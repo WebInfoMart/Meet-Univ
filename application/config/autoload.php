@@ -108,9 +108,9 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('model1', 'model2');
 |
 */
-
-$autoload['model'] = array();
-
+//$autoload['plugin'] = array('captcha');
+$autoload['model'] = array('path');
+//$autoload['css'];
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
