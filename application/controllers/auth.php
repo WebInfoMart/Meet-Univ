@@ -27,6 +27,17 @@ class Auth extends CI_Controller
 			redirect('/login/');
 		}
 	}
+	function home()
+	{
+		//$this->load->view('welcome');
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/auth/login/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$data['username']	= $this->tank_auth->get_username();
+			$this->load->view('welcome', $data);
+		}
+	}
 
 	/**
 	 * Login user on the site
@@ -143,6 +154,7 @@ class Auth extends CI_Controller
 			}
 			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean|alpha_dash');
 			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
+			$this->form_validation->set_rules('level', 'Level', 'trim');
 			$this->form_validation->set_rules('agree_term', 'I Agree', 'trim|required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
@@ -166,7 +178,7 @@ class Auth extends CI_Controller
 						$use_username ? $this->form_validation->set_value('username') : '',
 						$this->form_validation->set_value('fullname'),
 						$this->form_validation->set_value('createdby'),
-						$this->form_validation->set_value('agree_term'),
+						$this->form_validation->set_value('level'),
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
 						$email_activation))) {									// success

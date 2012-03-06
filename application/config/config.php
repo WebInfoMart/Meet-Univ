@@ -361,6 +361,6 @@ $config['proxy_ips'] = '';
 
 $config['css_path'] = 'css';
 $config['img_path'] = 'images';
-
+$config['admin_css_path'] ='css/admin';
 /* End of file config.php */
 /* Location: ./application/config/config.php */

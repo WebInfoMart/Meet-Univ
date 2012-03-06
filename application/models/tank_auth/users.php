@@ -31,6 +31,11 @@ class Users extends CI_Model
 	 * @param	bool
 	 * @return	object
 	 */
+	 function fetch_all_data($logged_user)
+	 {
+		$query = $this->db->get_where('users',array('id'=>$logged_user));
+	return $query->row_array();
+	 }
 	function get_user_by_id($user_id, $activated)
 	{
 		$this->db->where('id', $user_id);
@@ -49,8 +54,12 @@ class Users extends CI_Model
 	 */
 	function get_user_by_login($login)
 	{
-		$this->db->where('LOWER(username)=', strtolower($login));
-		$this->db->or_where('LOWER(email)=', strtolower($login));
+		$this->db->where("LOWER(username)='".strtolower($login)."' and level = 1");
+		//$this->db->where('LOWER(username)=', strtolower($login));
+		//$this->db->where('LOWER(level)=', '1');
+		$this->db->or_where("LOWER(email)='".strtolower($login)."' and level = 1");
+		//$this->db->or_where('LOWER(email)=', strtolower($login));
+		
 
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
@@ -128,7 +137,8 @@ class Users extends CI_Model
 	function create_user($data, $activated = TRUE)
 	{
 		//$data['created'] = date('Y-m-d H:i:s');
-		$data['activated'] = $activated ? 1 : 0;
+		//$data['activated'] = $activated ? 1 : 0;
+		$data['activated'] = 1;
 
 		if ($this->db->insert($this->table_name, $data)) {
 			$user_id = $this->db->insert_id();

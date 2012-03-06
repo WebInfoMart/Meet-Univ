@@ -45,6 +45,7 @@ class Tank_auth
 	 */
 	function login($login, $password, $remember, $login_by_username, $login_by_email)
 	{
+	print_r($login);
 		if ((strlen($login) > 0) AND (strlen($password) > 0)) {
 
 			// Which function to use to login (based on config)
@@ -72,6 +73,7 @@ class Tank_auth
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
 								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+								//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 						));
 
 						if ($user->activated == 0) {							// fail - not activated
@@ -159,7 +161,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $fullname, $createdby, $email, $password, $email_activation)
+	function create_user($username, $fullname, $createdby, $level, $email, $password, $email_activation)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -178,6 +180,7 @@ class Tank_auth
 				'fullname'	=> $fullname,
 				'username'	=> $username,
 				'createdby' => $createdby,
+				'level'     => $level,
 				'password'	=> $hashed_password,
 				'email'		=> $email,
 				'last_ip'	=> $this->ci->input->ip_address(),
@@ -190,10 +193,26 @@ class Tank_auth
 			if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];
 				$data['password'] = $password;
+				$this->ci->session->set_userdata(array(
+						 'user_id'	=> $res['user_id'],
+						 'username'	=> $username,
+						 'status'	=> STATUS_ACTIVATED,
+						 ));
+						 redirect('');
 				unset($data['last_ip']);
 				return $data;
 			}
+			
+			// $get_user_log_func = 'create_user';
+			// $user = $this->ci->users->$get_user_log_func($login);
+			 // $this->ci->session->set_userdata(array(
+						 // 'user_id'	=> $user_id,
+								 // 'username'	=> $username,
+								 // 'status'	=> STATUS_ACTIVATED,
+						 // ));
+						 // redirect('');
 		}
+		
 		return NULL;
 	}
 

@@ -85,6 +85,7 @@ $captcha = array(
 						<div class="control-group">
 						
 						<input type="hidden" value="self" name="createdby" id="createdby"/>
+						<input type="hidden" value="1" name="level" id="level"/>
 						</div>
 						
 						<div class="control-group">
