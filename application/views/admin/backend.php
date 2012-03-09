@@ -29,7 +29,8 @@
 
 	<div id="header">
 	
-		<h1><a href="#">ADMINIUM</a></h1>
+	<a href="#"><img src="<?php echo "$base$img_path"?>/mettunivlogo.png" alt="" height="50px;" width="180px" /></a>
+		
 		
 		<a href="#" class="backlink">&laquo; Back to the site</a>			
 	</div>			<!-- #header ends -->
@@ -42,26 +43,25 @@
 	<div id="content" class="loginbox">
 	
 		<div class="message info"><p>Admin Login Section</p></div>
-		<?php echo validation_errors(); ?>	
 		<form action="" method="post">
-			<p>
+			<div>
 				<label>Username:</label> <br />
 				<input type="text" class="text" name="login" id="login" placeholder="Username" value="<?php echo set_value('login'); ?>">
-				<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>
-							
-			</p>
+				<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>			
+			</div>
 			
-			<p>
+			<div>
 				<label>Password:</label> <br />
 				<input type="password" class="text" name="password" id="password" placeholder="Password" value="<?php echo set_value('password'); ?>" >
 				<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
 							
-			</p>
+			</div>
 			
-			<p class="formend">
+			<div class="formend">
+				<input type="hidden" name="user_type" id="user_type" value="admin" >
 				<input type="submit" class="submit" value="Login" /> &nbsp; 
-				<input type="checkbox" class="checkbox" checked="checked" id="rememberme" /> <label for="rememberme">Remember me</label>
-			</p>
+				<!--<input type="checkbox" class="checkbox" checked="checked" id="rememberme" /> <label for="rememberme">Remember me</label>-->
+			</div>
 		</form>
 	</div>		<!-- .loginbox ends -->
 	

@@ -61,7 +61,7 @@ $captcha = array(
 				<div class="span5 round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
 					<div class="notify_box _float_r">
-						<a href="#" class="white">Already a member? Sign in</a>
+						<a href="login" class="white">Already a member? Sign in</a>
 					</div>
 					<h3 class="blue">Signup</h3>
 					<form class="margin1" id="signup" method="post" action="">
@@ -85,7 +85,7 @@ $captcha = array(
 						<div class="control-group">
 						
 						<input type="hidden" value="self" name="createdby" id="createdby"/>
-						<input type="hidden" value="1" name="level" id="level"/>
+						<input type="hidden" value="1" name="level_user" id="level_user"/>
 						</div>
 						
 						<div class="control-group">
@@ -119,6 +119,8 @@ $captcha = array(
 							</label>
 							<span style="color: red;"> <?php echo form_error('agree_term'); ?><?php echo isset($errors['agree_term'])?$errors['agree_term']:''; ?> </span>
 						</div>
+						
+						<input type="hidden" name="user_type" value="student">
 						<button class="btn btn-primary" href="#">Join in!</button>
 					</form>
 					<span class="super">OR signup with</span> <img src="<?php echo "$base$img_path" ?>/fbconnect.png" /> <span class="super">or</span> <img src="images/inconnect.png" />

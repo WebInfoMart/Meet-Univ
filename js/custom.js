@@ -315,27 +315,113 @@ $(function () {
 		
 		var onoffSwitch = $(this);
 		var chckBox = $(this).find('input.onoffbtn');
+		var chkboxid= chckBox.attr("id");
+		var chkboxprivid=chkboxid.split("_");
+		var privid=chkboxprivid[1].trim();
 				
 		if(chckBox.is(':checked')) {
-		
+			
+			if(!(chckBox.hasClass('priorop')))
+			{
+				var viewchkboxid=chckBox.attr("id");
+				var vchkboxprivid=viewchkboxid.split("_");
+				var vprivid=vchkboxprivid[1].trim();
+				if(!($('#edit_'+vprivid).is(':checked')||$('#insert_'+vprivid).is(':checked')||$('#delete_'+vprivid).is(':checked')))
+				{
+				onoffSwitch.animate({ 'background-position-x': '0' }, 100, function() {
+				chckBox.removeAttr('checked');
+				$(this).removeClass('checked');
+				makeprivtotal(privid);
+				});
+				}
+				
+			}
+			else
+			{
 			onoffSwitch.animate({ 'background-position-x': '0' }, 100, function() {
 				chckBox.removeAttr('checked');
 				$(this).removeClass('checked');
+				makeprivtotal(privid);
 			});
+			}
 			
 		} else {
-		
+				
+			if(chckBox.hasClass('priorop'))
+			{
+						//	alert("s");
+
+				//code for checking if click on checkbox except view then if view is unchecked make it checked
+				var viewckboxid='view_'+privid;
+				var viewspan=$('#'+viewckboxid).parents('span');
+				viewspan.animate({ 'background-position-x': '-40px' }, 100, function() {
+				$('#'+viewckboxid).attr('checked', 'checked');
+				viewspan.addClass('checked');
+			});
+			}
 			onoffSwitch.animate({ 'background-position-x': '-40px' }, 100, function() {
 				chckBox.attr('checked', 'checked');
 				$(this).addClass('checked');
+				makeprivtotal(privid);
+				
 			});
+			
 		}
+		//alert("hello");
+		
 	});
 	
 	
 	
 	
+	function makeprivtotal(privid)
+	{
+		//add total privilege val for clicked privilage if checkbox is checked
+			var view_val;
+			var edit_val;
+			var insert_val;
+			var delete_val;
+			if($('#view_'+privid).is(':checked'))
+			{
+			view_val=$('#view_'+privid).val();
+			view_val=parseInt(view_val);
+			}
+			else
+			{
+			view_val=0;
+			}
+			if($('#edit_'+privid).is(':checked'))
+			{
+			edit_val=$('#edit_'+privid).val();
+			edit_val=parseInt(edit_val);
+			}
+			else
+			{
+			edit_val=0;
+			}
+			if($('#insert_'+privid).is(':checked'))
+			{
+			insert_val=$('#insert_'+privid).val();
+			insert_val=parseInt(insert_val);
+			}
+			else
+			{
+			insert_val=0;
+			}
+			if($('#delete_'+privid).is(':checked'))
+			{
+			delete_val=$('#delete_'+privid).val();
+			delete_val=parseInt(delete_val);
+			}
+			else
+			{
+			delete_val=0;
+			}
+			;
+			var total_val=view_val+edit_val+insert_val+delete_val;
+			$('#privilege_total_'+privid).val(total_val);
 	
+	}
 	// Progress bars animations
 	$('.progress_complete').click(function() {
 		var totalWidth = $(this).parents('.progress_bar').width();

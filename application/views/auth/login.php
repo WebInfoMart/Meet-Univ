@@ -38,7 +38,7 @@ $captcha = array(
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
 					<h3 class="blue">Login</h3>
 					<div class="notify_box">
-						<a href="#" class="white">Dont have an account? Signup</a>
+						<a href="register" class="white">Dont have an account? Signup</a>
 					</div>
 					<form class="margin1" id="signup" method="post" action="">
 						<div class="control-group">
@@ -56,6 +56,7 @@ $captcha = array(
 								<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
 							</div>
 							<small><a href="#">Forgot your password?</a></small>
+							<input type="hidden" name="user_type" id="student" value="student">
 						</div>
 						<button class="btn btn-primary" href="#">Login</button>
 					</form>

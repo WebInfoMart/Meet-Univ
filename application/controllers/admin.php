@@ -20,7 +20,7 @@ class Admin extends CI_Controller
 		$data = $this->path->all_path();
 		//$this->load->view('auth/header',$data);
 		//$this->load->view('auth/footer',$data);
-		if (!$this->tank_auth->is_logged_in()) {
+		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		} else {
 			$data['user_id']	= $this->tank_auth->get_user_id();
@@ -52,7 +52,7 @@ class Admin extends CI_Controller
 	function adminlogin()
 	{
 		$data = $this->path->all_path();
-		if ($this->tank_auth->is_logged_in()) {									// logged in
+		if ($this->tank_auth->is_admin_logged_in()) {									// logged in
 			redirect('');
 
 		}  else {
@@ -63,6 +63,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('login', 'Login', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('remember', 'Remember me', 'integer');
+			$this->form_validation->set_rules('user_type', 'user_type', 'string');
 
 			// Get login for counting attempts to login
 			if ($this->config->item('login_count_attempts', 'tank_auth') AND
@@ -87,8 +88,10 @@ class Admin extends CI_Controller
 						$this->form_validation->set_value('password'),
 						$this->form_validation->set_value('remember'),
 						$data['login_by_username'],
-						$data['login_by_email'])) {								// success
-					redirect('');
+						$data['login_by_email'],
+						$this->form_validation->set_value('user_type')
+						)) {								// success
+					redirect('/admin/');
 
 				} else {
 					$errors = $this->tank_auth->get_error_message();
@@ -99,7 +102,10 @@ class Admin extends CI_Controller
 						redirect('/auth/send_again/');
 
 					} else {													// fail
-						foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+						foreach ($errors as $k => $v)	{
+						$data['errors'][$k] = $this->lang->line($v);
+						}
+						
 					}
 				}
 			}
@@ -122,53 +128,40 @@ class Admin extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function logout()
+	function adminlogout()
 	{
-		$this->tank_auth->logout();
-
-		$this->_show_message($this->lang->line('auth_message_logged_out'));
+		$this->tank_auth->adminlogout();
+		redirect('admin');
+		//$this->_show_message($this->lang->line('auth_message_logged_out'));
 	}
 
+	
+	
 	/**
 	 * Register user on the site
 	 *
 	 * @return void
 	 */
-	function register()
+	function adduser()
 	{
+	if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+	else {	
 	$data = $this->path->all_path();
-	$this->load->view('auth/header',$data);
-		
-		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('');
-
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
-			redirect('/send_again/');
-
-		} elseif (!$this->config->item('allow_registration', 'tank_auth')) {	// registration is off
-			$this->_show_message($this->lang->line('auth_message_registration_disabled'));
-
-		} else {
-			$use_username = $this->config->item('use_username', 'tank_auth');
+	$this->load->view('admin/header',$data);
+	$this->load->view('admin/sidebar',$data);
+	$use_username = $this->config->item('use_username', 'tank_auth');
 			if ($use_username) {
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
 			}
 			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean|alpha_dash');
 			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
-			$this->form_validation->set_rules('agree_term', 'I Agree', 'trim|required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
-
-			//$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
-			//$use_recaptcha			= $this->config->item('use_recaptcha', 'tank_auth');
-			/*if ($captcha_registration) {
-				if ($use_recaptcha) {
-					$this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
-				} else {
-					$this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
-				}
-			}*/
+			$this->form_validation->set_rules('user_type', 'user_type', 'trim|string');
+			$this->form_validation->set_rules('level_user', 'level_user', 'trim|required|string');
 			$data['errors'] = array();
 
 			$email_activation = $this->config->item('email_activation', 'tank_auth');
@@ -178,51 +171,30 @@ class Admin extends CI_Controller
 						$use_username ? $this->form_validation->set_value('username') : '',
 						$this->form_validation->set_value('fullname'),
 						$this->form_validation->set_value('createdby'),
-						$this->form_validation->set_value('agree_term'),
+						$this->form_validation->set_value('level_user'),
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
-						$email_activation))) {									// success
+						$this->form_validation->set_value('user_type'),
+						$email_activation
+						))) {									// success
 
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
-					if ($email_activation) {									// send "activate" email
-						$data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
-
-						$this->_send_email('activate', $data['email'], $data);
-
-						unset($data['password']); // Clear password (just for any case)
-
-						$this->_show_message($this->lang->line('auth_message_registration_completed_1'));
-
-					} else {
-						if ($this->config->item('email_account_details', 'tank_auth')) {	// send "welcome" email
-
-							$this->_send_email('welcome', $data['email'], $data);
-						}
-						unset($data['password']); // Clear password (just for any case)
-
-						$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
-					}
+					
 				} else {
 					$errors = $this->tank_auth->get_error_message();
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
-			}
-			/*if ($captcha_registration) {
-				if ($use_recaptcha) {
-					$data['recaptcha_html'] = $this->_create_recaptcha();
-				} else {
-					$data['captcha_html'] = $this->_create_captcha();
-				}
-			}*/
-			$data['use_username'] = $use_username;
-			//$data['captcha_registration'] = $captcha_registration;
-			//$data['use_recaptcha'] = $use_recaptcha;
-			//$data['base'] = $base;
 			
-			$this->load->view('auth/register', $data);
+			
+			
+			//$this->load->view('auth/adduser', $data);
 		}
-		$this->load->view('auth/footer',$data);
+	$this->load->view('admin/adduser', $data);
+	
+	}
+	
+	
 	}
 
 	/**
@@ -232,7 +204,7 @@ class Admin extends CI_Controller
 	 */
 	function send_again()
 	{
-		if (!$this->tank_auth->is_logged_in(FALSE)) {							// not logged in or activated
+		if (!$this->tank_auth->is_admin_logged_in(FALSE)) {							// not logged in or activated
 			redirect('/login/');
 
 		} else {
@@ -289,10 +261,10 @@ class Admin extends CI_Controller
 	 */
 	function forgot_password()
 	{
-		if ($this->tank_auth->is_logged_in()) {									// logged in
+		if ($this->tank_auth->is_admin_logged_in()) {									// logged in
 			redirect('');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+		} elseif ($this->tank_auth->is_admin_logged_in(FALSE)) {						// logged in, not activated
 			redirect('/send_again/');
 
 		} else {
@@ -372,7 +344,7 @@ class Admin extends CI_Controller
 	 */
 	function change_password()
 	{
-		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
+		if (!$this->tank_auth->is_admin_logged_in()) {								// not logged in or not activated
 			redirect('/login/');
 
 		} else {
@@ -404,7 +376,7 @@ class Admin extends CI_Controller
 	 */
 	function change_email()
 	{
-		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
+		if (!$this->tank_auth->is_admin_logged_in()) {								// not logged in or not activated
 			redirect('/login/');
 
 		} else {
@@ -463,7 +435,7 @@ class Admin extends CI_Controller
 	 */
 	function unregister()
 	{
-		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
+		if (!$this->tank_auth->is_admin_logged_in()) {								// not logged in or not activated
 			redirect('/login/');
 
 		} else {
@@ -611,6 +583,100 @@ class Admin extends CI_Controller
 		}
 		return TRUE;
 	}
+	
+	/* add new user function by super admin */
+	/*function adduser()
+	{
+		$data = $this->path->all_path();
+		//$this->load->view('auth/header',$data);
+		//$this->load->view('auth/footer',$data);
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$data['username']	= $this->tank_auth->get_username();
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/sidebar', $data);	
+			$this->load->view('admin/adduser', $data);
+			
+		}
+	}*/
+	
+	function user_privileges()
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else
+		{
+		$nadminid=$this->tank_auth->get_newadmin_inprocess();
+		if($nadminid=='1')
+		{
+		
+		$data = $this->path->all_path();
+		$this->load->model('adminmodel');
+		$data['results'] = $this->adminmodel->userprivlegetype();
+		$data['new_user_level']=$this->tank_auth->get_newadmin_user_level();
+
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->load->view('admin/user_privilege',$data);
+		}
+		else
+		{
+		redirect('admin/adduser/');
+		}
+		
+		}
+	}
+	
+	
+	function usercreated()
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		
+			$email_activation = $this->config->item('email_activation', 'tank_auth');
+		//insert data in user and profile table
+		if($this->tank_auth->get_newadmin_inprocess())
+		{
+			if (!is_null($newadminid = $this->tank_auth->create_admin_user(
+						$email_activation))) {									// success
+					$data['site_name'] = $this->config->item('website_name', 'tank_auth');	
+				}
+		
+		
+		$data = $this->path->all_path();
+		$this->load->model('adminmodel');
+		$this->adminmodel->insert_userprivlege_data($newadminid);
+		$this->tank_auth->delete_newadmin_sessiondata();
+	//	print_r($data);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->load->view('admin/usersuccess',$data);
+		}
+		else
+		{
+			redirect('admin/adduser');
+		}
+		}
+			
+	}
+	
+	//function for show users
+	function manageusers()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->load->model('adminmodel');
+		$data['user_detail']=$this->adminmodel->fetch_user_data();
+		$this->load->view('admin/manageuser',$data);
+	}
+	
+	
 
 }
 

@@ -46,24 +46,59 @@ class Users extends CI_Model
 		return NULL;
 	}
 
+	
+	function check_facebook_email($fb_email)
+	{
+		$query = $this->db->get_where('users',array('email'=>$fb_email));
+		return $query = $query->num_rows();
+	}
+	function facebook_insert($fbdata)
+	{
+		if ($this->db->insert($this->table_name, $fbdata)) {
+			$user_id = $this->db->insert_id();
+			$this->create_profile($user_id);
+			return array('user_id' => $user_id);
+		}
+	}
+	
+	function fetch_fb_user_id($fb_email)
+	{
+		$this->db->select('id');
+		$this->db->where('email',$fb_email);
+		$query = $this->db->get($this->table_name);
+		// $this->db->select('id');
+		// $this->db->where("email", $fb_email);
+		// $query = $this->db->get('users');
+		  
+  return $query->row_array();
+	}
 	/**
 	 * Get user record by login (username or email)
 	 *
 	 * @param	string
 	 * @return	object
 	 */
-	function get_user_by_login($login)
+	function get_user_by_login($login,$user_type)
 	{
-		$this->db->where("LOWER(username)='".strtolower($login)."' and level = 1");
+		if($user_type=='admin')
+		{
+		$level='2,3,4,5';
+		}
+		else if($user_type=='student')
+		{
+		$level='1';
+		}
+		$this->db->where("LOWER(username)='".strtolower($login)."' and level IN($level)");
 		//$this->db->where('LOWER(username)=', strtolower($login));
 		//$this->db->where('LOWER(level)=', '1');
-		$this->db->or_where("LOWER(email)='".strtolower($login)."' and level = 1");
+		$this->db->or_where("LOWER(email)='".strtolower($login)."' and level IN($level)");
 		//$this->db->or_where('LOWER(email)=', strtolower($login));
 		
 
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
+		
 	}
 
 	/**

@@ -11,21 +11,28 @@ class Auth extends CI_Controller
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->load->library('security');
+		$this->load->helper('url');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
+		$this->load->library('fbConn/facebook');
 	}
 
 	function index()
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		$this->load->view('auth/footer',$data);
-		
-		if ($message = $this->session->flashdata('message')) {
-			$this->load->view('auth/general_message', array('message' => $message));
-		} else {
+		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$data['username']	= $this->tank_auth->get_username();
+			$logged_user = $data['user_id'];
+			$this->load->model('users');
+			$data2['query'] = $this->users->fetch_all_data($logged_user);
+			$this->load->view('welcome',$data2);
+			//$this->load->view('welcome', $data);
 		}
+		$this->load->view('auth/footer',$data);
 	}
 	function home()
 	{
@@ -51,9 +58,6 @@ class Auth extends CI_Controller
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
-			redirect('/send_again/');
-
 		} else {
 			$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
 					$this->config->item('use_username', 'tank_auth'));
@@ -62,6 +66,7 @@ class Auth extends CI_Controller
 			$this->form_validation->set_rules('login', 'Login', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('remember', 'Remember me', 'integer');
+			$this->form_validation->set_rules('user_type', 'user_type', 'string');
 
 			// Get login for counting attempts to login
 			if ($this->config->item('login_count_attempts', 'tank_auth') AND
@@ -86,7 +91,9 @@ class Auth extends CI_Controller
 						$this->form_validation->set_value('password'),
 						$this->form_validation->set_value('remember'),
 						$data['login_by_username'],
-						$data['login_by_email'])) {								// success
+						$data['login_by_email'],
+						$this->form_validation->set_value('user_type')
+						)) {								// success
 					redirect('');
 
 				} else {
@@ -124,8 +131,8 @@ class Auth extends CI_Controller
 	function logout()
 	{
 		$this->tank_auth->logout();
-
-		$this->_show_message($this->lang->line('auth_message_logged_out'));
+		redirect('login');
+		//$this->_show_message($this->lang->line('auth_message_logged_out'));
 	}
 
 	/**
@@ -154,12 +161,13 @@ class Auth extends CI_Controller
 			}
 			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean|alpha_dash');
 			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
-			$this->form_validation->set_rules('level', 'Level', 'trim');
 			$this->form_validation->set_rules('agree_term', 'I Agree', 'trim|required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
-
+			$this->form_validation->set_rules('level_user', 'level_user', 'trim|string');
+			$this->form_validation->set_rules('user_type', 'user_type', 'string');
+			
 			//$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
 			//$use_recaptcha			= $this->config->item('use_recaptcha', 'tank_auth');
 			/*if ($captcha_registration) {
@@ -178,10 +186,12 @@ class Auth extends CI_Controller
 						$use_username ? $this->form_validation->set_value('username') : '',
 						$this->form_validation->set_value('fullname'),
 						$this->form_validation->set_value('createdby'),
-						$this->form_validation->set_value('level'),
+						$this->form_validation->set_value('level_user'),
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
-						$email_activation))) {									// success
+						$this->form_validation->set_value('user_type'),
+						$email_activation
+						))) {									// success
 
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
 

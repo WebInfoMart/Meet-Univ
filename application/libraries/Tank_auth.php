@@ -43,9 +43,9 @@ class Tank_auth
 	 * @param	bool
 	 * @return	bool
 	 */
-	function login($login, $password, $remember, $login_by_username, $login_by_email)
+	function login($login, $password, $remember, $login_by_username, $login_by_email,$user_type)
 	{
-	print_r($login);
+//	print_r($login);
 		if ((strlen($login) > 0) AND (strlen($password) > 0)) {
 
 			// Which function to use to login (based on config)
@@ -57,7 +57,7 @@ class Tank_auth
 				$get_user_func = 'get_user_by_email';
 			}
 
-			if (!is_null($user = $this->ci->users->$get_user_func($login))) {	// login ok
+			if (!is_null($user = $this->ci->users->$get_user_func($login,$user_type))) {	// login ok
 
 				// Does password match hash in database?
 				$hasher = new PasswordHash(
@@ -69,13 +69,31 @@ class Tank_auth
 						$this->error = array('banned' => $user->ban_reason);
 
 					} else {
+					
+						//checking admin is doing login or student
+						
+						//for student login session
+						if($user_type=='student')
+						{
+							$this->ci->session->set_userdata(array(
+									'user_id'	=> $user->id,
+									'username'	=> $user->username,
+									'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+									'user_type' =>$user_type,
+									//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+							));
+						}
+						//for admin login session
+						else if($user_type=='admin')
+						{
 						$this->ci->session->set_userdata(array(
-								'user_id'	=> $user->id,
-								'username'	=> $user->username,
-								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
-								//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
-						));
-
+									'admin_user_id'	=> $user->id,
+									'admin_username'	=> $user->username,
+									'admin_status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+									'user_type' =>$user_type,
+									//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+							));
+						}
 						if ($user->activated == 0) {							// fail - not activated
 							$this->error = array('not_activated' => '');
 
@@ -115,11 +133,24 @@ class Tank_auth
 		$this->delete_autologin();
 
 		// See http://codeigniter.com/forums/viewreply/662369/ as the reason for the next line
-		$this->ci->session->set_userdata(array('user_id' => '', 'username' => '', 'status' => ''));
+		$this->ci->session->set_userdata(array('user_id' => '', 'username' => '', 'status' => '','user_type' =>''));
 
-		$this->ci->session->sess_destroy();
+		//$this->ci->session->sess_destroy();
 	}
-
+	
+	function adminlogout()
+	{
+	$this->ci->session->set_userdata(array('admin_user_id' => '', 'admin_username' => '', 'admin_status' => '','user_type' =>''));
+	
+	}
+	
+	function delete_newadmin_sessiondata()
+	{
+		$this->delete_autologin();
+		// See http://codeigniter.com/forums/viewreply/662369/ as the reason for the next line
+		$this->ci->session->set_userdata(array('newadmin_fullname' => '','newadmin_createdby' => '','newadmin_inprocess' => '','newadmin_password' => '','newadmin_email' => '', 'newadmin_createdby_user_id' => '', 'newadmin_level' => '','newadmin_username' =>''));
+		//$this->ci->session->sess_destroy();
+	}
 	/**
 	 * Check if user logged in. Also test if user is activated or not.
 	 *
@@ -129,8 +160,13 @@ class Tank_auth
 	function is_logged_in($activated = TRUE)
 	{
 		return $this->ci->session->userdata('status') === ($activated ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED);
+		
 	}
-
+	function is_admin_logged_in($activated = TRUE)
+	{
+		
+		return $this->ci->session->userdata('admin_status') === ($activated ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED);
+	}
 	/**
 	 * Get user_id
 	 *
@@ -139,8 +175,27 @@ class Tank_auth
 	function get_user_id()
 	{
 		return $this->ci->session->userdata('user_id');
+	} 
+	
+	function get_admin_user_id()
+	{
+		return $this->ci->session->userdata('admin_user_id');
 	}
-
+	//return user id of currentely created user by super admin
+	function get_newadmin_inprocess()
+	{
+	return $this->ci->session->userdata('newadmin_inprocess');
+    }
+	
+	
+	//return user level of currentely created user by super admin
+	function get_newadmin_user_level()
+	{
+	return $this->ci->session->userdata('newadmin_level');
+    }	
+	
+	
+	
 	/**
 	 * Get username
 	 *
@@ -161,7 +216,29 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $fullname, $createdby, $level, $email, $password, $email_activation)
+	
+	function create_admin_user($email_activation)
+	{
+		$data = array(
+				'fullname'	=> $this->ci->session->userdata('newadmin_fullname'),
+				'username'	=> $this->ci->session->userdata('newadmin_username'),
+				'createdby' => $this->ci->session->userdata('newadmin_createdby'),
+				'level'     => $this->ci->session->userdata('newadmin_level'),
+				'password'	=> $this->ci->session->userdata('newadmin_password'),
+				'email'		=> $this->ci->session->userdata('newadmin_email'),
+				'createdby_user_id' =>$this->ci->session->userdata('newadmin_createdby_user_id'),
+				'last_ip'	=> $this->ci->input->ip_address(),
+				
+			);
+		if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
+				$data['user_id'] = $res['user_id'];
+				//$data['password'] = $password;
+				}
+		return $data['user_id']; 		
+	}
+	
+	
+	function create_user($username, $fullname, $createdby, $level_user, $email, $password,$user_type,$email_activation)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -175,33 +252,68 @@ class Tank_auth
 					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
 					$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
 			$hashed_password = $hasher->HashPassword($password);
-
+			
+			//if user is student or admin
+			if($user_type=='student')
+			{
+			$createdby_user_id=0;
+			}
+			else if($user_type=='admin')
+			{
+			$createdby_user_id=$this->ci->session->userdata('admin_user_id');
+			}
 			$data = array(
 				'fullname'	=> $fullname,
 				'username'	=> $username,
 				'createdby' => $createdby,
-				'level'     => $level,
+				'level'     => $level_user,
 				'password'	=> $hashed_password,
 				'email'		=> $email,
+				'createdby_user_id' =>$createdby_user_id,
 				'last_ip'	=> $this->ci->input->ip_address(),
 				
 			);
-
+			
 			if ($email_activation) {
 				$data['new_email_key'] = md5(rand().microtime());
 			}
-			if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
+			
+		
+			
+			// if admin create user then no	need to store this in session	
+		   if($createdby!='admin')
+			{
+				if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];
 				$data['password'] = $password;
+				}
 				$this->ci->session->set_userdata(array(
 						 'user_id'	=> $res['user_id'],
 						 'username'	=> $username,
 						 'status'	=> STATUS_ACTIVATED,
+						 'user_type'=>$user_type,
 						 ));
 						 redirect('');
 				unset($data['last_ip']);
 				return $data;
 			}
+			else
+			{
+				$this->ci->session->set_userdata(array(
+						'newadmin_fullname'	=> $fullname,
+						'newadmin_username'	=> $username,
+						'newadmin_createdby' => $createdby,
+						'newadmin_level'     => $level_user,
+						'newadmin_password'	=> $hashed_password,
+						'newadmin_email'		=> $email,
+						'newadmin_createdby_user_id' =>$createdby_user_id,
+						'newadmin_inprocess' => '1',
+						 ));
+						 
+				redirect('admin/user_privileges');
+			}
+			
+			
 			
 			// $get_user_log_func = 'create_user';
 			// $user = $this->ci->users->$get_user_log_func($login);
@@ -590,6 +702,7 @@ class Tank_auth
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
 								'status'	=> STATUS_ACTIVATED,
+								
 						));
 
 						// Renew users cookie to prevent it from expiring
@@ -661,6 +774,9 @@ class Tank_auth
 					$this->ci->config->item('login_attempt_expire', 'tank_auth'));
 		}
 	}
+	
+	
+	
 }
 
 /* End of file Tank_auth.php */

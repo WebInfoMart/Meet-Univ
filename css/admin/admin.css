@@ -1,0 +1,75 @@
+.span1{width:130px}
+.span3{width:250px}
+.span5{width:600px}
+.span6{width:450px}
+.span8{width:960px}
+.admin{width:600px}
+[class*="span"] {
+float: left;
+margin-left: 20px;
+}
+.float_l{float:left}
+.float_r{float:right}
+/******************************margin**************************/
+.margin{margin:10px;}
+.margin_t{margin-top:10px;}
+.margin_l1{margin-left:10px;}
+.margin_l3{margin-left:30px;}
+.text_dec{text-decoration:line-through}
+
+#steps {
+margin-bottom: 15px;
+margin-top: 20px;
+background: #F0F0F0;
+border: 1px solid #E5E5E5;
+height: 28px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-background-clip: padding-box;
+border-radius: 5px;
+padding:11px 16px;
+}
+#steps .step .num {
+float: left;
+padding: 0px 5px;
+margin: 5px 0px 0 5px;
+background: white;
+color: #7D7D7D;
+font-size: 0.9em;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+-khtml-border-radius: 10px;
+-webkit-background-clip: padding-box;
+border-radius: 10px;
+text-shadow: none;
+}
+#steps .step .name {
+float: left;
+padding: 4px;
+margin: 2px 20px;
+}
+#steps .step img {
+float: left;
+display: inline;
+margin-left: 280px;
+margin-top: -12px;
+}
+#steps .step.first {
+padding-left: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomleft: 5px;
+-webkit-border-top-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-webkit-background-clip: padding-box;
+}
+#steps .step.active {
+background: #8B8B8B;
+color: white;
+}
+.margin_l2{margin-left:60px;}
+#content h5 {
+line-height: 24px;
+}
+.orange{color: #F89406!important;}
+.light{color:#666!important;}

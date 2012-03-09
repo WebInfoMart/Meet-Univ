@@ -133,7 +133,7 @@
 						<td>Published</td>
 						<td>20.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 					
 					<tr>
@@ -142,7 +142,7 @@
 						<td>Published</td>
 						<td>18.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 					
 					<tr>
@@ -151,7 +151,7 @@
 						<td>Published</td>
 						<td>20.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 					
 					<tr>
@@ -160,7 +160,7 @@
 						<td>Published</td>
 						<td>18.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 					
 					<tr>
@@ -169,7 +169,7 @@
 						<td>Published</td>
 						<td>20.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 					
 					<tr>
@@ -178,7 +178,7 @@
 						<td>Published</td>
 						<td>18.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 					
 					<tr>
@@ -187,7 +187,7 @@
 						<td>Published</td>
 						<td>20.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 					
 					<tr>
@@ -196,7 +196,7 @@
 						<td>Published</td>
 						<td>08.03.2010</td>
 						<td><a href="#">John Doe</a></td>
-						<td class="delete"><a href="#"><img src="images/adminimages/close.png" alt="Delete" title="Delete" /></a></td>
+						<td class="delete"><a href="#"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
 					</tr>
 				</tbody>
 				
@@ -486,7 +486,7 @@
 		
 		<ul class="imglist">
 			<li>
-				<img src="images/adminimages/thumb1.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb1.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6076/6056122514_f25be488a0_b.jpg" class="modal" rel="gallery" title="Summer boat">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -494,7 +494,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb2.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb2.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6010/5966972771_145b06344f_b.jpg" class="modal" rel="gallery" title="Sozopol bay">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -502,7 +502,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb3.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb3.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5311/5897768528_eccb7a67ee_b.jpg" class="modal" rel="gallery" title="Stones">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -510,7 +510,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb4.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb4.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5263/5897766402_0a7d894296_b.jpg" class="modal" rel="gallery" title="Gate">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -518,7 +518,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb1.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb1.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6076/6056122514_f25be488a0_b.jpg" class="modal" rel="gallery" title="Summer boat">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -526,7 +526,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb2.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb2.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6010/5966972771_145b06344f_b.jpg" class="modal" rel="gallery" title="Sozopol bay">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -534,7 +534,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb3.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb3.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5311/5897768528_eccb7a67ee_b.jpg" class="modal" rel="gallery" title="Stones">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -542,7 +542,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb4.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb4.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5263/5897766402_0a7d894296_b.jpg" class="modal" rel="gallery" title="Gate">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -550,7 +550,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb1.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb1.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6076/6056122514_f25be488a0_b.jpg" class="modal" rel="gallery" title="Summer boat">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -558,7 +558,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb2.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb2.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6010/5966972771_145b06344f_b.jpg" class="modal" rel="gallery" title="Sozopol bay">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -566,7 +566,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb3.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb3.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5311/5897768528_eccb7a67ee_b.jpg" class="modal" rel="gallery" title="Stones">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -574,7 +574,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb4.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb4.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5263/5897766402_0a7d894296_b.jpg" class="modal" rel="gallery" title="Gate">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -582,7 +582,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb1.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb1.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6076/6056122514_f25be488a0_b.jpg" class="modal" rel="gallery" title="Summer boat">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -590,7 +590,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb2.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb2.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm7.static.flickr.com/6010/5966972771_145b06344f_b.jpg" class="modal" rel="gallery" title="Sozopol bay">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -598,7 +598,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb3.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb3.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5311/5897768528_eccb7a67ee_b.jpg" class="modal" rel="gallery" title="Stones">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -606,7 +606,7 @@
 			</li>
 			
 			<li>
-				<img src="images/adminimages/thumb4.jpg" alt="" />
+				<img src="<?php echo "$base$admin_img" ?>/thumb4.jpg" alt="" />
 				<ul>
 					<li class="view"><a href="http://farm6.static.flickr.com/5263/5897766402_0a7d894296_b.jpg" class="modal" rel="gallery" title="Gate">View</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
@@ -678,9 +678,9 @@
 			<div class="chat_users">
 				<h3>In this discussion</h3>
 				<ul>
-					<li><a href="#" class="remove"><img src="images/adminimages/close.png" alt="" /></a> <a href="#"><img src="images/adminimages/avatar.gif" alt="" /> Emil Nikov</a></li>
-					<li><a href="#" class="remove"><img src="images/adminimages/close.png" alt="" /></a> <a href="#"><img src="images/adminimages/avatar_m.gif" alt="" /> John Doe</a></li>
-					<li><a href="#" class="remove"><img src="images/adminimages/close.png" alt="" /></a> </a><a href="#"><img src="images/adminimages/avatar_f.gif" alt="" /> Sarah Jones</a></li>				
+					<li><a href="#" class="remove"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="" /></a> <a href="#"><img src="<?php echo "$base$admin_img" ?>/avatar.gif" alt="" /> Emil Nikov</a></li>
+					<li><a href="#" class="remove"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="" /></a> <a href="#"><img src="<?php echo "$base$admin_img" ?>/avatar_m.gif" alt="" /> John Doe</a></li>
+					<li><a href="#" class="remove"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="" /></a> </a><a href="#"><img src="<?php echo "$base$admin_img" ?>/avatar_f.gif" alt="" /> Sarah Jones</a></li>				
 				</ul>
 			</div>
 			
@@ -691,7 +691,7 @@
 				<ul>
 					<li>
 						<span>Yesterday, 15:32</span>
-						<a href="#" class="avatar"><img src="images/adminimages/avatar.gif" alt="" /></a> 
+						<a href="#" class="avatar"><img src="<?php echo "$base$admin_img" ?>/avatar.gif" alt="" /></a> 
 						<a href="#" class="username">Emil Nikov</a>
 						
 						<p>What do you think about the new layout and colors?</p>
@@ -699,7 +699,7 @@
 					
 					<li>
 						<span>12 hours ago</span>
-						<a href="#" class="avatar"><img src="images/adminimages/avatar_m.gif" alt="" /></a> 
+						<a href="#" class="avatar"><img src="<?php echo "$base$admin_img" ?>/avatar_m.gif" alt="" /></a> 
 						<a href="#" class="username">John Doe</a>
 												
 						<p>Love it!</p>
@@ -712,7 +712,7 @@
 					
 					<li>
 						<span>15 minutes ago</span>
-						<a href="#" class="avatar"><img src="images/adminimages/avatar_f.gif" alt="" /></a> 
+						<a href="#" class="avatar"><img src="<?php echo "$base$admin_img" ?>/avatar_f.gif" alt="" /></a> 
 						<a href="#" class="username">Sarah Jones</a>				
 						
 						<p>Hey, guys, this looks GREAT!</p>
@@ -720,7 +720,7 @@
 				</ul>
 				
 				<form action="" method="post">
-					<img src="images/adminimages/avatar.gif" alt="" />
+					<img src="<?php echo "$base$admin_img" ?>/avatar.gif" alt="" />
 					<input type="text" class="text" />
 					<input type="submit" class="submit" value="Send" />
 				</form>
