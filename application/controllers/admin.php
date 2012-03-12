@@ -672,7 +672,11 @@ class Admin extends CI_Controller
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$this->load->model('adminmodel');
+<<<<<<< HEAD
+		$data['user_detail']= $this->adminmodel->fetch_user_data();
+=======
 		$data['user_detail']=$this->adminmodel->fetch_user_data();
+>>>>>>> 5a590558a2865a09b5fa26b7aacd29b231c96784
 		$this->load->view('admin/manageuser',$data);
 	}
 	

@@ -51,7 +51,11 @@
 
 	<div id="header">
 	
+<<<<<<< HEAD
+		<a href="#"><img src="<?php echo "$base$img_path"?>/logo.png" alt="" height="50px;" width="180px" /></a>
+=======
 		<a href="#"><img src="<?php echo "$base$img_path"?>/mettunivlogo.png" alt="" height="50px;" width="180px" /></a>
+>>>>>>> 5a590558a2865a09b5fa26b7aacd29b231c96784
 		
 		<form action="" method="post" class="searchform">
 			<input type="text" class="text" value="Search..." />
