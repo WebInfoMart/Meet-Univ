@@ -29,7 +29,7 @@ class Auth extends CI_Controller
 			$logged_user = $data['user_id'];
 			$this->load->model('users');
 			$data2['query'] = $this->users->fetch_all_data($logged_user);
-			$this->load->view('welcome',$data2);
+			$this->load->view('profile',$data2);
 			//$this->load->view('welcome', $data);
 		}
 		$this->load->view('auth/footer',$data);
@@ -159,7 +159,7 @@ class Auth extends CI_Controller
 			if ($use_username) {
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
 			}
-			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean|alpha_dash');
+			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
 			$this->form_validation->set_rules('agree_term', 'I Agree', 'trim|required');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');

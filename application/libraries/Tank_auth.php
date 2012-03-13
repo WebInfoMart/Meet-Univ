@@ -80,6 +80,7 @@ class Tank_auth
 									'username'	=> $user->username,
 									'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 									'user_type' =>$user_type,
+									
 									//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 							));
 						}
@@ -91,6 +92,7 @@ class Tank_auth
 									'admin_username'	=> $user->username,
 									'admin_status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 									'user_type' =>$user_type,
+									'admin_userlevel' =>$user->level,
 									//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 							));
 						}
@@ -140,7 +142,9 @@ class Tank_auth
 	
 	function adminlogout()
 	{
-	$this->ci->session->set_userdata(array('admin_user_id' => '', 'admin_username' => '', 'admin_status' => '','user_type' =>''));
+	$this->ci->session->set_userdata(array('admin_user_id' => '', 'admin_username' => '', 'admin_status' => '','user_type' =>'','admin_userlevel' =>''));
+	$this->ci->session->set_userdata(array('newadmin_fullname' => '','newadmin_createdby' => '','newadmin_inprocess' => '','newadmin_password' => '','newadmin_email' => '', 'newadmin_createdby_user_id' => '', 'newadmin_level' => '','newadmin_username' =>''));
+		
 	
 	}
 	
@@ -167,6 +171,7 @@ class Tank_auth
 		
 		return $this->ci->session->userdata('admin_status') === ($activated ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED);
 	}
+	
 	/**
 	 * Get user_id
 	 *
@@ -194,7 +199,11 @@ class Tank_auth
 	return $this->ci->session->userdata('newadmin_level');
     }	
 	
-	
+	function get_admin_user_level()
+	{
+		
+		return $this->ci->session->userdata('admin_userlevel');
+	}
 	
 	/**
 	 * Get username

@@ -46,6 +46,12 @@ class Adminmodel extends CI_Model
 		//$table= $this->table->generate($query);
 		return $query->result();
 	}
+	public function get_user_privilege($user_id)
+	{
+	//$query = $this->db->get('user_privilige');
+	$query = $this->db->get_where('user_privilige', array('user_id' => $user_id));
+	return $query->result_array();	
+	}
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

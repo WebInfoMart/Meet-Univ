@@ -119,6 +119,7 @@ if ($user) {
 <title>Project</title>
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script>
@@ -131,6 +132,18 @@ if ($user) {
       // The user has logged out, and the cookie has been cleared
     }
   });
+</script>
+<script src="<?php echo "$base$js";?>/jquery.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-collapse.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
+<script src="<?php echo "$base$js";?>/bootstrap-alerts.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#pulse').click(function(){
+$('#myModal').modal('toggle');});
+ });
+
 </script>
 </head>
 <body>

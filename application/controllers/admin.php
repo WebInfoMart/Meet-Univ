@@ -23,8 +23,11 @@ class Admin extends CI_Controller
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		} else {
-			$data['user_id']	= $this->tank_auth->get_user_id();
 			$data['username']	= $this->tank_auth->get_username();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			//fetch user privilege data from model
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);	
 			$this->load->view('admin/main', $data);
@@ -147,8 +150,15 @@ class Admin extends CI_Controller
 	if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		}
-	else {	
+	else {
+
+			
+	
 	$data = $this->path->all_path();
+	$data['user_id']	= $this->tank_auth->get_admin_user_id();
+	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+	$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+	
 	$this->load->view('admin/header',$data);
 	$this->load->view('admin/sidebar',$data);
 	$use_username = $this->config->item('use_username', 'tank_auth');
@@ -190,8 +200,19 @@ class Admin extends CI_Controller
 			
 			//$this->load->view('auth/adduser', $data);
 		}
+	$add_user_priv=array('4','6','8','10');
+	foreach($data['admin_priv'] as $userdata['admin_priv']){
+	if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$add_user_priv) )
+	{
 	$this->load->view('admin/adduser', $data);
-	
+	break;
+	}
+	else
+	{
+	$this->load->view('admin/accesserror', $data);
+	break;
+	}
+	}
 	}
 	
 	
@@ -609,15 +630,19 @@ class Admin extends CI_Controller
 		}
 		else
 		{
+		
+		
 		$nadminid=$this->tank_auth->get_newadmin_inprocess();
 		if($nadminid=='1')
 		{
 		
 		$data = $this->path->all_path();
-		$this->load->model('adminmodel');
 		$data['results'] = $this->adminmodel->userprivlegetype();
 		$data['new_user_level']=$this->tank_auth->get_newadmin_user_level();
-
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$this->load->view('admin/user_privilege',$data);
@@ -649,10 +674,12 @@ class Admin extends CI_Controller
 		
 		
 		$data = $this->path->all_path();
-		$this->load->model('adminmodel');
 		$this->adminmodel->insert_userprivlege_data($newadminid);
 		$this->tank_auth->delete_newadmin_sessiondata();
 	//	print_r($data);
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$this->load->view('admin/usersuccess',$data);
@@ -668,19 +695,43 @@ class Admin extends CI_Controller
 	//function for show users
 	function manageusers()
 	{
+		
 		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
-		$this->load->model('adminmodel');
-<<<<<<< HEAD
 		$data['user_detail']= $this->adminmodel->fetch_user_data();
-=======
 		$data['user_detail']=$this->adminmodel->fetch_user_data();
->>>>>>> 5a590558a2865a09b5fa26b7aacd29b231c96784
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==1 && $userdata['admin_priv']['privilege_level']!=0)
+		{
 		$this->load->view('admin/manageuser',$data);
+		break;
+		}
+		else
+		{
+		$this->load->view('admin/accesserror',$data);
+		break;
+		}
+		}
 	}
 	
+	function edituser()
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			
+		
+		}
+		
 	
+	}
 
 }
 

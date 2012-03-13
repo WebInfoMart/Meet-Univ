@@ -34,12 +34,13 @@
 						</li>
 						<?php 
 						//counter variable
-						$c=1;
+						$c=1; 
+						//echo $new_user_level;
 						foreach ($results as $privilage){
-						
+					//	print_r($results);
 						if($new_user_level==4)
 						{
-						 if($privilage['privilege_type_id']!=11 && $privilage['privilege_type_id']!=12)
+						 if($privilage['privilege_type_id']!=8 && $privilage['privilege_type_id']!=9)
 						 {
 						?>
 						
@@ -76,7 +77,7 @@
 				
 					else if($new_user_level==2)
 						{
-						 if($privilage['privilege_type_id']==11 || $privilage['privilege_type_id']==12)
+						 if($privilage['privilege_type_id']==8 || $privilage['privilege_type_id']==9)
 						 {
 						?>
 						
@@ -113,7 +114,7 @@
 					} }
 					else if($new_user_level==3)
 						{
-						 if($privilage['privilege_type_id']==5 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==7 || $privilage['privilege_type_id']==9 || $privilage['privilege_type_id']==14 )
+						 if($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==11 )
 						 {
 						?>
 						
