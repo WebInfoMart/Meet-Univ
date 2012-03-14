@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Project</title>
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/style_sh.css">
-<script src="js/jquery.js"></script>
-<script type="text/javascript" src="js/bootstrap-collapse.js"></script>
-<script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
-<script src="js/bootstrap-alerts.js"></script>
-<script type="text/javascript" src="js/bootstrap-modal.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
- $('#pulse').click(function(){
-$('#myModal').modal('toggle');});
- });
 
-</script>
-
-</head>
-
-<body>
-	
 	<div>
 		
 		<div class="body_container">
@@ -51,12 +23,12 @@ $('#myModal').modal('toggle');});
 					<div>
 						<div class="float_l span15 margin_zero sidebar">
 							<div class="sidebar_profic_pic">
-								<img src="images/profile_pic.png">
+								<img src="images/profile_icon.png">
 								<h3 class="text_align"><?php echo $query['fullname']; ?></h3>
 								<div>
 									<div class="margin_all">
-										<h4>11 March,Male</h4>
-										<h4>MBA</h4>
+										<h4>11 March,MBA</h4>
+										<!--<h4>MBA</h4>-->
 									</div>
 								</div>
 							</div>
@@ -253,6 +225,3 @@ $('#myModal').modal('toggle');});
 			</div>
 		</div>
 	</div>
-
-</body>
-</html>

@@ -165,7 +165,7 @@ class Admin extends CI_Controller
 			if ($use_username) {
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
 			}
-			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean|alpha_dash');
+			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
@@ -732,9 +732,8 @@ class Admin extends CI_Controller
 	
 	}*/
 	
-	function edituser($id)
+	function edituser($id='')
 	{
-	
 		$data = $this->path->all_path();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
@@ -742,22 +741,28 @@ class Admin extends CI_Controller
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$data['user_detail_edit'] = $this->adminmodel->fetch_data_edit($id);
+		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean|alpha_dash');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_update_unique_email');
+		if ($this->form_validation->run()) {
+		$this->adminmodel->edit_user_data();
+		redirect('admin/userupdated');
+		} 
 		//$send_id = '123';
 		$this->load->view('admin/edituser',$data);
 	}
 	function update_user_detail()
 	{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		$this->adminmodel->edit_user_data();
-		$this->load->view('admin/header',$data);
-		$this->load->view('admin/sidebar',$data);
-		$this->load->view('admin/userupdated',$data);
+			
+		$this->load->view('admin/edituser',$data);
 		
 		//$this->adminmodel->edit_user_profile_data(); 
 		
+	}
+	
+	//call back function for unique email when updating
+	function update_unique_email($email)
+	{
+		$data['admin_priv']=$this->adminmodel->check_unique_email($email);
 	}
 	
 	

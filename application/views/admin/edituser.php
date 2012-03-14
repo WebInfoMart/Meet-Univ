@@ -5,7 +5,7 @@ foreach($user_detail_edit as $user_detail){
 <h2>Edit User</h2>
 <div id="content">
 <div class="form span7">
-				<form action="<?php echo $base ?>admin/update_user_detail" method="post">
+				<form action="<?php echo $base ?>admin/edituser/<?php echo $user_detail->id; ?> " method="post">
 				<input type="hidden" name="hid_user_id" value="<?php echo $user_detail->id; ?>" >
 						<div>
 							<label>FULLNAME:</label><br>

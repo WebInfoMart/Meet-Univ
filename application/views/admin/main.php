@@ -3,13 +3,14 @@
 	
 	
 	<div id="content">
+		<div class="message info"><p>Welcome to the Meet universities Admin Panel</p></div> 
 		
-		<div class="breadcrumb">
+		<!--<div class="breadcrumb">
 			<a href="#">Adminium</a> &raquo; <a href="#">Section title</a> &raquo; <a href="#">Subsection title</a> &raquo; <a href="#">Page title</a>
 		</div>		<!-- .breadcrumb ends -->
 		
 		
-		<h2>Statistics</h2>
+	<!--	<h2>Statistics</h2>
 		
 		
 		<div class="stats_charts">
@@ -92,8 +93,7 @@
 				</tbody>
 			</table>
 			
-		</div>		<!-- .stats_charts ends -->
-		
+		</div>		
 				
 		
 		<table width="100%" cellpadding="0" cellspacing="0" class="today_stats">
@@ -212,7 +212,7 @@
 				</select>
 				
 				<input type="submit" class="submit tiny" value="Apply to selected" />
-			</div>		<!-- .tableactions ends -->
+			</div>		
 			
 			
 			<div class="table_pagination right">
@@ -224,7 +224,7 @@
 				<a href="#">5</a>
 				<a href="#">6</a>
 				<a href="#">&raquo;</a>
-			</div>		<!-- .pagination ends -->
+			</div>		
 						
 		</form>
 		
@@ -726,7 +726,7 @@
 				</form>
 			</div>
 			
-		</div>		<!-- .chat ends -->
+		</div>	-->	<!-- .chat ends -->
 		
 		
 		

@@ -32,7 +32,7 @@
 	<a href="#"><img src="<?php echo "$base$img_path"?>/logo.png" alt="" height="50px;" width="180px" /></a>
 			
 		
-		<a href="#" class="backlink">&laquo; Back to the site</a>			
+		<a href="<?php echo $base; ?>" class="backlink">&laquo; Back to the site</a>			
 	</div>			<!-- #header ends -->
 	
 	

@@ -18,6 +18,7 @@ $base = base_url();
 //$base['fb_redirect'] = "'".base_url()."'/auth/facebook";
 $user = $facebook->getUser();
 if ($user) {
+$logoutUrl2 = $this->tank_auth->logout();
   try {
     // Proceed knowing you have a logged in user who's authenticated.
     $user_profile = $facebook->api('/me');
@@ -32,7 +33,7 @@ if ($user) {
  ******************************************/
 	/******* Logout Link of Facebook and Site *******/
   $logoutUrl = $facebook->getLogoutUrl();
-  $logoutUrl2 = $this->tank_auth->logout();
+  
   
   /********************************************* 
  * Session start for validate in welcome Model *
@@ -154,17 +155,22 @@ $('#myModal').modal('toggle');});
 				<div class="row">
 					<div class="span4 offset9">
 						<div class="bar">
-							<div class="login">Login</div>
-							<div class="signup">Signup</div>
+						<?php
+						if($this->ci->session->userdata('status')){ ?>
+						<?php if($user) { ?>
+						<a href="<?=$logoutUrl ?>" onclick="<?=$logoutUrl2 ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
+						<?php } else { ?>	
+						<a href="<?php echo $base ?>logout"><div class="login">Hi <?php echo $this->ci->session->userdata('username'); ?></div> <div class="login">Logout</div></a>
+						<?php } } else { ?>
+							<a href="<?php echo $base ?>login"><div class="login">Login</div></a>
+							<a href="<?php echo $base ?>register"><div class="signup">Signup</div></a>
 							<span id="fb_button">
-							<?php if(!$user) { ?>
-							<fb:login-button  perms="email,user_checkins" onlogin="window.location.reload(true);"></fb:login-button>
-							<?php } else { ?>
-							<a href="<?=$logoutUrl ?>" onclick="<?=$logoutUrl2 ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
-							<?php } ?>
-							
+							<fb:login-button   perms="email,user_checkins" id="fb_butonek" onlogin="window.location.reload(true);"></fb:login-button>
 							<img src="<?php echo "$base$img_path" ?>/inconnect.png" />
 							</span>
+							<?php } ?>
+						
+							
 						</div>
 					</div>
 				</div>
@@ -201,6 +207,23 @@ $('#myModal').modal('toggle');});
 			</div>
 		</div>
 	</header>
+	<style>
+	#fb_butonek a
+{
+background: url("http://workforcetrack.in/images/fbconnect.png") no-repeat;
+
+width:20px; /*my image width*/
+
+height:19px; /*my image height*/
+}
+
+#fb_butonek a span
+{
+border:0px none;
+background: none;
+display:none;
+}
+	</style>
 <div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>

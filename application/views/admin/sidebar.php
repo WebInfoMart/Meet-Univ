@@ -83,14 +83,14 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		</ul>
 		
 <?php } ?>		
-		<div class="status_box">
+	<!--	<div class="status_box">
 			<ul>
 				<li><a href="#" class="online" title="Online">Web server 1</a></li>
 				<li><a href="#" class="online" title="Online">Web server 2</a></li>
 				<li><a href="#" class="warning" title="Warning">DB server</a></li>
 				<li><a href="#" class="offline" title="Offline">Mail server</a></li>
 			</ul>
-		</div>
+		</div>-->
 		
 	</div>		<!-- #sidebar ends -->
 	
