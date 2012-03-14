@@ -52,6 +52,32 @@ class Adminmodel extends CI_Model
 	$query = $this->db->get_where('user_privilige', array('user_id' => $user_id));
 	return $query->result_array();	
 	}
+	
+	//fetch and edit user profile and basic data
+	
+	public function fetch_data_edit($id)
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		//$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+		$this->db->where('id', $id); 
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	public function edit_user_data()
+	{
+	
+		$data = array(
+               'fullname' => $_POST['fullname'],
+               'email' => $_POST['email'],
+               'level' =>$_POST['level_user']
+            );
+		$this->db->update('users', $data, array('id' => $_POST['hid_user_id']));
+       
+	}
+	
+	
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

@@ -704,7 +704,6 @@ class Admin extends CI_Controller
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$data['user_detail']= $this->adminmodel->fetch_user_data();
-		$data['user_detail']=$this->adminmodel->fetch_user_data();
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==1 && $userdata['admin_priv']['privilege_level']!=0)
 		{
@@ -719,7 +718,7 @@ class Admin extends CI_Controller
 		}
 	}
 	
-	function edituser()
+	/*function edituser()
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
@@ -731,8 +730,37 @@ class Admin extends CI_Controller
 		}
 		
 	
+	}*/
+	
+	function edituser($id)
+	{
+	
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$data['user_detail_edit'] = $this->adminmodel->fetch_data_edit($id);
+		//$send_id = '123';
+		$this->load->view('admin/edituser',$data);
 	}
-
+	function update_user_detail()
+	{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->adminmodel->edit_user_data();
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->load->view('admin/userupdated',$data);
+		
+		//$this->adminmodel->edit_user_profile_data(); 
+		
+	}
+	
+	
 }
 
 /* End of file auth.php */

@@ -51,7 +51,7 @@
 
 	<div id="header">
 	
-		<a href="#"><img src="<?php echo "$base$img_path"?>/logo.png" alt="" height="50px;" width="180px" /></a>
+		<a href="#"><img src="<?php echo "$base$img_path" ?>/logo.png" alt="" height="50px;" width="180px" /></a>
 		
 		<form action="" method="post" class="searchform">
 			<input type="text" class="text" value="Search..." />
