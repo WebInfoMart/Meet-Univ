@@ -7,6 +7,7 @@ class Path extends CI_Model{
   }
  	function all_path(){
 	$data['base'] = $this->config->item('base_url');
+	$data['admin']=$this->config->item('admin');
 	$data['css_path'] = $this->config->item('css_path');	
 	$data['img_path'] = $this->config->item('img_path');
 	$data['admin_css'] = $this->config->item('admin_css_path');

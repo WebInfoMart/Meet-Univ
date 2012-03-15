@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://127.0.0.1/Meet-Univ/';
+$config['base_url']	= 'http://localhost/www/Meet-Univ/';
 
 /*
 |--------------------------------------------------------------------------
@@ -358,7 +358,7 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 /* Settings css File Path */
-
+$config['admin'] = 'admin';
 $config['css_path'] = 'css';
 $config['img_path'] = 'images';
 $config['admin_css_path'] ='css/admin';

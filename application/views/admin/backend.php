@@ -45,8 +45,8 @@
 		<div class="message info"><p>Admin Login Section</p></div>
 		<form action="" method="post">
 			<div>
-				<label>Username:</label> <br />
-				<input type="text" class="text" name="login" id="login" placeholder="Username" value="<?php echo set_value('login'); ?>">
+				<label>Email:</label> <br />
+				<input type="text" class="text" name="login" id="login" placeholder="Email" value="<?php echo set_value('login'); ?>">
 				<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>			
 			</div>
 			

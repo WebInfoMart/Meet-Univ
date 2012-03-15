@@ -9,7 +9,7 @@
   $this->ci =& get_instance();
   $this->ci->load->config('tank_auth', TRUE);
   $this->ci->load->library('session');
-
+ 
 $facebook = new Facebook(array(
   'appId'  => '358428497523493',
   'secret' => '497eb1b9decd06c794d89704f293afdd',
@@ -139,6 +139,7 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 <script src="<?php echo "$base$js";?>/bootstrap-alerts.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/pic_upload_js.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
  $('#pulse').click(function(){
@@ -160,7 +161,7 @@ $('#myModal').modal('toggle');});
 						<?php if($user) { ?>
 						<a href="<?=$logoutUrl ?>" onclick="<?=$logoutUrl2 ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
 						<?php } else { ?>	
-						<a href="<?php echo $base ?>logout"><div class="login">Hi <?php echo $this->ci->session->userdata('username'); ?></div> <div class="login">Logout</div></a>
+						<a href="<?php echo $base ?>logout"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div> <div class="login">Logout</div></a>
 						<?php } } else { ?>
 							<a href="<?php echo $base ?>login"><div class="login">Login</div></a>
 							<a href="<?php echo $base ?>register"><div class="signup">Signup</div></a>

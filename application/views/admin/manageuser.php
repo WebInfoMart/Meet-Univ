@@ -8,7 +8,7 @@
 						<!--<th width="10"><input type="checkbox" class="check_all"></th>-->
 						<th class="header" style="cursor: pointer; ">ID</th>
 						<th class="header" style="cursor: pointer; ">FULLNAME</th>
-						<th class="header" style="cursor: pointer; ">USERNAME</th>
+					<!--	<th class="header" style="cursor: pointer; ">USERNAME</th>-->
 						<th class="header" style="cursor: pointer; ">EMAIL</th>
 						<th class="header" style="cursor: pointer; ">USER TYPE</th>
 						<th class="header" style="cursor: pointer; ">MANAGE USER</th>
@@ -25,7 +25,7 @@ if($row->level!='5' && $row->level!='' && $row->level!='0'){
 						<!--<td><input type="checkbox"></td>-->
 						<td><strong><a href="#"><?php echo $row->id; ?></a></strong></td>
 						<td><?php echo $row->fullname; ?></td>
-						<td><?php echo $row->username; ?></td>
+						<!--<td><?php //echo $row->username; ?></td>-->
 						<td><a href="#"><?php echo $row->email; ?></a></td>
 						<td >
 						<?php if($row->level=='1' )
@@ -47,23 +47,26 @@ echo "Admin";
 
  ?>
 						</td>
+						<td>
 <?php if($admin_user_level=='5' || $admin_user_level=='4') {
 $user_edit_op=array('3','6','7','10');
 $user_delete_op=array('5','7','8','10');
 foreach ($admin_priv as $admin_priv_res){ 
 if($admin_priv_res['privilege_type_id']=='1' && in_array($admin_priv_res['privilege_level'],$user_edit_op))
 {?>					
-<td><a href="edituser/<?php echo $row->id; ?>"><img src="<?php echo "$base$admin_img" ?>/b_edit.png" alt="EDIT" title="edit" /></a></a>
+<a href="edituser/<?php echo $row->id; ?>/<?php echo $row->level; ?>"><img src="<?php echo "$base$admin_img" ?>/b_edit.png" alt="EDIT" title="edit" /></a></a>
 <?php 
 
 }
 if($admin_priv_res['privilege_type_id']=='1' && in_array($admin_priv_res['privilege_level'],$user_delete_op))
 {
+
 ?>
-<a href="#" style="margin-left:40px;"><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a></td>
+<a href="#" style="margin-left:40px;" onclick="delete_confirm('<?php  echo "$base$admin";?>','<?php  echo $row->level; ?>','<?php echo $row->id; ?>');" ><img src="<?php echo "$base$admin_img" ?>/close.png" alt="Delete" title="Delete" /></a>
 	
 <?php }}
-} ?>		
+} ?>
+</td>		
 </tr>
 <?php
 }
@@ -100,3 +103,14 @@ if($admin_priv_res['privilege_type_id']=='1' && in_array($admin_priv_res['privil
 						
 		</form>
 		</div>
+<script>
+function delete_confirm(adminbase,userlevel,userid)
+{
+var r=confirm("Are U sure u want to delete this user?");
+if (r==true)
+  {
+  window.location.href=adminbase+'/deleteuser/'+userlevel+'/'+userid;
+  }
+
+}
+</script>		

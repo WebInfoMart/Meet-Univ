@@ -25,12 +25,13 @@
 								<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span>
 							
 						</div> 
-						<div>
+						<!--<div>
 							<label>USERNAME:</label><br>
-							<input type="text" size="30" class="text" value="<?php echo set_value('username') ?>" name="username"> 
-								<span style="color: red;"> <?php echo form_error('username'); ?><?php echo isset($errors['username'])?$errors['username']:''; ?> </span>
+							<input type="text" size="30" class="text" value="<?php //echo set_value('username') ?>" name="username"> 
+								<span style="color: red;"> <?php //echo form_error('username'); ?><?php// echo isset($errors['username'])?$errors['username']:''; ?> </span>
 						
 						</div> 
+						-->
 						<div><label>USER ROLL</label></br>
 						<select class="styled" name="level_user" id="level_user">
 							<option value="0">SELECT</option>

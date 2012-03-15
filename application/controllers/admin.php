@@ -201,17 +201,18 @@ class Admin extends CI_Controller
 			//$this->load->view('auth/adduser', $data);
 		}
 	$add_user_priv=array('4','6','8','10');
+	$flag=0;
 	foreach($data['admin_priv'] as $userdata['admin_priv']){
 	if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$add_user_priv) )
 	{
 	$this->load->view('admin/adduser', $data);
+	$flag=1;
 	break;
 	}
-	else
+	}
+	if($flag==0)
 	{
 	$this->load->view('admin/accesserror', $data);
-	break;
-	}
 	}
 	}
 	
@@ -642,7 +643,6 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$this->load->view('admin/user_privilege',$data);
@@ -704,17 +704,18 @@ class Admin extends CI_Controller
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$data['user_detail']= $this->adminmodel->fetch_user_data();
+		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==1 && $userdata['admin_priv']['privilege_level']!=0)
 		{
 		$this->load->view('admin/manageuser',$data);
+		$flag=1;
 		break;
 		}
-		else
+		}
+		if($flag==0)
 		{
 		$this->load->view('admin/accesserror',$data);
-		break;
-		}
 		}
 	}
 	
@@ -732,23 +733,40 @@ class Admin extends CI_Controller
 	
 	}*/
 	
-	function edituser($id='')
+	function edituser($id='',$level)
 	{
 		$data = $this->path->all_path();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$data['current_user_priv']=$this->adminmodel->get_user_privilege($id);
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$data['user_detail_edit'] = $this->adminmodel->fetch_data_edit($id);
-		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean|alpha_dash');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|callback_update_unique_email');
+		//fetch all privilege type 
+		$data['results'] = $this->adminmodel->userprivlegetype();
+		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
+		//$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 		if ($this->form_validation->run()) {
 		$this->adminmodel->edit_user_data();
 		redirect('admin/userupdated');
-		} 
+		}
+		$edit_user_priv=array('3','6','7','10');
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$edit_user_priv) && $id!=$data['user_id'] && $level!='5' )
+		{
+		$this->load->view('admin/edituser', $data);
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
 		//$send_id = '123';
-		$this->load->view('admin/edituser',$data);
+		
 	}
 	function update_user_detail()
 	{
@@ -764,7 +782,42 @@ class Admin extends CI_Controller
 	{
 		$data['admin_priv']=$this->adminmodel->check_unique_email($email);
 	}
+	function userupdated()
+	{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->load->view('admin/userupdated',$data);
+	}
 	
+	function deleteuser($user_level,$user_id)
+	{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$delete_user_priv=array('5','7','8','10');
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv) && $user_id!=$data['user_id'] && $user_level!='5')
+		{
+		$this->adminmodel->deleteuser($user_level,$user_id);
+		$this->load->view('admin/userdeleted', $data);
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		
+	}
 	
 }
 

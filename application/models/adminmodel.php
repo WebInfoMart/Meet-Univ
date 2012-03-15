@@ -41,7 +41,11 @@ class Adminmodel extends CI_Model
 	
 	public function fetch_user_data()
 	{
-		$query = $this->db->get('users');
+		$user_id	= $this->tank_auth->get_admin_user_id();
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where(array('level !=' => '5','id !='=>$user_id));
+		$query = $this->db->get();
 		//$this->load->library('table');
 		//$table= $this->table->generate($query);
 		return $query->result();
@@ -68,6 +72,11 @@ class Adminmodel extends CI_Model
 	public function edit_user_data()
 	{
 	
+		if($_POST['level_user']!=1)
+		{
+		$this->db->delete('user_privilige', array('user_id' => $_POST['hid_user_id'])); 
+		$this->adminmodel->insert_userprivlege_data($_POST['hid_user_id']);
+		}
 		$data = array(
                'fullname' => $_POST['fullname'],
                'email' => $_POST['email'],
@@ -75,6 +84,27 @@ class Adminmodel extends CI_Model
             );
 		$this->db->update('users', $data, array('id' => $_POST['hid_user_id']));
        
+	}
+	
+	public function get_basic_operation_level($user_id,$priv_id)
+	{
+		$this->db->select('*');
+		$this->db->from('user_privilige');
+		$this->db->join('basic_operation', 'user_privilige.privilege_level = basic_operation.operation_level');
+		$this->db->where(array('user_privilige.user_id'=>$user_id,'user_privilige.privilege_type_id'=>$priv_id)); 
+		$query = $this->db->get();
+		//$query = $this->db->get_where('basic_operation', array('operation_level' => $level));
+		return $query->result_array();	
+	}
+	
+	public function deleteuser($user_level,$userid)
+	{
+	$this->db->delete('users', array('id' => $userid));
+	$this->db->delete('user_profiles', array('user_id' => $userid));
+	if($user_level!=1 && $user_level!=5)
+	{
+	$this->db->delete('user_privilige', array('user_id' => $userid));
+	}
 	}
 	
 	

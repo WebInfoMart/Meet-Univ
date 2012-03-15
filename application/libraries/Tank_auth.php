@@ -80,6 +80,8 @@ class Tank_auth
 									'username'	=> $user->username,
 									'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 									'user_type' =>$user_type,
+									'fullname'  =>$user->fullname,
+									
 									
 									//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 							));
@@ -89,6 +91,7 @@ class Tank_auth
 						{
 						$this->ci->session->set_userdata(array(
 									'admin_user_id'	=> $user->id,
+									'admin_fullname' => $user->fullname,
 									'admin_username'	=> $user->username,
 									'admin_status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 									'user_type' =>$user_type,
@@ -135,14 +138,14 @@ class Tank_auth
 		$this->delete_autologin();
 
 		// See http://codeigniter.com/forums/viewreply/662369/ as the reason for the next line
-		$this->ci->session->set_userdata(array('user_id' => '', 'username' => '', 'status' => '','user_type' =>''));
+		$this->ci->session->set_userdata(array('user_id' => '','fullname' => '', 'username' => '', 'status' => '','user_type' =>''));
 
 		//$this->ci->session->sess_destroy();
 	}
 	
 	function adminlogout()
 	{
-	$this->ci->session->set_userdata(array('admin_user_id' => '', 'admin_username' => '', 'admin_status' => '','user_type' =>'','admin_userlevel' =>''));
+	$this->ci->session->set_userdata(array('admin_user_id' => '','admin_fullname' => '', 'admin_username' => '', 'admin_status' => '','user_type' =>'','admin_userlevel' =>''));
 	$this->ci->session->set_userdata(array('newadmin_fullname' => '','newadmin_createdby' => '','newadmin_inprocess' => '','newadmin_password' => '','newadmin_email' => '', 'newadmin_createdby_user_id' => '', 'newadmin_level' => '','newadmin_username' =>''));
 		
 	
@@ -299,6 +302,7 @@ class Tank_auth
 				$this->ci->session->set_userdata(array(
 						 'user_id'	=> $res['user_id'],
 						 'username'	=> $username,
+						 'fullname' => $fullname,
 						 'status'	=> STATUS_ACTIVATED,
 						 'user_type'=>$user_type,
 						 ));

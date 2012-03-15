@@ -33,18 +33,16 @@
 							</div>
 						</li>
 						<?php 
-						//counter variable
-						$c=1; 
+						 
 						//echo $new_user_level;
 						foreach ($results as $privilage){
 					//	print_r($results);
-						if($new_user_level==4)
-						{
-						 if($privilage['privilege_type_id']!=8 && $privilage['privilege_type_id']!=9)
-						 {
-						?>
 						
-						<li>
+							if(($new_user_level==4 && $privilage['privilege_type_id']!=8 && $privilage['privilege_type_id']!=9) || ($new_user_level==2 && ($privilage['privilege_type_id']==8 || $privilage['privilege_type_id']==9)) || ($new_user_level==3 && ($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==11)))
+							{
+							?>
+						
+							<li>
 							<div class="span3 margin_t">
 								<label><h4><?php echo $privilage['privilege_name'];?></h4></label>
 								<input type="hidden" name="privilege_type_id[]" value="<?php echo $privilage['privilege_type_id']; ?>">
@@ -69,87 +67,13 @@
 								</div>
 								
 							</div>
-						<div class="clearfix"></div>
-						
-						</li>
+							<div class="clearfix"></div>
+							</li>
 					<?php
-					} }
-				
-					else if($new_user_level==2)
-						{
-						 if($privilage['privilege_type_id']==8 || $privilage['privilege_type_id']==9)
-						 {
-						?>
-						
-						<li>
-							<div class="span3 margin_t">
-								<label><h4><?php echo $privilage['privilege_name'];?></h4></label>
-								<input type="hidden" name="privilege_type_id[]" value="<?php echo $privilage['privilege_type_id']; ?>">
-									<input type="hidden" value="0" name="privilege_total[]" id="privilege_total_<?php echo $privilage['privilege_type_id']; ?>">
-							
-							</div>
-							<div class="span5">
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box" style="background-position-x: 0px; "><input type="checkbox" id="view_<?php echo $privilage['privilege_type_id'];?>"  name="view_<?php echo $privilage['privilege_type_id'];?>" value="1"  class="onoffbtn" ></span>
-								</p>
-								</div>
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box checked"><input type="checkbox" id="edit_<?php echo $privilage['privilege_type_id'];?>" name="edit_<?php echo $privilage['privilege_type_id'];?>" value="2" class="onoffbtn priorop" ></span>
-									</p>
-								</div>
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box checked"><input type="checkbox" id="insert_<?php echo $privilage['privilege_type_id'];?>" name="insert_<?php echo $privilage['privilege_type_id']?>"  value="3" class="onoffbtn priorop" ></span>
-									</p>
-								</div>
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box checked"><input type="checkbox" id="delete_<?php echo $privilage['privilege_type_id'];?>" name="delete_<?php echo $privilage['privilege_type_id'];?>"  value="4" class="onoffbtn priorop" ></span>
-									</p>
-								</div>
-								
-							</div>
-						<div class="clearfix"></div>
-						
-						</li>
-					<?php
-					} }
-					else if($new_user_level==3)
-						{
-						 if($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==11 )
-						 {
-						?>
-						
-						<li>
-							<div class="span3 margin_t">
-								<label><h4><?php echo $privilage['privilege_name'];?></h4></label>
-								<input type="hidden" name="privilege_type_id[]" value="<?php echo $privilage['privilege_type_id']; ?>">
-								<input type="hidden" value="0" name="privilege_total[]" id="privilege_total_<?php echo $privilage['privilege_type_id']; ?>">
-							
-							</div>
-							<div class="span5">
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box" style="background-position-x: 0px; "><input type="checkbox" id="view_<?php echo $privilage['privilege_type_id'];?>"" name="view_<?php echo $privilage['privilege_type_id'];?>" value="1"  class="onoffbtn " ></span>
-								</p>
-								</div>
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box checked"><input type="checkbox"id="edit_<?php echo $privilage['privilege_type_id'];?>"  name="edit_<?php echo $privilage['privilege_type_id'];?>" value="2" class="onoffbtn priorop" ></span>
-									</p>
-								</div>
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box checked"><input type="checkbox" id="insert_<?php echo $privilage['privilege_type_id'];?>" name="insert_<?php echo $privilage['privilege_type_id']?>"  value="3" class="onoffbtn priorop" ></span>
-									</p>
-								</div>
-								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box checked"><input type="checkbox" id="delete_<?php echo $privilage['privilege_type_id'];?>" name="delete_<?php echo $privilage['privilege_type_id'];?>"   value="4" class="onoffbtn priorop" ></span>
-									</p>
-								</div>
-								
-							</div>
-						<div class="clearfix"></div>
-						
-						</li>
-					<?php
-					} }
-					
+					 }
+					 ?>
+					<div class="clearfix"></div>
+						<?php
 					}?>
 					
 						

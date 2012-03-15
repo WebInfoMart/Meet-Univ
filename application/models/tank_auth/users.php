@@ -14,14 +14,21 @@ class Users extends CI_Model
 {
 	private $table_name			= 'users';			// user accounts
 	private $profile_table_name	= 'user_profiles';	// user profiles
-
+	var $gallery_path;
+	var $gallery_path_url;
+	
 	function __construct()
 	{
 		parent::__construct();
-
+		$this->gallery_path = realpath(APPPATH . '../uploads');
+		$this->gallery_path_url = base_url().'uploads/';
 		$ci =& get_instance();
 		$this->table_name			= $ci->config->item('db_table_prefix', 'tank_auth').$this->table_name;
 		$this->profile_table_name	= $ci->config->item('db_table_prefix', 'tank_auth').$this->profile_table_name;
+		//$this->program_parent	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_parent;
+		//$this->program_educ_level	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_educ_level;
+		//$this->country	= $ci->config->item('db_table_prefix', 'tank_auth').$this->country;
+		
 	}
 
 	/**
@@ -31,6 +38,100 @@ class Users extends CI_Model
 	 * @param	bool
 	 * @return	object
 	 */
+	 
+	 function fetch_country()
+	 {
+		$this->db->select('*');
+		$this->db->from('country');
+		$query=$this->db->get();
+		//$query = $this->db->query("select * from country");
+		return $query->result_array();
+	 }
+	 
+	 function fetch_educ_level()
+	 {
+		$this->db->select('*');
+		$this->db->from('program_educ_level');
+		$query = $this->db->get();
+		return $query->result_array();
+	 }
+	 
+	 function fetch_area_interest()
+	 {
+		$this->db->select('*');
+		$this->db->from('program_parent');
+		$query = $this->db->get();
+		return $query->result_array();
+	 }
+	 
+	 /* function for pic upload */
+	 
+	
+	function do_upload() {
+		 //$this->ci->load->config('tank_auth', TRUE);
+  
+		$config = array(
+			'allowed_types' => 'jpg|jpeg|gif|png',
+			'upload_path' => $this->gallery_path,
+			'max_size' => 2000
+		);
+		
+		$this->load->library('upload', $config);
+		$this->upload->do_upload();
+		$image_data = $this->upload->data();
+		
+		$config = array(
+			'source_image' => $image_data['full_path'],
+			'new_image' => $this->gallery_path . '/thumbs',
+			'maintain_ration' => true,
+			'width' => 150,
+			'height' => 100
+		);
+		
+		$this->load->library('image_lib', $config);
+		$this->image_lib->resize();
+		//print_r($config);
+		//print_r($image_data['file_name']);
+		//$img_path_store = $this->input->post('userfile');
+		//$img_path_store = $config['new_image'];
+		//print_r($this->session->userdata());
+		$data['user_id'] = $this->tank_auth->get_user_id();
+		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
+		 $this->db->query("update user_profiles set prog_parent_id = '".$this->input->post('area_interest')."' where user_id='".$data['user_id']."'");
+		 $this->db->query("update user_profiles set curr_educ_level = '".$this->input->post('educ_level')."' where user_id='".$data['user_id']."'");
+		 $this->db->query("update user_profiles set country_id = '".$this->input->post('countries')."' where user_id='".$data['user_id']."'");
+		 $this->db->query("update user_profiles set gender = '".$this->input->post('sex')."' where user_id='".$data['user_id']."'");
+		//echo $this->session->userdata('user_id');
+		redirect('');
+	}
+	
+	/*function get_images() {
+		
+		$files = scandir($this->gallery_path);
+		$files = array_diff($files, array('.', '..', 'thumbs'));
+		
+		$images = array();
+		
+		foreach ($files as $file) {
+			$images []= array (
+				'url' => $this->gallery_path_url . $file,
+				'thumb_url' => $this->gallery_path_url . 'thumbs/' . $file
+			);
+		}
+		return $images;
+	}*/
+	 
+	 /* End Here */
+	 /* function for get profile pic */
+	 function fetch_profile_pic($logged_user)
+	 {
+		$this->db->select('user_pic_path');
+		$this->db->where('user_id',$logged_user);
+		$query = $this->db->get($this->profile_table_name);
+		return $query->row_array();
+	 }
+	 /* End Here */
+	 
 	 function fetch_all_data($logged_user)
 	 {
 		$query = $this->db->get_where('users',array('id'=>$logged_user));
@@ -177,7 +278,7 @@ class Users extends CI_Model
 
 		if ($this->db->insert($this->table_name, $data)) {
 			$user_id = $this->db->insert_id();
-			$this->create_profile($user_id);
+			if ($activated)	$this->create_profile($user_id);
 			return array('user_id' => $user_id);
 		}
 		return NULL;

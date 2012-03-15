@@ -73,15 +73,15 @@ $captcha = array(
 								<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span>
 							</div>
 						</div>
-						<div class="control-group">
+						<!--<div class="control-group">
 							<label class="control-label" for="username">Username</label>
 							<div class="controls">
-								<input type="text" class="span4" name="username" id="username" placeholder="Username" value="<?php echo set_value('username') ?>">
+								<input type="text" class="span4" name="username" id="username" placeholder="Username" value="<?php //echo set_value('username') ?>">
 								
-								<span style="color: red;"> <?php echo form_error('username'); ?><?php echo isset($errors['username'])?$errors['username']:''; ?> </span>
+								<span style="color: red;"> <?php //echo form_error('username'); ?><?php// echo isset($errors['username'])?$errors['username']:''; ?> </span>
 							</div>
 						</div>
-						
+						-->
 						<div class="control-group">
 						
 						<input type="hidden" value="self" name="createdby" id="createdby"/>

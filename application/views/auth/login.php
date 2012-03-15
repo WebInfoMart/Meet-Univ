@@ -42,9 +42,9 @@ $captcha = array(
 					</div>
 					<form class="margin1" id="signup" method="post" action="">
 						<div class="control-group">
-							<label class="control-label" for="login">Username</label>
+							<label class="control-label" for="login">Email</label>
 							<div class="controls">
-								<input type="text" class="span4" name="login" id="login" placeholder="Username" value="<?php echo set_value('login'); ?>">
+								<input type="text" class="span4" name="login" id="login" placeholder="Email" value="<?php echo set_value('login'); ?>">
 								<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>
 							</div>
 						</div>
