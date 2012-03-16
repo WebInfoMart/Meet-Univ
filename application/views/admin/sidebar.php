@@ -12,25 +12,24 @@
 			</li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/calendar.png" alt="" /> Calendar</a></li>
 		-->	
-		<?php if($admin_user_level=='5' || $admin_user_level=='4') {
+		<?php 
+		if($admin_user_level=='5' || $admin_user_level=='4') {
 		$admin_add_op=array('4','6','8','10');
 		
 foreach ($admin_priv as $admin_priv_res){
 if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
 {?>
 
-			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/users.png" alt="" /> Users</a>
-				<ul>
-		<?php
-		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
-		{?>
-					<li><?php echo anchor('admin/adduser', 'Add new User'); ?></li>
+
+<li><a href="#"> <img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Q & A</a>
+		<ul><?php
+		if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
+			{
+			?>
+		<li><?php echo anchor('admin/addevents', 'Add Que'); ?></li> <?php } ?>
+			<li><?php echo anchor('admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
+
 					
-		<?php }?>			
-					<li><?php echo anchor('admin/manageusers', 'Manage User'); ?></li>
-					<li><a href="#">User groups</a></li>
-				</ul>
-			</li>			
 			<?php
 			
 }	
@@ -65,14 +64,19 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 			if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
-			
-		<li><a href="#"> <img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Q & A</a>
-		<ul><?php
-		if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
-			{
-			?>
-		<li><?php echo anchor('admin/addevents', 'Add Que'); ?></li> <?php } ?>
-			<li><?php echo anchor('admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
+			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/users.png" alt="" /> Users</a>
+				<ul>
+		<?php
+		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+		{?>
+					<li><?php echo anchor('admin/adduser', 'Add new User'); ?></li>
+					
+		<?php }?>			
+					<li><?php echo anchor('admin/manageusers', 'Manage User'); ?></li>
+					<li><a href="#">User groups</a></li>
+				</ul>
+			</li>	
+		
 	<?php 
 	}
 	}?>		
@@ -83,7 +87,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		</ul>
 		
 <?php } ?>		
-	<!--	<div class="status_box">
+		<!--<div class="status_box">
 			<ul>
 				<li><a href="#" class="online" title="Online">Web server 1</a></li>
 				<li><a href="#" class="online" title="Online">Web server 2</a></li>

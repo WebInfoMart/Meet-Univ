@@ -122,5 +122,13 @@ color:#666666 !important;
 text-decoration:none !important;
 '}
 
-
+.focused_error
+{
+border-color: rgba(255, 0, 0, .8) !important;
+  -webkit-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+     -moz-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+          box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+  outline: 0 !important;
+  width:290px !important;
+}
 

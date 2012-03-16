@@ -37,6 +37,9 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.fancybox.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tipsy.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
+	<!--<script type="text/javascript" src="<?php //echo "$base$js";?>/jquery.fancybox.js"></script>--?
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tipsy.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 	<!--[if lt IE 9]>
 	<style type="text/css" media="all"> @import url("css/ie.css"); </style>
 	<![endif]-->

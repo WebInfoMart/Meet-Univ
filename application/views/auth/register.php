@@ -53,10 +53,32 @@ $captcha = array(
 );*/
 ?>
 
-	<div>
+<?php
+$class_fullname='';
+$class_email='';
+$class_pass='';
+$class_cpass='';
+$class_iagree='';
+$error_fullname = form_error('fullname');
+$error_email = form_error('email');
+$error_pass = form_error('password');
+$error_cpass = form_error('confirm_password');
+$error_iagree = form_error('agree_term');
+
+if($error_fullname != '') { $class_fullname = 'focused_error'; } else { $class_fullname='span4'; }
+
+if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='span4'; }
+
+if($error_pass != '') { $class_pass = 'focused_error'; } else { $class_pass='span4'; }
+
+if($error_cpass != '') { $class_cpass = 'focused_error'; } else { $class_cpass='span4'; }
+
+if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagree=''; }
+?>
+	<!--<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
-		<div class="body_container">
+		<div class="body">-->
 			<div class="row">
 				<div class="span5 round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
@@ -69,7 +91,7 @@ $captcha = array(
 						<div class="control-group">
 							<label class="control-label" for="fullname">Full Name</label>
 							<div class="controls">
-								<input type="text" class="span4" name="fullname" id="fullname" value="<?php echo set_value('fullname') ?>"  placeholder="Full Name">
+								<input type="text" class="<?php echo $class_fullname; ?>" name="fullname" id="fullname" value="<?php echo set_value('fullname') ?>"  placeholder="Full Name">
 								<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span>
 							</div>
 						</div>
@@ -91,21 +113,21 @@ $captcha = array(
 						<div class="control-group">
 							<label class="control-label" for="email">Email</label>
 							<div class="controls">
-								<input type="text" class="span4" name="email" id="email" value="<?php echo set_value('email') ?>" placeholder="Email">
+								<input type="text" class="<?php echo $class_email; ?>" name="email" id="email" value="<?php echo set_value('email') ?>" placeholder="Email">
 							    <span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="password">Password</label>
 							<div class="controls">
-								<input type="password" name="password" id="password" class="span4" placeholder="Password" value="<?php echo set_value('password') ?>">
+								<input type="password" name="password" id="password" class="<?php echo $class_pass; ?>" placeholder="Password" value="<?php echo set_value('password') ?>">
 								<span style="color: red;"> <?php echo form_error('password'); ?> </span>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="confirm_password">Confirm Password</label>
 							<div class="controls">
-								<input type="password" class="span4" name="confirm_password" id="confirm_password" placeholder="Confirm Password" value="<?php echo set_value('confirm_password') ?>">
+								<input type="password" class="<?php echo $class_cpass; ?>" name="confirm_password" id="confirm_password" placeholder="Confirm Password" value="<?php echo set_value('confirm_password') ?>">
 								<span style="color: red;"> <?php echo form_error('confirm_password'); ?> </span>
 							</div>
 						</div>
@@ -113,7 +135,7 @@ $captcha = array(
 						
 											
 						<div class="control-group">
-							<label class="checkbox">
+							<label class="checkbox <?php echo $class_iagree; ?>">
 								<input type="checkbox" name="agree_term" id="agree_term" value="1">
 								I agree to the <a href="href">terms and conditions</a> of Meet Universities.
 							</label>
@@ -190,6 +212,6 @@ $captcha = array(
 					<span class="super">OR login with</span> <img src="<?php echo "$base$img_path" ?>/fbconnect.png" /> <span class="super">or</span> <img src="images/inconnect.png" />
 				</div>
 			</div>
-		</div>
-	</div>
+		<!--</div>
+	</div>-->
 	

@@ -30,12 +30,18 @@ $captcha = array(
 	'id'	=> 'captcha',
 	'maxlength'	=> 8,
 );*/
+
+$class_login='';
+$class_pass='';
+$error_login = form_error('login');
+$error_password = form_error('password');
+
+if($error_login != '') { $class_login = 'focused_error'; } else { $class_login='span4'; }
+
+if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass='span4'; }
 ?>
 
-	<div>
-		<div class="body_bar"></div>
-		<div class="body_header"></div>
-		<div class="body_container">
+	
 			<div class="row" style="display:"><!--LOGIN-->
 				<div class="span5 round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
@@ -47,7 +53,7 @@ $captcha = array(
 						<div class="control-group">
 							<label class="control-label" for="login">Email</label>
 							<div class="controls">
-								<input type="text" class="span4" name="login" id="login" placeholder="Email" value="<?php echo set_value('login'); ?>">
+								<input type="text" class="<?php echo $class_login; ?>" name="login" id="login" placeholder="Email" value="<?php echo set_value('login'); ?>">
 								<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>
 							</div>
 						</div>
@@ -55,7 +61,7 @@ $captcha = array(
 						<div class="control-group">
 							<label class="control-label" for="password">Password</label>
 							<div class="controls">
-								<input type="password" class="span4" name="password" id="password" placeholder="Password" value="<?php echo set_value('password'); ?>" >
+								<input type="password" class="<?php echo $class_pass; ?>" name="password" id="password" placeholder="Password" value="<?php echo set_value('password'); ?>" >
 								<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
 							</div>
 							<small><a href="#">Forgot your password?</a></small>
@@ -106,5 +112,4 @@ $captcha = array(
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+	

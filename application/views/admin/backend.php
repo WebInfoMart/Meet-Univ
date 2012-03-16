@@ -21,7 +21,16 @@
 
 </head>
 
+<?php
+$class_login='';
+$class_pass='';
+$error_login = form_error('login');
+$error_password = form_error('password');
 
+if($error_login != '') { $class_login = 'focused_error'; } else { $class_login='text'; }
+
+if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass='text'; }
+?>
 
 
 <body class="loginpage">
@@ -46,13 +55,13 @@
 		<form action="" method="post">
 			<div>
 				<label>Email:</label> <br />
-				<input type="text" class="text" name="login" id="login" placeholder="Email" value="<?php echo set_value('login'); ?>">
+				<input type="text" class="<?php echo $class_login; ?>" name="login" id="login" placeholder="Email" value="<?php echo set_value('login'); ?>">
 				<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>			
 			</div>
 			
 			<div>
 				<label>Password:</label> <br />
-				<input type="password" class="text" name="password" id="password" placeholder="Password" value="<?php echo set_value('password'); ?>" >
+				<input type="password" class="<?php echo $class_pass; ?>" name="password" id="password" placeholder="Password" value="<?php echo set_value('password'); ?>" >
 				<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
 							
 			</div>
