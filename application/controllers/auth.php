@@ -26,7 +26,12 @@ class Auth extends CI_Controller
 		
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
-		if (!$this->tank_auth->is_logged_in()) {
+		$this->load->view('auth/home',$data);
+		if ($this->tank_auth->is_logged_in()) {
+			redirect('home');
+		} 
+		//$this->load->view('auth/home',$data);
+		/*if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
 		} else {
 			$data['user_id']	= $this->tank_auth->get_user_id();
@@ -35,30 +40,48 @@ class Auth extends CI_Controller
 			$this->load->model('users');
 			$data['query'] = $this->users->fetch_all_data($logged_user);
 			$data['profile_pic'] = $this->users->fetch_profile_pic($logged_user);
+		//	print_r($data['profile_pic']);
 			$data['educ_level'] = $this->users->fetch_educ_level();
 			$data['country'] = $this->users->fetch_country();
 			//print_r($data['country']);
 			$data['area_interest'] = $this->users->fetch_area_interest();
-			$this->load->view('profile',$data);
+			$this->load->view('auth/profile',$data);
 			//$this->load->view('welcome', $data);
 		}
 		if ($this->input->post('upload')) {
 			$this->users->do_upload();
-		}
+		}*/
 		
 		//$data['images'] = $this->users->get_images();
 		$this->load->view('auth/footer',$data);
 	}
-	function home()
+	function home($pwd_change='')
 	{
+		$data = $this->path->all_path();
+		$data['pwd_change']=$pwd_change;
 		//$this->load->view('welcome');
 		if (!$this->tank_auth->is_logged_in()) {
-			redirect('/auth/login/');
+			redirect('/login/');
 		} else {
+			$this->load->view('auth/header',$data);
 			$data['user_id']	= $this->tank_auth->get_user_id();
 			$data['username']	= $this->tank_auth->get_username();
-			$this->load->view('welcome', $data);
+			$logged_user = $data['user_id'];
+			$this->load->model('users');
+			$data['query'] = $this->users->fetch_all_data($logged_user);
+			$data['profile_pic'] = $this->users->fetch_profile_pic($logged_user);
+		//	print_r($data['profile_pic']);
+			$data['educ_level'] = $this->users->fetch_educ_level();
+			$data['country'] = $this->users->fetch_country();
+			//print_r($data['country']);
+			$data['area_interest'] = $this->users->fetch_area_interest();
+			$this->load->view('auth/profile',$data);
+			
 		}
+		if ($this->input->post('upload')) {
+			$this->users->do_upload();
+		}
+		$this->load->view('auth/footer', $data);
 	}
 
 	/**
@@ -109,7 +132,7 @@ class Auth extends CI_Controller
 						$data['login_by_email'],
 						$this->form_validation->set_value('user_type')
 						)) {								// success
-					redirect('');
+					redirect('home');
 
 				} else {
 					$errors = $this->tank_auth->get_error_message();
@@ -312,7 +335,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function forgot_password()
+	/*function forgot_password()
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('');
@@ -344,7 +367,7 @@ class Auth extends CI_Controller
 			$this->load->view('auth/forgot_password_form', $data);
 		}
 	}
-
+*/
 	/**
 	 * Replace user password (forgotten) with a new one (set by user).
 	 * User is verified by user_id and authentication code in the URL.
@@ -390,37 +413,7 @@ class Auth extends CI_Controller
 		$this->load->view('auth/reset_password_form', $data);
 	}
 
-	/**
-	 * Change user password
-	 *
-	 * @return void
-	 */
-	function change_password()
-	{
-		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
-			redirect('/login/');
-
-		} else {
-			$this->form_validation->set_rules('old_password', 'Old Password', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
-			$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
-
-			$data['errors'] = array();
-
-			if ($this->form_validation->run()) {								// validation ok
-				if ($this->tank_auth->change_password(
-						$this->form_validation->set_value('old_password'),
-						$this->form_validation->set_value('new_password'))) {	// success
-					$this->_show_message($this->lang->line('auth_message_password_changed'));
-
-				} else {														// fail
-					$errors = $this->tank_auth->get_error_message();
-					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
-				}
-			}
-			$this->load->view('auth/change_password_form', $data);
-		}
-	}
+	
 
 	/**
 	 * Change user email
@@ -635,6 +628,67 @@ class Auth extends CI_Controller
 			return FALSE;
 		}
 		return TRUE;
+	}
+	
+	
+	
+	function change_password()
+	{
+		if (!$this->tank_auth->is_logged_in()) {								// not logged in or not activated
+			redirect('/login/');
+
+		} else {
+			$this->form_validation->set_rules('old_password', 'Old Password', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+			$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
+
+			$data['errors'] = array();
+
+			if ($this->form_validation->run()) {								// validation ok
+				if ($this->tank_auth->change_password(
+						$this->form_validation->set_value('old_password'),
+						$this->form_validation->set_value('new_password'))) {	// success
+					$this->_show_message($this->lang->line('auth_message_password_changed'));
+
+				} else {														// fail
+					$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+				}
+			}
+			$this->load->view('auth/change_password_form', $data);
+		}
+	}
+	function update_password()
+	{
+		$data = $this->path->all_path();
+		$data['pwd_change']=0;
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/login/');
+		} else {
+		
+		$this->load->view('auth/header',$data);
+		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+		$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
+		$data['errors'] = array();
+		if ($this->form_validation->run()) {								// validation ok
+				if ($this->tank_auth->change_password(
+						$this->form_validation->set_value('current_password'),
+						$this->form_validation->set_value('new_password'))) {	// success
+						redirect('home/pwd_change');
+					//$this->_show_message($this->lang->line('auth_message_password_changed'));
+					
+				} else {														// fail
+					$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+				}
+				
+			}
+			$this->load->view('auth/update_pass',$data);
+		
+		}
+		$this->load->view('auth/footer',$data);	
+		
 	}
 
 }

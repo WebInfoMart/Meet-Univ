@@ -53,10 +53,10 @@ $captcha = array(
 );*/
 ?>
 
-	<!--<div>
+	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
-		<div class="body">-->
+		<div class="body_container">
 			<div class="row">
 				<div class="span5 round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
@@ -190,6 +190,6 @@ $captcha = array(
 					<span class="super">OR login with</span> <img src="<?php echo "$base$img_path" ?>/fbconnect.png" /> <span class="super">or</span> <img src="images/inconnect.png" />
 				</div>
 			</div>
-		<!--</div>
-	</div>-->
+		</div>
+	</div>
 	

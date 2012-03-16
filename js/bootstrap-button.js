@@ -91,10 +91,23 @@
 
   $(function () {
     $('body').on('click.button.data-api', '[data-toggle^=button]', function ( e ) {
-      var $btn = $(e.target)
-      if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn')
+	  
+      var $btn = $(e.target);
+	   if($btn.attr("id")!='opendd')
+	   {
+      if (!$btn.hasClass('btn')) 
+	 {
+	 $btn = $btn.closest('.btn')
+	 }
+	 $('.ddclass').css('display','none');
+	  $('#opendd').html('Councelling');
       $btn.button('toggle')
+	 
+	}
+	
     })
   })
+  	
 
+ 
 }( window.jQuery );

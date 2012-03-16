@@ -140,12 +140,12 @@ if ($user) {
 <script src="<?php echo "$base$js";?>/bootstrap-alerts.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/pic_upload_js.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-button.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
  $('#pulse').click(function(){
 $('#myModal').modal('toggle');});
  });
-
 </script>
 </head>
 <body>
@@ -182,7 +182,7 @@ $('#myModal').modal('toggle');});
 				<div class="margin">
 					<div class="row"><!--LOGO-->
 						<div class="span4">
-							<img src="<?php echo "$base$img_path" ?>/logo.png" />
+						<a href="<?php echo $base; ?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" /></a>
 						</div>
 						<div class="span6 float_r">
 							<img src="<?php echo "$base$img_path" ?>/banner.png" />
@@ -225,7 +225,7 @@ background: none;
 display:none;
 }
 	</style>
-<div>
+	<!--<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
-		<div class="body">
+		<div class="body"> -->

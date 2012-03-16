@@ -535,7 +535,7 @@ class Tank_auth
 				return TRUE;
 
 			} else {															// fail
-				$this->error = array('old_password' => 'auth_incorrect_password');
+				$this->error = array('current_password' => 'auth_incorrect_password');
 			}
 		}
 		return FALSE;

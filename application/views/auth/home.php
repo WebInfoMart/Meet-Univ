@@ -1,3 +1,7 @@
+<div>
+		<div class="body_bar"></div>
+		<div class="body_header"></div>
+		<div class="form">
 			<div class="row">
 				<div class="span6 real">
 					<img src="images/slider.png">
@@ -17,19 +21,48 @@
 						<div class="clearfix"></div>
 					</div>
 				<div class="events" id="events_col">
-								
+					<div class="row margin_b">
+						<div class="float_l span21">
+							<span class="line">Events</span></br>
+						</div>
+						<div class="float_r span5">
+							<div class="btn-group" data-toggle="buttons-radio">
+								<!--<a class="btn" href="#">All</a>
+								<a class="btn" href="#">Postgraduate</a>
+								<a class="btn" href="#">Undergraduate</a>
+								<a class="btn" href="#">Foundation</a>-->
+								<button class="btn btnop">All</button>
+								<button class="btn btnop">Spot Admission</button>
+								<button class="btn btnop">Fairs</button>
+								<button class="btn btnop"id="opendd">Councelling</button>
+							</div>
+							  <ul class="ddclass">
+							  <li class="li1 openddli">
+							  <a href="#">Others</a></li>
+							  <li class="li2 openddli" >
+							  <a href="#">Alumuni</a>
+							  </li>
+							  </ul>
+						</div>
+						<div class="clearfix"></div>
+				</div>			
 				</div>
 				<div class="college" id="col">
+				
 					<div class="row margin_b">
 						<div class="float_l span21">
 							<span class="line">Type</span></br>
 						</div>
 						<div class="float_r span5">
-							<div class="btn-group">
-								<a class="btn" href="#">All</a>
+							<div class="btn-group" data-toggle="buttons-radio">
+								<!--<a class="btn" href="#">All</a>
 								<a class="btn" href="#">Postgraduate</a>
 								<a class="btn" href="#">Undergraduate</a>
-								<a class="btn" href="#">Foundation</a>
+								<a class="btn" href="#">Foundation</a>-->
+								<button class="btn">All</button>
+								<button class="btn">Postgraduate</button>
+								<button class="btn">UnderGraduate</button>
+								<button class="btn">Foundation</button>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -73,7 +106,12 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				
+					<!--<div>
+						<div class="span4">
+							<span class="line_break"></span>
+						</div>
+						<div class="clearfix"></div>
+					</div>-->
 					<div class="row margin_b">
 						<div class="float_l span21">
 							<span>Search</span></br>
@@ -317,4 +355,66 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
+</div>
+</div>
+<style type="text/css">	
+.ddclass{
+list-style:none;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;
+border:1px solid #ccc;width:86px;position:relative;left:186px;top:1px;display:none;
+}
+.ddclass li{background-color:#ccc;}
+.ddclass li:hover{background-color:whitesmoke;cursor:pointer;}
+.li1 a {color:#000;}
+.li2 a {color:#000;}
+.li1{padding-left:10px;padding-top:5px;}
+.li1 a:hover{text-decoration:none;}
+.li2 a:hover{text-decoration:none;}
+.li2{padding-left:10px;margin-bottom:0px;padding-right:5px;padding-top:5px;}
+</style>
+<script>
+$('#opendd').mouseenter(
+function(){
+$('.ddclass').css('display','block');
+}
+);
+$('.openddli').click(function()
+	{
 	
+	 $('.btnop').each(function()
+	 {
+	
+	  if($(this).attr("id")==null || $(this).attr("id")=='')
+	  {
+	   $(this).removeClass('active');
+	  }
+	  else
+	  {
+	  $(this).addClass('active');
+	  $('.ddclass').css('display','none');
+	  }
+	 
+	 })
+	  $('#opendd').html($(this).text());
+	})
+	$("body").click
+(
+  function(e)
+  {
+    if(e.target.className !== "ddclass")
+    {
+      $('.ddclass').css('display','none');
+    }
+  }
+);
+$(document).ready(function() {
+			$("#col").hide();
+	$('#colleges').click(function() {
+		$("#events_col").hide();
+		$("#col").show();
+   });
+   $('#events').click(function() {
+		$("#col").hide();
+		$("#events_col").show();
+   });
+});
+</script>	

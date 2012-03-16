@@ -15,9 +15,9 @@ $(window).load(function(){
 						<h3>Your Profile Information</h3>
 					</div>
 					<div class="modal-body model_body_height">
-						<form method="post" action="auth" enctype="multipart/form-data">
+						<form method="post" action="home" enctype="multipart/form-data">
 							<div>
-								<div class="float_l span15 margin_zero"><img src="images/profile_icon.png"></div>
+								<div class="float_l span15 margin_zero"><src="<?php echo "$base$img_path";  ?>profile_icon.png"></div>
 								<div class="float_l span15 margin_l12"><h4>Upload Your Picture</h4><div class="span15 margin_zero"><input type="file" name="userfile" /><br />
 							</div></div>
 								<div class="clearfix"></div>
@@ -33,6 +33,7 @@ $(window).load(function(){
 								<div class="float_l span2 margin_l12"><div class="controls">
 									<!--<input type="text" class="input-medium" id="input01">-->
 									<select name="educ_level">
+									<option value="0"></option>
 									<?php
 									foreach($educ_level as $level)
 									{
@@ -48,6 +49,7 @@ $(window).load(function(){
 								<div class="float_l span2 margin_l12">
 									<div class="controls">
 									<select name="area_interest">
+									<option value="0">Select</option>
 									<?php foreach($area_interest as $interest) 
 									{
 									?>
@@ -64,6 +66,7 @@ $(window).load(function(){
 								<div class="float_l span2 margin_l12">
 									<div class="controls">
 									<select name="countries">
+									<option value="0"></option>
 									<?php
 										//print_r($country);
 										foreach($country as $countries)
@@ -92,7 +95,8 @@ $(window).load(function(){
 
 <!-- Load Pop-up for pic upload End Here -->
 	<div>
-		
+		<div class="body_bar"></div>
+		<div class="body_header"></div>
 		<div class="body_container">
 			<div class="row show-grid">
 				<div class="span13">
@@ -125,7 +129,7 @@ $(window).load(function(){
 							echo "<img src='".base_url()."images/profile_icon.png'/>";
 							}
 							?>
-								<!--<img src="images/profile_pic.png">-->
+								<!--<src="<?php echo "$base$img_path";  ?>profile_pic.png">-->
 								<h3 class="text_align"><?php echo $query['fullname']; ?></h3>
 								<div>
 									<div class="margin_all">
@@ -202,10 +206,10 @@ $(window).load(function(){
 									<div class="events_box">
 										<h2>Events</h2>
 										<ul>
-											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood in floodplain lakes of the Mississippi Alluvial Valley. Environmental Biology of Fishes.<img src="images/event_arrow.png"></li>
-											<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity Supplemental treatments for timber bridge components. Forest Products Journal.<img src="images/event_arrow.png"></li>
-											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood <img src="images/event_arrow.png"></li>
-											<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<img src="images/event_arrow.png"></li>
+											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood in floodplain lakes of the Mississippi Alluvial Valley. Environmental Biology of Fishes.<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
+											<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity Supplemental treatments for timber bridge components. Forest Products Journal.<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
+											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood <src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
+											<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
 										</ul>
 									</div>
 									<div class="margin1 news_box">
@@ -216,12 +220,12 @@ $(window).load(function(){
 													<li>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">USA</a></div>
-															<div class="float_r"><img src="images/us.png"></div>
+															<div class="float_r"><src="<?php echo "$base$img_path";  ?>us.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">UK</a></div>
-															<div class="float_r"><img src="images/gb.png"></div>
+															<div class="float_r"><src="<?php echo "$base$img_path";  ?>gb.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="clearfix"></div>
@@ -229,12 +233,12 @@ $(window).load(function(){
 													<li>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">Canada</a></div>
-															<div class="float_r"><img src="images/ca.png"></div>
+															<div class="float_r"><src="<?php echo "$base$img_path";  ?>ca.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">Korea</a></div>
-															<div class="float_r"><img src="images/kr.png"></div>
+															<div class="float_r"><src="<?php echo "$base$img_path";  ?>kr.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="clearfix"></div>
@@ -242,12 +246,12 @@ $(window).load(function(){
 													<li>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">India</a></div>
-															<div class="float_r"><img src="images/india.png"></div>
+															<div class="float_r"><src="<?php echo "$base$img_path";  ?>india.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">Online</a></div>
-															<div class="float_r"><img src="images/ol.png"></div>
+															<div class="float_r"><src="<?php echo "$base$img_path";  ?>ol.png"></div>
 															<div class="clearfix"></div>
 														</div>
 													</li>
@@ -258,9 +262,9 @@ $(window).load(function(){
 										<div class="float_r span74 news_data margin_zero">
 											<h2>News</h2>
 												<ul>
-													<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<img src="images/event_arrow.png" class="news_arrow"></li>
-													<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<img src="images/event_arrow.png" class="news_arrow"></li>
-													<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<img src="images/event_arrow.png" class="news_arrow"></li>
+													<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
+													<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
+													<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
 											</ul>
 										</div>
 										<div class="clearfix"></div>
@@ -271,7 +275,7 @@ $(window).load(function(){
 									</div>
 								</div>
 								<div class="span15">
-									<img src="images/banner_img.png">
+									<src="<?php echo "$base$img_path";  ?>banner_img.png">
 								</div>
 								
 							</div>
@@ -281,7 +285,7 @@ $(window).load(function(){
 												<div class="artical_heading">Article</div>
 											<div id="home" class="box artical_box_data">
 												<div class="float_l margin_r1">
-													<img src="images/layer.png">
+													<src="<?php echo "$base$img_path";  ?>layer.png">
 												</div>
 												<div class="margin_l8">
 													Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
@@ -295,7 +299,7 @@ $(window).load(function(){
 												<div class="artical_heading">Article</div>
 											<div id="home" class="box artical_box_data">
 												<div class="float_l margin_r1">
-													<img src="images/layer.png">
+													<src="<?php echo "$base$img_path";  ?>layer.png">
 												</div>
 												<div class="margin_l8">
 													Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
@@ -309,7 +313,7 @@ $(window).load(function(){
 												<div class="artical_heading">Article</div>
 											<div id="home" class="box artical_box_data">
 												<div class="float_l margin_r1">
-													<img src="images/layer.png">
+													<src="<?php echo "$base$img_path";  ?>layer.png">
 												</div>
 												<div class="margin_l8">
 													Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
@@ -327,5 +331,17 @@ $(window).load(function(){
 			</div>
 		</div>
 	</div>
-
-</body>
+</div>
+<div>
+    <div id="pwd-change-msg" class="modal hide fade" style="display: none; ">
+     <div class="modal-header ">
+      <a class="close" data-dismiss="modal">x</a>
+      <h3>Your Password hash been changed successfully </h3>
+     </div>
+    </div>
+   </div> 
+<script>
+<?php if($pwd_change=='pwd_change'){ ?>
+$('#pwd-change-msg').modal('toggle');
+<?php } ?>
+</script>

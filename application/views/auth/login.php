@@ -32,7 +32,10 @@ $captcha = array(
 );*/
 ?>
 
-	
+	<div>
+		<div class="body_bar"></div>
+		<div class="body_header"></div>
+		<div class="body_container">
 			<div class="row" style="display:"><!--LOGIN-->
 				<div class="span5 round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
@@ -103,4 +106,5 @@ $captcha = array(
 					</div>
 				</div>
 			</div>
-	
+		</div>
+	</div>

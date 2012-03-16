@@ -23,6 +23,9 @@
 .padding_lefty{padding:0px 10px;}
 .margin_t7{margin:5px 10px}
 .margin_r2{margin-right:20px}
+.margin_19{margin-left:19px;}
+.margin_7{margin-left: 11px;}
+.margin_l45{margin-left:50px}
 
 /**************************width******************************/
 .span61{width:490px}
@@ -50,6 +53,10 @@
 .span78{width:530px;}
 .span44{width: 819px;}
 .span85{width:120px;}
+.span24{width:269px;}
+.span89{width:200px;}
+.span91{width:90px;}
+.span98{width:110px;}
 /***********************basic**********************************/
 .text_align{text-align:center;}
 .text_dec{text-decoration:line-through}
@@ -80,7 +87,7 @@ box-shadow: 0 0 5px #888;
 }
 .yellow_bar_text li{font-size:15px;padding: 15px 0px 9px 0px;text-decoration: none;}
 .yellow_bar_text li a{color:#666666;}
-.text_bar ul{font-weight:bold;list-style-type:square;color:#ff4f0e;}
+.text_bar ul{margin-left: 25px;font-weight:bold;list-style-type:square;color:#ff4f0e;}
 .yellow_bar_text li a{text-decoration: none;font-size:15px;color:#666666;}
 .box{border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;-webkit-border-left: 1px solid #DDD;-webkit-border-bottom: 1px solid #DDD;-webkit-border-right: 1px solid #DDD;border-left: 1px solid #DDD;-moz-border-bottom: 1px solid #DDD;-moz-border-right: 1px solid #DDD;-moz-border-left: 1px solid #DDD;
 padding:5px;
@@ -326,6 +333,7 @@ color: #08C;}
 .form_data .control-label{font-size:15px;text-align: left;width: 163px;}
 .input_xxx-large{width: 400px;margin-left: 11px;}
 .input_xxxx-large{width: 300px;margin-left: 11px;}
+.select_button select{width: 300px;margin-left: 11px;}
 .contact_box_content .help-inline{width: 130px;font-size: 10px;color: #AAA;}
 .contact_box_content img{z-index: 100;position: relative;top: 7px;left: 5px;}
 @-moz-document url-prefix() {
@@ -344,57 +352,74 @@ float: left;
 .letter_uni div span{color: #f89406;line-height:16px;}
 .letter_uni div{color:#333;
 font-size:194%}
-/******************************colleges***********************************/
-#scrollbar1 { width:150px; }
-#scrollbar1 .viewport { width: 115px; height: 100px; overflow: hidden; position: relative; }
+/******************************colleges(search)***********************************/
+.search_box{background-color: #ADD641;border:1px solid #aaa;-moz-border:1px solid #aaa;-webkit-border:1px solid #aaa;border-radius:2px;padding:10px 8px}
+.search_box ul{list-style:none;margin-left: 10px;}
+.search_box ul li{margin-top: 1px;}
+.search_box ul li a{font-size: 12px;color:#333;}
+.search_box_height{height: 80px;overflow: hidden;}
+#scrollbar1 { width:150px; height: 70px;overflow: hidden;}
+#scrollbar1 .viewport { width: 130px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar1 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
-#scrollbar1 .scrollbar{ background: transparent url(../images/bg-scrollbar-track-y.png) no-repeat 0 0; position: relative; background-position: 0 0; float: right; width: 8px; }
-#scrollbar1 .track {background: transparent url(../images/bg-scrollbar-trackend-y.png) no-repeat 0 100%; height: 100%; width:6px; position: relative; padding: 0 1px; }
-#scrollbar1 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:4px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:2px; }
+#scrollbar1 .scrollbar{ background-color: #ADD641; position: relative; background-position: 0 0; float: right; width: 14px; }
+#scrollbar1 .track {background-color: #ADD641; height: 100%; width:12px; position: relative; padding: 0 1px; }
+#scrollbar1 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:4px; }
 #scrollbar1 .thumb .end { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
 #scrollbar1 .disable { display: none; }
-#scrollbar2 { width:150px; }
-#scrollbar2 .viewport { width: 115px; height: 100px; overflow: hidden; position: relative; }
+#scrollbar2 { width:150px; height: 70px;overflow: hidden; }
+#scrollbar2 .viewport { width: 130px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar2 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
-#scrollbar2 .scrollbar{ background: transparent url(../images/bg-scrollbar-track-y.png) no-repeat 0 0; position: relative; background-position: 0 0; float: right; width: 8px; }
-#scrollbar2 .track {background: transparent url(../images/bg-scrollbar-trackend-y.png) no-repeat 0 100%; height: 100%; width:6px; position: relative; padding: 0 1px; }
-#scrollbar2 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:4px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:2px; }
+#scrollbar2 .scrollbar{background-color: #ADD641; position: relative; background-position: 0 0; float: right; width: 14px; }
+#scrollbar2 .track {background-color: #ADD641; height: 100%; width:12px; position: relative; padding: 0 1px; }
+#scrollbar2 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:4px; }
 #scrollbar2 .thumb .end { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
 #scrollbar2 .disable { display: none; }
-#scrollbar3 { width:150px; }
-#scrollbar3 .viewport { width: 115px; height: 100px; overflow: hidden; position: relative; }
+#scrollbar3 { width:150px; height: 70px;overflow: hidden; }
+#scrollbar3 .viewport { width: 130px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar3 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
-#scrollbar3 .scrollbar{ background: transparent url(../images/bg-scrollbar-track-y.png) no-repeat 0 0; position: relative; background-position: 0 0; float: right; width: 8px; }
-#scrollbar3 .track {background: transparent url(../images/bg-scrollbar-trackend-y.png) no-repeat 0 100%; height: 100%; width:6px; position: relative; padding: 0 1px; }
-#scrollbar3 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:4px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:2px; }
+#scrollbar3 .scrollbar{ background-color: #ADD641; position: relative; background-position: 0 0; float: right; width: 14px; }
+#scrollbar3 .track {background-color: #ADD641; height: 100%; width:12px; position: relative; padding: 0 1px; }
+#scrollbar3 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:4px; }
 #scrollbar3 .thumb .end { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
 #scrollbar3 .disable { display: none; }
-#scrollbar4 { width:150px; }
-#scrollbar4 .viewport { width: 115px; height: 100px; overflow: hidden; position: relative; }
+#scrollbar4 { width:150px; height: 70px;overflow: hidden; }
+#scrollbar4 .viewport { width: 130px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar4 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
-#scrollbar4 .scrollbar{ background: transparent url(../images/bg-scrollbar-track-y.png) no-repeat 0 0; position: relative; background-position: 0 0; float: right; width: 7px; }
-#scrollbar4 .track {background: transparent url(../images/bg-scrollbar-trackend-y.png) no-repeat 0 100%; height: 100%; width:5px; position: relative; padding: 0 1px; }
-#scrollbar4 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:3px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:2px; }
+#scrollbar4 .scrollbar{ background-color: #ADD641; position: relative; background-position: 0 0; float: right; width: 14px; }
+#scrollbar4 .track {background-color: #ADD641; height: 100%; width:12px; position: relative; padding: 0 1px; }
+#scrollbar4 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:4px; }
 #scrollbar4 .thumb .end { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
 #scrollbar4 .disable { display: none; }
-#scrollbar5 { width:150px; }
-#scrollbar5 .viewport { width: 115px; height: 100px; overflow: hidden; position: relative; }
+#scrollbar5 { width:150px; height: 70px;overflow: hidden; }
+#scrollbar5 .viewport { width: 130px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar5 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
-#scrollbar5 .scrollbar{ background: transparent url(../images/bg-scrollbar-track-y.png) no-repeat 0 0; position: relative; background-position: 0 0; float: right; width: 7px; }
-#scrollbar5 .track {background: transparent url(../images/bg-scrollbar-trackend-y.png) no-repeat 0 100%; height: 100%; width:5px; position: relative; padding: 0 1px; }
-#scrollbar5 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:3px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:2px; }
+#scrollbar5 .scrollbar{ background-color: #ADD641; position: relative; background-position: 0 0; float: right; width: 14px; }
+#scrollbar5 .track {background-color: #ADD641; height: 100%; width:12px; position: relative; padding: 0 1px; }
+#scrollbar5 .thumb { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%; height: 20px; width:6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:4px; }
 #scrollbar5 .thumb .end { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
 #scrollbar5 .disable { display: none; }
-.college_box ul{list-style:none;margin-left: 10px;}
-.college_box ul li{margin-top:10px;}
-.college_box ul li a{font-size: 14px;color:#333;}
 .last_view a{font-size:14px;color: #528310;font-weight: bold;}
 .last_view a:hover{color:#3881AB}
 
+.search_bar_heading{border: #DDDDCA solid 7px;padding:7px 8px;background:url('../images/lft_box_bg.gif')
+}
+.search_bar_heading h3{color: #209DEC;font-size:16px;line-height:10px}
+.offer_list_heading{color: #FF922A;}
+.offer_list{margin:0px;}
+.offer_list li{margin:2px 10px;list-style:none;}
+.offer_list li a{font-size:14px;}
+.college_map{font-size: 14px;font-weight: bold;letter-spacing: 1px;color: #FF922A;}
+
+
 /****************************model********************************/
 .model_back{}
-.model_heading{background-color:#3881ab;opacity:0.7;}
+.model_heading{background-color:#B0D743;}
 .model_heading h3{color:#fff;}
 .model_body_height{min-height:150px;margin: 15px 0px;}
 .model_body_height select{width:160px;}
 .model_body_height form{width:350px;margin-left:auto;margin-right:auto;}
+/*************************pop_up*******************************/
+.model_pop{width: 520px;max-height:50px;}
+.model_pop .model_heading{background-color:#f8a125 ;}
+/*************************pop_up*******************************/
+
