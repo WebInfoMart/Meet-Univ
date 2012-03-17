@@ -75,10 +75,10 @@ if($error_cpass != '') { $class_cpass = 'focused_error'; } else { $class_cpass='
 
 if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagree=''; }
 ?>
-	<!--<div>
+	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
-		<div class="body">-->
+		<div class="body">
 			<div class="row">
 				<div class="span5 round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
@@ -212,6 +212,6 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 					<span class="super">OR login with</span> <img src="<?php echo "$base$img_path" ?>/fbconnect.png" /> <span class="super">or</span> <img src="images/inconnect.png" />
 				</div>
 			</div>
-		<!--</div>
-	</div>-->
+		</div>
+	</div>
 	

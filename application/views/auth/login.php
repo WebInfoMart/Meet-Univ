@@ -41,7 +41,10 @@ if($error_login != '') { $class_login = 'focused_error'; } else { $class_login='
 if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass='span4'; }
 ?>
 
-	
+	<div>
+		<div class="body_bar"></div>
+		<div class="body_header"></div>
+		<div class="body_container">
 			<div class="row" style="display:"><!--LOGIN-->
 				<div class="span5 round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
@@ -112,4 +115,5 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 					</div>
 				</div>
 			</div>
-	
+		</div>
+	</div>

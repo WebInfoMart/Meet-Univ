@@ -61,7 +61,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 			</li>
 			<?php
 			}
-			if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
+			if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/users.png" alt="" /> Users</a>

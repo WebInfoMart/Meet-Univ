@@ -690,6 +690,15 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer',$data);	
 		
 	}
+	function update_profile()
+	{
+	$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$this->load->view('auth/profile_single');
+		$data['user_id'] = $this->tank_auth->get_user_id();
+		$data['update_profile'] = $this->tank_auth->update_profile();
+		$this->load->view('auth/footer',$data);
+	}
 
 }
 

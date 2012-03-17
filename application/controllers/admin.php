@@ -171,7 +171,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
 			$this->form_validation->set_rules('user_type', 'user_type', 'trim|string');
-			$this->form_validation->set_rules('level_user', 'level_user', 'trim|required|string');
+			$this->form_validation->set_rules('level_user', 'User Roll', 'trim|required|string');
 			$data['errors'] = array();
 
 			$email_activation = $this->config->item('email_activation', 'tank_auth');

@@ -44,6 +44,7 @@ class Adminmodel extends CI_Model
 		$user_id	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
 		$this->db->from('users');
+		$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
 		$this->db->where(array('level !=' => '5','id !='=>$user_id));
 		$query = $this->db->get();
 		//$this->load->library('table');
