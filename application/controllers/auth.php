@@ -27,9 +27,7 @@ class Auth extends CI_Controller
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
 		$this->load->view('auth/home',$data);
-		if ($this->tank_auth->is_logged_in()) {
-			redirect('home');
-		} 
+		
 		//$this->load->view('auth/home',$data);
 		/*if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
@@ -692,6 +690,10 @@ class Auth extends CI_Controller
 	}
 	function update_profile()
 	{
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/login/');
+		} else {
+		
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
@@ -701,17 +703,23 @@ class Auth extends CI_Controller
 		$data['area_interest'] = $this->users->fetch_area_interest();
 		$this->load->view('auth/profile_single',$data);
 		$this->load->view('auth/footer',$data);
+		}
 	}
 	
 	function user_profile_update()
 	{
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/login/');
+		} else {
+		
 		$this->load->model('users');
 		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
 		$data['user_profile_update'] = $this->users->user_profile_update($logged_user);
 		//if ($this->input->post('upload')) {
 			$this->users->do_upload_profile_pic();
 		//}
-		redirect('auth/update_profile');
+		redirect('home');
+		}
 	}
 
 

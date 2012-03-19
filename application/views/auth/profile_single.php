@@ -34,8 +34,9 @@
 															else{
 															?>
 															<img class="profile_img_width" src="<?php echo "$base$img_path";  ?>/user_model.png">
-															</label>
-															<?php } ?>
+															
+															
+															<?php } ?></label>
 															<div class="controls contact_box_content">
 															
 																<input type="file" name="userfile" class="button_profile"/><div class="span15 margin_zero change_profile">Change your pic</div>

@@ -2,28 +2,29 @@
 foreach($user_detail_edit as $user_detail){
 ?>
 
-<h2>Edit User</h2>
+
 <div id="content">
+<h2 class="margin">Edit User</h2>
 <div class="form span7">
 				<form action="<?php echo $base ?>admin/edituser/<?php echo $user_detail->id; ?>/<?php echo $user_detail->level; ?>" method="post">
+				<div class="span6">
 				<input type="hidden" name="hid_user_id" value="<?php echo $user_detail->id; ?>" >
 						<div>
-							<label>FULLNAME:</label><br>
-							<input type="text" size="30" class="text" value="<?php echo $user_detail->fullname; ?>" name="fullname"> 
-								<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span>
+							<label>FULLNAME:<input type="text" size="30" class="text blue float_r" value="<?php echo $user_detail->fullname; ?>" name="fullname"> 
+								<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span></label>
 							
 						</div> 
 						<div>
-							<label>EMAIL:</label><br>
-							<h4><?php  echo $user_detail->email; ?></h4>
-						<!--	<input type="text" size="30" class="text"value="<?php echo $user_detail->email; ?>" name="email"> 
-								<span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
+							<label>EMAIL:<input type="text" size="30" class="text blue float_r" readonly="readonly" value="<?php echo $user_detail->email; ?>"> 
+								<span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?></span></label>
+						<input type="hidden" name="email" value="<?php echo $user_detail->email; ?>">
+						</div>
 						
-						</div> 
-						--><input type="hidden" name="email" value="<?php echo $user_detail->email; ?>">
-						<div><label>USER ROLL</label><h4>
+						
+						
+						<div><label>USER ROLL
 						<input type="hidden" name="level_user" value="<?php echo $user_detail->level ?>">
-						<?php if($user_detail->level=='4'){ echo "ADMIN"; } 
+						<input type="text" size="30" class="text blue float_r" readonly="readonly" value="<?php if($user_detail->level=='4'){ echo "ADMIN"; } 
 						else if($user_detail->level=='3') { echo "UNIVERSITY ADMIN" ;}
 						else if($user_detail->level=='2'){echo  "COUNSELLOR";}
 						else if($user_detail->level=='1') {echo "STUDENT";}
@@ -31,8 +32,16 @@ foreach($user_detail_edit as $user_detail){
 						$user_level=$user_detail->level;
 						$user_id=$user_detail->id;
 						}
-						?></h4>
+						?>"></label>
 					</div>
+						
+						
+						
+						
+					<div class="clearfix"></div>
+	</div>	
+			
+					<hr></hr>
 						
 						<!-- user privilege section for editing -->
 						<?php

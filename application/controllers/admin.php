@@ -676,13 +676,14 @@ class Admin extends CI_Controller
 		$data = $this->path->all_path();
 		$this->adminmodel->insert_userprivlege_data($newadminid);
 		$this->tank_auth->delete_newadmin_sessiondata();
+		redirect('admin/manageusers/ucs');
 	//	print_r($data);
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		/*$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
-		$this->load->view('admin/usersuccess',$data);
+		$this->load->view('admin/usersuccess',$data);*/
 		}
 		else
 		{
@@ -693,7 +694,7 @@ class Admin extends CI_Controller
 	}
 	
 	//function for show users
-	function manageusers()
+	function manageusers($ups='')
 	{
 		
 		$data = $this->path->all_path();
@@ -708,6 +709,18 @@ class Admin extends CI_Controller
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==1 && $userdata['admin_priv']['privilege_level']!=0)
 		{
+		if($ups=='ups')
+		{
+		$this->load->view('admin/userupdated',$data);
+		}
+		else if($ups=='uds')
+		{
+		$this->load->view('admin/userdeleted',$data);
+		}
+		else if($ups=='ucs')
+		{
+		$this->load->view('admin/usersuccess',$data);
+		}
 		$this->load->view('admin/manageuser',$data);
 		$flag=1;
 		break;
@@ -749,7 +762,7 @@ class Admin extends CI_Controller
 		//$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 		if ($this->form_validation->run()) {
 		$this->adminmodel->edit_user_data();
-		redirect('admin/userupdated');
+		redirect('admin/manageusers/ups');
 		}
 		$edit_user_priv=array('3','6','7','10');
 		$flag=0;
@@ -806,7 +819,6 @@ class Admin extends CI_Controller
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv) && $user_id!=$data['user_id'] && $user_level!='5')
 		{
-		$this->adminmodel->deleteuser($user_level,$user_id);
 		$this->load->view('admin/userdeleted', $data);
 		$flag=1;
 		break;
@@ -815,6 +827,11 @@ class Admin extends CI_Controller
 		if($flag==0)
 		{
 		$this->load->view('admin/accesserror', $data);
+		}
+		else if($flag==1)
+		{
+		$this->adminmodel->deleteuser($user_level,$user_id);
+		redirect('admin/manageusers/uds');
 		}
 		
 	}
@@ -843,8 +860,9 @@ class Admin extends CI_Controller
 		$this->load->view('admin/accesserror', $data);
 		}*/
 		if ($this->input->post('upload')) {
-			$this->adminmodel->do_upload();
-			//print_r($data['a']);
+		 if($this->adminmodel->do_upload())
+		 {
+		 }
 		}
 		$this->load->view('admin/home_gallery', $data);
 	}

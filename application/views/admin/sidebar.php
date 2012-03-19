@@ -73,7 +73,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 					
 		<?php }?>			
 					<li><?php echo anchor('admin/manageusers', 'Manage User'); ?></li>
-					<li><a href="#">User groups</a></li>
+				
 				</ul>
 			</li>	
 		

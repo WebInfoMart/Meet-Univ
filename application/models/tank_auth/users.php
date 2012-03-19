@@ -167,7 +167,6 @@ class Users extends CI_Model
 		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
 		}
 		//echo $this->session->userdata('user_id');
-		redirect('');
 	}
 	
 	/*function get_images() {

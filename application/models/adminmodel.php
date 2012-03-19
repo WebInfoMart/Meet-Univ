@@ -115,40 +115,43 @@ class Adminmodel extends CI_Model
 	//upload home gallery
 	function do_upload() {
 		 //$this->ci->load->config('tank_auth', TRUE);
-		 $config = array(
-			'allowed_types' => 'jpg|jpeg|gif|png',
-			'upload_path' => $this->gallery_path,
-			'max_size' => 2000
-		);
 		
-		$this->load->library('upload', $config);
-		
-for($i=0; $i<2; $i++)
- {
-$this->upload->initialize($config);
+		$config['upload_path'] = $this->gallery_path; // server directory
+        $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
+        $config['max_size']    = '1000'; // in kb
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        
+        $this->load->library('upload', $config);
+        $this->load->library('Multi_upload');
+    
+        $files = $this->multi_upload->go_upload();
+        
+        if ( ! $files )        
+        {
+            $error = array('error' => $this->upload->display_errors());
+            return $error;
+        }    
+        else
+        {
+				$field = 'userfile';
+				$user_id=$this->tank_auth->get_admin_user_id();
+            $data1 = array('upload_data' => $files);
+			$num_files = count($_FILES[$field]['name']);
+			$f=0;
+			for($a=0;$a<$num_files;$a++)
+			{
+						$data = array(
+			   'image_path' => $data1['upload_data'][$a]['name'],
+			   'postedby' => $user_id
+			   
+			);
+			$this->db->insert('home_slider', $data);	
+				$f=1;
+			}
+			return $f;
+		}
 
- $this->upload->do_upload();
-$image_data = $this->upload->data();
-		
-		$config = array(
-			'source_image' => $image_data['full_path'],
-			'new_image' => $this->gallery_path . '/thumbs',
-			'maintain_ration' => true,
-			'width' => 150,
-			'height' => 100
-		);
-		
-		//print_r($config);
-		//print_r($image_data['file_name']);
-		//$img_path_store = $this->input->post('userfile');
-		//$img_path_store = $config['new_image'];
-		//print_r($this->session->userdata());
-		//$data['user_id'] = $this->tank_auth->get_user_id();
-		// $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
-		//echo $this->session->userdata('user_id');
-	//	redirect('admin/home_gallery');
-	}
-	
 }
 }
 /* End of file users.php */

@@ -511,8 +511,8 @@ $(function () {
 	
 	
 	// Show message on load (you can delete this, if not needed)
-	if( ! $('#content').hasClass('loginbox')) {
+/*	if( ! $('#content').hasClass('loginbox')) {
 		hudMsg('success', 'Page loaded successfully');
-	}
+	}*/
 
 });

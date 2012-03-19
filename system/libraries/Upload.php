@@ -977,7 +977,7 @@ class CI_Upload {
 	 * @param	string
 	 * @return	string
 	 */
-	protected function _prep_filename($filename)
+	public function _prep_filename($filename)
 	{
 		if (strpos($filename, '.') === FALSE OR $this->allowed_types == '*')
 		{

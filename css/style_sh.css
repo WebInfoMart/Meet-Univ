@@ -350,8 +350,8 @@ float: left;
 }
 .letter_uni div span{color: #f89406;line-height:16px;}
 .letter_uni div{color:#333;font-size:194%}
-.change_profile{margin-top: 75px;z-index: 100;position: absolute;}
-.button_profile{margin-top:70px;}
+.change_profile{position: absolute;}
+.button_profile{margin-top:50px;}
 .profile_img_width{width:100px;height:100px;}
 /******************************colleges(search)***********************************/
 .search_box{background-image: -moz-linear-gradient(#FFFFF5,#F5F3B4);

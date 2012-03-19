@@ -54,7 +54,7 @@ $user_delete_op=array('5','7','8','10');
 foreach ($admin_priv as $admin_priv_res){ 
 if($admin_priv_res['privilege_type_id']=='1' && in_array($admin_priv_res['privilege_level'],$user_edit_op))
 {?>					
-<a href="edituser/<?php echo $row->id; ?>/<?php echo $row->level; ?>"><img src="<?php echo "$base$admin_img" ?>/b_edit.png" alt="EDIT" title="edit" /></a></a>
+<a href="<?php echo "$base$admin"; ?>/edituser/<?php echo $row->id; ?>/<?php echo $row->level; ?>"><img src="<?php echo "$base$admin_img" ?>/b_edit.png" alt="EDIT" title="edit" /></a></a>
 <?php 
 
 }

@@ -34,15 +34,10 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.date_input.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.minicolors.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.wysiwyg.js"></script>
-	<!--<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.fancybox.js"></script>-->
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.fancybox.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tipsy.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
-	<!--<script type="text/javascript" src="<?php //echo "$base$js";?>/jquery.fancybox.js"></script>--?
-	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tipsy.js"></script>
-	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
-	<!--[if lt IE 9]>
-	<style type="text/css" media="all"> @import url("css/ie.css"); </style>
-	<![endif]-->
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.MultiFile.min.js"></script>
 
 </head>
 
