@@ -729,9 +729,7 @@ class Auth extends CI_Controller
 		}
 	}
 	
-<<<<<<< HEAD
-	
-=======
+
 	function user_profile_update()
 	{
 		if (!$this->tank_auth->is_logged_in()) {
@@ -747,7 +745,6 @@ class Auth extends CI_Controller
 		redirect('home');
 		}
 	}
->>>>>>> 1fb8244365f7b0638e99ccd862dcc75828842113
 
 
 }

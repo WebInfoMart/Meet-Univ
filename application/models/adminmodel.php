@@ -115,8 +115,6 @@ class Adminmodel extends CI_Model
 	//upload home gallery
 	function do_upload() {
 		 //$this->ci->load->config('tank_auth', TRUE);
-		
-<<<<<<< HEAD
 		   $this->load->library('upload');
 
             foreach ($_FILES as $key => $value)
@@ -145,7 +143,6 @@ class Adminmodel extends CI_Model
                 }
             }
 			return $key['name'];
-=======
 		$config['upload_path'] = $this->gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
         $config['max_size']    = '1000'; // in kb
@@ -182,7 +179,6 @@ class Adminmodel extends CI_Model
 			return $f;
 		}
 
->>>>>>> 1fb8244365f7b0638e99ccd862dcc75828842113
 }
 }
 /* End of file users.php */

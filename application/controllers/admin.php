@@ -860,14 +860,8 @@ class Admin extends CI_Controller
 		$this->load->view('admin/accesserror', $data);
 		}*/
 		if ($this->input->post('upload')) {
-<<<<<<< HEAD
-		$data['a']=$this->adminmodel->do_upload();
-			print_r($data['a']);
-=======
-		 if($this->adminmodel->do_upload())
-		 {
-		 }
->>>>>>> 1fb8244365f7b0638e99ccd862dcc75828842113
+		 $x=$this->adminmodel->do_upload();
+		
 		}
 		$this->load->view('admin/home_gallery', $data);
 	}
