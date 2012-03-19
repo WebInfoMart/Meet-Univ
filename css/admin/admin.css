@@ -8,6 +8,14 @@
 float: left;
 margin-left: 20px;
 }
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
 .float_l{float:left}
 .float_r{float:right}
 /******************************margin**************************/
@@ -73,3 +81,4 @@ line-height: 24px;
 }
 .orange{color: #F89406!important;}
 .light{color:#666!important;}
+.blue{color:#0888C3!important;}

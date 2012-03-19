@@ -115,12 +115,8 @@ class Adminmodel extends CI_Model
 	//upload home gallery
 	function do_upload() {
 		 //$this->ci->load->config('tank_auth', TRUE);
-		 $config = array(
-			'allowed_types' => 'jpg|jpeg|gif|png',
-			'upload_path' => $this->gallery_path,
-			'max_size' => 2000
-		);
 		
+<<<<<<< HEAD
 		   $this->load->library('upload');
 
             foreach ($_FILES as $key => $value)
@@ -149,6 +145,44 @@ class Adminmodel extends CI_Model
                 }
             }
 			return $key['name'];
+=======
+		$config['upload_path'] = $this->gallery_path; // server directory
+        $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
+        $config['max_size']    = '1000'; // in kb
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        
+        $this->load->library('upload', $config);
+        $this->load->library('Multi_upload');
+    
+        $files = $this->multi_upload->go_upload();
+        
+        if ( ! $files )        
+        {
+            $error = array('error' => $this->upload->display_errors());
+            return $error;
+        }    
+        else
+        {
+				$field = 'userfile';
+				$user_id=$this->tank_auth->get_admin_user_id();
+            $data1 = array('upload_data' => $files);
+			$num_files = count($_FILES[$field]['name']);
+			$f=0;
+			for($a=0;$a<$num_files;$a++)
+			{
+						$data = array(
+			   'image_path' => $data1['upload_data'][$a]['name'],
+			   'postedby' => $user_id
+			   
+			);
+			$this->db->insert('home_slider', $data);	
+				$f=1;
+			}
+			return $f;
+		}
+
+>>>>>>> 1fb8244365f7b0638e99ccd862dcc75828842113
 }
 }
 /* End of file users.php */

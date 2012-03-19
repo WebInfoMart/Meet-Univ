@@ -14,7 +14,11 @@
 | path to your installation.
 |
 */
+<<<<<<< HEAD
 $config['base_url']	= 'http://localhost/www/Meet-Univ/';
+=======
+$config['base_url']	= 'http://127.0.0.1/Meet-Univ/';
+>>>>>>> 1fb8244365f7b0638e99ccd862dcc75828842113
 
 /*
 |--------------------------------------------------------------------------

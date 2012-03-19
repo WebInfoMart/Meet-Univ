@@ -729,7 +729,25 @@ class Auth extends CI_Controller
 		}
 	}
 	
+<<<<<<< HEAD
 	
+=======
+	function user_profile_update()
+	{
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/login/');
+		} else {
+		
+		$this->load->model('users');
+		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
+		$data['user_profile_update'] = $this->users->user_profile_update($logged_user);
+		//if ($this->input->post('upload')) {
+			$this->users->do_upload_profile_pic();
+		//}
+		redirect('home');
+		}
+	}
+>>>>>>> 1fb8244365f7b0638e99ccd862dcc75828842113
 
 
 }
