@@ -33,7 +33,7 @@ $(window).load(function(){
 								<div class="float_l span2 margin_l12"><div class="controls">
 									<!--<input type="text" class="input-medium" id="input01">-->
 									<select name="educ_level">
-									<option value="0"></option>
+									<option value="">Select</option>
 									<?php
 									foreach($educ_level as $level)
 									{
@@ -66,7 +66,7 @@ $(window).load(function(){
 								<div class="float_l span2 margin_l12">
 									<div class="controls">
 									<select name="countries">
-									<option value="0"></option>
+									<option value="">Select</option>
 									<?php
 										//print_r($country);
 										foreach($country as $countries)
@@ -218,6 +218,11 @@ $(window).load(function(){
 						<div class="float_r span111">
 							<div class="row">
 								<div class="span71">
+								<div class="search_box_profile">
+										<span class="">My Country</span>
+										<input type="text" class="input_xxx-large search-query">
+										<button class="btn btn-success margin_l21" href="#">Search</button>
+									</div>
 									<div class="events_box">
 										<h2>Events</h2>
 										<ul>

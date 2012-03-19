@@ -26,6 +26,7 @@
 .margin_19{margin-left:19px;}
 .margin_7{margin-left: 11px;}
 .margin_l45{margin-left:50px}
+.margin_left_twenty{margin-left:20px}
 
 
 /**************************width******************************/
@@ -320,6 +321,9 @@ color: #08C;}
 
 
 /*******************************profile_single****************************************************/
+.search_box_profile{padding: 10px 8px;background-color: #DFF0D8;border: 1px solid #DDD;}
+.search_box_profile span{font-size:15px;}
+.search_box_profile input{border-radius:4px;}
 .profile_border{font-size: 14px;border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;background:url(../images/events.png);padding: 10px 15px;border-left: 1px solid #DDD;-moz-border-bottom: 1px solid #DDD;-webkit-border-bottom: 1px solid #DDD;-webkit-border-right: 1px solid #DDD;-moz-border-right: 1px solid #DDD;-webkit-border-left: 1px solid #DDD;-moz-border-left: 1px solid #DDD;}
 .single_sidebar ul{list-style:none;margin: 0px 5px;-webkit-border-top: 1px solid #DDD;-moz-border-top: 1px solid #DDD;border-top: 1px solid #DDD;width: 177px;}
 .single_sidebar ul li{padding: 8px 0px;border-bottom: 1px solid #DDD;-moz-border-bottom: 1px solid #DDD;-webkit-border-bottom: 1px solid #DDD;font-size: 15px;font-weight: bold;}
@@ -350,9 +354,11 @@ float: left;
 }
 .letter_uni div span{color: #f89406;line-height:16px;}
 .letter_uni div{color:#333;font-size:194%}
-.change_profile{margin-top: 75px;z-index: 100;position: absolute;}
-.button_profile{margin-top:70px;}
+.change_profile{position: absolute;}
+.button_profile{margin-top:50px;}
 .profile_img_width{width:100px;height:100px;}
+
+
 /******************************colleges(search)***********************************/
 .search_box{background-image: -moz-linear-gradient(#FFFFF5,#F5F3B4);
 background-image: -webkit-linear-gradient(#FFFFF5,#F5F3B4);
@@ -426,7 +432,7 @@ background: -moz-linear-gradient(270deg,#FFFFF6,#FFFDE3);border: 1px solid #E7E7
 
 /****************************model********************************/
 .model_back{}
-.model_heading{background-color: #3881AB;opacity:0.8;}
+.model_heading{background-color:#B0D743;}
 .model_heading h3{color:#fff;}
 .model_body_height{min-height:150px;margin: 15px 0px;}
 .model_body_height select{width:160px;}
@@ -434,5 +440,15 @@ background: -moz-linear-gradient(270deg,#FFFFF6,#FFFDE3);border: 1px solid #E7E7
 /*************************pop_up*******************************/
 .model_pop{width: 520px;max-height:50px;}
 .model_pop .model_heading{background-color:#f8a125 ;}
-/*************************pop_up*******************************/
+
+/*************************step1*******************************/
+
+.step_box{padding: 10px 10px;background-color: #DFF0D8;border: 1px solid #DDD;border-radius:4px;}
+.step_form .input-xlarge{width: 245px;}
+.select_data{width: 335px;float: right;}
+.step_form button{margin-left: 287px;margin-top: 20px;}
+.step_form label{font-size:18px;width: 225px!important;text-align: left!important;}
+.step_form .checkbox{width:380px!important;}
+.style_or{color: white;
+font-size: 17px;margin: 0px 3px;}
 

@@ -31,10 +31,10 @@
 								<a class="btn" href="#">Postgraduate</a>
 								<a class="btn" href="#">Undergraduate</a>
 								<a class="btn" href="#">Foundation</a>-->
-								<button class="btn btnop">All</button>
-								<button class="btn btnop">Spot Admission</button>
-								<button class="btn btnop">Fairs</button>
-								<button class="btn btnop"id="opendd">Councelling</button>
+								<button class="btn btnop active" id="all">All</button>
+								<button class="btn btnop" id="spot">Spot Admission</button>
+								<button class="btn btnop" id="fairs">Fairs</button>
+								<button class="btn btnop"id="opendd">Counselling</button>
 							</div>
 							  <ul class="ddclass">
 							  <li class="li1 openddli">
@@ -106,25 +106,50 @@
 						<div class="clearfix"></div>
 					</div>
 				</div>
-					<!--<div>
-						<div class="span4">
-							<span class="line_break"></span>
+						<div class="search_layout">
+					
+					
+					
+					
+					<div class="row margin_b">
+						<div class="float_l span21">
+							<span>City</span></br>
+						</div>
+						<div class="float_r span5">
+							<div class="controls float_l span3 margin_zero">
+								<select id="select01">
+									<option>Select City</option>
+									<option>India</option>
+									<option>USA</option>
+									<option>Canada</option>
+									<option>New york</option>
+								</select>
+								
+							</div>
+								
+								<div class="clearfix"></div>
 						</div>
 						<div class="clearfix"></div>
-					</div>-->
+					</div>
+					<div class="margin_b2">
+						<div class="float_l">
+							<img src="images/form_line_breaker.png">
+						</div>
+						<div class="float_l style_or">OR</div>
+						<div class="float_l"><img src="images/form_line_breaker2.png"></div>
+						<div class="clearfix"></div>
+					</div>
+					
+				</div>
+			
+					
 					<div class="row margin_b">
 						<div class="float_l span21">
 							<span>Search</span></br>
 						</div>
 						<div class="float_r span5">
 							<div class="controls float_l span3 margin_zero">
-								<select id="select01">
-									<option>Type something.</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
+								<input class="input-large focused" id="focusedInput" type="text" value="" placeholder="Search here...">
 								<h4 class="span4 margin_zero"><small class="white">ex:</small><small> mba, university of sydney, undergraduate course</small></h3>
 							</div>
 								<div class="float_r span1 margin_r">

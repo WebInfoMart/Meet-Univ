@@ -162,14 +162,14 @@ $('#myModal').modal('toggle');});
 						<?php if($user) { ?>
 						<a href="<?=$logoutUrl ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
 						<?php } else { ?>	
-						<div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div>
+						<a href="<?php echo $base?>home"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div></a>
 						<a href="<?php echo $base ?>logout"> <div class="login">Logout</div></a>
 						<?php } } else { ?>
 							<a href="<?php echo $base ?>login"><div class="login">Login</div></a>
 							<a href="<?php echo $base ?>register"><div class="signup">Signup</div></a>
 							<span id="fb_button">
 							<fb:login-button   perms="email,user_checkins" id="fb_butonek" onlogin="window.location.reload(true);"></fb:login-button>
-							<img src="<?php echo "$base$img_path" ?>/inconnect.png" />
+							<!--<img src="<?php echo "$base$img_path" ?>/inconnect.png" />-->
 							</span>
 							<?php } ?>
 						
@@ -213,11 +213,11 @@ $('#myModal').modal('toggle');});
 	<style>
 	#fb_butonek a
 {
-background: url("http://workforcetrack.in/images/fbconnect.png") no-repeat;
+background: url("<?php echo "$base$img_path" ?>/icon_facebook_login.png") no-repeat;
 
-width:20px; /*my image width*/
+width:70px; /*my image width*/
 
-height:19px; /*my image height*/
+height:22px; /*my image height*/
 }
 
 #fb_butonek a span

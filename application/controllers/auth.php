@@ -27,9 +27,7 @@ class Auth extends CI_Controller
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
 		$this->load->view('auth/home',$data);
-		if ($this->tank_auth->is_logged_in()) {
-			redirect('home');
-		} 
+		
 		//$this->load->view('auth/home',$data);
 		/*if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
@@ -94,7 +92,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 	$this->load->view('auth/header',$data);
 		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('');
+			redirect('home');
 
 		} else {
 			$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
@@ -184,7 +182,7 @@ class Auth extends CI_Controller
 	$this->load->view('auth/header',$data);
 		
 		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('');
+			redirect('home');
 
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
 			redirect('/send_again/');
@@ -692,6 +690,10 @@ class Auth extends CI_Controller
 	}
 	function update_profile()
 	{
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/login/');
+		} else {
+		
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
@@ -699,20 +701,35 @@ class Auth extends CI_Controller
 		$data['country'] = $this->users->fetch_country();
 		$data['educ_level'] = $this->users->fetch_educ_level();
 		$data['area_interest'] = $this->users->fetch_area_interest();
+		
+		if($this->input->post('update'))
+		{
+		$this->form_validation->set_rules('alt_email','Alternate Email','trim|xss_clean|valid_email');
+		$this->form_validation->set_rules('mob_no','Mobile Phone','trim|integer|xss_clean');
+		$this->form_validation->set_rules('sex','Sex','trim|required');
+		//$this->form_validation->set_rules('year','Year','trim|required');
+		//$this->form_validation->set_rules('month','Month','trim|required');
+		//$this->form_validation->set_rules('date','Date','trim|required');
+		if($this->form_validation->run())
+		{
+		$data['user_profile_update'] = $this->users->user_profile_update($logged_user);
+		$this->users->do_upload_profile_pic();
+		redirect('home');
+		}
+		else
+		{
+			$errors = $this->tank_auth->get_error_message();
+		foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+		}
+		}
+		
+		
 		$this->load->view('auth/profile_single',$data);
 		$this->load->view('auth/footer',$data);
+		}
 	}
 	
-	function user_profile_update()
-	{
-		$this->load->model('users');
-		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
-		$data['user_profile_update'] = $this->users->user_profile_update($logged_user);
-		//if ($this->input->post('upload')) {
-			$this->users->do_upload_profile_pic();
-		//}
-		redirect('auth/update_profile');
-	}
+	
 
 
 }

@@ -843,8 +843,8 @@ class Admin extends CI_Controller
 		$this->load->view('admin/accesserror', $data);
 		}*/
 		if ($this->input->post('upload')) {
-			$this->adminmodel->do_upload();
-			//print_r($data['a']);
+		$data['a']=$this->adminmodel->do_upload();
+			print_r($data['a']);
 		}
 		$this->load->view('admin/home_gallery', $data);
 	}

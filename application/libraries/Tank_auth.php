@@ -306,7 +306,7 @@ class Tank_auth
 						 'status'	=> STATUS_ACTIVATED,
 						 'user_type'=>$user_type,
 						 ));
-						 redirect('');
+						 redirect('home');
 				unset($data['last_ip']);
 				return $data;
 			}

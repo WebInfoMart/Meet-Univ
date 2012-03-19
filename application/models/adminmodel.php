@@ -121,34 +121,34 @@ class Adminmodel extends CI_Model
 			'max_size' => 2000
 		);
 		
-		$this->load->library('upload', $config);
-		
-for($i=0; $i<2; $i++)
- {
-$this->upload->initialize($config);
+		   $this->load->library('upload');
 
- $this->upload->do_upload();
-$image_data = $this->upload->data();
-		
-		$config = array(
-			'source_image' => $image_data['full_path'],
-			'new_image' => $this->gallery_path . '/thumbs',
-			'maintain_ration' => true,
-			'width' => 150,
-			'height' => 100
-		);
-		
-		//print_r($config);
-		//print_r($image_data['file_name']);
-		//$img_path_store = $this->input->post('userfile');
-		//$img_path_store = $config['new_image'];
-		//print_r($this->session->userdata());
-		//$data['user_id'] = $this->tank_auth->get_user_id();
-		// $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
-		//echo $this->session->userdata('user_id');
-	//	redirect('admin/home_gallery');
-	}
-	
+            foreach ($_FILES as $key => $value)
+            {
+
+
+                if (!empty($key['name']))
+                {
+
+
+                    $this->upload->initialize($config);
+                    if (!$this->upload->do_upload())
+                    {
+
+                        $errors = $this->upload->display_errors();
+						
+
+                        //flashMsg($errors);
+
+                    }
+                    else
+                    {
+                         // Code After Files Upload Success GOES HERE
+                    }
+					
+                }
+            }
+			return $key['name'];
 }
 }
 /* End of file users.php */

@@ -16,7 +16,7 @@
 					<div class="float_r span111">
 						<div class="row">
 							<div class="span71">
-								<form class="form-horizontal form_data" action="user_profile_update" method="post" enctype="multipart/form-data">
+								<form class="form-horizontal form_data" action="update_profile" method="post" enctype="multipart/form-data">
 									<h2 class="profile_heading">Update Account Information</h2>
 									<div class="profile_border">
 										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus, olor sit amet, consectetur adipiscing dolor ut posuere faucibus, nibh neque sollicitudin olor sit amet, consectetur adipiscing enim, non consectetur lorem odio eu lectus.
@@ -34,8 +34,9 @@
 															else{
 															?>
 															<img class="profile_img_width" src="<?php echo "$base$img_path";  ?>/user_model.png">
-															</label>
-															<?php } ?>
+															
+															
+															<?php } ?></label>
 															<div class="controls contact_box_content">
 															
 																<input type="file" name="userfile" class="button_profile"/><div class="span15 margin_zero change_profile">Change your pic</div>
@@ -53,6 +54,7 @@
 															
 																<div class="float_l span2 margin_7"><input type="radio" name="sex" value="male" <?php if($fetch_profile['gender'] == "male") { echo 'checked'; } ?> /> Male
 																	<input type="radio" name="sex" value="female" style="margin-left:20px;" <?php if($fetch_profile['gender'] == "female") { echo 'checked'; } ?> /> Female</div>
+																<span style="color:red;"> <?php echo form_error('sex'); ?><?php echo isset($errors['sex'])?$errors['sex']:''; ?> </span>
 																<div class="clearfix"></div>
 														</div>
 														<div class="control-group">
@@ -77,9 +79,12 @@
 															$dob = $fetch_profile['dob'];
 															$dob_explode = explode("-",$dob);
 															?>
-																<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[0] ?>" name="year" id="year" placeholder="Year">
-																<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[1] ?>" name="month" id="month" placeholder="Month">
+																<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[0] ?>" name="year" id="year" placeholder="Year">/
+																<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[1] ?>" name="month" id="month" placeholder="Month">/
 																<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[2] ?>" name="date" id="date" placeholder="Date">
+																<!--<span style="color:red;"> <?php //echo form_error('year'); ?><?php //echo isset($errors['year'])?$errors['year']:''; ?> </span>
+																<span style="color:red;"> <?php //echo form_error('month'); ?><?php //echo isset($errors['month'])?$errors['month']:''; ?> </span>
+																<span style="color:red;"> <?php //echo form_error('date'); ?><?php //echo isset($errors['date'])?$errors['date']:''; ?> </span>-->
 															</div>
 														</div>
 														<div class="control-group">
@@ -107,12 +112,14 @@
 															<label class="control-label">Mobile Number *</label>
 															<div class="controls contact_box_content">
 																<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['mob_no']; ?>" name="mob_no" id="mob_no" placeholder="Mobile number">
+																<span style="color:red;"> <?php echo form_error('mob_no'); ?><?php echo isset($errors['mob_no'])?$errors['mob_no']:''; ?> </span>
 															</div>
 														</div>
 														<div class="control-group">
 															<label class="control-label">Alternate Email *</label>
 															<div class="controls contact_box_content">
 																<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['alt_email']; ?>" name="alt_email" id="alt_email" placeholder="Alt email">
+																<span style="color:red;"> <?php echo form_error('alt_email'); ?><?php echo isset($errors['alt_email'])?$errors['alt_email']:''; ?> </span>
 															</div>
 														</div>
 													</div>
@@ -157,7 +164,7 @@
 										</div>	
 										<div class="clearfix"></div>
 										<div class="margin_t">
-										<input type="submit" class="btn btn-primary" value="Update"/>
+										<input type="submit" name="update" class="btn btn-primary" value="Update"/>
 											<!--<button class="btn btn-primary" href="#">Update</button>-->
 										</div>
 									</div>
