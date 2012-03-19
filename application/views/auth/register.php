@@ -149,7 +149,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 					<span id="fb_button">
 							<fb:login-button   perms="email,user_checkins" id="fb_butonek" onlogin="window.location.reload(true);"></fb:login-button>
 							</span>
-					<span class="super">or</span> <img src="images/inconnect.png" />
+					<!--<span class="super">or</span> <img src="images/inconnect.png" />-->
 				</div>
 				<div class="row">
 					<div class="span5">

@@ -18,7 +18,7 @@ $base = base_url();
 //$base['fb_redirect'] = "'".base_url()."'/auth/facebook";
 $user = $facebook->getUser();
 if ($user) {
-$logoutUrl2 = $this->tank_auth->logout();
+//$logoutUrl2 = $this->tank_auth->logout();
   try {
     // Proceed knowing you have a logged in user who's authenticated.
     $user_profile = $facebook->api('/me');
@@ -32,6 +32,7 @@ if ($user) {
  * Logout Link for Facebook and MU site   *
  ******************************************/
 	/******* Logout Link of Facebook and Site *******/
+	$params = array( 'next' => $base.'/logout' );
   $logoutUrl = $facebook->getLogoutUrl();
   
   
@@ -159,9 +160,10 @@ $('#myModal').modal('toggle');});
 						<?php
 						if($this->ci->session->userdata('status')){ ?>
 						<?php if($user) { ?>
-						<a href="<?=$logoutUrl ?>" onclick="<?=$logoutUrl2 ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
+						<a href="<?=$logoutUrl ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
 						<?php } else { ?>	
-						<a href="<?php echo $base ?>logout"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div> <div class="login">Logout</div></a>
+						<div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div>
+						<a href="<?php echo $base ?>logout"> <div class="login">Logout</div></a>
 						<?php } } else { ?>
 							<a href="<?php echo $base ?>login"><div class="login">Login</div></a>
 							<a href="<?php echo $base ?>register"><div class="signup">Signup</div></a>

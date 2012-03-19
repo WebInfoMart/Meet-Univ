@@ -17,7 +17,7 @@ $(window).load(function(){
 					<div class="modal-body model_body_height">
 						<form method="post" action="home" enctype="multipart/form-data">
 							<div>
-								<div class="float_l span15 margin_zero"><src="<?php echo "$base$img_path";  ?>profile_icon.png"></div>
+								<div class="float_l span15 margin_zero"><img src="<?php echo "$base$img_path";  ?>/profile_icon.png"></div>
 								<div class="float_l span15 margin_l12"><h4>Upload Your Picture</h4><div class="span15 margin_zero"><input type="file" name="userfile" /><br />
 							</div></div>
 								<div class="clearfix"></div>
@@ -116,6 +116,7 @@ $(window).load(function(){
 							</ul>
 						</nav>
 					</div>
+					
 					<div>
 						<div class="float_l span15 margin_zero sidebar">
 							<div class="sidebar_profic_pic">
@@ -182,6 +183,20 @@ $(window).load(function(){
 									</div>
 								</div>
 							</div>
+							<div class="part_second">
+								<div class="index_sidebar_box">
+									<div class="index_sidebar_header font_sidebar">
+										Account Settings
+									</div>
+									<div class="index_sidebar_content">
+										<ul class="links1">
+											<li><a href="<?php echo "$base" ?>update_profile">Update profile</a></li>
+											<li><a href="<?php echo "$base" ?>update_password">Change password</a></li>
+											
+										</ul>
+									</div>
+								</div>
+							</div>
 							<div class="part_second font_sidebar">
 								<div class="index_sidebar_content invite">
 									<div class="index_sidebar_header">
@@ -220,12 +235,12 @@ $(window).load(function(){
 													<li>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">USA</a></div>
-															<div class="float_r"><src="<?php echo "$base$img_path";  ?>us.png"></div>
+															<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/us.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">UK</a></div>
-															<div class="float_r"><src="<?php echo "$base$img_path";  ?>gb.png"></div>
+															<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/gb.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="clearfix"></div>
@@ -233,12 +248,12 @@ $(window).load(function(){
 													<li>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">Canada</a></div>
-															<div class="float_r"><src="<?php echo "$base$img_path";  ?>ca.png"></div>
+															<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ca.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">Korea</a></div>
-															<div class="float_r"><src="<?php echo "$base$img_path";  ?>kr.png"></div>
+															<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/kr.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="clearfix"></div>
@@ -246,12 +261,12 @@ $(window).load(function(){
 													<li>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">India</a></div>
-															<div class="float_r"><src="<?php echo "$base$img_path";  ?>india.png"></div>
+															<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/india.png"></div>
 															<div class="clearfix"></div>
 														</div>
 														<div class="float_l count">
 															<div class="float_l"><a href="#" class="study_content">Online</a></div>
-															<div class="float_r"><src="<?php echo "$base$img_path";  ?>ol.png"></div>
+															<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ol.png"></div>
 															<div class="clearfix"></div>
 														</div>
 													</li>
@@ -275,7 +290,7 @@ $(window).load(function(){
 									</div>
 								</div>
 								<div class="span15">
-									<src="<?php echo "$base$img_path";  ?>banner_img.png">
+									<img src="<?php echo "$base$img_path";  ?>/banner_img.png">
 								</div>
 								
 							</div>

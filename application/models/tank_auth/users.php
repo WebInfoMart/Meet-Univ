@@ -64,6 +64,30 @@ class Users extends CI_Model
 		return $query->result_array();
 	 }
 	 
+	 function user_profile_update($logged_user)
+	 {
+		$year = $this->input->post('year');
+		$month = $this->input->post('month');
+		$date = $this->input->post('date');
+		$dob = $year.'-'.$month.'-'.$date;
+		$data = array(
+		'full_name' => $this->input->post('full_name'),
+		'gender' => $this->input->post('sex'),
+		'country_id' => $this->input->post('country'),
+		'alias_name' => $this->input->post('alias_name'),
+		'home_address' => $this->input->post('home_adrs'),
+		'mob_no' => $this->input->post('mob_no'),
+		'alt_email' => $this->input->post('alt_email'),
+		'curr_educ_level' => $this->input->post('curnt_quali'),
+		'prog_parent_id' => $this->input->post('area_intrst'),
+		'dob' => $dob
+		//'user_pic_path' => $this->input->post('area_intrst')
+		);
+		
+		$this->db->where('user_id',$logged_user);
+		$this->db->update('user_profiles', $data); 
+	 }
+	 
 	 /* function for pic upload */
 	 
 	
@@ -96,11 +120,52 @@ class Users extends CI_Model
 		//$img_path_store = $config['new_image'];
 		//print_r($this->session->userdata());
 		$data['user_id'] = $this->tank_auth->get_user_id();
+		if($image_data['file_name'] != '')
+		{
 		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
+		}
 		 $this->db->query("update user_profiles set prog_parent_id = '".$this->input->post('area_interest')."' where user_id='".$data['user_id']."'");
 		 $this->db->query("update user_profiles set curr_educ_level = '".$this->input->post('educ_level')."' where user_id='".$data['user_id']."'");
 		 $this->db->query("update user_profiles set country_id = '".$this->input->post('countries')."' where user_id='".$data['user_id']."'");
 		 $this->db->query("update user_profiles set gender = '".$this->input->post('sex')."' where user_id='".$data['user_id']."'");
+		//echo $this->session->userdata('user_id');
+		redirect('');
+	}
+	
+	
+	function do_upload_profile_pic() {
+		 //$this->ci->load->config('tank_auth', TRUE);
+  
+		$config = array(
+			'allowed_types' => 'jpg|jpeg|gif|png',
+			'upload_path' => $this->gallery_path,
+			'max_size' => 2000
+		);
+		
+		$this->load->library('upload', $config);
+		$this->upload->do_upload();
+		$image_data = $this->upload->data();
+		
+		$config = array(
+			'source_image' => $image_data['full_path'],
+			'new_image' => $this->gallery_path . '/thumbs',
+			'maintain_ration' => true,
+			'width' => 150,
+			'height' => 100
+		);
+		
+		$this->load->library('image_lib', $config);
+		$this->image_lib->resize();
+		//print_r($config);
+		//print_r($image_data['file_name']);
+		//$img_path_store = $this->input->post('userfile');
+		//$img_path_store = $config['new_image'];
+		//print_r($this->session->userdata());
+		$data['user_id'] = $this->tank_auth->get_user_id();
+		if($image_data['file_name'] != '')
+		{
+		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
+		}
 		//echo $this->session->userdata('user_id');
 		redirect('');
 	}
@@ -122,6 +187,20 @@ class Users extends CI_Model
 	}*/
 	 
 	 /* End Here */
+	 
+	 /* function for fetch profile */
+	 
+	 function fetch_profile($logged_user)
+	 {
+	 
+			 $this->db->select('*');
+			  $this->db->from('users');
+			  $this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+			  $this->db->where('id', $logged_user);
+			  $query = $this->db->get();
+			  return $query->row_array();
+	 }
+	 
 	 /* function for get profile pic */
 	 function fetch_profile_pic($logged_user)
 	 {

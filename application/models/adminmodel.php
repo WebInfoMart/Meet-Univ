@@ -3,10 +3,14 @@
 class Adminmodel extends CI_Model
 {
 	
+		var $gallery_path;
 	function __construct()
 	{
 	
 		parent::__construct();
+		$this->gallery_path = realpath(APPPATH . '../uploads');
+		$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
+	
 		$this->load->database();
 	}
 
@@ -108,7 +112,44 @@ class Adminmodel extends CI_Model
 	}
 	}
 	
+	//upload home gallery
+	function do_upload() {
+		 //$this->ci->load->config('tank_auth', TRUE);
+		 $config = array(
+			'allowed_types' => 'jpg|jpeg|gif|png',
+			'upload_path' => $this->gallery_path,
+			'max_size' => 2000
+		);
+		
+		$this->load->library('upload', $config);
+		
+for($i=0; $i<2; $i++)
+ {
+$this->upload->initialize($config);
+
+ $this->upload->do_upload();
+$image_data = $this->upload->data();
+		
+		$config = array(
+			'source_image' => $image_data['full_path'],
+			'new_image' => $this->gallery_path . '/thumbs',
+			'maintain_ration' => true,
+			'width' => 150,
+			'height' => 100
+		);
+		
+		//print_r($config);
+		//print_r($image_data['file_name']);
+		//$img_path_store = $this->input->post('userfile');
+		//$img_path_store = $config['new_image'];
+		//print_r($this->session->userdata());
+		//$data['user_id'] = $this->tank_auth->get_user_id();
+		// $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
+		//echo $this->session->userdata('user_id');
+	//	redirect('admin/home_gallery');
+	}
 	
+}
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

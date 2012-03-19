@@ -34,7 +34,7 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.date_input.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.minicolors.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.wysiwyg.js"></script>
-	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.fancybox.js"></script>
+	<!--<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.fancybox.js"></script>-->
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tipsy.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 	<!--<script type="text/javascript" src="<?php //echo "$base$js";?>/jquery.fancybox.js"></script>--?
@@ -64,7 +64,7 @@
 		
 		<div class="userprofile">
 			<ul>
-				<li><a href="#"><img src="../images/admin/avatar.gif" alt="" /> enstyled</a>
+				<li><a href="#"><img src="../images/admin/avatar.gif" alt="" />Welocme <?php echo ucwords($this->session->userdata('admin_fullname')); ?></a>
 					<ul>
 						<li><a href="#">Profile</a></li>
 						<li><a href="#">Messages</a></li>

@@ -21,7 +21,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 {?>
 
 
-<li><a href="#"> <img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Q & A</a>
+<li><a href="#" class="collapse"> <img src="<?php echo "$base$admin_img" ?>/nav/qna.gif" alt="" /> Q & A</a>
 		<ul><?php
 		if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
 			{
@@ -37,7 +37,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 			
 			if($admin_priv_res['privilege_type_id']=='3' && $admin_priv_res['privilege_level']!='0')
 			{?>
-			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Events</a>
+			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/event.jpg" alt="" /> Events</a>
 			<ul>
 			<?php
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
@@ -50,7 +50,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 			
 			if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
 			{?>
-			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Articles News</a>
+			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" /> Articles & News</a>
 			<ul><?php
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
@@ -64,7 +64,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 			if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
-			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/users.png" alt="" /> Users</a>
+			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/users.png" alt="" /> Users</a>
 				<ul>
 		<?php
 		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
@@ -80,7 +80,14 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 	<?php 
 	}
 	}?>		
-			
+	
+		<li><a href="admin/manage_gallery" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />  Manage Gallery</a>
+		<ul>
+		<li><?php echo anchor('admin/home_gallery', 'Home Gallery'); ?></li>
+		<li><?php echo anchor('admin/univ_gallery', 'University Gallery'); ?></li>
+		</ul>
+		</li>
+		
 		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Support</a></li>
 			

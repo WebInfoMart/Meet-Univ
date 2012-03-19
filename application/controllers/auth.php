@@ -692,13 +692,28 @@ class Auth extends CI_Controller
 	}
 	function update_profile()
 	{
-	$data = $this->path->all_path();
+		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		$this->load->view('auth/profile_single');
-		$data['user_id'] = $this->tank_auth->get_user_id();
-		$data['update_profile'] = $this->tank_auth->update_profile();
+		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
+		$data['fetch_profile'] = $this->users->fetch_profile($logged_user);
+		$data['country'] = $this->users->fetch_country();
+		$data['educ_level'] = $this->users->fetch_educ_level();
+		$data['area_interest'] = $this->users->fetch_area_interest();
+		$this->load->view('auth/profile_single',$data);
 		$this->load->view('auth/footer',$data);
 	}
+	
+	function user_profile_update()
+	{
+		$this->load->model('users');
+		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
+		$data['user_profile_update'] = $this->users->user_profile_update($logged_user);
+		//if ($this->input->post('upload')) {
+			$this->users->do_upload_profile_pic();
+		//}
+		redirect('auth/update_profile');
+	}
+
 
 }
 

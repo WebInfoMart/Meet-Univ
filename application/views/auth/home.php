@@ -362,8 +362,8 @@
 list-style:none;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;
 border:1px solid #ccc;width:86px;position:relative;left:186px;top:1px;display:none;
 }
-.ddclass li{background-color:#ccc;}
-.ddclass li:hover{background-color:whitesmoke;cursor:pointer;}
+.ddclass li{background-color:#F5F5F5;}
+.ddclass li:hover{background-color:#ccc;cursor:pointer;}
 .li1 a {color:#000;}
 .li2 a {color:#000;}
 .li1{padding-left:10px;padding-top:5px;}
