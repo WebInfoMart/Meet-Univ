@@ -8,7 +8,7 @@ class Adminmodel extends CI_Model
 	{
 	
 		parent::__construct();
-		$this->gallery_path = realpath(APPPATH . '../uploads');
+		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
 		$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
 	
 		$this->load->database();
@@ -113,36 +113,10 @@ class Adminmodel extends CI_Model
 	}
 	
 	//upload home gallery
+	//upload home gallery
 	function do_upload() {
 		 //$this->ci->load->config('tank_auth', TRUE);
-		   $this->load->library('upload');
-
-            foreach ($_FILES as $key => $value)
-            {
-
-
-                if (!empty($key['name']))
-                {
-
-
-                    $this->upload->initialize($config);
-                    if (!$this->upload->do_upload())
-                    {
-
-                        $errors = $this->upload->display_errors();
-						
-
-                        //flashMsg($errors);
-
-                    }
-                    else
-                    {
-                         // Code After Files Upload Success GOES HERE
-                    }
-					
-                }
-            }
-			return $key['name'];
+		
 		$config['upload_path'] = $this->gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
         $config['max_size']    = '1000'; // in kb
@@ -164,22 +138,70 @@ class Adminmodel extends CI_Model
 				$field = 'userfile';
 				$user_id=$this->tank_auth->get_admin_user_id();
             $data1 = array('upload_data' => $files);
-			$num_files = count($_FILES[$field]['name']);
+			$num_files = count($_FILES[$field]['name'])-1;
 			$f=0;
 			for($a=0;$a<$num_files;$a++)
 			{
 						$data = array(
 			   'image_path' => $data1['upload_data'][$a]['name'],
-			   'postedby' => $user_id
+			   'postedby' => $user_id,
 			   
 			);
 			$this->db->insert('home_slider', $data);	
 				$f=1;
 			}
-			return $f;
+			return $files;
 		}
-
+		
 }
+		
+		function get_gallery_info()
+		{
+			$this->db->select('*');
+			$this->db->from('home_slider');
+			$query = $this->db->get();
+			return $query->result_array();
+		}
+		
+		function delete_gallery_pic($gid)
+		{
+			$this->db->delete('home_slider', array('id' => $gid));
+		}
+		
+		
+		
+		function update_gallery()
+		{
+		$g_id=$this->input->post('g_id');
+		$imgcount=count($this->input->post('g_id'));	
+		$image_caption=$this->input->post('image_caption');
+		$title=$this->input->post('title');
+		$link_to=$this->input->post("link_to");
+		for( $i =0; $i < $imgcount ; $i++ )
+		{
+			$cretedby_admin=$this->tank_auth->get_admin_user_id();
+						$data = array(
+			   'image_caption' => $image_caption[$i],
+			   'title' => $title[$i],
+			   'event_link_path' => $link_to[$i],
+			   'postedby' => $cretedby_admin,
+			);
+			$this->db->where('id', $g_id[$i]);
+			$this->db->update('home_slider', $data); 
+			//$this->db->insert('mytable', $data);
+		}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

@@ -79,15 +79,34 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		
 	<?php 
 	}
-	}?>		
 	
-		<li><a href="admin/manage_gallery" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />  Manage Gallery</a>
+		if($admin_priv_res['privilege_type_id']=='11' && $admin_priv_res['privilege_level']!='0')
+			{
+			?>
+		<li><a class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />  Manage Gallery</a>
 		<ul>
-		<li><?php echo anchor('admin/home_gallery', 'Home Gallery'); ?></li>
+		<li><a href="" class="collapse">Home Gallery</a>
+		<ul>
+		<?php
+		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+		{?>
+		<li><?php echo anchor('admin/home_gallery', 'Add Home Gallery'); ?></li>
+		<?php } ?>
+		<li><?php echo anchor('admin/manage_home_gallery', 'Manage Home Gallery'); ?></li>
+		</ul>
+		</li>
 		<li><?php echo anchor('admin/univ_gallery', 'University Gallery'); ?></li>
 		</ul>
 		</li>
+		<?php }
 		
+		}
+		?>
+		<li><a  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/univ.png" alt="" />  Manage University</a>
+		<ul>
+		<li><a href="admin/create_university" >Create University</a></li>
+		<li><a href="" >Manage University</a></li>
+		</ul>
 		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Support</a></li>
 			

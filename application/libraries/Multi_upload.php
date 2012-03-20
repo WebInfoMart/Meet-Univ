@@ -22,7 +22,7 @@ class Multi_upload  {
      * see http://www.fyneworks.com/jquery/multiple-file-upload/
 	 */	
 	function go_upload($field = 'userfile') {
-	$z=2;
+		$z=2;
         $CI =& get_instance(); 
 		// Is $_FILES[$field] set? If not, no reason to continue.
 		if ( ! isset($_FILES[$field]['name'][0]))
@@ -31,7 +31,8 @@ class Multi_upload  {
 			return FALSE;
 		} else
 		{
-			$num_files = count($_FILES[$field]['name']);
+		$z=5;
+			$num_files = count($_FILES[$field]['name'])-1;
             $file_list = array();
             $error_hold = array();
             $error_upload = FALSE;
@@ -54,7 +55,6 @@ class Multi_upload  {
             // Was the file able to be uploaded? If not, determine the reason why.
             if ( ! is_uploaded_file($_FILES[$field]['tmp_name'][$i]))
             {
-				$z=5;
                 $error = ( ! isset($_FILES[$field]['error'][$i])) ? 4 : $_FILES[$field]['error'][$i];
 
                 switch($error)
@@ -116,12 +116,11 @@ class Multi_upload  {
 
             // Are the image dimensions within the allowed size?
             // Note: This can fail if the server has an open_basdir restriction.
-            /*if ( ! $CI->upload->is_allowed_dimensions())
+           /* if ( ! $CI->upload->is_allowed_dimensions())
             {
                 $error_hold[$i] = 'upload_invalid_dimensions';
-				$z=$z+12;
-            }*/
-
+            }
+			*/
             // Sanitize the file name for security
             $CI->upload->file_name = $CI->upload->clean_file_name($CI->upload->file_name);
 
@@ -201,22 +200,24 @@ class Multi_upload  {
                             );
                 }
             }
-
+		
 // For debugging
 /*            
             if (strlen($error_hold[$i]) > 1) {
                     print_r($error_hold);
             }
-*/            
+*/           
+		$z=$z+10;
         } // end for loop
-
-// Add error display for individual files        
-        if ($error_upload) {
+			  if ($error_upload) {
             $this->set_error($error_hold);
-            return $z;
+            return FALSE;
         } else {
             return $file_list;
-        }    
+        } 
+			//return $z;
+// Add error display for individual files        
+         
     }
     
     // --------------------------------------------------------------------

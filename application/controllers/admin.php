@@ -5,6 +5,7 @@ class Admin extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
 		// $data['base'] = $this->config->item('base_url');
 		// $data['css'] = $this->config->item('css_path');
 		// $data['css'] = $this->config->item('img_path');
@@ -711,15 +712,18 @@ class Admin extends CI_Controller
 		{
 		if($ups=='ups')
 		{
+		$data['msg']='User Updated Successfully';
 		$this->load->view('admin/userupdated',$data);
 		}
 		else if($ups=='uds')
 		{
-		$this->load->view('admin/userdeleted',$data);
+		$data['msg']='User Deleted Successfully';
+		$this->load->view('admin/userupdated',$data);
 		}
 		else if($ups=='ucs')
 		{
-		$this->load->view('admin/usersuccess',$data);
+		$data['msg']='User Created Successfully';
+		$this->load->view('admin/userupdated',$data);
 		}
 		$this->load->view('admin/manageuser',$data);
 		$flag=1;
@@ -836,7 +840,7 @@ class Admin extends CI_Controller
 		
 	}
 	
-	function home_gallery()
+		function home_gallery()
 	{
 		$data = $this->path->all_path();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
@@ -844,13 +848,92 @@ class Admin extends CI_Controller
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
-		/*$delete_user_priv=array('5','7','8','10');
+		$add_gallery_priv=array('4','6','8','10');
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv) && $user_id!=$data['user_id'] && $user_level!='5')
+		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$add_gallery_priv) )
 		{
-		$this->adminmodel->deleteuser($user_level,$user_id);
-		$this->load->view('admin/userdeleted', $data);
+		$flag=1;
+		
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else 
+		{
+		if ($this->input->post('upload')) {
+		$data['x']=$this->adminmodel->do_upload();
+		redirect('admin/manage_home_gallery');
+		//print_r($data['x']);
+		
+		}
+		 $this->load->view('admin/home_gallery', $data);
+		}
+		
+	}
+	
+	function manage_home_gallery($del_pic=0)
+	{
+		
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$flag=0;
+		$delete=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==11 && $userdata['admin_priv']['privilege_level']!=0)
+		{
+		$delete_gallery_pic=array('5','7','8','10');
+		if(in_array($userdata['admin_priv']['privilege_level'],$delete_gallery_pic))
+		{
+		$delete=1;
+		}
+		$flag=1;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else if($flag==1)
+		{
+		if ($this->input->post('update')) {
+		$this->adminmodel->update_gallery();
+		$data['msg']="Gallery Updated successfully";
+		$this->load->view('admin/userupdated', $data);
+		}
+		if($delete==1 && $del_pic!=0 && $del_pic!='' && $del_pic!=NULL)
+		{
+			$this->adminmodel->delete_gallery_pic($del_pic);
+			$data['msg']="Gallery Image Deleted successfully";
+			$this->load->view('admin/userupdated', $data);
+		
+		}
+		}
+		$data['gallery']=$this->adminmodel->get_gallery_info();
+		$this->load->view('admin/manage_gallery', $data);
+			
+	}
+	
+	function create_university()
+	{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$create_univ=array('4','6','8','10');
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==5 && in_array($userdata['admin_priv']['privilege_level'],$create_univ) )
+		{
 		$flag=1;
 		break;
 		}
@@ -858,13 +941,17 @@ class Admin extends CI_Controller
 		if($flag==0)
 		{
 		$this->load->view('admin/accesserror', $data);
-		}*/
-		if ($this->input->post('upload')) {
-		 $x=$this->adminmodel->do_upload();
-		
 		}
-		$this->load->view('admin/home_gallery', $data);
+		else
+		{
+		$this->load->view('admin/add_university', $data);
+		}
+		
+	
 	}
+	
+	
+	
 	
 }
 
