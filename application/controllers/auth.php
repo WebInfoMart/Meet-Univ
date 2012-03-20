@@ -23,6 +23,7 @@ class Auth extends CI_Controller
 		/*  Upload code */
 		//$this->load->model('Gallery_model');
 		
+		$data['gallery_home'] = $this->users->fetch_home_gallery();
 		
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
@@ -730,7 +731,7 @@ class Auth extends CI_Controller
 	}
 	
 
-	function user_profile_update()
+	/*function user_profile_update()
 	{
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
@@ -744,8 +745,33 @@ class Auth extends CI_Controller
 		//}
 		redirect('home');
 		}
-	}
+	}*/
 
+	
+	function find_college()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		
+		if($this->input->post('process_step_one'))
+		{
+			$data_stepone = array(
+			'country_home' => $this->input->post('home_country'),
+			'email' => $this->input->post('step_email')
+			);
+			$this->session->set_userdata($data_stepone);
+			$this->load->view('auth/step_two');
+		}
+		// else if($this->input->post('submit_step_data'))
+		// {
+			// $this->
+		// }
+		else{
+			$this->load->view('auth/step_one');
+		}
+		$this->load->view('auth/footer',$data);
+	}
+	
 
 }
 

@@ -22,6 +22,9 @@ $(window).load(function(){
 							</div></div>
 								<div class="clearfix"></div>
 							</div>
+							<div id="show_img_bar" class="img_bar_profile_modal">
+							<img src="<?php echo "$base$img_path" ?>/ajax-loader.gif"/>
+							</div>
 							<div class="margin_t">
 								<div class="float_l span15 margin_zero"><h4>Gender</h4></div>
 								<div class="float_l span2 margin_l12"><input type="radio" name="sex" value="male" /> Male
@@ -80,9 +83,10 @@ $(window).load(function(){
 								</div>
 								<div class="clearfix"></div>
 							</div>
+							
 							<div class="margin_t">
 							
-								<input type="submit" class="btn btn-primary" name="upload" value="Continue" >
+								<input type="submit" class="btn btn-primary" name="upload" id="upload" value="Continue" >
 							</div>
 						</form>
 					</div>
@@ -360,8 +364,15 @@ $(window).load(function(){
      </div>
     </div>
    </div> 
+   
 <script>
 <?php if($pwd_change=='pwd_change'){ ?>
 $('#pwd-change-msg').modal('toggle');
 <?php } ?>
+</script>
+<script>
+$('#upload').click(function(){
+$('#show_img_bar').css("display","block");
+//alert('hi');
+});
 </script>

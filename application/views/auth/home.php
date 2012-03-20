@@ -4,8 +4,29 @@
 		<div class="form">
 			<div class="row">
 				<div class="span6 real">
-					<img src="images/slider.png">
+					<div id="gallery">
+					<?php
+				foreach($gallery_home as $galery_images)
+				{
+					if(!empty($galery_images['image_path']))
+					{
+					?>
+					
+
+	<a href="#" class="show">
+		<img src="<?php echo $base ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="Flowing Rock" width="580" height="360" title="" alt="<?php echo $galery_images['image_caption']; ?>" rel="<?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?> "/>
+	</a>
+					
+					<?php
+					}
+				}
+				?>
+				<div class="caption"><div class="content"></div></div>
+					</div>
+					
+				
 				</div>
+				
 				<div class="float_r span14 margin">
 					<div class="row margin_b">
 						<div class="float_l span21 padding_alpha">

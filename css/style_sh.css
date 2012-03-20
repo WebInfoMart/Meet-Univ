@@ -452,3 +452,11 @@ background: -moz-linear-gradient(270deg,#FFFFF6,#FFFDE3);border: 1px solid #E7E7
 .style_or{color: white;
 font-size: 17px;margin: 0px 3px;}
 
+
+.img_bar_profile_modal
+{
+	margin-left: 99px;
+	margin-top: 13px;
+	display:none;
+}
+
