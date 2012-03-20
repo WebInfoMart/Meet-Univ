@@ -18,9 +18,11 @@ $edit=1;
 break;
 }
 }
+$z=Array();
 ?>
+<?php if($gallery!=$z) { ?>
 <div id="content">
-		<h2 class="margin">Edit User</h2>
+		<h2 class="margin">Update Gallery</h2>
 		<div class="form span7 margin_zero">
 			<form action="manage_home_gallery" method="post">
 
@@ -90,7 +92,12 @@ break;
 </div>
 		
 		
-	</div>
+	</div> 
+	<?php } else { ?>
+	<div id="content">
+		<div class="message info"><p>Please Add the Gallery </p></div> 
+		</div>
+	<?php } ?>
 	<script>
 function delete_confirm(adminbase,gid)
 {

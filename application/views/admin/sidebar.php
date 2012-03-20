@@ -26,8 +26,8 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
-		<li><?php echo anchor('admin/addevents', 'Add Que'); ?></li> <?php } ?>
-			<li><?php echo anchor('admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
+		<li><?php echo anchor("$base$admin".'/admin/addevents', 'Add Que'); ?></li> <?php } ?>
+			<li><?php echo anchor("$base$admin".'/admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
 
 					
 			<?php
@@ -42,9 +42,9 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 			<?php
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
-			<li><?php echo anchor('admin/addevents', 'Add Events'); ?></li>
+			<li><?php echo anchor("$base$admin".'/admin/addevents', 'Add Events'); ?></li>
 			<?php } ?>
-			<li><?php echo anchor('admin/manageevents', 'Manage Events'); ?></li></ul></li>
+			<li><?php echo anchor("$base$admin".'/admin/manageevents', 'Manage Events'); ?></li></ul></li>
 			<?php
 			}
 			
@@ -54,9 +54,9 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 			<ul><?php
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
-			<li><?php echo anchor('admin/addevents', 'Add News & Article'); ?></li>
+			<li><?php echo anchor("$base$admin".'/admin/addevents', 'Add News & Article'); ?></li>
 			<?php } ?>
-			<li><?php echo anchor('admin/manageevents', 'Manage News & Article'); ?></li></ul>
+			<li><?php echo anchor("$base$admin".'/admin/manageevents', 'Manage News & Article'); ?></li></ul>
 			
 			</li>
 			<?php
@@ -69,10 +69,10 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		<?php
 		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 		{?>
-					<li><?php echo anchor('admin/adduser', 'Add new User'); ?></li>
+					<li><?php echo anchor("$base$admin".'/admin/adduser', 'Add new User'); ?></li>
 					
 		<?php }?>			
-					<li><?php echo anchor('admin/manageusers', 'Manage User'); ?></li>
+					<li><?php echo anchor("$base$admin".'/admin/manageusers', 'Manage User'); ?></li>
 				
 				</ul>
 			</li>	
@@ -83,26 +83,26 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		if($admin_priv_res['privilege_type_id']=='11' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
-		<li><a class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />  Manage Gallery</a>
+		<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />  Manage Gallery</a>
 		<ul>
 		<li><a href="" class="collapse">Home Gallery</a>
 		<ul>
 		<?php
 		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 		{?>
-		<li><?php echo anchor('admin/home_gallery', 'Add Home Gallery'); ?></li>
+		<li><?php echo anchor("$base$admin".'/admin/home_gallery', 'Add Home Gallery'); ?></li>
 		<?php } ?>
-		<li><?php echo anchor('admin/manage_home_gallery', 'Manage Home Gallery'); ?></li>
+		<li><?php echo anchor("$base$admin".'/admin/manage_home_gallery', 'Manage Home Gallery'); ?></li>
 		</ul>
 		</li>
-		<li><?php echo anchor('admin/univ_gallery', 'University Gallery'); ?></li>
+				<li><a href="#" class="collapse">Univ Gallery</a></li>
 		</ul>
 		</li>
 		<?php }
 		
 		}
 		?>
-		<li><a  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/univ.png" alt="" />  Manage University</a>
+		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/univ.png" alt="" />  Manage University</a>
 		<ul>
 		<li><a href="admin/create_university" >Create University</a></li>
 		<li><a href="" >Manage University</a></li>
