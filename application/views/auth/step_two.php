@@ -21,6 +21,7 @@
 							</ul>
 						</nav>
 					</div>
+					<?php print_r($this->session->userdata); ?>
 					<div>
 						<div class="span8 margin_zero padding">
 							<div class="step_box">
@@ -61,7 +62,7 @@
 														<option>Ms.</option>
 													</select>
 													<input class="span2" type="text" placeholder="First Name" name="first_name">
-													<input class="span2" type="text" placeholder="Last Name" name="second_name">
+													<input class="span2" type="text" placeholder="Last Name" name="last_name">
 													</div>
 												</div>
 												<div class="control-group">
@@ -385,10 +386,10 @@
 												<div class="control-group">
 													<label class="control-label">City</label>
 													<div class="controls docs-input-sizes">
-														<select class="span3">
+														<select class="span3" name="city">
 															<option value="">Please Select</option>
-															<option value="">Jaipur</option>
-															<option value="">BBSR</option>
+															<option value="Jaipur">Jaipur</option>
+															<option value="BBSR">BBSR</option>
 														</select>
 													</div>
 												</div>
@@ -416,7 +417,7 @@
 														</select>
 													</div>
 												</div>
-												<div class="control-group">
+												<!--<div class="control-group">
 													<label class="control-label">Choose preferred program type</label>
 													<div class="controls docs-input-sizes">
 														<select class="span3" name="prefer_prog_type">
@@ -426,7 +427,7 @@
 															<option value="OnCampus">Full Time</option>
 														</select>
 													</div>
-												</div>
+												</div>-->
 												<div class="control-group">
 													<label class="control-label">Current Education Level</label>
 													<div class="controls docs-input-sizes">
@@ -492,7 +493,7 @@
 																<option value="TOEFL-CBT">TOEFL-CBT</option>
 															</select>
 															<input class="span1" type="text" name="eng_prof_exam_score1">
-															<a href="#academic_scores">Add Another »</a><br/>
+															<!--<a href="#academic_scores">Add Another »</a><br/>-->
 														</div>
 														<select class="span2" name="eng_prof_exam_type2">
 															<option value="IELTS-Academic">IELTS-Academic</option>
@@ -501,11 +502,11 @@
 															<option value="TOEFL-CBT">TOEFL-CBT</option>
 														</select>
 														<input class="span1" type="text" name="eng_prof_exam_score2">
-														<a href="#academic_scores">Add Another »</a>
+														<!--<a href="#academic_scores">Add Another »</a>-->
 														<p class="help-block">Entering your Exam Scores is the best way to let the top schools around the world know that you have the required skills to study abroad.</p>
 													</div>
 												</div>
-												<div class="control-group">
+												<!--<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">When do you want to begin?</label>
 													<div class="controls">
 														<label class="radio inline">
@@ -515,7 +516,7 @@
 															<input type="radio" name="want_begin" id="want_begin" value="No" checked=""> No
 														</label>
 													</div>
-												</div>
+												</div>-->
 												<div class="controls">
 													<input type="submit" class="btn btn-success" name="submit_step_data" value="Continue">
 												</div>
