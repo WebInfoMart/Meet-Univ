@@ -3,9 +3,32 @@
 		<div class="body_header"></div>
 		<div class="form">
 			<div class="row">
-				<div class="span6 real">
-					<img src="images/slider.png">
+				<div class="span6 real gallery_div">
+					<div id='coin-slider'>
+					<?php
+				foreach($gallery_home as $galery_images)
+				{
+					if(!empty($galery_images['image_path']))
+					{
+					?>
+					
+<a href="" target="_blank">
+		<img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="580" height="360" title="" alt="" rel=" "/>
+		<span>
+			<?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?>
+		</span>
+	</a>
+	
+					
+					<?php
+					}
+				}
+				?>
 				</div>
+					
+				
+				</div>
+				
 				<div class="float_r span14 margin">
 					<div class="row margin_b">
 						<div class="float_l span21 padding_alpha">
@@ -443,3 +466,32 @@ $(document).ready(function() {
    });
 });
 </script>	
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#coin-slider').coinslider();
+	});
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#coin-slider').coinslider({ width: 900, navigation: false, delay: 5000 });
+		
+		
+		width: 565, // width of slider panel
+height: 290, // height of slider panel
+spw: 7, // squares per width
+sph: 5, // squares per height
+delay: 3000, // delay between images in ms
+sDelay: 30, // delay beetwen squares in ms
+opacity: 0.7, // opacity of title and navigation
+titleSpeed: 500, // speed of title appereance in ms
+effect: '', // random, swirl, rain, straight
+navigation: true, // prev next and buttons
+links : true, // show images as links
+hoverPause: true // pause on hover
+	});
+</script>
+
+

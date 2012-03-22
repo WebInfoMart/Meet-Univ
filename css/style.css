@@ -132,3 +132,9 @@ border-color: rgba(255, 0, 0, .8) !important;
   width:290px !important;
 }
 
+.img_bar_profile_modal
+{
+	margin-left: 99px;
+	margin-top: 13px;
+	display:none;
+}

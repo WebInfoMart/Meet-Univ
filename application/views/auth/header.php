@@ -122,6 +122,8 @@ if ($user) {
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-avia.css">
+
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script>
@@ -142,6 +144,9 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/pic_upload_js.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-button.js"></script>
+
+<script type="text/javascript" src="<?php echo "$base$js";?>/avia-custom.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
  $('#pulse').click(function(){

@@ -23,6 +23,7 @@ class Auth extends CI_Controller
 		/*  Upload code */
 		//$this->load->model('Gallery_model');
 		
+		$data['gallery_home'] = $this->users->fetch_home_gallery();
 		
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
@@ -730,7 +731,7 @@ class Auth extends CI_Controller
 	}
 	
 
-	function user_profile_update()
+	/*function user_profile_update()
 	{
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
@@ -744,8 +745,65 @@ class Auth extends CI_Controller
 		//}
 		redirect('home');
 		}
-	}
+	}*/
 
+	
+	function find_college()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		
+		if($this->input->post('process_step_one'))
+		{
+			$data_stepone = array(
+			'country_home' => $this->input->post('home_country'),
+			'email' => $this->input->post('step_email')
+			);
+			$this->session->set_userdata($data_stepone);
+			$this->load->view('auth/step_two');
+		}
+		 else if($this->input->post('submit_step_data'))
+		 {
+			 $data_steptwo = array(
+			 'intake1'             => $this->input->post('begin_year1'),
+			 'intake2'             => $this->input->post('begin_year2'),
+			 'title'               => $this->input->post('title'),
+			 'firstname'           => $this->input->post('first_name'),
+			 'lastname'            => $this->input->post('last_name'),
+			 'studying_country_id' => $this->input->post('interest_study_country'),
+			 'dob'                 => $this->input->post('dob_year').'-'.$this->input->post('dob_month').'-'.$this->input->post('dob_day'),
+			 'address'            =>  $this->input->post('home_address'),
+			 'state'              => $this->input->post('state'),
+			 'city'               => $this->input->post('city'),
+			 'phone_type1'        => $this->input->post('phone_type'),
+			 'phone_no1'          => $this->input->post('phone'),
+			 'phone_type2'        => $this->input->post('home_country'),
+			 'phone_no2'          => $this->input->post('home_country'),
+			 'prog_parent_id'     => $this->input->post('area_interest'),
+			 'current_educ_level' => $this->input->post('current_educ_level'),
+			 'next_educ_level'    => $this->input->post('next_educ_level'),
+			 
+			 'acedmic_exam_score_type1' =>  $this->input->post('academic_exam_type1'),
+			 'acedmic_exam_score1'      => 	$this->input->post('academic_exam_score1'),
+			 'acedmic_exam_score_type2' =>  $this->input->post('academic_exam_type2'),
+			 'acedmic_exam_score2'      =>  $this->input->post('academic_exam_score2'),
+			 'eng_profiency_exam1'      =>  $this->input->post('eng_prof_exam_type1'),
+			 'eng_profiency_exam_score1'=>  $this->input->post('eng_prof_exam_score1'),
+			 'eng_profiency_exam2'      =>  $this->input->post('eng_prof_exam_type2'),
+			 'eng_profiency_exam_score2'=>  $this->input->post('eng_prof_exam_score2'),
+			 
+			 );
+			 $this->session->set_userdata($data_steptwo);
+			 $this->load->view('auth/step_two');
+			 
+			 
+		 }
+		else{
+			$this->load->view('auth/step_one');
+		}
+		$this->load->view('auth/footer',$data);
+	}
+	
 
 }
 

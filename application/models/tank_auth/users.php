@@ -617,6 +617,49 @@ class Users extends CI_Model
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
 	}
+	
+	
+	function fetch_home_gallery()
+	{
+		$this->db->select('*');
+		$this->db->from('home_slider');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	
+	
+	// function find_collage_steps_data()
+	// {
+		
+		// if($this->tank_auth->is_logged_in())
+		// {
+			// $logged_user_id = $this->tank_auth->get_user_id();
+		// }
+		
+			// $data = array(
+			// 'user_id' => $logged_user_id,
+			// 'intake1' => $this->input->post('begin_year1'),
+			// 'intake2' => $this->input->post('begin_year2'),
+			// 'studying_country_id' => $this->input->post(''),
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// '' => '',
+			// );
+		
+	// }
 }
 
 /* End of file users.php */

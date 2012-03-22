@@ -343,7 +343,7 @@ class Adminmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('state');
 		$this->db->where(array('statename'=>$state,'country_id'=>$country));
-		
+		return $query->num_rows();
 	}
 		
 		
