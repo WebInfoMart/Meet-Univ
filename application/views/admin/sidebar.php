@@ -104,7 +104,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		?>
 		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/univ.png" alt="" />  Manage University</a>
 		<ul>
-		<li><a href="admin/create_university" >Create University</a></li>
+		<li><?php echo anchor("$base".'admin/create_university', 'Create University'); ?></li>
 		<li><a href="" >Manage University</a></li>
 		</ul>
 		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>

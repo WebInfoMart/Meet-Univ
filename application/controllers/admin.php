@@ -840,7 +840,7 @@ class Admin extends CI_Controller
 		
 	}
 	
-		function home_gallery()
+	function home_gallery()
 	{
 		$data = $this->path->all_path();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
@@ -929,6 +929,23 @@ class Admin extends CI_Controller
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
+		if($this->input->post('submit'))
+		{
+		$this->form_validation->set_rules('univ_name', 'University', 'trim|required');
+		$this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
+		$this->form_validation->set_rules('address2', 'Addrss Line2', 'trim|xss_clean');
+		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
+		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
+		$this->form_validation->set_rules('about_us', 'About Us', 'trim|xss_clean');
+		$this->form_validation->set_rules('univ_owner', 'University Owner', 'trim|required|string');
+		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'trim|required|string|is_unique[university.subdomain_name]');
+		if ($this->form_validation->run()) {
+		$data['x']=$this->adminmodel->create_univ();
+		//print_r($data['x']);
+		//$this->adminmodel->edit_user_data();
+		//redirect('admin/manageusers/ups');
+		}
+		}
 		$create_univ=array('4','6','8','10');
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
@@ -944,14 +961,73 @@ class Admin extends CI_Controller
 		}
 		else
 		{
+		$data['model']='0';
+		if($this->input->post('addcountry'))
+		{
+		$this->form_validation->set_rules('country_model', 'Country', 'trim|required|is_unique[country.country_name]');
+		$this->form_validation->set_rules('state_model', 'State', 'trim|required|callback_state_check');
+		$this->form_validation->set_rules('city_model', 'City', 'trim|required');
+		if ($this->form_validation->run()) {
+		$this->adminmodel->enterplacelevel1();
+		}
+		else
+		{
+		$data['model']='1';
+		}
+		}
+		else if($this->input->post('addstate'))
+		{
+		$this->form_validation->set_rules('country_model1', 'Country', 'trim|required|string');
+		$this->form_validation->set_rules('state_model1', 'State', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('city_model1', 'City', 'trim|required|string');
+		if ($this->form_validation->run()) {
+		$this->adminmodel->enterplacelevel2();
+		}
+		else
+		{
+		$data['model']='2';
+		}
+		}
+		else if($this->input->post('addcity'))
+		{
+		$this->form_validation->set_rules('country_model2', 'Country', 'trim|required|string');
+		$this->form_validation->set_rules('state_model2', 'State', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('city_model2', 'City', 'trim|required|string');
+		if ($this->form_validation->run()) {
+		$this->adminmodel->enterplacelevel3();
+		}
+		else
+		{
+		$data['model']='3';
+		}
+		}
+		$data['univ_admins']=$this->adminmodel->get_univ_admin();
+		//print_r($data['univ_admins']);
+		$data['countries']=$this->users->fetch_country();
+		//print_r($data['univ_admins']);
 		$this->load->view('admin/add_university', $data);
 		}
 		
 	
 	}
 	
+	function state_list_ajax($cid='0')
+	{
+		
+		$data['region']=$this->adminmodel->fetch_states($cid);
+		$this->load->view('ajaxviews/state_ajax',$data);
+	}
+	function city_list_ajax($sid='0')
+	{
+		
+		$data['region']=$this->adminmodel->fetch_city($sid);
+		$this->load->view('ajaxviews/city_ajax',$data);
+	}
 	
-	
+	function state_check()
+	{
+		$this->adminmodel->state_chk_in_country($this->input->post('country_model'),$this->input->post('state_model'));
+	}
 	
 }
 

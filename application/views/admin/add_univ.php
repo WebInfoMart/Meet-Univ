@@ -21,7 +21,7 @@
 							<label>University Logo</label>
 						</div>
 						<div class="float_l span3">
-							<div class="float_l"><img src="images/logo_coll.gif" class="logo_img"></div>
+							<div class="float_l"><img src="<?php echo '$base$admin_img' ?>/thumb1.jpg" class="logo_img"></div>
 							<div class="float_l span1"><input type="file" class="file"></div>
 						</div>
 						<div class="clearfix"></div>

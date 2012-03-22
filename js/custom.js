@@ -315,10 +315,12 @@ $(function () {
 		
 		var onoffSwitch = $(this);
 		var chckBox = $(this).find('input.onoffbtn');
+		var chk		 = $('#chkcustomjs').val();	
+		if(chk!='0')
+		{
 		var chkboxid= chckBox.attr("id");
 		var chkboxprivid=chkboxid.split("_");
 		var privid=chkboxprivid[1].trim();
-				
 		if(chckBox.is(':checked')) {
 			
 			if(!(chckBox.hasClass('priorop')))
@@ -344,8 +346,8 @@ $(function () {
 				makeprivtotal(privid);
 			});
 			}
-			
-		} else {
+			}
+			else {
 				
 			if(chckBox.hasClass('priorop'))
 			{
@@ -362,11 +364,36 @@ $(function () {
 			onoffSwitch.animate({ 'background-position-x': '-40px' }, 100, function() {
 				chckBox.attr('checked', 'checked');
 				$(this).addClass('checked');
-				makeprivtotal(privid);
+				
 				
 			});
 			
 		}
+		}
+	else
+	{
+	if(chckBox.is(':checked')) {
+			onoffSwitch.animate({ 'background-position-x': '0' }, 100, function() {
+				chckBox.removeAttr('checked');
+				$(this).removeClass('checked');
+				if(!($('#switch_status').is(':checked')))
+				{
+					$('#switch_univ_status').val(0);
+				}
+			});
+			
+		} else {
+		
+			onoffSwitch.animate({ 'background-position-x': '-40px' }, 100, function() {
+				chckBox.attr('checked', 'checked');
+				$(this).addClass('checked');
+				if($('#switch_status').is(':checked'))
+				{
+					$('#switch_univ_status').val(1);
+				}
+			});
+		}
+	}	
 		//alert("hello");
 		
 	});

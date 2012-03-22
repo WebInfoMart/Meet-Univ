@@ -9,6 +9,7 @@ class Adminmodel extends CI_Model
 	
 		parent::__construct();
 		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
+		$this->univ_gallery_path = realpath(APPPATH . '../uploads/univ_gallery');
 		$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
 	
 		$this->load->database();
@@ -193,12 +194,157 @@ class Adminmodel extends CI_Model
 		}
 		
 		
+		function get_univ_admin()
+		{
+			$this->db->select('user_id');
+			$this->db->from('university');
+			$user= $this->db->get();
+			$users=$user->result_array();
+			$userid=array('0');
+			foreach($users as $user_id)
+			{
+			$userid[]=$user_id['user_id'];
+			}
+			$level=array('1','2','4','5');
+			//$query = $this->db->get_where('basic_operation', array('operation_level' => $level));	
+			$this->db->select('id,fullname');
+			$this->db->from('users');
+			//$this->db->join('university', 'users.id != university.user_id','right');
+			$this->db->where_not_in('id',$userid); 
+			$this->db->where('level','3');
+			$query = $this->db->get();
+			//$query = $this->db->get_where('basic_operation', array('operation_level' => $level));
+			return $query->result_array();	
+		}
 		
+	 function fetch_states($cid)
+	 {
+		$this->db->select('*');
+		$this->db->from('state');
+		$this->db->where('country_id',$cid);
+		$query=$this->db->get();
+		return $query->result_array();
+	 }
+	 function fetch_city($sid)
+	 {
+		$this->db->select('*');
+		$this->db->from('city');
+		$this->db->where('state_id',$sid);
+		$query=$this->db->get();
+		return $query->result_array();
+	 }
 		
+	function create_univ()
+	{
+	
+		$config = array(
+			'allowed_types' => 'jpg|jpeg|gif|png',
+			'upload_path' => $this->gallery_path,
+			'max_size' => 2000
+		);
 		
+		$this->load->library('upload', $config);
+		$this->upload->do_upload();
+		$image_data = $this->upload->data();
 		
+		$config = array(
+			'source_image' => $image_data['full_path'],
+			'new_image' => $this->gallery_path . '/thumbs',
+			'maintain_ration' => true,
+			'width' => 150,
+			'height' => 100
+		);
 		
+		$this->load->library('image_lib', $config);
+		$this->image_lib->resize();
+	
+		$cretedby_admin=$this->tank_auth->get_admin_user_id();
+						$data = array(
+			   'univ_name' => $this->input->post('univ_name') ,
+			   'univ_logo_path' =>$image_data['file_name'],
+			   'address_line1' => $this->input->post('address1'),
+			   'address_line2' => $this->input->post('address2'),
+			   'user_id' => $this->input->post('univ_owner'),
+			   'city_id' =>$this->input->post('city'),
+			   'state_id' => $this->input->post('state'),
+			   'country_id'=>$this->input->post('country'),
+			   'phone_no' => $this->input->post('phone_no'),
+			   'switch_off_univ'=>$this->input->post('switch_univ_status'),
+			   'univ_is_client' =>$this->input->post('univ_is_client'),
+			   'subdomain_name' =>$this->input->post('sub_domain'),
+			   'about_us' => $this->input->post('about_us'),
+			   'contact_us' => $this->input->post('contact_us'),
+			   'createdby' =>$cretedby_admin
+			);
+			$this->db->insert('university', $data);		
+	}
 		
+	function enterplacelevel1()
+	{
+		$cretedby_admin=$this->tank_auth->get_admin_user_id();
+		$data1=array(
+		'country_name'=>$this->input->post('country_model'),
+		'createdby' =>$cretedby_admin
+		);
+		$this->db->insert('country', $data1);
+		$country_id=$this->db->insert_id();
+		$data2=array(
+		'statename'=>$this->input->post('state_model'),
+		'country_id' =>$country_id,
+		'createdby' =>$cretedby_admin
+		);
+		$this->db->insert('state', $data2);
+		$state_id=$this->db->insert_id();
+		$data3=array(
+		'cityname'=>$this->input->post('city_model'),
+		'state_id' =>$state_id,
+		'country_id' =>$country_id, 
+		'createdby' =>$cretedby_admin
+		);
+		$this->db->insert('city', $data3);
+		
+	}
+	
+	function enterplacelevel2()
+	{
+		$cretedby_admin=$this->tank_auth->get_admin_user_id();
+		$country_id=$this->input->post('country_model1');
+		$data2=array(
+		'statename'=>$this->input->post('state_model1'),
+		'country_id' =>$country_id,
+		'createdby' =>$cretedby_admin
+		);
+		$this->db->insert('state', $data2);
+		$state_id=$this->db->insert_id();
+		$data3=array(
+		'cityname'=>$this->input->post('city_model1'),
+		'state_id' =>$state_id,
+		'country_id' =>$country_id, 
+		'createdby' =>$cretedby_admin
+		);
+		$this->db->insert('city', $data3);
+	}
+	function enterplacelevel3()
+	{
+		$cretedby_admin=$this->tank_auth->get_admin_user_id();
+		$country_id=$this->input->post('country_model2');
+		$state_id=$this->input->post('state_model2');
+		$data3=array(
+		'cityname'=>$this->input->post('city_model2'),
+		'state_id' =>$state_id,
+		'country_id' =>$country_id, 
+		'createdby' =>$cretedby_admin
+		);
+		$this->db->insert('city', $data3);
+	}	
+		
+	function state_chk_in_country($country,$state)
+	{
+		$this->db->select('*');
+		$this->db->from('state');
+		$this->db->where(array('statename'=>$state,'country_id'=>$country));
+		
+	}
 		
 		
 		
