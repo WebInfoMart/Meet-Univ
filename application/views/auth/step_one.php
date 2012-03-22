@@ -1,4 +1,13 @@
+<?php
+$class_email='';
+$class_agree='';
+$error_email = form_error('step_email');
+$error_agree = form_error('step_email');
 
+if($error_email != '') { $class_email = 'focused_error_stepone'; } else { $class_email='span3'; }
+
+if($error_agree != '') { $class_agree = 'focused_error_stepone'; } else { $class_agree=''; }
+?>
 	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -305,15 +314,17 @@
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">Your Email Address</label>
 														<div class="controls">
-															<input class="span3" type="text" name="step_email">
+															<input class="<?php echo $class_email; ?>" type="text" name="step_email">
+															<span style="color:red"><?php echo form_error('step_email'); ?><?php echo isset($errors['step_email'])?$errors['step_email']:''; ?></span>
 														</div>
 												</div>
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes"></label>
 													<div class="controls">
 														<label class="checkbox inline">
-															<input type="checkbox" id="inlineCheckbox1" value="option1">I agree to the  <a>Service Agreement</a>  &  <a>Privacy Policy</a>
+															<input type="checkbox" name="iagree" id="iagree" value="agree">I agree to the  <a>Service Agreement</a>  &  <a>Privacy Policy</a>
 														</label>
+														<span style="color:red"><?php echo form_error('iagree'); ?><?php echo isset($errors['iagree'])?$errors['iagree']:''; ?></span>
 													</div>
 												</div>
 												<div class="controls">
