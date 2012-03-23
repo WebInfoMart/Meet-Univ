@@ -15,11 +15,7 @@
 |
 */
 
-<<<<<<< HEAD
 $config['base_url']	= 'http://127.0.0.1/Meet-Univ/';
-=======
-$config['base_url']	= 'http://localhost/Meet-Univ/';
->>>>>>> 2898e5c5b9743acea8b5fcdca50452e3b42f0162
 /*
 |--------------------------------------------------------------------------
 | Index File
