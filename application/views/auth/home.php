@@ -3,8 +3,8 @@
 		<div class="body_header"></div>
 		<div class="form">
 			<div class="row">
-				<div class="span6 real gallery_div">
-					<div id='coin-slider'>
+				<div class="span6 real">
+					<div id='coin-slider' class='gallery_div'>
 					<?php
 				foreach($gallery_home as $galery_images)
 				{
@@ -13,7 +13,7 @@
 					?>
 					
 <a href="" target="_blank">
-		<img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="580" height="360" title="" alt="" rel=" "/>
+		<img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="540" height="360" title="" alt="" rel=" "/>
 		<span>
 			<?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?>
 		</span>
@@ -476,10 +476,10 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#coin-slider').coinslider({ width: 900, navigation: false, delay: 5000 });
+		$('#coin-slider').coinslider({ width: 500, navigation: false, delay: 5000 });
 		
 		
-		width: 565, // width of slider panel
+		width: 400, // width of slider panel
 height: 290, // height of slider panel
 spw: 7, // squares per width
 sph: 5, // squares per height

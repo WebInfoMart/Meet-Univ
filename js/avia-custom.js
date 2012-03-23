@@ -63,7 +63,7 @@
 
 
             // create title bar
-            $('#'+el.id).append("<div class='cs-title' id='cs-title-"+el.id+"' style='position: absolute; bottom:0; left: 0; z-index: 1000;'></div>");
+            $('#'+el.id).append("<div class='cs-title' id='cs-title-"+el.id+"' style='position: absolute; bottom:0; left: 0; z-index: 998;'></div>");
 
             $.setFields(el);
 
@@ -473,4 +473,4 @@
             else return n;
         }
 
-    this.each(function(){init(this);});};$.fn.coinslider.defaults={width:565,height:290,spw:1,sph:1,delay:3000,sDelay:30,opacity:0.7,titleSpeed:500,effect:'',navigation:true,links:true,hoverPause:true};})(jQuery);
+    this.each(function(){init(this);});};$.fn.coinslider.defaults={width:438,height:290,spw:1,sph:1,delay:3000,sDelay:30,opacity:0.7,titleSpeed:500,effect:'',navigation:true,links:true,hoverPause:true};})(jQuery);
