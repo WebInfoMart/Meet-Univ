@@ -168,7 +168,7 @@ class Admin extends CI_Controller
 			}
 			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
 			$this->form_validation->set_rules('user_type', 'user_type', 'trim|string');
