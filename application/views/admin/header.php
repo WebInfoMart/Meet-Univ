@@ -59,7 +59,7 @@
 		
 		<div class="userprofile">
 			<ul>
-				<li><a href="#"><img src="../images/admin/avatar.gif" alt="" />Welocme <?php echo ucwords($this->session->userdata('admin_fullname')); ?></a>
+				<li><a href="#"><img src="../images/admin/avatar.gif" alt="" />Welcome <?php echo ucwords($this->session->userdata('admin_fullname')); ?></a>
 					<ul>
 						<li><a href="#">Profile</a></li>
 						<li><a href="#">Messages</a></li>

@@ -96,7 +96,7 @@ box-shadow: 0 0 5px #888;
 .yellow_bar_text li a{text-decoration: none;font-size:15px;color:#666666;}
 .heading_lft{transform: rotate(340deg);-ms-transform: rotate(340deg);-moz-transform: rotate(340deg);-webkit-transform: rotate(338deg);-o-transform: rotate(340deg);width: 106px;z-index: 100;position: absolute;left: 100px;border-bottom: 1px solid #333;}
 .box{border: 1px solid #DDD;-moz-border-right: 1px solid #DDD;-moz-border-left: 1px solid #DDD;
-padding:40px 5px;
+padding:10px 5px;
 height: 300px;
 overflow:hidden;}
 .box_list ul li{list-style:none;
@@ -461,6 +461,7 @@ font-size: 17px;margin: 0px 3px;}
 }
 .gallery_div
 {
+
 border-radius: 6px;
-border: 3px solid #CCC;
+border: 3px solid #fff;
 }
