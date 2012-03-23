@@ -1,10 +1,56 @@
+<?php
+$class_interest_country='';
+$class_firstname='';
+$class_lastname='';
+$class_dob_day='';
+$class_dob_year='';
+$class_home_adress='';
+$class_state='';
+$class_city='';
+$class_phone='';
+$class_area_interest='';
+$class_current_educ='';
+$class_next_educ='';
+$class_academic_exam_score='';
 
+$error_interest_country = form_error('interest_study_country');
+$error_firstname = form_error('first_name');
+$error_lastname = form_error('last_name');
+$error_dob_day = form_error('dob_day');
+$error_dob_year = form_error('dob_year');
+$error_home_adress = form_error('home_address');
+$error_state = form_error('state');
+$error_city = form_error('city');
+$error_phone = form_error('phone');
+$error_area_interest = form_error('area_interest');
+$error_current_educ = form_error('current_educ_level');
+$error_next_educ = form_error('next_educ_level');
+$error_academic_exam_score = form_error('academic_exam_score1');
+//$error_agree = form_error('step_email');
+
+if($error_interest_country != '') { $class_interest_country = 'focused_error_stepone'; } else { $class_interest_country=''; }
+
+if($error_state != '') { $class_state = 'focused_error_steptwo_dropdown'; } else { $class_state='span3'; }
+if($error_city != '') { $class_city = 'focused_error_steptwo_dropdown'; } else { $class_city='span3'; }
+if($error_area_interest != '') { $class_area_interest = 'focused_error_steptwo_dropdown'; } else { $class_area_interest='span3'; }
+if($error_current_educ != '') { $class_current_educ = 'focused_error_steptwo_dropdown'; } else { $class_current_educ='span3'; }
+if($error_next_educ != '') { $class_next_educ = 'focused_error_steptwo_dropdown'; } else { $class_next_educ='span3'; }
+
+if($error_firstname != '') { $class_firstname = 'focused_error_steptwo_small_textboxes'; } else { $class_firstname='span2'; }
+if($error_lastname != '') { $class_lastname = 'focused_error_steptwo_small_textboxes'; } else { $class_lastname='span2'; }
+if($error_dob_day != '') { $class_dob_day = 'focused_error_steptwo_small_textboxes'; } else { $class_dob_day='span2'; }
+if($error_dob_year != '') { $class_dob_year = 'focused_error_steptwo_small_textboxes'; } else { $class_dob_year='span2'; }
+if($error_home_adress != '') { $class_home_adress = 'focused_error_steptwo_large_textboxes'; } else { $class_home_adress='span3'; }
+if($error_phone != '') { $class_phone = 'focused_error_steptwo_small_textboxes'; } else { $class_phone='span2'; }
+if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_error_steptwo_small_textboxes'; } else { $class_academic_exam_score='span2'; }
+?>
 	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body_container">
 			<div class="row show-grid">
 				<div class="span13">
+				
 					<div class="alert alert-message message" data-alert="alert">
 						<a class="close" data-dismiss="alert">&times;</a>
 						<div>
@@ -21,14 +67,18 @@
 							</ul>
 						</nav>
 					</div>
-					<?php print_r($this->session->userdata); ?>
+				
+					
 					<div>
 						<div class="span8 margin_zero padding">
+						
 							<div class="step_box">
+							
 									<h1>Your University & College Search</h1>
 										<div class="margin_t">
 											<h2>School Preferences</h2>
 											<form class="form-horizontal form_step_box" action="find_college" method="post">
+											
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">When do you want to begin?</label>
 													<div class="controls">
@@ -44,13 +94,17 @@
 													<label class="control-label" for="inlineCheckboxes">Where are you interested in studying?</label>
 													<div class="controls">
 														<label class="checkbox inline">
-															<select name="interest_study_country">
-															<option value="1"> India </option>
-															<option value="2"> USA </option>
-															<option value="3"> UK </option>
-															<option value="4"> Canada </option>
+															<select name="interest_study_country" id="interest_study_country" class="<?php echo $class_interest_country; ?>" onchange="fetchstates(this);">
+															<option value=""> Please select </option>
+															<?php 
+																foreach($country as $contries)
+																{
+															?>
+															<option value="<?php echo $contries['country_id']; ?>"> <?php echo $contries['country_name']; ?> </option>
+															<?php } ?>
 															</select>
 														</label>
+														<span style="color:red"> <?php echo form_error('interest_study_country'); ?><?php echo isset($errors['interest_study_country'])?$errors['interest_study_country']:''; ?> </span>
 													</div>
 												</div>
 												<div class="control-group">
@@ -61,9 +115,12 @@
 														<option>Mrs.</option>
 														<option>Ms.</option>
 													</select>
-													<input class="span2" type="text" placeholder="First Name" name="first_name">
-													<input class="span2" type="text" placeholder="Last Name" name="last_name">
+													<input class="<?php echo $class_firstname; ?>" type="text" placeholder="First Name" name="first_name">
+													<input class="<?php echo $class_lastname; ?>" type="text" placeholder="Last Name" name="last_name">
+													<span style="color:red"> <?php echo form_error('first_name'); ?><?php echo isset($errors['first_name'])?$errors['first_name']:''; ?> </span>
+													<span style="color:red"> <?php echo form_error('last_name'); ?><?php echo isset($errors['last_name'])?$errors['last_name']:''; ?> </span>
 													</div>
+													
 												</div>
 												<div class="control-group">
 													<label class="control-label">Your Birth Date</label>
@@ -82,9 +139,12 @@
 															<option value="11">November</option>
 															<option value="12">December</option>
 														</select>
-														<input class="span2" type="text" placeholder="Day" name="dob_day">
-														<input class="span2" type="text" placeholder="Year" name="dob_year">
+														<input class="<?php echo $class_dob_day; ?>" type="text" placeholder="Day" name="dob_day">
+														<input class="<?php echo $class_dob_year; ?>" type="text" placeholder="Year" name="dob_year">
+														<span style="color:red"> <?php echo form_error('dob_day'); ?><?php echo isset($errors['dob_day'])?$errors['dob_day']:''; ?> </span> 
+													<span style="color:red"> <?php echo form_error('dob_year'); ?><?php echo isset($errors['dob_year'])?$errors['dob_year']:''; ?> </span>
 													</div>
+													
 												</div>
 												<!--<div class="control-group">
 													<label class="control-label">Country</label>
@@ -363,59 +423,60 @@
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">Home Address</label>
 														<div class="controls">
-															<input class="span3" type="text" name="home_address">
+															<input class="<?php echo $class_home_adress; ?>" type="text" name="home_address">
+															<span style="color:red"> <?php echo form_error('home_address'); ?><?php echo isset($errors['home_address'])?$errors['home_address']:''; ?> </span>
 														</div>
+														
 												</div>
 												<div class="control-group">
 													<label class="control-label">State</label>
 													<div class="controls docs-input-sizes">
-														<select class="span3" name="state">
+														<select class="<?php echo $class_state; ?>" name="state" id="state" onchange="fetchcities(this);">
 															<option value="">Please Select</option>
-															<option value="Andhra Pradesh">Andhra Pradesh</option>
-															<option value="Arunachal Pradesh">Arunachal Pradesh</option>
-															<option value="Assam">Assam</option>
-															<option value="Bihar">Bihar</option>
-															<option value="Chandigarh">Chandigarh</option>
-															<option value="Chhattisgarh">Chhattisgarh</option>
-															<option value="Goa">Goa</option>
-															<option value="Gujarat">Gujarat</option>
-															<option value="Haryana">Haryana</option>
+															
 														</select>
+														<span style="color:red"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
 													</div>
+													
 												</div>
 												<div class="control-group">
 													<label class="control-label">City</label>
 													<div class="controls docs-input-sizes">
-														<select class="span3" name="city">
+														<select class="<?php echo $class_city; ?>" name="city" id="city">
 															<option value="">Please Select</option>
-															<option value="Jaipur">Jaipur</option>
-															<option value="BBSR">BBSR</option>
+															
 														</select>
+														<span style="color:red"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
 													</div>
+													
 												</div>
 												<div class="control-group">
 													<label class="control-label">Phone Number</label>
 													<div class="controls docs-input-sizes">
-														<input class="span2" type="text" name="phone">
+														<input class="<?php echo $class_phone; ?>" type="text" name="phone">
 														<select class="span1" name="phone_type">
 															<option value="Mobile">Mobile</option>
 															<option selected="selected" value="Home">Home</option>
 															<option value="Work">Work</option>
 														</select>
+														<span style="color:red"> <?php echo form_error('phone'); ?><?php echo isset($errors['phone'])?$errors['phone']:''; ?> </span>
 													</div>
+													
 												</div>
 												<div class="control-group">
 													<label class="control-label">Area of Interest</label>
 													<div class="controls docs-input-sizes">
-														<select class="span3" name="area_interest">
+														<select class="<?php echo $class_area_interest; ?>" name="area_interest">
 															<option selected="selected" value="">— Please Select —</option>
-															<option value="Business">Business</option>
-															<option value="Design &amp; Animation">Design &amp; Animation</option>
-															<option value="Arts and Sciences">Arts and Sciences</option>
-															<option value="Arts">Arts</option>
-															<option value="Sciences">Sciences</option>
+															<?php 
+															foreach($area_interest as $interest)
+															{ ?>
+																<option value="<?php echo $interest['prog_parent_id']; ?>"> <?php echo $interest['program_parent_name']; ?> </option>
+															<?php } ?>
 														</select>
+														<span style="color:red"> <?php echo form_error('area_interest'); ?><?php echo isset($errors['area_interest'])?$errors['area_interest']:''; ?> </span>
 													</div>
+													
 												</div>
 												<!--<div class="control-group">
 													<label class="control-label">Choose preferred program type</label>
@@ -431,25 +492,32 @@
 												<div class="control-group">
 													<label class="control-label">Current Education Level</label>
 													<div class="controls docs-input-sizes">
-														<select class="span3" name="current_educ_level">
+														<select class="<?php echo $class_current_educ; ?>" name="current_educ_level">
 															<option selected="selected" value="">— Please Select —</option>
-															<option value="Class XII/High School">Class XII/High School</option>
-															<option value="Some Higher Education">Some Higher Education</option>
-															<option value="Bachelors Degree">Bachelors Degree</option>
-															<option value="Masters Degree">Masters Degree</option>
+															<?php foreach($educ_level as $education_level) { ?>
+																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>"> <?php echo $education_level['educ_level']; ?> </option>
+															<?php } ?>
 														</select>
+														<span style="color:red"> <?php echo form_error('current_educ_level'); ?><?php echo isset($errors['current_educ_level'])?$errors['current_educ_level']:''; ?> </span>
 													</div>
+													
 												</div>
 												<div class="control-group">
 													<label class="control-label">Next Education Level</label>
 													<div class="controls docs-input-sizes">
-														<select class="span3" name="next_educ_level">
+														<select class="<?php echo $class_next_educ; ?>" name="next_educ_level">
 															<option selected="selected" value="">— Please Select —</option>
-															<option value="Bachelors Degree">Bachelors Degree</option>
-															<option value="Masters Degree">Masters Degree</option>
-															<option value="Ph.D. or Doctoral Degree">Ph.D. or Doctoral Degree</option>
+															<?php foreach($educ_level as $education_level) { 
+																	
+																	if($education_level['prog_edu_lvl_id'] != '5') {
+															?>
+															
+																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>"> <?php echo $education_level['educ_level']; ?> </option>
+															<?php } } ?>
 														</select>
+														<span style="color:red"> <?php echo form_error('next_educ_level'); ?><?php echo isset($errors['next_educ_level'])?$errors['next_educ_level']:''; ?> </span>
 													</div>
+													
 												</div>
 												<!--<div class="control-group">
 													<label class="control-label" for="appendedInput">Appended text</label>
@@ -469,9 +537,11 @@
 																<option value="GRE">GRE</option>
 																<option value="GMAT">GMAT</option>
 															</select>
-															<input class="span2" type="text" name="academic_exam_score1">
-															<!--<a href="#academic_scores">Add Another »</a><br/>-->
+															<input class="<?php echo $class_academic_exam_score; ?>" type="text" name="academic_exam_score1"/>
+															<a id="academic_add" style="cursor:pointer;">Add Another »</a><br/>
 														</div>
+														<span id="academic_another" style="display:none;">
+														
 														<select class="span1" name="academic_exam_type2">
 															<option value="SAT">SAT</option>
 															<option value="ACT">ACT</option>
@@ -479,6 +549,8 @@
 															<option value="GMAT">GMAT</option>
 														</select>
 														<input class="span2" type="text" name="academic_exam_score2">
+														</span>
+														<span style="color:red"> <?php echo form_error('academic_exam_score1'); ?><?php echo isset($errors['academic_exam_score1'])?$errors['academic_exam_score1']:''; ?> </span>
 														<!--<a href="#academic_scores">Add Another »</a>-->
 													</div>
 												</div>
@@ -493,8 +565,9 @@
 																<option value="TOEFL-CBT">TOEFL-CBT</option>
 															</select>
 															<input class="span1" type="text" name="eng_prof_exam_score1">
-															<!--<a href="#academic_scores">Add Another »</a><br/>-->
+															<a id="eng_prof_add" style="cursor:pointer;">Add Another »</a><br/>
 														</div>
+														<span id="eng_prof_another" style="display:none;">
 														<select class="span2" name="eng_prof_exam_type2">
 															<option value="IELTS-Academic">IELTS-Academic</option>
 															<option selected="selected" value="TOEFL-iBT">TOEFL-iBT</option>
@@ -502,6 +575,7 @@
 															<option value="TOEFL-CBT">TOEFL-CBT</option>
 														</select>
 														<input class="span1" type="text" name="eng_prof_exam_score2">
+														</span>
 														<!--<a href="#academic_scores">Add Another »</a>-->
 														<p class="help-block">Entering your Exam Scores is the best way to let the top schools around the world know that you have the required skills to study abroad.</p>
 													</div>
@@ -534,4 +608,44 @@
 			</div>
 		</div>
 	</div>
-	
+	<script>
+function fetchstates(a)
+{
+var cid=$("#interest_study_country option:selected").val();
+$.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>auth/state_list_ajax/"+cid,
+   data: '',
+   cache: false,
+   success: function(msg)
+   {
+    $('#state').attr('disabled', false);
+	$('#state').html(msg);
+   }
+   });
+}
+function fetchcities(a)
+{
+var sid=$("#state option:selected").val();
+$.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>auth/city_list_ajax/"+sid,
+   data: '',
+   cache: false,
+   success: function(msg)
+   {
+    $('#city').attr('disabled', false);
+	$('#city').html(msg);
+   }
+   });
+}
+
+// show another controllers
+$('#academic_add').click(function(){
+$('#academic_another').css("display","block");
+});
+
+$('#eng_prof_add').click(function(){
+$('#eng_prof_another').css("display","block");
+});
+</script>

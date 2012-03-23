@@ -752,18 +752,49 @@ class Auth extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		
+		$data['country'] = $this->users->fetch_country();
+		$data['area_interest'] = $this->users->fetch_area_interest();
+		$data['educ_level'] = $this->users->fetch_educ_level();
 		if($this->input->post('process_step_one'))
+		{
+		$this->form_validation->set_rules('step_email','Email','trim|xss_clean|required|valid_email');
+		$this->form_validation->set_rules('iagree','I agree','trim|xss_clean|required');
+		if($this->form_validation->run())
 		{
 			$data_stepone = array(
 			'country_home' => $this->input->post('home_country'),
 			'email' => $this->input->post('step_email')
 			);
 			$this->session->set_userdata($data_stepone);
-			$this->load->view('auth/step_two');
+			$this->load->view('auth/step_two',$data);
+		}
+		else{
+					$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+					
+					$this->load->view('auth/step_one',$data);
+		}
 		}
 		 else if($this->input->post('submit_step_data'))
 		 {
+			
+			$this->form_validation->set_rules('interest_study_country','Interested Country','trim|xss_clean|required');
+		$this->form_validation->set_rules('first_name','First Name','trim|xss_clean|required');
+		$this->form_validation->set_rules('last_name','Last Name','trim|xss_clean|required');
+		$this->form_validation->set_rules('dob_day','DOB Day','trim|xss_clean|integer|required');
+		$this->form_validation->set_rules('dob_year','DOB Year','trim|xss_clean|integer|required');
+		$this->form_validation->set_rules('home_address','Home Address','trim|xss_clean|required');
+		$this->form_validation->set_rules('state','State','required');
+		$this->form_validation->set_rules('city','City','required');
+		$this->form_validation->set_rules('phone','Phone','trim|xss_clean|integer|required');
+		$this->form_validation->set_rules('area_interest','Interest Area','required');
+		$this->form_validation->set_rules('current_educ_level','Current Education','required');
+		$this->form_validation->set_rules('next_educ_level','Next Education Level','required');
+		$this->form_validation->set_rules('academic_exam_score1','Academic Exam Score','trim|xss_clean|required|integer');
+		//$this->form_validation->set_rules('eng_prof_exam_score1','English Proficiency','trim|xss_clean|required');
+			
+			if($this->form_validation->run())
+			{
 			 $data_steptwo = array(
 			 'intake1'             => $this->input->post('begin_year1'),
 			 'intake2'             => $this->input->post('begin_year2'),
@@ -795,7 +826,15 @@ class Auth extends CI_Controller
 			 );
 			 $this->session->set_userdata($data_steptwo);
 			 $this->load->view('auth/step_two');
+			 }
 			 
+			else
+				{
+					$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+					
+					$this->load->view('auth/step_two',$data);
+				}
 			 
 		 }
 		else{
@@ -804,6 +843,19 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer',$data);
 	}
 	
+	function state_list_ajax($cid='0')
+	{
+		
+		$data['region']=$this->adminmodel->fetch_states($cid);
+		$this->load->view('ajaxviews/state_ajax',$data);
+	}
+	
+	function city_list_ajax($sid='0')
+	{
+		
+		$data['region']=$this->adminmodel->fetch_city($sid);
+		$this->load->view('ajaxviews/city_ajax',$data);
+	}
 
 }
 
