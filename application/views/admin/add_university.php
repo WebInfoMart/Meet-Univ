@@ -72,6 +72,42 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 					</li>
 					<li>
 						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Title</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" name="title" size="30" class="text">
+								
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Keyword</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" name="keyword" size="30" class="text">
+								
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Description</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" name="description" size="30" class="text">
+								
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
 						<div class="float_l span3 margin_zero">
 							<label>University Logo</label>
 						</div>

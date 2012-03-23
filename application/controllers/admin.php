@@ -765,7 +765,6 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
 		//$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
 		if ($this->form_validation->run()) {
-		echo $_POST['switch_user_status'];
 		$this->adminmodel->edit_user_data();
 		redirect('admin/manageusers/ups');
 		}

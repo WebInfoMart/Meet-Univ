@@ -261,7 +261,10 @@ class Adminmodel extends CI_Model
 	
 		$cretedby_admin=$this->tank_auth->get_admin_user_id();
 						$data = array(
-			   'univ_name' => $this->input->post('univ_name') ,
+			   'univ_name' => $this->input->post('univ_name'),
+			   'title' => $this->input->post('title'),
+			   'keyword' => $this->input->post('keyword'),
+			   'description' => $this->input->post('description'),
 			   'univ_logo_path' =>$image_data['file_name'],
 			   'address_line1' => $this->input->post('address1'),
 			   'address_line2' => $this->input->post('address2'),
