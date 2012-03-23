@@ -339,7 +339,7 @@
 					</ul>
 					<div id="home" class="box question">
 						<ul>
-							<li class="margin_t1">
+							<li>
 								<div class="float_l">
 									<img src="images/img_boy.png">
 								</div>
