@@ -33,7 +33,7 @@ if ($user) {
  ******************************************/
 	/******* Logout Link of Facebook and Site *******/
 	$params = array( 'next' => $base.'/logout' );
-  $logoutUrl = $facebook->getLogoutUrl();
+  $logoutUrl = $facebook->getLogoutUrl($params);
   
   
   /********************************************* 
@@ -52,7 +52,7 @@ if ($user) {
   'createdby' => 'self',
   'level'     => '1',
   'email'		=> $user_profile['email'],
-  'activated'  => '1',
+  'activated'  => '1', 
   'createdby_user_id'  => '0',
   //'last_ip'	=> $this->ci->input->ip_address(),
   );
@@ -104,7 +104,8 @@ if ($user) {
  ****************************************/
   $loginUrl = $facebook->getLoginUrl(array(
                 'scope'         => 'email,offline_access,publish_stream,user_birthday,user_location,user_work_history,user_about_me,user_hometown',
-                //'redirect_uri'      => $base['url'],
+                //'next' => $base['url']
+				//'redirect_uri'      => $base['url'],
             ));
 	$_SESSION['fb'] = '';
 	   }
@@ -155,7 +156,7 @@ $('#myModal').modal('toggle');});
 </script>
 </head>
 <body>
-<div id="fb-root"></div>
+<div id="fb-root"></div> 
 	<header>
 		<div class="header_bar">	
 			<div class="container">
@@ -165,6 +166,7 @@ $('#myModal').modal('toggle');});
 						<?php
 						if($this->ci->session->userdata('status')){ ?>
 						<?php if($user) { ?>
+						<a href="<?php echo $base?>home"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('username')); ?></div></a>
 						<a href="<?=$logoutUrl ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
 						<?php } else { ?>	
 						<a href="<?php echo $base?>home"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div></a>

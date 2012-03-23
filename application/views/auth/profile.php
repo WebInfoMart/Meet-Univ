@@ -1,7 +1,50 @@
+<?php
+$facebook = new Facebook(array(
+  'appId'  => '358428497523493',
+  'secret' => '497eb1b9decd06c794d89704f293afdd',
+));
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me');
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+if($user)
+{
+$fb_user_country_city = explode(",",$user_profile['location']['name']);
+
+$city_fb_user = trim($fb_user_country_city[0]);
+
+$country_fb_user = trim($fb_user_country_city[1]);
+
+$fetch_country_result = $this->users->fetch_country_id($country_fb_user);
+
+$fetch_city_result = $this->users->fetch_city_id($city_fb_user);
+
+//$country = $fetch_country_result['country']['country_id'];
+
+//$city = $fetch_city_result['city']['city_id'];
+
+$update_fb_profile = array(
+'country_id' => $fetch_country_result,
+'city_id' => $fetch_city_result,
+'full_name' => $user_profile['name'] 
+);
+$update['facebook'] = $this->users->update_facebook_profile($update_fb_profile);
+}
+//print_r($this->session->userdata);
+?>
 <body>
 <!-- Load Pop-up for pic upload -->
 <?php //echo $fb_user = $facebook->getUser(); ?>
-<?php if($profile_pic['user_pic_path'] == '') { ?>
+
+<?php if($profile_pic['curr_educ_level'] == '0' || $profile_pic['prog_parent_id'] == '0' || $profile_pic['country_id'] == '0') { ?>
 <script>
 $(window).load(function(){
     $('#myModal').modal({
@@ -17,7 +60,23 @@ $(window).load(function(){
 					<div class="modal-body model_body_height">
 						<form method="post" action="home" enctype="multipart/form-data">
 							<div>
-								<div class="float_l span15 margin_zero"><img src="<?php echo "$base$img_path";  ?>/profile_icon.png"></div>
+								<div class="float_l span15 margin_zero">
+								<?php
+							if($profile_pic['user_pic_path'] != '')
+							{
+							echo "<img src='".base_url()."uploads/".$profile_pic['user_pic_path']."'/>";
+							}
+							else if($user)
+							{
+							?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+							<?php
+							}
+							else{
+							echo "<img src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
+								
 								<div class="float_l span15 margin_l12"><h4>Upload Your Picture</h4><div class="span15 margin_zero"><input type="file" name="userfile" /><br />
 							</div></div>
 								<div class="clearfix"></div>
@@ -129,7 +188,12 @@ $(window).load(function(){
 							{
 							echo "<img src='".base_url()."uploads/".$profile_pic['user_pic_path']."'/>";
 							}
-							
+							else if($user)
+							{
+							?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+							<?php
+							}
 							else{
 							echo "<img src='".base_url()."images/profile_icon.png'/>";
 							}

@@ -8,9 +8,9 @@
 					<div class="float_l span15 margin_zero sidebar">
 						<div class="margin_t50 single_sidebar">
 							<ul>
-								<li><div class="float_l"><img src="images/account.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Account Information</div><div class="clearfix"></div></li>
+								<li><a href="<?php echo "$base" ?>update_profile"><div class="float_l"><img src="images/account.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Account Information</div></a><div class="clearfix"></div></li>
 								<li class="active_side"><div class="float_l"><img src="images/update.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update Password</div><div class="clearfix"></div></li>
-								<li><div class="float_l"><img src="images/key.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update E-mail</div><div class="clearfix"></div></li>
+								<!--<li><div class="float_l"><img src="images/key.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update E-mail</div><div class="clearfix"></div></li>-->
 							</ul>
 						</div>
 					</div>

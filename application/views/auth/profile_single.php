@@ -1,3 +1,21 @@
+<?php
+$facebook = new Facebook(array(
+  'appId'  => '358428497523493',
+  'secret' => '497eb1b9decd06c794d89704f293afdd',
+));
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me');
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+?>
 <div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -8,8 +26,8 @@
 						<div class="margin_t50 single_sidebar">
 							<ul>
 								<li class="active_side"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/account.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Account Information</div><div class="clearfix"></div></li>
-								<li><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/update.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update Password</div><div class="clearfix"></div></li>
-								<li><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/key.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update E-mail</div><div class="clearfix"></div></li>
+								<li><a href="<?php echo "$base" ?>update_password"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/update.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update Password</div></a><div class="clearfix"></div></li>
+								<!--<li><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/key.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update E-mail</div><div class="clearfix"></div></li>-->
 							</ul>
 						</div>
 					</div>
@@ -31,6 +49,11 @@
 															{
 																echo "<img class='profile_img_width' src='".base_url()."uploads/".$fetch_profile['user_pic_path']."'/>";
 															}
+															else if($user) { ?>
+															<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+															<?php
+															}
+															
 															else{
 															?>
 															<img class="profile_img_width" src="<?php echo "$base$img_path";  ?>/user_model.png">
