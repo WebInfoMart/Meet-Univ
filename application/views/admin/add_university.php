@@ -11,6 +11,45 @@ if($error_univ_name != '') { $class_univ_name = 'focused_error_univ'; } else { $
 if($error_univ_owner != '') { $class_univ_owner = 'focused_error_univ'; } else { $class_univ_owner='text'; }
 if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else { $class_sub_domain='text'; }
 
+//ist model box
+$class_country_model='';
+$class_state_model='';
+$class_city_model='';
+$error_country_model = form_error('country_model');
+$error_state_model = form_error('state_model');
+$error_city_model = form_error('city_model');
+
+if($error_country_model != '') { $class_country_model = 'focused_error_univ'; } else { $class_country_model='text'; }
+
+if($error_state_model != '') { $class_state_model = 'focused_error_univ'; } else { $class_state_model='text'; }
+if($error_city_model != '') { $class_city_model = 'focused_error_univ'; } else { $class_city_model='text'; }
+
+//2nd model box
+$class_country_model1='';
+$class_state_model1='';
+$class_city_model1='';
+$error_country_model1 = form_error('country_model1');
+$error_state_model1 = form_error('state_model1');
+$error_city_model1 = form_error('city_model1');
+
+if($error_country_model1 != '') { $class_country_model1 = 'focused_error_univ'; } else { $class_country_model1='text'; }
+
+if($error_state_model1 != '') { $class_state_model1 = 'focused_error_univ'; } else { $class_state_model1='text'; }
+if($error_city_model1 != '') { $class_city_model1 = 'focused_error_univ'; } else { $class_city_model1='text'; }
+
+//3rd model box
+$class_country_model2='';
+$class_state_model2='';
+$class_city_model2='';
+$error_country_model2 = form_error('country_model2');
+$error_state_model2 = form_error('state_model2');
+$error_city_model2 = form_error('city_model2');
+
+if($error_country_model2 != '') { $class_country_model2 = 'focused_error_univ'; } else { $class_country_model2='text'; }
+
+if($error_state_model2 != '') { $class_state_model2 = 'focused_error_univ'; } else { $class_state_model2='text'; }
+if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else { $class_city_model2='text'; }
+
 ?>
 	<div id="content">
 			
@@ -37,7 +76,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 							<label>University Logo</label>
 						</div>
 						<div class="float_l span3">
-							<div class="float_l"><img src="<?php echo "$base$admin_img";  ?>/thumb1.jpg" class="logo_img"></div>
+							<div class="float_l"><img src="<?php echo "$base$img_path";  ?>/logo.png" class="logo_img"></div>
 							<div class="float_l span1"><input type="file" name="userfile" class="file"></div>
 						</div>
 						<div class="clearfix"></div>
@@ -93,7 +132,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 									<select class="styled span3 margin_zero" name="country" id="country" onchange="fetchstates(this)">
 										<option value="0">Select Country</option>
 							<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
+										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$select_place[0]){?> selected <?php }?> ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -150,7 +189,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					<li>
+					<!--<li>
 						<div>
 						<div class="float_l span3 margin_zero">
 							<label>Switch Status( On for Ban,Off for Unban)</label>
@@ -163,7 +202,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 						</div>
 						<div class="clearfix"></div>
 						</div>
-					</li>
+					</li>-->
 					<li>
 						<div>
 						<div class="float_l span3 margin_zero">
@@ -217,7 +256,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 						</div>
 					</li>
 				</ul>
-				<input type="hidden" id="chkcustomjs" value="0">
+			
 						<input type="submit" class="submit" name="submit" value="UPDATE">
 						
 			</form>
@@ -230,23 +269,23 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 				<div class="modal-profile" id="add-country1">
 					<h2>Add Your Place</h2>
 					<a href="#" title="Close profile window" class="modal-close-profile">
-					<img src="http://www.klevermedia.co.uk/assets/Uploads/close.png" alt="Close profile window"/></a>
+					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" alt="Close profile window"/></a>
 					<form action="" method="post" id="form_country">
 						<p>
 							<label>Country:</label><br>
-							<input type="text" size="30" class="text" name="country_model" value="<?php echo set_value('country_model'); ?>"> 
+							<input type="text" size="30" class="<?php echo $class_country_model; ?>" name="country_model" value="<?php echo set_value('country_model'); ?>"> 
 							<div style="color: red;"> <?php echo form_error('country_model'); ?><?php echo isset($errors['country_model'])?$errors['country_model']:''; ?> </div>
 							
 						</p>
 						<p>
 							<label>State:</label><br>
-							<input type="text" size="30" class="text" name="state_model" value="<?php echo set_value('state_model'); ?>"> 
+							<input type="text" size="30" class="<?php echo $class_state_model; ?>" name="state_model" value="<?php echo set_value('state_model'); ?>"> 
 							<div style="color: red;"> <?php echo form_error('state_model'); ?><?php echo isset($errors['state_model'])?$errors['state_model']:''; ?> </div>
 							
 						</p>
 						<p>
 							<label>City:</label><br>
-							<input type="text" size="30" class="text" name="city_model" value="<?php echo set_value('city_model'); ?>"> 
+							<input type="text" size="30" class="<?php echo $class_city_model; ?>" name="city_model" value="<?php echo set_value('city_model'); ?>"> 
 							<div style="color: red;"> <?php echo form_error('city_model'); ?><?php echo isset($errors['city_model'])?$errors['city_model']:''; ?> </div>
 							
 						</p>
@@ -261,11 +300,11 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 				<div class="modal-profile" id="add-state1">
 					<h2>Add Your Place</h2>
 					<a href="#" title="Close profile window" class="modal-close-profile">
-					<img src="http://www.klevermedia.co.uk/assets/Uploads/close.png" alt="Close profile window"/></a>
+					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" alt="Close profile window"/></a>
 						<form action="" method="post" id="form_state">
 						<p>
 							<label>Country:</label><br>
-						<select class="country_select margin_zero" name="country_model1" id="country" >
+						<select class="<?php echo $class_country_model1; ?> country_select margin_zero" name="country_model1" id="country" >
 										<option value="">Select Country</option>
 							<?php foreach($countries as $country) { ?>
 										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
@@ -276,13 +315,13 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 							
 						<p>
 							<label>State:</label><br>
-							<input type="text" size="30" class="text" name="state_model1" value="<?php echo set_value('state_model1'); ?>"> 
+							<input type="text" size="30" class="<?php echo $class_state_model1; ?>" name="state_model1" value="<?php echo set_value('state_model1'); ?>"> 
 							<div style="color: red;"> <?php echo form_error('state_model1'); ?><?php echo isset($errors['state_model1'])?$errors['state_model1']:''; ?> </div>
 							
 						</p>
 						<p>
 							<label>City:</label><br>
-							<input type="text" size="30" class="text" name="city_model1" value="<?php echo set_value('city_model1'); ?>"> 
+							<input type="text" size="30" class="<?php echo $class_city_model1; ?>" name="city_model1" value="<?php echo set_value('city_model1'); ?>"> 
 							<div style="color: red;"> <?php echo form_error('city_model1'); ?><?php echo isset($errors['city_model1'])?$errors['city_model1']:''; ?> </div>
 							
 						</p>
@@ -297,11 +336,11 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 				<div class="modal-profile" id="add-city1">
 					<h2>Add Your Place</h2>
 					<a href="#" title="Close profile window" class="modal-close-profile">
-					<img src="http://www.klevermedia.co.uk/assets/Uploads/close.png" alt="Close profile window"/></a>
+					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" alt="Close profile window"/></a>
 					<form action="" method="post" id="form_city">
 						<p>
 							<label>Country:</label><br>
-						<select class="country_select margin_zero" name="country_model2"  id="country_model" onchange="fetchstatesmodel(this)">
+						<select class="<?php echo $class_country_model2; ?> country_select margin_zero" name="country_model2"  id="country_model" onchange="fetchstatesmodel(this)">
 										<option value="">Select Country</option>
 							<?php foreach($countries as $country) { ?>
 										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
@@ -312,7 +351,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 						</p>
 						<p>
 							<label>State:</label><br>
-							<select class="country_select margin_zero" name="state_model2"  id="state_model" disabled="disabled">
+							<select class="<?php echo $class_state_model2; ?> country_select margin_zero" name="state_model2"  id="state_model" disabled="disabled">
 							<option value="">Please Select</option>
 							</select>
 							<div style="color: red;"> <?php echo form_error('state_model2'); ?><?php echo isset($errors['state_model2'])?$errors['state_model2']:''; ?> </div>
@@ -320,7 +359,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 						</p>
 						<p>
 							<label>City:</label><br>
-							<input type="text" size="30" class="text" name="city_model2"> 
+							<input type="text" size="30" class="<?php echo $class_city_model2; ?>" name="city_model2"> 
 			<div style="color: red;"> <?php echo form_error('city_model2'); ?><?php echo isset($errors['city_model2'])?$errors['city_model2']:''; ?> </div>
 								
 						</p>
@@ -333,7 +372,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 			</div>
 		</div>
 		
-	</div>
+	</div>	
 	
 <script> 
 $(document).ready(function()
@@ -351,6 +390,13 @@ $(document).ready(function()
  $('#add-city1').fadeTo("slow", .9);
 <?php }?>
 });
+<?php
+if($select_place[0]!='0' && $select_place[1]!='0' && $select_place[2]!='0')
+{?>
+fetchstates(1);
+fetchcities(1);
+<?php }
+?>
 $('#univ_client').click(function(){
 if($('#univ_client').is(':checked'))
 {
@@ -363,12 +409,13 @@ $('#univ_is_client').val(0);
 });
 function fetchstates(a)
 {
-var cid=$("#"+a.id+" option:selected").val();
+var cid=$("#country option:selected").val();
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/state_list_ajax/"+cid,
+   url: "<?php echo $base; ?>admin/state_list_ajax/"+cid+"/<?php echo $select_place[1]; ?>",
    data: '',
    cache: false,
+   async:false,
    success: function(msg)
    {
     $('#state').attr('disabled', false);
@@ -396,7 +443,7 @@ function fetchcities(a)
 var sid=$("#state option:selected").val();
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/city_list_ajax/"+sid,
+   url: "<?php echo $base; ?>admin/city_list_ajax/"+sid+"/<?php echo $select_place[2]; ?>",
    data: '',
    cache: false,
    success: function(msg)

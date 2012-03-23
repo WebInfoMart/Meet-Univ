@@ -316,8 +316,7 @@ $(function () {
 		var onoffSwitch = $(this);
 		var chckBox = $(this).find('input.onoffbtn');
 		var chk		 = $('#chkcustomjs').val();	
-		if(chk!='0')
-		{
+		
 		var chkboxid= chckBox.attr("id");
 		var chkboxprivid=chkboxid.split("_");
 		var privid=chkboxprivid[1].trim();
@@ -334,6 +333,13 @@ $(function () {
 				chckBox.removeAttr('checked');
 				$(this).removeClass('checked');
 				makeprivtotal(privid);
+				if(chk=='0'){
+				if(!$('#switch_status').is(':checked'))
+				{
+					$('#switch_user_status').val(0);
+					
+				}
+				}	
 				});
 				}
 				
@@ -344,8 +350,17 @@ $(function () {
 				chckBox.removeAttr('checked');
 				$(this).removeClass('checked');
 				makeprivtotal(privid);
+				if(chk=='0'){
+				if(!$('#switch_status').is(':checked'))
+				{
+					$('#switch_user_status').val(0);
+					
+				}
+				}	
 			});
 			}
+			
+				
 			}
 			else {
 				
@@ -363,22 +378,33 @@ $(function () {
 			}
 			onoffSwitch.animate({ 'background-position-x': '-40px' }, 100, function() {
 				chckBox.attr('checked', 'checked');
+				
 				$(this).addClass('checked');
-				
-				
+				makeprivtotal(privid);
+				if(chk=='0'){
+				if($('#switch_status').is(':checked'))
+				{
+					$('#switch_user_status').val(1);
+					
+				}
+				}
 			});
-			
+				
+			  
+				
 		}
-		}
-	else
+		
+/*	else
 	{
 	if(chckBox.is(':checked')) {
 			onoffSwitch.animate({ 'background-position-x': '0' }, 100, function() {
 				chckBox.removeAttr('checked');
 				$(this).removeClass('checked');
+				
 				if(!($('#switch_status').is(':checked')))
 				{
-					$('#switch_univ_status').val(0);
+					$('#switch_user_status').val(0);
+					
 				}
 			});
 			
@@ -389,11 +415,11 @@ $(function () {
 				$(this).addClass('checked');
 				if($('#switch_status').is(':checked'))
 				{
-					$('#switch_univ_status').val(1);
+					$('#switch_user_status').val(1);
 				}
 			});
 		}
-	}	
+	}	*/
 		//alert("hello");
 		
 	});
@@ -444,8 +470,8 @@ $(function () {
 			{
 			delete_val=0;
 			}
-			;
 			var total_val=view_val+edit_val+insert_val+delete_val;
+		//	alert(total_val);
 			$('#privilege_total_'+privid).val(total_val);
 	
 	}

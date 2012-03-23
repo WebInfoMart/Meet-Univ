@@ -17,8 +17,9 @@
 		$admin_add_op=array('4','6','8','10');
 		
 foreach ($admin_priv as $admin_priv_res){
-if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
-{?>
+if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
+{
+?>
 
 
 <li><a href="#" class="collapse"> <img src="<?php echo "$base$admin_img" ?>/nav/qna.gif" alt="" /> Q & A</a>

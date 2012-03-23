@@ -301,15 +301,41 @@ class Users extends CI_Model
 	 * @param	string
 	 * @return	object
 	 */
-	function get_user_by_email($email)
+	 
+	 
+	 
+	 
+	/*function get_user_by_email($email) by sumit munjal
 	{
 		$this->db->where('LOWER(email)=', strtolower($email));
 
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
-	}
+	}*/
 
+	function get_user_by_email($login,$user_type)
+	{
+		if($user_type=='admin')
+		{
+		$level='2,3,4,5';
+		}
+		else if($user_type=='student')
+		{
+		$level='1';
+		}
+		$this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1' ");
+		//$this->db->where('LOWER(username)=', strtolower($login));
+		//$this->db->where('LOWER(level)=', '1');
+	//	$this->db->or_where("LOWER(username)='".strtolower($login)."' and level IN($level)");
+		//$this->db->or_where('LOWER(email)=', strtolower($login));
+		
+
+		$query = $this->db->get($this->table_name);
+		if ($query->num_rows() == 1) return $query->row();
+		return NULL;
+	}
+	
 	/**
 	 * Check if username available for registering
 	 *

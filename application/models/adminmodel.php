@@ -86,7 +86,8 @@ class Adminmodel extends CI_Model
 		$data = array(
                'fullname' => $_POST['fullname'],
                'email' => $_POST['email'],
-               'level' =>$_POST['level_user']
+               'level' =>$_POST['level_user'],
+			   'banned'=>$_POST['switch_user_status']
             );
 		$this->db->update('users', $data, array('id' => $_POST['hid_user_id']));
        
@@ -269,7 +270,7 @@ class Adminmodel extends CI_Model
 			   'state_id' => $this->input->post('state'),
 			   'country_id'=>$this->input->post('country'),
 			   'phone_no' => $this->input->post('phone_no'),
-			   'switch_off_univ'=>$this->input->post('switch_univ_status'),
+			  /* 'switch_off_univ'=>$this->input->post('switch_univ_status'),*/
 			   'univ_is_client' =>$this->input->post('univ_is_client'),
 			   'subdomain_name' =>$this->input->post('sub_domain'),
 			   'about_us' => $this->input->post('about_us'),
@@ -277,6 +278,7 @@ class Adminmodel extends CI_Model
 			   'createdby' =>$cretedby_admin
 			);
 			$this->db->insert('university', $data);		
+			redirect('admin/manage_university');
 	}
 		
 	function enterplacelevel1()
@@ -302,6 +304,9 @@ class Adminmodel extends CI_Model
 		'createdby' =>$cretedby_admin
 		);
 		$this->db->insert('city', $data3);
+		$city_id=$this->db->insert_id();
+		$select_place=array($country_id,$state_id,$city_id);
+		return $select_place;
 		
 	}
 	
@@ -323,6 +328,9 @@ class Adminmodel extends CI_Model
 		'createdby' =>$cretedby_admin
 		);
 		$this->db->insert('city', $data3);
+		$city_id=$this->db->insert_id();
+		$select_place=array($country_id,$state_id,$city_id);
+		return $select_place;
 	}
 	function enterplacelevel3()
 	{
@@ -336,6 +344,9 @@ class Adminmodel extends CI_Model
 		'createdby' =>$cretedby_admin
 		);
 		$this->db->insert('city', $data3);
+		$city_id=$this->db->insert_id();
+		$select_place=array($country_id,$state_id,$city_id);
+		return $select_place; 
 	}	
 		
 	function state_chk_in_country($country,$state)
@@ -343,9 +354,18 @@ class Adminmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('state');
 		$this->db->where(array('statename'=>$state,'country_id'=>$country));
+		$query=$this->db->get();
 		return $query->num_rows();
 	}
-		
+	
+    function city_chk_in_state($state,$city)
+	{
+		$this->db->select('*');
+		$this->db->from('city');
+		$this->db->where(array('cityname'=>$city,'state_id'=>$state));
+		$query=$this->db->get();
+		return $query->num_rows();
+	}
 		
 		
 }

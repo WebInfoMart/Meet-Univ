@@ -101,7 +101,7 @@ $z=Array();
 	<script>
 function delete_confirm(adminbase,gid)
 {
-var r=confirm("Are U sure u want to delete this user?");
+var r=confirm("Are U sure u want to delete this image?");
 if (r==true)
   {
   window.location.href=adminbase+'/manage_home_gallery/'+gid;
