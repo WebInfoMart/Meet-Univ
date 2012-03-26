@@ -97,7 +97,7 @@ class Users extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->gallery_path,
-			'max_size' => 2000
+			'max_size' => 2000 
 		);
 		
 		$this->load->library('upload', $config);
@@ -124,10 +124,22 @@ class Users extends CI_Model
 		{
 		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
 		}
+		if($this->input->post('area_interest') != '')
+		{
 		 $this->db->query("update user_profiles set prog_parent_id = '".$this->input->post('area_interest')."' where user_id='".$data['user_id']."'");
+		}
+		if($this->input->post('educ_level') != '')
+		{
 		 $this->db->query("update user_profiles set curr_educ_level = '".$this->input->post('educ_level')."' where user_id='".$data['user_id']."'");
+		}
+		if($this->input->post('countries') != '')
+		{
 		 $this->db->query("update user_profiles set country_id = '".$this->input->post('countries')."' where user_id='".$data['user_id']."'");
+		}
+		if($this->input->post('sex') != '')
+		{
 		 $this->db->query("update user_profiles set gender = '".$this->input->post('sex')."' where user_id='".$data['user_id']."'");
+		}
 		//echo $this->session->userdata('user_id');
 		redirect('home');
 	}
@@ -201,12 +213,15 @@ class Users extends CI_Model
 	 }
 	 
 	 /* function for get profile pic */
-	 function fetch_profile_pic($logged_user)
+	 function fetch_profile_data($logged_user) 
 	 {
-		$this->db->select('user_pic_path');
-		$this->db->where('user_id',$logged_user);
-		$query = $this->db->get($this->profile_table_name);
+	 
+		$query = $this->db->get_where($this->profile_table_name,array('user_id'=>$logged_user));
 		return $query->row_array();
+		// $this->db->select('*');
+		// $this->db->where('user_id',$logged_user);
+		// $query = $this->db->get($this->profile_table_name);
+		// return $query->result_array();
 	 }
 	 /* End Here */
 	 
@@ -301,14 +316,36 @@ class Users extends CI_Model
 	 * @param	string
 	 * @return	object
 	 */
-	function get_user_by_email($email)
-	{
-		$this->db->where('LOWER(email)=', strtolower($email));
+	/*function get_user_by_email($email) by sumit munjal
+ {
+  $this->db->where('LOWER(email)=', strtolower($email));
 
-		$query = $this->db->get($this->table_name);
-		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
-	}
+  $query = $this->db->get($this->table_name);
+  if ($query->num_rows() == 1) return $query->row();
+  return NULL;
+ }*/
+
+ function get_user_by_email($login,$user_type)
+ {
+  if($user_type=='admin')
+  {
+  $level='2,3,4,5';
+  }
+  else if($user_type=='student')
+  {
+  $level='1';
+  }
+  $this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1' ");
+  //$this->db->where('LOWER(username)=', strtolower($login));
+  //$this->db->where('LOWER(level)=', '1');
+ // $this->db->or_where("LOWER(username)='".strtolower($login)."' and level IN($level)");
+  //$this->db->or_where('LOWER(email)=', strtolower($login));
+  
+
+  $query = $this->db->get($this->table_name);
+  if ($query->num_rows() == 1) return $query->row();
+  return NULL;
+ }
 
 	/**
 	 * Check if username available for registering
@@ -660,6 +697,94 @@ class Users extends CI_Model
 			// );
 		
 	// }
+	//function for fetch country id for fb
+	function fetch_country_id($country_fb_user)
+	{
+  
+		$this->db->select('country_id');
+		$this->db->where('country_name',$country_fb_user);
+		$query = $this->db->get('country');
+		//print_r($query);
+		if($query->num_rows() > 0)
+		{
+		$row = $query->row_array(); 
+		return $row['country_id'];
+		}
+		else{
+		return 0;
+		}
+	}
+	//function for fetch city id for fb
+	function fetch_city_id($city_fb_user)
+	{
+  
+		$this->db->select('city_id');
+		$this->db->where('cityname',$city_fb_user);
+		$query = $this->db->get('city');
+		//print_r($query);
+		if($query->num_rows() > 0)
+		{
+		$row = $query->row_array(); 
+		return $row['city_id'];
+		}
+		else{
+		return 0;
+		}
+	}
+	
+	function update_facebook_profile($update_fb_profile)
+	{
+		$logged_user_id = $this->tank_auth->get_user_id();
+		
+		$this->db->where('user_id',$logged_user_id);
+		$this->db->update('user_profiles',$update_fb_profile); 
+	}
+	/* Code For Reset Password by Subhanarayan */
+	function check_email_exists_lost_pass()
+	{
+		$post_current_email = $this->input->post('email');
+		$this->db->select('id,email');
+		$this->db->where('email',$post_current_email);
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else{
+		return 0;
+		}
+		// $this->db->where('email_address', $str);
+	  // $found = $this->db->get('users')->num_results(); // this returns the number of rows having the same address.
+	  // if ($found!=0)
+		 // return 0;  // more than 0 rows found. the callback fails.
+	  // else
+		// return true;   // 0 rows found. callback is ok.
+	
+	}
+	function set_key_forgot_password($set_key,$user_id)
+	{
+		$this->db->where('id', $user_id);
+		$this->db->update($this->table_name, $set_key);
+	}
+	
+	/* check if lost password link is valid */
+	function update_and_deactivate_psw_request($set_values,$set_update_values)
+	{
+		$clean_key = array(
+		'new_password_key' => 'NULL'
+		);
+		$this->db->where($set_values);
+		$this->db->update($this->table_name, $set_update_values);
+		if($this->db->affected_rows() > 0)
+		{
+			$this->db->where('id',$set_values['id']);
+		$this->db->update($this->table_name, $clean_key);
+			return 1;
+		}
+		else{
+		return 0;
+		}
+	}
 }
 
 /* End of file users.php */

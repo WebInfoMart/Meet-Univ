@@ -10,10 +10,15 @@ class Auth extends CI_Controller
 		// $data['css'] = $this->config->item('img_path');
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
+		//$this->ci->load->config('tank_auth', TRUE);
+		//$this->ci->load->library('session');
 		$this->load->library('security');
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
+		$this->load->helper('string');
+		$this->load->library('email');
+		$this->ci =& get_instance();
 		$this->load->library('fbConn/facebook');
 	}
 
@@ -856,7 +861,136 @@ class Auth extends CI_Controller
 		$data['region']=$this->adminmodel->fetch_city($sid);
 		$this->load->view('ajaxviews/city_ajax',$data);
 	}
+	/* Reset Email By User- Code by Subhanarayan */
+	function forgot_password()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		
+		if($this->input->post('reset_pass'))
+		{
+			$data['msg'] = 0;
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email'); 
+			if($this->form_validation->run())
+			{
+				$data['email_check'] = $this->users->check_email_exists_lost_pass();
+				//print_r($data['email_check']);
+				//print_r($data);
+				if($data['email_check'] == 0)
+				{
+					$data['errors']['email'] = 'Email does not Exist';
+					$data['msg'] = 1;
+					$this->load->view('auth/login',$data);
+				}
+				else{
+				$data['errors']['email'] = 'Email Exist';
+				$key = md5(rand().microtime());
+				$user_id = $data['email_check']['id'];
+				$email = $data['email_check']['email'];
+				$set_key = array(
+				'new_password_key'=>$key,
+				'new_password_requested'=>date('Y-m-d H:i:s'),
+				'psw_recover_flag'=>'1',
+				);
+				$this->users->set_key_forgot_password($set_key,$user_id);
+				$this->email->set_newline("\r\n");
 
+            $this->email->from('WorkForceTrack.in', 'Subham');
+            $this->email->to($email);
+            $this->email->subject('Lost Password');
+            $key = $key;
+            $message = "Please click this url to change your password ". base_url()."auth/change_user_password/".$key.'/'.$user_id ;
+            $message .="<br/>Thank you very much";
+            $this->email->message($message);
+			print_r($message);
+			if($this->email->send())
+                {
+                    echo 'Please check your email to reset password.';
+                }
+
+                else
+                {
+                    show_error($this->email->print_debugger());
+                }
+					$data['msg'] = 1;
+					$this->load->view('auth/login',$data);
+				}
+			}
+			else{
+				$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+					$data['msg'] = 1;
+					$this->load->view('auth/login',$data);
+			}
+		}
+		else{
+		$this->load->view('auth/login',$data);
+		}
+		$this->load->view('auth/footer',$data);
+	}
+	/* Check if recovery password link is valid */
+	
+	public function change_user_password($key='',$id='')
+	{
+		$this->ci->load->library('session');
+		if ($this->tank_auth->is_logged_in()) {
+			redirect('/home');
+		} else {
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		
+		echo $key; echo $id;
+		$set_values = array(
+		'id' => trim($id),
+		'new_password_key' => trim($key)
+		);
+		if($this->input->post('update_for_lost_psw'))
+		{
+			$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+			$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
+			
+			if($this->form_validation->run())
+			{
+				$hasher = new PasswordHash(
+				$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+				$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+				$hashed_password = $hasher->HashPassword($this->input->post('new_password'));
+				
+				$set_update_values = array(
+				'password' => $hashed_password,
+				'psw_recover_flag' => 0
+				);
+				
+				$data['link_valid'] = $this->users->update_and_deactivate_psw_request($set_values,$set_update_values);
+				if($data['link_valid'] == 1)
+				{
+				$this->ci->session->set_userdata(array(
+						 'user_id'	=> trim($id),
+						 'username'	=> '',
+						 'status'	=> STATUS_ACTIVATED
+						 ));
+				redirect('/home');
+				echo 'YOUR PASSWORD HAS BEEN UPDATED';
+				}
+				else{
+				echo 'SORRY THERE WAS A ERROR';
+				}
+			}
+			else{
+				$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+					$this->load->view('auth/change_lost_password',$data);
+			}
+			
+		}
+		else{
+		$this->load->view('auth/change_lost_password',$data);
+		}
+		
+		//echo $key;
+		$this->load->view('auth/footer',$data);
+	}
+	}
 }
 
 /* End of file auth.php */

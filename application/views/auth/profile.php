@@ -9,7 +9,7 @@ if ($user) {
 //$logoutUrl2 = $this->tank_auth->logout();
   try {
     // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $facebook->api('/me');
+    $user_profile = $facebook->api('/me'); 
   } catch (FacebookApiException $e) {
     error_log($e);
     $user = null;

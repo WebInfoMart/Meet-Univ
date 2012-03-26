@@ -3,7 +3,7 @@
 /****************************************** 
  *  Load Model and session library and    *
  *  Object                                *
- ******************************************/
+ ******************************************/ 
   
   $this->load->model('users');
   $this->ci =& get_instance();
@@ -152,6 +152,11 @@ if ($user) {
 $(document).ready(function(){
  $('#pulse').click(function(){
 $('#myModal').modal('toggle');});
+ });
+ 
+ $(document).ready(function(){
+ $('#pulse').click(function(){
+$('#forget_model').modal('toggle');});
  });
 </script>
 </head>

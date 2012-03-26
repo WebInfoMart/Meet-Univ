@@ -15,7 +15,7 @@ if ($user) {
     $user = null;
   }
 }
-?>
+?> 
 <div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
