@@ -68,7 +68,7 @@ class Auth extends CI_Controller
 			$logged_user = $data['user_id'];
 			$this->load->model('users');
 			$data['query'] = $this->users->fetch_all_data($logged_user);
-			$data['profile_pic'] = $this->users->fetch_profile_pic($logged_user);
+			$data['profile_pic'] = $this->users->fetch_profile_data($logged_user); 
 		//	print_r($data['profile_pic']);
 			$data['educ_level'] = $this->users->fetch_educ_level();
 			$data['country'] = $this->users->fetch_country();
@@ -374,7 +374,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function reset_password()
+	function reset_password() 
 	{
 		$user_id		= $this->uri->segment(3);
 		$new_pass_key	= $this->uri->segment(4);
