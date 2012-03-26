@@ -7,9 +7,15 @@
 					<div class="float_l span3 margin_zero sidebar">
 						<div class="margin_t50 single_sidebar">
 							<ul>
+<<<<<<< HEAD
 								<li><div class="float_l"><img src="images/account.png" class="margin_l"></div><div class="float_l margin_l">Account Information</div><div class="clearfix"></div></li>
 								<li class="active_side"><div class="float_l"><img src="images/update.png" class="margin_l"></div><div class="float_l margin_l">Update Password</div><div class="clearfix"></div></li>
 								<li><div class="float_l"><img src="images/key.png" class="margin_l"></div><div class="float_l margin_l">Update E-mail</div><div class="clearfix"></div></li>
+=======
+								<li><a href="<?php echo "$base" ?>update_profile"><div class="float_l"><img src="images/account.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Account Information</div></a><div class="clearfix"></div></li>
+								<li class="active_side"><div class="float_l"><img src="images/update.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update Password</div><div class="clearfix"></div></li>
+								<!--<li><div class="float_l"><img src="images/key.png" class="margin_l21"></div><div class="float_r span79 margin_zero">Update E-mail</div><div class="clearfix"></div></li>-->
+>>>>>>> 8eacc04f9ef4b31343a356983cf16f12c0355f69
 							</ul>
 						</div>
 					</div>

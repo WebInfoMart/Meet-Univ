@@ -35,6 +35,18 @@ foreach($user_detail_edit as $user_detail){
 						?>"></label>
 					</div>
 						
+						<div>
+							<label>Switch Status( On for Ban,Off for Unban)</label>
+							<div class="onoffswitch" <?php if($user_detail->banned){?> style="background-position:-40px;"<?php  }?>>
+								<span class="onoff_box checked" <?php if($user_detail->banned){?> style="background-position:-40px;"<?php } else {?> style="background-position-x: 0px; " <?php } ?>>
+								
+								<input type="checkbox" <?php  if($user_detail->banned){?> checked }<?php }?> id="switch_status"  class="onoffbtn"></span>
+								<input type="hidden" name="switch_user_status" id="switch_user_status" value="0">
+									<input type="hidden" id="chkcustomjs" value="0"><!-- for custom js -->
+							</div>
+							
+						</div>
+						
 						
 						
 						
@@ -67,6 +79,7 @@ foreach($user_detail_edit as $user_detail){
 						// print_r($current_user_priv);
 						//echo $user_level;
 						foreach ($results as $privilage){
+						
 							if(($user_level==4 && $privilage['privilege_type_id']!=8 && $privilage['privilege_type_id']!=9) || ($user_level==2 && ($privilage['privilege_type_id']==8 || $privilage['privilege_type_id']==9)) || ($user_level==3 && ($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==11)))
 							{
 							$res=$this->adminmodel->get_basic_operation_level($user_id,$privilage['privilege_type_id']);
@@ -77,7 +90,7 @@ foreach($user_detail_edit as $user_detail){
 						
 							<li>
 							<div class="span3 margin_t">
-								<label><h4><?php echo $privilage['privilege_name'];?></h4></label>
+								<label><h4><?php echo ucwords($privilage['privilege_name']);?></h4></label>
 								<input type="hidden" name="privilege_type_id[]" value="<?php echo $privilage['privilege_type_id']; ?>">
 								<input type="hidden" value="<?php echo $res_level['privilege_level']; ?>" name="privilege_total[]" id="privilege_total_<?php echo $privilage['privilege_type_id']; ?>">
 							</div>

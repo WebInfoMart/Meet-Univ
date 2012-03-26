@@ -6,13 +6,13 @@
 	'maxlength'	=> 80,
 	'size'	=> 30,
 );*/
-if ($login_by_username AND $login_by_email) {
-	$login_label = 'Email or login';
-} else if ($login_by_username) {
-	$login_label = 'Login';
-} else {
-	$login_label = 'Email';
-}
+// if ($login_by_username AND $login_by_email) {
+	// $login_label = 'Email or login';
+// } else if ($login_by_username) {
+	// $login_label = 'Login';
+// } else {
+	// $login_label = 'Email';
+// }
 /*$password = array(
 	'name'	=> 'password',
 	'id'	=> 'password',
@@ -40,6 +40,49 @@ if($error_login != '') { $class_login = 'focused_error'; } else { $class_login='
 
 if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass='input-xlarge'; }
 ?>
+
+<script>
+//var errors = <?=$error ?>
+$(document).ready(function(){
+//alert(errors);
+//if(errors != '')
+//{
+<?php if($msg == 1) { ?>
+ $('#forget_model').modal('toggle');
+ <?php } ?>
+//}
+});
+</script>
+
+<div id="forget_model" class="model_back modal hide fade" style="display: none; ">
+					<div class="modal-header no_border forget_heading">
+						<a class="close" data-dismiss="modal">x</a>
+						<h3>Forget Password</h3>
+					</div>
+					<div class="forget_back">
+					<div class="modal-body forget_height">
+						<form class="form-horizontal" action="forgot_password" method="post">
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label" for="prependedInput">Enter Your Email</label>
+									<div class="controls">
+										<div class="input-prepend">
+											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock1.png" class="email_forget"></span><input type="text" class="span3" name="email" size="16" >
+											<span style="color:red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
+										</div>
+									</div>
+								</div>
+								<div class="controls">
+									<input type="submit" class="btn btn-primary" name="reset_pass">
+								</div>
+							 </fieldset>
+						</form>
+					</div>
+					</div>
+				</div>
+
+
+
 
 	<div>
 		<div class="body_bar"></div>
@@ -71,7 +114,8 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 									<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
 								</div>
 							</div>
-							<small><a href="#">Forgot your password?</a></small>
+							<small><a data-toggle="modal" style="cursor:pointer;" id="pulse">Forgot your password?</a></small>
+							
 							<input type="hidden" name="user_type" id="student" value="student">
 						</div>
 						<button class="btn btn-primary" href="#">Login</button>

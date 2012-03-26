@@ -44,7 +44,7 @@
 						
 							<li>
 							<div class="span3 margin_t">
-								<label><h4><?php echo $privilage['privilege_name'];?></h4></label>
+								<label><h4><?php echo ucwords($privilage['privilege_name']);?></h4></label>
 								<input type="hidden" name="privilege_type_id[]" value="<?php echo $privilage['privilege_type_id']; ?>">
 								<input type="hidden" value="0" name="privilege_total[]" id="privilege_total_<?php echo $privilage['privilege_type_id']; ?>">
 							</div>

@@ -209,7 +209,6 @@ z-index: 1000;
 float: left;
 display: none;
 min-width: 160px;
-_width: 160px;
 padding: 4px 0;
 margin: 0;
 list-style: none;
@@ -224,6 +223,7 @@ border-radius: 0 0 5px 5px;
 -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+-webkit-background-clip: padding-box;
 -webkit-background-clip: padding-box;
 -moz-background-clip: padding;
 background-clip: padding-box;
@@ -401,9 +401,7 @@ a.menu:after, .dropdown-toggle:after {
 .menu-dropdown, .dropdown-menu {
 	background-color: #ffffff;
 	float: left;
-	display: none;
 	position: absolute;
-	top:22px;
 	z-index: 900;
 	min-width: 160px;
 	/*max-width: 220px;*/
@@ -416,15 +414,17 @@ a.menu:after, .dropdown-toggle:after {
 	border-color: rgba(0, 0, 0, 0.2);
 	border-style: solid;
 	border-width: 0 1px 1px;
-	-webkit-border-radius: 0 0 6px 6px;
-	-moz-border-radius: 0 0 6px 6px;
-	border-radius: 0 0 6px 6px;
 	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding-box;
 	background-clip: padding-box;
+	display: none;
+margin-top: 1px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
 }
 .menu-dropdown li, .dropdown-menu li {
 	float: none;
@@ -457,8 +457,11 @@ white-space: nowrap;
 }
 .open .menu-dropdown, .dropdown.open .menu-dropdown, .open .dropdown-menu, .dropdown.open .dropdown-menu {
 	display: block;
+margin-top: 1px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
 }
-
 
 .tab-content > .tab-pane, .pill-content > .pill-pane, .tab-content > div, .pill-content > div {
 	display: none;
@@ -474,5 +477,4 @@ border-top-left-radius: 4px;
 -moz-border-radius-bottomleft: 4px;
 border-bottom-left-radius: 4px;}
 .arrow_but{padding-bottom: 7px!important;;margin-left: -5px!important;margin-top: -2px;}
-.arrow_but:hover,.arrow_but:active,.arrow_but:visited{background-color: blue!important;}
-
+.arrow_but:hover,.arrow_but:active,.arrow_but:visited{background-color: #006DCC!important;}

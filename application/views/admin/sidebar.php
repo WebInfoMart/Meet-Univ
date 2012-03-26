@@ -13,18 +13,19 @@
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/calendar.png" alt="" /> Calendar</a></li>
 		-->	
 		<?php 
-		if($admin_user_level=='5' || $admin_user_level=='4') {
+		if($admin_user_level=='5' || $admin_user_level=='4' || $admin_user_level=='3') {
 		$admin_add_op=array('4','6','8','10');
 		
 foreach ($admin_priv as $admin_priv_res){
-if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
-{?>
+if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
+{
+?>
 
 
 <li><a href="#" class="collapse"> <img src="<?php echo "$base$admin_img" ?>/nav/qna.gif" alt="" /> Q & A</a>
 		<ul><?php
-		if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
-			{
+		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+		{?>
 			?>
 		<li><?php echo anchor("$base".'admin/addevents', 'Add Que'); ?></li> <?php } ?>
 			<li><?php echo anchor("$base".'admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
@@ -90,7 +91,7 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 		<?php
 		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 		{?>
-		<li><?php echo anchor("$base".'admin/home_gallery', 'Add Home Gallery'); ?></li>
+		<li><?php echo anchor("$base".'admin/home_gallery', 'Add Images'); ?></li>
 		<?php } ?>
 		<li><?php echo anchor("$base".'admin/manage_home_gallery', 'Manage Home Gallery'); ?></li>
 		</ul>
@@ -98,15 +99,22 @@ if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level
 				<li><a href="#" class="collapse">Univ Gallery</a></li>
 		</ul>
 		</li>
-		<?php }
-		
-		}
-		?>
+		<?php } 
+		if($admin_priv_res['privilege_type_id']=='5' && $admin_priv_res['privilege_level']!='0')
+			{
+			?>
+			
 		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/univ.png" alt="" />  Manage University</a>
-		<ul>
+		<ul><?php
+		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+		{?>
 		<li><?php echo anchor("$base".'admin/create_university', 'Create University'); ?></li>
+		<?php } ?>
 		<li><a href="" >Manage University</a></li>
 		</ul>
+		
+		
+		<?php }} ?>
 		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Support</a></li>
 			

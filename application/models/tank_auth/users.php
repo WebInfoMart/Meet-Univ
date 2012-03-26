@@ -97,8 +97,11 @@ class Users extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->gallery_path,
+<<<<<<< HEAD
 			$config['max_width']  = '160',
 			$config['max_height']  = '212',
+=======
+>>>>>>> 8eacc04f9ef4b31343a356983cf16f12c0355f69
 			'max_size' => 2000 
 		);
 		
@@ -729,7 +732,11 @@ class Users extends CI_Model
 	{
   
 		$this->db->select('city_id');
+<<<<<<< HEAD
 		$this->db->where('cityname',$city_fb_user); 
+=======
+		$this->db->where('cityname',$city_fb_user);
+>>>>>>> 8eacc04f9ef4b31343a356983cf16f12c0355f69
 		$query = $this->db->get('city');
 		//print_r($query);
 		if($query->num_rows() > 0)
@@ -749,6 +756,55 @@ class Users extends CI_Model
 		$this->db->where('user_id',$logged_user_id);
 		$this->db->update('user_profiles',$update_fb_profile); 
 	}
+<<<<<<< HEAD
+=======
+	/* Code For Reset Password by Subhanarayan */
+	function check_email_exists_lost_pass()
+	{
+		$post_current_email = $this->input->post('email');
+		$this->db->select('id,email');
+		$this->db->where('email',$post_current_email);
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else{
+		return 0;
+		}
+		// $this->db->where('email_address', $str);
+	  // $found = $this->db->get('users')->num_results(); // this returns the number of rows having the same address.
+	  // if ($found!=0)
+		 // return 0;  // more than 0 rows found. the callback fails.
+	  // else
+		// return true;   // 0 rows found. callback is ok.
+	
+	}
+	function set_key_forgot_password($set_key,$user_id)
+	{
+		$this->db->where('id', $user_id);
+		$this->db->update($this->table_name, $set_key);
+	}
+	
+	/* check if lost password link is valid */
+	function update_and_deactivate_psw_request($set_values,$set_update_values)
+	{
+		$clean_key = array(
+		'new_password_key' => 'NULL'
+		);
+		$this->db->where($set_values);
+		$this->db->update($this->table_name, $set_update_values);
+		if($this->db->affected_rows() > 0)
+		{
+			$this->db->where('id',$set_values['id']);
+		$this->db->update($this->table_name, $clean_key);
+			return 1;
+		}
+		else{
+		return 0;
+		}
+	}
+>>>>>>> 8eacc04f9ef4b31343a356983cf16f12c0355f69
 }
 
 /* End of file users.php */
