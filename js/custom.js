@@ -350,13 +350,13 @@ $(function () {
 				chckBox.removeAttr('checked');
 				$(this).removeClass('checked');
 				makeprivtotal(privid);
-				if(chk=='0'){
+			/*	if(chk=='0'){
 				if(!$('#switch_status').is(':checked'))
 				{
 					$('#switch_user_status').val(0);
 					
 				}
-				}	
+				}	*/
 			});
 			}
 			
@@ -381,13 +381,13 @@ $(function () {
 				
 				$(this).addClass('checked');
 				makeprivtotal(privid);
-				if(chk=='0'){
+				/*if(chk=='0'){
 				if($('#switch_status').is(':checked'))
 				{
 					$('#switch_user_status').val(1);
 					
 				}
-				}
+				}*/
 			});
 				
 			  

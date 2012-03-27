@@ -38,7 +38,7 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tipsy.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.MultiFile.min.js"></script>
-
+	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 </head>
 
 
@@ -49,7 +49,7 @@
 
 	<div id="header">
 	
-		<a href="#"><img src="<?php echo "$base$img_path" ?>/logo.png" alt="" height="50px;" width="180px" /></a>
+		<a href="<?php echo "$base$admin"; ?>"><img src="<?php echo "$base$img_path" ?>/logo.png" alt="" height="50px;" width="180px" /></a>
 		
 		<form action="" method="post" class="searchform">
 			<input type="text" class="text" value="Search..." />

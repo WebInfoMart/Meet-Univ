@@ -33,16 +33,16 @@ $z=Array();
 								<label><h3><center>S.No.</center></h3></label>
 							</div>
 							<div class="span1">
-								<label><h3><center>IMAGE</center></h3></label>
+								<label><h3><center>Image</center></h3></label>
 							</div>
 							<div class="span2">
 								<label><h3><center>Title</center></h3></label>
 							</div>
 							<div class="span3">
-								<label><h3><center>CAPTION</center></h3></label>
+								<label><h3><center>Caption</center></h3></label>
 							</div>
 							<div class="span2">
-								<label><h3><center>LINK TO</center></h3></label>
+								<label><h3><center>Link To</center></h3></label>
 							</div>
 							<div class="span0">
 								<label><h3><center></center></h3></label>
@@ -64,7 +64,7 @@ $z=Array();
 								<img src="<?php echo "$base";?>/uploads/home_gallery/<?php echo $gallery_info['image_path'];?>" align="middle" class="img_width">
 							</div>
 							<div class="span2">
-								<label><input type="textbox"  name="title[]"  value="<?php echo $gallery_info['title']; ?>" <?php if($edit!='1') {?> readonly="readonly" <?php } ?>  ></label>
+								<label><input type="textbox"  name="title[]" class="text_box"  value="<?php echo $gallery_info['title']; ?>" <?php if($edit!='1') {?> readonly="readonly" <?php } ?>  ></label>
 							</div>
 							<div class="span3">
 								<label><textarea rows="3" name="image_caption[]" <?php if($edit!='1') {?> readonly="readonly" <?php } ?>  cols="32"><?php echo $gallery_info['image_caption']; ?></textarea></label>
@@ -75,7 +75,7 @@ $z=Array();
 							<?php if($delete=='1')
 							{?>
 							<div class="span0">
-								<div class="center"><img src="<?php echo "$base$img_path";  ?>/admin/close.png" align="middle" onclick="delete_confirm('<?php echo "$base$admin";?>',<?php echo $gallery_info['id']; ?>)"></div>
+								<div class="center"><a href="#"><img src="<?php echo "$base$img_path";  ?>/admin/close.png" align="middle" onclick="delete_confirm('<?php echo "$base$admin";?>',<?php echo $gallery_info['id']; ?>)"></a></div>
 							</div>
 							<?php } ?>
 							<div class="clearfix"></div>
@@ -85,7 +85,7 @@ $z=Array();
 					<?php } ?>
 				</ul>
 					<?php	if($edit=='1') {?>
-					<input type="submit" class="submit" name="update" value="update">
+					<input type="submit" class="submit" name="update" value="Update">
 					<?php } ?>
 						
 				</form>

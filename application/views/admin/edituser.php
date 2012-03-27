@@ -1,4 +1,8 @@
 <?php
+$class_full_name='';
+$error_full_name = form_error('fullname');
+if($error_full_name != '') { $class_full_name = 'focused_error_univ'; } else { $class_full_name='text'; }
+
 foreach($user_detail_edit as $user_detail){
 ?>
 
@@ -10,7 +14,7 @@ foreach($user_detail_edit as $user_detail){
 				<div class="span6">
 				<input type="hidden" name="hid_user_id" value="<?php echo $user_detail->id; ?>" >
 						<div>
-							<label>FULLNAME:<input type="text" size="30" class="text blue float_r" value="<?php echo $user_detail->fullname; ?>" name="fullname"> 
+							<label>FULLNAME:<input type="text" size="30" class="<?php echo $class_full_name; ?> blue float_r" value="<?php echo $user_detail->fullname; ?>" name="fullname"> 
 								<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span></label>
 							
 						</div> 
@@ -35,18 +39,18 @@ foreach($user_detail_edit as $user_detail){
 						?>"></label>
 					</div>
 						
-						<div>
+					<!--	<div>
 							<label>Switch Status( On for Ban,Off for Unban)</label>
-							<div class="onoffswitch" <?php if($user_detail->banned){?> style="background-position:-40px;"<?php  }?>>
-								<span class="onoff_box checked" <?php if($user_detail->banned){?> style="background-position:-40px;"<?php } else {?> style="background-position-x: 0px; " <?php } ?>>
+							<div class="onoffswitch" <?php //if($user_detail->banned){?> style="background-position:-40px;"<?php//  }?>>
+								<span class="onoff_box checked" <?php// if($user_detail->banned){?> style="background-position:-40px;"<?php //} else {?> style="background-position-x: 0px; " <?php //} ?>>
 								
-								<input type="checkbox" <?php  if($user_detail->banned){?> checked }<?php }?> id="switch_status"  class="onoffbtn"></span>
+								<input type="checkbox" <?php // if($user_detail->banned){?> checked }<?php //}?> id="switch_status"  class="onoffbtn"></span>
 								<input type="hidden" name="switch_user_status" id="switch_user_status" value="0">
-									<input type="hidden" id="chkcustomjs" value="0"><!-- for custom js -->
+									<input type="hidden" id="chkcustomjs" value="0">
 							</div>
 							
 						</div>
-						
+					-->	
 						
 						
 						

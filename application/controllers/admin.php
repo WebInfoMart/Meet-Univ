@@ -152,9 +152,6 @@ class Admin extends CI_Controller
 			redirect('admin/adminlogin/');
 		}
 	else {
-
-			
-	
 	$data = $this->path->all_path();
 	$data['user_id']	= $this->tank_auth->get_admin_user_id();
 	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
@@ -695,9 +692,8 @@ class Admin extends CI_Controller
 	}
 	
 	//function for show users
-	function manageusers($ups='')
+	function manageusers($ups='',$paging='')
 	{
-		
 		$data = $this->path->all_path();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
@@ -705,7 +701,7 @@ class Admin extends CI_Controller
 		
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
-		$data['user_detail']= $this->adminmodel->fetch_user_data();
+		$data['user_detail']= $this->adminmodel->fetch_user_data($paging);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==1 && $userdata['admin_priv']['privilege_level']!=0)
@@ -723,6 +719,16 @@ class Admin extends CI_Controller
 		else if($ups=='ucs')
 		{
 		$data['msg']='User Created Successfully';
+		$this->load->view('admin/userupdated',$data);
+		}
+		else if($ups=='ban')
+		{
+		$data['msg']='Selected User Ban Successfully';
+		$this->load->view('admin/userupdated',$data);
+		}
+		else if($ups=='unban')
+		{
+		$data['msg']='Selected User Unban Successfully';
 		$this->load->view('admin/userupdated',$data);
 		}
 		$this->load->view('admin/manageuser',$data);
@@ -810,7 +816,7 @@ class Admin extends CI_Controller
 		$this->load->view('admin/userupdated',$data);
 	}
 	
-	function deleteuser($user_level,$user_id)
+	function deleteuser()
 	{
 		$data = $this->path->all_path();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
@@ -821,7 +827,7 @@ class Admin extends CI_Controller
 		$delete_user_priv=array('5','7','8','10');
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv) && $user_id!=$data['user_id'] && $user_level!='5')
+		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv))
 		{
 		$this->load->view('admin/userdeleted', $data);
 		$flag=1;
@@ -834,11 +840,43 @@ class Admin extends CI_Controller
 		}
 		else if($flag==1)
 		{
-		$this->adminmodel->deleteuser($user_level,$user_id);
+		echo $cc=$this->adminmodel->deleteuser();
 		redirect('admin/manageusers/uds');
 		}
 		
 	}
+	
+	function delete_single_user($id='',$level='')
+	{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$delete_user_priv=array('5','7','8','10');
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv )&& $data['user_id']!=$id && $level!=5)
+		{
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else if($flag==1)
+		{
+		$this->adminmodel->delete_single_user($id,$level);
+		redirect('admin/manageusers/uds');
+		}
+	}
+	
+	
+	
+	
 	
 	function home_gallery()
 	{
@@ -1073,7 +1111,40 @@ class Admin extends CI_Controller
 		
 	
 	}
-	
+	//ban the user
+	function ban_unban_user($ban_status,$ban_user_id,$user_level)
+	{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==1 && $userdata['admin_priv']['privilege_level']>1 && $data['user_id']!=$ban_user_id && $user_level!='5')
+		{
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else
+		{
+		$this->adminmodel->ban_unban_users($ban_status,$ban_user_id,$user_level);
+		if($ban_status)
+		{
+		redirect('admin/manageusers/unban');
+		}
+		else
+		{
+		redirect('admin/manageusers/ban');
+		}
+		}
+	}
 }
 
 /* End of file auth.php */

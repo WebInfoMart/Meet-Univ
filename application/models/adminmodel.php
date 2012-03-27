@@ -44,14 +44,28 @@ class Adminmodel extends CI_Model
 		return NULL;
 	}
 	
-	public function fetch_user_data()
+	public function fetch_user_data($paging)
 	{
+		$this->load->library('pagination');
 		$user_id	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
 		$this->db->where(array('level !=' => '5','id !='=>$user_id));
 		$query = $this->db->get();
+		$config['base_url']=base_url()."admin/manageusers/";
+		$config['total_rows']=$query->num_rows();
+		$config['per_page'] = '7'; 
+		//$config['use_page_numbers'] = TRUE;
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+		$this->db->where(array('level !=' => '5','id !='=>$user_id));
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
 		//$this->load->library('table');
 		//$table= $this->table->generate($query);
 		return $query->result();
@@ -59,6 +73,7 @@ class Adminmodel extends CI_Model
 	public function get_user_privilege($user_id)
 	{
 	//$query = $this->db->get('user_privilige');
+	$this->load->library('pagination');
 	$query = $this->db->get_where('user_privilige', array('user_id' => $user_id));
 	return $query->result_array();	
 	}
@@ -86,8 +101,8 @@ class Adminmodel extends CI_Model
 		$data = array(
                'fullname' => $_POST['fullname'],
                'email' => $_POST['email'],
-               'level' =>$_POST['level_user'],
-			   'banned'=>$_POST['switch_user_status']
+               'level' =>$_POST['level_user']
+			  /* 'banned'=>$_POST['switch_user_status']*/
             );
 		$this->db->update('users', $data, array('id' => $_POST['hid_user_id']));
        
@@ -104,7 +119,26 @@ class Adminmodel extends CI_Model
 		return $query->result_array();	
 	}
 	
-	public function deleteuser($user_level,$userid)
+	public function deleteuser()
+	{
+		$usercount=count($this->input->post('users_id'));	
+		$user_id=$this->input->post('users_id');
+		$users_level=$this->input->post("users_level");
+		for( $i =0; $i < $usercount ; $i++ )
+		{
+			if($_POST['check_users_'.$user_id[$i]]=='checked')
+			{
+			$this->db->delete('users', array('id' => $user_id[$i]));
+			$this->db->delete('user_profiles', array('user_id' => $user_id[$i]));
+			if($users_level[$i]!=1 && $users_level[$i]!=5)
+			{
+			$this->db->delete('user_privilige', array('user_id' => $user_id[$i]));
+			}
+			}
+		}
+		
+	}
+	public function delete_single_user($userid,$user_level)
 	{
 	$this->db->delete('users', array('id' => $userid));
 	$this->db->delete('user_profiles', array('user_id' => $userid));
@@ -113,7 +147,6 @@ class Adminmodel extends CI_Model
 	$this->db->delete('user_privilige', array('user_id' => $userid));
 	}
 	}
-	
 	//upload home gallery
 	//upload home gallery
 	function do_upload() {
@@ -369,7 +402,18 @@ class Adminmodel extends CI_Model
 		$query=$this->db->get();
 		return $query->num_rows();
 	}
-		
+    function ban_unban_users($ban_status,$ban_user_id,$userlevel)
+	{
+		$ban_unban=!$ban_status;
+		$data = array(
+               'banned' => $ban_unban,
+			  /* 'banned'=>$_POST['switch_user_status']*/
+            );
+		if($userlevel!='5')
+		{
+		$this->db->update('users', $data, array('id' => $ban_user_id,'level'=>$userlevel));
+		}
+	}
 		
 }
 /* End of file users.php */

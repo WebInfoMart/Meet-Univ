@@ -3,7 +3,7 @@ $class_fullname='';
 $class_email='';
 $class_level_user='';
 $class_confirm_password='';
-$class_password='';
+$class_pass='';
 $error_fullname = form_error('fullname');
 $error_email = form_error('email');
 $error_level_user = form_error('level_user');
@@ -14,14 +14,12 @@ if($error_fullname != '') { $class_fullname = 'focused_error'; } else { $class_f
 
 if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='text'; }
 if($error_level_user != '') { $class_level_user = 'focused_error'; } else { $class_level_user='text'; }
-if($error_confirm_pwd != '') { $class_password = 'focused_error'; } else { $class_confirm_password='text'; }
+if($error_confirm_pwd != '') { $class_pass = 'focused_error'; } else { $class_confirm_password='text'; }
 if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $class_pass='text'; }
 ?>
 <div id="content">
 		
-		<div class="breadcrumb">
-			<a href="#">Admin</a> &raquo; <a href="#">Add user</a> &raquo; <!--<a href="#">Subsection title</a> &raquo; <a href="#">Page title</a>-->
-		</div>	
+		
 		<div class="span8">
 			<div id="steps">
 				<div class="step first active">
@@ -76,7 +74,7 @@ if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $clas
 						</div> 
 						<div>
 							<label>PASSWORD:</label><br>
-							<input type="password" size="30" name="password" class="<?php echo $class_password; ?>">
+							<input type="password" size="30" name="password" class="<?php echo $class_pass; ?>">
 						    <span style="color: red;"> <?php echo form_error('password'); ?> </span>
 								
 						</div> 

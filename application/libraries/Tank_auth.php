@@ -312,6 +312,16 @@ class Tank_auth
 			}
 			else
 			{
+			if($level_user=='1')
+			{
+				if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
+					$data['user_id'] = $res['user_id'];
+					$data['password'] = $password;
+					}
+				redirect('admin/manageusers/ucs');	
+			}
+			else
+			{
 				$this->ci->session->set_userdata(array(
 						'newadmin_fullname'	=> $fullname,
 						'newadmin_username'	=> $username,
@@ -324,6 +334,7 @@ class Tank_auth
 						 ));
 						 
 				redirect('admin/user_privileges');
+			}	
 			}
 			
 			
