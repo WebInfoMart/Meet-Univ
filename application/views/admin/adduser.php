@@ -14,8 +14,8 @@ if($error_fullname != '') { $class_fullname = 'focused_error'; } else { $class_f
 
 if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='text'; }
 if($error_level_user != '') { $class_level_user = 'focused_error'; } else { $class_level_user='text'; }
-if($error_confirm_pwd != '') { $class_password = 'focused_error'; } else { $class_confirm_password='text'; }
-if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $class_pass='text'; }
+if($error_confirm_pwd != '') { $class_confirm_password = 'focused_error'; } else { $class_confirm_password='text'; }
+if($error_pwd != '') { $class_pass = 'focused_error'; } else { $class_pass='text'; }
 ?>
 <div id="content">
 		
@@ -76,8 +76,8 @@ if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $clas
 						</div> 
 						<div>
 							<label>PASSWORD:</label><br>
-							<input type="password" size="30" name="password" class="<?php echo $class_password; ?>">
-						    <span style="color: red;"> <?php echo form_error('password'); ?> </span>
+							<input type="password" size="30" name="password" class="<?php echo $class_pass; ?>">
+						    <span style="color: red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?> </span>
 								
 						</div> 
 						<div>

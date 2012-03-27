@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 
-=======
 <?php
 $facebook = new Facebook(array(
   'appId'  => '358428497523493',
@@ -44,7 +42,6 @@ $update['facebook'] = $this->users->update_facebook_profile($update_fb_profile);
 //print_r($this->session->userdata);
 ?>
 <body>
->>>>>>> 8eacc04f9ef4b31343a356983cf16f12c0355f69
 <!-- Load Pop-up for pic upload -->
 <?php //echo $fb_user = $facebook->getUser(); ?>
 
@@ -64,7 +61,24 @@ $(window).load(function(){
 	<div class="modal-body model_body_height">
 		<form method="post" action="home" enctype="multipart/form-data">
 			<div>
-				<div class="float_l span2 margin_zero"><img src="<?php echo "$base$img_path";  ?>/profile_icon.png"></div>
+				<div class="float_l span2 margin_zero">
+				
+				<?php
+							if($profile_pic['user_pic_path'] != '')
+							{
+							echo "<img src='".base_url()."uploads/".$profile_pic['user_pic_path']."'/>";
+							}
+							else if($user)
+							{
+							?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+							<?php
+							}
+							else{
+							echo "<img src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
+				</div>
 				<div class="float_l span3 margin_l12"><h4>Upload Your Picture</h4><div class="span2 margin_zero"><input type="file" name="userfile" /><br />
 			</div>
 			</div>
@@ -81,35 +95,40 @@ $(window).load(function(){
 			</div>
 			<div class="margin_t">
 				<div class="float_l span2 margin_zero"><h4>Current Educational level</h4></div>
-				<div class="float_l span3"><div class="controls">
+				<div class="float_l span3">
+				<div class="controls">
 					<!--<input type="text" class="input-medium" id="input01">-->
+					<?php $curent_quali = $fetch_profile['curr_educ_level']; ?>
 					<select name="educ_level">
 					<option value="">Select</option>
 					<?php
-					foreach($educ_level as $level)
-					{
-					?>
-					<option value="<?php echo $level['prog_edu_lvl_id']; ?>"> <?php echo $level['educ_level']; ?>  </option>
-					<?php } ?>
+									foreach($educ_level as $level)
+									{
+									if($level['prog_edu_lvl_id'] == $curent_quali) { $selected ='selected';} else { $selected =''; }
+									?>
+									<option value="<?php echo $level['prog_edu_lvl_id']; ?>" <?php echo $selected; ?> > <?php echo $level['educ_level']; ?>  </option>
+									<?php } ?>
 					</select>
-				</div></div>
+				</div>
+				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="margin_t">
 				<div class="float_l span2 margin_zero"><h4>Area of Interest</h4></div>
 				<div class="float_l span3 margin_l12">
 					<div class="controls">
+					<?php $intrest_area_profile = $fetch_profile['prog_parent_id']; ?>
 					<select name="area_interest">
 					<option value="0">Select</option>
 					<?php foreach($area_interest as $interest) 
-					{
+						{
+						if($interest['prog_parent_id'] == $intrest_area_profile) { $selected ='selected';} else { $selected =''; }
 					?>
-						<option value="<?php echo $interest['prog_parent_id']; ?>"><?php echo $interest['program_parent_name']; ?></option>
-						
+					<option value="<?php echo $interest['prog_parent_id']; ?>" <?php echo $selected; ?>><?php echo $interest['program_parent_name']; ?></option>
+										
 					<?php } ?>
 					</select>
 					</div>
-<<<<<<< HEAD
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -117,121 +136,37 @@ $(window).load(function(){
 				<div class="float_l span2 margin_zero"><h4>Country</h4></div>
 				<div class="float_l span3 margin_l12">
 					<div class="controls">
+					<?php $user_selected_country = $fetch_profile['country_id']; 
+						$selected ='';
+						?>
 					<select name="countries">
 					<option value="">Select</option>
 					<?php
-						//print_r($country);
-						foreach($country as $countries)
-						{
-					?>
-						<option value="<?php echo $countries['country_id'] ;?>"><?php echo $countries['country_name']; ?></option>
-						
-						<?php } ?>
-					</select>
-=======
-					<div class="modal-body model_body_height">
-						<form method="post" action="home" enctype="multipart/form-data">
-							<div>
-								<div class="float_l span15 margin_zero">
-								<?php
-							if($profile_pic['user_pic_path'] != '')
-							{
-							echo "<img src='".base_url()."uploads/".$profile_pic['user_pic_path']."'/>";
-							}
-							else if($user)
-							{
-							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
-							<?php
-							}
-							else{
-							echo "<img src='".base_url()."images/profile_icon.png'/>";
-							}
-							?>
-								
-								<div class="float_l span15 margin_l12"><h4>Upload Your Picture</h4><div class="span15 margin_zero"><input type="file" name="userfile" /><br />
-							</div></div>
-								<div class="clearfix"></div>
-							</div>
-							<div id="show_img_bar" class="img_bar_profile_modal">
-							<img src="<?php echo "$base$img_path" ?>/ajax-loader.gif"/>
-							</div>
-							<div class="margin_t">
-								<div class="float_l span15 margin_zero"><h4>Gender</h4></div>
-								<div class="float_l span2 margin_l12"><input type="radio" name="sex" value="male" /> Male
-									<input type="radio" name="sex" value="female" /> Female</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="margin_t">
-								<div class="float_l span15 margin_zero"><h4>Current Educational level</h4></div>
-								<div class="float_l span2 margin_l12"><div class="controls">
-									<!--<input type="text" class="input-medium" id="input01">-->
-									<select name="educ_level">
-									<option value="">Select</option>
-									<?php
-									foreach($educ_level as $level)
-									{
-									?>
-									<option value="<?php echo $level['prog_edu_lvl_id']; ?>"> <?php echo $level['educ_level']; ?>  </option>
-									<?php } ?>
-									</select>
-								</div></div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="margin_t">
-								<div class="float_l span15 margin_zero"><h4>Area of Interest</h4></div>
-								<div class="float_l span2 margin_l12">
-									<div class="controls">
-									<select name="area_interest">
-									<option value="0">Select</option>
-									<?php foreach($area_interest as $interest) 
-									{
-									?>
-										<option value="<?php echo $interest['prog_parent_id']; ?>"><?php echo $interest['program_parent_name']; ?></option>
-										
-									<?php } ?>
-									</select>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="margin_t">
-								<div class="float_l span15 margin_zero"><h4>Country</h4></div>
-								<div class="float_l span2 margin_l12">
-									<div class="controls">
-									<select name="countries">
-									<option value="">Select</option>
-									<?php
 										//print_r($country);
 										foreach($country as $countries)
 										{
+										if($countries['country_id'] == $user_selected_country) { $selected ='selected';} else { $selected =''; }
 									?>
-										<option value="<?php echo $countries['country_id'] ;?>"><?php echo $countries['country_name']; ?></option>
+										<option value="<?php echo $countries['country_id'] ;?>" <?php echo $selected; ?>><?php echo $countries['country_name']; ?></option>
 										
 										<?php } ?>
-									</select>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							
-							<div class="margin_t">
-							
-								<input type="submit" class="btn btn-primary" name="upload" id="upload" value="Continue" >
-							</div>
-						</form>
->>>>>>> 8eacc04f9ef4b31343a356983cf16f12c0355f69
-					</div>
+					</select>
+						</div>
 				</div>
-				<div class="clearfix"></div>
+					<div class="clearfix"></div>
 			</div>
 			
 			<div class="margin_t">
-				<input type="submit" class="btn btn-primary" name="upload" id="upload" value="Continue" >
+				<div class="controls">
+					<input type="submit" class="btn btn-primary" name="upload" id="upload" value="Continue" >
+				</div>
 			</div>
 		</form>
 	</div>
 </div>
+</div>
+</div>
+
 				<!--<div id="mask"></div>-->
 
 

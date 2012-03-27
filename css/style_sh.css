@@ -36,9 +36,12 @@
   /*border:solid 1px red;Debal*/
 }
 .grid_2{width:261px}
-.grid_3{width:327px;}
+.grid_3{width:326px;}
+.grid_1{width:161px;}
 
-
+/************************welcome********************/
+.back_img{background:url(../images/events.png)repeat;border-radius: 2px;border: 1px solid #AAA;-webkit-border: 1px solid #AAA;-moz-border: 1px solid #AAA;padding: 10px 20px;}
+.border_bot_wel{border-bottom: 1px solid #AAA;}
 
 
 
