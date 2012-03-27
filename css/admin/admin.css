@@ -152,11 +152,8 @@ a.modal-social {
 }
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 /****************button*******************/
 /* Patterns.less
  * Repeatable UI elements outside the base styles provided from the scaffolding
@@ -214,10 +211,7 @@ z-index: 1000;
 float: left;
 display: none;
 min-width: 160px;
-<<<<<<< HEAD
 _width: 160px;
-=======
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 padding: 4px 0;
 margin: 0;
 list-style: none;
@@ -233,10 +227,6 @@ border-radius: 0 0 5px 5px;
 -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 -webkit-background-clip: padding-box;
-<<<<<<< HEAD
-=======
--webkit-background-clip: padding-box;
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 -moz-background-clip: padding;
 background-clip: padding-box;
 }
@@ -413,13 +403,9 @@ a.menu:after, .dropdown-toggle:after {
 .menu-dropdown, .dropdown-menu {
 	background-color: #ffffff;
 	float: left;
-<<<<<<< HEAD
 	display: none;
 	position: absolute;
 	top:23px;
-=======
-	position: absolute;
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 	z-index: 900;
 	min-width: 160px;
 	/*max-width: 220px;*/
@@ -431,27 +417,15 @@ a.menu:after, .dropdown-toggle:after {
 	border-color: #999;
 	border-color: rgba(0, 0, 0, 0.2);
 	border-style: solid;
-<<<<<<< HEAD
 	-webkit-border-radius: 0 0 6px 6px;
 	-moz-border-radius: 0 0 6px 6px;
 	border-radius: 0 0 6px 6px;
-=======
-	border-width: 0 1px 1px;
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding-box;
 	background-clip: padding-box;
-<<<<<<< HEAD
-=======
-	display: none;
-margin-top: 1px;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 }
 .menu-dropdown li, .dropdown-menu li {
 	float: none;
@@ -484,18 +458,9 @@ white-space: nowrap;
 }
 .open .menu-dropdown, .dropdown.open .menu-dropdown, .open .dropdown-menu, .dropdown.open .dropdown-menu {
 	display: block;
-<<<<<<< HEAD
 }
 
 
-=======
-margin-top: 1px;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-}
-
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 .tab-content > .tab-pane, .pill-content > .pill-pane, .tab-content > div, .pill-content > div {
 	display: none;
 }
@@ -509,7 +474,6 @@ border-top-left-radius: 4px;
 -webkit-border-bottom-left-radius: 4px;
 -moz-border-radius-bottomleft: 4px;
 border-bottom-left-radius: 4px;}
-<<<<<<< HEAD
 .arrow_but{padding-bottom: 7px!important;;margin-left: -5px!important;margin-top: -4px;}
 .arrow_but:hover,.arrow_but:active,.arrow_but:visited{background-color: #05C!important;}
 
@@ -533,7 +497,3 @@ margin-top:40px;
 }
 .styled{width: 235px;height: 30px;}
 	
-=======
-.arrow_but{padding-bottom: 7px!important;;margin-left: -5px!important;margin-top: -2px;}
-.arrow_but:hover,.arrow_but:active,.arrow_but:visited{background-color: #006DCC!important;}
->>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
