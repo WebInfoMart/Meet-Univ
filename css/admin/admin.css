@@ -482,7 +482,7 @@ border-bottom-left-radius: 4px;}
 /* for pagination */
 #pagination a, #pagination strong {
 text-decoration: none;
-border: 1px solid #CCC;
+border: 1px solid #CCC; 
 padding: 3px 7px;
 margin: 0 1px;
 -webkit-border-radius: 3px;

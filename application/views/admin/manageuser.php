@@ -173,7 +173,7 @@ else
 alert("please select the action");
 return false;
 }
-}
+} 
 
 
 function set_chkbox_val()

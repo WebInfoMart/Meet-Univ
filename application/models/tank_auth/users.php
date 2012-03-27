@@ -330,7 +330,7 @@ class Users extends CI_Model
   if($user_type=='admin')
   {
   $level='2,3,4,5';
-  }
+  } 
   else if($user_type=='student')
   {
   $level='1';

@@ -73,7 +73,7 @@ if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $clas
 								
 						</div> 
 						<div>
-							<label>PASSWORD:</label><br>
+						 	<label>PASSWORD:</label><br>
 							<input type="password" size="30" name="password" class="<?php echo $class_pass; ?>">
 						    <span style="color: red;"> <?php echo form_error('password'); ?> </span>
 								
