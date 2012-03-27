@@ -1,7 +1,27 @@
 <div id="content">	
 <h2>DETAIL OF USERS</h2>
+<<<<<<< HEAD
 
 			<form action="<?php echo $base ?>admin/deleteuser" method="post" id="deleteform">	
+=======
+  <div class="pull-leftt btn-group">
+        <ul class="nav">
+          <li data-dropdown="dropdown" >  <a class="btn-primary button_cont" href="#"><i class="icon-user icon-white"></i> User</a>
+		  <a class="btn btn-primary dropdown-toggle arrow_but" data-toggle="dropdown" href="#"></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+				<li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+				<li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+				<li class="divider"></li>
+				<li><a href="#"><i class="i"></i> Make admin</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+	  
+	 
+			<form action="" method="post">	
+>>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
 			
 				<thead>
@@ -161,6 +181,7 @@ if(r)
 set_chkbox_val();
 $('#deleteform').submit();
 }
+<<<<<<< HEAD
 }
 else
 {
@@ -193,3 +214,7 @@ $(this).val('');
 
 
 </script>		
+=======
+
+</script>
+>>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4

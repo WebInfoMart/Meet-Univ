@@ -42,6 +42,6 @@ $route['default_controller'] = "auth";
 $route['404_override'] = '';
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(login|register|logout|update_password|home|update_profile|user_profile_update|find_college|home/pwd_change)'] = 'auth/$1';
+$route['(login|register|logout|update_password|home|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/$1|home/pwd_change)'] = 'auth/$1';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

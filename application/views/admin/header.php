@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="<?php echo "$base$admin_css" ;?>/jquery.fancybox.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/tipsy.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/admin.css">
+	<!--<link rel="stylesheet" href="<?php //echo "$base$css_path"?>/bootstrap.css">-->
 
 	
 	
@@ -39,6 +40,10 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.MultiFile.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
+<<<<<<< HEAD
+=======
+	
+>>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 </head>
 
 

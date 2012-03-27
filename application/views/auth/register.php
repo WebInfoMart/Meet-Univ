@@ -65,22 +65,22 @@ $error_pass = form_error('password');
 $error_cpass = form_error('confirm_password');
 $error_iagree = form_error('agree_term');
 
-if($error_fullname != '') { $class_fullname = 'focused_error'; } else { $class_fullname='span4'; }
+if($error_fullname != '') { $class_fullname = 'focused_error'; } else { $class_fullname='input-xlarge'; }
 
-if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='span4'; }
+if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='input-xlarge'; }
 
-if($error_pass != '') { $class_pass = 'focused_error'; } else { $class_pass='span4'; }
+if($error_pass != '') { $class_pass = 'focused_error'; } else { $class_pass='input-xlarge'; }
 
-if($error_cpass != '') { $class_cpass = 'focused_error'; } else { $class_cpass='span4'; }
+if($error_cpass != '') { $class_cpass = 'focused_error'; } else { $class_cpass='input-xlarge'; }
 
 if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagree=''; }
 ?>
 	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
-		<div class="body">
+		<div class="body_container">
 			<div class="row">
-				<div class="span5 round_box">
+				<div class="span5 margin_zero round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
 					<div class="notify_box _float_r">
 						<a href="login" class="white">Already a member? Sign in</a>
@@ -91,8 +91,10 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						<div class="control-group">
 							<label class="control-label" for="fullname">Full Name</label>
 							<div class="controls">
-								<input type="text" class="<?php echo $class_fullname; ?>" name="fullname" id="fullname" value="<?php echo set_value('fullname') ?>"  placeholder="Full Name">
-								<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span>
+								<div class="input-prepend">
+										<span class="add-on"><img src="<?php echo "$base$img_path" ?>/user-male.png"></span><input class="<?php echo $class_fullname; ?>" name="fullname" id="fullname" value="<?php echo set_value('fullname') ?>"  placeholder="Full Name" type="text">
+										<span style="color: red;"> <?php echo form_error('fullname'); ?><?php echo isset($errors['fullname'])?$errors['fullname']:''; ?> </span>
+								</div>
 							</div>
 						</div>
 						<!--<div class="control-group">
@@ -109,31 +111,33 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						<input type="hidden" value="self" name="createdby" id="createdby"/>
 						<input type="hidden" value="1" name="level_user" id="level_user"/>
 						</div>
-						
 						<div class="control-group">
 							<label class="control-label" for="email">Email</label>
 							<div class="controls">
-								<input type="text" class="<?php echo $class_email; ?>" name="email" id="email" value="<?php echo set_value('email') ?>" placeholder="Email">
-							    <span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
+								<div class="input-prepend">
+									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/at.png"></span><input class="<?php echo $class_email; ?>" name="email" id="email" value="<?php echo set_value('email') ?>"  placeholder="Email" type="text">
+									 <span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
+								</div>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="password">Password</label>
 							<div class="controls">
-								<input type="password" name="password" id="password" class="<?php echo $class_pass; ?>" placeholder="Password" value="<?php echo set_value('password') ?>">
-								<span style="color: red;"> <?php echo form_error('password'); ?> </span>
+								<div class="input-prepend">
+									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png"></span><input class="<?php echo $class_pass; ?>" name="password" id="password" placeholder="Password" value="<?php echo set_value('password') ?>" type="password">
+									<span style="color: red;"> <?php echo form_error('password'); ?> </span>
+								</div>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="confirm_password">Confirm Password</label>
 							<div class="controls">
-								<input type="password" class="<?php echo $class_cpass; ?>" name="confirm_password" id="confirm_password" placeholder="Confirm Password" value="<?php echo set_value('confirm_password') ?>">
-								<span style="color: red;"> <?php echo form_error('confirm_password'); ?> </span>
+								<div class="input-prepend">
+									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png"></span><input class="<?php echo $class_cpass; ?>" name="confirm_password" id="confirm_password" placeholder="Confirm Password" value="<?php echo set_value('confirm_password') ?>" type="password">
+									<span style="color: red;"> <?php echo form_error('confirm_password'); ?> </span>
+								</div>
 							</div>
 						</div>
-						
-						
-											
 						<div class="control-group">
 							<label class="checkbox <?php echo $class_iagree; ?>">
 								<input type="checkbox" name="agree_term" id="agree_term" value="1">
@@ -151,8 +155,8 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 							</span>
 					<!--<span class="super">or</span> <img src="images/inconnect.png" />-->
 				</div>
-				<div class="row">
-					<div class="span5">
+				<div>
+					<div class="span7">
 						<h3>5 reasons to join Meet Universities</h3>
 						<ul class="signup_benefits">
 							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -162,7 +166,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
 						</ul>
 					</div>
-					<div class="span2 thumb_box">
+					<div class="span4 thumb_box">
 						<h3>Newly Registered</h3>
 						<img class="thumb margin_delta" src="<?php echo "$base$img_path" ?>/sumit.png" />
 						<img class="thumb" src="<?php echo "$base$img_path" ?>/keshav.png" />
@@ -174,7 +178,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						<img class="thumb" src="<?php echo "$base$img_path" ?>/keshav.png" />
 						<img class="thumb margin_beta" src="<?php echo "$base$img_path" ?>/sumit.png" />
 					</div>
-					<div class="span7-1">
+					<div class="span10">
 						<h3>Upcoming Events</h3>
 						<ul class="events">
 							<li><img src="<?php echo "$base$img_path" ?>/bucks.png" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><h3>22-Feb<small>300 attending!</small></span></h3>

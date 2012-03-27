@@ -3,7 +3,7 @@
 /****************************************** 
  *  Load Model and session library and    *
  *  Object                                *
- ******************************************/
+ ******************************************/ 
   
   $this->load->model('users');
   $this->ci =& get_instance();
@@ -153,6 +153,11 @@ $(document).ready(function(){
  $('#pulse').click(function(){
 $('#myModal').modal('toggle');});
  });
+ 
+ $(document).ready(function(){
+ $('#pulse').click(function(){
+$('#forget_model').modal('toggle');});
+ });
 </script>
 </head>
 <body>
@@ -161,7 +166,7 @@ $('#myModal').modal('toggle');});
 		<div class="header_bar">	
 			<div class="container">
 				<div class="row">
-					<div class="span4 offset9">
+					<div class="span5 offset9">
 						<div class="bar">
 						<?php
 						if($this->ci->session->userdata('status')){ ?>
@@ -190,17 +195,17 @@ $('#myModal').modal('toggle');});
 			<div class="container">
 				<div class="margin">
 					<div class="row"><!--LOGO-->
-						<div class="span4">
+						<div class="span5 margin_zeros">
 						<a href="<?php echo $base; ?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" /></a>
 						</div>
-						<div class="span6 float_r">
+						<div class="span7 float_r">
 							<img src="<?php echo "$base$img_path" ?>/banner.png" />
 						</div>
 						<div class="clearfix"></div>
 					</div>
 					<div class="row">
 						<div class="main_menu">
-							<div class="float_r span9">
+							<div class="float_r span11">
 								<ul class="menu">
 									<li><a href="#" class="active">Home</a></li>
 									<li><a href="#">Colleges</a></li>

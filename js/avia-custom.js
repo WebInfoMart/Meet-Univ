@@ -473,4 +473,4 @@
             else return n;
         }
 
-    this.each(function(){init(this);});};$.fn.coinslider.defaults={width:438,height:290,spw:1,sph:1,delay:3000,sDelay:30,opacity:0.7,titleSpeed:500,effect:'',navigation:true,links:true,hoverPause:true};})(jQuery);
+    this.each(function(){init(this);});};$.fn.coinslider.defaults={width:480,height:290,spw:1,sph:1,delay:3000,sDelay:30,opacity:0.7,titleSpeed:500,effect:'',navigation:true,links:true,hoverPause:true};})(jQuery);

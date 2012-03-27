@@ -6,13 +6,13 @@
 	'maxlength'	=> 80,
 	'size'	=> 30,
 );*/
-if ($login_by_username AND $login_by_email) {
-	$login_label = 'Email or login';
-} else if ($login_by_username) {
-	$login_label = 'Login';
-} else {
-	$login_label = 'Email';
-}
+// if ($login_by_username AND $login_by_email) {
+	// $login_label = 'Email or login';
+// } else if ($login_by_username) {
+	// $login_label = 'Login';
+// } else {
+	// $login_label = 'Email';
+// }
 /*$password = array(
 	'name'	=> 'password',
 	'id'	=> 'password',
@@ -36,17 +36,60 @@ $class_pass='';
 $error_login = form_error('login');
 $error_password = form_error('password');
 
-if($error_login != '') { $class_login = 'focused_error'; } else { $class_login='span4'; }
+if($error_login != '') { $class_login = 'focused_error'; } else { $class_login='input-xlarge'; }
 
-if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass='span4'; }
+if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass='input-xlarge'; }
 ?>
+
+<script>
+//var errors = <?=$error ?>
+$(document).ready(function(){
+//alert(errors);
+//if(errors != '')
+//{
+<?php if($msg == 1) { ?>
+ $('#forget_model').modal('toggle');
+ <?php } ?>
+//}
+});
+</script>
+
+<div id="forget_model" class="model_back modal hide fade" style="display: none; ">
+					<div class="modal-header no_border forget_heading">
+						<a class="close" data-dismiss="modal">x</a>
+						<h3>Forget Password</h3>
+					</div>
+					<div class="forget_back">
+					<div class="modal-body forget_height">
+						<form class="form-horizontal" action="forgot_password" method="post">
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label" for="prependedInput">Enter Your Email</label>
+									<div class="controls">
+										<div class="input-prepend">
+											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock1.png" class="email_forget"></span><input type="text" class="span3" name="email" size="16" >
+											<span style="color:red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
+										</div>
+									</div>
+								</div>
+								<div class="controls">
+									<input type="submit" class="btn btn-primary" name="reset_pass">
+								</div>
+							 </fieldset>
+						</form>
+					</div>
+					</div>
+				</div>
+
+
+
 
 	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body_container">
 			<div class="row" style="display:"><!--LOGIN-->
-				<div class="span5 round_box">
+				<div class="span5 round_box margin_zero">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
 					<h3 class="blue">Login</h3>
 					<div class="notify_box">
@@ -55,19 +98,24 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 					<form class="margin1" id="signup" method="post" action="">
 						<div class="control-group">
 							<label class="control-label" for="login">Email</label>
-							<div class="controls">
-								<input type="text" class="<?php echo $class_login; ?>" name="login" id="login" placeholder="Email" value="<?php echo set_value('login'); ?>">
-								<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>
-							</div>
+								<div class="controls">
+									<div class="input-prepend">
+										<span class="add-on"><img src="<?php echo "$base$img_path" ?>/at.png"></span><input class="<?php echo $class_login; ?>" name="login" id="prependedInput login" placeholder="Email" value="<?php echo set_value('login'); ?>" type="text">
+										<span style="color:red;"> <?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?> </span>
+									</div>
+								</div>
 						</div>
 						
 						<div class="control-group">
 							<label class="control-label" for="password">Password</label>
 							<div class="controls">
-								<input type="password" class="<?php echo $class_pass; ?>" name="password" id="password" placeholder="Password" value="<?php echo set_value('password'); ?>" >
-								<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
+								<div class="input-prepend">
+									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png"></span><input class="<?php echo $class_pass; ?>" name="password" id="prependedInput password" placeholder="Password" value="<?php echo set_value('password'); ?>" type="password">
+									<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
+								</div>
 							</div>
-							<small><a href="#">Forgot your password?</a></small>
+							<small><a data-toggle="modal" style="cursor:pointer;" id="pulse">Forgot your password?</a></small>
+							
 							<input type="hidden" name="user_type" id="student" value="student">
 						</div>
 						<button class="btn btn-primary" href="#">Login</button>
@@ -81,7 +129,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 					<!--<span class="super">or</span> <img src="images/inconnect.png" />-->
 				</div>
 				<div class="row">
-					<div class="span5">
+					<div class="span7">
 						<h3>5 reasons to join Meet Universities</h3>
 						<ul class="signup_benefits">
 							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -91,7 +139,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
 						</ul>
 					</div>
-					<div class="span2 thumb_box">
+					<div class="span3 thumb_box">
 						<h3>Newly Registered</h3>
 						<img class="thumb margin_delta" src="<?php echo "$base$img_path" ?>/sumit.png" />
 						<img class="thumb" src="<?php echo "$base$img_path" ?>/keshav.png" />
@@ -103,7 +151,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 						<img class="thumb" src="<?php echo "$base$img_path" ?>/keshav.png" />
 						<img class="thumb margin_beta" src="<?php echo "$base$img_path" ?>/sumit.png" />
 					</div>
-					<div class="span7-1">
+					<div class="span10">
 						<h3>Upcoming Events</h3>
 						<ul class="events">
 							<li><img src="<?php echo "$base$img_path" ?>/bucks.png" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><h3>22-Feb<small>300 attending!</small></span></h3>

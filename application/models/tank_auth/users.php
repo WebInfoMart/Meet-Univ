@@ -97,8 +97,11 @@ class Users extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->gallery_path,
+<<<<<<< HEAD
 			$config['max_width']  = '160',
 			$config['max_height']  = '212',
+=======
+>>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 			'max_size' => 2000 
 		);
 		
@@ -729,7 +732,11 @@ class Users extends CI_Model
 	{
   
 		$this->db->select('city_id');
+<<<<<<< HEAD
 		$this->db->where('cityname',$city_fb_user); 
+=======
+		$this->db->where('cityname',$city_fb_user);
+>>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 		$query = $this->db->get('city');
 		//print_r($query);
 		if($query->num_rows() > 0)
@@ -749,6 +756,133 @@ class Users extends CI_Model
 		$this->db->where('user_id',$logged_user_id);
 		$this->db->update('user_profiles',$update_fb_profile); 
 	}
+<<<<<<< HEAD
+=======
+	/* Code For Reset Password by Subhanarayan */
+	function check_email_exists_lost_pass()
+	{
+		$post_current_email = $this->input->post('email');
+		$this->db->select('id,email');
+		$this->db->where('email',$post_current_email);
+		$query = $this->db->get('users');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else{
+		return 0;
+		}
+		// $this->db->where('email_address', $str);
+	  // $found = $this->db->get('users')->num_results(); // this returns the number of rows having the same address.
+	  // if ($found!=0)
+		 // return 0;  // more than 0 rows found. the callback fails.
+	  // else
+		// return true;   // 0 rows found. callback is ok.
+	
+	}
+	function set_key_forgot_password($set_key,$user_id)
+	{
+		$this->db->where('id', $user_id);
+		$this->db->update($this->table_name, $set_key);
+	}
+	
+	/* check if lost password link is valid */
+	function update_and_deactivate_psw_request($set_values,$set_update_values)
+	{
+		$clean_key = array(
+		'new_password_key' => 'NULL'
+		);
+		$this->db->where($set_values);
+		$this->db->update($this->table_name, $set_update_values);
+		if($this->db->affected_rows() > 0)
+		{
+			$this->db->where('id',$set_values['id']);
+		$this->db->update($this->table_name, $clean_key);
+			return 1;
+		}
+		else{
+		return 0;
+		}
+	}
+	
+	// function get_email_by_userid()
+	// {
+		
+	// }
+	
+	function get_university_by_id($univ_id)
+	{
+		$query = $this->db->get_where('university',array('univ_id'=>$univ_id));
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else {
+		return 0;
+		}
+	}
+	
+	function fetch_country_name_by_id($country_id)
+	{
+		$this->db->select('country_name');
+		$this->db->where('country_id',$country_id);
+		$query = $this->db->get('country');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else {
+		return 0;
+		}
+	}
+	
+	function fetch_city_name_by_id($city_id)
+	{
+		$this->db->select('cityname');
+		$this->db->where('city_id',$city_id);
+		$query = $this->db->get('city');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else {
+		return 0;
+		}
+	}
+	
+	function get_followers_of_univ($univ_id)
+	{
+		$query = $this->db->get_where('follow_univ',array('follow_to_univ_id'=>$univ_id,'followed_by !='=>''));
+		$rows = mysql_affected_rows();
+		return $rows;
+	}
+	
+	function add_followers($add_follower)
+	{
+		$this->db->set($add_follower);
+		$query = $this->db->insert('follow_univ');
+		 return $this->db->affected_rows() ? 1 : 0;
+	}
+	
+	function check_is_already_followed($add_follower)
+	{
+		$query = $this->db->get_where('follow_univ',$add_follower);
+		return $this->db->affected_rows() ? 1 : 0;
+	}
+	
+	function unjoin_now($add_follower)
+	{
+		$this->db->where($add_follower);
+		$this->db->delete('follow_univ');
+	}
+	
+	function get_articles_of_univ($univ_id)
+	{
+		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id,'type1'=>'article'));
+		$rows = mysql_affected_rows();
+		return $rows;
+	}
+>>>>>>> f282dbd82ec2c1369858b02217eaf44b0aa397e4
 }
 
 /* End of file users.php */
