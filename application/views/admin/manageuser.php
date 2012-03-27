@@ -69,7 +69,7 @@ if($admin_priv_res['privilege_type_id']=='1' && in_array($admin_priv_res['privil
 $user_can_edit=1;
 ?>	
       <ul class="nav">
-          <li data-dropdown="dropdown" >  <a class="btn-primary button_cont" href="#"><i class="icon-user icon-white"></i> <?php echo $row->fullname; ?></a>
+          <li data-dropdown="dropdown" >  <a class="btn-primary button_cont" href="#"><i class="icon-user icon-white"></i>User</a>
 		  <a class="btn btn-primary dropdown-toggle arrow_but" data-toggle="dropdown" href="#"></a>
             <ul class="dropdown-menu">
               <li><a href="<?php echo "$base$admin"; ?>/edituser/<?php echo $row->id; ?>/<?php echo $row->level; ?>"><i class="icon-pencil"></i> Edit</a></li>
