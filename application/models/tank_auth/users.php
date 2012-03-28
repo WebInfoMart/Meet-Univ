@@ -802,6 +802,67 @@ class Users extends CI_Model
 		return 0;
 		}
 	}
+	
+	function fetch_country_name_by_id($country_id)
+	{
+		$this->db->select('country_name');
+		$this->db->where('country_id',$country_id);
+		$query = $this->db->get('country');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else {
+		return 0;
+		}
+	}
+	
+	function fetch_city_name_by_id($city_id)
+	{
+		$this->db->select('cityname');
+		$this->db->where('city_id',$city_id);
+		$query = $this->db->get('city');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else {
+		return 0;
+		}
+	}
+	
+	function get_followers_of_univ($univ_id)
+	{
+		$query = $this->db->get_where('follow_univ',array('follow_to_univ_id'=>$univ_id,'followed_by !='=>''));
+		$rows = mysql_affected_rows();
+		return $rows;
+	}
+	
+	function add_followers($add_follower)
+	{
+		$this->db->set($add_follower);
+		$query = $this->db->insert('follow_univ');
+		 return $this->db->affected_rows() ? 1 : 0;
+	}
+	
+	function check_is_already_followed($add_follower)
+	{
+		$query = $this->db->get_where('follow_univ',$add_follower);
+		return $this->db->affected_rows() ? 1 : 0;
+	}
+	
+	function unjoin_now($add_follower)
+	{
+		$this->db->where($add_follower);
+		$this->db->delete('follow_univ');
+	}
+	
+	function get_articles_of_univ($univ_id)
+	{
+		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id,'type1'=>'article'));
+		$rows = mysql_affected_rows();
+		return $rows;
+	}
 }
 
 /* End of file users.php */

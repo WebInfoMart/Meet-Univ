@@ -126,7 +126,7 @@ class Adminmodel extends CI_Model
 		$users_level=$this->input->post("users_level");
 		for( $i =0; $i < $usercount ; $i++ )
 		{
-			if($_POST['check_users_'.$user_id[$i]]=='checked')
+			if($this->input->post("check_users_".$user_id[$i])=='checked')
 			{
 			$this->db->delete('users', array('id' => $user_id[$i]));
 			$this->db->delete('user_profiles', array('user_id' => $user_id[$i]));
@@ -413,6 +413,13 @@ class Adminmodel extends CI_Model
 		{
 		$this->db->update('users', $data, array('id' => $ban_user_id,'level'=>$userlevel));
 		}
+	}
+	function get_user_info()
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$query=$this->db->get();
+		return $query->result_array();
 	}
 		
 }

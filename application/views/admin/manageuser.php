@@ -1,5 +1,32 @@
 <div id="content">	
+
 <h2>DETAIL OF USERS</h2>
+<?php
+$no_of_admin=0;
+$no_of_university_admin=0;
+$no_of_counsellor=0;
+$no_of_student=0;
+ foreach($no_of_users as $no_of_user){
+if($no_of_user['level']=='4')
+{
+$no_of_admin++;
+}
+if($no_of_user['level']=='3')
+{
+$no_of_university_admin++;
+}
+if($no_of_user['level']=='2')
+{
+$no_of_counsellor++;
+}
+if($no_of_user['level']=='1')
+{
+$no_of_student++;
+}
+}
+?>
+<h4>Admin(<?php echo $no_of_admin;?>)</h4><h4>University Admin(<?php echo $no_of_university_admin;?>)</h4><h4>Counsellor(<?php echo $no_of_counsellor; ?>)
+</h4><h4>Student(<?php echo $no_of_student;?>)</h4>
 
 			<form action="<?php echo $base ?>admin/deleteuser" method="post" id="deleteform">	
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">

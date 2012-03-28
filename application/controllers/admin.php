@@ -698,7 +698,7 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		
+		$data['no_of_users']=$this->adminmodel->get_user_info();
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$data['user_detail']= $this->adminmodel->fetch_user_data($paging);
