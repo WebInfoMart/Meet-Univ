@@ -298,6 +298,8 @@ class Adminmodel extends CI_Model
 			   'title' => $this->input->post('title'),
 			   'keyword' => $this->input->post('keyword'),
 			   'description' => $this->input->post('description'),
+			   'latitude' => $this->input->post('latitude'),
+			   'longitude' => $this->input->post('longitude'),
 			   'univ_logo_path' =>$image_data['file_name'],
 			   'address_line1' => $this->input->post('address1'),
 			   'address_line2' => $this->input->post('address2'),
