@@ -216,7 +216,7 @@ $(window).load(function(){
 								<!--<src="<?php echo "$base$img_path";  ?>profile_pic.png">-->
 								<h3 class="text_align"><?php echo $query['fullname']; ?></h3>
 								<div>
-									<div class="margin_all">
+									<div class="text_align">
 										<h4>11 March,Male</h4>
 										<h4>MBA</h4>
 									</div>
@@ -315,7 +315,7 @@ $(window).load(function(){
 								</ul>
 							</div>
 							<div class="margin_t news_box">
-								<div class="span5 margin_zero">
+								<div class="span4 margin_zero">
 									<h2>Study Abroad</h2>
 									<div>
 										<ul class="study_point">
@@ -325,7 +325,7 @@ $(window).load(function(){
 													<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/us.png"></div>
 													<div class="clearfix"></div>
 												</div>
-												<div class="float_l count">
+												<div class="float_l count margin_l">
 													<div class="float_l"><a href="#" class="study_content">UK</a></div>
 													<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/gb.png"></div>
 													<div class="clearfix"></div>
@@ -338,7 +338,7 @@ $(window).load(function(){
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ca.png"></div>
 													<div class="clearfix"></div>
 												</div>
-												<div class="float_l count">
+												<div class="float_l count margin_l">
 													<div class="float_l"><a href="#" class="study_content">Korea</a></div>
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/kr.png"></div>
 													<div class="clearfix"></div>
@@ -351,7 +351,7 @@ $(window).load(function(){
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/india.png"></div>
 													<div class="clearfix"></div>
 												</div>
-												<div class="float_l count">
+												<div class="float_l count margin_l">
 													<div class="float_l"><a href="#" class="study_content">Online</a></div>
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ol.png"></div>
 													<div class="clearfix"></div>
@@ -360,10 +360,10 @@ $(window).load(function(){
 										</ul>
 									</div>
 								</div>
-								<div class="float_l right_border"></div>
-								<div class="span5 margin_zero">
+								<div class="margin_l float_l right_border"></div>
+								<div class="span5 margin_l">
 									<h2>News</h2>
-										<ul>
+										<ul class="news_left">
 											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
 											<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
 											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
