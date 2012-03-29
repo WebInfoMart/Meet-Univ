@@ -4,6 +4,7 @@ class Adminmodel extends CI_Model
 {
 	
 		var $gallery_path;
+		var $univ_gallery_path;
 	function __construct()
 	{
 	
@@ -11,7 +12,7 @@ class Adminmodel extends CI_Model
 		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
 		$this->univ_gallery_path = realpath(APPPATH . '../uploads/univ_gallery');
 		$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
-	
+		$this->load->library('pagination');
 		$this->load->database();
 	}
 
@@ -46,7 +47,6 @@ class Adminmodel extends CI_Model
 	
 	public function fetch_user_data($paging)
 	{
-		$this->load->library('pagination');
 		$user_id	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
 		$this->db->from('users');
@@ -188,6 +188,7 @@ class Adminmodel extends CI_Model
 			return $files;
 		}
 		
+		
 }
 		
 		function get_gallery_info()
@@ -207,24 +208,26 @@ class Adminmodel extends CI_Model
 		
 		function update_gallery()
 		{
-		$g_id=$this->input->post('g_id');
-		$imgcount=count($this->input->post('g_id'));	
-		$image_caption=$this->input->post('image_caption');
-		$title=$this->input->post('title');
-		$link_to=$this->input->post("link_to");
-		for( $i =0; $i < $imgcount ; $i++ )
-		{
-			$cretedby_admin=$this->tank_auth->get_admin_user_id();
-						$data = array(
-			   'image_caption' => $image_caption[$i],
-			   'title' => $title[$i],
-			   'event_link_path' => $link_to[$i],
-			   'postedby' => $cretedby_admin,
-			);
-			$this->db->where('id', $g_id[$i]);
-			$this->db->update('home_slider', $data); 
-			//$this->db->insert('mytable', $data);
-		}
+		
+			$g_id=$this->input->post('g_id');
+			$imgcount=count($this->input->post('g_id'));	
+			$image_caption=$this->input->post('image_caption');
+			$title=$this->input->post('title');
+			$link_to=$this->input->post("link_to");
+			for( $i =0; $i < $imgcount ; $i++ )
+			{
+				$cretedby_admin=$this->tank_auth->get_admin_user_id();
+							$data = array(
+				   'image_caption' => $image_caption[$i],
+				   'title' => $title[$i],
+				   'event_link_path' => $link_to[$i],
+				   'postedby' => $cretedby_admin,
+				);
+				$this->db->where('id', $g_id[$i]);
+				$this->db->update('home_slider', $data); 
+				//$this->db->insert('mytable', $data);
+			}
+			
 		}
 		
 		
@@ -273,7 +276,7 @@ class Adminmodel extends CI_Model
 	
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
-			'upload_path' => $this->gallery_path,
+			'upload_path' => $this->univ_gallery_path,
 			'max_size' => 2000
 		);
 		
@@ -283,7 +286,7 @@ class Adminmodel extends CI_Model
 		
 		$config = array(
 			'source_image' => $image_data['full_path'],
-			'new_image' => $this->gallery_path . '/thumbs',
+			'new_image' => $this->univ_gallery_path . '/thumbs',
 			'maintain_ration' => true,
 			'width' => 150,
 			'height' => 100
@@ -423,7 +426,155 @@ class Adminmodel extends CI_Model
 		$query=$this->db->get();
 		return $query->result_array();
 	}
+	function get_univ_info()
+	{
+		$this->db->select('*');
+		$this->db->from('university');
+		$this->db->join('users', 'users.id = university.user_id');
+		$this->db->join('country', 'country.country_id = university.country_id','left');
+		$query =$this->db->get();
+		$config['base_url']=base_url()."admin/manage_university/";
+		$config['total_rows']=$query->num_rows();
+		$config['per_page'] = '4'; 
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('university');
+		$this->db->join('users', 'users.id = university.user_id');
+		$this->db->join('country', 'country.country_id = university.country_id','left');
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
+		return $query->result();
+	}
+	function ban_unban_university($ban_status,$univ_id)
+	{
+		if($ban_status=='0')
+		{
+		$ban_unban='1';
+		}
+		else
+		{
+		$ban_unban='0';
+		}
+		$data = array(
+               'switch_off_univ' => $ban_unban
+            );
+		$this->db->where('univ_id', $univ_id);	
+		$this->db->update('university', $data);
+	}
+	
+	function delete_single_university($univ_id)
+	{
+		$this->db->delete('university', array('univ_id' => $univ_id));
+	/*	$this->db->delete('univ_gallery', array('univ_id' => $univ_id));
+		$this->db->delete('univ_program', array('univ_id' => $univ_id));
+		$this->db->delete('follow_univ', array('follow_to_univ_id' => $univ_id));
+		$this->db->delete('events', array('univ_id' => $univ_id));
+		$this->db->delete('mailchimp_detail', array('univ_id' => $univ_id));
+		$this->db->delete('news_article', array('univ_id' => $univ_id));
+	*/		
+	}
+	
+	function delete_universities()
+	{
+	    $univcount=count($this->input->post('univ_id'));	
+		$univ_id=$this->input->post('univ_id');
+		for( $i =0; $i < $univcount ; $i++ )
+		{
+			if($this->input->post("check_university_".$univ_id[$i])=='checked')
+			{
+			$this->db->delete('university', array('univ_id' => $univ_id[$i]));
+			/*$this->db->delete('univ_program', array('univ_id' => $univ_id[$i]));
+			$this->db->delete('follow_univ', array('follow_to_univ_id' => $univ_id[$i]));
+			$this->db->delete('events', array('univ_id' => $univ_id));
+			$this->db->delete('mailchimp_detail', array('univ_id' => $univ_id[$i]));
+			$this->db->delete('news_article', array('univ_id' => $univ_id[$i]));
+			*/
+			}
+		}
+	}
+	
+	function fetch_univ_data_edit($univ_id)
+	{
+	
+		$this->db->select('*');
+		$this->db->from('university');
+		$this->db->where('univ_id',$univ_id);
+		$this->db->join('users', 'users.id = university.user_id');
+		$this->db->join('country', 'country.country_id = university.country_id','left');
+		$query=$this->db->get();
+		return $query->result_array();
+	}
+	
+	function check_subdomain($sub_domain)
+	{
+	  $this->db->select('*');
+	  $this->db->from('university');
+	  $this->db->where('subdomain_name',$sub_domain);
+	  $query=$this->db->get();
+	  if($query->num_rows())
+	  return $query->num_rows();
+	}
+	
+	function update_university($univ_id)
+	{
+	$config = array(
+			'allowed_types' => 'jpg|jpeg|gif|png',
+			'upload_path' => $this->univ_gallery_path,
+			'max_size' => 2000
+		);
+		$myflag=0;
+		$this->load->library('upload', $config);
+		if($this->upload->do_upload())
+		{
+		$myflag=1;
+		}
+		echo $myflag;
+		$image_data = $this->upload->data();
 		
+		$config = array(
+			'source_image' => $image_data['full_path'],
+			'new_image' => $this->univ_gallery_path . '/thumbs',
+			'maintain_ration' => true,
+			'width' => 150,
+			'height' => 100
+		);
+		
+		$this->load->library('image_lib', $config);
+		$this->image_lib->resize();
+	
+		$cretedby_admin=$this->tank_auth->get_admin_user_id();
+						$data = array(
+			   'univ_name' => $this->input->post('univ_name'),
+			   'title' => $this->input->post('title'),
+			   'keyword' => $this->input->post('keyword'),
+			   'description' => $this->input->post('description'),
+			   'latitude' => $this->input->post('latitude'),
+			   'longitude' => $this->input->post('longitude'),
+			   'address_line1' => $this->input->post('address1'),
+			   'address_line2' => $this->input->post('address2'),
+			   'user_id' =>$this->input->post('user_id'),
+			   'city_id' =>$this->input->post('city'),
+			   'state_id' => $this->input->post('state'),
+			   'country_id'=>$this->input->post('country'),
+			   'phone_no' => $this->input->post('phone_no'),
+			  /* 'switch_off_univ'=>$this->input->post('switch_univ_status'),*/
+			   'univ_is_client' =>$this->input->post('univ_is_client'),
+			   'subdomain_name' =>$this->input->post('sub_domain'),
+			   'about_us' => $this->input->post('about_us'),
+			   'contact_us' => $this->input->post('contact_us'),
+			   'createdby' =>$cretedby_admin
+			);
+			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
+			if($myflag==1)
+			{
+			$data=array('univ_logo_path' =>$image_data['file_name']);
+			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
+			}
+			redirect('admin/manage_university/uus');
+	}		
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */
+

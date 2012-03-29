@@ -46,9 +46,9 @@ $no_of_student++;
 				
 				<tbody>
 				<?php
-foreach($user_detail as $row){
-if($row->level!='5' && $row->level!='' && $row->level!='0'){
-?>
+				foreach($user_detail as $row){
+				if($row->level!='5' && $row->level!='' && $row->level!='0'){
+				?>
 					<tr class="even">
 						<td><input type="checkbox" class="setchkval" value="" name="check_users_<?php echo $row->id; ?>" id="check_user_<?php echo $row->id; ?>">
 						<input type="hidden" name="users_id[]" value="<?php echo $row->id ?>" >
@@ -99,7 +99,8 @@ $user_can_edit=1;
           <li data-dropdown="dropdown" >  <a class="btn-primary button_cont" href="#"><i class="icon-user icon-white"></i>User</a>
 		  <a class="btn btn-primary dropdown-toggle arrow_but" data-toggle="dropdown" href="#"></a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo "$base$admin"; ?>/edituser/<?php echo $row->id; ?>/<?php echo $row->level; ?>"><i class="icon-pencil"></i> Edit</a></li>
+              <li><a href="<?php echo "$base$admin"; ?>/update-<?php echo $row->id; ?>-user-<?php echo $row->level; ?>">
+			  <i class="icon-pencil"></i> Edit</a></li>
 			 <li><a href="#" onclick="ban_confirm('<?php  echo "$base$admin";?>','<?php  echo $row->banned; ?>','<?php echo $row->id; ?>','<?php echo $row->level; ?>');"><i class="icon-ban-circle"></i><?php if($row->banned=='1'){?> Unban<?php } else {?> Ban <?php } ?></a></li>	
 			 <?php } 
 			  if($admin_priv_res['privilege_type_id']=='1' && in_array($admin_priv_res['privilege_level'],$user_delete_op))
@@ -153,7 +154,7 @@ window.location.href="<?php echo $base ?>"+'admin/delete_single_user/'+userid+'/
 }
 else
 {
-$('#check_user_'+id).removeAttr('checked');
+$('#check_user_'+userid).removeAttr('checked');
 }
 }
 

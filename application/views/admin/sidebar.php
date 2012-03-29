@@ -110,7 +110,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		{?>
 		<li><?php echo anchor("$base".'admin/create_university', 'Create University'); ?></li>
 		<?php } ?>
-		<li><a href="" >Manage University</a></li>
+		<li><?php echo anchor("$base".'admin/manage_university', 'Manage University'); ?></li>
 		</ul>
 		
 		

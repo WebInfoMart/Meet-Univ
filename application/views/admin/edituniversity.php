@@ -1,4 +1,4 @@
-	<?php
+<?php
 $class_univ_name='';
 $class_univ_owner='';
 $class_sub_domain='';
@@ -50,10 +50,16 @@ if($error_country_model2 != '') { $class_country_model2 = 'focused_error_univ'; 
 if($error_state_model2 != '') { $class_state_model2 = 'focused_error_univ'; } else { $class_state_model2='text'; }
 if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else { $class_city_model2='text'; }
 
+foreach($univ_detail_edit as $univ_detail_update)
+{
+$univ_state_id=$univ_detail_update['state_id'];
+$univ_city_id=$univ_detail_update['city_id'];
+
 ?>
+
 	<div id="content">
 			
-		<h2 class="margin">Create University</h2>
+		<h2 class="margin">Update University</h2>
 		<div class="form span8">
 			<form action="" method="post" class="caption_form" enctype="multipart/form-data">
 				<ul>
@@ -62,10 +68,11 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 							<div class="float_l span3 margin_zero">
 								<label>University Name</label>
 							</div>
-							<div class="float_l span3">
-								<input type="text" name="univ_name" size="30" class="<?php echo $class_univ_name; ?>">
-								<span style="color: red;"> <?php echo form_error('univ_name'); ?><?php echo isset($errors['univ_name'])?$errors['univ_name']:''; ?> </span>
 							
+							<div class="float_l span3">
+								<input type="text" name="univ_name" size="30" value="<?php echo $univ_detail_update['univ_name']; ?>" class="<?php echo $class_univ_name; ?>">
+								<span style="color: red;"> <?php echo form_error('univ_name'); ?><?php echo isset($errors['univ_name'])?$errors['univ_name']:''; ?> </span>
+								
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -76,7 +83,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>Title</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" name="title" size="30" class="text">
+								<input type="text" name="title" value="<?php echo $univ_detail_update['title']; ?>" size="30" class="text">
 								
 							</div>
 							<div class="clearfix"></div>
@@ -88,7 +95,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>Keyword</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" name="keyword" size="30" class="text">
+								<input type="text" name="keyword" value="<?php echo $univ_detail_update['keyword']; ?>" size="30" class="text">
 								
 							</div>
 							<div class="clearfix"></div>
@@ -100,7 +107,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>Description</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" name="description" size="30" class="text">
+								<input type="text" value="<?php echo $univ_detail_update['description']; ?>"  name="description" size="30" class="text">
 								
 							</div>
 							<div class="clearfix"></div>
@@ -112,7 +119,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>Latitude</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" name="latitude" size="30" class="text">
+								<input type="text" name="latitude" value="<?php echo $univ_detail_update['latitude']; ?>"   size="30" class="text">
 								
 							</div>
 							<div class="clearfix"></div>
@@ -124,7 +131,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>Longitude</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" name="longitude" size="30" class="text">
+								<input type="text" value="<?php echo $univ_detail_update['longitude']; ?>"  name="longitude" size="30" class="text">
 								
 							</div>
 							<div class="clearfix"></div>
@@ -136,7 +143,9 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 							<label>University Logo</label>
 						</div>
 						<div class="float_l span3">
-							<div class="float_l"><img src="<?php echo "$base$img_path";  ?>/logo.png" class="logo_img"></div>
+							<div class="float_l">
+							
+							<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img"></div>
 							<div class="float_l span1"><input type="file" name="userfile" class="file"></div>
 						</div>
 						<div class="clearfix"></div>
@@ -149,12 +158,16 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 							<label style="color:#2E64FE">University Owner</label>
 						</div>
 						<div class="float_l span3" >
-							<select class="<?php echo $class_univ_owner; ?> styled span3 margin_zero" name="univ_owner">
+						<input type="text" size="30" class="text" readonly name="univ_owner" value="<?php echo ucwords($univ_detail_update['fullname']); ?>" >
+							<!--<select class="<?php echo $class_univ_owner; ?> styled span3 margin_zero" name="univ_owner">
 								<option value="">Please Select</option>
 								<?php foreach($univ_admins as $univ_detail) { ?>
 								<option value="<?php echo $univ_detail['id']; ?>"><?php echo ucwords($univ_detail['fullname']); ?></option>
 							<?php } ?>
 							</select>
+							-->
+			<input type="hidden" name="user_id" value="<?php echo $univ_detail_update['user_id']; ?>">
+
 							<span style="color: red;"> <?php echo form_error('univ_owner'); ?><?php echo isset($errors['univ_owner'])?$errors['univ_owner']:''; ?> </span>
 							
 						</div>
@@ -167,7 +180,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 							<label>Address Line1</label>
 						</div>
 						<div class="float_l span3">
-							<input type="text" size="30" class="text" name="address1" value="<?php echo set_value('address1'); ?>">
+							<input type="text" size="30" class="text" name="address1" value="<?php echo $univ_detail_update['address_line1']; ?>" >
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -178,7 +191,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 							<label>Address Line2</label>
 						</div>
 						<div class="float_l span3">
-							<input type="text" size="30" class="text" name="address2" value="<?php echo set_value('address2'); ?>">
+							<input type="text" size="30" class="text" name="address2" value="<?php echo $univ_detail_update['address_line1']; ?>">
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -192,7 +205,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 									<select class="styled span3 margin_zero" name="country" id="country" onchange="fetchstates(this)">
 										<option value="0">Select Country</option>
 							<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$select_place[0]){?> selected <?php }?> ><?php echo $country['country_name']; ?></option>
+										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$univ_detail_update['country_id']){?> selected <?php }?> ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -207,7 +220,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 										<div class="float_l span3 margin_zero">
 											<label>State</label>
 										</div>
-										<div class="float_l span3">
+										<div class="float_l span3">      
 											<select class="styled span3 margin_zero" name="state" onchange="fetchcities(this)" id="state" disabled="disabled">
 												<option value="">Please Select</option>
 												
@@ -244,7 +257,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 							<label>Phone Number</label>
 						</div>
 						<div class="float_l span3">
-							<input type="text" size="30" class="text" value="<?php echo set_value('phone_no'); ?>" name="phone_no">
+							<input type="text" size="30" class="text" value="<?php echo $univ_detail_update['phone_no']; ?>"  name="phone_no">
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -269,8 +282,8 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 							<label>University Is Client</label>
 						</div>
 						<div class="float_l span3">
-							<input type="checkbox" id="univ_client" class="checkbox" checked >
-							<input type="hidden" name="univ_is_client" id="univ_is_client" value="1">
+							<input type="checkbox" id="univ_client" class="checkbox" <?php if($univ_detail_update['univ_is_client']){?> checked <?php } ?> >
+							<input type="hidden" name="univ_is_client" id="univ_is_client" value="<?php echo $univ_detail_update['univ_is_client']; ?>">
 						<!--	<div class="onoffswitch">
 								<span class="onoff_box checked"><input type="checkbox" id="univ_client" class="onoffbtn" ></span>
 								<input type="hidden" name="univ_is_client" id="univ_is_client" value="0">
@@ -286,9 +299,9 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>Sub Domain Name</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30"  name="sub_domain" class="<?php echo $class_sub_domain; ?>">
+								<input type="text" size="30" value="<?php echo $univ_detail_update['subdomain_name']; ?>"   name="sub_domain" class="<?php echo $class_sub_domain; ?>">
 								<span style="color: red;"> <?php echo form_error('sub_domain'); ?><?php echo isset($errors['sub_domain'])?$errors['sub_domain']:''; ?> </span>
-							
+								<input type="hidden" name="sub_domain_name" value="<?php echo $univ_detail_update['subdomain_name']; ?>">
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -299,7 +312,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>Contact Us</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="text" name="contact_us"  value="<?php echo set_value('contact_us'); ?>">
+								<input type="text" size="30" value="<?php echo $univ_detail_update['contact_us']; ?>"  class="text" name="contact_us"  value="<?php echo set_value('contact_us'); ?>">
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -310,7 +323,7 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 								<label>About Us</label>
 							</div>
 							<div class="float_l">
-								<textarea rows="9" cols="103" name="about_us"><?php echo set_value('about_us'); ?></textarea>
+								<textarea rows="9" cols="103" name="about_us"><?php echo $univ_detail_update['about_us']; ?>"</textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -433,10 +446,14 @@ if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else
 		</div>
 		
 	</div>	
-	
+<?php } 
+?>
+
 <script> 
 $(document).ready(function()
 {
+fetchstates(1);
+fetchcities(1);
 <?php if($model=='1') { ?>
  $('#add-country').fadeIn("slow");
  $('#add-country1').fadeTo("slow", .9);
@@ -450,13 +467,6 @@ $(document).ready(function()
  $('#add-city1').fadeTo("slow", .9);
 <?php }?>
 });
-<?php
-if($select_place[0]!='0' && $select_place[1]!='0' && $select_place[2]!='0')
-{?>
-fetchstates(1);
-fetchcities(1);
-<?php }
-?>
 $('#univ_client').click(function(){
 if($('#univ_client').is(':checked'))
 {
@@ -472,7 +482,7 @@ function fetchstates(a)
 var cid=$("#country option:selected").val();
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/state_list_ajax/"+cid+"/<?php echo $select_place[1]; ?>",
+   url: "<?php echo $base; ?>admin/state_list_ajax/"+cid+"/<?php echo $univ_state_id; ?>",
    data: '',
    cache: false,
    async:false,
@@ -503,7 +513,7 @@ function fetchcities(a)
 var sid=$("#state option:selected").val();
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/city_list_ajax/"+sid+"/<?php echo $select_place[2]; ?>",
+   url: "<?php echo $base; ?>admin/city_list_ajax/"+sid+"/<?php echo $univ_city_id; ?>",
    data: '',
    cache: false,
    success: function(msg)
