@@ -68,9 +68,9 @@ $delete=1;
               <li><a href="#"><?php //echo "$base$admin"; ?><!--/user_detail--><?php //echo $row->univ_id; ?>
 			  <i class="icon-view"></i> View</a></li>
 			<?php } if($edit==1) { ?>
-              <li><!--<a href="<?php echo "$base$admin"; ?>/update_university/<?php echo $row->univ_id; ?>">-->
-<a href="#">
-			  <i class="icon-pencil"></i> Edit</a></li>
+              <li><a href="<?php echo "$base$admin"; ?>/update_university/<?php echo $row->univ_id; ?>">
+
+			  <i class="icon-pencil"></i> Edit</li>
 			  <?php } if($edit==1 || $delete==1) { ?>
 			 <li><a href="#" onclick="ban_confirm('<?php echo "$base$admin";?>','<?php  echo $row->switch_off_univ; ?>','<?php echo $row->univ_id; ?>');"><i class="<?php if($row->switch_off_univ=='1'){ echo "icon-unban-circle"; } else { echo "icon-ban-circle"; }?>"></i><?php  if($row->switch_off_univ=='1'){?> Unban<?php } else {?> Ban <?php } ?></a></li>	
 			<?php }	 if($delete==1) { ?>
