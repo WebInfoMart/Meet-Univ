@@ -30,8 +30,13 @@
 				</div>
 				
 				<div class="float_r span8 margin_t margin_l">
-					<form class="form-horizontal form_horizontal_home">
+					<form class="form-horizontal form_horizontal_home" action="collage_search" method="post">
+					<input type="hidden" name="type_search" id="type_search" value="0"/>
 						<div class="control-group">
+						
+						
+						
+							
 							<label class="control-label" for="focusedInput"><h3 class="white">Explore</h3></label>
 								<div class="controls">
 									<div class="btn-group" data-toggle="buttons-radio">
@@ -50,10 +55,10 @@
 											<a class="btn" href="#">Postgraduate</a>
 											<a class="btn" href="#">Undergraduate</a>
 											<a class="btn" href="#">Foundation</a>-->
-											<button class="btn btnop active" id="all">All</button>
-											<button class="btn btnop" id="spot">Spot Admission</button>
-											<button class="btn btnop" id="fairs">Fairs</button>
-											<button class="btn btnop"id="opendd">Counselling</button>
+											<button type="button" class="btn btnop active" id="all">All</button>
+											<button type="button" class="btn btnop" id="spot">Spot Admission</button>
+											<button type="button" class="btn btnop" id="fairs">Fairs</button>
+											<button type="button" class="btn btnop"id="opendd">Counselling</button>
 										</div>
 										<ul class="ddclass">
 										<li class="li1 openddli">
@@ -74,22 +79,26 @@
 										<a class="btn" href="#">Postgraduate</a>
 										<a class="btn" href="#">Undergraduate</a>
 										<a class="btn" href="#">Foundation</a>-->
-										<button class="btn">All</button>
-										<button class="btn">Postgraduate</button>
-										<button class="btn">UnderGraduate</button>
-										<button class="btn">Foundation</button>
+										<button type="button" id="all" class="btn active">All</button>
+										<button type="button" id="pg" class="btn">Postgraduate</button>
+										<button type="button" id="ug" class="btn">UnderGraduate</button>
+										<button type="button" id="found" class="btn">Foundation</button>
 									</div>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label" for="focusedInput"><h3 class="white">in Country</h3></label>
 								<div class="controls">
-									<select id="select01">
-										<option>All</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+									<select id="search_country" name="search_country">
+										<option value="">select</option>
+										<?php
+										foreach($country as $srch_country)
+										{
+										?>
+											<option value="<?php echo $srch_country['country_id'] ?>"> <?php echo $srch_country['country_name'] ?> </option>
+										<?php
+										}
+										?>
 									</select>
 								</div>
 							</div>
@@ -97,22 +106,27 @@
 								<label class="control-label" for="focusedInput"><h3 class="white">Course</h3></label>
 								<div class="controls">
 									<div class="float_l span4 margin_zero">
-										<select id="select01">
-											<option>All</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
+										<select id="search_program" name="search_program">
+											<option value="">select</option>
+											<?php
+										foreach($area_interest as $srch_course)
+										{
+										?>
+											<option value="<?php echo $srch_course['prog_id']; ?>"> <?php echo $srch_course['course_name']; ?> </option>
+										<?php
+										}
+										?>
 										</select>
 									</div>
 									<div class="float_l span1">
-										<button class="btn" href="#">Submit</button>
+										
+										<input type="submit" name="btn_col_search" class="btn" value="Search"/>
 									</div>
 									<div class="clearfix"></div>
 								</div>
 							</div>
 						</div>
-						<div class="search_layout">
+						<!--<div class="search_layout">
 							<div class="control-group">
 								<label class="control-label" for="focusedInput"><h3 class="white">City</h3></label>
 								<div class="controls">
@@ -135,7 +149,7 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<div class="control-group">
 								<label class="control-label" for="focusedInput"><h3 class="white">Search</h3></label>
 								<div class="controls">
@@ -459,6 +473,28 @@ navigation: true, // prev next and buttons
 links : true, // show images as links
 hoverPause: true // pause on hover
 	});
+</script>
+<script>
+$(document).ready(function(){
+$('#all').click(function(){
+$('#type_search').val('0');
+});
+
+$('#found').click(function(){
+$('#type_search').val(2);
+});
+
+$('#pg').click(function(){
+$('#type_search').val(4);
+});
+
+$('#ug').click(function(){
+$('#type_search').val(3);
+});
+
+
+
+});
 </script>
 
 

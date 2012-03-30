@@ -306,19 +306,9 @@ class Tank_auth
 						 'status'	=> STATUS_ACTIVATED,
 						 'user_type'=>$user_type,
 						 ));
-						 redirect('home');
+						 //redirect('home');
 				unset($data['last_ip']);
 				return $data;
-			}
-			else
-			{
-			if($level_user=='1')
-			{
-				if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
-					$data['user_id'] = $res['user_id'];
-					$data['password'] = $password;
-					}
-				redirect('admin/manageusers/ucs');	
 			}
 			else
 			{
@@ -334,7 +324,6 @@ class Tank_auth
 						 ));
 						 
 				redirect('admin/user_privileges');
-			}	
 			}
 			
 			
@@ -349,7 +338,7 @@ class Tank_auth
 						 // redirect('');
 		}
 		
-		return NULL;
+		return 1;
 	}
 
 	/**

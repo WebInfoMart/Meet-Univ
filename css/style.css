@@ -130,16 +130,7 @@ text-decoration:none !important;
 .forget_height form{width: 409px;margin-left:auto;margin-right:auto;}
 .forget_height form .control-label{text-align:left;font-size: 18px;}
 .email_forget{width:18px;}
-.forget_heading{background: rgb(228,239,192); /* Old browsers */
-background: -moz-linear-gradient(left,  rgba(228,239,192,1) 0%, rgba(171,189,115,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(228,239,192,1)), color-stop(100%,rgba(171,189,115,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(left,  rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(left,  rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(left,  rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* IE10+ */
-background: linear-gradient(left,  rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4efc0', endColorstr='#abbd73',GradientType=1 ); /* IE6-9 */
-border: 1px solid #D6D4AD;}
-.forget_heading h3{color:#333!important;}
+
 .forget_back{background: rgb(255,255,255); /* Old browsers */
 background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(243,243,243,1) 39%, rgba(237,237,237,1) 51%, rgba(255,255,255,1) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(39%,rgba(243,243,243,1)), color-stop(51%,rgba(237,237,237,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
@@ -208,3 +199,18 @@ border-color: rgba(255, 0, 0, .8) !important;
   width:220px !important;
 }
 
+.focused_error_lost_pass_page
+{
+border-color: rgba(255, 0, 0, .8) !important;
+  -webkit-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+     -moz-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+          box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+  outline: 0 !important;
+  width:258px !important;
+}
+
+.univ_logo
+{
+	width: 150px;
+	height: 150px;
+}
