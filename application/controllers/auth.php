@@ -29,7 +29,8 @@ class Auth extends CI_Controller
 		//$this->load->model('Gallery_model');
 		
 		$data['gallery_home'] = $this->users->fetch_home_gallery();
-		
+		$data['country'] = $this->users->fetch_country();
+		$data['area_interest'] = $this->users->fetch_program();
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
 		$this->load->view('auth/home',$data);
@@ -63,6 +64,7 @@ class Auth extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$data['pwd_change']=$pwd_change;
+		
 		//$this->load->view('welcome');
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
@@ -237,20 +239,22 @@ class Auth extends CI_Controller
 						))) {									// success
 						//$CI->session->userdata('name');
 						//Send Email for new registration
-						echo $this->input->post('email');
-						$this->users->get_email_by_userid();
+						//print_r($this->session->userdata);
+						$uid = $this->session->userdata('user_id');
+						$data['logged_user_email'] = $this->users->get_email_by_userid($uid);
+						$uid = $data['logged_user_email'];
+						$email_body = $this->load->view('auth/new_signup_content_email.php');
 						$this->email->set_newline("\r\n");
 
-            $this->email->from('WorkForceTrack.in', 'Subham');
-            $this->email->to($this->input->post('email'));
-            $this->email->subject('Lost Password');
-            $key = $key;
-            $message = "<h3>Thank You For Registering with Meet University...Lets Select your College.......</h3>" ;
-            $message .="<br/>Thank you very much";
+            $this->email->from('Meet-University.com', 'Meet University');
+            $this->email->to($uid);
+            $this->email->subject('New Registration');
+            $message = "$email_body" ;
+            //$message .="<br/>Thank you very much";
             $this->email->message($message);
 			print_r($message);
 			$this->email->send();
-						
+			redirect('home');
 						
 						
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
@@ -739,7 +743,8 @@ class Auth extends CI_Controller
 		{
 		$data['user_profile_update'] = $this->users->user_profile_update($logged_user);
 		$this->users->do_upload_profile_pic();
-		redirect('home');
+		$data['pus'] = 1;
+		redirect('home/pus');
 		}
 		else
 		{
@@ -902,6 +907,7 @@ class Auth extends CI_Controller
 					$this->load->view('auth/login',$data);
 				}
 				else{
+				$data['email_send'] = 0;
 				$data['errors']['email'] = 'Email Exist';
 				$key = md5(rand().microtime());
 				$user_id = $data['email_check']['id'];
@@ -914,7 +920,7 @@ class Auth extends CI_Controller
 				$this->users->set_key_forgot_password($set_key,$user_id);
 				$this->email->set_newline("\r\n");
 
-            $this->email->from('WorkForceTrack.in', 'Subham');
+            $this->email->from('Workforcetrack.in', 'Meet University');
             $this->email->to($email);
             $this->email->subject('Lost Password');
             $key = $key;
@@ -924,7 +930,7 @@ class Auth extends CI_Controller
 			//print_r($message);
 			if($this->email->send())
                 {
-                    echo 'Please check your email to reset password.';
+                    $data['email_send'] = 1;
                 }
 
                 else
@@ -958,11 +964,12 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		
-		echo $key; echo $id;
+		//echo $key; echo $id;
 		$set_values = array(
 		'id' => trim($id),
 		'new_password_key' => trim($key)
 		);
+		$data['user_detail'] = $this->users->fetch_profile($id);
 		if($this->input->post('update_for_lost_psw'))
 		{
 			$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
@@ -986,12 +993,16 @@ class Auth extends CI_Controller
 				$this->ci->session->set_userdata(array(
 						 'user_id'	=> trim($id),
 						 'username'	=> '',
-						 'status'	=> STATUS_ACTIVATED
+						 'status'	=> STATUS_ACTIVATED,
+						 'psw_change'	=> 'true'
 						 ));
 				redirect('/home');
 				//echo 'YOUR PASSWORD HAS BEEN UPDATED';
 				}
 				else{
+				$this->ci->session->set_userdata(array(
+						 'psw_change'	=> 'true'
+						 ));
 				echo 'SORRY THERE WAS A ERROR';
 				}
 			}
@@ -1020,6 +1031,7 @@ class Auth extends CI_Controller
 		$city_id = $data['university_details']['city_id'];
 		$logged_user_id = $this->session->userdata('user_id');
 		 $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
+		 $data['area_interest'] = $this->users->fetch_area_interest();
 		$add_follower = array(
 			'follow_to_univ_id' => $univ_id,
 			'followed_by' => $logged_user_id
@@ -1043,6 +1055,18 @@ class Auth extends CI_Controller
 			redirect($redirect_current_url);
 		}
 		
+		else if($this->input->post('apply_now'))
+		{
+			$apply_now_data = array(
+				'apply_name' => $this->input->post('apply_name'),
+				'apply_course_interest' => $this->input->post('apply_course_interest'),
+				'apply_email' => $this->input->post('apply_email'),
+				'apply_mob' => $this->input->post('apply_mobile')
+			);
+			$this->session->set_userdata($apply_now_data);
+			//print_r($this->session->userdata);
+		}
+		
 		if($data['university_details'] != 0)
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -1057,6 +1081,38 @@ class Auth extends CI_Controller
 		$this->load->view('auth/university',$data);
 		}
 		//$this->load->view('auth/university',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	
+	function collage_search()
+	{
+			$data = $this->path->all_path();
+			$this->load->view('auth/header',$data);
+			$data['gallery_home'] = $this->users->fetch_home_gallery();
+			$data['country'] = $this->users->fetch_country();
+			$data['area_interest'] = $this->users->fetch_program();
+			
+		if($this->input->post('btn_col_search'))
+		{
+				$this->form_validation->set_rules('type_search','Education Level','trim|required');
+				$this->form_validation->set_rules('search_country','Country','trim|required');
+				
+			if($this->form_validation->run())
+			{
+				$type_educ_level = $this->input->post('type_search');
+				$search_country = $this->input->post('search_country');
+				$search_course = $this->input->post('search_program');
+				$data['get_university'] = $this->users->get_collages_by_search($type_educ_level,$search_country,$search_course);
+				//print_r($data['get_university']);
+				$this->load->view('auth/listed_collage',$data);
+			}
+			else{
+					redirect('');
+			}
+		}
+		else{
+		$this->load->view('auth/listed_collage',$data);
+		}
 		$this->load->view('auth/footer',$data);
 	}
 }

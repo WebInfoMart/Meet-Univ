@@ -68,7 +68,7 @@ if ($user) {
 												<div class="control-group">
 													<label class="control-label">Full Name *</label>
 													<div class="controls contact_box_content">
-														<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['full_name']; ?>" name="full_name" id="full_name" placeholder="Fullname">
+														<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['fullname']; ?>" name="full_name" id="full_name" placeholder="Fullname">
 													</div>
 												</div>
 												<div class="control-group">
@@ -97,14 +97,14 @@ if ($user) {
 												</div>
 												<div class="control-group">
 													<label class="control-label">Birth Date *</label>
-													<div class="controls contact_box_content">
+													<div class="controls contact_box_content">                
 													<?php
 													$dob = $fetch_profile['dob'];
-													$dob_explode = explode("-",$dob);
+													$dob_explode = explode("-",$dob);   
 													?>
-														<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[0] ?>" name="year" id="year" placeholder="Year">/
-														<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[1] ?>" name="month" id="month" placeholder="Month">/
-														<input type="text" class="input-small margin_all" value="<?php echo $dob_explode[2] ?>" name="date" id="date" placeholder="Date">
+														<input type="text" class="input-small margin_all" value="<?php if($dob_explode[0] == '0000' ){ echo ''; } else { echo $dob_explode[0]; } ?>" name="year" id="year" placeholder="Year">/
+														<input type="text" class="input-small margin_all" value="<?php if($dob_explode[1] == '00' ){ echo ''; } else { echo $dob_explode[1]; } ?>" name="month" id="month" placeholder="Month">/
+														<input type="text" class="input-small margin_all" value="<?php if($dob_explode[2] == '00' ){ echo ''; } else { echo $dob_explode[2]; } ?>" name="date" id="date" placeholder="Date">
 														<!--<span style="color:red;"> <?php //echo form_error('year'); ?><?php //echo isset($errors['year'])?$errors['year']:''; ?> </span>
 														<span style="color:red;"> <?php //echo form_error('month'); ?><?php //echo isset($errors['month'])?$errors['month']:''; ?> </span>
 														<span style="color:red;"> <?php //echo form_error('date'); ?><?php //echo isset($errors['date'])?$errors['date']:''; ?> </span>-->
@@ -134,7 +134,7 @@ if ($user) {
 													<div class="control-group">
 														<label class="control-label">Mobile Number *</label>
 														<div class="controls contact_box_content">
-															<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['mob_no']; ?>" name="mob_no" id="mob_no" placeholder="Mobile number">
+															<input type="text" class="input_xxxx-large" value="<?php if($fetch_profile['mob_no'] == '0'){echo '';} else { echo $fetch_profile['mob_no']; } ?>" name="mob_no" id="mob_no" placeholder="Mobile number">
 															<span style="color:red;"> <?php echo form_error('mob_no'); ?><?php echo isset($errors['mob_no'])?$errors['mob_no']:''; ?> </span>
 														</div>
 													</div>

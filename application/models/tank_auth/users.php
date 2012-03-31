@@ -64,6 +64,14 @@ class Users extends CI_Model
 		return $query->result_array();
 	 }
 	 
+	 function fetch_program()
+	 {
+		$this->db->select('*');
+		$this->db->from('program');
+		$query = $this->db->get();
+		return $query->result_array();
+	 }
+	 
 	 function user_profile_update($logged_user)
 	 {
 		$year = $this->input->post('year');
@@ -83,9 +91,16 @@ class Users extends CI_Model
 		'dob' => $dob
 		//'user_pic_path' => $this->input->post('area_intrst')
 		);
+		$users_update_data = array(
+		'fullname' => $this->input->post('full_name')
+		);
 		
 		$this->db->where('user_id',$logged_user);
 		$this->db->update('user_profiles', $data); 
+		
+		$this->db->where('id',$logged_user);
+		$this->db->update('users',$users_update_data); 
+		
 	 }
 	 
 	 /* function for pic upload */
@@ -330,7 +345,7 @@ class Users extends CI_Model
   if($user_type=='admin')
   {
   $level='2,3,4,5';
-  } 
+  }
   else if($user_type=='student')
   {
   $level='1';
@@ -786,10 +801,18 @@ class Users extends CI_Model
 		}
 	}
 	
-	// function get_email_by_userid()
-	// {
-		
-	// }
+	function get_email_by_userid($uid)
+	{
+		$this->db->select('email');
+		$query = $this->db->get_where('users',array('id'=>$uid));
+		if($this->db->affected_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else{
+		return 0;
+		}
+	}
 	
 	function get_university_by_id($univ_id)
 	{
@@ -862,6 +885,142 @@ class Users extends CI_Model
 		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id,'type1'=>'article'));
 		$rows = mysql_affected_rows();
 		return $rows;
+	}
+	
+	function get_program_provide_by_univ($univ_id)
+	{
+		$this->db->select('program_id');
+		$this->db->from('univ_program');
+		$this->db->where('univ_id',$univ_id);
+		$query = $this->db->get();
+		foreach($query->result_array() as $results)
+		{
+		$program_id[]=$results['program_id'];
+		}
+		$this->db->select('course_name');
+		$this->db->from('program');
+		$this->db->where_in('prog_id', $program_id);
+		$this->db->limit(5);
+		$res=$this->db->get();
+		//print_r($res->row_array());
+		return $res->result_array();
+	}
+	
+	function get_collages_by_search($type_educ_level,$search_country,$search_course)
+	{
+		if($type_educ_level != '' and $search_country != '' and $search_course != '')
+		{
+		
+		$this->db->select('univ_id');
+		$this->db->from('university');
+		$this->db->where('country_id',trim($search_country));
+		$rows_univ = $this->db->get();
+		$rows_univ_table = $rows_univ->result_array();
+		
+		$this->db->select('univ_id');
+		$this->db->where('program_id',trim($search_course));
+		$rows_univ_program = $this->db->get('univ_program');
+		$rows_univ_program_table = $rows_univ_program->result_array();
+		$arr = array();
+		if($rows_univ->num_rows() > 0 && $rows_univ_program->num_rows() > 0)
+		{
+			foreach($rows_univ_table as $univ_table)
+			{
+				 $univ_id_one = $univ_table['univ_id'];
+				foreach($rows_univ_program_table as $univ_prog_table)
+				{
+					 $univ_prog_table = $univ_prog_table['univ_id'];
+					if(trim($univ_id_one) == trim($univ_prog_table))
+					{
+						//echo $univ_prog_table;
+						$this->db->select('*');
+						$this->db->from('university');
+						$this->db->where('univ_id',$univ_prog_table);
+						$results = $this->db->get();
+						$arr[] = $results->row_array();
+						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
+						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
+						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);
+						
+					}
+					
+				}
+			}
+			$univ_data=array();
+			$univ_data['university'] = $arr;
+			$univ_data['followers'] = $univ_follow;
+			$univ_data['article'] = $univ_article;
+			$univ_data['program'] = $univ_program;
+			//print_r(univ_data);
+			return $univ_data;
+		}
+		
+	}
+	else if($type_educ_level == 0 and $search_country != '' and $search_course == '')
+	{
+						$this->db->select('*');
+						$this->db->from('university');
+						$this->db->where('country_id',$search_country);
+						$results = $this->db->get();
+						$arr[] = $results->row_array();
+						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
+						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
+						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);	
+						//return $arr;
+						$univ_data=array();
+						$univ_data['university'] = $arr;
+						$univ_data['followers'] = $univ_follow;
+						$univ_data['article'] = $univ_article;
+						$univ_data['program'] = $univ_program;
+						//print_r(univ_data);
+						return $univ_data;
+	}
+	
+	else if($type_educ_level != 0 and $type_educ_level != '' and $search_country != '' and $search_course == '')
+	{
+		$this->db->select('univ_id');
+		$this->db->from('university');
+		$this->db->where('country_id',trim($search_country));
+		$rows_univ = $this->db->get();
+		$rows_univ_table = $rows_univ->result_array();
+		
+		$this->db->select('univ_id');
+		$this->db->where('curr_educ_level_id',trim($type_educ_level));
+		$rows_univ_program = $this->db->get('university_educ_level');
+		$rows_univ_program_table = $rows_univ_program->result_array();
+		
+		if($rows_univ->num_rows() > 0 && $rows_univ_program->num_rows() > 0)
+		{
+			foreach($rows_univ_table as $univ_table)
+			{
+				 $univ_id_one = $univ_table['univ_id'];
+				foreach($rows_univ_program_table as $univ_prog_table)
+				{
+					 $univ_prog_table = $univ_prog_table['univ_id'];
+					if(trim($univ_id_one) == trim($univ_prog_table))
+					{
+						//echo $univ_prog_table;
+						$this->db->select('*');
+						$this->db->from('university');
+						$this->db->where('univ_id',$univ_prog_table);
+						$results = $this->db->get();
+						$arr[] = $results->row_array();
+						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
+						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
+						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);
+					}
+					
+				}
+			}
+			$univ_data=array();
+			$univ_data['university'] = $arr;
+			$univ_data['followers'] = $univ_follow;
+			$univ_data['article'] = $univ_article;
+			$univ_data['program'] = $univ_program;
+			//print_r(univ_data);
+			return $univ_data;
+		}
+	}
 	}
 }
 

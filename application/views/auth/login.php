@@ -47,13 +47,26 @@ $(document).ready(function(){
 //alert(errors);
 //if(errors != '')
 //{
+
 <?php if($msg == 1) { ?>
  $('#forget_model').modal('toggle');
  <?php } ?>
 //}
 });
 </script>
-
+<div class="modal" id="show_success" style="display:none;" >
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>Message For You</h3>
+  </div>
+  <div class="modal-body">
+    <p><center><h4>An link has been emailed to you.....</h4></center></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn">Close</a>
+    <!--<a href="#" class="btn btn-primary">Save changes</a>-->
+  </div>
+</div>
 <div id="forget_model" class="model_back modal hide fade" style="display: none; ">
 					<div class="modal-header no_border forget_heading">
 						<a class="close" data-dismiss="modal">x</a>
@@ -67,13 +80,13 @@ $(document).ready(function(){
 									<label class="control-label" for="prependedInput">Enter Your Email</label>
 									<div class="controls">
 										<div class="input-prepend">
-											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock1.png" class="email_forget"></span><input type="text" class="span3" name="email" size="16" >
+											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png" class="email_forget"></span><input type="text" class="span3" name="email" size="16" >
 											<span style="color:red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="controls">
-									<input type="submit" class="btn btn-primary" name="reset_pass">
+									<input type="submit" value="Submit" class="btn btn-primary" name="reset_pass">
 								</div>
 							 </fieldset>
 						</form>
@@ -165,3 +178,11 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
+<script>
+<?php if($email_send != 0) { ?>
+$(document).ready(function(){
+$('#show_success').css('display','block');
+$("#show_success").delay(3000).fadeOut(200);
+});
+<?php } ?>
+</script>

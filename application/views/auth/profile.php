@@ -53,6 +53,11 @@ $(window).load(function(){
     })
 });
 </script>
+
+
+
+
+
 <div id="myModal" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
@@ -79,7 +84,7 @@ $(window).load(function(){
 							}
 							?>
 				</div>
-				<div class="float_l span3 margin_l12"><h4>Upload Your Picture</h4><div class="span2 margin_zero"><input type="file" name="userfile" /><br />
+				<div class="float_l span3 margin_l12 margin_t50"><h4>Upload Your Picture</h4><div class="span2 margin_zero"><input type="file" name="userfile" /><br />
 			</div>
 			</div>
 				<div class="clearfix"></div>
@@ -164,6 +169,7 @@ $(window).load(function(){
 		</form>
 	</div>
 </div>
+
 </div>
 </div>
 
@@ -174,6 +180,23 @@ $(window).load(function(){
 <!-- Start of Login Dialog -->  
 
 <!-- Load Pop-up for pic upload End Here -->
+
+<div class="modal" id="show_success_update_profile" style="display:none;" >
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>Message For You</h3>
+  </div>
+  <div class="modal-body">
+    <p><center><h4>Your Profile has been updated.....</h4></center></p>
+  </div>
+  <div class="modal-footer">
+    <!--<a href="#" class="btn">Close</a>-->
+    <!--<a href="#" class="btn btn-primary">Save changes</a>-->
+  </div>
+</div>
+
+
+
 	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -216,13 +239,29 @@ $(window).load(function(){
 								<!--<src="<?php echo "$base$img_path";  ?>profile_pic.png">-->
 								<h3 class="text_align"><?php echo $query['fullname']; ?></h3>
 								<div>
-									<div class="text_align">
-										<h4>11 March,Male</h4>
-										<h4>MBA</h4>
+									<div class="margin_all">
+									<?php
+										$dob = $profile_pic['dob'];
+										$dob_explode = explode("-",$dob);
+									?>
+										<h4><?php echo $dob_explode[2]; ?> 
+										<?php if($dob_explode[1] ==01) { echo 'Jan';} ?>
+										<?php if($dob_explode[1] ==02) { echo 'Feb';} ?>
+										<?php if($dob_explode[1] ==03) { echo 'March';} ?>
+										<?php if($dob_explode[1] ==04) { echo 'April';} ?>
+										<?php if($dob_explode[1] ==05) { echo 'May';} ?>
+										<?php if($dob_explode[1] ==06) { echo 'June';} ?>
+										<?php if($dob_explode[1] ==07) { echo 'July';} ?>
+										<?php if($dob_explode[1] ==08) { echo 'Aug';} ?>
+										<?php if($dob_explode[1] ==09) { echo 'Sept';} ?>
+										<?php if($dob_explode[1] ==10) { echo 'Oct';} ?>
+										<?php if($dob_explode[1] ==11) { echo 'Nov';} ?>
+										<?php if($dob_explode[1] ==12) { echo 'Dec';} ?>,
+										<?php echo $profile_pic['gender']; ?></h4>
+										
 									</div>
 								</div>
-							</div>
-							<div class="part_second" style="">
+								<div class="part_second" style="">
 								<div class="index_sidebar_progress">
 									<div class="index_sidebar_body">
 										<h4 class="font_sidebar">Your Profile Completes 25%</h4>
@@ -234,7 +273,9 @@ $(window).load(function(){
 										</div>
 									</div>
 								</div>
+								</div>
 							</div>
+							
 							<div class="part_second">
 								<div class="index_sidebar_box">
 									<div class="index_sidebar_header font_sidebar">
@@ -259,10 +300,10 @@ $(window).load(function(){
 									</div>
 									<div class="index_sidebar_content">
 										<ul class="links1">
-											<li><a href="#">Composer</a></li>
-											<li><a href="#">Inbox (40)</a></li>
-											<li><a href="#">Outbox (40)</a></li>
-										</ul>
+           <li><a href="#">Composer</a></li>
+           <li><div><div class="float_l"><a href="#">Inbox </a></div><div class="float_r"><span class="badge badge-warning">68</span></div><div class="clearfix"></div></div></li><!--29-->
+           <li><div><div class="float_l"><a href="#">Outbox </a></div><div class="float_r"><span class="badge badge-warning">8</span></div><div class="clearfix"></div></div></li><!--29-->
+          </ul>
 									</div>
 								</div>
 							</div>
@@ -315,7 +356,7 @@ $(window).load(function(){
 								</ul>
 							</div>
 							<div class="margin_t news_box">
-								<div class="span4 margin_zero">
+								<div class="span5 margin_zero">
 									<h2>Study Abroad</h2>
 									<div>
 										<ul class="study_point">
@@ -325,7 +366,7 @@ $(window).load(function(){
 													<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/us.png"></div>
 													<div class="clearfix"></div>
 												</div>
-												<div class="float_l count margin_l">
+												<div class="float_l count">
 													<div class="float_l"><a href="#" class="study_content">UK</a></div>
 													<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/gb.png"></div>
 													<div class="clearfix"></div>
@@ -338,7 +379,7 @@ $(window).load(function(){
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ca.png"></div>
 													<div class="clearfix"></div>
 												</div>
-												<div class="float_l count margin_l">
+												<div class="float_l count">
 													<div class="float_l"><a href="#" class="study_content">Korea</a></div>
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/kr.png"></div>
 													<div class="clearfix"></div>
@@ -351,7 +392,7 @@ $(window).load(function(){
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/india.png"></div>
 													<div class="clearfix"></div>
 												</div>
-												<div class="float_l count margin_l">
+												<div class="float_l count">
 													<div class="float_l"><a href="#" class="study_content">Online</a></div>
 													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ol.png"></div>
 													<div class="clearfix"></div>
@@ -360,10 +401,10 @@ $(window).load(function(){
 										</ul>
 									</div>
 								</div>
-								<div class="margin_l float_l right_border"></div>
-								<div class="span5 margin_l">
+								<div class="float_l right_border"></div>
+								<div class="span5 margin_zero">
 									<h2>News</h2>
-										<ul class="news_left">
+										<ul>
 											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
 											<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
 											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
@@ -446,10 +487,14 @@ $(window).load(function(){
 <?php if($pwd_change=='pwd_change'){ ?>
 $('#pwd-change-msg').modal('toggle');
 <?php } ?>
+
+<?php if($pwd_change=='pus'){ ?>
+$('#show_success_update_profile').css('display','block');
+$("#show_success_update_profile").delay(2500).fadeOut(200);
+<?php } ?>
 </script>
 <script>
 $('#upload').click(function(){
-$('#show_img_bar').css("display","block");
-//alert('hi');
+$('.img_bar_profile_modal').css('display','block').css('z-index','999').css('position','absolute');
 });
 </script>

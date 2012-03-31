@@ -53,7 +53,10 @@
 									echo $university_details['about_us'];
 									?>
 								</div>
-							</div>	
+							</div>
+							<!--<div id="show_popup_success_join" class="success_modal">
+							You have Joined Successfully
+							</div>-->
 							<div>
 								<h3 class="heading_follow">Followers</h3>
 									<div class="float_l span6 margin_zero">
@@ -153,24 +156,26 @@
 									
 										<fieldset>
 											<div class="control-group">
-												<input type="text" class="input-medium" placeholder="Name">
+												<input type="text" name="apply_name" class="input-medium" placeholder="Name">
 											</div>
 											<div class="control-group">
-												<select id="select01" class="span2">
-													<option>Course of interest</option>
-													<option>Department of Engineering</option>
-													<option>Department of Information Technology</option>
-													<option>Department of Management</option>
-													<option>Department of Bio Technology</option>
+												<select name="apply_course_interest" id="apply_course_interest" class="span2">
+													<option value="">Course of interest</option>
+													<?php
+													foreach($area_interest as $apply_interest)
+													{
+														echo "<option value=$apply_interest[prog_parent_id]> $apply_interest[program_parent_name] </option>";
+													}
+													?>
 												</select>
 											</div>
 											<div class="control-group">
-												<input type="text" class="input-medium" placeholder="Email Id">
+												<input type="text" name="apply_email" id="apply_email" class="input-medium" placeholder="Email Id">
 											</div>
 											<div class="control-group">
-												<input type="text" class="input-medium" placeholder="Mobile Number">
+												<input type="text" name="apply_mobile" class="input-medium" placeholder="Mobile Number">
 											</div>
-											<div class="control-group">
+											<!--<div class="control-group">
 													<p class="help-block margin_alpha margin_b">Type in the characters you see below</p>
 												<div class="float_l">
 													<img src="<?php echo "$base$img_path" ?>/Captcha.jpg">
@@ -179,9 +184,9 @@
 													<input type="text" class="input_small">
 												</div>
 												<div class="clearfix"></div>
-											</div>
+											</div>-->
 											<div class="control-group">
-												<button class="btn btn-primary" href="#">Apply Now!</button>
+												<input type="submit" name="apply_now" id="apply_now" value="Apply Now!" class="btn btn-primary"/>
 											</div>
 										 </fieldset>
 									</form>
@@ -310,4 +315,3 @@
 			</div>
 		</div>
 	</div>
-	
