@@ -2,9 +2,9 @@
 .span3{width:250px}
 .span5{width:600px}
 .span6{width:450px}
-.span7{width:550px}
 .span8{width:960px}
 .admin{width:600px}
+.span11{width:550px}
 [class*="span"] {
 float: left;
 margin-left: 20px;

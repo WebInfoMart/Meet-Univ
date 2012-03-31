@@ -23,7 +23,7 @@ $z=Array();
 <?php if($gallery!=$z) { ?>
 <div id="content">
 		<h2 class="margin">Update Gallery</h2>
-		<div class="form span7 margin_zero">
+		<div class="form margin_zero">
 			<form action="manage_home_gallery" method="post">
 
 				<ul>

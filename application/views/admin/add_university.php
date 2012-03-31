@@ -348,7 +348,7 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 		</div>
 		
 
-		<div class="form span7">
+		<div class="form span11">
 			
 			<div class="modal-lightsout" id="add-country">
 				<div class="modal-profile" id="add-country1">
