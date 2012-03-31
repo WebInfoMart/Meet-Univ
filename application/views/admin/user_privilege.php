@@ -50,7 +50,8 @@
 							</div>
 							<div class="span5">
 								<div class="span1"><p class="onoffswitch margin_l3">
-									<span class="onoff_box" style="background-position-x: 0px; "><input type="checkbox" id="view_<?php echo $privilage['privilege_type_id'];?>" name="view_<?php echo $privilage['privilege_type_id'];?>" value="1"  class="onoffbtn" ></span>
+									<span class="onoff_box" style="background-position-x: 0px; ">
+									<input type="checkbox" id="view_<?php echo $privilage['privilege_type_id'];?>" name="view_<?php echo $privilage['privilege_type_id'];?>" value="1"  class="onoffbtn" ></span>
 								</p>
 								</div>
 								<div class="span1"><p class="onoffswitch margin_l3">

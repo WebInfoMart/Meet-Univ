@@ -2,9 +2,9 @@
 $regs='<option value="0">Select state</option>';
 //print_r($region);
 
-foreach($region as $reg) { 
+foreach($univ_admins as $reg) { 
 $sel='';
-if($reg['state_id']==$ssid)
+if($reg['id']==$ssid)
 {
 $sel='selected';
 }

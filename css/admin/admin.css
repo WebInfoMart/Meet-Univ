@@ -2,6 +2,7 @@
 .span3{width:250px}
 .span5{width:600px}
 .span6{width:450px}
+.span7{width:550px}
 .span8{width:960px}
 .admin{width:600px}
 [class*="span"] {
@@ -104,6 +105,19 @@ border-color: rgba(255, 0, 0, .8) !important;
   outline: 0 !important;
   padding:7px;
  /* width:290px !important;*/
+}
+.focused_error_univ_new
+{
+border-color: rgba(255, 0, 0, .8) !important;
+  -webkit-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+     -moz-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+          box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+  outline: 0 !important;
+  padding:7px;
+  width:185px!important;
+}
+ #content form label .error {
+ color: red;
 }
 .tdn
 {
@@ -458,7 +472,10 @@ background-position: -193px -95px;
 .icon-view
 {
 background-position: -48px 1px;
-
+}
+.icon-univ
+{
+background-position: 0px -23px !important;
 }
 .open .menu, .dropdown.open .menu, .open .dropdown-toggle, .dropdown.open .dropdown-toggle {
 	color: #ffffff;
@@ -510,4 +527,50 @@ margin-top:40px;
 width:100px;
 height:70px;
 } 
+.closeimagesize
+{
+width:37px;
+height:35px
+}
+
+/*****************model_box_second***********************************/
+.modal-profile1 h2 {
+    font-size:2em;
+    letter-spacing:-1px;
+	line-height: 15px!important;
+}
+.modal-profile1 {
+    display:none;
+    width: 825px;
+    padding:25px 20px;
+    border:1px solid #fff;
+    box-shadow: 0px 2px 7px #292929;
+    -moz-box-shadow: 0px 2px 7px #292929;
+    -webkit-box-shadow: 0px 2px 7px #292929;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    background: #f2f2f2;
+    z-index:50;
+}
+
+a.modal-social1 {
+    margin:0 10px 0 0;
+}
+.modal-lightsout1 {
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:25;
+    background:#000;
+}
+.university_model div{padding: 3px 0px!important;;}
+.university_model p{padding:5px 0px!important;}
+.university_model input.text{width:185px;}
+.button_width{width: 110px;}
+.form_univ{width:210px;}
+.right_univ{border:1px dotted #aaa;float:left;width:0px;height:265px;margin-left: 10px;}
+form #add_user_form .university_model label_error{color:red;}
 	

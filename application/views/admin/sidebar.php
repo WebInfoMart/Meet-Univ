@@ -26,7 +26,6 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<ul><?php
 		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 		{?>
-			?>
 		<li><?php echo anchor("$base".'admin/addevents', 'Add Que'); ?></li> <?php } ?>
 			<li><?php echo anchor("$base".'admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
 

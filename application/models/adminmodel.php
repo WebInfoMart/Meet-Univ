@@ -44,7 +44,27 @@ class Adminmodel extends CI_Model
 		//return $this->ci->session->userdata('newadmin_user_id');
 		return NULL;
 	}
-	
+	public function insert_userprivlege_data_ajax($new_admin_id)
+	{
+		
+		
+		$privilege=$this->input->post('privilege');
+		$privileges=explode('$$',$privilege);
+		$cretedby_admin=$this->tank_auth->get_admin_user_id();
+		for($i=0;$i<5;$i++)
+		{
+		$priv=explode('##',$privileges[$i]);
+						$data = array(
+			   'user_id' => $new_admin_id ,
+			   'privilege_level' => $priv[1],
+			   'privilege_type_id' => $priv[0],
+			   'permitted_by' => $cretedby_admin,
+			);
+			$this->db->insert('user_privilige', $data);
+		}
+		//return $this->ci->session->userdata('newadmin_user_id');
+		return $privileges;
+	}
 	public function fetch_user_data($paging)
 	{
 		$user_id	= $this->tank_auth->get_admin_user_id();
@@ -503,6 +523,8 @@ class Adminmodel extends CI_Model
 		$this->db->where('univ_id',$univ_id);
 		$this->db->join('users', 'users.id = university.user_id');
 		$this->db->join('country', 'country.country_id = university.country_id','left');
+		$this->db->join('state', 'state.state_id = university.state_id','left');
+		$this->db->join('city', 'city.city_id = university.city_id','left');
 		$query=$this->db->get();
 		return $query->result_array();
 	}
@@ -573,7 +595,16 @@ class Adminmodel extends CI_Model
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			}
 			redirect('admin/manage_university/uus');
-	}		
+	}
+
+	function check_unique_field($field_name,$value,$table_name)
+	{
+		$this->db->select('*');
+		$this->db->from($table_name);
+		$this->db->where($field_name,$value);
+		$query=$this->db->get();
+		return $query->num_rows();
+	}	
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

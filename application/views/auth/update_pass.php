@@ -22,35 +22,43 @@
 									<div class="contact_box margin">
 										<div class="margin_l margin_t">
 											<h3> Change Password</h3>
-												<form class="form-horizontal form_data margin1">
+											
+									<form class="form-horizontal form_data margin1" method="post" >
 													<div class="control-group">
 														<label class="control-label">Current Password *</label>
 														<div class="controls contact_box_content">
-															<input type="text" class="input_xxxx-large" id="input01">
+									<input type="password" value="<?php echo set_value('current_password'); ?>" class="input_xxxx-large" name="current_password" id="input01">
+									<span style="color:red;"> <?php echo form_error('current_password'); ?><?php echo isset($errors['current_password'])?$errors['current_password']:''; ?></td> </span>
+							
 														</div>
 													</div>
 													<div class="control-group">
 														<label class="control-label">New Password *</label>
 														<div class="controls contact_box_content">
-															<input type="text" class="input_xxxx-large" id="input01">
+									<input type="password" value="<?php echo set_value('new_password'); ?>" class="input_xxxx-large" name="new_password" id="input01">
+									<span style="color:red;"> <?php echo form_error('new_password'); ?><?php echo isset($errors['new_password'])?$errors['new_password']:''; ?></td> </span>
+							
 														</div>
 													</div>
 													<div class="control-group">
 														<label class="control-label">Re-enter Password *</label>
 														<div class="controls contact_box_content">
-															<input type="text" class="input_xxxx-large" id="input01">
+									<input type="password"  value="<?php echo set_value('confirm_new_password'); ?>" class="input_xxxx-large" name="confirm_new_password" id="input01">
+									<span style="color:red;"> <?php echo form_error('confirm_new_password'); ?><?php echo isset($errors['confirm_new_password'])?$errors['confirm_new_password']:''; ?></td> </span>
+							
 														</div>
 													</div>
-												</form>
+											
 												<div class="clearfix"></div>
 										</div>
 										<div class="clearfix"></div>
 									</div>
-									<div class="clearfix"></div>
-									<div class="margin_t">
-										<button class="btn btn-primary" href="#">Update</button>
-									</div>
+										<div class="clearfix"></div>
+										<div class="margin_t">
+											<button class="btn btn-primary" href="#">Update</button>
+										</div>
 								</div>
+								</form>
 							</div>
 						</div>
 							<div class="span3">
