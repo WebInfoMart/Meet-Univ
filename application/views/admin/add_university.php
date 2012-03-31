@@ -793,7 +793,6 @@ function univ_admin_validate_form()
 	   cache: false,
 	   success: function(msg)
 	   {
-	   alert(msg);
 	   $('.modal-profile1').fadeOut("slow");
         $('.modal-lightsout1').fadeOut("slow");
 		$('#add_user_form').reset();

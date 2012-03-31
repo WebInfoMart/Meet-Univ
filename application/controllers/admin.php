@@ -1544,8 +1544,8 @@ class Admin extends CI_Controller
 	
 	function check_unique_field($field_name='',$table_name='')
 	{
-		$result=$this->adminmodel->check_unique_field($field_name,$this->input->post('email'),$table_name);
-		echo $result;
+		$data['result']=$this->adminmodel->check_unique_field($field_name,$this->input->post('email'),$table_name);
+		$this->load->view('ajaxviews/check_unique_field', $data);	
 	}
 	
 	function add_univ_admin_ajax()
