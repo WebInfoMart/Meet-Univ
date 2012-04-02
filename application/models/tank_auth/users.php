@@ -404,7 +404,7 @@ class Users extends CI_Model
 	{
 		//$data['created'] = date('Y-m-d H:i:s');
 		//$data['activated'] = $activated ? 1 : 0;
-		//$data['activated'] = 1;
+		$data['activated'] = 1;
 
 		if ($this->db->insert($this->table_name, $data)) {
 			$user_id = $this->db->insert_id();
@@ -937,7 +937,9 @@ class Users extends CI_Model
 						$this->db->from('university');
 						$this->db->where('univ_id',$univ_prog_table);
 						$results = $this->db->get();
+						$res_of_univ_search = $results->row_array();
 						$arr[] = $results->row_array();
+						$marker[] = $res_of_univ_search['latitude'].','.$res_of_univ_search['longitude'].','.$res_of_univ_search['univ_name'].','.$res_of_univ_search['address_line1'];
 						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
 						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
 						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);
@@ -951,6 +953,7 @@ class Users extends CI_Model
 			$univ_data['followers'] = $univ_follow;
 			$univ_data['article'] = $univ_article;
 			$univ_data['program'] = $univ_program;
+			$univ_data['position'] = $marker;
 			//print_r(univ_data);
 			return $univ_data;
 		}
@@ -962,16 +965,19 @@ class Users extends CI_Model
 						$this->db->from('university');
 						$this->db->where('country_id',$search_country);
 						$results = $this->db->get();
+						$res_of_univ_search = $results->row_array();
 						$arr[] = $results->row_array();
 						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
 						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
 						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);	
+						$marker[] = $res_of_univ_search['latitude'].','.$res_of_univ_search['longitude'].','.$res_of_univ_search['univ_name'].','.$res_of_univ_search['address_line1'];
 						//return $arr;
 						$univ_data=array();
 						$univ_data['university'] = $arr;
 						$univ_data['followers'] = $univ_follow;
 						$univ_data['article'] = $univ_article;
 						$univ_data['program'] = $univ_program;
+						$univ_data['position'] = $marker;
 						//print_r(univ_data);
 						return $univ_data;
 	}
@@ -1004,10 +1010,12 @@ class Users extends CI_Model
 						$this->db->from('university');
 						$this->db->where('univ_id',$univ_prog_table);
 						$results = $this->db->get();
+						$res_of_univ_search = $results->row_array();
 						$arr[] = $results->row_array();
 						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
 						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
 						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);
+						$marker[] = $res_of_univ_search['latitude'].','.$res_of_univ_search['longitude'].','.$res_of_univ_search['univ_name'].','.$res_of_univ_search['address_line1'];
 					}
 					
 				}
@@ -1017,6 +1025,7 @@ class Users extends CI_Model
 			$univ_data['followers'] = $univ_follow;
 			$univ_data['article'] = $univ_article;
 			$univ_data['program'] = $univ_program;
+			$univ_data['position'] = $marker;
 			//print_r(univ_data);
 			return $univ_data;
 		}

@@ -42,16 +42,10 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 ?>
 
 <script>
-//var errors = <?=$error ?>
 $(document).ready(function(){
-//alert(errors);
-//if(errors != '')
-//{
-
 <?php if($msg == 1) { ?>
  $('#forget_model').modal('toggle');
  <?php } ?>
-//}
 });
 </script>
 <div class="modal" id="show_success" style="display:none;" >
@@ -68,6 +62,12 @@ $(document).ready(function(){
   </div>
 </div>
 <div id="forget_model" class="model_back modal hide fade" style="display: none; ">
+<?php 
+$class_modal_email='';
+$error_modal_email = form_error('email');
+
+if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } else { $class_modal_email='span3'; }
+ ?>
 					<div class="modal-header no_border forget_heading">
 						<a class="close" data-dismiss="modal">x</a>
 						<h3>Forget Password</h3>
@@ -80,7 +80,7 @@ $(document).ready(function(){
 									<label class="control-label" for="prependedInput">Enter Your Email</label>
 									<div class="controls">
 										<div class="input-prepend">
-											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png" class="email_forget"></span><input type="text" class="span3" name="email" size="16" >
+											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png" class="email_forget"></span><input type="text" class="<?php echo $class_modal_email; ?>" name="email" size="16" >
 											<span style="color:red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
 										</div>
 									</div>

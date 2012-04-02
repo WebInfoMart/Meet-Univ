@@ -30,7 +30,7 @@
 				</div>
 				
 				<div class="float_r span8 margin_t margin_l">
-					<form class="form-horizontal form_horizontal_home" action="collage_search" method="post">
+					<form class="form-horizontal form_horizontal_home" action="college_search" method="post">
 					<input type="hidden" name="type_search" id="type_search" value="0"/>
 						<div class="control-group">
 						

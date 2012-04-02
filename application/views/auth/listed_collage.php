@@ -163,6 +163,11 @@
 							</div>
 						</div>
 						<div class="clearfix"></div>
+						<?php echo $headerjs; ?>
+						<?php echo $headermap; ?>
+						<?php echo $onload; ?>
+						<?php echo $map; ?>
+						<?php echo $sidebar; ?>
 					</div>
 					<div class="margin_t">
 						<div class="search_bar_heading">

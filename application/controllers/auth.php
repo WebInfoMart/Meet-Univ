@@ -243,7 +243,7 @@ class Auth extends CI_Controller
 						$uid = $this->session->userdata('user_id');
 						$data['logged_user_email'] = $this->users->get_email_by_userid($uid);
 						$uid = $data['logged_user_email'];
-						$email_body = $this->load->view('auth/new_signup_content_email.php');
+						$email_body = $this->load->view('auth/new_signup_content_email.php','',TRUE);
 						$this->email->set_newline("\r\n");
 
             $this->email->from('Meet-University.com', 'Meet University');
@@ -1003,7 +1003,7 @@ class Auth extends CI_Controller
 				$this->ci->session->set_userdata(array(
 						 'psw_change'	=> 'true'
 						 ));
-				echo 'SORRY THERE WAS A ERROR';
+				$this->load->view('auth/forgot_pass_invalid_link');
 				}
 			}
 			else{
@@ -1084,37 +1084,7 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer',$data);
 	}
 	
-	function collage_search()
-	{
-			$data = $this->path->all_path();
-			$this->load->view('auth/header',$data);
-			$data['gallery_home'] = $this->users->fetch_home_gallery();
-			$data['country'] = $this->users->fetch_country();
-			$data['area_interest'] = $this->users->fetch_program();
-			
-		if($this->input->post('btn_col_search'))
-		{
-				$this->form_validation->set_rules('type_search','Education Level','trim|required');
-				$this->form_validation->set_rules('search_country','Country','trim|required');
-				
-			if($this->form_validation->run())
-			{
-				$type_educ_level = $this->input->post('type_search');
-				$search_country = $this->input->post('search_country');
-				$search_course = $this->input->post('search_program');
-				$data['get_university'] = $this->users->get_collages_by_search($type_educ_level,$search_country,$search_course);
-				//print_r($data['get_university']);
-				$this->load->view('auth/listed_collage',$data);
-			}
-			else{
-					redirect('');
-			}
-		}
-		else{
-		$this->load->view('auth/listed_collage',$data);
-		}
-		$this->load->view('auth/footer',$data);
-	}
+	
 }
 
 /* End of file auth.php */

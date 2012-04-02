@@ -25,7 +25,7 @@ if($error_pass != '') { $class_cpass = 'focused_error_lost_pass_page'; } else { 
 								<label class="control-label" for="input01">User:</label>
 								<div class="controls">
 									<div class="span2 margin_zero">
-									<div class="float_l">
+									<div class="float_l" style="width:100px;">
 									<?php
 									if($user_detail['user_pic_path'] != '')
 									{

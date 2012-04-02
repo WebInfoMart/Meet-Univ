@@ -11,7 +11,7 @@
     <table border="0" cellspacing="0" cellpadding="0" align="right">
      <tbody>
 	 <tr style="min-height:10.5pt">
-		<td style="float:left;width:385px;padding:7px;"><img src="logo1.png"></td>
+		<td style="float:left;width:385px;padding:7px;"><img src="<?php echo "$base$img_path" ?>/logo.png"></td>
 		<td style="float:right;width:385px;"></td>
      </tr>
     </tbody></table>
