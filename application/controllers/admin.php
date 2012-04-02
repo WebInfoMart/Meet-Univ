@@ -1389,58 +1389,6 @@ class Admin extends CI_Controller
 		}
 		else
 		{
-		$data['model']='0';
-		$data['select_place']=array('0','0','0');
-		if($this->input->post('addcountry'))
-		{
-		$this->form_validation->set_rules('country_model', 'Country', 'trim|required|is_unique[country.country_name]');
-		$this->form_validation->set_rules('state_model', 'State', 'trim|required');
-		$this->form_validation->set_rules('city_model', 'City', 'trim|required');
-		if ($this->form_validation->run()) {
-		$data['select_place']=array();
-		$data['select_place']=$this->adminmodel->enterplacelevel1();
-		$data['msg']='Your Place Added Successfully';
-		$this->load->view('admin/userupdated', $data);
-		}
-		else
-		{
-		$data['model']='1';
-		}
-		}
-		else if($this->input->post('addstate'))
-		{
-		$this->form_validation->set_rules('country_model1', 'Country', 'trim|required|string');
-		$this->form_validation->set_rules('state_model1', 'State', 'trim|required|xss_clean|callback_state_check');
-		$this->form_validation->set_rules('city_model1', 'City', 'trim|required|string');
-		if ($this->form_validation->run()) {
-		$data['select_place']=array();
-		$data['select_place']=$this->adminmodel->enterplacelevel2();
-		$data['msg']='Your Place Added Successfully';
-		$this->load->view('admin/userupdated', $data);
-		
-		}
-		else
-		{
-		$data['model']='2';
-		}
-		}
-		else if($this->input->post('addcity'))
-		{
-		$this->form_validation->set_rules('country_model2', 'Country', 'trim|required|string');
-		$this->form_validation->set_rules('state_model2', 'State', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('city_model2', 'City', 'trim|required|string|callback_city_check');
-		if ($this->form_validation->run()) {
-		$data['select_place']=array();
-		$data['select_place']=$this->adminmodel->enterplacelevel3();
-		$data['msg']='Your Place Added Successfully';
-		$this->load->view('admin/userupdated', $data);
-		
-		}
-		else
-		{
-		$data['model']='3';
-		}
-		}
 		$data['univ_admins']=$this->adminmodel->get_univ_admin();
 		$data['countries']=$this->users->fetch_country();
 		$data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
