@@ -969,9 +969,8 @@ class Admin extends CI_Controller
 		{
 		if ($this->input->post('upload')) {
 		$data['x']=$this->adminmodel->do_upload();
-		
-		//redirect('admin/manage_home_gallery');
-		print_r($data['x']);
+		redirect('admin/manage_home_gallery');
+		//print_r($data['x']);
 		
 		}
 		 $this->load->view('admin/home_gallery', $data);
@@ -1049,12 +1048,6 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
 		$this->form_validation->set_rules('about_us', 'About Us', 'trim|xss_clean');
-		$this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
-		$this->form_validation->set_rules('keyword', 'Keyword', 'trim|xss_clean');
-		$this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
-		$this->form_validation->set_rules('latitude', 'Latitude', 'trim|xss_clean');
-		$this->form_validation->set_rules('longitude', 'l\Longitude', 'trim|xss_clean');
-		
 		$this->form_validation->set_rules('univ_owner', 'University Owner', 'trim|required|string');
 		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 		if ($this->form_validation->run()) {
@@ -1131,7 +1124,36 @@ class Admin extends CI_Controller
 		$data['model']='3';
 		}
 		}
+		else if($this->input->post('add_univ_admin_submit'))
+		{
+		$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+		$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
+		if ($this->form_validation->run()) {
+		$hasher = new PasswordHash(
+		$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+		$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+		$password=$this->input->post('password');
+		$univ_admin_data=array(
+		'fullname'=>$this->input->post('fullname'),
+		'email'=>$this->input->post('email'),
+		'password'=>$hasher->HashPassword($password),
+		'createdby'=>'admin',
+		'level'=>'2',
+		'createdby_user_id'=>$data['user_id'],
+		);
+		$univ_admin_id['user_id']=$this->users->create_user($univ_admin_data,1);
+		$this->adminmodel->insert_userprivlege_data($univ_admin_id);	
+		$data['msg']='Your Place Added Successfully';
+		$this->load->view('admin/userupdated', $data);
 		
+		}
+		else
+		{
+		$data['model']='4';
+		}	
+		}
 		
 		$data['univ_admins']=$this->adminmodel->get_univ_admin();
 		$data['countries']=$this->users->fetch_country();
@@ -1541,39 +1563,6 @@ class Admin extends CI_Controller
 		$this->load->view('admin/view_university_detail', $data);	
 		}
 	 }	
-	}
-	
-	function check_unique_field($field_name='',$table_name='')
-	{
-		$data['result']=$this->adminmodel->check_unique_field($field_name,$this->input->post('email'),$table_name);
-		$this->load->view('ajaxviews/check_unique_field', $data);	
-	}
-	
-	function add_univ_admin_ajax()
-	{
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$hasher = new PasswordHash(
-		$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
-		$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
-		$password=$this->input->post('pwd');
-		$univ_admin_data=array(
-		'fullname'=>$this->input->post('name'),
-		'email'=>$this->input->post('email'),
-		'password'=>$hasher->HashPassword($password),
-		'createdby'=>'admin',
-		'level'=>'3',
-		'last_ip'	=> $this->ci->input->ip_address(),
-		'createdby_user_id'=>$data['user_id'],
-		
-		);
-		
-		$univ_admin_id=$this->users->create_user($univ_admin_data,1);
-		$this->adminmodel->insert_userprivlege_data_ajax($univ_admin_id['user_id']);
-		//$data['msg']='University Admin Added Successfully';
-		$this->load->view('admin/userupdated', $data);
-		$data['uai']=$univ_admin_id['user_id'];
-		$data['univ_admins']=$this->adminmodel->get_univ_admin();
-		$this->load->view('ajaxviews/univ_admin_list',$data);
 	}
 }
 
