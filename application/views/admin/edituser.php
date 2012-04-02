@@ -9,7 +9,7 @@ foreach($user_detail_edit as $user_detail){
 
 <div id="content">
 <h2 class="margin">Edit User</h2>
-<div class="form ">
+<div class="form span7">
 				<form action="<?php echo $base ?>admin/edituser/<?php echo $user_detail->id; ?>/<?php echo $user_detail->level; ?>" method="post">
 				<div class="span6">
 				<input type="hidden" name="hid_user_id" value="<?php echo $user_detail->id; ?>" >

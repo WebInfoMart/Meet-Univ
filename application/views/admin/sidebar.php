@@ -42,9 +42,9 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			<?php
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
-			<li><?php echo anchor("$base".'admin/addevents', 'Add Events'); ?></li>
+			<li><?php echo anchor("$base".'adminevents/add_event', 'Add Events'); ?></li>
 			<?php } ?>
-			<li><?php echo anchor("$base".'admin/manageevents', 'Manage Events'); ?></li></ul></li>
+			<li><?php echo anchor("$base".'adminevents', 'Manage Events'); ?></li></ul></li>
 			<?php
 			}
 			
