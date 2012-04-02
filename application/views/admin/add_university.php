@@ -1,9 +1,10 @@
 <div id="content" class="content_msg" style="display:none;">
 <div class="span8 margin_t">
-  <div class="message success"><p>University Admin added successfully</p>
+  <div class="message success"><p class="info_message"></p>
 </div>
   </div>
   </div>
+  
 <?php
 $class_univ_name='';
 $class_univ_owner='';
@@ -16,62 +17,6 @@ if($error_univ_name != '') { $class_univ_name = 'focused_error_univ'; } else { $
 
 if($error_univ_owner != '') { $class_univ_owner = 'focused_error_univ'; } else { $class_univ_owner='text'; }
 if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else { $class_sub_domain='text'; }
-
-//ist model box
-$class_country_model='';
-$class_state_model='';
-$class_city_model='';
-$error_country_model = form_error('country_model');
-$error_state_model = form_error('state_model');
-$error_city_model = form_error('city_model');
-
-if($error_country_model != '') { $class_country_model = 'focused_error_univ'; } else { $class_country_model='text'; }
-
-if($error_state_model != '') { $class_state_model = 'focused_error_univ'; } else { $class_state_model='text'; }
-if($error_city_model != '') { $class_city_model = 'focused_error_univ'; } else { $class_city_model='text'; }
-
-//2nd model box
-$class_country_model1='';
-$class_state_model1='';
-$class_city_model1='';
-$error_country_model1 = form_error('country_model1');
-$error_state_model1 = form_error('state_model1');
-$error_city_model1 = form_error('city_model1');
-
-if($error_country_model1 != '') { $class_country_model1 = 'focused_error_univ'; } else { $class_country_model1='text'; }
-
-if($error_state_model1 != '') { $class_state_model1 = 'focused_error_univ'; } else { $class_state_model1='text'; }
-if($error_city_model1 != '') { $class_city_model1 = 'focused_error_univ'; } else { $class_city_model1='text'; }
-
-//3rd model box
-$class_country_model2='';
-$class_state_model2='';
-$class_city_model2='';
-$error_country_model2 = form_error('country_model2');
-$error_state_model2 = form_error('state_model2');
-$error_city_model2 = form_error('city_model2');
-
-if($error_country_model2 != '') { $class_country_model2 = 'focused_error_univ'; } else { $class_country_model2='text'; }
-
-if($error_state_model2 != '') { $class_state_model2 = 'focused_error_univ'; } else { $class_state_model2='text'; }
-if($error_city_model2 != '') { $class_city_model2 = 'focused_error_univ'; } else { $class_city_model2='text'; }
-
-//4th model box
-$class_full_name='';
-$class_email='';
-$class_password='';
-$class_confirm_password='';
-$error_full_name = form_error('fullname');
-$error_email = form_error('email');
-$error_password = form_error('password');
-$error_confirm_password = form_error('confirm_password');
-
-if($error_full_name != '') { $class_full_name = 'focused_error_univ_new'; } else { $class_full_name='text'; }
-
-if($error_email != '') { $class_email = 'focused_error_univ_new'; } else { $class_email='text'; }
-if($error_password != '') { $class_password = 'focused_error_univ_new'; } else { $class_password='text'; }
-if($error_confirm_password != '') { $class_confirm_password = 'focused_error_univ_new'; } else { $class_confirm_password='text'; }
-
 ?>
 	<div id="content">
 			
@@ -214,10 +159,10 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 									<label>Country</label>
 								</div>
 								<div class="float_l span3">
-									<select class="styled span3 margin_zero" name="country" id="country" onchange="fetchstates(this)">
+									<select class="styled span3 margin_zero" name="country" id="country" onchange="fetchstates(0)">
 										<option value="0">Select Country</option>
 							<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$select_place[0]){?> selected <?php }?> ><?php echo $country['country_name']; ?></option>
+										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 									</select>
 								</div>
@@ -233,7 +178,7 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 											<label>State</label>
 										</div>
 										<div class="float_l span3">
-											<select class="styled span3 margin_zero" name="state" onchange="fetchcities(this)" id="state" disabled="disabled">
+											<select class="styled span3 margin_zero" name="state" onchange="fetchcities(0,0)" id="state" disabled="disabled">
 												<option value="">Please Select</option>
 												
 											
@@ -355,27 +300,24 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 					<h2>Add Your Place</h2>
 					<a href="#" title="Close profile window" class="modal-close-profile">
 					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" class="closeimagesize" alt="Close window"/></a>
-					<form action="" method="post" id="form_country" >
+					<form action="" method="post" id="form_country" id="add_country_form" >
 						<p>
 							<label>Country:</label><br>
-							<input type="text" size="30" class="<?php echo $class_country_model; ?>" name="country_model" value="<?php echo set_value('country_model'); ?>"> 
-							<div style="color: red;"> <?php echo form_error('country_model'); ?><?php echo isset($errors['country_model'])?$errors['country_model']:''; ?> </div>
-							
+							<input type="text" size="30" class="text" name="country_model" id="country_model" value=""> 
+							<label class="form_error"  id="country_error"></label>
 						</p>
 						<p>
 							<label>State:</label><br>
-							<input type="text" size="30" class="<?php echo $class_state_model; ?>" name="state_model" value="<?php echo set_value('state_model'); ?>"> 
-							<div style="color: red;"> <?php echo form_error('state_model'); ?><?php echo isset($errors['state_model'])?$errors['state_model']:''; ?> </div>
-							
+							<input type="text" size="30" class="text" name="state_model" id="state_model" value=""> 
+							<label class="form_error"  id="state_error"></label>
 						</p>
 						<p>
 							<label>City:</label><br>
-							<input type="text" size="30" class="<?php echo $class_city_model; ?>" name="city_model" value="<?php echo set_value('city_model'); ?>"> 
-							<div style="color: red;"> <?php echo form_error('city_model'); ?><?php echo isset($errors['city_model'])?$errors['city_model']:''; ?> </div>
-							
+							<input type="text" size="30" class="text" name="city_model" id="city_model" value=""> 
+							<label class="form_error"  id="city_error"></label>
 						</p>
 						<p>
-							<input type="submit" class="submit" name="addcountry" value="Submit">
+							<input type="button" class="submit" name="addcountry" id="addcountry" value="Submit">
 						</p>
 					</form>
 				</div>
@@ -386,32 +328,33 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 					<h2>Add Your Place</h2>
 					<a href="#" title="Close profile window" class="modal-close-profile">
 					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" class="closeimagesize" alt="Close window"/></a>
-						<form action="" method="post" id="form_state">
+						<form action="" method="post" id="form_state" id="add_state_form">
 						<p>
 							<label>Country:</label><br>
-						<select class="<?php echo $class_country_model1; ?> country_select margin_zero" name="country_model1" id="country" >
+						<select class="text country_select margin_zero" name="country_model1" id="country_model1" >
 										<option value="">Select Country</option>
 							<?php foreach($countries as $country) { ?>
 										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 						</select>
+							<label class="form_error"  id="country_error1"></label>
+						
 						</p>
-						<div style="color: red;"> <?php echo form_error('country_model1'); ?><?php echo isset($errors['country_model1'])?$errors['country_model1']:''; ?> </div>
 							
 						<p>
 							<label>State:</label><br>
-							<input type="text" size="30" class="<?php echo $class_state_model1; ?>" name="state_model1" value="<?php echo set_value('state_model1'); ?>"> 
-							<div style="color: red;"> <?php echo form_error('state_model1'); ?><?php echo isset($errors['state_model1'])?$errors['state_model1']:''; ?> </div>
-							
+							<input type="text" size="30" class="text" name="state_model1" id="state_model1" value=""> 
+								<label class="form_error"  id="state_error1"></label>
+						
 						</p>
 						<p>
 							<label>City:</label><br>
-							<input type="text" size="30" class="<?php echo $class_city_model1; ?>" name="city_model1" value="<?php echo set_value('city_model1'); ?>"> 
-							<div style="color: red;"> <?php echo form_error('city_model1'); ?><?php echo isset($errors['city_model1'])?$errors['city_model1']:''; ?> </div>
-							
+							<input type="text" size="30" class="text" name="city_model1" id="city_model1" value=""> 
+								<label class="form_error"  id="city_error1"></label>
+						
 						</p>
 						<p>
-							<input type="submit" class="submit" name="addstate" value="Submit">
+							<input type="button" class="submit" name="addstate" id="addstate" value="Submit">
 						</p>
 					</form>
 					
@@ -422,35 +365,34 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 					<h2>Add Your Place</h2>
 					<a href="#" title="Close profile window" class="modal-close-profile">
 					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" class="closeimagesize" alt="Close window"/></a>
-					<form action="" method="post" id="form_city">
+					<form action="" method="post" id="add_city_form" >
 						<p>
 							<label>Country:</label><br>
-						<select class="<?php echo $class_country_model2; ?> country_select margin_zero" name="country_model2"  id="country_model" onchange="fetchstatesmodel(this)">
+						<select class="text country_select margin_zero" name="country_model2"  id="country_model2" onchange="fetchstates('-1')">
 										<option value="">Select Country</option>
 							<?php foreach($countries as $country) { ?>
 										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 						</select>
+						<label class="form_error"  id="country_error2"></label>
 						<div style="color: red;"> <?php echo form_error('country_model2'); ?><?php echo isset($errors['country_model2'])?$errors['country_model2']:''; ?> </div>
 						
 						</p>
 						<p>
 							<label>State:</label><br>
-							<select class="<?php echo $class_state_model2; ?> country_select margin_zero" name="state_model2"  id="state_model" disabled="disabled">
+							<select class="text country_select margin_zero" name="state_model2"  id="state_model2" disabled="disabled">
 							<option value="">Please Select</option>
 							</select>
-							<div style="color: red;"> <?php echo form_error('state_model2'); ?><?php echo isset($errors['state_model2'])?$errors['state_model2']:''; ?> </div>
-							
+							<label class="form_error"  id="state_error2"></label>
 						</p>
 						<p>
 							<label>City:</label><br>
-							<input type="text" size="30" class="<?php echo $class_city_model2; ?>" name="city_model2"> 
-			<div style="color: red;"> <?php echo form_error('city_model2'); ?><?php echo isset($errors['city_model2'])?$errors['city_model2']:''; ?> </div>
-								
+							<input type="text" size="30" class="text" name="city_model2" id="city_model2"> 
+								<label class="form_error"  id="city_error2"></label>
 						</p>
 						<p>
 						<input type="hidden" name="level_user" value="3">
-							<input type="submit" class="submit" name="addcity" value="Submit">
+							<input type="button" class="submit" name="addcity" id="addcity" value="Submit">
 						</p>
 					</form>
 					
@@ -459,7 +401,7 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 			
 			<div class="modal-lightsout1" id="add-univ">
 				<div class="modal-profile1" id="add-univ1">
-					<h3>Create Univeraity Admin</h3>
+					<h3>Create University Admin</h3>
 					<a href="#" title="Close profile window" class="modal-close-profile">
 					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" class="closeimagesize"  alt="Close profile window"/></a>
 					<form action="" method="post" id="add_user_form" class="university_model" onsubmit="return false;">
@@ -467,23 +409,23 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 							<div class="float_l form_univ">
 								<p>
 									<label>FULLNAME:</label><br>
-									<input type="text" size="30" class="<?php echo $class_full_name; ?>" value="" id="fullname" name="fullname"> 
-									<label class="label_error"  id="fullname_error"></label>
+									<input type="text" size="30" class="text" value="" id="fullname" name="fullname"> 
+									<label class="form_error"  id="fullname_error"></label>
 								</p> 
 								<p>
 									<label>EMAIL:</label><br>
-									<input type="text" size="30" value="" class="<?php echo $class_email; ?>" id="email"  name="email">
-									<label class="label_error"  id="email_error"></label>		
+									<input type="text" size="30" value="" class="text" id="email"  name="email">
+									<label class="form_error"  id="email_error"></label>		
 							</p> 
 								<p>
 									<label>PASSWORD:</label><br>
-									<input type="password" size="30"  class="<?php echo $class_password; ?>" id="password" name="password"> 
-									<label class="label_error"  id="pwd_error"></label><label class="label_error"  id="length_pwd_error"></label>				
+									<input type="password" size="30"  class="text" id="password" name="password"> 
+									<label class="form_error"  id="pwd_error"></label><label class="form_error"  id="length_pwd_error"></label>				
 								</p> 
 								<p>
 									<label>CONFIRM PASSWORD:</label><br>
-									<input type="password" size="30" class="<?php echo $class_confirm_password; ?>" id="confirm_password"  name="confirm_password"> 
-									<label class="label_error"  id="cpwd_error"></label>		
+									<input type="password" size="30" class="text" id="confirm_password"  name="confirm_password"> 
+									<label class="form_error"  id="cpwd_error"></label>		
 						</p> 
 							</div>
 							<div class="right_univ"></div>
@@ -542,7 +484,7 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 							<div class="clearfix"></div>
 						</div>
 						<center>
-						<input type="submit" onclick="univ_admin_validate_form()" class="submit" name="add_univ_admin_submit" value="Submit"></center>
+						<input type="button" onclick="univ_admin_validate_form()" class="submit" id="add_univ_admin_submit" value="Submit"></center>
 					</form>
 				</div>
 		</div>
@@ -554,36 +496,6 @@ if($error_confirm_password != '') { $class_confirm_password = 'focused_error_uni
 	</div>	
 	
 <script> 
-function isValidEmailAddress(emailAddress) {
-    var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
-    return pattern.test(emailAddress);
-}
-$(document).ready(function()
-{
-<?php if($model=='1') { ?>
- $('#add-country').fadeIn("slow");
- $('#add-country1').fadeTo("slow", .9);
-<?php }?>
-<?php if($model=='2') { ?>
- $('#add-state').fadeIn("slow");
- $('#add-state1').fadeTo("slow", .9);
-<?php }?>
-<?php if($model=='3') { ?>
- $('#add-city').fadeIn("slow");
- $('#add-city1').fadeTo("slow", .9);
-<?php }?>
-<?php if($model=='4') { ?>
- $('#add-univ').fadeIn("slow");
- $('#add-univ1').fadeTo("slow", .9);
-<?php }?>
-});
-<?php
-if($select_place[0]!='0' && $select_place[1]!='0' && $select_place[2]!='0')
-{?>
-fetchstates(1);
-fetchcities(1);
-<?php }
-?>
 $('#univ_client').click(function(){
 if($('#univ_client').is(':checked'))
 {
@@ -594,51 +506,72 @@ else
 $('#univ_is_client').val(0);
 }
 });
-function fetchstates(a)
+function fetchcountry(cid)
 {
-var cid=$("#country option:selected").val();
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/state_list_ajax/"+cid+"/<?php echo $select_place[1]; ?>",
-   data: '',
+   url: "<?php echo $base; ?>admin/country_list_ajax",
+   data: 'country_id='+cid,
    cache: false,
    async:false,
    success: function(msg)
    {
-    $('#state').attr('disabled', false);
-	$('#state').html(msg);
+   // $('#state').attr('disabled', false);
+	$('#country').html(msg);
    }
    });
 }
-function fetchstatesmodel(a)
+function fetchstates(sid)
 {
-var cid=$("#"+a.id+" option:selected").val();
+var stid=sid;
+var cid;
+if(sid=='-1')
+{
+stid='0';
+cid=$("#country_model2 option:selected").val();
+}
+else
+{
+var cid=$("#country option:selected").val();
+}
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/state_list_ajax/"+cid,
-   data: '',
+   url: "<?php echo $base; ?>admin/state_list_ajax/",
+   data: 'country_id='+cid+'&sel_state_id='+stid,
    cache: false,
    success: function(msg)
    {
-    $('#state_model').attr('disabled', false);
-	$('#state_model').html(msg);
+    if(sid=='-1')
+	{
+	$('#state_model2').attr('disabled', false);
+	$('#state_model2').html(msg);
+	}
+	else
+	{
+    $('#state').attr('disabled', false);
+	$('#state').html(msg);
+
+	}
    }
    });
-}
-function fetchcities(a)
+ } 
+function fetchcities(state_id,cityid)
 {
-var sid=$("#state option:selected").val();
-$.ajax({
+if(state_id=='0')
+{
+state_id=$("#state option:selected").val();
+}
+ $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/city_list_ajax/"+sid+"/<?php echo $select_place[2]; ?>",
-   data: '',
+   url: "<?php echo $base; ?>admin/city_list_ajax/",
+   data: 'state_id='+state_id+'&sel_city_id='+cityid,
    cache: false,
    success: function(msg)
    {
     $('#city').attr('disabled', false);
 	$('#city').html(msg);
    }
-   });
+   });  
 }
 //for fancy box
 $.fn.center = function () {
@@ -682,8 +615,7 @@ $.fn.center = function () {
         $('.modal-lightsout1').fadeOut("slow");
     });
 
-function univ_admin_validate_form()
-{
+$('#add_univ_admin_submit').click(function(){
 	var fn=$("#add_user_form input[name=fullname]").val();
 	var email=$("#add_user_form input[name=email]").val();
 	var pwd=$("#add_user_form input[name=password]").val();
@@ -756,7 +688,7 @@ function univ_admin_validate_form()
 	   type: "POST",
 	   url: "<?php echo $base; ?>admin/check_unique_field/email/users",
 	   async:false,
-	   data: 'email='+email,
+	   data: 'field='+email,
 	   cache: false,
 	   success: function(msg)
 	   {
@@ -801,6 +733,7 @@ function univ_admin_validate_form()
 		$('.onoff_box').removeClass('checked');
 		$('.onoff_box').css('background-position-x','0px');
 		$('#univ_owner').html(msg);
+		$('.info_message').html('University Admin added successfully');
 		$('.content_msg').css('display','block');
 	   }
 	   });
@@ -808,5 +741,300 @@ function univ_admin_validate_form()
 	   
 	}
 	
-}	
+});
+
+
+$('#addcountry').click(function(){
+	var country=$("#country_model").val();
+	var state=$("#state_model").val();
+	var city=$("#city_model").val();
+	var flag=0;
+	if(country=='' || country==null)
+	{
+	 $('#country_error').html("Please enter the country name"); 
+	 $('#country_model').addClass('error');
+	 flag=1;
+	}
+	else
+	{
+	$('#country_error').html("") 
+	 $('#country_model').removeClass('error');
+	  flag=0;
+	}
+	if(state=='' || state==null)
+	{
+	$('#state_error').html("Please enter the state name"); 
+	$('#state_model').addClass('error');
+	flag=1;
+	
+	}
+	else
+	{
+	$('#state_error').html(""); 
+	$('#state_model').removeClass('error');
+	 flag=0;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error').html("Please enter the city"); 
+	$('#city_model').addClass('error');
+	flag=1;
+	}
+	else
+	{
+	$('#city_error').html(""); 
+	$('#city_model').removeClass('error');
+	flag=0;
+	}
+	if(!flag)
+	{
+	 var  countrystatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/check_unique_field/country_name/country",
+	   async:false,
+	   data: 'field='+country,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   if(msg=='1')
+		{
+		$('#country_error').html('Country Already Exist');
+		$('#country_model').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#country_model').html('');
+		$('#country_error').addClass('');
+		countrystatus=1;
+		}
+	   }
+	   });
+	 if(countrystatus)
+	 {
+	$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_country_ajax",
+	   async:false,
+	   data: 'country_model='+country+'&state_model='+state+'&city_model='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0]);
+		fetchstates(place[1]);
+		fetchcities(place[1],place[2]);
+		$('.modal-profile').fadeOut("slow");
+        $('.modal-lightsout').fadeOut("slow");
+		$('#add_country_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+
+
+
+
+
+
+$('#addstate').click(function(){
+	var country=$("#country_model1 option:selected").val();
+	var state=$("#state_model1").val();
+	var city=$("#city_model1").val();
+	var flag=0;
+	if(country=='' || country==null || country=='0')
+	{
+	 $('#country_error1').html("Please select the country"); 
+	 $('#country_model1').addClass('error');
+	 flag=1;
+	}
+	else
+	{
+	$('#country_error1').html("");
+	 $('#country_model1').removeClass('error');
+	  flag=0;
+	}
+	if(state=='' || state==null)
+	{
+	$('#state_error1').html("Please enter the state name"); 
+	$('#state_model1').addClass('error');
+	flag=1;
+	
+	}
+	else
+	{
+	$('#state_error1').html(""); 
+	$('#state_model1').removeClass('error');
+	 flag=0;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error1').html("Please enter the city"); 
+	$('#city_model1').addClass('error');
+	flag=1;
+	}
+	else
+	{
+	$('#city_error1').html(""); 
+	$('#city_model1').removeClass('error');
+	flag=0;
+	}
+	if(!flag)
+	{
+	 var  statestatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/state_check",
+	   async:false,
+	   data: 'state_model1='+state+'&country_model1='+country,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    if(msg=='1')
+		{
+		$('#state_error1').html('State Already Exist in Selected Country');
+		$('#state_model1').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#state_error1').html('');
+		$('#state_model1').addClass('');
+		statestatus=1;
+		}
+	   }
+	   });
+	 if(statestatus)
+	 {
+	 $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_state_ajax",
+	   async:false,
+	   data: 'country_model1='+country+'&state_model1='+state+'&city_model1='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0]);
+		fetchstates(place[1]);
+		fetchcities(place[1],place[2]);
+		$('.modal-profile').fadeOut("slow");
+        $('.modal-lightsout').fadeOut("slow");
+		$('#add_state_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+
+
+
+
+$('#addcity').click(function(){
+	var country=$("#country_model2 option:selected").val();
+	var state=$("#state_model2 option:selected").val();
+	var city=$("#city_model2").val();
+	var flag=0;
+	if(country=='' || country==null || country=='0')
+	{
+	 $('#country_error2').html("Please select the country"); 
+	 $('#country_model2').addClass('error');
+	 flag=1;
+	}
+	else
+	{
+	$('#country_error2').html("");
+	 $('#country_model2').removeClass('error');
+	  flag=0;
+	}
+	if(state=='' || state==null || state=='0')
+	{
+	$('#state_error2').html("Please select the state "); 
+	$('#state_model2').addClass('error');
+	flag=1;
+	}
+	else
+	{
+	$('#state_error2').html(""); 
+	$('#state_model2').removeClass('error');
+	 flag=0;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error2').html("Please enter the city"); 
+	$('#city_model2').addClass('error');
+	flag=1;
+	}
+	else
+	{
+	$('#city_error2').html(""); 
+	$('#city_model2').removeClass('error');
+	flag=0;
+	}
+	if(!flag)
+	{
+	 var  citystatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/city_check",
+	   async:false,
+	   data: 'state_model2='+state+'&country_model2='+country+'&city_model2='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    if(msg=='1')
+		{
+		$('#city_error2').html('CIty Already Exist in Selected State');
+		$('#city_model2').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#city_error2').html('');
+		$('#city_model2').addClass('');
+		citystatus=1;
+		}
+	   }
+	   });
+	 if(citystatus)
+	 {
+	 $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_city_ajax",
+	   async:false,
+	   data: 'country_model2='+country+'&state_model2='+state+'&city_model2='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0]);
+		fetchstates(place[1]);
+		fetchcities(place[1],place[2]);
+		$('.modal-profile').fadeOut("slow");
+        $('.modal-lightsout').fadeOut("slow");
+		$('#add_city_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+
+
+function isValidEmailAddress(emailAddress) {
+    var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
+    return pattern.test(emailAddress);
+}			
+	
+	
 </script>	

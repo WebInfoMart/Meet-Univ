@@ -896,7 +896,7 @@ class Admin extends CI_Controller
 		}
 		else if($flag==1)
 		{
-		echo $cc=$this->adminmodel->deleteuser();
+		$cc=$this->adminmodel->deleteuser();
 		redirect('admin/manageusers/uds');
 		}
 		}	
@@ -970,8 +970,8 @@ class Admin extends CI_Controller
 		if ($this->input->post('upload')) {
 		$data['x']=$this->adminmodel->do_upload();
 		
-		//redirect('admin/manage_home_gallery');
-		print_r($data['x']);
+		redirect('admin/manage_home_gallery');
+		//print_r($data['x']);
 		
 		}
 		 $this->load->view('admin/home_gallery', $data);
@@ -1079,60 +1079,6 @@ class Admin extends CI_Controller
 		}
 		else
 		{
-		$data['model']='0';
-		$data['select_place']=array('0','0','0');
-		if($this->input->post('addcountry'))
-		{
-		$this->form_validation->set_rules('country_model', 'Country', 'trim|required|is_unique[country.country_name]');
-		$this->form_validation->set_rules('state_model', 'State', 'trim|required');
-		$this->form_validation->set_rules('city_model', 'City', 'trim|required');
-		if ($this->form_validation->run()) {
-		$data['select_place']=array();
-		$data['select_place']=$this->adminmodel->enterplacelevel1();
-		$data['msg']='Your Place Added Successfully';
-		$this->load->view('admin/userupdated', $data);
-		}
-		else
-		{
-		$data['model']='1';
-		}
-		}
-		else if($this->input->post('addstate'))
-		{
-		$this->form_validation->set_rules('country_model1', 'Country', 'trim|required|string');
-		$this->form_validation->set_rules('state_model1', 'State', 'trim|required|xss_clean|callback_state_check');
-		$this->form_validation->set_rules('city_model1', 'City', 'trim|required|string');
-		if ($this->form_validation->run()) {
-		$data['select_place']=array();
-		$data['select_place']=$this->adminmodel->enterplacelevel2();
-		$data['msg']='Your Place Added Successfully';
-		$this->load->view('admin/userupdated', $data);
-		
-		}
-		else
-		{
-		$data['model']='2';
-		}
-		}
-		else if($this->input->post('addcity'))
-		{
-		$this->form_validation->set_rules('country_model2', 'Country', 'trim|required|string');
-		$this->form_validation->set_rules('state_model2', 'State', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('city_model2', 'City', 'trim|required|string|callback_city_check');
-		if ($this->form_validation->run()) {
-		$data['select_place']=array();
-		$data['select_place']=$this->adminmodel->enterplacelevel3();
-		$data['msg']='Your Place Added Successfully';
-		$this->load->view('admin/userupdated', $data);
-		
-		}
-		else
-		{
-		$data['model']='3';
-		}
-		}
-		
-		
 		$data['univ_admins']=$this->adminmodel->get_univ_admin();
 		$data['countries']=$this->users->fetch_country();
 		$this->load->view('admin/add_university', $data);
@@ -1142,44 +1088,54 @@ class Admin extends CI_Controller
 	
 	}
 	
-	function state_list_ajax($cid='0',$ssid='0')
+	function add_country_ajax()
 	{
+	$data['result']=$this->adminmodel->enterplacelevel1();
+	$this->load->view('ajaxviews/check_unique_field', $data);	
+	}
+	
+	function add_state_ajax()
+	{
+	$data['result']=$this->adminmodel->enterplacelevel2();
+	$this->load->view('ajaxviews/check_unique_field', $data);	
+	}
+	function add_city_ajax()
+	{
+	$data['result']=$this->adminmodel->enterplacelevel3();
+	$this->load->view('ajaxviews/check_unique_field', $data);	
+	}
+
+	function country_list_ajax($scid='0')
+	{
+		$data['region']=$this->users->fetch_country();
+		$data['scid']=$this->input->post('country_id');
+		$this->load->view('ajaxviews/country_ajax',$data);
+	}
+	function state_list_ajax()
+	{
+		$cid=$this->input->post('country_id');
 		$data['region']=$this->adminmodel->fetch_states($cid);
-		$data['ssid']=$ssid;
+		$data['ssid']=$this->input->post('sel_state_id');
 		$this->load->view('ajaxviews/state_ajax',$data);
 	}
-	function city_list_ajax($sid='0',$scid='0')
-	{
-		
+	function city_list_ajax()
+	{	
+		$sid=$this->input->post('state_id');
 		$data['region']=$this->adminmodel->fetch_city($sid);
-		$data['scid']=$scid;
+		$data['scid']=$this->input->post('sel_city_id');
 		$this->load->view('ajaxviews/city_ajax',$data);
 	}
 	
 	function state_check()
 	{
 		
-		if($this->adminmodel->state_chk_in_country($this->input->post('country_model1'),$this->input->post('state_model1')))
-		{
-		$this->form_validation->set_message('state_check', 'This State is alredy exist in this Country');
-		return FALSE;
-		}
-		else
-		{
-		return TRUE;
-		}
+		$data['result']=$this->adminmodel->state_chk_in_country($this->input->post('country_model1'),$this->input->post('state_model1'));
+		$this->load->view('ajaxviews/check_unique_field', $data);
 	}
 	function city_check()
 	{
-		if($this->adminmodel->city_chk_in_state($this->input->post('state_model2'),$this->input->post('city_model2')))
-		{
-		$this->form_validation->set_message('city_check', 'This CIty is alredy exist in this State');
-		return FALSE;
-		}
-		else
-		{
-		return TRUE;
-		}
+		$data['result']=$this->adminmodel->city_chk_in_state($this->input->post('state_model2'),$this->input->post('city_model2'));
+		$this->load->view('ajaxviews/check_unique_field', $data);
 	}
 	
 	function manage_university($mps='')
@@ -1545,7 +1501,7 @@ class Admin extends CI_Controller
 	
 	function check_unique_field($field_name='',$table_name='')
 	{
-		$data['result']=$this->adminmodel->check_unique_field($field_name,$this->input->post('email'),$table_name);
+		$data['result']=$this->adminmodel->check_unique_field($field_name,$this->input->post('field'),$table_name);
 		$this->load->view('ajaxviews/check_unique_field', $data);	
 	}
 	

@@ -221,7 +221,16 @@ class Adminmodel extends CI_Model
 		
 		function delete_gallery_pic($gid)
 		{
+			$this->db->select('*');
+			$this->db->from('home_slider');
+			$this->db->where('id',$gid);
+			$query = $this->db->get();
+			$res=$query->row_array();
+			$delpath=$this->gallery_path;
+			$del_path=$delpath.'/'.$res['image_path'];
+			unlink($del_path);
 			$this->db->delete('home_slider', array('id' => $gid));
+			return $del_path;
 		}
 		
 		
@@ -366,9 +375,8 @@ class Adminmodel extends CI_Model
 		);
 		$this->db->insert('city', $data3);
 		$city_id=$this->db->insert_id();
-		$select_place=array($country_id,$state_id,$city_id);
+		$select_place=$country_id.'##'.$state_id.'##'.$city_id;
 		return $select_place;
-		
 	}
 	
 	function enterplacelevel2()
@@ -390,7 +398,7 @@ class Adminmodel extends CI_Model
 		);
 		$this->db->insert('city', $data3);
 		$city_id=$this->db->insert_id();
-		$select_place=array($country_id,$state_id,$city_id);
+		$select_place=$country_id.'##'.$state_id.'##'.$city_id;
 		return $select_place;
 	}
 	function enterplacelevel3()
@@ -406,7 +414,7 @@ class Adminmodel extends CI_Model
 		);
 		$this->db->insert('city', $data3);
 		$city_id=$this->db->insert_id();
-		$select_place=array($country_id,$state_id,$city_id);
+		$select_place=$country_id.'##'.$state_id.'##'.$city_id;
 		return $select_place; 
 	}	
 		

@@ -24,7 +24,7 @@ $z=Array();
 <div id="content">
 		<h2 class="margin">Update Gallery</h2>
 		<div class="form margin_zero">
-			<form action="manage_home_gallery" method="post">
+			<form action="<?php echo $base ?>admin/manage_home_gallery" method="post">
 
 				<ul>
 					<li>

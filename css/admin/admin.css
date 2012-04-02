@@ -573,4 +573,4 @@ a.modal-social1 {
 .form_univ{width:210px;}
 .right_univ{border:1px dotted #aaa;float:left;width:0px;height:265px;margin-left: 10px;}
 form #add_user_form .university_model label_error{color:red;}
-	
+.form_error{color:red !important;}
