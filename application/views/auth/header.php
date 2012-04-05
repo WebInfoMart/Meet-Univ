@@ -159,6 +159,14 @@ $('#myModal').modal('toggle');});
 $('#forget_model').modal('toggle');});
  });
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#pulse2').click(function(){
+$('#myModal2').modal('toggle');});
+ });
+
+</script>
 </head>
 <body>
 <div id="fb-root"></div> 
@@ -208,7 +216,7 @@ $('#forget_model').modal('toggle');});
 							<div class="float_r span11">
 								<ul class="menu">
 									<li><a href="#" class="active">Home</a></li>
-									<li><a href="#">Colleges</a></li>
+									<li><a href="<?php echo "$base"; ?>all_colleges">Colleges</a></li>
 									<li><a href="#">Study Abroad</a></li>
 									<li><a href="#">Questions & Answers</a></li>
 									<li><a href="#">Events</a></li>

@@ -487,3 +487,58 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 border-radius: 6px;
 border: 3px solid #fff;
 }
+
+/*************************user_profile****************************/
+.green_box{background-color: #DFF0D8;border: 1px solid #DDD;-webkit-border: 1px solid #DDD;-moz-border: 1px solid #DDD;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;}
+.uesr_question{font-size: 23px;padding: 25px 0px 0px 0px;color: #333;}
+.question_data{padding:0px 10px;}
+.question_data span{font-size: 20px;color: #333;}
+/********************inbox****************************/
+.inbox_box{padding: 10px;
+border: 1px solid #DDD;
+-moz-border: 1px solid #ddd;
+-webkit-border: 1px solid #ddd;
+border-radius: 4px;
+background: url(../images/events.png);}
+.inbox_list{margin: 0px;list-style-type: none;}
+.inbox_list li{padding:5px 0px;}
+.search_result{width:60px!important;height:60px!important;}
+.user_color{color:#f89406;}
+
+/******** Added by Subh *********************/
+/* for inbox page */
+.span1_modified
+{
+	width: 125px;
+}
+.span6_modified
+{
+	width: 285px;
+	height:20px;
+	overflow:hidden;
+}
+.reply_msg_box
+{
+	width: 79px;
+	height: 21px;
+	color: blue;
+	background-color: #EEE;
+	border-radius: 2px;
+	text-align: center;
+	cursor:pointer;
+}
+.reply_msg_box2
+{
+	width: 90px;
+	height: 242px;
+	color: blue;
+	background-color: lightSteelBlue;
+	border-radius: 2px;
+	text-align: center;
+	cursor:pointer;
+	padding-top: 15px;
+}

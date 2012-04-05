@@ -1,12 +1,20 @@
-
 	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body">
 			<div class="row">
 				<div class="span10">
-					<h2><?php echo $university_details['univ_name']; ?> - <small><?php echo $country_name_university['country_name']; ?>
-					, <?php echo $city_name_university['cityname']; ?></small></h2>
+					<h2><?php 
+					if($university_details['univ_name'] != '')
+					{
+					echo $university_details['univ_name']; } ?> 
+					- <small><?php 
+					if($country_name_university['country_name'] != '')
+					{
+					echo $country_name_university['country_name']; } ?>
+					, <?php 
+					if($city_name_university['cityname'] != ''){
+					echo $city_name_university['cityname']; } ?></small></h2>
 				</div>
 				<div class="span4 float_r margin_t">
 					<div class="margin_zero float_l">
@@ -20,13 +28,31 @@
 				</div>
 			</div>
 			<ul class="uni_gallery">
-				<li><?php echo "<img src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; ?></li>
-				<li><img src="<?php echo "$base$img_path" ?>/uni1-1.jpg" /></li>
-				<li><img src="<?php echo "$base$img_path" ?>/uni1-2.jpg" /></li>
-				<li><img src="<?php echo "$base$img_path" ?>/uni1-3.jpg" /></li>
-				<li><img src="<?php echo "$base$img_path" ?>/uni1-4.jpg" /></li>
-				<li><img src="<?php echo "$base$img_path" ?>/uni1-5.jpg" /></li>
-				<li><img src="<?php echo "$base$img_path" ?>/uni1-6.jpg" /></li>
+				<li class="univ_page_logo">
+				<?php 
+				if($university_details['univ_logo_path'] != '')
+				{
+				echo "<img src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
+				}
+				?></li>
+				<?php
+				if(!empty($univ_gallery))
+				{
+				foreach($univ_gallery as $gallery)
+				{
+				if(is_array($gallery))
+				{
+				foreach($gallery as $gal)
+				{
+				//print_r($gal);
+				?>
+					<li class="univ_page_gal"><?php echo "<img src='".base_url()."uploads/univ_gallery/".$gal."'/>"; ?></li>
+				<?php
+				}
+				}
+				}
+				}
+				?>
 				<li class="clearfix"></li>
 			</ul>
 			<div class="row uni_menu_placeholder">
@@ -62,56 +88,20 @@
 									<div class="float_l span6 margin_zero">
 										<ul class="follow">
 											<li>
+											<?php
+											if(!empty($followers_detail_of_univ))
+											{
+											foreach($followers_detail_of_univ as $followers)
+											{
+											//echo $followers['id'].'-----'.$followers['user_pic_path'];
+											?>
 												<div class="float_l">
 													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
+														<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>"><?php echo "<img style='width:63px;height:55px;' src='".base_url()."uploads/".$followers['user_pic_path']."'/>"; ?></a> </br>
 													</div>
 												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
-												<div class="float_l">
-													<div class="follow_img">
-														<img src="<?php echo "$base$img_path" ?>/stud.jpg"> </br>
-													</div>
-												</div>
+												
+											<?php } } ?>
 											</li>
 										</ul>
 									</div>
@@ -142,7 +132,13 @@
 										<div class="clearfix"></div>
 									</div>
 								</div>
-								<div class="map_layout"><img src="<?php echo "$base$img_path" ?>/map.png"/></div>
+								<div class="map_layout">
+								<?php echo $headerjs; ?>
+							<?php echo $headermap; ?>
+							<?php echo $onload; ?>
+							<?php echo $map; ?>
+							<?php echo $sidebar; ?>
+								</div>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -162,9 +158,12 @@
 												<select name="apply_course_interest" id="apply_course_interest" class="span2">
 													<option value="">Course of interest</option>
 													<?php
+													if(!empty($area_interest))
+													{
 													foreach($area_interest as $apply_interest)
 													{
 														echo "<option value=$apply_interest[prog_parent_id]> $apply_interest[program_parent_name] </option>";
+													}
 													}
 													?>
 												</select>
@@ -196,12 +195,30 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				<div class="margin_t">
+			<div class="margin_t">
 					<div class="span8 float_l margin_l">
 						<div class="news_data_uni events_box event_height_uni">
 								<h2>Events</h2>
 								<ul>
-									<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood in floodplain lakes of the Mississippi Alluvial Valley. Durable composites: An overview. Proceedings, American Wood in floodplain lakes of the Mississippi<img src="<?php echo "$base$img_path" ?>/event_arrow.png"></li>
+									<li>
+									<?php
+									//foreach($events_of_univ as $events)
+									//{
+									//print_r($events_of_univ);
+									if(!empty($events_of_univ))
+									{
+									if($events_of_univ['featured_home_event'] == '1' && $events_of_univ['event_type'] == 'univ_event' )
+									{
+										print_r($events_of_univ['event_title']);
+									
+									?>
+									<img src="<?php echo "$base$img_path" ?>/event_arrow.png">
+									<?php
+									}
+									}
+									//}
+									?>
+									</li>
 								</ul>
 							</div>
 							<div class="margin_t">
@@ -238,80 +255,50 @@
 									</div>
 								</div>
 							</div>
+							<div class="margin_t">
+								<div class="news_data_uni events_box news_box_uni">
+									<h2>News</h2>
+										<ul>
+										<?php
+										foreach($article_news_gallery as $news)
+										{
+										if($news['na_type'] == 'news' && $news['na_type_ud'] == 'univ_na')
+										{
+										?>
+											<li><a href="#"><?php echo $news['na_detail']; ?><img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
+										<?php } } ?>	
+									</ul>
+								</div>
+							</div>
+					</div>
+					<div class="span8 float_l">
+					<?php
+					foreach($article_news_gallery as $article)
+					{
+					if($article['na_type'] == 'article' && $article['na_type_ud'] == 'univ_na')
+					{
+					?>
+						<div class="span4 float_l margin_zero">
+							<div class="index_sidebar_box">
+									<div class="artical_heading"><?php echo $article['na_title']; ?></div>
+								<div id="home" class="box artical_box_data">
+									<div class="float_l">
+										<?php echo "<img src='".base_url()."uploads/news_article_images/".$article['na_image_path']."'/>"; ?>
+									</div>
+									<div>
+										<?php echo $article['na_detail']; ?>
+									</div>							
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						
+					<?php } } ?>		
 							
 					</div>
-					<div class="span4 float_l">
-						<div class="index_sidebar_box">
-								<div class="artical_heading">Article</div>
-							<div id="home" class="box artical_box_data">
-								<div class="float_l">
-									<img src="<?php echo "$base$img_path" ?>/layer.png">
-								</div>
-								<div>
-									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
-								</div>							
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="span4 float_l">
-						<div class="index_sidebar_box">
-							<div class="artical_heading">Article</div>
-								<div id="home" class="box artical_box_data">
-									<div class="float_l">
-										<img src="<?php echo "$base$img_path" ?>/layer.png">
-									</div>
-									<div>
-										Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
-									</div>							
-								</div>
-								<div class="clearfix"></div>
-						</div>
-					</div>
 					<div class="clearfix"></div>
 				</div>
-				<div class="margin_t">
-					<div class="span8 float_l margin_l">
-						<div class="news_data_uni events_box news_box_uni">
-							<h2>News</h2>
-								<ul>
-									<li><a>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
-									<li><a>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
-									<li><a>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
-									<li><a>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="span4 float_l">
-						<div class="index_sidebar_box">
-							<div class="artical_heading">Article</div>
-								<div id="home" class="box artical_box_data">
-									<div class="float_l">
-										<img src="<?php echo "$base$img_path" ?>/layer.png">
-									</div>
-									<div>
-										Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
-									</div>							
-								</div>
-								<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="span4 float_l">
-						<div class="index_sidebar_box">
-							<div class="artical_heading">Article</div>
-								<div id="home" class="box artical_box_data">
-									<div class="float_l">
-										<img src="<?php echo "$base$img_path" ?>/layer.png">
-									</div>
-									<div>
-										Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
-									</div>							
-								</div>
-								<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
+				
 			</div>
 		</div>
 	</div>

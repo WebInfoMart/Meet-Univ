@@ -861,6 +861,28 @@ class Users extends CI_Model
 		return $rows;
 	}
 	
+	function get_followers_detail_of_univ($univ_id)
+	{
+		$this->db->select('followed_by');
+		$this->db->from('follow_univ');
+		$this->db->where('follow_to_univ_id',$univ_id);
+		$query = $this->db->get();
+		foreach($query->result_array() as $results)
+		{
+		$followers_id[]=$results['followed_by'];
+		}
+			if($query->num_rows() > 0)
+			{	
+			  $this->db->select('*');
+			  $this->db->from('users');
+			  $this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+			  $this->db->where_in('id', $followers_id);
+			  $this->db->limit(10);
+			  $res = $this->db->get();
+			  return $res->result_array();
+			}
+	}
+	
 	function add_followers($add_follower)
 	{
 		$this->db->set($add_follower);
@@ -874,29 +896,56 @@ class Users extends CI_Model
 		return $this->db->affected_rows() ? 1 : 0;
 	}
 	
+	function check_is_already_followed_to_person($add_follower)
+	{
+		$query = $this->db->get_where('follow_person',$add_follower);
+		return $this->db->affected_rows() ? 1 : 0;
+	}
+	
 	function unjoin_now($add_follower)
 	{
 		$this->db->where($add_follower);
 		$this->db->delete('follow_univ');
 	}
 	
+	function unfollow_now_to_user($add_follower)
+	{
+		$this->db->where($add_follower);
+		$this->db->delete('follow_person');
+	}
+	
+	function add_followers_to_person($add_follower)
+	{
+		$this->db->set($add_follower);
+		$query = $this->db->insert('follow_person');
+		 return $this->db->affected_rows() ? 1 : 0;
+	}
+	
 	function get_articles_of_univ($univ_id)
 	{
-		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id,'type1'=>'article'));
+		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id,'na_type'=>'article','na_type_ud'=>'univ_na'));
 		$rows = mysql_affected_rows();
 		return $rows;
 	}
-	
+	function get_detail_articles_of_univ($univ_id)
+	{
+		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id));
+		$rows = $query->result_array();
+		return $rows;
+	}
 	function get_program_provide_by_univ($univ_id)
 	{
 		$this->db->select('program_id');
 		$this->db->from('univ_program');
 		$this->db->where('univ_id',$univ_id);
 		$query = $this->db->get();
+		//print_r($query->result_array());
 		foreach($query->result_array() as $results)
 		{
 		$program_id[]=$results['program_id'];
 		}
+		if($query->num_rows() > 0)
+		{
 		$this->db->select('course_name');
 		$this->db->from('program');
 		$this->db->where_in('prog_id', $program_id);
@@ -904,6 +953,7 @@ class Users extends CI_Model
 		$res=$this->db->get();
 		//print_r($res->row_array());
 		return $res->result_array();
+		}
 	}
 	
 	function get_collages_by_search($type_educ_level,$search_country,$search_course)
@@ -1031,6 +1081,177 @@ class Users extends CI_Model
 		}
 	}
 	}
+	function show_all_college()
+	{
+		$this->db->select('univ_id');
+		$this->db->from('university');
+		$result = $this->db->get();
+		$all_results = $result->result_array();
+		//print_r($all_results);
+		$count_res = count($all_results);
+		
+		for($loop=0; $loop < $count_res; $loop++)
+		{
+		$all_results2 = $all_results[$loop];
+		foreach($all_results2 as $univ_id1)
+		{
+		//print_r($univ_id1);
+			//$univ_detail_arr[] = $this->get_university_by_id($univ_id1);
+						$this->db->select('*');
+						$this->db->from('university');
+						$this->db->where('univ_id',$univ_id1);
+						$results = $this->db->get();
+						$res_of_univ_search = $results->row_array();
+						$univ_detail_arr[] = $results->row_array();
+						
+			
+			$univ_follow[] = $this->get_followers_of_univ($univ_id1);
+			$univ_article[] = $this->get_articles_of_univ($univ_id1);
+			$univ_program[] = $this->get_program_provide_by_univ($univ_id1);
+			//$univ_gallery[] = $this->get_univ_gallery($univ_id1);
+			$marker[] = $res_of_univ_search['latitude'].','.$res_of_univ_search['longitude'].','.$res_of_univ_search['univ_name'].','.$res_of_univ_search['address_line1'];
+		}
+		}
+			$univ_data=array();
+			$univ_data['university'] = $univ_detail_arr;
+			$univ_data['followers'] = $univ_follow;
+			$univ_data['article'] = $univ_article;
+			$univ_data['program'] = $univ_program;
+			$univ_data['position'] = $marker;
+			//$univ_data['gallery'] = $univ_gallery;
+			//print_r(univ_data);
+			return $univ_data;
+	}
+	
+	function get_univ_gallery($univ_id)
+	{
+		$where_clause = array(
+		'univ_id'=>$univ_id,
+		'gal_type'=>'univ'
+		);
+		$this->db->select('g_image_path');
+		$this->db->from('univ_gallery');
+		$this->db->where($where_clause);
+		$query = $this->db->get();
+		return $result = $query->result_array();
+	}
+
+	function send_message_to_user($msg)
+	{
+		$this->db->set($msg);
+		$query = $this->db->insert('message_table');
+		return $this->db->affected_rows() ? 1: 0;
+	}
+	
+	function fetch_latest_events_by_univ_id($univ_id)
+	{
+		$this->db->select_max('event_id');
+		$this->db->from('events');
+		$this->db->where('event_univ_id',$univ_id);
+		$query = $this->db->get();
+		//$query = $this->db->get_where('events',array('event_univ_id'=>$univ_id,'event_id'));
+		$result = $query->row_array();
+		if($this->db->affected_rows() > 0)
+		{
+			$this->db->select('*');
+		$this->db->from('events');
+		$this->db->where('event_id',$result['event_id']);
+		$query = $this->db->get();
+		$result = $query->row_array();
+		return $result;
+		//print_r($result);
+		}
+	}
+	
+	function fetch_educ_level_by_id($cur_educ_lvl)
+	{
+		$this->db->select('educ_level');
+		$this->db->from('program_educ_level');
+		$this->db->where('prog_edu_lvl_id',$cur_educ_lvl);
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+	
+	function fetch_area_interest_by_id($area_interest)
+	{
+		$this->db->select('program_parent_name');
+		$this->db->from('program_parent');
+		$this->db->where('prog_parent_id',$area_interest);
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+	
+	function get_followers_detail_of_person($id)
+	{
+		$this->db->select('followed_by');
+		$this->db->from('follow_person');
+		$this->db->where('followed_to_person_id',$id);
+		$query = $this->db->get();
+		foreach($query->result_array() as $results)
+		{
+		$followers_id[]=$results['followed_by'];
+		}
+			if($query->num_rows() > 0)
+			{
+			  $this->db->select('*');
+			  $this->db->from('users');
+			  $this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+			  $this->db->where_in('id', $followers_id);
+			  $this->db->limit(10);
+			  $res = $this->db->get();
+			  return $res->result_array();
+			  }
+	}
+	
+	function inbox_message($logged_user)
+	{
+		$query = $this->db->get_where('message_table',array('recipent_id'=>$logged_user));
+		if($query->num_rows() > 0)
+		{
+			//print_r($query->result_array());
+			return $query->result_array();
+		}
+		else{
+		return 0;
+		}
+	}
+	
+	function fetch_message_by_id($message_condition)
+	{
+		$query = $this->db->get_where('message_table',$message_condition);
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	function get_sender_email($sender_id)
+	{
+		$this->db->select('email');
+		$this->db->from('users');
+		$this->db->where('id',$sender_id);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else{
+		return 0;
+		}
+	}
+	
+	function delete_single_message_inbox($msg_del_cond)
+	{
+		$this->db->where($msg_del_cond);
+		$this->db->delete('message_table');
+		return $this->db->affected_rows() ? 1 : 0;
+	}
+	
+	
 }
 
 /* End of file users.php */

@@ -40,9 +40,16 @@
 
 $route['default_controller'] = "auth";
 $route['404_override'] = '';
+$route['user/(:num)']='auth/user/$1';
+$route['university/(:num)']='auth/university/$1';
+$route['inbox/(:any)']='user/inbox/$1';
+$route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(login|register|logout|update_password|home|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/$1|home/pwd_change|home/pus|index/cfr)'] = 'auth/$1';
+$route['(login|register|logout|update_password|home|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|all_colleges|home/pwd_change|home/pus|index/cfr)'] = 'auth/$1';
 $route['(college_search)'] = 'search/$1';
+$route['(inbox)'] = 'user/$1';
+$route['(delete_message_inbox)'] = 'user/$1';
+$route['(delete_message_inbox/(:num))'] = 'user/$1';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

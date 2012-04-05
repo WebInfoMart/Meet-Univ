@@ -924,7 +924,7 @@ class Auth extends CI_Controller
             $this->email->to($email);
             $this->email->subject('Lost Password');
             $key = $key;
-            $message = "Please click this url to change your password ". base_url()."auth/change_user_password/".$key.'/'.$user_id ;
+            $message = "Please click this url to change your password ". base_url()."change_user_password/".$key.'/'.$user_id ;
             $message .="<br/>Thank you very much";
             $this->email->message($message);
 			//print_r($message);
@@ -1029,15 +1029,37 @@ class Auth extends CI_Controller
 		$data['university_details'] = $this->users->get_university_by_id($univ_id);
 		$country_id = $data['university_details']['country_id'];
 		$city_id = $data['university_details']['city_id'];
+		$longitude = $data['university_details']['longitude'];
+		$latitude = $data['university_details']['latitude'];
+		$university_name = $data['university_details']['univ_name'];
+		$university_address = $data['university_details']['address_line1'];
 		$logged_user_id = $this->session->userdata('user_id');
 		 $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
 		 $data['area_interest'] = $this->users->fetch_area_interest();
+		 $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+		 $data['article_news_gallery'] = $this->users->get_detail_articles_of_univ($univ_id);
+		 $data['followers_detail_of_univ'] = $this->users->get_followers_detail_of_univ($univ_id);
+		 $data['events_of_univ'] = $this->users->fetch_latest_events_by_univ_id($univ_id);
+		 //print_r($data['events_of_univ']);
+		 //print_r($data['followers_detail_of_univ']);
 		$add_follower = array(
 			'follow_to_univ_id' => $univ_id,
 			'followed_by' => $logged_user_id
 			);
 			
 		$data['is_already_follow'] = $this->users->check_is_already_followed($add_follower);
+		
+		/* code for university map */
+		$this->load->library('GMapuniv');
+		$this->gmapuniv->GoogleMapAPI();
+		$this->gmapuniv->setMapType('map');
+		$this->gmapuniv->addMarkerByCoords($longitude,$latitude,$university_name,$university_address);
+		
+						$data['headerjs'] = $this->gmapuniv->getHeaderJS();
+						$data['headermap'] = $this->gmapuniv->getMapJS();
+						$data['onload'] = $this->gmapuniv->printOnLoad();
+						$data['map'] = $this->gmapuniv->printMap();
+						$data['sidebar'] = $this->gmapuniv->printSidebar();
 		
 		if($this->input->post('join_now'))
 		{
@@ -1082,6 +1104,84 @@ class Auth extends CI_Controller
 		}
 		//$this->load->view('auth/university',$data);
 		$this->load->view('auth/footer',$data);
+	}
+	
+	function all_colleges()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$data['get_university'] = $this->users->show_all_college();
+		//print_r($data['get_university']);
+		$this->load->view('auth/show_all_college',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	
+	function user($id='')
+	{
+		if (!$this->tank_auth->is_logged_in()) {
+			redirect('/home');
+		} else {
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$redirect_current_url = $this->config->site_url().$this->uri->uri_string();
+		$data['detail_visited_user'] = $this->users->fetch_profile($id);
+		$cur_educ_lvl = $data['detail_visited_user']['curr_educ_level'];
+		$area_interest = $data['detail_visited_user']['prog_parent_id'];
+		$data['educ_level'] = $this->users->fetch_educ_level_by_id($cur_educ_lvl);
+		$data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
+		$data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
+		$data['follower_detail'] = $this->users->get_followers_detail_of_person($id);
+		$logged_user_id = $this->session->userdata('user_id');
+		$data['send_message_to_user_error'] = 0;
+		$data['follow_own'] = 0;
+		$logged_user_id == $id ? $data['follow_own'] = 1 : $data['follow_own'] = 0;
+		$add_follower = array(
+			'followed_to_person_id' => $id,
+			'followed_by' => $logged_user_id
+			);
+			
+		$data['is_already_follow'] = $this->users->check_is_already_followed_to_person($add_follower);
+		//print_r($data['follower_detail']);
+		
+		if($this->input->post('follow_now'))
+		{
+			$data['user_follow_university'] = $this->users->add_followers_to_person($add_follower);
+			redirect($redirect_current_url);
+		}
+
+		else if($this->input->post('unfollow_now'))
+		{
+			$data['unjoin_now_success'] = $this->users->unfollow_now_to_user($add_follower);
+			redirect($redirect_current_url);
+		}
+		
+		$data['send_message_to'] = 0 ;
+		if($this->input->post('btn_msg_send'))
+		{
+			$this->form_validation->set_rules('subject_message','Subject box','trim|xss_clean|required');
+			$this->form_validation->set_rules('message_body','Message box','trim|xss_clean|required');
+			if($this->form_validation->run())
+			{
+				$sender_id = $this->session->userdata('user_id');
+				$recipent_id = $id;
+				$msg = array(
+				'sender_id'=>$sender_id,
+				'recipent_id'=>$recipent_id,
+				'subject'=> $this->input->post('subject_message'),
+				'body'=> $this->input->post('message_body'),
+				);
+				//print_r($msg);
+				$data['send_message_to'] = $this->users->send_message_to_user($msg);
+			}
+			else{
+			$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+			$data['send_message_to_user_error'] = 1;
+			}
+		}
+		$this->load->view('auth/visit-user-profile',$data);
+		$this->load->view('auth/footer',$data);
+		}
 	}
 	
 	
