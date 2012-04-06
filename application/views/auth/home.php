@@ -1,96 +1,82 @@
 <div class="container">
-		<div class="body_bar"></div>
-		<div class="body_header"></div>
-		<div class="form">
-			<div class="row">
-				<div class="span8 real margin_t">
-					<div id='coin-slider' class='gallery_div'>
+	<div class="body_bar"></div>
+	<div class="body_header"></div>
+	<div class="form">
+		<div class="row">
+			<div class="span8 real margin_t">
+				<div id='coin-slider' class='gallery_div'>
 					<?php
-				foreach($gallery_home as $galery_images)
-				{
-					if(!empty($galery_images['image_path']))
+					foreach($gallery_home as $galery_images)
+					{
+						if(!empty($galery_images['image_path']))
 					{
 					?>
-					
-<a href="" target="_blank">
-		<img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="700" height="360" title="" alt="" rel=" "/>
-		<span>
-			<?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?>
-		</span>
-	</a>
-	
-					
+					<a href="" target="_blank"><img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="700" height="360" title="" alt="" rel=" "/>
+						<span>
+							<?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?>
+						</span>
+					</a>
 					<?php
 					}
-				}
-				?>
-				</div>
-					
-				
-				</div>
-				
-				<div class="float_r span8 margin_t margin_l">
-					<form class="form-horizontal form_horizontal_home" action="college_search" method="post">
+					}
+					?>
+				</div>				
+			</div>
+			<div class="float_r span8 margin_t margin_l">
+				<form class="form-horizontal form_horizontal_home" action="college_search" method="post">
 					<input type="hidden" name="type_search" id="type_search" value="0"/>
+					<div class="control-group">
+						<label class="control-label" for="focusedInput"><h3 class="white">Explore</h3></label>
+						<div class="controls">
+							<div class="btn-group" data-toggle="buttons-radio">
+								<button type="button" class="btn active" id="events">Events</button>
+								<input type="button" class="btn" id="colleges" value="Colleges" /><br/>
+								<p class="help-block white form_height">colleges by programs, country and course level</p>
+							</div>
+						</div>
+					</div>
+					<div class="events" id="events_col">
 						<div class="control-group">
-						
-						
-						
-							
-							<label class="control-label" for="focusedInput"><h3 class="white">Explore</h3></label>
-								<div class="controls">
-									<div class="btn-group" data-toggle="buttons-radio">
-										<button type="button" class="btn active" id="events">Events</button>
-										<input type="button" class="btn" id="colleges" value="Colleges"><br/>
-										<p class="help-block white form_height">colleges by programs, country and course level</p>
-									</div>
+							<label class="control-label" for="focusedInput"><h3 class="white">Events</h3></label>
+							<div class="controls">
+								<div class="btn-group" data-toggle="buttons-radio">
+									<!--<a class="btn" href="#">All</a>
+									<a class="btn" href="#">Postgraduate</a>
+									<a class="btn" href="#">Undergraduate</a>
+									<a class="btn" href="#">Foundation</a>-->
+									<button type="button" class="btn btnop active" id="all">All</button>
+									<button type="button" class="btn btnop" id="spot">Spot Admission</button>
+									<button type="button" class="btn btnop" id="fairs">Fairs</button>
+									<button type="button" class="btn btnop"id="opendd">Counselling</button>
 								</div>
-						</div>
-						<div class="events" id="events_col">
-							<div class="control-group">
-								<label class="control-label" for="focusedInput"><h3 class="white">Events</h3></label>
-									<div class="controls">
-										<div class="btn-group" data-toggle="buttons-radio">
-											<!--<a class="btn" href="#">All</a>
-											<a class="btn" href="#">Postgraduate</a>
-											<a class="btn" href="#">Undergraduate</a>
-											<a class="btn" href="#">Foundation</a>-->
-											<button type="button" class="btn btnop active" id="all">All</button>
-											<button type="button" class="btn btnop" id="spot">Spot Admission</button>
-											<button type="button" class="btn btnop" id="fairs">Fairs</button>
-											<button type="button" class="btn btnop"id="opendd">Counselling</button>
-										</div>
-										<ul class="ddclass">
-										<li class="li1 openddli">
-										<a href="#">Others</a></li>
-										<li class="li2 openddli" >
-										<a href="#">Alumuni</a>
-										</li>
-										</ul>
-									</div>
+								<ul class="ddclass">
+									<li class="li1 openddli"><a href="#">Others</a></li>
+									<li class="li2 openddli" ><a href="#">Alumuni</a></li>
+								</ul>
 							</div>
 						</div>
-						<div class="college" id="col">
-							<div class="control-group">
-								<label class="control-label" for="focusedInput"><h3 class="white">Type</h3></label>
-								<div class="controls">
-									<div class="btn-group" data-toggle="buttons-radio">
-										<!--<a class="btn" href="#">All</a>
-										<a class="btn" href="#">Postgraduate</a>
-										<a class="btn" href="#">Undergraduate</a>
-										<a class="btn" href="#">Foundation</a>-->
-										<button type="button" id="all" class="btn active">All</button>
-										<button type="button" id="pg" class="btn">Postgraduate</button>
-										<button type="button" id="ug" class="btn">UnderGraduate</button>
-										<button type="button" id="found" class="btn">Foundation</button>
-									</div>
+					</div>
+					<div class="college" id="col">
+						<div class="control-group">
+							<label class="control-label" for="focusedInput"><h3 class="white">Type</h3></label>
+							<div class="controls">
+								<div class="btn-group" data-toggle="buttons-radio">
+									<!--<a class="btn" href="#">All</a>
+									<a class="btn" href="#">Postgraduate</a>
+									<a class="btn" href="#">Undergraduate</a>
+									<a class="btn" href="#">Foundation</a>-->
+									<button type="button" id="all" class="btn active">All</button>
+									<button type="button" id="pg" class="btn">Postgraduate</button>
+									<button type="button" id="ug" class="btn">UnderGraduate</button>
+									<button type="button" id="found" class="btn">Foundation</button>
 								</div>
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="focusedInput"><h3 class="white">in Country</h3></label>
-								<div class="controls">
-									<select id="search_country" name="search_country">
-										<option value="">select</option>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="focusedInput"><h3 class="white">in Country</h3></label>
+							<div class="controls">
+								<select id="search_country" name="search_country">
+									<option value="">select</option>
 										<?php
 										foreach($country as $srch_country)
 										{
@@ -99,16 +85,16 @@
 										<?php
 										}
 										?>
-									</select>
-								</div>
+								</select>
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="focusedInput"><h3 class="white">Course</h3></label>
-								<div class="controls">
-									<div class="float_l span4 margin_zero">
-										<select id="search_program" name="search_program">
-											<option value="">select</option>
-											<?php
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="focusedInput"><h3 class="white">Course</h3></label>
+							<div class="controls">
+								<div class="float_l span4 margin_zero">
+									<select id="search_program" name="search_program">
+										<option value="">select</option>
+										<?php
 										foreach($area_interest as $srch_course)
 										{
 										?>
@@ -116,60 +102,58 @@
 										<?php
 										}
 										?>
-										</select>
-									</div>
-									<div class="float_l span1">
-										
-										<input type="submit" name="btn_col_search" class="btn" value="Search"/>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-						<!--<div class="search_layout">
-							<div class="control-group">
-								<label class="control-label" for="focusedInput"><h3 class="white">City</h3></label>
-								<div class="controls">
-									<select id="select01">
-										<option>Select City</option>
-										<option>India</option>
-										<option>USA</option>
-										<option>Canada</option>
-										<option>New york</option>
 									</select>
 								</div>
-							</div>
-							<div class="control-group">
-								<div class="margin_b2">
-									<div class="float_l">
-										<img src="images/form_line_breaker.png">
-									</div>
-									<div class="float_l style_or">OR</div>
-									<div class="float_l"><img src="images/form_line_breaker2.png"></div>
-									<div class="clearfix"></div>
+								<div class="float_l span1">
+									<input type="submit" name="btn_col_search" class="btn" value="Search"/>
 								</div>
+								<div class="clearfix"></div>
 							</div>
-						</div>-->
-						<div class="control-group">
-								<label class="control-label" for="focusedInput"><h3 class="white">Search</h3></label>
-								<div class="controls">
-									<div class="float_l span4 margin_zero">
-										<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Search here...">
-										<p class="help-block ex_univ"><span class="white">ex:</span> mba, university of sydney, undergraduate course</p>
-									</div>
-									<div class="float_l span1">
-										<button class="btn" href="#">Submit</button>
-									</div>
-									<div class="clearfix"></div>
-								</div>
 						</div>
-					</form>
-				</div>
-				<div class="clearfix"></div>
+					</div>
+					<!--<div class="search_layout">
+						<div class="control-group">
+							<label class="control-label" for="focusedInput"><h3 class="white">City</h3></label>
+							<div class="controls">
+								<select id="select01">
+									<option>Select City</option>
+									<option>India</option>
+									<option>USA</option>
+									<option>Canada</option>
+									<option>New york</option>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="margin_b2">
+								<div class="float_l">
+									<img src="images/form_line_breaker.png">
+								</div>
+								<div class="float_l style_or">OR</div>
+								<div class="float_l"><img src="images/form_line_breaker2.png"></div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>-->
+					<div class="control-group">
+						<label class="control-label" for="focusedInput"><h3 class="white">Search</h3></label>
+						<div class="controls">
+							<div class="float_l span4 margin_zero">
+								<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Search here...">
+								<p class="help-block ex_univ"><span class="white">ex:</span> mba, university of sydney, undergraduate course</p>
+							</div>
+							<div class="float_l span1">
+								<button class="btn" href="#">Submit</button>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</form>
 			</div>
-		</div>
 			<div class="clearfix"></div>
 		</div>
+	</div>
+	<div class="clearfix"></div>
 	<div class="body">
 		<div class="row">
 			<div class="span16 margin_l margin_t1">
