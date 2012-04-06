@@ -477,6 +477,11 @@ background-position: -48px 1px;
 {
 background-position: 0px -23px !important;
 }
+.icon-univ-event
+{
+background-position: -192px -120px !important;
+}
+
 .open .menu, .dropdown.open .menu, .open .dropdown-toggle, .dropdown.open .dropdown-toggle {
 	color: #ffffff;
 	background: #ccc;

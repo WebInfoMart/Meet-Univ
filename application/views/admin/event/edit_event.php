@@ -1,3 +1,10 @@
+<?php 
+foreach($event_info as $event_detail) { 
+$univ_state_id=$event_detail['event_state_id'];
+$univ_city_id=$event_detail['event_city_id'];
+
+?>
+
 <div id="content" class="content_msg" style="display:none;">
 <div class="span8 margin_t">
   <div class="message success"><p class="info_message"></p>
@@ -30,7 +37,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
  <div id="content">
 		<h2 class="margin">Create University Events</h2>
 		<div class="form span8">
-			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
+			<form action="<?php echo $base; ?>adminevents/edit_event/<?php echo $event_detail['event_id']; ?>" method="post" class="caption_form">
 				<ul>
 					<li>
 						<div>
@@ -38,7 +45,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Title</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">
+								<input type="text" size="30" class="<?php echo $class_title; ?>" name="title" value="<?php echo $event_detail['title']; ?>">
 								<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> </span>
 		
 							</div>
@@ -56,7 +63,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
 								<option value="">Please Select</option>
 									<?php foreach($univ_info as $univ_detail) { ?>
-										<option value="<?php echo $univ_detail->univ_id; ?>" ><?php echo $univ_detail->univ_name; ?></option>
+<option value="<?php echo $univ_detail->univ_id; ?>" <?php if($univ_detail->univ_id==$event_detail['event_univ_id']) { ?> selected <?php } ?> ><?php echo $univ_detail->univ_name; ?></option>
 										<?php } ?>
 							</select>
 		<span style="color: red;"> <?php echo form_error('university'); ?><?php echo isset($errors['university'])?$errors['university']:''; ?> </span>
@@ -80,7 +87,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 					</li>
 					-->
 					<?php } else { ?>
-	 				<input type="hidden" name="university" value="<?php echo $univ_info['univ_id']; ?>">
+	 				<input type="hidden" name="university" value="<?php echo $event_detail['event_univ_id']; ?>">
 					<?php }?>
 					<li>
 						<div>
@@ -91,7 +98,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<select class="<?php echo $class_country; ?> styled span3 margin_zero" name="country" id="country" onchange="fetchstates(0)">
 									<option value="">Please Select</option>
 									<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
+										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$event_detail['country_id']) { ?>selected <?php } ?> ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 	
 								</select>
@@ -114,7 +121,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<select class="<?php echo $class_state; ?> styled span3 margin_zero" name="state" onchange="fetchcities(0,0)" id="state" disabled="disabled">
 								<option value="">Please Select</option>
 							</select>
-						<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
+		<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
 		
 						</div>
 						<div class="float_l span3">
@@ -148,9 +155,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Event Time</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="date_picker" value="<?php echo set_value('event_time'); ?>" name="event_time">
-	<span style="color: red;"> <?php echo form_error('event_time'); ?><?php echo isset($errors['event_time'])?$errors['event_time']:''; ?> </span>
-		
+								<input type="text" size="30" class="text" name="event_time" value="<?php echo $event_detail['event_date_time']; ?>">
 							</div>
 							
 							<div class="clearfix"></div>
@@ -163,7 +168,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Detail</label>
 							</div>
 							<div class="">
-								<textarea rows="12" name="detail" class="wysiwyg" cols="103"><?php echo set_value('detail'); ?></textarea>
+								<textarea rows="12" name="detail" class="wysiwyg" cols="103"><?php echo $event_detail['event_detail']; ?></textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -282,8 +287,14 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 				</div>
 			</div>
 	</div>
-
+<?php } ?>
 <script>
+$(document).ready(function()
+{
+fetchstates(<?php echo $univ_state_id; ?>);
+fetchcities(<?php echo $univ_state_id; ?>,<?php echo $univ_city_id; ?>);
+//fetchcities();
+});
 function fetchcountry(cid)
 {
 $.ajax({

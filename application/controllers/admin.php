@@ -1468,7 +1468,6 @@ class Admin extends CI_Controller
 		'level'=>'3',
 		'last_ip'	=> $this->ci->input->ip_address(),
 		'createdby_user_id'=>$data['user_id'],
-		
 		);
 		
 		$univ_admin_id=$this->users->create_user($univ_admin_data,1);

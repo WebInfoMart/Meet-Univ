@@ -146,7 +146,7 @@ if(action=='delete')
 var atLeastOneIsChecked = $('.setchkval:checked').length > 0;
 if(atLeastOneIsChecked)
 {
-var r=confirm("Are U sure u want to delete all the recoeds of this university");
+var r=confirm("Are U sure u want to delete all the recoeds of selected university");
 if(r)
 {
 set_chkbox_val();

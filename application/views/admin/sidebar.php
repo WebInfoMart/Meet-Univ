@@ -111,9 +111,27 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<?php } ?>
 		<li><?php echo anchor("$base".'admin/manage_university', 'Manage University'); ?></li>
 		</ul>
-		
+		</li>
 		
 		<?php }} ?>
+			<?php if($admin_user_level=='5'){ ?>
+		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" /> Program/Courese</a>
+		<ul>
+		<li><?php echo anchor("$base".'admincourses/upload_courses', 'Add Bulk Courses'); ?></li>
+		<li><?php echo anchor("$base".'admincourses/add_course', 'Add SIngle Course'); ?></li>
+		<li><?php echo anchor('#', 'Manage Course'); ?></li>
+		
+		</ul>
+		</li>
+		<?php } if($admin_user_level=='3' || $admin_user_level=='5'){  ?>
+		
+		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />University/Courese</a>
+		<ul>
+		<li><?php echo anchor("$base".'admincourses/university_addcourse', 'Add Courses To University'); ?></li>
+		
+		</ul>
+		</li>
+		<?php } ?>
 		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Support</a></li>
 			
