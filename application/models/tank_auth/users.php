@@ -1251,6 +1251,49 @@ class Users extends CI_Model
 		return $this->db->affected_rows() ? 1 : 0;
 	}
 	
+	function fetch_program_title_of_univ($univ_id)
+	{
+		$this->db->select('program_id');
+		$this->db->from('univ_program');
+		$this->db->where('univ_id',$univ_id);
+		$query = $this->db->get();
+		
+		foreach($query->result_array() as $progid)
+		{
+			$prog_id[] = $progid['program_id'];
+		}
+		
+		if($query->num_rows() > 0)
+		{
+			$this->db->select('*');
+			$this->db->from('univ_program');
+			$this->db->join('program', 'univ_program.program_id = program.prog_id');
+			$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+			
+			$this->db->where_in('program_id',$prog_id);
+			$res = $this->db->get();
+			//print_r($res->result_array());
+			return $res->result_array();
+			//return $res->result_array();
+		}
+	}
+	
+	function fetch_course_detail($univ_id,$course_id)
+	{
+			$condition = array(
+			'prog_id'=>$course_id,
+			'univ_id'=>$univ_id
+			);
+			$this->db->select('*');
+			$this->db->from('univ_program');
+			$this->db->join('program', 'univ_program.program_id = program.prog_id');
+			$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+			
+			$this->db->where($condition);
+			$res = $this->db->get();
+			return $res->row_array();
+	}
+	
 	
 }
 

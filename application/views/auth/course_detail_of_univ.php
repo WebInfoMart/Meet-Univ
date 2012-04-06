@@ -1,0 +1,15 @@
+<div class="container">
+		<div class="body_bar"></div>
+		<div class="body_header"></div>
+		<div class="body">
+			<?php $this->load->view('auth/univ-header-gallery-logo'); ?>
+		
+			<h2><?php echo $detail_of_course['course_name']!='' ? $detail_of_course['course_name']:'Course Name Not Found!!!'; ?></h3>
+			<h4><?php echo $detail_of_course['prog_title']!='' ? $detail_of_course['prog_title']:'Title Not Found!!!'; ?></h4></br>
+			<?php echo $detail_of_course['program_detail']!='' ? $detail_of_course['program_detail']:'We currently have no information for this program.'; ?></br></br>
+			<h5><?php echo $detail_of_course['educ_level']!='' ? $detail_of_course['educ_level']:'Education Level Not Found!!!'; ?></h5></br>
+			<h5><?php echo $detail_of_course['program_duration1']!='' ? $detail_of_course['program_duration1']:'Program Duration Not Found!!!'; ?></h5></br>
+			<?php $this->load->view('auth/univ-fb-sidebar'); ?>
+</div>
+	</div>
+		

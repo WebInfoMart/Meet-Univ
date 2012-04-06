@@ -41,7 +41,9 @@
 $route['default_controller'] = "auth";
 $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';
-$route['university/(:num)']='auth/university/$1';
+$route['university/(:num)']='univ/university/$1';
+$route['univ_programs/(:num)/(:any)']='univ/univ_programs/$1/$2';
+$route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
 $route['inbox/(:any)']='user/inbox/$1';
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 //$route['(:any)'] = "auth/$1";
