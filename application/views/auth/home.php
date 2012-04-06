@@ -30,9 +30,9 @@
 						<div class="controls">
 							<div class="btn-group" data-toggle="buttons-radio">
 								<button type="button" class="btn active" id="events">Events</button>
-								<input type="button" class="btn" id="colleges" value="Colleges" /><br/>
-								<p class="help-block white form_height">colleges by programs, country and course level</p>
+								<button type="button" class="btn" id="colleges">Colleges</button>
 							</div>
+							<p class="help-block white form_height">colleges by programs, country and course level</p>
 						</div>
 					</div>
 					<div class="events" id="events_col">
@@ -53,6 +53,23 @@
 									<li class="li1 openddli"><a href="#">Others</a></li>
 									<li class="li2 openddli" ><a href="#">Alumuni</a></li>
 								</ul>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="focusedInput"><h3 class="white">in City</h3></label>
+							<div class="controls">
+								<select id="search_country" name="search_country">
+									<option value="">Select</option>
+									<option value="New Delhi">New Delhi</option>
+									<option value="Mumbai">Mumbai</option>
+									<option value="Chennai">Chennai</option>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="focusedInput"><h3 class="white">in the Month of</h3></label>
+							<div class="controls">
+								<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">
 							</div>
 						</div>
 					</div>
