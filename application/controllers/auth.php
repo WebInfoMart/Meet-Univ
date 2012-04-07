@@ -1041,6 +1041,7 @@ class Auth extends CI_Controller
 		} else {
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
+		$data['educ_level'] = '';
 		$redirect_current_url = $this->config->site_url().$this->uri->uri_string();
 		$data['detail_visited_user'] = $this->users->fetch_profile($id);
 		$cur_educ_lvl = $data['detail_visited_user']['curr_educ_level'];

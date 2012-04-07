@@ -148,7 +148,24 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-button.js"></script>
 
 <script type="text/javascript" src="<?php echo "$base$js";?>/avia-custom.js"></script>
-
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+   $('#scrollbar1').tinyscrollbar(); 
+  });
+  $(document).ready(function(){
+   $('#scrollbar2').tinyscrollbar(); 
+  });
+  $(document).ready(function(){
+   $('#scrollbar3').tinyscrollbar(); 
+  });
+  $(document).ready(function(){
+   $('#scrollbar4').tinyscrollbar(); 
+  });
+  $(document).ready(function(){
+   $('#scrollbar5').tinyscrollbar(); 
+  });
+ </script>
 <script type="text/javascript">
 $(document).ready(function(){
  $('#pulse').click(function(){

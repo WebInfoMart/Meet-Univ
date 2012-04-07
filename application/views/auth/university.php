@@ -12,7 +12,7 @@
 					<div class="span12 float_l margin_l margin_t">
 						<div class="span8 margin_zero">
 							<div class="letter_first">
-									<div>
+									<div class="univ_content">
 									<?php
 									echo $university_details['about_us'];
 									?>
@@ -21,7 +21,7 @@
 							<!--<div id="show_popup_success_join" class="success_modal">
 							You have Joined Successfully
 							</div>-->
-							<div>
+							<div class="margin_t">
 								<h3 class="heading_follow">Followers</h3>
 									<div class="float_l span6 margin_zero">
 										<ul class="follow">
@@ -61,7 +61,7 @@
 									<h2>Contact Information</h2>
 									<div>
 										<div class="float_l"><h4>Office Address</h4></div>
-										<div class="float_r span2 margin_zero"><?php echo $university_details['address_line1']; ?></div>
+										<div class="float_r span2 margin_zero contact_height"><?php echo $university_details['address_line1']; ?></div>
 										<div class="clearfix"></div>
 									</div>
 									<div>
@@ -81,9 +81,9 @@
 						<div class="clearfix"></div>
 					</div>
 					<?php $this->load->view('auth/univ-fb-sidebar'); ?>
-			<div class="margin_t">
-					<div class="span8 float_l margin_l">
-						<div class="news_data_uni events_box event_height_uni">
+			<div>
+					<div class="span8 float_l margin_l margin_t">
+						<div class="events_univ events_box event_height_uni">
 								<h2>Events</h2>
 								<ul>
 									<li>
@@ -108,14 +108,14 @@
 								</ul>
 							</div>
 							<div class="margin_t">
-								<div class="well margin_gamma padding_zero" style="background-color: #DFF0D8;border: 1px solid #DDD;">
+								<div class="well margin_gamma padding_zero new_data">
 									<div>
 										<div class="float_l">
 											<div class="letter_uni">
 											<div>Q Go Ask </br><span>uestion</span></div>
 											</div>
 										</div>
-										<div class="float_r" style="width:348px;font-size:20px;margin: 25px 0px 0px 0px;color: #333;">
+										<div class="float_r have_data">
 											<span>Have a Question?</span>
 											<span>Ask our counselors!</span>
 										</div>
@@ -123,7 +123,7 @@
 									</div>
 									<div class="margin">
 										<div>
-											<div class="float_l" style="font-size: 24px;margin-bottom:10px;color: #333;">what are the type of questions they ask in iit?</div>
+											<div class="float_l wht_data">what are the type of questions they ask in iit?</div>
 											
 											<div class="clearfix"></div>
 										</div>
@@ -135,7 +135,7 @@
 													<input style="width:262px" id="appendedInput" size="16" type="text" placeholder="Enter Your Qusetion"><span class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;">Ask</span>
 												</div>
 											</div>
-											<div class="float_r"><button class="btn btn-success" href="#" style="padding: 5px 20px;">More Q&amp;A</button></div>
+											<div class="float_r"><button class="btn btn-success more_btn" href="#">More Q&amp;A</button></div>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -157,19 +157,19 @@
 								</div>
 							</div>
 					</div>
-					<div class="span8 float_l">
+					<div class="artical_width float_l">
 					<?php
 					foreach($article_news_gallery as $article)
 					{
 					if($article['na_type'] == 'article' && $article['na_type_ud'] == 'univ_na')
 					{
 					?>
-						<div class="span4 float_l margin_zero">
+						<div class="span4 float_l margin_t">
 							<div class="index_sidebar_box">
 									<div class="artical_heading"><?php echo $article['na_title']; ?></div>
-								<div id="home" class="box artical_box_data">
-									<div class="float_l">
-										<?php echo "<img src='".base_url()."uploads/news_article_images/".$article['na_image_path']."'/>"; ?>
+								<div id="home" class="artical_box_data">
+									<div class="float_l content_art">
+										<?php echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['na_image_path']."'/>"; ?>
 									</div>
 									<div>
 										<?php echo $article['na_detail']; ?>

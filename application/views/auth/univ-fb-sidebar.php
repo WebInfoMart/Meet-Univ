@@ -5,13 +5,13 @@
 								<span>Interested in studying at Manipal University, Dubai Campus (RCPL)</span>
 								<div class="fcnt_signBtn"></div>or Fill details for the institute to counsel you
 								<div class="margin_t text_align"> 
-									
+									 <form class="form-horizontal" action="" method="post">
 										<fieldset>
 											<div class="control-group">
 												<input type="text" name="apply_name" class="input-medium" placeholder="Name">
 											</div>
 											<div class="control-group">
-												<select name="apply_course_interest" id="apply_course_interest" class="span2">
+												<select name="apply_course_interest" id="apply_course_interest" class="grid_1 box_select">
 													<option value="">Course of interest</option>
 													<?php
 													if(!empty($area_interest))

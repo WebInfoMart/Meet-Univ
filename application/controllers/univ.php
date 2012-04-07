@@ -5,13 +5,8 @@ class Univ extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		// $data['base'] = $this->config->item('base_url');
-		// $data['css'] = $this->config->item('css_path');
-		// $data['css'] = $this->config->item('img_path');
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		//$this->ci->load->config('tank_auth', TRUE);
-		//$this->ci->load->library('session');
 		$this->load->library('security');
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
@@ -22,6 +17,7 @@ class Univ extends CI_Controller
 		$this->load->library('fbConn/facebook');
 	}
 
+	/* Function used for single university page */
 function university($univ_id='')
 	{
 		$data = $this->path->all_path();
@@ -101,12 +97,13 @@ function university($univ_id='')
 		
 		else{
 		//$data['errors'] = 'Sorry, No University Details Found !!!';
-		$this->load->view('auth/university',$data);
+		$this->load->view('auth/NotFoundPage',$data);
 		}
 		//$this->load->view('auth/university',$data);
 		$this->load->view('auth/footer',$data);
 	}
 	
+	/* This Function used for get program categories provided by university */
 	function univ_programs($univ_id='',$prg='')
 	{
 		$data = $this->path->all_path();
@@ -131,15 +128,20 @@ function university($univ_id='')
 			$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
 			$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 			$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
-			//$this->load->view('auth/university',$data);
-		}
-		if($prg == 'program')
+			if($prg == 'program')
 		{
 			$data['prog_title_of_univ'] = $this->users->fetch_program_title_of_univ($univ_id);
 		}
 		$this->load->view('auth/university-courses',$data);
+		}
+		else{
+		$this->load->view('auth/NotFoundPage',$data);
+		}
 		$this->load->view('auth/footer',$data);
 	}
+	
+	/* This Function used for get course detail of program category 
+	of university selected by user */
 	
 	function program_detail($univ_id='',$course_id='')
 	{
@@ -167,9 +169,12 @@ function university($univ_id='')
 			//$this->load->view('auth/university',$data);
 			/* get detail of course */
 			$data['detail_of_course'] = $this->users->fetch_course_detail($univ_id,$course_id);
+			$this->load->view('auth/course_detail_of_univ',$data);
+		}
+		else{
+		$this->load->view('auth/NotFoundPage',$data);
 		}
 		
-		$this->load->view('auth/course_detail_of_univ',$data);
 		$this->load->view('auth/footer',$data);
 	}
 	}

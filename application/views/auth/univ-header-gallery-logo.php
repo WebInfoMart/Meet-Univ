@@ -25,11 +25,11 @@
 			</div>
 			
 			<ul class="uni_gallery">
-				<li class="univ_page_logo">
+				<li>
 				<?php 
 				if($university_details['univ_logo_path'] != '')
 				{
-				echo "<img src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
+				echo "<img class='univ_page_logo' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
 				}
 				?></li>
 				<?php
@@ -41,10 +41,15 @@
 				{
 				foreach($gallery as $gal)
 				{
-				//print_r($gal);
+				if($gal!=''){
 				?>
-					<li class="univ_page_gal"><?php echo "<img src='".base_url()."uploads/univ_gallery/".$gal."'/>"; ?></li>
+					<li><?php echo "<img class='univ_page_gal' src='".base_url()."uploads/univ_gallery/".$gal."'/>"; ?></li>
 				<?php
+				}
+				else{ ?>
+				<li class="univ_page_gal"><?php echo "No Image Available"; ?></li>
+				<?php
+				}
 				}
 				}
 				}
@@ -54,11 +59,11 @@
 			</ul>
 			
 			<div class="row uni_menu_placeholder">
-				<div class="span7 float_r">
+				<div class="span8 float_r">
 					<ul class="uni_menu">
 						<li>Home</li>
 						<li>About</li>
-						<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program">Programs</a></li>
+						<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
 						<li>Events</li>
 						<li>Questions & Answers</li>
 						<li class="border_beta">News</li>
