@@ -174,7 +174,7 @@ class Adminmodel extends CI_Model
 		
 		$config['upload_path'] = $this->gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
-        $config['max_size']    = '1000'; // in kb
+        $config['max_size']    = '100'; // in kb
         $config['max_width']  = '1024';
         $config['max_height']  = '768';
         
@@ -185,8 +185,8 @@ class Adminmodel extends CI_Model
         
         if ( ! $files )        
         {
-            $error = array('error' => $this->upload->display_errors());
-            return $error;
+            $data['err_msg'] ='Error!  Please Check Your file size and type';
+            $this->load->view('admin/show_error', $data);
         }    
         else
         {
@@ -205,7 +205,9 @@ class Adminmodel extends CI_Model
 			$this->db->insert('home_slider', $data);	
 				$f=1;
 			}
-			return $files;
+			//return $files;
+			redirect('admin/manage_home_gallery');
+		
 		}
 		
 		
@@ -225,12 +227,15 @@ class Adminmodel extends CI_Model
 			$this->db->from('home_slider');
 			$this->db->where('id',$gid);
 			$query = $this->db->get();
+			if($query->num_rows())
+			{
 			$res=$query->row_array();
 			$delpath=$this->gallery_path;
 			$del_path=$delpath.'/'.$res['image_path'];
 			unlink($del_path);
 			$this->db->delete('home_slider', array('id' => $gid));
 			return $del_path;
+			}
 		}
 		
 		
@@ -306,11 +311,17 @@ class Adminmodel extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			'max_size' => 2000
+			'max_size' => 500
 		);
 		
 		$this->load->library('upload', $config);
-		$this->upload->do_upload();
+		if(!$this->upload->do_upload())
+		{
+		  $data['err_msg']=$this->upload->display_errors();
+		  $this->load->view('admin/show_error',$data);
+		}
+		else
+		{
 		$image_data = $this->upload->data();
 		
 		$config = array(
@@ -349,6 +360,7 @@ class Adminmodel extends CI_Model
 			);
 			$this->db->insert('university', $data);		
 			redirect('admin/manage_university');
+		}	
 	}
 		
 	function enterplacelevel1()
@@ -495,13 +507,12 @@ class Adminmodel extends CI_Model
 	function delete_single_university($univ_id)
 	{
 		$this->db->delete('university', array('univ_id' => $univ_id));
-	/*	$this->db->delete('univ_gallery', array('univ_id' => $univ_id));
+		$this->db->delete('univ_gallery', array('univ_id' => $univ_id));
 		$this->db->delete('univ_program', array('univ_id' => $univ_id));
 		$this->db->delete('follow_univ', array('follow_to_univ_id' => $univ_id));
 		$this->db->delete('events', array('univ_id' => $univ_id));
 		$this->db->delete('mailchimp_detail', array('univ_id' => $univ_id));
-		$this->db->delete('news_article', array('univ_id' => $univ_id));
-	*/		
+		$this->db->delete('news_article', array('univ_id' => $univ_id));	
 	}
 	
 	function delete_universities()
@@ -513,12 +524,11 @@ class Adminmodel extends CI_Model
 			if($this->input->post("check_university_".$univ_id[$i])=='checked')
 			{
 			$this->db->delete('university', array('univ_id' => $univ_id[$i]));
-			/*$this->db->delete('univ_program', array('univ_id' => $univ_id[$i]));
+			$this->db->delete('univ_program', array('univ_id' => $univ_id[$i]));
 			$this->db->delete('follow_univ', array('follow_to_univ_id' => $univ_id[$i]));
 			$this->db->delete('events', array('univ_id' => $univ_id));
 			$this->db->delete('mailchimp_detail', array('univ_id' => $univ_id[$i]));
 			$this->db->delete('news_article', array('univ_id' => $univ_id[$i]));
-			*/
 			}
 		}
 	}

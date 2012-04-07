@@ -49,7 +49,7 @@ class Admincourses extends CI_Controller
 			if($this->input->post('upload'))
 			{
 			$this->courses->upload_bulk_courses();
-			redirect('admincourses/manage_courses/bcus');
+			
 			}
 			$this->load->view('admin/courses/upload_bulk_courses');	
 			}
@@ -74,7 +74,7 @@ class Admincourses extends CI_Controller
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);
-			if($data['admin_user_level']=='5' || $data['admin_user_level']=='3')
+			if($data['admin_user_level']=='5')
 			{
 			if($msg=='bcus')
 			{
@@ -86,8 +86,13 @@ class Admincourses extends CI_Controller
 			$data['msg']='Program Added Sucessfully';
 			$this->load->view('admin/userupdated',$data);
 			}
-			$this->load->view('admin/courses/manage_courses');	
-			
+			if($msg=='cds')
+			{
+			$data['msg']='Course Deleted Sucessfully';
+			$this->load->view('admin/userupdated',$data);
+			}
+			$data['course_info']=$this->courses->program_info();
+			$this->load->view('admin/courses/manage_courses',$data);	
 			}
 			else
 			{
@@ -170,7 +175,7 @@ class Admincourses extends CI_Controller
 			}
 			if ($this->form_validation->run()) {
 			$this->courses->add_course_to_univ();
-			redirect('admincourses/manage_courses/cas');
+			redirect('admincourses/manage_univ_course/cas');
 			}
 			$data['submit_attemp']=0;
 			if($submit=='submit')
@@ -200,7 +205,7 @@ class Admincourses extends CI_Controller
 		$this->load->view('ajaxviews/program_list',$data);
 	}
 	
-	function add_univ_prog($submit='')
+	/*function add_univ_prog($submit='')
 	{
 			$data = $this->path->all_path();
 			if (!$this->tank_auth->is_admin_logged_in()) {
@@ -240,7 +245,7 @@ class Admincourses extends CI_Controller
 			$this->load->view('admin/accesserror',$data);
 			}
 		}
-	}		
+	}*/		
 		function check_univ_course()
 		{
 			$data['res']=$this->courses->check_univ_course($this->input->post('university'),$this->input->post('program'));
@@ -254,7 +259,171 @@ class Admincourses extends CI_Controller
 			return TRUE;
 			}
 		}
+		function check_univ_course_ajax()
+		{
+		$data['result']=$this->courses->check_univ_course($this->input->post('university'),$this->input->post('program'));
+		$this->load->view('ajaxviews/check_unique_field', $data);	
+		}
+		
+		function delete_single_course($prog_id)
+		{
+		
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$delete_user_priv=array('5','7','8','10');
+		$flag=0;
+		if($data['admin_user_level']=='5')
+		{
+		$this->courses->delete_single_course($prog_id);
+		redirect('admincourses/manage_courses/cds');
+		}
+		else{
+		$this->load->view('admin/accesserror', $data);
+		}
+		
+		}
+		}
+		function delete_single_course_univ($prog_id)
+		{
+		
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$flag=0;
+		if($data['admin_user_level']=='5' || $data['admin_user_level']=='3') 
+		{ 
+		if($data['admin_user_level']=='3') 
+		{
+		$univ=$this->events->fetch_univ_id($data['user_id']);
+		$univ_id=$univ['univ_id'];
+		}
+		$this->courses->delete_single_course_univ($prog_id,$univ_id);
+		redirect('admincourses/manage_univ_course/cds');
+		}
+		else{
+		$this->load->view('admin/accesserror', $data);
+		}
+		
+		}
+		}
+		function delete_courses()
+		{
+		
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		if($data['admin_user_level']=='5')
+		{
+		$this->courses->delete_courses();
+		redirect('admincourses/manage_courses/cds');
+		
+		}
+		else{
+		$this->load->view('admin/accesserror', $data);
+		}
+		
+		}
+		}
+		
+		function manage_univ_course($msg='')
+		{
+			if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		if($data['admin_user_level']=='5' || $data['admin_user_level']=='3')
+		{
+		if($msg=='cds')
+		{
+		$data['msg']='Course Deleted Sucessfully';
+		$this->load->view('admin/userupdated',$data);
+		}
+		if($msg=='cas')
+		{
+			$data['msg']='Program Added Sucessfully';
+			$this->load->view('admin/userupdated',$data);
+		}
+		if($data['admin_user_level']=='3')
+		{
+		$univ=$this->events->fetch_univ_id($data['user_id']);
+		$univ_id=$univ['univ_id'];
+		$data['course_info']=$this->courses->fetch_univ_courses($univ_id);
+		}
+		else if($data['admin_user_level']=='5')
+		{
+		$data['univ_info']=$this->events->get_univ_detail();
+		}
+		$this->load->view('admin/courses/manage_univ_courses', $data);
+		
+		}
+		else{
+		$this->load->view('admin/accesserror', $data);
+		}
+		
+		}
+		}
+		
+	function delete_univ_courses()
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		if($data['admin_user_level']=='5' || $data['admin_user_level']=='3')
+		{
+		if($data['admin_user_level']=='3')
+		{
+		$univ=$this->events->fetch_univ_id($data['user_id']);
+		$univ_id=$univ['univ_id'];
+		}
+		$this->courses->delete_univ_courses($univ_id);
+		redirect('admincourses/manage_univ_course/cds');
+		}
+		else{
+		$this->load->view('admin/accesserror', $data);
+		}
+		
+		}
+	}
 
+	function fetch_univ_course_ajax()
+	{
+		
+	}
 }
 
 /* End of file auth.php */

@@ -80,12 +80,10 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 	<?php 
 	}
 	
-		if($admin_priv_res['privilege_type_id']=='11' && $admin_priv_res['privilege_level']!='0')
-			{
+		if($admin_priv_res['privilege_type_id']=='11' && $admin_priv_res['privilege_level']!='0' && $admin_user_level!='3')
+		{
 			?>
-		<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />  Manage Gallery</a>
-		<ul>
-		<li><a href="" class="collapse">Home Gallery</a>
+		<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />  Manage Home Gallery</a>
 		<ul>
 		<?php
 		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
@@ -95,10 +93,9 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<li><?php echo anchor("$base".'admin/manage_home_gallery', 'Manage Home Gallery'); ?></li>
 		</ul>
 		</li>
-				<li><a href="#" class="collapse">Univ Gallery</a></li>
-		</ul>
-		</li>
-		<?php } 
+		
+		<?php
+		} 
 		if($admin_priv_res['privilege_type_id']=='5' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
@@ -119,7 +116,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<ul>
 		<li><?php echo anchor("$base".'admincourses/upload_courses', 'Add Bulk Courses'); ?></li>
 		<li><?php echo anchor("$base".'admincourses/add_course', 'Add SIngle Course'); ?></li>
-		<li><?php echo anchor('#', 'Manage Course'); ?></li>
+		<li><?php echo anchor("$base".'admincourses/manage_courses', 'Manage Course'); ?></li>
 		
 		</ul>
 		</li>
@@ -128,6 +125,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />University/Courese</a>
 		<ul>
 		<li><?php echo anchor("$base".'admincourses/university_addcourse', 'Add Courses To University'); ?></li>
+		<li><?php echo anchor("$base".'admincourses/manage_univ_course', 'Manage Courses'); ?></li>
 		
 		</ul>
 		</li>

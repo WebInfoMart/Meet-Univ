@@ -39,7 +39,7 @@ if($error_currency2 != '') { $class_currency2= 'focused_error_univ'; } else { $c
 		<span style="color: red;"> <?php echo form_error('program'); ?><?php echo isset($errors['program'])?$errors['program']:''; ?> </span>
 
 		<div class="form span8">
-			<form action="<?php echo $base; ?>admincourses/university_addcourse/submit" method="post" class="caption_form">
+<form action="<?php echo $base; ?>admincourses/university_addcourse/submit" method="post" class="caption_form" onsubmit="return chk_prog_to_univ();" >
 					<ul>
 					<li style="margin-left:80px;">
 						<div>
@@ -96,7 +96,7 @@ if($error_currency2 != '') { $class_currency2= 'focused_error_univ'; } else { $c
 							<label>Choose University</label>
 						</div>
 						<div class="float_l span3">
-							<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
+							<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university" id="university">
 								<option value="">Please Select</option>
 									<?php foreach($univ_info as $univ_detail) { ?>
 										<option value="<?php echo $univ_detail->univ_id; ?>" ><?php echo $univ_detail->univ_name; ?></option>
@@ -110,7 +110,7 @@ if($error_currency2 != '') { $class_currency2= 'focused_error_univ'; } else { $c
 					</li>
 				
 					<?php } else { ?>
-	 				<input type="hidden" name="university" value="<?php echo $univ_info['univ_id']; ?>">
+	 				<input type="hidden" name="university" id="university" value="<?php echo $univ_info['univ_id']; ?>">
 					
 					<?php }?>
 						<div>
@@ -295,6 +295,52 @@ $('#program').css('display','none');
 $('.program_label').css('display','none');
 $('#prog_data').hide(500);
 }
+}
+function chk_prog_to_univ()
+{
+<?php if($admin_user_level=='5') { ?>
+var university=$("#university option:selected").val();
+<?php } else if($admin_user_level=='3'){ ?>
+var university=$("#university").val();
+<?php } ?>
+var program=$("#program option:selected").val();
+var f=0;
+if(program=='' || program=='0' || program==null)
+{
+alert("Please select the Program");
+return false;
+}
+else if(university=='' || university==null )
+{
+alert("Please Select the University");
+return false;
+}
+else {
+$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admincourses/check_univ_course_ajax",
+	   async:false,
+	   data: 'university='+university+'&program='+program,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   if(msg =='1')
+		{
+		f=1;
+		}
+	   }
+	   });
+		if(f==1)
+		{
+		alert("Selected Program is Alredy Exist in this university");
+		return false;
+		}
+		else
+		{
+		return true;
+		}
+}
+
 }	
 </script>	
 	

@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = "auth";
+$route['admin/update-(:num)-user-(:num)'] = 'admin/edituser/$1/$2';
 $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';
 $route['university/(:num)']='auth/university/$1';

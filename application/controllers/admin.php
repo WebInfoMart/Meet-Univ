@@ -885,7 +885,8 @@ class Admin extends CI_Controller
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==1 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv))
 		{
-		$this->load->view('admin/userdeleted', $data);
+		$data['msg']='User Delted Successfully';
+		$this->load->view('admin/userupdated', $data);
 		$flag=1;
 		break;
 		}
@@ -954,7 +955,7 @@ class Admin extends CI_Controller
 		$add_gallery_priv=array('4','6','8','10');
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==11 && in_array($userdata['admin_priv']['privilege_level'],$add_gallery_priv) )
+		if($userdata['admin_priv']['privilege_type_id']==11 && $data['admin_user_level']!='3' && in_array($userdata['admin_priv']['privilege_level'],$add_gallery_priv ) )
 		{
 		$flag=1;
 		
@@ -970,7 +971,6 @@ class Admin extends CI_Controller
 		if ($this->input->post('upload')) {
 		$data['x']=$this->adminmodel->do_upload();
 		
-		redirect('admin/manage_home_gallery');
 		//print_r($data['x']);
 		
 		}
@@ -994,7 +994,7 @@ class Admin extends CI_Controller
 		$flag=0;
 		$delete=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==11 && $userdata['admin_priv']['privilege_level']!=0)
+		if($userdata['admin_priv']['privilege_type_id']==11 && $userdata['admin_priv']['privilege_level']!=0 && $data['admin_user_level']!=3)
 		{
 		$delete_gallery_pic=array('5','7','8','10');
 		if(in_array($userdata['admin_priv']['privilege_level'],$delete_gallery_pic))

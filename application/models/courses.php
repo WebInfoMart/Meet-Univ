@@ -67,8 +67,8 @@ class Courses extends CI_Model
 			//$config['max_size']    = '10000';
 			$this->load->library('upload', $config);
 			if(!$this->upload->do_upload()){
-			$data['msg']=$this->upload->display_errors();
-			$this->load->view('admin/userupdated',$data);
+			$data['err_msg']=$this->upload->display_errors();
+			$this->load->view('admin/show_error',$data);
 			} else {
 			$this->load->library('Spreadsheet_Excel_Reader');
 			$path=$this->excel_path.'/'.$_FILES['userfile']['name'];
@@ -117,6 +117,7 @@ class Courses extends CI_Model
 							);
 				*/			
 				$this->db->insert('program',$pro);
+				redirect('admincourses/manage_courses/bcus');
 			}
 			//echo $data->sheets[0]['numRows'];
 			
@@ -147,6 +148,7 @@ class Courses extends CI_Model
 	$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data=array(
 		'program_id'=>$this->input->post('program'),
+		'curr_educ_level'=>$this->input->post('educ_level'),
 		'univ_id'=>$this->input->post('university'),
 		'intake1'=>$this->input->post('intake1'),
 		'intake2'=>$this->input->post('intake2'),
@@ -161,14 +163,7 @@ class Courses extends CI_Model
 		'insertedby'=>$data['user_id']
 			);
 		$this->db->insert('univ_program',$data);
-		$res=$this->courses->university_educ_level_exists($this->input->post('university'),$this->input->post('educ_level'));
-		if(!$res)
-		{
-			$data=array('univ_id'=>$this->input->post('university'),
-						'curr_educ_level_id'=>$this->input->post('educ_level')
-			);
-			$this->db->insert('university_educ_level',$data);
-		}
+		
 	}
 	
 	function check_univ_course($univ_id,$prog_id)
@@ -178,11 +173,94 @@ class Courses extends CI_Model
 		
 	}
 	
-	function university_educ_level_exists($univ_id,$educ_level)
+	
+	function program_info()
 	{
-	$query = $this->db->get_where('university_educ_level', array('univ_id' => $univ_id,'curr_educ_level_id'=>$educ_level));
-	return $query->num_rows();
+		$this->db->select('*');
+		$this->db->from('program');
+		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
+		$query =$this->db->get();
+		$config['base_url']=base_url()."admincourses/manage_courses/";
+		$config['total_rows']=$query->num_rows();
+		$config['per_page'] = '5'; 
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('program');
+		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+		$this->db->join('program_parent', 'program_parent.prog_parent_id = program_parent.prog_parent_id');
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
+		return $query->result();
+	}
+	function delete_single_course($prog_id)
+	{
+		$this->db->delete('program', array('prog_id' => $prog_id));
+		$this->db->delete('univ_program',array('program_id' => $prog_id));
+	}
+	
+	function delete_courses()
+	{
+		$progcount=count($this->input->post('course_id'));	
+		$prog_id=$this->input->post('course_id');
+		for( $i =0; $i < $progcount ; $i++ )
+		{
+			if($this->input->post("check_course_".$prog_id[$i])=='checked')
+			{
+			$this->db->delete('program', array('prog_id' => $prog_id[$i]));
+			$this->db->delete('univ_program',array('program_id' => $prog_id[$i]));
+			
+			}
+		}
+		
+	}
+	function delete_univ_courses($univ_id)
+	{
+		$progcount=count($this->input->post('course_id'));	
+		$prog_id=$this->input->post('course_id');
+		for( $i =0; $i < $progcount ; $i++ )
+		{
+			if($this->input->post("check_course_".$prog_id[$i])=='checked')
+			{
+			$this->db->delete('univ_program',array('program_id' => $prog_id[$i],'univ_id'=>$univ_id));
+			
+			}
+		}
+	}
+	function delete_single_course_univ($prog_id,$univ_id)
+	{
+	$this->db->delete('univ_program',array('program_id' => $prog_id,'univ_id'=>$univ_id));
+	}
+		
+	function fetch_univ_courses($univ_id)
+	{
+	
+		$this->db->select('*');
+		$this->db->from('univ_program');
+		$this->db->join('program', 'program.prog_id = univ_program.program_id');
+		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
+		$this->db->where('univ_id', $univ_id);
+		$query=$this->db->get();
+		$config['base_url']=base_url()."admincourses/manage_univ_course/";
+		$config['total_rows']=$query->num_rows();
+		$config['per_page'] = '7'; 
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('univ_program');
+		$this->db->join('program', 'program.prog_id = univ_program.program_id');
+		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
+		$this->db->where('univ_id', $univ_id);
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
+		return $query->result();
 	}
 }
+
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

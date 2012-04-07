@@ -155,7 +155,7 @@ $('#deleteform').submit();
 }
 else
 {
-alert("please select al least one usniversity");
+alert("please select al least one university");
 return false;
 }
 }
