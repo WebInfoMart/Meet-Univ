@@ -23,7 +23,7 @@
 				</div>				
 			</div>
 			<div class="float_r span8 margin_t margin_l">
-				<form class="form-horizontal form_horizontal_home" action="college_search" method="post">
+				<form class="form-horizontal form_horizontal_home" action="college_search" method="get">
 					<input type="hidden" name="type_search" id="type_search" value="0"/>
 					<div class="control-group">
 						<label class="control-label" for="focusedInput"><h3 class="white">Explore</h3></label>
@@ -58,7 +58,7 @@
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h3 class="white">in City</h3></label>
 							<div class="controls">
-								<select id="search_country" name="search_country">
+								<select>
 									<option value="">Select</option>
 									<option value="New Delhi">New Delhi</option>
 									<option value="Mumbai">Mumbai</option>
