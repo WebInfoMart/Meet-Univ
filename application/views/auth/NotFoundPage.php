@@ -7,7 +7,7 @@
 					<div class="back_img">
 						<h2 class="border_bot_wel">Meet Univerties</h2>
 						<div class="span8 margin_t alert alert-error">
-							<center><h2> Sorry....</br><span class="text-align"> This Link is Invalid.... </span> </h2></center>
+							<center><h2> Sorry....</br><span class="text-align"> Page Not Found.... </span> </h2></center>
 						</div>
 						<div class="clearfix"></div>
 					</div>

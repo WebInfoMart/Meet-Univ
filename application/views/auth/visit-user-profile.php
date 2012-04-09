@@ -55,6 +55,10 @@
 						{
 						echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/".$detail_visited_user['user_pic_path']."'/>"; 
 						}
+						else { ?>
+						<img class="profile_img_width" src="<?php echo "$base$img_path";  ?>/user_model.png">
+						<?php
+						}
 						?>
 							
 							<h3 class="text_align">

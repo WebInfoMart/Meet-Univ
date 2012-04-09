@@ -1022,9 +1022,10 @@ class Admin extends CI_Controller
 			$this->load->view('admin/userupdated', $data);
 		
 		}
-		}
 		$data['gallery']=$this->adminmodel->get_gallery_info();
 		$this->load->view('admin/manage_gallery', $data);
+		
+		}
 		}	
 	}
 	
@@ -1477,6 +1478,145 @@ class Admin extends CI_Controller
 		$data['uai']=$univ_admin_id['user_id'];
 		$data['univ_admins']=$this->adminmodel->get_univ_admin();
 		$this->load->view('ajaxviews/univ_admin_list',$data);
+	}
+	
+	function add_univ_gallery()
+	{if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$add_gallery_priv=array('4','6','8','10');
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==11 && in_array($userdata['admin_priv']['privilege_level'],$add_gallery_priv ) )
+		{
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else 
+		{
+		$submit=0;
+		$data['univ_info']=$this->events->get_univ_detail();
+		if ($this->input->post('upload')) {
+		if($data['admin_user_level']=='3')
+		{
+		$univ_info=$this->events->fetch_univ_id($data['user_id']);
+		$university_id=$univ_info['univ_id'];
+		$submit=1;
+		}
+		else
+		{
+		$this->form_validation->set_rules('university', 'University', 'trim|required');
+		if ($this->form_validation->run()) {
+		$submit=1;
+		$university_id=$this->input->post('university');
+		}
+		}
+		if($submit=='1')
+		{	
+		echo $x=$this->adminmodel->upload_univ_gallery($university_id);
+		}
+		}
+		$this->load->view('admin/add_univ_gallery', $data);
+	  }
+		
+	}
+	}
+	
+	
+	function manage_univ_gallery($del_pic='')
+	{
+	if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$flag=0;
+		$delete=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==11 && $userdata['admin_priv']['privilege_level']!=0)
+		{
+		$delete_gallery_pic=array('5','7','8','10');
+		if(in_array($userdata['admin_priv']['privilege_level'],$delete_gallery_pic))
+		{
+		$delete=1;
+		}
+		$flag=1;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else if($flag==1)
+		{
+		
+		if($delete==1 && $del_pic!=0 && $del_pic!='' && $del_pic!=NULL)
+		{
+			$this->adminmodel->delete_univ_gallery_pic($del_pic);
+			$data['msg']="Gallery Image Deleted successfully";
+			$this->load->view('admin/userupdated', $data);
+		
+		}
+		if($del_pic=='ius')
+		{
+		$data['msg']="Gallery Image Uploaded successfully";
+		$this->load->view('admin/userupdated', $data);
+		}
+		if($data['admin_user_level']=='3')
+		{
+		$univ_info=$this->events->fetch_univ_id($data['user_id']);
+		$data['gallery']=$this->adminmodel->get_univ_gallery_info($univ_info['univ_id']);
+		
+		}
+		else
+		{
+		$data['univ_info']=$this->events->get_univ_detail();
+		}
+		$this->load->view('admin/manage_univ_gallery', $data);
+		}
+		}	
+	}
+	
+	function fetch_univ_gallery_ajax()
+	{
+	$data = $this->path->all_path();
+	$data['user_id']	= $this->tank_auth->get_admin_user_id();
+	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+	$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+	$delete=0;
+	$delete_gallery_pic=array('5','7','8','10');
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==11 && $userdata['admin_priv']['privilege_level']!=0 && $data['admin_user_level']!='3')
+		{
+		if(in_array($userdata['admin_priv']['privilege_level'],$delete_gallery_pic))
+		{
+		$delete=1;
+		}
+		}
+	}
+	$univ_id=$this->input->post('univ_id');
+	$data['delete']=$delete;	
+	$data['count']=$this->adminmodel->get_univ_gallery_info_count($univ_id);
+	$data['gallery']=$this->adminmodel->get_univ_gallery_info($univ_id);
+	$this->load->view('ajaxviews/manage_univ_gallery_admin', $data);
+	
 	}
 }
 

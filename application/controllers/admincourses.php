@@ -291,7 +291,7 @@ class Admincourses extends CI_Controller
 		
 		}
 		}
-		function delete_single_course_univ($prog_id)
+		function delete_single_course_univ($prog_id='',$univid='')
 		{
 		
 		if (!$this->tank_auth->is_admin_logged_in()) {
@@ -312,13 +312,16 @@ class Admincourses extends CI_Controller
 		$univ=$this->events->fetch_univ_id($data['user_id']);
 		$univ_id=$univ['univ_id'];
 		}
+		else
+		{
+		$univ_id=$univid;
+		}
 		$this->courses->delete_single_course_univ($prog_id,$univ_id);
 		redirect('admincourses/manage_univ_course/cds');
 		}
 		else{
 		$this->load->view('admin/accesserror', $data);
 		}
-		
 		}
 		}
 		function delete_courses()
@@ -338,7 +341,6 @@ class Admincourses extends CI_Controller
 		{
 		$this->courses->delete_courses();
 		redirect('admincourses/manage_courses/cds');
-		
 		}
 		else{
 		$this->load->view('admin/accesserror', $data);
@@ -357,6 +359,7 @@ class Admincourses extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$data['openhtml']=0;
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		if($data['admin_user_level']=='5' || $data['admin_user_level']=='3')
@@ -410,6 +413,10 @@ class Admincourses extends CI_Controller
 		$univ=$this->events->fetch_univ_id($data['user_id']);
 		$univ_id=$univ['univ_id'];
 		}
+		else
+		{
+		$univ_id=$this->input->post('university');
+		}
 		$this->courses->delete_univ_courses($univ_id);
 		redirect('admincourses/manage_univ_course/cds');
 		}
@@ -422,6 +429,12 @@ class Admincourses extends CI_Controller
 
 	function fetch_univ_course_ajax()
 	{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$univ_id=$this->input->post('university');
+		$data['course_info']=$this->courses->fetch_univ_courses($univ_id);
+		$this->load->view('ajaxviews/manage_univ_courses',$data);
 		
 	}
 }

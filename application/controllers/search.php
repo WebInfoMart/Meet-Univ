@@ -96,8 +96,13 @@ class search extends CI_Controller
 					// Load our view, passing the map data that has just been created
 					//$this->load->view('my_view', $data);
 				
-				
+				if($data['get_university'] != 0)
+				{
 				$this->load->view('auth/listed_collage',$data);
+				}
+				else{
+				$this->load->view('auth/NotFoundPage',$data);
+				}
 			}
 			else{
 					redirect('');

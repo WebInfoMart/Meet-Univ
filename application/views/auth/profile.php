@@ -310,7 +310,7 @@ $(window).load(function(){
 									<div class="artical_heading">Article</div>
 										<div id="home" class="box artical_box_data">
 											<div class="float_l margin_r1">
-												<img src="<?php echo "$base$img_path";  ?>/layer.png">
+												<img class="artical_img" src="<?php echo "$base$img_path";  ?>/layer.png">
 											</div>
 											<div class="margin_l8">
 												Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
@@ -324,7 +324,7 @@ $(window).load(function(){
 									<div class="artical_heading">Article</div>
 										<div id="home" class="box artical_box_data">
 											<div class="float_l margin_r1">
-												<img src="<?php echo "$base$img_path";  ?>/layer.png">
+												<img class="artical_img" src="<?php echo "$base$img_path";  ?>/layer.png">
 											</div>
 											<div class="margin_l8">
 												Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
@@ -338,7 +338,7 @@ $(window).load(function(){
 									<div class="artical_heading">Article</div>
 										<div id="home" class="box artical_box_data">
 											<div class="float_l margin_r1">
-												<img src="<?php echo "$base$img_path";  ?>/layer.png">
+												<img class="artical_img" src="<?php echo "$base$img_path";  ?>/layer.png">
 											</div>
 											<div class="margin_l8">
 												Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 

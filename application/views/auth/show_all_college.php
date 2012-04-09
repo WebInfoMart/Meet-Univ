@@ -200,7 +200,7 @@
 												?>
 												</div>
 										</div>
-										<div class="float_r span4 margin_l">
+										<div class="float_r span4 margin_l data_limited">
 											<?php echo $get_university['university'][$no_university]['about_us']; ?>
 										</div>
 									</div>
@@ -247,11 +247,12 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				
 				<div class="float_r span3">
 					<img src="images/banner_img.png" />
 				</div>
 				<div class="clearfix"></div>
+			</div>
 			</div>
 		</div>
 	</div>

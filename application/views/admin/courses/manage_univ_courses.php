@@ -75,8 +75,7 @@
 
 <h2>DETAIL OF COURSES</h2>
 			<form action="<?php echo $base ?>admincourses/delete_univ_courses" method="post" id="deleteform">
-				<div id="choose_univ">
-				<ul>
+				<ul >
 						<li>
 						<div>
 						<div class="float_l span3 margin_zero">
@@ -95,7 +94,9 @@
 						</div>
 					</li>
 				</ul>	
-			</div>		
+				<div id="choose_univ" >
+				
+				</div>		
 			</form>	
 </div>
 <?php } ?>	
@@ -112,18 +113,18 @@ $.ajax({
 	   cache: false,
 	   success: function(msg)
 	   {
-	  alert(msg);
+	  $('#choose_univ').html(msg);
 	   }
 });
-
 }
 function delete_confirm(progid)
 {
+var univid=$("#university option:selected").val();
 $('#check_course_'+progid).attr('checked','checked')
 var r=confirm("Are U sure u want to DELETE this Course?");
 if(r)
 {
-window.location.href="<?php echo $base ?>"+'admincourses/delete_single_course_univ/'+progid;
+window.location.href="<?php echo $base ?>"+'admincourses/delete_single_course_univ/'+progid+'/'+univid;
 }
 else 
 {

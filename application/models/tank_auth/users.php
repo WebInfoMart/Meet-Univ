@@ -1005,7 +1005,13 @@ class Users extends CI_Model
 			$univ_data['program'] = $univ_program;
 			$univ_data['position'] = $marker;
 			//print_r(univ_data);
+			if(!empty($univ_data))
+			{
 			return $univ_data;
+			}
+			else{
+			return 0;
+			}
 		}
 		
 	}
@@ -1029,7 +1035,13 @@ class Users extends CI_Model
 						$univ_data['program'] = $univ_program;
 						$univ_data['position'] = $marker;
 						//print_r(univ_data);
+						if(!empty($univ_data))
+						{
 						return $univ_data;
+						}
+						else{
+						return 0;
+						}
 	}
 	
 	else if($type_educ_level != 0 and $type_educ_level != '' and $search_country != '' and $search_course == '')
@@ -1042,7 +1054,7 @@ class Users extends CI_Model
 		
 		$this->db->select('univ_id');
 		$this->db->where('curr_educ_level_id',trim($type_educ_level));
-		$rows_univ_program = $this->db->get('university_educ_level');
+		$rows_univ_program = $this->db->get('univ_program');
 		$rows_univ_program_table = $rows_univ_program->result_array();
 		
 		if($rows_univ->num_rows() > 0 && $rows_univ_program->num_rows() > 0)
@@ -1077,7 +1089,13 @@ class Users extends CI_Model
 			$univ_data['program'] = $univ_program;
 			$univ_data['position'] = $marker;
 			//print_r(univ_data);
+			if(!empty($univ_data))
+			{
 			return $univ_data;
+			}
+			else{
+			return 0;
+			}
 		}
 	}
 	}
@@ -1120,7 +1138,13 @@ class Users extends CI_Model
 			$univ_data['position'] = $marker;
 			//$univ_data['gallery'] = $univ_gallery;
 			//print_r(univ_data);
+			if(!empty($univ_data))
+			{
 			return $univ_data;
+			}
+			else{
+			return 0;
+			}
 	}
 	
 	function get_univ_gallery($univ_id)
@@ -1249,6 +1273,55 @@ class Users extends CI_Model
 		$this->db->where($msg_del_cond);
 		$this->db->delete('message_table');
 		return $this->db->affected_rows() ? 1 : 0;
+	}
+	
+	function fetch_program_title_of_univ($univ_id)
+	{
+		// $this->db->select('program_id');
+		// $this->db->from('univ_program');
+		// $this->db->where('univ_id',$univ_id);
+		// $query = $this->db->get();
+		// print_r($query->result_array());
+		// foreach($query->result_array() as $progid)
+		// {
+			// $prog_id[] = $progid['program_id'];
+		// }
+		
+		// if($query->num_rows() > 0)
+		// {
+			$this->db->select('*');
+			$this->db->from('univ_program');
+			$this->db->join('program', 'univ_program.program_id = program.prog_id');
+			$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+			$this->db->where_in('univ_id',$univ_id);
+			$res = $this->db->get();
+			//print_r($res->result_array());
+			//print_r($res->result_array());
+			return $res->result_array();
+			//return $res->result_array();
+		//}
+	}
+	
+	function fetch_course_detail($univ_id,$course_id)
+	{
+			$condition = array(
+			'prog_id'=>$course_id,
+			'univ_id'=>$univ_id
+			);
+			$this->db->select('*');
+			$this->db->from('univ_program');
+			$this->db->join('program', 'univ_program.program_id = program.prog_id');
+			$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+			
+			$this->db->where($condition);
+			$res = $this->db->get();
+			if($res->num_rows() > 0)
+			{
+			return $res->row_array();
+			}
+			else{
+			return 0;
+			}
 	}
 	
 	

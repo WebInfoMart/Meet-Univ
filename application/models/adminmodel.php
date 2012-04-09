@@ -622,7 +622,68 @@ class Adminmodel extends CI_Model
 		$this->db->where($field_name,$value);
 		$query=$this->db->get();
 		return $query->num_rows();
-	}	
+	}
+	
+	function upload_univ_gallery($univ_id)
+	{
+		$config['upload_path'] = $this->univ_gallery_path; // server directory
+        $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
+        $config['max_size']    = '100'; // in kb
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        
+        $this->load->library('upload', $config);
+        $this->load->library('Multi_upload');
+    
+        $files = $this->multi_upload->go_upload();
+        
+        if ( ! $files )        
+        {
+            $data['err_msg'] ='Error!  Please Check Your file size and type';
+            $this->load->view('admin/show_error', $data);
+        }    
+        else
+        {
+		$f=0;
+				$field = 'userfile';
+				$user_id=$this->tank_auth->get_admin_user_id();
+            $data1 = array('upload_data' => $files);
+			$num_files = count($_FILES[$field]['name'])-1;
+			$f=0;
+			for($a=0;$a<$num_files;$a++)
+			{
+						$data = array(
+				'gal_type' =>'univ',
+				'univ_id'=>	$univ_id,
+			   'g_image_path' => $data1['upload_data'][$a]['name'],
+			   'postedby' => $user_id,
+			   
+			);
+			$this->db->insert('univ_gallery', $data);	
+				$f=1;
+			}
+			//return $f;
+			redirect('admin/manage_univ_gallery/ius');
+		
+			
+			
+		}
+	}
+	
+	function get_univ_gallery_info($univ_id)
+	{
+		$query = $this->db->get_where('univ_gallery', array('gal_type' =>'univ','univ_id'=>$univ_id));
+		return $query->result_array();
+	}
+	function get_univ_gallery_info_count($univ_id)
+	{
+		$query = $this->db->get_where('univ_gallery', array('gal_type' =>'univ','univ_id'=>$univ_id));
+		return $query->num_rows();
+	}
+	function delete_univ_gallery_pic($gid)
+	{
+	$this->db->delete('univ_gallery', array('gid' => $gid));
+	}
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

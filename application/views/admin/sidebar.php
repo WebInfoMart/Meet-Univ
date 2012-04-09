@@ -129,6 +129,17 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		
 		</ul>
 		</li>
+		<?php }if($admin_priv_res['privilege_type_id']=='11' && $admin_priv_res['privilege_level']!='0') {?>
+		<li>
+		<a href="#"  class="collapse" ><img src="<?php echo "$base$admin_img" ?>/nav/gallery.jpg" alt="" />University Gallery</a>
+		<ul><?php
+		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+		{?>
+		<li><?php echo anchor("$base".'admin/add_univ_gallery', 'Add Images'); ?></li>
+		<?php } ?>
+		<li><?php echo anchor("$base".'admin/manage_univ_gallery', 'Manage Gallery'); ?></li>
+		</ul>
+		</li>
 		<?php } ?>
 		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Support</a></li>

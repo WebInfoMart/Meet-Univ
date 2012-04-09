@@ -111,6 +111,7 @@ background: linear-gradient(top,  rgba(31,123,229,0.9) 0%,rgba(26,158,186,0.9) 1
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e61f7be5', endColorstr='#e61a9eba',GradientType=0 ); /* IE6-8 */
 height:20px;padding:5px;color:#fff;margin-right:-10px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 0px;-moz-border-radius-bottomright: 0px;-moz-border-radius-bottomleft: 5px;-webkit-border-radius: 5px 0px 0px 5px;border-radius: 5px 0px 0px 5px;}
 ul.uni_menu li {list-style:none;line-height:20px;font-weight: 500;font-size: 17px;padding: 0px 5px;border-right: solid 1px #CCC;display:inline-block}
+ul.uni_menu li a.active{color:#000;}
 .map{-webkit-box-shadow: 0px 0px 2px 2px rgba(0, 0, , 0.2);
 -moz-box-shadow: 0px 0px 2px 2px rgba(0, 0, , 0.2);
 box-shadow: 0px 0px 2px 2px rgba(0, 0, , 0.2);}
@@ -211,17 +212,17 @@ border-color: rgba(255, 0, 0, .8) !important;
 
 .univ_logo
 {
-	width: 150px;
+	width: 175px;
 	height: 150px;
 }
 .univ_page_logo
 {
-	width:250px;
+	width:222px;
 	height:100px;
 }
 
 .univ_page_gal
 {
-	width:185px;
+	width:205px;
 	height:100px;
 }

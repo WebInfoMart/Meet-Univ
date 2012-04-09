@@ -488,10 +488,10 @@ $(function () {
 	
 	
 	// Sortable images
-	$('ul.imglist').sortable({
+	/*$('ul.imglist').sortable({
 		placeholder: 'ui-state-highlight'
 	});
-	
+	*/
 	
 	
 	
@@ -546,7 +546,7 @@ $(function () {
 	
 		
 	// Image delete confirmation
-	$('ul.imglist .delete a').click(function() {
+	/*$('ul.imglist .delete a').click(function() {
 		if (confirm('Are you sure you want to delete this image?')) {
 		
 			// Make AJAX call to delete
@@ -558,7 +558,7 @@ $(function () {
 		}
 		return false;
 	});
-
+	*/
 	
 	
 	

@@ -1,3 +1,21 @@
+<?php
+$facebook = new Facebook(array(
+  'appId'  => '358428497523493',
+  'secret' => '497eb1b9decd06c794d89704f293afdd',
+));
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+?>
 <div class="span3 margin_zero float_l">
 						<div class="sidebar_profic_pic">
 							<?php
