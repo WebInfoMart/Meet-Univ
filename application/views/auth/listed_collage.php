@@ -185,7 +185,7 @@
 							<div>
 								<div class="college_head">
 									<div class="float_l margin_zero">
-										<h3><?php echo $get_university['university'][$no_university]['univ_name']; ?></h3>
+										<h3><a href="university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['university'][$no_university]['univ_name']; ?></a></h3>
 									</div>
 									<div class="float_r span4 margin_t1">
 										<div class="float_l">
@@ -213,7 +213,7 @@
 												}
 												?></div>
 										</div>
-										<div class="float_r span4 margin_l">
+										<div class="float_r span4 margin_l data_limited">
 											<?php echo $get_university['university'][$no_university]['about_us']; ?>
 										</div>
 									</div>

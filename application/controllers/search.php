@@ -28,19 +28,19 @@ class search extends CI_Controller
 			$data['country'] = $this->users->fetch_country();
 			$data['area_interest'] = $this->users->fetch_program();
 			
-		if($this->input->post('btn_col_search'))
+		if($this->input->get('btn_col_search'))
 		{
-				$this->form_validation->set_rules('type_search','Education Level','trim|required');
-				$this->form_validation->set_rules('search_country','Country','trim|required');
+				//$this->form_validation->set_rules('type_search','Education Level','trim|required');
+				//$this->form_validation->set_rules('search_country','Country','trim|required');
 				
-			if($this->form_validation->run())
-			{
+			//if($this->form_validation->run())
+			//{
 				$config['geocodeCaching'] = TRUE;
 				//$this->googlemaps->initialize($config);
-				$type_educ_level = $this->input->post('type_search');
-				$search_country = $this->input->post('search_country');
-				$search_course = $this->input->post('search_program');
-				$data['get_university'] = $this->users->get_collages_by_search($type_educ_level,$search_country,$search_course);
+				$type_educ_level = $this->input->get('type_search');
+				$search_country = $this->input->get('search_country');
+				$search_course = $this->input->get('search_program');
+				$data['get_university'] = $this->searchmodel->get_collages_by_search($type_educ_level,$search_country,$search_course);
 				//print_r($data['get_university']);
 				
 				
@@ -103,10 +103,15 @@ class search extends CI_Controller
 				else{
 				$this->load->view('auth/NotFoundPage',$data);
 				}
+<<<<<<< HEAD
 			}
 			else{
 					redirect('');
 			}
+=======
+			//}
+			
+>>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0
 		}
 		else{
 		$this->load->view('auth/listed_collage',$data);
