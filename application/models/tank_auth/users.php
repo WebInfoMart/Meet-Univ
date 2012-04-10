@@ -956,149 +956,7 @@ class Users extends CI_Model
 		}
 	}
 	
-	function get_collages_by_search($type_educ_level,$search_country,$search_course)
-	{
-		if($type_educ_level != '' and $search_country != '' and $search_course != '')
-		{
-		
-		$this->db->select('univ_id');
-		$this->db->from('university');
-		$this->db->where('country_id',trim($search_country));
-		$rows_univ = $this->db->get();
-		$rows_univ_table = $rows_univ->result_array();
-		
-		$this->db->select('univ_id');
-		$this->db->where('program_id',trim($search_course));
-		$rows_univ_program = $this->db->get('univ_program');
-		$rows_univ_program_table = $rows_univ_program->result_array();
-		$arr = array();
-		if($rows_univ->num_rows() > 0 && $rows_univ_program->num_rows() > 0)
-		{
-			foreach($rows_univ_table as $univ_table)
-			{
-				 $univ_id_one = $univ_table['univ_id'];
-				foreach($rows_univ_program_table as $univ_prog_table)
-				{
-					 $univ_prog_table = $univ_prog_table['univ_id'];
-					if(trim($univ_id_one) == trim($univ_prog_table))
-					{
-						//echo $univ_prog_table;
-						$this->db->select('*');
-						$this->db->from('university');
-						$this->db->where('univ_id',$univ_prog_table);
-						$results = $this->db->get();
-						$res_of_univ_search = $results->row_array();
-						$arr[] = $results->row_array();
-						$marker[] = $res_of_univ_search['latitude'].','.$res_of_univ_search['longitude'].','.$res_of_univ_search['univ_name'].','.$res_of_univ_search['address_line1'];
-						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
-						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
-						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);
-						
-					}
-					
-				}
-			}
-			$univ_data=array();
-			$univ_data['university'] = $arr;
-			$univ_data['followers'] = $univ_follow;
-			$univ_data['article'] = $univ_article;
-			$univ_data['program'] = $univ_program;
-			$univ_data['position'] = $marker;
-			//print_r(univ_data);
-			if(!empty($univ_data))
-			{
-			return $univ_data;
-			}
-			else{
-			return 0;
-			}
-		}
-		
-	}
-	else if($type_educ_level == 0 and $search_country != '' and $search_course == '')
-	{
-						$this->db->select('*');
-						$this->db->from('university');
-						$this->db->where('country_id',$search_country);
-						$results = $this->db->get();
-						$res_of_univ_search = $results->row_array();
-						$arr[] = $results->row_array();
-						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
-						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
-						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);	
-						$marker[] = $res_of_univ_search['latitude'].','.$res_of_univ_search['longitude'].','.$res_of_univ_search['univ_name'].','.$res_of_univ_search['address_line1'];
-						//return $arr;
-						$univ_data=array();
-						$univ_data['university'] = $arr;
-						$univ_data['followers'] = $univ_follow;
-						$univ_data['article'] = $univ_article;
-						$univ_data['program'] = $univ_program;
-						$univ_data['position'] = $marker;
-						//print_r(univ_data);
-						if(!empty($univ_data))
-						{
-						return $univ_data;
-						}
-						else{
-						return 0;
-						}
-	}
 	
-	else if($type_educ_level != 0 and $type_educ_level != '' and $search_country != '' and $search_course == '')
-	{
-		$this->db->select('univ_id');
-		$this->db->from('university');
-		$this->db->where('country_id',trim($search_country));
-		$rows_univ = $this->db->get();
-		$rows_univ_table = $rows_univ->result_array();
-		
-		$this->db->select('univ_id');
-		$this->db->where('curr_educ_level_id',trim($type_educ_level));
-		$rows_univ_program = $this->db->get('univ_program');
-		$rows_univ_program_table = $rows_univ_program->result_array();
-		
-		if($rows_univ->num_rows() > 0 && $rows_univ_program->num_rows() > 0)
-		{
-			foreach($rows_univ_table as $univ_table)
-			{
-				 $univ_id_one = $univ_table['univ_id'];
-				foreach($rows_univ_program_table as $univ_prog_table)
-				{
-					 $univ_prog_table = $univ_prog_table['univ_id'];
-					if(trim($univ_id_one) == trim($univ_prog_table))
-					{
-						//echo $univ_prog_table;
-						$this->db->select('*');
-						$this->db->from('university');
-						$this->db->where('univ_id',$univ_prog_table);
-						$results = $this->db->get();
-						$res_of_univ_search = $results->row_array();
-						$arr[] = $results->row_array();
-						$univ_follow[] = $this->get_followers_of_univ($univ_prog_table);
-						$univ_article[] = $this->get_articles_of_univ($univ_prog_table);
-						$univ_program[] = $this->get_program_provide_by_univ($univ_prog_table);
-						$marker[] = $res_of_univ_search['latitude'].','.$res_of_univ_search['longitude'].','.$res_of_univ_search['univ_name'].','.$res_of_univ_search['address_line1'];
-					}
-					
-				}
-			}
-			$univ_data=array();
-			$univ_data['university'] = $arr;
-			$univ_data['followers'] = $univ_follow;
-			$univ_data['article'] = $univ_article;
-			$univ_data['program'] = $univ_program;
-			$univ_data['position'] = $marker;
-			//print_r(univ_data);
-			if(!empty($univ_data))
-			{
-			return $univ_data;
-			}
-			else{
-			return 0;
-			}
-		}
-	}
-	}
 	function show_all_college()
 	{
 		$this->db->select('univ_id');
@@ -1324,7 +1182,57 @@ class Users extends CI_Model
 			}
 	}
 	
-	
+	public function get_content($url)
+		{
+		   $ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$curl_scraped_page = curl_exec($ch);
+curl_close($ch);
+//echo $curl_scraped_page;
+		   
+		   $explode_data = explode('<table id="guide">',$curl_scraped_page);
+		   $explode_data2 = explode('</div>',$explode_data[1]);
+		   $explode_data3 = explode('<tr>',$explode_data2[0]);
+		    //print_r($explode_data3);
+			//extract university name
+			for($explode_data3_1=1;$explode_data3_1<count($explode_data3);$explode_data3_1++)
+		   {
+			$explode_univ_name1 = explode('- ',$explode_data3[$explode_data3_1]);
+			$explode_univer_name2 = explode('</h3>',$explode_univ_name1[1]);
+			
+			$explode_univ_phone1 = explode('t:',$explode_univ_name1[1]);
+			$explode_univ_fax1 = explode('f:',$explode_univ_phone1[1]);
+			$explode_univ_email1 = explode('e:',$explode_univ_fax1[1]);
+			$explode_univ_web1 = explode('w:',$explode_univ_email1[1]);
+			$explode_univ_web = explode('w:',$explode_univ_web1[1]);
+			$explode_univer_web1 = explode('<br />',$explode_univ_web1[1]);
+			$explode_adress1 = explode('</h3>',$explode_univ_phone1[0]);
+			
+			
+			
+			$a = strip_tags($explode_univer_name2[0]);
+			$b = strip_tags($explode_univer_name2[0]);
+			$c = strip_tags($explode_adress1[1]);
+			$d = strip_tags($explode_univ_fax1[0]);
+			$e = strip_tags($explode_univ_email1[0]);
+			$f = strip_tags($explode_univ_web1[0]);
+			$g = strip_tags($explode_univer_web1[0]);
+			$array_insert_univ_data = array(
+			'univ_name'=>$a,
+			'title'=>$b,
+			'address_line1'=>$c,
+			'phone_no'=>$d,
+			'univ_fax'=>$e,
+			'univ_email'=>$f,
+			'univ_web'=>$g
+			);
+			$this->db->insert('university',$array_insert_univ_data);
+			
+			}
+			//echo "web"; print_r(strip_tags($explode_univer_web1[0]));
+			//print_r($explode_univ_name1);
+
+		}
 }
 
 /* End of file users.php */

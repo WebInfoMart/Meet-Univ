@@ -103,11 +103,8 @@ class search extends CI_Controller
 				else{
 				$this->load->view('auth/NotFoundPage',$data);
 				}
-		else{
-					redirect('');
-			}
 			//}
-		
+			
 		}
 		else{
 		$this->load->view('auth/listed_collage',$data);

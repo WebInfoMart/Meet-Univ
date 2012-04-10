@@ -37,8 +37,7 @@ function university($univ_id='')
 		 $data['article_news_gallery'] = $this->users->get_detail_articles_of_univ($univ_id);
 		 $data['followers_detail_of_univ'] = $this->users->get_followers_detail_of_univ($univ_id);
 		 $data['events_of_univ'] = $this->users->fetch_latest_events_by_univ_id($univ_id);
-		 //print_r($data['events_of_univ']);
-		 //print_r($data['followers_detail_of_univ']);
+		 
 		$add_follower = array(
 			'follow_to_univ_id' => $univ_id,
 			'followed_by' => $logged_user_id
@@ -83,6 +82,7 @@ function university($univ_id='')
 				'apply_mob' => $this->input->post('apply_mobile')
 			);
 			$this->session->set_userdata($apply_now_data);
+			
 		}
 		
 		if($data['university_details'] != 0)
@@ -95,10 +95,6 @@ function university($univ_id='')
 		}
 		
 		else{
-		//$data['errors'] = 'Sorry, No University Details Found !!!';
-		$this->load->view('auth/NotFoundPage',$data);
-		}
-		//$this->load->view('auth/university',$data);
 		/* load not found if university not found */
 		$this->load->view('auth/NotFoundPage',$data);
 		}
@@ -122,9 +118,7 @@ function university($univ_id='')
 		 $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
 		 $data['area_interest'] = $this->users->fetch_area_interest();
 		 $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
-		 //$data['article_news_gallery'] = $this->users->get_detail_articles_of_univ($univ_id);
-		 //$data['followers_detail_of_univ'] = $this->users->get_followers_detail_of_univ($univ_id);
-		 //$data['events_of_univ'] = $this->users->fetch_latest_events_by_univ_id($univ_id);
+		
 		 if($data['university_details'] != 0)
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -169,6 +163,7 @@ function university($univ_id='')
 			$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
 			$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 			$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+			
 			/* get detail of course */
 			$data['detail_of_course'] = $this->users->fetch_course_detail($univ_id,$course_id);
 			$this->load->view('auth/course_detail_of_univ',$data);
@@ -179,6 +174,12 @@ function university($univ_id='')
 		
 		$this->load->view('auth/footer',$data);
 	}
+	
+	function scrap()
+		{
+			$url = "http://www.ucas.com/students/choosingcourses/choosinguni/instguide/z/";
+			$data['scrapdata'] = $this->users->get_content($url);
+			//$this->load->view('scrap',$data);
+		}
 	}
-
 ?>
