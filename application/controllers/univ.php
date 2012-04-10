@@ -37,12 +37,8 @@ function university($univ_id='')
 		 $data['article_news_gallery'] = $this->users->get_detail_articles_of_univ($univ_id);
 		 $data['followers_detail_of_univ'] = $this->users->get_followers_detail_of_univ($univ_id);
 		 $data['events_of_univ'] = $this->users->fetch_latest_events_by_univ_id($univ_id);
-<<<<<<< HEAD
 		 //print_r($data['events_of_univ']);
 		 //print_r($data['followers_detail_of_univ']);
-=======
-		 
->>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0
 		$add_follower = array(
 			'follow_to_univ_id' => $univ_id,
 			'followed_by' => $logged_user_id
@@ -87,11 +83,6 @@ function university($univ_id='')
 				'apply_mob' => $this->input->post('apply_mobile')
 			);
 			$this->session->set_userdata($apply_now_data);
-<<<<<<< HEAD
-			//print_r($this->session->userdata);
-=======
-			
->>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0
 		}
 		
 		if($data['university_details'] != 0)
@@ -104,17 +95,14 @@ function university($univ_id='')
 		}
 		
 		else{
-<<<<<<< HEAD
 		//$data['errors'] = 'Sorry, No University Details Found !!!';
 		$this->load->view('auth/NotFoundPage',$data);
 		}
 		//$this->load->view('auth/university',$data);
-=======
 		/* load not found if university not found */
 		$this->load->view('auth/NotFoundPage',$data);
 		}
 		
->>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0
 		$this->load->view('auth/footer',$data);
 	}
 	
@@ -134,13 +122,9 @@ function university($univ_id='')
 		 $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
 		 $data['area_interest'] = $this->users->fetch_area_interest();
 		 $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
-<<<<<<< HEAD
 		 //$data['article_news_gallery'] = $this->users->get_detail_articles_of_univ($univ_id);
 		 //$data['followers_detail_of_univ'] = $this->users->get_followers_detail_of_univ($univ_id);
 		 //$data['events_of_univ'] = $this->users->fetch_latest_events_by_univ_id($univ_id);
-=======
-		
->>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0
 		 if($data['university_details'] != 0)
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -185,11 +169,6 @@ function university($univ_id='')
 			$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
 			$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 			$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
-<<<<<<< HEAD
-			//$this->load->view('auth/university',$data);
-=======
-			
->>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0
 			/* get detail of course */
 			$data['detail_of_course'] = $this->users->fetch_course_detail($univ_id,$course_id);
 			$this->load->view('auth/course_detail_of_univ',$data);
@@ -201,14 +180,5 @@ function university($univ_id='')
 		$this->load->view('auth/footer',$data);
 	}
 	}
-<<<<<<< HEAD
+
 ?>
-
-
-
-
-
-
-=======
-?>
->>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0

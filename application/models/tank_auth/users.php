@@ -956,7 +956,6 @@ class Users extends CI_Model
 		}
 	}
 	
-<<<<<<< HEAD
 	function get_collages_by_search($type_educ_level,$search_country,$search_course)
 	{
 		if($type_educ_level != '' and $search_country != '' and $search_course != '')
@@ -1100,9 +1099,6 @@ class Users extends CI_Model
 		}
 	}
 	}
-=======
-	
->>>>>>> b5fd64388c0d83a053b3d8339f6279266205a1d0
 	function show_all_college()
 	{
 		$this->db->select('univ_id');
