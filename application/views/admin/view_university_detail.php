@@ -225,6 +225,40 @@ foreach($univ_detail_edit as $univ_detail_update)
 							<div class="clearfix"></div>
 						</div>
 					</li>
+					
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Fax Address</label>
+							</div>
+							<div class="float_l span3">
+	<input type="text" size="30"  class="text" disabled="disabled" name="fax_address"  value="<?php echo $univ_detail_update['univ_fax']; ?>">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>University Email</label>
+							</div>
+							<div class="float_l span3">
+			<input type="text" size="30"  disabled="disabled"  class="text" name="univ_email" value="<?php echo $univ_detail_update['univ_email']; ?>"   >
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Web Address</label>
+							</div>
+							<div class="float_l span3">
+					<input type="text" disabled="disabled" size="30" value="<?php echo $univ_detail_update['univ_web']; ?>"  class="text" name="web_address">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>		
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">

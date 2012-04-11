@@ -315,13 +315,17 @@ class Adminmodel extends CI_Model
 		);
 		
 		$this->load->library('upload', $config);
+		$flag=0;
+		if($_FILES["userfile"]["name"]!=''){
 		if(!$this->upload->do_upload())
 		{
+		  $flag=1;
 		  $data['err_msg']=$this->upload->display_errors();
 		  $this->load->view('admin/show_error',$data);
+		 
 		}
-		else
-		{
+		}
+		else if($flag==0){
 		$image_data = $this->upload->data();
 		
 		$config = array(
@@ -356,7 +360,10 @@ class Adminmodel extends CI_Model
 			   'subdomain_name' =>$this->input->post('sub_domain'),
 			   'about_us' => $this->input->post('about_us'),
 			   'contact_us' => $this->input->post('contact_us'),
-			   'createdby' =>$cretedby_admin
+			   'createdby' =>$cretedby_admin,
+			   'univ_fax' =>$this->input->post('fax_address'),
+			   'univ_email'=>$this->input->post('univ_email'),
+			   'univ_web'=>$this->input->post('web_address')
 			);
 			$this->db->insert('university', $data);		
 			redirect('admin/manage_university');
@@ -535,7 +542,6 @@ class Adminmodel extends CI_Model
 	
 	function fetch_univ_data_edit($univ_id)
 	{
-	
 		$this->db->select('*');
 		$this->db->from('university');
 		$this->db->where('univ_id',$univ_id);
@@ -604,7 +610,10 @@ class Adminmodel extends CI_Model
 			   'subdomain_name' =>$this->input->post('sub_domain'),
 			   'about_us' => $this->input->post('about_us'),
 			   'contact_us' => $this->input->post('contact_us'),
-			   'createdby' =>$cretedby_admin
+			   'createdby' =>$cretedby_admin,
+			   'univ_fax'=>$this->input->post('fax_address'),
+			   'univ_email'=>$this->input->post('univ_email'),
+			   'univ_web'=>$this->input->post('web_address')
 			);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			if($myflag==1)

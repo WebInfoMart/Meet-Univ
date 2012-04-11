@@ -277,6 +277,40 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
+								<label>Fax Address</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" size="30" class="text" name="fax_address"  value="<?php echo set_value('fax_address'); ?>">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>University Email</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" size="30" class="text" name="univ_email"  value="<?php echo set_value('univ_email'); ?>">
+		<span style="color: red;"> <?php echo form_error('univ_email'); ?><?php echo isset($errors['univ_email'])?$errors['univ_email']:''; ?> </span>						
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Web Address</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" size="30" class="text" name="web_address"  value="<?php echo set_value('web_address'); ?>">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>About Us</label>
 							</div>
 							<div class="float_l">

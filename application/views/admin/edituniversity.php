@@ -287,6 +287,40 @@ $univ_city_id=$univ_detail_update['city_id'];
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
+								<label>Fax Address</label>
+							</div>
+							<div class="float_l span3">
+	<input type="text" size="30"  class="text" name="fax_address"  value="<?php echo $univ_detail_update['univ_fax']; ?>">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>University Email</label>
+							</div>
+							<div class="float_l span3">
+			<input type="text" size="30"  class="text" name="univ_email" value="<?php echo $univ_detail_update['univ_email']; ?>">
+			<span style="color: red;"> <?php echo form_error('univ_email'); ?><?php echo isset($errors['univ_email'])?$errors['univ_email']:''; ?> </span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li> 
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Web Address</label>
+							</div>
+							<div class="float_l span3">
+			<input type="text" size="30" class="text" name="web_address"  value="<?php echo $univ_detail_update['univ_web']; ?>">
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>About Us</label>
 							</div>
 							<div class="float_l">

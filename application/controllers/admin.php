@@ -1054,7 +1054,10 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('keyword', 'Keyword', 'trim|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
 		$this->form_validation->set_rules('latitude', 'Latitude', 'trim|xss_clean');
-		$this->form_validation->set_rules('longitude', 'l\Longitude', 'trim|xss_clean');
+		$this->form_validation->set_rules('longitude', 'Longitude', 'trim|xss_clean');
+		$this->form_validation->set_rules('fax_address', 'Fax Address', 'trim|xss_clean');
+		$this->form_validation->set_rules('univ_email', 'university email', 'trim|xss_clean|valid_email');
+		$this->form_validation->set_rules('web_address', 'Web Address', 'trim|xss_clean');
 		
 		$this->form_validation->set_rules('univ_owner', 'University Owner', 'trim|required|string');
 		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
