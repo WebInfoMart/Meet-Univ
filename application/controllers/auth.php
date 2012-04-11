@@ -908,7 +908,7 @@ class Auth extends CI_Controller
 				}
 				else{
 				$data['email_send'] = 0;
-				$data['errors']['email'] = 'Email Exist';
+				//$data['errors']['email'] = 'Email Exist';
 				$key = md5(rand().microtime());
 				$user_id = $data['email_check']['id'];
 				$email = $data['email_check']['email'];
@@ -963,7 +963,7 @@ class Auth extends CI_Controller
 		} else {
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		
+		$logged_user = '';
 		//echo $key; echo $id;
 		$set_values = array(
 		'id' => trim($id),
@@ -990,9 +990,12 @@ class Auth extends CI_Controller
 				$data['link_valid'] = $this->users->update_and_deactivate_psw_request($set_values,$set_update_values);
 				if($data['link_valid'] == 1)
 				{
+				$logged_user = $id;
+				$data['fetch_user_fullname'] = $this->users->fetch_profile($logged_user);
 				$this->ci->session->set_userdata(array(
 						 'user_id'	=> trim($id),
 						 'username'	=> '',
+						 'fullname'	=> $data['fetch_user_fullname']['fullname'],
 						 'status'	=> STATUS_ACTIVATED,
 						 'psw_change'	=> 'true'
 						 ));

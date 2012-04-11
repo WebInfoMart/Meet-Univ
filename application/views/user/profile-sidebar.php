@@ -41,8 +41,12 @@ if ($user) {
 										$dob = $profile_pic['dob'];
 										$dob_explode = explode("-",$dob);
 									?>
-										<h4><?php echo $dob_explode[2].'&nbsp;'; 
-										 if($dob_explode[1] ==00) { echo '00';} 
+										<h4><?php 
+									if($dob_explode[2] == 00 || $dob_explode[2] == '')
+									{ echo '';} else {
+									echo $dob_explode[2].'&nbsp;';
+									}
+										 if($dob_explode[1] ==00) { echo '';} 
 										 else if($dob_explode[1] ==01) { echo 'Jan';} 
 										 else if($dob_explode[1] ==02) { echo 'Feb';} 
 										 else if($dob_explode[1] ==03) { echo 'March';} 
@@ -54,10 +58,14 @@ if ($user) {
 										 else if($dob_explode[1] ==09) { echo 'Sept';} 
 										 else if($dob_explode[1] ==10) { echo 'Oct';} 
 										 else if($dob_explode[1] ==11) { echo 'Nov';} 
-										 else if($dob_explode[1] ==12) { echo 'Dec';} 
-										 echo $dob_explode[0];
-										 ?>,
-										<?php echo $profile_pic['gender']; ?></h4>
+										 else if($dob_explode[1] ==12) { echo 'Dec';} ?>
+									<?php
+									if($dob_explode[0] == 0000 || $dob_explode[0] == '')
+									{ echo ''; } else {
+									echo $dob_explode[0].',';
+									}
+									if($profile_pic['gender'] != '') { echo $profile_pic['gender']; } else { echo " "; }
+									?> </h4>
 										
 									</div>
 								</div>
