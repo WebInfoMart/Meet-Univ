@@ -63,7 +63,8 @@
 				<li><a href="#"><img src="../images/admin/avatar.gif" alt="" />Welcome <?php echo ucwords($this->session->userdata('admin_fullname')); ?></a>
 					<ul>
 						<li><a href="#">Profile</a></li>
-						<li><a href="#">Messages</a></li>
+						<li><?php echo anchor('admin/update_password/', 'Change Password'); ?></li>
+						<!--<li><a href="#">Messages</a></li>-->
 						<li><?php echo anchor('admin/adminlogout/', 'Logout'); ?></li>
 					</ul>
 				</li>

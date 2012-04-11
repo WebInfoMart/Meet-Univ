@@ -31,6 +31,7 @@ class Admin extends CI_Controller
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			
 			//fetch user privilege data from model
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);	
@@ -1599,6 +1600,7 @@ class Admin extends CI_Controller
 	
 	function fetch_univ_gallery_ajax()
 	{
+	
 	$data = $this->path->all_path();
 	$data['user_id']	= $this->tank_auth->get_admin_user_id();
 	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
@@ -1620,6 +1622,45 @@ class Admin extends CI_Controller
 	$data['gallery']=$this->adminmodel->get_univ_gallery_info($univ_id);
 	$this->load->view('ajaxviews/manage_univ_gallery_admin', $data);
 	
+	}
+	
+	function update_password()
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+		$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
+		$data['errors'] = array();
+		$flag=0;
+		if ($this->form_validation->run()) {								// validation ok
+				if ($this->tank_auth->change_admin_password(
+						$this->form_validation->set_value('current_password'),
+						$this->form_validation->set_value('new_password'))) {	// success
+						$data['msg']='Your Password has been changed Successfully';
+						$this->load->view('admin/userupdated',$data);
+						$flag=1;
+					//$this->_show_message($this->lang->line('auth_message_password_changed'));
+					
+				} else {														// fail
+					$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+				}
+				
+			}
+		if($flag==0)
+		{	
+		$this->load->view('admin/update_password', $data);
+		}
+	 }
 	}
 }
 
