@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 //$autoload['plugin'] = array('captcha');
-$autoload['model'] = array('path','adminmodel','events','courses','searchmodel');
+$autoload['model'] = array('path','adminmodel','events','courses','searchmodel','frontmodel');
 //$autoload['css'];
 
 /* End of file autoload.php */

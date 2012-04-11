@@ -54,7 +54,7 @@
 										<div class="clearfix"></div>
 									</div>
 										<div class="clearfix"></div>
-										<div class="margin_t">
+										<div class="margin_t margin_l">
 											<button class="btn btn-primary" href="#">Update</button>
 										</div>
 								</div>

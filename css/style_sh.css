@@ -38,6 +38,7 @@
 .grid_2{width:261px}
 .grid_3{width:326px;}
 .grid_1{width:161px;}
+.grid_6{width:672px;}
 
 /************************welcome********************/
 .back_img{background:url(../images/events.png)repeat;border-radius: 2px;border: 1px solid #AAA;-webkit-border: 1px solid #AAA;-moz-border: 1px solid #AAA;padding: 10px 20px;}
@@ -97,7 +98,7 @@ overflow:hidden;}
 .box ul{margin:0px!important;}
 .box ul li{list-style:none;margin:0px;}
 .all_box ul li{margin-bottom:10px;}
-.data_events{width: 152px;text-align: justify;margin-right: 10px;}
+.data_events{width: 495px;height: 40px;overflow: hidden;text-align: justify;margin-right: 10px;}
 .home_artical_heading span{-webkit-box-shadow:inset 0 1px 0 rgba(239, 239, 239, 0.2);
 -moz-box-shadow: inset 0 1px 0 rgba(239, 239, 239, 0.2);
 box-shadow:inset 0 1px 0 rgba(239, 239, 239, 0.2);
@@ -111,7 +112,7 @@ background: linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 62%,
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#efefef',GradientType=0 ); /* IE6-9 */-webkit-border-radius: 8px 8px 0 0;-moz-border-radius: 8px 8px 0 0;border-radius: 8px 8px 0 0;padding:0px 10px;font-size: 20px;font-family: Calibri;color:#ff4200;font-weight:bold;border-bottom: 1px solid #DDD;}
 .featured_art{width:94px;height:99px;}
 .style_h3{color:#00a3e1;line-height:11px;}
-.events_img{width:76px;}
+.events_img{width:76px;height: 45px;}
 
 
 
@@ -257,7 +258,7 @@ border-bottom: 1px solid #E5E5E5;
 -moz-border-radius-topright: 5px;
 -webkit-background-clip: padding-box;
 }
-.event_height_uni{height: 113px;}
+.event_height_uni{height: 105px;}
 .event_height_ul{height:75px;overflow:hidden;}
 .news_box_uni{height: 242px;overflow: hidden;}
 .index_sidebar_box .index_sidebar_body .links {
@@ -336,7 +337,14 @@ color: #08C;}
 .single_sidebar ul li{padding: 8px 0px;border-bottom: 1px solid #DDD;-moz-border-bottom: 1px solid #DDD;-webkit-border-bottom: 1px solid #DDD;font-size: 15px;font-weight: bold;}
 .contact_box{background-color:#fff;border:2px solid #ddd;-webkit-border:2px solid #ddd;-moz-border:2px solid #ddd;}
 .profile_heading{padding:8px;border: 1px solid #DDD;}
-.active_side{position: relative;z-index: 1;background:url(../images/events.png);border-left:1px solid #ddd;-webkit-border-left:1px solid #ddd;-moz-border-left:1px solid #ddd;}
+.active_side{ border-style: solid;
+	border-color:#ddd;
+    border-width: 0px 0px 1px 1px;
+	-moz-border-width: 1px 0 1px 1px;
+	-webkit-border-width: 1px 0 1px 1px;
+    position: relative;
+    width: 175px;
+    z-index: 100;background:url(../images/events.png);}
 .profile_box{width:646px;}
 .contact_box_content{width:500px;}
 .contact_box_content .input-small{width:76px;}
@@ -563,3 +571,26 @@ background: url(../images/events.png);}
 .course_list{list-style:none;margin: 0px!important;}
 .course_list li{border-bottom:1px solid #aaa;padding: 10px 0px;}
 .course_cont{text-align: justify;font-size: 14px;line-height: 22px;}
+
+/*=============11-04-2012==========================*/
+.ddposition{z-index: 1;position: absolute;}
+.radio_first{margin: 3px;position: absolute;z-index: 1;}
+.radio_sec{margin-left: 5px; margin-top: 3px;position: absolute;z-index: 1;}
+.fb_heading{font-size: 20px;font-family: Calibri;color: #FF4200;font-weight: bold;}
+.girls_img{width: 35px;height: 42px;margin-right:10px}
+/*******************university_script_menu****************/
+#main-nav-holder {
+	height:30px;
+	top:20px;
+}
+#main-nav ul {
+	
+	}
+#main-nav li {
+	display:inline;
+	
+}
+
+#main-nav li:first-child {
+	border-left:0;
+}

@@ -54,7 +54,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			<ul><?php
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
-			<li><?php echo anchor("$base".'admin/addevents', 'Add News & Article'); ?></li>
+			<li><?php echo anchor("$base".'news_article', 'Add News & Article'); ?></li>
 			<?php } ?>
 			<li><?php echo anchor("$base".'admin/manageevents', 'Manage News & Article'); ?></li></ul>
 			

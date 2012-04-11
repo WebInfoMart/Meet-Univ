@@ -59,16 +59,41 @@
 			</ul>
 			
 			<div class="row uni_menu_placeholder">
-				<div class="span8 float_r">
-					<ul class="uni_menu">
-						<li>Home</li>
-						<li>About</li>
-						<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
-						<li>Events</li>
-						<li>Questions & Answers</li>
-						<li class="border_beta">News</li>
-					</ul>
+				<div class="span8 float_r" id="main-nav-holder">
+					<nav id="main-nav">
+						<ul class="uni_menu">
+							<li>Home</li>
+							<li>About</li>
+							<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
+							<li>Events</li>
+							<li>Questions & Answers</li>
+							<li class="border_beta">News</li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 			
 			<div class="clearfix"></div>
+			<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var fixed = false;
+
+$(document).scroll(function() {
+    if( $(this).scrollTop() >= 50 ) {
+        if( !fixed ) {
+            fixed = true;
+            $('#main-nav-holder').css({position:'fixed',top:140,left:665});
+			// Or set top:20px; in CSS
+        }                                           // It won't matter when static
+    } else {
+        if( fixed ) {
+            fixed = false;
+            $('#main-nav-holder').css({position:'static'});
+        }
+    }
+});
+
+});
+
+</script>

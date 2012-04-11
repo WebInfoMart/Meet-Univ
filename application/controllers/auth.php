@@ -31,6 +31,8 @@ class Auth extends CI_Controller
 		$data['gallery_home'] = $this->users->fetch_home_gallery();
 		$data['country'] = $this->users->fetch_country();
 		$data['area_interest'] = $this->users->fetch_program();
+		$data['featured_events']=$this->frontmodel->fetch_featured_events();
+	//	print_r($data['featured_events']);
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
 		$this->load->view('auth/home',$data);

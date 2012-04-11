@@ -61,7 +61,7 @@ if ($user) {
 													<?php } ?></label>
 													<div class="controls contact_box_content">
 													
-														<input type="file" name="userfile" class="button_profile"/><div class="span15 margin_zero change_profile">Change your pic</div>
+														<input type="file" name="userfile" class="button_profile"/><div class="change_profile">Change your pic</div>
 													</div>
 													<div class="clearfix"></div>
 												</div>
@@ -72,7 +72,8 @@ if ($user) {
 													</div>
 												</div>
 												<div class="control-group">
-													<div class="float_l"><h4>Gender</h4></div>
+													<label class="control-label">Gender *</label>
+												
 														<div class="controls">
 														<div class="float_l span3"><input type="radio" name="sex" value="male" <?php if($fetch_profile['gender'] == "male") { echo 'checked'; } ?> /> Male
 															<input type="radio" name="sex" value="female" style="margin-left:20px;" <?php if($fetch_profile['gender'] == "female") { echo 'checked'; } ?> /> Female</div>
@@ -81,7 +82,7 @@ if ($user) {
 														</div>
 												</div>
 												<div class="control-group">
-													<label class="control-label">Country *</label>
+													<label class="control-label">Country </label>
 													<div class="controls select_button">
 														<?php $user_selected_country = $fetch_profile['country_id']; 
 														$selected ='';
@@ -96,7 +97,7 @@ if ($user) {
 													</div>
 												</div>
 												<div class="control-group">
-													<label class="control-label">Birth Date *</label>
+													<label class="control-label">Birth Date </label>
 													<div class="controls contact_box_content">                
 													<?php
 													$dob = $fetch_profile['dob'];
@@ -111,7 +112,7 @@ if ($user) {
 													</div>
 												</div>
 												<div class="control-group">
-													<label class="control-label">Alias *</label>
+													<label class="control-label">Alias </label>
 													<div class="controls contact_box_content">
 														<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['alias_name']; ?>" name="alias_name" id="alias_name" placeholder="Alias name">
 													</div>
@@ -126,20 +127,20 @@ if ($user) {
 											<h3>Contact Information</h3>
 												<div class="margin1">
 													<div class="control-group">
-														<label class="control-label">Home Address *</label>
+														<label class="control-label">Home Address </label>
 														<div class="controls contact_box_content">
 															<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['home_address']; ?>" name="home_adrs" id="home_adrs" placeholder="Home adress">
 														</div>
 													</div>
 													<div class="control-group">
-														<label class="control-label">Mobile Number *</label>
+														<label class="control-label">Mobile Number </label>
 														<div class="controls contact_box_content">
 															<input type="text" class="input_xxxx-large" value="<?php if($fetch_profile['mob_no'] == '0'){echo '';} else { echo $fetch_profile['mob_no']; } ?>" name="mob_no" id="mob_no" placeholder="Mobile number">
 															<span style="color:red;"> <?php echo form_error('mob_no'); ?><?php echo isset($errors['mob_no'])?$errors['mob_no']:''; ?> </span>
 														</div>
 													</div>
 													<div class="control-group">
-														<label class="control-label">Alternate Email *</label>
+														<label class="control-label">Alternate Email </label>
 														<div class="controls contact_box_content">
 															<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['alt_email']; ?>" name="alt_email" id="alt_email" placeholder="Alt email">
 															<span style="color:red;"> <?php echo form_error('alt_email'); ?><?php echo isset($errors['alt_email'])?$errors['alt_email']:''; ?> </span>

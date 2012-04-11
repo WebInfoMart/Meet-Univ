@@ -61,7 +61,7 @@ $insert=1;
 						</td>
 						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
 						<td>
-						<?php echo ucwords(substr($row->event_title,0,50)); ?>
+						<?php echo ucwords($row->event_title); ?>
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
 						<td><a href="#"><?php echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>

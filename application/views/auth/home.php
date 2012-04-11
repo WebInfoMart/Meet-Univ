@@ -49,10 +49,12 @@
 									<button type="button" class="btn btnop" id="fairs">Fairs</button>
 									<button type="button" class="btn btnop"id="opendd">Counselling</button>
 								</div>
-								<ul class="ddclass">
-									<li class="li1 openddli"><a href="#">Others</a></li>
-									<li class="li2 openddli" ><a href="#">Alumuni</a></li>
-								</ul>
+								<div class="ddposition">
+									<ul class="ddclass">
+										<li class="li1 openddli"><a href="#">Others</a></li>
+										<li class="li2 openddli" ><a href="#">Alumuni</a></li>
+									</ul>
+								</div>	
 							</div>
 						</div>
 						<div class="control-group">
@@ -183,92 +185,33 @@
 		</div>
 		<div class="margin_t">
 			<div class="row">
-				<div class="grid_3 margin_l home_artical_box">
+				<div class="grid_6 margin_l home_artical_box">
 					<div class="home_artical_heading">
 						<span>Events</span>
 					</div>
 					<div class="box all_box">
 						<ul class="box_list">
+						<?php foreach($featured_events as $events) { ?>
 							<li>
 								<div>
 									<div class="float_l">
 										<img src="images/bucks.png" class="events_img">
 									</div>
-									<div class="float_l margin_l data_events">Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl</div>
+									<div class="float_l margin_l data_events">
+									<?php echo ucwords(substr($events['event_detail'],0,176)); ?>
+									</div>
 									<div class="float_r">
 										<h3 class="style_h3"><small>11-Mar</small></h3>
-										<span class="span_text">300 attending</span>
+										<span class="span_text">300 attending</span><br/>
 										<button class="btn_reg" href="#">Register!</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
 							</li>
-							<li>
-								<div>
-									<div class="float_l">
-										<img src="images/ls.png" class="events_img">
-									</div>
-									<div class="float_l margin_l data_events">Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl</div>
-									<div class="float_r">
-										<h3 class="style_h3"><small>11-Mar</small></h3>
-										<span class="span_text">300 attending</span>
-										<button class="btn_reg" href="#">Register!</button>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</li>
-							<li>
-								<div class="float_l">
-									<img src="images/uds.png" class="events_img">
-								</div>
-								<div class="float_l margin_l data_events">Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl</div>
-								<div class="float_r">
-									<h3 class="style_h3"><small>11-Mar</small></h3>
-									<span class="span_text">300 attending</span>
-									<button class="btn_reg" href="#">Register!</button>
-								</div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="float_l">
-									<img src="images/layer2.png" class="events_img">
-								</div>
-								<div class="float_l margin_l data_events">Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl</div>
-								<div class="float_r">
-									<h3 class="style_h3"><small>11-Mar</small></h3>
-									<span class="span_text">300 attending</span>
-									<button class="btn_reg" href="#">Register!</button>
-								</div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="float_l">
-									<img src="images/middlesex.png" class="events_img">
-								</div>
-								<div class="float_l margin_l data_events">Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl</div>
-								<div class="float_r">
-									<h3 class="style_h3"><small>11-Mar</small></h3>
-									<span class="span_text">300 attending</span>
-									<button class="btn_reg" href="#">Register!</button>
-								</div>
-								<div class="clearfix"></div>
-							</li>
+						<?php } ?>	
+							
 
 							</ul>
-					</div>
-				</div>
-				<div class="grid_3">
-					<div class="home_artical_heading">
-						<span>Featured Article</span>
-					</div>
-					<div class="box">
-						<div class="float_l">
-							<img src="images/layer.png">
-						</div>
-						<div>
-							Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdie fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od. 
-						</div>							
-						<div class="clearfix"></div>
 					</div>
 				</div>
 				<div class="grid_3">
@@ -325,41 +268,41 @@
 						<ul>
 							<li>
 								<div class="float_l">
-									<img src="images/img_girl.png">
+									<img src="images/img_girl.png" class="girls_img">
 								</div>
-								<div class="float_l span4 margin_l">
+								<div>
 									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
 								</div>
 							</li>
 							<li>
 								<div class="float_l">
-									<img src="images/img_boy.png">
+									<img src="images/img_boy.png"  class="girls_img">
 								</div>
-								<div class="float_l span4 margin_l">
+								<div>
 									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
 								</div>
 							</li>
 							<li>
 								<div class="float_l">
-									<img src="images/img_girl.png">
+									<img src="images/img_girl.png" class="girls_img">
 								</div>
-								<div class="float_l span4 margin_l">
+								<div>
 									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
 								</div>
 							</li>
 							<li>
 								<div class="float_l">
-									<img src="images/img_boy.png">
+									<img src="images/img_boy.png" class="girls_img">
 								</div>
-								<div class="float_l span4 margin_l">
+								<div>
 									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
 								</div>
 							</li>
 							<li>
 								<div class="float_l">
-									<img src="images/img_girl.png">
+									<img src="images/img_girl.png" class="girls_img">
 								</div>
-								<div class="float_l span4 margin_l">
+								<div>
 									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
 								</div>
 							</li>
@@ -368,13 +311,20 @@
 				</div>
 				<div class="grid_3">
 					<div class="home_artical_heading">
-						<span>Destination</span>
+						<span>Featured Article</span>
 					</div>
 					<div class="box">
-						
+						<div class="float_l">
+							<img src="images/layer.png">
+						</div>
+						<div>
+							Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdie fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od. 
+						</div>							
+						<div class="clearfix"></div>
 					</div>
 				</div>
 				<div class="grid_3">
+					<span class="fb_heading">Facebook like</span>
 					<img src="images/facebook.png">
 				</div>
 			</div>

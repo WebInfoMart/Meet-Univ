@@ -66,7 +66,7 @@
 									</div>
 									<div>
 										<div class="float_l"><h4>Mobile Number</h4></div>
-										<div class="float_r span2 margin_zero"><?php echo $university_details['phone_no']; ?></div>
+										<div class="float_l span3 margin_zero"><?php echo $university_details['phone_no']; ?></div>
 										<div class="clearfix"></div>
 									</div>
 								</div>
