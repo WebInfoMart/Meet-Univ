@@ -88,11 +88,17 @@
 								<ul>
 									<li>
 									<?php
-									//foreach($events_of_univ as $events)
-									//{
-									//print_r($events_of_univ);
+									
 									if(!empty($events_of_univ))
 									{
+									/* Check upcoming events with date */
+									//$todays_date = date("Y M d");
+									//$today = strtotime($todays_date);
+									//$event_date = date("Y M d", strtotime($events_of_univ['event_date_time']));
+									//echo $events_of_univ['event_date_time'];
+									/* Check End Here */
+									//if($event_date > $today)
+									//{
 									if($events_of_univ['featured_home_event'] == '1' && $events_of_univ['event_type'] == 'univ_event' )
 									{
 										print_r($events_of_univ['event_title']);
@@ -100,6 +106,7 @@
 									?>
 									<img src="<?php echo "$base$img_path" ?>/event_arrow.png">
 									<?php
+									//}
 									}
 									}
 									//}

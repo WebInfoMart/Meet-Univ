@@ -115,7 +115,9 @@ if ($user) {
 									<div class="index_sidebar_content">
 										<ul class="links1">
 											<li><a href="<?php echo "$base" ?>update_profile">Update profile</a></li>
+											<?php if(!$user) { ?>
 											<li><a href="<?php echo "$base" ?>update_password">Change password</a></li>
+											<?php } ?>
 											
 										</ul>
 									</div>
