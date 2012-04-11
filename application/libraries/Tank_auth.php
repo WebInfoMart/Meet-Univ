@@ -788,8 +788,32 @@ class Tank_auth
 		}
 	}
 	
-	
-	
+	/* Change Admin Password */
+	function change_admin_password($old_pass, $new_pass)
+ {
+  $user_id = $this->ci->session->userdata('admin_user_id');
+
+  if (!is_null($user = $this->ci->users->get_user_by_id($user_id, TRUE))) {
+
+   // Check if old password correct
+   $hasher = new PasswordHash(
+     $this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+     $this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+   if ($hasher->CheckPassword($old_pass, $user->password)) {   // success
+
+    // Hash new password using phpass
+    $hashed_password = $hasher->HashPassword($new_pass);
+
+    // Replace old password with new one
+    $this->ci->users->change_password($user_id, $hashed_password);
+    return TRUE;
+
+   } else {               // fail
+    $this->error = array('current_password' => 'auth_incorrect_password');
+   }
+  }
+  return FALSE;
+ }
 }
 
 /* End of file Tank_auth.php */

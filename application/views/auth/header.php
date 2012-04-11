@@ -88,7 +88,7 @@ if ($user) {
  //echo $fb_email;
 	$get_fb_user_id['query'] = $this->users->fetch_fb_user_id($fb_email);
 	//print_r($get_fb_user_id);
-	$fb_user_id = trim($get_fb_user_id['query']['id']);
+	$fb_user_id = $get_fb_user_id['query']['id'];
 	//echo $fb_user_id;
 	$this->ci->session->set_userdata(array(
 						 'user_id'	=> $fb_user_id,
