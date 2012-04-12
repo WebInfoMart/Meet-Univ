@@ -923,16 +923,32 @@ class Users extends CI_Model
 	
 	function get_articles_of_univ($univ_id)
 	{
-		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id,'na_type'=>'article','na_type_ud'=>'univ_na'));
+		$query = $this->db->get_where('article',array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
 		$rows = mysql_affected_rows();
 		return $rows;
 	}
+	
+	function get_detail_news_of_univ($univ_id)
+	{
+		$this->db->select('*');
+		$this->db->from('news');
+		$this->db->where(array('news_univ_id'=>$univ_id,'news_type_ud'=>'univ_news'));
+		$this->db->limit(2);
+		$this->db->order_by("publish_time", "desc"); 	
+		$query = $this->db->get();
+		return $query->result_array();
+	}
 	function get_detail_articles_of_univ($univ_id)
 	{
-		$query = $this->db->get_where('news_article',array('univ_id'=>$univ_id));
-		$rows = $query->result_array();
-		return $rows;
+		$this->db->select('*');
+		$this->db->from('article');
+		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
+		$this->db->limit(4);
+		$this->db->order_by("publish_time", "desc");
+		$query = $this->db->get();		
+		return $query->result_array();
 	}
+	
 	function get_program_provide_by_univ($univ_id)
 	{
 		$this->db->select('program_id');
@@ -1027,22 +1043,15 @@ class Users extends CI_Model
 	
 	function fetch_latest_events_by_univ_id($univ_id)
 	{
-		$this->db->select_max('event_id');
+		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->where('event_univ_id',$univ_id);
+		$this->db->limit(2);
+		$this->db->order_by("event_created_time", "desc");
 		$query = $this->db->get();
-		//$query = $this->db->get_where('events',array('event_univ_id'=>$univ_id,'event_id'));
-		$result = $query->row_array();
-		if($this->db->affected_rows() > 0)
-		{
-			$this->db->select('*');
-		$this->db->from('events');
-		$this->db->where('event_id',$result['event_id']);
-		$query = $this->db->get();
-		$result = $query->row_array();
+		$result = $query->result_array();
 		return $result;
-		//print_r($result);
-		}
+		
 	}
 	
 	function fetch_educ_level_by_id($cur_educ_lvl)

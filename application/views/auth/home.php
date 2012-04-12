@@ -195,15 +195,16 @@
 							<li>
 								<div>
 									<div class="float_l">
-										<img src="images/bucks.png" class="events_img">
+<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/default_logo.png<?php } ?>" class="events_img" >
 									</div>
 									<div class="float_l margin_l data_events">
 									<?php echo ucwords(substr($events['event_detail'],0,176)); ?>
 									</div>
 									<div class="float_r">
-										<h3 class="style_h3"><small>11-Mar</small></h3>
+									<?php $date=explode(" ",$events['event_date_time']); ?>
+										<h3 class="style_h3"><small><?php echo $date[0]."-".$date[1]; ?></small></h3>
 										<span class="span_text">300 attending</span><br/>
-										<button class="btn_reg" href="#">Register!</button>
+										<button class="btn_reg" id="<?php echo $events['event_id']; ?>" href="">Register!</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -221,22 +222,16 @@
 					<div class="box">
 						<ul>
 							<li>
-								<div class="float_l"><img src="images/layer15.png" class="featured_art"></div>
-								<div class="float_l margin_l"><img src="images/layer11.png" class="featured_art"></div>
-								<div class="float_r"><img src="images/layer10.png" class="featured_art"></div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="float_l"><img src="images/layer15.png" class="featured_art"></div>
-								<div class="float_l margin_l"><img src="images/layer13.png" class="featured_art"></div>
-								<div class="float_r"><img src="images/layer12.png" class="featured_art"></div>
-								<div class="clearfix"></div>
-							</li>
-							<li>
-								<div class="float_l"><img src="images/layer15.png" class="featured_art"></div>
-								<div class="float_l margin_l"><img src="images/layer11.png" class="featured_art"></div>
-								<div class="float_r"><img src="images/layer10.png" class="featured_art"></div>
-								<div class="clearfix"></div>
+						<?php 
+						$x=0;
+						foreach($featured_college as $featured_clg) { ?>
+									<div class="<?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo " margin_l"; } ?>" >
+				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php if($featured_clg['univ_logo_path']!=''){echo $featured_clg['univ_logo_path'];}else{ echo 'default_logo.png';} ?>" class="featured_art"></a>
+						</div>							
+
+					
+				<?php $x++; }?>
+								
 							</li>
 						</ul>
 					</div>
@@ -314,12 +309,18 @@
 						<span>Featured Article</span>
 					</div>
 					<div class="box">
+					<?php foreach($featured_article as $article){ ?>
 						<div class="float_l">
-							<img src="images/layer.png">
+						<?php if($article['article_image_path']==''){?>
+						<img src="images/default_logo.png">
+						<?php } else {?>
+						<img src="<?php echo $base; ?>/uploads/news_article_images/<?php echo $article['article_image_path']; ?>" >
+						<?php } ?>	
 						</div>
 						<div>
-							Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdie fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od. 
-						</div>							
+						<?php echo substr($article['article_detail'],0,800).'...'; ?>	 
+						</div>	
+						<?php } ?>	
 						<div class="clearfix"></div>
 					</div>
 				</div>

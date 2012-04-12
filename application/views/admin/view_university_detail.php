@@ -89,7 +89,7 @@ foreach($univ_detail_edit as $univ_detail_update)
 						<div class="float_l span3">
 							<div class="float_l">
 							
-							<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img"></div>
+							<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "default_logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img"></div>
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -101,7 +101,7 @@ foreach($univ_detail_edit as $univ_detail_update)
 							<label style="color:#2E64FE">University Owner</label>
 						</div>
 						<div class="float_l span3" >
-						<input type="text" disabled="disabled" size="30" class="text" readonly name="univ_owner" value="<?php echo ucwords($univ_detail_update['fullname']); ?>" >
+<input type="text" disabled="disabled" size="30" class="text" readonly name="univ_owner" value="<?php if($univ_detail_update['fullname']==''){echo "No Admin Assigned Yet";} else{ echo $univ_detail_update['fullname']; } ?>" >
 						
 							
 						</div>

@@ -85,34 +85,38 @@
 					<div class="span8 float_l margin_l margin_t">
 						<div class="events_univ events_box event_height_uni">
 								<h2>Events</h2>
-								<ul>
-									<li>
-									<?php
-									
+								 <ul>
+								 <?php
 									if(!empty($events_of_univ))
 									{
-									/* Check upcoming events with date */
+									foreach($events_of_univ as $events)
+									{ 
+									?>
+									<li>
+									<!-- Check upcoming events with date
 									//$todays_date = date("Y M d");
 									//$today = strtotime($todays_date);
 									//$event_date = date("Y M d", strtotime($events_of_univ['event_date_time']));
 									//echo $events_of_univ['event_date_time'];
 									/* Check End Here */
 									//if($event_date > $today)
-									//{
-									if($events_of_univ['featured_home_event'] == '1' && $events_of_univ['event_type'] == 'univ_event' )
+									//{-->
+									<?php if($events['event_type'] == 'univ_event' )
 									{
-										print_r($events_of_univ['event_title']);
+										echo $events['event_title'].','. $events['event_date_time'];
 									
 									?>
 									<img src="<?php echo "$base$img_path" ?>/event_arrow.png">
 									<?php
 									//}
-									}
-									}
+									} ?>
+									</li>
+									<?php } ?>
+									<?php }
 									//}
 									?>
-									</li>
-								</ul>
+									
+								 </ul>
 							</div>
 							<div class="margin_t">
 								<div class="well margin_gamma padding_zero new_data">
@@ -153,40 +157,37 @@
 									<h2>News</h2>
 										<ul>
 										<?php
-										foreach($article_news_gallery as $news)
+										foreach($news_gallery as $news)
 										{
-										if($news['na_type'] == 'news' && $news['na_type_ud'] == 'univ_na')
-										{
+										
 										?>
-											<li><a href="#"><?php echo $news['na_detail']; ?><img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
-										<?php } } ?>	
+					<li><a href="#"><?php echo substr($news['news_detail'],0,300).'..'; ?><img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
+										<?php  } ?>	
 									</ul>
 								</div>
 							</div>
 					</div>
 					<div class="artical_width float_l">
 					<?php
-					foreach($article_news_gallery as $article)
-					{
-					if($article['na_type'] == 'article' && $article['na_type_ud'] == 'univ_na')
+					foreach($article_gallery as $article)
 					{
 					?>
 						<div class="span4 float_l margin_t">
 							<div class="index_sidebar_box">
-									<div class="artical_heading"><?php echo $article['na_title']; ?></div>
+									<div class="artical_heading"><?php echo $article['article_title']; ?></div>
 								<div id="home" class="artical_box_data">
 									<div class="float_l content_art">
-										<?php echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['na_image_path']."'/>"; ?>
+										<?php echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['article_image_path']."'/>"; ?>
 									</div>
 									<div>
-										<?php echo $article['na_detail']; ?>
+										<?php echo substr($article['article_detail'],0,380).'....'; ?>
 									</div>							
 								</div>
 								<div class="clearfix"></div>
 							</div>
 						</div>
 						
-					<?php } } ?>		
+					<?php  } ?>		
 							
 					</div>
 					<div class="clearfix"></div>

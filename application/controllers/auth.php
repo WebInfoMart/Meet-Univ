@@ -32,6 +32,8 @@ class Auth extends CI_Controller
 		$data['country'] = $this->users->fetch_country();
 		$data['area_interest'] = $this->users->fetch_program();
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
+		$data['featured_college']=$this->frontmodel->fetch_featured_college();
+		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
 	//	print_r($data['featured_events']);
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
@@ -1106,6 +1108,16 @@ class Auth extends CI_Controller
 		$this->load->view('auth/visit-user-profile',$data);
 		$this->load->view('auth/footer',$data);
 		}
+	}
+	
+	function events($page='')
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$data['events'] = $this->frontmodel->fetch_events($page);
+		//print_r($data['events']);
+		$this->load->view('auth/events',$data);
+		$this->load->view('auth/footer',$data);
 	}
 	
 	

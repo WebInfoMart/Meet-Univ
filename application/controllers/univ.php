@@ -34,11 +34,11 @@ function university($univ_id='')
 		 $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
 		 $data['area_interest'] = $this->users->fetch_area_interest();
 		 $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
-		 $data['article_news_gallery'] = $this->users->get_detail_articles_of_univ($univ_id);
+		 $data['article_gallery'] = $this->users->get_detail_articles_of_univ($univ_id);
+		 $data['news_gallery'] = $this->users->get_detail_news_of_univ($univ_id);
 		 $data['followers_detail_of_univ'] = $this->users->get_followers_detail_of_univ($univ_id);
 		 $data['events_of_univ'] = $this->users->fetch_latest_events_by_univ_id($univ_id);
-		 
-		$add_follower = array(
+		 $add_follower = array(
 			'follow_to_univ_id' => $univ_id,
 			'followed_by' => $logged_user_id
 			);

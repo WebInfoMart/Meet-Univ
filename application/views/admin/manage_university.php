@@ -51,10 +51,10 @@ $delete=1;
 						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
 						<td>
 						
-						<img src="<?php echo $base ?>uploads/univ_gallery/<?php if($row->univ_logo_path==''){ echo "logo.png" ;} else { echo $row->univ_logo_path;} ?>" class="univ_logo_size">
+						<img src="<?php echo $base ?>uploads/univ_gallery/<?php if($row->univ_logo_path==''){ echo "default_logo.png" ;} else { echo $row->univ_logo_path;} ?>" class="univ_logo_size">
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
-						<td><a href="#"><?php echo ucwords($row->fullname); ?></a></td>
+						<td><a href="#"><?php if($row->fullname==''){ echo "Not assigned Yet";}else{ echo ucwords($row->fullname);} ?></a></td>
 						<td >
 					<?php echo $row->country_name; ?>
 						</td>

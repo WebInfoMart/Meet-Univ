@@ -70,7 +70,7 @@ class Adminmodel extends CI_Model
 		$user_id	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
 		$this->db->from('users');
-		$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+		$this->db->join('user_profiles', 'users.id = user_profiles.user_id'); 
 		$this->db->where(array('level !=' => '5','id !='=>$user_id));
 		$query = $this->db->get();
 		$config['base_url']=base_url()."admin/manageusers/";
@@ -477,7 +477,7 @@ class Adminmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('university');
-		$this->db->join('users', 'users.id = university.user_id');
+		$this->db->join('users', 'users.id = university.user_id','left');
 		$this->db->join('country', 'country.country_id = university.country_id','left');
 		$query =$this->db->get();
 		$config['base_url']=base_url()."admin/manage_university/";
@@ -487,7 +487,7 @@ class Adminmodel extends CI_Model
         $limit = $config['per_page'];
 		$this->db->select('*');
 		$this->db->from('university');
-		$this->db->join('users', 'users.id = university.user_id');
+		$this->db->join('users', 'users.id = university.user_id','left');
 		$this->db->join('country', 'country.country_id = university.country_id','left');
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
@@ -545,7 +545,7 @@ class Adminmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('university');
 		$this->db->where('univ_id',$univ_id);
-		$this->db->join('users', 'users.id = university.user_id');
+		$this->db->join('users', 'users.id = university.user_id','left');
 		$this->db->join('country', 'country.country_id = university.country_id','left');
 		$this->db->join('state', 'state.state_id = university.state_id','left');
 		$this->db->join('city', 'city.city_id = university.city_id','left');
