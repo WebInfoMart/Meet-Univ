@@ -167,6 +167,7 @@ class Auth extends CI_Controller
 					$data['captcha_html'] = $this->_create_captcha();
 				}
 			}*/
+			$data['featured_events']=$this->frontmodel->fetch_featured_events();
 			$this->load->view('auth/login', $data);
 		}
 		$this->load->view('auth/footer',$data);
@@ -211,7 +212,7 @@ class Auth extends CI_Controller
 			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
 			$this->form_validation->set_rules('agree_term', 'I Agree', 'trim|required');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
 			$this->form_validation->set_rules('level_user', 'level_user', 'trim|string');
@@ -298,7 +299,7 @@ class Auth extends CI_Controller
 			//$data['captcha_registration'] = $captcha_registration;
 			//$data['use_recaptcha'] = $use_recaptcha;
 			//$data['base'] = $base;
-			
+			$data['featured_events']=$this->frontmodel->fetch_featured_events();
 			$this->load->view('auth/register', $data);
 		}
 		$this->load->view('auth/footer',$data);
@@ -1120,6 +1121,14 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer',$data);
 	}
 	
+	function news($page='')
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$data['news'] = $this->frontmodel->fetch_news($page);
+		$this->load->view('auth/news',$data);
+		$this->load->view('auth/footer',$data);
+	}
 	
 }
 

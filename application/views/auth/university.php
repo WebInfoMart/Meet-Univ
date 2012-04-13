@@ -1,12 +1,4 @@
-
-	<div class="container">
-		<div class="body_bar"></div>
-		<div class="body_header"></div>
-		<div class="body">
-			
-			
-			<?php $this->load->view('auth/univ-header-gallery-logo'); ?>
-			<form class="form-horizontal" action="" method="post">
+	<form class="form-horizontal" action="" method="post">
 			<div class="row" style="margin-top:-25px">
 				<div>
 					<div class="span12 float_l margin_l margin_t">
@@ -48,9 +40,9 @@
 									if($is_already_follow == 0)
 									{
 									?>
-									<input type="submit" name="join_now" class="btn btn-success" value="Join Now!"/>
+									<input type="submit" name="join_now" class="btn btn-success" value="Follow !"/>
 									<?php } else { ?>
-									<input type="submit" name="unjoin_now" class="btn btn-success" value="Unjoin Now!"/>
+									<input type="submit" name="unjoin_now" class="btn btn-success" value="UnFollow !"/>
 									<?php } ?>
 									</div>
 									

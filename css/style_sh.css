@@ -595,6 +595,10 @@ background: url(../images/events.png);}
 	border-left:0;
 }
 
+.event_home_text_color
+{
+color:#666 !important;
+}
 
 /*================events page==================================*/
 .dsolution{overflow: hidden;min-height: 85px;max-height:132px;}

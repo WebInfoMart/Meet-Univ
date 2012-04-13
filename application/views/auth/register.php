@@ -181,11 +181,14 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 					<div class="span10">
 						<h3>Upcoming Events</h3>
 						<ul class="events">
-							<li><img src="<?php echo "$base$img_path" ?>/bucks.png" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><h3>22-Feb<small>300 attending!</small></span></h3>
-							<li><img src="<?php echo "$base$img_path" ?>/uds.png" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><h3>28-Feb<small>109 attending!</small></span></h3>
-							<li><img src="<?php echo "$base$img_path" ?>/ls.png" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><h3>02-Mar<small>405 attending!</small></span></h3>
-							<li><img src="<?php echo "$base$img_path" ?>/bucks.png" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><h3>19-Mar<small>67 attending!</small></span></h3>
-							<li class="border_gamma"><img src="<?php echo "$img_path" ?>/middlesex.png" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span><h3>07-Apr<small>191 attending!</small></span></h3>
+						<?php
+						$c=0;
+						foreach($featured_events as $events) { $c=$c+1; ?>
+							<li <?php if($c==count($featured_events)){ echo "class='border_gamma' ";} ?>   style="cursor:pointer;"  onclick="gotoevent('<?php echo $base;?>univ-<?php echo $events['univ_id'];?>-event-<?php echo $events['event_id'];?>')">
+							<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/default_logo.png<?php } ?>" class="events_img" >
+							<span><?php echo ucwords(substr($events['event_detail'],0,176)); ?></span><h3><?php $date=explode(" ",$events['event_date_time']); echo $date[0]."-".$date[1]; ?><small>300 attending!</small></span></h3>
+							</li>
+						<?php } ?>	
 						</ul>
 					</div>
 				</div>
@@ -218,4 +221,10 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 			</div>
 		</div>
 	</div>
-	
+	<script>
+	function gotoevent(url)
+	{
+	window.location.href=url;
+	//alert("hi");
+	}
+	</script>

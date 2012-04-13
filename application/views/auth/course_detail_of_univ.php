@@ -1,9 +1,4 @@
-<div class="container">
-		<div class="body_bar"></div>
-		<div class="body_header"></div>
-		<div class="body">
-			<?php $this->load->view('auth/univ-header-gallery-logo'); ?>
-			<div class="row" style="margin-top:-40px">
+<div class="row" style="margin-top:-40px">
 				<div class="span12 float_l margin_l margin_t">	
 				
 					<h2><?php echo $detail_of_course['course_name']!='' ? $detail_of_course['course_name']:'Course Name Not Found!!!'; ?></h3>

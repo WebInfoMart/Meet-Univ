@@ -1,12 +1,8 @@
-<div class="container">
-		<div class="body_bar"></div>
-		<div class="body_header"></div>
-		<div class="body">
-			<div class="row margin_t1">
+<div class="row margin_t1">
 				<div class="float_l span13 margin_l">
 					<h2 class="course_txt">Upcoming Events</h2>
 					<div class="margin_t1">
-					<?php foreach($events as $event_detail){ ?>
+					<?php foreach($event_list_detail as $event_detail){ ?>
 						<div class="event_border">
 							<div class="float_l">
 								<?php if($event_detail['univ_logo_path']==''){?>
@@ -44,6 +40,4 @@
             </div>
 				<div class="clearfix"></div>
 			</div>
-		</div>
-	</div>
 	

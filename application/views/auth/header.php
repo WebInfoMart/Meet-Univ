@@ -233,12 +233,12 @@ $('#myModal2').modal('toggle');});
 						<div class="main_menu">
 							<div class="float_r span11">
 								<ul class="menu">
-									<li><a href="#" class="active">Home</a></li>
+									<li><a href="<?php echo $base; ?>" class="active">Home</a></li>
 									<li><a href="<?php echo "$base"; ?>all_colleges">Colleges</a></li>
 									<li><a href="#">Study Abroad</a></li>
 									<li><a href="#">Questions & Answers</a></li>
-									<li><a href="#">Events</a></li>
-									<li class="padding_beta" style="border:none;"><a href="#">News</a></li>
+									<li><a href="<?php echo $base; ?>events">Events</a></li>
+									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>news">News</a></li>
 								</ul>
 							</div>
 							<div class="clearfix"></div>

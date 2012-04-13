@@ -1,8 +1,4 @@
-<div class="container">
-		<div class="body_bar"></div>
-		<div class="body_header"></div>
-		<div class="body">
-		<?php $this->load->view('auth/univ-header-gallery-logo'); ?>
+
 		<div class="row" style="margin-top:-40px">
 			<div class="span12 float_l margin_l margin_t">	
 				<h1 class="course_txt">Academic Programs</h1>

@@ -23,6 +23,7 @@ class search extends CI_Controller
 	function college_search()
 	{
 			$data = $this->path->all_path();
+			$data['err_div']=0;
 			$this->load->view('auth/header',$data);
 			$data['gallery_home'] = $this->users->fetch_home_gallery();
 			$data['country'] = $this->users->fetch_country();
@@ -101,6 +102,8 @@ class search extends CI_Controller
 				$this->load->view('auth/listed_collage',$data);
 				}
 				else{
+				$data['err_msg']='<h2> Sorry....</br><span class="text-align"> Page Not Found.... </span> </h2>';
+				$data['err_div']=1;
 				$this->load->view('auth/NotFoundPage',$data);
 				}
 			//}

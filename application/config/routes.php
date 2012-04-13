@@ -44,13 +44,17 @@ $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';
 $route['university/(:num)']='univ/university/$1';
 $route['univ_programs/(:num)/(:any)']='univ/univ_programs/$1/$2';
+$route['univ-(:num)-event-(:num)']='univ/univ_event/$1/$2';
+$route['univ-(:num)-news-(:num)']='univ/univ_news/$1/$2';
+$route['univ-(:num)-events']='univ/university_events_list/$1';
+$route['univ-(:num)-news']='univ/university_news_list/$1';
 $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
 $route['inbox/(:any)']='user/inbox/$1';
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(login|register|logout|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|all_colleges|home/pwd_change|home/pus|index/cfr)'] = 'auth/$1';
+$route['(login|register|logout|news|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|all_colleges|home/pwd_change|home/pus|index/cfr)'] = 'auth/$1';
 $route['(college_search)'] = 'search/$1';
 $route['(inbox)'] = 'user/$1';
 $route['(delete_message_inbox)'] = 'user/$1';

@@ -1,3 +1,7 @@
+<div class="container">
+		<div class="body_bar"></div>
+		<div class="body_header"></div>
+		<div class="body">
 <div class="row">
 				<div class="span10">
 					<h2><?php 
@@ -62,12 +66,12 @@
 				<div class="span8 float_r" id="main-nav-holder">
 					<nav id="main-nav">
 						<ul class="uni_menu">
-							<li>Home</li>
+							<li><a href="<?php echo $base ?>university/<?php echo $univ_id_for_program; ?>" class="active">Home</a></li>
 							<li>About</li>
 							<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
-							<li>Events</li>
+							<li><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-events" class="active">Events</a></li>
 							<li>Questions & Answers</li>
-							<li class="border_beta">News</li>
+							<li class="border_beta"><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-news" class="active">News</a></li>
 						</ul>
 					</nav>
 				</div>
