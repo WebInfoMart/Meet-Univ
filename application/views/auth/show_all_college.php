@@ -201,7 +201,7 @@
 												</div>
 										</div>
 										<div class="float_r span4 margin_l data_limited">
-											<?php echo $get_university['university'][$no_university]['about_us']; ?>
+											<?php echo substr($get_university['university'][$no_university]['about_us'],0,365).'..'; ?>
 										</div>
 									</div>
 									<div class="float_l">
@@ -215,13 +215,12 @@
 												{
 												foreach($get_university['program'][$no_university] as $prog) {
 												if(is_array($prog))
-													{
-														foreach($prog as $program)
-														{
-														?>
-															<li><a href=""><?php echo $program; ?></a></li>
+													{ ?>
+														
+														
+ <li><a href="<?php echo $base; ?>program_detail/<?php echo $get_university['university'][$no_university]['univ_id'].'/'.$prog['prog_id']; ?>"><?php echo $prog['course_name']; ?></a></li>
 														<?php
-														}
+														
 													}
 												}
 												}

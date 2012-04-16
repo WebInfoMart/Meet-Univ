@@ -5,7 +5,9 @@
 					<?php foreach($news_list_detail as $news_detail){ ?>
 						<div class="event_border">
 							<div class="float_l">
-								<?php if($news_detail['univ_logo_path']==''){?>
+							<?php if($news_detail['news_image_path']!=""){?>
+<img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $news_detail['news_image_path']; ?>" style="width:80px;height:80px;margin-right:20px">
+								<?php } else if($news_detail['univ_logo_path']==''){?>
 								<img src="<?php echo "$base$img_path"; ?>/default_logo.png" style="width:80px;height:80px;margin-right:20px">
 								<?php } else {?>
 								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $news_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >

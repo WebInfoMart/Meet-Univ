@@ -98,8 +98,8 @@
 										echo $events['event_title'].','. $events['event_date_time'];
 									
 									?>
-									<img src="<?php echo "$base$img_path" ?>/event_arrow.png">
-									<?php
+								<a href="<?php echo $base ?>univ-<?php echo $university_details['univ_id'] ?>-event-<?php echo $events['event_id']; ?>"><img src="<?php echo "$base$img_path" ?>/event_arrow.png">
+								</a>	<?php
 									//}
 									} ?>
 									</li>
@@ -115,7 +115,7 @@
 									<div>
 										<div class="float_l">
 											<div class="letter_uni">
-											<div>Q Go Ask </br><span>uestion</span></div>
+											<div>Q Go Ask </br><span>Question</span></div>
 											</div>
 										</div>
 										<div class="float_r have_data">
@@ -153,7 +153,10 @@
 										{
 										
 										?>
-					<li><a href="#"><?php echo substr($news['news_detail'],0,300).'..'; ?><img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a></li>
+					<li><a href="<?php echo $base ?>univ-<?php echo $university_details['univ_id'] ?>-news-<?php echo $news['news_id']; ?>">
+					<?php echo substr($news['news_detail'],0,300).'..'; ?>
+					<img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a>
+					</li>
 										<?php  } ?>	
 									</ul>
 								</div>
@@ -166,7 +169,7 @@
 					?>
 						<div class="span4 float_l margin_t">
 							<div class="index_sidebar_box">
-									<div class="artical_heading"><?php echo $article['article_title']; ?></div>
+									<div class="artical_heading"><a href="<?php echo $base ?>univ-<?php echo $university_details['univ_id'] ?>-article-<?php echo $article['article_id']; ?>"><?php echo $article['article_title']; ?></a></div>
 								<div id="home" class="artical_box_data">
 									<div class="float_l content_art">
 										<?php echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['article_image_path']."'/>"; ?>

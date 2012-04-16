@@ -1,4 +1,13 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div class="container">
+
 	<div class="body_bar"></div>
 	<div class="body_header"></div>
 	<div class="form">
@@ -23,7 +32,7 @@
 				</div>				
 			</div>
 			<div class="float_r span8 margin_t margin_l">
-				<form class="form-horizontal form_horizontal_home" action="college_search" method="get">
+				<form class="form-horizontal form_horizontal_home" id="search_form" action="" method="get">
 					<input type="hidden" name="type_search" id="type_search" value="0"/>
 					<div class="control-group">
 						<label class="control-label" for="focusedInput"><h3 class="white">Explore</h3></label>
@@ -47,12 +56,12 @@
 									<button type="button" class="btn btnop active" id="all">All</button>
 									<button type="button" class="btn btnop" id="spot">Spot Admission</button>
 									<button type="button" class="btn btnop" id="fairs">Fairs</button>
-									<button type="button" class="btn btnop"id="opendd">Counselling</button>
+									<button type="button" class="btn btnop" id="opendd">Counselling</button>
 								</div>
 								<div class="ddposition">
 									<ul class="ddclass">
-										<li class="li1 openddli"><a href="#">Others</a></li>
-										<li class="li2 openddli" ><a href="#">Alumuni</a></li>
+										<li class="li1 openddli"><a href="#" id="other_dd">Others</a></li>
+										<li class="li2 openddli" ><a href="#" id="alu_dd">Alumuni</a></li>
 									</ul>
 								</div>	
 							</div>
@@ -60,19 +69,42 @@
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h3 class="white">in City</h3></label>
 							<div class="controls">
-								<select>
+								<select name="event_city" id="city">
 									<option value="">Select</option>
-									<option value="New Delhi">New Delhi</option>
-									<option value="Mumbai">Mumbai</option>
-									<option value="Chennai">Chennai</option>
+									<?php
+									foreach($cities as $city)
+									{ ?>
+									<option value="<?php echo $city['city_id']; ?>"><?php echo $city['cityname']; ?></option>
+								
+								<?php } ?>	
 								</select>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h3 class="white">in the Month of</h3></label>
-							<div class="controls">
-								<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">
+							<div class="float_l span4 margin_zero">
+								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
+								<select name="event_month" id="month">
+									<option value="">Select Month</option>
+									<option value="Januray">Jan</option>
+									<option value="February">Feb</option>
+									<option value="March">Mar</option>
+									<option value="April">Apr</option>
+									<option value="May">May</option>
+									<option value="June">Jun</option>
+									<option value="July">Jul</option>
+									<option value="August">Aug</option>
+									<option value="September">Sep</option>
+									<option value="October">Oct</option>
+									<option value="November">Nov</option>
+									<option value="December">Dec</option>
+								</select>
 							</div>
+							<div class="float_l span1">
+									<input type="button" onclick="serch_events();" name="btn_evet_search" class="btn" value="Search"/>
+									<input type="hidden" name="btn_event_serch" value="">
+								</div>
+								<div class="clearfix"></div>
 						</div>
 					</div>
 					<div class="college" id="col">
@@ -124,7 +156,8 @@
 									</select>
 								</div>
 								<div class="float_l span1">
-									<input type="submit" name="btn_col_search" class="btn" value="Search"/>
+									<input type="button" onclick="serach_results()" name="serach_col_btn" class="btn" value="Search"/>
+									<input type="hidden" name="btn_search" id="btn_col_search">
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -326,7 +359,7 @@
 				</div>
 				<div class="grid_3">
 					<span class="fb_heading">Facebook like</span>
-					<img src="images/facebook.png">
+					<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="314" data-height="304" data-show-faces="true" data-stream="false" data-header="true"></div>
 				</div>
 			</div>
 		</div>
@@ -444,9 +477,41 @@ $('#ug').click(function(){
 $('#type_search').val(3);
 });
 
+$('#spot').click(function(){
+$('#type_search').val(2);
+});
+
+$('#fairs').click(function(){
+$('#type_search').val(4);
+});
 
 
 });
+
+function serach_results()
+{
+if($('#search_country').val()=='')
+{
+alert("Please select the country")
+}
+else if($('#search_program').val()=='')
+{
+alert("please select the program")
+}
+else
+{
+ $("#search_form").attr("action","college_search");
+ $('#btn_col_search').val('col_search');
+ $('#search_form').submit();
+}
+}
+function serch_events()
+{
+$("#search_form").attr("action","events_search");
+$('#btn_event_serch').val('event_search');
+$('#search_form').submit();
+}
+
 </script>
 
 

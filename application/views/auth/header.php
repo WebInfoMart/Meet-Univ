@@ -239,6 +239,7 @@ $('#myModal2').modal('toggle');});
 									<li><a href="#">Questions & Answers</a></li>
 									<li><a href="<?php echo $base; ?>events">Events</a></li>
 									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>news">News</a></li>
+									
 								</ul>
 							</div>
 							<div class="clearfix"></div>

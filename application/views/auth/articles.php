@@ -6,28 +6,28 @@
 				<div class="float_l span13 margin_l">
 					<h2 class="course_txt">Recent News</h2>
 					<div class="margin_t1">
-					<?php foreach($news as $news_detail){ ?>
+					<?php foreach($articles as $articles_detail){ ?>
 						<div class="event_border">
 							<div class="float_l">
-							<?php if($news_detail['news_image_path']!=""){?>
-<img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $news_detail['news_image_path']; ?>" style="width:80px;height:80px;margin-right:20px">
+							<?php if($articles_detail['article_image_path']!=""){?>
+<img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $articles_detail['article_image_path']; ?>" style="width:80px;height:80px;margin-right:20px">
 								
-								<?php } else if($news_detail['univ_logo_path']==''){?>
+								<?php } else if($articles_detail['univ_logo_path']==''){?>
 								<img src="<?php echo "$base$img_path"; ?>/default_logo.png" style="width:80px;height:80px;margin-right:20px">
 								<?php } else {?>
-								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $news_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >
+								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $articles_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >
 								<?php } ?>	
 							</div>
 							<div class="dsolution">
 								<div>
 									<div class="float_l">
-<h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
-										<span><?php echo $news_detail['publish_time']; ?></span><br/>
+<h3><a href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>"><?php echo $articles_detail['article_title']; ?></a></h3>
+										<span><?php echo $articles_detail['publish_time']; ?></span><br/>
 									</div>
 									
 									<div class="clearfix"></div>
 								</div>
-								<div class="course_cont"><?php echo substr($news_detail['news_detail'],0,250).'..'; ?></div>
+								<div class="course_cont"><?php echo substr($articles_detail['article_detail'],0,250).'..'; ?></div>
 							</div>
 							<div class="clearfix"></div>
 						</div>

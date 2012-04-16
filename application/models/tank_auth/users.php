@@ -962,7 +962,7 @@ class Users extends CI_Model
 		}
 		if($query->num_rows() > 0)
 		{
-		$this->db->select('course_name');
+		$this->db->select('prog_id,course_name');
 		$this->db->from('program');
 		$this->db->where_in('prog_id', $program_id);
 		$this->db->limit(5);

@@ -72,6 +72,7 @@
 							<li><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-events" class="active">Events</a></li>
 							<li>Questions & Answers</li>
 							<li class="border_beta"><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-news" class="active">News</a></li>
+						
 						</ul>
 					</nav>
 				</div>
@@ -87,13 +88,13 @@ $(document).scroll(function() {
     if( $(this).scrollTop() >= 50 ) {
         if( !fixed ) {
             fixed = true;
-            $('#main-nav-holder').css({position:'fixed',top:140,left:665});
+            $('#main-nav').css({position:'fixed',top:140,left:694});
 			// Or set top:20px; in CSS
         }                                           // It won't matter when static
     } else {
         if( fixed ) {
             fixed = false;
-            $('#main-nav-holder').css({position:'static'});
+            $('#main-nav').css({position:'static'});
         }
     }
 });

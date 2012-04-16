@@ -160,15 +160,12 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 					</div>
 					<div class="span3 thumb_box">
 						<h3>Newly Registered</h3>
-						<img class="thumb margin_delta" src="<?php echo "$base$img_path" ?>/sumit.png" />
-						<img class="thumb" src="<?php echo "$base$img_path" ?>/keshav.png" />
-						<img class="thumb margin_beta" src="<?php echo "$base$img_path" ?>/keshav.png" />
-						<img class="thumb margin_delta" src="<?php echo "$base$img_path" ?>/keshav.png" />
-						<img class="thumb" src="<?php echo "$base$img_path" ?>/sumit.png" />
-						<img class="thumb margin_beta" src="<?php echo "$base$img_path" ?>/sumit.png" />
-						<img class="thumb margin_delta" src="<?php echo "$base$img_path" ?>/sumit.png" />
-						<img class="thumb" src="<?php echo "$base$img_path" ?>/keshav.png" />
-						<img class="thumb margin_beta" src="<?php echo "$base$img_path" ?>/sumit.png" />
+						<?php
+						$x=0;
+						foreach($new_users as $newly_registered){ $x++; ?>
+<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>"><img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $base; ?>images/user_model.png <?php } else { echo $base; ?>uploads/<?php echo $newly_registered['user_pic_path'];} ?> " /></a>				
+		
+					<?php } ?>	
 					</div>
 					<div class="span10">
 						<h3>Upcoming Events</h3>

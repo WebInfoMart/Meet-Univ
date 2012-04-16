@@ -30,6 +30,7 @@ class Auth extends CI_Controller
 		
 		$data['gallery_home'] = $this->users->fetch_home_gallery();
 		$data['country'] = $this->users->fetch_country();
+		$data['cities'] = $this->frontmodel->fetch_cities();
 		$data['area_interest'] = $this->users->fetch_program();
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();
@@ -168,6 +169,7 @@ class Auth extends CI_Controller
 				}
 			}*/
 			$data['featured_events']=$this->frontmodel->fetch_featured_events();
+			$data['new_users']=$this->frontmodel->newly_registered_users();
 			$this->load->view('auth/login', $data);
 		}
 		$this->load->view('auth/footer',$data);
@@ -300,6 +302,7 @@ class Auth extends CI_Controller
 			//$data['use_recaptcha'] = $use_recaptcha;
 			//$data['base'] = $base;
 			$data['featured_events']=$this->frontmodel->fetch_featured_events();
+			$data['new_users']=$this->frontmodel->newly_registered_users();
 			$this->load->view('auth/register', $data);
 		}
 		$this->load->view('auth/footer',$data);
@@ -1127,6 +1130,14 @@ class Auth extends CI_Controller
 		$this->load->view('auth/header',$data);
 		$data['news'] = $this->frontmodel->fetch_news($page);
 		$this->load->view('auth/news',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	function articles($page='')
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$data['articles'] = $this->frontmodel->fetch_articles($page);
+		$this->load->view('auth/articles',$data);
 		$this->load->view('auth/footer',$data);
 	}
 	

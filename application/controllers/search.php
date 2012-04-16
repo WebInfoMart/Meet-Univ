@@ -1,5 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class search extends CI_Controller
+class Search extends CI_Controller
 {
 	function __construct()
 	{
@@ -29,7 +29,7 @@ class search extends CI_Controller
 			$data['country'] = $this->users->fetch_country();
 			$data['area_interest'] = $this->users->fetch_program();
 			
-		if($this->input->get('btn_col_search'))
+		if($this->input->get('btn_search')=='col_search')
 		{
 				//$this->form_validation->set_rules('type_search','Education Level','trim|required');
 				//$this->form_validation->set_rules('search_country','Country','trim|required');
@@ -97,12 +97,12 @@ class search extends CI_Controller
 					// Load our view, passing the map data that has just been created
 					//$this->load->view('my_view', $data);
 				
-				if($data['get_university'] != 0)
+				if($data['get_university'] != 0 )
 				{
 				$this->load->view('auth/listed_collage',$data);
 				}
 				else{
-				$data['err_msg']='<h2> Sorry....</br><span class="text-align"> Page Not Found.... </span> </h2>';
+				$data['err_msg']='<h2> Sorry....</br><span class="text-align">No result Found.... </span> </h2>';
 				$data['err_div']=1;
 				$this->load->view('auth/NotFoundPage',$data);
 				}
@@ -114,5 +114,40 @@ class search extends CI_Controller
 		}
 		$this->load->view('auth/footer',$data);
 	}
+	
+	function events_search()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$data['err_div']=0;
+		$data['selected_month']=$this->input->get('event_month');
+		if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='0')
+		{
+		redirect(base_url().'events');
+		}
+		else if(($this->input->get('event_month')!='' || $this->input->get('event_city')!='') && $this->input->get('type_search')=='0')
+		{
+		$data['events']=$this->searchmodel->serach_events();
+		if($data['events']!=0)
+		{
+		$this->load->view('auth/search_event_results',$data);
+		}
+		else
+		{
+		$data['err_msg']='<h2> Sorry....</br><span class="text-align">No result Found.... </span> </h2>';
+		$data['err_div']=1;
+		$this->load->view('auth/NotFoundPage',$data);
+		}
+		}
+		else
+		{
+		$data['err_msg']='<h2> Sorry....</br><span class="text-align">No result Found.... </span> </h2>';
+		$data['err_div']=1;
+		$this->load->view('auth/NotFoundPage',$data);
+		}
+		
+		$this->load->view('auth/footer',$data);
+	}
+	
 }
 ?>

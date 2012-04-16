@@ -312,7 +312,44 @@ function university($univ_id='')
 			$this->load->view('auth/footer',$data);
 	}
 
-	
+	function university_article_list($univ_id='')
+	{
+			$data = $this->path->all_path();
+			$data['err_div']=0;
+			$this->load->view('auth/header',$data);
+			//$this->load->view('auth/univ-header-gallery-logo',$data);
+			$data['univ_id_for_program'] = $univ_id;	
+			$data['university_details'] = $this->users->get_university_by_id($univ_id);
+			$country_id = $data['university_details']['country_id'];
+			$city_id = $data['university_details']['city_id'];
+			$university_name = $data['university_details']['univ_name'];
+			$university_address = $data['university_details']['address_line1'];
+			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+			$data['articles_list_detail']=$this->frontmodel->get_articles_list_by_univ($univ_id);
+			if($data['university_details'] != 0 )
+			{
+				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
+				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
+				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+				$this->load->view('auth/univ-header-gallery-logo',$data);
+				if($data['articles_list_detail']!=0)
+				{
+				$this->load->view('auth/university_articles_list',$data);
+				}
+				else
+				{
+				$data['err_msg']='<h2> Sorry....</br><span class="text-align">No Recent Articles.... </span> </h2>';
+				$this->load->view('auth/NotFoundPage',$data);
+				}
+			}
+			else{
+			$data['err_msg']='<h2> Sorry....</br><span class="text-align">Page Not Found.... </span> </h2>';
+			$data['err_div']=1;
+			$this->load->view('auth/NotFoundPage',$data);
+			}
+			$this->load->view('auth/footer',$data);
+	}
 		function univ_news($univ_id='',$news_id='')
 		{
 			$data = $this->path->all_path();
@@ -335,8 +372,18 @@ function university($univ_id='')
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
+				$data['clear_comment']=0;
 				if($data['news_detail']!=0)
 				{
+				$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+				$this->form_validation->set_rules('full_name', 'Name ', 'trim|required|xss_clean');
+				$this->form_validation->set_rules('commented_text', 'Commented Text ', 'trim|required|xss_clean'); 
+				if ($this->form_validation->run()) {								// validation ok
+				$this->frontmodel->insert_user_comment();
+				$data['clear_comment']=1;
+				}
+				$data['news_comments']=$this->frontmodel->fetch_all_comments('news',$news_id);
+				print_r($data['news_comments']);
 				$this->load->view('auth/univ_news_detail',$data);
 				}
 				else
@@ -353,6 +400,51 @@ function university($univ_id='')
 			}
 				$this->load->view('auth/footer',$data);
 		}
+		
+	
+		function univ_articles($univ_id='',$article_id='')
+		{
+			$data = $this->path->all_path();
+			$data['err_div']=0;
+			$this->load->view('auth/header',$data);
+			//$this->load->view('auth/univ-header-gallery-logo',$data);
+			$data['univ_id_for_program'] = $univ_id;	
+			$data['university_details'] = $this->users->get_university_by_id($univ_id);
+			$country_id = $data['university_details']['country_id'];
+			$city_id = $data['university_details']['city_id'];
+			$university_name = $data['university_details']['univ_name'];
+			$university_address = $data['university_details']['address_line1'];
+			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+			$data['articles_detail']=$this->frontmodel->get_article_detail_by_univ($univ_id,$article_id);
+			 if($data['university_details'] != 0 )
+			{
+				
+				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
+				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
+				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+				$this->load->view('auth/univ-header-gallery-logo',$data);
+				if($data['articles_detail']!=0)
+				{
+				$this->load->view('auth/univ_article_detail',$data);
+				}
+				else
+				{
+				$data['err_msg']='<h2> Sorry....</br><span class="text-align"> NO Recent Article Found.... </span> </h2>';
+				$this->load->view('auth/NotFoundPage',$data);
+				}
+				
+			}
+			else{
+			$data['err_msg']='<h2> Sorry....</br><span class="text-align"> Page Not Found.... </span> </h2>';
+			$data['err_div']=1;
+			$this->load->view('auth/NotFoundPage',$data);
+			}
+				$this->load->view('auth/footer',$data);
+		}
+		
+		
+		
 	}
 	
 	

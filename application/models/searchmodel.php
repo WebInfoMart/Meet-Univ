@@ -164,4 +164,34 @@ function get_collages_by_search($type_educ_level,$search_country,$search_course)
 		}
 	}
 	}
+	
+	function serach_events()
+	{
+		$this->db->select('*');
+		$this->db->from('events');
+		$this->db->join('university','events.event_univ_id=university.univ_id');
+		$this->db->join('city','city.city_id=events.event_city_id','left');
+		$this->db->join('state','state.state_id=events.event_state_id','left');
+		$this->db->join('country','country.country_id=events.event_country_id','left');
+		if($this->input->get('event_city')!='')
+		{
+		$this->db->where('event_city_id',$this->input->get('event_city'));
+		}
+		
+		if($this->input->get('event_month')!='')
+		{
+		$month=$this->input->get('event_month');
+		$mon=substr($month,0,3);
+		$this->db->like('event_date_time', $mon, 'both'); 
+		}
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
 }

@@ -226,12 +226,11 @@
 												<?php foreach($get_university['program'][$no_university] as $prog) {
 												if(is_array($prog))
 													{
-														foreach($prog as $program)
-														{
+								
 														?>
-															<li><a href=""><?php echo $program; ?></a></li>
+															<li><a href="<?php echo $base; ?>program_detail/<?php echo $get_university['university'][$no_university]['univ_id'].'/'.$prog['prog_id']; ?>"><?php echo $prog['course_name']; ?></a></li>
 														<?php
-														}
+														
 													}
 												}
 												?>

@@ -181,6 +181,30 @@ class Frontmodel extends CI_Model
 		
 	}
 	
+	function fetch_articles($page)
+	{
+		$this->db->select('*');
+		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
+		$this->db->where('article_type_ud','univ_article');
+		$query = $this->db->get();
+		$numrows=$query->num_rows();
+		$config['base_url']=base_url()."auth/articles";
+		$config['total_rows']=$numrows;
+		$config['per_page'] = '2'; 
+		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
+		$this->db->where('article_type_ud','univ_article');
+		$this->db->order_by("publish_time", "desc"); 
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
+		return $query->result_array();
+	}
+	
 	function get_news_detail_by_univ($univ_id,$news_id)
 	{
 		$this->db->select('*');
@@ -197,5 +221,97 @@ class Frontmodel extends CI_Model
 		return 0;
 		}
 	}
+	function get_article_detail_by_univ($univ_id,$article_id)
+	{
+		$this->db->select('*');
+		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
+		$this->db->where(array('article_id'=>$article_id,'article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		  return $query->row_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	function get_articles_list_by_univ($univ_id)
+	{
+		
+		/*$this->db->select('*');
+		$this->db->from('events');
+		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
+		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
+		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
+		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
+		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event'));
+		$query = $this->db->get();
+		$numrows=$query->num_rows();
+		$config['base_url']=base_url()."univ/university_events_list";
+		$config['total_rows']=$numrows;
+		$config['per_page'] = '2'; 
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];*/
+		$this->db->select('*');
+		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
+		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
+		//$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		//$this->pagination->initialize($config);
+		if($query->num_rows()>0)
+		{
+		  return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	function newly_registered_users()
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->join('user_profiles', 'user_profiles.user_id = users.id'); 
+		$this->db->where('level','1');
+		$this->db->limit(9);
+		$query=$this->db->get();
+		return $query->result_array();
+	}
+	//function for finding the cities list for event search
+	function fetch_cities()
+	{
+		$this->db->select('*');
+		$this->db->from('city');
+		$query=$this->db->get();
+		return $query->result_array();
+	}
+	
+	function insert_user_comment()
+	{
+	$data=array(
+	'commented_by_user_name'=>$this->input->post('full_name'),
+	'commented_by_user_email'=>$this->input->post('email'),
+	'commented_on'=>$this->input->post('commented_on'),
+	'comment_on_id'=>$this->input->post('commented_on_id'),
+	'commented_text'=>$this->input->post('commented_text'),
+	);
+	$this->db->insert('comment_table',$data);
+	}
+	
+	function fetch_all_comments($commented_on,$commented_on_id)
+	{
+		$this->db->select('*');
+		$this->db->from('comment_table');
+		$this->db->join('users', 'users.id = comment_table.commented_by','left');
+		$this->db->join('user_profiles','user_profiles.user_id = users.id','left');	
+		$this->db->where(array('comment_on_id'=>$commented_on_id,'commented_on'=>$commented_on));
+		$query=$this->db->get();
+		return $query->result_array();
+	}
+	
+	
 
 }
