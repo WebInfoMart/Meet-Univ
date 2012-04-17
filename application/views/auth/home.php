@@ -60,8 +60,8 @@
 								</div>
 								<div class="ddposition">
 									<ul class="ddclass">
-										<li class="li1 openddli"><a href="#" id="other_dd">Others</a></li>
-										<li class="li2 openddli" ><a href="#" id="alu_dd">Alumuni</a></li>
+										<li class="li1 openddli" id="others"><a href="#" id="other_dd">Others</a></li>
+										<li class="li2 openddli" id="alumuni" ><a href="#" id="alu_dd">Alumuni</a></li>
 									</ul>
 								</div>	
 							</div>
@@ -210,8 +210,18 @@
 		<div class="row">
 			<div class="span16 margin_l margin_t1">
 				<div class="yellow_bar text_bar">
-					<div class="span8 yellow_bar_text float_l margin_zero"><ul><li><a href="#">Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat.</a></li></ul></div>
-					<div class="span8 yellow_bar_text float_r margin_zero"><ul><li><a href="#">Praesent eu nisl at eros vulputate fringilla vel rdiet od liastu vestibulum.</a></li></ul></div>
+				<?php
+					$x=0;
+				foreach($featured_news as $featured_news_list) { $x++; ?>
+					<div class="span8 yellow_bar_text <?php if($x==1){?> float_l <?php }else{ ?> float_r <?php } ?> margin_zero"><ul><li>
+					<a href="<?php echo $base; ?>univ-<?php echo $featured_news_list['news_univ_id']; ?>-news-<?php echo $featured_news_list['news_id']; ?>">
+					<?php echo substr($featured_news_list['news_title'],0,70).'..'; ?>
+					</a></li></ul>
+					</div>
+				<?php
+				if($x=='2')
+				break;
+				} ?>	
 					<div class="clearfix"></div>
 				</div>
 		    </div>
@@ -393,23 +403,24 @@ $('.ddclass').css('display','block');
 );
 $('.openddli').click(function()
 	{
-	
 	 $('.btnop').each(function()
 	 {
-	
-	  if($(this).attr("id")==null || $(this).attr("id")=='')
-	  {
 	   $(this).removeClass('active');
+	 });
+	 $('#opendd').addClass('active');
+	 $('.ddclass').css('display','none');
+	 $('#opendd').html($(this).text());
+	  if($(this).attr("id")=='others')
+	  {
+	  $('#type_search').val('others');
 	  }
 	  else
 	  {
-	  $(this).addClass('active');
-	  $('.ddclass').css('display','none');
+	  $('#type_search').val('alumuni');
+	  
 	  }
-	 
-	 })
-	  $('#opendd').html($(this).text());
-	})
+	});
+	
 	$("body").click
 (
   function(e)
@@ -478,11 +489,11 @@ $('#type_search').val(3);
 });
 
 $('#spot').click(function(){
-$('#type_search').val(2);
+$('#type_search').val('spot_admission');
 });
 
 $('#fairs').click(function(){
-$('#type_search').val(4);
+$('#type_search').val('fairs');
 });
 
 

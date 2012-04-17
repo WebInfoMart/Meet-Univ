@@ -17,7 +17,14 @@ class Frontmodel extends CI_Model
 		$this->db->where(array('featured_home_event' =>'1'));
 		$this->db->limit(5);
 		$query = $this->db->get();
+		if($query->num_rows>0)
+		{
 		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
 	}
 	
 	//function for getting university information
@@ -191,7 +198,7 @@ class Frontmodel extends CI_Model
 		$numrows=$query->num_rows();
 		$config['base_url']=base_url()."auth/articles";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '2'; 
+		$config['per_page'] = '7'; 
 		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -312,6 +319,77 @@ class Frontmodel extends CI_Model
 		return $query->result_array();
 	}
 	
+	function post_comment_by_logged_in_user($logged_in_user_id,$commented_on,$commented_on_id,$commented_text)
+	{
+		$data=array(
+		'commented_by'=>$logged_in_user_id,
+		'commented_on'=>$commented_on,
+		'comment_on_id'=>$commented_on_id,
+		'commented_text'=>$commented_text,
+		);
+	$this->db->insert('comment_table',$data);
+		return $this->db->insert_id();
+	}
 	
+	function delete_comment()
+	{
+	$this->db->delete('comment_table', array('comment_id' =>$this->input->post('comment_id')));
+	
+	}	
+	
+	function recent_articles()
+	{
+		$this->db->select('*');
+		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
+		$this->db->where(array('article_type_ud'=>'univ_article'));
+		$this->db->order_by("publish_time", "desc"); 
+		$this->db->limit(3);
+		$query = $this->db->get();
+		//$this->pagination->initialize($config);
+		if($query->num_rows()>0)
+		{
+		  return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	function recent_news()
+	{
+		$this->db->select('*');
+		$this->db->from('news');
+		$this->db->join('university', 'news.news_univ_id = university.univ_id'); 
+		$this->db->where(array('news_type_ud'=>'univ_news'));
+		$this->db->order_by("publish_time", "desc"); 
+		$this->db->limit(3);
+		$query = $this->db->get();
+		//$this->pagination->initialize($config);
+		if($query->num_rows()>0)
+		{
+		  return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	function fetch_recent_events()
+	{
+		$this->db->select('*');
+		$this->db->from('events');
+		$this->db->join('university', 'events.event_univ_id=university.univ_id');
+		$this->db->limit(5);
+		$query = $this->db->get();
+		if($query->num_rows>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
 
 }

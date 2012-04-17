@@ -12,23 +12,11 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
+							<?php foreach($country as $countries) { ?>			
 											<li>
-												<a>United Kingdam</a>
-											</li>
-											<li>
-												<a>India</a>
-											</li>
-											<li>
-												<a>United State</a>
-											</li>
-											<li>
-												<a>Canada</a>
-											</li><li>
-												<a>Korea</a>
-											</li>
-											<li>
-												<a>Ireland</a>
-											</li>
+	<a href="<?php echo $base; ?>all_colleges?country_id=<?php echo $countries['country_id']; ?>"><?php echo $countries['country_name']; ?></a>
+											</li>	
+							<?php } ?>				
 										</ul>                 
 									</div>
 								</div>
@@ -42,23 +30,14 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
+										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { ?>			
 											<li>
-												<a>Business, Finance & Management</a>
-											</li>
-											<li>
-												<a>Arts & Humanities</a>
-											</li>
-											<li>
-												<a>Science</a>
-											</li>
-											<li>
-												<a>Computers & Information Technology</a>
-											</li><li>
-												<a>Engineering</a>
-											</li>
-											<li>
-												<a>Health Sciences & Medical</a>
-											</li>
+								
+	<a href="<?php echo $base; ?>all_colleges?study_subject=<?php echo $fetch_area_intrest1['prog_parent_id']; ?>"><?php echo $fetch_area_intrest1['program_parent_name']; ?></a>
+											</li>	
+										<?php } ?>
+											
+											
 										</ul>                 
 									</div>
 								</div>
@@ -71,64 +50,18 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
+										<?php foreach($fetch_educ_level as $fetch_educ_levels) { ?>			
 											<li>
-												<a>Bachelors Degree</a>
-											</li>
-											<li>
-												<a>Masters Degree</a>
-											</li>
-											<li>
-												<a>College Diploma</a>
-											</li>
-											<li>
-												<a>Ph.D. or Doctoral Degree</a>
-											</li>
-											<li>
-												<a>Post-Graduate Certificate</a>
-											</li>
-											<li>
-												<a>Certificate</a>
-											</li>
-											<li>
-												<a>Associate Degree</a>
-											</li>
-											<li>
-												<a>High School</a>
-											</li>
+<a href="<?php echo $base; ?>all_colleges?education_level=<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>"><?php echo $fetch_educ_levels['educ_level']; ?></a>
+											</li>	
+										<?php } ?>
+											
 										</ul>                 
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="float_l grid_1 margin_zero search_box_height">
-							<h5>Filter by Course Duration </h5>
-							<div id="scrollbar4">
-								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
-								<div class="viewport">
-									<div class="overview">
-										<ul>
-											<li>
-												<a>Business, Finance & Management</a>
-											</li>
-											<li>
-												<a>Arts & Humanities</a>
-											</li>
-											<li>
-												<a>Science</a>
-											</li>
-											<li>
-												<a>Computers & Information Technology</a>
-											</li><li>
-												<a>Engineering</a>
-											</li>
-											<li>
-												<a>Health Sciences & Medical</a>
-											</li>
-										</ul>                 
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<div class="float_l grid_1 margin_zero search_box_height">
 							<h5>Filter by Course Duration </h5>
 							<div id="scrollbar5">
@@ -174,11 +107,11 @@
 									</div>
 									<div class="float_r span4 margin_t1">
 										<div class="float_l">
-											<div class="float_l"><img src="images/user.png"></div>
+											<div class="float_l"><img src="<?php echo "$base$img_path"; ?>/user.png"></div>
 											<div class="float_r margin_l"><small>Followers <?php echo $get_university['followers'][$no_university]; ?></small></div>
 										</div>
 										<div class="float_r">
-											<div class="float_l"><img src="images/document.png"></div>
+											<div class="float_l"><img src="<?php echo "$base$img_path"; ?>/document.png"></div>
 											<div class="float_r margin_l"><small>Articles <?php echo $get_university['article'][$no_university]; ?></small></div>
 										</div>
 										<div class="clearfix"></div>
@@ -246,10 +179,15 @@
 							</div>
 						</div>
 					</div>
-				
+			
 				<div class="float_r span3">
-					<img src="images/banner_img.png" />
+					<img src="<?php echo "$base$img_path"; ?>/banner_img.png" />
 				</div>
+				<div id="pagination" class="table_pagination right paging-margin">
+   
+            <?php echo $this->pagination->create_links();?>
+   
+            </div>
 				<div class="clearfix"></div>
 			</div>
 			</div>

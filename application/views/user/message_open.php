@@ -22,7 +22,7 @@
 					
 			<div class="row">
 				<div class="margin_zero span16">
-					<div data-alert="alert" class="alert alert-message message">
+					<!--<div data-alert="alert" class="alert alert-message message">
 								<a data-dismiss="alert" class="close">×</a>
 								<div>
 									<div class="float_l"><h2>Welcome! Let’s get started by</h2></div>
@@ -38,6 +38,7 @@
 									</ul>
 								</nav>
 					</div>
+					-->
 					<?php $this->load->view('user/profile-sidebar.php'); ?>
 					<div class="span13 float_r">
 						<div class="span10 margin_zero float_l">
@@ -62,7 +63,7 @@
 							</div>
 						</div>
 						<div class="span3 float_l">
-							<img src="images/banner_img.png">
+							<img src="<?php echo $base; ?>images/banner_img.png">
 						</div>
 						<div class="clearfix"></div>
 					</div>

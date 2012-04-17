@@ -203,7 +203,7 @@ $(window).load(function(){
 		<div class="body_container">
 			<div class="row">
 				<div class="margin_zero span16">
-					<div class="alert alert-message message" data-alert="alert">
+					<!--<div class="alert alert-message message" data-alert="alert">
 								<a class="close" data-dismiss="alert">&times;</a>
 								<div>
 									<div class="float_l"><h2>Welcome! Let&#8217;s get started by</h2></div>
@@ -219,25 +219,29 @@ $(window).load(function(){
 									</ul>
 								</nav>
 					</div>
+					-->
 					<?php $this->load->view('user/profile-sidebar.php'); ?>
 					<div class="span13 float_r">
 						<div class="span10 margin_zero">
-							<div class="search_box_profile">
+						<!--	<div class="search_box_profile">
 								<span class="">My Country</span>
 								<input type="text" class="input_xxx-large search-query">
 								<button class="btn btn-success margin_l21" href="#">Search</button>
 							</div>
+						-->	
 							<div class="events_box margin_t">
 								<h2>Events</h2>
 								<ul>
-									<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood in floodplain lakes of the Mississippi Alluvial Valley. Environmental Biology of Fishes.<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
-									<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity Supplemental treatments for timber bridge components. Forest Products Journal.<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
-									<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood <src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
-									<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
+							 <?php	foreach($featured_events as $featured_events_detail) { ?>							
+				<li>
+				<a style="color:#666;" href="<?php echo $base; ?>univ-<?php echo $featured_events_detail['event_univ_id']; ?>-event-<?php echo $featured_events_detail['event_id']; ?>"><?php echo substr($featured_events_detail['event_title'],0,100).'..'; ?></a>
+				<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
+				<?php } ?>
+									
 								</ul>
 							</div>
 							<div class="margin_t news_box">
-								<div class="span5 margin_zero">
+								<!--<div class="span5 margin_zero">
 									<h2>Study Abroad</h2>
 									<div>
 										<ul class="study_point">
@@ -282,20 +286,25 @@ $(window).load(function(){
 										</ul>
 									</div>
 								</div>
-								<div class="float_l right_border"></div>
-								<div class="span5 margin_zero">
+								<div class="float_l right_border"></div> commented by sumit munjal-->
+							<!--	<div class="span5 margin_zero">  replaced by below line -->
+									<div class="margin_zero">
 									<h2>News</h2>
 										<ul>
-											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
-											<li>Dembkowski, D.J., L.E. Miranda. 2012. Hierarchy in factors affecting fish biodiversity.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
-											<li>Barnes, H.M. 2012. Durable composites: An overview. Proceedings, American Wood.<src="<?php echo "$base$img_path";  ?>event_arrow.png" class="news_arrow"></li>
+				 <?php	foreach($recent_news as $recent_news_detail) { ?>					
+				<li>
+				<a style="color:#666;" href="<?php echo $base; ?>univ-<?php echo $recent_news_detail['news_univ_id']; ?>-news-<?php echo $recent_news_detail['news_id']; ?>">
+				<?php echo substr($recent_news_detail['news_title'],0,100); ?><img src="<?php echo "$base$img_path";  ?>/event_arrow.png" class="news_arrow">
+										</a>	</li>
+											
+					<?php } ?>						
 										</ul>
-								</div>
+								`	</div>
 								<div class="clearfix"></div>
 								</div>
 								<div class="margin_t">
 									<div class="news_box">
-										<h2>Question and Answer</h2>
+										<h2>Question and Answer</h2> 
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a dictum arcu. Vestibulum ultrices lacus in velit posuere sit amet elementum metus fringilla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut at quam id velit pulvinar rutrum. Cras gravida velit id augue viverra eget tempus mauris mollis.Ut at quam id velit. </p>
 									</div>
 								</div>
@@ -305,48 +314,29 @@ $(window).load(function(){
 						</div>
 						<div class="clearfix"></div>
 						<div class="margin_t">
+						<?php foreach($recent_articles as $recent_articles_detail){ ?>
 							<div class="grid_2 margin_zero artical_box">
 								<div class="index_sidebar_box">
-									<div class="artical_heading">Article</div>
+				<div class="artical_heading"><a href="<?php echo $base; ?>univ-<?php echo $recent_articles_detail['article_univ_id']; ?>-article-<?php echo $recent_articles_detail['article_id']; ?>"><?php echo $recent_articles_detail['article_title']; ?></a>
+				</div>
 										<div id="home" class="box artical_box_data">
 											<div class="float_l margin_r1">
-												<img class="artical_img" src="<?php echo "$base$img_path";  ?>/layer.png">
+								<?php if($recent_articles_detail['article_image_path']!=""){?>
+									<img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $recent_articles_detail['article_image_path']; ?>" style="width:80px;height:80px;margin-right:20px">
+									<?php } else if($recent_articles_detail['univ_logo_path']==''){?>
+									<img src="<?php echo "$base$img_path"; ?>/default_logo.png" style="width:80px;height:80px;margin-right:20px">
+									<?php } else {?>
+									<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $news_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >
+									<?php } ?>
 											</div>
 											<div class="margin_l8">
-												Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
+												<?php echo substr($recent_articles_detail['article_detail'],0,420).'..'; ?>
 											</div>							
 										</div>
-									<div class="clearfix"></div>
+									<div class="clearfix"></div> 
 								</div>
 							</div>
-							<div class="grid_2 artical_box">
-								<div class="index_sidebar_box">
-									<div class="artical_heading">Article</div>
-										<div id="home" class="box artical_box_data">
-											<div class="float_l margin_r1">
-												<img class="artical_img" src="<?php echo "$base$img_path";  ?>/layer.png">
-											</div>
-											<div class="margin_l8">
-												Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
-											</div>							
-										</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="grid_2 artical_box">
-								<div class="index_sidebar_box">
-									<div class="artical_heading">Article</div>
-										<div id="home" class="box artical_box_data">
-											<div class="float_l margin_r1">
-												<img class="artical_img" src="<?php echo "$base$img_path";  ?>/layer.png">
-											</div>
-											<div class="margin_l8">
-												Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu.Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate fringilla vel rdiet od vestibulum felis aesent eu nisl at eros vulputate fringilla uismod dictum. 
-											</div>							
-										</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
+						<?php } ?>
 							<div class="clearfix"></div>
 						</div>
 					</div>

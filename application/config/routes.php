@@ -38,7 +38,6 @@
 |
 */
 
-$route['default_controller'] = "auth";
 $route['admin/update-(:num)-user-(:num)'] = 'admin/edituser/$1/$2';
 $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';
@@ -55,12 +54,16 @@ $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
 $route['inbox/(:any)']='user/inbox/$1';
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 $route['(college_search|events_search)'] = 'Search/$1';
+$route['(college_list/all_colleges)/(:num)']='auth/all_colleges/$1';
+$route['(college_list/all_colleges)']='auth/all_colleges';
 
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|all_colleges|home/pwd_change|home/pus|index/cfr)'] = 'auth/$1';
+$route['(login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|home/pwd_change|all_colleges|home/pus|index/cfr)'] = 'auth/$1';
 $route['(inbox)'] = 'user/$1';
 $route['(delete_message_inbox)'] = 'user/$1';
 $route['(delete_message_inbox/(:num))'] = 'user/$1';
+$route['default_controller'] = 'auth';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

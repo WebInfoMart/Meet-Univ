@@ -109,8 +109,8 @@ if ($user) {
 									<div class="index_sidebar_content">
 										<ul class="links1">
            <li><a href="#">Composer</a></li>
-           <li><div><div class="float_l"><a href="inbox">Inbox </a></div><div class="float_r"><span class="badge badge-warning">68</span></div><div class="clearfix"></div></div></li><!--29-->
-           <li><div><div class="float_l"><a href="#">Outbox </a></div><div class="float_r"><span class="badge badge-warning">8</span></div><div class="clearfix"></div></div></li><!--29-->
+           <li><div><div ><a href="inbox">Inbox </a></div><div class="float_r"><!--<span class="badge badge-warning">68</span>==></div><div class="clearfix"></div></div></li><!--29-->
+           <li><div><div ><a href="#">Outbox </a></div><div class="float_r"><!--<span class="badge badge-warning">8</span>--></div><div class="clearfix"></div></div></li><!--29-->
           </ul>
 									</div>
 								</div>

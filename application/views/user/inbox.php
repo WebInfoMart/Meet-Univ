@@ -5,7 +5,7 @@
 		<div class="body_container">
 			<div class="row">
 				<div class="margin_zero span16">
-					<div data-alert="alert" class="alert alert-message message">
+					<!--<div data-alert="alert" class="alert alert-message message">
 								<a data-dismiss="alert" class="close"></a>
 								<div>
 									<div class="float_l"><h2>Welcome! Let&#8217;s get started by</h2></div>
@@ -21,6 +21,7 @@
 									</ul>
 								</nav>
 					</div>
+					-->
 					<?php $this->load->view('user/profile-sidebar.php'); ?>
 					<div class="span13 float_r">
 						<div class="span10 margin_zero float_l">
@@ -39,7 +40,7 @@
 										<div class="span0 margin_zero">
 											<input type="checkbox" name="msg[]" id="<?php echo $checkbox_numbering; ?>" value="<?php echo $messages['id'] ? $messages['id']: ''; ?>">
 										</div>
-										<a href="inbox/<?php echo $messages['id']; ?>">
+										<a href="<?php echo $base; ?>inbox/<?php echo $messages['id']; ?>">
 										<div class="span2 margin_l">
 											<span><?php echo $messages['subject']!='' ? $messages['subject'] : 'No Subject' ; ?></span>
 										</div>
@@ -60,15 +61,18 @@
 									
 								</ul>
 								<div class="float_r">
-								
+								<?php  if($inbox_messages!=0){ ?>
 									<input type="submit" class="btn btn-success" name="del_multi_msg" value="Delete" />
+								<?php } else{ ?>	
+								<h3>Inbox is Empty</h3>
+								<?php } ?>
 								</form>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 						</div>
 						<div class="span3 float_l">
-							<img src="images/banner_img.png">
+							<img src="<?php echo $base; ?>images/banner_img.png">
 						</div>
 						<div class="clearfix"></div>
 					</div>

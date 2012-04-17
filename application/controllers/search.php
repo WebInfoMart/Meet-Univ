@@ -110,7 +110,7 @@ class Search extends CI_Controller
 			
 		}
 		else{
-		$this->load->view('auth/listed_collage',$data);
+			$this->load->view('auth/listed_collage',$data);
 		}
 		$this->load->view('auth/footer',$data);
 	}
@@ -125,7 +125,7 @@ class Search extends CI_Controller
 		{
 		redirect(base_url().'events');
 		}
-		else if(($this->input->get('event_month')!='' || $this->input->get('event_city')!='') && $this->input->get('type_search')=='0')
+		else if($this->input->get('event_month')!='' || $this->input->get('event_city')!='')
 		{
 		$data['events']=$this->searchmodel->serach_events();
 		if($data['events']!=0)

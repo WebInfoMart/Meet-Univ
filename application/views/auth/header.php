@@ -235,10 +235,11 @@ $('#myModal2').modal('toggle');});
 								<ul class="menu">
 									<li><a href="<?php echo $base; ?>" class="active">Home</a></li>
 									<li><a href="<?php echo "$base"; ?>all_colleges">Colleges</a></li>
-									<li><a href="#">Study Abroad</a></li>
 									<li><a href="#">Questions & Answers</a></li>
 									<li><a href="<?php echo $base; ?>events">Events</a></li>
-									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>news">News</a></li>
+									<li ><a href="<?php echo $base; ?>news">News</a></li>
+									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>articles">Articles</a></li>
+									
 									
 								</ul>
 							</div>

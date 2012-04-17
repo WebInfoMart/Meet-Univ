@@ -35,6 +35,7 @@ class Auth extends CI_Controller
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();
 		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
+		$data['featured_news']=$this->frontmodel->recent_news();	
 	//	print_r($data['featured_events']);
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
@@ -82,6 +83,17 @@ class Auth extends CI_Controller
 			$data['fetch_profile'] = $this->users->fetch_profile($logged_user);
 			$data['query'] = $this->users->fetch_all_data($logged_user);
 			$data['profile_pic'] = $this->users->fetch_profile_data($logged_user); 
+			$data['recent_articles']=$this->frontmodel->recent_articles();
+			$data['recent_news']=$this->frontmodel->recent_news();
+			$data['featured_events']=$this->frontmodel->fetch_recent_events();
+			if($data['recent_articles']==0)
+			{
+			$data['recent_articles']=array();
+			}
+			if($data['recent_news']==0)
+			{
+			$data['recent_news']=array();
+			}
 		//	print_r($data['profile_pic']);
 			$data['educ_level'] = $this->users->fetch_educ_level();
 			$data['country'] = $this->users->fetch_country();
@@ -1035,13 +1047,27 @@ class Auth extends CI_Controller
 	
 	
 	
-	function all_colleges()
+	function all_colleges($clg ='',$paging='')
 	{
 		$data = $this->path->all_path();
+		$data['err_msg']=0;
+		$data['filter_var']=0;
 		$this->load->view('auth/header',$data);
+		$data['country'] = $this->users->fetch_country();
 		$data['get_university'] = $this->users->show_all_college();
-		//print_r($data['get_university']);
+		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
+		$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
+		if($data['get_university']!=0)
+		{
 		$this->load->view('auth/show_all_college',$data);
+		}
+		else
+		{
+		$data['filter_var']=1;
+		$data['err_div']=0;
+		$data['err_msg']='<h2> Sorry....</br><span class="text-align">Result Not Found.... </span> </h2>';
+		$this->load->view('auth/filter_top_bar',$data);
+		}
 		$this->load->view('auth/footer',$data);
 	}
 	

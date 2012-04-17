@@ -177,7 +177,10 @@ function get_collages_by_search($type_educ_level,$search_country,$search_course)
 		{
 		$this->db->where('event_city_id',$this->input->get('event_city'));
 		}
-		
+		if($this->input->get('type_search')!='0')
+		{
+		$this->db->where('event_category',$this->input->get('type_search'));
+		}
 		if($this->input->get('event_month')!='')
 		{
 		$month=$this->input->get('event_month');

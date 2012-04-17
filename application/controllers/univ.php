@@ -209,16 +209,33 @@ function university($univ_id='')
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['event_detail']=$this->frontmodel->get_event_detail_by_univ($univ_id,$event_id);
 			 if($data['university_details'] != 0 )
-			{
+			 {
 				
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
+				$data['clear_comment']=0;
 				if($data['event_detail']!=0)
 				{
+				$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+				$this->form_validation->set_rules('full_name', 'Name ', 'trim|required|xss_clean');
+				$this->form_validation->set_rules('commented_text', 'Commented Text ', 'trim|required|xss_clean'); 
+				if ($this->form_validation->run()) {								// validation ok
+				$this->frontmodel->insert_user_comment();
+				$data['clear_comment']=1;
+				}
+				$data['event_comments']=$this->frontmodel->fetch_all_comments('event',$event_id);
+				$data['user_is_logged_in']=0;
+				if($this->tank_auth->is_logged_in())
+				{
+				$data['user_is_logged_in']=1;
+				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
+				}
+				//print_r($data['user_detail']);
 				$this->load->view('auth/univ_event_detail',$data);
+				
 				}
 				else
 				{
@@ -383,7 +400,13 @@ function university($univ_id='')
 				$data['clear_comment']=1;
 				}
 				$data['news_comments']=$this->frontmodel->fetch_all_comments('news',$news_id);
-				print_r($data['news_comments']);
+				$data['user_is_logged_in']=0;
+				if($this->tank_auth->is_logged_in())
+				{
+				$data['user_is_logged_in']=1;
+				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
+				}
+				//print_r($data['user_detail']);
 				$this->load->view('auth/univ_news_detail',$data);
 				}
 				else
@@ -424,8 +447,23 @@ function university($univ_id='')
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
+				$data['clear_comment']=0;
 				if($data['articles_detail']!=0)
 				{
+				$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+				$this->form_validation->set_rules('full_name', 'Name ', 'trim|required|xss_clean');
+				$this->form_validation->set_rules('commented_text', 'Commented Text ', 'trim|required|xss_clean'); 
+				if ($this->form_validation->run()) {								// validation ok
+				$this->frontmodel->insert_user_comment();
+				$data['clear_comment']=1;
+				}
+				$data['article_comments']=$this->frontmodel->fetch_all_comments('article',$article_id);
+				$data['user_is_logged_in']=0;
+				if($this->tank_auth->is_logged_in())
+				{
+				$data['user_is_logged_in']=1;
+				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
+				}
 				$this->load->view('auth/univ_article_detail',$data);
 				}
 				else
@@ -443,7 +481,21 @@ function university($univ_id='')
 				$this->load->view('auth/footer',$data);
 		}
 		
-		
+		function post_comment()
+		{
+			$data = $this->path->all_path();
+			$logged_in_user_id=$this->ci->session->userdata('user_id');
+			$data['commented_on']=$this->input->post('commentd_on');
+			$commented_on_id=$this->input->post('commented_on_id');
+			$data['commented_text']=$this->input->post('commented_text');
+	$data['delete_comment']=$this->frontmodel->post_comment_by_logged_in_user($logged_in_user_id,$data['commented_on'],$commented_on_id,$data['commented_text']);
+			$data['user_detail']=$this->users->fetch_profile($logged_in_user_id);
+			$this->load->view('ajaxviews/post_comment',$data);
+		}
+		function delete_comment()
+		{
+		$this->frontmodel->delete_comment();
+		}
 		
 	}
 	

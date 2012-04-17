@@ -25,6 +25,7 @@ class Users extends CI_Model
 		$ci =& get_instance();
 		$this->table_name			= $ci->config->item('db_table_prefix', 'tank_auth').$this->table_name;
 		$this->profile_table_name	= $ci->config->item('db_table_prefix', 'tank_auth').$this->profile_table_name;
+		$this->load->library('pagination');
 		//$this->program_parent	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_parent;
 		//$this->program_educ_level	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_educ_level;
 		//$this->country	= $ci->config->item('db_table_prefix', 'tank_auth').$this->country;
@@ -219,7 +220,7 @@ class Users extends CI_Model
 	 function fetch_profile($logged_user)
 	 {
 	 
-			 $this->db->select('*');
+			  $this->db->select('*');
 			  $this->db->from('users');
 			  $this->db->join('user_profiles', 'users.id = user_profiles.user_id');
 			  $this->db->where('id', $logged_user);
@@ -243,7 +244,7 @@ class Users extends CI_Model
 	 function fetch_all_data($logged_user)
 	 {
 		$query = $this->db->get_where('users',array('id'=>$logged_user));
-	return $query->row_array();
+		return $query->row_array();
 	 }
 	function get_user_by_id($user_id, $activated)
 	{
@@ -977,11 +978,33 @@ class Users extends CI_Model
 	{
 		$this->db->select('univ_id');
 		$this->db->from('university');
+		if($this->input->get('country_id')!='')
+		{
+		 $this->db->where('country_id',$this->input->get('country_id'));
+		}
+		if($this->input->get('education_level')!='')
+		{
+		 //$this->db->where('country_id',$this->input->get('education_level'));
+		}
+		$result1 = $this->db->get();
+		$all_results1 = $result1->result_array();
+		//print_r($all_results);
+		$count_res = count($all_results1);
+		if($count_res > 0)
+		{
+		$config['base_url']=base_url()."college_list/all_colleges";
+		$config['total_rows']=$count_res;
+		$config['per_page'] = '30'; 
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('univ_id');
+		$this->db->from('university');
+		$this->db->limit($limit,$offset);
 		$result = $this->db->get();
+		$this->pagination->initialize($config);
 		$all_results = $result->result_array();
 		//print_r($all_results);
 		$count_res = count($all_results);
-		
 		for($loop=0; $loop < $count_res; $loop++)
 		{
 		$all_results2 = $all_results[$loop];
@@ -1019,6 +1042,12 @@ class Users extends CI_Model
 			else{
 			return 0;
 			}
+			
+		}
+		else
+		{
+		return 0;
+		}		
 	}
 	
 	function get_univ_gallery($univ_id)

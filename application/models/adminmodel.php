@@ -473,7 +473,7 @@ class Adminmodel extends CI_Model
 		$query=$this->db->get();
 		return $query->result_array();
 	}
-	function get_univ_info()
+	function get_univ_info($paging)
 	{
 		$this->db->select('*');
 		$this->db->from('university');
@@ -483,7 +483,7 @@ class Adminmodel extends CI_Model
 		$config['base_url']=base_url()."admin/manage_university/";
 		$config['total_rows']=$query->num_rows();
 		$config['per_page'] = '4'; 
-		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+		$offset = $paging; //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
 		$this->db->from('university');
