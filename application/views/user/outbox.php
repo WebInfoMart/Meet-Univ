@@ -25,28 +25,22 @@
 					<div class="span13 float_r">
 						<div class="span10 margin_zero float_l">
 							<div class="inbox_box">
-								<h2>Inbox</h2>
+								<h2>Sent Mail</h2>
 								<ul class="inbox_list">
-								<form action="delete_message_inbox" method="post">
+								<form action="delete_message_outbox" method="post">
 								<?php
 								if(!empty($inbox_messages))
 								{
 								$checkbox_numbering = 0;
 								foreach($inbox_messages as $messages)
 								{
-								if($messages['msg_read_status'] == '1')
-								{
-								$color_read_unread_msg = "background-color:white;border:1px solid whiteSmoke";
-								}
-								else{
-								$color_read_unread_msg = "background-color:lightBlue";
-								}
+								
 								?>
-									<li style="<?php echo $color_read_unread_msg; ?>">
+									<li style="background-color:white;border:1px solid whiteSmoke">
 										<div class="span0 margin_zero">
 											<input type="checkbox" name="msg[]" id="<?php echo $checkbox_numbering; ?>" value="<?php echo $messages['id'] ? $messages['id']: ''; ?>">
 										</div>
-										<a href="inbox/<?php echo $messages['id']; ?>">
+										<a href="<?php echo "$base"; ?>outbox/<?php echo $messages['id']; ?>">
 										<div class="span2 margin_l">
 											<span><?php echo $messages['subject']!='' ? $messages['subject'] : 'No Subject' ; ?></span>
 										</div>
@@ -59,16 +53,16 @@
 										</div>
 										
 										<div class="span0 margin_l">
-											<a href="delete_message_inbox/<?php echo $messages['id']; ?>"><i class="icon-remove"></i></a>
+											<a href="" name="del_single_msg" id="<?php echo $messages['id']; ?>"  onclick="deletechecked(this,'<?php echo $base; ?>');"><i class="icon-remove"></i></a>
 										</div>
 										<div class="clearfix"></div>
 									</li>
-								<?php $checkbox_numbering++; } } else { echo "Empty Message Inbox..."; } ?>
+								<?php $checkbox_numbering++; } } else { echo "Empty Message Outbox..."; } ?>
 									
 								</ul>
 								<div class="float_r">
 								
-									<input type="submit" class="btn btn-success" name="del_multi_msg" value="Delete" />
+									<input type="button" class="btn btn-success" name="del_multi_msg" onclick="deletechecked(this,'<?php echo $base; ?>');" value="Delete" />
 								</form>
 								</div>
 								<div class="clearfix"></div>
@@ -83,4 +77,25 @@
 			</div>
 		</div>
 	</div>
-	
+	<script type="text/javascript">
+	function deletechecked(atr,base)
+{
+	var name = atr.name;
+	if(name == 'del_multi_msg')
+	{
+    var answer = confirm("Are you sure to Delete selected Multiple messages ?");
+    if (answer){
+        document.messages.submit();
+    }
+	}
+	else if(name == 'del_single_msg') {
+	var answer1 = confirm("Are you sure to Delete selected message ?");
+	 if (answer1){
+	 var id=atr.id;
+	  window.location=base+'delete_message_outbox/'+id;
+    }
+	}
+    
+    return false;  
+} 
+	</script>

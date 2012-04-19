@@ -29,13 +29,18 @@
 			</div>
 			
 			<ul class="uni_gallery">
-				<li>
+				<li class="univ_page_logo">
 				<?php 
 				if($university_details['univ_logo_path'] != '')
 				{
 				echo "<img class='univ_page_logo' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
 				}
-				?></li>
+				else
+				{
+				echo "<img class='univ_page_logo' src='".base_url()."uploads/univ_gallery/default_logo.png'/>"; 
+				}
+				?>
+				</li>
 				<?php
 				if(!empty($univ_gallery))
 				{

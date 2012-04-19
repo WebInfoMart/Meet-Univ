@@ -32,6 +32,8 @@ function university($univ_id='')
 		$university_name = $data['university_details']['univ_name'];
 		$university_address = $data['university_details']['address_line1'];
 		$logged_user_id = $this->session->userdata('user_id');
+		$redirect_current_url = $this->config->site_url().$this->uri->uri_string();
+   
 		 $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
 		 $data['area_interest'] = $this->users->fetch_area_interest();
 		 $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -46,17 +48,18 @@ function university($univ_id='')
 			
 		$data['is_already_follow'] = $this->users->check_is_already_followed($add_follower);
 		
-		/* code for university map */
-		$this->load->library('GMapuniv');
-		$this->gmapuniv->GoogleMapAPI();
-		$this->gmapuniv->setMapType('map');
-		$this->gmapuniv->addMarkerByCoords($longitude,$latitude,$university_name,$university_address);
-		
-						$data['headerjs'] = $this->gmapuniv->getHeaderJS();
-						$data['headermap'] = $this->gmapuniv->getMapJS();
-						$data['onload'] = $this->gmapuniv->printOnLoad();
-						$data['map'] = $this->gmapuniv->printMap();
-						$data['sidebar'] = $this->gmapuniv->printSidebar();
+	/* code for university map */
+  $this->load->library('GMapuniv');
+  $this->gmapuniv->GoogleMapAPI();
+  $this->gmapuniv->setMapType('map');
+  //$this->gmapuniv->addMarkerByAddress($longitude,$latitude,$university_name,$university_address);
+  $this->gmapuniv->addMarkerByAddress($university_address,$university_name, $university_address);;
+  
+      $data['headerjs'] = $this->gmapuniv->getHeaderJS();
+      $data['headermap'] = $this->gmapuniv->getMapJS();
+      $data['onload'] = $this->gmapuniv->printOnLoad();
+      $data['map'] = $this->gmapuniv->printMap();
+      $data['sidebar'] = $this->gmapuniv->printSidebar();
 		
 		if($this->input->post('join_now'))
 		{
@@ -85,7 +88,18 @@ function university($univ_id='')
 			$this->session->set_userdata($apply_now_data);
 			
 		}
-		
+		else if($this->input->post('ask_quest'))
+		  {
+		   
+		   $univ_quest = $this->input->post('quest_on_univ');
+		   
+			$quest_title = array(
+			'ask_quest_on_univ_page'=>$univ_quest
+			);
+			$this->session->set_userdata($quest_title);
+			redirect("UniversityQuestSection/$univ_id");
+
+		  }
 		if($data['university_details'] != 0)
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -497,7 +511,138 @@ function university($univ_id='')
 		$this->frontmodel->delete_comment();
 		}
 		
-	}
 	
+	function UniversityQuest($univ_id='',$quest_id='',$user_id='')
+  {
+   $data = $this->path->all_path();
+   $this->load->view('auth/header',$data);
+   $data['univ_id_for_program'] = $univ_id; 
+   $data['university_details'] = $this->users->get_university_by_id($univ_id);
+   $country_id = $data['university_details']['country_id'];
+   $city_id = $data['university_details']['city_id'];
+   $university_name = $data['university_details']['univ_name'];
+   $university_address = $data['university_details']['address_line1'];
+   $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+   if($data['university_details'] != 0 )
+   {
+    $data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
+    $data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+    $data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
+    $data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+    $this->load->view('auth/univ-header-gallery-logo',$data);
+    if($univ_id !=''&& $quest_id !='' && $user_id !='')
+    {
+    $data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$user_id);
+    //print_r($data['single_quest']);
+    }
+    $this->load->view('auth/univ_questions',$data);
+   }
+   else{
+   $data['err_msg']='<h2> Sorry....</br><span class="text-align">Page Not Found.... </span> </h2>';
+   $data['err_div']=1;
+   $this->load->view('auth/NotFoundPage',$data);
+   }
+   $this->load->view('auth/footer',$data);
+  }
+		function UniversityQuestSection($univ_id='',$quest_id='',$user_id='')
+		{
+			$data = $this->path->all_path();
+			$this->load->view('auth/header',$data);
+			if($this->session->userdata('quest_send_suc')=='1')
+			{
+				$data['show_quest_send_msg'] = '1';
+				//$this->session->set_userdata('quest_send_suc','');
+				$this->session->set_userdata('quest_send_suc','');
+			}
+			else{
+				$data['show_quest_send_msg'] = '';
+			}
+			$data['univ_id_for_program'] = $univ_id;	
+			$data['university_details'] = $this->users->get_university_by_id($univ_id);
+			$country_id = $data['university_details']['country_id'];
+			$city_id = $data['university_details']['city_id'];
+			$university_name = $data['university_details']['univ_name'];
+			$university_address = $data['university_details']['address_line1'];
+			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+			if($data['university_details'] != 0 )
+			{
+				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
+				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
+				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+				$data['get_all_question_of_univ'] = $this->quest_ans_model->get_all_quest_of_univ_user_info($univ_id);
+				$data['count_all_question_of_univ'] = $this->quest_ans_model->count_all_questions_of_univ($univ_id);
+				$this->load->view('auth/univ-header-gallery-logo',$data);
+				
+				if($this->input->post('post_quest_on_univ'))
+				{
+					$this->form_validation->set_rules('quest_title','Question Title','required');
+					if($this->form_validation->run())
+					{
+					
+					if (!$this->tank_auth->is_logged_in()) {
+			$univ_or_country_id = $univ_id;
+			$quest_title = $this->input->post('quest_title');
+			$quest_detail = $this->input->post('quest_detail');
+			//$quest_cat_type = 'col';
+			
+			$quest = array(
+			'q_category'=>'univ',
+			'q_univ_id'=>$univ_or_country_id,
+			'q_title'=>$quest_title,
+			'q_detail'=>$quest_detail,
+			'q_approve'=>'0',
+			'q_featured_home_que'=>'0',
+			'q_featured_country_que'=>'0',
+			);
+			$quest_sess = array(
+			'quest_sess_active'=>'true'
+			);
+			$quest_cat_type = array(
+			'quest_cat_type'=>'col'
+			);
+			
+			$this->session->set_userdata($quest);
+			$this->session->set_userdata('redirect_section',$univ_id);
+			$this->session->set_userdata($quest_sess);
+			$this->session->set_userdata($quest_cat_type);
+			
+			redirect('/login/');
+		} else {
+			$univ_or_country_id = $univ_id;
+			$quest_title = $this->input->post('quest_title');
+			$quest_detail = $this->input->post('quest_detail');
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$quest_cat_type = 'col';
+			
+			$quest = array(
+			'q_category'=>'univ',
+			'q_univ_id'=>$univ_or_country_id,
+			'q_title'=>$quest_title,
+			'q_detail'=>$quest_detail,
+			'q_askedby'=>$data['user_id'],
+			'q_approve'=>'0',
+			'q_featured_home_que'=>'0',
+			'q_featured_country_que'=>'0',
+			);
+			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
+			$this->session->set_userdata('ask_quest_on_univ_page','');
+			$data['show_quest_send_msg'] = '1';
+			}
+			}		
+			}		
+				
+				$this->load->view('auth/ask_quest_in_univ',$data);
+				
+			}
+			else{
+			$data['err_msg']='<h2> Sorry....</br><span class="text-align">Page Not Found.... </span> </h2>';
+			$data['err_div']=1;
+			$this->load->view('auth/NotFoundPage',$data);
+			}
+			$this->load->view('auth/footer',$data);
+		}
+	
+}		
 	
 ?>

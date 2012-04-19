@@ -693,6 +693,7 @@ class Adminmodel extends CI_Model
 	{
 	$this->db->delete('univ_gallery', array('gid' => $gid));
 	}
+	
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

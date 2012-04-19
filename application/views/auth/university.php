@@ -135,7 +135,8 @@
 										<div>
 											<div class="float_l">
 												<div class="input-append">
-													<input style="width:262px" id="appendedInput" size="16" type="text" placeholder="Enter Your Qusetion"><span class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;">Ask</span>
+													<input style="width:262px" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
+													<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
 												</div>
 											</div>
 											<div class="float_r"><button class="btn btn-success more_btn" href="#">More Q&amp;A</button></div>

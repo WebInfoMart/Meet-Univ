@@ -125,7 +125,7 @@ if ($user) {
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-avia.css">
-
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-editor.css" />
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script>
@@ -149,6 +149,7 @@ if ($user) {
 
 <script type="text/javascript" src="<?php echo "$base$js";?>/avia-custom.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/tinyeditor.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
    $('#scrollbar1').tinyscrollbar(); 
@@ -185,6 +186,64 @@ $('#myModal2').modal('toggle');});
  });
 
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+    var url = window.location.pathname, 
+        urlRegExp = new RegExp(url.replace(/\/$/,'') + "$"); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
+        // now grab every link from the navigation
+        $('.menu a').each(function(){
+            // and test its normalized href against the url pathname regexp
+            if(urlRegExp.test(this.href.replace(/\/$/,''))){
+                $(this).addClass('active');
+            }
+        });
+
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+    var url = window.location.pathname, 
+        urlRegExp = new RegExp(url.replace(/\/$/,'') + "$"); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
+        // now grab every link from the navigation
+        $('.cat_list a').each(function(){
+            // and test its normalized href against the url pathname regexp
+            if(urlRegExp.test(this.href.replace(/\/$/,''))){
+                $(this).addClass('cat_list_select');
+            }
+        });
+
+});
+</script>
+<!-- ===================start slider_kit=================== -->
+		<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.sliderkit.1.9.2.pack.js"></script>
+		<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.easing.1.3.min.js"></script>
+		<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mousewheel.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="<?php echo "$base$css_path"?>/sliderkit-core.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="<?php echo "$base$css_path"?>/sliderkit-demos.css" media="screen, projection" />
+		<link rel="stylesheet" type="text/css" href="<?php echo "$base$css_path"?>/sliderkit-site.css" media="screen, projection" />
+		
+			<script type="text/javascript">
+			$(window).load(function(){ //$(window).load() must be used instead of $(document).ready() because of Webkit compatibility		
+				
+				// Photo slider > Minimal
+				$(".contentslider-std").sliderkit({
+					auto:0,
+					tabs:1,
+					circular:1,
+					panelfx:"sliding",
+					panelfxfirst:"fading",
+					panelfxeasing:"easeInOutExpo",
+					fastchange:0,
+					keyboard:1
+				});
+				
+			});	
+		</script>
+	<!-- ===================end slider_kit=================== -->
 </head>
 <body>
 <div id="fb-root"></div> 
@@ -235,11 +294,10 @@ $('#myModal2').modal('toggle');});
 								<ul class="menu">
 									<li><a href="<?php echo $base; ?>" class="active">Home</a></li>
 									<li><a href="<?php echo "$base"; ?>all_colleges">Colleges</a></li>
-									<li><a href="#">Questions & Answers</a></li>
+									<li><a href="#">Study Abroad</a></li>
+									<li><a href="<?php echo "$base"; ?>QuestandAns">Questions & Answers</a></li>
 									<li><a href="<?php echo $base; ?>events">Events</a></li>
-									<li ><a href="<?php echo $base; ?>news">News</a></li>
-									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>articles">Articles</a></li>
-									
+									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>news">News</a></li>
 									
 								</ul>
 							</div>

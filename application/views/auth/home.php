@@ -212,7 +212,15 @@
 				<div class="yellow_bar text_bar">
 				<?php
 					$x=0;
-				foreach($featured_news as $featured_news_list) { $x++; ?>
+				if($featured_news==0) {	 ?>
+				<div class="span8 yellow_bar_text float_l margin_zero"><ul><li>
+					Sorry No recent News
+					</li></ul>
+					</div>
+				
+			<?php 	}
+				else
+				{ foreach($featured_news as $featured_news_list) { $x++; ?>
 					<div class="span8 yellow_bar_text <?php if($x==1){?> float_l <?php }else{ ?> float_r <?php } ?> margin_zero"><ul><li>
 					<a href="<?php echo $base; ?>univ-<?php echo $featured_news_list['news_univ_id']; ?>-news-<?php echo $featured_news_list['news_id']; ?>">
 					<?php echo substr($featured_news_list['news_title'],0,70).'..'; ?>
@@ -221,7 +229,9 @@
 				<?php
 				if($x=='2')
 				break;
-				} ?>	
+				} 
+				 }
+				?>	
 					<div class="clearfix"></div>
 				</div>
 		    </div>

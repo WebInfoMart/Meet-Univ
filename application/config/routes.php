@@ -51,18 +51,34 @@ $route['univ-(:num)-events']='univ/university_events_list/$1';
 $route['univ-(:num)-news']='univ/university_news_list/$1';
 $route['univ-(:num)-articles']='univ/university_article_list/$1';
 $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
-$route['inbox/(:any)']='user/inbox/$1';
+
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 $route['(college_search|events_search)'] = 'Search/$1';
 $route['(college_list/all_colleges)/(:num)']='auth/all_colleges/$1';
 $route['(college_list/all_colleges)']='auth/all_colleges';
 
+$route['UniversityQuest/(:num)/(:num)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
+$route['UniversityQuestSection/(:num)'] = 'univ/UniversityQuestSection/$1';
+$route['UniversityQuestSection'] = 'univ/UniversityQuestSection';
+$route['(QuestandAns)'] = 'quest_ans_controler/$1';
+
+$route['(inbox)'] = 'user/$1';
+$route['inbox/(:any)']='user/inbox/$1';
+$route['(outbox)'] = 'user/$1';
+$route['outbox/(:any)']='user/outbox/$1';
+$route['(compose_email)'] = 'user/$1';
+$route['BrowseQuestion/(:any)'] = 'quest_ans_controler/BrowseQuestion/$1';
+$route['(QuestandAns)'] = 'quest_ans_controler/$1';
+$route['(delete_message_inbox)'] = 'user/$1';
+$route['(delete_message_inbox)/(:num))'] = 'user/$1';
+$route['(delete_message_outbox)'] = 'user/$1';
+$route['(delete_message_outbox/(:num))'] = 'user/$1';
+
+
+
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|home/pwd_change|all_colleges|home/pus|index/cfr)'] = 'auth/$1';
-$route['(inbox)'] = 'user/$1';
-$route['(delete_message_inbox)'] = 'user/$1';
-$route['(delete_message_inbox/(:num))'] = 'user/$1';
+$route['(login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|all_colleges|home/pus|index/cfr)'] = 'auth/$1';
 $route['default_controller'] = 'auth';
 
 /* End of file routes.php */

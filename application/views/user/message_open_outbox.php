@@ -47,18 +47,12 @@
 								<h3>Sender</h3><?php echo $get_sender_email['email']!='0' ? $get_sender_email['email'] : ''; ?>
 								<h3>Subject </h3><?php echo $message_full['subject']!='0' ? $message_full['subject'] : ''; ?>
 								<h3>Message</h3><p> <?php echo $message_full['body']!='0' ? $message_full['body'] : ''; ?> </p>
-								<div id="reply_msg" class="reply_msg_box" > Reply to user </div>
+								<!--<div id="reply_msg" class="reply_msg_box" > Reply to user </div>-->
 								<?php } ?>
 								<div class="float_r">
-									<a href="<?php echo "$base"; ?>inbox">back to inbox</a>
+									<a href="<?php echo "$base"; ?>outbox">back to Outbox</a>
 								</div>
-								<form class="well form-search" id="form_reply" style="width:369px;display:none;" action="" method="post">
-        Subject:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="input-xlarge" name="msg_sub"></br></br>
-		<span style="color:red;"> <?php echo form_error('msg_sub'); ?><?php echo isset($errors['msg_sub'])?$errors['msg_sub']:''; ?></span>
-        Message:&nbsp;&nbsp;&nbsp;<textarea class="input-xlarge" id="textarea" rows="3" name="msg_body"></textarea></br></br>
-		<span style="color:red;"> <?php echo form_error('msg_body'); ?><?php echo isset($errors['msg_body'])?$errors['msg_body']:''; ?></span>
-        <center><input type="submit" name="btn_msg_reply" class="btn" value="Send Message"></center>
-      </form>
+								
 								
 								<div class="clearfix"></div>
 							</div>

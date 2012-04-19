@@ -91,12 +91,13 @@ if ($user) {
 									</div>
 									<div class="index_sidebar_body">
 									<ul class="links">
-										<li><a href="#">MBA</a></li>
-										<li><a href="#">Engineering</a></li>
-										<li><a href="#">Info Tech</a></li>
-										<li><a href="#">Education</a></li>
-										<li><a href="#">Aviation</a></li>
-										<li><a href="#">Science</a></li>
+									<?php if(!empty($my_collage_of_user))
+									{
+										foreach($my_collage_of_user as $my_collage)
+										{
+									?>
+										<li><a href="university/<?php echo $my_collage['univ_id']; ?>"><?php echo $my_collage['univ_name']; ?></a></li>
+									<?php } } ?>
 									</ul>
 									</div>
 								</div>
@@ -108,9 +109,9 @@ if ($user) {
 									</div>
 									<div class="index_sidebar_content">
 										<ul class="links1">
-           <li><a href="#">Composer</a></li>
-           <li><div><div ><a href="inbox">Inbox </a></div><div class="float_r"><!--<span class="badge badge-warning">68</span>==></div><div class="clearfix"></div></div></li><!--29-->
-           <li><div><div ><a href="#">Outbox </a></div><div class="float_r"><!--<span class="badge badge-warning">8</span>--></div><div class="clearfix"></div></div></li><!--29-->
+           <li><a href="<?php echo "$base"; ?>compose_email">Composer</a></li>
+           <li><div><div class="float_l"><a href="<?php echo "$base"; ?>inbox">Inbox </a></div><div class="float_r"><?php if($count_inbox) { ?><span class="badge badge-warning"><?php echo $count_inbox ? $count_inbox : ''; ?></span><?php } ?></div><div class="clearfix"></div></div></li><!--29-->
+           <li><div><div class="float_l"><a href="<?php echo "$base"; ?>outbox">Outbox </a></div><div class="float_r"><?php if($count_outbox) { ?><span class="badge badge-warning"><?php echo $count_outbox ? $count_outbox : ''; ?></span><?php } ?></div><div class="clearfix"></div></div></li><!--29-->
           </ul>
 									</div>
 								</div>

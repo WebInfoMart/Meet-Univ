@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url']	= 'http://127.0.0.1/Meet-Univ/';
+$config['base_url']	= 'http://localhost/www/Meet-Univ/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -126,7 +126,7 @@ $config['subclass_prefix'] = 'MY_';
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_@\-';
 
 
 /*

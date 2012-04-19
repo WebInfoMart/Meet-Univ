@@ -223,7 +223,7 @@ border-color: rgba(255, 0, 0, .8) !important;
 
 .univ_page_gal
 {
-	width:205px;
+	width:204px;
 	height:100px;
 }
 
@@ -263,3 +263,34 @@ border-color: rgba(255, 0, 0, .8) !important;
 	text-shadow: 0 1px 0 #333;
 	}
 	
+.show_qans_main_div
+{
+ width:825px;
+ border:1px solid whitesmoke;
+ margin-left: 10px;
+ margin-top: 20px;
+}
+.show_qans_main_div_left
+{
+ float:left;
+ width: 185px;
+}
+.show_qans_main_div_right
+{
+ float:left;
+ 
+}
+.quest_row_single
+{
+ height:51px;
+}
+.quest_right
+{
+ /*vertical-align:text-top;*/
+ float:left;
+ padding-left:2px;
+}
+.quest_pic
+{
+ float:left;
+}

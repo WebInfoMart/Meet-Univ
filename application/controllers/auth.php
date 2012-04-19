@@ -24,6 +24,9 @@ class Auth extends CI_Controller
 
 	function index()
 	{
+		
+		$subdomain_arr = explode('.', $_SERVER['HTTP_HOST']);
+		
 		$data = $this->path->all_path();
 		/*  Upload code */
 		//$this->load->model('Gallery_model');
@@ -35,7 +38,8 @@ class Auth extends CI_Controller
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();
 		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
-		$data['featured_news']=$this->frontmodel->recent_news();	
+		$data['featured_news']=$this->frontmodel->fetch_featured_news();
+				
 	//	print_r($data['featured_events']);
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
@@ -64,8 +68,9 @@ class Auth extends CI_Controller
 		}*/
 		
 		//$data['images'] = $this->users->get_images();
-		$this->load->view('auth/footer',$data);
+		$this->load->view('auth/footer',$data);	
 	}
+	
 	function home($pwd_change='')
 	{
 		$data = $this->path->all_path();
@@ -75,9 +80,14 @@ class Auth extends CI_Controller
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
 		} else {
+		
+			$subdomain_arr = explode('.', $_SERVER['HTTP_HOST'], 2);
+			
 			$this->load->view('auth/header',$data);
 			$data['user_id']	= $this->tank_auth->get_user_id();
 			$data['username']	= $this->tank_auth->get_username();
+			$data['count_inbox'] = 0;
+			$data['count_outbox'] = 0;
 			$logged_user = $data['user_id'];
 			$this->load->model('users');
 			$data['fetch_profile'] = $this->users->fetch_profile($logged_user);
@@ -99,6 +109,9 @@ class Auth extends CI_Controller
 			$data['country'] = $this->users->fetch_country();
 			//print_r($data['country']);
 			$data['area_interest'] = $this->users->fetch_area_interest();
+			$data['my_collage_of_user'] = $this->users->my_collage_of_user($logged_user);
+			$data['count_inbox'] = $this->users->count_inbox_user($logged_user);
+			$data['count_outbox'] = $this->users->count_outbox_user($logged_user);
 			$this->load->view('auth/profile',$data);
 			
 		}
@@ -114,78 +127,144 @@ class Auth extends CI_Controller
 	 * @return void
 	 */
 	function login()
-	{
-		$data = $this->path->all_path();
-	$this->load->view('auth/header',$data);
-		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('home');
+ {
+  $data = $this->path->all_path();
+ $this->load->view('auth/header',$data);
+  if ($this->tank_auth->is_logged_in()) {         // logged in
+   redirect('home');
 
-		} else {
-			$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
-					$this->config->item('use_username', 'tank_auth'));
-			$data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
+  } else {
+   $data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
+     $this->config->item('use_username', 'tank_auth'));
+   $data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
 
-			$this->form_validation->set_rules('login', 'Login', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('remember', 'Remember me', 'integer');
-			$this->form_validation->set_rules('user_type', 'user_type', 'string');
+   $this->form_validation->set_rules('login', 'Login', 'trim|required|xss_clean');
+   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
+   $this->form_validation->set_rules('remember', 'Remember me', 'integer');
+   $this->form_validation->set_rules('user_type', 'user_type', 'string');
 
-			// Get login for counting attempts to login
-			if ($this->config->item('login_count_attempts', 'tank_auth') AND
-					($login = $this->input->post('login'))) {
-				$login = $this->security->xss_clean($login);
-			} else {
-				$login = '';
-			}
+   // Get login for counting attempts to login
+   if ($this->config->item('login_count_attempts', 'tank_auth') AND
+     ($login = $this->input->post('login'))) {
+    $login = $this->security->xss_clean($login);
+   } else {
+    $login = '';
+   }
 
-			//$data['use_recaptcha'] = $this->config->item('use_recaptcha', 'tank_auth');
-			/*if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
-				if ($data['use_recaptcha'])
-					$this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
-				else
-					$this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
-			}*/
-			$data['errors'] = array();
+   //$data['use_recaptcha'] = $this->config->item('use_recaptcha', 'tank_auth');
+   /*if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
+    if ($data['use_recaptcha'])
+     $this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
+    else
+     $this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
+   }*/
+   $data['errors'] = array();
+   //print_r($this->session->userdata);
+   if ($this->form_validation->run()) {        // validation ok
+    if ($this->tank_auth->login(
+      $this->form_validation->set_value('login'),
+      $this->form_validation->set_value('password'),
+      $this->form_validation->set_value('remember'),
+      $data['login_by_username'],
+      $data['login_by_email'],
+      $this->form_validation->set_value('user_type')
+      )) {        // success
+      /* Code for if user question should be insert after login */
+      if($this->session->userdata('quest_sess_active') == 'true')
+      {
+       $data['user_id'] = $this->tank_auth->get_user_id();
+       //if asked on particular university
+       if($this->session->userdata('quest_cat_type') == 'col')
+       {
+       $quest = array(
+       'q_category'=>'univ',
+       'q_univ_id'=>$this->session->userdata('q_univ_id'),
+       'q_title'=>$this->session->userdata('q_title'),
+       'q_detail'=>$this->session->userdata('q_detail'),
+       'q_askedby'=>$data['user_id'],
+       'q_approve'=>$this->session->userdata('q_approve'),
+       'q_featured_home_que'=>$this->session->userdata('q_featured_home_que'),
+       'q_featured_country_que'=>$this->session->userdata('q_featured_country_que'),
+       );
+       $data['post_quest'] = $this->quest_ans_model->post_quest($quest);
+       //destroy all sessions
+       $this->session->set_userdata('q_univ_id','');
+       $this->session->set_userdata('q_title','');
+       $this->session->set_userdata('q_detail','');
+       $this->session->set_userdata('q_approve','');
+       $this->session->set_userdata('q_featured_home_que','');
+       $this->session->set_userdata('q_featured_country_que','');
+       $this->session->set_userdata('ask_quest_on_univ_page','');
+       }
+       //if asked on study abroad
+       else if($this->session->userdata('quest_cat_type') == 'sa')
+       {
+        $quest = array(
+       'q_category'=>'country',
+       'q_country_id'=>$this->session->userdata('q_country_id'),
+       'q_title'=>$this->session->userdata('q_title'),
+       'q_detail'=>$this->session->userdata('q_detail'),
+       'q_askedby'=>$data['user_id'],
+       'q_approve'=>$this->session->userdata('q_approve'),
+       'q_featured_home_que'=>$this->session->userdata('q_featured_home_que'),
+       'q_featured_country_que'=>$this->session->userdata('q_featured_country_que'),
+       );
+       $data['post_quest'] = $this->quest_ans_model->post_quest($quest);
+       //destroy all sessions
+       $this->session->userdata('q_univ_id');
+       $this->session->userdata('q_title','');
+       $this->session->userdata('q_detail','');
+       $this->session->userdata('q_approve','');
+       $this->session->userdata('q_featured_home_que','');
+       $this->session->userdata('q_featured_country_que','');
+	   
+       }
+	   $this->session->set_userdata('quest_sess_active','');
+	   $this->session->set_userdata('quest_cat_type','');
+	   if($this->session->userdata('redirect_section')!= '')
+	   {
+		$this->session->set_userdata('quest_send_suc','1');
+		$red = 'UniversityQuestSection/'.$this->session->userdata('redirect_section');
+		$this->session->set_userdata('redirect_section','');
+		redirect($red);
+	   }
+	   else{
+	   $this->session->set_userdata('quest_send_suc','1');
+	   redirect('QuestandAns');
+	   }
+      }
+      else{
+      redirect('home');
+      }
 
-			if ($this->form_validation->run()) {								// validation ok
-				if ($this->tank_auth->login(
-						$this->form_validation->set_value('login'),
-						$this->form_validation->set_value('password'),
-						$this->form_validation->set_value('remember'),
-						$data['login_by_username'],
-						$data['login_by_email'],
-						$this->form_validation->set_value('user_type')
-						)) {								// success
-					redirect('home');
+    } else {
+     $errors = $this->tank_auth->get_error_message();
+     if (isset($errors['banned'])) {        // banned user
+      $this->_show_message($this->lang->line('auth_message_banned').' '.$errors['banned']);
 
-				} else {
-					$errors = $this->tank_auth->get_error_message();
-					if (isset($errors['banned'])) {								// banned user
-						$this->_show_message($this->lang->line('auth_message_banned').' '.$errors['banned']);
+     } elseif (isset($errors['not_activated'])) {    // not activated user
+      redirect('/auth/send_again/');
 
-					} elseif (isset($errors['not_activated'])) {				// not activated user
-						redirect('/auth/send_again/');
-
-					} else {													// fail
-						foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
-					}
-				}
-			}
-			/*$data['show_captcha'] = FALSE;
-			if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
-				$data['show_captcha'] = TRUE;
-				if ($data['use_recaptcha']) {
-					$data['recaptcha_html'] = $this->_create_recaptcha();
-				} else {
-					$data['captcha_html'] = $this->_create_captcha();
-				}
-			}*/
-			$data['featured_events']=$this->frontmodel->fetch_featured_events();
-			$data['new_users']=$this->frontmodel->newly_registered_users();
-			$this->load->view('auth/login', $data);
-		}
-		$this->load->view('auth/footer',$data);
-	}
+     } else {             // fail
+      foreach ($errors as $k => $v) $data['errors'][$k] = $this->lang->line($v);
+     }
+    }
+   }
+   /*$data['show_captcha'] = FALSE;
+   if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
+    $data['show_captcha'] = TRUE;
+    if ($data['use_recaptcha']) {
+     $data['recaptcha_html'] = $this->_create_recaptcha();
+    } else {
+     $data['captcha_html'] = $this->_create_captcha();
+    }
+   }*/
+   $data['featured_events']=$this->frontmodel->fetch_featured_events();
+   $data['new_users']=$this->frontmodel->newly_registered_users();
+   $this->load->view('auth/login', $data);
+  }
+  $this->load->view('auth/footer',$data);
+ }
 
 	/**
 	 * Logout user
@@ -1167,7 +1246,21 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer',$data);
 	}
 	
+	function about_us()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$this->load->view('about_us',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	
+	function contact_us()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$this->load->view('contact_us',$data);
+		$this->load->view('auth/footer',$data);
+	}
 }
-
 /* End of file auth.php */
 /* Location: ./application/controllers/auth.php */

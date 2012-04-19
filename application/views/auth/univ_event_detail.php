@@ -1,4 +1,20 @@
 <?php
+$facebook = new Facebook(array(
+  'appId'  => '358428497523493',
+  'secret' => '497eb1b9decd06c794d89704f293afdd',
+));
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
 $class_fullname='';
 $class_email='';
 $class_commented_text='';
@@ -133,7 +149,11 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
-									<?php if($user_detail['user_pic_path']==''){?>
+									<?php if($user)
+									{ ?>
+									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+									<?php }
+									else if($user_detail['user_pic_path']==''){?>
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
@@ -168,6 +188,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					<img src="images/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
+			</div>
 			</div>
 <script>
 function post_comment()

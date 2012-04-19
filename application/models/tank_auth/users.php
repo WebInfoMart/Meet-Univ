@@ -1220,13 +1220,13 @@ class Users extends CI_Model
 			}
 	}
 	
-	public function get_content($url)
+		public function get_content($url)
 		{
-		   $ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$curl_scraped_page = curl_exec($ch);
-curl_close($ch);
-//echo $curl_scraped_page;
+				   $ch = curl_init($url);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					$curl_scraped_page = curl_exec($ch);
+					curl_close($ch);
+				//echo $curl_scraped_page;
 		   
 		   $explode_data = explode('<table id="guide">',$curl_scraped_page);
 		   $explode_data2 = explode('</div>',$explode_data[1]);
@@ -1271,6 +1271,122 @@ curl_close($ch);
 			//print_r($explode_univ_name1);
 
 		}
+		
+		public function my_collage_of_user($logged_user)
+		{
+		   $this->db->select('*');
+		   $this->db->from('follow_univ');
+		   $this->db->where('followed_by',$logged_user);
+		   $this->db->join('university','follow_univ.follow_to_univ_id = university.univ_id');
+		   $query = $this->db->get();
+		   if($query->num_rows() > 0)
+		   {
+			return $query->result_array();
+		   }
+		   else {
+			return 0;
+		}
+	   }
+		public function fetch_user_list_compose($email)
+		{
+		   $this->db->select('*');
+		   $this->db->from('users');
+		   $this->db->where_in('email',$email);
+		   $this->db->join('user_profiles','users.id=user_profiles.user_id');
+		   $query = $this->db->get();
+		   if($query->num_rows() > 0)
+		   {
+			return $query->result_array();
+		   }
+		   else{
+		   return 0;
+		   }
+		}
+	  
+		public function send_msg_by_search($insert)
+		{
+		   $this->db->set($insert);
+		  $query = $this->db->insert('message_table');
+		  return $this->db->affected_rows() ? 1: 0;
+		}
+		
+		public function count_inbox_user($logged_user)
+		{
+		   $condition = array(
+		   'recipent_id'=>$logged_user,
+		   'msg_read_status'=>'0'
+		   );
+		   $this->db->select('*');
+		   $this->db->from('message_table');
+		   $this->db->where($condition);
+		   $query = $this->db->get();
+		   //$results = $query->result_array();
+		   //print_r($query->result_array());
+		   if($query->num_rows() > 0)
+		   {
+			return $query->num_rows();
+		   }
+		   else{
+		   return 0;
+		   }
+		}
+		  public function count_outbox_user($logged_user)
+		  {
+			   $this->db->select('*');
+			   $this->db->from('message_table');
+			   $this->db->where('sender_id',$logged_user);
+			   $query = $this->db->get();
+			   //$results = $query->result_array();
+			   //print_r($query->result_array());
+			   if($query->num_rows() > 0)
+			   {
+				return $query->num_rows();
+			   }
+			   else{
+			   return 0;
+			   }
+		  }
+		  
+		public function set_msg_read_status($message_condition)
+		{
+		   $update_data = array(
+		   'msg_read_status'=> '1'
+		   );
+		   $this->db->where($message_condition);
+		   $this->db->update('message_table',$update_data);
+		}
+		function outbox_message($logged_user)
+		{
+		   $query = $this->db->get_where('message_table',array('sender_id'=>$logged_user));
+		   if($query->num_rows() > 0)
+		   {
+			//print_r($query->result_array());
+			return $query->result_array();
+		   }
+		   else{
+		   return 0;
+			}
+		}
+		function fetch_outbox_message_by_id($message_condition)
+		{
+		   $query = $this->db->get_where('message_table',$message_condition);
+		   if($query->num_rows() > 0)
+		   {
+			return $query->row_array();
+		   }
+		   else
+		   {
+			return 0;
+		   }
+		}
+		
+		function delete_single_message_outbox($msg_del_cond)
+		{
+		  $this->db->where($msg_del_cond);
+		  $this->db->delete('message_table');
+		  return $this->db->affected_rows() ? 1 : 0;
+		}
+		
 }
 
 /* End of file users.php */

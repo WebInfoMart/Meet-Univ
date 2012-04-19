@@ -27,6 +27,24 @@ class Frontmodel extends CI_Model
 		}
 	}
 	
+	function fetch_featured_news()
+	{
+		$this->db->select('*');
+		$this->db->from('news');
+		$this->db->join('university', 'news.news_univ_id=university.univ_id');
+		$this->db->where(array('featured_home_news' =>'1','news_type_ud'=>'univ_news'));
+		$this->db->limit(2);
+		$query = $this->db->get();
+		if($query->num_rows>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	
 	//function for getting university information
 	function fetch_featured_college()
 	{
@@ -390,6 +408,15 @@ class Frontmodel extends CI_Model
 		{
 		return 0;
 		}
+	}
+	
+	function get_id_of_univ_by_subdomain($sub_domain)
+	{
+		$this->db->select('univ_id');
+		$this->db->from('university');
+		$this->db->where('subdomain_name',$sub_domain);
+		$query = $this->db->get();
+		return $query->row_array();
 	}
 
 }

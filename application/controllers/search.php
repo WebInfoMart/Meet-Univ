@@ -27,6 +27,8 @@ class Search extends CI_Controller
 			$this->load->view('auth/header',$data);
 			$data['gallery_home'] = $this->users->fetch_home_gallery();
 			$data['country'] = $this->users->fetch_country();
+			$data['fetch_educ_level'] =$this->users->fetch_educ_level();
+			$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
 			$data['area_interest'] = $this->users->fetch_program();
 			
 		if($this->input->get('btn_search')=='col_search')
