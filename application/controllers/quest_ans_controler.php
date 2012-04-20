@@ -35,7 +35,7 @@ class Quest_ans_controler extends CI_Controller
 		if($this->form_validation->run())
 		{
 		if (!$this->tank_auth->is_logged_in()) {
-			$univ_or_country_id = $this->input->post('collages');
+			$univ_or_country_id = $this->input->post('colleges');
 			$quest_title = $this->input->post('quest_title');
 			$quest_detail = $this->input->post('quest_detail');
 			$quest_cat_type = $this->input->post('category');
@@ -51,7 +51,7 @@ class Quest_ans_controler extends CI_Controller
 			'q_featured_country_que'=>'0',
 			);
 			}
-			else if($quest_cat_type == 'sa')
+			else
 			{
 				$quest = array(
 			'q_category'=>'country',

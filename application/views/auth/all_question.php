@@ -107,7 +107,7 @@
 												<select class="span3" id="category" name="category" onchange="fetch_collage(this);">
 													<option value="">Choose Type</option>
 													<option value="sa">Study Abroad</option>
-													<option value="col">Collages</option>
+													<option value="col">College</option>
 													
 												</select>
 												<select id="colleges" name="colleges">

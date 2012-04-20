@@ -52,7 +52,7 @@
 										<ul>
 										<?php foreach($fetch_educ_level as $fetch_educ_levels) { ?>			
 											<li>
-<a href="<?php echo $base; ?>all_colleges?area_intrest=<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>"><?php echo $fetch_educ_levels['educ_level']; ?></a>
+<a href="<?php echo $base; ?>all_colleges?education_level=<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>"><?php echo $fetch_educ_levels['educ_level']; ?></a>
 											</li>	
 										<?php } ?>
 											
@@ -94,7 +94,7 @@
 						<div class="clearfix"></div>
 						
 					</div>
-				<div class="float_l"><div class="row" style="margin-left:70px;">
+				<div class="float_l"><div class="row" style="margin-left:92px;">
 				<div class="span10 margin_t1">
 					<div class="back_img">
 						<h2 class="border_bot_wel">Meet Univerties</h2>
