@@ -27,7 +27,7 @@
 							<div class="inbox_box">
 								<h2>Inbox</h2>
 								<ul class="inbox_list">
-								<form action="delete_message_inbox" method="post">
+								<form action="<?php echo $base; ?>delete_message_inbox" id="message_delete_form" method="post">
 								<?php
 								if(!empty($inbox_messages))
 								{
@@ -36,16 +36,17 @@
 								{
 								if($messages['msg_read_status'] == '1')
 								{
-								$color_read_unread_msg = "background-color:white;border:1px solid whiteSmoke";
+								$color_read_unread_msg = "background-color:lightgray;border:1px solid whiteSmoke";
 								}
 								else{
-								$color_read_unread_msg = "background-color:lightBlue";
+								$color_read_unread_msg = "background-color:white;border:1px solid whiteSmoke";
 								}
 								?>
 									<li style="<?php echo $color_read_unread_msg; ?>">
 										<div class="span0 margin_zero">
-											<input type="checkbox" name="msg[]" id="<?php echo $checkbox_numbering; ?>" value="<?php echo $messages['id'] ? $messages['id']: ''; ?>">
-										</div>
+					<input type="checkbox" name="msg[]" id="<?php echo $checkbox_numbering; ?>" value="<?php echo $messages['id'] ? $messages['id']: ''; ?>">
+					<input type="hidden" name="msg_outbox_status[]" value="<?php echo $messages['msg_outbox_status']; ?>">					
+								</div>
 										<a href="inbox/<?php echo $messages['id']; ?>">
 										<div class="span2 margin_l">
 											<span><?php echo $messages['subject']!='' ? $messages['subject'] : 'No Subject' ; ?></span>
@@ -59,7 +60,7 @@
 										</div>
 										
 										<div class="span0 margin_l">
-											<a href="delete_message_inbox/<?php echo $messages['id']; ?>"><i class="icon-remove"></i></a>
+			<a href="#" id="<?php echo $messages['id']; ?>" name="del_single_msg" onclick="deletechecked(this,'<?php echo $base; ?>','<?php echo $messages['msg_outbox_status'];?>')"><i class="icon-remove"></i></a>
 										</div>
 										<div class="clearfix"></div>
 									</li>
@@ -67,15 +68,17 @@
 									
 								</ul>
 								<div class="float_r">
-								
-									<input type="submit" class="btn btn-success" name="del_multi_msg" value="Delete" />
+								<?php if(!empty($inbox_messages)) { ?>
+								<input type="hidden" name="msg_delete" value="1">
+									<input type="button" onclick="deletechecked(this,'<?php echo $base; ?>');" class="btn btn-success" name="del_multi_msg" value="Delete" />
+								<?php } ?>	
 								</form>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 						</div>
 						<div class="span3 float_l">
-							<img src="images/banner_img.png">
+							<img src="<?php echo $base; ?>images/banner_img.png">
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -83,4 +86,33 @@
 			</div>
 		</div>
 	</div>
-	
+	<script type="text/javascript">
+	function deletechecked(atr,base,inbox_status)
+{
+	var name = atr.name;
+	if(name == 'del_multi_msg')
+	{
+	var checked = $('input[name="msg[]"]:checked').length;
+	if(checked==0)
+	{
+		alert("Please select at least one message");
+	}
+	else
+	{
+    var answer = confirm("Are you sure to Delete selected  messages ?");
+    if (answer){
+        $('#message_delete_form').submit();
+    }
+	}
+	}
+	else if(name == 'del_single_msg') {
+	var answer1 = confirm("Are you sure you to Delete this message ?");
+	 if (answer1){
+	 var id=atr.id;
+	 id=id.trim();
+	  window.location=base+'delete_message_inbox/'+id+'/'+inbox_status;
+    }
+	}
+  
+} 
+	</script>

@@ -116,7 +116,7 @@
 									<a class="btn" href="#">Postgraduate</a>
 									<a class="btn" href="#">Undergraduate</a>
 									<a class="btn" href="#">Foundation</a>-->
-									<button type="button" id="all" class="btn active">All</button>
+									<button type="button" id="allcollege" class="btn active">All</button>
 									<button type="button" id="pg" class="btn">Postgraduate</button>
 									<button type="button" id="ug" class="btn">UnderGraduate</button>
 									<button type="button" id="found" class="btn">Foundation</button>
@@ -482,20 +482,25 @@ hoverPause: true // pause on hover
 </script>
 <script>
 $(document).ready(function(){
-$('#all').click(function(){
+$('#allcollege').click(function(){
 $('#type_search').val('0');
+fetch_programs(0);
 });
 
 $('#found').click(function(){
 $('#type_search').val(2);
+fetch_programs(2);
 });
 
 $('#pg').click(function(){
 $('#type_search').val(4);
+fetch_programs(4);
+
 });
 
 $('#ug').click(function(){
 $('#type_search').val(3);
+fetch_programs(3);
 });
 
 $('#spot').click(function(){
@@ -533,6 +538,20 @@ $('#btn_event_serch').val('event_search');
 $('#search_form').submit();
 }
 
+function fetch_programs(educ_level)
+{
+	   $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>search/fetch_progrmas_on_home_ajax",
+	   async:false,
+	   data: 'educ_level='+educ_level,
+	   cache: false,
+	   success: function(msg)
+	   {
+	  $('#search_program').html(msg);
+	   }
+	   })
+}
 </script>
 
 

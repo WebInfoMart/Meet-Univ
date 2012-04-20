@@ -1125,7 +1125,7 @@ class Users extends CI_Model
 	
 	function inbox_message($logged_user)
 	{
-		$query = $this->db->get_where('message_table',array('recipent_id'=>$logged_user));
+		$query = $this->db->get_where('message_table',array('recipent_id'=>$logged_user,'msg_inbox_status'=>'0'));
 		if($query->num_rows() > 0)
 		{
 			//print_r($query->result_array());
@@ -1164,11 +1164,21 @@ class Users extends CI_Model
 		}
 	}
 	
-	function delete_single_message_inbox($msg_del_cond)
+	function delete_single_message_inbox($msg_del_cond,$outbox_status)
 	{
-		$this->db->where($msg_del_cond);
-		$this->db->delete('message_table');
-		return $this->db->affected_rows() ? 1 : 0;
+
+		 if($outbox_status)
+		  {
+		  $this->db->where($msg_del_cond);
+		  $this->db->delete('message_table');
+		  }
+		  else
+		  {
+		  $this->db->where($msg_del_cond);
+		  $msg_update_cond['msg_inbox_status']='1';
+		  $this->db->update('message_table', $msg_update_cond);
+		  }
+		  return $this->db->affected_rows() ? 1 : 0;
 	}
 	
 	function fetch_program_title_of_univ($univ_id)
@@ -1357,7 +1367,7 @@ class Users extends CI_Model
 		}
 		function outbox_message($logged_user)
 		{
-		   $query = $this->db->get_where('message_table',array('sender_id'=>$logged_user));
+		   $query = $this->db->get_where('message_table',array('sender_id'=>$logged_user,'msg_outbox_status'=>'0'));
 		   if($query->num_rows() > 0)
 		   {
 			//print_r($query->result_array());
@@ -1380,13 +1390,36 @@ class Users extends CI_Model
 		   }
 		}
 		
-		function delete_single_message_outbox($msg_del_cond)
+		function delete_single_message_outbox($msg_del_cond,$inbox_status)
 		{
+		  if($inbox_status)
+		  {
 		  $this->db->where($msg_del_cond);
 		  $this->db->delete('message_table');
+		  }
+		  else
+		  {
+		  $this->db->where($msg_del_cond);
+		  $msg_update_cond['msg_outbox_status']='1';
+		  $this->db->update('message_table', $msg_update_cond);
+		  }
 		  return $this->db->affected_rows() ? 1 : 0;
 		}
 		
+		function chk_profile_completeness($pro_data)
+		{
+		 $pro=0;
+		 foreach($pro_data as $profile_data)
+		 {
+		 if($profile_data=='' || $profile_data==NULL || $profile_data=='0' || $profile_data=='0000-00-00')
+		 {
+			$pro++;
+		 }
+		 }
+		 $pro_complete=100-(($pro-2)*10);
+		 return $pro_complete ;
+		
+		}
 }
 
 /* End of file users.php */

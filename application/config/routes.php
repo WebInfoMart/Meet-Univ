@@ -68,11 +68,14 @@ $route['(outbox)'] = 'user/$1';
 $route['outbox/(:any)']='user/outbox/$1';
 $route['(compose_email)'] = 'user/$1';
 $route['BrowseQuestion/(:any)'] = 'quest_ans_controler/BrowseQuestion/$1';
-$route['(QuestandAns)'] = 'quest_ans_controler/$1';
-$route['(delete_message_inbox)'] = 'user/$1';
-$route['(delete_message_inbox)/(:num))'] = 'user/$1';
-$route['(delete_message_outbox)'] = 'user/$1';
-$route['(delete_message_outbox/(:num))'] = 'user/$1';
+
+
+$route['(delete_message_inbox)'] = 'user/delete_message_inbox';
+$route['(delete_message_inbox/(:num))'] = 'user/delete_message_inbox/$1';
+$route['(delete_message_inbox/(:num)/(:num))'] = 'user/delete_message_inbox/$1/$2';
+$route['(delete_message_outbox)'] = 'user/delete_message_outbox/$1';
+$route['(delete_message_outbox/(:num))'] = 'user/delete_message_outbox/$1';
+$route['(delete_message_outbox/(:num)/(:num))'] = 'user/delete_message_outbox/$1/$2';
 
 
 

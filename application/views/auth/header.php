@@ -54,6 +54,7 @@ if ($user) {
   'email'		=> $user_profile['email'],
   'activated'  => '1', 
   'createdby_user_id'  => '0',
+   'fb_user' =>'1',
   //'last_ip'	=> $this->ci->input->ip_address(),
   );
   $fb_email = $user_profile['email'];
@@ -292,13 +293,12 @@ $(document).ready(function(){
 						<div class="main_menu">
 							<div class="float_r span11">
 								<ul class="menu">
-									<li><a href="<?php echo $base; ?>" class="active">Home</a></li>
+									<li><a href="<?php echo $base; ?>">Home</a></li>
 									<li><a href="<?php echo "$base"; ?>all_colleges">Colleges</a></li>
-									<li><a href="#">Study Abroad</a></li>
 									<li><a href="<?php echo "$base"; ?>QuestandAns">Questions & Answers</a></li>
 									<li><a href="<?php echo $base; ?>events">Events</a></li>
+									<li><a href="<?php echo $base; ?>articles">Articles</a></li>
 									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>news">News</a></li>
-									
 								</ul>
 							</div>
 							<div class="clearfix"></div>
@@ -309,7 +309,7 @@ $(document).ready(function(){
 		</div>
 	</header>
 	<style>
-	#fb_butonek a
+#fb_butonek a
 {
 background: url("<?php echo "$base$img_path" ?>/icon_facebook_login.png") no-repeat;
 

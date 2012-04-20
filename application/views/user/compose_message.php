@@ -136,7 +136,8 @@ $.ajax({
    cache: false,
    success: function(msg)
    {
-
+	$('#add_content').css("display","none");
+	$('#body_msg').css("display","none");
     //$('#state').attr('disabled', false);
 	$('#add_content').html(msg);
 	var get_hidden_id_user = $('#recp_id').val();
@@ -165,6 +166,7 @@ $.ajax({
 	$('#body_msg').css("display","none");
 	var error = "Sorry...Email not found !!!";
 		$('#show_error').css("display","block");
+	$('#show_process').hide("slow");	
 		$('#show_error').html(error);
 	}
 	}

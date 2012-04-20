@@ -81,8 +81,7 @@ class Auth extends CI_Controller
 			redirect('/login/');
 		} else {
 		
-			$subdomain_arr = explode('.', $_SERVER['HTTP_HOST'], 2);
-			
+			$subdomain_arr = explode('.', $_SERVER['HTTP_HOST'], 2);	
 			$this->load->view('auth/header',$data);
 			$data['user_id']	= $this->tank_auth->get_user_id();
 			$data['username']	= $this->tank_auth->get_username();
@@ -93,6 +92,8 @@ class Auth extends CI_Controller
 			$data['fetch_profile'] = $this->users->fetch_profile($logged_user);
 			$data['query'] = $this->users->fetch_all_data($logged_user);
 			$data['profile_pic'] = $this->users->fetch_profile_data($logged_user); 
+			$data['pro_complete']=$this->users->chk_profile_completeness($data['profile_pic']);
+			
 			$data['recent_articles']=$this->frontmodel->recent_articles();
 			$data['recent_news']=$this->frontmodel->recent_news();
 			$data['featured_events']=$this->frontmodel->fetch_recent_events();
@@ -791,8 +792,12 @@ class Auth extends CI_Controller
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
 		} else {
-		
-		$this->load->view('auth/header',$data);
+		$logged_user =  $this->tank_auth->get_user_id();
+		$chkfbuser=$this->users->fetch_profile($logged_user);
+		if($chkfbuser['fb_user'])
+		{
+		redirect('home');
+		}		$this->load->view('auth/header',$data);
 		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 		$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
@@ -824,7 +829,7 @@ class Auth extends CI_Controller
 		
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
+		$logged_user =  $this->tank_auth->get_user_id();
 		$data['fetch_profile'] = $this->users->fetch_profile($logged_user);
 		$data['country'] = $this->users->fetch_country();
 		$data['educ_level'] = $this->users->fetch_educ_level();

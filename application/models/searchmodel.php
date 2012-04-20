@@ -197,4 +197,16 @@ function get_collages_by_search($type_educ_level,$search_country,$search_course)
 		return 0;
 		}
 	}
+	
+	function fetch_program_list_ajax()
+	{
+		$this->db->select('*');
+		$this->db->from('program');
+		if($this->input->post('educ_level')!='0')
+		{
+		$this->db->where('educ_level_id',$this->input->post('educ_level'));
+		}
+		$query=$this->db->get();
+		return $query->result_array();
+	}
 }

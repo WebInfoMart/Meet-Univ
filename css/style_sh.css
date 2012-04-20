@@ -9,7 +9,7 @@
 .margin_all{margin:0px 10px;}
 .padding_all{padding: 10px 0px;}
 .padding_lefty{padding:0px 10px;}
-.margin_t50{margin-top: 51px;}
+.margin_t50{margin-top: 53px;}
 .margin_bot{margin-bottom: 18px;}
 /*.margin_l4{margin-left:4px;}
 .margin_twenty{margin:20px;}
@@ -448,7 +448,7 @@ background: -moz-linear-gradient(270deg,#FFFFF6,#FFFDE3);border: 1px solid #E7E7
 
 /****************************model********************************/
 .model_back{}
-.model_heading{background-color:#B0D743;}
+.model_heading{background-color:#3881AB;}
 .model_heading h3{color:#fff;}
 .model_body_height{min-height:150px;margin: 15px 0px;}
 .model_body_height select{width:160px;}

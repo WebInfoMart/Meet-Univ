@@ -34,7 +34,7 @@ if ($user) {
 							}
 							?>
 								<!--<src="<?php echo "$base$img_path";  ?>profile_pic.png">-->
-								<h3 class="text_align"><?php echo $query['fullname']; ?></h3>
+								<h3 class="text_align"><a href="<?php echo $base; ?>home"><?php echo $query['fullname']; ?></a></h3>
 								<div>
 									<div class="margin_all">
 									<?php
@@ -72,10 +72,10 @@ if ($user) {
 								<div class="part_second" style="">
 								<div class="index_sidebar_progress">
 									<div class="index_sidebar_body">
-										<h4 class="font_sidebar">Your Profile Completes 25%</h4>
+										<h4 class="font_sidebar">Your Profile Completes <?php echo $pro_complete; ?>%</h4>
 										<div class="progress_outline progress_out">
 											<div class="progress progress_bar">
-												<div class="bar margin_zero" style="width: 50%;">
+												<div class="bar margin_zero" style="width: <?php echo $pro_complete; ?>%;">
 												</div>
 											</div>
 										</div>
@@ -97,7 +97,9 @@ if ($user) {
 										{
 									?>
 										<li><a href="university/<?php echo $my_collage['univ_id']; ?>"><?php echo $my_collage['univ_name']; ?></a></li>
-									<?php } } ?>
+									<?php }
+											}
+									else { ?><li>No Activity Yet</li><?php } ?>			
 									</ul>
 									</div>
 								</div>
@@ -111,7 +113,7 @@ if ($user) {
 										<ul class="links1">
            <li><a href="<?php echo "$base"; ?>compose_email">Composer</a></li>
            <li><div><div class="float_l"><a href="<?php echo "$base"; ?>inbox">Inbox </a></div><div class="float_r"><?php if($count_inbox) { ?><span class="badge badge-warning"><?php echo $count_inbox ? $count_inbox : ''; ?></span><?php } ?></div><div class="clearfix"></div></div></li><!--29-->
-           <li><div><div class="float_l"><a href="<?php echo "$base"; ?>outbox">Outbox </a></div><div class="float_r"><?php if($count_outbox) { ?><span class="badge badge-warning"><?php echo $count_outbox ? $count_outbox : ''; ?></span><?php } ?></div><div class="clearfix"></div></div></li><!--29-->
+           <li><div><div class="float_l"><a href="<?php echo "$base"; ?>outbox">Outbox </a></div><div class="clearfix"></div></div></li><!--29-->
           </ul>
 									</div>
 								</div>
@@ -132,7 +134,7 @@ if ($user) {
 									</div>
 								</div>
 							</div>
-							<div class="part_second font_sidebar">
+							<!--<div class="part_second font_sidebar">
 								<div class="index_sidebar_content invite">
 									<div class="index_sidebar_header">
 										<a data-toggle="modal" href="#myModal" id="pulse"><span class="orange">+  Invite Friends</span></a>
@@ -148,5 +150,5 @@ if ($user) {
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 					</div>

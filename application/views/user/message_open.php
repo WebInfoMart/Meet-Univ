@@ -64,7 +64,7 @@
 							</div>
 						</div>
 						<div class="span3 float_l">
-							<img src="images/banner_img.png">
+							<img src="<?php echo $base; ?>images/banner_img.png">
 						</div>
 						<div class="clearfix"></div>
 					</div>

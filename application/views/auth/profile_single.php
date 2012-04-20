@@ -26,8 +26,8 @@ if ($user) {
 						<div class="margin_t50 single_sidebar">
 							<ul>
 								<li class="active_side"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/account.png" class="margin_l"></div><div class="float_l margin_l">Account Information</div><div class="clearfix"></div></li>
-								<li><a href="<?php echo "$base" ?>update_password"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/update.png" class="margin_l"></div><div class="float_l margin_l">Update Password</div></a><div class="clearfix"></div></li>
-								<!--<li><div class="float_l"><img src="images/key.png" class="margin_l"></div><div class="float_l margin_l">Update E-mail</div><div class="clearfix"></div></li>-->
+		<?php if(!$fetch_profile['fb_user']) { ?>						<li><a href="<?php echo "$base" ?>update_password"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/update.png" class="margin_l"></div><div class="float_l margin_l">Update Password</div></a><div class="clearfix"></div></li>
+						<?php } ?>		<!--<li><div class="float_l"><img src="images/key.png" class="margin_l"></div><div class="float_l margin_l">Update E-mail</div><div class="clearfix"></div></li>-->
 							</ul>
 						</div>
 					</div>
