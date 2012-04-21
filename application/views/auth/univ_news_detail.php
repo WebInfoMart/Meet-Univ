@@ -56,7 +56,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="event_border">
 								<h3><?php echo count($news_comments); ?> Comments</h3>
 							</div> 
-				<?php if(count($question_comments)>0){
+				<?php if(count($news_comments)>0){
 						foreach($news_comments as $news_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $news_comments_detail['comment_id']; ?>" >
 								<div class="float_l">

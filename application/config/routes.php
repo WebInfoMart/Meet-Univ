@@ -51,6 +51,8 @@ $route['univ-(:num)-events']='univ/university_events_list/$1';
 $route['univ-(:num)-news']='univ/university_news_list/$1';
 $route['univ-(:num)-articles']='univ/university_article_list/$1';
 $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
+$route['about-(:num)-university']='univ/univ_aboutus/$1';
+
 
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 $route['(college_search|events_search)'] = 'search/$1';

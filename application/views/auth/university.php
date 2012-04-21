@@ -6,8 +6,8 @@
 							<div class="letter_first">
 									<div class="univ_content">
 									<?php
-									echo $university_details['about_us'];
-									?>
+									echo substr($university_details['about_us'],0.500).'..';
+									?><a href="<?php echo $base; ?>/">View more detail</a>
 								</div>
 							</div>
 							<!--<div id="show_popup_success_join" class="success_modal">

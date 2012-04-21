@@ -15,7 +15,7 @@
 									<li><a href="#tab2">Privacy Policy</a></li>
 									<li><a href="#tab3">Discrepancy</a></li>
 									<li><a href="#tab4">Terms & Condition</a></li>
-									<li><a href="meet_contact.html">Contact Us</a></li>
+									<li><a href="<?php echo $base; ?>contact_us">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>

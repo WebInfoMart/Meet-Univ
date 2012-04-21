@@ -203,7 +203,18 @@
 				?>
 
 				<li><div class="quest_row_single">
-				<div id="quest_pic" class="quest_pic"> <?php echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/".$quest_list['user_pic_path']."'/>";  ?> </div>
+				<div id="quest_pic" class="quest_pic">
+				
+				<?php if($quest_list['user_pic_path']!='')
+				{
+				echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/".$quest_list['user_pic_path']."'/>"; 
+				} else
+				{
+				echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/user_model.png'/>"; 
+				
+				} ?>
+				</div>
+				
 				<div id="quest" class="quest_right">
 				<a href="<?php echo $url; ?>">
 				<h3><?php

@@ -28,15 +28,33 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="row" style="margin-top:-20px">
 	<div>
 		<div class="float_l span13 margin_l">
 			<h3>Question: <span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span></h3>
+
 			<div>
 				<div class="float_l span2 margin_zero">
-					<?php echo $single_quest['user_pic_path'] ? "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>" : 'No Image'; ?>
+					<?php echo $single_quest['user_pic_path'] ? "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>" : "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/user_model.png'/>" ?>
 				</div>
+				<div class="float_r"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+				<div class="float_r span9 margin_zero">
+							<div>
+								<h3>Posted Time</h3>
+								<div class="date_heading"><?php echo $single_quest['q_asked_time']; ?></div>
+								<h3>Details</h3>
+								<?php echo $single_quest['q_detail']; ?>
+							</div>
+						</div>
 				<?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?>
 				<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
@@ -73,7 +91,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									</a>
 									</h4>
 									<?php echo $question_comments_detail['commented_text'];?>
-<div class="fb-like float_l" data-href="<?php $_SERVER["REQUEST_URI"]; ?>/news_commentid/<?php echo $question_comments_detail['comment_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+<div class="fb-like float_l" data-href="<?php $_SERVER["REQUEST_URI"]; ?>/que_commentid/<?php echo $question_comments_detail['comment_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 									<div style="font-size;color:black;" class="float_r"><?php
 									echo substr($question_comments_detail['comment_time'],0,16);?></div>
 								</div>
@@ -89,7 +107,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="float_l span9 margin_zero">
 									<form class="form-horizontal" method="post" action="">
 									<input type="hidden" name="commented_on_id" value="<?php echo $single_quest['que_id']; ?>" >
-									<input type="hidden" name="commented_on" value="que" >
+									<input type="hidden" name="commented_on" value="qna" >
 									
 										<div class="control-group">
 											<label class="control-label" for="input01">Name:</label>

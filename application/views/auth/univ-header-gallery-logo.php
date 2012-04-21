@@ -72,7 +72,7 @@
 					<nav id="main-nav">
 						<ul class="uni_menu">
 							<li><a href="<?php echo $base ?>university/<?php echo $univ_id_for_program; ?>" class="active">Home</a></li>
-							<li>About</li>
+							<li><a href="<?php echo $base ?>about-<?php echo $univ_id_for_program; ?>-university" class="active">About</a></li>
 							<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
 							<li><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-events" class="active">Events</a></li>
 							<li><a href="<?php echo $base; ?>UniversityQuestSection/<?php echo $univ_id_for_program; ?>" class="active">Questions & Answers</a></li>
