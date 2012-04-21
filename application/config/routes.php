@@ -53,7 +53,7 @@ $route['univ-(:num)-articles']='univ/university_article_list/$1';
 $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
 
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
-$route['(college_search|events_search)'] = 'Search/$1';
+$route['(college_search|events_search)'] = 'search/$1';
 $route['(college_list/all_colleges)/(:num)']='auth/all_colleges/$1';
 $route['(college_list/all_colleges)']='auth/all_colleges';
 

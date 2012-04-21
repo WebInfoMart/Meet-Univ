@@ -512,7 +512,7 @@ function university($univ_id='')
 		}
 		
 	
-	function UniversityQuest($univ_id='',$quest_id='',$user_id='')
+  function UniversityQuest($univ_id='',$quest_id='',$user_id='')
   {
    $data = $this->path->all_path();
    $this->load->view('auth/header',$data);
@@ -530,9 +530,28 @@ function university($univ_id='')
     $data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
     $data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
     $this->load->view('auth/univ-header-gallery-logo',$data);
+				
     if($univ_id !=''&& $quest_id !='' && $user_id !='')
     {
     $data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$user_id);
+	$data['clear_comment']=0;
+	if($data['single_quest']!=0)
+	{
+				$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
+				$this->form_validation->set_rules('full_name', 'Name ', 'trim|required|xss_clean');
+				$this->form_validation->set_rules('commented_text', 'Commented Text ', 'trim|required|xss_clean'); 
+				if ($this->form_validation->run()) {								// validation ok
+				$this->frontmodel->insert_user_comment();
+				$data['clear_comment']=1;
+				}
+				$data['question_comments']=$this->frontmodel->fetch_all_comments('que',$quest_id);
+				$data['user_is_logged_in']=0;
+				if($this->tank_auth->is_logged_in())
+				{
+				$data['user_is_logged_in']=1;
+				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
+				}
+	}
     //print_r($data['single_quest']);
     }
     $this->load->view('auth/univ_questions',$data);
