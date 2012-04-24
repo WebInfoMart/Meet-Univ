@@ -1143,6 +1143,9 @@ class Auth extends CI_Controller
 		$type_educ_level = $this->input->get('education_level');
 		$search_country = $this->input->get('search_country');
 		$search_course = $this->input->get('search_program');
+		$data['country_arrow']=$s_country;
+		$data['educ_arrow']=$s_educ_level;
+		$data['course_arrow']=$s_course;
 		
 		$data['get_university'] = $this->users->show_all_college($s_country,$s_educ_level,$s_course);
 		if($data['get_university']!=0)

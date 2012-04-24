@@ -12,9 +12,9 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
-			<li class="filter_arrow"><a href="<?php echo $base; ?>colleges/AllCountry-0">All</a></li>							
+			<li <?php if($country_arrow=='' || $country_arrow==0) {  ?> class="filter_arrow" <?php } ?>><a href="<?php echo $base; ?>colleges/AllCountry-0">All</a></li>							
 							<?php foreach($country as $countries) { ?>	
-											<li  >
+											<li   <?php if($country_arrow == $countries['country_id']) { ?> class="filter_arrow" <?php } ?>>
 																					
 	<a href="<?php echo $base; ?>colleges/<?php echo $countries['country_name']; ?>-<?php echo $countries['country_id']; ?>"><?php echo $countries['country_name']; ?></a>
 											</li>	
@@ -33,10 +33,10 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
-			<li class="filter_arrow"><a href="#" onclick="onstudylevel('0','AllLevel');">All</a></li>							
+			<li <?php if($educ_arrow=='' || $educ_arrow==0) { ?> class="filter_arrow" <?php } ?>><a href="#" onclick="onstudylevel('0','AllLevel');">All</a></li>							
 							
 										<?php foreach($fetch_educ_level as $fetch_educ_levels) { ?>			
-											<li>
+											<li <?php if($educ_arrow == $fetch_educ_levels['prog_edu_lvl_id']) { ?> class="filter_arrow" <?php } ?>>
 <a href="#" onclick="onstudylevel('<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>','<?php echo $fetch_educ_levels['educ_level']; ?>')"><?php echo $fetch_educ_levels['educ_level']; ?></a>
 											</li>	
 										<?php } ?>
@@ -54,10 +54,10 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
-		<li class="filter_arrow"><a href="#" onclick="onareaintrest('AllAreas','0');">All</a></li>							
+		<li <?php if($course_arrow=='' || $course_arrow==0) { ?> class="filter_arrow" <?php } ?>><a href="#" onclick="onareaintrest('AllAreas','0');">All</a></li>							
 											
 										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { ?>			
-											<li>
+											<li <?php if($course_arrow == $fetch_area_intrest1['prog_parent_id']) { ?> class="filter_arrow" <?php } ?>>
 								
 	<a href="#" onclick="onareaintrest('<?php echo $fetch_area_intrest1['program_parent_name']; ?>','<?php echo $fetch_area_intrest1['prog_parent_id']; ?>')"><?php echo $fetch_area_intrest1['program_parent_name']; ?></a>
 											</li>	
@@ -283,15 +283,11 @@ var url=document.URL;
 	}
 	if(ul=='2')
 	{
-	window.location=url+'/'+prog_parent_name+'-'+prog_parent_id;
+	window.location=document.URL+'/'+prog_parent_name+'-'+prog_parent_id;
 	}
 	if(ul>2)
 	{
 	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/'+surl[1]+'/'+prog_parent_name+'-'+prog_parent_id;
-	}
-	else
-	{
-	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/EducationLevel-0/'+prog_parent_name+'-'+prog_parent_id;
 	}
 	}
 	}

@@ -47,35 +47,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="float_l grid_1 margin_zero search_box_height">
-							<h5>Filter by Course Duration </h5>
-							<div id="scrollbar5">
-								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
-								<div class="viewport">
-									<div class="overview">
-										<ul>
-											<li>
-												<a>Business, Finance & Management</a>
-											</li>
-											<li>
-												<a>Arts & Humanities</a>
-											</li>
-											<li>
-												<a>Science</a>
-											</li>
-											<li>
-												<a>Computers & Information Technology</a>
-											</li><li>
-												<a>Engineering</a>
-											</li>
-											<li>
-												<a>Health Sciences & Medical</a>
-											</li>
-										</ul>                 
-									</div>
-								</div>
-							</div>
-						</div>
+						
 						<div class="float_l grid_1 margin_zero search_box_height">
 							<h5>Filter by Study Level</h5>
 							<div id="scrollbar3">

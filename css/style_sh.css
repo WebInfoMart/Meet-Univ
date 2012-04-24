@@ -630,7 +630,7 @@ line-height: 22px;
 
 .course_list li:hover{background-color: #f8d7a8}
 .question_user{width:80px;height:80px;margin:0px 10px}
-.filter_arrow{background: url(../images/arrow_bg1.PNG)no-repeat;
+.filter_arrow{background: url(../images/arrow_bg1.png)no-repeat;
 width: 122px;}
 
 
