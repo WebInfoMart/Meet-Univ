@@ -27,10 +27,8 @@ class Search extends CI_Controller
 			$this->load->view('auth/header',$data);
 			$data['gallery_home'] = $this->users->fetch_home_gallery();
 			$data['country'] = $this->users->fetch_country();
+			$data['area_interest'] = $this->users->fetch_area_interest();
 			$data['fetch_educ_level'] =$this->users->fetch_educ_level();
-			$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
-			$data['area_interest'] = $this->users->fetch_program();
-			
 		if($this->input->get('btn_search')=='col_search')
 		{
 				//$this->form_validation->set_rules('type_search','Education Level','trim|required');
@@ -43,7 +41,7 @@ class Search extends CI_Controller
 				$type_educ_level = $this->input->get('type_search');
 				$search_country = $this->input->get('search_country');
 				$search_course = $this->input->get('search_program');
-				$data['get_university'] = $this->searchmodel->get_collages_by_search($type_educ_level,$search_country,$search_course);
+				$data['get_university'] = $this->searchmodel->get_collages_by_search1($type_educ_level,$search_country,$search_course);
 				//print_r($data['get_university']);
 				
 				
@@ -69,9 +67,10 @@ class Search extends CI_Controller
 						
 							for($pos = 0; $pos < $cnt_pos_univ; $pos++)
 							{
-								$marker = explode(",",$data['get_university']['position'][$pos]);
-								//print_r($marker['position']);
-								$this->gmap->addMarkerByCoords($marker[1],$marker[0],$marker[2],$marker[3]);
+								$marker = explode("||",$data['get_university']['position'][$pos]);
+								//print_r($data['get_university']['position']);
+								//print_r($marker);
+								$this->gmap->addMarkerByAddress($marker[0],$marker[1],$marker[2]);
 								//$this->gmap->addOverlay();
 								//$this->googlemaps->add_marker($marker);
 							}
@@ -112,11 +111,10 @@ class Search extends CI_Controller
 			
 		}
 		else{
-			$this->load->view('auth/listed_collage',$data);
+		$this->load->view('auth/listed_collage',$data);
 		}
 		$this->load->view('auth/footer',$data);
 	}
-	
 	function events_search()
 	{
 		$data = $this->path->all_path();
@@ -151,9 +149,10 @@ class Search extends CI_Controller
 		$this->load->view('auth/footer',$data);
 	}
 	
-	function fetch_progrmas_on_home_ajax()
+	function fetch_parent_progrmas_on_home_ajax()
 	{
 		$data['result']=$this->searchmodel->fetch_program_list_ajax();
+		print_r($data['result']);
 		$this->load->view('ajaxviews/program_list',$data);
 		
 	}

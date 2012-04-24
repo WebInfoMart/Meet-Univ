@@ -141,6 +141,7 @@ if ($user) {
   });
 </script>
 <script src="<?php echo "$base$js";?>/jquery.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/marquee.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-collapse.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 <script src="<?php echo "$base$js";?>/bootstrap-alerts.js"></script>
@@ -294,7 +295,7 @@ $(document).ready(function(){
 							<div class="float_r span11">
 								<ul class="menu">
 									<li><a href="<?php echo $base; ?>">Home</a></li>
-									<li><a href="<?php echo "$base"; ?>all_colleges">Colleges</a></li>
+									<li><a href="<?php echo "$base"; ?>colleges">Colleges</a></li>
 									<li><a href="<?php echo "$base"; ?>QuestandAns">Questions & Answers</a></li>
 									<li><a href="<?php echo $base; ?>events">Events</a></li>
 									<li><a href="<?php echo $base; ?>articles">Articles</a></li>
@@ -325,7 +326,26 @@ background: none;
 display:none;
 }
 	</style>
-	<!--<div>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+</script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>				
+<!--<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body"> -->

@@ -28,15 +28,6 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 <div class="row" style="margin-top:-20px">
 	<div>
 		<div class="float_l span13 margin_l">
@@ -46,7 +37,15 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<div class="float_l span2 margin_zero">
 					<?php echo $single_quest['user_pic_path'] ? "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>" : "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/user_model.png'/>" ?>
 				</div>
-				<div class="float_r"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+				<div class="float_r">
+				<div class="float_l" style="margin-right:20px;">	<g:plusone size="medium" annotation="none"></g:plusone></div>
+				
+				<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+				<div class="float_l">
+							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+						</div>
+				</div>
+						
 				<div class="float_r span9 margin_zero">
 							<div>
 								<h3>Posted Time</h3>

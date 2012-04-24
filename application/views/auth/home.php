@@ -5,7 +5,29 @@
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+
+</script>
+<script>
+$(function () {
+        // basic version is: $('div.demo marquee').marquee() - but we're doing some sexy extras
+        
+        $('marquee').marquee('pointer').mouseover(function () {
+	       $(this).trigger('stop');
+        }).mouseout(function () {
+            $(this).trigger('start');
+        }).mousemove(function (event) {
+            if ($(this).data('drag') == true) {
+                this.scrollLeft = $(this).data('scrollX') + ($(this).data('x') - event.clientX);
+            }
+        }).mousedown(function (event) {
+            $(this).data('drag', true).data('x', event.clientX).data('scrollX', this.scrollLeft);
+        }).mouseup(function () {
+            $(this).data('drag', false);
+        });
+    });
+ 
+</script>
 <div class="container">
 
 	<div class="body_bar"></div>
@@ -149,7 +171,7 @@
 										foreach($area_interest as $srch_course)
 										{
 										?>
-											<option value="<?php echo $srch_course['prog_id']; ?>"> <?php echo $srch_course['course_name']; ?> </option>
+											<option value="<?php echo $srch_course['prog_parent_id']; ?>"> <?php echo $srch_course['program_parent_name']; ?> </option>
 										<?php
 										}
 										?>
@@ -220,7 +242,10 @@
 				
 			<?php 	}
 				else
-				{ foreach($featured_news as $featured_news_list) { $x++; ?>
+				{?>
+<marquee behavior="scroll" scrollamount="3" direction="left">
+	
+<?php				foreach($featured_news as $featured_news_list) { $x++; ?>
 					<div class="span8 yellow_bar_text <?php if($x==1){?> float_l <?php }else{ ?> float_r <?php } ?> margin_zero"><ul><li>
 					<a href="<?php echo $base; ?>univ-<?php echo $featured_news_list['news_univ_id']; ?>-news-<?php echo $featured_news_list['news_id']; ?>">
 					<?php echo substr($featured_news_list['news_title'],0,70).'..'; ?>
@@ -229,8 +254,10 @@
 				<?php
 				if($x=='2')
 				break;
-				} 
-				 }
+				} ?>
+				</marquee>
+
+		<?php		 }
 				?>	
 					<div class="clearfix"></div>
 				</div>
@@ -294,6 +321,7 @@
 		<div class="margin_t">
 			<div class="row">
 				<div class="yellow_bar span16 margin_l">
+				<marquee behavior="scroll" scrollamount="3" direction="left">
 					<ul class="yellow yellow_nav">
 						<li><a href="#">Engineering</a></li>
 						<li><a href="#">Medical</a></li>
@@ -303,6 +331,7 @@
 						<li><a href="#">Science</a></li>
 						<li><a href="#" style="border:none;">MBA</a></li>
 					</ul>
+			</marquee>		
 				</div>
 			</div>
 		</div>
@@ -542,7 +571,7 @@ function fetch_programs(educ_level)
 {
 	   $.ajax({
 	   type: "POST",
-	   url: "<?php echo $base; ?>search/fetch_progrmas_on_home_ajax",
+	   url: "<?php echo $base; ?>search/fetch_parent_progrmas_on_home_ajax",
 	   async:false,
 	   data: 'educ_level='+educ_level,
 	   cache: false,
@@ -552,6 +581,7 @@ function fetch_programs(educ_level)
 	   }
 	   })
 }
+
 </script>
 
 

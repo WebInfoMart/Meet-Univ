@@ -68,7 +68,7 @@
 			</ul>
 			
 			<div class="row uni_menu_placeholder">
-				<div class="span8 float_r" id="main-nav-holder">
+				<div class="span9 float_r" id="main-nav-holder">
 					<nav id="main-nav">
 						<ul class="uni_menu">
 							<li><a href="<?php echo $base ?>university/<?php echo $univ_id_for_program; ?>" class="active">Home</a></li>
@@ -76,8 +76,8 @@
 							<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
 							<li><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-events" class="active">Events</a></li>
 							<li><a href="<?php echo $base; ?>UniversityQuestSection/<?php echo $univ_id_for_program; ?>" class="active">Questions & Answers</a></li>
-							<li class="border_beta"><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-news" class="active">News</a></li>
-						
+							<li ><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-news" class="active">News</a></li>
+							<li class="border_beta"><a href="<?php echo "$base" ?>univ-<?php echo $univ_id_for_program; ?>-articles" class="active">Articles</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -93,7 +93,7 @@ $(document).scroll(function() {
     if( $(this).scrollTop() >= 50 ) {
         if( !fixed ) {
             fixed = true;
-            $('#main-nav').css({position:'fixed',top:140,left:694});
+            $('#main-nav').css({position:'fixed',top:140,left:628});
 			// Or set top:20px; in CSS
         }                                           // It won't matter when static
     } else {

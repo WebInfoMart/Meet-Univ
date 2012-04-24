@@ -34,7 +34,7 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
-										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { ?>			
+										<?php foreach($area_interest as $fetch_area_intrest1) { ?>			
 											<li>
 								
 	<a href="<?php echo $base; ?>all_colleges?study_subject=<?php echo $fetch_area_intrest1['prog_parent_id']; ?>"><?php echo $fetch_area_intrest1['program_parent_name']; ?></a>
@@ -47,25 +47,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="float_l grid_1 margin_zero search_box_height">
-							<h5>Filter by Study Level</h5>
-							<div id="scrollbar3">
-								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
-								<div class="viewport">
-									<div class="overview">
-										<ul>
-										<?php foreach($fetch_educ_level as $fetch_educ_levels) { ?>			
-											<li>
-<a href="<?php echo $base; ?>all_colleges?education_level=<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>"><?php echo $fetch_educ_levels['educ_level']; ?></a>
-											</li>	
-										<?php } ?>
-											
-										</ul>                 
-									</div>
-								</div>
-							</div>
-						</div>
-						
 						<div class="float_l grid_1 margin_zero search_box_height">
 							<h5>Filter by Course Duration </h5>
 							<div id="scrollbar5">
@@ -95,6 +76,26 @@
 								</div>
 							</div>
 						</div>
+						<div class="float_l grid_1 margin_zero search_box_height">
+							<h5>Filter by Study Level</h5>
+							<div id="scrollbar3">
+								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+								<div class="viewport">
+									<div class="overview">
+										<ul>
+										<?php foreach($fetch_educ_level as $fetch_educ_levels) { ?>			
+											<li>
+<a href="<?php echo $base; ?>all_colleges?education_level=<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>"><?php echo $fetch_educ_levels['educ_level']; ?></a>
+											</li>	
+										<?php } ?>
+											
+										</ul>                 
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
 						<div class="clearfix"></div>
 						
 					</div>

@@ -34,7 +34,7 @@ class Auth extends CI_Controller
 		$data['gallery_home'] = $this->users->fetch_home_gallery();
 		$data['country'] = $this->users->fetch_country();
 		$data['cities'] = $this->frontmodel->fetch_cities();
-		$data['area_interest'] = $this->users->fetch_program();
+		$data['area_interest'] = $this->users->fetch_area_interest();
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();
 		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
@@ -1131,16 +1131,20 @@ class Auth extends CI_Controller
 	
 	
 	
-	function all_colleges($clg ='',$paging='')
+	function all_colleges($s_country ='',$s_educ_level='',$s_course='')
 	{
 		$data = $this->path->all_path();
 		$data['err_msg']=0;
 		$data['filter_var']=0;
 		$this->load->view('auth/header',$data);
 		$data['country'] = $this->users->fetch_country();
-		$data['get_university'] = $this->users->show_all_college();
 		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
 		$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
+		$type_educ_level = $this->input->get('education_level');
+		$search_country = $this->input->get('search_country');
+		$search_course = $this->input->get('search_program');
+		
+		$data['get_university'] = $this->users->show_all_college($s_country,$s_educ_level,$s_course);
 		if($data['get_university']!=0)
 		{
 		$this->load->view('auth/show_all_college',$data);

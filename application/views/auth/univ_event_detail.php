@@ -28,21 +28,19 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-	
 	<div class="row ">
 				<div class="float_l span13 margin_l">
 					
 					<div class="">
 						<h2 class="course_txt"><?php echo $event_detail['event_title']; ?></h2>
-						<div class="float_r"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+							<div class="float_r">
+						<div class="float_l" style="margin-right:20px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
+						<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+						<div class="float_l">
+							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+						
+						</div>
+						</div>
 						<div class="float_l span9 margin_zero">
 							<div>
 								<h3>When</h3>

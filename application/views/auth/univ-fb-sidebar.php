@@ -11,7 +11,7 @@
 												<input type="text" name="apply_name" class="input-medium" placeholder="Name">
 											</div>
 											<div class="control-group">
-												<select name="apply_course_interest" id="apply_course_interest" class="grid_1 box_select">
+												<select name="apply_course_interest" style="width:160px;" id="apply_course_interest" class="grid_1 box_select">
 													<option value="">Course of interest</option>
 													<?php
 													if(!empty($area_interest))

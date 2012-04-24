@@ -972,9 +972,71 @@ class Users extends CI_Model
 		return $res->result_array();
 		}
 	}
+	function show_all_college($search_country,$type_educ_level,$search_course)
+	{
+						$this->db->select('*');
+						$this->db->from('university');
+						$chk_sc_sel=0;
+						$chk_c_id=0;
+						if($search_course!='' && $search_course!='0')
+						{
+						$search_array['univ_program.prog_parent_id']=$search_course;
+						$chk_sc_sel++;
+						}
+						if($type_educ_level!='' && $type_educ_level!=0)
+						{
+						$search_array['univ_program.prog_educ_level']=$type_educ_level;
+						$chk_sc_sel++;
+						}
+						if($search_country!='' && $search_country!=0)
+						{
+						$search_array['country_id']=$search_country;
+						$chk_c_id=1;
+						//$this->db->where('country_id',trim($search_country));
+						}
+						if($chk_sc_sel>0 || $chk_c_id)
+						{
+						if($chk_sc_sel>0)
+						{
+						$this->db->join('univ_program','univ_program.univ_id=university.univ_id','left');
+						$this->db->group_by("university.univ_id"); 
+						}
+						$this->db->where($search_array);
+						}
+						
+						$results = $this->db->get();
+						//echo $results->num_rows();
+			if($results->num_rows()>0)
+			{
+						$res_of_univ_search1 = $results->result_array();
+						foreach($res_of_univ_search1 as $univ_search_result)
+						{	
+								$university_id=$univ_search_result['univ_id'];
+								$this->db->select('*');
+								$this->db->from('university');
+								$this->db->where('univ_id',$university_id);
+								$results=$this->db->get();
+								$university_detail[] = $results->row_array();
+								$marker[] = $univ_search_result['address_line1'].'||'.$univ_search_result['univ_name'].'||'.$univ_search_result['address_line1'];
+								$univ_follow[] = $this->users->get_followers_of_univ($university_id);
+								$univ_article[] = $this->users->get_articles_of_univ($university_id);
+								$univ_program[] = $this->users->get_program_provide_by_univ($university_id);
+						}		
+						$univ_data=array();
+						$univ_data['university'] = $university_detail;
+						$univ_data['followers'] = $univ_follow;
+						$univ_data['article'] = $univ_article;
+						$univ_data['program'] = $univ_program;
+						$univ_data['position'] = $marker;
+						return $univ_data;
+			}
+			else{
+			return 0;
+			}
+		
+	}
 	
-	
-	function show_all_college()
+	/*function show_all_college()
 	{
 		$this->db->select('univ_id');
 		$this->db->from('university');
@@ -1048,7 +1110,7 @@ class Users extends CI_Model
 		{
 		return 0;
 		}		
-	}
+	}*/
 	
 	function get_univ_gallery($univ_id)
 	{

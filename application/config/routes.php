@@ -59,6 +59,15 @@ $route['(college_search|events_search)'] = 'search/$1';
 $route['(college_list/all_colleges)/(:num)']='auth/all_colleges/$1';
 $route['(college_list/all_colleges)']='auth/all_colleges';
 
+$route['colleges/(:any)-(:num)/(:any)-(:num)/(:any)-(:num)']='auth/all_colleges/$2/$4/$6';
+$route['colleges/(:any)-(:num)/(:any)-(:num)']='auth/all_colleges/$2/$4';
+$route['colleges/(:any)-(:num)']='auth/all_colleges/$2';
+$route['colleges']='auth/all_colleges';
+
+
+
+
+
 $route['UniversityQuest/(:num)/(:num)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
 $route['UniversityQuestSection/(:num)'] = 'univ/UniversityQuestSection/$1';
 $route['UniversityQuestSection'] = 'univ/UniversityQuestSection';
@@ -83,7 +92,7 @@ $route['(delete_message_outbox/(:num)/(:num))'] = 'user/delete_message_outbox/$1
 
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|all_colleges|home/pus|index/cfr)'] = 'auth/$1';
+$route['(login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
 $route['default_controller'] = 'auth';
 
 /* End of file routes.php */

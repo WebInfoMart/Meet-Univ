@@ -4,6 +4,12 @@
 		<div class="body">
 			<div class="row margin_t1">
 				<div class="float_l span13 margin_l">
+				<div class="float_r">
+				<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
+				<div class="float_l">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+				</div>
+				</div>
 					<h2 class="course_txt">Upcoming Events</h2>
 					<div class="margin_t1">
 					<?php foreach($events as $event_detail){ ?>
@@ -23,7 +29,9 @@
 										<span><?php echo $event_detail['event_date_time']; ?></span><br/>
 									</div>
 									<div class="float_r">
-										<h4>22 Register</h4>
+	<div ><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+									</div>
+									<h4>22 Register</h4>
 									</div>
 									<div class="clearfix"></div>
 								</div>

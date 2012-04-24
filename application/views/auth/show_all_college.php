@@ -12,9 +12,11 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
-							<?php foreach($country as $countries) { ?>			
-											<li>
-	<a href="<?php echo $base; ?>all_colleges?country_id=<?php echo $countries['country_id']; ?>"><?php echo $countries['country_name']; ?></a>
+			<li class="filter_arrow"><a href="<?php echo $base; ?>colleges/AllCountry-0">All</a></li>							
+							<?php foreach($country as $countries) { ?>	
+											<li  >
+																					
+	<a href="<?php echo $base; ?>colleges/<?php echo $countries['country_name']; ?>-<?php echo $countries['country_id']; ?>"><?php echo $countries['country_name']; ?></a>
 											</li>	
 							<?php } ?>				
 										</ul>                 
@@ -23,36 +25,19 @@
 							</div>
 								<div class="clearfix"></div>
 						</div>
-						<div class="float_l grid_1 margin_zero search_box_height">
-							<h5>Filter by Study Subject</h5>
-							<div id="scrollbar2">
-								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
-								<div class="viewport">
-									<div class="overview">
-										<ul>
-										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { ?>			
-											<li>
-								
-	<a href="<?php echo $base; ?>all_colleges?study_subject=<?php echo $fetch_area_intrest1['prog_parent_id']; ?>"><?php echo $fetch_area_intrest1['program_parent_name']; ?></a>
-											</li>	
-										<?php } ?>
-											
-											
-										</ul>                 
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="float_l grid_1 margin_zero search_box_height">
+						
+							<div class="float_l grid_1 margin_zero search_box_height">
 							<h5>Filter by Study Level</h5>
 							<div id="scrollbar3">
 								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
 								<div class="viewport">
 									<div class="overview">
 										<ul>
+			<li class="filter_arrow"><a href="#" onclick="onstudylevel('0','AllLevel');">All</a></li>							
+							
 										<?php foreach($fetch_educ_level as $fetch_educ_levels) { ?>			
 											<li>
-<a href="<?php echo $base; ?>all_colleges?education_level=<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>"><?php echo $fetch_educ_levels['educ_level']; ?></a>
+<a href="#" onclick="onstudylevel('<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>','<?php echo $fetch_educ_levels['educ_level']; ?>')"><?php echo $fetch_educ_levels['educ_level']; ?></a>
 											</li>	
 										<?php } ?>
 											
@@ -63,6 +48,28 @@
 						</div>
 						
 						<div class="float_l grid_1 margin_zero search_box_height">
+							<h5>Filter by Area Of Intrest</h5>
+							<div id="scrollbar2">
+								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+								<div class="viewport">
+									<div class="overview">
+										<ul>
+		<li class="filter_arrow"><a href="#" onclick="onareaintrest('AllAreas','0');">All</a></li>							
+											
+										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { ?>			
+											<li>
+								
+	<a href="#" onclick="onareaintrest('<?php echo $fetch_area_intrest1['program_parent_name']; ?>','<?php echo $fetch_area_intrest1['prog_parent_id']; ?>')"><?php echo $fetch_area_intrest1['program_parent_name']; ?></a>
+											</li>	
+										<?php } ?>
+											
+											
+										</ul>                 
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--<div class="float_l grid_1 margin_zero search_box_height">
 							<h5>Filter by Course Duration </h5>
 							<div id="scrollbar5">
 								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
@@ -90,7 +97,10 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>-->
+					
+						
+						
 						<div class="clearfix"></div>
 					</div>
 					<div class="margin_t">
@@ -176,6 +186,7 @@
 							<?php
 							}
 							?>
+				
 							</div>
 						</div>
 					</div>
@@ -193,3 +204,109 @@
 			</div>
 		</div>
 	</div>
+<script>
+function onstudylevel(educ_lvl_id,educ_lvl_name)
+{
+
+	var url=document.URL;
+	var lcofurl=url.charAt(url.length-1);
+	if(lcofurl=='/' || lcofurl=='#')
+	{
+	url = url.substring(0, url.length-1);
+	}
+	lcofurl=url.charAt(url.length-1);
+	if(lcofurl=='/' || lcofurl=='#')
+	{
+	url = url.substring(0, url.length-1);
+	}
+	var spliturl;
+	var nurl=url.indexOf("colleges/");
+	if(nurl > -1)
+	{
+	
+	spliturl=url.split('colleges/');
+	if(spliturl[1]=='' || spliturl[1]==null)
+	{
+	window.location='<?php echo $base; ?>colleges/'+'Country-0/'+educ_lvl_name+'-'+educ_lvl_id+'/';
+	}
+	else
+	{
+	var surl=spliturl[1].split('/');
+	var ul=surl.length;
+	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/'+educ_lvl_name+'-'+educ_lvl_id+'/';
+	}
+	}
+	else
+	{
+	var lcofurl=url.charAt(url.length-1);
+	if(lcofurl!='/')
+	{
+	url=url+'/';
+	}
+	window.location=url+'Country-0/'+educ_lvl_name+'-'+educ_lvl_id;
+	//}
+	//window.location='Country-0/'
+	}
+	
+}
+
+function onareaintrest(prog_parent_name,prog_parent_id)
+{
+var url=document.URL;
+	var lcofurl=url.charAt(url.length-1);
+	if(lcofurl=='/' || lcofurl=='#')
+	{
+	url = url.substring(0, url.length-1);
+	}
+	lcofurl=url.charAt(url.length-1);
+	if(lcofurl=='/' || lcofurl=='#')
+	{
+	url = url.substring(0, url.length-1);
+	}
+	var spliturl;
+	var nurl=url.indexOf("colleges/");
+	if(nurl > -1)
+	{
+	
+	spliturl=url.split('colleges/');
+	if(spliturl[1]=='' || spliturl[1]==null)
+	{
+	window.location=url+'Country-0/EducationLevel-0/'+prog_parent_name+'-'+prog_parent_id;
+	}
+	else
+	{
+	var surl=spliturl[1].split('/');
+	var ul=surl.length;
+	if(ul=='1' || ul=='0')
+	{
+	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/EducationLevel-0/'+prog_parent_name+'-'+prog_parent_id;
+	}
+	if(ul=='2')
+	{
+	window.location=url+'/'+prog_parent_name+'-'+prog_parent_id;
+	}
+	if(ul>2)
+	{
+	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/'+surl[1]+'/'+prog_parent_name+'-'+prog_parent_id;
+	}
+	else
+	{
+	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/EducationLevel-0/'+prog_parent_name+'-'+prog_parent_id;
+	}
+	}
+	}
+	else
+	{
+	var lcofurl=url.charAt(url.length-1);
+	if(lcofurl!='/')
+	{
+	url=url+'/';
+	}
+	window.location=url+'Country-0/EducationLevel-0/'+prog_parent_name+'-'+prog_parent_id;
+	//}
+	//window.location='Country-0/'
+	}
+	
+}
+</script>
+	

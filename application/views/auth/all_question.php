@@ -3,6 +3,14 @@
 		<div class="body_header"></div>
 		<div class="body">
 			<div>
+			<div class="float_r" style="margin-right:200px;">
+				<div class="float_l" style="margin-right:20px;">	<g:plusone size="medium" annotation="none"></g:plusone></div>
+				
+				<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+				<div class="float_l">
+							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+						</div>
+	</div>
 				<!--<div class="row">
 					<div class="span10">
 						<h2>Salford City College - <small>City, Country</small></h2>
@@ -62,6 +70,7 @@
 						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
 					  </div>
 	</div>
+	
 	<!-- End Here -->
 				
 					<div class="green_box">
@@ -75,6 +84,8 @@
 								<span>Have a Question about your career or course?</span>
 								<span>Ask our counselors!</span>
 							</div>
+							
+						
 							<div class="clearfix"></div>
 						</div>
 						<div class="sliderkit contentslider-std">
@@ -88,7 +99,7 @@
 									</ul>
 								</div>
 							</div>
-							<div class="sliderkit-panels">
+					<div class="sliderkit-panels">
 								<form action="QuestandAns" method="post">
 									<div class="sliderkit-panel" id="tab1">
 										<div class="control-group">
@@ -211,7 +222,6 @@
 				} else
 				{
 				echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/user_model.png'/>"; 
-				
 				} ?>
 				</div>
 				
@@ -227,6 +237,9 @@
 	// $diferencia = time() - $quest_list['q_asked_time'];
     
 				?>
+				
+				</div>
+				<div class="float_r"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 				
 				</div>
 				</div>
@@ -245,7 +258,7 @@
 				</div>
 				
 				<div class="float_r span3 margin_t">
-					<img src="images/banner_img.png">
+					<img src="<?php echo $base; ?>images/banner_img.png">
 				</div>
 		
 			
