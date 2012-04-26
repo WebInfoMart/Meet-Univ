@@ -1,15 +1,3 @@
-<script>
-$(document).ready(function()
-{
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-});
-</script>
 
 <div class="event_border hover_delete_comment_<?php echo $delete_comment; ?>">
 								<div class="float_l">
@@ -30,7 +18,7 @@ $(document).ready(function()
 									<?php echo $user_detail['fullname']; ?>
 									</a></h4>
 									<?php echo $commented_text; ?>
-									<div class="fb-like float_l" data-href="<?php $_SERVER["REQUEST_URI"]; ?>/<?php echo $commented_on; ?>_commentid/<?php echo $delete_comment; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+									
 									<div style="font-size;color:black;" class="float_r"><?php
 									$time_now=mktime(date('h')+5,date('i')+30,date('s'));
 									$date = date('h:i A',$time_now);

@@ -132,9 +132,7 @@
 						</div>
 							</form>
 						</div>
-			</div>
-		</div>
-		<!-- Added by Subh -->
+								<!-- Added by Subh -->
 				<div id="quest_div_1">
 				<!--<div id="question_filters" class="show_qans_main_div_left">
 				
@@ -193,10 +191,15 @@
 				</div>
 				<!-- End Here -->
 	</div>
+			</div>
+	
+		
+		
 	<div class="float_r span3 margin_t">
-		<img src="images/banner_img.png">
+		<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
 	</div>
 	<div class="clearfix"></div>
+	</div>
 </div>	
 </div>		
 <script type="text/javascript">

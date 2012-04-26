@@ -106,10 +106,10 @@
 .contentslider-std .sliderkit-nav-clip li{height:22px;padding:0;margin:0 3px 0 12px;}
 .contentslider-std .sliderkit-nav-clip li{float:left;}
 .contentslider-std .sliderkit-nav-clip li a{float:left;color:#333;}
-.contentslider-std .sliderkit-nav-clip li a{height:18px;margin:0;padding:3px 10px 1px;color:#333;text-decoration:none;}
+.contentslider-std .sliderkit-nav-clip li a{height:18px;margin:0;padding:3px 10px 1px;color:#666;text-decoration:none;}
 .contentslider-std .sliderkit-nav-clip li a:hover{background:#666;color:#fff;}
 .contentslider-std .sliderkit-nav-clip li.sliderkit-selected{}
-.contentslider-std .sliderkit-nav-clip li.sliderkit-selected a{color:#666;}
+.contentslider-std .sliderkit-nav-clip li.sliderkit-selected a{color:#333;font-weight:bold;}
 .contentslider-std .sliderkit-nav-clip li.sliderkit-selected a:hover{color:#fff!important;}
 
 /* Panel */

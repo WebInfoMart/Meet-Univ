@@ -97,7 +97,18 @@ foreach($event_info as $event_detail) { ?>
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Event Type</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" disabled="disabled" size="30" class="text" value="<?php echo $event_detail['event_category']?>" >
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</li>
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">

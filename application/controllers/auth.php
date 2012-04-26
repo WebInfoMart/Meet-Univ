@@ -39,7 +39,7 @@ class Auth extends CI_Controller
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();
 		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
 		$data['featured_news']=$this->frontmodel->fetch_featured_news();
-				
+		 $data['featured_quest'] = $this->frontmodel->fetch_home_featured_quest();		
 	//	print_r($data['featured_events']);
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);
@@ -1169,8 +1169,10 @@ class Auth extends CI_Controller
 		} else {
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
+		$logged_user_id = $this->session->userdata('user_id');
 		$data['educ_level'] = '';
 		$redirect_current_url = $this->config->site_url().$this->uri->uri_string();
+		$data['my_college'] = $this->users->my_collage_of_user($id);
 		$data['detail_visited_user'] = $this->users->fetch_profile($id);
 		$cur_educ_lvl = $data['detail_visited_user']['curr_educ_level'];
 		$area_interest = $data['detail_visited_user']['prog_parent_id'];
@@ -1178,7 +1180,6 @@ class Auth extends CI_Controller
 		$data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
 		$data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
 		$data['follower_detail'] = $this->users->get_followers_detail_of_person($id);
-		$logged_user_id = $this->session->userdata('user_id');
 		$data['send_message_to_user_error'] = 0;
 		$data['follow_own'] = 0;
 		$logged_user_id == $id ? $data['follow_own'] = 1 : $data['follow_own'] = 0;

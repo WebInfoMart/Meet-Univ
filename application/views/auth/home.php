@@ -92,7 +92,7 @@ $(function () {
 							<label class="control-label" for="focusedInput"><h3 class="white">in City</h3></label>
 							<div class="controls">
 								<select name="event_city" id="city">
-									<option value="">Select</option>
+									<option value="">All</option>
 									<?php
 									foreach($cities as $city)
 									{ ?>
@@ -107,7 +107,7 @@ $(function () {
 							<div class="float_l span4 margin_zero">
 								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
 								<select name="event_month" id="month">
-									<option value="">Select Month</option>
+									<option value="">All</option>
 									<option value="Januray">Jan</option>
 									<option value="February">Feb</option>
 									<option value="March">Mar</option>
@@ -337,55 +337,44 @@ $(function () {
 		</div>
 		<div class="margin_t">
 			<div class="row">
-				<div class="grid_3 margin_l">
-					<div class="home_artical_heading">
-						<span>Featured Colleges</span>
-					</div>
-					<div class="box all_box">
-						<ul>
-							<li>
-								<div class="float_l">
-									<img src="images/img_girl.png" class="girls_img">
-								</div>
-								<div>
-									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
-								</div>
-							</li>
-							<li>
-								<div class="float_l">
-									<img src="images/img_boy.png"  class="girls_img">
-								</div>
-								<div>
-									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
-								</div>
-							</li>
-							<li>
-								<div class="float_l">
-									<img src="images/img_girl.png" class="girls_img">
-								</div>
-								<div>
-									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
-								</div>
-							</li>
-							<li>
-								<div class="float_l">
-									<img src="images/img_boy.png" class="girls_img">
-								</div>
-								<div>
-									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
-								</div>
-							</li>
-							<li>
-								<div class="float_l">
-									<img src="images/img_girl.png" class="girls_img">
-								</div>
-								<div>
-									Aenean id ipsum nec lorem commodo imperdiet euismod dictum erat. Praesent eu nisl at eros vulputate vel rdiet ...<img src="images/like.png" class="face">
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
+				 <div class="grid_3 margin_l">
+     <div class="home_artical_heading">
+      <span>Featured Q & A</span>
+     </div>
+     <div class="box all_box">
+      <ul>
+      <?php
+	  if(!empty($featured_quest))
+      {
+      if($featured_quest != 0)
+      {
+      foreach($featured_quest as $feature_questions)
+      {
+      if($feature_questions['q_univ_id'] != '0')
+       {
+        $url = "UniversityQuest/$feature_questions[q_univ_id]/$feature_questions[que_id]/$feature_questions[q_askedby]";
+       }
+       else if($feature_questions['q_country_id'] != '0')
+       {
+        $url = "";
+       }
+      ?>
+       <li>
+        <div class="float_l">
+         <?php if($feature_questions['user_pic_path']!='' || $feature_questions['user_pic_path']!= '0') { ?>
+         <?php echo "<img src='".base_url()."uploads/".$feature_questions['user_pic_path']."' class='girls_img'/>"; ?>
+         <?php } else { echo "<img src='".base_url()."images/profile_icon.png' class='girls_img'/>"; } ?>
+        </div>
+        <div>
+         <a href="<?php echo "$base$url"; ?>"><?php echo $feature_questions['q_title'] ? substr($feature_questions['q_title'],0,15) : 'Not Available'; ?>...</a>
+         <div class="float_r"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+        </div>
+       </li>
+       <?php } } }  else { echo "Not Available"; } ?>
+	
+      </ul>
+     </div>
+    </div>
 				<div class="grid_3">
 					<div class="home_artical_heading">
 						<span>Featured Article</span>

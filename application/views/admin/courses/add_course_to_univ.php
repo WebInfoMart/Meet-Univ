@@ -281,7 +281,7 @@ $.ajax({
 	   cache: false,
 	   success: function(msg)
 	   {
-	   $('#program').css('display','block');
+	  $('#program').css('display','block');
 	   $('.program_label').css('display','block');
 	   $('#program').html(msg);
 	   $('#prog_data').show(1000);
