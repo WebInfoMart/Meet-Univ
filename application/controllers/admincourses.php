@@ -202,7 +202,7 @@ class Admincourses extends CI_Controller
 	function fetch_programs()
 	{
 		$data['result']=$this->courses->fetch_programs($this->input->post('educ_level'),$this->input->post('area_interest'));
-		$this->load->view('ajaxviews/program_list',$data);
+		$this->load->view('ajaxviews/program_view',$data);
 	}
 	
 	/*function add_univ_prog($submit='')
@@ -437,6 +437,32 @@ class Admincourses extends CI_Controller
 		$this->load->view('ajaxviews/manage_univ_courses',$data);
 		
 	}
+	
+	function map_area_interest_and_progrmas()
+	{
+	if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		if($data['admin_user_level']=='5')
+		{
+		$this->load->view('admin/courses/area_vs_program', $data);
+		
+		}
+		else{
+		$this->load->view('admin/accesserror', $data);
+		}
+		
+		}
+	
+	}
+	
 }
 
 /* End of file auth.php */

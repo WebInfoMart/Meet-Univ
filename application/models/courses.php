@@ -74,8 +74,9 @@ class Courses extends CI_Model
 			$path=$this->excel_path.'/'.$_FILES['userfile']['name'];
 			$data1 = new Spreadsheet_Excel_Reader();
 			$data1->read($path);
+			print_r($data1);
 			error_reporting(E_ALL ^ E_NOTICE);
-			for ($j = 1; $j < $data1->sheets[0]['numRows']; $j++)
+			/*for ($j = 1; $j < $data1->sheets[0]['numRows']; $j++)
 			{
 				$prog_data=array();
 				for ($i = 1; $i <= $data1->sheets[0]['numCols']; $i++)
@@ -121,7 +122,7 @@ class Courses extends CI_Model
 			}
 			//echo $data->sheets[0]['numRows'];
 			
-		}
+		//}
 	}
 	
 	function add_single_course()
@@ -148,7 +149,8 @@ class Courses extends CI_Model
 	$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data=array(
 		'program_id'=>$this->input->post('program'),
-		'curr_educ_level'=>$this->input->post('educ_level'),
+		'prog_educ_level'=>$this->input->post('educ_level'),
+		'prog_parent_id'=>$this->input->post('area_interest'),
 		'univ_id'=>$this->input->post('university'),
 		'intake1'=>$this->input->post('intake1'),
 		'intake2'=>$this->input->post('intake2'),
@@ -180,6 +182,7 @@ class Courses extends CI_Model
 		$this->db->from('program');
 		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
 		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
+		$this->db->group_by("program.course_name");
 		$query =$this->db->get();
 		$config['base_url']=base_url()."admincourses/manage_courses/";
 		$config['total_rows']=$query->num_rows();
@@ -190,6 +193,7 @@ class Courses extends CI_Model
 		$this->db->from('program');
 		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
 		$this->db->join('program_parent', 'program_parent.prog_parent_id = program_parent.prog_parent_id');
+		$this->db->group_by("program.prog_id");
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
 		$this->pagination->initialize($config);

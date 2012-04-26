@@ -183,6 +183,7 @@ class Events extends CI_Model
 			   'event_univ_id' => $this->input->post('university'),
 			   'event_country_id' => $this->input->post('country'),
 			   'event_state_id' => $this->input->post('state'),
+			   'event_category' => $this->input->post('event_type'),
 			   'event_city_id' => $this->input->post('city')
 				
 			);

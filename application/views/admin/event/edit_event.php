@@ -161,7 +161,25 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Event Type</label>
+							</div>
+							<div class="float_l span3">
+							<select class="text styled span3 margin_zero"  name="event_type" >
+								<option value="all" <?php if($event_detail['event_category']=='all'){ echo "selected" ;} ?>>All</option>
+								<option value="spot_admission" <?php if($event_detail['event_category']=='spot_admission'){ echo "selected" ;} ?>>Spot Admission</option>
+								<option value="fairs" <?php if($event_detail['event_category']=='fairs'){ echo "selected" ;} ?>>Fairs</option>
+								<option value="alumuni" <?php if($event_detail['event_category']=='alumuni'){ echo "selected" ;} ?>>Alumuni</option>
+								<option value="others" <?php if($event_detail['event_category']=='others'){ echo "selected" ;} ?>>Others</option>
+								
+							</select>
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</li>
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
