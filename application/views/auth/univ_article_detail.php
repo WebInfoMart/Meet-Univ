@@ -43,7 +43,46 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						</div>
 						<div class="float_l span9 margin_zero">
 							<div>
-								<div class="date_heading"><?php echo $articles_detail['publish_time']; ?></div>
+								<div class="date_heading">
+								<?php
+								//print_r($articles_detail['publish_time']);
+								$exp = explode(" ",$articles_detail['publish_time']);
+								$create_month_format = explode('-',$exp[0]);
+								$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
+								//print_r($exp[0]);
+								//print_r($exp[1]);
+								
+
+								?>
+								</br>
+								<?php 
+								// Check if this time is above 24 hours...
+								$starttime = $articles_detail['publish_time']; 
+								$starttime = strtotime($starttime); 
+								$oneday = 60*60*24; 
+								if( $starttime < (time()-$oneday) ) { 
+								  // echo 'more than one day since start'; 
+								echo $exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
+								}
+								else {
+								//Less than oneday from start
+								//Time difference
+								$date = date('Y-m-d H:i:s');
+								$firstTime=strtotime($articles_detail['publish_time']);
+								$lastTime=strtotime($date);
+
+								// perform subtraction to get the difference (in seconds) between times
+								$timeDiff=$lastTime-$firstTime;
+								
+								// Convert Seconds to h:i:s format
+								$init = $timeDiff;
+								$hours = floor($init / 3600);
+								$minutes = floor(($init / 60) % 60);
+								$seconds = $init % 60;
+								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
+								}
+								
+								?></div>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -152,14 +191,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<div class="comment_img">
 									<?php 
 									if($user)
-									{ ?>
+									{ 
+									
+									?>
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
 									<?php }
 									else if($user_detail['user_pic_path']==''){?>
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } ?>
+								<?php } echo $user_detail['fullname']; ?>
 									</div>
 								</div>
 								<div class="float_l span9 margin_zero">
