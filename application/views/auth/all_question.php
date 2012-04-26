@@ -135,7 +135,7 @@
 										<div class="float_l span6 margin_zero">
 											<h3>Collages Q&A </h3>
 											<div class="margin_t1">
-												<ul>
+												<ul class="browse_list">
 													<li>
 														<a href="BrowseQuestion/allcol">Browse All Questions</a>
 													</li>
@@ -226,17 +226,20 @@
 				</div>
 				
 				<div id="quest" class="quest_right">
-				<a href="<?php echo $url; ?>">
+				<div class="float_l span11 margin_zero">
+				<a href="<?php echo "$base$url"; ?>">
 				<h3><?php
 				echo $quest_list['q_title']."</br>";?></h3>
-				</a>
-				<?php echo "by&nbsp;".$quest_list['fullname']."&nbsp";
+				<span class="black"><?php echo "by&nbsp;".$quest_list['fullname']."&nbsp";
 				// Quickly calculate the timespan
 					
 	// $time = $quest_list['q_asked_time'];
 	// $diferencia = time() - $quest_list['q_asked_time'];
     
 				?>
+				</span>
+				</a>
+				</div>
 				
 				</div>
 				<div class="float_r"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>

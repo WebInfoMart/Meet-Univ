@@ -89,7 +89,6 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									</a>
 									</h4>
 									<?php echo $event_comments_detail['commented_text'];?>
-									<div class="fb-like float_l" data-href="<?php $_SERVER["REQUEST_URI"]; ?>/event_commentid/<?php echo $event_comments_detail['comment_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 									<div style="font-size;color:black;" class="float_r"><?php
 									echo substr($event_comments_detail['comment_time'],0,16);?></div>
 								</div>

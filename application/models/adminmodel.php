@@ -473,7 +473,7 @@ class Adminmodel extends CI_Model
 		$query=$this->db->get();
 		return $query->result_array();
 	}
-	function get_univ_info($paging)
+	function get_univ_info($paging='')
 	{
 		$this->db->select('*');
 		$this->db->from('university');

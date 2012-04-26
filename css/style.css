@@ -294,3 +294,17 @@ border-color: rgba(255, 0, 0, .8) !important;
 {
  float:left;
 }
+
+/* For Highlited date */
+
+.highlight_date
+{
+color:#00A3E1;
+height: 20px;
+text-align: center;
+padding-top: 6px;
+background-color: brown;
+border-radius: 15px;
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+}

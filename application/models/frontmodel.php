@@ -206,7 +206,7 @@ class Frontmodel extends CI_Model
 		
 	}
 	
-	function fetch_articles($page)
+	function fetch_articles($page='')
 	{
 		$this->db->select('*');
 		$this->db->from('article');
@@ -214,7 +214,7 @@ class Frontmodel extends CI_Model
 		$this->db->where('article_type_ud','univ_article');
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
-		$config['base_url']=base_url()."auth/articles";
+		$config['base_url']=base_url()."Recent_Articles/articles";
 		$config['total_rows']=$numrows;
 		$config['per_page'] = '7'; 
 		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
@@ -310,6 +310,7 @@ class Frontmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('city');
+		$this->db->order_by('cityname','asc');
 		$query=$this->db->get();
 		return $query->result_array();
 	}
@@ -418,5 +419,28 @@ class Frontmodel extends CI_Model
 		$query = $this->db->get();
 		return $query->row_array();
 	}
-
+	
+	 function fetch_home_featured_quest()
+	 {
+	  $condition = array(
+	  'q_featured_home_que'=>'1'
+	  );
+	  $limit = 5;
+	  $this->db->select('*');
+	  $this->db->from('questions');
+	  $this->db->where($condition);
+	  $this->db->join('users','questions.q_askedby = users.id');
+	  $this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
+	  $this->db->order_by("q_askedby","desc");
+	  $this->db->limit($limit);
+	  $query = $this->db->get();
+	  //$query = $this->db->get_where('questions',$condition,$limit);
+	  if($query->num_rows() > 0)
+	  {
+	   return $query->result_array();
+	  }
+	  else {
+	  return 0;
+	  }
+	 }
 }

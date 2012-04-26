@@ -44,6 +44,7 @@ class Users extends CI_Model
 	 {
 		$this->db->select('*');
 		$this->db->from('country');
+		$this->db->order_by('country_name','asc');
 		$query=$this->db->get();
 		//$query = $this->db->query("select * from country");
 		return $query->result_array();
@@ -61,6 +62,7 @@ class Users extends CI_Model
 	 {
 		$this->db->select('*');
 		$this->db->from('program_parent');
+		$this->db->order_by('program_parent_name','asc');
 		$query = $this->db->get();
 		return $query->result_array();
 	 }
@@ -1146,22 +1148,34 @@ class Users extends CI_Model
 	}
 	
 	function fetch_educ_level_by_id($cur_educ_lvl)
-	{
-		$this->db->select('educ_level');
-		$this->db->from('program_educ_level');
-		$this->db->where('prog_edu_lvl_id',$cur_educ_lvl);
-		$query = $this->db->get();
-		return $query->row_array();
-	}
+	 {
+	  $this->db->select('educ_level');
+	  $this->db->from('program_educ_level');
+	  $this->db->where('prog_edu_lvl_id',$cur_educ_lvl);
+	  $query = $this->db->get();
+	  if($query->num_rows() > 0)
+	  {
+	  return $query->row_array();
+	  }
+	  else{
+	  return 0;
+	  }
+	 }
 	
 	function fetch_area_interest_by_id($area_interest)
-	{
-		$this->db->select('program_parent_name');
-		$this->db->from('program_parent');
-		$this->db->where('prog_parent_id',$area_interest);
-		$query = $this->db->get();
-		return $query->row_array();
-	}
+	 {
+	  $this->db->select('program_parent_name');
+	  $this->db->from('program_parent');
+	  $this->db->where('prog_parent_id',$area_interest);
+	  $query = $this->db->get();
+	  if($query->num_rows() > 0)
+	  {
+	  return $query->row_array();
+	  }
+	  else {
+	  return 0;
+	  }
+	 }
 	
 	function get_followers_detail_of_person($id)
 	{

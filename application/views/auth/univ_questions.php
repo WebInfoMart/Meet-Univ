@@ -28,33 +28,49 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="row" style="margin-top:-20px">
 	<div>
+	
 		<div class="float_l span13 margin_l">
-			<h3>Question: <span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span></h3>
-
-			<div>
-				<div class="float_l span2 margin_zero">
-					<?php echo $single_quest['user_pic_path'] ? "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>" : "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/user_model.png'/>" ?>
-				</div>
-				<div class="float_r">
+		<div class="float_r" >
 				<div class="float_l" style="margin-right:20px;">	<g:plusone size="medium" annotation="none"></g:plusone></div>
 				
-				<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+				<div class="float_l" style="margin-left:10px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
 				<div class="float_l">
 							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-						</div>
 				</div>
-						
-				<div class="float_r span9 margin_zero">
-							<div>
-								<h3>Posted Time</h3>
-								<div class="date_heading"><?php echo $single_quest['q_asked_time']; ?></div>
-								<h3>Details</h3>
-								<?php echo $single_quest['q_detail']; ?>
-							</div>
-						</div>
+				<div class="clearfix"></div>
+				</div>
+			<div>
+				<div class="float_l span12 margin_zero">
+				<h3>Question:<span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span></h3>
 				<?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?>
+				</div>
+				
+				<div class="clearfix"></div>
+			</div>
+			<div>
+				<div class="margin_t1">
+					<div class="float_l span1" style="margin-right:20px;">
+						<?php echo $single_quest['user_pic_path'] ? "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>" : "<img style='width:40px;height:40px;' src='".base_url()."images/user_model.png'/>" ?>
+					</div>
+					<div>
+						<?php echo $single_quest['q_detail']; ?><br/>
+						<div class="float_r margin_t1" style="color:#000" ><?php echo $single_quest['q_asked_time']; ?></div>
+					</div>
+				<div class="clearfix"></div>
+				</div>
+				
+				
 				<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
@@ -184,6 +200,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					</div>
 				</div>
 				<div class="float_r span3">
+					
 					<img src="<?php echo $base; ?>images/banner_img.png">
 				</div>
 				<div class="clearfix"></div>

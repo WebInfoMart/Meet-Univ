@@ -76,6 +76,7 @@ class Events extends CI_Model
 			   'event_date_time'=> $this->input->post('event_time'),
 			   'postedby' => $data['user_id'],
 			   'event_univ_id' => $this->input->post('university'),
+			   'event_category' => $this->input->post('event_type'),
 			   'event_country_id' => $this->input->post('country'),
 			   'event_state_id' => $this->input->post('state'),
 			   'event_city_id' => $this->input->post('city')

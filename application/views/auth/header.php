@@ -47,7 +47,22 @@ if ($user) {
  *  facebbok login                          *
  ******************************************/
   
-  $fbdata = array(
+  
+  $fb_email = $user_profile['email'];
+  $fb_name = $user_profile['name'];
+
+/**************************************** 
+ *  Check if current facebook uesr      *
+ *  email is available or not           *
+ ****************************************/
+  $fb_return_num_rows = $this->users->check_facebook_email($fb_email);
+  if(!$fb_return_num_rows)
+  {
+  /**************************************** 
+ *  Insert data from facebook             *
+ *  if user is new for this site from FB  *
+ ****************************************/
+ $fbdata = array(
   'fullname'	=> $user_profile['name'],
   'createdby' => 'self',
   'level'     => '1',
@@ -57,21 +72,10 @@ if ($user) {
    'fb_user' =>'1',
   //'last_ip'	=> $this->ci->input->ip_address(),
   );
-  $fb_email = $user_profile['email'];
-  $fb_name = $user_profile['name'];
-
-/**************************************** 
- *  Check if current facebook uesr      *
- *  email is available or not           *
- ****************************************/
-  $fb_return_num_rows = $this->users->check_facebook_email($fb_email);
-  if($fb_return_num_rows == 0)
+  if($user_profile['name']!='' && $user_profile['name']!=NULL)
   {
-  /**************************************** 
- *  Insert data from facebook             *
- *  if user is new for this site from FB  *
- ****************************************/
   $data['fb_user_id'] = $this->users->facebook_insert($fbdata);
+  }
   $data_fb_id = trim($data['fb_user_id']);
   $this->ci->session->set_userdata(array(
 						 'user_id'	=> $data_fb_id,

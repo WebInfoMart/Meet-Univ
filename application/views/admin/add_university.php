@@ -787,40 +787,40 @@ $('#addcountry').click(function(){
 	{
 	 $('#country_error').html("Please enter the country name"); 
 	 $('#country_model').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error').html("") 
 	 $('#country_model').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
 	$('#state_error').html("Please enter the state name"); 
 	$('#state_model').addClass('error');
-	flag=1;
+	flag=0;
 	
 	}
 	else
 	{
 	$('#state_error').html(""); 
 	$('#state_model').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error').html("Please enter the city"); 
 	$('#city_model').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error').html(""); 
 	$('#city_model').removeClass('error');
-	flag=0;
+	flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  countrystatus=0;
 		$.ajax({
@@ -885,13 +885,13 @@ $('#addstate').click(function(){
 	{
 	 $('#country_error1').html("Please select the country"); 
 	 $('#country_model1').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error1').html("");
 	 $('#country_model1').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
@@ -904,21 +904,21 @@ $('#addstate').click(function(){
 	{
 	$('#state_error1').html(""); 
 	$('#state_model1').removeClass('error');
-	 flag=0;
+	  flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error1').html("Please enter the city"); 
 	$('#city_model1').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error1').html(""); 
 	$('#city_model1').removeClass('error');
-	flag=0;
+	 flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  statestatus=0;
 		$.ajax({
@@ -981,39 +981,39 @@ $('#addcity').click(function(){
 	{
 	 $('#country_error2').html("Please select the country"); 
 	 $('#country_model2').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error2').html("");
 	 $('#country_model2').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null || state=='0')
 	{
 	$('#state_error2').html("Please select the state "); 
 	$('#state_model2').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#state_error2').html(""); 
 	$('#state_model2').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error2').html("Please enter the city"); 
 	$('#city_model2').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error2').html(""); 
 	$('#city_model2').removeClass('error');
-	flag=0;
+	flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  citystatus=0;
 		$.ajax({

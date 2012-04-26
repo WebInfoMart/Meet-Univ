@@ -44,11 +44,20 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="float_l span9 margin_zero">
 							<div>
 								<div class="date_heading"><?php echo $articles_detail['publish_time']; ?></div>
-								<h3>Details</h3>
-								<?php echo $articles_detail['article_detail']; ?>
 							</div>
 						</div>
 						<div class="clearfix"></div>
+						<div>
+							<h3>Details</h3>
+							<div class="float_l span4 margin_r2">
+								<img src="images/user_model.png" class="art_img_left">
+							</div>
+							<div>
+								<?php echo $articles_detail['article_detail']; ?>
+								
+							</div>
+							<div class="clearfix"></div>
+						</div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
 								<h3><?php echo count($article_comments); ?> Comments</h3>
