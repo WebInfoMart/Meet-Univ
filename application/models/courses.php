@@ -74,9 +74,8 @@ class Courses extends CI_Model
 			$path=$this->excel_path.'/'.$_FILES['userfile']['name'];
 			$data1 = new Spreadsheet_Excel_Reader();
 			$data1->read($path);
-			print_r($data1);
 			error_reporting(E_ALL ^ E_NOTICE);
-			/*for ($j = 1; $j < $data1->sheets[0]['numRows']; $j++)
+			for ($j = 1; $j < $data1->sheets[0]['numRows']; $j++)
 			{
 				$prog_data=array();
 				for ($i = 1; $i <= $data1->sheets[0]['numCols']; $i++)
@@ -122,7 +121,7 @@ class Courses extends CI_Model
 			}
 			//echo $data->sheets[0]['numRows'];
 			
-		//}
+		}
 	}
 	
 	function add_single_course()
@@ -263,6 +262,32 @@ class Courses extends CI_Model
 		$query = $this->db->get();
 		$this->pagination->initialize($config);
 		return $query->result();
+	}
+	
+	function fetch_program_list($educ_level)
+	{
+		$this->db->select('*');
+		$this->db->from('program');
+		if($educ_level!='' && $educ_level!=NULL)
+		{
+		$this->db->where('educ_level_id',$educ_level);
+		}
+		$query = $this->db->get();
+		if($query->num_rows()>1)
+		return $query->result_array();
+		else
+		return 0;
+	}
+	
+	function fetch_universities()
+	{
+		$this->db->select('*');
+		$this->db->from('university');
+		$query = $this->db->get();
+		if($query->num_rows()>1)
+		return $query->result_array();
+		else
+		return 0;
 	}
 }
 

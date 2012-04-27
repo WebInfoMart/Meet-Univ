@@ -1,6 +1,8 @@
 <div id="content">	
-
+<div class="margin_t">
+<div class="float_l">
 <h2>DETAIL OF USERS</h2>
+</div>
 <?php
 $no_of_admin=0;
 $no_of_university_admin=0;
@@ -25,8 +27,12 @@ $no_of_student++;
 }
 }
 ?>
-<h4>Admin(<?php echo $no_of_admin;?>)</h4><h4>University Admin(<?php echo $no_of_university_admin;?>)</h4><h4>Counsellor(<?php echo $no_of_counsellor; ?>)
-</h4><h4>Student(<?php echo $no_of_student;?>)</h4>
+<div class="float_r">
+<ul>
+<li class="small_size">Admin<span class="badge badge-info"><?php echo $no_of_admin;?></span> </li><li class="small_size">University Admin<span class="badge"><?php echo $no_of_university_admin;?></span> </li><li class="small_size">Counsellor<span class="badge badge-warning"><?php echo $no_of_counsellor; ?></span></li><li class="small_size">
+Student<span class="badge badge-success"><?php echo $no_of_student;?></span></li></ul>
+</div>
+</div>
 
 			<form action="<?php echo $base ?>admin/deleteuser" method="post" id="deleteform">	
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">

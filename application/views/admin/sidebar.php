@@ -145,12 +145,18 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		if( $admin_user_level=='5'){
 		?>
 		<li>
+		<a href="#"  class="collapse" ><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />Manage Univ/Program</a>
+		<ul>
+		<li><?php echo anchor("$base".'admincourses/map_program_and_university', 'Area Of Intrest/Program'); ?></li>
+		</ul>
+		</li>
+		<!--<li>
 		<a href="#"  class="collapse" ><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />Manage Progrmas</a>
 		<ul>
 		<li><?php echo anchor("$base".'admincourses/map_area_interest_and_progrmas', 'Area Of Intrest/Program'); ?></li>
-		<?php } ?>
 		</ul>
-		</li>
+		</li>-->
+		<?php } ?>
 		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Support</a></li>
 			
