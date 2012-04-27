@@ -3,14 +3,14 @@
 		<div class="body_header"></div>
 		<div class="body">
 			<div>
-			<div class="float_r" style="margin-right:200px;">
+			<!--<div class="float_r" style="margin-right:200px;">
 				<div class="float_l" style="margin-right:20px;">	<g:plusone size="medium" annotation="none"></g:plusone></div>
 				
 				<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
 				<div class="float_l">
 							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 						</div>
-	</div>
+	</div>-->
 				<!--<div class="row">
 					<div class="span10">
 						<h2>Salford City College - <small>City, Country</small></h2>
@@ -242,9 +242,51 @@
 				</div>
 				
 				</div>
-				<div class="float_r"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-				
+				<div class="float_r">
+				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
+				<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+				<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
 				</div>
+				<div class="float_l"> Asked on
+				<?php 
+				$exp = explode(" ",$quest_list['q_asked_time']);
+				$create_month_format = explode('-',$exp[0]);
+				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
+				
+				// Check if this time is above 24 hours...
+								$starttime = $quest_list['q_asked_time']; 
+								$starttime = strtotime($starttime); 
+								$oneday = 60*60*24; 
+								if( $starttime < (time()-$oneday) ) { 
+								  // echo 'more than one day since start'; 
+								echo $exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
+								}
+								else {
+								//Less than oneday from start
+								//Time difference
+								$date = date('Y-m-d H:i:s');
+								$firstTime=strtotime($quest_list['q_asked_time']);
+								$lastTime=strtotime($date);
+
+								// perform subtraction to get the difference (in seconds) between times
+								$timeDiff=$lastTime-$firstTime;
+								
+								// Convert Seconds to h:i:s format
+								$init = $timeDiff;
+								$hours = floor($init / 3600);
+								$minutes = floor(($init / 60) % 60);
+								$seconds = $init % 60;
+								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
+								}
+				
+							if($quest_list['q_country_id'] == '0' and $quest_list['q_univ_id'] != '0')
+							{
+								echo "Qategory&nbsp;:&nbsp;".'Colleges';
+							}
+							else {
+								echo "Qategory&nbsp;:&nbsp;".'Study Abroad';
+							}
+				?>  </div>
 				</div>
 				</li>
 				
@@ -254,6 +296,7 @@
 				?>
 				</ul>
 				</div>
+				
 				</div>
 				<div class="clearfix"></div>
 				</div>
