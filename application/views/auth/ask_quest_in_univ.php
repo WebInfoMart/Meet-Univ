@@ -138,14 +138,29 @@
 				
 
 				</div>-->
-				<div id="quest_div_show_right" class="float_l">
+				
+				</div>
+				</div>
+				
+				<!-- End Here -->
+	</div>
+	
+			</div>
+	
+		
+		
+	<div class="float_r span3 margin_t">
+		<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
+	</div>
+	<div id="quest_div_show_right" class="float_l list_user_quest">
 				<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on MeetUniversities</h3>
 				<div>
 				<ul class="course_list">
 				<?php
 				if(!empty($get_all_question_of_univ))
 				{
-				foreach($get_all_question_of_univ as $quest_list)
+				$a=0;
+				foreach($get_all_question_of_univ['quest_detail'] as $quest_list)
 				{
 				if($quest_list['q_univ_id'] != '0')
 				{
@@ -163,21 +178,71 @@
 				<div id="quest" class="quest_right">
 				<a href="<?php echo "$base$url"; ?>">
 				<h3>
-				<?php
-				echo $quest_list['q_title']."</br>";?></h3></a>
-				<?php
-				echo "by&nbsp;".$quest_list['fullname']."&nbsp";
+				<?
 				// Quickly calculate the timespan
 					
 	// $time = $quest_list['q_asked_time'];
 	// $diferencia = time() - $quest_list['q_asked_time'];
-    
-				?>
+    ?>
+				
+				<div class=""> 
+				<?php
+				echo $quest_list['q_title']."</br>";?></h3></a>
+				<?php
+				echo "by&nbsp;".$quest_list['fullname']."&nbsp"; ?>
+				Asked on
+				<?php 
+				$exp = explode(" ",$quest_list['q_asked_time']);
+				$create_month_format = explode('-',$exp[0]);
+				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
+				
+				// Check if this time is above 24 hours...
+								$starttime = $quest_list['q_asked_time']; 
+								$starttime = strtotime($starttime); 
+								$oneday = 60*60*24; 
+								if( $starttime < (time()-$oneday) ) { 
+								  // echo 'more than one day since start'; 
+								echo $exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
+								}
+								else {
+								//Less than oneday from start
+								//Time difference
+								$date = date('Y-m-d H:i:s');
+								$firstTime=strtotime($quest_list['q_asked_time']);
+								$lastTime=strtotime($date);
+
+								// perform subtraction to get the difference (in seconds) between times
+								$timeDiff=$lastTime-$firstTime;
+								
+								// Convert Seconds to h:i:s format
+								$init = $timeDiff;
+								$hours = floor($init / 3600);
+								$minutes = floor(($init / 60) % 60);
+								$seconds = $init % 60;
+								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
+								}
+				
+							if($quest_list['q_country_id'] == '0' and $quest_list['q_univ_id'] != '0')
+							{
+								echo "Qategory&nbsp;:&nbsp;".'Colleges';
+							}
+							else {
+								echo "Qategory&nbsp;:&nbsp;".'Study Abroad';
+							}
+							echo "&nbsp;Total Answer&nbsp;".$get_all_question_of_univ['ans_count'][$a];
+				
+				?>  </div>
+				<div class="float_r">
+				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
+				<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+				<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
+				</div>
 				</div>
 				<div class="clearfix"></div>
 				</div>
 				</a>
 				<?php
+				$a=$a+1;
 				}
 				}
 				?>
@@ -187,17 +252,6 @@
 				
 				</ul>
 				</div>
-				</div>
-				</div>
-				<!-- End Here -->
-	</div>
-			</div>
-	
-		
-		
-	<div class="float_r span3 margin_t">
-		<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
-	</div>
 	<div class="clearfix"></div>
 	</div>
 </div>	

@@ -287,7 +287,7 @@ $(function () {
 									</div>
 									<div class="float_r">
 									<?php $date=explode(" ",$events['event_date_time']); ?>
-										<h3 class="style_h3"><div class="highlight_date"><?php echo $date[0]."-".$date[1]; ?></div></h3>
+										<h3 class="style_h3"><div><?php echo $date[0]."-".$date[1]; ?></div></h3>
 										<span class="span_text">300 attending</span><br/>
 										<button class="btn_reg" id="<?php echo $events['event_id']; ?>" href="">Register!</button>
 									</div>

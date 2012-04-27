@@ -122,9 +122,9 @@ class Quest_ans_controler extends CI_Controller
 			}
 			
 		$data['get_all_question'] = $this->quest_ans_model->get_all_quest_user_info();
-		//print_r($data['get_all_question']);
+		//echo count($data['get_all_question']);
 		$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
-		//print_r($data['count_all_question']);
+		print_r($data['count_all_question']);
 		$this->load->view('auth/all_question',$data);
 		$this->load->view('auth/footer',$data);
 	}

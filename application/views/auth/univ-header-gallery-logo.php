@@ -29,15 +29,15 @@
 			</div>
 			
 			<ul class="uni_gallery">
-				<li class="univ_page_logo">
+				<li class="univ_page_logo" style="text-align:center;">
 				<?php 
 				if($university_details['univ_logo_path'] != '')
 				{
-				echo "<img class='univ_page_logo' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
+				echo "<img class='univ_page_logo_nw' style='height:100px' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
 				}
 				else
 				{
-				echo "<img class='univ_page_logo' src='".base_url()."uploads/univ_gallery/default_logo.png'/>"; 
+				echo "<img class='univ_page_logo_nw' style='height:100px' src='".base_url()."uploads/univ_gallery/default_logo.png'/>"; 
 				}
 				?>
 				</li>
@@ -84,7 +84,7 @@
 			</div>
 			
 			<div class="clearfix"></div>
-			<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.4.min.js"></script>
+			<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.4.min.js"></script>			
 <script type="text/javascript">
 $(document).ready(function() {
 	var fixed = false;
@@ -105,5 +105,24 @@ $(document).scroll(function() {
 });
 
 });
+$(document).ready(function() {
+    $('.univ_page_logo_nw').each(function() {
+    var maxWidth = 222; // Max width for the image
+    var width = $(this).width();    // Current image width
+   
+//alert(width);
+    // Check if the current width is larger than the max
+    if(width < maxWidth){
+		 $('.univ_page_logo').css('text-align','center').css('height','100px');
+        
+    }
+	else{
+		$('.univ_page_logo_nw').css('height','100px').css('width','222px');
+	}
 
+ 
+	
+});
+});
+		
 </script>

@@ -308,3 +308,9 @@ border-radius: 15px;
 -webkit-border-radius: 15px;
 -moz-border-radius: 15px;
 }
+
+.list_user_quest
+{
+margin-top: 20px;
+margin-left: 14px;
+}

@@ -53,8 +53,8 @@
 				</div>-->
 				<div class="clearfix"></div>
 			</div>
-			<div class="row" style="margin-top:-25px">
-				<div class="float_l span13 margin_l margin_t">
+			<div class="row">
+				<div class="float_l span13 margin_l margin_t1">
 				
 				<!-- Question send success -->
 	<div class="modal" id="show_success" style="display:none;" >
@@ -117,7 +117,7 @@
 												<label>Categorys</label>
 												<select class="span3" id="category" name="category" onchange="fetch_collage(this);">
 													<option value="">Choose Type</option>
-													<option value="sa">Study Abroad</option>
+													<!--<option value="sa">Study Abroad</option>-->
 													<option value="col">College</option>
 													
 												</select>
@@ -201,8 +201,10 @@
 				<?php
 				if(!empty($get_all_question))
 				{
-				foreach($get_all_question as $quest_list)
+				$a=0;
+				foreach($get_all_question['quest_detail'] as $quest_list)
 				{
+				
 				if($quest_list['q_univ_id'] != '0')
 				{
 					$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
@@ -213,7 +215,9 @@
 				}
 				?>
 
-				<li><div class="quest_row_single">
+				<li>
+				<div class="margin_b2">
+				<div class="quest_row_single">
 				<div id="quest_pic" class="quest_pic">
 				
 				<?php if($quest_list['user_pic_path']!='')
@@ -239,15 +243,8 @@
 				?>
 				</span>
 				</a>
-				</div>
-				
-				</div>
-				<div class="float_r">
-				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
-				<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-				<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
-				</div>
-				<div class="float_l"> Asked on
+					<div>
+					<div class="float_l span3 margin_zero"> Asked on
 				<?php 
 				$exp = explode(" ",$quest_list['q_asked_time']);
 				$create_month_format = explode('-',$exp[0]);
@@ -278,19 +275,43 @@
 								$seconds = $init % 60;
 								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
 								}
-				
+							?>
+							</div>
+							<div class="float_l span3">
+							<?php
 							if($quest_list['q_country_id'] == '0' and $quest_list['q_univ_id'] != '0')
 							{
-								echo "Qategory&nbsp;:&nbsp;".'Colleges';
+								echo "Category&nbsp;:&nbsp;".'Colleges';
 							}
 							else {
-								echo "Qategory&nbsp;:&nbsp;".'Study Abroad';
+								echo "Category&nbsp;:&nbsp;".'Study Abroad';
 							}
-				?>  </div>
+							?>
+							</div>
+							<div class="float_l span3">
+							<?php
+							echo "Total Answer&nbsp;".$get_all_question['ans_count'][$a];
+							
+				?> 
+				</div>
+				<div class="clearfix"></div>
+				</div>
+				</div>
+				
+				</div>
+				<div class="float_r">
+				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
+				<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+				<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
+				</div>
+			<div class="clearfix"></div>
+				</div>
+			
 				</div>
 				</li>
 				
 				<?php
+				$a=$a+1;
 				}
 				}
 				?>
@@ -303,7 +324,7 @@
 				<!-- End Here -->
 				</div>
 				
-				<div class="float_r span3 margin_t">
+				<div class="float_r span3 margin_t1">
 					<img src="<?php echo $base; ?>images/banner_img.png">
 				</div>
 		

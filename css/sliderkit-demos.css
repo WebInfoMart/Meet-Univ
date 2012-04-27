@@ -113,7 +113,7 @@
 .contentslider-std .sliderkit-nav-clip li.sliderkit-selected a:hover{color:#fff!important;}
 
 /* Panel */
-.contentslider-std .sliderkit-panels{width:765px;min-height:250px;overflow:hidden;padding:10px 0;}
+.contentslider-std .sliderkit-panels{width:765px;min-height:274px;overflow:hidden;padding:10px 0;}
 .contentslider-std .sliderkit-panel{width:765px;min-height:250px;overflow:auto;padding:0 10px;}
 .contentslider-std .sliderkit-panel h2{margin:5px 0 20px;}
 

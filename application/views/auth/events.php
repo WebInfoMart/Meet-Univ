@@ -22,6 +22,9 @@
 								<?php } else {?>
 								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $event_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >
 								<?php } ?>	
+								<div>
+									<h4>22 Register</h4>
+									</div>
 							</div>
 							<div class="dsolution">
 								<div>
@@ -33,8 +36,9 @@
 									<div class="float_r">
 	<div ><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 									</div>
-									<h4>22 Register</h4>
+									
 									</div>
+									
 									<div class="clearfix"></div>
 								</div>
 								<div class="course_cont"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></div>

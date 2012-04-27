@@ -122,21 +122,21 @@ class Quest_ans_model extends CI_Model
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{
-			/* $times = $query->result_array();
-			//$before_time=array();
-			foreach($times as $time)
+			$q_detail = $query->result_array();
+			foreach($q_detail as $getAns)
 			{
-				$d = $time['q_asked_time'];
-				//$seconds = $this->UnixTime($d);
-				//echo $d; 
-				$before_time[] = $this->convertToFBTimestamp(strtotime($d));
-				
-				//exit;
-				
-			} */
-			//print_r($before_time);
-			//exit;
-			return $query->result_array();
+				$this->db->select('*');
+				$this->db->from('answers');
+				$this->db->where('qid',$getAns['que_id']);
+				$query = $this->db->get();
+				$cntAns[] = $query->num_rows();
+			}
+			$quest_data = array();
+			$quest_data['quest_detail'] = $q_detail;
+			
+			$quest_data['ans_count'] = $cntAns;
+			echo count($quest_data['ans_count']);
+			return $quest_data;
 		}
 		else{
 		return 0;
@@ -204,7 +204,22 @@ class Quest_ans_model extends CI_Model
 			} */
 			//print_r($before_time);
 			//exit;
-			return $query->result_array();
+			//return $query->result_array();
+			$q_detail = $query->result_array();
+			foreach($q_detail as $getAns)
+			{
+				$this->db->select('*');
+				$this->db->from('answers');
+				$this->db->where('qid',$getAns['que_id']);
+				$query = $this->db->get();
+				$cntAns[] = $query->num_rows();
+			}
+			$quest_data = array();
+			$quest_data['quest_detail'] = $q_detail;
+			
+			$quest_data['ans_count'] = $cntAns;
+			//echo count($quest_data['ans_count']);
+			return $quest_data;
 		}
 		else{
 		return 0;
