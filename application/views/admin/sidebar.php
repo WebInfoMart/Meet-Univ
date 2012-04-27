@@ -112,7 +112,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		
 		<?php }} ?>
 			<?php if($admin_user_level=='5'){ ?>
-		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" /> Program/Courese</a>
+		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" /> Program/Courses</a>
 		<ul>
 		<li><?php echo anchor("$base".'admincourses/upload_courses', 'Add Bulk Courses'); ?></li>
 		<li><?php echo anchor("$base".'admincourses/add_course', 'Add SIngle Course'); ?></li>
@@ -122,7 +122,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		</li>
 		<?php } if($admin_user_level=='3' || $admin_user_level=='5'){  ?>
 		
-		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />University/Courese</a>
+		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />University/Courses</a>
 		<ul>
 		<li><?php echo anchor("$base".'admincourses/university_addcourse', 'Add Courses To University'); ?></li>
 		<li><?php echo anchor("$base".'admincourses/manage_univ_course', 'Manage Courses'); ?></li>

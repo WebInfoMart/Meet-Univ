@@ -42,6 +42,10 @@ class Admincourses extends CI_Controller
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);
 			if($data['admin_user_level']=='5')
@@ -72,6 +76,10 @@ class Admincourses extends CI_Controller
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);
 			if($data['admin_user_level']=='5')
@@ -111,6 +119,10 @@ class Admincourses extends CI_Controller
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
 			$data['educ_level']=$this->users->fetch_educ_level();
 			$data['area_interest']=$this->users->fetch_area_interest();
 			$this->load->view('admin/header', $data);
@@ -151,6 +163,10 @@ class Admincourses extends CI_Controller
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
 			$data['educ_level']=$this->users->fetch_educ_level();
 			$data['area_interest']=$this->users->fetch_area_interest();
 			$this->load->view('admin/header', $data);
@@ -201,8 +217,13 @@ class Admincourses extends CI_Controller
 	
 	function fetch_programs()
 	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$data['result']=$this->courses->fetch_programs($this->input->post('educ_level'),$this->input->post('area_interest'));
 		$this->load->view('ajaxviews/program_view',$data);
+		}
 	}
 	
 	/*function add_univ_prog($submit='')
@@ -261,8 +282,13 @@ class Admincourses extends CI_Controller
 		}
 		function check_univ_course_ajax()
 		{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$data['result']=$this->courses->check_univ_course($this->input->post('university'),$this->input->post('program'));
-		$this->load->view('ajaxviews/check_unique_field', $data);	
+		$this->load->view('ajaxviews/check_unique_field', $data);
+		}	
 		}
 		
 		function delete_single_course($prog_id)
@@ -276,6 +302,10 @@ class Admincourses extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$delete_user_priv=array('5','7','8','10');
@@ -302,6 +332,10 @@ class Admincourses extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
@@ -335,6 +369,10 @@ class Admincourses extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		if($data['admin_user_level']=='5')
@@ -359,6 +397,10 @@ class Admincourses extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$data['openhtml']=0;
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
@@ -404,6 +446,10 @@ class Admincourses extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		if($data['admin_user_level']=='5' || $data['admin_user_level']=='3')
@@ -429,13 +475,17 @@ class Admincourses extends CI_Controller
 
 	function fetch_univ_course_ajax()
 	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$data = $this->path->all_path();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$univ_id=$this->input->post('university');
 		$data['course_info']=$this->courses->fetch_univ_courses($univ_id);
 		$this->load->view('ajaxviews/manage_univ_courses',$data);
-		
+		}
 	}
 	
 	function map_area_interest_and_progrmas()
@@ -448,6 +498,10 @@ class Admincourses extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$data['area_interest']=$this->users->fetch_area_interest();
 		$data['program_list']=$this->courses->fetch_program_list('4');
 		
@@ -468,29 +522,57 @@ class Admincourses extends CI_Controller
 	
 	function map_program_and_university()
 	{
-	if (!$this->tank_auth->is_admin_logged_in()) {
-			redirect('admin/adminlogin/');
-		}
-		else{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		$data['univresity_detail']=$this->courses->fetch_universities();
-		$data['program_list']=$this->courses->fetch_program_list();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+				redirect('admin/adminlogin/');
+			}
+			else{
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
+			$data['university_detail']=$this->courses->fetch_universities();
+			
+			$this->load->view('admin/header',$data);
+			$this->load->view('admin/sidebar',$data);
+			if($data['admin_user_level']=='5')
+			{
+			if($this->input->post('submit'))
+			{
+			 $this->courses->insert_courses_to_univ();													
+			}
+			
+			$this->load->view('admin/courses/univ_vs_program', $data);
+			
+			}
+			else{
+			$this->load->view('admin/accesserror', $data);
+			}
+			
+			}
+	}
+	
+	function fetch_univ_programs_ajax()
+	{
 		
-		$this->load->view('admin/header',$data);
-		$this->load->view('admin/sidebar',$data);
-		if($data['admin_user_level']=='5')
-		{
-		$this->load->view('admin/courses/area_vs_postgraduate_program', $data);
-		
-		}
-		else{
-		$this->load->view('admin/accesserror', $data);
-		}
-		
-		}
+		if (!$this->tank_auth->is_admin_logged_in()) {
+				redirect('admin/adminlogin/');
+			}
+			else{
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			if($data['admin_user_level']=='5')
+			{
+			$data['program_list']=$this->courses->fetch_program_list($level='');
+			$data['univ_program']=$this->courses->fetch_univ_program($this->input->post('university'));
+			$this->load->view('ajaxviews/univ_vs_program_ajax', $data);	
+			}
+			
+			}
 	}
 	
 }

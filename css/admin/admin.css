@@ -510,7 +510,7 @@ border-top-left-radius: 4px;
 -webkit-border-bottom-left-radius: 4px;
 -moz-border-radius-bottomleft: 4px;
 border-bottom-left-radius: 4px;}
-.arrow_but{padding-bottom: 7px!important;;margin-left: -7px!important;margin-top: -2px;}
+.arrow_but{padding-bottom: 7px!important;;margin-left: -7px!important;margin-top: -4px;}
 .arrow_but:hover,.arrow_but:active,.arrow_but:visited{background-color: #05C!important;}
 
 
@@ -609,3 +609,7 @@ vertical-align: baseline;
 background-color: #468847;
 }
 .small_size{font-size: 12px;}
+.list_univ{width: 455px;margin-top:20px;}
+.prog_css{margin-top:30px;margin-left:50px;}
+.univ_name_txt{background: none;border: none!important;}
+.new_div li div {padding-bottom:5px!important;padding-top:0px!important;}

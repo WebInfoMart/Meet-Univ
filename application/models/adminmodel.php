@@ -95,7 +95,10 @@ class Adminmodel extends CI_Model
 	//$query = $this->db->get('user_privilige');
 	$this->load->library('pagination');
 	$query = $this->db->get_where('user_privilige', array('user_id' => $user_id));
-	return $query->result_array();	
+	if($query->num_rows>0)
+	return $query->result_array();
+    else
+    return 0;	
 	}
 	
 	//fetch and edit user profile and basic data

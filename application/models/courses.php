@@ -288,6 +288,67 @@ class Courses extends CI_Model
 		return $query->result_array();
 		else
 		return 0;
+	} 
+	
+	function fetch_univ_program($univ_id)
+	{
+		$this->db->select('program_id');
+		$this->db->from('univ_program');
+		$this->db->where('univ_id', $univ_id);
+		$query=$this->db->get();
+		return $query->result_array();
+		
+	}
+	
+	function insert_courses_to_univ()
+	{
+	
+			$program_name = $this->input->post('programs_name');
+			$program_id = $this->input->post('program_id');
+			$univ_id=$this->input->post('university');
+			$already_checked_prog = $this->input->post('already_checked_prog');
+			
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$educ_level=$this->input->post('area_interest');	
+			$area_intrest=$this->input->post('education_level_id');	
+			$i=0;
+			foreach($program_id as $prog_id)
+			{
+			 if(!in_array($prog_id,$program_name))
+			 {
+			 $this->db->delete('univ_program',array('program_id'=>$prog_id,'univ_id'=>$univ_id));
+			 }
+			 if((in_array($prog_id,$program_name)) && (!in_array($prog_id,$already_checked_prog)))
+			 {
+				$prog_educ_level_id=$educ_level[$i];
+				$univ_prog_data = array(
+				'univ_id'=>$univ_id,
+				'program_id'=> $prog_id,
+				'insertedby' => $data['user_id'],
+				'prog_parent_id' =>$area_intrest[$i],
+				'prog_educ_level' => $prog_educ_level_id
+				);
+				$this->db->insert('univ_program',$univ_prog_data);
+			 }
+			 $i=$i+1;
+			}
+			/*foreach($education_level_id as $educ_level_id)
+			{
+			if()
+			$this->db->delete('univ_program',array('univ_id'=>$this->input->post('university')));
+			
+			
+			$prog_educ_level_id=$educ_level[$i];
+			$univ_prog_data = array(
+			'univ_id'=>$this->input->post('university'),
+			'program_id'=> $program_id,
+			'insertedby' => $data['user_id'],
+			'prog_parent_id' =>$area_intrest[$i],
+			'prog_educ_level' => $prog_educ_level_id
+			);
+			//$this->db->insert('univ_program',$univ_prog_data);
+			$i=$i+1;
+			}*/
 	}
 }
 

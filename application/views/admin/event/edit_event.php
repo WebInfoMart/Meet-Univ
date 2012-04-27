@@ -155,7 +155,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Event Time</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="text" name="event_time" value="<?php echo $event_detail['event_date_time']; ?>">
+								<input type="text" size="30" class="date_picker" name="event_time" value="<?php echo $event_detail['event_date_time']; ?>">
 							</div>
 							
 							<div class="clearfix"></div>

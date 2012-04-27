@@ -25,13 +25,17 @@ class Admin extends CI_Controller
 		//$this->load->view('auth/header',$data);
 		//$this->load->view('auth/footer',$data);
 		if (!$this->tank_auth->is_admin_logged_in()) {
+		 
 			redirect('admin/adminlogin/');
 		} else {
 			$data['username']	= $this->tank_auth->get_username();
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-			
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
 			//fetch user privilege data from model
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);	
@@ -160,7 +164,10 @@ class Admin extends CI_Controller
 	$data['user_id']	= $this->tank_auth->get_admin_user_id();
 	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 	$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-	
+	if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 	$this->load->view('admin/header',$data);
 	$this->load->view('admin/sidebar',$data);
 	$use_username = $this->config->item('use_username', 'tank_auth');
@@ -645,6 +652,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$this->load->view('admin/user_privilege',$data);
@@ -706,6 +717,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$data['no_of_users']=$this->adminmodel->get_user_info();
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
@@ -760,6 +775,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$data['user_detail_edit'] = $this->adminmodel->fetch_data_edit($id);
@@ -810,6 +829,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$data['current_user_priv']=$this->adminmodel->get_user_privilege($id);
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
@@ -863,6 +886,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$this->load->view('admin/userupdated',$data);
@@ -879,6 +906,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$delete_user_priv=array('5','7','8','10');
@@ -914,6 +945,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$delete_user_priv=array('5','7','8','10');
@@ -951,6 +986,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$add_gallery_priv=array('4','6','8','10');
@@ -990,6 +1029,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
@@ -1040,6 +1083,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$data['results'] = $this->adminmodel->userprivlegetype();
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
@@ -1095,48 +1142,81 @@ class Admin extends CI_Controller
 	
 	function add_country_ajax()
 	{
+	if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+	else {
 	$data['result']=$this->adminmodel->enterplacelevel1();
 	$this->load->view('ajaxviews/check_unique_field', $data);	
 	}
-	
+	}
 	function add_state_ajax()
-	{
+	{if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+	else {
 	$data['result']=$this->adminmodel->enterplacelevel2();
 	$this->load->view('ajaxviews/check_unique_field', $data);	
+		}
 	}
 	function add_city_ajax()
 	{
+	if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+	else {	
 	$data['result']=$this->adminmodel->enterplacelevel3();
-	$this->load->view('ajaxviews/check_unique_field', $data);	
+	$this->load->view('ajaxviews/check_unique_field', $data);
+	}	
 	}
 
 	function country_list_ajax($scid='0')
 	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$data['region']=$this->users->fetch_country();
 		$data['scid']=$this->input->post('country_id');
 		$this->load->view('ajaxviews/country_ajax',$data);
+		}
 	}
 	function state_list_ajax()
 	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$cid=$this->input->post('country_id');
 		$data['region']=$this->adminmodel->fetch_states($cid);
 		$data['ssid']=$this->input->post('sel_state_id');
 		$this->load->view('ajaxviews/state_ajax',$data);
+		}
 	}
 	function city_list_ajax()
 	{	
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$sid=$this->input->post('state_id');
 		$data['region']=$this->adminmodel->fetch_city($sid);
 		$data['scid']=$this->input->post('sel_city_id');
 		$this->load->view('ajaxviews/city_ajax',$data);
+		}
 	}
 	
 	function state_check()
 	{
-		
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$data['result']=$this->adminmodel->state_chk_in_country($this->input->post('country_model1'),$this->input->post('state_model1'));
 		$this->load->view('ajaxviews/check_unique_field', $data);
+		}
 	}
+	
 	function city_check()
 	{
 		$data['result']=$this->adminmodel->city_chk_in_state($this->input->post('state_model2'),$this->input->post('city_model2'));
@@ -1153,6 +1233,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
@@ -1215,6 +1299,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
@@ -1254,6 +1342,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
@@ -1293,6 +1385,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$delete_user_priv=array('5','7','8','10');
@@ -1326,6 +1422,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$delete_user_priv=array('5','7','8','10');
@@ -1361,6 +1461,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		if($this->input->post('submit'))
@@ -1404,19 +1508,19 @@ class Admin extends CI_Controller
 	
 	function check_subdomain()
 	{
-	if($this->input->post('sub_domain')==$this->input->post('sub_domain_name'))
-	{
-	return TRUE;
-	}
-	else if($this->adminmodel->check_subdomain($this->input->post('sub_domain')))
-	{
-	$this->form_validation->set_message('check_subdomain', 'This SubDomain is alredy Exist');
-	return FALSE;
-	}
-	else
-	{
-	return TRUE;
-	}
+		if($this->input->post('sub_domain')==$this->input->post('sub_domain_name'))
+		{
+		return TRUE;
+		}
+		else if($this->adminmodel->check_subdomain($this->input->post('sub_domain')))
+		{
+		$this->form_validation->set_message('check_subdomain', 'This SubDomain is alredy Exist');
+		return FALSE;
+		}
+		else
+		{
+		return TRUE;
+		}
 	}
 	
 	function univ_detail($univ_id)
@@ -1429,6 +1533,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$delete_user_priv=array('5','7','8','10');
@@ -1454,12 +1562,21 @@ class Admin extends CI_Controller
 	
 	function check_unique_field($field_name='',$table_name='')
 	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$data['result']=$this->adminmodel->check_unique_field($field_name,$this->input->post('field'),$table_name);
-		$this->load->view('ajaxviews/check_unique_field', $data);	
+		$this->load->view('ajaxviews/check_unique_field', $data);
+		}	
 	}
 	
 	function add_univ_admin_ajax()
 	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$hasher = new PasswordHash(
 		$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
@@ -1482,10 +1599,12 @@ class Admin extends CI_Controller
 		$data['uai']=$univ_admin_id['user_id'];
 		$data['univ_admins']=$this->adminmodel->get_univ_admin();
 		$this->load->view('ajaxviews/univ_admin_list',$data);
+		}
 	}
 	
 	function add_univ_gallery()
-	{if (!$this->tank_auth->is_admin_logged_in()) {
+	{
+	if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		}
 		else{
@@ -1493,6 +1612,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$add_gallery_priv=array('4','6','8','10');
@@ -1549,6 +1672,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
@@ -1600,11 +1727,18 @@ class Admin extends CI_Controller
 	
 	function fetch_univ_gallery_ajax()
 	{
-	
+	if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+	else {
 	$data = $this->path->all_path();
 	$data['user_id']	= $this->tank_auth->get_admin_user_id();
 	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 	$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+	if(!($data['admin_priv']))
+	{
+		redirect('admin/adminlogout');
+	}
 	$delete=0;
 	$delete_gallery_pic=array('5','7','8','10');
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
@@ -1623,7 +1757,7 @@ class Admin extends CI_Controller
 	$this->load->view('ajaxviews/manage_univ_gallery_admin', $data);
 	
 	}
-	
+  }	
 	function update_password()
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {
@@ -1634,6 +1768,10 @@ class Admin extends CI_Controller
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
