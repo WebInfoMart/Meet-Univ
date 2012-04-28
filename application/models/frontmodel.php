@@ -446,9 +446,52 @@ class Frontmodel extends CI_Model
 	 
 	function fetch_search_country_having_univ()
 	{
-		/*$this->db->select('*');
+		$this->db->select('*');
 		$this->db->from('country');
-		$this->db->join('users','questions.q_askedby = users.id');
-		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');*/
+		$this->db->join('university','university.country_id = country.country_id');
+		$this->db->group_by("country.country_id");
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
 	}	
+	
+	function fetch_area_interest_having_univ()
+	{
+		$this->db->select('*');
+		$this->db->from('program_parent');
+		$this->db->join('univ_program','univ_program.prog_parent_id = program_parent.prog_parent_id');
+		$this->db->group_by("program_parent.prog_parent_id");
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	
+	function fetch_cities_having_univ()
+	{
+		$this->db->select('*');
+		$this->db->from('city');
+		$this->db->join('events','events.event_city_id = city.city_id');
+		$this->db->group_by("city.city_id");
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
 }
