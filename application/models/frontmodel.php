@@ -443,4 +443,12 @@ class Frontmodel extends CI_Model
 	  return 0;
 	  }
 	 }
+	 
+	function fetch_search_country_having_univ()
+	{
+		/*$this->db->select('*');
+		$this->db->from('country');
+		$this->db->join('users','questions.q_askedby = users.id');
+		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');*/
+	}	
 }

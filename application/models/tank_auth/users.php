@@ -974,7 +974,7 @@ class Users extends CI_Model
 		return $res->result_array();
 		}
 	}
-	function show_all_college($search_country,$type_educ_level,$search_course)
+	function show_all_college($search_country,$type_educ_level,$search_course,$search_program)
 	{
 						$this->db->select('*');
 						$this->db->from('university');
@@ -995,6 +995,11 @@ class Users extends CI_Model
 						$search_array['country_id']=$search_country;
 						$chk_c_id=1;
 						//$this->db->where('country_id',trim($search_country));
+						}
+						if($search_program!='' && $search_program!=0)
+						{
+						$search_array['univ_program.program_id']=$search_program;
+						$chk_sc_sel++;
 						}
 						if($chk_sc_sel>0 || $chk_c_id)
 						{
@@ -1495,6 +1500,25 @@ class Users extends CI_Model
 		 $pro_complete=100-(($pro-2)*10);
 		 return $pro_complete ;
 		
+		}
+		
+		function fetch_program_by_area_intrest($educ_level,$area_interest)
+		{
+			$this->db->select('*');
+			$this->db->from('univ_program');
+			$this->db->join('program','univ_program.program_id=program.prog_id');
+		    if($educ_level!='' && $educ_level!=0)
+			{
+			$serach_array['univ_program.prog_educ_level']=$educ_level;
+			}
+			$serach_array['univ_program.prog_parent_id']=$area_interest;
+			$this->db->where($serach_array);
+			$query=$this->db->get();
+			if($query->num_rows()>0)
+			return $query->result_array();
+			else
+			return 0;
+			
 		}
 }
 

@@ -56,6 +56,8 @@ $(function () {
 			<div class="float_r span8 margin_t margin_l">
 				<form class="form-horizontal form_horizontal_home" id="search_form" action="" method="get">
 					<input type="hidden" name="type_search" id="type_search" value="0"/>
+					<input type="hidden" name="educ_level" id="educ_level" value="All"/>
+					
 					<div class="control-group">
 						<label class="control-label" for="focusedInput"><h3 class="white">Explore</h3></label>
 						<div class="controls">
@@ -154,7 +156,7 @@ $(function () {
 										foreach($country as $srch_country)
 										{
 										?>
-											<option value="<?php echo $srch_country['country_id'] ?>"> <?php echo ucwords($srch_country['country_name']); ?> </option>
+											<option value="<?php echo $srch_country['country_id'] ?>"><?php echo ucwords($srch_country['country_name']); ?></option>
 										<?php
 										}
 										?>
@@ -171,7 +173,7 @@ $(function () {
 										foreach($area_interest as $srch_course)
 										{
 										?>
-											<option value="<?php echo $srch_course['prog_parent_id']; ?>"> <?php echo ucwords($srch_course['program_parent_name']); ?> </option>
+											<option value="<?php echo $srch_course['prog_parent_id']; ?>"><?php echo ucwords($srch_course['program_parent_name']); ?></option>
 										<?php
 										}
 										?>
@@ -209,7 +211,7 @@ $(function () {
 							</div>
 						</div>
 					</div>-->
-					<div class="control-group">
+					<!--<div class="control-group">
 						<label class="control-label" for="focusedInput"><h3 class="white">Search</h3></label>
 						<div class="controls">
 							<div class="float_l span4 margin_zero">
@@ -222,6 +224,7 @@ $(function () {
 							<div class="clearfix"></div>
 						</div>
 					</div>
+					-->
 				</form>
 			</div>
 			<div class="clearfix"></div>
@@ -487,8 +490,6 @@ $(document).ready(function() {
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#coin-slider').coinslider({ width: 500, navigation: false, delay: 5000 });
-		
-		
 		width: 400, // width of slider panel
 height: 290, // height of slider panel
 spw: 7, // squares per width
@@ -512,17 +513,22 @@ fetch_programs(0);
 
 $('#found').click(function(){
 $('#type_search').val(2);
+$('#educ_level').val('Foundation');
+
 fetch_programs(2);
 });
 
 $('#pg').click(function(){
 $('#type_search').val(4);
+$('#educ_level').val('Postgraduate');
+
 fetch_programs(4);
 
 });
 
 $('#ug').click(function(){
 $('#type_search').val(3);
+$('#educ_level').val('Undergraduate');
 fetch_programs(3);
 });
 
@@ -539,20 +545,38 @@ $('#type_search').val('fairs');
 
 function serach_results()
 {
+var country;
+var educ_level;
+var area_interest;
 if($('#search_country').val()=='')
 {
-alert("Please select the country")
-}
-else if($('#search_program').val()=='')
-{
-alert("please select the program")
+country='AllCountry-0';
 }
 else
 {
- $("#search_form").attr("action","college_search");
- $('#btn_col_search').val('col_search');
- $('#search_form').submit();
+var s_country=$('#search_country option:selected').text();
+s_country=s_country.replace(',','');
+country=s_country+'-'+$('#search_country option:selected').val();
 }
+if($('#search_program').val()=='')
+{
+area_interest='AllArea-0';
+}
+else
+{
+var sarea=$("#search_program option:selected").text();
+sarea=sarea.replace(',','');
+area_interest=sarea+'-'+$("#search_program option:selected").val();
+}
+if($('#educ_level').val()=='All'|| $('#type_search').val()=='0')
+{
+educ_level='AllLevel-0';
+}
+else
+{
+educ_level=$('#educ_level').val()+'-'+$('#type_search').val();
+}
+window.location='<?php echo $base; ?>colleges/'+country+'/'+educ_level+'/'+area_interest;
 }
 function serch_events()
 {

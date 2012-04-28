@@ -38,7 +38,7 @@
 .grid_2{width:261px}
 .grid_3{width:326px;}
 /*.grid_1{width:161px;}* commented by sumit munjal*/
-.grid_1{width:263px;}
+.grid_1{width:195px;}
 .grid_6{width:672px;}
 
 /************************welcome********************/
@@ -384,7 +384,7 @@ border: 1px solid #DFDDB5;-moz-border:1px solid #aaa;-webkit-border:1px solid #a
 .search_box ul li{margin-top: 1px;}
 .search_box ul li a{font-size: 12px;color:#333;}
 .search_box_height{height: 80px;overflow: hidden;}
-#scrollbar1 { width:200px; height: 70px;overflow: hidden;}
+#scrollbar1 { width:165px; height: 70px;overflow: hidden;}
 #scrollbar1 .viewport { width: 130px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar1 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
 #scrollbar1 .scrollbar{ background-color: #F5F3BE;border-radius: 6px;border: 1px solid #F5F3BE; position: relative; background-position: 0 0; float: right; width: 14px; }
@@ -392,7 +392,7 @@ border: 1px solid #DFDDB5;-moz-border:1px solid #aaa;-webkit-border:1px solid #a
 #scrollbar1 .thumb { background-color: #e4e2be;border-radius: 5px;height: 20px; width:6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:4px; }
 #scrollbar1 .thumb .end { background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
 #scrollbar1 .disable { display: none; }
-#scrollbar2 { width:225px; height: 70px;overflow: hidden; }
+#scrollbar2 { width:181px; height: 70px;overflow: hidden; }
 #scrollbar2 .viewport { width: 148px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar2 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
 #scrollbar2 .scrollbar{background-color: #F5F3BE;border-radius: 6px;border: 1px solid #F5F3BE; position: relative; background-position: 0 0; float: right; width: 14px; }
@@ -400,7 +400,7 @@ border: 1px solid #DFDDB5;-moz-border:1px solid #aaa;-webkit-border:1px solid #a
 #scrollbar2 .thumb {background-color: #e4e2be;border-radius: 5px;height: 20px; width:6px; cursor: pointer; overflow: hidden; position: absolute; top: 0; left:4px; }
 #scrollbar2 .thumb .end {background: transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0; overflow: hidden; height: 5px; width: 25px; }
 #scrollbar2 .disable { display: none; }
-#scrollbar3 { width:203px; height: 70px;overflow: hidden; }
+#scrollbar3 { width:175px; height: 70px;overflow: hidden; }
 #scrollbar3 .viewport { width: 151px; height: 70px; overflow: hidden; position: relative; }
 #scrollbar3 .overview { list-style: none; position: absolute; left: 0; top: 0; padding: 0; margin: 0; }
 #scrollbar3 .scrollbar{ background-color: #F5F3BE;border-radius: 6px;border: 1px solid #F5F3BE; position: relative; background-position: 0 0; float: right; width: 14px; }
@@ -569,7 +569,7 @@ background: url(../images/events.png);}
 .course_txt{color: #F89406;}
 .course_tit{font-size:15px;}
 .course_list{list-style:none;margin: 0px!important;}
-.course_list li{border-bottom:1px solid #aaa;padding: 10px 10px;}
+.course_list li{list-style:none;border-bottom:1px solid #aaa;padding: 10px 10px;}
 .course_cont{text-align: justify;font-size: 14px;line-height: 22px;}
 
 /*=============11-04-2012==========================*/
@@ -602,8 +602,9 @@ color:#666 !important;
 
 /*================events page==================================*/
 .dsolution{overflow: hidden;min-height: 85px;max-height:170px;}
-.dsolution h3 a{color:#333;}
+.dsolution.txt_three{font-size:18px;font-weight: bold;color: #333!important;}
 .event_border{border-bottom: 1px solid #DDD;padding: 10px;}
+.event_border img{border: 1px solid #DDD;width: 80px;height: 80px;margin-right: 20px;}
 /*================single_event================================*/
 .course_cont {
 text-align: justify;

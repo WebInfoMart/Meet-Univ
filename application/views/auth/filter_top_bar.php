@@ -12,11 +12,11 @@
 								<div class="viewport">
 									<div class="overview">
 										<ul>
-			<li <?php if($country_arrow=='' || $country_arrow==0) { ?> class="filter_arrow" <?php } ?>><a href="<?php echo $base; ?>colleges/AllCountry-0">All</a></li>							
+			<li <?php if($country_arrow=='' || $country_arrow==0) {  ?> class="filter_arrow" <?php } ?>><a href="<?php echo $base; ?>colleges/AllCountry-0">All</a></li>							
 							<?php foreach($country as $countries) { ?>	
 											<li   <?php if($country_arrow == $countries['country_id']) { ?> class="filter_arrow" <?php } ?>>
 																					
-	<a href="<?php echo $base; ?>colleges/<?php echo $countries['country_name']; ?>-<?php echo $countries['country_id']; ?>"><?php echo $countries['country_name']; ?></a>
+	<a href="<?php echo $base; ?>colleges/<?php echo $countries['country_name']; ?>-<?php echo $countries['country_id']; ?>"><?php echo ucwords($countries['country_name']); ?></a>
 											</li>	
 							<?php } ?>				
 										</ul>                 
@@ -37,7 +37,7 @@
 							
 										<?php foreach($fetch_educ_level as $fetch_educ_levels) { ?>			
 											<li <?php if($educ_arrow == $fetch_educ_levels['prog_edu_lvl_id']) { ?> class="filter_arrow" <?php } ?>>
-<a href="#" onclick="onstudylevel('<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>','<?php echo $fetch_educ_levels['educ_level']; ?>')"><?php echo $fetch_educ_levels['educ_level']; ?></a>
+<a href="#" onclick="onstudylevel('<?php echo $fetch_educ_levels['prog_edu_lvl_id']; ?>','<?php echo $fetch_educ_levels['educ_level']; ?>')"><?php echo ucwords($fetch_educ_levels['educ_level']); ?></a>
 											</li>	
 										<?php } ?>
 											
@@ -59,7 +59,7 @@
 										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { ?>			
 											<li <?php if($course_arrow == $fetch_area_intrest1['prog_parent_id']) { ?> class="filter_arrow" <?php } ?>>
 								
-	<a href="#" onclick="onareaintrest('<?php echo $fetch_area_intrest1['program_parent_name']; ?>','<?php echo $fetch_area_intrest1['prog_parent_id']; ?>')"><?php echo $fetch_area_intrest1['program_parent_name']; ?></a>
+	<a href="#" onclick="onareaintrest('<?php echo $fetch_area_intrest1['program_parent_name']; ?>','<?php echo $fetch_area_intrest1['prog_parent_id']; ?>')"><?php echo ucwords($fetch_area_intrest1['program_parent_name']); ?></a>
 											</li>	
 										<?php } ?>
 											
@@ -69,38 +69,36 @@
 								</div>
 							</div>
 						</div>
-						<!--<div class="float_l grid_1 margin_zero search_box_height">
-							<h5>Filter by Course Duration </h5>
+										<?php if($prog_show=='1'){ ?>
+						<div class="float_l grid_1 margin_zero search_box_height">
+							<h5>Filter by Program</h5>
 							<div id="scrollbar5">
 								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
 								<div class="viewport">
 									<div class="overview">
 										<ul>
-											<li>
-												<a>Business, Finance & Management</a>
-											</li>
-											<li>
-												<a>Arts & Humanities</a>
-											</li>
-											<li>
-												<a>Science</a>
-											</li>
-											<li>
-												<a>Computers & Information Technology</a>
-											</li><li>
-												<a>Engineering</a>
-											</li>
-											<li>
-												<a>Health Sciences & Medical</a>
-											</li>
+					<?php if($s_program>0) { ?>					
+					<li <?php if($prog_arrow=='' || $prog_arrow==0) { ?> class="filter_arrow" <?php } ?>>
+					<a href="#" onclick="onsubprogram('AllProgram','0')" >All</a></li>							
+											
+										<?php foreach($s_program as $search_program) { ?>			
+											<li <?php if($prog_arrow == $search_program['program_id']) { ?> class="filter_arrow" <?php } ?>>
+								
+	<a href="#" onclick="onsubprogram('<?php echo $search_program['course_name']; ?>','<?php echo $search_program['program_id']; ?>')"><?php echo ucwords($search_program['course_name']); ?></a>
+											</li>	
+										<?php } ?>
+					<?php } else { ?> <li class="filter_arrow"><a href="#" >No Program </a></li> <?php } ?>					
 										</ul>                 
 									</div>
 								</div>
 							</div>
-						</div>-->
+						</div>
 					
-						
-						
+				<?php } ?>
+				
+				
+				
+				
 						<div class="clearfix"></div>
 					</div>
 				<div class="float_l"><div class="row" style="margin-left:70px;">
@@ -135,6 +133,7 @@
 <script>
 function onstudylevel(educ_lvl_id,educ_lvl_name)
 {
+educ_lvl_name=educ_lvl_name.replace(',','');
 
 	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
@@ -180,7 +179,9 @@ function onstudylevel(educ_lvl_id,educ_lvl_name)
 
 function onareaintrest(prog_parent_name,prog_parent_id)
 {
-var url=document.URL;
+
+	prog_parent_name=prog_parent_name.replace(',','');
+	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
 	if(lcofurl=='/' || lcofurl=='#')
 	{
@@ -211,13 +212,12 @@ var url=document.URL;
 	}
 	if(ul=='2')
 	{
-	window.location=url+'/'+prog_parent_name+'-'+prog_parent_id;
+	window.location=document.URL+prog_parent_name+'-'+prog_parent_id;
 	}
 	if(ul>2)
 	{
 	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/'+surl[1]+'/'+prog_parent_name+'-'+prog_parent_id;
 	}
-	
 	}
 	}
 	else
@@ -231,7 +231,38 @@ var url=document.URL;
 	//}
 	//window.location='Country-0/'
 	}
-	
-}
+}	
+ function onsubprogram(prog_name,prog_id)
+ {
+	prog_name=prog_name.replace(',','');
+	var url=document.URL;
+	var lcofurl=url.charAt(url.length-1);
+	if(lcofurl=='/' || lcofurl=='#')
+	{
+	url = url.substring(0, url.length-1);
+	}
+	lcofurl=url.charAt(url.length-1);
+	if(lcofurl=='/' || lcofurl=='#')
+	{
+	url = url.substring(0, url.length-1);
+	}
+	var spliturl;
+	var nurl=url.indexOf("colleges/");
+	if(nurl > -1)
+	{
+	spliturl=url.split('colleges/');
+	var surl=spliturl[1].split('/');
+	var ul=surl.length;
+	if(ul=='3')
+	{
+	window.location=url+'/'+prog_name+'-'+prog_id;
+	}
+	else if(ul>3)
+	{
+	window.location='<?php echo $base; ?>colleges/'+surl[0]+'/'+surl[1]+'/'+surl[2]+'/'+prog_name+'-'+prog_id;
+	}
+	}
+	//window.location=url+'/'+prog_name+'-'+prog_id;
+ }
 </script>
 	

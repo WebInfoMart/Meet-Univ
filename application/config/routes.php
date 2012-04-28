@@ -60,6 +60,7 @@ $route['(college_search|events_search)'] = 'search/$1';
 $route['(college_list/all_colleges)/(:num)']='auth/all_colleges/$1';
 $route['(college_list/all_colleges)']='auth/all_colleges';
 
+$route['colleges/(:any)-(:num)/(:any)-(:num)/(:any)-(:num)/(:any)-(:num)']='auth/all_colleges/$2/$4/$6/$8';
 $route['colleges/(:any)-(:num)/(:any)-(:num)/(:any)-(:num)']='auth/all_colleges/$2/$4/$6';
 $route['colleges/(:any)-(:num)/(:any)-(:num)']='auth/all_colleges/$2/$4';
 $route['colleges/(:any)-(:num)']='auth/all_colleges/$2';

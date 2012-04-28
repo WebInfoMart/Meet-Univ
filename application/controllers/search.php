@@ -152,7 +152,6 @@ class Search extends CI_Controller
 	function fetch_parent_progrmas_on_home_ajax()
 	{
 		$data['result']=$this->searchmodel->fetch_program_list_ajax();
-		print_r($data['result']);
 		$this->load->view('ajaxviews/program_list',$data);
 		
 	}

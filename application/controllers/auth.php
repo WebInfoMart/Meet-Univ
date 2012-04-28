@@ -32,7 +32,7 @@ class Auth extends CI_Controller
 		//$this->load->model('Gallery_model');
 		
 		$data['gallery_home'] = $this->users->fetch_home_gallery();
-		$data['country'] = $this->users->fetch_country();
+		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
 		$data['cities'] = $this->frontmodel->fetch_cities();
 		$data['area_interest'] = $this->users->fetch_area_interest();
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
@@ -1131,7 +1131,7 @@ class Auth extends CI_Controller
 	
 	
 	
-	function all_colleges($s_country ='',$s_educ_level='',$s_course='')
+	function all_colleges($s_country ='',$s_educ_level='',$s_course='',$s_program='')
 	{
 		$data = $this->path->all_path();
 		$data['err_msg']=0;
@@ -1140,14 +1140,21 @@ class Auth extends CI_Controller
 		$data['country'] = $this->users->fetch_country();
 		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
 		$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
-		$type_educ_level = $this->input->get('education_level');
-		$search_country = $this->input->get('search_country');
-		$search_course = $this->input->get('search_program');
 		$data['country_arrow']=$s_country;
 		$data['educ_arrow']=$s_educ_level;
 		$data['course_arrow']=$s_course;
-		
-		$data['get_university'] = $this->users->show_all_college($s_country,$s_educ_level,$s_course);
+		$data['prog_arrow']=$s_program;
+		if($s_course!='' && $s_course!=0)
+		{
+		$data['s_program']=$this->users->fetch_program_by_area_intrest($s_educ_level,$s_course);
+		//print_r($data['s_program']);
+		$data['prog_show']=1;
+		}
+		else
+		{
+		$data['prog_show']=0;
+		}
+		$data['get_university'] = $this->users->show_all_college($s_country,$s_educ_level,$s_course,$s_program);
 		if($data['get_university']!=0)
 		{
 		$this->load->view('auth/show_all_college',$data);
