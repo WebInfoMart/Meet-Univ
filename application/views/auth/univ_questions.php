@@ -65,7 +65,39 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					</div>
 					<div>
 						<?php echo $single_quest['q_detail']; ?><br/>
-						<div class="float_r margin_t1" style="color:#000" ><?php echo $single_quest['q_asked_time']; ?></div>
+						<div class="float_r margin_t1" style="color:#000" >
+						<?php 
+						$exp = explode(" ",$single_quest['q_asked_time']);
+				$create_month_format = explode('-',$exp[0]);
+				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
+				
+				// Check if this time is above 24 hours...
+								$starttime = $single_quest['q_asked_time']; 
+								$starttime = strtotime($starttime); 
+								$oneday = 60*60*24; 
+								if( $starttime < (time()-$oneday) ) { 
+								  // echo 'more than one day since start'; 
+								echo $exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
+								}
+								else {
+								//Less than oneday from start
+								//Time difference
+								$date = date('Y-m-d H:i:s');
+								$firstTime=strtotime($single_quest['q_asked_time']);
+								$lastTime=strtotime($date);
+
+								// perform subtraction to get the difference (in seconds) between times
+								$timeDiff=$lastTime-$firstTime;
+								
+								// Convert Seconds to h:i:s format
+								$init = $timeDiff;
+								$hours = floor($init / 3600);
+								$minutes = floor(($init / 60) % 60);
+								$seconds = $init % 60;
+								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
+								}
+						?>
+						</div>
 					</div>
 				<div class="clearfix"></div>
 				</div>
@@ -115,8 +147,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<?php }
 }				?>			
 						</div>
-			<?php if($user_is_logged_in==0){ ?>			
-						<div class="margin_t margin_bs">
+			<?php if($user_is_logged_in==0){ ?>		
+			<div class="events_box" style="height: 53px;">
+				<div class="float_r">
+					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+				</div>
+				<div class="float_l" style="margin-top: 30px; margin-left: 311px;">
+				<center><h3>Please Login for comment</h3></center>
+				</div>
+				</div>			
+						<!--<div class="margin_t margin_bs">
 							<div class="events_box">
 								<h3>Your Comment</h3>
 								<div class="float_l span9 margin_zero">
@@ -158,7 +198,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								</div>
 								<div class="clearfix"></div>
 							</div>
-						</div>
+						</div>-->
 		<?php } else { ?>	
 			<div class="margin_t margin_bs">
 							<div class="events_box">

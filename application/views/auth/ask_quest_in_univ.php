@@ -24,21 +24,19 @@
 		</script>
 <div class="row" style="margin-top:-30px">
 	<div class="float_l span13 margin_l margin_t">
-	<!-- Question send success -->
-	<div class="modal" id="show_success" style="display:none;" >
-					  <div class="modal-header">
-						<a class="close" data-dismiss="modal"></a>
-						<h3>Message For You</h3>
-					  </div>
-					  <div class="modal-body">
-						<p><center><h4>Your Message Has been sent successfully.....</h4></center></p>
-					  </div>
-					  <div class="modal-footer">
-						<!--<a href="#" class="btn">Close</a>-->
-						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
-					  </div>
-	</div>
-	<!-- End Here -->
+		<div class="modal" id="show_success" style="display:none;" >
+			<div class="modal-header">
+			<a class="close" data-dismiss="modal"></a>
+			<h3>Message For You</h3>
+			</div>
+			<div class="modal-body">
+			<p><center><h4>Your Message Has been sent successfully.....</h4></center></p>
+			</div>
+			<div class="modal-footer">
+			<!--<a href="#" class="btn">Close</a>-->
+			<!--<a href="#" class="btn btn-primary">Save changes</a>-->
+			</div>
+		</div>
 		<div class="green_box">
 			<div>
 				<div class="float_l">
@@ -53,7 +51,7 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="sliderkit contentslider-std">
-				<div class="sliderkit-nav">
+			<div class="sliderkit-nav">
 					<div class="sliderkit-nav-clip">
 						<ul>
 							<li class="float_l"><a href="#tab1" title="[link title]">Ask a Question</a></li>
@@ -61,11 +59,11 @@
 							<li><div class="clearfix"></div></li>
 						</ul>
 					</div>
-				</div>
-						<div class="sliderkit-panels">
-							<form action="" method="post">
-						<div class="sliderkit-panel" id="tab1">
-							<div class="control-group">
+			</div>
+			<div class="sliderkit-panels">
+				<form action="" method="post">
+					<div class="sliderkit-panel" id="tab1">
+						<div class="control-group">
 								<?php
 								if($this->session->userdata('ask_quest_on_univ_page') != '');
 								{
@@ -74,40 +72,24 @@
 								?>
 									<input class="input-xxlarge focused" id="quest_title" name="quest_title" type="text" value="<?php echo $quest_title ? $quest_title : ''; ?>">
 									<span style="color:red;"> <?php echo form_error('quest_title'); ?><?php echo isset($errors['quest_title'])?$errors['quest_title']:''; ?> </span>
-							</div>
-							<div class="control-group">
+						</div>
+						<div class="control-group">
 								<label>Describe your question in more detail (optional) </label>
 								<textarea class="input-xxlarge" id="quest_detail" name="quest_detail" rows="5"></textarea>
 							</div>
-							<!--<span>Category course <a href="#" id="cat">Category</a></span>-->
-							<!--<div id="change" class="form-inline">
-											<div class="control-group margin_t1">
-												<label>Categorys</label>
-												<select class="span3" id="category" name="category" onchange="fetch_collage(this);">
-													<option value="">Choose Type</option>
-													<option value="sa">Study Abroad</option>
-													<option value="col">Collages</option>
-													
-												</select>
-												<select id="collages" name="collages">
-													
-												</select>
-											</div>
-											<div class="clearfix"></div>
-										</div>-->
 							
 							<div class="control-group margin_t1">
 								<input type="submit" class="btn btn-success" name="post_quest_on_univ" value="Post Question" />
 							</div>
-						</div>
-						<div class="sliderkit-panel" id="tab2">
+					</div>
+					<div class="sliderkit-panel" id="tab2">
 							<div class="float_l span6 margin_zero">
 								<h3>University Q&A </h3>
 								<div class="margin_t1">
 											<?php
-											if(!empty($get_all_question_of_univ))
+											if(!empty($get_all_question_of_univ['quest_detail']))
 													{
-													foreach($get_all_question_of_univ as $quest_list)
+													foreach($get_all_question_of_univ['quest_detail'] as $quest_list)
 													{
 													if($quest_list['q_univ_id'] != '0')
 													{
@@ -129,32 +111,15 @@
 								</div>
 										
 							</div>
-						</div>
-							</form>
-						</div>
-								<!-- Added by Subh -->
-				<div id="quest_div_1">
-				<!--<div id="question_filters" class="show_qans_main_div_left">
-				
-
-				</div>-->
-				
-				</div>
-				</div>
-				
-				<!-- End Here -->
-	</div>
-	
+					</div>
+				</form>
 			</div>
-	
-		
-		
-	<div class="float_r span3 margin_t">
-		<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
-	</div>
-	<div id="quest_div_show_right" class="float_l list_user_quest">
-				<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on MeetUniversities</h3>
-				<div>
+		</div>
+	</div>	
+	<div id="quest_div_1"  class="margin_t">
+		<div id="quest_div_show_right">
+			<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on MeetUniversities</h3>
+			<div>
 				<ul class="course_list">
 				<?php
 				if(!empty($get_all_question_of_univ))
@@ -185,13 +150,13 @@
 	// $diferencia = time() - $quest_list['q_asked_time'];
     ?>
 				
-				<div class=""> 
+				
 				<?php
-				echo $quest_list['q_title']."</br>";?></h3></a>
-				<?php
-				echo "by&nbsp;".$quest_list['fullname']."&nbsp"; ?>
-				Asked on
-				<?php 
+				echo $quest_list['q_title']."</br>";?></h3>
+				<span class="black"><?php echo "by&nbsp;".$quest_list['fullname']."&nbsp"; ?></span>
+				</a>
+				
+				<?php  
 				$exp = explode(" ",$quest_list['q_asked_time']);
 				$create_month_format = explode('-',$exp[0]);
 				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
@@ -221,17 +186,24 @@
 								$seconds = $init % 60;
 								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
 								}
-				
+								?>
+							-
+							<?php
 							if($quest_list['q_country_id'] == '0' and $quest_list['q_univ_id'] != '0')
 							{
-								echo "Qategory&nbsp;:&nbsp;".'Colleges';
+								echo 'Colleges Category';
 							}
 							else {
-								echo "Qategory&nbsp;:&nbsp;".'Study Abroad';
-							}
-							echo "&nbsp;Total Answer&nbsp;".$get_all_question_of_univ['ans_count'][$a];
+								echo 'Study Abroad Category';
+							}?>
+							-
+							<?php
+							echo $get_all_question_of_univ['ans_count'][$a]."&nbsp;Answers&nbsp;" ;
 				
-				?>  </div>
+				?> 
+				
+				
+				</div>
 				<div class="float_r">
 				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
 				<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
@@ -239,23 +211,29 @@
 				</div>
 				</div>
 				<div class="clearfix"></div>
-				</div>
+				
 				</a>
+				
+				
+			
+				</li>
 				<?php
 				$a=$a+1;
 				}
 				}
 				?>
 				
-			
-				</li>
-				
 				</ul>
 				</div>
-	<div class="clearfix"></div>
+		</div>
 	</div>
+	</div>
+	<div class="float_r span3 margin_t">
+		<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
+	</div>
+	<div class="clearfix"></div>
 </div>	
-</div>		
+</div>	
 <script type="text/javascript">
 $(document).ready(function() {
 	var fixed = false;
@@ -265,6 +243,7 @@ $(document).scroll(function() {
         if( !fixed ) {
             fixed = true;
             $('#main-nav-holder').css({position:'fixed',top:140,left:476});
+			 $('.row').css({margin-top:0px;});
 			// Or set top:20px; in CSS
         }                                           // It won't matter when static
     } else {

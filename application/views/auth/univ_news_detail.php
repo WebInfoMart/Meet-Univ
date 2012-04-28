@@ -93,8 +93,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<?php }
 }				?>			
 						</div>
-			<?php if($user_is_logged_in==0){ ?>			
-						<div class="margin_t margin_bs">
+			<?php if($user_is_logged_in==0){ ?>		
+			<div class="events_box" style="height: 53px;">
+				<div class="float_r">
+					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+				</div>
+				<div class="float_l" style="margin-top: 30px; margin-left: 311px;">
+				<center><h3>Please Login for comment</h3></center>
+				</div>
+				</div>			
+						<!--<div class="margin_t margin_bs">
 							<div class="events_box">
 								<h3>Your Comment</h3>
 								<div class="float_l span9 margin_zero">
@@ -136,7 +144,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								</div>
 								<div class="clearfix"></div>
 							</div>
-						</div>
+						</div>-->
 		<?php } else { ?>	
 			<div class="margin_t margin_bs">
 							<div class="events_box">

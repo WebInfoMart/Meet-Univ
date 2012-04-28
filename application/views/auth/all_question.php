@@ -164,7 +164,7 @@
 						</div>
 					</div>
 							<!-- Added by Subh -->
-				<div id="quest_div_1">
+				<div id="quest_div_1" class="margin_t">
 				<!--<div id="question_filters" class="show_qans_main_div_left">
 				<h3 class="heading_follow">Filter Questions</h3>
 				<h4>By Category</h4>
@@ -216,7 +216,7 @@
 				?>
 
 				<li>
-				<div class="margin_b2">
+				<div>
 				<div class="quest_row_single">
 				<div id="quest_pic" class="quest_pic">
 				
@@ -230,7 +230,7 @@
 				</div>
 				
 				<div id="quest" class="quest_right">
-				<div class="float_l span11 margin_zero">
+				<div class="float_l span10 margin_zero">
 				<a href="<?php echo "$base$url"; ?>">
 				<h3><?php
 				echo $quest_list['q_title']."</br>";?></h3>
@@ -243,8 +243,7 @@
 				?>
 				</span>
 				</a>
-					<div>
-					<div class="float_l span3 margin_zero"> Asked on
+					
 				<?php 
 				$exp = explode(" ",$quest_list['q_asked_time']);
 				$create_month_format = explode('-',$exp[0]);
@@ -276,26 +275,22 @@
 								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
 								}
 							?>
-							</div>
-							<div class="float_l span3">
+							-
 							<?php
 							if($quest_list['q_country_id'] == '0' and $quest_list['q_univ_id'] != '0')
 							{
-								echo "Category&nbsp;:&nbsp;".'Colleges';
+								echo 'Colleges Category';
 							}
 							else {
-								echo "Category&nbsp;:&nbsp;".'Study Abroad';
+								echo 'Study Abroad Category';
 							}
 							?>
-							</div>
-							<div class="float_l span3">
+							-
 							<?php
-							echo "Total Answer&nbsp;".$get_all_question['ans_count'][$a];
+							echo $get_all_question['ans_count'][$a]."&nbsp;Answers&nbsp;";
 							
 				?> 
-				</div>
-				<div class="clearfix"></div>
-				</div>
+				
 				</div>
 				
 				</div>

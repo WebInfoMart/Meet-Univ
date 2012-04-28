@@ -35,29 +35,34 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<h2 class="course_txt"><?php echo $event_detail['event_title']; ?></h2>
 							<div class="float_r">
 						<div class="float_l" style="margin-right:20px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
-						<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+						<div class="float_l" style="margin-right:20px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
 						<div class="float_l">
 							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 						
 						</div>
 						</div>
 						<div class="float_l span9 margin_zero">
-							<div>
-								<h3>When</h3>
-								<div class="date_heading"><?php echo $event_detail['event_date_time']; ?></div>
-								<h3>Where</h3>
-								<div class="date_heading"><?php echo $event_detail['country_name']; 
+							
+								
+								<div class="date_heading"><div class="span-event-single"><strong>When</strong></div><div class="overrite_date_heading"><?php echo $event_detail['event_date_time']; ?></div></div>
+								</br><div class="span-event-single"><strong>Where</strong></div>
+								<div class="date_heading overrite_date_heading"><?php echo $event_detail['country_name']; 
 								if($event_detail['statename']==''){} else{echo ",".$event_detail['statename'];}
 								if($event_detail['cityname']==''){} else{echo ",".$event_detail['cityname'];}
 								?></div>
+								</br>
+								<div class="float_l">
 								<h3>Details</h3>
+								</div>
+								<div class="float_l">
 								<?php echo $event_detail['event_detail']; ?>
-							</div>
+								</div>
 						</div>
 										<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
-								<h3><?php echo count($event_comments); ?> Comments</h3>
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($event_comments); ?>"/>
+								<h3><span id="cnt_comment_show"><?php echo count($event_comments); ?></span> Comments</h3>
 							</div> 
 				<?php if(count($event_comments)>0){
 						foreach($event_comments as $event_comments_detail){ ?>
@@ -97,10 +102,24 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<?php }
 }				?>			
 						</div>
-			<?php if($user_is_logged_in==0){ ?>			
-						<div class="margin_t margin_bs">
+			<?php if($user_is_logged_in==0){ ?>		
+				<div class="events_box" style="height: 53px;">
+				<div class="float_r">
+					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+				</div>
+				<div class="float_l" style="margin-top: 30px; margin-left: 311px;">
+				<center><h3>Please Login for comment</h3></center>
+				</div>
+				</div>
+						<!-- <div class="margin_t margin_bs">
 							<div class="events_box">
-								<h3>Your Comment</h3>
+								<div id="comment">
+								<div class="float_l"><h3>Your Comment</h3></div>
+								<div class="float_r">
+									Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
 								<div class="float_l span9 margin_zero">
 									<form class="form-horizontal" method="post" action="">
 									<input type="hidden" name="commented_on_id" value="<?php echo $event_detail['event_id']; ?>" >
@@ -135,12 +154,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										</div>
 									</form>
 								</div>
-								<div class="float_r">
-									Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-								</div>
+								
 								<div class="clearfix"></div>
 							</div>
-						</div>
+						</div> -->
 		<?php } else { ?>	
 			<div class="margin_t margin_bs">
 							<div class="events_box">
@@ -188,11 +205,14 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			</div>
 			</div>
 <script>
+
 function post_comment()
 {
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
+var span_comment = $('#txt_cnt_comment_show').val();
+var span_comment_incr = parseInt(span_comment) + 1;
 if($('#commented_text').val()!='')
 {
 	$.ajax({
@@ -206,9 +226,12 @@ if($('#commented_text').val()!='')
 		
 		$(".event_border:last").after(msg);
 		$('#commented_text').val('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
+		$('#cnt_comment_show').html(span_comment_incr);
 		}
 	   });
-}	   
+}
+   
 }
 
 /*$('.hover_delete_comment').hover(
@@ -222,6 +245,8 @@ if($('#commented_text').val()!='')
 function delete_this_comment(comment_id)
 {
 var r=confirm("Want to Delete this comment");
+var span_comment = $('#txt_cnt_comment_show').val();
+var span_comment_incr = parseInt(span_comment) - 1;
 if(r)
 {
 $.ajax({
@@ -233,8 +258,10 @@ $.ajax({
 	   success: function(msg)
 	   {
 		$('.hover_delete_comment_'+comment_id).replaceWith('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)-1);
+		$('#cnt_comment_show').html(span_comment_incr);
 		}
 	   });
 }
-}			
+}		
 </script>	
