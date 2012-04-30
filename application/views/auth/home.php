@@ -555,7 +555,7 @@ country='AllCountry-0';
 else
 {
 var s_country=$('#search_country option:selected').text();
-s_country=s_country.replace(',','');
+s_country =  s_country.replace(/[^a-zA-Z 0-9]+/g,'');
 country=s_country+'-'+$('#search_country option:selected').val();
 }
 if($('#search_program').val()=='')
@@ -565,7 +565,7 @@ area_interest='AllArea-0';
 else
 {
 var sarea=$("#search_program option:selected").text();
-sarea=sarea.replace(',','');
+sarea =  sarea.replace(/[^a-zA-Z 0-9]+/g,'');
 area_interest=sarea+'-'+$("#search_program option:selected").val();
 }
 if($('#educ_level').val()=='All'|| $('#type_search').val()=='0')

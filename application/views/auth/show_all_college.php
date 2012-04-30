@@ -101,7 +101,7 @@
 				
 						<div class="clearfix"></div>
 					</div>
-					<div class="margin_t">
+					<div class="margin_t" id="col_paging">
 						<div class="search_bar_heading">
 						<?php
 						$count_array = count($get_university['university']);
@@ -192,21 +192,36 @@
 				<div class="float_r span3">
 					<img src="<?php echo "$base$img_path"; ?>/banner_img.png" />
 				</div>
-				<div id="pagination" class="table_pagination right paging-margin">
+			
+				<div class="clearfix"></div>
+				<div id="pagination" class="table_pagination paging-margin">
    
-            <?php echo $this->pagination->create_links();?>
+           <?php
+		   $cc=$get_university['total_res'];
+		   $rl=$get_university['limit_res']; 
+		   if($cc>$rl)
+		   {
+		   $z=0;
+		   for($c=$cc;$c>0;$c=$c-$rl)
+		   {
+		   ?>
+		   
+		  <a href="#" onclick="ajax('<?php echo ($rl*$z); ?>')"><?php echo ++$z; ?></a>
+		 <?php 
+		   }
+		   }
+		   ?>
    
             </div>
-				<div class="clearfix"></div>
 			</div>
 			</div>
 		</div>
 	</div>
 <script>
+var cpage=0;
 function onstudylevel(educ_lvl_id,educ_lvl_name)
 {
-educ_lvl_name=educ_lvl_name.replace(',','');
-
+educ_lvl_name =  educ_lvl_name.replace(/[^a-zA-Z 0-9]+/g,'');
 	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
 	if(lcofurl=='/' || lcofurl=='#')
@@ -252,7 +267,8 @@ educ_lvl_name=educ_lvl_name.replace(',','');
 function onareaintrest(prog_parent_name,prog_parent_id)
 {
 
-	prog_parent_name=prog_parent_name.replace(',','');
+	prog_parent_name =  prog_parent_name.replace(/[^a-zA-Z 0-9]+/g,'');
+
 	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
 	if(lcofurl=='/' || lcofurl=='#')
@@ -306,7 +322,7 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 }	
  function onsubprogram(prog_name,prog_id)
  {
-	prog_name=prog_name.replace(',','');
+	prog_name =  prog_name.replace(/[^a-zA-Z 0-9]+/g,'');
 	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
 	if(lcofurl=='/' || lcofurl=='#')
@@ -335,6 +351,26 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 	}
 	}
 	//window.location=url+'/'+prog_name+'-'+prog_id;
+ }
+ 
+ function ajax(a)
+{
+	if(a!=cpage)	
+	{
+	cpage=a;
+ 	   $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>auth/all_colleges_paging/<?php echo $country_arrow;?>/<?php echo $educ_arrow;?>/<?php echo $course_arrow;?>/<?php echo $prog_arrow;?>",
+	   async:false,
+	   data: 'offset='+a,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $('#col_paging').html(msg);
+	   }
+	   })
+	   
+   }
  }
 </script>
 	

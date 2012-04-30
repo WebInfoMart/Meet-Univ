@@ -976,6 +976,47 @@ class Users extends CI_Model
 	}
 	function show_all_college($search_country,$type_educ_level,$search_course,$search_program)
 	{
+						$univ_data['total_res']=0;
+						$univ_data['limit_res']=25;
+						$this->db->select('*');
+						$this->db->from('university');
+						$chk_sc_sel=0;
+						$chk_c_id=0;
+						$search_array=array();
+						if($search_course!='' && $search_course!='0')
+						{
+						$search_array['univ_program.prog_parent_id']=$search_course;
+						$chk_sc_sel++;
+						}
+						if($type_educ_level!='' && $type_educ_level!=0)
+						{
+						$search_array['univ_program.prog_educ_level']=$type_educ_level;
+						$chk_sc_sel++;
+						}
+						if($search_country!='' && $search_country!=0)
+						{
+						$search_array['country_id']=$search_country;
+						$chk_c_id=1;
+						//$this->db->where('country_id',trim($search_country));
+						}
+						if($search_program!='' && $search_program!=0)
+						{
+						$search_array['univ_program.program_id']=$search_program;
+						$chk_sc_sel++;
+						}
+						if($chk_sc_sel>0 || $chk_c_id)
+						{
+						if($chk_sc_sel>0)
+						{
+						$this->db->join('univ_program','univ_program.univ_id=university.univ_id','left');
+						$this->db->group_by("university.univ_id"); 
+						}
+						$this->db->where($search_array);
+						}
+						$results = $this->db->get();
+						$univ_data['total_res']=$results->num_rows();
+						if($results->num_rows()>$univ_data['limit_res']);
+						{
 						$this->db->select('*');
 						$this->db->from('university');
 						$chk_sc_sel=0;
@@ -1008,14 +1049,15 @@ class Users extends CI_Model
 						$this->db->join('univ_program','univ_program.univ_id=university.univ_id','left');
 						$this->db->group_by("university.univ_id"); 
 						}
-						$this->db->where($search_array);
 						}
-						
+						$this->db->limit($univ_data['limit_res']);
+						$this->db->where($search_array);
 						$results = $this->db->get();
-						//echo $results->num_rows();
+						}
 			if($results->num_rows()>0)
 			{
 						$res_of_univ_search1 = $results->result_array();
+						//print_r($res_of_univ_search1);
 						foreach($res_of_univ_search1 as $univ_search_result)
 						{	
 								$university_id=$univ_search_result['univ_id'];
@@ -1024,17 +1066,15 @@ class Users extends CI_Model
 								$this->db->where('univ_id',$university_id);
 								$results=$this->db->get();
 								$university_detail[] = $results->row_array();
-								$marker[] = $univ_search_result['address_line1'].'||'.$univ_search_result['univ_name'].'||'.$univ_search_result['address_line1'];
 								$univ_follow[] = $this->users->get_followers_of_univ($university_id);
 								$univ_article[] = $this->users->get_articles_of_univ($university_id);
 								$univ_program[] = $this->users->get_program_provide_by_univ($university_id);
 						}		
-						$univ_data=array();
 						$univ_data['university'] = $university_detail;
 						$univ_data['followers'] = $univ_follow;
 						$univ_data['article'] = $univ_article;
 						$univ_data['program'] = $univ_program;
-						$univ_data['position'] = $marker;
+						//$univ_data['position'] = $marker;*/
 						return $univ_data;
 			}
 			else{
@@ -1520,6 +1560,95 @@ class Users extends CI_Model
 			return 0;
 			
 		}
+		
+		
+		
+		
+		
+	function show_all_college_paging($search_country,$type_educ_level,$search_course,$search_program)
+	{
+						$offset=$this->input->post('offset');
+						$this->db->select('*');
+						$this->db->from('university');
+						$chk_sc_sel=0;
+						$chk_c_id=0;
+						if($search_course!='' && $search_course!='0')
+						{
+						$search_array['univ_program.prog_parent_id']=$search_course;
+						$chk_sc_sel++;
+						}
+						if($type_educ_level!='' && $type_educ_level!=0)
+						{
+						$search_array['univ_program.prog_educ_level']=$type_educ_level;
+						$chk_sc_sel++;
+						}
+						if($search_country!='' && $search_country!=0)
+						{
+						$search_array['country_id']=$search_country;
+						$chk_c_id=1;
+						//$this->db->where('country_id',trim($search_country));
+						}
+						if($search_program!='' && $search_program!=0)
+						{
+						$search_array['univ_program.program_id']=$search_program;
+						$chk_sc_sel++;
+						}
+						if($chk_sc_sel>0 || $chk_c_id)
+						{
+						if($chk_sc_sel>0)
+						{
+						$this->db->join('univ_program','univ_program.univ_id=university.univ_id','left');
+						$this->db->group_by("university.univ_id"); 
+						}
+						
+						$this->db->where($search_array);
+						}
+						$this->db->limit('25',$offset);
+						$results = $this->db->get();
+						//echo $results->num_rows();
+			if($results->num_rows()>0)
+			{
+						$res_of_univ_search1 = $results->result_array();
+						foreach($res_of_univ_search1 as $univ_search_result)
+						{	
+								$university_id=$univ_search_result['univ_id'];
+								$this->db->select('*');
+								$this->db->from('university');
+								$this->db->where('univ_id',$university_id);
+								$results=$this->db->get();
+								$university_detail[] = $results->row_array();
+								$marker[] = $univ_search_result['address_line1'].'||'.$univ_search_result['univ_name'].'||'.$univ_search_result['address_line1'];
+								$univ_follow[] = $this->users->get_followers_of_univ($university_id);
+								$univ_article[] = $this->users->get_articles_of_univ($university_id);
+								$univ_program[] = $this->users->get_program_provide_by_univ($university_id);
+						}		
+						$univ_data=array();
+						$univ_data['university'] = $university_detail;
+						$univ_data['followers'] = $univ_follow;
+						$univ_data['article'] = $univ_article;
+						$univ_data['program'] = $univ_program;
+						$univ_data['position'] = $marker;
+						return $univ_data;
+			}
+			else{
+			return 0;
+			}
+		
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }
 
 /* End of file users.php */

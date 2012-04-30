@@ -1130,7 +1130,41 @@ class Auth extends CI_Controller
 	}
 	
 	
-	
+	function all_colleges_paging($s_country ='',$s_educ_level='',$s_course='',$s_program='')
+	{
+		$data = $this->path->all_path();
+		$data['err_msg']=0;
+		$data['filter_var']=0;
+		$data['country'] = $this->users->fetch_country();
+		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
+		$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
+		$data['country_arrow']=$s_country;
+		$data['educ_arrow']=$s_educ_level;
+		$data['course_arrow']=$s_course;
+		$data['prog_arrow']=$s_program;
+		if($s_course!='' && $s_course!=0)
+		{
+		$data['s_program']=$this->users->fetch_program_by_area_intrest($s_educ_level,$s_course);
+		//print_r($data['s_program']);
+		$data['prog_show']=1;
+		}
+		else
+		{
+		$data['prog_show']=0;
+		}
+		$data['get_university'] = $this->users->show_all_college_paging($s_country,$s_educ_level,$s_course,$s_program);
+		if($data['get_university']!=0)
+		{
+		$this->load->view('auth/show_all_college_paging',$data);
+		}
+		else
+		{
+		$data['filter_var']=1;
+		$data['err_div']=0;
+		$data['err_msg']='<h2> Sorry....</br><span class="text-align">Result Not Found.... </span> </h2>';
+		$this->load->view('auth/filter_top_bar',$data);
+		}
+	}
 	function all_colleges($s_country ='',$s_educ_level='',$s_course='',$s_program='')
 	{
 		$data = $this->path->all_path();
