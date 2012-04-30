@@ -43,8 +43,41 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						</div>
 						<div class="float_l span9 margin_zero">
 							<div>
-								<h3>Posted Time</h3>
-								<div class="date_heading"><?php echo $news_detail['publish_time']; ?></div>
+								<div class="span-event-single" style="color:#333;"><strong>Posted Time</strong></div>  
+								<div class="date_heading">
+								<?php 
+								$exp = explode(" ",$news_detail['publish_time']);
+				$create_month_format = explode('-',$exp[0]);
+				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
+				
+				// Check if this time is above 24 hours...
+								$starttime = $news_detail['publish_time']; 
+								$starttime = strtotime($starttime); 
+								$oneday = 60*60*24; 
+								if( $starttime < (time()-$oneday) ) { 
+								  // echo 'more than one day since start'; 
+								echo '&nbsp;&nbsp;'.$exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
+								}
+								else {
+								//Less than oneday from start
+								//Time difference
+								$date = date('Y-m-d H:i:s');
+								$firstTime=strtotime($news_detail['publish_time']);
+								$lastTime=strtotime($date);
+
+								// perform subtraction to get the difference (in seconds) between times
+								$timeDiff=$lastTime-$firstTime;
+								
+								// Convert Seconds to h:i:s format
+								$init = $timeDiff;
+								$hours = floor($init / 3600);
+								$minutes = floor(($init / 60) % 60);
+								$seconds = $init % 60;
+								echo "&nbsp;&nbap;"."$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
+								}
+								//echo "&nbsp;&nbsp;".$news_detail['publish_time']; 
+								?>
+								</div>
 								<h3>Details</h3>
 								<?php echo $news_detail['news_detail']; ?>
 							</div>
@@ -169,8 +202,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 											<div class="my_form_controls">
 												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
 												</textarea>
+												<?php echo $user_detail['fullname']?$user_detail['fullname']:''; ?>
 											</div>
 										</div>
+										
 										<div class="control-group">
 											<div class="my_form_controls">
 												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">

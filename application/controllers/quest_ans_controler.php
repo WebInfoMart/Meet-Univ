@@ -21,7 +21,7 @@ class Quest_ans_controler extends CI_Controller
 	{
 	}
 	
-	function QuestandAns()
+	function QuestandAns($page='')
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
@@ -121,7 +121,7 @@ class Quest_ans_controler extends CI_Controller
 				$this->session->set_userdata('quest_send_suc','');
 			}
 			
-		$data['get_all_question'] = $this->quest_ans_model->get_all_quest_user_info();
+		$data['get_all_question'] = $this->quest_ans_model->get_all_quest_user_info($page);
 		//echo count($data['get_all_question']);
 		$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
 		//print_r($data['count_all_question']);

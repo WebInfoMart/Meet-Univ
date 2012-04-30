@@ -15,7 +15,8 @@ class Quest_ans_model extends CI_Model
 		$ci =& get_instance();
 		$this->table_name			= $ci->config->item('db_table_prefix', 'tank_auth').$this->table_name;
 		$this->profile_table_name	= $ci->config->item('db_table_prefix', 'tank_auth').$this->profile_table_name;
-		$this->db->query("SET time_zone='+5:30'");
+		//$this->db->query("SET time_zone='+5:30'");
+		$this->load->library('pagination');
 		//$this->program_parent	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_parent;
 		//$this->program_educ_level	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_educ_level;
 		//$this->country	= $ci->config->item('db_table_prefix', 'tank_auth').$this->country;
@@ -120,6 +121,21 @@ class Quest_ans_model extends CI_Model
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
 		$query = $this->db->get();
+		
+		/* $numrows=$query->num_rows();
+		$config['base_url']=base_url()."quest_ans_controler/QuestandAns";
+		$config['total_rows']=$numrows;
+		$config['per_page'] = '2'; 
+		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+		$limit = $config['per_page'];
+		
+		$this->db->select('*');
+		$this->db->from('questions');
+		$this->db->join('users','questions.q_askedby = users.id');
+		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get(); */
+		
 		if($query->num_rows() > 0)
 		{
 			$q_detail = $query->result_array();

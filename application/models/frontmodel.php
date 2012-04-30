@@ -63,6 +63,7 @@ class Frontmodel extends CI_Model
 	
 	function fetch_events($page)
 	{
+	echo $page;
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 

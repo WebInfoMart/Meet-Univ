@@ -323,7 +323,9 @@
 					<img src="<?php echo $base; ?>images/banner_img.png">
 				</div>
 		
-			
+			<div id="pagination" class="table_pagination right paging-margin">
+            <?php echo $this->pagination->create_links();?>
+            </div>
 				
 			</div>
 		</div>
