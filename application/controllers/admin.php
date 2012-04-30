@@ -1094,7 +1094,6 @@ class Admin extends CI_Controller
 		{
 		$this->form_validation->set_rules('univ_name', 'University', 'trim|required');
 		$this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
-		$this->form_validation->set_rules('address2', 'Addrss Line2', 'trim|xss_clean');
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
 		$this->form_validation->set_rules('about_us', 'About Us', 'trim|xss_clean');
@@ -1471,7 +1470,6 @@ class Admin extends CI_Controller
 		{
 		$this->form_validation->set_rules('univ_name', 'University', 'trim|required');
 		$this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
-		$this->form_validation->set_rules('address2', 'Addrss Line2', 'trim|xss_clean');
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
 		$this->form_validation->set_rules('about_us', 'About Us', 'trim|xss_clean');

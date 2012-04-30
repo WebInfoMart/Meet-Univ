@@ -119,17 +119,7 @@ foreach($univ_detail_edit as $univ_detail_update)
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>Address Line2</label>
-						</div>
-						<div class="float_l span3">
-							<input type="text" disabled="disabled" size="30" class="text univ_name_txt" name="address2" value="<?php echo $univ_detail_update['address_line1']; ?>">
-						</div>
-						<div class="clearfix"></div>
-						</div>
-					</li>
+					
 						<li>
 							<div>
 								<div class="float_l span3 margin_zero">

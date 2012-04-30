@@ -152,17 +152,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>Address Line2</label>
-						</div>
-						<div class="float_l span3">
-							<input type="text" size="30" class="text" name="address2" value="<?php echo $univ_detail_update['address_line1']; ?>">
-						</div>
-						<div class="clearfix"></div>
-						</div>
-					</li>
+					
 						<li>
 							<div>
 								<div class="float_l span3 margin_zero">

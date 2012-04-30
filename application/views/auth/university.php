@@ -7,7 +7,7 @@
 									<div class="univ_content">
 									<?php
 									echo substr($university_details['about_us'],0.500).'..';
-									?><a href="<?php echo $base; ?>/">View more detail</a>
+									?><a href="<?php echo $base; ?>about-<?php echo $university_details['univ_id']; ?>-university">View more detail</a>
 								</div>
 							</div>
 							<!--<div id="show_popup_success_join" class="success_modal">

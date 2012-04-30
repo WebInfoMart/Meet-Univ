@@ -101,10 +101,31 @@
 				
 						<div class="clearfix"></div>
 					</div>
-					<div class="margin_t" id="col_paging">
+	<div id="ajax_loader_paging"><img src="<?php echo "$base$img_path"; ?>/ajax-loader.gif"></div>
+					<div id="pagination" style="margin-top:15px;" class="table_pagination right paging-margin">
+   
+					   <?php
+					   $cc=$get_university['total_res'];
+					   $rl=$get_university['limit_res']; 
+					   if($cc>$rl)
+					   {
+					   $z=0;
+					   for($c=$cc;$c>0;$c=$c-$rl)
+					   {
+					   ?>
+					 <a href="#" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+					 <?php 
+					   }
+					   }
+					   ?>
+   
+					</div>
+					<div class="margin_t" id="col_paging" style="margin-top:37px;">
+					
 						<div class="search_bar_heading">
 						<?php
 						$count_array = count($get_university['university']);
+						$map_address='';
 						for($no_university = 0; $no_university<$count_array; $no_university++)
 						{
 						?>
@@ -132,12 +153,13 @@
 												<?php 
 												$x = $get_university['university'][$no_university]['univ_logo_path'];
 												if($x != '')
-												{
-												echo "<img class='univ_logo' src='".base_url()."uploads/univ_gallery/".$x."'/>"; 
-												}
-												else{
-												echo "<img src='".base_url()."images/default_logo.png'/>";
-												}
+												{ ?>
+							<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img class='univ_logo' src='<?php echo $base; ?>uploads/univ_gallery/<?php echo $x; ?>'></a>
+											<?php	}
+												else{ ?>
+											<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img class='university_logo' src='<?php echo "$base"; ?>uploads/univ_gallery/univ_logo.png'></a>
+							
+											<?php	}
 												?>
 												</div>
 										</div>
@@ -182,6 +204,7 @@
 									<div class="clearfix"></div>
 							</div>
 							<?php
+							$map_address.=  $get_university['university'][$no_university]['univ_name'].'univ_name#@$%univ_name'.$get_university['university'][$no_university]['address_line1'].'map#@$%map';
 							}
 							?>
 				
@@ -194,7 +217,9 @@
 				</div>
 			
 				<div class="clearfix"></div>
-				<div id="pagination" class="table_pagination paging-margin">
+		
+			</div>
+			<div id="pagination" style="margin-top:15px;" class="table_pagination paging-margin">
    
            <?php
 		   $cc=$get_university['total_res'];
@@ -205,8 +230,7 @@
 		   for($c=$cc;$c>0;$c=$c-$rl)
 		   {
 		   ?>
-		   
-		  <a href="#" onclick="ajax('<?php echo ($rl*$z); ?>')"><?php echo ++$z; ?></a>
+		  <a href="#" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
 		 <?php 
 		   }
 		   }
@@ -214,9 +238,9 @@
    
             </div>
 			</div>
-			</div>
 		</div>
 	</div>
+<div id="map_address_list" style="display:none"><?php echo $map_address; ?></div>
 <script>
 var cpage=0;
 function onstudylevel(educ_lvl_id,educ_lvl_name)
@@ -353,10 +377,15 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 	//window.location=url+'/'+prog_name+'-'+prog_id;
  }
  
- function ajax(a)
+ function ajax(a,pid)
 {
+	
 	if(a!=cpage)	
 	{
+	$('#pagination a').removeClass('add_paging_background_class');
+	 $('.'+pid).addClass('add_paging_background_class');
+	$('#ajax_loader_paging').css('z-index','9');
+	$('#col_paging').css('opacity','0.4');
 	cpage=a;
  	   $.ajax({
 	   type: "POST",
@@ -366,11 +395,15 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 	   cache: false,
 	   success: function(msg)
 	   {
-	   $('#col_paging').html(msg);
+	   	$('#ajax_loader_paging').css('z-index','-9');
+	    $('#col_paging').html(msg);
+		$('#col_paging').css('opacity','1');
+	    
 	   }
 	   })
 	   
    }
  }
+ 
 </script>
 	

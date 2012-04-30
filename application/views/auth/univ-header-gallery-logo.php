@@ -37,7 +37,7 @@
 				}
 				else
 				{
-				echo "<img class='univ_page_logo_nw' style='height:100px' src='".base_url()."uploads/univ_gallery/default_logo.png'/>"; 
+				echo "<img class='univ_page_logo_nw' style='height:100px' src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
 				}
 				?>
 				</li>
@@ -109,7 +109,6 @@ $(document).ready(function() {
     $('.univ_page_logo_nw').each(function() {
     var maxWidth = 222; // Max width for the image
     var width = $(this).width();    // Current image width
-   
 //alert(width);
     // Check if the current width is larger than the max
     if(width < maxWidth){

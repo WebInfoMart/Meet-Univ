@@ -17,6 +17,7 @@ class Auth extends CI_Controller
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
 		$this->load->helper('string');
+		$this->load->library('GMap');
 		$this->load->library('email');
 		$this->ci =& get_instance();
 		$this->load->library('fbConn/facebook');
@@ -1171,7 +1172,7 @@ class Auth extends CI_Controller
 		$data['err_msg']=0;
 		$data['filter_var']=0;
 		$this->load->view('auth/header',$data);
-		$data['country'] = $this->users->fetch_country();
+		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
 		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
 		$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
 		$data['country_arrow']=$s_country;
@@ -1189,6 +1190,12 @@ class Auth extends CI_Controller
 		$data['prog_show']=0;
 		}
 		$data['get_university'] = $this->users->show_all_college($s_country,$s_educ_level,$s_course,$s_program);
+		$this->load->library('GMap');
+		$this->gmap->GoogleMapAPI();
+		$data['headerjs'] = $this->gmap->getHeaderJS();
+		$data['headermap'] = $this->gmap->getMapJS();
+		$data['onload'] = $this->gmap->printOnLoad();
+		
 		if($data['get_university']!=0)
 		{
 		$this->load->view('auth/show_all_college',$data);
@@ -1314,6 +1321,29 @@ class Auth extends CI_Controller
 		$this->load->view('auth/header',$data);
 		$this->load->view('contact_us',$data);
 		$this->load->view('auth/footer',$data);
+	}
+	
+	//fetch all college maps
+	function fetch_maps_of_all_colleges()
+	{
+		$map_addresses=$this->input->post('map_address');
+		$data['locations']=$this->users->fetch_map_of_colleges($map_addresses);
+		$this->load->library('GMap');
+		$this->gmap->GoogleMapAPI();
+		$cnt_pos_univ = count($data['locations']);
+		$this->gmap->setMapType('map');
+		$marker = array();				
+		for($pos = 0; $pos < $cnt_pos_univ; $pos++)
+		{
+		$marker = explode("||",$data['locations'][$pos]);
+	    $this->gmap->addMarkerByAddress($marker[0],$marker[1],$marker[2]);
+		}
+		$data['headerjs'] = $this->gmap->getHeaderJS();
+		$data['headermap'] = $this->gmap->getMapJS();
+		$data['onload'] = $this->gmap->printOnLoad();
+		$data['map'] = $this->gmap->printMap();
+		$data['sidebar'] = $this->gmap->printSidebar();
+		$this->load->view('ajaxviews/google_map',$data);
 	}
 }
 /* End of file auth.php */

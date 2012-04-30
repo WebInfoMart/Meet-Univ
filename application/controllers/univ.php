@@ -53,7 +53,7 @@ function university($univ_id='')
   $this->gmapuniv->GoogleMapAPI();
   $this->gmapuniv->setMapType('map');
   //$this->gmapuniv->addMarkerByAddress($longitude,$latitude,$university_name,$university_address);
-  $this->gmapuniv->addMarkerByAddress($university_address,$university_name, $university_address);;
+  $this->gmapuniv->addMarkerByAddress($university_address,$university_name, $university_address);
   
       $data['headerjs'] = $this->gmapuniv->getHeaderJS();
       $data['headermap'] = $this->gmapuniv->getMapJS();

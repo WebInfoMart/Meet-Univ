@@ -142,17 +142,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>Address Line2</label>
-						</div>
-						<div class="float_l span3">
-							<input type="text" size="30" class="text" name="address2" value="<?php echo set_value('address2'); ?>">
-						</div>
-						<div class="clearfix"></div>
-						</div>
-					</li>
+					
 						<li>
 							<div>
 								<div class="float_l span3 margin_zero">

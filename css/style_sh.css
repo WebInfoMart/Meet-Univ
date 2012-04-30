@@ -440,6 +440,7 @@ background: -moz-linear-gradient(270deg,#FFFFF6,#FFFDE3);border: 1px solid #E7E7
 .college_map{font-size: 14px;font-weight: bold;letter-spacing: 1px;color: #FF922A;}
 .college_side{width:157px;}
 .college_head{position: relative;height: 30px;background-color:#F5F3BE;padding: 5px 10px;}
+.college_map_div{position: relative;height: 18px;margin-top:10px;background-color:#F5F3BE;padding: 1px 5px;}
 .college_list_data{height:75px;overflow:hidden;}
 .college_list_data li{margin:0px;}
 .college_list_data li a{color:#666}
@@ -639,6 +640,9 @@ width: 122px;}
 .browse_list li a {font-size:15px;color:#666}
 .margin_r2{margin-right:20px;}
 .art_img_left{width: 240px;height: 170px;}
-
+.university_logo{width:95px;height:95px;}
 
 .margin_b2{margin-bottom:10px}
+#ajax_loader_paging{left:37%;top:49%;position:absolute;z-index:-9;}
+
+.add_paging_background_class{background:#008EE8 !important;color:white !important}

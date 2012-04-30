@@ -1636,7 +1636,22 @@ class Users extends CI_Model
 		
 	}
 		
-		
+	function fetch_map_of_colleges($map_addresses)
+    {
+		$map_addresses_colleges=explode('map#@$%map',$map_addresses);
+		foreach($map_addresses_colleges as $map_addresses_colleges_list)
+		{
+		$univ_name_with_address=explode('univ_name#@$%univ_name',$map_addresses_colleges_list);
+		$univ_name=$univ_name_with_address[0];
+		$univ_address="";
+		if(count($univ_name_with_address)>1)
+		{
+		$univ_address=$univ_name_with_address[1];
+		}
+	    $marker[] = $univ_address.'||'.$univ_name.'||'.$univ_address;
+		}
+		return $marker;
+	}	
 		
 		
 		

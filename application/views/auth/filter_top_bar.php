@@ -131,10 +131,10 @@
 		</div>
 	</div>
 <script>
+var cpage=0;
 function onstudylevel(educ_lvl_id,educ_lvl_name)
 {
-educ_lvl_name=educ_lvl_name.replace(',','');
-
+educ_lvl_name =  educ_lvl_name.replace(/[^a-zA-Z 0-9]+/g,'');
 	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
 	if(lcofurl=='/' || lcofurl=='#')
@@ -180,7 +180,8 @@ educ_lvl_name=educ_lvl_name.replace(',','');
 function onareaintrest(prog_parent_name,prog_parent_id)
 {
 
-	prog_parent_name=prog_parent_name.replace(',','');
+	prog_parent_name =  prog_parent_name.replace(/[^a-zA-Z 0-9]+/g,'');
+
 	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
 	if(lcofurl=='/' || lcofurl=='#')
@@ -234,7 +235,7 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 }	
  function onsubprogram(prog_name,prog_id)
  {
-	prog_name=prog_name.replace(',','');
+	prog_name =  prog_name.replace(/[^a-zA-Z 0-9]+/g,'');
 	var url=document.URL;
 	var lcofurl=url.charAt(url.length-1);
 	if(lcofurl=='/' || lcofurl=='#')
@@ -265,4 +266,3 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 	//window.location=url+'/'+prog_name+'-'+prog_id;
  }
 </script>
-	
