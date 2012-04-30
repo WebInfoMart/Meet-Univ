@@ -61,7 +61,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			<div>
 				<div class="margin_t1">
 					<div class="float_l span1" style="margin-right:20px;">
-						<?php echo $single_quest['user_pic_path'] ? "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>" : "<img style='width:40px;height:40px;' src='".base_url()."images/user_model.png'/>" ?>
+						<?php 
+						if($single_quest['user_pic_path']!= '')
+						{
+						
+						echo "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>";
+						}
+						else {
+						echo "<img style='width:40px;height:40px;' src='".base_url()."images/user_model.png'/>" ;
+						}
+						?>
 					</div>
 					<div>
 						<?php echo $single_quest['q_detail']; ?><br/>
@@ -106,7 +115,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
-								<h3><?php echo count($question_comments); ?> Comments</h3>
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($question_comments); ?>"/>
+								<h3><span id="cnt_comment_show"><?php echo count($question_comments); ?></span> Comments</h3>
 							</div> 
 				<?php if(count($question_comments)>0){
 						foreach($question_comments as $question_comments_detail){ ?>
@@ -126,7 +136,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			{
 			?>					
 			<span class="float_r delete_comment" >
-					<img style="cursor:pointer" onclick='delete_this_comment("<?php echo $question_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
+					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $question_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
 			<?php	} } ?>				
 									<h4 ><a href="#" class="course_txt">
@@ -218,7 +228,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="float_l span9 margin_zero">
 									<form class="form-horizontal" method="post" action="">
 									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $single_quest['que_id']; ?>" >
-									<input type="hidden" name="commented_on" id="commented_on" value="news" >
+									<input type="hidden" name="commented_on" id="commented_on" value="qna" >
 										<div class="control-group">
 											<div class="my_form_controls">
 												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
@@ -253,6 +263,8 @@ function post_comment()
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
+var span_comment = $('#txt_cnt_comment_show').val();
+var span_comment_incr = parseInt(span_comment) + 1;
 if($('#commented_text').val()!='')
 {
 	$.ajax({
@@ -266,6 +278,8 @@ if($('#commented_text').val()!='')
 		
 		$(".event_border:last").after(msg);
 		$('#commented_text').val('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
+		$('#cnt_comment_show').html(span_comment_incr);
 		}
 	   });
 }	   
@@ -282,6 +296,8 @@ if($('#commented_text').val()!='')
 function delete_this_comment(comment_id)
 {
 var r=confirm("Want to Delete this comment");
+var span_comment = $('#txt_cnt_comment_show').val();
+var span_comment_incr = parseInt(span_comment) - 1;
 if(r)
 {
 $.ajax({
@@ -293,6 +309,8 @@ $.ajax({
 	   success: function(msg)
 	   {
 		$('.hover_delete_comment_'+comment_id).replaceWith('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)-1);
+		$('#cnt_comment_show').html(span_comment_incr);
 		}
 	   });
 }

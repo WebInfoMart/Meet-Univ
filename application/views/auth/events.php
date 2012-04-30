@@ -54,7 +54,7 @@
 									<div class="float_r">
 	<div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 									
-									<g:plusone size="medium" annotation="none"></g:plusone>
+									<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
 					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a>
 				
 									</div>

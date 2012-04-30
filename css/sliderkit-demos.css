@@ -109,11 +109,11 @@
 .contentslider-std .sliderkit-nav-clip li a{height:18px;margin:0;padding:3px 10px 1px;color:#666;text-decoration:none;}
 .contentslider-std .sliderkit-nav-clip li a:hover{background:#666;color:#fff;}
 .contentslider-std .sliderkit-nav-clip li.sliderkit-selected{}
-.contentslider-std .sliderkit-nav-clip li.sliderkit-selected a{color:#333;font-weight:bold;background-color: darkGray;border-radius: 5px;}
+.contentslider-std .sliderkit-nav-clip li.sliderkit-selected a{color:#333;font-weight:bold;}
 .contentslider-std .sliderkit-nav-clip li.sliderkit-selected a:hover{color:#fff!important;}
 
 /* Panel */
-.contentslider-std .sliderkit-panels{width:765px;min-height:274px;overflow:hidden;padding:10px 0;}
+.contentslider-std .sliderkit-panels{width:765px;min-height:250px;overflow:hidden;padding:10px 0;}
 .contentslider-std .sliderkit-panel{width:765px;min-height:250px;overflow:auto;padding:0 10px;}
 .contentslider-std .sliderkit-panel h2{margin:5px 0 20px;}
 

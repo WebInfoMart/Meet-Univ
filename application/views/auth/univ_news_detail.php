@@ -86,7 +86,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
-								<h3><?php echo count($news_comments); ?> Comments</h3>
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($news_comments); ?>"/>
+								<h3><span id="cnt_comment_show"><?php echo count($news_comments); ?></span> Comments</h3>
 							</div> 
 				<?php if(count($news_comments)>0){
 						foreach($news_comments as $news_comments_detail){ ?>
@@ -106,7 +107,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			{
 			?>					
 			<span class="float_r delete_comment" >
-					<img style="cursor:pointer" onclick='delete_this_comment("<?php echo $news_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
+					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $news_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
 			<?php	} } ?>				
 									<h4 ><a href="#" class="course_txt">
@@ -233,6 +234,8 @@ function post_comment()
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
+var span_comment = $('#txt_cnt_comment_show').val();
+var span_comment_incr = parseInt(span_comment) + 1;
 if($('#commented_text').val()!='')
 {
 	$.ajax({
@@ -246,6 +249,8 @@ if($('#commented_text').val()!='')
 		
 		$(".event_border:last").after(msg);
 		$('#commented_text').val('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
+		$('#cnt_comment_show').html(span_comment_incr);
 		}
 	   });
 }	   
@@ -262,6 +267,8 @@ if($('#commented_text').val()!='')
 function delete_this_comment(comment_id)
 {
 var r=confirm("Want to Delete this comment");
+var span_comment = $('#txt_cnt_comment_show').val();
+var span_comment_incr = parseInt(span_comment) - 1;
 if(r)
 {
 $.ajax({
@@ -273,6 +280,8 @@ $.ajax({
 	   success: function(msg)
 	   {
 		$('.hover_delete_comment_'+comment_id).replaceWith('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)-1);
+		$('#cnt_comment_show').html(span_comment_incr);
 		}
 	   });
 }

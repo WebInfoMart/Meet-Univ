@@ -296,7 +296,8 @@
 				</div>
 				<div class="float_r">
 				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
-				<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+				<div class="float_l"> <div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div> </div>
+				<div class="float_r"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
 				<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
 				</div>
 			<div class="clearfix"></div>

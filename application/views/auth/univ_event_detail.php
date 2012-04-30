@@ -82,7 +82,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			{
 			?>					
 			<span class="float_r delete_comment" >
-					<img style="cursor:pointer" onclick='delete_this_comment("<?php echo $event_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
+					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php echo $event_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
 			<?php	} } ?>				
 									<h4 ><a href="#" class="course_txt">
