@@ -114,7 +114,7 @@ class Quest_ans_model extends CI_Model
   return date( 'F j, Y \a\t g:ia' , $d );
 }
 }
-	function get_all_quest_user_info()
+	function get_all_quest_user_info($page)
 	{
 		$this->db->select('*');
 		$this->db->from('questions');
@@ -122,10 +122,17 @@ class Quest_ans_model extends CI_Model
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
 		$query = $this->db->get();
 		
-		/* $numrows=$query->num_rows();
+		$numrows=$query->num_rows();
+		if($numrows > 5)
+		{
+			$rows_per_page = 5;
+		}
+		else {
+		$rows_per_page = $numrows;
+		}
 		$config['base_url']=base_url()."quest_ans_controler/QuestandAns";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '2'; 
+		$config['per_page'] = $rows_per_page; 
 		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
 		$limit = $config['per_page'];
 		
@@ -134,8 +141,8 @@ class Quest_ans_model extends CI_Model
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
 		$this->db->limit($limit,$offset);
-		$query = $this->db->get(); */
-		
+		$query = $this->db->get(); 
+		$this->pagination->initialize($config);
 		if($query->num_rows() > 0)
 		{
 			$q_detail = $query->result_array();
@@ -151,7 +158,7 @@ class Quest_ans_model extends CI_Model
 			$quest_data['quest_detail'] = $q_detail;
 			
 			$quest_data['ans_count'] = $cntAns;
-			echo count($quest_data['ans_count']);
+			//echo count($quest_data['ans_count']);
 			return $quest_data;
 		}
 		else{

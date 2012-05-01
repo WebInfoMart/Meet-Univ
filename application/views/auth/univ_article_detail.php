@@ -144,7 +144,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									} ?>
 									</a>
 									</h4>
-									<?php echo $article_comments_detail['commented_text'];?>
+									<span><?php echo $article_comments_detail['commented_text'];?></span>
 									
 									<div style="font-size;color:black;" class="float_r"><?php
 									echo substr($article_comments_detail['comment_time'],0,16);?></div>

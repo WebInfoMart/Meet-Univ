@@ -3,36 +3,16 @@
 		<div class="body_header"></div>
 		<div class="body">
 			
-			<div class="row" style="margin-top:-25px">
-				<div class="float_l span13 margin_l margin_t">
-					<div class="green_box">
-						<div>
-							<div class="float_l">
-								<div class="letter_uni">
-								<div>Upcoming Events</div>
-								</div>
-							</div>
-							
-							
-							<div class="sliderkit-panels">
-								<form>
-									
-						<div class="sliderkit contentslider-std">
-							<div class="sliderkit-nav">
-								<div class="sliderkit-nav-clip">
-									<ul>
-										<li class="float_l"><a href="#tab1" title="[link title]">All Events</a></li>
-										<li class="float_l"><a href="#tab2" title="[link title]">Browse More Q & A</a></li>
-										<li class="float_l"><a href="#tab3" title="[link title]">Office</a></li>
-											<div class="clearfix"></div>
-									</ul>
-								</div>
-							</div>
-							<div class="sliderkit-panels">
-								<form>
-									<div class="sliderkit-panel" id="tab1">
-										<div class="control-group">
-											<?php foreach($events as $event_detail){ ?>
+			<div class="row">
+				<div class="float_l" style="margin-top: -13px;">
+				<div class="well form-search" style="width: 784px;">
+					
+					<div id="link1" style="cursor:pointer;color:whitesmoke;float:left;width: 100px;"> <h3><a style="color:brown;">All Events</a></h3> </div>
+					<div id="link2" style="cursor:pointer;color:whitesmoke;float:left;"> <h3><a style="color:brown;">Selected Events</a></h3> </div>
+					
+				</div>
+				<div id="event1" class="well form-search" style="width: 705px;padding:0px;float:left;margin-top: -20px;width: 822px;">
+					<?php foreach($events as $event_detail){ ?>
 						<div class="event_border">
 							<div class="float_l">
 								<?php if($event_detail['univ_logo_path']==''){?>
@@ -67,112 +47,26 @@
 							<div class="clearfix"></div>
 						</div>
 					<?php } ?>	
-										</div>
-										
-										<!--<span>Category course <a href="#" id="cat">Category</a></span>
-										<div id="change" class="form-inline">
-											<div class="control-group margin_t1">
-												<label>Categorys</label>
-												<select class="span3">
-													<option>something</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-												</select>
-												<select id="select01">
-													<option>something</option>
-													<option>2</option>
-													<option>3</option>
-													<option>4</option>
-													<option>5</option>
-												</select>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="control-group margin_t1">
-											<button class="btn btn-success" href="#">Post Question</button>
-										</div>-->
-									</div>
-									<div class="sliderkit-panel" id="tab2">
-										
-										<div class="clearfix"></div>
-									</div>
-									<div class="sliderkit-panel" id="tab3">
-										fine
-									</div>
-								</form>
-							</div>
-							<div class="clearfix"></div>
-							<div id="pagination" class="table_pagination right paging-margin">
-            <?php echo $this->pagination->create_links();?>
-            </div>
-										
-									</div>
-									
-									<div class="sliderkit-panel" id="tab3">
-										fine
-									</div>
-								</form>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
 				</div>
-				<div class="float_r span3 margin_t">
+				<div id="event2" class="well form-search" style="height: 298px;width: 705px;padding:0px;float:right;display:none;margin-top: -20px;width: 822px;">
+					No Results Found !!!
+				</div>
+					</div>
+					<div class="float_r span3 margin_t">
 					<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-			
-				
-	<script type="text/javascript">
-$(document).ready(function() {
-	var fixed = false;
-
-$(document).scroll(function() {
-    if( $(this).scrollTop() >= 50 ) {
-        if( !fixed ) {
-            fixed = true;
-            $('#main-nav-holder').css({position:'fixed',top:140,left:476});
-			// Or set top:20px; in CSS
-        }                                           // It won't matter when static
-    } else {
-        if( fixed ) {
-            fixed = false;
-            $('#main-nav-holder').css({position:'static'});
-        }
-    }
+					</div>
+					</div>
+					</div>
+					</div>
+<script>
+$('#link1').click(function(){
+$('#event2').css("display","none");
+$('#event1').css("display","block");
 });
-
+$('#link2').click(function(){
+$('#event1').css("display","none");
+$('#event2').css("display","block");
 });
-
 </script>
-<!-- ===================start slider_kit=================== -->
-		<script type="text/javascript" src="js/jquery.sliderkit.1.9.2.pack.js"></script>
-		<script type="text/javascript" src="js/jquery.easing.1.3.min.js"></script>
-		<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/sliderkit-core.css" media="screen, projection" />
-		<link rel="stylesheet" type="text/css" href="css/sliderkit-demos.css" media="screen, projection" />
-		<link rel="stylesheet" type="text/css" href="css/sliderkit-site.css" media="screen, projection" />
-		
-			<script type="text/javascript">
-			$(window).load(function(){ //$(window).load() must be used instead of $(document).ready() because of Webkit compatibility		
-				
-				// Photo slider > Minimal
-				$(".contentslider-std").sliderkit({
-					auto:0,
-					tabs:1,
-					circular:1,
-					panelfx:"sliding",
-					panelfxfirst:"fading",
-					panelfxeasing:"easeInOutExpo",
-					fastchange:0,
-					keyboard:1
-				});
-				
-			});	
-		</script>
-	<!-- ===================end slider_kit=================== -->
