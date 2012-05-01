@@ -25,7 +25,8 @@
 	<div class="float_r"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
 								
 								<h3><a href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>"><?php echo $articles_detail['article_title']; ?></a></h3>
-								<span><?php echo $articles_detail['publish_time']; ?></span><br/>
+								<span><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
+							</span><br/>
 								
 								<div class="course_cont"><?php echo substr($articles_detail['article_detail'],0,250).'..'; ?></div>
 								<div class="clearfix"></div>

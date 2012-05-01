@@ -27,7 +27,14 @@
 											?>
 												<div class="float_l">
 													<div class="follow_img">
-														<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>"><?php echo "<img style='width:63px;height:55px;' src='".base_url()."uploads/".$followers['user_pic_path']."'/>"; ?></a> </br>
+										<?php 		if($followers['user_pic_path']!='')  { ?>	
+														<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>">
+														<img style='width:63px;height:55px;' src='<?php echo $base; ?>uploads/<?php echo$followers['user_pic_path']; ?>' /></a>
+									<?php } else { ?>
+											<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>">
+														<img style='width:63px;height:55px;' src='<?php echo $base; ?>images/user_model.png' /></a>
+									<?php } ?>
+														</br>
 													</div>
 												</div>
 												

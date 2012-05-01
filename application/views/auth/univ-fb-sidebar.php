@@ -2,7 +2,7 @@
 								<div class="college_form">
 							<div>
 							<h2 class="text_align">I AM INTERESTED</h2>
-								<span>Interested in studying at Manipal University, Dubai Campus (RCPL)</span>
+								<span>Interested in studying at <?php echo ucwords($university_details['univ_name']);?></span>
 								<div class="fcnt_signBtn"></div>or Fill details for the institute to counsel you
 								<div class="margin_t text_align"> 
 									 <form class="form-horizontal" action="" method="post">

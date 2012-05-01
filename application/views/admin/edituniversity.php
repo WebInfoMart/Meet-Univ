@@ -119,7 +119,19 @@ $univ_city_id=$univ_detail_update['city_id'];
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					
+					<li>
+					<div>
+						<div class="float_l span3 margin_zero">
+							<label>Upload University Gallery</label>
+						</div>
+						<div class="float_l span3">
+							<h4>1.File size must be less than 500kb</h4>
+							<input type="file" name="userfile[]"  class="multi" multiple />
+						</div>
+						<div class="clearfix"></div>
+					</div>
+						<br />
+					</li>
 						<li>
 						<div>
 						<div class="float_l span3 margin_zero" >
@@ -151,10 +163,10 @@ $univ_city_id=$univ_detail_update['city_id'];
 					<li>
 						<div>
 						<div class="float_l span3 margin_zero">
-							<label>Address Line1</label>
+							<label>Address</label>
 						</div>
-						<div class="float_l span3">
-							<input type="text" size="30" class="text" name="address1" value="<?php echo $univ_detail_update['address_line1']; ?>" >
+						<div class="float_l " style="margin-left:19px;">
+							<textarea rows="4" cols="50" name="address1"><?php echo $univ_detail_update['address_line1']; ?></textarea>
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -522,7 +534,8 @@ $univ_city_id=$univ_detail_update['city_id'];
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<center>
+						
+					<center>
 						<input type="button" onclick="univ_admin_validate_form()" class="submit" id="add_univ_admin_submit" value="Submit"></center>
 					</form>
 				</div>

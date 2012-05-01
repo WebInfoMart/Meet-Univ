@@ -27,7 +27,9 @@
 									</div>
 									<div class="clearfix"></div>
 								</div>
-								<div class="course_cont"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></div>
+								<div class="course_cont"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?>
+								
+								</div>
 							</div>
 							<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
 							<div class="clearfix"></div>

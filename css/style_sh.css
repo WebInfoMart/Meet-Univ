@@ -646,3 +646,4 @@ width: 122px;}
 #ajax_loader_paging{left:37%;top:49%;position:absolute;z-index:-9;}
 
 .add_paging_background_class{background:#008EE8 !important;color:white !important}
+.time_ago{cursor:default !important;text-transform:none !important;font-weight:bold}

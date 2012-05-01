@@ -34,7 +34,7 @@
 <h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
 										<span>
 										
-							<abbr class="timeago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
+							<abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
 										</span><br/>
 									</div>
 									<div class="float_r">

@@ -578,7 +578,6 @@ class Adminmodel extends CI_Model
 		{
 		$myflag=1;
 		}
-		echo $myflag;
 		$image_data = $this->upload->data();
 		
 		$config = array(

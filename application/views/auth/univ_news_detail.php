@@ -45,38 +45,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div>
 								<div class="span-event-single" style="color:#333;"><strong>Posted Time</strong></div>  
 								<div class="date_heading">
-								<?php 
-								$exp = explode(" ",$news_detail['publish_time']);
-				$create_month_format = explode('-',$exp[0]);
-				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
-				
-				// Check if this time is above 24 hours...
-								$starttime = $news_detail['publish_time']; 
-								$starttime = strtotime($starttime); 
-								$oneday = 60*60*24; 
-								if( $starttime < (time()-$oneday) ) { 
-								  // echo 'more than one day since start'; 
-								echo '&nbsp;&nbsp;'.$exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
-								}
-								else {
-								//Less than oneday from start
-								//Time difference
-								$date = date('Y-m-d H:i:s');
-								$firstTime=strtotime($news_detail['publish_time']);
-								$lastTime=strtotime($date);
-
-								// perform subtraction to get the difference (in seconds) between times
-								$timeDiff=$lastTime-$firstTime;
-								
-								// Convert Seconds to h:i:s format
-								$init = $timeDiff;
-								$hours = floor($init / 3600);
-								$minutes = floor(($init / 60) % 60);
-								$seconds = $init % 60;
-								echo "&nbsp;&nbap;"."$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
-								}
-								//echo "&nbsp;&nbsp;".$news_detail['publish_time']; 
-								?>
+								<abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
 								</div>
 								<h3>Details</h3>
 								<?php echo $news_detail['news_detail']; ?>
@@ -229,6 +198,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 </div>
 </div>
 <script>
+
 function post_comment()
 {
 var commentedtext=$('#commented_text').val();
@@ -285,5 +255,8 @@ $.ajax({
 		}
 	   });
 }
-}			
+}
+jQuery(document).ready(function() {
+ jQuery("abbr.timeago").timeago();
+});			
 </script>
