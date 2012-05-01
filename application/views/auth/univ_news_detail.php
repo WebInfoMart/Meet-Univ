@@ -45,7 +45,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div>
 								<div class="span-event-single" style="color:#333;"><strong>Posted Time</strong></div>  
 								<div class="date_heading">
-								<abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
+								<br /><abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
 								</div>
 								<h3>Details</h3>
 								<?php echo $news_detail['news_detail']; ?>
@@ -88,8 +88,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									</a>
 									</h4>
 									<?php echo $news_comments_detail['commented_text'];?>
-									<div style="font-size;color:black;" class="float_r"><?php
-									echo substr($news_comments_detail['comment_time'],0,16);?></div>
+									<div style="font-size;color:black;" class="float_r">
+									<abbr class="timeago time_ago" title="<?php echo $news_comments_detail['comment_time']; ?>"></abbr></div>
 								</div>
 								<div class="clearfix"></div>
 							</div>

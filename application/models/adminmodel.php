@@ -367,7 +367,7 @@ class Adminmodel extends CI_Model
 			   'univ_email'=>$this->input->post('univ_email'),
 			   'univ_web'=>$this->input->post('web_address')
 			);
-			$this->db->insert('university', $data);		
+			$this->db->insert('university', $data);
 			redirect('admin/manage_university');
 		}	
 	}
@@ -484,7 +484,7 @@ class Adminmodel extends CI_Model
 		$query =$this->db->get();
 		$config['base_url']=base_url()."admin/manage_university/";
 		$config['total_rows']=$query->num_rows();
-		$config['per_page'] = '4'; 
+		$config['per_page'] = '25'; 
 		$offset = $paging; //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -494,6 +494,17 @@ class Adminmodel extends CI_Model
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
 		$this->pagination->initialize($config);
+		return $query->result();
+	}
+	function get_univ_info_search($univ_name)
+	{
+		$this->db->select('*');
+		$this->db->from('university');
+		$this->db->join('users', 'users.id = university.user_id','left');
+		$this->db->join('country', 'country.country_id = university.country_id','left');
+		$this->db->like('univ_name',$univ_name,'both');
+		$query =$this->db->get();
+
 		return $query->result();
 	}
 	function ban_unban_university($ban_status,$univ_id)
@@ -615,13 +626,20 @@ class Adminmodel extends CI_Model
 			   'univ_email'=>$this->input->post('univ_email'),
 			   'univ_web'=>$this->input->post('web_address')
 			);
+			
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			if($myflag==1)
 			{
 			$data=array('univ_logo_path' =>$image_data['file_name']);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			}
+			$check=$this->adminmodel->upload_univ_gallery($univ_id);	
+			if($check)
+			{
 			redirect('admin/manage_university/uus');
+			}
+			
+			//redirect('admin/manage_university/uus');
 	}
 
 	function check_unique_field($field_name,$value,$table_name)
@@ -638,23 +656,27 @@ class Adminmodel extends CI_Model
 		$config['upload_path'] = $this->univ_gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
         $config['max_size']    = '100'; // in kb
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
         
         $this->load->library('upload', $config);
         $this->load->library('Multi_upload');
-    
-        $files = $this->multi_upload->go_upload();
+		if ($_FILES['userfile1']['name'][0]=='')
+		{
+		return 1;
+		}
+		else
+		{
+				$files = $this->multi_upload->go_upload();
         
         if ( ! $files )        
         {
             $data['err_msg'] ='Error!  Please Check Your file size and type';
             $this->load->view('admin/show_error', $data);
+			return 0;
         }    
         else
         {
 		$f=0;
-				$field = 'userfile';
+				$field = 'userfile1';
 				$user_id=$this->tank_auth->get_admin_user_id();
             $data1 = array('upload_data' => $files);
 			$num_files = count($_FILES[$field]['name'])-1;
@@ -672,11 +694,12 @@ class Adminmodel extends CI_Model
 				$f=1;
 			}
 			//return $f;
-			redirect('admin/manage_univ_gallery/ius');
-		
-			
+			//redirect('admin/manage_univ_gallery/ius');
+			return 1;
 			
 		}
+		}
+        
 	}
 	
 	function get_univ_gallery_info($univ_id)

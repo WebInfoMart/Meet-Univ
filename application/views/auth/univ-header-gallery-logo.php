@@ -84,7 +84,7 @@
 			</div>
 			
 			<div class="clearfix"></div>
-			<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.4.min.js"></script>			
+
 <script type="text/javascript">
 $(document).ready(function() {
 	var fixed = false;

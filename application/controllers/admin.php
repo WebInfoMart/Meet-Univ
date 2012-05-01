@@ -1277,7 +1277,7 @@ class Admin extends CI_Controller
 		}
 		else
 		{
-		$data['univ_info']=$this->adminmodel->get_univ_info();
+		$data['univ_info']=$this->adminmodel->get_univ_info($mps);
 		$this->load->view('admin/manage_university',$data);
 		}
 		//$data['msg']='University Created Successfully';
@@ -1649,7 +1649,7 @@ class Admin extends CI_Controller
 		}
 		if($submit=='1')
 		{	
-		echo $x=$this->adminmodel->upload_univ_gallery($university_id);
+		$x=$this->adminmodel->upload_univ_gallery($university_id);
 		}
 		}
 		$this->load->view('admin/add_univ_gallery', $data);
@@ -1797,6 +1797,23 @@ class Admin extends CI_Controller
 		}
 	 }
 	}
+	
+ function ManageUniversitySearch()
+ {
+   if (!$this->tank_auth->is_admin_logged_in()) {
+   redirect('admin/adminlogin/');
+   }
+   else{
+   //echo "Function call from controller";
+   $data = $this->path->all_path();
+   $univ_name = $this->input->post('univ_name');
+   $data['user_id'] = $this->tank_auth->get_admin_user_id();
+   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+   $data['univ_info_search']=$this->adminmodel->get_univ_info_search($univ_name);
+   $this->load->view('ajaxviews/search_manage_university',$data);
+   //print_r($data['univ_info_search']);
+   }
+ }
 }
 
 /* End of file auth.php */

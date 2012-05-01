@@ -24,9 +24,10 @@
 							<div class="dsolution">
 								<div>
 									<div class="float_l">
-<h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?>
-						
-										<span><?php echo $news_detail['publish_time']; ?></span></a><br/>
+<h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
+										<abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
+							
+										<br/>
 									</div>
 						<div class="float_r">
 						<div class="fb-like " data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" >

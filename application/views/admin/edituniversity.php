@@ -126,7 +126,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 						</div>
 						<div class="float_l span3">
 							<h4>1.File size must be less than 500kb</h4>
-							<input type="file" name="userfile[]"  class="multi" multiple />
+							<input type="file" name="userfile1[]"  class="multi" multiple />
 						</div>
 						<div class="clearfix"></div>
 					</div>

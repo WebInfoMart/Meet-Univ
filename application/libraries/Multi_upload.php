@@ -21,7 +21,7 @@ class Multi_upload  {
      * Based upon JQuery Multiple Upload Class
      * see http://www.fyneworks.com/jquery/multiple-file-upload/
 	 */	
-	function go_upload($field = 'userfile') {
+	function go_upload($field = 'userfile1') {
 		$z=2;
         $CI =& get_instance(); 
 		// Is $_FILES[$field] set? If not, no reason to continue.

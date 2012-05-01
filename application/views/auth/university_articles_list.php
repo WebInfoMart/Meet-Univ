@@ -1,4 +1,5 @@
 <div class="row margin_t1">
+<div class="row margin_t1">
 				<div class="float_l span13 margin_l">
 				<div class="float_r">
 				<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>

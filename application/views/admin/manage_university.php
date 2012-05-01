@@ -19,13 +19,26 @@ $delete=1;
 }
 }
 ?>
+
 <div id="content">	
 
 <h2>DETAIL OF UNIVERSITY</h2>
+			<div id="search_university" style="width: 425px;"> 
+			<div class="float_l"><input type="text" name="txt_search_univ" id="txt_search_univ" style="width: 331px;height: 29px;margin-left: 11px;"/></div>
+			<div class="float_r"><input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_university();"></div> 
+			 <div class="clearfix"></div>
+			 </div> 
+			
 			<form action="<?php echo $base ?>admin/delete_universities" method="post" id="deleteform">	
+			<div id="content_search">
+			<div id="pagination" class="table_pagination right paging-margin">
+			
+            <?php echo $this->pagination->create_links();?>
+			</div>
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
 			
-				<thead>
+			
+           <thead>
 					<tr>
 						<th ><input type="checkbox" class="check_all" ></th>
 					<!--	<th class="header" style="cursor: pointer; ">ID</th>-->
@@ -36,7 +49,7 @@ $delete=1;
 						<th class="header" style="cursor: pointer; ">University Country</th>
 						<th></th>
 					</tr>
-				</thead>
+		</thead>
 				
 				<tbody>
 				<?php
@@ -84,8 +97,13 @@ $delete=1;
 				
 			<?php } ?>		
 				</tbody>
-				
+			
 			</table>
+			<div id="pagination" class="table_pagination right paging-margin">
+			
+            <?php echo $this->pagination->create_links();?>
+			</div>
+			</div>
 		<?php if($delete==1) { ?> 	
 			<div class="tableactions" style="margin-top:10px;">
 				<select name="univ_action" id="univ_action">
@@ -97,16 +115,31 @@ $delete=1;
 			</div>		<!-- .tableactions ends -->
 		<?php  } ?>	
 		
-			<div id="pagination" class="table_pagination right paging-margin">
-			
-            <?php echo $this->pagination->create_links();?>
-			
-            </div> 		
+				
 			
 		</form>
 		</div>
 		
 <script>
+function search_university()
+{
+	var search_box_val = $('#txt_search_univ').val();
+	
+	var search_url = "<?php echo $base; ?>admin/ManageUniversitySearch";
+	//var search_url = "/index.php/control_form/get_selected_member/" + selected_member_id;
+	if(search_box_val != '' || search_box_val != null) 
+	{
+	$.ajax({
+    type: "POST",
+    url: search_url,
+	data:'univ_name='+search_box_val,
+    success: function(response)
+    {
+		$('#content_search').html(response);
+    }
+});
+}
+}
 function delete_confirm(univid)
 {
 $('#check_university_'+univid).attr('checked','checked')
