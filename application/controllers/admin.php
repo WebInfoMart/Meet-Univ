@@ -1806,6 +1806,13 @@ class Admin extends CI_Controller
    else{
    //echo "Function call from controller";
    $data = $this->path->all_path();
+   $data['user_id']	= $this->tank_auth->get_admin_user_id();
+   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+   $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+    if(!($data['admin_priv']))
+	{
+			redirect('admin/adminlogout');
+	}
    $univ_name = $this->input->post('univ_name');
    $data['user_id'] = $this->tank_auth->get_admin_user_id();
    $data['admin_user_level']=$this->tank_auth->get_admin_user_level();

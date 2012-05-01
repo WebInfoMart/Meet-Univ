@@ -1,3 +1,24 @@
+<?php 
+$edit=0;
+$delete=0;
+$view=0;
+$univ_edit_op=array('3','6','7','10');
+$univ_delete_op=array('5','7','8','10');
+foreach ($admin_priv as $admin_priv_res){ 
+if($admin_priv_res['privilege_type_id']=='5' && $admin_priv_res['privilege_level']!=0)
+{
+$view=1;
+if(in_array($admin_priv_res['privilege_level'],$univ_edit_op))
+{
+$edit=1;
+}
+if(in_array($admin_priv_res['privilege_level'],$univ_delete_op))
+{
+$delete=1;
+}
+}
+}
+?>
 <table cellpadding="0" cellspacing="0" width="100%" class="sortable">
 			 
 				<thead>
@@ -60,4 +81,4 @@
 			<?php } ?>		
 				</tbody>
 				
-			</table>
+</table>
