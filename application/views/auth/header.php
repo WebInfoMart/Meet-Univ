@@ -156,6 +156,8 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/avia-custom.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/tinyeditor.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function(){
    $('#scrollbar1').tinyscrollbar(); 
@@ -174,6 +176,9 @@ if ($user) {
   });
  </script>
 <script type="text/javascript">
+ jQuery(document).ready(function() {
+  jQuery("abbr.timeago").timeago();
+});
 $(document).ready(function(){
  $('#pulse').click(function(){
 $('#myModal').modal('toggle');});

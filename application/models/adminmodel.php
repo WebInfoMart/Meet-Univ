@@ -11,7 +11,7 @@ class Adminmodel extends CI_Model
 		parent::__construct();
 		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
 		$this->univ_gallery_path = realpath(APPPATH . '../uploads/univ_gallery');
-		$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
+		//$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
 		$this->load->library('pagination');
 		$this->load->database();
 	}
@@ -548,9 +548,9 @@ class Adminmodel extends CI_Model
 		$this->db->from('university');
 		$this->db->where('univ_id',$univ_id);
 		$this->db->join('users', 'users.id = university.user_id','left');
-		$this->db->join('country', 'country.country_id = university.country_id','left');
 		$this->db->join('state', 'state.state_id = university.state_id','left');
 		$this->db->join('city', 'city.city_id = university.city_id','left');
+		$this->db->join('country', 'country.country_id = university.country_id','left');
 		$query=$this->db->get();
 		return $query->result_array();
 	}
@@ -601,7 +601,7 @@ class Adminmodel extends CI_Model
 			   'latitude' => $this->input->post('latitude'),
 			   'longitude' => $this->input->post('longitude'),
 			   'address_line1' => $this->input->post('address1'),
-			   'user_id' =>$this->input->post('user_id'),
+			   'user_id' =>$this->input->post('univ_owner'),
 			   'city_id' =>$this->input->post('city'),
 			   'state_id' => $this->input->post('state'),
 			   'country_id'=>$this->input->post('country'),

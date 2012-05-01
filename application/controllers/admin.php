@@ -1105,8 +1105,6 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('fax_address', 'Fax Address', 'trim|xss_clean');
 		$this->form_validation->set_rules('univ_email', 'university email', 'trim|xss_clean|valid_email');
 		$this->form_validation->set_rules('web_address', 'Web Address', 'trim|xss_clean');
-		
-		$this->form_validation->set_rules('univ_owner', 'University Owner', 'trim|required|string');
 		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 		if ($this->form_validation->run()) {
 		$data['x']=$this->adminmodel->create_univ();
@@ -1464,6 +1462,7 @@ class Admin extends CI_Controller
 		{
 			redirect('admin/adminlogout');
 		}
+		$data['results'] = $this->adminmodel->userprivlegetype();
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
 		if($this->input->post('submit'))

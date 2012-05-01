@@ -33,38 +33,9 @@
 									<div class="float_l">
 <h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
 										<span>
-										<?php 
-										$exp = explode(" ",$news_detail['publish_time']);
-				$create_month_format = explode('-',$exp[0]);
-				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
-				
-				// Check if this time is above 24 hours...
-								$starttime = $news_detail['publish_time']; 
-								$starttime = strtotime($starttime); 
-								$oneday = 60*60*24; 
-								if( $starttime < (time()-$oneday) ) { 
-								  // echo 'more than one day since start'; 
-								echo $exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
-								}
-								else {
-								//Less than oneday from start
-								//Time difference
-								$date = date('Y-m-d H:i:s');
-								$firstTime=strtotime($news_detail['publish_time']);
-								$lastTime=strtotime($date);
-
-								// perform subtraction to get the difference (in seconds) between times
-								$timeDiff=$lastTime-$firstTime;
-								
-								// Convert Seconds to h:i:s format
-								$init = $timeDiff;
-								$hours = floor($init / 3600);
-								$minutes = floor(($init / 60) % 60);
-								$seconds = $init % 60;
-								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
-								}
 										
-										?></span><br/>
+							<abbr class="timeago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
+										</span><br/>
 									</div>
 									<div class="float_r">
 				<!--<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>-->

@@ -4,6 +4,7 @@
 </div>
   </div>
   </div>
+  
 <?php
 $class_univ_name='';
 $class_univ_owner='';
@@ -112,7 +113,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 						<div class="float_l span3">
 							<div class="float_l">
 							
-							<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "default_logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img"></div>
+							<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "univ_logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img"></div>
 							<div class="float_l span1"><input type="file" name="userfile" class="file"></div>
 						</div>
 						<div class="clearfix"></div>
@@ -125,18 +126,24 @@ $univ_city_id=$univ_detail_update['city_id'];
 							<label style="color:#2E64FE">University Owner</label>
 						</div>
 						<div class="float_l span3" >
-						<input type="text" size="30" class="text" readonly name="univ_owner" value="<?php echo ucwords($univ_detail_update['fullname']); ?>" >
-							<!--<select class="<?php echo $class_univ_owner; ?> styled span3 margin_zero" name="univ_owner">
+						<!--<input type="text" size="30" class="text" readonly name="univ_owner" value="<?php echo ucwords($univ_detail_update['fullname']); ?>" >-->
+							<select class="<?php echo $class_univ_owner; ?> styled span3 margin_zero" id="univ_owner" name="univ_owner">
+							
 								<option value="">Please Select</option>
+					<?php if($univ_detail_update['user_id']!='' && $univ_detail_update['user_id']!=0 && $univ_detail_update['user_id']!=NULL){ ?>
+					<option value="<?php echo $univ_detail_update['user_id']; ?>" selected><?php echo ucwords($univ_detail_update['fullname']); ?></option>
+					<?php } ?>		
 								<?php foreach($univ_admins as $univ_detail) { ?>
 								<option value="<?php echo $univ_detail['id']; ?>"><?php echo ucwords($univ_detail['fullname']); ?></option>
 							<?php } ?>
 							</select>
-							-->
-			<input type="hidden" name="user_id" value="<?php echo $univ_detail_update['user_id']; ?>">
-
+							
+			
 							<span style="color: red;"> <?php echo form_error('univ_owner'); ?><?php echo isset($errors['univ_owner'])?$errors['univ_owner']:''; ?> </span>
 							
+						</div>
+						<div class="float_l span3">
+								<a rel="add-univ-admin" href="#" id="add_univ_admin" class="tdn">Add New University Admin</a>
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -313,8 +320,8 @@ $univ_city_id=$univ_detail_update['city_id'];
 							<div class="float_l span3 margin_zero">
 								<label>About Us</label>
 							</div>
-							<div class="float_l">
-								<textarea rows="9" cols="103" name="about_us"><?php echo $univ_detail_update['about_us']; ?>"</textarea>
+							<div class="">
+								<textarea rows="9" class="wysiwyg" cols="113" name="about_us"><?php echo $univ_detail_update['about_us']; ?>"</textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -431,19 +438,102 @@ $univ_city_id=$univ_detail_update['city_id'];
 					
 				</div>
 			</div>
-			
+			<div class="modal-lightsout1" id="add-univ">
+				<div class="modal-profile1" id="add-univ1">
+					<h3>Create University Admin</h3>
+					<a href="#" title="Close profile window" class="modal-close-profile">
+					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" class="closeimagesize"  alt="Close profile window"/></a>
+					<form action="" method="post" id="add_user_form" class="university_model" onsubmit="return false;">
+						<div>
+							<div class="float_l form_univ">
+								<p>
+									<label>FULLNAME:</label><br>
+									<input type="text" size="30" class="text" value="" id="fullname" name="fullname"> 
+									<label class="form_error"  id="fullname_error"></label>
+								</p> 
+								<p>
+									<label>EMAIL:</label><br>
+									<input type="text" size="30" value="" class="text" id="email"  name="email">
+									<label class="form_error"  id="email_error"></label>		
+							</p> 
+								<p>
+									<label>PASSWORD:</label><br>
+									<input type="password" size="30"  class="text" id="password" name="password"> 
+									<label class="form_error"  id="pwd_error"></label><label class="form_error"  id="length_pwd_error"></label>				
+								</p> 
+								<p>
+									<label>CONFIRM PASSWORD:</label><br>
+									<input type="password" size="30" class="text" id="confirm_password"  name="confirm_password"> 
+									<label class="form_error"  id="cpwd_error"></label>		
+						</p> 
+							</div>
+							<div class="right_univ"></div>
+							<div class="float_l span5 margin_zero">
+								<ul>
+									<li>
+										<div>
+											<div class="float_l span1 margin_zero"><h4><center>Manage</center></h4></div>
+											<div class="float_l button_width"><h5><center>VIEW</center></h5></div>
+											<div class="float_l button_width"><h5><center>EDIT</center></h5></div>
+											<div class="float_l button_width"><h5><center>INSERT</center></h5></div>
+											<div class="float_l button_width"><h5><center>DELETE</center></h5></div>
+											<div class="clearfix"></div>
+										</div>
+									</li>
+									<?php
+										foreach ($results as $privilage){	
+										if($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==11)
+										{?>	
+									<li>
+										<div>
+											<div class="float_l span1 margin_zero"><h5><center><?php echo ucwords($privilage['privilege_name']);?></center></h5></div>
+											<input type="hidden" name="privilege_type_id[]" value="<?php echo $privilage['privilege_type_id']; ?>">
+											<input type="hidden" value="0" name="privilege_total[]" class="reset_priv" id="privilege_total_<?php echo $privilage['privilege_type_id']; ?>">
+											<div class="float_l button_width">
+											<p class="onoffswitch margin_l3">
+											<span class="onoff_box" style="background-position-x: 0px; ">
+											<input type="checkbox" id="view_<?php echo $privilage['privilege_type_id'];?>" name="view_<?php echo $privilage['privilege_type_id'];?>" value="1"  class="onoffbtn" ></span>
+											</p>
+											</div>
+											<div class="float_l button_width">
+											<p class="onoffswitch margin_l3">
+											<span class="onoff_box" style="background-position-x: 0px; ">
+											<input type="checkbox" id="edit_<?php echo $privilage['privilege_type_id'];?>" name="edit_<?php echo $privilage['privilege_type_id'];?>" value="2" class="onoffbtn priorop" ></span>
+											</p>
+											</div>
+											<div class="float_l button_width">
+											<p class="onoffswitch margin_l3">
+											<span class="onoff_box" style="background-position-x: 0px; ">
+											<input type="checkbox" id="insert_<?php echo $privilage['privilege_type_id'];?>" name="insert_<?php echo $privilage['privilege_type_id']?>"  value="3" class="onoffbtn priorop" ></span>
+											</p></div>
+											<div class="float_l button_width">
+											<p class="onoffswitch margin_l3">
+											<span class="onoff_box" style="background-position-x: 0px; ">
+											<input type="checkbox" id="delete_<?php echo $privilage['privilege_type_id'];?>" name="delete_<?php echo $privilage['privilege_type_id'];?>"  value="4" class="onoffbtn priorop" ></span>
+											</p></div>
+											<div class="clearfix"></div>
+										
+										</div>
+									</li>
+									<?php } 
+										}?>	
+									
+								</ul>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<center>
+						<input type="button" onclick="univ_admin_validate_form()" class="submit" id="add_univ_admin_submit" value="Submit"></center>
+					</form>
+				</div>
+		</div>
+
 			
 		</div>
 		
 	</div>	
 	
 <script> 
-$(document).ready(function()
-{
-fetchstates(<?php echo $univ_state_id; ?>);
-fetchcities(<?php echo $univ_state_id; ?>,<?php echo $univ_city_id; ?>);
-//fetchcities();
-});
 $('#univ_client').click(function(){
 if($('#univ_client').is(':checked'))
 {
@@ -498,6 +588,7 @@ $.ajax({
 	{
     $('#state').attr('disabled', false);
 	$('#state').html(msg);
+
 	}
    }
    });
@@ -573,32 +664,32 @@ $('#add_univ_admin_submit').click(function(){
 	{
 	 $('#fullname_error').html("Please enter the full name"); 
 	 $('#fullname').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#fullname_error').html("") 
 	 $('#fullname').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(email=='' || email==null ||  (!isValidEmailAddress(email)))
 	{
 	$('#email_error').html("Please enter valid email address").addClass("error"); 
 	$('#email').addClass('error');
-	flag=1;
+	flag=0;
 	
 	}
 	else
 	{
 	$('#email_error').html(""); 
 	$('#email').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(pwd=='' || pwd==null)
 	{
 	$('#pwd_error').html("Please enter the password"); 
 	$('#password').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
@@ -606,13 +697,13 @@ $('#add_univ_admin_submit').click(function(){
 	{
 	$('#length_pwd_error').html("password length is not enough"); 
 	$('#password').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#length_pwd_error').html(""); 
 	$('#password').removeClass('error');
-	 flag=0;
+	flag=flag+1;
 	}
 	$('#pwd_error').html("");
 	}
@@ -620,17 +711,17 @@ $('#add_univ_admin_submit').click(function(){
 	{
 	$('#cpwd_error').html("password and confirm password does not match").addClass("error"); 
 	$('#confirm_password').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#cpwd_error').html(""); 
 	$('#confirm_password').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
-	if(!flag)
+	if(flag>3)
 	{
-	 var  emailstatus=0;
+	var  emailstatus=0;
 		$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>admin/check_unique_field/email/users",
@@ -685,7 +776,7 @@ $('#add_univ_admin_submit').click(function(){
 	   }
 	   });
 	 } 
-	   
+
 	}
 	
 });
@@ -700,40 +791,40 @@ $('#addcountry').click(function(){
 	{
 	 $('#country_error').html("Please enter the country name"); 
 	 $('#country_model').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error').html("") 
 	 $('#country_model').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
 	$('#state_error').html("Please enter the state name"); 
 	$('#state_model').addClass('error');
-	flag=1;
+	flag=0;
 	
 	}
 	else
 	{
 	$('#state_error').html(""); 
 	$('#state_model').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error').html("Please enter the city"); 
 	$('#city_model').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error').html(""); 
 	$('#city_model').removeClass('error');
-	flag=0;
+	flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  countrystatus=0;
 		$.ajax({
@@ -798,13 +889,13 @@ $('#addstate').click(function(){
 	{
 	 $('#country_error1').html("Please select the country"); 
 	 $('#country_model1').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error1').html("");
 	 $('#country_model1').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
@@ -817,21 +908,21 @@ $('#addstate').click(function(){
 	{
 	$('#state_error1').html(""); 
 	$('#state_model1').removeClass('error');
-	 flag=0;
+	  flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error1').html("Please enter the city"); 
 	$('#city_model1').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error1').html(""); 
 	$('#city_model1').removeClass('error');
-	flag=0;
+	 flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  statestatus=0;
 		$.ajax({
@@ -894,39 +985,39 @@ $('#addcity').click(function(){
 	{
 	 $('#country_error2').html("Please select the country"); 
 	 $('#country_model2').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error2').html("");
 	 $('#country_model2').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null || state=='0')
 	{
 	$('#state_error2').html("Please select the state "); 
 	$('#state_model2').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#state_error2').html(""); 
 	$('#state_model2').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error2').html("Please enter the city"); 
 	$('#city_model2').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error2').html(""); 
 	$('#city_model2').removeClass('error');
-	flag=0;
+	flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  citystatus=0;
 		$.ajax({
@@ -975,6 +1066,13 @@ $('#addcity').click(function(){
 	   
 	}
 	
-});	
+});
+
+
+function isValidEmailAddress(emailAddress) {
+    var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
+    return pattern.test(emailAddress);
+}			
+	
 	
 </script>	

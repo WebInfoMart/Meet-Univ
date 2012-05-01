@@ -103,8 +103,8 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 							<label>University Logo</label>
 						</div>
 						<div class="float_l span3">
-							<div class="float_l"><img src="<?php echo "$base$img_path";  ?>/logo.png" class="logo_img"></div>
-							<div class="float_l span1"><input type="file" name="userfile" class="file"></div>
+							<!--<div class="float_l"><img src="<?php echo "$base";  ?>uploads/univ_gallery/univ_logo.png" class="logo_img"></div>
+							--><div class="float_l span1"><input type="file" name="userfile" class="file"></div>
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -134,10 +134,10 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 					<li>
 						<div>
 						<div class="float_l span3 margin_zero">
-							<label>Address Line1</label>
+							<label>Address</label>
 						</div>
-						<div class="float_l span3">
-							<input type="text" size="30" class="text" name="address1" value="<?php echo set_value('address1'); ?>">
+						<div class="float_l " style="margin-left:19px;">
+							<textarea rows="4" cols="50" name="address1"><?php echo set_value('address1'); ?></textarea>
 						</div>
 						<div class="clearfix"></div>
 						</div>
@@ -250,6 +250,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 								<span style="color: red;"> <?php echo form_error('sub_domain'); ?><?php echo isset($errors['sub_domain'])?$errors['sub_domain']:''; ?> </span>
 							
 							</div>
+							<div class="float_l">.meetuniversities.com</div>
 							<div class="clearfix"></div>
 						</div>
 					</li>
@@ -303,8 +304,8 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 							<div class="float_l span3 margin_zero">
 								<label>About Us</label>
 							</div>
-							<div class="float_l">
-								<textarea rows="9" cols="103" name="about_us"><?php echo set_value('about_us'); ?></textarea>
+							<div class="">
+								<textarea rows="9" class="wysiwyg" cols="150" name="about_us"><?php echo set_value('about_us'); ?></textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -650,32 +651,32 @@ $('#add_univ_admin_submit').click(function(){
 	{
 	 $('#fullname_error').html("Please enter the full name"); 
 	 $('#fullname').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#fullname_error').html("") 
 	 $('#fullname').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(email=='' || email==null ||  (!isValidEmailAddress(email)))
 	{
 	$('#email_error').html("Please enter valid email address").addClass("error"); 
 	$('#email').addClass('error');
-	flag=1;
+	flag=0;
 	
 	}
 	else
 	{
 	$('#email_error').html(""); 
 	$('#email').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(pwd=='' || pwd==null)
 	{
 	$('#pwd_error').html("Please enter the password"); 
 	$('#password').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
@@ -683,13 +684,13 @@ $('#add_univ_admin_submit').click(function(){
 	{
 	$('#length_pwd_error').html("password length is not enough"); 
 	$('#password').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#length_pwd_error').html(""); 
 	$('#password').removeClass('error');
-	 flag=0;
+	flag=flag+1;
 	}
 	$('#pwd_error').html("");
 	}
@@ -697,17 +698,17 @@ $('#add_univ_admin_submit').click(function(){
 	{
 	$('#cpwd_error').html("password and confirm password does not match").addClass("error"); 
 	$('#confirm_password').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#cpwd_error').html(""); 
 	$('#confirm_password').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
-	if(!flag)
+	if(flag>3)
 	{
-	 var  emailstatus=0;
+	var  emailstatus=0;
 		$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>admin/check_unique_field/email/users",
@@ -762,7 +763,7 @@ $('#add_univ_admin_submit').click(function(){
 	   }
 	   });
 	 } 
-	   
+
 	}
 	
 });
