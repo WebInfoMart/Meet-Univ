@@ -170,6 +170,9 @@ ul.navigation li a {padding: 0.5em 0 0.5em 20px;border-bottom: 1px solid #CCC;di
 .uni_breaking{margin-left: 10px;-moz-border: 1px dotted #CCC;-webkit-border: 1px dotted #CCC;border: 1px dotted #CCC;margin:10px 0px;}
 .Events{border:1px solid #eee;-moz-border:1px solid #eee;-webkit-border:1px solid #eee;padding:10px;}
 .letter_first div:first-letter {color: #F89406;font-size: 610%;height: 20px;padding-right: 1px;float: left;}
+.letter_first p:first-letter {color: #F89406;font-size: 610%;height: 20px;padding-right: 1px;float: left;}
+
+.letter_first p:first-letter {color: #F89406;font-size: 610%;height: 20px;padding-right: 1px;float: left;}
 .letter_first_char{color: #F89406;font-size: 610%;height: 20px;padding-right: 1px;float: left;text-transform:uppercase;}
 .message{background-color: #F2DEDE;border-color: #EED3D7;color: #B94A48;}
 .message span{color:#333;}
