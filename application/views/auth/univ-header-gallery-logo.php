@@ -9,15 +9,15 @@
 					{
 					echo $university_details['univ_name'].'-'; } ?> 
 					 <small><?php 
-					 if($city_name_university['cityname'] != '')
+					 if($city_name_university !='0')
 					 {
 						echo $city_name_university['cityname'].','; 
 					 }
-					 if($state_name_university['statename'] != '0' || $state_name_university['statename'] != '')
+					 if($state_name_university != '0')
 					 {
 						echo $state_name_university['statename'].',';
 					 }
-					if($country_name_university['country_name'] != '' || $country_name_university['country_name']!= '0')
+					if($country_name_university != '0')
 					{
 					echo $country_name_university['country_name']; } ?>
 					 </small></h2>
