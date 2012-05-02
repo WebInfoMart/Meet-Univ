@@ -344,8 +344,8 @@ $(document).scroll(function() {
 					panelfx:"sliding",
 					panelfxfirst:"fading",
 					panelfxeasing:"easeInOutExpo",
-					fastchange:0,
-					keyboard:1
+					fastchange:0
+					
 				});
 				
 			});	

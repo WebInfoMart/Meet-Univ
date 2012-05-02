@@ -19,11 +19,15 @@
 								<div>
 									<div class="float_l">
 <h3><a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>"><?php echo $event_detail['event_title']; ?>
-				-<?php echo $event_detail['cityname'].",".$event_detail['statename'].",".$event_detail['country_name']?></a></h3>
-										<span><?php echo $event_detail['event_date_time']; ?></span><br/>
+				</a></h3>
+										<span>
+										<?php echo $event_detail['cityname'].",".$event_detail['statename'].",".$event_detail['country_name']?>,
+										
+										<strong><?php echo $event_detail['event_date_time']; ?></strong>
+										</span><br/>
 									</div>
 									<div class="float_r">
-										<h4>22 Register</h4>
+										<!--<h4>22 Register</h4>-->
 									</div>
 									<div class="clearfix"></div>
 								</div>
