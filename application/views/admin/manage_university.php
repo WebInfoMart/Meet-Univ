@@ -105,7 +105,7 @@ $delete=1;
 			</div>
 			</div>
 		<?php if($delete==1) { ?> 	
-			<div class="tableactions" style="margin-top:10px;">
+			<div class="tableactions" style="margin-top:40px;">
 				<select name="univ_action" id="univ_action">
 					<option value="">Actions</option>
 					<option value="delete">Delete</option>

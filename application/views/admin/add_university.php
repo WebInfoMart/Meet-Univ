@@ -302,6 +302,19 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
+								<label>Salient Features</label>
+								
+							</div>
+							*After Entering One Feature Press Enter Key Once
+							<div class="">
+								<textarea rows="6" cols="100" name="salient_features"><?php echo set_value('salient_features'); ?></textarea>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>About Us</label>
 							</div>
 							<div class="">
@@ -312,7 +325,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 					</li>
 				</ul>
 			
-						<input type="submit" class="submit" name="submit" value="UPDATE">
+						<input type="submit" class="submit" name="submit" value="Create">
 						
 			</form>
 		</div>

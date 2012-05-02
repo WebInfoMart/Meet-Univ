@@ -365,10 +365,11 @@ class Adminmodel extends CI_Model
 			   'createdby' =>$cretedby_admin,
 			   'univ_fax' =>$this->input->post('fax_address'),
 			   'univ_email'=>$this->input->post('univ_email'),
-			   'univ_web'=>$this->input->post('web_address')
+			   'univ_web'=>$this->input->post('web_address'),
+			   'salient_features'=>$this->input->post('salient_features')
 			);
 			$this->db->insert('university', $data);
-			redirect('admin/manage_university');
+			redirect('admin/manage_university/ucs');
 		}	
 	}
 		
@@ -530,9 +531,10 @@ class Adminmodel extends CI_Model
 		$this->db->delete('univ_gallery', array('univ_id' => $univ_id));
 		$this->db->delete('univ_program', array('univ_id' => $univ_id));
 		$this->db->delete('follow_univ', array('follow_to_univ_id' => $univ_id));
-		$this->db->delete('events', array('univ_id' => $univ_id));
+		$this->db->delete('events', array('event_univ_id' => $univ_id));
 		$this->db->delete('mailchimp_detail', array('univ_id' => $univ_id));
-		$this->db->delete('news_article', array('univ_id' => $univ_id));	
+		$this->db->delete('news', array('news_univ_id' => $univ_id));
+		$this->db->delete('article', array('article_univ_id' => $univ_id));		
 	}
 	
 	function delete_universities()
@@ -546,9 +548,10 @@ class Adminmodel extends CI_Model
 			$this->db->delete('university', array('univ_id' => $univ_id[$i]));
 			$this->db->delete('univ_program', array('univ_id' => $univ_id[$i]));
 			$this->db->delete('follow_univ', array('follow_to_univ_id' => $univ_id[$i]));
-			$this->db->delete('events', array('univ_id' => $univ_id));
+			$this->db->delete('events', array('event_univ_id' => $univ_id));
 			$this->db->delete('mailchimp_detail', array('univ_id' => $univ_id[$i]));
-			$this->db->delete('news_article', array('univ_id' => $univ_id[$i]));
+			$this->db->delete('news', array('news_univ_id' => $univ_id[$i]));
+			$this->db->delete('article', array('article_univ_id' => $univ_id[$i]));	
 			}
 		}
 	}
@@ -624,7 +627,8 @@ class Adminmodel extends CI_Model
 			   'createdby' =>$cretedby_admin,
 			   'univ_fax'=>$this->input->post('fax_address'),
 			   'univ_email'=>$this->input->post('univ_email'),
-			   'univ_web'=>$this->input->post('web_address')
+			   'univ_web'=>$this->input->post('web_address'),
+			   'salient_features'=>$this->input->post('salient_features')
 			);
 			
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		

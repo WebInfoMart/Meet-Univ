@@ -43,14 +43,6 @@ class Admin extends CI_Controller
 			
 		}
 
-		
-		
-		
-		/*if ($message = $this->session->flashdata('message')) {
-			$this->load->view('auth/general_message', array('message' => $message));
-		} else {
-			redirect('admin/adminlogin');
-		}*/
 	}
 
 	/**
@@ -1097,6 +1089,7 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
 		$this->form_validation->set_rules('about_us', 'About Us', 'trim|xss_clean');
+		$this->form_validation->set_rules('salient_features', 'Salient Features', 'trim|xss_clean');
 		$this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
 		$this->form_validation->set_rules('keyword', 'Keyword', 'trim|xss_clean');
 		$this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
@@ -1260,13 +1253,11 @@ class Admin extends CI_Controller
 		$data['msg']='University Updated Successfully';
 		$this->load->view('admin/userupdated',$data);
 		}
-		/*
 		else if($mps=='ucs')
 		{
-		$data['msg']='User Created Successfully';
+		$data['msg']='University Created Successfully';
 		$this->load->view('admin/userupdated',$data);
 		}
-		*/
 		$flag=1;
 		break;
 		}
