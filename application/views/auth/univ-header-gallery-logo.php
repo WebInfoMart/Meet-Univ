@@ -5,7 +5,7 @@
 <div class="row">
 				<div class="span10">
 					<h2><?php 
-					if($university_details['univ_name'] != '')
+					if($university_details['univ_name'] != '' || $university_details['univ_name']!= '0')
 					{
 					echo $university_details['univ_name'].'-'; } ?> 
 					 <small><?php 
@@ -13,11 +13,11 @@
 					 {
 						echo $city_name_university['cityname'].','; 
 					 }
-					 if($state_name_university['statename'] != '')
+					 if($state_name_university['statename'] != '0' || $state_name_university['statename'] != '')
 					 {
 						echo $state_name_university['statename'].',';
 					 }
-					if($country_name_university['country_name'] != '')
+					if($country_name_university['country_name'] != '' || $country_name_university['country_name']!= '0')
 					{
 					echo $country_name_university['country_name']; } ?>
 					 </small></h2>
