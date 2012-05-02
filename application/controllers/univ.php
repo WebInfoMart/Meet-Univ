@@ -27,7 +27,7 @@ function university($univ_id='',$qid='',$uid='')
 		$data['university_details'] = $this->users->get_university_by_id($univ_id);
 		$country_id = $data['university_details']['country_id'];
 		$city_id = $data['university_details']['city_id'];
-		
+		$state_id = $data['university_details']['state_id'];
 		$longitude = $data['university_details']['longitude'];
 		$latitude = $data['university_details']['latitude'];
 		$university_name = $data['university_details']['univ_name'];
@@ -105,6 +105,7 @@ function university($univ_id='',$qid='',$uid='')
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 			$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+			$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 			$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 			$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 			$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -132,6 +133,7 @@ function university($univ_id='',$qid='',$uid='')
 		
 		$country_id = $data['university_details']['country_id'];
 		$city_id = $data['university_details']['city_id'];
+		$state_id = $data['university_details']['state_id'];
 		$university_name = $data['university_details']['univ_name'];
 		$university_address = $data['university_details']['address_line1'];
 		$logged_user_id = $this->session->userdata('user_id');
@@ -143,6 +145,7 @@ function university($univ_id='',$qid='',$uid='')
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 			$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+			$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 			$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 			$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 			if($prg == 'program')
@@ -173,6 +176,7 @@ function university($univ_id='',$qid='',$uid='')
 		
 		$country_id = $data['university_details']['country_id'];
 		$city_id = $data['university_details']['city_id'];
+		$state_id = $data['university_details']['state_id'];
 		$university_name = $data['university_details']['univ_name'];
 		$university_address = $data['university_details']['address_line1'];
 		$logged_user_id = $this->session->userdata('user_id');
@@ -185,6 +189,7 @@ function university($univ_id='',$qid='',$uid='')
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 			$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+			$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 			$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 			$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 			
@@ -219,6 +224,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -228,6 +234,7 @@ function university($univ_id='',$qid='',$uid='')
 				
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -276,6 +283,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -284,6 +292,7 @@ function university($univ_id='',$qid='',$uid='')
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -315,6 +324,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -323,6 +333,7 @@ function university($univ_id='',$qid='',$uid='')
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -354,6 +365,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -362,6 +374,7 @@ function university($univ_id='',$qid='',$uid='')
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -392,6 +405,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -401,6 +415,7 @@ function university($univ_id='',$qid='',$uid='')
 				
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -450,6 +465,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -459,6 +475,7 @@ function university($univ_id='',$qid='',$uid='')
 				
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -591,6 +608,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -598,6 +616,7 @@ function university($univ_id='',$qid='',$uid='')
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$data['get_all_question_of_univ'] = $this->quest_ans_model->get_all_quest_of_univ_user_info($univ_id);
@@ -683,6 +702,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -690,6 +710,7 @@ function university($univ_id='',$qid='',$uid='')
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
 				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
 				$this->load->view('auth/univ-header-gallery-logo',$data);
