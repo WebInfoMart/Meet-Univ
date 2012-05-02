@@ -52,37 +52,8 @@
 					<h3><?php echo $quest_list['q_title']."</br>";?></h3></a>
 				
 				<span style="color:black;">
-				<?php    
-				$exp = explode(" ",$quest_list['q_asked_time']);
-				$create_month_format = explode('-',$exp[0]);
-				$string_month = date("M", mktime(0, 0, 0, $create_month_format[1]));
-				
-				// Check if this time is above 24 hours...
-								$starttime = $quest_list['q_asked_time']; 
-								$starttime = strtotime($starttime); 
-								$oneday = 60*60*24; 
-								if( $starttime < (time()-$oneday) ) { 
-								  // echo 'more than one day since start'; 
-								echo $exp[1].'&nbsp;&nbsp;'.$create_month_format[0].'-'.$string_month.'-'.$create_month_format[2]; //$articles_detail['publish_time']; 
-								}
-								else {
-								//Less than oneday from start
-								//Time difference
-								$date = date('Y-m-d H:i:s');
-								$firstTime=strtotime($quest_list['q_asked_time']);
-								$lastTime=strtotime($date);
-
-								// perform subtraction to get the difference (in seconds) between times
-								$timeDiff=$lastTime-$firstTime;
-								
-								// Convert Seconds to h:i:s format
-								$init = $timeDiff;
-								$hours = floor($init / 3600);
-								$minutes = floor(($init / 60) % 60);
-								$seconds = $init % 60;
-								echo "$hours:$minutes:$seconds".'&nbsp;&nbsp;before';
-								}
-				?>
+				<abbr class="timeago time_ago" title="<?php echo $quest_list['q_asked_time'] ?>"></abbr>
+							
 				</span>, <?php echo "by&nbsp;".$quest_list['fullname']."&nbsp";
 				if($quest_list['q_country_id'] == '0' and $quest_list['q_univ_id'] != '0')
 							{

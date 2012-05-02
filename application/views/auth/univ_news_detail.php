@@ -62,7 +62,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						foreach($news_comments as $news_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $news_comments_detail['comment_id']; ?>" >
 								<div class="float_l">
-									<div class="comment_img">
+									<div class="comment_img" style="margin-right:10px;">
 									<?php if($news_comments_detail['user_pic_path']==''){?>
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php } else { ?>		
@@ -79,13 +79,13 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $news_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
 			<?php	} } ?>				
-									<h4 ><a href="#" class="course_txt">
+									<h4 ><span class="course_txt">
 									<?php if($news_comments_detail['commented_by_user_name']==''){
 									echo $news_comments_detail['fullname'];
 									}else{
 									echo $news_comments_detail['commented_by_user_name']; 
 									} ?>
-									</a>
+									</span>
 									</h4>
 									<?php echo $news_comments_detail['commented_text'];?>
 									<div style="font-size;color:black;" class="float_r">
@@ -161,8 +161,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } ?>
+								<?php } ?><br />
 									</div>
+								<p>		
 								</div>
 								<div class="float_l span9 margin_zero">
 									<form class="form-horizontal" method="post" action="">
@@ -172,7 +173,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 											<div class="my_form_controls">
 												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
 												</textarea>
-												<?php echo $user_detail['fullname']?$user_detail['fullname']:''; ?>
+												
 											</div>
 										</div>
 										

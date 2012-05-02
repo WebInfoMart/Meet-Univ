@@ -109,8 +109,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									</h4>
 									<span><?php echo $article_comments_detail['commented_text'];?></span>
 									
-									<div style="font-size;color:black;" class="float_r"><?php
-									echo substr($article_comments_detail['comment_time'],0,16);?></div>
+									<div style="font-size;color:black;" class="float_r">
+									<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr></div>
 								</div>
 								<div class="clearfix"></div>
 							</div>
