@@ -6,9 +6,16 @@
 							<div >
 									<div class="univ_content letter_first">
 									<?php
-									echo substr($university_details['about_us'],0,500).'..';
+									echo substr($university_details['about_us'],0,500);
+									$count_view_more_string = strlen($university_details['about_us']);
+									?>
+									<?php
+									if($count_view_more_string > 500)
+									{
+									echo '..';
 									?>
 									<a href="<?php echo $base; ?>about-<?php echo $university_details['univ_id']; ?>-university">View more detail</a>
+									<?php } ?>
 									</div>
 							</div>
 							<!--<div id="show_popup_success_join" class="success_modal">
@@ -39,7 +46,7 @@
 													</div>
 												</div>
 												
-											<?php } } ?>
+											<?php } } else { echo "<h3>Be the first follower...</h3>"; } ?>
 											</li>
 										</ul>
 									</div>
@@ -112,7 +119,7 @@
 									} ?>
 									</li>
 									<?php } ?>
-									<?php }
+									<?php } else { echo " <center><h3><span style='color:maroon'>No Recent Event Available</span></h3></center> "; }
 									//}
 									?>
 									
@@ -158,6 +165,8 @@
 									<h2>News</h2>
 										<ul>
 										<?php
+										if(!empty($news_gallery))
+										{
 										foreach($news_gallery as $news)
 										{
 										
@@ -166,7 +175,7 @@
 					<?php echo substr($news['news_detail'],0,300).'..'; ?>
 					<img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a>
 					</li>
-										<?php  } ?>	
+										<?php  } } else { echo " <center><h3><span style='color:maroon'>No Recent News Available</span></h3></center> "; }?>	
 									</ul>
 								</div>
 							</div>

@@ -856,7 +856,20 @@ class Users extends CI_Model
 		return 0;
 		}
 	}
-	
+	// Fetch State Name for showing in university page
+	function fetch_state_name_by_id($state_id)
+	{
+		$this->db->select('statename');
+		$this->db->where('state_id',$state_id);
+		$query = $this->db->get('state');
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else {
+		return 0;
+		}
+	}
 	function get_followers_of_univ($univ_id)
 	{
 		$query = $this->db->get_where('follow_univ',array('follow_to_univ_id'=>$univ_id,'followed_by !='=>''));

@@ -7,14 +7,20 @@
 					<h2><?php 
 					if($university_details['univ_name'] != '')
 					{
-					echo $university_details['univ_name']; } ?> 
-					- <small><?php 
+					echo $university_details['univ_name'].'-'; } ?> 
+					 <small><?php 
+					 if($city_name_university['cityname'] != '')
+					 {
+						echo $city_name_university['cityname'].','; 
+					 }
+					 if($state_name_university['statename'] != '')
+					 {
+						echo $state_name_university['statename'].',';
+					 }
 					if($country_name_university['country_name'] != '')
 					{
 					echo $country_name_university['country_name']; } ?>
-					, <?php 
-					if($city_name_university['cityname'] != ''){
-					echo $city_name_university['cityname']; } ?></small></h2>
+					 </small></h2>
 				</div>
 				<div class="span4 float_r margin_t">
 					<div class="margin_zero float_l">
