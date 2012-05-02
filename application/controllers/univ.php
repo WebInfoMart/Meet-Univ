@@ -365,7 +365,7 @@ function university($univ_id='',$qid='',$uid='')
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
 			$country_id = $data['university_details']['country_id'];
 			$city_id = $data['university_details']['city_id'];
-			$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
+			$state_id = $data['university_details']['state_id'];
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
