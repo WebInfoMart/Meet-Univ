@@ -384,8 +384,8 @@ float: left;
 background-image: -webkit-linear-gradient(#FFFFF5,#F5F3B4);
 -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffff5',endColorstr='#f5f3b4',GradientType=0)";
 border: 1px solid #DFDDB5;-moz-border:1px solid #aaa;-webkit-border:1px solid #aaa;border-radius:2px;padding:10px 8px}
-.search_box ul{list-style:none;margin-left: 10px;}
-.search_box ul li{margin-top: 1px;}
+.search_box ul{list-style:none;margin-left: 0px;}/*margin-left: 10px*/
+.search_box ul li{margin-top: 1px;padding-left:5px;}/*Added padding-left:5px;*/
 .search_box ul li a{font-size: 12px;color:#333;}
 .search_box_height{height: 80px;overflow: hidden;}
 #scrollbar1 { width:165px; height: 70px;overflow: hidden;}
