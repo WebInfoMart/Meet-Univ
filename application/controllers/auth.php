@@ -1284,9 +1284,43 @@ class Auth extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		$data['events'] = $this->frontmodel->fetch_events($page);
+		$cat='all';
+		$data['events'] = $this->frontmodel->fetch_events($cat,$page);
 		//print_r($data['events']);
 		$this->load->view('auth/events',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	
+	function spot_admission_events($page='')
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$cat='spot_admission';
+		$data['events'] = $this->frontmodel->fetch_events($cat,$page);
+		//print_r($data['events']);
+		$this->load->view('auth/spot_admission_events',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	
+	function fairs_events($page='')
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$cat='fairs';
+		$data['events'] = $this->frontmodel->fetch_events($cat,$page);
+		//print_r($data['events']);
+		$this->load->view('auth/fairs_events',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	
+	function Counselling_events($page='')
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$cat='others_alumuni';
+		$data['events'] = $this->frontmodel->fetch_events($cat,$page);
+		//print_r($data['events']);
+		$this->load->view('auth/counselling_events',$data);
 		$this->load->view('auth/footer',$data);
 	}
 	
@@ -1345,6 +1379,8 @@ class Auth extends CI_Controller
 		$data['sidebar'] = $this->gmap->printSidebar();
 		$this->load->view('ajaxviews/google_map',$data);
 	}
+	
+	
 }
 /* End of file auth.php */
 /* Location: ./application/controllers/auth.php */

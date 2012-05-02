@@ -54,6 +54,8 @@ $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
 $route['about-(:num)-university']='univ/univ_aboutus/$1';
 $route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
 $route['(Recent_Articles/articles)']='auth/articles';
+$route['(Recent_News/news/(:num))']='auth/news/$1';
+$route['(Recent_News/news)']='auth/news';
 
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 $route['(college_search|events_search)'] = 'search/$1';
@@ -94,7 +96,7 @@ $route['(delete_message_outbox/(:num)/(:num))'] = 'user/delete_message_outbox/$1
 
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
+$route['(spot_admission_events|fairs_events|Counselling_events|login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|find_college|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
 $route['default_controller'] = 'auth';
 
 /* End of file routes.php */

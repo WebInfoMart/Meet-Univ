@@ -61,7 +61,7 @@ class Frontmodel extends CI_Model
 		return $query->result_array();
 	}
 	
-	function fetch_events($page)
+	function fetch_events($cat,$page)
 	{
 	//echo $page;
 		$this->db->select('*');
@@ -70,7 +70,18 @@ class Frontmodel extends CI_Model
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$this->db->where('event_type','univ_event');
+		$event_arr['event_type']='univ_event';
+		if($cat=='spot_admission' || $cat=='fairs')
+		{
+		$event_arr['event_category']=$cat;
+		$this->db->where($event_arr);
+		}
+		else if($cat=='others_alumuni')
+		{
+		$event_arr['event_category']='others';
+		$this->db->where(array('event_category'=>'others','event_type'=>'univ_event'));
+		$this->db->or_where(array('event_category'=>'alumuni'));
+		}
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
 		$config['base_url']=base_url()."auth/events";
@@ -84,7 +95,19 @@ class Frontmodel extends CI_Model
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$this->db->where('event_type','univ_event');
+		$event_arr['event_type']='univ_event';
+		if($cat=='spot_admission' || $cat=='fairs')
+		{
+		$event_arr['event_category']=$cat;
+		$this->db->where($event_arr);
+		}
+		else if($cat=='others_alumuni')
+		{
+		$event_arr['event_category']='others';
+		$this->db->where(array('event_category'=>'others','event_type'=>'univ_event'));
+		$this->db->or_where(array('event_category'=>'alumuni'));
+		}
+		
 		$this->db->order_by("event_created_time", "desc"); 
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
@@ -190,7 +213,7 @@ class Frontmodel extends CI_Model
 		$this->db->where('news_type_ud','univ_news');
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
-		$config['base_url']=base_url()."auth/news";
+		$config['base_url']=base_url()."Recent_News/news";
 		$config['total_rows']=$numrows;
 		$config['per_page'] = '5'; 
 		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset

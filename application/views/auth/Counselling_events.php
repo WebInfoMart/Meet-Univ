@@ -5,10 +5,10 @@
 			<div class="row">
 			<div class="float_l span13 margin_l margin_t">
 				<ul id="myTab" class="nav nav-tabs">
-					<li class="tabs_events active1"><a href="<?php echo $base; ?>events" data-toggle="tab" id="link1">All</a></li>
-					<li class="tabs_events"><a href="<?php echo $base; ?>spot_admission_events" data-toggle="tab" id="link2">Spot Admission</a></li>
+					<li class="tabs_events"><a href="<?php echo $base; ?>events" data-toggle="tab" id="link1">All</a></li>
+					<li class="tabs_events "><a href="<?php echo $base; ?>spot_admission_events" data-toggle="tab" id="link2">Spot Admission</a></li>
 					<li class="tabs_events"><a href="<?php echo $base; ?>fairs_events" data-toggle="tab" id="link3">Fairs</a></li>
-					<li class="tabs_events"><a href="<?php echo $base; ?>Counselling_events" data-toggle="tab" id="link4">Counselling</a></li>
+					<li class="tabs_events active1"><a href="<?php echo $base; ?>Counselling_events" data-toggle="tab" id="link4">Counselling</a></li>
 				</ul>
 				<div id="event1" class="form-search tab-content">
 					<?php foreach($events as $event_detail){ ?>
