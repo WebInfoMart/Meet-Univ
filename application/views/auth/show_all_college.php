@@ -164,7 +164,11 @@
 												</div>
 										</div>
 										<div class="float_r span4 margin_l data_limited">
-											<?php echo substr($get_university['university'][$no_university]['about_us'],0,365).'..'; ?>
+											<?php
+					$univ_detail=str_replace("<div>","<p>",$get_university['university'][$no_university]['about_us']);
+					$univ_detail=str_replace("</div>","</p>",$univ_detail);
+					echo substr($univ_detail,0,365);
+											?>
 										</div>
 									</div>
 									<div class="float_l">

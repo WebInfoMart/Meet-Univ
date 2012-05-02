@@ -6,7 +6,9 @@
 							<div >
 									<div class="univ_content letter_first">
 									<?php
-									echo substr($university_details['about_us'],0,500);
+									$univ_detail=str_replace("<div>","<p>",$university_details['about_us']);
+									$univ_detail=str_replace("</div>","</p>",$univ_detail);
+									echo substr($univ_detail,0,500);
 									$count_view_more_string = strlen($university_details['about_us']);
 									?>
 									<?php

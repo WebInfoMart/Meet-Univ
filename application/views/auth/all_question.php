@@ -95,7 +95,7 @@
 										<li class="float_l"><a href="#tab1" title="[link title]">Ask a Question</a></li>
 										<li class="float_l"><a href="#tab2" title="[link title]">Browse More Q & A</a></li>
 										
-											<div class="clearfix"></div>
+											<li class="clearfix"></li>
 									</ul>
 								</div>
 							</div>
