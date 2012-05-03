@@ -396,7 +396,7 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 	{
 	$('#pagination a').removeClass('add_paging_background_class');
 	 $('.'+pid).addClass('add_paging_background_class');
-	$('#ajax_loader_paging').css('z-index','9');
+	//$('#ajax_loader_paging').css('z-index','9');
 	$('#col_paging').css('opacity','0.4');
 	cpage=a;
  	   $.ajax({
@@ -412,10 +412,13 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 		'opacity':1
 		},1000,function(){
 		});
-		$('#ajax_loader_paging').animate({
+		
+		/*$('#ajax_loader_paging').animate({
 		'z-index':'-9'
 		},800,function(){
 		});
+		*/
+		
 		$('#col_paging').html(msg);
 	   }
 	   })
