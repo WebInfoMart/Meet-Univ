@@ -85,7 +85,8 @@ function university($univ_id='',$qid='',$uid='')
 				'firstname' => $this->input->post('apply_name'),
 				'prog_parent_id' => $this->input->post('apply_course_interest'),
 				'email' => $this->input->post('apply_email'),
-				'phone_no1' => $this->input->post('apply_mobile')
+				'phone_no1' => $this->input->post('apply_mobile'),
+				'applied_univ_id'=> $univ_id
 			);
 			//print_r($apply_now_data);
 			//$this->session->set_userdata($apply_now_data);

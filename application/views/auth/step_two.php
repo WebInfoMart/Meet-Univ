@@ -108,9 +108,9 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 													<label class="control-label">Your Name</label>
 													<div class="controls docs-input-sizes">
 													<select class="grid_0 margin_zero" name="title">
-														<option>Mr.</option>
-														<option>Mrs.</option>
-														<option>Ms.</option>
+														<option>Mr</option>
+														<option>Mrs</option>
+														<option>Ms</option>
 													</select>
 													<input class="<?php echo $class_firstname; ?>" type="text" placeholder="First Name" name="first_name">
 													<input class="<?php echo $class_lastname; ?>" type="text" placeholder="Last Name" name="last_name">
@@ -506,7 +506,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 															<option selected="selected" value="">— Please Select —</option>
 															<?php foreach($educ_level as $education_level) { 
 																	
-																	if($education_level['prog_edu_lvl_id'] != '5') {
+																	if($education_level['prog_edu_lvl_id'] !='2' ) {
 															?>
 															
 																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>"> <?php echo $education_level['educ_level']; ?> </option>

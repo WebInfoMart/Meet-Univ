@@ -36,7 +36,7 @@ if($error_agree != '') { $class_agree = 'focused_error_stepone'; } else { $class
 									<h1>Search & Apply to 100+ Colleges & Universities</h1>
 										<div class="margin_t">
 											<h2>Basic Info</h2>
-											<form class="form-horizontal form_step_box" action="find_college" method="post">
+											<form class="form-horizontal form_step_box" action="" method="post">
 												<div class="control-group">
 													<label class="control-label">Your Home Country</label>
 													<div class="controls docs-input-sizes">

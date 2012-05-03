@@ -18,24 +18,37 @@ class Leadcontroller extends CI_Controller
 	}
 	
 	// Functions for steps in of Lead Data
-	function find_college()
+	function find_college($x='',$request_univ_id='')
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
+		$id = $request_univ_id;
 		$data['country'] = $this->users->fetch_country();
 		$data['area_interest'] = $this->users->fetch_area_interest();
 		$data['educ_level'] = $this->users->fetch_educ_level();
 		$data['show_country_having_univ'] = $this->frontmodel->fetch_search_country_having_univ();
 		if($this->input->post('process_step_one'))
 		{
+		
 		$this->form_validation->set_rules('step_email','Email','trim|xss_clean|required|valid_email');
 		$this->form_validation->set_rules('iagree','I agree','trim|xss_clean|required');
 		if($this->form_validation->run())
 		{
+			
+			if($id=='')
+			{
 			$condition = array(
 			'home_country_id' => $this->input->post('home_country'),
 			'email' => $this->input->post('step_email')
 			);
+			}
+			else{
+			$condition = array(
+			'home_country_id' => $this->input->post('home_country'),
+			'email' => $this->input->post('step_email'),
+			'applied_univ_id'=>$id
+			);
+			}
 			$insert_type = '1';
 			$data['insert_step_one_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
 			//$this->session->set_userdata($data_stepone);

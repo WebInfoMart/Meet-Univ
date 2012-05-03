@@ -205,7 +205,10 @@
 										<h4></h4>
 										</div>
 										<div class="float_r">
+										<form action="<?php echo $base; ?>find_college/<?php echo $get_university['university'][$no_university]['univ_id'];?>" method="post">
+										<!--<input type="hidden" name="univ_id_request" value="<?php echo $get_university['university'][$no_university]['univ_id'];?>"/>-->
 											<input type="submit" value="Request Information" class="btn btn-success" name="request_information_submit" />
+										</form>
 										</div>
 										<div class="clearfix"></div>
 									</div>
