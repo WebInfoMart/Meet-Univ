@@ -139,6 +139,8 @@ class Adminevents extends CI_Controller
 			$this->form_validation->set_rules('city', 'City', 'trim|required|string');
 			$this->form_validation->set_rules('event_time', 'Event Time', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('detail', 'Detail', 'trim|string');
+			$this->form_validation->set_rules('event_place', 'Event Place', 'trim|string');
+			$this->form_validation->set_rules('event_timing', 'Event Time', 'trim|string');
 			
 			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {

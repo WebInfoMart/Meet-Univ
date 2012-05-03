@@ -142,7 +142,17 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Event Place</label>
+						</div>
+						<div class="float_l span3">
+						<input type="text" size="30" class="text" value="<?php echo set_value('event_place'); ?>" name="event_place">	
+				
+						</div>
+						</div>
+					</li>
 					<li>
 						<div>
 						<div class="float_l span3 margin_zero">
@@ -170,7 +180,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
-								<label>Event Time</label>
+								<label>Event Date</label>
 							</div>
 							<div class="float_l span3">
 								<input type="text" size="30" class="date_picker" value="<?php echo set_value('event_time'); ?>" name="event_time">
@@ -181,7 +191,19 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label>Event Time</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" class="text" size="30" value="<?php echo set_value('event_timing'); ?>" name="event_timing">
+	
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</li>
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">

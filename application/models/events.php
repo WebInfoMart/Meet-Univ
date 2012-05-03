@@ -79,8 +79,9 @@ class Events extends CI_Model
 			   'event_category' => $this->input->post('event_type'),
 			   'event_country_id' => $this->input->post('country'),
 			   'event_state_id' => $this->input->post('state'),
-			   'event_city_id' => $this->input->post('city')
-				
+			   'event_city_id' => $this->input->post('city'),
+			   'event_place' => $this->input->post('event_place'),
+			   'event_time' => $this->input->post('event_timing')
 			);
 			$this->db->insert('events', $data);
 	}
@@ -184,7 +185,9 @@ class Events extends CI_Model
 			   'event_country_id' => $this->input->post('country'),
 			   'event_state_id' => $this->input->post('state'),
 			   'event_category' => $this->input->post('event_type'),
-			   'event_city_id' => $this->input->post('city')
+			   'event_city_id' => $this->input->post('city'),
+				'event_place' => $this->input->post('event_place'),
+				'event_time' => $this->input->post('event_timing')
 				
 			);
 			$this->db->update('events', $data, array('event_id' => $event_id));

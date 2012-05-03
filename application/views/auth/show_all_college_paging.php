@@ -38,7 +38,7 @@
 												</div>
 										</div>
 										<div class="float_r span4 margin_l data_limited">
-											<?php echo substr($get_university['university'][$no_university]['about_us'],0,365).'..'; ?>
+											<?php //echo substr($get_university['university'][$no_university]['about_us'],0,365).'..'; ?>
 										</div>
 									</div>
 									<div class="float_l">

@@ -164,11 +164,24 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
+								<label>Event Time</label>
+							</div>
+							<div class="float_l span3">
+								<input type="text" class="text" size="30" value="<?php echo $event_detail['event_time']; ?>" name="event_timing">
+	
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>Event Type</label>
 							</div>
 							<div class="float_l span3">
 							<select class="text styled span3 margin_zero"  name="event_type" >
-								<option value="all" <?php if($event_detail['event_category']=='all'){ echo "selected" ;} ?>>All</option>
+								<option value="all" >All</option>
 								<option value="spot_admission" <?php if($event_detail['event_category']=='spot_admission'){ echo "selected" ;} ?>>Spot Admission</option>
 								<option value="fairs" <?php if($event_detail['event_category']=='fairs'){ echo "selected" ;} ?>>Fairs</option>
 								<option value="alumuni" <?php if($event_detail['event_category']=='alumuni'){ echo "selected" ;} ?>>Alumuni</option>
@@ -178,6 +191,17 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							</div>
 							
 							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Event Place</label>
+						</div>
+						<div class="float_l span3">
+						<input type="text" size="30" class="text" value="<?php echo $event_detail['event_place'] ?>" name="event_place">	
+				
+						</div>
 						</div>
 					</li>
 					<li>
