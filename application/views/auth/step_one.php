@@ -12,8 +12,8 @@ if($error_agree != '') { $class_agree = 'focused_error_stepone'; } else { $class
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body_container">
-			<div class="row show-grid">
-				<div class="span13">
+			<div class="row">
+				<div class="span16 margin_zero">
 					<div class="alert alert-message message" data-alert="alert">
 						<a class="close" data-dismiss="alert">&times;</a>
 						<div>
@@ -31,7 +31,7 @@ if($error_agree != '') { $class_agree = 'focused_error_stepone'; } else { $class
 						</nav>
 					</div>
 					<div>
-						<div class="span8 margin_zero padding">
+						<div class="span9 margin_zero">
 							<div class="step_box">
 									<h1>Search & Apply to 100+ Colleges & Universities</h1>
 										<div class="margin_t">
@@ -335,7 +335,7 @@ if($error_agree != '') { $class_agree = 'focused_error_stepone'; } else { $class
 									<div class="clearfix"></div>
 							</div>
 						</div>
-						<div class="span15 float_r">
+						<div class="span3 float_r">
 							<img src="images/banner_img.png">
 						</div>
 					<div class="clearfix"></div>

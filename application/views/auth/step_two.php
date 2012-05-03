@@ -30,26 +30,26 @@ $error_academic_exam_score = form_error('academic_exam_score1');
 
 if($error_interest_country != '') { $class_interest_country = 'focused_error_stepone'; } else { $class_interest_country=''; }
 
-if($error_state != '') { $class_state = 'focused_error_steptwo_dropdown'; } else { $class_state='span3'; }
-if($error_city != '') { $class_city = 'focused_error_steptwo_dropdown'; } else { $class_city='span3'; }
-if($error_area_interest != '') { $class_area_interest = 'focused_error_steptwo_dropdown'; } else { $class_area_interest='span3'; }
-if($error_current_educ != '') { $class_current_educ = 'focused_error_steptwo_dropdown'; } else { $class_current_educ='span3'; }
-if($error_next_educ != '') { $class_next_educ = 'focused_error_steptwo_dropdown'; } else { $class_next_educ='span3'; }
+if($error_state != '') { $class_state = 'focused_error_steptwo_dropdown span3'; } else { $class_state='span3'; }
+if($error_city != '') { $class_city = 'focused_error_steptwo_dropdown span3'; } else { $class_city='span3'; }
+if($error_area_interest != '') { $class_area_interest = 'focused_error_steptwo_dropdown span3'; } else { $class_area_interest='span3'; }
+if($error_current_educ != '') { $class_current_educ = 'focused_error_steptwo_dropdown span3'; } else { $class_current_educ='span3'; }
+if($error_next_educ != '') { $class_next_educ = 'focused_error_steptwo_dropdown span3'; } else { $class_next_educ='span3'; }
 
-if($error_firstname != '') { $class_firstname = 'focused_error_steptwo_small_textboxes'; } else { $class_firstname='span2'; }
-if($error_lastname != '') { $class_lastname = 'focused_error_steptwo_small_textboxes'; } else { $class_lastname='span2'; }
-if($error_dob_day != '') { $class_dob_day = 'focused_error_steptwo_small_textboxes'; } else { $class_dob_day='span2'; }
-if($error_dob_year != '') { $class_dob_year = 'focused_error_steptwo_small_textboxes'; } else { $class_dob_year='span2'; }
-if($error_home_adress != '') { $class_home_adress = 'focused_error_steptwo_large_textboxes'; } else { $class_home_adress='span3'; }
-if($error_phone != '') { $class_phone = 'focused_error_steptwo_small_textboxes'; } else { $class_phone='span2'; }
-if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_error_steptwo_small_textboxes'; } else { $class_academic_exam_score='span2'; }
+if($error_firstname != '') { $class_firstname = 'focused_error_steptwo_small_textboxes span2'; } else { $class_firstname='span2'; }
+if($error_lastname != '') { $class_lastname = 'focused_error_steptwo_small_textboxes span2'; } else { $class_lastname='span2'; }
+if($error_dob_day != '') { $class_dob_day = 'focused_error_steptwo_small_textboxes span2'; } else { $class_dob_day='span2'; }
+if($error_dob_year != '') { $class_dob_year = 'focused_error_steptwo_small_textboxes span2'; } else { $class_dob_year='span2'; }
+if($error_home_adress != '') { $class_home_adress = 'focused_error_steptwo_large_textboxes span3'; } else { $class_home_adress='span3'; }
+if($error_phone != '') { $class_phone = 'focused_error_steptwo_small_textboxes span2'; } else { $class_phone='span2'; }
+if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_error_steptwo_small_textboxes span2'; } else { $class_academic_exam_score='span2'; }
 ?>
 	<div>
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body_container">
-			<div class="row show-grid">
-				<div class="span13">
+			<div class="row">
+				<div class="span16 margin_zero">
 				
 					<div class="alert alert-message message" data-alert="alert">
 						<a class="close" data-dismiss="alert">&times;</a>
@@ -70,8 +70,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 				
 					
 					<div>
-						<div class="span8 margin_zero padding">
-						
+						<div class="span9 margin_zero">
 							<div class="step_box">
 							
 									<h1>Your University & College Search</h1>
@@ -93,24 +92,22 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">Where are you interested in studying?</label>
 													<div class="controls">
-														<label class="checkbox inline">
-															<select name="interest_study_country" id="interest_study_country" class="<?php echo $class_interest_country; ?>" onchange="fetchstates(this);">
-															<option value=""> Please select </option>
-															<?php 
-																foreach($country as $contries)
-																{
-															?>
-															<option value="<?php echo $contries['country_id']; ?>"> <?php echo $contries['country_name']; ?> </option>
-															<?php } ?>
-															</select>
-														</label>
+														<select name="interest_study_country" id="interest_study_country" class="<?php echo $class_interest_country; ?>" onchange="fetchstates(this);">
+														<option value=""> Please select </option>
+														<?php 
+															foreach($country as $contries)
+															{
+														?>
+														<option value="<?php echo $contries['country_id']; ?>"> <?php echo $contries['country_name']; ?> </option>
+														<?php } ?>
+														</select>
 														<span style="color:red"> <?php echo form_error('interest_study_country'); ?><?php echo isset($errors['interest_study_country'])?$errors['interest_study_country']:''; ?> </span>
 													</div>
 												</div>
 												<div class="control-group">
 													<label class="control-label">Your Name</label>
 													<div class="controls docs-input-sizes">
-													<select class="span1" name="title">
+													<select class="grid_0 margin_zero" name="title">
 														<option>Mr.</option>
 														<option>Mrs.</option>
 														<option>Ms.</option>
@@ -125,7 +122,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label">Your Birth Date</label>
 													<div class="controls docs-input-sizes">
-														<select class="span1" name="dob_month">
+														<select class="grid_0 margin_zero" name="dob_month">
 															<option value="1">January</option>
 															<option value="2">February</option>
 															<option value="3">March</option>
@@ -454,7 +451,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 													<label class="control-label">Phone Number</label>
 													<div class="controls docs-input-sizes">
 														<input class="<?php echo $class_phone; ?>" type="text" name="phone">
-														<select class="span1" name="phone_type">
+														<select class="span2" name="phone_type">
 															<option value="Mobile">Mobile</option>
 															<option selected="selected" value="Home">Home</option>
 															<option value="Work">Work</option>
@@ -531,7 +528,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 													<label class="control-label">Academic Exam Scores</label>
 													<div class="controls docs-input-sizes">
 														<div class="margin_bot">
-															<select class="span1" name="academic_exam_type1">
+															<select class="grid_0 margin_zero" name="academic_exam_type1">
 																<option value="SAT">SAT</option>
 																<option value="ACT">ACT</option>
 																<option value="GRE">GRE</option>
@@ -542,7 +539,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 														</div>
 														<span id="academic_another" style="display:none;">
 														
-														<select class="span1" name="academic_exam_type2">
+														<select class="grid_0 margin_zero" name="academic_exam_type2">
 															<option value="SAT">SAT</option>
 															<option value="ACT">ACT</option>
 															<option value="GRE">GRE</option>
@@ -564,17 +561,17 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 																<option value="TOEFL-PBT">TOEFL-PBT</option>
 																<option value="TOEFL-CBT">TOEFL-CBT</option>
 															</select>
-															<input class="span1" type="text" name="eng_prof_exam_score1">
+															<input class="grid_0 margin_zero" type="text" name="eng_prof_exam_score1">
 															<a id="eng_prof_add" style="cursor:pointer;">Add Another »</a><br/>
 														</div>
 														<span id="eng_prof_another" style="display:none;">
-														<select class="span2" name="eng_prof_exam_type2">
+														<select class="span3" name="eng_prof_exam_type2">
 															<option value="IELTS-Academic">IELTS-Academic</option>
 															<option selected="selected" value="TOEFL-iBT">TOEFL-iBT</option>
 															<option value="TOEFL-PBT">TOEFL-PBT</option>
 															<option value="TOEFL-CBT">TOEFL-CBT</option>
 														</select>
-														<input class="span1" type="text" name="eng_prof_exam_score2">
+														<input class="grid_0 margin_zero" type="text" name="eng_prof_exam_score2">
 														</span>
 														<!--<a href="#academic_scores">Add Another »</a>-->
 														<p class="help-block">Entering your Exam Scores is the best way to let the top schools around the world know that you have the required skills to study abroad.</p>
@@ -599,7 +596,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 									<div class="clearfix"></div>
 							</div>
 						</div>
-						<div class="span15 float_r">
+						<div class="span3 float_r">
 							<img src="images/banner_img.png">
 						</div>
 					<div class="clearfix"></div>

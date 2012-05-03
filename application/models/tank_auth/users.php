@@ -66,6 +66,14 @@ class Users extends CI_Model
 		$query = $this->db->get();
 		return $query->result_array();
 	 }
+	 function fetch_program_parent()
+	 {
+		$this->db->select('*');
+		$this->db->from('program_parent');
+		$this->db->order_by('program_parent_name','asc');
+		$query = $this->db->get();
+		return $query->result_array();
+	 }
 	 
 	 function fetch_program()
 	 {
