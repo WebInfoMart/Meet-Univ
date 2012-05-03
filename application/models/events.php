@@ -53,6 +53,7 @@ class Events extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('university');
+		$this->db->order_by("univ_name","asc");
 		$query = $this->db->get();
 		return $query->result();
 	}

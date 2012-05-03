@@ -69,14 +69,16 @@
 								</div>
 							</div>
 						</div>
-										<?php if($prog_show=='1'){ ?>
 						<div class="float_l grid_1 margin_zero search_box_height">
 							<h5>Filter by Program</h5>
 							<div id="scrollbar5">
 								<div class="scrollbar" style="height: 70px!important;overflow: hidden;"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
 								<div class="viewport">
 									<div class="overview">
+									
 										<ul>
+					<?php if($prog_show=='1'){ ?>
+										
 					<?php if($s_program>0) { ?>					
 					<li <?php if($prog_arrow=='' || $prog_arrow==0) { ?> class="filter_arrow" <?php } ?>>
 					<a href="#" onclick="onsubprogram('AllProgram','0')" >All</a></li>							
@@ -87,14 +89,17 @@
 	<a href="#" onclick="onsubprogram('<?php echo $search_program['course_name']; ?>','<?php echo $search_program['program_id']; ?>')"><?php echo ucwords($search_program['course_name']); ?></a>
 											</li>	
 										<?php } ?>
-					<?php } else { ?> <li class="filter_arrow"><a href="#" >No Program </a></li> <?php } ?>					
-										</ul>                 
+					<?php } else { ?> <li class="filter_arrow"><a href="#" >No Program </a></li> <?php } ?>	
+							<?php } else { ?>
+					<li><a>Select Area of Interest</a></li>					
+								<?php } ?>
+										</ul> 
+								
 									</div>
 								</div>
 							</div>
 						</div>
 					
-				<?php } ?>
 				
 				
 				
@@ -399,10 +404,16 @@ function onareaintrest(prog_parent_name,prog_parent_id)
 	   cache: false,
 	   success: function(msg)
 	   {
-	   	$('#ajax_loader_paging').css('z-index','-9');
-	    $('#col_paging').html(msg);
-		$('#col_paging').css('opacity','1');
-	    
+	   	
+		$('#col_paging').animate({
+		'opacity':1
+		},1000,function(){
+		});
+		$('#ajax_loader_paging').animate({
+		'z-index':'-9'
+		},800,function(){
+		});
+		$('#col_paging').html(msg);
 	   }
 	   })
 	   

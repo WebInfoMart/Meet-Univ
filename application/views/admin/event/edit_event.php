@@ -210,7 +210,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Detail</label>
 							</div>
 							<div class="">
-								<textarea rows="12" name="detail" class="wysiwyg" cols="103"><?php echo $event_detail['event_detail']; ?></textarea>
+								<textarea rows="12" name="detail"  cols="103"><?php echo $event_detail['event_detail']; ?></textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
