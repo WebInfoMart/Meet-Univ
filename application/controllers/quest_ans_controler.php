@@ -28,6 +28,14 @@ class Quest_ans_controler extends CI_Controller
 		$this->load->helper('date');
 		/// use session for show question send success--Subh
 		$data['show_quest_send_msg'] = '';
+		//$data['quest_var'] = '';
+		if($this->input->post('ask_quest'))
+			{
+				$data['quest_var'] = $this->input->post('quest_on_univ');
+			}
+			else{
+			$data['quest_var'] = '';
+			}		
 		if($this->input->post('post_quest'))
 		{
 		$this->form_validation->set_rules('quest_title','Question Title','required');

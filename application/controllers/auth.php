@@ -40,7 +40,8 @@ class Auth extends CI_Controller
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();
 		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
 		$data['featured_news']=$this->frontmodel->fetch_featured_news();
-		 $data['featured_quest'] = $this->frontmodel->fetch_home_featured_quest();		
+		 $data['featured_quest'] = $this->frontmodel->fetch_home_featured_quest();
+		  
 	//	print_r($data['featured_events']);
 		/*  Upload code end */
 		$this->load->view('auth/header',$data);

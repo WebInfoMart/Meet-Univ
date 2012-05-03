@@ -1,3 +1,4 @@
+
 	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -103,7 +104,7 @@
 								<form action="QuestandAns" method="post">
 									<div class="sliderkit-panel" id="tab1">
 										<div class="control-group">
-											<input class="input-xxlarge focused" id="quest_title" name="quest_title" type="text" value="">
+											<input class="input-xxlarge focused" id="quest_title" name="quest_title" type="text" value="<?php echo $quest_var; ?>">
 											<span style="color:red;"> <?php echo form_error('quest_title'); ?><?php echo isset($errors['quest_title'])?$errors['quest_title']:''; ?> </span>
 										</div>
 										<div class="control-group">
