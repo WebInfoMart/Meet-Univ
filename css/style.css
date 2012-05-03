@@ -219,10 +219,11 @@ border-color: rgba(255, 0, 0, .8) !important;
 }
 .univ_page_logo
 {
+vertical-align: middle;
+line-height: 150px;
 	z-index: 100;
 position: absolute;
 margin-top: 3px;
-height: 150px;
 background: white;
 border: 2px solid #EAEAEA;
 padding: 2px;

@@ -39,11 +39,11 @@
 				<?php 
 				if($university_details['univ_logo_path'] != '')
 				{
-				echo "<img class='univ_page_logo_nw' style='height:150px' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
+				echo "<img class='univ_page_logo_nw' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
 				}
 				else
 				{
-				echo "<img class='univ_page_logo_nw' style='height:150px' src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
+				echo "<img class='univ_page_logo_nw' src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
 				}
 				?>
 				</div>
@@ -115,23 +115,4 @@ $(document).scroll(function() {
 });
 
 });
-$(document).ready(function() {
-    $('.univ_page_logo_nw').each(function() {
-    var maxWidth = 222; // Max width for the image
-    var width = $(this).width();    // Current image width
-//alert(width);
-    // Check if the current width is larger than the max
-    if(width < maxWidth){
-		 $('.univ_page_logo').css('text-align','center').css('height','100px');
-        
-    }
-	else{
-		$('.univ_page_logo_nw').css('height','100px').css('width','222px');
-	}
-
- 
-	
-});
-});
-		
 </script>

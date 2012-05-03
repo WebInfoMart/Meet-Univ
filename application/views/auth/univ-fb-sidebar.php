@@ -1,4 +1,4 @@
-<div class="span4 float_r margin_t">
+<div class="span4 float_r">
 								<div class="college_form">
 							<div>
 							<h2 class="text_align">I AM INTERESTED</h2>
