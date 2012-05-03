@@ -80,13 +80,36 @@ function university($univ_id='',$qid='',$uid='')
 		
 		else if($this->input->post('apply_now'))
 		{
-			$apply_now_data = array(
-				'apply_name' => $this->input->post('apply_name'),
-				'apply_course_interest' => $this->input->post('apply_course_interest'),
-				'apply_email' => $this->input->post('apply_email'),
-				'apply_mob' => $this->input->post('apply_mobile')
+			
+			$condition = array(
+				'firstname' => $this->input->post('apply_name'),
+				'prog_parent_id' => $this->input->post('apply_course_interest'),
+				'email' => $this->input->post('apply_email'),
+				'phone_no1' => $this->input->post('apply_mobile')
 			);
-			$this->session->set_userdata($apply_now_data);
+			//print_r($apply_now_data);
+			//$this->session->set_userdata($apply_now_data);
+			$this->form_validation->set_rules('apply_name', 'Name ', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('apply_course_interest', 'Course', 'required');
+			$this->form_validation->set_rules('apply_email', 'Email', 'trim|required|xss_clean|valid_email');
+			$this->form_validation->set_rules('apply_mobile', 'Email', 'trim|required|xss_clean|numeric');
+			if($this->form_validation->run())
+			{
+			$this->session->set_userdata('current_insert_lead_email',$this->input->post('apply_email'));
+			$insert_type = '0';
+			$data['fb_sidebar_apply_form'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
+			if($data['fb_sidebar_apply_form'] != '')
+			{
+			$this->session->set_userdata('current_insert_lead_id', $this->db->insert_id());
+			//print_r($this->session->userdata('current_insert_lead_id'));
+			}
+			redirect('find_college');
+			}
+			else {
+					$errors = $this->tank_auth->get_error_message();
+					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+			}
+			//print_r($data['fb_sidebar_apply_form']);
 			
 		}
 		else if($this->input->post('ask_quest'))
