@@ -114,9 +114,9 @@ class Quest_ans_model extends CI_Model
   return date( 'F j, Y \a\t g:ia' , $d );
 }
 }
-	function get_all_quest_user_info($page)
+	function get_all_quest_user_info()
 	{
-		$this->db->select('*');
+		/*$this->db->select('*');
 		$this->db->from('questions');
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
@@ -135,14 +135,14 @@ class Quest_ans_model extends CI_Model
 		$config['per_page'] = $rows_per_page; 
 		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
 		$limit = $config['per_page'];
-		
+		*/
 		$this->db->select('*');
 		$this->db->from('questions');
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
-		$this->db->limit($limit,$offset);
+		//$this->db->limit($limit,$offset);
 		$query = $this->db->get(); 
-		$this->pagination->initialize($config);
+	//	$this->pagination->initialize($config);
 		if($query->num_rows() > 0)
 		{
 			$q_detail = $query->result_array();

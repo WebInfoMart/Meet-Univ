@@ -53,8 +53,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								</br>
 								<div class="float_l">
 								<h3>Details</h3>
-								</div>
-								<div class="float_l">
+								<!--</div>
+								<div class="float_l">-->
 								<?php echo $event_detail['event_detail']; ?>
 								</div>
 						</div>

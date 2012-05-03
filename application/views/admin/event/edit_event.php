@@ -45,8 +45,8 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Title</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="<?php echo $class_title; ?>" name="title" value="<?php echo $event_detail['title']; ?>">
-								<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> </span>
+								<input type="text" size="30" class="<?php echo $class_title; ?>" name="title" value="<?php echo $event_detail['event_title']; ?>">
+								<span style="color: red;"> <?php echo form_error('event_title'); ?><?php echo isset($errors['event_title'])?$errors['event_title']:''; ?> </span>
 		
 							</div>
 							
