@@ -18,11 +18,12 @@ class Leadcontroller extends CI_Controller
 	}
 	
 	// Functions for steps in of Lead Data
-	function find_college($x='',$request_univ_id='')
+	function find_college($request_univ_id='',$event_id='')
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$id = $request_univ_id;
+		$events_id = $event_id;
 		$data['country'] = $this->users->fetch_country();
 		$data['area_interest'] = $this->users->fetch_area_interest();
 		$data['educ_level'] = $this->users->fetch_educ_level();
@@ -40,6 +41,16 @@ class Leadcontroller extends CI_Controller
 			$condition = array(
 			'home_country_id' => $this->input->post('home_country'),
 			'email' => $this->input->post('step_email')
+			);
+			}
+			else if($id!='' && $events_id!='')
+			{
+				$condition = array(
+			'home_country_id' => $this->input->post('home_country'),
+			'email' => $this->input->post('step_email'),
+			'applied_univ_id'=>$id,
+			'applied_event_id'=>$events_id
+			
 			);
 			}
 			else{

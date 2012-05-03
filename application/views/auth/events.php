@@ -44,7 +44,10 @@
 								</div>
 								<div class="course_cont"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></div>
 							</div>
-							<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
+							<div class="float_r margin_t1">
+							<form action="find_college/<?php echo $event_detail['univ_id'].'/'.$event_detail['event_id']; ?>" method="post">
+							<input type="submit" value="Register" name="event_register" class="btn btn-success"></div>
+							</form>
 							<div class="clearfix"></div>
 						</div>
 					<?php } ?>	
