@@ -205,7 +205,7 @@
 										<h4></h4>
 										</div>
 										<div class="float_r">
-											<button class="btn btn-success" href="#">Request Information</button>
+											<input type="submit" value="Request Information" class="btn btn-success" name="request_information_submit" />
 										</div>
 										<div class="clearfix"></div>
 									</div>

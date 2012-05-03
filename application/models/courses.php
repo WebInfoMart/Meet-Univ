@@ -339,7 +339,7 @@ class Courses extends CI_Model
 				'prog_parent_id' =>$area_intrest[$i],
 				'prog_educ_level' => $prog_educ_level_id
 				);
-				//$this->db->insert('univ_program',$univ_prog_data);
+				$this->db->insert('univ_program',$univ_prog_data);
 			 }
 			 $i=$i+1;
 			}
