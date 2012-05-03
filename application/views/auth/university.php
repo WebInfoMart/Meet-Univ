@@ -15,8 +15,9 @@
 									if($count_view_more_string > 500)
 									{
 									echo '..';
-									?>
-									<a href="<?php echo $base; ?>about-<?php echo $university_details['univ_id']; ?>-university">View more detail</a>
+									?>.
+									</br>
+									<a href="<?php echo $base; ?>about-<?php echo $university_details['univ_id']; ?>-university" class="float_r">View more detail</a>
 									<?php } ?>
 									</div>
 							</div>
@@ -132,7 +133,7 @@
 									<div>
 										<div class="float_l">
 											<div class="letter_uni">
-											<div>Q Go Ask </br><span>Question</span></div>
+											<div>Q Go Ask </br><span>uestion</span></div>
 											</div>
 										</div>
 										<div class="float_r have_data">

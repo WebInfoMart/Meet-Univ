@@ -34,19 +34,21 @@
 				</div>
 			</div>
 			
-			<ul class="uni_gallery">
-				<li class="univ_page_logo" style="text-align:center;">
+			
+				<div class="univ_page_logo">
 				<?php 
 				if($university_details['univ_logo_path'] != '')
 				{
-				echo "<img class='univ_page_logo_nw' style='height:100px' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
+				echo "<img class='univ_page_logo_nw' style='height:150px' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
 				}
 				else
 				{
-				echo "<img class='univ_page_logo_nw' style='height:100px' src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
+				echo "<img class='univ_page_logo_nw' style='height:150px' src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
 				}
 				?>
-				</li>
+				</div>
+				
+				<ul class="uni_gallery">
 				<?php
 				if(!empty($univ_gallery))
 				{
@@ -96,16 +98,18 @@ $(document).ready(function() {
 	var fixed = false;
 
 $(document).scroll(function() {
-    if( $(this).scrollTop() >= 50 ) {
+    if( $(this).scrollTop() >= 75 ) {
         if( !fixed ) {
             fixed = true;
             $('#main-nav').css({position:'fixed',top:140,left:628});
+			 $('.uni_menu').css({opacity:1});
 			// Or set top:20px; in CSS
         }                                           // It won't matter when static
     } else {
         if( fixed ) {
             fixed = false;
             $('#main-nav').css({position:'static'});
+			$('.uni_menu').css({opacity:0.7});
         }
     }
 });

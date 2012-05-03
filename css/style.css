@@ -97,20 +97,22 @@ ul.events li span{width:390px;float:left;word-wrap:break-word;}
 ul.events li h3{width:75px;color:#00a3e1;font-weight:500;float:right;display:inline-block;text-align:center;line-height:20px;}
 ul.events li h3 small{font-size:11px;display:block;}
 /**************************UNIVERSITY******************************/
-ul.uni_gallery{margin:0px -10px;overflow-y:hidden;border:solid 1px #ccc;border-right:none;border-left:none;height:100px}
+ul.uni_gallery{margin:25px -10px;overflow-y:hidden;border:solid 1px #ccc;border-right:none;border-left:none;height:100px}
 ul.uni_gallery li{list-style:none;float:left;}
-.uni_menu_placeholder{position:relative;top:-101px;z-index:1;}
+.uni_menu_placeholder{position:relative;top:-127px;z-index:1;}
 ul.uni_menu{/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzFmN2JlNSIgc3RvcC1vcGFjaXR5PSIwLjkiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzFhOWViYSIgc3RvcC1vcGFjaXR5PSIwLjkiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-background: -moz-linear-gradient(top,  rgba(31,123,229,0.9) 0%, rgba(26,158,186,0.9) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(31,123,229,0.9)), color-stop(100%,rgba(26,158,186,0.9))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(31,123,229,0.9) 0%,rgba(26,158,186,0.9) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(31,123,229,0.9) 0%,rgba(26,158,186,0.9) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(31,123,229,0.9) 0%,rgba(26,158,186,0.9) 100%); /* IE10+ */
-background: linear-gradient(top,  rgba(31,123,229,0.9) 0%,rgba(26,158,186,0.9) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e61f7be5', endColorstr='#e61a9eba',GradientType=0 ); /* IE6-8 */
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #e6e6e6 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#e6e6e6)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#e6e6e6 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#e6e6e6 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#e6e6e6 100%); /* IE10+ */
+background: linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#e6e6e6 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+-moz-box-shadow: 0 0 5px #888;-webkit-box-shadow: 0 0 5px#888;box-shadow: 0 0 5px #888;opacity: 0.7;
 height:20px;padding:5px;color:#fff;margin-right:-10px;-moz-border-radius-topleft: 5px;-moz-border-radius-topright: 0px;-moz-border-radius-bottomright: 0px;-moz-border-radius-bottomleft: 5px;-webkit-border-radius: 5px 0px 0px 5px;border-radius: 5px 0px 0px 5px;}
 ul.uni_menu li {list-style:none;line-height:20px;font-weight: 500;font-size: 17px;padding: 0px 5px;border-right: solid 1px #CCC;display:inline-block}
+ul.uni_menu:hover{opacity:1;}
 ul.uni_menu li a.active{color:#000;}
 .map{-webkit-box-shadow: 0px 0px 2px 2px rgba(0, 0, , 0.2);
 -moz-box-shadow: 0px 0px 2px 2px rgba(0, 0, , 0.2);
@@ -217,13 +219,22 @@ border-color: rgba(255, 0, 0, .8) !important;
 }
 .univ_page_logo
 {
-	width:222px;
-	height:100px;
+	z-index: 100;
+position: absolute;
+margin-top: 3px;
+height: 150px;
+background: white;
+border: 2px solid #EAEAEA;
+padding: 2px;
+width:150px;
+-moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;
+box-shadow: 0 0 5px #888;
 }
 
 .univ_page_gal
 {
-	width:204px;
+	width:208px;
 	height:100px;
 }
 
