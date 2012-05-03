@@ -520,7 +520,7 @@ class Admincourses extends CI_Controller
 	
 	}
 	
-	function map_program_and_university()
+	function map_program_and_university($cis='')
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {
 				redirect('admin/adminlogin/');
@@ -542,9 +542,14 @@ class Admincourses extends CI_Controller
 			{
 			if($this->input->post('submit'))
 			{
-			 $this->courses->insert_courses_to_univ();													
+			 $this->courses->insert_courses_to_univ();
+			redirect('admincourses/map_program_and_university/cis');			 
 			}
-			
+			if($cis=='cis')
+			{
+			$data['msg']='Course Updated in the selected university sucessfully';
+			$this->load->view('admin/userupdated',$data);
+			}	
 			$this->load->view('admin/courses/univ_vs_program', $data);
 			
 			}

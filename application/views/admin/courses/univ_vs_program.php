@@ -4,7 +4,9 @@
 		<div class="form span8">
 	<form action="<?php echo $base; ?>admincourses/map_program_and_university" method="post" class="caption_form">
 <div>
+<center><h4>Please Select College</h4></center>
 <center>
+
 <select name="university" id="university" onchange="populate_program();">
 <option value="">Select College</option> 
 <?php foreach($university_detail as $university_details) { ?>
