@@ -283,7 +283,7 @@ $(function () {
 							<li>
 								<div>
 									<div class="float_l">
-<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/calendar.png<?php } ?>" class="events_img" >
+<img <?php if($events['univ_logo_path']!=''){ ?> src=" <?php echo $base;?>/uploads/univ_gallery/<?php echo $events['univ_logo_path']; ?>" class='events_img' <?php } else { ?> src="<?php echo "$base$img_path" ; ?>/calendar.png <?php } ?>">
 									</div>
 									<div class="float_l margin_l data_events">
 								<a class="event_home_text_color" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>">	<?php echo ucwords(substr($events['event_detail'],0,176)); ?></a>
@@ -343,6 +343,47 @@ $(function () {
 				</div>
 			</div>
 		</div>
+		<div class="row margin_t">
+			<div class="grid_6 margin_l">
+				<div class="well margin_gamma padding_zero new_data">
+					<div>
+						<div class="float_l">
+							<div class="letter_uni">
+							<div>Q Go Ask </br><span>uestion</span></div>
+							</div>
+						</div>
+						<div class="float_r have_data">
+							<span>Have a Question?</span>
+							<span>Ask our counselors!</span>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="margin">
+						<div>
+							<div class="float_l wht_data">what are the type of questions they ask in iit?</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div class="margin">
+						<div>
+							<div class="float_l">
+								<div class="input-append">
+									<input class="span6 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
+									<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
+								</div>
+							</div>
+							<div class="float_r"><button class="btn btn-success more_btn" href="#">More Q&amp;A</button></div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid_3">
+			hello
+			</div>
+			<div class="clearfix"></div>
+		</div>
 		<div class="margin_t">
 			<div class="row">
 				 <div class="grid_3 margin_l">
@@ -391,12 +432,12 @@ $(function () {
 					<?php foreach($featured_article as $article){ ?>
 						<div class="float_l">
 						<?php if($article['article_image_path']==''){?>
-						<img src="images/default_logo.png">
+						<img src="images/default_logo.png" class="home_art">
 						<?php } else {?>
-						<img src="<?php echo $base; ?>/uploads/news_article_images/<?php echo $article['article_image_path']; ?>" >
+						<img src="<?php echo $base; ?>/uploads/news_article_images/<?php echo $article['article_image_path']; ?>" class="home_art">
 						<?php } ?>	
 						</div>
-						<div>
+						<div class="justify">
 						<?php echo substr($article['article_detail'],0,800).'...'; ?>	 
 						</div>	
 						<?php } ?>	
