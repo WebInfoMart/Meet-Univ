@@ -283,7 +283,7 @@ $(function () {
 							<li>
 								<div>
 									<div class="float_l">
-<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/default_logo.png<?php } ?>" class="events_img" >
+<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/calendar.png<?php } ?>" class="events_img" >
 									</div>
 									<div class="float_l margin_l data_events">
 								<a class="event_home_text_color" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>">	<?php echo ucwords(substr($events['event_detail'],0,176)); ?></a>
