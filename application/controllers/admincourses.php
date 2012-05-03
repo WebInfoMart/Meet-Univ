@@ -572,7 +572,7 @@ class Admincourses extends CI_Controller
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			if($data['admin_user_level']=='5')
 			{
-			$data['program_list']=$this->courses->fetch_program_list($level='');
+			$data['program_list']=$this->courses->fetch_program_list_with_educ_level();
 			$data['univ_program']=$this->courses->fetch_univ_program($this->input->post('university'));
 			$this->load->view('ajaxviews/univ_vs_program_ajax', $data);	
 			}

@@ -17,7 +17,7 @@ $checked='checked';
 }
 }?>
 <input type="checkbox" <?php echo $checked; ?> id="program_<?php echo $program_list1['prog_id']; ?>" name="programs_name[]" value="<?php echo $program_list1['prog_id']; ?>">
-<label for="program_<?php echo $program_list1['prog_id']; ?>"><strong><?php echo $program_list1['course_name']; ?></strong></label>
+<label for="program_<?php echo $program_list1['prog_id']; ?>"><strong><?php echo $program_list1['course_name']; ?></strong></label>(<?php echo $program_list1['educ_level']; ?>)
 <input type="hidden" name="area_interest[]" value="<?php echo $program_list1['prog_parent_id']; ?>">
 <input type="hidden" name="education_level_id[]" value="<?php echo $program_list1['educ_level_id']; ?>">
 <input type="hidden" name="program_id[]" value="<?php echo $program_list1['prog_id']; ?>">

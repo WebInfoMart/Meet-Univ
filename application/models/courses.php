@@ -278,7 +278,17 @@ class Courses extends CI_Model
 		else
 		return 0;
 	}
-	
+	function fetch_program_list_with_educ_level()
+	{
+		$this->db->select('*');
+		$this->db->from('program');
+		$this->db->join('program_educ_level','program.educ_level_id=program_educ_level.prog_edu_lvl_id');
+		$query = $this->db->get();
+		if($query->num_rows()>1)
+		return $query->result_array();
+		else
+		return 0;
+	}
 	function fetch_universities()
 	{
 		$this->db->select('*');
@@ -310,8 +320,8 @@ class Courses extends CI_Model
 			$already_checked_prog = $this->input->post('already_checked_prog');
 			
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
-			$educ_level=$this->input->post('area_interest');	
-			$area_intrest=$this->input->post('education_level_id');	
+			$area_intrest=$this->input->post('area_interest');	
+			$educ_level=$this->input->post('education_level_id');	
 			$i=0;
 			foreach($program_id as $prog_id)
 			{
@@ -329,7 +339,7 @@ class Courses extends CI_Model
 				'prog_parent_id' =>$area_intrest[$i],
 				'prog_educ_level' => $prog_educ_level_id
 				);
-				$this->db->insert('univ_program',$univ_prog_data);
+				//$this->db->insert('univ_program',$univ_prog_data);
 			 }
 			 $i=$i+1;
 			}
