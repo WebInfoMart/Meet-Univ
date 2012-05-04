@@ -330,19 +330,19 @@ $univ_city_id=$univ_detail_update['city_id'];
 					</li>
 					<li>
 						<div>
-							<div class="float_l span3 margin_zero">
+							<!--<div class="float_l span3 margin_zero">
 								<label>Salient Features</label>
 								
 			<?php //$s=explode(chr(10),$univ_detail_update['salient_features']); ?>					
 							</div>
-							*After Entering One Feature Press Enter Key Once
+							*After Entering One Feature Press Enter Key Once-->
 							
-							<div >
-							<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-salient"/>
-							<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-salient"/>
-							<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-salient"/>
+							<!--<div >
+							<img src="<?php //echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-salient"/>
+							<img src="<?php //echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-salient"/>
+							<img src="<?php //echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-salient"/>
 								<textarea rows="6" cols="100" id="salient_features" name="salient_features"><?php echo $univ_detail_update['salient_features']; ?></textarea>
-							</div>
+							</div>-->
 							<div class="clearfix"></div>
 						</div>
 					</li>

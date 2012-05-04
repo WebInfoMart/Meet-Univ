@@ -591,6 +591,8 @@ class Adminmodel extends CI_Model
 	
 	function update_university($univ_id)
 	{
+	// 'salient_features'=>$this->input->post('salient_features'),
+	 /* 'switch_off_univ'=>$this->input->post('switch_univ_status'),*/
 	$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
@@ -629,7 +631,6 @@ class Adminmodel extends CI_Model
 			   'state_id' => $this->input->post('state'),
 			   'country_id'=>$this->input->post('country'),
 			   'phone_no' => $this->input->post('phone_no'),
-			  /* 'switch_off_univ'=>$this->input->post('switch_univ_status'),*/
 			   'univ_is_client' =>$this->input->post('univ_is_client'),
 			   'subdomain_name' =>$this->input->post('sub_domain'),
 			   'about_us' => $this->input->post('about_us'),
@@ -638,7 +639,6 @@ class Adminmodel extends CI_Model
 			   'univ_fax'=>$this->input->post('fax_address'),
 			   'univ_email'=>$this->input->post('univ_email'),
 			   'univ_web'=>$this->input->post('web_address'),
-			   'salient_features'=>$this->input->post('salient_features'),
 			   'univ_overview'=>$this->input->post('txtareaoverview'),
 			   'univ_campus'=>$this->input->post('txtareacampus'),
 			   'univ_services'=>$this->input->post('txtareaservices'),
@@ -650,7 +650,6 @@ class Adminmodel extends CI_Model
 			   'univ_departments'=>$this->input->post('txtareadepartments'),
 			   'univ_insights'=>$this->input->post('txtareainsights')
 			);
-			print_r($data);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			if($myflag==1)
 			{
