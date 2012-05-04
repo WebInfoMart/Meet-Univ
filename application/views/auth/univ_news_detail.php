@@ -34,7 +34,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					<div class="">
 						<h2 class="course_txt"><?php echo $news_detail['news_title']; ?></h2>
 						<div class="float_r">
-						<div class="float_l" style="margin-right:20px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
+						<div class="float_l" style="margin-right:20px;">
+						<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
+						<div class="g-plusone" data-size="standard" data-count="true"></div>
+						</div>
 						<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
 						<div class="float_l">
 							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>

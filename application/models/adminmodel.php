@@ -360,16 +360,26 @@ class Adminmodel extends CI_Model
 			  /* 'switch_off_univ'=>$this->input->post('switch_univ_status'),*/
 			   'univ_is_client' =>$this->input->post('univ_is_client'),
 			   'subdomain_name' =>$this->input->post('sub_domain'),
-			   'about_us' => $this->input->post('about_us'),
 			   'contact_us' => $this->input->post('contact_us'),
 			   'createdby' =>$cretedby_admin,
 			   'univ_fax' =>$this->input->post('fax_address'),
 			   'univ_email'=>$this->input->post('univ_email'),
 			   'univ_web'=>$this->input->post('web_address'),
-			   'salient_features'=>$this->input->post('salient_features')
+			   'salient_features'=>$this->input->post('salient_features'),
+			   'univ_overview'=>$this->input->post('txtareaoverview'),
+			   'univ_campus'=>$this->input->post('txtareacampus'),
+			   'univ_services'=>$this->input->post('txtareaservices'),
+			   'univ_faculties'=>$this->input->post('txtareafaculties'),
+			   'univ_expertise'=>$this->input->post('txtareaexpertise'),
+			   'univ_slife'=>$this->input->post('txtareaslife'),
+			   'univ_interstudents'=>$this->input->post('txtareainterstudents'),
+			   'univ_alumni'=>$this->input->post('txtareaalumni'),
+			   'univ_departments'=>$this->input->post('txtareadepartments'),
+			   'univ_insights'=>$this->input->post('txtareainsights')
 			);
+			//print_r($data);
 			$this->db->insert('university', $data);
-			redirect('admin/manage_university/ucs');
+			//redirect('admin/manage_university/ucs');
 		}	
 	}
 		
@@ -628,9 +638,19 @@ class Adminmodel extends CI_Model
 			   'univ_fax'=>$this->input->post('fax_address'),
 			   'univ_email'=>$this->input->post('univ_email'),
 			   'univ_web'=>$this->input->post('web_address'),
-			   'salient_features'=>$this->input->post('salient_features')
+			   'salient_features'=>$this->input->post('salient_features'),
+			   'univ_overview'=>$this->input->post('txtareaoverview'),
+			   'univ_campus'=>$this->input->post('txtareacampus'),
+			   'univ_services'=>$this->input->post('txtareaservices'),
+			   'univ_faculties'=>$this->input->post('txtareafaculties'),
+			   'univ_expertise'=>$this->input->post('txtareaexpertise'),
+			   'univ_slife'=>$this->input->post('txtareaslife'),
+			   'univ_interstudents'=>$this->input->post('txtareainterstudents'),
+			   'univ_alumni'=>$this->input->post('txtareaalumni'),
+			   'univ_departments'=>$this->input->post('txtareadepartments'),
+			   'univ_insights'=>$this->input->post('txtareainsights')
 			);
-			
+			print_r($data);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			if($myflag==1)
 			{

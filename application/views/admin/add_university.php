@@ -21,8 +21,9 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 	<div id="content">
 			
 		<h2 class="margin">Create University</h2>
-		<div class="form span8">
+		
 			<form action="" method="post" class="caption_form" enctype="multipart/form-data">
+			<div class="form span8" style="float:left;width:630px;">
 				<ul>
 					<li>
 						<div>
@@ -307,28 +308,125 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 							</div>
 							*After Entering One Feature Press Enter Key Once
 							<div class="">
-								<textarea rows="6" cols="100" name="salient_features"><?php echo set_value('salient_features'); ?></textarea>
+							<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-salient"/>
+							<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-salient"/>
+							<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-salient"/>
+								<textarea rows="6" cols="100" id="salient_features" name="salient_features"><?php echo set_value('salient_features'); ?></textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
 					</li>
 					<li>
 						<div>
-							<div class="float_l span3 margin_zero">
+							<!--<div class="float_l span3 margin_zero">
 								<label>About Us</label>
 							</div>
 							<div class="">
-								<textarea rows="9" class="wysiwyg" cols="150" name="about_us"><?php echo set_value('about_us'); ?></textarea>
-							</div>
+								<textarea rows="9" class="wysiwyg" cols="150" name="about_us"><?php //echo set_value('about_us'); ?></textarea>
+							</div>-->
 							<div class="clearfix"></div>
 						</div>
 					</li>
 				</ul>
 			
 						<input type="submit" class="submit" name="submit" value="Create">
-						
-			</form>
+				</div>
+					<div id="edit_detail" style="float:right;border: 1px solid whiteSmoke;width: 430px;">
+		<div style="cursor:pointer;" id="overview"><h5>Overview University</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtoverview">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-0"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-0"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-0"/>
 		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaoverview" id="txtareaoverview" value="<?php echo set_value('txtareaoverview'); ?>"></textarea></div><div class="clearfix"></div>
+		
+		<div style="cursor:pointer;" id="campus"><h5>Campus Overview</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtcampus">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-1"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-1"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-1"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareacampus" id="txtareacampus"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="services"><h5>Facilities & Services / Accommodation</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtservices">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-2"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-2"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-2"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaservices" id="txtareaservices"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="faculties"><h5>Faculties</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtfaculties">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-3"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-3"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-3"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareafaculties" id="txtareafaculties"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="expertise"><h5>Research Expertise</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtexpertise">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-4"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-4"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-4"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaexpertise" id="txtareaexpertise"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="slife"><h5>Student Life</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtslife">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-5"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-5"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-5"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaslife" id="txtareaslife"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="interstudents"><h5>For International Students</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtinterstudents">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-6"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-6"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-6"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareainterstudents" id="txtareainterstudents"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="alumni"><h5>Awarded Alumni</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtalumni">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-7"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-7"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-7"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaalumni" id="txtareaalumni"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="departments"><h5>Departments</h5></div><div class="clearfix"></div>
+		
+		<div style="display:none;" id="txtdepartments">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-8"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-8"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-8"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareadepartments" id="txtareadepartments"></textarea></div><div class="clearfix"></div>
+		<div style="cursor:pointer;" id="insights"><h5>Insights</h5></div>
+		
+		<div style="display:none;" id="txtinsights">
+		<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-9"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-9"/>
+		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-9"/>
+		</div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareainsights" id="txtareainsights"></textarea></div><div class="clearfix"></div>
+				
+			</div>
+			</form>
+		
 		
 
 		<div class="form span11">
@@ -1075,4 +1173,272 @@ function isValidEmailAddress(emailAddress) {
 }			
 	
 	
+</script>
+
+<script>
+$('#overview').click(function(){
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').toggle("slow");
+});
+
+$('#campus').click(function(){
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').toggle("slow");
+});
+
+$('#services').click(function(){
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').toggle("slow");
+});
+
+$('#faculties').click(function(){
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').toggle("slow");
+});
+
+$('#expertise').click(function(){
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').toggle("slow");
+});
+
+$('#slife').click(function(){
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').toggle("slow");
+});
+
+$('#interstudents').click(function(){
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').toggle("slow");
+});
+
+$('#alumni').click(function(){
+$('#txtdepartments').hide("slow");
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').toggle("slow");
+});
+
+$('#departments').click(function(){
+$('#txtinsights').hide("slow");
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').toggle("slow");
+});
+
+$('#insights').click(function(){
+$('#txtoverview').hide("slow");
+$('#txtcampus').hide("slow");
+$('#txtservices').hide("slow");
+$('#txtfaculties').hide("slow");
+$('#txtexpertise').hide("slow");
+$('#txtslife').hide("slow");
+$('#txtinterstudents').hide("slow");
+$('#txtalumni').hide("slow");
+$('#txtdepartments').hide("slow");
+$('#txtinsights').toggle("slow");
+});
+</script>
+<script>
+$('#bold-0').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareaoverview').val($('#txtareaoverview').val()+'[b][/b]');
+});
+$('#italic-0').click(function(){
+$('#txtareaoverview').val($('#txtareaoverview').val()+'[i][/i]');
+});
+$('#ul-0').click(function(){
+$('#txtareaoverview').val($('#txtareaoverview').val()+'[ul][li][/li][/ul]');
+});
+
+//2//
+$('#bold-1').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareacampus').val($('#txtareacampus').val()+'[b][/b]');
+});
+$('#italic-1').click(function(){
+$('#txtareacampus').val($('#txtareacampus').val()+'[i][/i]');
+});
+$('#ul-1').click(function(){
+$('#txtareacampus').val($('#txtareacampus').val()+'[ul][li][/li][/ul]');
+});
+
+//3//
+
+$('#bold-2').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareaservices').val($('#txtareaservices').val()+'[b][/b]');
+});
+$('#italic-2').click(function(){
+$('#txtareaservices').val($('#txtareaservices').val()+'[i][/i]');
+});
+$('#ul-2').click(function(){
+$('#txtareaservices').val($('#txtareaservices').val()+'[ul][li][/li][/ul]');
+});
+
+//4//
+
+$('#bold-3').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareafaculties').val($('#txtareafaculties').val()+'[b][/b]');
+});
+$('#italic-3').click(function(){
+$('#txtareafaculties').val($('#txtareafaculties').val()+'[i][/i]');
+});
+$('#ul-3').click(function(){
+$('#txtareafaculties').val($('#txtareafaculties').val()+'[ul][li][/li][/ul]');
+});
+//5//
+
+$('#bold-4').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareaexpertise').val($('#txtareaexpertise').val()+'[b][/b]');
+});
+$('#italic-4').click(function(){
+$('#txtareaexpertise').val($('#txtareaexpertise').val()+'[i][/i]');
+});
+$('#ul-4').click(function(){
+$('#txtareaexpertise').val($('#txtareaexpertise').val()+'[ul][li][/li][/ul]');
+});
+//6//
+
+$('#bold-5').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareaslife').val($('#txtareaslife').val()+'[b][/b]');
+});
+$('#italic-5').click(function(){
+$('#txtareaslife').val($('#txtareaslife').val()+'[i][/i]');
+});
+$('#ul-5').click(function(){
+$('#txtareaslife').val($('#txtareaslife').val()+'[ul][li][/li][/ul]');
+});
+//7//
+
+$('#bold-6').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareainterstudents').val($('#txtareainterstudents').val()+'[b][/b]');
+});
+$('#italic-6').click(function(){
+$('#txtareainterstudents').val($('#txtareainterstudents').val()+'[i][/i]');
+});
+$('#ul-6').click(function(){
+$('#txtareainterstudents').val($('#txtareainterstudents').val()+'[ul][li][/li][/ul]');
+});
+//8//
+
+$('#bold-7').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareaalumni').val($('#txtareaalumni').val()+'[b][/b]');
+});
+$('#italic-7').click(function(){
+$('#txtareaalumni').val($('#txtareaalumni').val()+'[i][/i]');
+});
+$('#ul-7').click(function(){
+$('#txtareaalumni').val($('#txtareaalumni').val()+'[ul][li][/li][/ul]');
+});
+//9//
+//3//
+
+$('#bold-8').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareadepartments').val($('#txtareadepartments').val()+'[b][/b]');
+});
+$('#italic-8').click(function(){
+$('#txtareadepartments').val($('#txtareadepartments').val()+'[i][/i]');
+});
+$('#ul-8').click(function(){
+$('#txtareadepartments').val($('#txtareadepartments').val()+'[ul][li][/li][/ul]');
+});
+//10//
+//3//
+
+$('#bold-9').click(function(){
+//alert($('#txtareaoverview').val());
+$('#txtareainsights').val($('#txtareainsights').val()+'[b][/b]');
+});
+$('#italic-9').click(function(){
+$('#txtareainsights').val($('#txtareainsights').val()+'[i][/i]');
+});
+$('#ul-9').click(function(){
+$('#txtareainsights').val($('#txtareainsights').val()+'[ul][li][/li][/ul]');
+});
+
+//Salient Features
+$('#bold-salient').click(function(){
+//alert($('#salient_features').val());
+$('#salient_features').val($('#salient_features').val()+'[b][/b]');
+});
+$('#italic-salient').click(function(){
+$('#salient_features').val($('#salient_features').val()+'[i][/i]');
+});
+$('#ul-salient').click(function(){
+$('#salient_features').val($('#salient_features').val()+'[ul][li][/li][/ul]');
+});
 </script>	

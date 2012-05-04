@@ -1088,7 +1088,6 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
-		$this->form_validation->set_rules('about_us', 'About Us', 'trim|xss_clean');
 		$this->form_validation->set_rules('salient_features', 'Salient Features', 'trim|xss_clean');
 		$this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
 		$this->form_validation->set_rules('keyword', 'Keyword', 'trim|xss_clean');
@@ -1462,7 +1461,6 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
-		$this->form_validation->set_rules('about_us', 'About Us', 'trim|xss_clean');
 		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|callback_check_subdomain');
 		if ($this->form_validation->run()) {
 		$data['x']=$this->adminmodel->update_university($univ_id);
@@ -1489,6 +1487,7 @@ class Admin extends CI_Controller
 		$data['univ_admins']=$this->adminmodel->get_univ_admin();
 		$data['countries']=$this->users->fetch_country();
 		$data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
+		//print_r($data['univ_detail_edit']);
 		$this->load->view('admin/edituniversity',$data);
 		}
 	   }
