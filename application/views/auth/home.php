@@ -282,7 +282,7 @@ $(function () {
 						?>
 							<li>
 								<div>
-									<div class="float_l">
+									<div class="float_l box_list_img">
 <img <?php if($events['univ_logo_path']!=''){ ?> src=" <?php echo $base;?>/uploads/univ_gallery/<?php echo $events['univ_logo_path']; ?>" class='events_img' <?php } else { ?> src="<?php echo "$base$img_path" ; ?>/calendar.png <?php } ?>">
 									</div>
 									<div class="float_l margin_l data_events">
@@ -307,13 +307,13 @@ $(function () {
 					<div class="home_artical_heading">
 						<span>Featured Colleges</span>
 					</div>
-					<div class="box">
-						<ul>
+					<div class="col_box">
+						<ul class="col_img">
 							<li>
 						<?php 
 						$x=0;
 						foreach($featured_college as $featured_clg) { ?>
-									<div class="<?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo " margin_l"; } ?>" >
+									<div class="<?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo ""; } ?>" >
 				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php if($featured_clg['univ_logo_path']!=''){echo $featured_clg['univ_logo_path'];}else{ echo 'univ_logo.png';} ?>" class="featured_art"></a>
 						</div>							
 
@@ -378,53 +378,45 @@ $(function () {
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="grid_3">
-			hello
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="margin_t">
-			<div class="row">
-				 <div class="grid_3 margin_l">
-     <div class="home_artical_heading">
-      <span>Featured Q & A</span>
-     </div>
-     <div class="box all_box">
-      <ul>
-      <?php
-	  if(!empty($featured_quest))
-      {
-      if($featured_quest != 0)
-      {
-      foreach($featured_quest as $feature_questions)
-      {
-      if($feature_questions['q_univ_id'] != '0')
-       {
-        $url = "UniversityQuest/$feature_questions[q_univ_id]/$feature_questions[que_id]/$feature_questions[q_askedby]";
-       }
-       else if($feature_questions['q_country_id'] != '0')
-       {
-        $url = "";
-       }
-      ?>
-       <li>
-        <div class="float_l">
-         <?php if($feature_questions['user_pic_path']!='' || $feature_questions['user_pic_path']!= '0') { ?>
-         <?php echo "<img src='".base_url()."uploads/".$feature_questions['user_pic_path']."' class='girls_img'/>"; ?>
-         <?php } else { echo "<img src='".base_url()."images/profile_icon.png' class='girls_img'/>"; } ?>
-        </div>
-        <div>
-         <a href="<?php echo "$base$url"; ?>"><?php echo $feature_questions['q_title'] ? substr($feature_questions['q_title'],0,15) : 'Not Available'; ?>...</a>
-         <div class="float_r"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
-        </div>
-       </li>
-       <?php } } }  else { echo "Not Available"; } ?>
-	
-      </ul>
-     </div>
-    </div>
-				<div class="grid_3">
+				<div class="grid_3 margin_delta margin_t">
+					<div class="home_artical_heading">
+					<span>Featured Q & A</span>
+					</div>
+					<div class="box all_box">
+					<ul>
+					<?php
+					if(!empty($featured_quest))
+					{
+					if($featured_quest != 0)
+					{
+					foreach($featured_quest as $feature_questions)
+					{
+					if($feature_questions['q_univ_id'] != '0')
+					{
+						$url = "UniversityQuest/$feature_questions[q_univ_id]/$feature_questions[que_id]/$feature_questions[q_askedby]";
+					}
+					else if($feature_questions['q_country_id'] != '0')
+					{
+						$url = "";
+					}
+					?>
+					<li>
+						<div class="float_l">
+						<?php if($feature_questions['user_pic_path']!='' || $feature_questions['user_pic_path']!= '0') { ?>
+						<?php echo "<img src='".base_url()."uploads/".$feature_questions['user_pic_path']."' class='girls_img'/>"; ?>
+						<?php } else { echo "<img src='".base_url()."images/profile_icon.png' class='girls_img'/>"; } ?>
+						</div>
+						<div>
+						<a href="<?php echo "$base$url"; ?>"><?php echo $feature_questions['q_title'] ? substr($feature_questions['q_title'],0,15) : 'Not Available'; ?>...</a>
+						<div class="float_r"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+						</div>
+					</li>
+					<?php } } }  else { echo "Not Available"; } ?>
+					
+					</ul>
+					</div>
+				</div>
+				<div class="grid_3 margin_t">
 					<div class="home_artical_heading">
 						<span>Featured Article</span>
 					</div>
@@ -444,11 +436,11 @@ $(function () {
 						<div class="clearfix"></div>
 					</div>
 				</div>
-				<div class="grid_3">
-					<span class="fb_heading">Facebook like</span>
-					<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="314" data-height="304" data-show-faces="true" data-stream="false" data-header="true"></div>
-				</div>
 			</div>
+			<div class="grid_3">
+				<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="326" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
+			</div>
+			<div class="clearfix"></div>
 		</div>
 		<div class="margin_t">
 			<div class="row">

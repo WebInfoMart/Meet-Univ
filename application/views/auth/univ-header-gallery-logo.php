@@ -113,6 +113,14 @@ $(document).scroll(function() {
         }
     }
 });
-
+$(".uni_menu").hover(
+  function () {
+    $(this).css({opacity:1});
+  }, 
+  function () {
+    $(this).css({opacity:0.7});
+  }
+);
 });
+
 </script>
