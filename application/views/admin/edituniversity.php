@@ -365,11 +365,11 @@ $univ_city_id=$univ_detail_update['city_id'];
 		<div style="cursor:pointer;" id="overview"><h5>Overview University</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtoverview">
-		<div style="width:200px;height:50px;float:left;"> 
-		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-0"/>
-		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-0"/>
-		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-0"/>
-		</div>
+		<!--<div style="width:200px;height:50px;float:left;"> 
+		<img src="<?php //echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-0"/>
+		<img src="<?php //echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-0"/>
+		<img src="<?php //echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-0"/>
+		</div>-->
 		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaoverview" id="txtareaoverview" ><?php echo $univ_detail_update['univ_overview']; ?></textarea></div><div class="clearfix"></div>
 		
 		<div style="cursor:pointer;" id="campus"><h5>Campus Overview</h5></div><div class="clearfix"></div>
