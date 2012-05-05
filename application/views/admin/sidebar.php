@@ -110,7 +110,11 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		</ul>
 		</li>
 		
-		<?php }} ?>
+		<?php }
+		
+		
+		
+		} ?>
 			<?php if($admin_user_level=='5'){ ?>
 		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" /> Program/Courses</a>
 		<ul>
@@ -120,7 +124,20 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		
 		</ul>
 		</li>
-		<?php } if($admin_user_level=='3' || $admin_user_level=='5'){  ?>
+		<?php }
+		if($admin_user_level=='3')
+			{
+			?>
+			
+		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/univ.png" alt="" />  Manage University</a>
+		<ul>
+		<li><?php echo anchor("$base".'admin/update_university_detail/'.$univ_detail_edit[0]->univ_id, 'Update University'); ?></li>
+		</ul>
+		</li>
+		
+		<?php }
+
+		if($admin_user_level=='3' || $admin_user_level=='5'){  ?>
 		
 		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />University/Courses</a>
 		<ul>
@@ -150,6 +167,14 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<li><?php echo anchor("$base".'admincourses/map_program_and_university', 'Area Of Intrest/Program'); ?></li>
 		</ul>
 		</li>
+		<li>
+		<a href="#"  class="collapse" ><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />Manage Univ/users</a>
+		<ul>
+		<li><?php echo anchor("$base".'Admin_users/map_univ_vs_users', 'Add Univ vs Users'); ?></li>
+		<li><?php echo anchor("$base".'Admin_users/manage_map_univ_vs_users', 'Manage Univ vs Users'); ?></li>
+		
+		</ul>
+		</li>
 		<!--<li>
 		<a href="#"  class="collapse" ><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />Manage Progrmas</a>
 		<ul>
@@ -157,7 +182,8 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		</ul>
 		</li>-->
 		<?php } ?>
-		<li><a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
+		<li>
+			<a href="#"><span>12</span><img src="<?php echo "$base$admin_img" ?>/nav/settings.png" alt="" /> Settings</a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/support.png" alt="" /> Support</a></li>
 			
 		</ul>
