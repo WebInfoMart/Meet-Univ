@@ -205,40 +205,40 @@
         TOOLBAR : {
             bold          : { visible : true, tags : ['b', 'strong'], css : { fontWeight : 'bold' }, tooltip : "Bold" },
             italic        : { visible : true, tags : ['i', 'em'], css : { fontStyle : 'italic' }, tooltip : "Italic" },
-            strikeThrough : { visible : true, tags : ['s', 'strike'], css : { textDecoration : 'line-through' }, tooltip : "Strike-through" },
-            underline     : { visible : true, tags : ['u'], css : { textDecoration : 'underline' }, tooltip : "Underline" },
+            //strikeThrough : { visible : true, tags : ['s', 'strike'], css : { textDecoration : 'line-through' }, tooltip : "Strike-through" },
+            //underline     : { visible : true, tags : ['u'], css : { textDecoration : 'underline' }, tooltip : "Underline" },
 
-            separator00 : { visible : true, separator : true },
+            //separator00 : { visible : true, separator : true },
 
-            justifyLeft   : { visible : true, css : { textAlign : 'left' }, tooltip : "Justify Left" },
-            justifyCenter : { visible : true, tags : ['center'], css : { textAlign : 'center' }, tooltip : "Justify Center" },
-            justifyRight  : { visible : true, css : { textAlign : 'right' }, tooltip : "Justify Right" },
-            justifyFull   : { visible : true, css : { textAlign : 'justify' }, tooltip : "Justify Full" },
+            //justifyLeft   : { visible : true, css : { textAlign : 'left' }, tooltip : "Justify Left" },
+            //justifyCenter : { visible : true, tags : ['center'], css : { textAlign : 'center' }, tooltip : "Justify Center" },
+            //justifyRight  : { visible : true, css : { textAlign : 'right' }, tooltip : "Justify Right" },
+            //justifyFull   : { visible : true, css : { textAlign : 'justify' }, tooltip : "Justify Full" },
 
-            separator01 : { visible : true, separator : true },
+            //separator01 : { visible : true, separator : true },
 
-            indent  : { visible : true, tooltip : "Indent" },
-            outdent : { visible : true, tooltip : "Outdent" },
+            //indent  : { visible : true, tooltip : "Indent" },
+            //outdent : { visible : true, tooltip : "Outdent" },
 
-            separator02 : { visible : false, separator : true },
+            //separator02 : { visible : false, separator : true },
 
-            subscript   : { visible : true, tags : ['sub'], tooltip : "Subscript" },
-            superscript : { visible : true, tags : ['sup'], tooltip : "Superscript" },
+            //subscript   : { visible : true, tags : ['sub'], tooltip : "Subscript" },
+            //superscript : { visible : true, tags : ['sup'], tooltip : "Superscript" },
 
-            separator03 : { visible : true, separator : true },
+            //separator03 : { visible : true, separator : true },
 
-            undo : { visible : true, tooltip : "Undo" },
-            redo : { visible : true, tooltip : "Redo" },
+            //undo : { visible : true, tooltip : "Undo" },
+            //redo : { visible : true, tooltip : "Redo" },
 
-            separator04 : { visible : true, separator : true },
+            //separator04 : { visible : true, separator : true },
 
             insertOrderedList    : { visible : true, tags : ['ol'], tooltip : "Insert Ordered List" },
             insertUnorderedList  : { visible : true, tags : ['ul'], tooltip : "Insert Unordered List" },
-            insertHorizontalRule : { visible : true, tags : ['hr'], tooltip : "Insert Horizontal Rule" },
+            //insertHorizontalRule : { visible : true, tags : ['hr'], tooltip : "Insert Horizontal Rule" },
 
-            separator05 : { separator : true },
+            //separator05 : { separator : true },
 
-            createLink : {
+            /* createLink : {
                 visible : true,
                 exec    : function()
                 {
@@ -268,9 +268,9 @@
 
                 tags : ['a'],
                 tooltip : "Create link"
-            },
+            }, */
 
-            insertImage : {
+            /* insertImage : {
                 visible : true,
                 exec    : function()
                 {
@@ -290,23 +290,23 @@
 
                 tags : ['img'],
                 tooltip : "Insert image"
-            },
+            }, */
 
-            separator06 : { separator : true },
+            //separator06 : { separator : true },
 
-            h1mozilla : { visible : true && $.browser.mozilla, className : 'h1', command : 'heading', arguments : ['h1'], tags : ['h1'], tooltip : "Header 1" },
-            h2mozilla : { visible : true && $.browser.mozilla, className : 'h2', command : 'heading', arguments : ['h2'], tags : ['h2'], tooltip : "Header 2" },
-            h3mozilla : { visible : true && $.browser.mozilla, className : 'h3', command : 'heading', arguments : ['h3'], tags : ['h3'], tooltip : "Header 3" },
+            //h1mozilla : { visible : true && $.browser.mozilla, className : 'h1', command : 'heading', arguments : ['h1'], tags : ['h1'], tooltip : "Header 1" },
+            //h2mozilla : { visible : true && $.browser.mozilla, className : 'h2', command : 'heading', arguments : ['h2'], tags : ['h2'], tooltip : "Header 2" },
+            //h3mozilla : { visible : true && $.browser.mozilla, className : 'h3', command : 'heading', arguments : ['h3'], tags : ['h3'], tooltip : "Header 3" },
 
-            h1 : { visible : true && !( $.browser.mozilla ), className : 'h1', command : 'formatBlock', arguments : ['<H1>'], tags : ['h1'], tooltip : "Header 1" },
-            h2 : { visible : true && !( $.browser.mozilla ), className : 'h2', command : 'formatBlock', arguments : ['<H2>'], tags : ['h2'], tooltip : "Header 2" },
-            h3 : { visible : true && !( $.browser.mozilla ), className : 'h3', command : 'formatBlock', arguments : ['<H3>'], tags : ['h3'], tooltip : "Header 3" },
+            //h1 : { visible : true && !( $.browser.mozilla ), className : 'h1', command : 'formatBlock', arguments : ['<H1>'], tags : ['h1'], tooltip : "Header 1" },
+            //h2 : { visible : true && !( $.browser.mozilla ), className : 'h2', command : 'formatBlock', arguments : ['<H2>'], tags : ['h2'], tooltip : "Header 2" },
+            //h3 : { visible : true && !( $.browser.mozilla ), className : 'h3', command : 'formatBlock', arguments : ['<H3>'], tags : ['h3'], tooltip : "Header 3" },
 
-            separator07 : { visible : false, separator : true },
+            //separator07 : { visible : false, separator : true },
 
-            cut   : { visible : false, tooltip : "Cut" },
-            copy  : { visible : false, tooltip : "Copy" },
-            paste : { visible : false, tooltip : "Paste" },
+            //cut   : { visible : false, tooltip : "Cut" },
+            //copy  : { visible : false, tooltip : "Copy" },
+            //paste : { visible : false, tooltip : "Paste" },
 
             separator08 : { separator : false && !( $.browser.msie ) },
 
@@ -333,9 +333,9 @@
                     this.viewHTML = !( this.viewHTML );
                 },
                 tooltip : "View source code"
-            },
+            }
 
-            removeFormat : {
+            /* removeFormat : {
                 visible : true,
                 exec    : function()
                 {
@@ -344,7 +344,7 @@
                     this.editorDoc.execCommand('unlink', false, []);
                 },
                 tooltip : "Remove formatting"
-            }
+            } */
         }
     });
 

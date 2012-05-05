@@ -375,84 +375,84 @@ $univ_city_id=$univ_detail_update['city_id'];
 		<div style="cursor:pointer;" id="campus"><h5>Campus Overview</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtcampus">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-1"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-1"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-1"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareacampus" id="txtareacampus" ><?php echo $univ_detail_update['univ_campus']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareacampus" id="txtareacampus" ><?php echo $univ_detail_update['univ_campus']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="services"><h5>Facilities & Services / Accommodation</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtservices">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-2"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-2"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-2"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaservices" id="txtareaservices" ><?php echo $univ_detail_update['univ_services']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaservices" id="txtareaservices" ><?php echo $univ_detail_update['univ_services']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="faculties"><h5>Faculties</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtfaculties">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-3"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-3"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-3"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareafaculties" id="txtareafaculties" ><?php echo $univ_detail_update['univ_faculties']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareafaculties" id="txtareafaculties" ><?php echo $univ_detail_update['univ_faculties']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="expertise"><h5>Research Expertise</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtexpertise">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-4"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-4"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-4"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaexpertise" id="txtareaexpertise"><?php echo $univ_detail_update['univ_expertise']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaexpertise" id="txtareaexpertise"><?php echo $univ_detail_update['univ_expertise']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="slife"><h5>Student Life</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtslife">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-5"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-5"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-5"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaslife" id="txtareaslife" ><?php echo $univ_detail_update['univ_slife']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaslife" id="txtareaslife" ><?php echo $univ_detail_update['univ_slife']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="interstudents"><h5>For International Students</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtinterstudents">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-6"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-6"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-6"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareainterstudents" id="txtareainterstudents"><?php echo $univ_detail_update['univ_interstudents']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareainterstudents" id="txtareainterstudents"><?php echo $univ_detail_update['univ_interstudents']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="alumni"><h5>Awarded Alumni</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtalumni">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-7"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-7"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-7"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaalumni" id="txtareaalumni"><?php echo $univ_detail_update['univ_alumni']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaalumni" id="txtareaalumni"><?php echo $univ_detail_update['univ_alumni']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="departments"><h5>Departments</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtdepartments">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-8"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-8"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-8"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareadepartments" id="txtareadepartments"><?php echo $univ_detail_update['univ_departments']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareadepartments" id="txtareadepartments"><?php echo $univ_detail_update['univ_departments']?></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="insights"><h5>Insights</h5></div>
 		
 		<div style="display:none;" id="txtinsights">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-9"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-9"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-9"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareainsights" id="txtareainsights" ><?php echo $univ_detail_update['univ_insights']?></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareainsights" id="txtareainsights" ><?php echo $univ_detail_update['univ_insights']?></textarea></div><div class="clearfix"></div>
 				
 			</div>
 			</form>
@@ -661,6 +661,8 @@ $univ_city_id=$univ_detail_update['city_id'];
 	</div>	
 	
 <script> 
+fetchstates('<?php echo $univ_state_id; ?>');
+fetchcities('<?php echo $univ_state_id; ?>','<?php echo $univ_city_id; ?>');
 $('#univ_client').click(function(){
 if($('#univ_client').is(':checked'))
 {
@@ -1350,6 +1352,7 @@ $('#txtinsights').toggle("slow");
 });
 </script>
 <script>
+ 
 $('#bold-0').click(function(){
 //alert($('#txtareaoverview').val());
 $('#txtareaoverview').val($('#txtareaoverview').val()+'[b][/b]');
@@ -1363,7 +1366,6 @@ $('#txtareaoverview').val($('#txtareaoverview').val()+'[ul][li][/li][/ul]');
 
 //2//
 $('#bold-1').click(function(){
-//alert($('#txtareaoverview').val());
 $('#txtareacampus').val($('#txtareacampus').val()+'[b][/b]');
 });
 $('#italic-1').click(function(){

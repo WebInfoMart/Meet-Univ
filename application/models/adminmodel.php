@@ -377,7 +377,6 @@ class Adminmodel extends CI_Model
 			   'univ_departments'=>$this->input->post('txtareadepartments'),
 			   'univ_insights'=>$this->input->post('txtareainsights')
 			);
-			//print_r($data);
 			$this->db->insert('university', $data);
 			//redirect('admin/manage_university/ucs');
 		}	
@@ -650,6 +649,7 @@ class Adminmodel extends CI_Model
 			   'univ_departments'=>$this->input->post('txtareadepartments'),
 			   'univ_insights'=>$this->input->post('txtareainsights')
 			);
+			//print_r($data);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			if($myflag==1)
 			{

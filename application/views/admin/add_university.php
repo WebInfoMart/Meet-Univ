@@ -329,101 +329,101 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 					</li>
 				</ul>
 			
-						<input type="submit" class="submit" name="submit" value="Create">
+						
 				</div>
 					<div id="edit_detail" style="float:right;border: 1px solid whiteSmoke;width: 430px;">
 		<div style="cursor:pointer;" id="overview"><h5>Overview University</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtoverview">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-0"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-0"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-0"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaoverview" id="txtareaoverview" value="<?php echo set_value('txtareaoverview'); ?>"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaoverview" id="txtareaoverview" ></textarea></div><div class="clearfix"></div>
 		
 		<div style="cursor:pointer;" id="campus"><h5>Campus Overview</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtcampus">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-1"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-1"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-1"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareacampus" id="txtareacampus"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareacampus" id="txtareacampus"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="services"><h5>Facilities & Services / Accommodation</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtservices">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-2"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-2"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-2"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaservices" id="txtareaservices"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaservices" id="txtareaservices"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="faculties"><h5>Faculties</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtfaculties">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-3"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-3"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-3"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareafaculties" id="txtareafaculties"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareafaculties" id="txtareafaculties"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="expertise"><h5>Research Expertise</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtexpertise">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-4"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-4"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-4"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaexpertise" id="txtareaexpertise"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaexpertise" id="txtareaexpertise"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="slife"><h5>Student Life</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtslife">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-5"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-5"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-5"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaslife" id="txtareaslife"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaslife" id="txtareaslife"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="interstudents"><h5>For International Students</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtinterstudents">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-6"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-6"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-6"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareainterstudents" id="txtareainterstudents"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareainterstudents" id="txtareainterstudents"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="alumni"><h5>Awarded Alumni</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtalumni">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-7"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-7"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-7"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareaalumni" id="txtareaalumni"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareaalumni" id="txtareaalumni"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="departments"><h5>Departments</h5></div><div class="clearfix"></div>
 		
 		<div style="display:none;" id="txtdepartments">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-8"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-8"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-8"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareadepartments" id="txtareadepartments"></textarea></div><div class="clearfix"></div>
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareadepartments" id="txtareadepartments"></textarea></div><div class="clearfix"></div>
 		<div style="cursor:pointer;" id="insights"><h5>Insights</h5></div>
 		
 		<div style="display:none;" id="txtinsights">
-		<div style="width:200px;height:50px;float:left;"> 
+		<!--<div style="width:200px;height:50px;float:left;"> 
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/boldicon.gif" style="cursor:pointer" id="bold-9"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-9"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-9"/>
-		</div>
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" name="txtareainsights" id="txtareainsights"></textarea></div><div class="clearfix"></div>
-				
+		</div>-->
+		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" name="txtareainsights" id="txtareainsights"></textarea></div><div class="clearfix"></div>
+				<input type="submit" class="submit" name="submit" value="Create">
 			</div>
 			</form>
 		
