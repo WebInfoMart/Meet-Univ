@@ -19,7 +19,7 @@ class Admin extends CI_Controller
 		$this->lang->load('tank_auth');
 	}
 
-	function index($msg='')
+ function index($msg='')
  {
   $data = $this->path->all_path();
   //$this->load->view('auth/header',$data);

@@ -608,7 +608,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 									</li>
 									<?php
 										foreach ($results as $privilage){	
-										if($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==11)
+										if($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==12|| $privilage['privilege_type_id']==11)
 										{?>	
 									<li>
 										<div>

@@ -579,7 +579,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 									</li>
 									<?php
 										foreach ($results as $privilage){	
-										if($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==11)
+										if($privilage['privilege_type_id']==2 || $privilage['privilege_type_id']==3 || $privilage['privilege_type_id']==4 || $privilage['privilege_type_id']==6 || $privilage['privilege_type_id']==12|| $privilage['privilege_type_id']==11)
 										{?>	
 									<li>
 										<div>

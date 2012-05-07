@@ -50,13 +50,13 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			
 			if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
 			{?>
-			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" /> Articles & News</a>
+			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" /> Articles</a>
 			<ul><?php
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
-			<li><?php echo anchor("$base".'news_article', 'Add News & Article'); ?></li>
+			<li><?php echo anchor("$base".'adminarticles/add_article', 'Add Article'); ?></li>
 			<?php } ?>
-			<li><?php echo anchor("$base".'admin/manageevents', 'Manage News & Article'); ?></li></ul>
+			<li><?php echo anchor("$base$admin".'adminarticles/manage_articles', 'Manage Articles'); ?></li></ul>
 			
 			</li>
 			<?php
