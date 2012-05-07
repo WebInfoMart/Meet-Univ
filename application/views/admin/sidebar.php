@@ -56,7 +56,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			{?>
 			<li><?php echo anchor("$base".'adminarticles/add_article', 'Add Article'); ?></li>
 			<?php } ?>
-			<li><?php echo anchor("$base$admin".'adminarticles/manage_articles', 'Manage Articles'); ?></li></ul>
+			<li><?php echo anchor("$base".'adminarticles/manage_articles', 'Manage Articles'); ?></li></ul>
 			
 			</li>
 			<?php
@@ -170,8 +170,8 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<li>
 		<a href="#"  class="collapse" ><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" />Manage Univ/users</a>
 		<ul>
-		<li><?php echo anchor("$base".'Admin_users/map_univ_vs_users', 'Add Univ vs Users'); ?></li>
-		<li><?php echo anchor("$base".'Admin_users/manage_map_univ_vs_users', 'Manage Univ vs Users'); ?></li>
+		<li><?php echo anchor("$base".'admin_users/map_univ_vs_users', 'Add Univ vs Users'); ?></li>
+		<li><?php echo anchor("$base".'admin_users/manage_map_univ_vs_users', 'Manage Univ vs Users'); ?></li>
 		
 		</ul>
 		</li>

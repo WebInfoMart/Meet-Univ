@@ -30,7 +30,7 @@ class adminarticles extends CI_Controller
 		}	
 	}
 	
-	function manage_events($msg='')
+	function manage_articles($msg='')
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
@@ -49,7 +49,7 @@ class adminarticles extends CI_Controller
 			$this->load->view('admin/sidebar', $data);
 			$flag=0;
 			foreach($data['admin_priv'] as $userdata['admin_priv']){
-			if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']!=0 )
+			if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']!=0 )
 			{
 			$flag=1;
 			break;
@@ -63,41 +63,41 @@ class adminarticles extends CI_Controller
 			{
 			if($msg=='eas')
 			{
-			$data['msg']='Event Added Successfully';
+			$data['msg']='Article Added Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='fh')
 			{
-			$data['msg']='Event set as Home featured event Successfully';
+			$data['msg']='Article set as Home featured event Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='ufh')
 			{
-			$data['msg']='Event remove as Home featured event Successfully';
+			$data['msg']='Article remove as Home featured event Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='fd')
 			{
-			$data['msg']='Event set as Study Abroad featured event Successfully';
+			$data['msg']='Article set as Study Abroad featured event Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='ufd')
 			{
-			$data['msg']='Event remove as Study Abroad featured event Successfully';
+			$data['msg']='Article remove as Study Abroad featured event Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='eds')
 			{
-			$data['msg']='Event deleted Successfully';
+			$data['msg']='Article deleted Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='eus')
 			{
-			$data['msg']='Event Updated Successfully';
+			$data['msg']='Article Updated Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
-			$data['events_info']=$this->events->events_detail();
-			$this->load->view('admin/event/manage_events', $data);
+			$data['article_info']=$this->articlemodel->article_detail();
+			$this->load->view('admin/articles/manage_articles', $data);
 			}
 		}	
 	}
@@ -134,18 +134,28 @@ class adminarticles extends CI_Controller
 			{
 			$this->form_validation->set_rules('title', 'Title', 'trim|required');
 			$this->form_validation->set_rules('university', 'University', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('country', 'country', 'trim|xss_clean|required');
-			$this->form_validation->set_rules('state', 'state', 'trim|xss_clean|required');
+			$this->form_validation->set_rules('detail', 'Detail', 'trim|xss_clean|required');
+			/* $this->form_validation->set_rules('state', 'state', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('city', 'City', 'trim|required|string');
 			$this->form_validation->set_rules('event_time', 'Event Time', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('detail', 'Detail', 'trim|string');
 			$this->form_validation->set_rules('event_place', 'Event Place', 'trim|string');
-			$this->form_validation->set_rules('event_timing', 'Event Time', 'trim|string');
+			$this->form_validation->set_rules('event_timing', 'Event Time', 'trim|string'); */
 			
 			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {
-			//$data['x']=$this->events->create_event();
-			redirect('adminevents/manage_events/eas');
+			/* $datas = array(
+			   'article_title' => $this->input->post('title'),
+			   'article_detail' => $this->input->post('detail'),
+			   'postedby' => $data['user_id'],
+			   'article_univ_id' => $this->input->post('university'),
+			   'article_image_path' => $image_data['file_name'],
+			   'article_type_ud' => $this->input->post('article_type_ud')
+			); */
+			//print_r($datas);
+			$data['create_article_data']=$this->articlemodel->create_article();
+			//print_r($data['create_article_data']);
+			redirect('adminarticles/manage_articles/eas');
 			}
 			//fetch user privilege data from model
 			}
@@ -160,7 +170,7 @@ class adminarticles extends CI_Controller
 			}
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);	
-			$this->load->view('admin/articles/add_article', $data);
+			$this->load->view('admin/articles/add_articles', $data);
 			
 			}	
 	}
@@ -341,7 +351,7 @@ class adminarticles extends CI_Controller
 	  }
 	}
 	
-	function view_event($event_id)
+	function view_article($article_id)
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
@@ -360,7 +370,7 @@ class adminarticles extends CI_Controller
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']>0)
+		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>0)
 		{
 		$flag=1;
 		break;
@@ -373,10 +383,10 @@ class adminarticles extends CI_Controller
 		else
 		{
 		$f=1;
-		if($data['admin_user_level']=='3')
+		if($data['admin_user_level']=='2')
 		{
 		$admin_univ_id=$this->events->fetch_univ_id($data['user_id']);
-		$event_list=$this->events->fetch_events_ids($admin_univ_id['univ_id']);
+		$event_list=$this->events->fetch_article_ids($admin_univ_id['univ_id']);
 		if(!in_array($event_id,$event_list))
 		{
 			$f=0;
@@ -384,8 +394,8 @@ class adminarticles extends CI_Controller
 		}
 		if($f==1)
 		{
-		$data['event_info']=$this->events->fetch_event_detail($event_id);
-		$this->load->view('admin/event/view_event', $data);
+		$data['article_info']=$this->articlemodel->article_detail($article_id);
+		$this->load->view('admin/event/view_article', $data);
 		}
 		else
 		{

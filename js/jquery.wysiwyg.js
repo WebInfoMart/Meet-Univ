@@ -392,7 +392,7 @@
                 /**
                  * http://code.google.com/p/jwysiwyg/issues/detail?id=96
                  */
-                this.editor.attr('tabindex', $(element).attr('tabindex'));
+                //this.editor.attr('tabindex', $(element).attr('tabindex'));
 
                 if ( $.browser.msie )
                 {
@@ -417,7 +417,7 @@
                 width : ( newX > 0 ) ? ( newX ).toString() + 'px' : '100%'
             }).addClass('wysiwyg')
                 .append(panel)
-                .append( $('<div><!-- --></div>').css({ clear : 'both' }) )
+                .append( $('<span><!-- --></span>').css({ clear : 'both' }) )
                 .append(editor)
 		;
 

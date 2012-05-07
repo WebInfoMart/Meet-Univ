@@ -328,7 +328,7 @@ class Adminmodel extends CI_Model
 		 
 		}
 		}
-		else if($flag==0){
+		if($flag==0){
 		$image_data = $this->upload->data();
 		
 		$config = array(
@@ -378,7 +378,7 @@ class Adminmodel extends CI_Model
 			   'univ_insights'=>$this->input->post('txtareainsights')
 			);
 			$this->db->insert('university', $data);
-			//redirect('admin/manage_university/ucs');
+			redirect('admin/manage_university/ucs');
 		}	
 	}
 		
