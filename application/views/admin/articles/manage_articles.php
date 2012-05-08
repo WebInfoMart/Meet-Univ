@@ -36,7 +36,7 @@ $insert=1;
  <div id="content">	
 
 <h2>DETAIL OF ARTICLES</h2>
-			<form action="<?php echo $base ?>adminevents/delete_events" method="post" id="deleteeventform" >	
+			<form action="<?php echo $base ?>adminarticles/delete_articles" method="post" id="deletearticleform" >	
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
 			
 				<thead>
@@ -56,7 +56,7 @@ $insert=1;
 					<tr class="even">
 					
 						<td>
-		<input type="checkbox" class="setchkval" value="" name="check_event_<?php echo $row->article_id; ?>" id="check_event_<?php echo $row->article_id; ?>">
+		<input type="checkbox" class="setchkval" value="" name="check_article_<?php echo $row->article_id; ?>" id="check_article_<?php echo $row->article_id; ?>">
 						<input type="hidden" name="article_id[]" value="<?php echo $row->article_id ?>" >
 						</td>
 						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
@@ -74,13 +74,13 @@ $insert=1;
 			<?php if($view==1) { ?>
               <li><a href="<?php echo "$base"; ?>adminarticles/view_article/<?php echo $row->article_id; ?>"><i class="icon-view" ></i> View</a></li>
 			<?php } if($edit==1) { ?>
-              <li><a href="<?php echo "$base"; ?>adminevents/edit_article/<?php echo $row->article_id; ?>">
+              <li><a href="<?php echo "$base"; ?>adminarticles/edit_article/<?php echo $row->article_id; ?>">
 			  <i class="icon-pencil"></i> Edit</a></li>
 			  <?php } if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3') { ?>
-<li><a href="#" onclick="featured_home_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_home_article; ?>','<?php echo $row->article_id; ?>');"><i class="<?php if($row->featured_home_article=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_home_article=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a>
-			 </li>	
+<li><a href="#" onclick="featured_home_confirm('<?php echo "$base";?>adminarticles','<?php  echo $row->featured_home_article; ?>','<?php echo $row->article_id; ?>');"><i class="<?php if($row->featured_home_article=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_home_article=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a>
+			<!-- </li>	
 			  <li><a href="#" onclick="featured_dest_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_dest_article; ?>','<?php echo $row->article_id; ?>');"><i class="<?php if($row->featured_dest_article=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_dest_article=='1'){?> Make Study-Abroad Unfeatured <?php } else {?> Make Study-Abroad Featured <?php } ?></a>
-			 </li>	
+			 </li>-->	
 			<?php }	 if($delete==1) { ?>
 			 <li><a href="#" onclick="delete_confirm('<?php echo $row->article_id; ?>');" ><i class="icon-trash"></i> Delete</a></li>
 				<?php }?>
@@ -119,25 +119,26 @@ $insert=1;
 		
 		</div>
 <script>
-function delete_confirm(eventid)
+function delete_confirm(articleid)
 {
-$('#check_event_'+eventid).attr('checked','checked')
+$('#check_article_'+articleid).attr('checked','checked')
 var r=confirm("Are U sure u want to Delete this event?");
 if(r)
 {
-window.location.href="<?php echo $base ?>"+'adminevents/delete_single_event/'+eventid;
+window.location.href="<?php echo $base ?>"+'adminarticles/delete_single_article/'+articleid;
 }
 else
 {
-$('#check_university_'+eventid).removeAttr('checked');
+$('#check_university_'+articleid).removeAttr('checked');
 }
 }
+
 function featured_home_confirm(a,b,c)
 {
 var nof='1';
 if(b=='0')
 {
-nof=chknooffeatured('featured_home_event');
+nof=chknooffeatured('featured_home_article');
 }
 if(nof=='1')
 {
@@ -150,17 +151,20 @@ if(b==1)
 {
 status='make home unfeatured';
 }
-var r=confirm("Are U sure u want to " +status+ " to this event?");
+var r=confirm("Are U sure u want to " +status+ " to this article?");
 if (r==true)
 {
-  window.location.href=a+'/featured_unfeatured_event/'+b+'/'+c+'/';
+  window.location.href=a+'/featured_unfeatured_article/'+b+'/'+c+'/';
 }
 }
 else
 {
-alert("Max Limit 5 reached,To make this home featured event,make other to unfeature");
+alert("You have reached maximum limit for show article");
 }
 }
+
+
+
 function featured_dest_confirm(a,b,c)
 {
 var nof='1';
@@ -198,17 +202,17 @@ if(action=='delete')
 var atLeastOneIsChecked = $('.setchkval:checked').length > 0;
 if(atLeastOneIsChecked)
 {
-var r=confirm("Are U sure u want to delete the selected events");
+var r=confirm("Are U sure u want to delete the selected articles");
 set_chkbox_val();
 
 if(r)
 {
-$('#deleteeventform').submit();
+$('#deletearticleform').submit();
 }
 }
 else
 {
-alert("please select al least one usniversity");
+alert("please select al least one university");
 return false;
 }
 }
@@ -239,7 +243,7 @@ function chknooffeatured(field)
 var f;
 	$.ajax({
 	   type: "POST",
-	   url: "<?php echo $base; ?>adminevents/count_featured_events/"+field,
+	   url: "<?php echo $base; ?>adminarticles/count_featured_articles/"+field,
 	   async:false,
 	   data: '',
 	   cache: false,

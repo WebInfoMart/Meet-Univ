@@ -44,7 +44,7 @@ class Events extends CI_Model
 		$i=0;
 		foreach($res as $res1)
 		{
-		$r[]=$res[$i]['event_id'];
+		$r[]=$res1[$i]['event_id'];
 		$i++;
 		}
 		return $r;

@@ -68,22 +68,22 @@ class adminarticles extends CI_Controller
 			}
 			if($msg=='fh')
 			{
-			$data['msg']='Article set as Home featured event Successfully';
+			$data['msg']='Article set as Home featured Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='ufh')
 			{
-			$data['msg']='Article remove as Home featured event Successfully';
+			$data['msg']='Article remove as Home featured Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='fd')
 			{
-			$data['msg']='Article set as Study Abroad featured event Successfully';
+			$data['msg']='Article set as Study Abroad featured Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='ufd')
 			{
-			$data['msg']='Article remove as Study Abroad featured event Successfully';
+			$data['msg']='Article remove as Study Abroad featured Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
 			if($msg=='eds')
@@ -297,7 +297,7 @@ class adminarticles extends CI_Controller
 	  }
 	}
 	
-	function delete_single_event($event_id)
+	function delete_single_article($article_id)
 	{
 	if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
@@ -316,7 +316,7 @@ class adminarticles extends CI_Controller
 		$flag=0;
 		$delete_events=array('5','7','8','10');
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$delete_events))
+		if($userdata['admin_priv']['privilege_type_id']==2 && in_array($userdata['admin_priv']['privilege_level'],$delete_events))
 		{
 		$flag=1;
 		break;
@@ -331,17 +331,17 @@ class adminarticles extends CI_Controller
 		$f=1;
 		if($data['admin_user_level']=='3')
 		{
-		$admin_univ_id=$this->events->fetch_univ_id($data['user_id']);
-		$event_list=$this->events->fetch_events_ids($admin_univ_id['univ_id']);
-		if(!in_array($event_id,$event_list))
+		$admin_univ_id=$this->articlemodel->fetch_univ_id($data['user_id']);
+		$article_list=$this->articlemodel->fetch_article_ids($admin_univ_id['univ_id']);
+		if(!in_array($article_id,$article_list))
 		{
 			$f=0;
 		}
 		}
 		if($f==1)
 		{
-		$this->events->delete_single_event($event_id);
-		redirect('adminevents/manage_events/eds');
+		$this->articlemodel->delete_single_article($article_id);
+		redirect('adminarticles/manage_articles/eds');
 		}
 		else
 		{
@@ -383,19 +383,20 @@ class adminarticles extends CI_Controller
 		else
 		{
 		$f=1;
-		if($data['admin_user_level']=='2')
+		if($data['admin_user_level']=='3')
 		{
-		$admin_univ_id=$this->events->fetch_univ_id($data['user_id']);
-		$event_list=$this->events->fetch_article_ids($admin_univ_id['univ_id']);
-		if(!in_array($event_id,$event_list))
+		$admin_univ_id=$this->articlemodel->fetch_univ_id($data['user_id']);
+		$article_list=$this->articlemodel->fetch_article_ids($admin_univ_id['univ_id']);
+		if(!in_array($article_id,$article_list))
 		{
 			$f=0;
 		}
 		}
 		if($f==1)
 		{
-		$data['article_info']=$this->articlemodel->article_detail($article_id);
-		$this->load->view('admin/event/view_article', $data);
+		$data['article_info']=$this->articlemodel->fetch_article_detail($article_id);
+		//$this->load->view('admin/event/view_event', $data);
+		$this->load->view('admin/articles/view_article', $data);
 		}
 		else
 		{
@@ -406,7 +407,7 @@ class adminarticles extends CI_Controller
 	}
 	
 	
-	function edit_event($event_id)
+	function edit_article($article_id)
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
@@ -422,10 +423,10 @@ class adminarticles extends CI_Controller
 		}
 		$this->load->view('admin/header',$data);
 		$this->load->view('admin/sidebar',$data);
-		$edit_events=array('3','6','7','10');
+		$edit_articles=array('3','6','7','10');
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$edit_events) )
+		if($userdata['admin_priv']['privilege_type_id']==2 && in_array($userdata['admin_priv']['privilege_level'],$edit_articles) )
 		{
 		$flag=1;
 		break;
@@ -440,9 +441,9 @@ class adminarticles extends CI_Controller
 		$f=1;
 		if($data['admin_user_level']=='3')
 		{
-		$admin_univ_id=$this->events->fetch_univ_id($data['user_id']);
-		$event_list=$this->events->fetch_events_ids($admin_univ_id['univ_id']);
-		if(!in_array($event_id,$event_list))
+		$admin_univ_id=$this->articlemodel->fetch_univ_id($data['user_id']);
+		$article_list=$this->articlemodel->fetch_article_ids($admin_univ_id['univ_id']);
+		if(!in_array($article_id,$article_list))
 		{
 			$f=0;
 		}
@@ -453,22 +454,18 @@ class adminarticles extends CI_Controller
 			{
 			$this->form_validation->set_rules('title', 'Title', 'trim|required');
 			$this->form_validation->set_rules('university', 'University', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('country', 'country', 'trim|xss_clean|required');
-			$this->form_validation->set_rules('state', 'state', 'trim|xss_clean|required');
-			$this->form_validation->set_rules('city', 'City', 'trim|required|string');
-			$this->form_validation->set_rules('event_time', 'Event Time', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('detail', 'Detail', 'trim|string');
 			
 			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {
-			$this->events->update_event($event_id);
-			redirect('adminevents/manage_events/eus');
+			$this->articlemodel->update_article($article_id);
+			redirect('adminarticles/manage_articles/eus');
 			}
 		}
 		$data['countries']=$this->users->fetch_country();
 		$data['univ_info']=$this->events->get_univ_detail();
-		$data['event_info']=$this->events->fetch_event_detail($event_id);
-		$this->load->view('admin/event/edit_event', $data);	
+		$data['article_info']=$this->articlemodel->fetch_article_detail($article_id);
+		$this->load->view('admin/articles/edit_article', $data);	
 		}
 		else
 		{
@@ -476,9 +473,83 @@ class adminarticles extends CI_Controller
 		}
 		}
 		}
-	  }
+	  }	
 	 
-	function delete_events()
+	 function count_featured_events($field)
+	 {
+		$data['result']=$this->events->count_feature_event($field);
+		$this->load->view('ajaxviews/check_unique_field',$data);
+		
+	 }
+	 
+	 function featured_unfeatured_article($f_status='',$article_id)
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 && $data['user_id']!='3')
+		{
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else
+		{
+		$f=1;
+		if($data['admin_user_level']=='3')
+		{
+		$admin_univ_id=$this->articlemodel->fetch_univ_id($data['user_id']);
+		$article_list=$this->articlemodel->fetch_events_ids($admin_univ_id['univ_id']);
+		if(!in_array($article_id,$article_list))
+		{
+			$f=0;
+		}
+		}
+		if($f==1)
+		{
+		$fu_status=$this->articlemodel->home_featured_unfeatured_article($f_status,$article_id);
+		if($fu_status)
+		{
+		redirect('adminarticles/manage_articles/fh');
+		}
+		else
+		{
+		redirect('adminarticles/manage_articles/ufh');
+		}
+		}
+		else
+		{
+		$this->load->view('admin/accesserror', $data);
+		}	
+		}
+	  }
+	}
+	
+	function count_featured_articles($field)
+	 {
+		$data['result']=$this->articlemodel->count_feature_article($field);
+		$this->load->view('ajaxviews/check_unique_field',$data);
+		
+	 }
+	 
+	 function delete_articles()
 	{
 	if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
@@ -497,7 +568,7 @@ class adminarticles extends CI_Controller
 		$delete_user_priv=array('5','7','8','10');
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv))
+		if($userdata['admin_priv']['privilege_type_id']==2 && in_array($userdata['admin_priv']['privilege_level'],$delete_user_priv))
 		{
 		$flag=1;
 		break;
@@ -509,18 +580,11 @@ class adminarticles extends CI_Controller
 		}
 		else if($flag==1)
 		{
-		$this->events->delete_events();
-		redirect('adminevents/manage_events/eds');
+		$this->articlemodel->delete_articles();
+		redirect('adminarticles/manage_articles/eds');
 		}
 	  }
-	}	
-	 
-	 function count_featured_events($field)
-	 {
-		$data['result']=$this->events->count_feature_event($field);
-		$this->load->view('ajaxviews/check_unique_field',$data);
-		
-	 }
+	}
 }
 
 /* End of file auth.php */
