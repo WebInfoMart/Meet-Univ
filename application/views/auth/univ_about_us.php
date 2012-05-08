@@ -45,16 +45,16 @@
 	echo "<h3>University univ_web</h3>----".$university_details['univ_web'].'</br>';
 	echo "<h3>University featured_college</h3>----".$university_details['featured_college'].'</br>';
 	echo "<h3>University salient_features</h3>----".$university_details['salient_features'].'</br>';*/
-	echo "<h3>University univ_overview</h3>----".$university_details['univ_overview'].'</br>';
-	echo "<h3>University univ_campus</h3>----".$university_details['univ_campus'].'</br>';
-	echo "<h3>University univ_services</h3>----".$university_details['univ_services'].'</br>';
-	echo "<h3>University univ_faculties</h3>----".$university_details['univ_faculties'].'</br>';
-	echo "<h3>University univ_expertise</h3>----".$university_details['univ_expertise'].'</br>';
-	echo "<h3>University univ_slife</h3>----".$university_details['univ_slife'].'</br>';
-	echo "<h3>University univ_interstudents</h3>----".$university_details['univ_interstudents'].'</br>';
-	echo "<h3>University univ_alumni</h3>----".$university_details['univ_alumni'].'</br>';
-	echo "<h3>University univ_departments</h3>----".$university_details['univ_departments'].'</br>';
-	echo "<h3>University univ_insights</h3>----".$university_details['univ_insights'].'</br>';
+	echo "<h3>Overview University</h3>----".$university_details['univ_overview'].'</br>';
+	echo "<h3>University Campus Overview</h3>----".$university_details['univ_campus'].'</br>';
+	echo "<h3>University Facilities & Services / Accommodation</h3>----".$university_details['univ_services'].'</br>';
+	echo "<h3>University Faculties</h3>----".$university_details['univ_faculties'].'</br>';
+	echo "<h3>University Research Expertise</h3>----".$university_details['univ_expertise'].'</br>';
+	echo "<h3>University Student Life</h3>----".$university_details['univ_slife'].'</br>';
+	echo "<h3>University For International Students</h3>----".$university_details['univ_interstudents'].'</br>';
+	echo "<h3>University Awarded Alumni</h3>----".$university_details['univ_alumni'].'</br>';
+	echo "<h3>University Departments</h3>----".$university_details['univ_departments'].'</br>';
+	echo "<h3>University Insights</h3>----".$university_details['univ_insights'].'</br>';
 //}
 ?>
 
