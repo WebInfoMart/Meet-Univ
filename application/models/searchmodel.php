@@ -281,4 +281,50 @@ class Searchmodel extends CI_Model
 		$query=$this->db->get();
 		return $query->result_array();
 	}
+	
+	function get_country_id_by_name($country_name)
+	{
+		$this->db->select('country_id');
+		$this->db->from('country');
+		$this->db->where('country_name',$country_name);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		{
+		 return $res->row_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	function get_educ_level_id_by_name($educ_level)
+	{
+		$this->db->select('prog_edu_lvl_id');
+		$this->db->from('program_educ_level');
+		$this->db->where('educ_level',$educ_level);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		{
+		 return $res->row_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	function get_area_intrest_id_by_name($area_interest)
+	{
+		$this->db->select('prog_parent_id');
+		$this->db->from('program_parent');
+		$this->db->where('program_parent_name',$educ_level);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		{
+		 return $res->row_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
 }

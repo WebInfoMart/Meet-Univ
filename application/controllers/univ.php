@@ -748,6 +748,33 @@ function university($univ_id='',$qid='',$uid='')
 		$this->load->view('auth/footer',$data);
 	}	
 	
+	function follow_to_univ()
+	{
+		if (!($this->tank_auth->is_logged_in())) {	
+		$this->session->set_userdata('follow_to_univ','1');
+			echo "login";
+		}
+		else
+		{
+		$user_id	= $this->tank_auth->get_user_id();
+		$add_follower = array(
+			'follow_to_univ_id' => $this->input->post('univ_id'),
+			'followed_by' => $user_id
+			);
+		$already_followed=$this->users->check_is_already_followed($add_follower);	
+		if(!($already_followed))	
+		{
+		$this->users->add_followers($add_follower);
+		echo "nowfollowed";
+		}
+		else
+		{
+		$this->users->unjoin_now($add_follower);
+		echo "nowunfollowed";	
+		}
+		}
+	}
+	
 }		
 	
 ?>

@@ -172,6 +172,11 @@ class Auth extends CI_Controller
       $data['login_by_email'],
       $this->form_validation->set_value('user_type')
       )) {        // success
+	  
+	  if($this->session->userdata('follow_to_univ'))
+	  {
+		redirect('colleges');
+	  }
       /* Code for if user question should be insert after login */
       if($this->session->userdata('quest_sess_active') == 'true')
       {
@@ -1074,6 +1079,17 @@ class Auth extends CI_Controller
 		$this->load->view('auth/filter_top_bar',$data);
 		}
 	}
+	
+	function all_colleges_search()
+	{
+		$current_url=$this->input->post('current_url');
+		$data = $this->path->all_path();
+		$data['get_university'] = $this->users->show_all_college_filteration($current_url);
+		if($data['get_university']!=0)
+		{
+		$this->load->view('auth/show_all_college_search',$data);
+		}
+	}
 	function all_colleges($s_country ='',$s_educ_level='',$s_course='',$s_program='')
 	{
 		$data = $this->path->all_path();
@@ -1082,7 +1098,7 @@ class Auth extends CI_Controller
 		$this->load->view('auth/header',$data);
 		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
 		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
-		$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
+		$data['fetch_area_intrest'] =$this->users->fetch_area_interest_having_univ();
 		$data['country_arrow']=$s_country;
 		$data['educ_arrow']=$s_educ_level;
 		$data['course_arrow']=$s_course;
@@ -1098,6 +1114,7 @@ class Auth extends CI_Controller
 		$data['prog_show']=0;
 		}
 		$data['get_university'] = $this->users->show_all_college($s_country,$s_educ_level,$s_course,$s_program);
+		
 		$this->load->library('GMap');
 		$this->gmap->GoogleMapAPI();
 		$data['headerjs'] = $this->gmap->getHeaderJS();
@@ -1113,7 +1130,6 @@ class Auth extends CI_Controller
 		$data['filter_var']=1;
 		$data['err_div']=0;
 		$data['err_msg']='<h2> Sorry....</br><span class="text-align">Result Not Found.... </span> </h2>';
-		$this->load->view('auth/filter_top_bar',$data);
 		}
 		$this->load->view('auth/footer',$data);
 	}

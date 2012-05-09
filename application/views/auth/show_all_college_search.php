@@ -1,4 +1,23 @@
-<?php
+<div id="pagination" style="margin-top:15px;" class="table_pagination right paging-margin">
+   
+						   <?php
+						   $cc=$get_university['total_res'];
+						   $rl=$get_university['limit_res']; 
+						   if($cc>$rl)
+						   {
+						   $z=0;
+						   for($c=$cc;$c>0;$c=$c-$rl)
+						   {
+						   ?>
+						 <a href="#" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <?php 
+						   }
+						   }
+						   ?>
+							</div>
+						<div class="clearfix"></div>
+						<div id="col_paging">
+						<?php
 						$count_array = count($get_university['university']);
 						$map_address='';
 						for($no_university = 0; $no_university<$count_array; $no_university++)
@@ -83,15 +102,17 @@
 														<span style="font-size:18px;">
 														<?php if($event_has) { echo $date_part[1]; ?> <br/>
 											<?php if($get_university['univ_event'][$no_university][0]['country_name']!='') {
-											echo $get_university['univ_event'][$no_university][0]['country_name'];
+											echo ucwords($get_university['univ_event'][$no_university][0]['country_name']);
 											} ?><br />
 													
 											<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
-											echo $get_university['univ_event'][$no_university][0]['cityname']; }
+											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
 											} ?><br />
 														</span>
-											<?php } else { ?><div class="float_l margin_t1">
-														<span style="font-size:18px;"> No Recent Event </span> </div><?php } ?>			
+											<?php } else { ?>
+											
+											<div class="float_l margin_t1">
+														<span style="font-size:18px;">No Recent Event </span> </div><?php } ?>			
 													</div>
 													</div>
 											</div>
@@ -114,7 +135,7 @@
 												&nbsp;&nbsp;Listed: <span class="blue">2980</span>
 											</div>
 											<div class="last_box_col float_r">
-												<img src="images/add.png"/>
+												<img src="<?php echo "$base$img_path"; ?>/add.PNG"/>
 				<span class="green follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
 												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow University<?php } else { ?>Unfollow University <?php } ?>
 									   </span>
@@ -128,4 +149,5 @@
 								<div class="clearfix"></div>
 							</div>
 					<?php } ?>	
-					
+						</div>
+						</div>

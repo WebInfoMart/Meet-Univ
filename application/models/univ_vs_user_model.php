@@ -134,6 +134,7 @@ class Univ_vs_user_model extends CI_Model
 	
 	function get_assigned_univ_info($user_id)
 	{
+	  $univ=array();	
 	  $this->db->select('university_id');
 	  $this->db->from(' university_vs_users');
 	  $this->db->where('univ_user_id',$user_id);

@@ -1,3 +1,6 @@
+<?php //function for counting the no of views 
+$no_of_views=$university_details['univ_views_count']+1;
+$this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_views); ?>
 <div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>

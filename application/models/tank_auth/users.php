@@ -943,7 +943,12 @@ class Users extends CI_Model
 		$rows = mysql_affected_rows();
 		return $rows;
 	}
-	
+	function get_question_by_univ($univ_id)
+	{
+		$query = $this->db->get_where('questions',array('q_univ_id'=>$univ_id,'q_category'=>'univ'));
+		$rows = mysql_affected_rows();
+		return $rows;
+	}
 	function get_detail_news_of_univ($univ_id)
 	{
 		$this->db->select('*');
@@ -986,6 +991,12 @@ class Users extends CI_Model
 		//print_r($res->row_array());
 		return $res->result_array();
 		}
+	}
+	//increase no views of univ
+	function increase_univ_no_of_views($univ_id,$views_count)
+	{
+	$this->db->where('univ_id', $univ_id);
+	$this->db->update('university',array('univ_views_count'=>$views_count));
 	}
 	function show_all_college($search_country,$type_educ_level,$search_course,$search_program)
 	{
@@ -1082,11 +1093,31 @@ class Users extends CI_Model
 								$univ_follow[] = $this->users->get_followers_of_univ($university_id);
 								$univ_article[] = $this->users->get_articles_of_univ($university_id);
 								$univ_program[] = $this->users->get_program_provide_by_univ($university_id);
+								$univ_question[] = $this->users->get_question_by_univ($university_id);
+								$univ_event[] = $this->users->get_upcoming_event_by_univ($university_id);
+								
+								if ($this->tank_auth->is_logged_in()) {	
+								$user_id	= $this->tank_auth->get_user_id();
+								$add_follower = array(
+									'follow_to_univ_id' => $university_id,
+									'followed_by' => $user_id
+									); 
+								$is_already_follow[] = $this->users->check_is_already_followed($add_follower);
+								}
+								else
+								{
+								$is_already_follow[] = 0;
+								}
 						}		
 						$univ_data['university'] = $university_detail;
 						$univ_data['followers'] = $univ_follow;
 						$univ_data['article'] = $univ_article;
 						$univ_data['program'] = $univ_program;
+						$univ_data['questions'] = $univ_question;
+						$univ_data['is_already_follow']	=$is_already_follow	;
+						$univ_data['univ_event']	=$univ_event	;
+						
+						//$univ_data['total_univ']=$total_result;
 						//$univ_data['position'] = $marker;*/
 						return $univ_data;
 			}
@@ -1580,6 +1611,8 @@ class Users extends CI_Model
 		
 	function show_all_college_paging($search_country,$type_educ_level,$search_course,$search_program)
 	{
+						$univ_data['total_res']=0;
+						$univ_data['limit_res']=25;
 						$offset=$this->input->post('offset');
 						$this->db->select('*');
 						$this->db->from('university');
@@ -1619,6 +1652,7 @@ class Users extends CI_Model
 						$this->db->limit('25',$offset);
 						$results = $this->db->get();
 						//echo $results->num_rows();
+						$univ_data['total_res']=$results->num_rows();
 			if($results->num_rows()>0)
 			{
 						$res_of_univ_search1 = $results->result_array();
@@ -1634,18 +1668,160 @@ class Users extends CI_Model
 								$univ_follow[] = $this->users->get_followers_of_univ($university_id);
 								$univ_article[] = $this->users->get_articles_of_univ($university_id);
 								$univ_program[] = $this->users->get_program_provide_by_univ($university_id);
+								$univ_question[] = $this->users->get_question_by_univ($university_id);
+								$univ_event[] = $this->users->get_upcoming_event_by_univ($university_id);
+								
+								if ($this->tank_auth->is_logged_in()) {	
+								$user_id	= $this->tank_auth->get_user_id();
+								$add_follower = array(
+									'follow_to_univ_id' => $university_id,
+									'followed_by' => $user_id
+									); 
+								$is_already_follow[] = $this->users->check_is_already_followed($add_follower);
+								}
+								else
+								{
+								$is_already_follow[] = 0;
+								}
 						}		
-						$univ_data=array();
 						$univ_data['university'] = $university_detail;
 						$univ_data['followers'] = $univ_follow;
 						$univ_data['article'] = $univ_article;
 						$univ_data['program'] = $univ_program;
 						$univ_data['position'] = $marker;
+						$univ_data['questions'] = $univ_question;
+						$univ_data['is_already_follow']	=$is_already_follow	;
+						$univ_data['univ_event']	=$univ_event	;
+						
+						
 						return $univ_data;
 			}
 			else{
 			return 0;
 			}
+		
+	}
+	
+	function show_all_college_filteration($current_url)
+	{
+						$pos = strpos($current_url,'colleges/');
+						$filter_country=0;
+						$filter_educ_level=0;
+						$filter_area_interest=0;
+						if($pos>0)
+						{
+						$arr=explode('colleges/',$current_url);
+						if(count($arr)>0 )
+						{
+						if($arr[1]!='' && $arr[1]!=NULL)
+						{
+						 $filter_content=explode('/',$arr[1]);
+						for($f=0;$f<count($filter_content);$f++)
+						{
+						  $chk_country=$this->searchmodel->get_country_id_by_name($filter_content[$f]);
+						  if($chk_country!=0)
+						  {
+						   $country_id[]=$chk_country['country_id'];
+						   $filter_country=1;
+						  }
+						  else if($chk_country==0)
+						  {
+						  $chk_educ_level=$this->searchmodel->get_educ_level_id_by_name($filter_content[$f]);
+						  if($chk_educ_level!=0)
+						  {
+						  $educ_level[]=$chk_educ_level['prog_edu_lvl_id'];
+						  $filter_educ_level=1;
+						  }
+						  }
+						  else if($chk_educ_level==0)
+						  {
+						  $chk_area_intrest=$this->searchmodel->get_area_intrest_id_by_name($filter_content[$f]);
+						  if($chk_area_intrest!=0)
+						  {
+						  $area_intrest[]=$chk_area_intrest['prog_parent_id'];
+						  $filter_area_interest=1;
+						  }
+						  }
+						  
+						}
+						}
+						}
+						else
+						{
+						$filter_content=0;
+						}
+					}	
+						$univ_data['total_res']=0;
+						$univ_data['limit_res']=25;
+						$this->db->select('*');
+						$this->db->from('university');
+						$chk_sc_sel=0;
+						$chk_c_id=0;
+						
+						$search_array=array();
+						if($filter_country==1)
+						{
+						$this->db->where_in('country_id',$country_id);
+						}
+						$results = $this->db->get();
+						$univ_data['total_res']=$results->num_rows();
+						if($results->num_rows()>$univ_data['limit_res']);
+						{
+						$this->db->select('*');
+						$this->db->from('university');
+						if($filter_country==1)
+						{
+						$this->db->where_in('country_id',$country_id);
+						}
+						$results = $this->db->get();
+						}
+			if($results->num_rows()>0)
+			{
+						$res_of_univ_search1 = $results->result_array();
+						//print_r($res_of_univ_search1);
+						foreach($res_of_univ_search1 as $univ_search_result)
+						{	
+								$university_id=$univ_search_result['univ_id'];
+								$this->db->select('*');
+								$this->db->from('university');
+								$this->db->where('univ_id',$university_id);
+								$results=$this->db->get();
+								$university_detail[] = $results->row_array();
+								$univ_follow[] = $this->users->get_followers_of_univ($university_id);
+								$univ_article[] = $this->users->get_articles_of_univ($university_id);
+								$univ_program[] = $this->users->get_program_provide_by_univ($university_id);
+								$univ_question[] = $this->users->get_question_by_univ($university_id);
+								$univ_event[] = $this->users->get_upcoming_event_by_univ($university_id);
+								
+								if ($this->tank_auth->is_logged_in()) {	
+								$user_id	= $this->tank_auth->get_user_id();
+								$add_follower = array(
+									'follow_to_univ_id' => $university_id,
+									'followed_by' => $user_id
+									); 
+								$is_already_follow[] = $this->users->check_is_already_followed($add_follower);
+								}
+								else
+								{
+								$is_already_follow[] = 0;
+								}
+						}		
+						$univ_data['university'] = $university_detail;
+						$univ_data['followers'] = $univ_follow;
+						$univ_data['article'] = $univ_article;
+						$univ_data['program'] = $univ_program;
+						$univ_data['questions'] = $univ_question;
+						$univ_data['is_already_follow']	=$is_already_follow	;
+						$univ_data['univ_event']	=$univ_event	;
+						
+						//$univ_data['total_univ']=$total_result;
+						//$univ_data['position'] = $marker;*/
+						return $univ_data;
+			}
+			else{
+			return 0;
+			}
+		
 		
 	}
 		
@@ -1666,10 +1842,44 @@ class Users extends CI_Model
 		return $marker;
 	}	
 		
+	function get_upcoming_event_by_univ($univ_id)
+	{
+		$this->db->select("*");
+		$this->db->from('events');
+		$condition=array('event_univ_id'=>$univ_id,
+						'event_type'=>'univ_event',
+						'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d"));
+		$this->db->join('country','country.country_id=events.event_country_id','left');
+		$this->db->join('city','city.city_id=events.event_city_id','left');
+		
+		$this->db->where($condition);
+		$this->db->limit(1);
+		//$this->db->order_by('STR_TO_DATE(event_date_time, "%d %M %Y")','asc');
+		$res=$this->db->get();
+		if($res->num_rows>0)
+		{
+		return $res->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}	
 		
 		
-		
-		
+	function fetch_area_interest_having_univ()
+	{
+		$this->db->select('*');
+		$this->db->from('program_parent');
+		$this->db->join('univ_program','univ_program.prog_parent_id=program_parent.prog_parent_id');
+		$this->db->group_by("univ_program.prog_parent_id"); 
+		$this->db->order_by('program_parent_name','asc');
+		$query = $this->db->get();
+		if($query->num_rows>0)
+		return $query->result_array();
+		else
+		return 0;
+	}	
 		
 		
 		
