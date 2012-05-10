@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinysort.js"></script>
 <?php
 $this->session->unset_userdata('follow_to_univ');
 //print_r($get_university['university']); ?>
@@ -8,14 +9,16 @@ $this->session->unset_userdata('follow_to_univ');
 			<div class="row margin_t1">
 				<div class="float_l span12 margin_l">
 					<div class="start_bar">
-						<div class="float_l"><h3>Viewing 1 - <?php echo count($get_university['university']); ?> universities of 350<?php //print_r($get_university['total_univ']); ?>.</h3></div>
+						<div class="float_l"><h3>Viewing 1 - <span id="listed_currently_univ"><?php echo count($get_university['university']); ?></span> universities of <span id="red_total_univ"> <?php echo $get_university['total_res']; ?></span>.</h3></div>
 						<div class="float_r">
 							<div class="sort_contanier">
 								<ul class="sort_list">
 									<li><h4>Sort By:</h4></li>
-									<li><a href="#" class="active">Country</a></li>
-									<li><a href="#">University Name</a></li>
-									<li><a href="#">Events</a></li>
+									<li id="sort_country"><a href="javascript:void(0)" class="active" onclick="sortBy('country','desc','sort_country','Country')">Country</a>
+									</li>
+									
+									<li id="sort_univ_name"><a href="javascript:void(0)" onclick="sortBy('univ_name','desc','sort_univ_name','University Name')">University Name</a></li>
+									<li id="sort_event_date"><a href="javascript:void(0)" onclick="sortBy('date','desc','sort_event_date','Events')">Events</a></li>
 								</ul>
 							</div>
 						</div>
@@ -29,10 +32,18 @@ $this->session->unset_userdata('follow_to_univ');
 									<h4>Country</h4>
 									<ul class="col_filter_list">
 							<?php foreach($country as $countries) { 
-							$country_name=str_replace(',','_',$countries['country_name']);	
+							$sel='';
+							$country_name=str_replace(' ','_',$countries['country_name']);	
 							//$country_name=str_replace(' ','_',$country_name);	
 							?>	
-											<li  href="/<?php echo $country_name; ?>"><input type="checkbox" class="search_chkbox"> <?php echo ucwords($countries['country_name']); ?></li>
+											<li  href="/<?php echo $country_name; ?>">
+		<?php 
+		if(in_array($countries['country_id'],$get_university['filter_country']))
+		{
+		$sel='checked';
+		}
+		?>									
+		<input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo ucwords($countries['country_name']); ?></li>
 								<?php } ?>					
 									</ul>
 									
@@ -40,11 +51,17 @@ $this->session->unset_userdata('follow_to_univ');
 								<div class="margin_t">
 									<h4>Education Level</h4>
 									<ul class="col_filter_list">
-										<?php foreach($fetch_educ_level as $fetch_educ_levels) { 
-							$educ_level=str_replace(',','_',$fetch_educ_levels['educ_level']);	
+										<?php foreach($fetch_educ_level as $fetch_educ_levels) {
+							$educ_sel='';			
+							if(in_array($fetch_educ_levels['prog_edu_lvl_id'],$get_university['filter_educ_level']))
+							{
+							$educ_sel='checked';
+							}						
+							$educ_level=str_replace(' ','_',$fetch_educ_levels['educ_level']);	
 							//$educ_level=str_replace(' ','_',$educ_level);		
 										?>			
-			<li href="/<?php echo $educ_level; ?>"><input type="checkbox" class="search_chkbox"> <?php echo ucwords($fetch_educ_levels['educ_level']); ?></li>	
+			<li href="/<?php echo $educ_level; ?>"><input type="checkbox" class="search_chkbox" <?php echo $educ_sel; ?>> 
+			<?php echo ucwords($fetch_educ_levels['educ_level']); ?></li>	
 										<?php } ?>
 											
 										  
@@ -55,10 +72,14 @@ $this->session->unset_userdata('follow_to_univ');
 									<h4>Area of Interest</h4>
 									<ul class="col_filter_list">
 										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { 
-										$area_intrest=str_replace(',','_',$fetch_area_intrest1['program_parent_name']);	
-									//	$area_intrest=str_replace(' ','_',$area_intrest);	
+							$area_interest_sel='';			
+							if(in_array($fetch_area_intrest1['prog_parent_id'],$get_university['filter_area_intrest']))
+							{
+							$area_interest_sel='checked';
+							}			
+										$area_intrest=str_replace(' ','_',$fetch_area_intrest1['program_parent_name']);	
 										?>			
-		<li href="/<?php echo $area_intrest; ?>"><input type="checkbox" class="search_chkbox"><?php echo ucwords($fetch_area_intrest1['program_parent_name']); ?></li>	
+		<li href="/<?php echo $area_intrest; ?>"><input type="checkbox" class="search_chkbox" <?php echo $area_interest_sel; ?>><?php echo ucwords($fetch_area_intrest1['program_parent_name']); ?></li>	
 										<?php } ?>
 									</ul>
 									
@@ -77,11 +98,12 @@ $this->session->unset_userdata('follow_to_univ');
 						   for($c=$cc;$c>0;$c=$c-$rl)
 						   {
 						   ?>
-						 <a href="#" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
 						 <?php 
 						   }
 						   }
 						   ?>
+						   <input type="hidden" id="current_paging_value" value="0">	
 							</div>
 						<div class="clearfix"></div>
 						<div id="col_paging">
@@ -91,12 +113,13 @@ $this->session->unset_userdata('follow_to_univ');
 						for($no_university = 0; $no_university<$count_array; $no_university++)
 						{
 						?>
-							<div class="events_holder_box margin_t">
+		<div class="events_holder_box margin_t" date="<?php echo date("m-d-Y", strtotime($get_university['univ_event'][$no_university][0]['event_date_time'])); ?>" country="<?php echo $get_university['university'][$no_university]['country_name']; ?>" univ_name="<?php echo $get_university['university'][$no_university]['univ_name']; ?>">
 								<div class="row">
 									<div class="span6 float_l margin_l margin_t1">
 										<h3><span><a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>" >
+										
 										<?php echo $get_university['university'][$no_university]['univ_name']; ?></a></span>- 
-										United Kingdom</h3>
+										<?php echo $get_university['university'][$no_university]['country_name']; ?></h3>
 									</div>
 									<div class="float_r">
 										<!--<div class="box_col">
@@ -150,7 +173,7 @@ $this->session->unset_userdata('follow_to_univ');
 									</div>
 									<div class="float_r page2_col">
 										<div class="float_l done margin_l">
-											<div class="events_dates float_l">
+											<div class="events_dates float_l" onclick="gotoevent('<?php echo $get_university['university'][$no_university]['univ_id']  ;?>','<?php echo $get_university['univ_event'][$no_university][0]['event_id']; ?>');" style="cursor:pointer;">
 												<div class="red_box">
 													Events
 												</div>
@@ -288,9 +311,9 @@ $this->session->unset_userdata('follow_to_univ');
 						   }
 						   ?>
 						</div>-->
+								
 	</div>
 <script>
-var cpage=0;
 function follow_university(univ_id,follow_count)
 {	
  follow_count=$('#follow_count_'+univ_id).val();
@@ -327,26 +350,36 @@ function follow_university(univ_id,follow_count)
 }
 function ajax(a,pid)
 {
+
+	cpage=$('#current_paging_value').val();
 	if(a!=cpage)	
 	{
+	var url=document.URL;
+	var change_url=url.split('colleges/');
+	if(!(change_url.length>1 && change_url[1]!=''))
+	{
+	url='<?php echo $base; ?>colleges';
+	}
 	$('#pagination a').removeClass('add_paging_background_class');
 	 $('.'+pid).addClass('add_paging_background_class');
 	//$('#ajax_loader_paging').css('z-index','9');
 	$('#col_paging').css('opacity','0.4');
-	cpage=a;
+	$('#current_paging_value').val(a);
  	   $.ajax({
 	   type: "POST",
-	   url: "<?php echo $base; ?>auth/all_colleges_paging",
+	   url: "auth/all_colleges_paging",
 	   async:false,
-	   data: 'offset='+a,
+	   data: 'offset='+a+'&current_url='+url,
 	   cache: false,
-	   success: function(msg)
+	   success: function(r)
 	   {
+	 //  r=eval(r);
+	//	alert(r.total_univ_per_page);
 	   $('#col_paging').animate({
 		'opacity':1
 		},1000,function(){
 		});
-		$('#col_paging').html(msg);
+		$('#col_paging').html(r);
 	   }
 	   })
 	   
@@ -403,5 +436,24 @@ function get_college_result_by_ajax()
 	   }
 	   })
 }
+function sortBy(what,orderBy,id,text){
+$('.sort_list a').removeClass('active');
+var od='desc';
+if(orderBy=='desc')
+{
+od='asc';
+}
+$('#'+id).html('<a href="javascript:void(0)" class="active" onclick="sortBy(\''+what+'\',\''+od+'\',\''+id+'\',\''+text+'\')">'+text+'</a>');
 
+ $('.events_holder_box').tsort('',{attr:what,order:orderBy});
+
+}
+
+function gotoevent(univ_id,event_id)
+{
+if(univ_id!='' && event_id!='')
+{
+window.location='<?php echo $base; ?>univ-'+univ_id+'-event-'+event_id;
+}
+}
 </script>	 

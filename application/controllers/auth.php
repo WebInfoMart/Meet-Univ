@@ -1044,39 +1044,15 @@ class Auth extends CI_Controller
 	}
 	
 	
-	function all_colleges_paging($s_country ='',$s_educ_level='',$s_course='',$s_program='')
+	function all_colleges_paging()
 	{
 		$data = $this->path->all_path();
-		$data['err_msg']=0;
-		$data['filter_var']=0;
-		$data['country'] = $this->users->fetch_country();
-		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
-		$data['fetch_area_intrest'] =$this->users->fetch_area_interest();
-		$data['country_arrow']=$s_country;
-		$data['educ_arrow']=$s_educ_level;
-		$data['course_arrow']=$s_course;
-		$data['prog_arrow']=$s_program;
-		if($s_course!='' && $s_course!=0)
-		{
-		$data['s_program']=$this->users->fetch_program_by_area_intrest($s_educ_level,$s_course);
-		//print_r($data['s_program']);
-		$data['prog_show']=1;
-		}
-		else
-		{
-		$data['prog_show']=0;
-		}
-		$data['get_university'] = $this->users->show_all_college_paging($s_country,$s_educ_level,$s_course,$s_program);
+		$current_url=$this->input->post('current_url');
+		$data['get_university'] = $this->searchmodel->show_all_college_paging($current_url);
 		if($data['get_university']!=0)
 		{
-		$this->load->view('auth/show_all_college_paging',$data);
-		}
-		else
-		{
-		$data['filter_var']=1;
-		$data['err_div']=0;
-		$data['err_msg']='<h2> Sorry....</br><span class="text-align">Result Not Found.... </span> </h2>';
-		$this->load->view('auth/filter_top_bar',$data);
+		$college_list=$this->load->view('auth/show_all_college_paging',$data);
+
 		}
 	}
 	
@@ -1084,53 +1060,35 @@ class Auth extends CI_Controller
 	{
 		$current_url=$this->input->post('current_url');
 		$data = $this->path->all_path();
-		$data['get_university'] = $this->users->show_all_college_filteration($current_url);
+		$data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
 		if($data['get_university']!=0)
 		{
 		$this->load->view('auth/show_all_college_search',$data);
 		}
 	}
-	function all_colleges($s_country ='',$s_educ_level='',$s_course='',$s_program='')
+	function all_colleges($parms='')
 	{
 		$data = $this->path->all_path();
-		$data['err_msg']=0;
-		$data['filter_var']=0;
 		$this->load->view('auth/header',$data);
+		$data = $this->path->all_path();
+		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		$change_url=explode("colleges/",$current_url);
+		if(count($change_url)>1)
+		{
+		if($change_url[1]=='')
+		$current_url=$data['base'].'colleges';
+		}
 		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
 		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
 		$data['fetch_area_intrest'] =$this->users->fetch_area_interest_having_univ();
-		$data['country_arrow']=$s_country;
-		$data['educ_arrow']=$s_educ_level;
-		$data['course_arrow']=$s_course;
-		$data['prog_arrow']=$s_program;
-		if($s_course!='' && $s_course!=0)
-		{
-		$data['s_program']=$this->users->fetch_program_by_area_intrest($s_educ_level,$s_course);
-		//print_r($data['s_program']);
-		$data['prog_show']=1;
-		}
-		else
-		{
-		$data['prog_show']=0;
-		}
-		$data['get_university'] = $this->users->show_all_college($s_country,$s_educ_level,$s_course,$s_program);
-		
-		$this->load->library('GMap');
-		$this->gmap->GoogleMapAPI();
-		$data['headerjs'] = $this->gmap->getHeaderJS();
-		$data['headermap'] = $this->gmap->getMapJS();
-		$data['onload'] = $this->gmap->printOnLoad();
-		
-		if($data['get_university']!=0)
-		{
+		$data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
 		$this->load->view('auth/show_all_college',$data);
-		}
-		else
+		/*else
 		{
 		$data['filter_var']=1;
 		$data['err_div']=0;
 		$data['err_msg']='<h2> Sorry....</br><span class="text-align">Result Not Found.... </span> </h2>';
-		}
+		}*/
 		$this->load->view('auth/footer',$data);
 	}
 	

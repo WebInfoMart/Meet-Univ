@@ -9,11 +9,13 @@
 						   for($c=$cc;$c>0;$c=$c-$rl)
 						   {
 						   ?>
-						 <a href="#" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <a style="cursor:pointer;" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
 						 <?php 
 						   }
 						   }
 						   ?>
+						    <input type="hidden" id="current_paging_value" value="0">	
+							
 							</div>
 						<div class="clearfix"></div>
 						<div id="col_paging">
@@ -23,12 +25,12 @@
 						for($no_university = 0; $no_university<$count_array; $no_university++)
 						{
 						?>
-							<div class="events_holder_box margin_t">
+							<div class="events_holder_box margin_t" date="<?php echo date("m-d-Y", strtotime($get_university['univ_event'][$no_university][0]['event_date_time'])); ?>" country="<?php echo $get_university['university'][$no_university]['country_name']; ?>" univ_name="<?php echo $get_university['university'][$no_university]['univ_name']; ?>">
 								<div class="row">
 									<div class="span6 float_l margin_l margin_t1">
 										<h3><span><a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>" >
 										<?php echo $get_university['university'][$no_university]['univ_name']; ?></a></span>- 
-										United Kingdom</h3>
+										<?php echo $get_university['university'][$no_university]['country_name']; ?></h3>
 									</div>
 									<div class="float_r">
 										<!--<div class="box_col">
