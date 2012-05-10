@@ -1,23 +1,9 @@
 <div class="row" style="margin-top:-25px">
 				<div class="float_l span13 margin_l">
-					<div class="margin_t1">
-						<h2 class="course_txt"><?php echo $university_details['univ_name']; ?></h2>
-						<div class="margin_t1"><?php echo $university_details['about_us']; ?></div>
-					</div>
-					<div class="margin_t1">
-						<h3 class="course_txt">Interesting Facts</h3>
-						<ul>
-							<li>400 international students</li>
-							<li>U.S. News & World Report ranked UW-L second among Midwestern public universities offering bachelor's and master's degrees in 2005, 2006, and 2007, and third in 2008</li>
-							<li>In 2007, the Princeton Review named UW-La Crosse one of America's "Best Midwestern Colleges" and an "America's Best Value College"</li>
-						</ul>
-					</div>
-<br></br>
-<br></br>
-<?php
+					<div class="margin_t">
+						<?php
 //foreach($university_details as $univ_detail)
 //{
-	echo "<h3>University Name</h3>----".$university_details['univ_name'].'</br>';
 	/*echo "<h3>University title</h3>----".$university_details['title'].'</br>';
 	echo "<h3>University keyword</h3>----".$university_details['keyword'].'</br>';
 	echo "<h3>University description</h3>----".$university_details['description'].'</br>';
@@ -45,25 +31,73 @@
 	echo "<h3>University univ_web</h3>----".$university_details['univ_web'].'</br>';
 	echo "<h3>University featured_college</h3>----".$university_details['featured_college'].'</br>';
 	echo "<h3>University salient_features</h3>----".$university_details['salient_features'].'</br>';*/
-	echo "<h3>Overview University</h3>----".$university_details['univ_overview'].'</br>';
-	echo "<h3>University Campus Overview</h3>----".$university_details['univ_campus'].'</br>';
-	echo "<h3>University Facilities & Services / Accommodation</h3>----".$university_details['univ_services'].'</br>';
-	echo "<h3>University Faculties</h3>----".$university_details['univ_faculties'].'</br>';
-	echo "<h3>University Research Expertise</h3>----".$university_details['univ_expertise'].'</br>';
-	echo "<h3>University Student Life</h3>----".$university_details['univ_slife'].'</br>';
-	echo "<h3>University For International Students</h3>----".$university_details['univ_interstudents'].'</br>';
-	echo "<h3>University Awarded Alumni</h3>----".$university_details['univ_alumni'].'</br>';
-	echo "<h3>University Departments</h3>----".$university_details['univ_departments'].'</br>';
-	echo "<h3>University Insights</h3>----".$university_details['univ_insights'].'</br>';
+	?>
+	<div>
+		<div class="float_l span8 margin_zero about_depend">
+		<?php
+		echo "<h3>Overview University</h3><div class='course_cont'>".$university_details['univ_overview']."</div>";?>
+		</div>
+		<div class="float_r span5">
+			<div class="about_round">
+			<?php
+				echo "<h3>University Insights:</h3><div class='course_cont'>".$university_details['univ_insights']."</div>";?>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="margin_t">
+	<?php
+	echo "<h3>University Campus Overview</h3><div class='course_cont'>".$university_details['univ_campus']."</div>";?>
+	</div>
+	<div class="margin_t">
+		<div class="float_l grid_2 margin_zero">
+			<?php echo "<h3>University Departments</h3><div class='about_fix'>".$university_details['univ_departments']."</div>";?>
+		</div>
+		<div class="left_about"></div>
+		<div class="float_l grid_2 margin_zero">
+			<?php
+			echo "<h3>University Research Expertise</h3><div class='about_fix'>".$university_details['univ_expertise']."</div>";
+			?>
+		</div>
+		<div class="left_about"></div>
+		<div class="float_r grid_2 margin_zero">
+			<?php echo "<h3>International Students</h3><div class='about_fix'>".$university_details['univ_interstudents']."</div>";?>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="margin_t">
+		<div class="float_l grid_2 margin_zero">
+			<?php 
+			echo "<h3>University Student Life</h3><div class='about_fix'>".$university_details['univ_slife']."</div>";?>
+		</div>
+		<div class="left_about"></div>
+		<div class="float_l grid_2 margin_zero">
+			<?php
+			echo "<h3>University Faculties</h3><div class='about_fix'>".$university_details['univ_faculties']."</div>";
+			?>
+		</div>
+		<div class="left_about"></div>
+		<div class="float_r grid_2 margin_zero">
+			<?php echo "<h3>University Awarded Alumni</h3><div class='about_fix'>".$university_details['univ_alumni']."</div>";?>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<?php
+	
+	
+	
+	//echo "<h3>University Facilities & Services / Accommodation</h3><div class='course_cont'>".$university_details['univ_services']."I tried viewing the demo using ietester for 5.5, 6, and 7. Doesn’t seem to be working. Is the demo set to work in IE?I tried viewing the demo using ietester for 5.5, 6, and 7. Doesn’t seem to be working. Is the demo set to work in IE?I tried viewing the demo using ietester for 5.5, 6, and 7. </div>";
+	
 //}
 ?>
-
+					</div>
 				</div>
-				<div class="float_r span3 margin_t">
+				<div class="float_r span3" style="margin-top: -5px;">
 					<img src="<?php echo $base; ?>images/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 				
+</div>
 </div>
 
 

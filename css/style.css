@@ -355,3 +355,24 @@ border-color: rgba(255, 0, 0, .8) !important;
           box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
   outline: 0 !important;
 }
+
+
+/*======================events_page=====================*/
+.page_event{font-size: 120%;border-left: 1px solid #DDD;padding: 0px 20px;}
+.page_event h4 a{color: #333;}
+.page_event .small{line-height: 21px;font-size:18px;font-weight:bold;color: #333;}
+.page_event_data{width: 420px;float: right;}
+.page_last_border{border-bottom: 1px solid #DDD;padding: 10px 0px;}
+.page_event_height{overflow: hidden;height: 34px;}
+
+
+
+/*==================univ_about_us===================*/
+.about_round{min-height: 150px;overflow: hidden;background: #C4EB6F;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;padding: 10px;-moz-box-shadow: 0 0 5px #888;
+-webkit-box-shadow: 0 0 5px#888;box-shadow: 0 0 5px #888;}
+.left_about{border-right: 1px dotted #ddd;-moz-border-right: 1px dotted #ddd;-webkit-border-right: 1px dotted #AAA;padding-left: 10px;float: left;margin-right: 10px;height: 188px;}
+.about_fix{text-align: justify;
+font-size: 14px;
+line-height: 22px;height:160px;overflow:hidden;}
+.insight_data{list-style:none;}
+.about_depend{min-height: 150px;overflow: hidden;}

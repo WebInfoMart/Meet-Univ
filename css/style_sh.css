@@ -606,7 +606,10 @@ color:#666 !important;
 /*================events page==================================*/
 .dsolution{overflow: hidden;min-height: 85px;max-height:170px;}
 .dsolution.txt_three{font-size:18px;font-weight: bold;color: #333!important;}
-.event_border{border: 1px solid #DDD;line-height: 100px;text-align: center;width: 80px;margin-right: 20px;}.event_border img{width: 80px;height: 64px;vertical-align: middle;}
+.event_border{border-bottom: 1px solid #DDD;padding: 10px;}
+.event_border img{border: 1px solid #DDD;width: 80px;height: 80px;margin-right: 20px;}
+.event_border_style{border: 1px solid #DDD;line-height: 100px;text-align: center;width: 80px;margin-right: 20px;}
+.event_border_style img{width: 80px;height: 64px;vertical-align: middle;}
 /*================single_event================================*/
 .course_cont {
 text-align: justify;
@@ -614,7 +617,7 @@ font-size: 14px;
 line-height: 22px;
 }
 .event_comment{background-color: #DFF0D8;border: 1px solid #DDD;border-radius:4px;padding:10px;}
-.comment_img{width:54px;height:54px;}
+.comment_img{height:54px;}
 .date_heading{font-size:16px;}
 .my_form_controls{margin-left:14px;}
 .comment_img img{height:54px;}
@@ -762,3 +765,9 @@ border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;padding: 7
 .date{color: #08C;;font-size: 324%;font-family: Georgia;}
 .done{width: 135px;}
 .courses_data{width:160px}
+
+
+
+ /*======================univ_single_events_page=====================*/
+.page_univ h2{line-height: 20px;}
+.page_univ img{width: 287px;height: 171px;background: white;border: 1px solid #DDD;padding: 2px;}

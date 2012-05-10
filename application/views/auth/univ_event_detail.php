@@ -28,43 +28,74 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-	<div class="row ">
+	
+
+			<div class="row" style="margin-top:-10px">
 				<div class="float_l span13 margin_l">
-					
-					<div class="">
-						<h2 class="course_txt"><?php echo $event_detail['event_title']; ?></h2>
-							<div class="float_r">
-						<div class="float_l" style="margin-right:20px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
-						<div class="float_l" style="margin-right:20px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-						<div class="float_l">
-							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-						
+					<div>
+					<div class="float_r">
+							<div class="float_l" style="margin-right:20px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
+							<div class="float_l" style="margin-right:-30px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+							<div class="float_l">
+								<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+							</div>
 						</div>
-						</div>
-						<div class="float_l span9 margin_zero">
+						<div class="float_l span4 margin_zero">
+							<div id="single_event_calendar">
 							
-								
-								<div class="date_heading"><div class="span-event-single"><strong>When</strong></div><div class="overrite_date_heading"><?php echo $event_detail['event_date_time']; ?></div></div>
-								</br><div class="span-event-single"><strong>Where</strong></div>
-								<div class="date_heading overrite_date_heading"><?php echo $event_detail['country_name']; 
-								if($event_detail['statename']==''){} else{echo ",".$event_detail['statename'];}
-								if($event_detail['cityname']==''){} else{echo ",".$event_detail['cityname'];}
-								?></div>
-								</br>
-								<div class="float_l">
-								<h3>Details</h3>
-								<!--</div>
-								<div class="float_l">-->
-								<?php echo $event_detail['event_detail']; ?>
-								</div>
+							</div>
 						</div>
-										<div class="clearfix"></div>
-						<div class="margin_t" id="add_more_comment">
-							<div class="event_border">
+						<?php 
+						if($event_detail['event_date_time'] !=0 || $event_detail['event_date_time'] != '')
+						{
+								$array_dates = array();
+								
+								$var_date = '';
+								//echo $event_detail['event_date_time'];
+								$extract_date = explode(" ",$event_detail['event_date_time']);
+								//echo $extract_date[];
+								$month = $extract_date[1];
+								$number_month = date('m', strtotime($month));
+								//echo $extract_date[0];
+								//echo $number_months; //= $number_month-1 ;
+								//echo $extract_date[2];
+								$var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
+								array_push($array_dates,$var);
+						}
+								?>
+						<div class="float_r span9 page_univ">
+							<h2><?php echo $event_detail['event_title']; ?>  <small><?php 
+							if($event_detail['cityname']==''){} else{echo $event_detail['cityname'].', ';}
+							if($event_detail['statename']==''){} else{echo $event_detail['statename'].', ';}
+							if($event_detail['country_name']==''){} else{echo $event_detail['country_name'];} 
+								
+								
+								?></small></h2> 
+							<h3><?php echo $extract_date[1] ?> <?php echo ' '.$extract_date[0].' '.$extract_date[2];?></h3> 
+							<h3>Timings: <?php echo $event_detail['event_time']; ?></h3>
+							<!--<h3>Total Registered Users: <span class="blue">25</span></h3>-->
+							
+							<div class="margin_t1">
+								<div class="course_cont"><?php echo $event_detail['event_detail']; ?></div>
+							</div>
+							<div class="margin_t1">
+								<div class="map_layout">
+									<?php echo $headerjs; ?>
+									<?php echo $headermap; ?>
+									<?php echo $onload; ?>
+									<?php echo $map; ?>
+									<?php echo $sidebar; ?>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="margin_t1">
+						<div class="event_border">
 							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($event_comments); ?>"/>
 								<h3><span id="cnt_comment_show"><?php echo count($event_comments); ?></span> Comments</h3>
 							</div> 
-				<?php if(count($event_comments)>0){
+							<?php if(count($event_comments)>0){
 						foreach($event_comments as $event_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $event_comments_detail['comment_id']; ?>" >
 								<div class="float_l">
@@ -100,9 +131,12 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 				<?php }
-}				?>			
-						</div>
-			<?php if($user_is_logged_in==0){ ?>		
+					}?>			
+						
+					</div>
+					<div class="margin_t margin_b">
+						<div class="events_box">
+							<?php if($user_is_logged_in==0){ ?>		
 				<div class="events_box" style="height: 53px;">
 				<div class="float_r">
 					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
@@ -111,55 +145,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<center><h3>Please Login for comment</h3></center>
 				</div>
 				</div>
-						<!-- <div class="margin_t margin_bs">
-							<div class="events_box">
-								<div id="comment">
-								<div class="float_l"><h3>Your Comment</h3></div>
-								<div class="float_r">
-									Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-								<div class="float_l span9 margin_zero">
-									<form class="form-horizontal" method="post" action="">
-									<input type="hidden" name="commented_on_id" value="<?php echo $event_detail['event_id']; ?>" >
-									<input type="hidden" name="commented_on" value="event" >
-									
-										<div class="control-group">
-											<label class="control-label" for="input01">Name:</label>
-											<div class="controls">
-												<input type="text" value="<?php if($clear_comment==1){ echo ""; } else{ echo set_value('full_name');} ?>" class="<?php echo $class_fullname; ?>" id="input01" name="full_name">
-												<span style="color: red;"> <?php echo form_error('full_name'); ?><?php echo isset($errors['full_name'])?$errors['full_name']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<label class="control-label" for="input01">Email:</label>
-											<div class="controls">
-												<input type="text" value="<?php if($clear_comment==1){ } else{ echo set_value('email');} ?>" class="<?php echo $class_email; ?>" id="input01" name="email">
-												<span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<label class="control-label" for="textarea">Comment:</label>
-											<div class="controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="textarea" name="commented_text" rows="3">
-												<?php if($clear_comment==1){ echo ""; } else{ echo set_value('commented_text');} ?></textarea>
-												<span style="color: red;"> <?php echo form_error('commented_text'); ?><?php echo isset($errors['commented_text'])?$errors['commented_text']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<div class="controls">
-												<input type="submit" class="btn btn-success" name="submit" value="Post Comment">
-											</div>
-										</div>
-									</form>
-								</div>
-								
-								<div class="clearfix"></div>
-							</div>
-						</div> -->
-		<?php } else { ?>	
-			<div class="margin_t margin_bs">
+				<?php } else { ?>
+				<div class="margin_t margin_bs">
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
@@ -171,7 +158,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } ?>
+								<?php } echo $user_detail['fullname']; ?>
 									</div>
 								</div>
 								<div class="float_l span9 margin_zero">
@@ -195,7 +182,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 						</div>
-		<?php } ?>
+				<?php } ?>
+				
+							<div class="clearfix"></div>
+						</div>
 					</div>
 				</div>
 				<div class="float_r span3">
@@ -203,7 +193,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				</div>
 				<div class="clearfix"></div>
 			</div>
-			</div>
+		</div>
+	</div>
+	
 <script>
 
 function post_comment()
@@ -265,3 +257,34 @@ $.ajax({
 }
 }		
 </script>	
+<?php 
+$array_dates=implode(',',$array_dates);
+//echo $event_detail['event_date_time'];
+$show_date = '';
+								//echo $event_detail['event_date_time'];
+								$show_current_date = explode(" ",$event_detail['event_date_time']);
+								//echo $extract_date[];
+								$month = $extract_date[1];
+								//echo $show_current_date[2];
+								$number_month = date('m', strtotime($month));
+								$number_month = $number_month -1;
+			// foreach($array_dates as $dates){
+			// echo $dates;
+			// }?>
+<script type="text/javascript">
+var x = new Array(<?php echo $array_dates; ?>);
+//'12/04/2012';
+			$(document).ready(function () {
+				//$("#example").thingerlyCalendar();
+				$("#single_event_calendar").thingerlyCalendar({
+					'month' : <?php echo $number_month; ?>,
+					'year' : <?php echo $show_current_date[2]; ?>,
+          'transition' : 'slide',
+					'viewTransition' : 'fade',
+          'events' : [
+		  <?php echo $array_dates; ?>
+          ]
+          });
+
+			});
+		</script>

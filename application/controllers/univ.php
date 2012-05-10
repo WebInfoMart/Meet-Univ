@@ -280,6 +280,41 @@ function university($univ_id='',$qid='',$uid='')
 				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
 				}
 				//print_r($data['user_detail']);
+				/* code for Event map-Added by Subh */
+				//print_r($data['event_detail']);
+				$event_title_map = $data['event_detail']['event_title'];
+				$city_event = $data['city_name_university']['cityname'];
+				$state_event = $data['state_name_university']['statename'];
+				$country_event = $data['country_name_university']['country_name'];
+				$event_place_name = $data['event_detail']['event_place'];
+				if($event_place = $data['event_detail']['event_place'] == 0 || $event_place = $data['event_detail']['event_place'] == '')
+				{
+				$event_place = $city_event.','.$state_event.','.$country_event;
+				}
+				else if($data['city_name_university']['cityname'] == 0 || $data['city_name_university']['cityname'] == '') {
+				$event_place = $event_place_name.' '.$state_event.' '.$country_event;
+				}
+				else if($data['state_name_university']['statename'] == 0 || $data['state_name_university']['statename'] ==''){
+				$event_place = $event_place_name.' '.$city_event.' '.$country_event;
+				}
+				else if($data['country_name_university']['country_name'] == 0 || $data['country_name_university']['country_name'] =='')
+				{
+					$event_place = $event_place_name.' '.$city_event.' '.$state_event;
+				}
+				else {
+				$event_place = $event_place_name.' '.$city_event.' '.$state_event.' '.$country_event;
+				}	 		
+					  $this->load->library('GMapevent');
+					  $this->gmapevent->GoogleMapAPI();
+					  $this->gmapevent->setMapType('map');
+					  //$this->gmapuniv->addMarkerByAddress($longitude,$latitude,$university_name,$university_address);
+					  $this->gmapevent->addMarkerByAddress($event_place,$event_title_map, $event_place);
+					  
+						  $data['headerjs'] = $this->gmapevent->getHeaderJS();
+						  $data['headermap'] = $this->gmapevent->getMapJS();
+						  $data['onload'] = $this->gmapevent->printOnLoad();
+						  $data['map'] = $this->gmapevent->printMap();
+						  $data['sidebar'] = $this->gmapevent->printSidebar();
 				$this->load->view('auth/univ_event_detail',$data);
 				
 				}
@@ -774,6 +809,50 @@ function university($univ_id='',$qid='',$uid='')
 		}
 		}
 	}
+	
+	function search_event_by_calendar()
+		{
+			$data = $this->path->all_path();
+			$event_date = $this->input->post('date');
+			$event_month = $this->input->post('month');
+			$event_year = $this->input->post('year');
+			$complete_event_date = $event_date .' '. $event_month .' '. $event_year;
+			$type= $this->input->post('type');
+			
+			if($type == "all")
+			{
+			$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event'
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+			$this->load->view('ajaxviews/all_event_list_by_calendar_ajax',$data);
+			}
+			else if($type == "spot")
+			{
+			$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event',
+			'event_category'=>'spot_admission',
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+				$this->load->view('ajaxviews/spot_event_list_by_calendar_ajax',$data);
+			}
+			else if($type == "fairs")
+			{
+				
+			}
+			else if($type == "counsell")
+			{
+			$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event',
+			'event_category'=>'alumuni',
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+				$this->load->view('ajaxviews/counsell_event_list_by_calendar_ajax',$data);
+			}
+		}
 	
 }		
 	

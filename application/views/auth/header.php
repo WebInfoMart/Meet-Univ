@@ -131,6 +131,7 @@ if ($user) {
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-avia.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-editor.css" />
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/thingerly-calendar.css" />
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script>
@@ -157,6 +158,8 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/tinyeditor.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
 
 <script type="text/javascript">
   $(document).ready(function(){
