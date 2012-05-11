@@ -65,9 +65,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								?>
 						<div class="float_r span9 page_univ">
 							<h2><?php echo $event_detail['event_title']; ?>  <small><?php 
-							if($event_detail['cityname']==''){} else{echo $event_detail['cityname'].', ';}
-							if($event_detail['statename']==''){} else{echo $event_detail['statename'].', ';}
-							if($event_detail['country_name']==''){} else{echo $event_detail['country_name'];} 
+							if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
+							if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
+							if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} 
 								
 								
 								?></small></h2> 

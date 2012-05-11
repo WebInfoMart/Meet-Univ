@@ -1,3 +1,8 @@
+<script>
+ if (typeof FB  != "undefined"){
+        FB.XFBML.parse(document.getElementById('fbLike'));} 
+		twttr.widgets.load();
+</script>
 					<?php foreach($search_event_by_calendar as $event_detail){ ?>
 						<div class="page_last_border">
 							<div class="float_l event_border_style">
