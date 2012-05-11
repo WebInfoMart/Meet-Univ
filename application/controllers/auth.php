@@ -1052,9 +1052,11 @@ class Auth extends CI_Controller
 		if($data['get_university']!=0)
 		{
 		$college_list=$this->load->view('auth/show_all_college_paging',$data);
-
+		$total_univ=$data['get_university']['total_res'];
+		echo $college_list.'!@#$%^&*'.$total_univ;
 		}
 	}
+	
 	
 	function all_colleges_search()
 	{
@@ -1063,9 +1065,13 @@ class Auth extends CI_Controller
 		$data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
 		if($data['get_university']!=0)
 		{
-		$this->load->view('auth/show_all_college_search',$data);
+		$college_list=$this->load->view('auth/show_all_college_search',$data);
+		$total_univ=$data['get_university']['total_res'];
+		$per_page_res=$data['get_university']['per_page_res'];
+		echo $college_list.'!@#$%^&*'.$total_univ.'!@#$%^&*'.$per_page_res;
 		}
 	}
+	
 	function all_colleges($parms='')
 	{
 		$data = $this->path->all_path();
