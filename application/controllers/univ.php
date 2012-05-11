@@ -836,6 +836,7 @@ function university($univ_id='',$qid='',$uid='')
 			'event_category'=>'spot_admission'
 			);
 			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+			//print_r($data['search_event_by_calendar']);
 				$this->load->view('ajaxviews/spot_event_list_by_calendar_ajax',$data);
 			}
 			else if($type == "fairs")
