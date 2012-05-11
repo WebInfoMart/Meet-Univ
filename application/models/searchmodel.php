@@ -549,9 +549,9 @@ function show_all_college_paging($current_url)
 //3.filteration
 				function show_all_college_filteration($current_url)
 				{
-						$univ_data['filter_area_intrest']=array();
-						$univ_data['filter_country']=array();
-						$univ_data['filter_educ_level']=array();
+						$univ_data['filter_area_intrest']=array(0);
+						$univ_data['filter_country']=array(0);
+						$univ_data['filter_educ_level']=array(0);
 						//$current_url=str_replace('-',',',$current_url);
 						$current_url=str_replace('_',' ',$current_url);
 						
@@ -647,6 +647,11 @@ function show_all_college_paging($current_url)
 						$this->db->group_by("university.univ_id"); 
 						$this->db->limit($univ_data['limit_res']);
 						$results = $this->db->get();
+						$univ_data['per_page_res']=$results->num_rows();
+						}
+						if($results->num_rows()<$univ_data['limit_res'])
+						{
+						$univ_data['per_page_res']=$univ_data['total_res'];
 						}
 						
 			if($results->num_rows()>0)
@@ -694,7 +699,8 @@ function show_all_college_paging($current_url)
 						return $univ_data;
 			}
 			else{
-			return 0;
+			$univ_data['university']=array();
+			return $univ_data;
 			}
 						
 					

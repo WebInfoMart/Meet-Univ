@@ -1,5 +1,6 @@
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinysort.js"></script>
 <?php
+$count_array = count($get_university['university']);						
 $this->session->unset_userdata('follow_to_univ');
 //print_r($get_university['university']); ?>
 <div class="container">
@@ -31,19 +32,22 @@ $this->session->unset_userdata('follow_to_univ');
 								<div class="margin_t">
 									<h4>Country</h4>
 									<ul class="col_filter_list">
-							<?php foreach($country as $countries) { 
+							<?php 
+							foreach($country as $countries) { 
 							$sel='';
 							$country_name=str_replace(' ','_',$countries['country_name']);	
 							//$country_name=str_replace(' ','_',$country_name);	
 							?>	
 											<li  href="/<?php echo $country_name; ?>">
 		<?php 
+		
 		if(in_array($countries['country_id'],$get_university['filter_country']))
 		{
 		$sel='checked';
 		}
 		?>									
-		<input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo ucwords($countries['country_name']); ?></li>
+		<input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo ucwords($countries['country_name']);;
+							 ?></li>
 								<?php } ?>					
 									</ul>
 									
@@ -87,6 +91,9 @@ $this->session->unset_userdata('follow_to_univ');
 							</div>
 						</div>
 						<div class="float_r" id="search_results">
+						<?php if(!($count_array)){ ?>
+						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
+						<?php } ?>
 							<div id="pagination" style="margin-top:15px;" class="table_pagination right paging-margin">
    
 						   <?php
@@ -107,9 +114,10 @@ $this->session->unset_userdata('follow_to_univ');
 							</div>
 						<div class="clearfix"></div>
 						<div id="col_paging">
+						
 						<?php
-						$count_array = count($get_university['university']);
 						$map_address='';
+						
 						for($no_university = 0; $no_university<$count_array; $no_university++)
 						{
 						?>
@@ -367,19 +375,19 @@ function ajax(a,pid)
 	$('#current_paging_value').val(a);
  	   $.ajax({
 	   type: "POST",
-	   url: "auth/all_colleges_paging",
+	   url: "<?php echo $base; ?>auth/all_colleges_paging",
 	   async:false,
 	   data: 'offset='+a+'&current_url='+url,
 	   cache: false,
 	   success: function(r)
 	   {
-	 //  r=eval(r);
-	//	alert(r.total_univ_per_page);
-	   $('#col_paging').animate({
+	    res=r.split('!@#$%^&*');
+		$('#col_paging').animate({
 		'opacity':1
 		},1000,function(){
 		});
-		$('#col_paging').html(r);
+		$('#col_paging').html(res[0]);
+		$('#listed_currently_univ').html(res[1]);
 	   }
 	   })
 	   
@@ -426,13 +434,23 @@ function get_college_result_by_ajax()
 	   url: "<?php echo $base; ?>auth/all_colleges_search",
 	   data: 'current_url='+url,
 	   cache: false,
-	   success: function(msg)
+	   success: function(r)
 	   {
-	    $('#search_results').animate({
+	   res=r.split('!@#$%^&*');
+	   $('#search_results').animate({
 		'opacity':1
 		},1000,function(){
 		});
-	 $('#search_results').html(msg);	
+		if(res[2]!='0' && res[1]!='0')
+		{
+		$('#search_results').html(res[0]);	
+		}
+		else
+		{
+		$('#search_results').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
+		}
+	  	$('#listed_currently_univ').html(res[2]);
+	    $('#red_total_univ').html(res[1]);
 	   }
 	   })
 }
