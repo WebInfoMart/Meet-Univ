@@ -833,21 +833,27 @@ function university($univ_id='',$qid='',$uid='')
 			$event_date = array(
 			'event_date_time'=>$complete_event_date,
 			'event_type'=>'univ_event',
-			'event_category'=>'spot_admission',
+			'event_category'=>'spot_admission'
 			);
 			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
 				$this->load->view('ajaxviews/spot_event_list_by_calendar_ajax',$data);
 			}
 			else if($type == "fairs")
 			{
-				
+				$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event',
+			'event_category'=>'fairs'
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+				$this->load->view('ajaxviews/fairs_event_list_by_calendar_ajax',$data);
 			}
 			else if($type == "counsell")
 			{
 			$event_date = array(
 			'event_date_time'=>$complete_event_date,
 			'event_type'=>'univ_event',
-			'event_category'=>'alumuni',
+			'event_category'=>'alumuni'
 			);
 			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
 				$this->load->view('ajaxviews/counsell_event_list_by_calendar_ajax',$data);

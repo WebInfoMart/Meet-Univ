@@ -18,6 +18,8 @@
 								<li class="tabs_events"><a href="<?php echo $base; ?>Counselling_events" data-toggle="tab" id="link4">Counselling</a></li>
 							</ul>
 							<?php 
+								if(!empty($events))
+								{
 								$array_dates = array();
 								foreach($events as $event_detail){ 
 								$var_date = '';
@@ -31,11 +33,13 @@
 								//echo $extract_date[2];
 								$var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
 								array_push($array_dates,$var);
-								}
+								} }
 								?>
 							<div id="loading_img" style="z-index:-1;margin-left: 252px;margin-top: 139px;position:absolute;"> <img src="<?php echo "$base$img_path"; ?>/AjaxLoading.gif"/> </div>
 							<div id="event1" class="">
 								<?php 
+								if(!empty($events))
+								{
 								foreach($events as $event_detail){ 
 								?>
 								<div class="page_last_border">
@@ -70,8 +74,11 @@
 									</div>
 									<div class="clearfix"></div>
 								</div>
-									<?php }  ?> <!--print_r($array_dates);-->
-							</div>
+									<?php } } else { echo "No Recent Events Found ..."; }  ?> <!--print_r($array_dates);-->
+							</div> 
+							<div id="pagination" class="table_pagination right paging-margin">
+            <?php echo $this->pagination->create_links();?>
+            </div>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -81,20 +88,34 @@
 				</div>
 					<div class="clearfix"></div>
 			</div>
+			
 		</div>
 </div>
 </div>
 <?php 
+if(!empty($events))
+{
 $array_dates=implode(',',$array_dates);
+}
+else{
+$array_dates = date("m/d/Y");
+}
 //echo $event_detail['event_date_time'];
 $show_date = '';
 								//echo $event_detail['event_date_time'];
+								if(!empty($events))
+								{
 								$show_current_date = explode(" ",$event_detail['event_date_time']);
 								//echo $extract_date[];
 								$month = $extract_date[1];
 								//echo $show_current_date[2];
 								$number_month = date('m', strtotime($month));
 								$number_month = $number_month -1;
+								}
+								else{
+								$show_current_date[2] = date('Y');
+								$number_month = date('m');
+								}
 			// foreach($array_dates as $dates){
 			// echo $dates;
 			// }?>

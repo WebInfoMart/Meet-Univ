@@ -8,6 +8,8 @@
 								<div id="event_calendar">
 									<?php 
 								$array_dates = array();
+								if(!empty($events))
+								{
 								foreach($events as $event_detail){ 
 								$var_date = '';
 								//echo $event_detail['event_date_time'];
@@ -21,6 +23,7 @@
 								$var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
 								array_push($array_dates,$var);
 								}
+								}
 								?>
 								<div id="loading_img" style="z-index:-1;margin-top: 139px;position:absolute;"> <img src="<?php echo "$base$img_path"; ?>/AjaxLoading.gif"/> </div>
 								</div>
@@ -29,12 +32,15 @@
 						<div class="page_event">
 							<ul id="myTab" class="nav nav-tabs">
 								<li class="tabs_events"><a href="<?php echo $base; ?>events" data-toggle="tab" id="link1">All</a></li>
-								<li class="tabs_events active1"><a href="<?php echo $base; ?>spot_admission_events" data-toggle="tab" id="link2">Spot Admission</a></li>
-								<li class="tabs_events"><a href="<?php echo $base; ?>fairs_events" data-toggle="tab" id="link3">Fairs</a></li>
-								<li class="tabs_events "><a href="<?php echo $base; ?>Counselling_events" data-toggle="tab" id="link4">Counselling</a></li>
+								<li class="tabs_events"><a href="<?php echo $base; ?>spot_admission_events" data-toggle="tab" id="link2">Spot Admission</a></li>
+								<li class="tabs_events active1"><a href="<?php echo $base; ?>fairs_events" data-toggle="tab" id="link3">Fairs</a></li>
+								<li class="tabs_events"><a href="<?php echo $base; ?>Counselling_events" data-toggle="tab" id="link4">Counselling</a></li>
 							</ul>
 							<div id="event1" class="">
-								<?php foreach($events as $event_detail){ ?>
+								<?php 
+								if(!empty($events))
+								{
+								foreach($events as $event_detail){ ?>
 								<div class="page_last_border">
 									<div class="float_l event_border_style">
 										<?php if($event_detail['univ_logo_path']==''){?>
@@ -71,8 +77,11 @@
 									</div>
 									<div class="clearfix"></div>
 								</div>
-								<?php } ?>	
+								<?php } } else { echo "<h3>No Recent fairs Event Found...</h3>"; } ?>	
 							</div>
+							<div id="pagination" class="table_pagination right paging-margin">
+            <?php echo $this->pagination->create_links();?>
+            </div>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -90,15 +99,28 @@
 
 					
 <?php 
+if(!empty($events))
+{
 $array_dates=implode(',',$array_dates);
+}
+else{
+$array_dates = date("m/d/Y");
+}
 //echo $event_detail['event_date_time'];
 $show_date = '';
 								//echo $event_detail['event_date_time'];
+								if(!empty($events))
+								{
 								$show_current_date = explode(" ",$event_detail['event_date_time']);
 								//echo $extract_date[];
 								$month = $extract_date[1];
 								$number_month = date('m', strtotime($month));
 								$number_month = $number_month -1;
+								}
+								else {
+								$show_current_date[2] = date('Y');
+								$number_month = date('m');
+								}
 			// foreach($array_dates as $dates){
 			// echo $dates;
 			// }?>
@@ -148,7 +170,7 @@ var x = new Array(<?php echo $array_dates; ?>);
 					$.ajax({
 						type: "POST",
 						url: searchUrl,
-						data:'date='+x+"&month="+y+"&year="+z+"&type=spot",
+						data:'date='+x+"&month="+y+"&year="+z+"&type=fairs",
 						success: function(response)
 						{
 							//$('#content_search').html(response);
