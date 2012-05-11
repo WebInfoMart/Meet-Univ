@@ -25,7 +25,7 @@
 								}
 								}
 								?>
-								<div id="loading_img" style="z-index:-1;margin-top: 139px;position:absolute;"> <img src="<?php echo "$base$img_path"; ?>/AjaxLoading.gif"/> </div>
+								<div id="loading_img" style="z-index:-1;margin-left: 487px;margin-top: 139px;position:absolute;"> <img src="<?php echo "$base$img_path"; ?>/AjaxLoading.gif"/> </div>
 								</div>
 					</div>
 					<div class="float_r span9">

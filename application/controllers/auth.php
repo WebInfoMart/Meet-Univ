@@ -1208,7 +1208,7 @@ class Auth extends CI_Controller
 		$cat='others_alumuni';
 		$data['events'] = $this->frontmodel->fetch_events($cat,$page);
 		//print_r($data['events']);
-		$this->load->view('auth/counselling_events',$data);
+		$this->load->view('auth/Counselling_events',$data);
 		$this->load->view('auth/footer',$data);
 	}
 	
