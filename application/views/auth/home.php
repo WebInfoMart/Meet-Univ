@@ -581,38 +581,28 @@ $('#type_search').val('fairs');
 
 function serach_results()
 {
+var url='<?php echo $base; ?>colleges/';
 var country;
 var educ_level;
 var area_interest;
-if($('#search_country').val()=='')
+var country=$('#search_country option:selected').text();
+country=country.replace(' ','_');
+var prog= $('#search_program option:selected').text();
+prog=prog.replace(' ','_');
+var educ_level=$('#educ_level').val();
+if(country!='Select_Country')
 {
-country='AllCountry-0';
+url=url+country+'/';
 }
-else
+if(prog!='Select' && prog!='Select_Program')
 {
-var s_country=$('#search_country option:selected').text();
-s_country =  s_country.replace(/[^a-zA-Z 0-9]+/g,'');
-country=s_country+'-'+$('#search_country option:selected').val();
+url=url+prog+'/';
 }
-if($('#search_program').val()=='')
+if(educ_level='')
 {
-area_interest='AllArea-0';
+url=url+educ_level;
 }
-else
-{
-var sarea=$("#search_program option:selected").text();
-sarea =  sarea.replace(/[^a-zA-Z 0-9]+/g,'');
-area_interest=sarea+'-'+$("#search_program option:selected").val();
-}
-if($('#educ_level').val()=='All'|| $('#type_search').val()=='0')
-{
-educ_level='AllLevel-0';
-}
-else
-{
-educ_level=$('#educ_level').val()+'-'+$('#type_search').val();
-}
-window.location='<?php echo $base; ?>colleges/'+country+'/'+educ_level+'/'+area_interest;
+window.location=url;
 }
 function serch_events()
 {

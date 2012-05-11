@@ -526,8 +526,14 @@
                 /**
                  * @link http://code.google.com/p/jwysiwyg/issues/detail?id=11
                  */
-                $(this.editorDoc).keydown(function() { self.saveContent(); })
-                                 .keyup(function() { self.saveContent(); })
+                $(this.editorDoc).keydown(function() { 
+								
+								 self.saveContent();
+								 	 })
+                                 .keyup(function(e) {
+								 self.saveContent();
+														
+								 })
                                  .mousedown(function() { self.saveContent(); });
             }
 
@@ -611,7 +617,7 @@
 		{
                     content = ( content.substr(-4) == '<br>' ) ? content.substr(0, content.length - 4) : content;
 		}
-
+				
                 $(this.original).val(content);
             }
         },
