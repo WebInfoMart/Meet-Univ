@@ -28,7 +28,20 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-	
+<style>
+.tc-header-l
+{
+	display:none !important;
+}
+.tc-header-r
+{
+	display:none !important;
+}
+.tc-header-t
+{
+	display:none !important;
+}
+</style>	
 
 			<div class="row" style="margin-top:-10px">
 				<div class="float_l span13 margin_l">
@@ -71,6 +84,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								
 								
 								?></small></h2> 
+								<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
 							<h3><?php echo $extract_date[1] ?> <?php echo ' '.$extract_date[0].' '.$extract_date[2];?></h3> 
 							<h3>Timings: <?php echo $event_detail['event_time']; ?></h3>
 							<!--<h3>Total Registered Users: <span class="blue">25</span></h3>-->
@@ -78,6 +92,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="margin_t1">
 								<div class="course_cont"><?php echo $event_detail['event_detail']; ?></div>
 							</div>
+							
 							<div class="margin_t1">
 								<div class="map_layout">
 									<?php echo $headerjs; ?>
