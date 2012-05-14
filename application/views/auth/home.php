@@ -297,7 +297,24 @@ $(function () {
 										<h4><?php echo ucwords(substr($events['event_detail'],0,176)); ?></h4>
 									</div>
 									<div class="float_r center">
-										<h3>Spot Admission</h3>
+										<h3>
+										
+										<?php 
+										if($events['event_category'] == 'spot_admission'){
+										echo "Spot Admission"; 
+										}
+										else if($events['event_category'] == 'fairs'){
+										echo "Fairs"; 
+										}
+										else if($events['event_category'] == 'others'){
+										echo "Alumuni"; 
+										}
+										else if($events['event_category'] == 'alumuni'){
+										echo "Alumuni"; 
+										}
+										?>
+										
+										</h3>
 										<button class="btn btn-primary" id="id="<?php echo $events['event_id']; ?>"" href="">Register!</button>
 									</div>
 									<div class="clearfix"></div>
