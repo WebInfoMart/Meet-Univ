@@ -238,13 +238,53 @@ class Searchmodel extends CI_Model
 	
 	function serach_events()
 	{
+		echo $this->input->get('type_search');
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university','events.event_univ_id=university.univ_id');
 		$this->db->join('city','city.city_id=events.event_city_id','left');
 		$this->db->join('state','state.state_id=events.event_state_id','left');
 		$this->db->join('country','country.country_id=events.event_country_id','left');
-		if($this->input->get('event_city')!='')
+		if($this->input->get('type_search') == '0' && $this->input->get('event_city')!='' && $this->input->get('event_month')!='')
+		{
+			$month=$this->input->get('event_month');
+			$mon=substr($month,0,3);
+			$this->db->where('event_city_id',$this->input->get('event_city'));
+			$this->db->like('event_date_time', $mon, 'both'); 
+		}
+		else if($this->input->get('type_search') == '0' && $this->input->get('event_city')!='' && $this->input->get('event_month')=='')
+		{
+			$this->db->where('event_city_id',$this->input->get('event_city'));
+		}
+		else if($this->input->get('type_search') == '0' && $this->input->get('event_city')=='' && $this->input->get('event_month')!='')
+		{
+			$month=$this->input->get('event_month');
+			$mon=substr($month,0,3);
+			$this->db->like('event_date_time', $mon, 'both'); 
+		}
+		else {
+		if($this->input->get('event_city')!='' && $this->input->get('event_month')!='')
+		{
+			$month=$this->input->get('event_month');
+			$mon=substr($month,0,3);
+			$this->db->where('event_category',$this->input->get('type_search'));
+			$this->db->where('event_city_id',$this->input->get('event_city'));
+			$this->db->like('event_date_time', $mon, 'both'); 
+		}
+		else if($this->input->get('event_city')=='' && $this->input->get('event_month')!='')
+		{
+			$month=$this->input->get('event_month');
+			$mon=substr($month,0,3);
+			$this->db->where('event_category',$this->input->get('type_search'));
+			$this->db->like('event_date_time', $mon, 'both'); 
+		}
+		else if($this->input->get('event_city')!='' && $this->input->get('event_month')=='')
+		{
+			$this->db->where('event_category',$this->input->get('type_search'));
+			$this->db->where('event_city_id',$this->input->get('event_city'));
+		}
+		}
+		/* if($this->input->get('event_city')!='')
 		{
 		$this->db->where('event_city_id',$this->input->get('event_city'));
 		}
@@ -257,7 +297,7 @@ class Searchmodel extends CI_Model
 		$month=$this->input->get('event_month');
 		$mon=substr($month,0,3);
 		$this->db->like('event_date_time', $mon, 'both'); 
-		}
+		} */
 		$query=$this->db->get();
 		if($query->num_rows()>0)
 		{

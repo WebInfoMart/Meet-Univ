@@ -125,14 +125,61 @@ class Search extends CI_Controller
 		 {
 			redirect(base_url().'events');
 		 }
-		 else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='0')
+		 /* else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='0')
 		 {
-			redirect(base_url().'events');
+			$type='all';
+			$month = '1';
+			$city = '1';
+			$data['events'] = $this->searchmodel->events($type,$month,$city);
 		 }
-		 else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='')
+		 else if($this->input->get('event_month')!='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='0')
 		 {
-		 
+			
+		 } */
+		 else if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='spot_admission')
+		 {
+			redirect(base_url().'spot_admission_events');
 		 }
+		 /* else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='spot_admission')
+		 {
+			
+		 } */
+		 else if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='fairs')
+		 {
+			redirect(base_url().'fairs_events');
+		 }
+		/*  else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='fairs')
+		 {
+			
+		 } */
+		 else if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='others')
+		 {
+			redirect(base_url().'Counselling_events');
+		 }
+		 /* else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='others')
+		 {
+			
+		 } */
+		 else if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='alumuni')
+		 {
+			redirect(base_url().'Counselling_events');
+		 }
+		 else{
+		 $data['events'] = $this->searchmodel->serach_events();
+		 if($data['events'] != 0)
+		 {
+			$this->load->view('auth/search_event_results',$data);
+		 }
+		 else {
+		 $data['err_msg']='<h2> Sorry....</br><span class="text-align">No result Found.... </span> </h2>';
+		$data['err_div']=1;
+		$this->load->view('auth/NotFoundPage',$data);
+		 }
+		 }
+		 /* else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='alumuni')
+		 {
+			
+		 } */
 		/*else if($this->input->get('event_month')!='' || $this->input->get('event_city')!='')
 		{
 		$data['events']=$this->searchmodel->serach_events();
