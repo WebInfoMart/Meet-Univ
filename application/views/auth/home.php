@@ -273,31 +273,37 @@ $(function () {
 						<span>Events</span>
 					</div>
 					<div class="box all_box">
-						<ul class="box_list">
-						<?php 
+						<ul class="">
+						
+						
+							<?php 
 						if(!empty($featured_events))
 						{
 						foreach($featured_events as $events) { 
 						//if($featured_events != '' || $featured_events != '0') {
+						$date = explode(" ",$events['event_date_time']);
 						?>
 							<li>
 								<div>
-									<div class="float_l box_list_img">
-<img <?php if($events['univ_logo_path']!=''){ ?> src=" <?php echo $base;?>/uploads/univ_gallery/<?php echo $events['univ_logo_path']; ?>" class='events_img' <?php } else { ?> src="<?php echo "$base$img_path" ; ?>/calendar.png <?php } ?>">
+									<div class="float_l span8 margin_zero">
+										<a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a>
+										<h4><?php
+										if(!empty($date))
+										{
+										echo $date[0].' '.$date[1].', '.$date[2].'|';
+										}
+										?> 
+										 <?php echo $events['event_time']; ?></h4>
+										<h4><?php echo ucwords(substr($events['event_detail'],0,176)); ?></h4>
 									</div>
-									<div class="float_l margin_l data_events">
-								<a class="event_home_text_color" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>">	<?php echo ucwords(substr($events['event_detail'],0,176)); ?></a>
-									</div>
-									<div class="float_r">
-									<?php $date=explode(" ",$events['event_date_time']); ?>
-										<h3 class="style_h3"><div><?php echo $date[0]."-".$date[1]; ?></div></h3>
-										<span class="span_text">300 attending</span><br/>
-										<button class="btn_reg" id="<?php echo $events['event_id']; ?>" href="">Register!</button>
+									<div class="float_r center">
+										<h3>Spot Admission</h3>
+										<button class="btn btn-primary" id="id="<?php echo $events['event_id']; ?>"" href="">Register!</button>
 									</div>
 									<div class="clearfix"></div>
 								</div>
 							</li>
-						<?php } } else { echo "There is No Upcoming Events ! ! !"; } ?>	
+						<?php } } else { echo "There is No Upcoming Events ! ! !"; } ?>
 							
 
 							</ul>

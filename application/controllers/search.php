@@ -121,11 +121,19 @@ class Search extends CI_Controller
 		$this->load->view('auth/header',$data);
 		$data['err_div']=0;
 		$data['selected_month']=$this->input->get('event_month');
-		if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='0')
-		{
-		redirect(base_url().'events');
-		}
-		else if($this->input->get('event_month')!='' || $this->input->get('event_city')!='')
+		 if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='0')
+		 {
+			redirect(base_url().'events');
+		 }
+		 else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='0')
+		 {
+			redirect(base_url().'events');
+		 }
+		 else if($this->input->get('event_month')!='' && $this->input->get('event_city')!='' && $this->input->get('type_search')=='')
+		 {
+		 
+		 }
+		/*else if($this->input->get('event_month')!='' || $this->input->get('event_city')!='')
 		{
 		$data['events']=$this->searchmodel->serach_events();
 		if($data['events']!=0)
@@ -144,7 +152,7 @@ class Search extends CI_Controller
 		$data['err_msg']='<h2> Sorry....</br><span class="text-align">No result Found.... </span> </h2>';
 		$data['err_div']=1;
 		$this->load->view('auth/NotFoundPage',$data);
-		}
+		} */
 		
 		$this->load->view('auth/footer',$data);
 	}
