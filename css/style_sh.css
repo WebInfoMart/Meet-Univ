@@ -775,3 +775,51 @@ border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;padding: 7
 {
 	text-align:center;
 }
+
+/*----------------steps1-------------------------*/
+.center{text-align: center;}
+.step_back{margin-top:20px;background: url(../images/events.png);padding: 10px;border: solid 1px #CCC;}
+.handle_img{z-index: 100;position: relative;top: -26px;background-image:url(../images/all_steps.png);background-repeat: no-repeat;}
+.step1_posit{background-position: 107px 1px;height: 39px;}
+.step2_posit{background-position: 107px -37px;height: 41px;top:-30px}
+.step3_posit{background-position: 107px -78px;height: 46px;top: -34px;}
+.form_step_box select[class*="span3"]{width: 220px;}
+.page3_step3{padding: 10px;border: 2px solid #ddd;background:#fff;color: #7B8F9F;border-radius: 7px;}
+.page3_step3_width{width: 294px;}
+.page3_step3_img{background: white;border: 2px solid #EAEAEA;-moz-border: 2px solid #EAEAEA;-webkit-border: 2px solid #EAEAEA;line-height: 110px;text-align: center;
+border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;padding: 0px 2px;margin-right: 20px;}
+.page3_step3_img img{width: 80px;height: 60px;vertical-align:middle;}
+.page3_step3_img #content{height: 105px;overflow: hidden;}
+.step4_posit{background-position: 107px -172px;height: 46px;top: -34px;}
+.page3_step3 a{color: #333;}
+.check{position: absolute;margin-top: -18px!important;}	
+	
+	
+/*-----------*/
+.month{font-size:27px;
+line-height: 26px;
+left: 5px;
+top: 0px;
+font-weight: bold;
+text-align: center;
+display: inline-block;
+width: 15px;
+text-transform: uppercase;}
+.day{
+font-size: 27px;
+font-weight: bold;
+padding: 0px 14px;}
+.year{display: block;
+position: relative;
+font-weight: bold;
+font-size: 24px;
+top: -34px;
+right:-15px;
+-webkit-transform: rotate(-90deg);
+-moz-transform: rotate(-90deg);	}
+.img_logo_events{border: 2px solid #EAEAEA;
+background: white;
+line-height: 59px;}
+.img_logo_events img{vertical-align: middle;width: 60px;height: 60px;margin-right: 20px;}
+.page_data{width:75px;float: left;height: 30px;color: #999;}
+.page_data_item{width:52px;}	

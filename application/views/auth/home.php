@@ -285,7 +285,18 @@ $(function () {
 						?>
 							<li>
 								<div>
-									<div class="float_l span8 margin_zero">
+								<div class="page_data">
+										<div class="float_l page_data_item">
+											<span class="month">May</span> 
+											<span class="day">21</span>
+										</div>
+										<div class="year float_r"><span>2011</span></div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="float_l span1 img_logo_events">
+										<img src="http://localhost/Meet-Univ//uploads/univ_gallery/university_of_Abertay-dundee_logo.jpg"/>
+									</div>
+									<div class="float_l span5">
 										<a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a>
 										<h4><?php
 										if(!empty($date))

@@ -48,20 +48,59 @@ class Leadmodel extends CI_Model
 		else if($insert_type == '2')
 		{
 			$to_insert_id = $this->session->userdata('current_insert_lead_id');
+			print_r($condition);
+			print_r($to_insert_id);
+			$to_insert_id = $this->session->userdata('current_insert_lead_id');
 			$this->db->where('id',$to_insert_id);
 			$this->db->update('lead_data',$condition);
 			if($this->db->affected_rows() > 0)
 			{
-				$set_session_data_to_blank = array(
+				//$data_for_step_three = 
+				$this->db->select('*');
+				$this->db->from('lead_data');
+				$this->db->where('id',$to_insert_id);
+				$query = $this->db->get();
+				//$res = $query->result_array();
+				//print_r($res);
+				/* $set_session_data_to_blank = array(
 				'current_insert_lead_id'=>'',
 				'current_insert_lead_email'=>''
-				);
-				$this->session->set_userdata($set_session_data_to_blank);
-				return 1;
+				); */
+				//$this->session->set_userdata($set_session_data_to_blank);
+				return $query->result_array();
 			}
 			else {
 			return 0;
 			}
 		}
+	}
+	
+	function fetch_college_step_three($country,$area_interest,$next_educ_level)
+	{
+		$to_insert_id = $this->session->userdata('current_insert_lead_id');
+		$cond1 = array(
+		'prog_parent_id'=>$area_interest,
+		'prog_educ_level'=>$next_educ_level
+		);
+		$cond2 = array(
+		'country_id'=>$country
+		);
+		$to_insert_id = $this->session->userdata('current_insert_lead_id');
+		$this->db->select('univ_id');
+		$this->db->from('univ_program');
+		//$this->db->join('univ_program','univ_program.univ_id=university.id');
+		$this->db->where('univ_program',$cond1);
+		//$this->db->where('university',$cond2);
+		$query = $this->db->get();
+		return $query->result_array();
+		/* $this->db->select('*');
+		$this->db->from('university');
+		$this->db->join('univ_program AS prog','university.id=prog.univ_id');
+		$this->db->join('lead_data AS lead','prog.prog_educ_level=lead.prog_educ_level and 
+		prog.prog_parent_id=lead.prog_parent_id');
+		$this->db->where('lead.id=>'.$to_insert_id);
+		$query = $this->db->get();
+		print_r($query); */
+		//exit;
 	}
 }

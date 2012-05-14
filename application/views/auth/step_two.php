@@ -44,38 +44,18 @@ if($error_home_adress != '') { $class_home_adress = 'focused_error_steptwo_large
 if($error_phone != '') { $class_phone = 'focused_error_steptwo_small_textboxes span2'; } else { $class_phone='span2'; }
 if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_error_steptwo_small_textboxes span2'; } else { $class_academic_exam_score='span2'; }
 ?>
-	<div>
+	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
-		<div class="body_container">
-			<div class="row">
-				<div class="span16 margin_zero">
-				
-					<div class="alert alert-message message" data-alert="alert">
-						<a class="close" data-dismiss="alert">&times;</a>
-						<div>
-							<div class="float_l"><h2>Welcome! Let&#8217;s get started by</h2></div>
-							<div class="float_r close_cont"> <span> Don't want our help? </span> Close Tips </div>
-							<div class="clearfix"></div>
-						</div>
-						<nav id="help-tools">
-							<ul>
-								<li class="text_dec">1) Step 1</li>
-								<li class="text_dec"><a href="#">2) Step 2</a></li>
-								<li><a href="#">3) Step 3</a></li>
-								<li><a href="#">4) Step 4</a></li>
-							</ul>
-						</nav>
-					</div>
-				
-					
-					<div>
-						<div class="span9 margin_zero">
-							<div class="step_box">
-							
-									<h1>Your University & College Search</h1>
-										<div class="margin_t">
-											<h2>School Preferences</h2>
+		<div class="body">
+			<div class="row margin_t1">
+				<div class="float_l span13 margin_l">
+					<div class="float_l span10 margin_zero">
+						<div class="step_back round_box ">
+							<div class="center handle_img step2_posit">
+							</div>
+							<h2>Your University & College Search</h2>
+							<div class="margin_t">
 											<form class="form-horizontal form_step_box" action="find_college" method="post">
 											
 												<div class="control-group">
@@ -104,7 +84,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 														<span style="color:red"> <?php echo form_error('interest_study_country'); ?><?php echo isset($errors['interest_study_country'])?$errors['interest_study_country']:''; ?> </span>
 													</div>
 												</div>
-												<div class="control-group">
+												<!--<div class="control-group">
 													<label class="control-label">Your Name</label>
 													<div class="controls docs-input-sizes">
 													<select class="grid_0 margin_zero" name="title">
@@ -118,8 +98,8 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 													<span style="color:red"> <?php echo form_error('last_name'); ?><?php echo isset($errors['last_name'])?$errors['last_name']:''; ?> </span>
 													</div>
 													
-												</div>
-												<div class="control-group">
+												</div>-->
+												<!--<div class="control-group">
 													<label class="control-label">Your Birth Date</label>
 													<div class="controls docs-input-sizes">
 														<select class="grid_0 margin_zero" name="dob_month">
@@ -142,7 +122,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 													<span style="color:red"> <?php echo form_error('dob_year'); ?><?php echo isset($errors['dob_year'])?$errors['dob_year']:''; ?> </span>
 													</div>
 													
-												</div>
+												</div>-->
 												<!--<div class="control-group">
 													<label class="control-label">Country</label>
 													<div class="controls docs-input-sizes">
@@ -447,7 +427,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 													</div>
 													
 												</div>
-												<div class="control-group">
+												<!--<div class="control-group">
 													<label class="control-label">Phone Number</label>
 													<div class="controls docs-input-sizes">
 														<input class="<?php echo $class_phone; ?>" type="text" name="phone">
@@ -459,7 +439,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 														<span style="color:red"> <?php echo form_error('phone'); ?><?php echo isset($errors['phone'])?$errors['phone']:''; ?> </span>
 													</div>
 													
-												</div>
+												</div>-->
 												<div class="control-group">
 													<label class="control-label">Area of Interest</label>
 													<div class="controls docs-input-sizes">
@@ -593,15 +573,17 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												</div>
 											</form>
 										</div>
-									<div class="clearfix"></div>
-							</div>
 						</div>
-						<div class="span3 float_r">
-							<img src="images/banner_img.png">
-						</div>
-					<div class="clearfix"></div>
 					</div>
+					<div class="float_r span3">
+						<img src="images/banner_img.png">
+					</div>
+					<div class="clearfix"></div>
 				</div>
+				<div class="float_r span3">
+					<img src="images/banner_img.png">
+				</div>
+				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
