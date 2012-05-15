@@ -24,6 +24,7 @@ class Leadmodel extends CI_Model
 	}
 	public function insert_data_lead_data($condition,$insert_type)
 	{
+		$to_insert_id = $this->session->userdata('current_insert_lead_id');
 		if($insert_type == '0')
 		{
 			$this->db->insert('lead_data',$condition);
@@ -34,7 +35,7 @@ class Leadmodel extends CI_Model
 		}
 		else if($insert_type == '1')
 		{
-			$to_insert_id = $this->session->userdata('current_insert_lead_id');
+		//$to_insert_id = $this->session->userdata('current_insert_lead_id');
 			if($to_insert_id!='')
 			{
 			$this->db->where('id',$to_insert_id);
@@ -43,14 +44,21 @@ class Leadmodel extends CI_Model
 			else{
 			$this->db->insert('lead_data',$condition);
 			}
-			return $this->db->affected_rows()? 1 : 0 ;
+			//return $this->db->affected_rows()? 1 : 0 ;
+			if($this->db->affected_rows() > 0)
+			{
+				return $this->db->insert_id();
+			}
+			else {
+			return 0;
+			}
 		}
 		else if($insert_type == '2')
 		{
-			$to_insert_id = $this->session->userdata('current_insert_lead_id');
+			/* $to_insert_id = $this->session->userdata('current_insert_lead_id');
 			print_r($condition);
 			print_r($to_insert_id);
-			$to_insert_id = $this->session->userdata('current_insert_lead_id');
+			$to_insert_id = $this->session->userdata('current_insert_lead_id'); */
 			$this->db->where('id',$to_insert_id);
 			$this->db->update('lead_data',$condition);
 			if($this->db->affected_rows() > 0)
@@ -67,7 +75,7 @@ class Leadmodel extends CI_Model
 				'current_insert_lead_email'=>''
 				); */
 				//$this->session->set_userdata($set_session_data_to_blank);
-				return $query->result_array();
+				return $query->row_array();
 			}
 			else {
 			return 0;
@@ -82,25 +90,45 @@ class Leadmodel extends CI_Model
 		'prog_parent_id'=>$area_interest,
 		'prog_educ_level'=>$next_educ_level
 		);
-		$cond2 = array(
+		/* $cond2 = array(
 		'country_id'=>$country
-		);
-		$to_insert_id = $this->session->userdata('current_insert_lead_id');
+		); */
+		//$to_insert_id = $this->session->userdata('current_insert_lead_id');
 		$this->db->select('univ_id');
 		$this->db->from('univ_program');
 		//$this->db->join('univ_program','univ_program.univ_id=university.id');
-		$this->db->where('univ_program',$cond1);
+		$this->db->where($cond1);
+		$this->db->distinct();
 		//$this->db->where('university',$cond2);
 		$query = $this->db->get();
-		return $query->result_array();
-		/* $this->db->select('*');
+		foreach($query->result_array() as $univ)
+		{
+			$university_id[] = $univ['univ_id'];
+		}
+		$this->db->select('*');
 		$this->db->from('university');
-		$this->db->join('univ_program AS prog','university.id=prog.univ_id');
-		$this->db->join('lead_data AS lead','prog.prog_educ_level=lead.prog_educ_level and 
-		prog.prog_parent_id=lead.prog_parent_id');
-		$this->db->where('lead.id=>'.$to_insert_id);
+		$this->db->where('country_id',$country);
+		$this->db->where_in('univ_id',$university_id);
 		$query = $this->db->get();
-		print_r($query); */
-		//exit;
+		return $query->result_array();
+		
+		
+	}
+	
+	function insert_step_three($insert_val)
+	{
+		$cond_clause = array(
+		'applied_univ_id'=>$insert_val
+		);
+		$to_insert_id = $this->session->userdata('current_insert_lead_id');
+		$this->db->where('id',$to_insert_id);
+		$this->db->update('lead_data',$cond_clause);
+		if($this->db->affected_rows() > 0)
+		{
+			return 1;
+		}
+		else {
+		return 0;
+		}
 	}
 }

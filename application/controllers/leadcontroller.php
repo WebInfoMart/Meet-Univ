@@ -20,7 +20,12 @@ class Leadcontroller extends CI_Controller
 	// Functions for steps in of Lead Data
 	function find_college($request_univ_id='',$event_id='')
 	{
-		echo $this->session->userdata('current_insert_lead_id');
+		 /* $set_session_data_to_blank = array(
+				'current_insert_lead_id'=>'',
+				'current_insert_lead_email'=>''
+				); 
+				$this->session->set_userdata($set_session_data_to_blank);  */
+		//echo $this->session->userdata('current_insert_lead_id');
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$id = $request_univ_id;
@@ -87,10 +92,11 @@ class Leadcontroller extends CI_Controller
 			}
 			$insert_type = '1';
 			$data['insert_step_one_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
-			print_r($data['insert_step_one_data']);
+			//print_r($data['insert_step_one_data']);
 			//$this->session->set_userdata($data_stepone);
-			if($data['insert_step_one_data'] == '1')
+			if($data['insert_step_one_data'] != 0)
 			{
+			$this->session->set_userdata('current_insert_lead_id', $this->db->insert_id());
 			$this->load->view('auth/step_two',$data);
 			}
 			else{
@@ -143,18 +149,18 @@ class Leadcontroller extends CI_Controller
 			 //$this->session->set_userdata($data_steptwo);
 			 $insert_type = '2';
 			 $data['insert_step_two_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
-			 print_r($data['insert_step_two_data']);
-			 if($data['insert_step_two_data'] != '')
+			 //print_r($data['insert_step_two_data']);
+			 if($data['insert_step_two_data'] != 0)
 			 {
 				$country = $data['insert_step_two_data']['studying_country_id'];
 				$area_interest = $data['insert_step_two_data']['prog_parent_id'];
 				$next_educ_level = $data['insert_step_two_data']['next_educ_level'];
 				$data['selected_college_step_three'] = $this->leadmodel->fetch_college_step_three($country,$area_interest,$next_educ_level);
-				print_r($data['selected_college_step_three']);
-				$this->load->view('auth/step_three');
+				//print_r($data['selected_college_step_three']);
+				$this->load->view('auth/step_three',$data);
 			 }
 			 else{
-			 $this->load->view('auth/step_two');
+			 $this->load->view('auth/step_one');
 			 }
 			 
 			 }
@@ -167,6 +173,31 @@ class Leadcontroller extends CI_Controller
 					$this->load->view('auth/step_two',$data);
 				}
 			 
+		 }
+		 else if($this->input->post('submit_step_three_data'))
+		 {
+			$university_ids = $this->input->post('select_id');
+			$arr = array();
+			foreach($university_ids as $ids)
+			{
+				array_push($arr,$ids);
+				
+			}
+			$insert_val = implode(",",$arr);
+			$data['submitting_step_three'] = $this->leadmodel->insert_step_three($insert_val);
+			if($data['submitting_step_three'] != 0)
+			{
+				$set_session_data_to_blank = array(
+				'current_insert_lead_id'=>'',
+				'current_insert_lead_email'=>''
+				); 
+				$this->session->set_userdata($set_session_data_to_blank);
+				$this->load->view('auth/step_four');
+			}
+			else {
+			$redirect_url = $base.'find_college';
+			redirect($redirect_url);
+			}
 		 }
 		else{
 			$this->load->view('auth/step_one',$data);

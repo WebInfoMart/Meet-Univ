@@ -10,75 +10,44 @@
 							</div>
 							<h2>Search & Apply to 100+ Colleges & Universities</h2>
 							<div>
+							<form action="" method="POST" name="frmSelectCoolege">
+								<?php
+								foreach($selected_college_step_three as $select_univ)
+								{
+								?>
 								<div class="page3_step3_width float_l margin_t">
 									<div class="page3_step3">
-									<input type="checkbox" id="optionsCheckbox2" class="check" value="option1">
-										<h3>The University of Aberdeen- UK</h3>
+									<input type="checkbox" id="<?php echo $select_univ['univ_id']; ?>" class="check" name="select_id[]" value="<?php echo $select_univ['univ_id']; ?>">
+										<h3><?php echo $select_univ['univ_name']; ?></h3>
 										<div>
 											<div class="float_l page3_step3_img">
-												<img title="The University of Aberdeen" src="http://workforcetrack.in/uploads/univ_gallery/250px-Aberdeen_university_logo.gif">
+												<?php
+												if($select_univ['univ_logo_path'] != '')
+												{
+													echo "<img class='univ_page_logo_nw' src='".base_url()."uploads/univ_gallery/".$select_univ['univ_logo_path']."'/>"; 
+												}
+												else
+												{
+													echo "<img class='univ_page_logo_nw' src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
+												}
+												?>
 											</div>
 											<div id="content">
-												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+												<?php echo substr($select_univ['about_us'],0,100).'....'; ?>
 											</div>
-											<a href="" class="float_r">View Courses</a>
+											<a href="<?php echo "$base"; ?>univ_programs/<?php echo $select_univ['univ_id']; ?>/program" class="float_r">View Courses</a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
 								</div>
-								<div class="page3_step3_width float_r margin_t">
-									<div class="page3_step3">
-										<input type="checkbox" id="optionsCheckbox2" class="check" value="option1">
-										<h3>The University of Aberdeen- UK</h3>
-										<div>
-											<div class="float_l page3_step3_img">
-												<img title="The University of Aberdeen" src="http://workforcetrack.in/uploads/univ_gallery/250px-Aberdeen_university_logo.gif">
-											</div>
-											<div id="content">
-												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-											</div>
-											<a href="" class="float_r">View Courses</a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
+								<?php } ?>
+								<div class="controls">
+									<input type="submit" class="btn btn-success" name="submit_step_three_data" value="Continue">
 								</div>
+								</form>
 								<div class="clearfix"></div>
 							</div>
-							<div>
-								<div class="page3_step3_width float_l margin_t">
-									<div class="page3_step3">
-										<input type="checkbox" id="optionsCheckbox2" class="check" value="option1">
-										<h3>The University of Aberdeen- UK</h3>
-										<div>
-											<div class="float_l page3_step3_img">
-												<img title="The University of Aberdeen" src="http://workforcetrack.in/uploads/univ_gallery/250px-Aberdeen_university_logo.gif">
-											</div>
-											<div id="content">
-												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-											</div>
-											<a href="" class="float_r">View Courses</a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-								<div class="page3_step3_width float_r margin_t">
-									<div class="page3_step3">
-										<input type="checkbox" id="optionsCheckbox2" class="check" value="option1">
-										<h3>The University of Aberdeen- UK</h3>
-										<div>
-											<div class="float_l page3_step3_img">
-												<img title="The University of Aberdeen" src="http://workforcetrack.in/uploads/univ_gallery/250px-Aberdeen_university_logo.gif">
-											</div>
-											<div id="content">
-												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-											</div>
-											<a href="" class="float_r">View Courses</a>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							</div>
+							
 						</div>
 					</div>
 					<div class="float_r span3">
