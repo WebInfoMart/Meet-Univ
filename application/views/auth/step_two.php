@@ -56,7 +56,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 							</div>
 							<h2>Your University & College Search</h2>
 							<div class="margin_t">
-											<form class="form-horizontal form_step_box" action="find_college" method="post">
+											<form class="form-horizontal form_step_box" action="" method="post">
 											
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">When do you want to begin?</label>
@@ -576,12 +576,12 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 						</div>
 					</div>
 					<div class="float_r span3">
-						<img src="images/banner_img.png">
+						<img src="<?php echo "$base$img_path" ?>/banner_img.png">
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="float_r span3">
-					<img src="images/banner_img.png">
+					<img src="<?php echo "$base$img_path" ?>/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 			</div>

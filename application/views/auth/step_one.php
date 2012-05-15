@@ -138,12 +138,12 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 						</div>
 					</div>
 					<div class="float_r span3">
-						<img src="images/banner_img.png">
+						<img src="<?php echo "$base$img_path" ?>/banner_img.png">
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="float_r span3">
-					<img src="images/banner_img.png">
+					<img src="<?php echo "$base$img_path" ?>/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 			</div>

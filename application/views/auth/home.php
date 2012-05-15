@@ -268,11 +268,11 @@ $(function () {
 		</div>
 		<div class="margin_t">
 			<div class="row">
-				<div class="grid_6 margin_l home_artical_box">
-					<div class="home_artical_heading">
+				<div class="grid_6 margin_l">
+					<div class="home_artical_box">
 						<span>Events</span>
 					</div>
-					<div class="box all_box">
+					<div class="box all_box event_rad">
 						<ul class="">
 						
 						
@@ -283,18 +283,19 @@ $(function () {
 						//if($featured_events != '' || $featured_events != '0') {
 						$date = explode(" ",$events['event_date_time']);
 						?>
+						<form action="find_college/<?php echo $events['univ_id'].'/'.$events['event_id']; ?>" method="post">
 							<li>
 								<div>
 								<div class="page_data">
 										<div class="float_l page_data_item">
-											<span class="month">May</span> 
-											<span class="day">21</span>
+											<span class="month"><?php echo $date[1]; ?></span> 
+											<span class="day"><?php echo $date[0]; ?></span>
 										</div>
-										<div class="year float_r"><span>2011</span></div>
+										<div class="year float_r"><span><?php echo $date[2]; ?></span></div>
 										<div class="clearfix"></div>
 									</div>
 									<div class="float_l span1 img_logo_events">
-										<img src="http://localhost/Meet-Univ//uploads/univ_gallery/university_of_Abertay-dundee_logo.jpg"/>
+										<img <?php if($events['univ_logo_path']!=''){ ?> src=" <?php echo $base;?>/uploads/univ_gallery/<?php echo $events['univ_logo_path']; ?>" class='events_img' <?php } else { ?> src="<?php echo "$base$img_path" ; ?>/calendar.png <?php } ?>">
 									</div>
 									<div class="float_l span5">
 										<a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a>
@@ -326,13 +327,15 @@ $(function () {
 										?>
 										
 										</h3>
-										<button class="btn btn-primary" id="id="<?php echo $events['event_id']; ?>"" href="">Register!</button>
+										
+										<button class="btn btn-primary" id="<?php echo $events['event_id']; ?>" href="">Register!</button>
+										
 									</div>
 									<div class="clearfix"></div>
 								</div>
 							</li>
 						<?php } } else { echo "There is No Upcoming Events ! ! !"; } ?>
-							
+							</form>
 
 							</ul>
 					</div>

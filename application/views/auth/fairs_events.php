@@ -70,7 +70,11 @@
 											</div>
 										<div>
 											<div class="float_l span5 margin_zero page_event_height"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></div>
-											<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
+											<div class="float_r margin_t1">
+											<form action="find_college/<?php echo $event_detail['univ_id'].'/'.$event_detail['event_id']; ?>" method="post">
+											<button class="btn btn-success" href="#">Register</button>
+											</form>
+											</div>
 											<div class="clearfix"></div>
 										</div>
 										<div class="clearfix"></div>

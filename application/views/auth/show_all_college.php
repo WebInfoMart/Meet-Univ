@@ -254,49 +254,7 @@ $this->session->unset_userdata('follow_to_univ');
 					</div>
 				</div>
 				<div class="span4 float_r">
-					<div class="college_form">
-						<div>
-						<h2 class="text_align">I AM INTERESTED</h2>
-							<span>Interested in studying at Manipal University, Dubai Campus (RCPL)</span>
-							<div class="fcnt_signBtn"></div>or Fill details for the institute to counsel you
-							<div class="margin_t text_align"> 
-								<form class="form-horizontal">
-									<fieldset>
-										<div class="control-group">
-											<input type="text" class="input-medium" placeholder="Name">
-										</div>
-										<div class="control-group">
-											<select name="apply_course_interest" style="width:162px;" id="apply_course_interest" class="grid_1 box_select ">
-												<option>Department of Engineering</option>
-												<option>Department of Information Technology</option>
-												<option>Department of Management</option>
-												<option>Department of Bio Technology</option>
-											</select>
-										</div>
-										<div class="control-group">
-											<input type="text" class="input-medium" placeholder="Email Id">
-										</div>
-										<div class="control-group">
-											<input type="text" class="input-medium" placeholder="Mobile Number">
-										</div>
-										<div class="control-group">
-												<p class="help-block margin_alpha margin_b">Type in the characters you see below</p>
-											<div class="float_l">
-												<img src="<?php echo "$base$img_path"; ?>/Captcha.jpg">
-											</div>
-											<div class="float_r margin_t">
-												<input type="text" class="input_small">
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="control-group">
-											<button class="btn btn-primary" href="#">Apply Now!</button>
-										</div>
-									</fieldset>
-								</form>
-							</div>
-						</div>
-					</div>
+					<img src="<?php echo "$base$img_path" ?>/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 			</div>

@@ -35,7 +35,11 @@
 								
 								</div>
 							</div>
-							<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
+							<div class="float_r margin_t1">
+							<form action="find_college/<?php echo $event_detail['univ_id'].'/'.$event_detail['event_id']; ?>" method="post">
+							<button class="btn btn-success" href="#">Register</button>
+							</form>
+							</div>
 							<div class="clearfix"></div>
 						</div>
 					<?php } ?>	

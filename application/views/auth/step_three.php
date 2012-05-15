@@ -51,12 +51,12 @@
 						</div>
 					</div>
 					<div class="float_r span3">
-						<img src="http://localhost/www/Meet-Univ/images/banner_img.png">
+						<img src="<?php echo "$base$img_path" ?>/banner_img.png">
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="float_r span3">
-					<img src="http://localhost/www/Meet-Univ/images/banner_img.png">
+					<img src="<?php echo "$base$img_path" ?>/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 			</div>
