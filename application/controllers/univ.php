@@ -99,9 +99,10 @@ function university($univ_id='',$qid='',$uid='')
 			$this->session->set_userdata('current_insert_lead_email',$this->input->post('apply_email'));
 			$insert_type = '0';
 			$data['fb_sidebar_apply_form'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
-			if($data['fb_sidebar_apply_form'] != '')
+			if($data['fb_sidebar_apply_form'] != 0)
 			{
-			$this->session->set_userdata('current_insert_lead_id', $this->db->insert_id());
+			$id_for_session = $data['fb_sidebar_apply_form'];
+			$this->session->set_userdata('current_insert_lead_id', $id_for_session);
 			//print_r($this->session->userdata('current_insert_lead_id'));
 			}
 			redirect('find_college');

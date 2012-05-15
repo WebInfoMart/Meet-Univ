@@ -22,7 +22,7 @@ class Leadmodel extends CI_Model
 		//$this->country	= $ci->config->item('db_table_prefix', 'tank_auth').$this->country;
 		
 	}
-	public function insert_data_lead_data($condition,$insert_type)
+	function insert_data_lead_data($condition,$insert_type)
 	{
 		$to_insert_id = $this->session->userdata('current_insert_lead_id');
 		if($insert_type == '0')
@@ -32,19 +32,28 @@ class Leadmodel extends CI_Model
 			{
 				return $this->db->insert_id();
 			}
+			else {
+			return 0;
+			}
 		}
 		else if($insert_type == '1')
 		{
-		//$to_insert_id = $this->session->userdata('current_insert_lead_id');
-			if($to_insert_id!='')
+		$to_insert_id = $this->session->userdata('current_insert_lead_id');
+			if($to_insert_id!='' || $to_insert_id!=0)
 			{
-			$this->db->where('id',$to_insert_id);
+			$condition_id = trim($to_insert_id);
+			$this->db->where('id',$condition_id);
 			$this->db->update('lead_data',$condition);
+			if($this->db->affected_rows() > 0)
+			{
+				return 1;
+			}
+			else {
+			return 0;
+			}
 			}
 			else{
 			$this->db->insert('lead_data',$condition);
-			}
-			//return $this->db->affected_rows()? 1 : 0 ;
 			if($this->db->affected_rows() > 0)
 			{
 				return $this->db->insert_id();
@@ -52,6 +61,9 @@ class Leadmodel extends CI_Model
 			else {
 			return 0;
 			}
+			}
+			//return $this->db->affected_rows()? 1 : 0 ;
+			
 		}
 		else if($insert_type == '2')
 		{

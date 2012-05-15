@@ -20,11 +20,12 @@ class Leadcontroller extends CI_Controller
 	// Functions for steps in of Lead Data
 	function find_college($request_univ_id='',$event_id='')
 	{
+		//$x = $this->session->userdata('current_insert_lead_id');
 		 /* $set_session_data_to_blank = array(
 				'current_insert_lead_id'=>'',
 				'current_insert_lead_email'=>''
 				); 
-				$this->session->set_userdata($set_session_data_to_blank);  */
+				$this->session->set_userdata($set_session_data_to_blank); */
 		//echo $this->session->userdata('current_insert_lead_id');
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
