@@ -58,10 +58,8 @@
 				<h4><?php echo $event_detail['cityname'].",".$event_detail['statename'].",".$event_detail['country_name']?></a></h4>
 				<div>
 									<div class="float_l">
-										
-										<span class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"></span>
-										
-									</div>
+													<span class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"><?php echo $event_detail['event_date_time']; ?></span>
+												</div>
 									<div class="float_r">
 	<div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 									

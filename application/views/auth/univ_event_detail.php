@@ -28,20 +28,7 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-<style>
-.tc-header-l
-{
-	display:none !important;
-}
-.tc-header-r
-{
-	display:none !important;
-}
-.tc-header-t
-{
-	display:none !important;
-}
-</style>	
+	
 
 			<div class="row" style="margin-top:-10px">
 				<div class="float_l span13 margin_l">

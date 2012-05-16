@@ -14,7 +14,7 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id=university.univ_id');
-		$this->db->where(array('featured_home_event' =>'1'));
+		$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		$this->db->limit(5);
 		$query = $this->db->get();
 		if($query->num_rows>0)
@@ -63,24 +63,34 @@ class Frontmodel extends CI_Model
 	
 	function fetch_events($cat,$page)
 	{
-	//echo $page;
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$event_arr['event_type']='univ_event';
 		if($cat=='spot_admission' || $cat=='fairs')
 		{
-		$event_arr['event_category']=$cat;
-		$this->db->where($event_arr);
+		//$event_arr['event_category']=$cat;
+		$this->db->where(array('event_category'=>$cat,'event_type'=>'univ_event',
+		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+		));
 		}
 		else if($cat=='others_alumuni')
 		{
-		$event_arr['event_category']='others';
-		$this->db->where(array('event_category'=>'others','event_type'=>'univ_event'));
-		$this->db->or_where(array('event_category'=>'alumuni'));
+		//$event_arr['event_category']='others';
+		$this->db->where(array('event_type'=>'univ_event',
+		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		$category=array('spot_admission','fairs');
+		$this->db->where_not_in('event_category',$category);
+			
+		//$this->db->or_where(array('event_category'=>'others','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		}
+		else
+		{
+		$this->db->where(array('event_type'=>'univ_event',
+		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+		));
 		}
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
@@ -95,19 +105,27 @@ class Frontmodel extends CI_Model
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$event_arr['event_type']='univ_event';
 		if($cat=='spot_admission' || $cat=='fairs')
 		{
-		$event_arr['event_category']=$cat;
-		$this->db->where($event_arr);
+		$this->db->where(array('event_category'=>$cat,'event_type'=>'univ_event',
+		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+		));
 		}
 		else if($cat=='others_alumuni')
 		{
-		$event_arr['event_category']='others';
-		$this->db->where(array('event_category'=>'others','event_type'=>'univ_event'));
-		$this->db->or_where(array('event_category'=>'alumuni'));
+			$this->db->where(array('event_type'=>'univ_event',
+			'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+			));
+			$category=array('spot_admission','fairs');
+			$this->db->where_not_in('event_category',$category);
+			//$this->db->or_where(array('event_category'=>'others','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		}
-		
+		else
+		{
+		$this->db->where(array('event_type'=>'univ_event',
+		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+		));
+		}
 		$this->db->order_by("event_created_time", "desc"); 
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();

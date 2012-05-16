@@ -141,7 +141,7 @@ $(function () {
 									<a class="btn" href="#">Undergraduate</a>
 									<a class="btn" href="#">Foundation</a>-->
 									<button type="button" id="allcollege" class="btn active">All</button>
-									<button type="button" id="pg" class="btn">Postgraduate</button>
+									<button type="button" id="pg" class="btn">PostGraduate</button>
 									<button type="button" id="ug" class="btn">UnderGraduate</button>
 									<button type="button" id="found" class="btn">Foundation</button>
 								</div>
@@ -593,7 +593,7 @@ fetch_programs(2);
 
 $('#pg').click(function(){
 $('#type_search').val(4);
-$('#educ_level').val('Postgraduate');
+$('#educ_level').val('PostGraduate');
 
 fetch_programs(4);
 
@@ -601,7 +601,7 @@ fetch_programs(4);
 
 $('#ug').click(function(){
 $('#type_search').val(3);
-$('#educ_level').val('Undergraduate');
+$('#educ_level').val('UnderGraduate');
 fetch_programs(3);
 });
 
@@ -625,7 +625,7 @@ var area_interest;
 var country=$('#search_country option:selected').text();
 country=country.replace(' ','_');
 var prog= $('#search_program option:selected').text();
-prog=prog.replace(' ','_');
+prog=prog.replace(/ /g,'_');
 var educ_level=$('#educ_level').val();
 if(country!='Select_Country')
 {
@@ -635,7 +635,7 @@ if(prog!='Select' && prog!='Select_Program')
 {
 url=url+prog+'/';
 }
-if(educ_level='')
+if(educ_level!='All')
 {
 url=url+educ_level;
 }
