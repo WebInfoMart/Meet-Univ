@@ -28,6 +28,17 @@ class Leadcontroller extends CI_Controller
 		$data['area_interest'] = $this->users->fetch_area_interest();
 		$data['educ_level'] = $this->users->fetch_educ_level();
 		$data['show_country_having_univ'] = $this->frontmodel->fetch_search_country_having_univ();
+		$level_steps = $this->session->userdata('level_steps');
+		
+		$country = $this->session->userdata('country');
+		$area_interest = $this->session->userdata('area_interest');
+		$next_educ_level = $this->session->userdata('next_educ_level');
+		if($level_steps!= '' && $country!='' && $area_interest!='' && $next_educ_level!='')
+		{
+		$data['selected_college_step_three'] = $this->leadmodel->fetch_college_step_three($country,$area_interest,$next_educ_level);
+		$college_for_apply = $this->session->userdata('apply_college');
+		$data['selected_university_name_by_step'] = $this->leadmodel->get_university_title_by_id($college_for_apply);
+		}
 		if($this->input->post('process_step_one'))
 		{
 		$this->form_validation->set_rules('first_name','First Name','trim|xss_clean|required');
@@ -79,8 +90,7 @@ class Leadcontroller extends CI_Controller
 			'lastname'=> $this->input->post('last_name'),
 			'dob'=> $this->input->post('dob_year').'-'.$this->input->post('dob_month').'-'.$this->input->post('dob_day'),
 			'phone_type1'=> $this->input->post('phone_type'),
-			'phone_no1'=> $this->input->post('phone'),
-			'applied_univ_id'=>$id
+			'phone_no1'=> $this->input->post('phone')
 			);
 			//print_r($condition);echo "h1";
 			}
@@ -91,11 +101,15 @@ class Leadcontroller extends CI_Controller
 			if($data['insert_step_one_data'] != 0)
 			{
 			$this->session->set_userdata('current_insert_lead_id', $data['insert_step_one_data']);
+			$id_for_session = array(
+			'level_steps'=>'2'
+			);
+			$this->session->set_userdata($id_for_session);
+			}
 			$this->load->view('auth/step_two',$data);
-			}
-			else{
+			/* else{
 			$this->load->view('auth/step_one',$data);
-			}
+			} */
 		}
 		else{
 					$errors = $this->tank_auth->get_error_message();
@@ -143,19 +157,31 @@ class Leadcontroller extends CI_Controller
 			 //$this->session->set_userdata($data_steptwo);
 			 $insert_type = '2';
 			 $data['insert_step_two_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
+			 $college_for_apply = $this->session->userdata('apply_college');
+			 $data['selected_university_name_by_step'] = $this->leadmodel->get_university_title_by_id($college_for_apply);
 			 //print_r($data['insert_step_two_data']);
-			 if($data['insert_step_two_data'] != 0)
-			 {
+			 //if($data['insert_step_two_data'] != 0)
+			 //{
 				$country = $data['insert_step_two_data']['studying_country_id'];
 				$area_interest = $data['insert_step_two_data']['prog_parent_id'];
 				$next_educ_level = $data['insert_step_two_data']['next_educ_level'];
+				$user_listed_college_data = array(
+				'country'=>$country,
+				'area_interest'=>$area_interest,
+				'next_educ_level'=>$next_educ_level
+				);
+				$this->session->set_userdata($user_listed_college_data);
 				$data['selected_college_step_three'] = $this->leadmodel->fetch_college_step_three($country,$area_interest,$next_educ_level);
 				//print_r($data['selected_college_step_three']);
-				$this->load->view('auth/step_three',$data);
-			 }
-			 else{
+				$id_for_session = array(
+				'level_steps'=>'3'
+				);
+			$this->session->set_userdata($id_for_session);
+			 //}
+			 $this->load->view('auth/step_three',$data);
+			 /* else{
 			 $this->load->view('auth/step_one');
-			 }
+			 } */
 			 
 			 }
 			 
@@ -170,31 +196,58 @@ class Leadcontroller extends CI_Controller
 		 }
 		 else if($this->input->post('submit_step_three_data'))
 		 {
+			$level_steps = $this->session->userdata('level_steps');
+			$apply_college_steps = $this->session->userdata('apply_college');
 			$university_ids = $this->input->post('select_id');
 			$arr = array();
+			array_push($arr,$apply_college_steps);
 			foreach($university_ids as $ids)
 			{
+				if($ids != $apply_college_steps)
+				{
 				array_push($arr,$ids);
-				
+				}
 			}
 			$insert_val = implode(",",$arr);
 			$data['submitting_step_three'] = $this->leadmodel->insert_step_three($insert_val);
-			if($data['submitting_step_three'] != 0)
+			/* if($data['submitting_step_three'] != 0)
 			{
-				$set_session_data_to_blank = array(
+				
+				
+			} */
+			$set_session_data_to_blank = array(
 				'current_insert_lead_id'=>'',
-				'current_insert_lead_email'=>''
+				'current_insert_lead_email'=>'',
+				'apply_college'=>'',
+				'level_steps'=>'',
+				'country'=>'',
+				'area_interest'=>'',
+				'next_educ_level'=>''
 				); 
 				$this->session->set_userdata($set_session_data_to_blank);
-				$this->load->view('auth/step_four');
-			}
-			else {
+			// $id_for_session = array(
+			// 'level_steps'=>''
+			// );
+			//$this->session->set_userdata($id_for_session);
+			$this->load->view('auth/step_four');
+			/* else {
 			$redirect_url = $base.'find_college';
 			redirect($redirect_url);
-			}
+			} */
 		 }
 		else{
+		$level_steps = $this->session->userdata('level_steps');
+		if($level_steps == '2')
+		{
+			$this->load->view('auth/step_two',$data);
+		}
+		else if($level_steps == '3')
+		{
+			$this->load->view('auth/step_three',$data);
+		}
+		else{
 			$this->load->view('auth/step_one',$data);
+			}
 		}
 		$this->load->view('auth/footer',$data);
 	}

@@ -9,6 +9,13 @@
 							<div class="center handle_img step3_posit">
 							</div>
 							<h2>Search & Apply to 100+ Colleges & Universities</h2>
+							<?php
+							if(!empty($selected_university_name_by_step))
+							{
+								echo "<h4>Yoh have Choose    ".$selected_university_name_by_step['title']."</h4></br>";
+								echo "<h4>Want to Register with more university...Select Universitys</h4>";
+							}
+							?>
 							<div>
 							<form action="" method="POST" name="frmSelectCoolege">
 								<?php
@@ -32,10 +39,10 @@
 												}
 												?>
 											</div>
-											<div id="content">
+											<div id="content" class="step3_content">
 												<?php echo substr($select_univ['about_us'],0,100).'....'; ?>
 											</div>
-											<a href="<?php echo "$base"; ?>univ_programs/<?php echo $select_univ['univ_id']; ?>/program" class="float_r">View Courses</a>
+											<a href="<?php echo "$base"; ?>univ_programs/<?php echo $select_univ['univ_id']; ?>/program" class="float_r" target="_blank">View Courses</a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -47,7 +54,7 @@
 								</form>
 								<div class="clearfix"></div>
 							</div>
-							
+							</div>
 						</div>
 					</div>
 					<div class="float_r span3">

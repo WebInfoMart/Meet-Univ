@@ -49,8 +49,8 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 													<option value="Mrs">Mrs</option>
 													<option value="Ms">Ms</option>
 												</select>
-												<input class="<?php echo $class_firstname; ?>" type="text" placeholder="First Name" name="first_name">
-													<input class="<?php echo $class_lastname; ?>" type="text" placeholder="Last Name" name="last_name">
+												<input class="<?php echo $class_firstname; ?>" type="text" placeholder="First Name" name="first_name" value="<?php echo set_value('first_name') ?>">
+													<input class="<?php echo $class_lastname; ?>" type="text" placeholder="Last Name" name="last_name" value="<?php echo set_value('last_name') ?>">
 													<span style="color:red"> <?php echo form_error('first_name'); ?><?php echo isset($errors['first_name'])?$errors['first_name']:''; ?> </span>
 													<span style="color:red"> <?php echo form_error('last_name'); ?><?php echo isset($errors['last_name'])?$errors['last_name']:''; ?> </span>
 											</div>
@@ -72,8 +72,8 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 															<option value="11">November</option>
 															<option value="12">December</option>
 											</select>
-											<input class="<?php echo $class_dob_day; ?>" type="text" placeholder="Day" name="dob_day">
-														<input class="<?php echo $class_dob_year; ?>" type="text" placeholder="Year" name="dob_year">
+											<input class="<?php echo $class_dob_day; ?>" type="text" placeholder="Day" name="dob_day" value="<?php echo set_value('dob_day') ?>">
+														<input class="<?php echo $class_dob_year; ?>" type="text" placeholder="Year" name="dob_year" value="<?php echo set_value('dob_year') ?>">
 														<span style="color:red"> <?php echo form_error('dob_day'); ?><?php echo isset($errors['dob_day'])?$errors['dob_day']:''; ?> </span> 
 													<span style="color:red"> <?php echo form_error('dob_year'); ?><?php echo isset($errors['dob_year'])?$errors['dob_year']:''; ?> </span>
 											<!--<input class="span2 margin_l" type="text" placeholder="Day">
@@ -83,7 +83,7 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 									<div class="control-group">
 										<label class="control-label">Phone Number</label>
 										<div class="controls docs-input-sizes">
-											<input class="<?php echo $class_phone; ?>" type="text" name="phone">
+											<input class="<?php echo $class_phone; ?>" type="text" name="phone" value="<?php echo set_value('phone') ?>">
 											<select class="span2 margin_l" name="phone_type">
 												<option value="Mobile">Mobile</option>
 												<option selected="selected" value="Home">Home</option>
@@ -101,7 +101,7 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 														foreach($show_country_having_univ as $show_country)
 														{
 														?>
-															<option value="<?php echo $show_country['country_id']; ?>"><?php echo $show_country['country_name']; ?></option>
+															<option value="<?php echo $show_country['country_id']; ?>" <?php echo ($this->input->post('home_country')==$show_country['country_id']?"selected='selected'":'') ?> ><?php echo $show_country['country_name']; ?></option>
 														<?php
 														} }
 														?>					
@@ -117,7 +117,7 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 														$lead_email = $this->session->userdata('current_insert_lead_email');
 														} else { $lead_email = ''; }
 														?>
-															<input class="<?php echo $class_email; ?>" type="text" name="step_email" value="<?php echo $lead_email; ?>">
+															<input class="<?php echo $class_email; ?>" type="text" name="step_email" value="<?php echo $lead_email; ?>" value="<?php echo set_value('step_email') ?>">
 															<span style="color:red"><?php echo form_error('step_email'); ?><?php echo isset($errors['step_email'])?$errors['step_email']:''; ?></span>
 											</div>
 									</div>

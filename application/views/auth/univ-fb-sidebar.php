@@ -26,7 +26,7 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 									 <form class="form-horizontal" action="" method="post">
 										<fieldset>
 											<div class="control-group">
-												<input type="text" name="apply_name" class="input-medium <?php echo $class_name; ?>" placeholder="Name">
+												<input type="text" name="apply_name" class="input-medium <?php echo $class_name; ?>" value="<?php echo set_value('apply_name') ?>" placeholder="Name">
 												<span style="color:red"><?php echo form_error('apply_name'); ?><?php echo isset($errors['apply_name'])?$errors['apply_name']:''; ?></span>
 											</div>
 											<div class="control-group">
@@ -35,9 +35,10 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 													<?php
 													if(!empty($area_interest))
 													{
+													//$selected = ($this->input->post('apply_course_interest')) ? $this->input->post('apply_course_interest') : ' '; 
 													foreach($area_interest as $apply_interest)
 													{
-														echo "<option value=$apply_interest[prog_parent_id]> $apply_interest[program_parent_name] </option>";
+														echo "<option value='".$apply_interest[prog_parent_id]."' ".($this->input->post('apply_course_interest')==$apply_interest[prog_parent_id]?"selected='selected'":'').">".$apply_interest[program_parent_name]."</option>";
 													}
 													}
 													?>
@@ -45,11 +46,11 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 												<span style="color:red"><?php echo form_error('apply_course_interest'); ?><?php echo isset($errors['apply_course_interest'])?$errors['apply_course_interest']:''; ?></span>
 											</div>
 											<div class="control-group">
-												<input type="text" name="apply_email" id="apply_email" class="input-medium <?php echo $class_email; ?>" placeholder="Email Id">
+												<input type="text" name="apply_email" id="apply_email" class="input-medium <?php echo $class_email; ?>" value="<?php echo set_value('apply_email') ?>" placeholder="Email Id">
 												<span style="color:red"><?php echo form_error('apply_email'); ?><?php echo isset($errors['apply_email'])?$errors['apply_email']:''; ?></span>
 											</div>
 											<div class="control-group">
-												<input type="text" name="apply_mobile" class="input-medium <?php echo $class_mobile; ?>" placeholder="Mobile Number">
+												<input type="text" name="apply_mobile" class="input-medium <?php echo $class_mobile; ?>" value="<?php echo set_value('apply_mobile') ?>" placeholder="Mobile Number">
 												<span style="color:red"><?php echo form_error('apply_mobile'); ?><?php echo isset($errors['apply_mobile'])?$errors['apply_mobile']:''; ?></span>
 											</div>
 											<!--<div class="control-group">

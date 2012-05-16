@@ -80,7 +80,13 @@ function university($univ_id='',$qid='',$uid='')
 		
 		else if($this->input->post('apply_now'))
 		{
-			
+			$level_steps = $this->session->userdata('level_steps');
+			if($level_steps != '')
+			{
+				$this->session->set_userdata('apply_college',$univ_id);
+				redirect(find_college);
+			}
+			else {
 			$condition = array(
 				'firstname' => $this->input->post('apply_name'),
 				'prog_parent_id' => $this->input->post('apply_course_interest'),
@@ -101,9 +107,14 @@ function university($univ_id='',$qid='',$uid='')
 			$data['fb_sidebar_apply_form'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
 			if($data['fb_sidebar_apply_form'] != 0)
 			{
-			$id_for_session = $data['fb_sidebar_apply_form'];
-			$this->session->set_userdata('current_insert_lead_id', $id_for_session);
+			$id_for_session = array(
+			'current_insert_lead_id'=>$data['fb_sidebar_apply_form'],
+			'level_steps'=>'2',
+			'apply_college'=>$univ_id
+			);
+			$this->session->set_userdata($id_for_session);
 			//print_r($this->session->userdata('current_insert_lead_id'));
+			//print_r($this->session->userdata('level_steps'));
 			}
 			redirect('find_college');
 			}
@@ -112,7 +123,7 @@ function university($univ_id='',$qid='',$uid='')
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 			}
 			//print_r($data['fb_sidebar_apply_form']);
-			
+			}
 		}
 		else if($this->input->post('ask_quest'))
 		  {

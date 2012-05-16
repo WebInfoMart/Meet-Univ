@@ -27,6 +27,20 @@ class Leadmodel extends CI_Model
 		$to_insert_id = $this->session->userdata('current_insert_lead_id');
 		if($insert_type == '0')
 		{
+			if($to_insert_id!='' || $to_insert_id!=0)
+			{
+			$condition_id = trim($to_insert_id);
+			$this->db->where('id',$condition_id);
+			$this->db->update('lead_data',$condition);
+			if($this->db->affected_rows() > 0)
+			{
+				return 1;
+			}
+			else {
+			return 0;
+			}
+			}
+			else {
 			$this->db->insert('lead_data',$condition);
 			if($this->db->affected_rows() > 0)
 			{
@@ -34,6 +48,7 @@ class Leadmodel extends CI_Model
 			}
 			else {
 			return 0;
+			}
 			}
 		}
 		else if($insert_type == '1')
@@ -87,11 +102,15 @@ class Leadmodel extends CI_Model
 	
 	function fetch_college_step_three($country,$area_interest,$next_educ_level)
 	{
+		// echo $country;
+		// echo $area_interest;
+		// echo $next_educ_level;
 		$to_insert_id = $this->session->userdata('current_insert_lead_id');
 		$cond1 = array(
 		'prog_parent_id'=>$area_interest,
 		'prog_educ_level'=>$next_educ_level
 		);
+		$university_id = array();
 		$this->db->select('univ_id');
 		$this->db->from('univ_program');
 		$this->db->where($cond1);
@@ -106,9 +125,7 @@ class Leadmodel extends CI_Model
 		$this->db->where('country_id',$country);
 		$this->db->where_in('univ_id',$university_id);
 		$query = $this->db->get();
-		return $query->result_array();
-		
-		
+		return $query->result_array();	
 	}
 	
 	function insert_step_three($insert_val)
@@ -122,6 +139,21 @@ class Leadmodel extends CI_Model
 		if($this->db->affected_rows() > 0)
 		{
 			return 1;
+		}
+		else {
+		return 0;
+		}
+	}
+	
+	function get_university_title_by_id($college_for_apply)
+	{
+		$this->db->select('title');
+		$this->db->from('university');
+		$this->db->where('univ_id',$college_for_apply);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->row_array();
 		}
 		else {
 		return 0;

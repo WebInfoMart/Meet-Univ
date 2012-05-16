@@ -61,11 +61,22 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">When do you want to begin?</label>
 													<div class="controls">
+													<?php 
+													if($this->input->post('begin_year1') != '')
+													{
+														$checked_one = 'checked=checked';
+													} else { $checked_one=''; }
+													
+													if($this->input->post('begin_year2') != '')
+													{
+														$checked_two = 'checked=checked';
+													} else { $checked_two=''; }
+													?>
 														<label class="checkbox inline">
-															<input type="checkbox" name="begin_year1" id="begin_year1" value="Fall 2012"> Fall 2012
+															<input type="checkbox" name="begin_year1" id="begin_year1" value="Fall 2012" <?php echo $checked_one; ?> > Fall 2012
 														</label>
 														<label class="checkbox inline">
-															<input type="checkbox" name="begin_year2" id="begin_year2" value="Spring 2013"> Spring 2013
+															<input type="checkbox" name="begin_year2" id="begin_year2" value="Spring 2013" <?php echo $checked_two; ?> > Spring 2013
 														</label>
 													</div>
 												</div>
@@ -78,7 +89,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 															foreach($country as $contries)
 															{
 														?>
-														<option value="<?php echo $contries['country_id']; ?>"> <?php echo $contries['country_name']; ?> </option>
+														<option value="<?php echo $contries['country_id']; ?>" > <?php echo $contries['country_name']; ?> </option>
 														<?php } ?>
 														</select>
 														<span style="color:red"> <?php echo form_error('interest_study_country'); ?><?php echo isset($errors['interest_study_country'])?$errors['interest_study_country']:''; ?> </span>
@@ -400,7 +411,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">Home Address</label>
 														<div class="controls">
-															<input class="<?php echo $class_home_adress; ?>" type="text" name="home_address">
+															<input class="<?php echo $class_home_adress; ?>" type="text" name="home_address" value="<?php echo set_value('home_address') ?>">
 															<span style="color:red"> <?php echo form_error('home_address'); ?><?php echo isset($errors['home_address'])?$errors['home_address']:''; ?> </span>
 														</div>
 														
@@ -448,7 +459,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 															<?php 
 															foreach($area_interest as $interest)
 															{ ?>
-																<option value="<?php echo $interest['prog_parent_id']; ?>"> <?php echo $interest['program_parent_name']; ?> </option>
+																<option value="<?php echo $interest['prog_parent_id']; ?>" <?php echo $this->input->post('area_interest')==$interest['prog_parent_id']?"selected='selected'":'' ?>> <?php echo $interest['program_parent_name']; ?> </option>
 															<?php } ?>
 														</select>
 														<span style="color:red"> <?php echo form_error('area_interest'); ?><?php echo isset($errors['area_interest'])?$errors['area_interest']:''; ?> </span>
@@ -472,7 +483,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 														<select class="<?php echo $class_current_educ; ?>" name="current_educ_level">
 															<option selected="selected" value="">— Please Select —</option>
 															<?php foreach($educ_level as $education_level) { ?>
-																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>"> <?php echo $education_level['educ_level']; ?> </option>
+																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>" <?php echo $this->input->post('current_educ_level')==$education_level['prog_edu_lvl_id']?"selected='selected'":'' ?> > <?php echo $education_level['educ_level']; ?> </option>
 															<?php } ?>
 														</select>
 														<span style="color:red"> <?php echo form_error('current_educ_level'); ?><?php echo isset($errors['current_educ_level'])?$errors['current_educ_level']:''; ?> </span>
@@ -489,7 +500,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 																	if($education_level['prog_edu_lvl_id'] !='2' ) {
 															?>
 															
-																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>"> <?php echo $education_level['educ_level']; ?> </option>
+																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>" <?php echo ($this->input->post('next_educ_level')==$education_level['prog_edu_lvl_id']?"selected='selected'":'') ?>> <?php echo $education_level['educ_level']; ?> </option>
 															<?php } } ?>
 														</select>
 														<span style="color:red"> <?php echo form_error('next_educ_level'); ?><?php echo isset($errors['next_educ_level'])?$errors['next_educ_level']:''; ?> </span>
@@ -514,7 +525,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 																<option value="GRE">GRE</option>
 																<option value="GMAT">GMAT</option>
 															</select>
-															<input class="<?php echo $class_academic_exam_score; ?>" type="text" name="academic_exam_score1"/>
+															<input class="<?php echo $class_academic_exam_score; ?>" type="text" name="academic_exam_score1" value="<?php echo set_value('academic_exam_score1') ?>"/>
 															<a id="academic_add" style="cursor:pointer;">Add Another »</a><br/>
 														</div>
 														<span id="academic_another" style="display:none;">
@@ -541,7 +552,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 																<option value="TOEFL-PBT">TOEFL-PBT</option>
 																<option value="TOEFL-CBT">TOEFL-CBT</option>
 															</select>
-															<input class="grid_0 margin_zero" type="text" name="eng_prof_exam_score1">
+															<input class="grid_0 margin_zero" type="text" name="eng_prof_exam_score1" value="<?php echo set_value('eng_prof_exam_score1'); ?>">
 															<a id="eng_prof_add" style="cursor:pointer;">Add Another »</a><br/>
 														</div>
 														<span id="eng_prof_another" style="display:none;">
@@ -551,7 +562,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 															<option value="TOEFL-PBT">TOEFL-PBT</option>
 															<option value="TOEFL-CBT">TOEFL-CBT</option>
 														</select>
-														<input class="grid_0 margin_zero" type="text" name="eng_prof_exam_score2">
+														<input class="grid_0 margin_zero" type="text" name="eng_prof_exam_score2" value="<?php echo set_value('eng_prof_exam_score2') ?>">
 														</span>
 														<!--<a href="#academic_scores">Add Another »</a>-->
 														<p class="help-block">Entering your Exam Scores is the best way to let the top schools around the world know that you have the required skills to study abroad.</p>
