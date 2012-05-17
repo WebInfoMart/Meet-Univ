@@ -609,7 +609,7 @@ color:#666 !important;
 .event_border{border-bottom: 1px solid #DDD;padding: 10px;}
 .event_border_div{width: 84px;height: 84px;}
 .event_border img{border: 1px solid #DDD;margin-right: 20px;}
-.event_border_style{border: 1px solid #DDD;line-height: 100px;text-align: center;width: 80px;margin-right: 20px;}
+.event_border_style{border: 1px solid #DDD;text-align: center;width: 80px;height:80px;margin-right: 20px;}
 .event_border_style img{width: 80px;height: 64px;vertical-align: middle;}
 /*================single_event================================*/
 .course_cont {

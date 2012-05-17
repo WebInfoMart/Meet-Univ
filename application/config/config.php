@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url']	= 'http://localhost/www/Meet-Univ/';
+$config['base_url']	= 'http://127.0.0.1/Meet-Univ/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -87,7 +87,8 @@ $config['charset'] = 'UTF-8';
 | Enable/Disable System Hooks
 |--------------------------------------------------------------------------
 |
-| If you would like to use the 'hooks' feature you must enable it by
+| If you w
+ould like to use the 'hooks' feature you must enable it by
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */

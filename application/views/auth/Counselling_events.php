@@ -45,7 +45,7 @@
 					{
 					foreach($events as $event_detail){ ?>
 						<div class="page_last_border">
-							<div class="float_l event_border_style">
+							<div class="float_l event_border_style aspectcorrect">
 								<?php if($event_detail['univ_logo_path']==''){?>
 								<img src="<?php echo "$base$img_path"; ?>/default_logo.png">
 								<?php } else {?>
@@ -200,3 +200,8 @@ var x = new Array(<?php echo $array_dates; ?>);
 
 			});
 		</script>					
+		<script>
+$(document).ready(function(){
+			FixImages(true);
+});			
+</script>	
