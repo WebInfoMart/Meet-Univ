@@ -1,3 +1,9 @@
+<?php
+$fetch_country = array();
+$fetch_area_interest = array();
+$fetch_country = $this->frontmodel->fetch_country_having_univ_footer();
+$fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ();
+?>
 <footer>
 		<div class="container">
 			<div class="margin">
@@ -5,23 +11,28 @@
 					<div class="footer margin_delta">
 						<h4 class="white">Colleges</h4>
 						<ul>
-							<li><a href="">Medical Colleges</a></li>
-							<li><a href="">Engineering Colleges</a></li>
-							<li><a href="">Management Colleges</a></li>
-							<li><a href="">ABC Colleges</a></li>
-							<li><a href="">DEF Colleges</a></li>
-							<li><a href="">GHI Colleges</a></li>
+						<?php
+						if(!empty($fetch_area_interest))
+						{
+						foreach($fetch_area_interest as $interest)
+						{
+						?>
+							<li><a href=""><?php echo $interest['program_parent_name'];  ?></a></li>
+						<?php } } ?>
 						</ul>
 					</div>
 					<div class="footer">
 						<h4 class="white">Destinations</h4>
 						<ul>
-							<li><a href="">USA</a></li>
-							<li><a href="">Canada</a></li>
-							<li><a href="">UK</a></li>
-							<li><a href="">Australia</a></li>
-							<li><a href="">New Zealand</a></li>
-							<li><a href="">Bangladesh</a></li>
+						<?php
+						if(!empty($fetch_country))
+						{
+						foreach($fetch_country as $country)
+						{
+						?>
+							<li><a href="<?php echo "$base"; ?>colleges/<?php echo $country['country_name']; ?>"><?php echo $country['country_name']; ?></a></li>
+						<?php } } ?>
+						<!--<li style="margin-left: -26px;"><a href="#"> >>>More Countries<<< </a></li>-->
 						</ul>
 					</div>
 					<div class="footer">

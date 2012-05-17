@@ -536,4 +536,41 @@ class Frontmodel extends CI_Model
 		return 0;
 		}
 	}
+	
+	function fetch_country_having_univ_footer()
+	{
+		$this->db->select('*');
+		$this->db->from('country');
+		$this->db->join('university','university.country_id = country.country_id');
+		$this->db->group_by("country.country_id");
+		$this->db->limit(5);
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	
+	function fetch_area_interest_having_univ_footer()
+	{
+		$this->db->select('*');
+		$this->db->from('program_parent');
+		$this->db->join('univ_program','univ_program.prog_parent_id = program_parent.prog_parent_id');
+		$this->db->group_by("program_parent.prog_parent_id");
+		$this->db->limit(5);
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	
 }

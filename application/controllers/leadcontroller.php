@@ -51,7 +51,7 @@ class Leadcontroller extends CI_Controller
 		if($this->form_validation->run())
 		{
 			
-			if($id=='')
+			/* if($id=='')
 			{
 			$condition = array(
 			'home_country_id' => $this->input->post('home_country'),
@@ -64,8 +64,8 @@ class Leadcontroller extends CI_Controller
 			'phone_no1'=> $this->input->post('phone')
 			);
 			//print_r($condition);echo "h3";
-			}
-			else if($id!='' && $events_id!='')
+			} */
+			/* else if($id!='' && $events_id!='')
 			{
 				$condition = array(
 			'home_country_id' => $this->input->post('home_country'),
@@ -80,8 +80,8 @@ class Leadcontroller extends CI_Controller
 			'applied_event_id'=>$events_id
 			);
 			//print_r($condition);echo "h2";
-			}
-			else{
+			} */
+			//else{
 			$condition = array(
 			'home_country_id' => $this->input->post('home_country'),
 			'email' => $this->input->post('step_email'),
@@ -93,7 +93,7 @@ class Leadcontroller extends CI_Controller
 			'phone_no1'=> $this->input->post('phone')
 			);
 			//print_r($condition);echo "h1";
-			}
+			//}
 			$insert_type = '1';
 			$data['insert_step_one_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
 			//print_r($data['insert_step_one_data']);
@@ -251,4 +251,59 @@ class Leadcontroller extends CI_Controller
 		}
 		$this->load->view('auth/footer',$data);
 	}
+	
+	function EventRegistration()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$data['get_info_logged_user'] = '';
+		if ($this->tank_auth->is_logged_in()) {
+			$logged_user_id = $this->session->userdata('user_id');
+			$data['get_info_logged_user'] = $this->users->fetch_profile($logged_user_id);
+			}
+			else{
+			$data['get_info_logged_user'] = '';
+			}
+		$univ_id = $this->input->post('event_register_of_univ_id');
+		$event_id = $this->input->post('event_register_id');
+		if($univ_id!='' && $event_id!='')
+		{
+		$set_session_event_register = array(
+		'register_event_university_id'=>$univ_id,
+		'register_event_id'=>$event_id
+		);
+		$this->session->set_userdata($set_session_event_register);
+		}
+		
+		//print_r($this->session->userdata());
+		if($this->input->post('submit_event_register'))
+		{
+			$this->form_validation->set_rules('event_fullname','Fullname','trim|xss_clean|required');
+			$this->form_validation->set_rules('event_email','Email','trim|xss_clean|required|valid_email');
+			$this->form_validation->set_rules('event_phone','Phone','trim|xss_clean|required|integer');
+			
+			if($this->form_validation->run())
+			{
+				/* $university_id = $this->session->userdata('register_event_university_id');
+				$event_id = $this->session->userdata('register_event_id'); */
+				$id_university = $this->session->userdata('register_event_university_id');
+				$id_event = $this->session->userdata('register_event_id');
+				$data['success_event_register'] = $this->leadmodel->event_registration($id_university,$id_event);
+				if($data['success_event_register'] != 0)
+				{
+					$set_blank_session_event_register = array(
+						'register_event_university_id'=>'',
+						'register_event_id'=>''
+					);
+					$this->session->set_userdata($set_blank_session_event_register);
+				}
+			}
+		}
+		$this->load->view('auth/event_register',$data);
+		$this->load->view('auth/footer',$data);
+	}
 }
+
+
+
+

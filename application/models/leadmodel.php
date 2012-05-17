@@ -159,4 +159,26 @@ class Leadmodel extends CI_Model
 		return 0;
 		}
 	}
+	
+	function event_registration($event_id,$university_id)
+	{
+		$title = $this->input->post('title');
+		$fullname = $this->input->post('event_fullname');
+		$email = $this->input->post('event_email');
+		$phone = $this->input->post('event_phone');
+		$clause = array(
+		'title'=>$title,
+		'fullname'=>$fullname,
+		'email'=>$email,
+		'phone'=>$phone,
+		'register_event_id'=>$event_id,
+		'register_event_univ_id'=>$university_id
+		);
+		$this->db->insert('event_register',$clause);
+		return $this->db->affected_rows() ? 1 : 0;
+	}
 }
+
+
+
+

@@ -94,5 +94,7 @@ $route['default_controller'] = 'auth';
 $route['(find_college)'] = 'leadcontroller/find_college';
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';
 $route['(find_college/(:num)/(:num))'] = 'leadcontroller/find_college/$1/$2';
+
+$route['(EventRegistration)'] = 'leadcontroller/EventRegistration';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
