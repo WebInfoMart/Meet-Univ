@@ -313,10 +313,10 @@ class Searchmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('program_parent');
-		$this->db->join('program','program.prog_parent_id=program_parent.prog_parent_id','left');
+		$this->db->join('univ_program','univ_program.prog_parent_id = program_parent.prog_parent_id');
 		if($this->input->post('educ_level')!='0')
 		{
-		$this->db->where('program.educ_level_id',$this->input->post('educ_level'));
+		$this->db->where('univ_program.prog_educ_level',$this->input->post('educ_level'));
 		}
 		$this->db->group_by("program_parent.prog_parent_id"); 
 		$query=$this->db->get();
