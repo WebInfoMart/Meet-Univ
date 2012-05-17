@@ -5,7 +5,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body">
-<div class="row">
+		<div class="row">
 				<div class="span10">
 					<h2><?php 
 					if($university_details['univ_name'] != '' || $university_details['univ_name']!= '0')
@@ -38,15 +38,15 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 			</div>
 			
 			
-				<div class="univ_page_logo">
+				<div class="univ_page_logo aspectcorrect" style='position:absolute;' >
 				<?php 
 				if($university_details['univ_logo_path'] != '')
 				{
-				echo "<img class='univ_page_logo_nw' src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
+				echo "<img  src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
 				}
 				else
 				{
-				echo "<img class='univ_page_logo_nw' src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
+				echo "<img   src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
 				}
 				?>
 				</div>
@@ -125,5 +125,7 @@ $(".uni_menu").hover(
   }
 );
 });
-
+$(document).ready(function(){
+			FixImages(true);
+});	
 </script>

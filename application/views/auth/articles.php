@@ -14,10 +14,10 @@
 				<div class="clearfix"></div>
 				</div>-->	
 					<h2 class="course_txt">Recent Articles</h2>
-					<div class="margin_t1">
+				<div class="margin_t1">
 					<?php foreach($articles as $articles_detail){ ?>
-						<div class="event_border">
-							<div class="float_l">
+						<div class="event_border ">
+							<div class="float_l event_border_div aspectcorrect">
 							<?php if($articles_detail['article_image_path']!=""){?>
 <img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $articles_detail['article_image_path']; ?>">
 								
@@ -27,7 +27,7 @@
 								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $articles_detail['univ_logo_path']; ?>">
 								<?php } ?>	
 							</div>
-							<div class="dsolution">
+							<div class="dsolution" style="padding-left:20px;">
 								<div>
 									<div class="float_l">
 <a href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" class="txt_three"><?php echo $articles_detail['article_title']; ?></a>
@@ -69,4 +69,8 @@
 			</div>
 		</div>
 	</div>
-	
+<script>
+$(document).ready(function(){
+			FixImages(true);
+});	
+</script>	

@@ -294,8 +294,8 @@ $(function () {
 										<div class="year float_r"><span><?php echo $date[2]; ?></span></div>
 										<div class="clearfix"></div>
 									</div>
-									<div class="float_l span1 img_logo_events">
-										<img <?php if($events['univ_logo_path']!=''){ ?> src=" <?php echo $base;?>/uploads/univ_gallery/<?php echo $events['univ_logo_path']; ?>" class='events_img' <?php } else { ?> src="<?php echo "$base$img_path" ; ?>/calendar.png <?php } ?>">
+									<div class="float_l span1 img_logo_events aspectcorrect">
+										<img <?php if($events['univ_logo_path']!=''){ ?> src=" <?php echo $base;?>/uploads/univ_gallery/<?php echo $events['univ_logo_path']; ?>" <?php } else { ?> src="<?php echo "$base$img_path" ; ?>/calendar.png <?php } ?>">
 									</div>
 									<div class="float_l span5">
 										<a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a>
@@ -341,17 +341,19 @@ $(function () {
 					</div>
 				</div>
 				<div class="grid_3">
-					<div class="home_artical_heading">
+					<div class="home_artical_box feat_col">
 						<span>Featured Colleges</span>
 					</div>
-					<div class="col_box">
+					<div class="col_box event_rad">
 						<ul class="col_img">
 							<li>
 						<?php 
 						$x=0;
 						foreach($featured_college as $featured_clg) { ?>
-									<div class="<?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo ""; } ?>" >
-				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php if($featured_clg['univ_logo_path']!=''){echo $featured_clg['univ_logo_path'];}else{ echo 'univ_logo.png';} ?>" class="featured_art"></a>
+									<div class="aspectcorrect featured_art <?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo ""; } ?>" >
+				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php if($featured_clg['univ_logo_path']!=''){echo $featured_clg['univ_logo_path'];}else{ echo 'univ_logo.png';} ?>" >
+				
+				</a>
 						</div>							
 
 					
@@ -662,7 +664,11 @@ function fetch_programs(educ_level)
 	   }
 	   })
 }
+window.onload = function() {
 
+			FixImages(true);
+
+		}
 </script>
 
 

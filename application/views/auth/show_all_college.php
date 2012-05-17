@@ -1,4 +1,9 @@
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinysort.js"></script>
+<script>
+$(document).ready(function(){
+			FixImages(true);
+});			
+</script>
 <?php
 $count_array = count($get_university['university']);						
 $this->session->unset_userdata('follow_to_univ');
@@ -143,7 +148,7 @@ $this->session->unset_userdata('follow_to_univ');
 								<div class="margin_t1"> 
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
-											<div class="col_list_logo">
+											<div class="col_list_logo aspectcorrect">
 												<?php 
 												$x = $get_university['university'][$no_university]['univ_logo_path'];
 												if($x != '')
@@ -401,7 +406,7 @@ function get_college_result_by_ajax()
 		});
 		if(res[2]!='0' && res[1]!='0')
 		{
-		$('#search_results').html(res[0]);	
+		$('#search_results').html(res[0]);
 		}
 		else
 		{
@@ -432,4 +437,5 @@ if(univ_id!='' && event_id!='')
 window.location='<?php echo $base; ?>univ-'+univ_id+'-event-'+event_id;
 }
 }
+
 </script>	 

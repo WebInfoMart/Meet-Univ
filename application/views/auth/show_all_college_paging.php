@@ -1,3 +1,4 @@
+					
 <?php
 						$count_array = count($get_university['university']);
 						$map_address='';
@@ -11,21 +12,14 @@
 										<?php echo $get_university['university'][$no_university]['univ_name']; ?></a></span>- 
 										<?php echo $get_university['university'][$no_university]['country_name']; ?></h3>
 									</div>
-									<div class="float_r">
-										<!--<div class="box_col">
-										<div class="fb-like float_l" data-href="<?php echo $base;?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-										<div class="float_r">
-										<a href="https://twitter.com/share" data-url="<?php echo $base;?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"  class="twitter-share-button" data-count="none">Tweet</a>
-										</div>
-										<div class="clearfix"></div>
-										</div>-->
+									<div class="float_r">										
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="margin_t1"> 
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
-											<div class="col_list_logo">
+											<div class="col_list_logo aspectcorrect">
 												<?php 
 												$x = $get_university['university'][$no_university]['univ_logo_path'];
 												if($x != '')
@@ -128,4 +122,8 @@
 								<div class="clearfix"></div>
 							</div>
 					<?php } ?>	
-					
+<script>
+$(document).ready(function(){
+			FixImages(true);
+});	
+</script>					

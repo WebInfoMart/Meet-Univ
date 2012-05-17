@@ -159,6 +159,8 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/tinyeditor.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/image_scaling.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -352,6 +354,7 @@ display:none;
 <script type="text/javascript" src="http://apis.google.com/js/plusone.js">
   {lang: 'en-GB'}
 </script>
+
 <!--<script type="text/javascript">
   (function() {
     var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

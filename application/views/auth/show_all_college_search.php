@@ -1,3 +1,4 @@
+
 <div id="pagination" style="margin-top:15px;" class="table_pagination right paging-margin">
    
 						   <?php
@@ -46,7 +47,7 @@
 								<div class="margin_t1"> 
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
-											<div class="col_list_logo">
+											<div class="col_list_logo aspectcorrect">
 												<?php 
 												$x = $get_university['university'][$no_university]['univ_logo_path'];
 												if($x != '')
@@ -153,3 +154,8 @@
 					<?php } ?>	
 						</div>
 						</div>
+<script>
+$(document).ready(function(){
+			FixImages(true);
+});	
+</script>						

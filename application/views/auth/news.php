@@ -18,7 +18,7 @@
 					<div class="margin_t1">
 					<?php foreach($news as $news_detail){ ?>
 						<div class="event_border">
-							<div class="float_l">
+							<div class="float_l event_border_div aspectcorrect">
 							<?php if($news_detail['news_image_path']!=""){?>
 <img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $news_detail['news_image_path']; ?>" style="width:80px;height:80px;margin-right:20px">
 								
@@ -28,7 +28,7 @@
 								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $news_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >
 								<?php } ?>	
 							</div>
-							<div class="dsolution">
+							<div class="dsolution" style="padding-left:20px;">
 								<div>
 									<div class="float_l">
 <h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
@@ -69,4 +69,9 @@
 			</div>
 		</div>
 	</div>
+<script>
+$(document).ready(function(){
+			FixImages(true);
+});	
+</script>		
 	
