@@ -244,7 +244,7 @@ $this->session->unset_userdata('follow_to_univ');
 											<div class="last_box_col float_r">
 												<img src="<?php echo "$base$img_path"; ?>/add.PNG"/>
 				<span class="green follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
-												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow University<?php } else { ?>Unfollow University <?php } ?>
+												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow<?php } else { ?>Unfollow<?php } ?>
 									   </span>
 		<input type="hidden" id="follow_count_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" value="<?php echo $get_university['followers'][$no_university]; ?>">								
 											</div>
@@ -308,13 +308,13 @@ function follow_university(univ_id,follow_count)
 		   {
 		   follow_count=parseInt(follow_count)+1;
 		   $('#follow_count_'+univ_id).val(follow_count);
-		   $('.follow_univ_'+univ_id).html('Unfollow Univeristy');
+		   $('.follow_univ_'+univ_id).html('Unfollow');
 		   }
 		   else if(msg=='nowunfollowed')
 		   {
 		   follow_count=parseInt(follow_count)-1;
 		   $('#follow_count_'+univ_id).val(follow_count);
-		   $('.follow_univ_'+univ_id).html('Follow Univeristy');
+		   $('.follow_univ_'+univ_id).html('Follow');
 		   }
 		   $('.followers_'+univ_id).html(follow_count);
 		   }

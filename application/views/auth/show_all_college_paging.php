@@ -19,7 +19,7 @@
 								<div class="margin_t1"> 
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
-											<div class="col_list_logo aspectcorrect">
+											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;>
 												<?php 
 												$x = $get_university['university'][$no_university]['univ_logo_path'];
 												if($x != '')
@@ -31,6 +31,9 @@
 							
 											<?php	}
 												?>
+											</div>
+											<div class="apply">
+												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"><a href="#">Apply</a></span>
 											</div>
 										</div>
 										<div class="float_r courses_data margin_l">
@@ -110,7 +113,7 @@
 											<div class="last_box_col float_r">
 												<img src="<?php echo "$base$img_path"; ?>/add.PNG"/>
 				<span class="green follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
-												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow University<?php } else { ?>Unfollow University <?php } ?>
+												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow<?php } else { ?>Unfollow <?php } ?>
 									   </span>
 		<input type="hidden" id="follow_count_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" value="<?php echo $get_university['followers'][$no_university]; ?>">								
 											</div>
