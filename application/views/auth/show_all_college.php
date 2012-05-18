@@ -148,7 +148,7 @@ $this->session->unset_userdata('follow_to_univ');
 								<div class="margin_t1"> 
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
-											<div class="col_list_logo aspectcorrect">
+											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;>
 												<?php 
 												$x = $get_university['university'][$no_university]['univ_logo_path'];
 												if($x != '')
@@ -160,6 +160,9 @@ $this->session->unset_userdata('follow_to_univ');
 							
 											<?php	}
 												?>
+											</div>
+											<div class="apply">
+												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"><a href="#">Apply</a></span>
 											</div>
 										</div>
 										<div class="float_r courses_data margin_l">

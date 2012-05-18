@@ -160,8 +160,24 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/image_scaling.js"></script>
-
+<?php
+$pageURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
+if ($_SERVER["SERVER_PORT"] != "80")
+{
+    $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+} 
+else 
+{
+    $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+}
+$ucurl=explode('/',$pageURL);
+$ncurl=$ucurl[count($ucurl)-1];
+if($ncurl!='' && $ncurl!='/')
+{?>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+<?php 
+}
+?>
 <script type="text/javascript">
   $(document).ready(function(){
    $('#scrollbar1').tinyscrollbar(); 
@@ -205,31 +221,12 @@ $('#myModal2').modal('toggle');});
 $(document).ready(function(){
 
 
-    var url = window.location.pathname, 
-        urlRegExp = new RegExp(url.replace(/\/$/,'') + "$"); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
-        // now grab every link from the navigation
-        $('.menu a').each(function(){
-            // and test its normalized href against the url pathname regexp
-            if(urlRegExp.test(this.href.replace(/\/$/,''))){
-                $(this).addClass('active');
-            }
-        });
-
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-
-
-    var url = window.location.pathname;
-	    urlRegExp = new RegExp(url.replace(/\/$/,'') + "$"); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
-        // now grab every link from the navigation
-        $('.cat_list a').each(function(){
-            // and test its normalized href against the url pathname regexp
-            if(urlRegExp.test(this.href.replace(/\/$/,''))){
-                $(this).addClass('cat_list_select');
-            }
-        });
+    var TheP   = window.location.pathname.split('/');
+var HeRe   = '<?php echo $base; ?>'+TheP[TheP.length-1];
+$('.menu a').each(function(){
+ var Link  = $(this).attr('href');
+      if (Link == HeRe){ $(this).addClass('active');}
+ });
 
 });
 </script>

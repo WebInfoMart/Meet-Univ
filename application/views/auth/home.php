@@ -246,22 +246,17 @@ $(function () {
 			<?php 	}
 				else
 				{?>
-<marquee behavior="scroll" scrollamount="3" direction="left">
-	
-<?php				foreach($featured_news as $featured_news_list) { $x++; ?>
-					<div class="span8 yellow_bar_text <?php if($x==1){?> float_l <?php }else{ ?> float_r <?php } ?> margin_zero"><ul><li>
+	<div class="marquee">
+		<?php				foreach($featured_news as $featured_news_list) { $x++; ?>
+					<div class="span8 yellow_bar_text float_l  margin_zero"><ul><li>
 					<a href="<?php echo $base; ?>univ-<?php echo $featured_news_list['news_univ_id']; ?>-news-<?php echo $featured_news_list['news_id']; ?>">
 					<?php echo substr($featured_news_list['news_title'],0,70).'..'; ?>
 					</a></li></ul>
 					</div>
-				<?php
-				if($x=='2')
-				break;
-				} ?>
-				</marquee>
 
 		<?php		 }
-				?>	
+			?>	</div>	
+		<?php } ?>		
 					<div class="clearfix"></div>
 				</div>
 		    </div>

@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url']	= 'http://localhost/www/Meet-Univ/';
+$config['base_url']	= 'http://127.0.0.1/Meet-Univ/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -214,7 +214,8 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 | system/cache/ folder.  Use a full server path with trailing slash.
 |
 */
-$config['cache_path'] = '';
+$config['cac
+he_path'] = '';
 
 /*
 |--------------------------------------------------------------------------
