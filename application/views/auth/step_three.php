@@ -19,12 +19,22 @@
 							<div>
 							<form action="" method="POST" name="frmSelectCoolege">
 								<?php
+								if(!empty($selected_college_step_three))
+								{
+								$apply_by_univ_id = $this->session->userdata('apply_college');
 								foreach($selected_college_step_three as $select_univ)
 								{
+								if($select_univ['univ_id'] == $apply_by_univ_id)
+								{
+									$check = 'checked=checked';
+								}
+								else{
+								$check='';
+								}
 								?>
 								<div class="page3_step3_width float_l margin_t">
 									<div class="page3_step3">
-									<input type="checkbox" id="<?php echo $select_univ['univ_id']; ?>" class="check" name="select_id[]" value="<?php echo $select_univ['univ_id']; ?>">
+									<input type="checkbox" id="<?php echo $select_univ['univ_id']; ?>" class="check" name="select_id[]" value="<?php echo $select_univ['univ_id']; ?>" <?php echo $check; ?>>
 										<h3><?php echo $select_univ['univ_name']; ?></h3>
 										<div>
 											<div class="float_l page3_step3_img">
@@ -47,9 +57,13 @@
 										</div>
 									</div>
 								</div>
-								<?php } ?>
+								<?php } } else { echo "<h3> No Results Found According Search Criteria... </h3>"; } ?>
 								<div class="controls">
+								<?php if(empty($selected_college_step_three)) { ?>
+								<input type="submit" class="btn btn-success" name="edit_search" value="Modify Your search">
+								<?php } else { ?>
 									<input type="submit" class="btn btn-success" name="submit_step_three_data" value="Continue">
+									<?php } ?>
 								</div>
 								</form>
 								<div class="clearfix"></div>

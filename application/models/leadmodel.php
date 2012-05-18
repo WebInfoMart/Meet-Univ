@@ -110,12 +110,16 @@ class Leadmodel extends CI_Model
 		'prog_parent_id'=>$area_interest,
 		'prog_educ_level'=>$next_educ_level
 		);
+		//print_r($cond1);
 		$university_id = array();
 		$this->db->select('univ_id');
 		$this->db->from('univ_program');
 		$this->db->where($cond1);
 		$this->db->distinct();
 		$query = $this->db->get();
+		$res = $query->result_array();
+		if(!empty($res))
+		{
 		foreach($query->result_array() as $univ)
 		{
 			$university_id[] = $univ['univ_id'];
@@ -126,6 +130,10 @@ class Leadmodel extends CI_Model
 		$this->db->where_in('univ_id',$university_id);
 		$query = $this->db->get();
 		return $query->result_array();	
+		}
+		else{
+		return 0;
+		}
 	}
 	
 	function insert_step_three($insert_val)

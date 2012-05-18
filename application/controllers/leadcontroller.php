@@ -38,6 +38,11 @@ class Leadcontroller extends CI_Controller
 		$data['selected_college_step_three'] = $this->leadmodel->fetch_college_step_three($country,$area_interest,$next_educ_level);
 		$college_for_apply = $this->session->userdata('apply_college');
 		$data['selected_university_name_by_step'] = $this->leadmodel->get_university_title_by_id($college_for_apply);
+		if(empty($data['selected_university_name_by_step']))
+		{
+			//echo "xxxxxxxxxxxxxx";
+			$this->session->set_userdata('level_steps','2');
+		}
 		}
 		if($this->input->post('process_step_one'))
 		{
@@ -179,6 +184,7 @@ class Leadcontroller extends CI_Controller
 			$this->session->set_userdata($id_for_session);
 			 //}
 			 $this->load->view('auth/step_three',$data);
+			 
 			 /* else{
 			 $this->load->view('auth/step_one');
 			 } */
@@ -234,6 +240,11 @@ class Leadcontroller extends CI_Controller
 			$redirect_url = $base.'find_college';
 			redirect($redirect_url);
 			} */
+		 }
+		 else if($this->input->post('edit_search'))
+		 {
+			$this->session->set_userdata('level_steps','2');
+			redirect(find_college);
 		 }
 		else{
 		$level_steps = $this->session->userdata('level_steps');
