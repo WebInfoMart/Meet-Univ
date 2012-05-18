@@ -2,7 +2,7 @@
 $fetch_country = array();
 $fetch_area_interest = array();
 $fetch_country = $this->frontmodel->fetch_country_having_univ_footer();
-$fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ();
+$fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer();
 ?>
 <footer>
 		<div class="container">
