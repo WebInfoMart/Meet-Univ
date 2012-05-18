@@ -274,8 +274,11 @@ class Leadcontroller extends CI_Controller
 		);
 		$this->session->set_userdata($set_session_event_register);
 		}
-		
-		//print_r($this->session->userdata());
+		$id_of_university = $this->session->userdata('register_event_university_id');
+		//$id_of_event = $this->session->userdata('register_event_id');
+		$condition = array(
+		'event_univ_id'=>$id_of_university);
+		$data['univ_event_info'] = $this->leadmodel->get_event_univ_info($condition);
 		if($this->input->post('submit_event_register'))
 		{
 			$this->form_validation->set_rules('event_fullname','Fullname','trim|xss_clean|required');

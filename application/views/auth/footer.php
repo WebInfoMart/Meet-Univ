@@ -10,7 +10,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ();
 				<div>
 					<div class="footer margin_delta">
 						<h4 class="white">Colleges</h4>
-						<ul>
+						<ul style="margin-left:-1px;">
 						<?php
 						if(!empty($fetch_area_interest))
 						{

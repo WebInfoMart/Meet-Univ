@@ -1,21 +1,98 @@
-<div class="container">
+
+	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body">
 			<div class="row margin_t1">
 				<div class="float_l span13 margin_l">
-<form action="" method="post">		
-		
-FullName<input type="text" name="event_fullname" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['fullname']? $get_info_logged_user['fullname']:''; }?>"/>
+					<div class="float_l span10 margin_zero round_box">
+						<h2>Event Registration</h2>
+					<div class="margin_t1">
+						<form class="form-horizontal form_step_box" action="" method="post">
+							<div class="control-group">
+								<label class="control-label" for="focusedInput">Full Nmae</label>
+								<div class="controls">
+								<input type="text" class="input-xlarge focused" name="event_fullname" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['fullname']? $get_info_logged_user['fullname']:'Full Name'; }?>"/>
 <span style="color:red;"> <?php echo form_error('event_fullname'); ?> <?php echo isset($errors['event_fullname'])? $errors['event_fullname'] : ''; ?> </span>
-Email<input type="text" name="event_email" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['email']? $get_info_logged_user['email']:''; }?>"/>
+									
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="focusedInput">Email</label>
+								<div class="controls">
+								<input type="text" name="event_email" class="input-xlarge focused" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['email']? $get_info_logged_user['email']:'Email'; }?>"/>
 <span style="color:red;"> <?php echo form_error('event_email'); ?> <?php echo isset($errors['event_email'])? $errors['event_email'] : ''; ?> </span>
-Phone<input type="text" name="event_phone" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['mob_no']? $get_info_logged_user['mob_no']:'';} ?>"/>
+									
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="focusedInput">Phone</label>
+								<div class="controls">
+								<input type="text" class="input-xlarge focused" name="event_phone" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['mob_no']? $get_info_logged_user['mob_no']:'Phone';} ?>"/>
 <span style="color:red;"> <?php echo form_error('event_phone'); ?> <?php echo isset($errors['event_phone'])?$errors['event_phone'] : ''; ?>  </span>
-
-<input type="submit" name="submit_event_register" value="Register"/>
-</form>
-</div>
-</div>
-</div>
-</div>
+									
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="focusedInput">Event</label>
+								<div class="controls">
+									<span class="page4-font">
+									<?php
+									if($univ_event_info['event_category'] == 'spot_admission')
+									{
+										echo "Spot Admission";
+									}
+									else if($univ_event_info['event_category'] == 'fairs')
+									{
+										echo "Fairs";
+									}
+									else if($univ_event_info['event_category'] == 'others')
+									{
+										echo "Counselling";
+									}
+									else if($univ_event_info['event_category'] == 'alumuni')
+									{
+										echo "Counselling";
+									}
+									?>
+									</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="focusedInput">University Name</label>
+								<div class="controls">
+									<span class="page4-font"><?php echo $univ_event_info['univ_name']?$univ_event_info['title']:'Not Available'; ?></span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="focusedInput">Date</label>
+								<div class="controls">
+									<span class="page4-font"><?php echo $univ_event_info['event_date_time']?$univ_event_info['event_date_time']:'Not Available'; ?></span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="focusedInput">Time</label>
+								<div class="controls">
+									<span class="page4-font"><?php echo $univ_event_info['event_time']?$univ_event_info['event_time']:'Not Available'; ?></span>
+								</div>
+							</div>
+							<div class="controls">
+							<input type="submit" name="submit_event_register" value="Register me" class="btn btn-success"/>
+								
+							</div>
+						</form>
+					</div>
+					</div>
+					<div class="float_r">
+						<img src="images/banner_img.png">
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="float_r span3">
+					<img src="images/banner_img.png">
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	
