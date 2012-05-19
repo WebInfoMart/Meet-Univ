@@ -129,7 +129,7 @@ if ($user) {
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
-<link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-avia.css">
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/home_slider.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-editor.css" />
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/thingerly-calendar.css" />
 <div id="fb-root"></div>
@@ -154,7 +154,7 @@ if ($user) {
 <script type="text/javascript" src="<?php echo "$base$js";?>/pic_upload_js.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-button.js"></script>
 
-<script type="text/javascript" src="<?php echo "$base$js";?>/avia-custom.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/slides.min.jquery.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/tinyeditor.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>

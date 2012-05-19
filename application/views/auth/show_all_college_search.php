@@ -23,6 +23,7 @@
 						<?php
 						$count_array = count($get_university['university']);
 						$map_address='';
+						$cnt = 1;
 						for($no_university = 0; $no_university<$count_array; $no_university++)
 						{
 						?>
@@ -61,7 +62,10 @@
 												?>
 											</div>
 											<div class="apply">
-												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"><a href="#">Apply</a></span>
+												<span id="send_steps_span">
+											<input type="hidden" id="steps_univ_id_<?php echo $cnt; ?>" name="steps_univ_id_<?php echo $cnt; ?>" value="<?php echo $get_university['university'][$no_university]['univ_id']; ?>"
+												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"/><a href="#" id="<?php echo $cnt; ?>" onclick="send_steps(this);">Apply</a></span>
+											</span>
 											</div>
 										</div>
 										<div class="float_r courses_data margin_l">
@@ -154,7 +158,7 @@
 								</div>
 								<div class="clearfix"></div>
 							</div>
-					<?php } ?>	
+					<?php $cnt++; } ?>	
 						</div>
 						</div>
 <script>

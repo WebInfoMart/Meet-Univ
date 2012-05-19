@@ -35,22 +35,26 @@ $(function () {
 	<div class="form">
 		<div class="row">
 			<div class="span8 real margin_t">
-				<div id='coin-slider' class='gallery_div'>
-					<?php
+				<div id="slider_slides"  class='gallery_div'>
+				<div class="slides_container">
+				<?php
 					foreach($gallery_home as $galery_images)
 					{
 						if(!empty($galery_images['image_path']))
 					{
-					?>
-					<a href="" target="_blank"><img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="700" height="360" title="" alt="" rel=" "/>
-						<span>
-							<?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?>
-						</span>
-					</a>
-					<?php
-					}
-					}
-					?>
+					?>			
+					<div class="slide">
+						<a href="#" title=""><img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="700" height="360" title="" alt="" rel=" "></a>
+						<div class="slider_caption" style="bottom:0">
+							<p><?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?></p>
+						</div>
+					</div>	
+				
+				<?php
+				  }
+				  }
+				?>
+				</div>	
 				</div>				
 			</div>
 			<div class="float_r span8 margin_t margin_l">
@@ -549,31 +553,6 @@ $(document).ready(function() {
    });
 });
 </script>	
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#coin-slider').coinslider();
-	});
-</script>
-
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#coin-slider').coinslider({ width: 500, navigation: false, delay: 5000 });
-		width: 400, // width of slider panel
-height: 290, // height of slider panel
-spw: 7, // squares per width
-sph: 5, // squares per height
-delay: 3000, // delay between images in ms
-sDelay: 30, // delay beetwen squares in ms
-opacity: 0.7, // opacity of title and navigation
-titleSpeed: 500, // speed of title appereance in ms
-effect: '', // random, swirl, rain, straight
-navigation: true, // prev next and buttons
-links : true, // show images as links
-hoverPause: true // pause on hover
-	});
-</script>
 <script>
 $(document).ready(function(){
 $('#allcollege').click(function(){
@@ -664,6 +643,36 @@ window.onload = function() {
 			FixImages(true);
 
 		}
+		$(function(){
+			$('#slider_slides').slides({
+				play: 5000,
+				pause: 2500,
+				hoverPause: true,
+				animationStart: function(current){
+					$('.slider_caption').animate({
+						bottom:-35
+					},100);
+					if (window.console && console.log) {
+						// example return of current slide number
+						console.log('animationStart on slide: ', current);
+					};
+				},
+				animationComplete: function(current){
+					$('.slider_caption').animate({
+						bottom:0
+					},200);
+					if (window.console && console.log) {
+						// example return of current slide number
+						console.log('animationComplete on slide: ', current);
+					};
+				},
+				slidesLoaded: function() {
+					$('.slider_caption').animate({
+						bottom:0
+					},200);
+				}
+			});
+		});
 </script>
 
 
