@@ -271,6 +271,7 @@ $(function () {
 					<div class="home_artical_box">
 						<span>Events</span>
 					</div>
+					<form action="EventRegistration" method="post">
 					<div class="box all_box event_rad">
 						<ul class="">
 						
@@ -282,7 +283,7 @@ $(function () {
 						//if($featured_events != '' || $featured_events != '0') {
 						$date = explode(" ",$events['event_date_time']);
 						?>
-						<form action="find_college/<?php echo $events['univ_id'].'/'.$events['event_id']; ?>" method="post">
+						
 							<li>
 								<div>
 								<div class="page_data">
@@ -327,17 +328,22 @@ $(function () {
 										
 										</h3>
 										
-										<button class="btn btn-primary" id="<?php echo $events['event_id']; ?>" href="">Register!</button>
+									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
+									<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
+									<div class="float_r margin_t1">
+									<input type="submit" name="btn_event_register" id="<?php echo $events['event_id']; ?>" value="Register" class="btn btn-primary" /></div>
+										
 										
 									</div>
 									<div class="clearfix"></div>
 								</div>
 							</li>
 						<?php } } else { echo "There is No Upcoming Events ! ! !"; } ?>
-							</form>
+							
 
 							</ul>
 					</div>
+					</form>
 				</div>
 				<div class="grid_3">
 					<div class="home_artical_box feat_col">
