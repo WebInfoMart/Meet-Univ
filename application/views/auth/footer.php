@@ -54,15 +54,23 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 					<div class="footer margin_beta">
 						<h4 class="white">Reach Us</h4>
 						<div>
-								ABC, XYZ Building,<br />
-								Hyderabad,<br />
-								Arunachal Pradesh,<br />
+								601, Topaz Building,<br />
+								Amrutha Hills, Punjagutta,<br />
+								Hyderabad - 500082<br />
 								India<br />
 								Email: meet@meetuniversities.com<br />
-								Call: +91-0000000000
+								Call: +91-40-66364426
 						</div>
 					</div>
 					<div class="clearfix"></div>
+					<div class="row">
+						<div class="span4">
+							&copy; 2011 - 2012 Meet Universities
+						</div>
+						<div class="span4 offset6 text-right">
+							Powered by <a href="http://webinfomart.com" target="_blank">WebInfoMart</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
