@@ -2,7 +2,7 @@
 	Resets defualt browser settings
 	reset.css
 */
-.slider_caption p{ margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:100%; font-family:inherit; vertical-align:baseline;font:normal 62.5%/1.5 Helvetica, Arial, sans-serif;
+.slider_caption p{ margin:0; padding:0; border:0; outline:0; font-weight:inherit; font-style:inherit; font-size:13px; font-family:inherit; vertical-align:baseline;/*font:normal 62.5%/1.5 Helvetica, Arial, sans-serif; font-size changed from 100%*/
 	 }
 
 
@@ -29,13 +29,14 @@
 */
 
 .slides_container {
-
-		width:493px;
-
+	width:493px;
 	/*width:570px;*/
 	overflow:hidden;
 	position:relative;
 	display:none;
+	/*Added by Debal*/
+	border-radius: 6px;
+	border: 3px solid #fff;
 }
 
 /*
@@ -81,6 +82,8 @@ width:493px;
 .slider_pagination {
 	margin:6px auto 0;
 	width:100px;
+	position: relative;
+	top: -3px;
 }
 
 .slider_pagination li {

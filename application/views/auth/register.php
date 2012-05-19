@@ -157,13 +157,14 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 				</div>
 				<div>
 					<div class="span7">
-						<h3>5 reasons to join Meet Universities</h3>
+						<h2 class="orange">5 reasons to join Meet Universities</h2>
 						<ul class="signup_benefits">
-							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-							<li>Duis pharetra eleifend sapien, id faucibus dolor rutrum et.</li>
-							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-							<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+							<li>Single largest University Event listing in the world.</li>
+							<li>Meet your dream university : Offline | Online</li>
+							<li>Free university information.</li>
+							<li>Free Career advice from experts.</li>
+							<li>One Click , dream university match engine.</li>
+							<li>Guidance on visa ,immigration , education loans</li>
 						</ul>
 					</div>
 					<div class="span4 thumb_box">
@@ -176,7 +177,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 					<?php } ?>	
 					</div>
 					<div class="span10">
-						<h3>Upcoming Events</h3>
+						<h2 class="orange">Upcoming Events</h2>
 						<ul class="events">
 						<?php
 						$c=0;
