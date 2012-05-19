@@ -95,6 +95,8 @@ $this->session->unset_userdata('follow_to_univ');
 								</div>
 							</div>
 						</div>
+						<form action="<?php echo "$base"; ?>find_college" method="post" id="frm_search_steps">
+						<input type="hidden" name="hid_send_univ_id_frm_search" id="hid_send_univ_id_frm_search" value=""/>
 						<div class="float_r" id="search_results">
 						<?php if(!($count_array)){ ?>
 						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
@@ -122,7 +124,7 @@ $this->session->unset_userdata('follow_to_univ');
 						
 						<?php
 						$map_address='';
-						
+						$cnt = 1;
 						for($no_university = 0; $no_university<$count_array; $no_university++)
 						{
 						?>
@@ -162,7 +164,10 @@ $this->session->unset_userdata('follow_to_univ');
 												?>
 											</div>
 											<div class="apply">
-												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"><a href="#">Apply</a></span>
+												<span id="send_steps_span">
+											<input type="hidden" id="steps_univ_id_<?php echo $cnt; ?>" name="steps_univ_id_<?php echo $cnt; ?>" value="<?php echo $get_university['university'][$no_university]['univ_id']; ?>"
+												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"/><a href="#" id="<?php echo $cnt; ?>" onclick="send_steps(this);">Apply</a></span>
+											</span>
 											</div>
 										</div>
 										<div class="float_r courses_data margin_l">
@@ -255,7 +260,7 @@ $this->session->unset_userdata('follow_to_univ');
 								</div>
 								<div class="clearfix"></div>
 							</div>
-					<?php } ?>	
+					<?php $cnt++; } ?>	
 						</div>
 						</div>
 						<div class="clearfix"></div>
@@ -268,6 +273,7 @@ $this->session->unset_userdata('follow_to_univ');
 			</div>
 			
 		</div>
+		</form>
 		<!--<div id="pagination" style="margin-top:15px;margin-left:410px;" class="table_pagination paging-margin">
    
 						   <?php
@@ -440,5 +446,12 @@ if(univ_id!='' && event_id!='')
 window.location='<?php echo $base; ?>univ-'+univ_id+'-event-'+event_id;
 }
 }
-
+function send_steps(atr)
+{
+var x = atr.id;
+var txt_val = $('#steps_univ_id_'+x).val();
+$('#hid_send_univ_id_frm_search').val(txt_val);
+$('#frm_search_steps').submit();
+//redirect(find_college);
+}
 </script>	 

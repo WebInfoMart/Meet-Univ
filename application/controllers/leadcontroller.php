@@ -22,12 +22,11 @@ class Leadcontroller extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		//echo $this->input->post('steps_univ_id');
-		/* if($this->input->post('steps_univ_id'))
+		if($this->input->post('hid_send_univ_id_frm_search'))
 		{
-		$unvid = $this->input->post('steps_univ_id');
-		$this->session->set_userdata('apply_college',$unvid);
-		} */
+			$unvid = $this->input->post('hid_send_univ_id_frm_search');
+			$this->session->set_userdata('apply_college',$unvid);
+		} 
 		//echo $this->session->userdata('apply_college');
 		$id = $request_univ_id;
 		$events_id = $event_id;
