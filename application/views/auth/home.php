@@ -354,9 +354,12 @@ $(function () {
 							<li>
 						<?php 
 						$x=0;
-						foreach($featured_college as $featured_clg) { ?>
+						foreach($featured_college as $featured_clg) {
+				list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$featured_clg['univ_logo_path']);
+				$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);?>
+				
 									<div class="aspectcorrect featured_art <?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo ""; } ?>" >
-				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php if($featured_clg['univ_logo_path']!=''){echo $featured_clg['univ_logo_path'];}else{ echo 'univ_logo.png';} ?>" >
+				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php if($featured_clg['univ_logo_path']!=''){echo $featured_clg['univ_logo_path'];}else{ echo 'univ_logo.png';} ?>" >
 				
 				</a>
 						</div>							
@@ -644,11 +647,6 @@ function fetch_programs(educ_level)
 	   }
 	   })
 }
-window.onload = function() {
-
-			FixImages(true);
-
-		}
 		$(function(){
 			$('#slider_slides').slides({
 				play: 5000,
