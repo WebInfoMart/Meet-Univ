@@ -55,13 +55,17 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<?php
 							if($articles_detail['article_image_path'] != '')
 							{
+							list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$articles_detail['article_image_path']);
+							$img_arr=$this->searchmodel->set_the_image($width,$height,240,175,TRUE);
 							?>
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $articles_detail['article_image_path']; ?>" class="art_img_left" />
+								<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo "$base"; ?>uploads/news_article_images/<?php echo $articles_detail['article_image_path']; ?>"  />
 							<?php	
 							}
 							else {
+							list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$articles_detail['article_image_path']);
+							$img_arr=$this->searchmodel->set_the_image($width,$height,240,175,TRUE);
 							?>
-							<img src="<?php echo "$base$img_path"; ?>/user_model.png" class="art_img_left" />
+							<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo "$base$img_path"; ?>/user_model.png" />
 							<?php
 							}
 							?>

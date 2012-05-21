@@ -15,16 +15,26 @@
 				</div>-->	
 					<h2 class="course_txt">Recent Articles</h2>
 				<div class="margin_t1">
-					<?php foreach($articles as $articles_detail){ ?>
+					<?php foreach($articles as $articles_detail){
+					
+				?>
 						<div class="event_border ">
 							<div class="float_l event_border_div aspectcorrect">
-							<?php if($articles_detail['article_image_path']!=""){?>
-<img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $articles_detail['article_image_path']; ?>">
-								
-								<?php } else if($articles_detail['univ_logo_path']==''){?>
-								<img src="<?php echo "$base$img_path"; ?>/default_logo.png">
-								<?php } else {?>
-								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $articles_detail['univ_logo_path']; ?>">
+							<?php if($articles_detail['article_image_path']!=""){
+								list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$articles_detail['article_image_path']);
+								$img_arr=$this->searchmodel->set_the_image($width,$height,86,86,TRUE);
+							?>
+							<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>uploads/news_article_images/<?php echo $articles_detail['article_image_path']; ?>">
+								<?php } else if($articles_detail['univ_logo_path']==''){
+								list($width, $height, $type, $attr) = getimagesize($base.$img_path.'default_logo.png');
+								$img_arr=$this->searchmodel->set_the_image($width,$height,86,86,TRUE);
+								?>
+								<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo "$base$img_path"; ?>/default_logo.png">
+								<?php } else {
+								list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$articles_detail['univ_logo_path']);
+								$img_arr=$this->searchmodel->set_the_image($width,$height,86,86,TRUE);
+								?>
+								<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $articles_detail['univ_logo_path']; ?>">
 								<?php } ?>	
 							</div>
 							<div class="dsolution" style="padding-left:20px;">
@@ -69,8 +79,3 @@
 			</div>
 		</div>
 	</div>
-<script>
-$(document).ready(function(){
-			FixImages(true);
-});	
-</script>	
