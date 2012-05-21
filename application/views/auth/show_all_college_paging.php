@@ -24,11 +24,18 @@
 												<?php 
 												$x = $get_university['university'][$no_university]['univ_logo_path'];
 												if($x != '')
-												{ ?>
-							<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $base; ?>uploads/univ_gallery/<?php echo $x; ?>' /></a>
-											<?php	}
-												else{ ?>
-											<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo "$base"; ?>uploads/univ_gallery/univ_logo.png' /></a>
+												{ 
+				list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$x);
+				$img_arr=$this->searchmodel->set_the_image($width,$height,110,115,TRUE);?>
+							<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $base; ?>uploads/univ_gallery/<?php echo $x; ?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;"></a>
+											<?php
+								
+											}
+												else{ 
+												list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/univ_logo.png');
+												$img_arr=$this->searchmodel->set_the_image($width,$height,110,115,TRUE);?>
+			
+											<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo "$base"; ?>uploads/univ_gallery/univ_logo.png' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;"></a>
 							
 											<?php	}
 												?>
@@ -129,8 +136,4 @@
 								<div class="clearfix"></div>
 							</div>
 					<?php $cnt++; } ?>	
-<script>
-$(document).ready(function(){
-			FixImages(true);
-});	
-</script>					
+					

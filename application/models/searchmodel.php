@@ -748,7 +748,62 @@ function show_all_college_paging($current_url)
 		
 		
 	}
-//filteratio end	
-		
+//filteration end	
+
+	function set_the_image($img_width,$img_height,$div_width,$div_height,$flag)
+    {
+			
+		    $data = $this->searchmodel->ScaleImage($img_width, $img_height, $div_width, $div_height,$flag);
+			return $data;
+	
+	}	
+	
+	function ScaleImage($srcwidth, $srcheight, $targetwidth, $targetheight, $fLetterBox) {
+	$result = array( 'width'=>0, 'height'=>0, 'fScaleToTargetWidth'=>true);
+
+    if (($srcwidth <= 0) || ($srcheight <= 0) || ($targetwidth <= 0) || ($targetheight <= 0)) {
+        return $result;
+    }
+    if($srcwidth<$targetwidth && $srcheight<$targetheight)
+	{
+	$result = array('width'=>$srcwidth, 'height'=>$srcheight);
+	$result['targetleft'] =floor(($targetwidth - $result['width']) / 2);
+	$result['targettop'] = floor(($targetheight - $result['height']) / 2);
+	 return $result;
+	}
+	
+    // scale to the target width
+    $scaleX1 = $targetwidth;
+    $scaleY1 = ($srcheight * $targetwidth) / $srcwidth;
+
+    // scale to the target height
+    $scaleX2 = ($srcwidth * $targetheight) / $srcheight;
+    $scaleY2 = $targetheight;
+
+    // now figure out which one we should use
+    $fScaleOnWidth = ($scaleX2 > $targetwidth);
+    if ($fScaleOnWidth) {
+        $fScaleOnWidth = $fLetterBox;
+    }
+    else {
+        $fScaleOnWidth = !$fLetterBox;
+    }
+
+    if ($fScaleOnWidth) {
+        $result['width'] = floor($scaleX1);
+        $result['height'] = floor($scaleY1);
+        $result['fScaleToTargetWidth'] = true;
+    }
+    else {
+        $result['width'] = floor($scaleX2);
+        $result['height'] = floor($scaleY2);
+        $result['fScaleToTargetWidth'] = false;
+    }
+     $result['targetleft'] = floor(($targetwidth - $result['width']) / 2);
+	 $result['targettop'] = floor(($targetheight - $result['height']) / 2);
+   return $result;
+}
+	
+	
 		
 }
