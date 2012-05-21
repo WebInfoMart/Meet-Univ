@@ -28,7 +28,7 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>
-	<div class="row" style="margin-top:-25px">
+	<div class="row" style="margin-top:-10px">
 				<div class="float_l span13 margin_l">
 				
 						<div class="">
@@ -53,22 +53,30 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<h3>Details</h3>
 							<div class="float_l span4 margin_r2">
 							<?php
-							if($articles_detail['article_image_path'] != '')
-							{
-							list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$articles_detail['article_image_path']);
-							$img_arr=$this->searchmodel->set_the_image($width,$height,240,175,TRUE);
+									$image_exist=0;	
+									$article_img = $articles_detail['article_image_path'];	
+									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$article_img);
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+								    }
+									if($article_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$article_img;
+									}
+									else
+									{
+									$image=$base.$img_path.'/default_logo.png';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
 							?>
-								<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo "$base"; ?>uploads/news_article_images/<?php echo $articles_detail['article_image_path']; ?>"  />
-							<?php	
-							}
-							else {
-							list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$articles_detail['article_image_path']);
-							$img_arr=$this->searchmodel->set_the_image($width,$height,240,175,TRUE);
-							?>
-							<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo "$base$img_path"; ?>/user_model.png" />
-							<?php
-							}
-							?>
+
+							<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+							
 								
 							</div>
 							<div>

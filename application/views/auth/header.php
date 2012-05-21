@@ -250,7 +250,7 @@ $('.menu a').each(function(){
 					panelfxfirst:"fading",
 					panelfxeasing:"easeInOutExpo",
 					fastchange:0,
-					keyboard:1
+					keyboard:0
 				});
 				
 			});	

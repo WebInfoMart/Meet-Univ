@@ -49,24 +49,30 @@
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
 											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;>
-												<?php 
-												$x = $get_university['university'][$no_university]['univ_logo_path'];
-												if($x != '')
-												{ 
-				list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$x);
-				$img_arr=$this->searchmodel->set_the_image($width,$height,110,115,TRUE);?>
-							<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $base; ?>uploads/univ_gallery/<?php echo $x; ?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;"></a>
-											<?php
-								
+												<?php
+											$image_exist=0;	
+											$univ_img = $get_university['university'][$no_university]['univ_logo_path'];	
+											if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img ) && $univ_img!='')	
+											{
+											$image_exist=1;
+											list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$univ_img);
 											}
-												else{ 
-												list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/univ_logo.png');
-												$img_arr=$this->searchmodel->set_the_image($width,$height,110,115,TRUE);?>
-			
-											<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo "$base"; ?>uploads/univ_gallery/univ_logo.png' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;"></a>
-							
-											<?php	}
-												?>
+											else
+											{
+											list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/univ_logo.png');
+											}
+											if($univ_img!='' && $image_exist==1)
+											{
+											$image=$base.'uploads/univ_gallery/'.$univ_img;
+											}
+											else
+											{
+											$image=$base.'uploads/univ_gallery/univ_logo.png';
+											} 
+											$img_arr=$this->searchmodel->set_the_image($width,$height,110,115,TRUE);
+											?>
+											<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;"></a>
+											
 											</div>
 											<div class="apply">
 												<span id="send_steps_span">

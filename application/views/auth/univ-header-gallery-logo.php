@@ -8,21 +8,36 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 		<div class="row">
 				<div class="span10">
 					<h2><?php 
+					$comcount=0;
 					if($university_details['univ_name'] != '' || $university_details['univ_name']!= '0')
 					{
 					echo $university_details['univ_name'].'-'; } ?> 
 					 <small><?php 
 					 if($city_name_university !='0')
 					 {
-						echo $city_name_university['cityname'].','; 
+						echo $city_name_university['cityname']; 
+						$comcount=1;
 					 }
 					 if($state_name_university != '0')
 					 {
-						echo $state_name_university['statename'].',';
+						if($comcount>0)
+						{
+						$comcount++;
+						echo ",";
+						}
+						echo $state_name_university['statename'];
+						
 					 }
 					if($country_name_university != '0')
 					{
-					echo $country_name_university['country_name']; } ?>
+						if($comcount>0)
+						{
+						$comcount++;
+						echo ",";
+						}
+					echo $country_name_university['country_name']; 
+					
+					} ?>
 					 </small></h2>
 				</div>
 				<div class="span4 float_r margin_t">
@@ -39,16 +54,30 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 			
 			
 				<div class="univ_page_logo aspectcorrect" style='position:absolute;' >
-				<?php 
-				if($university_details['univ_logo_path'] != '')
-				{
-				echo "<img  src='".base_url()."uploads/univ_gallery/".$university_details['univ_logo_path']."'/>"; 
-				}
-				else
-				{
-				echo "<img   src='".base_url()."uploads/univ_gallery/univ_logo.png'/>"; 
-				}
+				
+				<?php
+									$image_exist=0;	
+									$univ_img = $university_details['univ_logo_path'];	
+									if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$univ_img);
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/univ_logo.png');
+									}
+									if($univ_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/univ_gallery/'.$univ_img;
+									}
+									else
+									{
+									$image=$base.'uploads/univ_gallery/univ_logo.png';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,150,150,TRUE);
 				?>
+				<img  title="" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;">
 				</div>
 				
 				<ul class="uni_gallery">
@@ -125,7 +154,5 @@ $(".uni_menu").hover(
   }
 );
 });
-$(document).ready(function(){
-			FixImages(true);
-});	
+
 </script>

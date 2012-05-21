@@ -14,13 +14,31 @@
 				<?php foreach($articles_list_detail as $articles_detail){ ?>
 						<div class="event_border">
 								<div class="float_l">
-									<?php if($articles_detail['article_image_path']!=""){?>
-									<img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $articles_detail['article_image_path']; ?>" style="width:80px;height:80px;margin-right:20px">
-									<?php } else if($articles_detail['univ_logo_path']==''){?>
-									<img src="<?php echo "$base$img_path"; ?>/default_logo.png" style="width:80px;height:80px;margin-right:20px">
-									<?php } else {?>
-									<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $news_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >
-									<?php } ?>	
+									<?php
+									$image_exist=0;	
+									$article_img = $articles_detail['article_image_path'];	
+									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$article_img);
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+								    }
+									if($article_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$article_img;
+									}
+									else
+									{
+									$image=$base.$img_path.'/default_logo.png';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
+							?>
+
+							<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+							
 								</div>
 							<div class="dsolution">
 	<div class="float_r"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>

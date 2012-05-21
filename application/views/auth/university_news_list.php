@@ -13,13 +13,29 @@
 					<?php foreach($news_list_detail as $news_detail){ ?>
 						<div class="event_border">
 							<div class="float_l">
-							<?php if($news_detail['news_image_path']!=""){?>
-<img src="<?php echo $base; ?>uploads/news_article_images/<?php echo $news_detail['news_image_path']; ?>" style="width:80px;height:80px;margin-right:20px">
-								<?php } else if($news_detail['univ_logo_path']==''){?>
-								<img src="<?php echo "$base$img_path"; ?>/default_logo.png" style="width:80px;height:80px;margin-right:20px">
-								<?php } else {?>
-								<img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $news_detail['univ_logo_path']; ?>" style="width:80px;height:80px;margin-right:20px" >
-								<?php } ?>	
+							<?php
+									$image_exist=0;	
+									$news_img = $news_detail['news_image_path'];	
+									if(file_exists(getcwd().'/uploads/news_article_images/'.$news_img) && $news_img!='')	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$news_img);
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/news_default_image.jpg');
+								    }
+									if($news_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$news_img;
+									}
+									else
+									{
+									$image=$base.$img_path.'/news_default_image.jpg';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,84,84,TRUE);
+							?>
+<img src="<?php echo $image; ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;margin-right:20px">	
 							</div>
 							<div class="dsolution">
 								<div>

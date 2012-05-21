@@ -282,6 +282,25 @@ $(function () {
 						foreach($featured_events as $events) { 
 						//if($featured_events != '' || $featured_events != '0') {
 						$date = explode(" ",$events['event_date_time']);
+						$image_exist=0;		
+						if(file_exists(getcwd().'/uploads/univ_gallery/'.$events['univ_logo_path']))	
+						{
+						$image_exist=1;
+						list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$events['univ_logo_path']);
+						}
+						else
+						{
+						list($width, $height, $type, $attr) = getimagesize($base.$img_path.'calendar.png');
+						}
+						if($events['univ_logo_path']!='' && $image_exist==1)
+						{
+						$image=$base.'uploads/univ_gallery/'.$events['univ_logo_path'];
+						}
+						else
+						{
+						$image=$base.$img_path.'/calendar.png';
+						} 
+						$img_arr=$this->searchmodel->set_the_image($width,$height,60,60,TRUE);
 						?>
 						
 							<li>
@@ -295,7 +314,8 @@ $(function () {
 										<div class="clearfix"></div>
 									</div>
 									<div class="float_l span1 img_logo_events aspectcorrect">
-										<img <?php if($events['univ_logo_path']!=''){ ?> src=" <?php echo $base;?>/uploads/univ_gallery/<?php echo $events['univ_logo_path']; ?>" <?php } else { ?> src="<?php echo "$base$img_path" ; ?>/calendar.png <?php } ?>">
+					
+										<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 									</div>
 									<div class="float_l span5">
 										<a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a>
@@ -352,14 +372,32 @@ $(function () {
 					<div class="col_box event_rad">
 						<ul class="col_img">
 							<li>
-						<?php 
-						$x=0;
-						foreach($featured_college as $featured_clg) {
+				<?php 
+				$x=0;
+				foreach($featured_college as $featured_clg) {
+				$image_exist=0;		
+				if(file_exists(getcwd().'/uploads/univ_gallery/'.$featured_clg['univ_logo_path']) && $featured_clg['univ_logo_path']!='')	
+				{
+				$image_exist=1;
 				list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$featured_clg['univ_logo_path']);
-				$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);?>
+				}
+				else
+				{
+				list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/univ_logo.png');
+				}
+				if($featured_clg['univ_logo_path']!='' && $image_exist==1)
+				{
+				$image=$featured_clg['univ_logo_path'];
+				}
+				else
+				{
+				$image='univ_logo.png';
+				} 
+				$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);
+				?>
 				
 									<div class="aspectcorrect featured_art <?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo ""; } ?>" >
-				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php if($featured_clg['univ_logo_path']!=''){echo $featured_clg['univ_logo_path'];}else{ echo 'univ_logo.png';} ?>" >
+				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" >
 				
 				</a>
 						</div>							

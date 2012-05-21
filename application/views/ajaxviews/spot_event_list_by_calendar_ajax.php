@@ -6,19 +6,32 @@
 					<?php foreach($search_event_by_calendar as $event_detail){ ?>
 						<div class="page_last_border">
 							<div class="float_l event_border_style aspectcorrect">
-								<?php if($event_detail['univ_logo_path']==''){
-								list($width, $height, $type, $attr) = getimagesize($base.$img_path.'default_logo.png');
-								$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
-								?>
-								<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo "$base$img_path"; ?>/default_logo.png">
-								<?php } else {
-								list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$event_detail['univ_logo_path']);
-								$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
-								?>
-								<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $event_detail['univ_logo_path']; ?>">
-								<?php } ?>	
+									<?php
+									$image_exist=0;	
+									$event_img = $event_detail['univ_logo_path'];	
+									if(file_exists(getcwd().'/uploads/univ_gallery/'.$event_img) && $event_img!='')	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$event_img);
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+								    }
+									if($event_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/univ_gallery/'.$event_img;
+									}
+									else
+									{
+									$image=$base.$img_path.'default_logo.png';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
+									?>
 								
-							</div>
+								<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+									
+									</div>
 							<div class="page_event_data">
 								<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>">
 								<h3><?php echo $event_detail['event_title']; ?></h3>

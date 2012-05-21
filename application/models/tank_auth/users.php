@@ -864,7 +864,7 @@ class Users extends CI_Model
 		$query = $this->db->get('state');
 		if($query->num_rows() > 0)
 		{
-			return $query->result_array();
+			return $query->row_array();
 		}
 		else {
 		return 0;

@@ -17,7 +17,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 						foreach($fetch_area_interest as $interest)
 						{
 						?>
-							<li><a href=""><?php echo $interest['program_parent_name'];  ?></a></li>
+							<li><a href="<?php echo $base; ?>/colleges/<?php echo str_replace(' ','_',$interest['program_parent_name']); ?>"><?php echo $interest['program_parent_name'];  ?></a></li>
 						<?php } } ?>
 						</ul>
 					</div>

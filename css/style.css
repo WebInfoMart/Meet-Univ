@@ -99,7 +99,7 @@ ul.events li span{width:390px;float:left;word-wrap:break-word;}
 ul.events li h3{width:75px;color:#00a3e1;font-weight:500;float:right;display:inline-block;text-align:center;line-height:20px;}
 ul.events li h3 small{font-size:11px;display:block;}
 /**************************UNIVERSITY******************************/
-ul.uni_gallery{margin:25px -10px;overflow-y:hidden;border:solid 1px #ccc;border-right:none;border-left:none;height:100px;margin-left: 149px;}
+ul.uni_gallery{margin:25px -10px;overflow-y:hidden;border:solid 1px #ccc;border-right:none;border-left:none;height:100px;margin-left: 155px;}
 ul.uni_gallery li{list-style:none;float:left;}
 .uni_menu_placeholder{position:relative;top:-127px;z-index:1;}
 ul.uni_menu{/* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -227,7 +227,8 @@ position: absolute;
 margin-top: 3px;
 background: white;
 border: 2px solid #EAEAEA;
-padding: 2px;
+/*padding: 2px;*/
+padding:5px; /* by sumit munjal*/
 width:150px;
 height:150px;
 -moz-box-shadow: 0 0 5px #888;
@@ -238,7 +239,7 @@ text-align: center;
 
 .univ_page_gal
 {
-	width:208px;
+	width:125px;
 	height:100px;
 }
 
