@@ -290,7 +290,7 @@ $(function () {
 						}
 						else
 						{
-						list($width, $height, $type, $attr) = getimagesize($base.$img_path.'calendar.png');
+						list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/calendar.png');
 						}
 						if($events['univ_logo_path']!='' && $image_exist==1)
 						{
