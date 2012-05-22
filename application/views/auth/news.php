@@ -29,11 +29,11 @@
 									if(file_exists(getcwd().'/uploads/news_article_images/'.$news_img) && $news_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$news_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$news_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/news_default_image.jpg');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/news_default_image.jpg');
 								    }
 									if($news_img!='' && $image_exist==1)
 									{
@@ -58,8 +58,9 @@
 										</span><br/>
 									</div>
 									<div class="float_r">
+				<div class="float_l" style="margin-right:10px;"> <g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone> </div>
 				<!--<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>-->
-				<div class="float_l" style="margin-right:10px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+				<div class="float_l" style="width: 66px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 									
 				</div>
 				<div class="float_l">

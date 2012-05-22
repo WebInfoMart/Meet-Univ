@@ -2,6 +2,8 @@
  if (typeof FB  != "undefined"){
         FB.XFBML.parse(document.getElementById('fbLike'));} 
 		twttr.widgets.load();
+		
+ gapi.plusone.go();
 </script>
 <?php 
 								foreach($search_event_by_calendar as $event_detail){ 
@@ -14,11 +16,11 @@
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$event_img) && $event_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$event_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$event_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
 								    }
 									if($event_img!='' && $image_exist==1)
 									{
@@ -45,6 +47,7 @@
 												</div>
 												<div class="float_r">
 													<div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+												<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 												<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a>
 												</div>
 												<div class="clearfix"></div>

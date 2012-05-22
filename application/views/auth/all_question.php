@@ -266,8 +266,9 @@
 				</div>
 				<div class="float_r">
 				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
-				<div class="float_l"> <div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div> </div>
-				<div class="float_r"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
+				<div id="gp" class="float_l gp"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+				<div id="fb" class="float_l"> <div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div> </div>
+				<div id="tw" class="float_r"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
 				<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
 				</div>
 			<div class="clearfix"></div>

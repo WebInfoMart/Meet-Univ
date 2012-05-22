@@ -61,11 +61,11 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$univ_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$univ_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/univ_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/univ_logo.png');
 									}
 									if($univ_img!='' && $image_exist==1)
 									{

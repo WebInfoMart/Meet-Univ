@@ -2,6 +2,8 @@
  if (typeof FB  != "undefined"){
         FB.XFBML.parse(document.getElementById('fbLike'));} 
 		twttr.widgets.load();
+		
+
 </script>					
 					<?php foreach($search_event_by_calendar as $event_detail){ ?>
 						<div class="page_last_border">
@@ -12,11 +14,11 @@
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$event_img) && $event_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$event_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$event_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
 								    }
 									if($event_img!='' && $image_exist==1)
 									{

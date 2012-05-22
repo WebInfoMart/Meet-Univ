@@ -286,11 +286,11 @@ $(function () {
 						if(file_exists(getcwd().'/uploads/univ_gallery/'.$events['univ_logo_path']))	
 						{
 						$image_exist=1;
-						list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$events['univ_logo_path']);
+						list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$events['univ_logo_path']);
 						}
 						else
 						{
-						list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/calendar.png');
+						list($width, $height, $type, $attr) = getimagesize(getcwd().$img_path.'/calendar.png');
 						}
 						if($events['univ_logo_path']!='' && $image_exist==1)
 						{
@@ -379,11 +379,11 @@ $(function () {
 				if(file_exists(getcwd().'/uploads/univ_gallery/'.$featured_clg['univ_logo_path']) && $featured_clg['univ_logo_path']!='')	
 				{
 				$image_exist=1;
-				list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$featured_clg['univ_logo_path']);
+				list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$featured_clg['univ_logo_path']);
 				}
 				else
 				{
-				list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/univ_logo.png');
+				list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/univ_logo.png');
 				}
 				if($featured_clg['univ_logo_path']!='' && $image_exist==1)
 				{

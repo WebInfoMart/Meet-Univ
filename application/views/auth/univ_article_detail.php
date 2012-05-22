@@ -34,7 +34,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="">
 						<h2 class="course_txt"><?php echo $articles_detail['article_title']; ?></h2>
 						<div class="float_r">
-						<div class="float_l" style="margin-right:20px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
+						<div class="float_l" style="margin-right:20px;">
+						<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+						</div>
 						<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
 						<div class="float_l">
 							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
@@ -58,11 +60,11 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$article_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
 								    }
 									if($article_img!='' && $image_exist==1)
 									{
@@ -197,7 +199,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } echo $user_detail['fullname']; ?>
+								<?php } echo "<span style='float: left;width: 46px;position: absolute;'> ".$user_detail['fullname']."</span>"; ?>
 									</div>
 								</div>
 								<div class="float_l span9 margin_zero">

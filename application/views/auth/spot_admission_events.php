@@ -50,11 +50,11 @@
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$event_img) && $event_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$event_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$event_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
 								    }
 									if($event_img!='' && $image_exist==1)
 									{
@@ -79,10 +79,16 @@
 													<span class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"><?php echo $event_detail['event_date_time']; ?></span>
 												</div>
 											<div class="float_r">
-												<div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-												
+											<div id="gp" class="float_l">
+											<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+											</div>
+											<div id="fb" class="float_l fb">
+												<div class="fb-like" style="width: 66px;" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+												</div>
 												<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
+												<div id="tw" class="float_r tw">
 												<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a>
+												</div>
 											</div>
 											<div class="clearfix"></div>
 										</div>
@@ -202,6 +208,7 @@ var x = new Array(<?php echo $array_dates; ?>);
 						{
 							//$('#content_search').html(response);
 							//alert(response);
+							 gapi.plusone.go();
 							$('#event1').html(response);
 							$('#event1').animate({
 								opacity: 1,

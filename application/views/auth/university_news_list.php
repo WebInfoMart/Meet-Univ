@@ -19,11 +19,11 @@
 									if(file_exists(getcwd().'/uploads/news_article_images/'.$news_img) && $news_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/news_article_images/'.$news_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$news_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/news_default_image.jpg');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/news_default_image.jpg');
 								    }
 									if($news_img!='' && $image_exist==1)
 									{
@@ -46,7 +46,8 @@
 										<br/>
 									</div>
 						<div class="float_r">
-						<div class="fb-like " data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" >
+						<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+						<div class="fb-like" style="width: 66px;margin-left: 23px;" data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" >
 						
 						</div>
 						<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>

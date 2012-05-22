@@ -14,11 +14,11 @@
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$event_img) && $event_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize($base.'uploads/univ_gallery/'.$event_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$event_img);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize($base.$img_path.'/default_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
 								    }
 									if($event_img!='' && $image_exist==1)
 									{

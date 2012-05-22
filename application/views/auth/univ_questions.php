@@ -42,7 +42,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 	
 		<div class="float_l span13 margin_l">
 		<div class="float_r" >
-				<div class="float_l" style="margin-right:20px;">	<g:plusone size="medium" annotation="none"></g:plusone></div>
+				<div class="float_l" style="margin-right:20px;">	
+				<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+				</div>
 				
 				<div class="float_l" style="margin-left:10px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
 				<div class="float_l">
