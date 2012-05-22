@@ -24,21 +24,19 @@
     <table border="0" cellspacing="0" cellpadding="0">
      <tbody><tr>
       <td style="padding:0in 12.75pt 0in 12.75pt">
-      <h1 style="margin:0in;margin-bottom:.0001pt;text-align:justify"><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#058dd7">Lorem ipsum dolor
-      sit amet<u></u><u></u></span></h1>
+      <h1 style="margin:0in;margin-bottom:.0001pt;text-align:justify"><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#058dd7">Welcome To Meet Universities<u></u><u></u></span></h1>
       </td>
      </tr>
      <tr>
       <td style="padding:0in 12.75pt 0in 12.75pt;display:inline-block">
-      <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">Lorem ipsum dolor sit
-      amet, consectetur adipiscing elit. Sed risus lectus, varius accumsan
-      aliquam id, venenatis non lectus. Etiam eget dui tortor, id varius odio.
-      Fusce sem arcu, venenatis vitae pulvinar vitae, condimentum sed neque.
-      Mauris eu diam eu dui vulputate viverra. Suspendisse vitae quam erat. <u></u><u></u></span></p>
+      <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">
+	  Hi <?php echo $fullname; ?>,Welcome to MeetUniversities.<br />
+	  Your Passwod is <?php echo $password; ?><br />
+	  <u></u><u></u></span></p>
       </td>
      </tr>
      <tr>
-      <td style="padding:0in 12.75pt 0in 12.75pt;display:inline-block">
+     <!-- <td style="padding:0in 12.75pt 0in 12.75pt;display:inline-block">
       <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt;text-align:justify"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">Nulla
       tincidunt nulla a nisl fermentum molestie. Nullam fringilla, elit in
       varius congue, dui ante condimentum sapien, a tristique ante ante id dui.
@@ -59,6 +57,7 @@
       Aenean suscipit laoreet dui, ut pellentesque urna ornare ut. <u></u><u></u></span></p>
       </td>
      </tr>
+	 -->
     </tbody></table>
     </td>
    </tr>
@@ -71,9 +70,9 @@
       <td style="padding:0in 0in 0in 0in">
       <h5 style="margin:0in;margin-bottom:.0001pt"><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">Meet Universities
       please contact: <u></u><u></u></span></h5>
-     <span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646"><a href="mailto:lorem@ipsum.com" target="_blank">lorem@ipsum.com</a><br>
-      <span>+1 (800) 555 5555</span><span dir="ltr" tabindex="-1"></span> ext. 706<u></u><u></u></span></p>
-      <p><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">P.O.Box 12345 <u></u><u></u></span></p>
+     <span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646"><a href="mailto:lorem@ipsum.com" target="_blank">info@meetuniversities.com</a><br>
+      <span>+919891006366</span><span dir="ltr" tabindex="-1"></span><u></u><u></u></span></p>
+      <p><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646"><u></u><u></u></span></p>
       </td>
      </tr>
     </tbody></table>

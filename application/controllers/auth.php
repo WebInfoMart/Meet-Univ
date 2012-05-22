@@ -348,8 +348,10 @@ class Auth extends CI_Controller
 						//print_r($this->session->userdata);
 						$uid = $this->session->userdata('user_id');
 						$data['logged_user_email'] = $this->users->get_email_by_userid($uid);
+						$data['password'] = $this->input->post('password');
+						$data['fullname'] = $this->input->post('fullname');
 						$uid = $data['logged_user_email'];
-						$email_body = $this->load->view('auth/new_signup_content_email.php','',TRUE);
+						$email_body = $this->load->view('auth/new_signup_content_email.php',$data,TRUE);
 						$this->email->set_newline("\r\n");
 
             $this->email->from('Meet-University.com', 'Meet University');
