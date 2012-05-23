@@ -377,7 +377,13 @@ class Frontmodel extends CI_Model
 		$this->db->join('user_profiles','user_profiles.user_id = users.id','left');	
 		$this->db->where(array('comment_on_id'=>$commented_on_id,'commented_on'=>$commented_on));
 		$query=$this->db->get();
+		if($query->num_rows() > 0)
+		{
 		return $query->result_array();
+		}
+		else {
+		return 0;
+		}
 	}
 	
 	function post_comment_by_logged_in_user($logged_in_user_id,$commented_on,$commented_on_id,$commented_text)

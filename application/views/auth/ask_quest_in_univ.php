@@ -174,10 +174,16 @@
 				
 				</div>
 				<div class="float_r">
-				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
-				<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-				<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
+				<div class="float_l" style="margin-right:15px;">
+				<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 				</div>
+				<div class="float_l"><div class="fb-like" style="width:66px;" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+	
+				<div class="float_l">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
+				</div>
+				<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
+				
 				</div>
 				<div class="clearfix"></div>
 				

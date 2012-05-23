@@ -172,13 +172,15 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 						<h2 class="orange">Upcoming Events</h2>
 						<ul class="events">
 						<?php
+						if(!empty($featured_events))
+						{
 						$c=0;
 						foreach($featured_events as $events) { $c=$c+1; ?>
 							<li <?php if($c==count($featured_events)){ echo "class='border_gamma' ";} ?>   style="cursor:pointer;"  onclick="gotoevent('<?php echo $base;?>univ-<?php echo $events['univ_id'];?>-event-<?php echo $events['event_id'];?>')">
 							<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/default_logo.png<?php } ?>" class="events_img" >
 							<span><?php echo ucwords(substr($events['event_detail'],0,176)); ?></span><h3><?php $date=explode(" ",$events['event_date_time']); echo $date[0]."-".$date[1]; ?><small>300 attending!</small></span></h3>
 							</li>
-						<?php } ?>	
+						<?php } } else { echo "No Upcoming Events !!!"; } ?>	
 						</ul>
 					</div>
 				</div>

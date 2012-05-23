@@ -48,7 +48,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				
 				<div class="float_l" style="margin-left:10px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
 				<div class="float_l">
-							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 				</div>
 				<div class="clearfix"></div>
 				</div>
@@ -88,10 +88,13 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
-							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($question_comments); ?>"/>
-								<h3><span id="cnt_comment_show"><?php echo count($question_comments); ?></span> Comments</h3>
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?>"/>
+								<h3><span id="cnt_comment_show"><?php if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?></span> Comments</h3>
 							</div> 
-				<?php if(count($question_comments)>0){
+				<?php 
+				if(!empty($question_comments))
+				{
+				if(count($question_comments)>0){
 						foreach($question_comments as $question_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $question_comments_detail['comment_id']; ?>" >
 								<div class="float_l">
@@ -121,16 +124,30 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									</a>
 									</h4>
 									<?php echo $question_comments_detail['commented_text'];?>
-<div class="fb-like float_l" data-href="<?php $_SERVER["REQUEST_URI"]; ?>/que_commentid/<?php echo $question_comments_detail['comment_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+
 									<div style="font-size;color:black;" class="float_r"><?php
 									echo substr($question_comments_detail['comment_time'],0,16);?></div>
+									<div class="float_r">
+									<div class="float_l">
+									<div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>/que_commentid/<?php echo $question_comments_detail['comment_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+									</div>
+									<div class="float_l" style="margin-right: 22px;">
+									<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>/que_commentid/<?php echo $question_comments_detail['comment_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+									</div>
+									<div class="float_r">
+									<a href="https://twitter.com/share" style="width: 82px;" class="twitter-share-button" data-url="<?php $_SERVER["REQUEST_URI"]; ?>/que_commentid/<?php echo $question_comments_detail['comment_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>
+									</div>
+								</div>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 				<?php }
-}				?>			
+				} }				
+				?>			
 						</div>
-			<?php if($user_is_logged_in==0){ ?>		
+			<?php 
+			if(!empty($user_is_logged_in)) {
+			if($user_is_logged_in == 0){ ?>		
 			<div class="events_box" style="height: 53px;">
 				<div class="float_r">
 					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
@@ -219,7 +236,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 						</div>
-		<?php } ?>
+		<?php } } ?>
 					</div>
 				</div>
 				<div class="float_r span3">

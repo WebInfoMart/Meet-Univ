@@ -2,7 +2,9 @@
  if (typeof FB  != "undefined"){
         FB.XFBML.parse(document.getElementById('fbLike'));} 
 		twttr.widgets.load();
-</script>
+		
+		gapi.plusone.go();
+</script>			
 					<?php foreach($search_event_by_calendar as $event_detail){ ?>
 						<div class="page_last_border">
 							<div class="float_l event_border_style aspectcorrect">
@@ -43,11 +45,13 @@
 										
 									</div>
 									<div class="float_r">
-	<div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-									
-									<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a>
-				
+										<div id="gp" class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+										<div id="fb" class="float_l" style="width: 66px;margin-left: 19px;">
+										<div class="fb-like" style="width: 66px;" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+										</div>
+										<div id="tw" class="float_r">
+										<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a>
+										</div>
 									</div>
 									
 									<div class="clearfix"></div>
