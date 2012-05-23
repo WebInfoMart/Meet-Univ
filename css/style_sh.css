@@ -81,7 +81,7 @@ input, textarea, select, .uneditable-input {margin-bottom:0px;}
 .college{height:134px;}
 .search{height:90px}
 .body_container{background:#fff;padding: 20px 20px;}
-.yellow_bar{background-color:#fdf7cd;
+.yellow_bar{padding:15px;background-color:#fdf7cd;
 border:1px solid #cccccc;
 -moz-border:1px solid #cccccc;
 -webkit-border:1px solid #cccccc;
@@ -870,3 +870,8 @@ border: 1px solid #ddd;width:58px;padding: 7px 1px 5px 28px;z-index: 1;position:
 .apply img{z-index: 1;position: absolute;left: 13px;top: 10px;}
 .apply a{color: #667F00;}
 .page4-font{font-size:15px;}
+.box-red{border: 1px solid red;width: 4px;height: 4px;display: inline-block;background:red;margin-right: 10px;}
+.red-text{z-index: 1;
+top: 0px;
+position: absolute;
+left: 14px;}

@@ -8,26 +8,6 @@
 }(document, 'script', 'facebook-jssdk'));
 
 </script>
-<script>
-$(function () {
-        // basic version is: $('div.demo marquee').marquee() - but we're doing some sexy extras
-        
-        $('marquee').marquee('pointer').mouseover(function () {
-	       $(this).trigger('stop');
-        }).mouseout(function () {
-            $(this).trigger('start');
-        }).mousemove(function (event) {
-            if ($(this).data('drag') == true) {
-                this.scrollLeft = $(this).data('scrollX') + ($(this).data('x') - event.clientX);
-            }
-        }).mousedown(function (event) {
-            $(this).data('drag', true).data('x', event.clientX).data('scrollX', this.scrollLeft);
-        }).mouseup(function () {
-            $(this).data('drag', false);
-        });
-    });
- 
-</script>
 <div class="container">
 
 	<div class="body_bar"></div>
@@ -250,16 +230,14 @@ $(function () {
 			<?php 	}
 				else
 				{?>
-	<div class="marquee">
-		<?php				foreach($featured_news as $featured_news_list) { $x++; ?>
-					<div class="span8 yellow_bar_text float_l  margin_zero"><ul><li>
-					<a href="<?php echo $base; ?>univ-<?php echo $featured_news_list['news_univ_id']; ?>-news-<?php echo $featured_news_list['news_id']; ?>">
-					<?php echo substr($featured_news_list['news_title'],0,70).'..'; ?>
-					</a></li></ul>
-					</div>
-
-		<?php		 }
-			?>	</div>	
+			<div class="marquee" id="marquee" >
+			<span>
+				<a class="box-red"><span class="red-text">sdfsdfgdfg</span></a>
+				<a class="box-red"><span class="red-text">dfgdfgdf</span></a>
+				<a class="box-red"><span class="red-text">dfgdfg</span></a>	
+		
+			</span>
+			</div>	
 		<?php } ?>		
 					<div class="clearfix"></div>
 				</div>
@@ -413,7 +391,7 @@ $(function () {
 		</div>
 		<div class="margin_t">
 			<div class="row">
-				<div class="yellow_bar span16 margin_l">
+				<div class="yellow_bar margin_l" style="width:988px;">
 				<!--<marquee behavior="scroll" scrollamount="3" direction="left">-->
 					<ul class="yellow yellow_nav">
 						<li><a href="#">Engineering</a></li>
@@ -716,5 +694,18 @@ function fetch_programs(educ_level)
 			});
 		});
 </script>
+    <style type="text/css">
+#marquee {position:relative;
 
+overflow:hidden;
+
+width:1000px;
+
+height:22px;
+
+}
+
+#marquee span {white-space:nowrap;}
+
+</style>
 
