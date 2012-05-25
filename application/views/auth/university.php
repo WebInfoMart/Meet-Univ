@@ -187,7 +187,16 @@
 							<div class="artical_heading"><a href="<?php echo $base ?>univ-<?php echo $university_details['univ_id'] ?>-article-<?php echo $article['article_id']; ?>"><?php echo $article['article_title']; ?></a></div>
 						<div id="home" class="artical_box_data">
 							<div class="float_l content_art">
-								<?php echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['article_image_path']."'/>"; ?>
+								<?php
+								if($article['article_image_path']!='')
+								{
+								echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['article_image_path']."'/>";
+								}
+								else
+								{
+								echo "<img class='artical_img' src=".base_url()."images/default_logo.png />";
+								}
+								?>
 							</div>
 							<div>
 								<?php echo substr($article['article_detail'],0,380).'....'; ?>

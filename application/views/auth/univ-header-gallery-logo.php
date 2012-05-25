@@ -1,6 +1,15 @@
 <?php //function for counting the no of views 
 $no_of_views=$university_details['univ_views_count']+1;
 $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_views); ?>
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.univ.fancybox.js"></script>
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/jquery.fancybox.css" />
+<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$('.fancybox').fancybox();
+
+		});
+	</script>
 <div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -78,6 +87,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 									$img_arr=$this->searchmodel->set_the_image($width,$height,150,150,TRUE);
 				?>
 				<img  title="" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;">
+	
 				</div>
 				
 				<ul class="uni_gallery">
@@ -90,9 +100,12 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 				{
 				foreach($gallery as $gal)
 				{
-				if($gal!=''){
+				if(file_exists(getcwd().'/uploads/univ_gallery/'.$gal) && $gal!='')
+				{
 				?>
-					<li><?php echo "<img class='univ_page_gal' src='".base_url()."uploads/univ_gallery/".$gal."'/>"; ?></li>
+					<li>
+				<a class="fancybox" href="<?php echo $base; ?>uploads/univ_gallery/<?php echo $gal; ?>" data-fancybox-group="gallery" >	<img class='univ_page_gal' src='<?php echo $base; ?>uploads/univ_gallery/<?php echo $gal; ?>' /></a>
+					</li>
 				<?php
 				}
 				else{ ?>

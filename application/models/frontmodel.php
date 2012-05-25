@@ -55,7 +55,7 @@ class Frontmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('article');
-		$this->db->where(array('featured_home_article'=>'1','article_type_ud'=>'univ_article'));
+		$this->db->where(array('featured_home_article'=>'1','article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$this->db->limit(1);
 		$query = $this->db->get();
 		return $query->result_array();
@@ -223,7 +223,7 @@ class Frontmodel extends CI_Model
 		}
 
 	}
-	function fetch_news($page)
+	function fetch_news($page='')
 	{
 		$this->db->select('*');
 		$this->db->from('news');
@@ -231,10 +231,10 @@ class Frontmodel extends CI_Model
 		$this->db->where('news_type_ud','univ_news');
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
-		$config['base_url']=base_url()."Recent_News/news";
+		$config['base_url']=base_url()."Recent_News/news/";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '5'; 
-		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+		$config['per_page'] = 7; 
+		$offset = $this->uri->segment('3');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
 		$this->db->from('news');
@@ -253,20 +253,20 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
-		$this->db->where('article_type_ud','univ_article');
+		$this->db->where(array('article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
 		$config['base_url']=base_url()."Recent_Articles/articles";
 		$config['total_rows']=$numrows;
 		$config['per_page'] = '7'; 
-		$offset = $page;//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+		$offset = $this->uri->segment('3');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
-		$this->db->where('article_type_ud','univ_article');
-		$this->db->order_by("publish_time", "desc"); 
+		$this->db->where(array('article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$this->db->limit($limit,$offset);
+		$this->db->order_by("publish_time", "desc"); 
 		$query = $this->db->get();
 		$this->pagination->initialize($config);
 		return $query->result_array();
@@ -293,7 +293,7 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
-		$this->db->where(array('article_id'=>$article_id,'article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
+		$this->db->where(array('article_id'=>$article_id,'article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$query=$this->db->get();
 		if($query->num_rows()>0)
 		{
@@ -324,7 +324,7 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
-		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
+		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		//$this->db->limit($limit,$offset);
 		$query = $this->db->get();
 		//$this->pagination->initialize($config);
@@ -409,7 +409,7 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
-		$this->db->where(array('article_type_ud'=>'univ_article'));
+		$this->db->where(array('article_type_ud'=>'univ_article','article_approve_status'=>1));
 		$this->db->order_by("publish_time", "desc"); 
 		$this->db->limit(3);
 		$query = $this->db->get();

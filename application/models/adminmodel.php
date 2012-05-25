@@ -485,6 +485,7 @@ class Adminmodel extends CI_Model
 		$query=$this->db->get();
 		return $query->result_array();
 	}
+	
 	function get_univ_info($paging='')
 	{
 		$this->db->select('*');
@@ -506,6 +507,7 @@ class Adminmodel extends CI_Model
 		$this->pagination->initialize($config);
 		return $query->result();
 	}
+	
 	function get_univ_info_search($univ_name)
 	{
 		$this->db->select('*');

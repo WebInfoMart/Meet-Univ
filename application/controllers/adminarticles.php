@@ -61,6 +61,16 @@ class adminarticles extends CI_Controller
 			}
 			else
 			{
+			if($msg=='aas')
+			{
+			$data['msg']='Article Approved Successfully';
+			$this->load->view('admin/userupdated', $data);
+			}
+			if($msg=='adas')
+			{
+			$data['msg']='Article DisApproved Successfully';
+			$this->load->view('admin/userupdated', $data);
+			}
 			if($msg=='eas')
 			{
 			$data['msg']='Article Added Successfully';
@@ -500,7 +510,7 @@ class adminarticles extends CI_Controller
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 && $data['user_id']!='3')
+		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 && $data['admin_user_level']!='3')
 		{
 		$flag=1;
 		break;
@@ -585,7 +595,52 @@ class adminarticles extends CI_Controller
 		}
 	  }
 	}
-}
+	
+	
+	function approve_disapprove_article($approve_status='',$article_id)
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 && $data['admin_user_level']!='3')
+		{
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		$this->load->view('admin/accesserror', $data);
+		}
+		else
+		{
+		$fu_status=$this->articlemodel->approve_home_confirm($approve_status,$article_id);
+		if($fu_status)
+		{
+		redirect('adminarticles/manage_articles/aas');
+		}
+		else
+		{
+		redirect('adminarticles/manage_articles/adas');
+		}
+		}
+			
+		}
+	  }
+	}
 
 /* End of file auth.php */
 /* Location: ./application/controllers/auth.php */

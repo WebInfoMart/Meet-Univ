@@ -44,6 +44,8 @@ $insert=1;
 						<th ><input type="checkbox" class="check_all" ></th>
 						<th class="header" style="cursor: pointer; ">Article Title</th>
 						<th class="header" style="cursor: pointer; ">University Name</th>
+						<th class="header" style="cursor: pointer; ">Article Status</th>
+						
 						<!--<th class="header" style="cursor: pointer; ">Event's Place</th>-->
 						<th></th>
 					</tr>
@@ -64,6 +66,8 @@ $insert=1;
 						<?php echo ucwords(substr($row->article_title,0,50)); ?>
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
+						<td><?php if($row->article_approve_status){ echo "Approved"; } else {  echo"Pending For Approve";} ?></td>
+						
 						<!--<td><a href="#"><?php echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>-->
 						<td>
 			
@@ -77,7 +81,8 @@ $insert=1;
               <li><a href="<?php echo "$base"; ?>adminarticles/edit_article/<?php echo $row->article_id; ?>">
 			  <i class="icon-pencil"></i> Edit</a></li>
 			  <?php } if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3') { ?>
-<li><a href="#" onclick="featured_home_confirm('<?php echo "$base";?>adminarticles','<?php  echo $row->featured_home_article; ?>','<?php echo $row->article_id; ?>');"><i class="<?php if($row->featured_home_article=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_home_article=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a>
+<li><a href="#" onclick="featured_home_confirm('<?php echo "$base";?>adminarticles','<?php  echo $row->featured_home_article; ?>','<?php echo $row->article_id; ?>');"><i class="<?php if($row->featured_home_article=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_home_article=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a></li>
+<li><a href="#" onclick="approve_home_confirm('<?php echo "$base";?>adminarticles','<?php  echo $row->article_approve_status; ?>','<?php echo $row->article_id; ?>');"><i class="<?php if($row->article_approve_status=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->article_approve_status=='0'){?> Approve Article <?php } else {?> DisAprrove Article <?php } ?></a></li>
 			<!-- </li>	
 			  <li><a href="#" onclick="featured_dest_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_dest_article; ?>','<?php echo $row->article_id; ?>');"><i class="<?php if($row->featured_dest_article=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_dest_article=='1'){?> Make Study-Abroad Unfeatured <?php } else {?> Make Study-Abroad Featured <?php } ?></a>
 			 </li>-->	
@@ -132,7 +137,22 @@ else
 $('#check_university_'+articleid).removeAttr('checked');
 }
 }
-
+function approve_home_confirm(a,b,c)
+{
+if(b==0)
+{
+status='approve';
+}
+if(b==1)
+{
+status='disapprove';
+}
+var r=confirm("Are U sure u want to " +status+ " to this article?");
+if (r==true)
+{
+  window.location.href=a+'/approve_disapprove_article/'+b+'/'+c+'/';
+}
+}
 function featured_home_confirm(a,b,c)
 {
 var nof='1';

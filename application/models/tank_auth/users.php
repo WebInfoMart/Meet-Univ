@@ -939,7 +939,7 @@ class Users extends CI_Model
 	
 	function get_articles_of_univ($univ_id)
 	{
-		$query = $this->db->get_where('article',array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
+		$query = $this->db->get_where('article',array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$rows = mysql_affected_rows();
 		return $rows;
 	}
@@ -963,7 +963,7 @@ class Users extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('article');
-		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article'));
+		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$this->db->limit(4);
 		$this->db->order_by("publish_time", "desc");
 		$query = $this->db->get();		

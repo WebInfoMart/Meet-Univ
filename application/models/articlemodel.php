@@ -10,7 +10,6 @@ class Articlemodel extends CI_Model
 		parent::__construct();
 		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
 		$this->univ_gallery_path = realpath(APPPATH . '../uploads/news_article_images');
-		$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
 		$this->load->library('pagination');
 		$this->load->database();
 	}
@@ -27,10 +26,8 @@ class Articlemodel extends CI_Model
 		$this->load->library('upload', $config);
 		$flag=0;
 		if($_FILES["userfile"]["name"]!=''){
-		echo "kjkljkljkl";
 		if(!$this->upload->do_upload())
 		{
-		echo "opopopop";
 		  $flag=1;
 		  $data['err_msg']=$this->upload->display_errors();
 		  $this->load->view('admin/show_error',$data);
@@ -57,7 +54,8 @@ class Articlemodel extends CI_Model
 			   'postedby' => $data['user_id'],
 			    'article_image_path' => $image_data['file_name'],
 			   'article_univ_id' => $this->input->post('university'),
-			   'article_type_ud' => $this->input->post('article_type_ud')
+			   'article_type_ud' => $this->input->post('article_type_ud'),
+			   'article_approve_status'=>'0'
 			);
 			$this->db->insert('article', $data_insert);
 
@@ -76,7 +74,7 @@ class Articlemodel extends CI_Model
 		$this->db->where('university.user_id',$data['user_id']);
 		}
 		$query=$this->db->get();
-		$config['base_url']=base_url()."adminarticles/index/";
+		$config['base_url']=base_url()."adminarticles/manage_articles/";
 		$config['total_rows']=$query->num_rows();
 		$config['per_page'] = '7'; 
 		//$config['use_page_numbers'] = TRUE;
@@ -194,6 +192,22 @@ class Articlemodel extends CI_Model
 		return $f_status;
        
 	}
+	
+	function approve_home_confirm($approve_status,$article_id)
+	{
+		if($approve_status=='1')
+		{
+		$approve_status='0';
+		}
+		else if($approve_status=='0')
+		{
+		$approve_status='1'; 
+		}
+		$data=array('article_approve_status'=>$approve_status);
+		$this->db->update('article', $data, array('article_id' => $article_id));
+		return $approve_status;
+       
+	}	
 	
 	function count_feature_article($field)
 	{
