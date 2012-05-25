@@ -13,6 +13,7 @@ class Path extends CI_Model{
 	$data['admin_css'] = $this->config->item('admin_css_path');
 	$data['js'] =$this->config->item('js');
 	$data['admin_img'] =$this->config->item('admin_img');
+	$this->load->library('email');
 	return $data;	
  	}
 }

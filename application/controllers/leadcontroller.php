@@ -275,6 +275,15 @@ class Leadcontroller extends CI_Controller
 	function EventRegistration()
 	{
 		$data = $this->path->all_path();
+		$this->email->initialize(array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.sendgrid.net',
+			'smtp_user' => 'meetinfo',
+			'smtp_pass' => 'meet2012univ',
+			'smtp_port' => 587,
+			'crlf' => "\r\n",
+			'newline' => "\r\n"
+		));
 		$this->load->view('auth/header',$data);
 		$data['get_info_logged_user'] = '';
 		$data['eve_reg_suc'] = '';
@@ -310,6 +319,7 @@ class Leadcontroller extends CI_Controller
 			{
 				/* $university_id = $this->session->userdata('register_event_university_id');
 				$event_id = $this->session->userdata('register_event_id'); */
+				$user_email = $this->input->post('event_email');
 				$id_university = $this->session->userdata('register_event_university_id');
 				$id_event = $this->session->userdata('register_event_id');
 				$data['success_event_register'] = $this->leadmodel->event_registration($id_university,$id_event);
@@ -319,6 +329,16 @@ class Leadcontroller extends CI_Controller
 						'register_event_university_id'=>'',
 						'register_event_id'=>''
 					);
+					$message_email = $this->load->view('auth/event_register_content_email');
+					$this->email->from('info@meetuniversities.info', 'Meet Universities');
+					$this->email->to($user_email);
+					//$this->email->cc('another@another-example.com');
+					//$this->email->bcc('them@their-example.com');
+					$this->email->subject('Welcome To Meet Universities');
+					$this->email->message($message_email);
+					$this->email->send();
+					echo $this->email->print_debugger(); 
+					//echo $user_email;
 					$this->session->set_userdata($set_blank_session_event_register);
 					$data['eve_reg_suc'] = "suc";
 				}

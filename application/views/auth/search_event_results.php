@@ -79,8 +79,10 @@
 								</div>
 							</div>
 							<div class="float_r margin_t1">
-							<form action="find_college/<?php echo $event_detail['univ_id'].'/'.$event_detail['event_id']; ?>" method="post">
-							<button class="btn btn-success" href="#">Register</button>
+							<form action="EventRegistration" method="post">
+							<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
+							<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
+							<input type="submit" class="btn btn-success" value="Register"/>
 							</form>
 							</div>
 							<div class="clearfix"></div>

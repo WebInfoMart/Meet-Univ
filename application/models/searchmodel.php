@@ -238,7 +238,6 @@ class Searchmodel extends CI_Model
 	
 	function serach_events()
 	{
-		echo $this->input->get('type_search');
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university','events.event_univ_id=university.univ_id');

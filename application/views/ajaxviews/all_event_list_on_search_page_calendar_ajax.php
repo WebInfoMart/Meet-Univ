@@ -43,9 +43,12 @@
 											</div>
 											<div>
 												<div class="float_l span5 margin_zero page_event_height"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></div>
-										
-												<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
+											<form action="EventRegistration" method="post">
+									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
+									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
+									<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
 												<div class="clearfix"></div>
+									</form>
 											</div>
 									<div class="clearfix"></div>
 								</div>
