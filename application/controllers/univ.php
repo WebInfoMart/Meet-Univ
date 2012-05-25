@@ -605,7 +605,6 @@ function university($univ_id='',$qid='',$uid='')
 			$event_id = $commented_on_id;
 			$data['count_comment']=$this->frontmodel->fetch_all_comments('event',$event_id);
 			$data['event_comments_count'] = count($data['count_comment']);
-			print_r($data['event_comments_count']);
 			$this->load->view('ajaxviews/count_comment',$data);
 		}
 	

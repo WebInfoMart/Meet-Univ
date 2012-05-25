@@ -59,9 +59,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
 							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($news_comments); ?>"/>
-								<h3><span id="cnt_comment_show"><?php echo count($news_comments); ?></span> Comments</h3>
+								<h3><span id="cnt_comment_show"><?php if($news_comments!=0){ echo count($news_comments); } else { echo "0";}; ?></span> Comments</h3>
 							</div> 
-				<?php if(count($news_comments)>0){
+				<?php if($news_comments!=0){
 						foreach($news_comments as $news_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $news_comments_detail['comment_id']; ?>" >
 								<div class="float_l">

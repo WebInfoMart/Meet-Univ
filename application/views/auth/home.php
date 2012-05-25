@@ -304,7 +304,7 @@
 										}
 										?> 
 										 <?php echo $events['event_time']; ?></h4>
-										<h4><?php echo ucwords(substr($events['event_detail'],0,176)); ?></h4>
+										<h4><?php echo ucwords(substr($events['event_detail'],0,50)); ?></h4>
 									</div>
 									<div class="float_r center">
 										<h3>
