@@ -872,7 +872,68 @@ function university($univ_id='',$qid='',$uid='')
 				$this->load->view('ajaxviews/counsell_event_list_by_calendar_ajax',$data);
 			}
 		}
+		
+		function event_search_page_by_calendar()
+		{
+			$data = $this->path->all_path();
+			$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
+			print_r($data['city_name_having_event']);
+			$event_date = $this->input->post('date');
+			$event_month = $this->input->post('month');
+			$event_year = $this->input->post('year');
+			$complete_event_date = $event_date .' '. $event_month .' '. $event_year;
+			$type= $this->input->post('type');
+			
+			if($type == "all")
+			{
+			$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event'
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+			$this->load->view('ajaxviews/all_event_list_on_search_page_calendar_ajax',$data);
+			}
+			else if($type == "spot")
+			{
+			$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event',
+			'event_category'=>'spot_admission'
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+			//print_r($data['search_event_by_calendar']);
+				$this->load->view('ajaxviews/spot_event_list_by_calendar_ajax',$data);
+			}
+			else if($type == "fairs")
+			{
+				$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event',
+			'event_category'=>'fairs'
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+				$this->load->view('ajaxviews/fairs_event_list_by_calendar_ajax',$data);
+			}
+			else if($type == "counsell")
+			{
+			$event_date = array(
+			'event_date_time'=>$complete_event_date,
+			'event_type'=>'univ_event',
+			'event_category'=>'alumuni'
+			);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+				$this->load->view('ajaxviews/counsell_event_list_by_calendar_ajax',$data);
+			}
+		}
 	
+	function event_filter_by_city()
+	{
+		$event_city = $this->input->post('event_city');
+		$event_month = $this->input->post('event_month');
+		$data['search_event_by_calendar'] = $this->leadmodel->events_filter_by_city($event_city,$event_month);
+		//print_r($data['search_event_by_calendar']);
+		$this->load->view('ajaxviews/all_event_list_on_search_page_calendar_ajax',$data);
+	}
 }		
 	
 ?>

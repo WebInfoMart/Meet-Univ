@@ -391,3 +391,15 @@ line-height: 22px;height:160px;overflow:hidden;}
 .insight_data{list-style:none;}
 .about_depend{min-height: 150px;overflow: hidden;}
 .page4-font{font-size:15px;}
+
+
+.city_name_filter
+{
+background-color: 
+ghostWhite;
+width: 201px;
+border-radius: 4px;
+text-align: center;
+cursor: pointer;
+margin-bottom:9px;
+}

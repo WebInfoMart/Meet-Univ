@@ -199,6 +199,48 @@ class Leadmodel extends CI_Model
 		return 0;
 		}
 	}
+	
+	function city_name_having_event()
+	{
+		$this->db->select('city_id,cityname');
+		$this->db->from('city');
+		$this->db->join('events','events.event_city_id = city.city_id');
+		$this->db->distinct();
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else {
+			return 1;
+		}
+	}
+	
+	function events_filter_by_city($event_city,$event_month)
+	{
+		/* $this->db->select('*');
+		$this->db->from('events');
+		$this->db->join('city','city.city_id=events.event_city_id');
+		$this->db->where('event_city_id',$event_city);
+		$this->db->like('event_date_time',$event_month,'both');
+		$query = $this->db->get(); */
+		$this->db->select('*');
+		$this->db->from('events');
+		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
+		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
+		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
+		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
+		$this->db->where('event_city_id',$event_city);
+		$this->db->like('event_date_time',$event_month,'both');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else {
+			return 0;
+		}
+	}
 }
 
 

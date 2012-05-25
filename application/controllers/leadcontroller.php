@@ -277,6 +277,7 @@ class Leadcontroller extends CI_Controller
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$data['get_info_logged_user'] = '';
+		$data['eve_reg_suc'] = '';
 		if ($this->tank_auth->is_logged_in()) {
 			$logged_user_id = $this->session->userdata('user_id');
 			$data['get_info_logged_user'] = $this->users->fetch_profile($logged_user_id);
@@ -319,6 +320,7 @@ class Leadcontroller extends CI_Controller
 						'register_event_id'=>''
 					);
 					$this->session->set_userdata($set_blank_session_event_register);
+					$data['eve_reg_suc'] = "suc";
 				}
 			}
 		}

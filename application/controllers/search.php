@@ -119,6 +119,8 @@ class Search extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
+		$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
+			print_r($data['city_name_having_event']);
 		$data['err_div']=0;
 		$data['selected_month']=$this->input->get('event_month');
 		 if($this->input->get('event_month')=='' && $this->input->get('event_city')=='' && $this->input->get('type_search')=='0')

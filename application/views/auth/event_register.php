@@ -1,8 +1,40 @@
-
+<?php
+	if($eve_reg_suc == 'suc')
+	{
+	?>
+	<script>
+	$(document).ready(function(){
+	$('#show_success').css('display','block');
+	$('#show_success').hide();
+	$('#show_success').show("show");
+	$("#show_success").delay(3000).fadeOut(200);
+	});
+	</script>
+	<?php
+	}
+	$eve_reg_suc = '';
+	?>
 	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body">
+		
+		
+		<div class="modal" id="show_success" style="display:none;" >
+					  <div class="modal-header">
+						<a class="close" data-dismiss="modal"></a>
+						<h3>Message For You</h3>
+					  </div>
+					  <div class="modal-body">
+						<p><center><h4>Event Has been registred successfully.....</h4></center></p>
+					  </div>
+					  <div class="modal-footer">
+						<!--<a href="#" class="btn">Close</a>-->
+						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
+					  </div>
+				</div>
+		
+		
 			<div class="row margin_t1">
 				<div class="float_l span13 margin_l">
 					<div class="float_l span10 margin_zero round_box">
