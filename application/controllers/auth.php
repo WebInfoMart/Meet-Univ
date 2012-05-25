@@ -351,18 +351,30 @@ class Auth extends CI_Controller
 						$data['password'] = $this->input->post('password');
 						$data['fullname'] = $this->input->post('fullname');
 						$uid = $data['logged_user_email'];
-						$email_body = $this->load->view('auth/new_signup_content_email.php',$data,TRUE);
+						$email_body = $this->load->view('auth/new_signup_content_email',$data,TRUE);
 						$this->email->set_newline("\r\n");
-
-            $this->email->from('Meet-University.com', 'Meet University');
-            $this->email->to($uid);
-            $this->email->subject('New Registration');
-            $message = "$email_body" ;
-            //$message .="<br/>Thank you very much";
-            $this->email->message($message);
-			print_r($message);
-			$this->email->send();
-			redirect('home');
+			
+			
+			//$message_email = $this->load->view('auth/event_register_content_email');
+					$this->email->from('info@meetuniversities.info', 'Meet Universities');
+					$this->email->to($uid);
+					//$this->email->cc('another@another-example.com');
+					//$this->email->bcc('them@their-example.com');
+					$this->email->subject('New Registration');
+					$this->email->message($email_body);
+					$this->email->send();
+					//echo $this->email->print_debugger(); 
+					redirect('home');
+					
+					/* $this->email->from('Meet-University.com', 'Meet University');
+					$this->email->to($uid);
+					$this->email->subject('New Registration');
+					$message = "$email_body" ;
+					//$message .="<br/>Thank you very much";
+					$this->email->message($message);
+					print_r($message);
+					$this->email->send(); */
+			
 						
 						
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');

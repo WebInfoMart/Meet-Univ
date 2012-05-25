@@ -181,7 +181,23 @@ class Leadmodel extends CI_Model
 		'register_event_univ_id'=>$university_id
 		);
 		$this->db->insert('event_register',$clause);
-		return $this->db->affected_rows() ? 1 : 0;
+		if($this->db->affected_rows() > 0)
+		{
+		$current_insert_id = $this->db->insert_id();
+		$this->db->select('*');
+		$this->db->from('event_register');
+		$this->db->join('events','event_register.register_event_id=events.event_id');
+		$this->db->where('id',$current_insert_id);
+		$query = $this->db->get();
+		if($this->db->affected_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else{
+			return 0;
+		}
+		}
+		//return $this->db->affected_rows() ? 1 : 0;
 	}
 	
 	function get_event_univ_info($condition)

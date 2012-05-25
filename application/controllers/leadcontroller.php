@@ -337,8 +337,6 @@ class Leadcontroller extends CI_Controller
 					$this->email->subject('Welcome To Meet Universities');
 					$this->email->message($message_email);
 					$this->email->send();
-					echo $this->email->print_debugger(); 
-					//echo $user_email;
 					$this->session->set_userdata($set_blank_session_event_register);
 					$data['eve_reg_suc'] = "suc";
 				}

@@ -30,8 +30,8 @@
      <tr>
       <td style="padding:0in 12.75pt 0in 12.75pt;display:inline-block">
       <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">
-	  Hi <?php echo $fullname; ?>,Welcome to MeetUniversities.<br />
-	  Your Passwod is <?php echo $password; ?><br />
+	  Welcome to MeetUniversities.<br />
+	  <h3> Your have successfully Registered with MeetUniversities...Thank You.</h3>
 	  <u></u><u></u></span></p>
       </td>
      </tr>
