@@ -1,4 +1,4 @@
-<div id="content1" class="content_msg" style="display:none;">
+<div id="content" class="content_msg" style="display:none;">
 <div class="span8 margin_t">
   <div class="message success"><p class="info_message"></p>
 </div>
@@ -26,121 +26,144 @@ if($error_state != '') { $class_state = 'focused_error_univ'; } else { $class_st
 if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city='text'; }
 
 ?>
-
-
-<a id="add_another_event" style="cursor:pointer" onclick="add_more_event();"> Add another event </a>
-  <form action="<?php echo $base; ?>adminevents/add_more_event" method="post" class="caption_form" id="frm_add_event">
-	 <div id="content" class="event_full_content">
-	 <div id="left_cont" class="left_content"> 
-	 <div class="box_top_margin">
-		<div class="float_l">
+  
+ <div id="content" class="movetheform" >
+		<h2 class="margin">Create University Events</h2>
+		<div class="form span8">
+			<form action="<?php echo $base; ?>adminevents/add_more_event" method="post" id="caption_form">
+				<ul>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>Title</label>
 							</div>
-							<div class="float_r">
-								<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">
-								<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> </span>
-		
+							<div class="float_l span3">
+								<input type="text" size="30" id="title" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">
+									<label class="form_error"  id="title_error_form"></label>
+								
 							</div>
 							
 							<div class="clearfix"></div>
-							</div>
-							<div class="box_top_margin">
-							<?php if($admin_user_level=='5' || $admin_user_level=='4') {?>
-							<div class="float_l">
-								<label>Choose University</label>
-							</div>
-							<div class="float_r">
-							<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
+						</div>
+					</li>
+					<?php if($admin_user_level=='5' || $admin_user_level=='4') {?>
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Choose University</label>
+						</div>
+						<div class="float_l span3">
+							<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university" id="university">
 								<option value="">Please Select</option>
 									<?php foreach($univ_info as $univ_detail) { ?>
 										<option value="<?php echo $univ_detail->univ_id; ?>" ><?php echo $univ_detail->univ_name; ?></option>
 										<?php } ?>
 							</select>
-		<span style="color: red;"> <?php echo form_error('university'); ?><?php echo isset($errors['university'])?$errors['university']:''; ?> </span>
+							<label class="form_error"  id="university_error_form"></label>
 		
 						</div>
 						<div class="clearfix"></div>
-							<?php } else { ?>
-							<input type="hidden" name="university" value="<?php echo $univ_info['univ_id']; ?>">
+						</div>
+					</li>
+					<!--<li>
+						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Event Type</label>
+						</div>
+						<div class="float_l span3">
+								<label><input type="radio" class="radio" name="demo" checked="checked" />University Event</label>
+								<label><input type="radio" class="radio" name="demo" />Study Abroad Event</label>
+				
+						</div>
+						<div class="clearfix"></div>
+						</div>
+					</li>
+					-->
+					<?php } else { ?>
+	 				<input type="hidden" id="university" name="university" value="<?php echo $univ_info['univ_id']; ?>">
 					<?php }?>
-					</div>
-					<div class="box_top_margin">
-					<div class="float_l">
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>Country</label>
 							</div>
-					<div class="float_r" >
-								<select class="<?php echo $class_country; ?> styled span3 margin_zero styled_overwrite" name="country" id="country" onchange="fetchstates(0)">
+							<div class="float_l span3" >
+								<select class="<?php echo $class_country; ?> styled span3 margin_zero" name="country" id="country" onchange="fetchstates(0)">
 									<option value="">Please Select</option>
 									<?php foreach($countries as $country) { ?>
 										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 	
 								</select>
-			<span style="color: red;"> <?php echo form_error('country'); ?><?php echo isset($errors['country'])?$errors['country']:''; ?> </span>
+			<label class="form_error"  id="country_error_form"></label>
+		
 							
-						</div> 
-					<div class="float_r">
+							</div>
+								<div class="float_l span3">
 								<a rel="modal-profile" href="#" id="add_country" class="tdn">Add New Country</a>
 								</div>
-					<div class="clearfix"></div>
-					</div>
+								<div class="clearfix"></div>
+						</div>
+					</li>
 					
-					<div class="box_top_margin">
-					<div class="float_l">
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
 							<label>State</label>
 						</div>
-						<div class="float_r">
-							<select class="<?php echo $class_state; ?> styled span3 margin_zero styled_overwrite state_more_event1" name="state" onchange="fetchcities(0,0)" id="state" disabled="disabled">
+						<div class="float_l span3">
+							<select class="<?php echo $class_state; ?> styled span3 margin_zero" name="state" onchange="fetchcities(0,0)" id="state" disabled="disabled">
 								<option value="">Please Select</option>
 							</select>
-						<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
+						<label class="form_error"  id="state_error_form"></label>
 		
 						</div>
-						<div class="float_r">
+						<div class="float_l span3">
 							<a id="add_state" href="#" class="tdn">Add New State</a>
 						</div>
 						<div class="clearfix"></div>
-					</div>
+						</div>
+					</li>
 					
-					<div class="box_top_margin">
-						<div class="float_l">
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
 							<label>City</label>
 						</div>
-						<div class="float_r">
-							<select class="<?php echo $class_city; ?> styled span3 margin_zero styled_overwrite"  name="city" id="city" disabled="disabled">
+						<div class="float_l span3">
+							<select class="<?php echo $class_city; ?> styled span3 margin_zero"  name="city" id="city" disabled="disabled">
 								<option value="">Please Select</option>
 							</select>
-	<span style="color: red;"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
+						<label class="form_error"  id="city_error_form"></label>
+			
 				
-						</div><div class="clearfix"></div>
-						<div class="float_r">
+						</div>
+						<div class="float_l span3">
 						<a id="add_city" href="#" class="tdn">Add New City</a>
 						</div>
 						<div class="clearfix"></div>
-					</div>
-					
-					
-							
-	 </div>
-	 <!--------------- Middle Div ----------------->
-	 <div id="middle_cont" class="mid_content">  
-		<div class="box_top_margin">
-			<div class="float_l">
+						</div>
+					</li>
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
 							<label>Event Place</label>
 						</div>
-						<div class="float_r">
-						<input type="text" size="30" class="text" value="<?php echo set_value('event_place'); ?>" name="event_place">	
-				
+						<div class="float_l span3">
+						<input type="text" size="30" class="text" id="event_place" value="<?php echo set_value('event_place'); ?>" name="event_place">	
+						
+						<label class="form_error"  id="event_place_error_form"></label>
+			
 						</div>
-						<div class="clearfix"></div>
-		</div>
-		
-		<div class="box_top_margin">
-			<div class="float_l">
+						</div>
+					</li>
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
 							<label>Event Type</label>
 						</div>
-						<div class="float_r">
-							<select class="text styled span3 margin_zero styled_overwrite"  name="event_type">
+						<div class="float_l span3">
+							<select class="text styled span3 margin_zero" id="event_type"  name="event_type">
 								<option value="all">Select</option>
 								<option value="spot_admission">Spot Admission</option>
 								<option value="fairs">Fairs</option>
@@ -148,57 +171,68 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<option value="others">Counselling-Others</option>
 								
 							</select>
-	<span style="color: red;"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
-				
+					<label class="form_error"  id="event_type_error_form"></label>
+						
 						</div>
 						
 						<div class="clearfix"></div>
-		</div>
-		
-		<div class="box_top_margin">
-			<div class="float_l">
+						</div>
+					</li>
+					
+					
+					
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>Event Date</label>
 							</div>
-							<div class="float_r">
-								<input type="text" size="30" class="date_picker" value="<?php echo set_value('event_time'); ?>" name="event_time">
-								<span style="color: red;"> <?php echo form_error('event_time'); ?><?php echo isset($errors['event_time'])?$errors['event_time']:''; ?> </span>
+							<div class="float_l span3">
+								<input type="text" size="30" id="event_time" class="date_picker" value="<?php echo set_value('event_time'); ?>" name="event_time">
+									<label class="form_error"  id="event_time_error_form"></label>
+				
 		
 							</div>
 							
 							<div class="clearfix"></div>
-		</div>
-		
-		<div class="box_top_margin">
-		<div class="float_l">
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>Event Time</label>
 							</div>
-							<div class="float_r">
-								<input type="text" class="text" size="30" value="<?php echo set_value('event_timing'); ?>" name="event_timing">
-	
+							<div class="float_l span3">
+								<input type="text" id="event_timing" class="text" size="30" value="<?php echo set_value('event_timing'); ?>" name="event_timing">
+								<label class="form_error"  id="event_timing_error_form"></label>
+				
 							</div>
 							
 							<div class="clearfix"></div>
-		</div>
-		
-	 </div>
-	 
-	 
-	 <!--------------- Right Div ----------------->
-	 <div id="right_cont" class="right_content"> 
-		<div class="float_l">
+						</div>
+					</li>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">
 								<label>Detail</label>
 							</div>
-							<div class="float_l">
-								<textarea rows="6" name="detail" class="wysiwyg" cols="20"><?php echo set_value('detail'); ?></textarea>
+							<div class="">
+								<textarea rows="12" id="detail"  name="detail" class="wysiwyg" cols="103"><?php echo set_value('detail'); ?></textarea>
+								<label class="form_error"  id="detail_error_form"></label>
+				
 							</div>
 							<div class="clearfix"></div>
-							<input type="submit" name="submit" class="submit" value="UPDATE">
-	 </div>
-	 </div>
-	 
-</form>
-
-<div class="form span11">
+						</div>
+					</li>
+				</ul>
+						<input type="button" name="submitevent" class="submit" onclick="addmoreevent();" value="Add More Event">
+						<input type="submit" name="submit" class="submit" value="Submit">
+						
+			</form>
+		</div>
+		
+		
+	
+		<div class="form span11">
 			
 			<div class="modal-lightsout" id="add-country">
 				<div class="modal-profile" id="add-country1">
@@ -304,7 +338,161 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 				</div>
 			</div>
 	</div>
+
 <script>
+
+function addmoreevent()
+{
+	var title=$("#title").val();
+	var university=$("#university").val();
+	var country=$("#country").val();
+	var state=$("#state").val();
+	var city=$("#city").val();
+	var event_time=$("#event_time").val();
+	var detail=$("#detail").val();
+	var event_place=$("#event_place").val();
+	var event_timing=$("#event_timing").val();
+	var event_type=$('#event_type').val();
+	var flag=0;
+	if(title=='' || title==null)
+	{
+	 $('#title_error_form').html("Please enter the Title"); 
+	 $('#title').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	$('#title_error_form').html("") 
+	 $('#title').removeClass('error');
+	  flag=flag+1;
+	}
+	if(university=='' || university==null || university=='0')
+	{
+	$('#university_error_form').html("Please select the university"); 
+	$('#university').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#university_error_form').html(""); 
+	$('#university').removeClass('error');
+	 flag=flag+1;
+	}
+	if(country=='' || country==null)
+	{
+	$('#country_error_form').html("Please enter the country"); 
+	$('#country').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#country_error_form').html(""); 
+	$('#country').removeClass('error');
+	flag=flag+1;
+	}
+	if(state=='' || state==null || state=='0')
+	{
+	 $('#state_error_form').html("Please enter the state"); 
+	 $('#state').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	$('#state_error_form').html("") 
+	 $('#state').removeClass('error');
+	  flag=flag+1;
+	}
+	if(city=='' || city==null || city=='0')
+	{
+	$('#city_error_form').html("Please enter the city"); 
+	$('#city').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#city_error_form').html(""); 
+	$('#city').removeClass('error');
+	 flag=flag+1;
+	}
+	if(detail=='' || detail==null)
+	{
+	$('#detail_error_form').html("Please enter the detail"); 
+	$('#detail').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#detail_error_form').html(""); 
+	$('#detail').removeClass('error');
+	flag=flag+1;
+	}
+	if(event_time=='' || event_time==null)
+	{
+	 $('#event_time_error_form').html("Please enter the event time"); 
+	 $('#event_time').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	 $('#event_time_error_form').html("") ;
+	 $('#event_time').removeClass('error');
+	  flag=flag+1;
+	}
+	if(event_place=='' || event_place==null)
+	{
+	 $('#event_place_error_form').html("Please enter the Event place"); 
+	 $('#event_place').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	 $('#event_place_error_form').html("") 
+	 $('#event_place').removeClass('error');
+	  flag=flag+1;
+	}
+	if(event_timing=='' || event_timing==null )
+	{
+	$('#event_timing_error_form').html("Please enter the Event time"); 
+	$('#event_timing').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#event_timing_error_form').html(""); 
+	$('#event_timing').removeClass('error');
+	 flag=flag+1;
+	}
+	if(flag==9)
+	{
+	 var  countrystatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>adminevents/add_more_event_by_ajax",
+	   async:false,
+	   data: 'title='+title+'&university='+university+'&country='+country+'&state='+state+'&city='+city+'&event_time='+event_time+'&detail='+detail+'&event_place='+event_place+'&event_timing='+event_timing+'&event_type='+event_type+'&add_multiple_event_by_ajax=1',
+	   cache: false,
+	   success: function(msg)
+	   {
+	  //$('.movetheform').animate({opacity:0.1}, "slow");
+	  $('.movetheform').animate({
+		opacity: 0.1,
+	  }, 1000, function() {
+		 $('#caption_form').reset();
+	  });
+		$('.movetheform').animate({
+		opacity: 1,
+	  }, 1000, function() {
+	  });
+	  $('.info_message').html('Event Added Sucessfully.You can Add more event');
+	$('.content_msg').css('display','block');
+	  $('html, body').animate({
+						scrollTop: 0
+					}, 2000);
+		}
+	});
+	   } 
+	}
+
 function fetchcountry(cid)
 {
 $.ajax({
@@ -322,7 +510,6 @@ $.ajax({
 }
 function fetchstates(sid)
 {
-alert('hello');
 var stid=sid;
 var cid;
 if(sid=='-1')
@@ -343,13 +530,11 @@ $.ajax({
    {
     if(sid=='-1')
 	{
-	alert(msg);
 	$('#state_model2').attr('disabled', false);
 	$('#state_model2').html(msg);
 	}
 	else
 	{
-	alert(msg);
     $('#state').attr('disabled', false);
 	$('#state').html(msg);
 

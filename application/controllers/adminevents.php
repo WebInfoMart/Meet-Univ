@@ -554,10 +554,11 @@ class Adminevents extends CI_Controller
 			
 			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {
-			$data['x']=$this->events->create_more_event();
+			$data['x']=$this->events->create_event();
 			redirect('adminevents/manage_events/eas');
 			}
 			//fetch user privilege data from model
+			}
 			}
 			$data['countries']=$this->users->fetch_country();
 			if($data['admin_user_level']=='5'  || $data['admin_user_level']=='4')
@@ -574,7 +575,42 @@ class Adminevents extends CI_Controller
 			
 			}	
 	}
-	 }
+	 
+	function add_more_event_by_ajax()
+	{
+		if($this->input->post('add_multiple_event_by_ajax'))
+		{
+		$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
+			$add_events=array('4','6','8','10');
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv']){
+			if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$add_events) )
+			{
+			$flag=1;
+			break;
+			}
+			}
+			if($flag==0)
+			{
+			$this->load->view('admin/accesserror', $data);
+			}
+			else
+			{			
+			$data['x']=$this->events->create_event();
+			}
+		}	
+		}
+	}
 }
 
 /* End of file auth.php */

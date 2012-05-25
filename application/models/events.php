@@ -220,6 +220,41 @@ class Events extends CI_Model
 		return 0;
 	}
 	
+	//add multiple event
+	function add_multiple_event()
+	{
+		$event_univ=$this->input->post('university');
+		$event_title=$this->input->post('title');
+		$event_detail=$this->input->post('detail');
+		$event_date_time=$this->input->post('event_time');
+		$event_univ_id=$this->input->post('university');
+		$event_category=$this->input->post('event_type');
+		$event_country_id= $this->input->post('country');
+		$event_state_id=$this->input->post('state');
+		$event_city_id=$this->input->post('city');
+		$event_place=$this->input->post('event_place');
+		$event_time=$this->input->post('event_timing');
+		$data['user_id'] = $this->tank_auth->get_admin_user_id();	
+		for($i=0;$i<count($event_univ);$i++)
+		{
+			$data = array(
+			   'event_title' => $event_title[$i],
+			   'event_detail' => $event_detail[$i],
+			   'event_date_time'=> $event_date_time[$i],
+			   'postedby' => $data['user_id'],
+			   'event_univ_id' => $event_univ[$i],
+			   'event_category' => $event_category[$i],
+			   'event_country_id' => $event_country_id[$i],
+			   'event_state_id' => $event_state_id[$i],
+			   'event_city_id' => $event_city_id[$i],
+			   'event_place' => $event_place[$i],
+			   'event_time' => $event_time[$i]
+			);
+			$this->db->insert('events', $data);
+		}
+	
+	}
+	
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */
