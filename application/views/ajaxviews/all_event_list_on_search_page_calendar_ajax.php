@@ -1,5 +1,8 @@
 <?php 
-								foreach($search_event_by_calendar as $event_detail){ 
+								if(!empty($search_event_by_calendar))
+								{
+								foreach($search_event_by_calendar as $event_detail)
+								{ 
 								?>
 								<div class="page_last_border">
 									<div class="float_l event_border_style aspectcorrect">
@@ -54,5 +57,6 @@
 								</div>
 									<div class="clearfix"></div>
 								</div>
-								<?php }  ?>
+								<?php } } else { echo "No Events Found On This Date..."; }								
+								?>
 						

@@ -876,7 +876,6 @@ function university($univ_id='',$qid='',$uid='')
 		{
 			$data = $this->path->all_path();
 			$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
-			print_r($data['city_name_having_event']);
 			$event_date = $this->input->post('date');
 			$event_month = $this->input->post('month');
 			$event_year = $this->input->post('year');
