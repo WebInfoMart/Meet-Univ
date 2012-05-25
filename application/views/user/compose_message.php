@@ -127,6 +127,8 @@ var logged_user_id = <?php echo $logged_user_id; ?>;
 
 $('#search_user').click(function(){
 $('#show_process').css("display","block");
+$('#body_msg').css("display","none");
+$('#add_content').css("display","none");
 var email = $("#search_user_email").val();
 //alert(email);
 $.ajax({
@@ -144,6 +146,7 @@ $.ajax({
 	if(get_hidden_id_user == logged_user_id )
 	{
 		var error = "You Can't Send Message To You !!!";
+		$('#show_process').hide("slow");
 		$('#show_error').css("display","block");
 		$('#show_error').html(error);
 	}

@@ -33,7 +33,7 @@ $content.= "<div class='float_l'>".
 				"</div>".
 				"<div class='clearfix'></div>";
 		echo $content;
-		echo $user_list['fullname'];
+		//echo $user_list['fullname'];
 	}
 }
 exit(0);

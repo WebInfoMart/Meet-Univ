@@ -1376,4 +1376,36 @@ border-color: rgba(255, 0, 0, .8) !important;
           box-shadow: inset 0 1px 1px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
   outline: 0 !important;
   width:290px !important;
+}
+.event_full_content
+{
+	width:1000px;
 }	
+.left_content
+{
+	float:left;
+	width:300px;
+	margin-right:50px;
+	margin-top:7px;
+}
+.mid_content
+{
+	float:left;
+	width:300px;
+	margin-right:50px;
+}
+.right_content
+{
+	float:right;
+	width:300px;
+	margin-top:7px;
+}
+.box_top_margin
+{
+	margin-top:10px;
+}
+.styled_overwrite
+{
+	width: 215px !important;
+	height: 23px !important;
+}

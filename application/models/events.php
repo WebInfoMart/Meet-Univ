@@ -220,7 +220,6 @@ class Events extends CI_Model
 		return 0;
 	}
 	
-	
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

@@ -511,6 +511,70 @@ class Adminevents extends CI_Controller
 		$this->load->view('ajaxviews/check_unique_field',$data);
 		
 	 }
+	 
+	 function add_more_event()
+	 {
+		$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
+			$add_events=array('4','6','8','10');
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv']){
+			if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$add_events) )
+			{
+			$flag=1;
+			break;
+			}
+			}
+			if($flag==0)
+			{
+			$this->load->view('admin/accesserror', $data);
+			}
+			else
+			{
+			if($this->input->post('submit'))
+			{
+			$this->form_validation->set_rules('title', 'Title', 'trim|required');
+			$this->form_validation->set_rules('university', 'University', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('country', 'country', 'trim|xss_clean|required');
+			$this->form_validation->set_rules('state', 'state', 'trim|xss_clean|required');
+			$this->form_validation->set_rules('city', 'City', 'trim|required|string');
+			$this->form_validation->set_rules('event_time', 'Event Time', 'trim|xss_clean|required');
+			$this->form_validation->set_rules('detail', 'Detail', 'trim|string');
+			$this->form_validation->set_rules('event_place', 'Event Place', 'trim|string');
+			$this->form_validation->set_rules('event_timing', 'Event Time', 'trim|string');
+			
+			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
+			if ($this->form_validation->run()) {
+			$data['x']=$this->events->create_more_event();
+			redirect('adminevents/manage_events/eas');
+			}
+			//fetch user privilege data from model
+			}
+			$data['countries']=$this->users->fetch_country();
+			if($data['admin_user_level']=='5'  || $data['admin_user_level']=='4')
+			{
+			$data['univ_info']=$this->events->get_univ_detail();
+			}
+			else
+			{
+			$data['univ_info']=$this->events->get_univ_id_by_user_id($data['user_id']);
+			}
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/sidebar', $data);	
+			$this->load->view('admin/event/add_more_event', $data);
+			
+			}	
+	}
+	 }
 }
 
 /* End of file auth.php */
