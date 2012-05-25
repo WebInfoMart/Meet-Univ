@@ -231,12 +231,15 @@
 				else
 				{?>
 			<div class="marquee" id="marquee" >
-			<span>
-				<a class="box-red"><span class="red-text">sdfsdfgdfg</span></a>
-				<a class="box-red"><span class="red-text">dfgdfgdf</span></a>
-				<a class="box-red"><span class="red-text">dfgdfg</span></a>	
-		
-			</span>
+			<?php foreach($featured_news as $featured_news_list) { $x++; ?>
+					<div class="span8 yellow_bar_text float_l  margin_zero"><ul><li>
+					<a href="<?php echo $base; ?>univ-<?php echo $featured_news_list['news_univ_id']; ?>-news-<?php echo $featured_news_list['news_id']; ?>">
+					<?php echo substr($featured_news_list['news_title'],0,70).'..'; ?>
+					</a></li></ul>
+					</div>
+					
+		<?php		if($x==2)break; }
+			?>
 			</div>	
 		<?php } ?>		
 					<div class="clearfix"></div>

@@ -89,7 +89,7 @@ border:1px solid #cccccc;
 -webkit-box-shadow: 0 0 5px#888;
 box-shadow: 0 0 5px #888;
 }
-.yellow_bar_text li{font-size:15px;padding: 15px 0px 9px 0px;text-decoration: none;}
+.yellow_bar_text li{font-size:15px;padding: 2px 0px 9px 0px;text-decoration: none;}
 .yellow_bar_text li a{color:#666666;}
 .text_bar ul{margin-left:30px;font-weight:bold;list-style-type:square;color:#ff4f0e;}
 .yellow_bar_text li a{text-decoration: none;font-size:15px;color:#666666;}
