@@ -85,6 +85,8 @@ class Events extends CI_Model
 			   'event_time' => $this->input->post('event_timing')
 			);
 			$this->db->insert('events', $data);
+			$current_id = $this->db->insert_id();
+			return $current_id;
 	}
 	
 	function events_detail()

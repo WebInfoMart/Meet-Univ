@@ -1517,7 +1517,7 @@ class Users extends CI_Model
 		$this->db->limit(1);
 		//$this->db->order_by('STR_TO_DATE(event_date_time, "%d %M %Y")','asc');
 		$res=$this->db->get();
-		if($res->num_rows>0)
+		if($res->num_rows() > 0)
 		{
 		return $res->result_array();
 		}
@@ -1536,13 +1536,22 @@ class Users extends CI_Model
 		$this->db->group_by("univ_program.prog_parent_id"); 
 		$this->db->order_by('program_parent_name','asc');
 		$query = $this->db->get();
-		if($query->num_rows>0)
+		if($query->num_rows() > 0)
 		return $query->result_array();
 		else
 		return 0;
 	}	
 		
-		
+	function fetch_profile_by_user_email($logged_user_email)
+	 {
+	 
+			  $this->db->select('*');
+			  $this->db->from('users');
+			  $this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+			  $this->db->where('email', $logged_user_email);
+			  $query = $this->db->get();
+			  return $query->row_array();
+	 }	
 		
 		
 }

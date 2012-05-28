@@ -261,13 +261,12 @@ class Leadmodel extends CI_Model
 	function event_detail_for_email($latest_registered_event_id)
 	{
 		$this->db->select('*');
-		$this->db->from('event_register');
-		$this->db->join('events','event_register.register_event_id=events.event_id');
+		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$this->db->where('id',$latest_registered_event_id);
+		$this->db->where('event_id',$latest_registered_event_id);
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{

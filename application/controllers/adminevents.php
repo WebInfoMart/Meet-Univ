@@ -105,6 +105,15 @@ class Adminevents extends CI_Controller
 	function add_event()
 	{
 		$data = $this->path->all_path();
+		$this->email->initialize(array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.sendgrid.net',
+			'smtp_user' => 'meetinfo',
+			'smtp_pass' => 'meet2012univ',
+			'smtp_port' => 587,
+			'crlf' => "\r\n",
+			'newline' => "\r\n"
+		));
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		} else {
@@ -144,8 +153,40 @@ class Adminevents extends CI_Controller
 			
 			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {
+			$followers_id = array();
+			$followers_detail = array();
+			$followers_email_for_sent = array();
 			$data['x']=$this->events->create_event();
-			redirect('adminevents/manage_events/eas');
+			$latest_registered_event_id = $data['x'];
+			$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
+			//print_r($data['latest_register_event_info']);
+			$message_body = $this->load->view('auth/event_register_content_email_from_admin',$data,TRUE);
+			$selected_univ_id = $this->input->post('university');
+			$data['followers_of_univ'] = $this->users->get_followers_detail_of_univ($selected_univ_id);
+			$followers_detail = $data['followers_of_univ'];
+			foreach($followers_detail as $follow)
+			{
+				//$data['user_info_for_sent_email'] = $this->users->fetch_profile_by_user_email($follow['email']);
+				
+				//print_r($data['user_info_for_sent_email']);
+				array_push($followers_id,$follow['email']);
+				//echo $follow['email'];
+			}
+			$message_body;
+			$followers_email_for_sent = implode($followers_id,",");
+				 $this->email->from('info@meetuniversities.info', 'Meet Universities');
+					$this->email->to($followers_id);
+					//$this->email->cc('another@another-example.com');
+					//$this->email->bcc('them@their-example.com');
+					$this->email->subject('Welcome To Meet Universities');
+					$this->email->message($message_body);
+					$this->email->send(); 
+			//$followers_email_for_sent = implode($followers_id,",");
+			//print_r($followers_email_for_sent);
+			//print_r($data['followers_of_univ']);
+			//$followers_id = $data['followers_of_univ'];
+			//print_r($followers_id);
+			//redirect('adminevents/manage_events/eas');
 			}
 			//fetch user privilege data from model
 			}

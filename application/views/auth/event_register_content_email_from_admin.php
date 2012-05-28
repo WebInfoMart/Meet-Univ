@@ -32,12 +32,15 @@
       <td style="padding:0in 12.75pt 0in 12.75pt;display:inline-block">
       <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">
 	 <!-- Hi--> <?php //echo $send_info['fullname']; ?> Welcome to MeetUniversities.<br />
-	  <h3>Your Event Registration Have been Completed Successfully........</br>
 	  
-	  <h3> Your Event Registration Detail Are... </h3>
+	  
+	 
 	  <?php 
 	  foreach($latest_register_event_info as $event_detail)
 	  {
+		echo "<h3> Dear Follower Of".$event_detail['title']."</h3>";
+		echo "<h3>".$event_detail['title']."&nbsp;Conducting An Event.</h3></br>";
+		echo "<h3> Event Details Are Listed Below...</br> </h3>";
 		if($event_detail['event_category'] == 'spot_admission'){
 										$event_cat =  "Spot Admission"; 
 										}
@@ -51,21 +54,16 @@
 										$event_cat = "Alumuni"; 
 										}
 										else{
-										$event_cat = " "; 
+										$event_cat = 0;
 										}
-		if($event_detail['fullname'] != '')
-		{		
-		echo "<h4>Your Name-: &nbsp;".$event_detail['fullname']."</h4></br>";
-		}
-		if($event_cat != " ")
-		{
+		if($event_cat != 0){
 		echo "<h4>Event Type-: &nbsp;".$event_cat."</h4></br>"; 
 		}
 		if($event_detail['title'] != '')
 		{
 		echo "<h4>Event Of University-: &nbsp;".$event_detail['title']."</h4></br>"; 
 		}
-		if($event_detail['country_name'] != '')
+		if($event_detail['country_name'])
 		{
 		echo "<h4>Event Country-: &nbsp;".$event_detail['country_name']."</h4></br>"; 
 		}
@@ -77,16 +75,13 @@
 		{
 		echo "<h4>Event City-: &nbsp;".$event_detail['cityname']."</h4></br>"; 
 		}
-		if($event_detail['event_date_time'] != '')
-		{
+		if($event_detail['event_date_time'] != ''){
 		echo "<h4>Event Date-: &nbsp;".$event_detail['event_date_time']."</h4></br>"; 
 		}
-		if($event_detail['event_time'] != '')
-		{
+		if($event_detail['event_time'] != ''){
 		echo "<h4>Event Timing-: &nbsp;".$event_detail['event_time']."</h4></br>"; 
 		}
-		if($event_detail['event_place'] != '')
-		{
+		if($event_detail['event_place'] != ''){
 		echo "<h4>Event Place-: &nbsp;".$event_detail['event_place']."</h4></br>"; 
 		}
 	  }
