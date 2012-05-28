@@ -744,7 +744,7 @@ class Adminmodel extends CI_Model
 	
 	function fetch_univ_detail($user_id)
 	 {
-	 $this->db->select('univ_id');
+	 $this->db->select('*');
 	 $this->db->from('university');
 	 $this->db->where('user_id',$user_id);
 	 $query=$this->db->get();
