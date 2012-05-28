@@ -168,7 +168,7 @@ class Leadmodel extends CI_Model
 		}
 	}
 	
-	function event_registration($event_id,$university_id)
+	function event_registration($university_id,$event_id)
 	{
 		$fullname = $this->input->post('event_fullname');
 		$email = $this->input->post('event_email');
@@ -248,6 +248,26 @@ class Leadmodel extends CI_Model
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
 		$this->db->where('event_city_id',$event_city);
 		$this->db->like('event_date_time',$event_month,'both');
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	function event_detail_for_email($latest_registered_event_id)
+	{
+		$this->db->select('*');
+		$this->db->from('event_register');
+		$this->db->join('events','event_register.register_event_id=events.event_id');
+		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
+		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
+		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
+		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
+		$this->db->where('id',$latest_registered_event_id);
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{

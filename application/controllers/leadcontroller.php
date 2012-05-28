@@ -323,13 +323,12 @@ class Leadcontroller extends CI_Controller
 				$id_university = $this->session->userdata('register_event_university_id');
 				$id_event = $this->session->userdata('register_event_id');
 				$data['success_event_register'] = $this->leadmodel->event_registration($id_university,$id_event);
+				$latest_registered_event_id = $data['success_event_register']['id'];
 				if($data['success_event_register'] != 0)
 				{
-					$set_blank_session_event_register = array(
-						'register_event_university_id'=>'',
-						'register_event_id'=>''
-					);
-					$message_email = $this->load->view('auth/event_register_content_email');
+					$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
+					//print_r($data['latest_register_event_info']);
+					echo $message_email = $this->load->view('auth/event_register_content_email',$data,TRUE);
 					$this->email->from('info@meetuniversities.info', 'Meet Universities');
 					$this->email->to($user_email);
 					//$this->email->cc('another@another-example.com');
@@ -337,6 +336,10 @@ class Leadcontroller extends CI_Controller
 					$this->email->subject('Welcome To Meet Universities');
 					$this->email->message($message_email);
 					$this->email->send();
+					$set_blank_session_event_register = array(
+						'register_event_university_id'=>'',
+						'register_event_id'=>''
+					);
 					$this->session->set_userdata($set_blank_session_event_register);
 					$data['eve_reg_suc'] = "suc";
 				}

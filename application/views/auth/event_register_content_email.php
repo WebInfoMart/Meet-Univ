@@ -1,3 +1,4 @@
+
 <html>
 <body>
 <div align="center">
@@ -32,6 +33,34 @@
       <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">
 	 <!-- Hi--> <?php //echo $send_info['fullname']; ?> Welcome to MeetUniversities.<br />
 	  <h3>Your Event Registration Have been Completed Successfully........</br>
+	  
+	  <h3> Your Event Registration Detail Are... </h3>
+	  <?php 
+	  foreach($latest_register_event_info as $event_detail)
+	  {
+		if($events['event_category'] == 'spot_admission'){
+										$event_cat =  "Spot Admission"; 
+										}
+										else if($events['event_category'] == 'fairs'){
+										$event_cat = "Fairs"; 
+										}
+										else if($events['event_category'] == 'others'){
+										$event_cat = "Alumuni"; 
+										}
+										else if($events['event_category'] == 'alumuni'){
+										$event_cat = "Alumuni"; 
+										}
+		echo "<h4>Your Name-: &nbsp;".$event_detail['fullname']."</h4></br>";
+		echo "<h4>Event Type-: &nbsp;".$event_cat."</h4></br>"; 
+		echo "<h4>Event Of University-: &nbsp;".$event_detail['title']."</h4></br>"; 
+		echo "<h4>Event Country-: &nbsp;".$event_detail['country_name']."</h4></br>"; 
+		echo "<h4>Event State-: &nbsp;".$event_detail['statename']."</h4></br>"; 
+		echo "<h4>Event City-: &nbsp;".$event_detail['cityname']."</h4></br>"; 
+		echo "<h4>Event Date-: &nbsp;".$event_detail['event_date_time']."</h4></br>"; 
+		echo "<h4>Event Timing-: &nbsp;".$event_detail['event_time']."</h4></br>"; 
+		echo "<h4>Event Place-: &nbsp;".$event_detail['event_place']."</h4></br>"; 
+	  }
+	  ?>
 	  Thanks For Registration...</h3>
 	 <!-- <h3> Registered Event Information </h3></br>
 	  Event Title : <?php //echo $send_info['event_title']; ?></br>

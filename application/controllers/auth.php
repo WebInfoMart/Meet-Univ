@@ -295,7 +295,15 @@ class Auth extends CI_Controller
 	{
 	$data = $this->path->all_path();
 	$this->load->view('auth/header',$data);
-		
+		$this->email->initialize(array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'smtp.sendgrid.net',
+			'smtp_user' => 'meetinfo',
+			'smtp_pass' => 'meet2012univ',
+			'smtp_port' => 587,
+			'crlf' => "\r\n",
+			'newline' => "\r\n"
+		));
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('home');
 
@@ -379,7 +387,7 @@ class Auth extends CI_Controller
 						
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
-					if ($email_activation) {									// send "activate" email
+					/* if ($email_activation) {									// send "activate" email
 						$data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
 
 						$this->_send_email('activate', $data['email'], $data);
@@ -396,7 +404,7 @@ class Auth extends CI_Controller
 						unset($data['password']); // Clear password (just for any case)
 
 						$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
-					}
+					} */
 					
 				} else {
 					$errors = $this->tank_auth->get_error_message();
