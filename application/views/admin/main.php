@@ -47,8 +47,6 @@
 			
 		</div>		<!-- .stats_charts ends -->
 		
-		<?php } ?>		
-		
 		<table width="100%" cellpadding="0" cellspacing="0" class="today_stats">
 			<tr>
 				<td><strong><?php echo $univ_detail_edit[0]->univ_views_count; ?></strong>University Viewd<span class="goup"><!--+53%--></span></td>
@@ -57,6 +55,31 @@
 				<td class="last"><strong><?php echo $univ_follwers; ?></strong>Follwers</td>
 			</tr>
 		</table>
+		<?php } ?>		
+		<center><h3>Newly Registerd User for Upcoming Event</h3></center>
+		<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
+			
+				<thead>
+					<tr>
+						<th>Page title</th>
+						<th>Status</th>
+						<th>Date created</th>
+						<th>Author</th>
+						<th></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td><strong><a href="#">Aorem ipsum dolor</a></strong></td>
+						<td>Published</td>
+						<td>20.03.2010</td>
+						<td><a href="#">John Doe</a></td>
+					</tr>
+					
+				</tbody>
+				
+			</table>
 		
 	</div>
 	

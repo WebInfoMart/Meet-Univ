@@ -107,7 +107,7 @@ class Admin_users extends CI_Controller
 			if($this->input->post('submit'))
 			{
 			$this->univ_vs_user_model->update_univ_user_map_data();
-			redirect('Admin_users/manage_map_univ_vs_users/ucus');
+			redirect('admin_users/manage_map_univ_vs_users/ucus');
 			}
 			$this->load->view('admin/univ_vs_users/manage_map_univ_vs_users',$data);	
 			}

@@ -67,6 +67,10 @@ class Dashboard extends CI_Model
 		$res=$this->db->get();
 		return $res->num_rows();
 	}
+	
+	function upcoming_event_registerd_user_detail()
+	{
+	}
 }
 
 /* End of file users.php */
