@@ -1,8 +1,38 @@
+<?php
+$sms_suc_sess_val = $this->session->userdata('msg_send_suc');
+if($sms_suc_sess_val == '1')
+{
+?>
+	<script>
+	$(document).ready(function(){
+	$('#show_success').css('display','block');
+	$('#show_success').hide();
+	$('#show_success').show("show");
+	$("#show_success").delay(3000).fadeOut(200);
+	});
+	</script>
+<?php
+}
+$this->session->unset_userdata('msg_send_suc');
+?>
 <div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body">
 			<div class="row margin_t1">
+			<div class="modal" id="show_success" style="display:none;" >
+					  <div class="modal-header">
+						<a class="close" data-dismiss="modal"></a>
+						<h3>Message For You</h3>
+					  </div>
+					  <div class="modal-body">
+						<p><center><h4>SMS has been send successfully.....</h4></center></p>
+					  </div>
+					  <div class="modal-footer">
+						<!--<a href="#" class="btn">Close</a>-->
+						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
+					  </div>
+				</div>
 				<div class="float_l span13 margin_l">
 					<div class="float_l span4 margin_zero">
 								<div id="event_calendar">
@@ -101,6 +131,7 @@
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 									<div class="float_r margin_t1">
+									<input type="BUTTON" value="SMS ME" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
 									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" /></div>
 											</form>
 											</div>
@@ -129,7 +160,15 @@
 					
 					
 </div>
-
+<div id="myModal" class="model_back modal hide fade">
+	<div class="modal-header no_border model_heading">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Event Information</h3>
+	</div>
+	<div id="event_det" class="modal-body model_body_height">
+	
+	</div>
+	</div>
 					
 <?php 
 if(!empty($events))
@@ -157,6 +196,36 @@ $show_date = '';
 			// foreach($array_dates as $dates){
 			// echo $dates;
 			// }?>
+			
+<SCRIPT LANGUAGE="JavaScript">     
+ function popup(id) {
+ /* $('#myModal').modal({
+        keyboard: false
+    }) */
+  $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+id,
+	   cache: false,
+	   success: function(msg)
+	   $('#event_det').html(msg);
+		$('#sms_form').append('<input type="hidden" name="page_status" value="fairs"/>');
+		$('#myModal').modal({
+        keyboard: false
+    })
+	  //$('#search_program').html(msg);
+	   }
+	   }) 
+//alert(id);
+/* var URL = "<?php echo site_url('leadcontroller/sms_me_event');?>";
+//window.open("<?php echo site_url('controller/method/param1/param2/etc');?>", 'width=150,height=150'); 
+day = new Date();
+id = day.getTime();
+window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
+} 
+
+</script>
 <script type="text/javascript">
 var x = new Array(<?php echo $array_dates; ?>);
 //'12/04/2012';

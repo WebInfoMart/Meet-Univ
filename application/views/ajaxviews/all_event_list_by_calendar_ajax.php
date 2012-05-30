@@ -5,7 +5,9 @@
 		
  gapi.plusone.go();
 </script>
-<?php 
+<?php 	
+								if(!empty($search_event_by_calendar))
+								{
 								foreach($search_event_by_calendar as $event_detail){ 
 								?>
 								<div class="page_last_border">
@@ -55,7 +57,7 @@
 											</div>
 											<div>
 												<div class="float_l span5 margin_zero page_event_height"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></div>
-										
+												<input type="BUTTON" value="SMS ME" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
 												<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
 												<div class="clearfix"></div>
 											</div>
@@ -63,5 +65,5 @@
 								</div>
 									<div class="clearfix"></div>
 								</div>
-								<?php }  ?>
+								<?php } } else { echo "<h3>This Event Has Been Removed...</h3>"; }  ?>
 						

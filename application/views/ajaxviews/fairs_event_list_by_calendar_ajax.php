@@ -62,6 +62,7 @@
 											</div>
 										<div>
 											<div class="float_l span5 margin_zero page_event_height"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></div>
+											<input type="BUTTON" value="SMS ME" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
 											<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
 											<div class="clearfix"></div>
 										</div>

@@ -49,6 +49,7 @@
 											<form action="EventRegistration" method="post">
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
+									<input type="BUTTON" value="SMS ME" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
 									<div class="float_r margin_t1"><button class="btn btn-success" href="#">Register</button></div>
 												<div class="clearfix"></div>
 									</form>

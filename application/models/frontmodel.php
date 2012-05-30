@@ -579,4 +579,23 @@ class Frontmodel extends CI_Model
 		}
 	}
 	
+	function get_event_for_sms($event_id)
+	{
+		$this->db->select('*');
+		$this->db->from('events');
+		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
+		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
+		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
+		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
+		$this->db->where('event_id',$event_id);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else{
+		return 0;
+		}
+	}
+	
 }

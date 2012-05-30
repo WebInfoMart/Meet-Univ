@@ -348,6 +348,66 @@ class Leadcontroller extends CI_Controller
 		$this->load->view('auth/event_register',$data);
 		$this->load->view('auth/footer',$data);
 	}
+	
+	function sms_me_event_ajax()
+	{
+	$data = $this->path->all_path();
+	if ($this->tank_auth->is_logged_in()) {
+	$logged_user = $data['user_id'] = $this->tank_auth->get_user_id();
+	$data['fetch_profile_user'] = $this->users->fetch_profile($logged_user);
+	}
+		$id = $this->input->post('event_id');
+		$data['event_info_sms'] = $this->frontmodel->get_event_for_sms($id);
+		$this->load->view('ajaxviews/events_for_send_sms',$data);
+	}
+	
+	function send_sms_of_event()
+	{
+		
+		$username = $this->input->post('uname');
+		$password = $this->input->post('pass');
+		$send = $this->input->post('send');
+		$destination = $this->input->post('dest');
+		$fullname = $this->input->post('fullname');
+		$page_to_redirect = $this->input->post('page_status');
+		//$message = $this->input->post('msg');
+		$event_title = $this->input->post('event_title');
+		$event_date = $this->input->post('event_date');
+		$event_time = $this->input->post('event_time');
+		$event_place = $this->input->post('event_place');
+		$event_city = $this->input->post('event_city');
+		$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
+		$url = "http://www.unicel.in/SendSMS/sendmsg.php?uname=$username&pass=$password&send=$send&dest=$destination&msg=$message";
+		//$send_suc = file_get_contents($url);
+		//$red_url = $base.'msg_send_suc';
+		$this->session->set_userdata('msg_send_suc','1');
+		//echo $current_url;
+		if($page_to_redirect == 'home')
+		{
+			$current_url = base_url();
+		}
+		else if($page_to_redirect == 'events')
+		{
+			$current_url = base_url().'events';
+		}
+		else if($page_to_redirect == 'fairs')
+		{
+			$current_url = base_url().'fairs_events';
+		}
+		else if($page_to_redirect == 'spot')
+		{
+			$current_url = base_url().'spot_admission_events';
+		}
+		else if($page_to_redirect == 'counsell')
+		{
+			$current_url = base_url().'Counselling_events';
+		}
+		else{
+		$current_url = $page_to_redirect;
+		}
+		redirect($current_url);
+		//echo $send_suc;
+	}
 }
 
 
