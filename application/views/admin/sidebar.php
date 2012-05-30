@@ -1,7 +1,18 @@
+<?php
+$flag=1;
+  if($admin_user_level=='3')
+  {
+  $univ_detail_edit=$this->adminmodel->fetch_univ_detail($user_id);
+  if($univ_detail_edit==0)
+  {
+  $flag=0;
+  }
+  }
+ if($flag==1) { ?> 
 	<div id="sidebar">
-	
+
 		<ul id="nav">
-			<li><a href="#"><strong><img src="<?php echo "$base$admin_img" ?>/nav/dashboard.png" alt="" /> Dashboard</strong></a></li>
+			<li><a href="<?php echo $base; ?>admin"><strong><img src="<?php echo "$base$admin_img" ?>/nav/dashboard.png" alt="" /> Dashboard</strong></a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" /> Pages</a></li>
 		<!--	<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/media.png" alt="" /> Media</a>
 				<ul>
@@ -22,13 +33,13 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 ?>
 
 
-<li><a href="#" class="collapse"> <img src="<?php echo "$base$admin_img" ?>/nav/qna.gif" alt="" /> Q & A</a>
+<!--<li><a href="#" class="collapse"> <img src="<?php //echo "$base$admin_img" ?>/nav/qna.gif" alt="" /> Q & A</a>
 		<ul><?php
-		if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
-		{?>
-		<li><?php echo anchor("$base".'admin/addevents', 'Add Que'); ?></li> <?php } ?>
-			<li><?php echo anchor("$base".'admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
-
+		//if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+		//{?>
+		<li><?php //echo anchor("$base".'admin/addevents', 'Add Que'); ?></li> <?php //} ?>
+			<li><?php //echo anchor("$base".'admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
+-->
 					
 			<?php
 			
@@ -201,5 +212,5 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		
 	</div>		<!-- #sidebar ends -->
 	
-	
+<?php } ?>	
 	

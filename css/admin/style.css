@@ -120,6 +120,7 @@ a:hover {
 
 #header .userprofile ul li:hover ul {
 	display: block;
+	z-index:9;
 	}
 	
 #header .userprofile ul li ul li {
@@ -1134,9 +1135,9 @@ a:hover {
 	}
 
 #content .chat_messages {
-	padding-right: 230px;
+	padding-right: 482px;
 	}
-
+.answer_box{margin-top:10px;background:#FBFBFB;border:1px solid #ccc;width:482px;border-radius:3px;padding:10px;}
 #content .chat_messages ul li {
 	overflow: hidden;
 	border-bottom: 1px solid #eee;
@@ -1225,8 +1226,8 @@ a:hover {
 
 #content .chat_users ul li a img {
 	vertical-align: text-bottom;
-	width: 16px;
-	height: 16px;
+	width: 27px;
+	height: 27px;
 
 	border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -1408,4 +1409,11 @@ border-color: rgba(255, 0, 0, .8) !important;
 {
 	width: 215px !important;
 	height: 23px !important;
+}
+.registerd_event_admin{
+float:left;
+margin-top:30px;
+}
+.chat_admin{
+margin-top:40px;
 }

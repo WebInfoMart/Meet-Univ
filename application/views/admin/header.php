@@ -40,6 +40,8 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.MultiFile.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
+	
 </head>
 
 
@@ -49,9 +51,23 @@
 
 
 	<div id="header">
-	
+	<?php 
+	$img_exist=0;
+	if($admin_user_level==3){ 
+  $univ_detail_edit=$this->adminmodel->fetch_univ_detail($user_id);
+ $univ_img = $univ_detail_edit[0]->univ_logo_path;
+  if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	{
+	?>
+	<a href="<?php echo "$base$admin"; ?>"><img src="<?php echo "$base" ?>uploads/univ_gallery/<?php echo $univ_img; ?>" alt="" height="50px;" width="180px" /></a>
+	<?php 
+	$img_exist=1;
+	}
+}
+	if($img_exist==0) { ?>
 		<a href="<?php echo "$base$admin"; ?>"><img src="<?php echo "$base$img_path" ?>/logo.png" alt="" height="50px;" width="180px" /></a>
-		
+	<?php } 
+	
+	?>	
 		<form action="" method="post" class="searchform">
 			<input type="text" class="text" value="Search..." />
 			<input type="submit" class="submit" value="" />
@@ -73,7 +89,11 @@
 			
 	</div>			<!-- #header ends -->
 	
-	
+<script>
+ jQuery(document).ready(function() {
+  jQuery("abbr.timeago").timeago();
+});
+</script>	
 	
 	
 	

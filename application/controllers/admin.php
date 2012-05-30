@@ -47,6 +47,9 @@ class Admin extends CI_Controller
 	$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
 	$data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
 	$data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
+	$data['fetch_recent_five_question']=$this->dashboard->fetch_recent_five_question($data['university_id']);
+	$data['recent_followers_of_univ']=$this->dashboard->recent_followers_of_univ($data['university_id']);
+	
 	//$data['date_wise_lead_data']=$this->dashboard->fetch_lead_data_date_wise('2');
 	//echo $lead_created_time=$data['date_wise_lead_data'][0]['lead_created_time'];
 	//echo $data['no_of_redisterd_user']=$this->dashboard->count_no_of_redisterd_user_by_date($lead_created_time);

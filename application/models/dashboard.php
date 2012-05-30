@@ -68,8 +68,56 @@ class Dashboard extends CI_Model
 		return $res->num_rows();
 	}
 	
-	function upcoming_event_registerd_user_detail()
+	function upcoming_event_registerd_user_detail($univ_id)
 	{
+		$this->db->select("*");
+		$this->db->from('events');
+		$condition=array('event_univ_id'=>$univ_id,
+						'event_type'=>'univ_event',
+						'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d"));
+		$this->db->join('event_register','event_register.register_event_id=events.event_id');
+		$this->db->where($condition);
+		$this->db->limit(7);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		return $res->result_array();
+		else
+		return 0;
+	}
+	
+	function fetch_recent_five_question($univ_id)
+	{
+		$this->db->select("*");
+		$this->db->from('questions');
+		$condition=array('q_univ_id'=>$univ_id,
+						'q_category'=>'univ');
+		$this->db->join('users','questions.q_askedby=users.id');
+		$this->db->join('user_profiles','user_profiles.user_id=users.id');
+		$this->db->where($condition);
+		$this->db->order_by("q_asked_time", "desc");
+		$this->db->limit(5);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		return $res->result_array();
+		else
+		return 0;
+	}
+	
+	function recent_followers_of_univ($univ_id)
+	{
+		$this->db->select("*");
+		$this->db->from('follow_univ');
+		$condition=array('follow_to_univ_id'=>$univ_id);
+		$this->db->join('users','follow_univ.followed_by=users.id');
+		$this->db->join('user_profiles','user_profiles.user_id=users.id');
+		$this->db->where($condition);
+		$this->db->order_by("ontime", "desc");
+		$this->db->limit(5);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		return $res->result_array();
+		else
+		return 0;
 	}
 }
 
