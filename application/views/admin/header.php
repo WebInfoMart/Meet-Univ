@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="<?php echo "$base$admin_css" ;?>/jquery.fancybox.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/tipsy.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/admin.css">
-	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/jquery.autocomplete.css">
 	
 	<!--<link rel="stylesheet" href="<?php //echo "$base$css_path"?>/bootstrap.css">-->
 
@@ -43,7 +43,7 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.MultiFile.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
-	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-typeahead.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.autocomplete.js"></script>
 	
 </head>
 
@@ -58,11 +58,14 @@
 	$img_exist=0;
   if($admin_user_level==3){ 
   $univ_detail_edit=$this->adminmodel->fetch_univ_detail($user_id);
+  if($univ_detail_edit!=0)
+  {
   $univ_img = $univ_detail_edit[0]->univ_logo_path;
   if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	{ 
   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$univ_img);
   $univ_image=$base.'uploads/univ_gallery/'.$univ_img;
   $img_exist=1;
+  }
   }
   }
   if($img_exist==0)

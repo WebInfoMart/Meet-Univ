@@ -1,3 +1,13 @@
+<?php 
+$flag=1;
+  if($admin_user_level=='3')
+  {
+  if($univ_detail_edit==0)
+  {
+  $flag=0;
+  }
+  }
+ if($flag) { ?>  
 	<div id="content">
 		<div class="message info"><p>Welcome to the Meet universities Admin Panel</p></div> 
 		
@@ -157,7 +167,7 @@
 		<?php } ?>		
 		
 	</div>
-	
+<?php } ?>	
 <script>
 function answerthis(formid)
 {

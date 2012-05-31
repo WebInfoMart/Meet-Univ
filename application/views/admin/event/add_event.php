@@ -12,7 +12,8 @@ $class_state='';
 $class_city='';
 
 $error_title = form_error('title');
-$error_univ_name = form_error('university');
+$error_univ_id = form_error('university');
+$error_univ_name = form_error('university_name');
 $error_country=form_error('country');
 $error_state=form_error('state');
 $error_city=form_error('city');
@@ -20,17 +21,37 @@ $error_city=form_error('city');
 
 if($error_title != '') { $class_title = 'focused_error_univ'; } else { $class_title='text'; }
 
-if($error_univ_name != '') { $class_univ_name = 'focused_error_univ'; } else { $class_univ_name='text'; }
+if($error_univ_name != '' || $error_univ_id!='') { $class_univ_name = 'focused_error_univ'; } else { $class_univ_name='text'; }
+
 if($error_country != '') { $class_country = 'focused_error_univ'; } else { $class_country='text'; }
 if($error_state != '') { $class_state = 'focused_error_univ'; } else { $class_state='text'; }
 if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city='text'; }
 
 ?>
-  
+ <script type="text/javascript">
+$(document).ready(function() {
+	
+	$("#univ_name").autocomplete("<?php echo $base; ?>autosuggest/suggest_university", {
+		width: 260,
+		matchContains: true,
+		mustMatch: true,
+		//minChars: 0,
+		//multiple: true,
+		//highlight: false,
+		//multipleSeparator: ",",
+		selectFirst: false
+	});
+	
+	$("#univ_name").result(function(event, data, formatted) {
+		$("#university").val(data[1]);
+	});
+
+});
+</script>
  <div id="content">
 		<h2 class="margin">Create University Events</h2>
 		<div class="form span8">
-			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
+			<form action="<?php echo $base; ?>adminevents/add_event" autocomplete="off" method="post" class="caption_form">
 				<ul>
 					<li>
 						<div>
@@ -52,25 +73,22 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 						<div class="float_l span3 margin_zero">
 							<label>Choose University</label>
 						</div>
-						<div class="float_l span3 well">
-		<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
+						<div class="float_l span3">
+						
+							<!--<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
 								<option value="">Please Select</option>
-									<?php $x=0; foreach($univ_info as $univ_detail) { $x++?>
+									<?php foreach($univ_info as $univ_detail) { ?>
 										<option value="<?php echo $univ_detail->univ_id; ?>" ><?php echo $univ_detail->univ_name; ?></option>
-										<?php
-										
-						$clg_list=str_replace('"',' ',$univ_detail->univ_name);
-						$clg_list=str_replace('"',' ',$univ_detail->univ_name);
-						$college_list=str_replace("'",' ',$univ_detail->univ_name);
-						$arr='[';
-						$arr.='"Alabama"';
-						$arr.=']';
-						$college_list.=',';		
-										} ?>
+										<?php } ?>
 							</select>
-<input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source='' >
-							
-		<span style="color: red;"> <?php echo form_error('university'); ?><?php echo isset($errors['university'])?$errors['university']:''; ?> </span>
+						-->	
+						<input type="text" size="30" class="<?php echo $class_univ_name; ?>" name="university_name" id="univ_name" />
+						<input type="hidden" name="university" id="university" />
+		<span style="color: red;">
+		<?php if($class_univ_name=='focused_error_univ') {
+		 echo form_error('university_name'); echo isset($errors['university_name'])?$errors['university_name']:'';
+		 } ?>
+		</span>
 		
 						</div>
 						<div class="clearfix"></div>
@@ -92,6 +110,8 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 					-->
 					<?php } else { ?>
 	 				<input type="hidden" name="university" value="<?php echo $univ_info['univ_id']; ?>">
+					<input type="hidden" name="university_name" value="<?php echo $univ_info['univ_name']; ?>">
+					
 					<?php }?>
 					<li>
 						<div>

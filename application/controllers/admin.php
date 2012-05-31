@@ -41,8 +41,8 @@ class Admin extends CI_Controller
    }
    else
    {
-	$data['university_id']=2;
-	//$data['university_id']=$data['univ_detail_edit'][0]->univ_id;
+	//$data['university_id']=2;
+	$data['university_id']=$data['univ_detail_edit'][0]->univ_id;
 	$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
 	$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
 	$data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
