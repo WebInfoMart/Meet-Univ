@@ -52,13 +52,24 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 						<div class="float_l span3 margin_zero">
 							<label>Choose University</label>
 						</div>
-						<div class="float_l span3">
-							<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
+						<div class="float_l span3 well">
+		<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
 								<option value="">Please Select</option>
-									<?php foreach($univ_info as $univ_detail) { ?>
+									<?php $x=0; foreach($univ_info as $univ_detail) { $x++?>
 										<option value="<?php echo $univ_detail->univ_id; ?>" ><?php echo $univ_detail->univ_name; ?></option>
-										<?php } ?>
+										<?php
+										
+						$clg_list=str_replace('"',' ',$univ_detail->univ_name);
+						$clg_list=str_replace('"',' ',$univ_detail->univ_name);
+						$college_list=str_replace("'",' ',$univ_detail->univ_name);
+						$arr='[';
+						$arr.='"Alabama"';
+						$arr.=']';
+						$college_list.=',';		
+										} ?>
 							</select>
+<input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" data-source='' >
+							
 		<span style="color: red;"> <?php echo form_error('university'); ?><?php echo isset($errors['university'])?$errors['university']:''; ?> </span>
 		
 						</div>

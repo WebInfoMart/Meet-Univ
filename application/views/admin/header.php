@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="<?php echo "$base$admin_css" ;?>/jquery.fancybox.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/tipsy.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/admin.css">
+	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/bootstrap.css">
+	
 	<!--<link rel="stylesheet" href="<?php //echo "$base$css_path"?>/bootstrap.css">-->
 
 	
@@ -41,6 +43,7 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.MultiFile.min.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-typeahead.js"></script>
 	
 </head>
 
@@ -53,21 +56,28 @@
 	<div id="header">
 	<?php 
 	$img_exist=0;
-	if($admin_user_level==3){ 
+  if($admin_user_level==3){ 
   $univ_detail_edit=$this->adminmodel->fetch_univ_detail($user_id);
- $univ_img = $univ_detail_edit[0]->univ_logo_path;
-  if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	{
-	?>
-	<a href="<?php echo "$base$admin"; ?>"><img src="<?php echo "$base" ?>uploads/univ_gallery/<?php echo $univ_img; ?>" alt="" height="50px;" width="180px" /></a>
-	<?php 
-	$img_exist=1;
-	}
-}
-	if($img_exist==0) { ?>
-		<a href="<?php echo "$base$admin"; ?>"><img src="<?php echo "$base$img_path" ?>/logo.png" alt="" height="50px;" width="180px" /></a>
-	<?php } 
-	
-	?>	
+  $univ_img = $univ_detail_edit[0]->univ_logo_path;
+  if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	{ 
+  list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$univ_img);
+  $univ_image=$base.'uploads/univ_gallery/'.$univ_img;
+  $img_exist=1;
+  }
+  }
+  if($img_exist==0)
+  {
+	list($width, $height, $type, $attr) = getimagesize(getcwd().'/images/logo.png');
+	$univ_image=$base.'images/logo.png';
+  }
+  $img_arr=$this->searchmodel->set_the_image($width,$height,50,180,TRUE);
+	?>						
+		<div class="aspectcorrect float_l" ><img style="height:50px;width:180px;"  src="<?php echo $univ_image;?>" alt=""  />
+		</div>
+	<?php  if($admin_user_level==3){
+			if($univ_detail_edit!=0){ ?>
+		<div class="float_l univ_name_margin" ><h3><?php echo $univ_detail_edit[0]->univ_name; ?></h3></div>
+		<?php } } ?>
 		<form action="" method="post" class="searchform">
 			<input type="text" class="text" value="Search..." />
 			<input type="submit" class="submit" value="" />

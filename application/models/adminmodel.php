@@ -82,6 +82,7 @@ class Adminmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+		$this->db->join('university', 'university.user_id = users.id','left');
 		$this->db->where(array('level !=' => '5','id !='=>$user_id));
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();

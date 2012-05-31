@@ -79,7 +79,15 @@ echo "Counsellor";
 }
 else if($row->level=='3')
 {
-echo "University Admin";
+if($row->univ_name!='')
+{
+$univ_name=$row->univ_name;
+}
+else
+{
+$univ_name='No University Assigned Yet';
+}
+echo "University Admin<br />(".$univ_name.")";
 }
 else if($row->level=='4')
 {
