@@ -36,6 +36,8 @@
 	  
 	  <h3> Your Event Registration Detail Are... </h3>
 	  <?php 
+	  if(!empty($latest_register_event_info))
+	  {
 	  foreach($latest_register_event_info as $event_detail)
 	  {
 		if($event_detail['event_category'] == 'spot_admission'){
@@ -53,10 +55,10 @@
 										else{
 										$event_cat = " "; 
 										}
-		if($event_detail['fullname'] != '')
+		/* if($event_detail['full_name'] != '')
 		{		
-		echo "<h4>Your Name-: &nbsp;".$event_detail['fullname']."</h4></br>";
-		}
+		echo "<h4>Your Name-: &nbsp;".$event_detail['full_name']."</h4></br>";
+		} */
 		if($event_cat != " ")
 		{
 		echo "<h4>Event Type-: &nbsp;".$event_cat."</h4></br>"; 
@@ -89,6 +91,7 @@
 		{
 		echo "<h4>Event Place-: &nbsp;".$event_detail['event_place']."</h4></br>"; 
 		}
+	  }
 	  }
 	  ?>
 	  Thanks For Registration...</h3>

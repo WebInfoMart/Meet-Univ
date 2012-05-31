@@ -275,15 +275,15 @@ class Leadcontroller extends CI_Controller
 	function EventRegistration()
 	{
 		$data = $this->path->all_path();
-		$this->email->initialize(array(
-			'protocol' => 'smtp',
-			'smtp_host' => 'smtp.sendgrid.net',
-			'smtp_user' => 'meetinfo',
-			'smtp_pass' => 'meet2012univ',
-			'smtp_port' => 587,
-			'crlf' => "\r\n",
-			'newline' => "\r\n"
-		));
+		$this->config->load('sendgrid');
+		$config['protocol'] = $this->config->item('protocol');
+		$config['smtp_host'] = $this->config->item('smtp_host');
+		$config['smtp_user'] = $this->config->item('smtp_user');
+		$config['smtp_pass'] = $this->config->item('smtp_pass');
+		$config['smtp_port'] = $this->config->item('smtp_port');
+		$config['crlf'] = $this->config->item('crlf');
+		$config['newline'] = $this->config->item('newline');
+		$this->email->initialize($config);
 		$this->load->view('auth/header',$data);
 		$data['get_info_logged_user'] = '';
 		$data['eve_reg_suc'] = '';
@@ -324,11 +324,11 @@ class Leadcontroller extends CI_Controller
 				$id_event = $this->session->userdata('register_event_id');
 				$data['success_event_register'] = $this->leadmodel->event_registration($id_university,$id_event);
 				$latest_registered_event_id = $data['success_event_register']['id'];
-				if($data['success_event_register'] != 0)
-				{
+				//if($data['success_event_register'] != 0)
+				//{
 					$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
 					//print_r($data['latest_register_event_info']);
-					echo $message_email = $this->load->view('auth/event_register_content_email',$data,TRUE);
+					$message_email = $this->load->view('auth/event_register_content_email',$data,TRUE);
 					$this->email->from('info@meetuniversities.info', 'Meet Universities');
 					$this->email->to($user_email);
 					//$this->email->cc('another@another-example.com');
@@ -342,7 +342,7 @@ class Leadcontroller extends CI_Controller
 					);
 					$this->session->set_userdata($set_blank_session_event_register);
 					$data['eve_reg_suc'] = "suc";
-				}
+				//}
 			}
 		}
 		$this->load->view('auth/event_register',$data);
@@ -431,15 +431,26 @@ class Leadcontroller extends CI_Controller
 		$fullname = $this->input->post('fullname');
 		$page_to_redirect = $this->input->post('page_status');
 		//$message = $this->input->post('msg');
+		
+		$date_call = $this->input->post('call_date');
+		$month_call = $this->input->post('call_month');
+		$year_call = $this->input->post('call_year');
+		$hour_call = '12';
+		$minute_call = '00';
+		$second_call = '00';
+		$date_and_time = $year_call.'-'.$month_call.'-'.$date_call.'%20'.$hour_call.':'.$minute_call.':'.$second_call;
+		
 		$event_title = $this->input->post('event_title_voice');
 		$event_date = $this->input->post('event_date_voice');
 		$event_time = $this->input->post('event_time_voice');
 		$event_place = $this->input->post('event_place_voice');
 		$event_city = $this->input->post('event_city_voice');
-		$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
+		//$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
 		
-		$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid";
+		$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
+
 		$send_suc = file_get_contents($url);
+		//echo $url;
 		//$red_url = $base.'msg_send_suc';
 		$this->session->set_userdata('msg_send_suc_voice','1');
 		//echo $current_url;

@@ -295,7 +295,7 @@ class Auth extends CI_Controller
 	{
 	$data = $this->path->all_path();
 	$this->load->view('auth/header',$data);
-		$this->email->initialize(array(
+		/* $this->email->initialize(array(
 			'protocol' => 'smtp',
 			'smtp_host' => 'smtp.sendgrid.net',
 			'smtp_user' => 'meetinfo',
@@ -303,7 +303,16 @@ class Auth extends CI_Controller
 			'smtp_port' => 587,
 			'crlf' => "\r\n",
 			'newline' => "\r\n"
-		));
+		)); */
+		$this->config->load('sendgrid');
+		$config['protocol'] = $this->config->item('protocol');
+		$config['smtp_host'] = $this->config->item('smtp_host');
+		$config['smtp_user'] = $this->config->item('smtp_user');
+		$config['smtp_pass'] = $this->config->item('smtp_pass');
+		$config['smtp_port'] = $this->config->item('smtp_port');
+		$config['crlf'] = $this->config->item('crlf');
+		$config['newline'] = $this->config->item('newline');
+		$this->email->initialize($config);
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 			redirect('home');
 

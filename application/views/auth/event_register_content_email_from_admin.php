@@ -63,6 +63,10 @@
 		{
 		echo "<h4>Event Of University-: &nbsp;".$event_detail['title']."</h4></br>"; 
 		}
+		if($event_detail['event_title'] != '')
+		{
+		echo "<h4>Event Name-: &nbsp;".$event_detail['event_title']."</h4></br>"; 
+		}
 		if($event_detail['country_name'])
 		{
 		echo "<h4>Event Country-: &nbsp;".$event_detail['country_name']."</h4></br>"; 
