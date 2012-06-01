@@ -276,6 +276,36 @@ class Leadmodel extends CI_Model
 			return 0;
 		}
 	}
+	
+	function insert_user_data_after_send_sms($msg_type)
+	{
+		if($msg_type == 'text')
+		{
+			$email = $this->input->post('email');
+			$name = $this->input->post('fullname');
+			$mobile = $this->input->post('dest');
+		}
+		else if($msg_type == 'voice')
+		{
+			$email = $this->input->post('email_voice');
+			$name = $this->input->post('fullname_voice');
+			$mobile = $this->input->post('mobno');
+		}
+		$this->db->select('id');
+		$this->db->from('users');
+		$this->db->where('email',$email);
+		$query = $this->db->get();
+		if($query->num_rows() < 1)
+		{
+			$this->db->insert('users',array('email'=>$email,'fullname'=>$name));
+			if($this->db->affected_rows() > 0)
+			{
+				$current_id = $this->db->insert_id();
+				$this->db->insert('user_profiles',array('user_id'=>$current_id,'full_name'=>$name,'mob_no'=>$mobile));
+			}
+		}
+		
+	}
 }
 
 

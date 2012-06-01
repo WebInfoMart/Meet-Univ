@@ -370,17 +370,26 @@ class Leadcontroller extends CI_Controller
 		$destination = $this->input->post('dest');
 		$fullname = $this->input->post('fullname');
 		$page_to_redirect = $this->input->post('page_status');
+		$email_text_sms = $this->input->post('email');
 		//$message = $this->input->post('msg');
 		$event_title = $this->input->post('event_title');
 		$event_date = $this->input->post('event_date');
 		$event_time = $this->input->post('event_time');
 		$event_place = $this->input->post('event_place');
 		$event_city = $this->input->post('event_city');
+		
+		$msg_type = 'text';
+		/* $this->form_validation->set_rules('fullname','Name','required');
+		$this->form_validation->set_rules('dest','Mobile No','required|integer');
+		if($this->form_validation->run())
+		{ */
 		$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
 		$url = "http://www.unicel.in/SendSMS/sendmsg.php?uname=$username&pass=$password&send=$send&dest=$destination&msg=$message";
-		$send_suc = file_get_contents($url);
+		//$send_suc = file_get_contents($url);
+		$data['insert_in_user_aft_txt_msg'] = $this->leadmodel->insert_user_data_after_send_sms($msg_type);
 		//$red_url = $base.'msg_send_suc';
 		$this->session->set_userdata('msg_send_suc','1');
+		//}
 		//echo $current_url;
 		if($page_to_redirect == 'home')
 		{
@@ -446,12 +455,13 @@ class Leadcontroller extends CI_Controller
 		$event_place = $this->input->post('event_place_voice');
 		$event_city = $this->input->post('event_city_voice');
 		//$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
-		
+		$msg_type = 'voice';
 		$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
 
 		$send_suc = file_get_contents($url);
 		//echo $url;
 		//$red_url = $base.'msg_send_suc';
+		$data['insert_in_user_aft_voice_msg'] = $this->leadmodel->insert_user_data_after_send_sms($msg_type);
 		$this->session->set_userdata('msg_send_suc_voice','1');
 		//echo $current_url;
 		if($page_to_redirect == 'home')

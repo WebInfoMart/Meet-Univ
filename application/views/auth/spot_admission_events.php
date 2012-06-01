@@ -1,6 +1,14 @@
 <?php
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
-if($sms_suc_sess_val == '1')
+if($sms_suc_sess_val == 1)
+{
+	$show_suc_msg = "A Event Details has been send to you successfully.....";
+}
+else if($sms_voice_suc_sess_val == 1)
+{
+	$show_suc_msg = "A Reminder Voice SMS has been send to you successfully.....";
+}
+if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 {
 ?>
 	<script>
@@ -26,7 +34,7 @@ $this->session->unset_userdata('msg_send_suc');
 						<h3>Message For You</h3>
 					  </div>
 					  <div class="modal-body">
-						<p><center><h4>SMS has been send successfully.....</h4></center></p>
+						<p><center><h4><?php echo $show_suc_msg; ?></h4></center></p>
 					  </div>
 					  <div class="modal-footer">
 						<!--<a href="#" class="btn">Close</a>-->
