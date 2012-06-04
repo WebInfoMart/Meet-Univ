@@ -10,10 +10,7 @@
   $this->ci->load->config('tank_auth', TRUE);
   $this->ci->load->library('session');
  
-$facebook = new Facebook(array(
-  'appId'  => '358428497523493',
-  'secret' => '497eb1b9decd06c794d89704f293afdd',
-));
+$facebook = new Facebook();
 $base = base_url();
 //$base['fb_redirect'] = "'".base_url()."'/auth/facebook";
 $user = $facebook->getUser();
@@ -108,24 +105,78 @@ if ($user) {
  *                                      *
  ****************************************/
   $loginUrl = $facebook->getLoginUrl(array(
-                'scope'         => 'email,offline_access,publish_stream,user_birthday,user_location,user_work_history,user_about_me,user_hometown',
+                'scope'         => 'email,offline_access,publish_actions,user_birthday,user_location,user_work_history,user_about_me,user_hometown',
                 //'next' => $base['url']
 				//'redirect_uri'      => $base['url'],
             ));
 	$_SESSION['fb'] = '';
 	   }
 	  //print_r($this->session->userdata);
+	  function currentPageURL() {
+    $curpageURL = 'http';
+    //if ($_SERVER["HTTPS"] == "on") {$curpageURL.= "s";}
+    $curpageURL.= "://";
+    if ($_SERVER["SERVER_PORT"] != "80") {
+    $curpageURL.= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+    } else {
+    $curpageURL.= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+    }
+    return $curpageURL;
+    }
+
+    $curURL = currentPageURL();
+?>
+<?php
+if(!empty($university_details))
+{
+if($university_details['univ_logo_path'] !=0 || $university_details['univ_logo_path'] != '')
+{
+$img_src = base_url()."uploads/univ_gallery/".$university_details['univ_logo_path'];
+}
+else{
+$img_src = base_url()."uploads/univ_gallery/univ_logo.png";
+}
+}
+else{
+$img_src = "";
+}
+if(!empty($event_detail))
+{
+if($event_detail['event_title'] != 0 || $event_detail['event_title'] != '')
+{
+$title_of_event = $event_detail['event_title'];	
+}
+}
+else{
+$title_of_event = "";
+}
+
+if(!empty($event_detail))
+{
+if($event_detail['event_title'] != 0 || $event_detail['event_title'] != '')
+{
+$detail_of_event = $event_detail['event_detail'];
+}
+}
+else{
+$detail_of_event = "";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# meetuniversities: http://ogp.me/ns/fb/meetuniversities#">
+  <meta property="fb:app_id" content="415316545179174" /> 
+  <meta property="og:type"   content="meetuniversities:event" /> 
+  <meta property="og:url"    content="<?php echo $curURL; ?>" /> 
+  <meta property="og:title"  content="<?php echo $title_of_event; ?>" /> 
+  <meta property="og:image"  content="<?php echo $img_src; ?>" />
+  <meta property="og:description"  content="<?php echo $detail_of_event; ?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="">
-<meta name="description" content="">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">
-<title>Meet Universities</title>
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
@@ -135,7 +186,7 @@ if ($user) {
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script>
-  FB.init({appId: '358428497523493', status: true, cookie: true, xfbml: true});
+  FB.init({appId: '415316545179174', status: true, cookie: true, xfbml: true});
   FB.Event.subscribe('auth.sessionChange', function(response) {
     if (response.session) {
       // A user has logged in, and a new cookie has been saved
@@ -277,7 +328,7 @@ $('.menu a').each(function(){
 							<a href="<?php echo $base ?>login"><div class="login">Login</div></a>
 							<a href="<?php echo $base ?>register"><div class="signup">Signup</div></a>
 							<span id="fb_button">
-							<fb:login-button   perms="email,user_checkins" id="fb_butonek" onlogin="window.location.reload(true);"></fb:login-button>
+							<fb:login-button   perms="email,user_checkins,publish_actions" id="fb_butonek" onlogin="window.location.reload(true);"></fb:login-button>
 							<!--<img src="<?php echo "$base$img_path" ?>/inconnect.png" />-->
 							</span>
 							<?php } ?>
@@ -341,7 +392,7 @@ display:none;
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=415316545179174";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
@@ -350,6 +401,27 @@ display:none;
 <!-- Place this render call where appropriate -->
 <script type="text/javascript" src="http://apis.google.com/js/plusone.js">
   {lang: 'en-GB'}
+</script>
+
+<script>
+function postCook(url)
+  {
+  FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {  
+      FB.api(
+       'me/meetuniversities:view?event='+url,
+        'post',
+        function(response) {
+		alert(response.toSource());
+           if (!response || response.error) {
+     
+           } else {     
+     id_pro = response.id;       
+     }
+        });
+  } 
+   });
+}
 </script>
 
 <!--<script type="text/javascript">

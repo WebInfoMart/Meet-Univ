@@ -1,5 +1,6 @@
 <?php
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
+$sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)
 {
 	$show_suc_msg = "A Event Details has been send to you successfully.....";
@@ -22,6 +23,7 @@ if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 <?php
 }
 $this->session->unset_userdata('msg_send_suc');
+$this->session->unset_userdata('msg_send_suc_voice');
 ?>
 <div class="container">
 		<div class="body_bar"></div>

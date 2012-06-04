@@ -10,3 +10,4 @@ $config['newline'] = '\r\n';
 
 /* End of file sendgrid.php */
 /* Location: ./application/config/sendgrid.php */
+?>

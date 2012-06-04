@@ -254,7 +254,6 @@ function university($univ_id='',$qid='',$uid='')
 		{
 			$data = $this->path->all_path();
 			$data['err_div']=0;
-			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -265,6 +264,7 @@ function university($univ_id='',$qid='',$uid='')
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['event_detail']=$this->frontmodel->get_event_detail_by_univ($univ_id,$event_id);
+			$this->load->view('auth/header',$data);
 			 if($data['university_details'] != 0 )
 			 {
 				

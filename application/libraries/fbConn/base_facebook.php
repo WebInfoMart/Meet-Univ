@@ -210,10 +210,9 @@ abstract class BaseFacebook
    *
    * @param array $config The application configuration
    */
-  public function __construct() {
-  
-    $this->setAppId($config['appId'] = '358428497523493');
-    $this->setAppSecret($config['secret'] = '497eb1b9decd06c794d89704f293afdd');
+  public function __construct($config) {
+    $this->setAppId($config['appId']);
+    $this->setAppSecret($config['secret']);
     if (isset($config['fileUpload'])) {
       $this->setFileUploadSupport($config['fileUpload']);
     }

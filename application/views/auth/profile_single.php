@@ -1,8 +1,5 @@
 	<?php
-$facebook = new Facebook(array(
-  'appId'  => '358428497523493',
-  'secret' => '497eb1b9decd06c794d89704f293afdd',
-));
+$facebook = new Facebook();
 $user = $facebook->getUser();
 $this->load->model('users');
 if ($user) {

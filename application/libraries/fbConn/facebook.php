@@ -1,5 +1,4 @@
 <?php
-ob_start();
 /**
  * Copyright 2011 Facebook, Inc.
  *
@@ -33,11 +32,15 @@ class Facebook extends BaseFacebook
    * @param Array $config the application configuration.
    * @see BaseFacebook::__construct in facebook.php
    */
-  public function __construct() {
+  public function __construct($config=array()) {
     if (!session_id()) {
       session_start();
     }
-    parent::__construct();
+	if(count($config)==0)
+	{
+	$config=array('appId'=>'415316545179174','secret'=>'ac58e50d8d10b458388e63eec36939ae');
+	}
+    parent::__construct($config);
   }
 
   protected static $kSupportedKeys =
