@@ -66,6 +66,7 @@ $route['colleges']='auth/all_colleges';
 
 
 $route['UniversityQuest/(:num)/(:num)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
+$route['MeetQuest/(:any)/(:any)'] = 'quest_ans_controler/MeetQuest/$1/$2';
 $route['UniversityQuestSection/(:num)'] = 'univ/UniversityQuestSection/$1';
 $route['UniversityQuestSection'] = 'univ/UniversityQuestSection';
 $route['(QuestandAns)'] = 'quest_ans_controler/$1';

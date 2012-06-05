@@ -134,18 +134,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
 								<select name="event_month" id="month">
 									<option value="">All</option>
-									<option value="Januray">Jan</option>
-									<option value="February">Feb</option>
-									<option value="March">Mar</option>
-									<option value="April">Apr</option>
+									<option value="Jan">Jan</option>
+									<option value="Feb">Feb</option>
+									<option value="Mar">Mar</option>
+									<option value="Apr">Apr</option>
 									<option value="May">May</option>
-									<option value="June">Jun</option>
-									<option value="July">Jul</option>
-									<option value="August">Aug</option>
-									<option value="September">Sep</option>
-									<option value="October">Oct</option>
-									<option value="November">Nov</option>
-									<option value="December">Dec</option>
+									<option value="Jun">Jun</option>
+									<option value="Jul">Jul</option>
+									<option value="Aug">Aug</option>
+									<option value="Sep">Sep</option>
+									<option value="Oct">Oct</option>
+									<option value="Nov">Nov</option>
+									<option value="Dec">Dec</option>
 								</select>
 							</div>
 							<div class="float_l span1">
@@ -649,12 +649,6 @@ function voicepopup(id) {
 	  //$('#search_program').html(msg);
 	   }
 	   }) 
-//alert(id);
-/* var URL = "<?php echo site_url('leadcontroller/sms_me_event');?>";
-//window.open("<?php echo site_url('controller/method/param1/param2/etc');?>", 'width=150,height=150'); 
-day = new Date();
-id = day.getTime();
-window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
 } 
 
 </script>

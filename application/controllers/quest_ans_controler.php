@@ -39,7 +39,7 @@ class Quest_ans_controler extends CI_Controller
 		if($this->input->post('post_quest'))
 		{
 		$this->form_validation->set_rules('quest_title','Question Title','required');
-		$this->form_validation->set_rules('colleges','Category Field','required');
+		//$this->form_validation->set_rules('colleges','Category Field','required');
 		if($this->form_validation->run())
 		{
 		if (!$this->tank_auth->is_logged_in()) {
@@ -49,28 +49,43 @@ class Quest_ans_controler extends CI_Controller
 			$quest_cat_type = $this->input->post('category');
 			if($quest_cat_type == 'col')
 			{
-			$quest = array(
-			'q_category'=>'univ',
-			'q_univ_id'=>$univ_or_country_id,
-			'q_title'=>$quest_title,
-			'q_detail'=>$quest_detail,
-			'q_approve'=>'0',
-			'q_featured_home_que'=>'0',
-			'q_featured_country_que'=>'0',
-			);
+				$quest = array(
+				'q_category'=>'univ',
+				'q_univ_id'=>$univ_or_country_id,
+				'q_title'=>$quest_title,
+				'q_detail'=>$quest_detail,
+				'q_approve'=>'0',
+				'q_featured_home_que'=>'0',
+				'q_featured_country_que'=>'0',
+				);
+			}
+			else if($quest_cat_type == 'sa')
+			{
+					$quest = array(
+				'q_category'=>'country',
+				'q_country_id'=>$univ_or_country_id,
+				'q_title'=>$quest_title,
+				'q_detail'=>$quest_detail,
+				'q_approve'=>'0',
+				'q_featured_home_que'=>'0',
+				'q_featured_country_que'=>'0',
+				);
+			}
+			else if($quest_cat_type == 'gen')
+			{
+					$quest = array(
+				'q_category'=>'general',
+				'q_country_id'=>'0',
+				'q_univ_id'=>'0',
+				'q_title'=>$quest_title,
+				'q_detail'=>$quest_detail,
+				'q_askedby'=>$data['user_id'],
+				'q_approve'=>'0',
+				'q_featured_home_que'=>'0',
+				'q_featured_country_que'=>'0',
+				);
 			}
 			
-			{
-				$quest = array(
-			'q_category'=>'country',
-			'q_country_id'=>$univ_or_country_id,
-			'q_title'=>$quest_title,
-			'q_detail'=>$quest_detail,
-			'q_approve'=>'0',
-			'q_featured_home_que'=>'0',
-			'q_featured_country_que'=>'0',
-			);
-			}
 			$quest_sess = array(
 			'quest_sess_active'=>'true'
 			);
@@ -108,6 +123,23 @@ class Quest_ans_controler extends CI_Controller
 				$quest = array(
 			'q_category'=>'country',
 			'q_country_id'=>$univ_or_country_id,
+			'q_title'=>$quest_title,
+			'q_detail'=>$quest_detail,
+			'q_askedby'=>$data['user_id'],
+			'q_approve'=>'0',
+			'q_featured_home_que'=>'0',
+			'q_featured_country_que'=>'0',
+			);
+			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
+			$data['show_quest_send_msg'] = '1';
+			}
+			
+			else if($quest_cat_type == 'gen')
+			{
+				$quest = array(
+			'q_category'=>'general',
+			'q_country_id'=>'0',
+			'q_univ_id'=>'0',
 			'q_title'=>$quest_title,
 			'q_detail'=>$quest_detail,
 			'q_askedby'=>$data['user_id'],
@@ -174,6 +206,32 @@ class Quest_ans_controler extends CI_Controller
 		//print_r($data['get_all_question']);
 		
 		
+		$this->load->view('auth/footer',$data);
+	}
+	function MeetQuest($quest_id='', $ask_user_id='')
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		if($quest_id!='' && $ask_user_id!='')
+		{
+			$univ_id = 'meetquest';
+			$data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$ask_user_id);
+			//print_r($data['single_quest']);
+			if($data['single_quest'] == 0)
+			{
+				$data['err_msg']='<h2> Sorry....</br><span class="text-align">Question Detail Not Found.... </span> </h2>';
+				$data['err_div']=1;
+				$this->load->view('auth/NotFoundPage',$data);
+			}
+			else{
+			$this->load->view('auth/meet_general_question',$data);
+			}
+		}
+		else{
+		$data['err_msg']='<h2> Sorry....</br><span class="text-align">No Question Found.... </span> </h2>';
+			$data['err_div']=1;
+		$this->load->view('auth/NotFoundPage',$data);
+		}
 		$this->load->view('auth/footer',$data);
 	}
 }

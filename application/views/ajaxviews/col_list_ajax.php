@@ -1,5 +1,4 @@
 <?php
-$regs='<option value="0">Select Collage</option>';
 //print_r($region);
 
 foreach($collage_list as $col) { 

@@ -618,10 +618,10 @@ font-size: 14px;
 line-height: 22px;
 }
 .event_comment{background-color: #DFF0D8;border: 1px solid #DDD;border-radius:4px;padding:10px;}
-.comment_img{height:54px;}
+.comment_img{height:69px; width:69px;}
 .date_heading{font-size:16px;}
 .my_form_controls{margin-left:14px;}
-.comment_img img{height:54px;}
+.comment_img img{height:69px; width:69px;}
 
 
 /*==========================Q & A=================================*/

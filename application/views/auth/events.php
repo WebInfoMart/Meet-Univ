@@ -143,7 +143,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 									<div class="float_r margin_t1">
-									<input type="BUTTON" value="SMS ME" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
+									<input type="BUTTON" value="SMS ME" class="btn btn-primary" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
+									<input type="BUTTON" value="VOICE SMS" class="btn btn-primary" onClick="voicepopup('<?php echo $event_detail['event_id']; ?>')">
 									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" /></div>
 									<div class="clearfix"></div>
 									</form>
@@ -168,6 +169,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		</div>
 </div>
 </div>
+<!--  Div for Text SMS  -->
 <div id="myModal" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
@@ -177,6 +179,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	
 	</div>
 	</div>
+<!-- End Here -->	
+<!-- Div For Voice SMS -->
+	<div id="myModal-voice" class="model_back modal hide fade">
+	<div class="modal-header no_border model_heading">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Event Information</h3>
+	</div>
+	<div id="event_det_voice" class="modal-body model_body_height">
+	
+	</div>
+	</div>
+	<!-- End Here -->
 <?php 
 if(!empty($events))
 {
@@ -233,6 +247,27 @@ id = day.getTime();
 window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
 } 
 
+function voicepopup(id) {
+ /* $('#myModal').modal({
+        keyboard: false
+    }) */
+  $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_voice_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+id,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $('#event_det_voice').html(msg);
+		$('#sms_form_voice').append('<input type="hidden" name="page_status_voice" value="events"/>');
+		$('#myModal-voice').modal({
+        keyboard: false
+    })
+	  //$('#search_program').html(msg);
+	   }
+	   }) 
+}
 </script>			
 <script type="text/javascript">
 var x = new Array(<?php echo $array_dates; ?>);

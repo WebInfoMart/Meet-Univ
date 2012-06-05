@@ -63,11 +63,15 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="event_border hover_delete_comment_<?php echo $news_comments_detail['comment_id']; ?>" >
 								<div class="float_l">
 									<div class="comment_img" style="margin-right:10px;">
-									<?php if($news_comments_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $news_comments_detail['user_pic_path']; ?>" />
-								<?php } ?>
+									<?php if($news_comments_detail['user_pic_path'] !=''){ ?>
+									<img src="<?php echo "$base"; ?>uploads/<?php echo $news_comments_detail['user_pic_path']; ?>" />
+									<?php } 
+									else if($user) { ?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+								<?php } 
+									else { ?>		
+									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<?php } ?>
 									</div>
 								</div>
 								<div>
@@ -80,11 +84,19 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			</span>
 			<?php	} } ?>				
 									<h4 ><span class="course_txt">
-									<?php if($news_comments_detail['commented_by_user_name']==''){
-									echo $news_comments_detail['fullname'];
-									}else{
+									<?php 
+									if($news_comments_detail['commented_by_user_name'] !=''){
 									echo $news_comments_detail['commented_by_user_name']; 
-									} ?>
+									}
+									else if($news_comments_detail['fullname'] !='')
+									{
+										echo $news_comments_detail['fullname'];
+									}
+									else if($user)
+									{
+										echo $user_profile['name'];
+									}
+									?>
 									</span>
 									</h4>
 									<?php echo $news_comments_detail['commented_text'];?>
@@ -153,15 +165,27 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
-									<?php if($user)
+									<?php if($user_detail['user_pic_path'] !=''){?>
+										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<?php }
+									else if($user)
 									{ ?>
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-									<?php }
-									else if($user_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
+									<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } echo "<span style='float: left;width: 46px;position: absolute;'> ".$user_detail['fullname']."</span>"; ?>
+								<?php }  ?>
+								<span style='float: left;width: 46px;position: absolute;'>
+								<?php
+								if($user_detail['fullname'] !='')
+								{
+									echo $user_detail['fullname'];
+								}
+								else if($user)
+								{
+									echo $user_profile['name'];
+								}
+								?>
+								</span>
 									</div>
 								<p>		
 								</div>

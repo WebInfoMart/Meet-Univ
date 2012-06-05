@@ -8,9 +8,9 @@ input {width:200px;}
 	display:none;
 }
 .needsfilled {
-	background:whitesmoke;
-	color:red;
-	border-color:red;
+	background:whitesmoke !important;
+	color:red !important;
+	border-color:red !important;
 }
 </style>
 <?php
@@ -51,7 +51,8 @@ foreach($event_info_sms as $event_sms)
 	<div style='float:left;'><span style='font-size: 15px;color: black;'>Event Date -</span>$event_sms[event_date_time]</div><div class='clearfix'></div>
 	<div style='float:left;'><span style='font-size: 15px;color: black;'>Event Time-</span>$event_sms[event_time]</div><div class='clearfix'></div>
 	<div style='float:left;'><span style='font-size: 15px;color: black;'>Venue -</span>$event_sms[event_place] &nbsp;$event_sms[cityname]</div><div class='clearfix'></div>
-	
+	<div id='agree_terms' style='float:left;'><span><input type='checkbox' value='yes' name='agree' id='agree'/></span>
+	<span id='agree_terms_span' style='font-size: 15px;color: black;margin-left:5px;'>I agree to the terms and conditions</span></div>
 	</div>
 	</br>
 	<input type='submit' value='SMS ME' name='btn_sms_me' id='btn_sms_me' class='btn btn-primary'/>
@@ -63,13 +64,16 @@ foreach($event_info_sms as $event_sms)
 <script>
 $(document).ready(function(){
 	// Place ID's of all required fields here.
-	required = ["fullname", "email", "dest"];
+	required = ["fullname", "email", "dest","agree"];
 	// If using an ID other than #email or #error then replace it here
 	email = $("#email");
+	agree_terms = $("#agree_terms");
+	agree_terms_span = $("#agree_terms_span");
 	//phone = $("#dest");
 	errornotice = $("#error");
 	//var regEx = /^(\+\d)*\s*(\(\d{3}\)\s*)*\d{3}(-{0,1}|\s{0,1})\d{2}(-{0,1}|\s{0,1})\d{2}$/;
 	phone = $("#dest");
+	check_agree = $("#agree");
 	// The text to show up within a field when it is incorrect
 	emptyerror = "Please fill out this field.";
 	emailerror = "Please enter a valid e-mail.";
@@ -107,6 +111,12 @@ $(document).ready(function(){
             phone.addClass("needsfilled");
 			phone.val(phoneerror_digit);
         }
+		 
+		if(!$('#agree[type="checkbox"]').is(':checked')){
+		check_agree.addClass("needsfilled");
+		agree_terms.addClass("needsfilled");
+		agree_terms_span.addClass("needsfilled");
+		}
 
 		//if any inputs on the page have the class 'needsfilled' the form will not submit
 		if ($(":input").hasClass("needsfilled")) {

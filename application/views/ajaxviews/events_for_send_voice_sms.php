@@ -8,9 +8,9 @@ input {width:200px;}
 	display:none;
 }
 .needsfilled {
-	background:whitesmoke;
-	color:red;
-	border-color:red;
+	background:whitesmoke !important;
+	color:red !important;
+	border-color:red !important;
 }
 </style>
 <?php
@@ -74,6 +74,9 @@ foreach($event_info_sms as $event_sms)
 	<div style='float:left;'><span style='font-size: 15px;color: black;'>Venue -</span>$event_sms[event_place] &nbsp;$event_sms[cityname]</div><div class='clearfix'></div>
 	
 	</div>
+	<div id='agree_terms' style='float:left;'><span><input type='checkbox' value='yes' name='agree' id='agree'/></span>
+	<span id='agree_terms_span' style='font-size: 15px;color: black;margin-left:5px;'>I agree to the terms and conditions</span></div>
+	</div>
 	</br>
 	<input type='submit' value='SMS ME' name='btn_sms_me' class='btn btn-primary'/>
 	</form>
@@ -85,9 +88,12 @@ foreach($event_info_sms as $event_sms)
 <script>
 $(document).ready(function(){
 	// Place ID's of all required fields here.
-	required = ["fullname_voice", "email_voice", "mobno"];
+	required = ["fullname_voice", "email_voice", "mobno","agree"];
 	// If using an ID other than #email or #error then replace it here
 	email = $("#email_voice");
+	agree_terms = $("#agree_terms");
+	agree_terms_span = $("#agree_terms_span");
+	check_agree = $("#agree");
 	//phone = $("#dest");
 	errornotice = $("#error");
 	//var regEx = /^(\+\d)*\s*(\(\d{3}\)\s*)*\d{3}(-{0,1}|\s{0,1})\d{2}(-{0,1}|\s{0,1})\d{2}$/;
@@ -129,7 +135,12 @@ $(document).ready(function(){
             phone.addClass("needsfilled");
 			phone.val(phoneerror_digit);
         }
-
+			
+		if(!$('#agree[type="checkbox"]').is(':checked')){
+		check_agree.addClass("needsfilled");
+		agree_terms.addClass("needsfilled");
+		agree_terms_span.addClass("needsfilled");
+		}
 		//if any inputs on the page have the class 'needsfilled' the form will not submit
 		if ($(":input").hasClass("needsfilled")) {
 			return false;

@@ -182,10 +182,19 @@ class Quest_ans_model extends CI_Model
 	
 	public function get_single_quest_detail($univ_id,$quest_id,$user_id)
 	{
-		$where_clause = array(
-		'que_id'=>$quest_id,
-		'q_univ_id'=>$univ_id
-		);
+		if($univ_id == 'meetquest')
+		{
+			$where_clause = array(
+			'que_id'=>$quest_id,
+			'q_category'=>'general'
+			);	
+		}
+		else{
+			$where_clause = array(
+			'que_id'=>$quest_id,
+			'q_univ_id'=>$univ_id
+			);
+		}
 		$this->db->select('*');
 		$this->db->from('questions');
 		$this->db->where($where_clause);

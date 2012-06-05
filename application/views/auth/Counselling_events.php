@@ -1,6 +1,15 @@
 <?php
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
-if($sms_suc_sess_val == '1')
+$sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
+if($sms_suc_sess_val == 1)
+{
+	$show_suc_msg = "A Event Details has been send to you successfully.....";
+}
+else if($sms_voice_suc_sess_val == 1)
+{
+	$show_suc_msg = "A Reminder Voice SMS has been send to you successfully.....";
+}
+if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 {
 ?>
 	<script>
@@ -14,6 +23,7 @@ if($sms_suc_sess_val == '1')
 <?php
 }
 $this->session->unset_userdata('msg_send_suc');
+$this->session->unset_userdata('msg_send_suc_voice');
 ?>
 <div class="container">
 		<div class="body_bar"></div>
@@ -26,7 +36,7 @@ $this->session->unset_userdata('msg_send_suc');
 						<h3>Message For You</h3>
 					  </div>
 					  <div class="modal-body">
-						<p><center><h4>SMS has been send successfully.....</h4></center></p>
+						<p><center><h4><?php echo $show_suc_msg; ?></h4></center></p>
 					  </div>
 					  <div class="modal-footer">
 						<!--<a href="#" class="btn">Close</a>-->
@@ -131,7 +141,8 @@ $this->session->unset_userdata('msg_send_suc');
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 									<div class="float_r margin_t1">
-									<input type="BUTTON" value="SMS ME" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
+									<input type="BUTTON" value="SMS ME" class="btn btn-primary" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
+									<input type="BUTTON" value="VOICE SMS" class="btn btn-primary" onClick="voicepopup('<?php echo $event_detail['event_id']; ?>')">
 									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" /></div>
 							</form>
 							</div>
@@ -159,7 +170,7 @@ $this->session->unset_userdata('msg_send_suc');
 					</div>
 					</div>
 					</div>
-					
+<!--  Div For Text SMS  -->					
 <div id="myModal" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
@@ -169,8 +180,18 @@ $this->session->unset_userdata('msg_send_suc');
 	
 	</div>
 	</div>					
-
-					
+<!-- End Here -->
+<!-- Div For Voice SMS -->
+	<div id="myModal-voice" class="model_back modal hide fade">
+	<div class="modal-header no_border model_heading">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Event Information</h3>
+	</div>
+	<div id="event_det_voice" class="modal-body model_body_height">
+	
+	</div>
+	</div>
+	<!-- End Here -->						
 <?php 
 if(!empty($events))
 {
@@ -228,6 +249,28 @@ id = day.getTime();
 window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
 } 
 
+function voicepopup(id) {
+ /* $('#myModal').modal({
+        keyboard: false
+    }) */
+  $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_voice_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+id,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $('#event_det_voice').html(msg);
+		$('#sms_form_voice').append('<input type="hidden" name="page_status_voice" value="counsell"/>');
+		$('#myModal-voice').modal({
+        keyboard: false
+    })
+	  //$('#search_program').html(msg);
+	   }
+	   }) 
+}
+
 </script>			
 <script type="text/javascript">
 var x = new Array(<?php echo $array_dates; ?>);
@@ -275,7 +318,7 @@ var x = new Array(<?php echo $array_dates; ?>);
 					$.ajax({
 						type: "POST",
 						url: searchUrl,
-						data:'date='+x+"&month="+y+"&year="+z+"&type=counsell",
+						data:'date='+x+"&month="+y+"&year="+z+"&type=counsell_alumuni_others",
 						success: function(response)
 						{
 							//$('#content_search').html(response);

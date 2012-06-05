@@ -1,8 +1,5 @@
 <?php
-$facebook = new Facebook(array(
-  'appId'  => '358428497523493',
-  'secret' => '497eb1b9decd06c794d89704f293afdd',
-));
+$facebook = new Facebook();
 $user = $facebook->getUser();
 $this->load->model('users');
 if ($user) {
@@ -28,9 +25,48 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-	
+<?php
+$sms_suc_sess_val = $this->session->userdata('msg_send_suc');
+$sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
+if($sms_suc_sess_val == 1)
+{
+	$show_suc_msg = "A Event Details has been send to you successfully.....";
+}
+else if($sms_voice_suc_sess_val == 1)
+{
+	$show_suc_msg = "A Reminder Voice SMS has been send to you successfully.....";
+}
+if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
+{
+?>
+<script>
+	$(document).ready(function(){
+	$('#show_success').css('display','block');
+	$('#show_success').hide();
+	$('#show_success').show("show");
+	$("#show_success").delay(3000).fadeOut(200);
+	});
+	</script>
+<?php
+}
+$this->session->unset_userdata('msg_send_suc');
+$this->session->unset_userdata('msg_send_suc_voice');
+?>	
 
 			<div class="row" style="margin-top:-10px">
+			<div class="modal" id="show_success" style="display:none;" >
+					  <div class="modal-header">
+						<a class="close" data-dismiss="modal"></a>
+						<h3>Message For You</h3>
+					  </div>
+					  <div class="modal-body">
+						<p><center><h4><?php echo $show_suc_msg; ?></h4></center></p>
+					  </div>
+					  <div class="modal-footer">
+						<!--<a href="#" class="btn">Close</a>-->
+						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
+					  </div>
+				</div>
 				<div class="float_l span13 margin_l">
 					<div>
 					<div class="float_r">
@@ -76,6 +112,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 									<div class="float_r margin_t1">
+									<input type="BUTTON" value="SMS ME" class="btn btn-primary" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
+									<input type="BUTTON" value="VOICE SMS" class="btn btn-primary" onClick="voicepopup('<?php echo $event_detail['event_id']; ?>')">
 									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" /></div>
 								</div>
 							<h3><?php echo $extract_date[1] ?> <?php echo ' '.$extract_date[0].' '.$extract_date[2];?></h3> 
@@ -109,11 +147,15 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="event_border hover_delete_comment_<?php echo $event_comments_detail['comment_id']; ?>" >
 								<div class="float_l">
 									<div class="comment_img">
-									<?php if($event_comments_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $event_comments_detail['user_pic_path']; ?>" />
-								<?php } ?>
+									<?php if($event_comments_detail['user_pic_path'] !=''){ ?>
+									<img src="<?php echo "$base"; ?>uploads/<?php echo $event_comments_detail['user_pic_path']; ?>" />
+									<?php } 
+									else if($user) { ?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+								<?php } 
+									else { ?>		
+									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<?php } ?>
 									</div>
 								</div>
 								<div>
@@ -126,10 +168,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			</span>
 			<?php	} } ?>				
 									<h4 ><a href="#" class="course_txt">
-									<?php if($event_comments_detail['commented_by_user_name']==''){
-									echo $event_comments_detail['fullname'];
-									}else{
+									<?php if($event_comments_detail['commented_by_user_name'] !=''){
 									echo $event_comments_detail['commented_by_user_name']; 
+									}
+									else if($event_comments_detail['fullname'] !='')
+									{
+										echo $event_comments_detail['fullname'];
+									}
+									else if($user)
+									{
+										echo $user_profile['name'];
 									} ?>
 									</a>
 									</h4>
@@ -159,15 +207,27 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
-									<?php if($user)
+									<?php if($user_detail['user_pic_path'] !=''){?>
+										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<?php }
+									else if($user)
 									{ ?>
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-									<?php }
-									else if($user_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
+									<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } echo "<span style='float: left;width: 46px;position: absolute;'> ".$user_detail['fullname']."</span>"; ?>
+								<?php }  ?>
+								<span style='float: left;width: 46px;position: absolute;'>
+								<?php
+								if($user_detail['fullname'] !='')
+								{
+									echo $user_detail['fullname'];
+								}
+								else if($user)
+								{
+									echo $user_profile['name'];
+								}
+								?>
+								</span>
 									</div>
 								</div>
 								<div class="float_l span9 margin_zero">
@@ -204,6 +264,78 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			</div>
 		</div>
 	</div>
+<!--  Div For Text SMS  -->					
+<div id="myModal" class="model_back modal hide fade">
+	<div class="modal-header no_border model_heading">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Event Information</h3>
+	</div>
+	<div id="event_det" class="modal-body model_body_height">
+	
+	</div>
+	</div>					
+<!-- End Here -->
+<!-- Div For Voice SMS -->
+	<div id="myModal-voice" class="model_back modal hide fade">
+	<div class="modal-header no_border model_heading">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Event Information</h3>
+	</div>
+	<div id="event_det_voice" class="modal-body model_body_height">
+	
+	</div>
+	</div>
+	<!-- End Here -->
+
+<SCRIPT LANGUAGE="JavaScript">     
+ function popup(id) {
+ var loc = window.location;
+  $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+id,
+	   cache: false,
+	   success: function(msg)
+	   {
+		$('#event_det').html(msg);
+		$('#sms_form').append("<input type='hidden' name='page_status' value='"+loc+"'/>");
+		$('#myModal').modal({
+        keyboard: false
+    })
+	  //$('#search_program').html(msg);
+	   }
+	   }) 
+//alert(id);
+/* var URL = "<?php echo site_url('leadcontroller/sms_me_event');?>";
+//window.open("<?php echo site_url('controller/method/param1/param2/etc');?>", 'width=150,height=150'); 
+day = new Date();
+id = day.getTime();
+window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
+} 
+
+function voicepopup(id) {
+var loc = window.location;
+  $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_voice_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+id,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $('#event_det_voice').html(msg);
+		$('#sms_form_voice').append("<input type='hidden' name='page_status_voice' value='"+loc+"'/>");
+		$('#myModal-voice').modal({
+        keyboard: false
+    })
+	  //$('#search_program').html(msg);
+	   }
+	   }) 
+}
+
+</script>			
+
 	
 <script>
 

@@ -438,14 +438,14 @@ class Leadcontroller extends CI_Controller
 		$fid = $this->input->post('fid');
 		$destination = $this->input->post('mobno');
 		$fullname = $this->input->post('fullname');
-		$page_to_redirect = $this->input->post('page_status');
+		$page_to_redirect = $this->input->post('page_status_voice');
 		//$message = $this->input->post('msg');
 		
 		$date_call = $this->input->post('call_date');
 		$month_call = $this->input->post('call_month');
 		$year_call = $this->input->post('call_year');
-		$hour_call = '12';
-		$minute_call = '00';
+		$hour_call = '19';
+		$minute_call = '42';
 		$second_call = '00';
 		$date_and_time = $year_call.'-'.$month_call.'-'.$date_call.'%20'.$hour_call.':'.$minute_call.':'.$second_call;
 		
@@ -458,9 +458,9 @@ class Leadcontroller extends CI_Controller
 		$msg_type = 'voice';
 		$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
 
-		$send_suc = file_get_contents($url);
+		//$send_suc = file_get_contents($url);
+		//echo $send_suc;
 		//echo $url;
-		//$red_url = $base.'msg_send_suc';
 		$data['insert_in_user_aft_voice_msg'] = $this->leadmodel->insert_user_data_after_send_sms($msg_type);
 		$this->session->set_userdata('msg_send_suc_voice','1');
 		//echo $current_url;

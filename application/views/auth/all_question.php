@@ -93,8 +93,8 @@
 							<div class="sliderkit-nav">
 								<div class="sliderkit-nav-clip">
 									<ul>
-										<li class="float_l"><a href="#tab1" title="[link title]">Ask a Question</a></li>
-										<li class="float_l"><a href="#tab2" title="[link title]">Browse More Q & A</a></li>
+										<li class="float_l"><a href="#tab1" title="[Ask a Question]">Ask a Question</a></li>
+										<li class="float_l"><a href="#tab2" title="[Browse More Q & A]">Browse More Q & A</a></li>
 										
 											<li class="clearfix"></li>
 									</ul>
@@ -117,13 +117,13 @@
 											<div class="control-group margin_t1">
 												<label>Categorys</label>
 												<select class="span3" id="category" name="category" onchange="fetch_collage(this);">
-													<option value="">Choose Type</option>
+													<option value="gen">Choose Type</option>
 													<!--<option value="sa">Study Abroad</option>-->
 													<option value="col">College</option>
 													
 												</select>
 												<select id="colleges" name="colleges">
-													
+												<option value="0"> select </option>	
 												</select>
 											</div>
 											<div class="clearfix"></div>
@@ -213,6 +213,10 @@
 				else if($quest_list['q_country_id'] != '0')
 				{
 					$url = "";
+				}
+				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
+				{
+					$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
 				}
 				?>
 

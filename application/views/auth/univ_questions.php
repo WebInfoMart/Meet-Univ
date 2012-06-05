@@ -25,14 +25,14 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-<div id="fb-root"></div>
+<!--<div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=255162604516860";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));</script>-->
 
 <div class="row" style="margin-top:-20px">
 	<div>
@@ -96,11 +96,15 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="event_border hover_delete_comment_<?php echo $question_comments_detail['comment_id']; ?>" >
 								<div class="float_l">
 									<div class="comment_img">
-									<?php if($question_comments_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $question_comments_detail['user_pic_path']; ?>" />
-								<?php } ?>
+									<?php if($question_comments_detail['user_pic_path'] !=''){ ?>
+									<img src="<?php echo "$base"; ?>uploads/<?php echo $question_comments_detail['user_pic_path']; ?>" />
+									<?php } 
+									else if($user) { ?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+								<?php } 
+									else { ?>		
+									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<?php } ?>
 									</div>
 								</div>
 								<div>
@@ -113,10 +117,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			</span>
 			<?php	} } ?>				
 									<h4 ><a href="#" class="course_txt">
-									<?php if($question_comments_detail['commented_by_user_name']==''){
-									echo $question_comments_detail['fullname'];
-									}else{
+									<?php if($question_comments_detail['commented_by_user_name'] !=''){
 									echo $question_comments_detail['commented_by_user_name']; 
+									}
+									else if($question_comments_detail['fullname'] !='')
+									{
+										echo $question_comments_detail['fullname'];
+									}
+									else if($user)
+									{
+										echo $user_profile['name'];
 									} ?>
 									</a>
 									</h4>
@@ -143,7 +153,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				?>			
 						</div>
 			<?php 
-			if(!empty($user_is_logged_in)) {
+			//if(!empty($user_is_logged_in)) {
 			if($user_is_logged_in == 0){ ?>		
 			<div class="events_box" style="height: 53px;">
 				<div class="float_r">
@@ -201,15 +211,28 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
-									<?php if($user)
+									
+									<?php if($user_detail['user_pic_path'] !=''){?>
+										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<?php }
+									else if($user)
 									{ ?>
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-									<?php }
-									else if($user_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
+									<?php } else { ?>		
 								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
 								<?php } ?>
+								<span style='float: left;width: 46px;position: absolute;'>
+								<?php
+								if($user_detail['fullname'] !='')
+								{
+									echo $user_detail['fullname'];
+								}
+								else if($user)
+								{
+									echo $user_profile['name'];
+								}
+								?>
+								</span>
 									</div>
 								</div>
 								<div class="float_l span9 margin_zero">
@@ -233,7 +256,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 						</div>
-		<?php } } ?>
+		<?php } //} ?>
 					</div>
 				</div>
 				<div class="float_r span3">
