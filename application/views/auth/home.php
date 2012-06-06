@@ -324,6 +324,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						$image=$base.$img_path.'/calendar.png';
 						} 
 						$img_arr=$this->searchmodel->set_the_image($width,$height,60,60,TRUE);
+						$event_register_user = $this->frontmodel->count_event_register($events['event_id']);
 						?>
 								<li>
 									<div>
@@ -352,7 +353,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												
 											</div>
 											<div class="float_r registered">
-													<h2 class="blue">15</h2>	
+													<h2 class="blue"><?php echo $event_register_user; ?></h2>	
 													<h4 class="blue">Registered</h4>
 											</div>
 											<div class="clearfix"></div>
@@ -553,7 +554,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;">
 										<?php } ?>
 										</div>
-										<span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
+										<span class="black"><a href="<?php echo "$base$url"; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a></span>
 										<div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
 										<div style="font-size: 11px;line-height: 12px;">
 										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
@@ -589,7 +590,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<?php $article_count++; } } ?>
 						</div>
 						<div class="float_l span4">
-							<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="326" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
+							<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="240" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
 						</div>
 						<div class="clearfix"></div>
 					</div>

@@ -31,6 +31,13 @@ class Frontmodel extends CI_Model
 		return 0;
 		}
 	}
+	function count_event_register($event_id)
+	{
+		$this->db->select('*');
+		$this->db->from('event_register');
+		$this->db->where('register_event_id',$event_id);
+		return $this->db->count_all_results();
+	}
 	
 	function fetch_featured_news()
 	{
