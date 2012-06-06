@@ -306,13 +306,13 @@ class Auth extends CI_Controller
 			'crlf' => "\r\n",
 			'newline' => "\r\n"
 		)); */
-		$this->config->load('sendgrid');
+		/* $this->config->load('sendgrid');
 		$config['protocol'] = $this->config->item('protocol');
 		$config['smtp_host'] = $this->config->item('smtp_host');
 		$config['smtp_user'] = $this->config->item('smtp_user');
 		$config['smtp_pass'] = $this->config->item('smtp_pass');
 		$config['smtp_port'] = $this->config->item('smtp_port');
-		$config['crlf'] = $this->config->item('crlf');
+		$config['crlf'] = $this->config->item('crlf'); */
 		$config['newline'] = $this->config->item('newline');
 		$this->email->initialize($config);
 		if ($this->tank_auth->is_logged_in()) {									// logged in
@@ -375,7 +375,7 @@ class Auth extends CI_Controller
 			
 			
 			//$message_email = $this->load->view('auth/event_register_content_email');
-					$this->email->from('info@meetuniversities.info', 'Meet Universities');
+					/* $this->email->from('info@meetuniversities.info', 'Meet Universities');
 					$this->email->to($uid);
 					//$this->email->cc('another@another-example.com');
 					//$this->email->bcc('them@their-example.com');
@@ -383,17 +383,17 @@ class Auth extends CI_Controller
 					$this->email->message($email_body);
 					$this->email->send();
 					//echo $this->email->print_debugger(); 
-					redirect('home');
+					redirect('home'); */
 					
-					/* $this->email->from('Meet-University.com', 'Meet University');
+					 $this->email->from('info@meetuniversities.info', 'Meet Universities');
 					$this->email->to($uid);
 					$this->email->subject('New Registration');
 					$message = "$email_body" ;
 					//$message .="<br/>Thank you very much";
 					$this->email->message($message);
-					print_r($message);
-					$this->email->send(); */
-			
+					//print_r($message);
+					$this->email->send(); 
+					redirect('home');
 						
 						
 					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
