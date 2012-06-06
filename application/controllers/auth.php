@@ -1078,32 +1078,31 @@ class Auth extends CI_Controller
 	
 	
 	function all_colleges_paging()
-	{
-		$data = $this->path->all_path();
-		$current_url=$this->input->post('current_url');
-		$data['get_university'] = $this->searchmodel->show_all_college_paging($current_url);
-		if($data['get_university']!=0)
-		{
-		$college_list=$this->load->view('auth/show_all_college_paging',$data);
-		$total_univ=$data['get_university']['total_res'];
-		echo $college_list.'!@#$%^&*'.$total_univ;
-		}
-	}
+ {
+  $data = $this->path->all_path();
+  $current_url=$this->input->post('current_url');
+  $data['get_university'] = $this->searchmodel->show_all_college_paging($current_url);
+  if($data['get_university']!=0)
+  {
+  $college_list=$this->load->view('auth/show_all_college_paging',$data);
+  echo $data['get_university']['per_page_res'].'!@#$%^&*'.$college_list;
+  }
+ }
 	
 	
 	function all_colleges_search()
-	{
-		$current_url=$this->input->post('current_url');
-		$data = $this->path->all_path();
-		$data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
-		if($data['get_university']!=0)
-		{
-		$college_list=$this->load->view('auth/show_all_college_search',$data);
-		$total_univ=$data['get_university']['total_res'];
-		$per_page_res=$data['get_university']['per_page_res'];
-		echo $college_list.'!@#$%^&*'.$total_univ.'!@#$%^&*'.$per_page_res;
-		}
-	}
+ {
+  $current_url=$this->input->post('current_url');
+  $data = $this->path->all_path();
+  $data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
+  if($data['get_university']!=0)
+  {
+  $college_list=$this->load->view('auth/show_all_college_search',$data);
+  $total_univ=$data['get_university']['total_res'];
+  $per_page_res=$data['get_university']['per_page_res'];
+  echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$college_list;
+  }
+ }
 	
 	function all_colleges($parms='')
 	{
@@ -1301,32 +1300,10 @@ class Auth extends CI_Controller
 		$this->load->view('ajaxviews/google_map',$data);
 	}
 	
-	function all_colleges_paging()
- {
-  $data = $this->path->all_path();
-  $current_url=$this->input->post('current_url');
-  $data['get_university'] = $this->searchmodel->show_all_college_paging($current_url);
-  if($data['get_university']!=0)
-  {
-  $college_list=$this->load->view('auth/show_all_college_paging',$data);
-  echo $data['get_university']['per_page_res'].'!@#$%^&*'.$college_list;
-  }
- }
+	
  
  
- function all_colleges_search()
- {
-  $current_url=$this->input->post('current_url');
-  $data = $this->path->all_path();
-  $data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
-  if($data['get_university']!=0)
-  {
-  $college_list=$this->load->view('auth/show_all_college_search',$data);
-  $total_univ=$data['get_university']['total_res'];
-  $per_page_res=$data['get_university']['per_page_res'];
-  echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$college_list;
-  }
- }
+ 
 	
 	
 }
