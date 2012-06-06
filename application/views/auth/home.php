@@ -415,6 +415,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<li>
 								<?php 
 				$f_coll=0;
+				if(!empty($featured_college))
+				{
 				foreach($featured_college as $featured_clg) {
 				if($f_coll < 6)
 				{
@@ -441,7 +443,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<div class="float_l featured_art aspectcorrect">
 										<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
 									</div>
-				<?php $f_coll++; } } ?>					
+				<?php $f_coll++; } } } else { echo "No Featured Colleges Available"; } ?>					
 								</li>
 							</ul>
 							<div class="clearfix"></div>
@@ -572,6 +574,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<h2 style="line-height: 20px;">Article</h2>
 							<?php 
 							$article_count = 0;
+							if(!empty($featured_article))
+							{
 							foreach($featured_article as $article){ 
 							if($article_count < 2) {
 							?>
@@ -587,7 +591,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</span>
 									<p><?php echo substr($article['article_detail'],0,800).'...'; ?>	 </p>
 							</div>
-							<?php $article_count++; } } ?>
+							<?php $article_count++; } } } else { echo "No Recent Articles Available"; } ?>
 						</div>
 						<div class="float_l span4">
 							<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="240" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
