@@ -69,32 +69,136 @@ class Autosuggest extends CI_Controller
 			redirect('admin/adminlogout');
 		}
 	  $hint = strtolower($_GET["q"]);
+	  $univ_id=$_GET['univ_id'];
 	  if (!$hint) return;	
-	   if($data['admin_user_level']=='3')
-	   {
-	   $univ_id=$univ_detail_edit->univ_id;
-	   }
-	   else
-	   {
-	   $univ_id=0;
-	   }
-	  $data['univ_info']=$this->autosuggest_model->get_country_detail($hint,$univ_id);
-	  if($data['univ_info']!=0)
+	  $data['country_info']=$this->autosuggest_model->get_country_detail_by_univ($hint,$univ_id);
+	  if($data['country_info']!=0)
 	  {
-	  foreach($data['univ_info'] as $univ_info) {
-			$univ_name=$univ_info->univ_name;
-			$univ_id=$univ_info->univ_id;
-			echo "$univ_name|$univ_id\n";
-	 }
-	 }
+	  foreach($data['country_info'] as $country_info) {
+			$country_name=$country_info->country_name;
+			$country_id=$country_info->country_id;
+			echo "$country_name|$country_id\n";
+	  }
+	  }
 	 else
 	 {
-	 echo 'No Result Found';
+	  $data['country_info1']=$this->autosuggest_model->get_country_detail($hint);
+	  if($data['country_info1']!=0)
+	  {
+	  foreach($data['country_info1'] as $country_info1) {
+			$country_name=$country_info1->country_name;
+			$country_id=$country_info1->country_id;
+			echo "$country_name|$country_id\n";
+	  }
+	  }
+	  else
+	  {
+	  echo 'No Result Found';
+	  }
 	 }
+	 
+			
+	}
+ }
+ 
+ function suggest_state()
+ {
+ 
+  if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
+	  $hint = strtolower($_GET["q"]);
+	  $univ_id=$_GET['univ_id'];
+	  $country_id=$_GET['country_id'];
+	  if (!$hint) return;	
+	  $data['state_info']=$this->autosuggest_model->get_state_detail_by_univ($hint,$univ_id,$country_id);
+	  if($data['state_info']!=0)
+	  {
+	  foreach($data['state_info'] as $state_info) {
+			$state_name=$state_info->statename;
+			$state_id=$state_info->state_id;
+			echo "$state_name|$state_id\n";
+	  }
+	  }
+	 else
+	 {
+	  $data['state_info1']=$this->autosuggest_model->get_state_detail($hint,$country_id);
+	  if($data['state_info1']!=0)
+	  {
+	  foreach($data['state_info1'] as $state_info1) {
+			$state_name=$state_info1->statename;
+			$state_id=$state_info1->state_id;
+			echo "$state_name|$state_id\n";
+	  }
+	  }
+	  else
+	  {
+	  echo 'No Result Found';
+	  }
+	 }
+	 
 			
 	}
  }
 
+  function suggest_city()
+ {
+ 
+  if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else{
+		
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
+	  $hint = strtolower($_GET["q"]);
+	  $univ_id=$_GET['univ_id'];
+	  $country_id=$_GET['country_id'];
+	  $state_id=$_GET['state_id'];
+	  if (!$hint) return;	
+	  $data['city_info']=$this->autosuggest_model->get_city_detail_by_univ($hint,$univ_id,$country_id,$state_id);
+	  if($data['city_info']!=0)
+	  {
+	  foreach($data['city_info'] as $city_info) {
+			$city_name=$city_info->cityname;
+			$city_id=$city_info->city_id;
+			echo "$city_name|$city_id\n";
+	  }
+	  }
+	 else
+	 {
+	  $data['city_info1']=$this->autosuggest_model->get_city_detail($hint,$country_id,$state_id);
+	  if($data['city_info1']!=0)
+	  {
+	  foreach($data['city_info1'] as $city_info1) {
+			$city_name=$city_info1->cityname;
+			$city_id=$city_info1->city_id;
+			echo "$city_name|$city_id\n";
+	  }
+	  }
+	  else
+	  {
+	  echo 'No Result Found';
+	  }
+	 }		
+	}
+ }
  
 }
 

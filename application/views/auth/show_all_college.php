@@ -10,7 +10,7 @@ $this->session->unset_userdata('follow_to_univ');
 			<div class="row margin_t1">
 				<div class="float_l span12 margin_l">
 					<div class="start_bar">
-						<div class="float_l"><h3>Viewing 1 - <span id="listed_currently_univ"><?php echo count($get_university['university']); ?></span> universities of <span id="red_total_univ"> <?php echo $get_university['total_res']; ?></span>.</h3></div>
+						<div class="float_l"><h3>Viewing 1 - <span id="listed_currently_univ"><?php echo $get_university['per_page_res']; ?></span> universities of <span id="red_total_univ"> <?php echo $get_university['total_res']; ?></span>.</h3></div>
 						<div class="float_r">
 							<div class="sort_contanier">
 								<ul class="sort_list">
@@ -125,7 +125,7 @@ $this->session->unset_userdata('follow_to_univ');
 						?>
 		<div class="events_holder_box margin_t" date="<?php echo date("m-d-Y", strtotime($get_university['univ_event'][$no_university][0]['event_date_time'])); ?>" country="<?php echo $get_university['university'][$no_university]['country_name']; ?>" univ_name="<?php echo $get_university['university'][$no_university]['univ_name']; ?>">
 								<div class="row">
-									<div class="span6 float_l margin_l margin_t1">
+									<div class="span8 float_l margin_l margin_t1">
 										<h3><span><a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>" >
 										
 										<?php echo $get_university['university'][$no_university]['univ_name']; ?></a></span>- 
@@ -179,26 +179,15 @@ $this->session->unset_userdata('follow_to_univ');
 											</span>
 											</div>
 										</div>
-										<div class="float_r courses_data margin_l">
-											<h4>Courses Offered</h4>
-											<ul class="courses_list_style">
-												<?php 
-												if($get_university['program'][$no_university] != '')
-												{
-												foreach($get_university['program'][$no_university] as $prog) {
-												if(is_array($prog))
-													{ ?>
-														
-														
- <li><a href="<?php echo $base; ?>program_detail/<?php echo $get_university['university'][$no_university]['univ_id'].'/'.$prog['prog_id']; ?>"><?php echo $prog['course_name']; ?></a></li>
-														<?php
-														
-													}
-												}
-												}
-												?>
-											</ul>
-											<div class="float_r more_style"><a href="<?php echo $base; ?>univ_programs/<?php echo $get_university['university'][$no_university]['univ_id']  ;?>/program">View all&raquo;</a></div>
+										<div class="float_r course_des margin_l">
+											<?php 
+											$overview=$get_university['university'][$no_university]['univ_overview'];
+											echo substr($overview,0,205);
+											if(strlen($overview)>205)
+											{											
+											?>
+											..<div class="float_r"><a href="<?php echo $base; ?>about-<?php echo $get_university['university'][$no_university]['univ_id']  ;?>-university">View all&raquo;</a></div>
+											<?php } ?>
 										</div>
 									</div>
 									<div class="float_r page2_col">
@@ -244,6 +233,8 @@ $this->session->unset_userdata('follow_to_univ');
 												<li><a href="<?php echo $base; ?>univ-<?php echo $get_university['university'][$no_university]['univ_id']; ?>-articles">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $base; ?>UniversityQuestSection/<?php echo $get_university['university'][$no_university]['univ_id']; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>
 												<li><a href="#">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
+												<li><a href="<?php echo $base; ?>univ_programs/<?php echo $get_university['university'][$no_university]['univ_id']; ?>/program">Courses(<span class="blue"><?php echo count($get_university['program'][$no_university]); ?></span>)</a></li>
+												
 												<!--<li><a href="#">E-Brochure</a></li>-->
 											</ul>
 										</div>
@@ -283,23 +274,7 @@ $this->session->unset_userdata('follow_to_univ');
 			
 		</div>
 		</form>
-		<!--<div id="pagination" style="margin-top:15px;margin-left:410px;" class="table_pagination paging-margin">
-   
-						   <?php
-						   $cc=$get_university['total_res'];
-						   $rl=$get_university['limit_res']; 
-						   if($cc>$rl)
-						   {
-						   $z=0;
-						   for($c=$cc;$c>0;$c=$c-$rl)
-						   {
-						   ?>
-						 <a href="#" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
-						 <?php 
-						   }
-						   }
-						   ?>
-						</div>-->
+		
 								
 	</div>
 <script>
@@ -367,8 +342,8 @@ function ajax(a,pid)
 		'opacity':1
 		},1000,function(){
 		});
-		$('#col_paging').html(res[0]);
-		$('#listed_currently_univ').html(res[1]);
+		$('#col_paging').html(res[1]);
+		$('#listed_currently_univ').html(res[0]);
 	   }
 	   })
 	   
@@ -424,14 +399,14 @@ function get_college_result_by_ajax()
 		});
 		if(res[2]!='0' && res[1]!='0')
 		{
-		$('#search_results').html(res[0]);
+		$('#search_results').html(res[2]);
 		}
 		else
 		{
 		$('#search_results').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
 		}
-	  	$('#listed_currently_univ').html(res[2]);
-	    $('#red_total_univ').html(res[1]);
+	  	$('#listed_currently_univ').html(res[1]);
+	    $('#red_total_univ').html(res[0]);
 	   }
 	   })
 }

@@ -158,8 +158,13 @@ class Adminevents extends CI_Controller
 			$this->form_validation->set_rules('event_time', 'Event Time', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('detail', 'Detail', 'trim|string');
 			$this->form_validation->set_rules('event_place', 'Event Place', 'trim|string');
-			$this->form_validation->set_rules('event_timing', 'Event Time', 'trim|string');
+			$this->form_validation->set_rules('event_start_timing', 'Event Start Time', 'trim|string');
+			$this->form_validation->set_rules('event_end_timing', 'Event End Time', 'trim|string');
 			$this->form_validation->set_rules('university_name', 'University Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('country_name', 'Country Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('state_name', 'State Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('city_name', 'City Name', 'trim|required|xss_clean');
+			
 			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {
 			$followers_id = array();
@@ -198,8 +203,9 @@ class Adminevents extends CI_Controller
 			//print_r($data['followers_of_univ']);
 			//$followers_id = $data['followers_of_univ'];
 			//print_r($followers_id);
-			//redirect('adminevents/manage_events/eas');
 			}
+			redirect('adminevents/manage_events/eas');
+			
 			}
 			//fetch user privilege data from model
 			}

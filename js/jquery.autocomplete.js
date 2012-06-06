@@ -234,6 +234,38 @@ $.Autocompleter = function(input, options) {
 		$input.val(v);
 		hideResultsNow();
 		$input.trigger("result", [selected.data, selected.value]);
+		var did=$input.attr('id');
+		if(did=='country_name')
+		{
+		 var stateval=$("#state_name").val();	
+		 if(stateval=='' || stateval==null)
+		 {
+		  $("#state_name").removeAttr("disabled");
+		 }
+		 else
+		$("#state_name").removeAttr("disabled");
+		 {
+		   $("#city_name").attr("disabled", "disabled");
+		   $("#state_name").val("");
+		   $("#state").val("");
+		   $("#city_name").val("");
+		   $("#city").val("");
+		 }
+		
+		}
+		else if(did=='state_name')
+		{
+		var cityval=$("#city_name").val();	
+		 if(cityval=='' || cityval==null)
+		 {
+		   $("#city_name").removeAttr("disabled");
+		 }
+		 else
+		 {
+		   $("#city_name").val("");
+		   $("#city").val("");
+		 }
+		}
 		return true;
 		}
 		else
@@ -324,13 +356,40 @@ $.Autocompleter = function(input, options) {
 				function (result){
 					// if no value found, clear the input box
 					if( !result ) {
+						var hid=$input.attr('title');
+						if(hid=='country')
+						{
+						$("#state_name").attr("disabled", "disabled");
+						$("#city_name").attr("disabled", "disabled");
+						$('#state_name').val('');
+						$('#city_name').val('');
+						$('#city').val('');
+						$('#state').val('');
+						}
+						else if(hid=='state')
+						{
+						$("#city_name").attr("disabled", "disabled");
+						$('#city').val('');
+						$('#city_name').val('');
+						}
+						else if(hid=='city')
+						{
+						$("#city_name").attr("disabled", "disabled");
+						$('#city_name').val('');
+						$('#city').val('');
+						}
+						else if(hid=='university')
+						{
+						$('#university').val('');
+						}
 						if (options.multiple) {
 							var words = trimWords($input.val()).slice(0, -1);
 							$input.val( words.join(options.multipleSeparator) + (words.length ? options.multipleSeparator : "") );
 						}
 						else {
-							$input.val( "" );
+							$input.val("");
 							$input.trigger("result", null);
+							
 						}
 					}
 				}
@@ -354,10 +413,12 @@ $.Autocompleter = function(input, options) {
 			term = term.toLowerCase();
 		var data = cache.load(term);
 		// recieve the cached data
-		if (data && data.length) {
+		/*if (data && data.length) {
+		alert("hello");
+	
 			success(term, data);
 		// if an AJAX url has been supplied, try loading the data now
-		} else if( (typeof options.url == "string") && (options.url.length > 0) ){
+		}*/  if( (typeof options.url == "string") && (options.url.length > 0) ){
 			
 			var extraParams = {
 				timestamp: +new Date()
@@ -375,7 +436,9 @@ $.Autocompleter = function(input, options) {
 				url: options.url,
 				data: $.extend({
 					q: lastWord(term),
-					id:$("#university").val(),
+					univ_id:$("#university").val(),
+					country_id:$("#country").val(),
+					state_id:$('#state').val(),
 					limit: options.max
 				}, extraParams),
 				success: function(data) {
