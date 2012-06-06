@@ -221,6 +221,7 @@ class Leadmodel extends CI_Model
 		$this->db->select('city_id,cityname');
 		$this->db->from('city');
 		$this->db->join('events','events.event_city_id = city.city_id');
+		$this->db->where(array('STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		$this->db->distinct();
 		$query = $this->db->get();
 		if($query->num_rows() > 0)

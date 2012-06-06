@@ -140,6 +140,7 @@ class Quest_ans_model extends CI_Model
 		$this->db->from('questions');
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
+		$this->db->order_by("que_id","desc");
 		//$this->db->limit($limit,$offset);
 		$query = $this->db->get(); 
 	//	$this->pagination->initialize($config);

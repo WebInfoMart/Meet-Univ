@@ -111,7 +111,7 @@ background: -o-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 6
 background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 62%,rgba(239,239,239,1) 66%,rgba(239,239,239,1) 77%,rgba(239,239,239,1) 100%); /* IE10+ */
 background: linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 62%,rgba(239,239,239,1) 66%,rgba(239,239,239,1) 77%,rgba(239,239,239,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#efefef',GradientType=0 ); /* IE6-9 */-webkit-border-radius: 8px 8px 0 0;-moz-border-radius: 8px 8px 0 0;border-radius: 8px 8px 0 0;padding:0px 10px;font-size: 20px;font-family: Calibri;color:#ff4200;font-weight:bold;border-bottom: 1px solid #DDD;}
-.featured_art{width:90px;height:90px;}
+.featured_art{width:106px;height:75px;}
 .style_h3{color:#00a3e1;line-height:11px;}
 .events_img{width: 76px;height: 45px;vertical-align: middle;padding: 2px;}
 .box_list_img{border: 2px solid #EAEAEA;line-height: 10px;}
@@ -130,9 +130,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', end
 .side ul li{margin:0px;font-size:10px;}
 .span22 ul li{list-style:none;margin-left: 5px;}
 .yellow  li{display: inline-block;list-style:none;}
-.yellow_nav{color:#666666;font-size:20px;}
-.yellow_nav li{display:inline-block;margin: 13px 0px 8px 0px;}
-.yellow_nav li a{border-right-width: 1px;border-right-style: solid;border-right-color: #666666;text-decoration:none;padding: 0px 20px;color:#666666;}
+.yellow_nav{margin:0px;font-size:12px;}
+.yellow_nav li{display:inline-block;}
+.yellow_nav li a{border-right-width: 1px;border-right-style: solid;border-right-color: #000;text-decoration:none;padding: 0px 20px;color:black;}
 .list_none a{border: none;}
 .question{list-style:none;}
 .question ul li{list-style: none;}
@@ -362,7 +362,7 @@ color: #08C;}
 }
 .margin_t50{margin-top: 53px\0/IE8+9; /* IE8 + 9 + IE10pp4  */
 }
-.letter_uni{padding:15px 10px 0px 10px;}
+.letter_uni{padding-top: 10px;}
 .letter_uni div::first-letter {
 color: #f89406;
 font-size: 266%;
@@ -875,3 +875,129 @@ border: 1px solid #ddd;width:58px;padding: 7px 1px 5px 28px;z-index: 1;position:
 top: 0px;
 position: absolute;
 left: 14px;}
+.course_des{text-align: justify;width: 213px}
+.dropdown_box, .dropdown_box_country, .dropdown_box_course{width: 280px;
+background: #E6E6E6;
+padding: 5px;
+border-radius: 3px;
+margin-right: 70px;
+float: right;
+text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+background-color: whiteSmoke;
+background-image: -moz-linear-gradient(top,white,#E6E6E6);
+background-image: -ms-linear-gradient(top,white,#E6E6E6);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E6E6E6));
+background-image: -webkit-linear-gradient(top, white, #E6E6E6);
+background-image: -o-linear-gradient(top, white,#E6E6E6);
+background-image: linear-gradient(top,white, #E6E6E6);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+cursor: pointer;
+filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+#selected_value, #selected_country, #selected_course{font-size: 12px;color:#555;}
+#city{width: 265px;}
+#search_country, #search_program{width: 220px;}
+.dropdown_box_country{width: 238px;margin-right: 112px;}
+.dropdown_box_course{width: 240px;margin: 0px;float:left}
+.new_list{margin:0px;}
+.new_list li{display:inline-block;padding: 0px 10px;}
+.new_list li a{color:#000;}
+.new_list li a:hover{text-decoration:none;text-shadow: 1px 1px 2px black;}
+.event_new{list-style:none;margin:0px;}
+.event_new li{padding: 11px 0px;border-bottom:1px solid #DDD;-moz-border-bottom:1px solid #DDD;-webkit-border-bottom:1px solid #DDD;}
+.img_style{border:1px solid #ddd;width: 100px;padding: 5px;}
+.inline{display:inline;}
+.happen{background:#e6f4dd;height: 49px;border-radius: 4px;}
+.happen ul li {
+float: left;
+border-right: 1px solid #6cb53c;
+border-left: 1px solid #6cb53c;
+padding: 0 8px;
+font-size: 26px;
+color: white;
+font-family: Arial, Helvetica, sans-serif;
+text-shadow: 1px 1px 2px 
+#3A688E;
+-moz-text-shadow: 1px 1px 2px #3a688e;
+-webkit-text-shadow: 1px 1px 2px #3a688e;
+width: 66px;
+text-align: center;
+height: 48px;
+line-height: 53px;
+overflow: hidden;}
+.label_text ul{margin:0px;}
+.label_text ul li{padding: 0px 37px;display: inline;float: left;}
+.label_text ul li a{color:#333;}
+.status_bg,.status_bg:hover{background: #fcf4ea; /* Old browsers */
+background: -moz-linear-gradient(top,  #fcf4ea 0%, #fee6c5 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcf4ea), color-stop(100%,#fee6c5)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #fcf4ea 0%,#fee6c5 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #fcf4ea 0%,#fee6c5 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #fcf4ea 0%,#fee6c5 100%); /* IE10+ */
+background: linear-gradient(top,  #fcf4ea 0%,#fee6c5 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf4ea', endColorstr='#fee6c5',GradientType=0 ); /* IE6-9 */
+}
+.Qust_content{font-size:18px;margin-top:20px;}
+.qust_ask{font-size:20px;margin-bottom: 10px;color:#333;}
+.green_qust{background-color: #DFF0D8;border: 1px solid #C0E3B1;padding:10px;-webkit-border-radius: 4px;
+-moz-border-radius: 4px;border-radius: 4px;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);height: 366px;
+overflow-y: hidden;}
+.prof_data{margin:0px;list-style:none;height: 199px;overflow-y: hidden;}
+.prof_data li{margin-bottom: 10px;}
+.part_art{height: 170px;overflow: hidden;}
+.text-width{width:205px;margin-left:20px}
+.line_time{line-height: 20px;overflow-y: hidden;height: 20px;}
+.registered{text-align: center;background: #eeeeee; /* Old browsers */
+background: -moz-linear-gradient(left,  #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #eeeeee 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #eeeeee 0%,#eeeeee 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #eeeeee 0%,#eeeeee 100%); /* IE10+ */
+background: linear-gradient(left,  #eeeeee 0%,#eeeeee 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 */border-radius:3px;padding: 5px;height: 55px;-moz-box-shadow: inset 0 0 5px #EAEAEA;
+-webkit-box-shadow: inset 0 0 5px #EAEAEA;box-shadow: inner 0 0 5px #EAEAEA;width:65px;}
+.college_img_center{width: 90px;height:40px;margin-top: 10px;z-index: 100;}
+.fix-height{height: 355px;overflow: hidden;}
+/*
+			Load CSS before JavaScript
+		*/
+		
+		/*
+			Slides container
+			Important:
+			Set the width of your slides container
+			Set to display none, prevents content flash
+		*/
+		#slides_content .slides_container {
+			width:305px;
+			display:none;
+		}
+
+		/*
+			Each slide
+			Important:
+			Set the width of your slides
+			If height not specified height will be set by the slide content
+			Set to display block
+		*/
+		slides_content .slides_container div {
+			width:470px;
+			height:170px;
+			display:block;
+		}
+		
+
+#slides_content .slides_container .slides_control{height:280px!important}
+#slides_content .slides_container .slides_control div{width:300px;text-align: justify;}
+#slides_content .slider_pagination{display: none;}
+#slides_content .next{background:url(../images/next.png)no-repeat;height: 21px;width: 21px;display: inline-block;margin-top: 25px;}
+#slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block;margin-top: 25px;}
+.btn_cal{width:192px;}
+.title_style{width: 365px;overflow: hidden;height: 29px;}
+.cal_style{cursor: pointer;z-index: 100;position: absolute;margin-top: -2px;margin-left: 14px;}

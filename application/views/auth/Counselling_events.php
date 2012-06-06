@@ -318,6 +318,7 @@ var x = new Array(<?php echo $array_dates; ?>);
 					$.ajax({
 						type: "POST",
 						url: searchUrl,
+						async:true,
 						data:'date='+x+"&month="+y+"&year="+z+"&type=counsell_alumuni_others",
 						success: function(response)
 						{

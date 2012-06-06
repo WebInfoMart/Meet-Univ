@@ -166,13 +166,14 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="float_l">
 									<div class="comment_img">
 									<?php if($user_detail['user_pic_path'] !=''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
+										
 									<?php }
 									else if($user)
 									{ ?>
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
 									<?php } else { ?>		
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
+								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php }  ?>
 								<span style='float: left;width: 46px;position: absolute;'>
 								<?php

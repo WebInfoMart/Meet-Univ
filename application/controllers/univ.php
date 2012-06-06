@@ -836,7 +836,7 @@ function university($univ_id='',$qid='',$uid='')
 			'event_date_time'=>$complete_event_date,
 			'event_type'=>'univ_event'
 			);
-			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date,$type);
 			$this->load->view('ajaxviews/all_event_list_by_calendar_ajax',$data);
 			}
 			else if($type == "spot")
@@ -846,7 +846,7 @@ function university($univ_id='',$qid='',$uid='')
 			'event_type'=>'univ_event',
 			'event_category'=>'spot_admission'
 			);
-			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date,$type);
 			//print_r($data['search_event_by_calendar']);
 				$this->load->view('ajaxviews/spot_event_list_by_calendar_ajax',$data);
 			}
@@ -857,18 +857,18 @@ function university($univ_id='',$qid='',$uid='')
 			'event_type'=>'univ_event',
 			'event_category'=>'fairs'
 			);
-			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date,$type);
 				$this->load->view('ajaxviews/fairs_event_list_by_calendar_ajax',$data);
 			}
-			else if($type == "counsell")
+			else if($type == "counsell_alumuni_others")
 			{
 			$event_date = array(
 			'event_date_time'=>$complete_event_date,
-			'event_type'=>'univ_event',
-			'event_category'=>'alumuni'
+			'event_type'=>'univ_event'
 			);
-			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date);
-				$this->load->view('ajaxviews/counsell_event_list_by_calendar_ajax',$data);
+			$data['search_event_by_calendar'] = $this->search_event_calendar->get_event_list_by_calendar($event_date,$type);
+				//print_r($data['search_event_by_calendar']);
+			$this->load->view('ajaxviews/counsell_event_list_by_calendar_ajax',$data);
 			}
 		}
 		

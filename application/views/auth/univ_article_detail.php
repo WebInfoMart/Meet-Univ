@@ -118,12 +118,12 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			<?php	} } ?>				
 									<h4 ><a href="#" class="course_txt">
 									<?php 
-									if($question_comments_detail['commented_by_user_name'] !=''){
-									echo $question_comments_detail['commented_by_user_name']; 
+									if($article_comments_detail['commented_by_user_name'] !=''){
+									echo $article_comments_detail['commented_by_user_name']; 
 									}
-									else if($question_comments_detail['fullname'] !='')
+									else if($article_comments_detail['fullname'] !='')
 									{
-										echo $question_comments_detail['fullname'];
+										echo $article_comments_detail['fullname'];
 									}
 									else if($user)
 									{
@@ -200,13 +200,14 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="float_l">
 									<div class="comment_img">
 									<?php if($user_detail['user_pic_path'] !=''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+									<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
+										
 									<?php }
 									else if($user)
 									{ ?>
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
 									<?php } else { ?>		
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
+								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php }  ?>
 								<span style='float: left;width: 46px;position: absolute;'>
 								<?php

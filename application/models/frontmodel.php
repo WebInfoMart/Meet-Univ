@@ -14,9 +14,14 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id=university.univ_id');
+		$this->db->join('city','events.event_city_id=city.city_id');
+		$this->db->join('state','events.event_state_id=state.state_id');
+		$this->db->join('country','events.event_country_id=country.country_id');
 		$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		$this->db->limit(5);
 		$query = $this->db->get();
+		//$x = $query->result_array();
+		//echo $x['event_id'];
 		if($query->num_rows>0)
 		{
 		return $query->result_array();
@@ -56,7 +61,16 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->where(array('featured_home_article'=>'1','article_type_ud'=>'univ_article','article_approve_status'=>'1'));
-		$this->db->limit(1);
+		$this->db->limit(2);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	function fetch_featured_news_home()
+	{
+		$this->db->select('*');
+		$this->db->from('news');
+		$this->db->where(array('featured_home_news'=>'1','news_type_ud'=>'univ_news'));
+		$this->db->limit(4);
 		$query = $this->db->get();
 		return $query->result_array();
 	}

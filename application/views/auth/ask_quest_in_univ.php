@@ -16,21 +16,21 @@
 					panelfx:"sliding",
 					panelfxfirst:"fading",
 					panelfxeasing:"easeInOutExpo",
-					fastchange:0,
-					keyboard:1
+					fastchange:0
 				});
 				
 			});	
 		</script>
 <div class="row" style="margin-top:-30px">
 	<div class="float_l span13 margin_l margin_t">
+	<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on MeetUniversities</h3>
 		<div class="modal" id="show_success" style="display:none;" >
 			<div class="modal-header">
 			<a class="close" data-dismiss="modal"></a>
 			<h3>Message For You</h3>
 			</div>
 			<div class="modal-body">
-			<p><center><h4>Your Message Has been sent successfully.....</h4></center></p>
+			<p><center><h4>Your Question Has been posting successfully.....</h4></center></p>
 			</div>
 			<div class="modal-footer">
 			<!--<a href="#" class="btn">Close</a>-->
@@ -100,7 +100,7 @@
 														$url = "";
 													}
 													}
-													}
+													
 											?>
 												<ul>
 													<li>
@@ -108,6 +108,7 @@
 													</li>
 													
 												</ul>
+												<?php } else { echo "NO More Questions Available..."; } ?>
 								</div>
 										
 							</div>
@@ -116,9 +117,9 @@
 			</div>
 		</div>
 	</div>	
+	
 	<div id="quest_div_1"  class="margin_t">
 		<div id="quest_div_show_right">
-			<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on MeetUniversities</h3>
 			<div>
 				<ul class="course_list">
 				<?php
@@ -201,7 +202,9 @@
 				</ul>
 				</div>
 		</div>
+		
 	</div>
+	
 	</div>
 	<div class="float_r span3 margin_t">
 		<img src="<?php echo "$base$img_path"; ?>/banner_img.png">

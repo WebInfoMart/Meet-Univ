@@ -1,4 +1,4 @@
-<div id="fb-root"></div>
+<!--<div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -7,7 +7,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-</script>
+</script>-->
 <?php
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
@@ -30,6 +30,7 @@ if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 	$("#show_success").delay(3000).fadeOut(200);
 	});
 	</script>
+	
 <?php
 }
 $this->session->unset_userdata('msg_send_suc');
@@ -83,20 +84,22 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					<input type="hidden" name="educ_level" id="educ_level" value="All"/>
 					
 					<div class="control-group">
-						<label class="control-label" for="focusedInput"><h3 class="white">Explore</h3></label>
+						<label class="control-label" for="focusedInput"><h4 class="white">Explore</h4></label>
 						<div class="controls">
-							<div class="btn-group" data-toggle="buttons-radio">
+							<div id="explore_button" class="btn-group" data-toggle="buttons-radio">
 								<button type="button" class="btn active" id="events">Events</button>
 								<button type="button" class="btn" id="colleges">Colleges</button>
 							</div>
 							<p class="help-block white form_height">colleges by programs, country and course level</p>
 						</div>
+						
+						
 					</div>
 					<div class="events" id="events_col">
 						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">Events</h3></label>
+							<label class="control-label" for="focusedInput"><h4 class="white">Events</h4></label>
 							<div class="controls">
-								<div class="btn-group" data-toggle="buttons-radio">
+								<div class="btn-group" id="event_button" data-toggle="buttons-radio">
 									<!--<a class="btn" href="#">All</a>
 									<a class="btn" href="#">Postgraduate</a>
 									<a class="btn" href="#">Undergraduate</a>
@@ -115,8 +118,23 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">in City</h3></label>
-							<div class="controls">
+							<label class="control-label" for="focusedInput"><h4 class="white">in City</h4></label>
+							<div class="dropdown_box">
+								<div>
+									<span id="selected_value">All</span>
+									<span id="city_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
+								</div>
+								<div id="open_box">
+									<input type="text" name="event_city" id="city" value=""/>
+								</div>
+							</div>
+							<?php
+									//foreach($cities as $city)
+									//{ ?>
+									 <?php //echo "value".$city['city_id']."<br/>"; ?><?php //echo ucwords($city['cityname']); ?>
+								
+								<?php //} ?>	
+							<!--<div class="controls">
 								<select name="event_city" id="city">
 									<option value="">All</option>
 									<?php
@@ -126,27 +144,15 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 								<?php } ?>	
 								</select>
+							</div>-->
+							<div class="controls">
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">in the Month of</h3></label>
+							<label class="control-label" for="focusedInput"><h4 class="white">in the Month of</h4></label>
 							<div class="float_l span4 margin_zero">
 								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
-								<select name="event_month" id="month">
-									<option value="">All</option>
-									<option value="Jan">Jan</option>
-									<option value="Feb">Feb</option>
-									<option value="Mar">Mar</option>
-									<option value="Apr">Apr</option>
-									<option value="May">May</option>
-									<option value="Jun">Jun</option>
-									<option value="Jul">Jul</option>
-									<option value="Aug">Aug</option>
-									<option value="Sep">Sep</option>
-									<option value="Oct">Oct</option>
-									<option value="Nov">Nov</option>
-									<option value="Dec">Dec</option>
-								</select>
+								<input type="text" id="last_widget" class="btn_cal"> <img src="images/cal_img.png" id="last_widget_button" class="cal_style">
 							</div>
 							<div class="float_l span1">
 									<input type="button" onclick="serch_events();" name="btn_evet_search" class="btn" value="Search"/>
@@ -157,9 +163,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					</div>
 					<div class="college" id="col">
 						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">Type</h3></label>
+							<label class="control-label" for="focusedInput"><h4 class="white">Type</h4></label>
 							<div class="controls">
-								<div class="btn-group" data-toggle="buttons-radio">
+								<div id="college_button" class="btn-group" data-toggle="buttons-radio">
 									<!--<a class="btn" href="#">All</a>
 									<a class="btn" href="#">Postgraduate</a>
 									<a class="btn" href="#">Undergraduate</a>
@@ -172,9 +178,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">in Country</h3></label>
+							<label class="control-label" for="focusedInput"><h4 class="white">in Country</h4></label>
 							<div class="controls">
-								<select id="search_country" name="search_country">
+								<!--<select id="search_country" name="search_country">
 									<option value="">Select Country</option>
 										<?php
 										foreach($country as $srch_country)
@@ -184,13 +190,31 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<?php
 										}
 										?>
-								</select>
+								</select>-->
+								<div class="dropdown_box_country">
+									<div>
+										<span id="selected_country">Selected Country</span>
+										<span id="country_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
+									</div>
+									<div id="open_box_country">
+										<input type="text" name="search_country" id="search_country" value=""/>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">Course</h3></label>
+							<label class="control-label" for="focusedInput"><h4 class="white">Course</h4></label>
 							<div class="controls">
-								<div class="float_l span4 margin_zero">
+								<div class="dropdown_box_course">
+									<div>
+										<span id="selected_course">Select</span>
+										<span id="course_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
+									</div>
+									<div id="open_box_course">
+										<input type="text" name="search_program" id="search_program" value=""/>
+									</div>
+								</div>
+								<!--<div class="float_l span4 margin_zero">
 									<select id="search_program" name="search_program">
 										<option value="">Select</option>
 										<?php
@@ -202,7 +226,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										}
 										?>
 									</select>
-								</div>
+								</div>-->
 								<div class="float_l span1">
 									<input type="button" onclick="serach_results()" name="serach_col_btn" class="btn" value="Search"/>
 									<input type="hidden" name="btn_search" id="btn_col_search">
@@ -255,48 +279,26 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		</div>
 	</div>
 	<div class="clearfix"></div>
-	<div class="body">
-		<div class="row">
-			<div class="span16 margin_l margin_t1">
-				<div class="yellow_bar text_bar">
-				<?php
-					$x=0;
-				if($featured_news==0) {	 ?>
-				<div class="span8 yellow_bar_text float_l margin_zero"><ul><li>
-					Sorry No recent News
-					</li></ul>
-					</div>
-				
-			<?php 	}
-				else
-				{?>
-			<div class="marquee" id="marquee" >
-			<?php foreach($featured_news as $featured_news_list) { $x++; ?>
-					<div class="span8 yellow_bar_text float_l  margin_zero"><ul><li>
-					<a href="<?php echo $base; ?>univ-<?php echo $featured_news_list['news_univ_id']; ?>-news-<?php echo $featured_news_list['news_id']; ?>">
-					<?php echo substr($featured_news_list['news_title'],0,70).'..'; ?>
-					</a></li></ul>
-					</div>
-					
-		<?php		if($x==2)break; }
-			?>
-			</div>	
-		<?php } ?>		
-					<div class="clearfix"></div>
-				</div>
-		    </div>
-		</div>
-		<div class="margin_t">
+	<div class="body_container">
 			<div class="row">
-				<div class="grid_6 margin_l">
-					<div class="home_artical_box">
-						<span>Events</span>
+				<div class="span16 margin_zero">
+					<div style="padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px
+					#999;-moz-box-shadow: 0px 0px 6px #888;">
+							<ul class="new_list">
+								<li><a>Lorem Ipsum has been the industry's standard dummy text.</a> </li>
+								<li><a>Lorem Ipsum has been the industry's standard dummy text.</a> </li>
+								<li><a>Lorem Ipsum has been standard dummy text.</a> </li>
+							</ul>
 					</div>
-					<form action="EventRegistration" method="post">
-					<div class="box all_box event_rad">
-						<ul class="">
-						
-						
+				</div>
+			</div>
+			<div class="row">
+				<div class="span16 margin_t margin_delta">
+					<div class="float_l span7 margin_delta">
+						<h2>Upcoming Events</h2>
+						<div class="fix-height">
+							<ul class="event_new">
+							<form action="EventRegistration" method="post">
 							<?php 
 						if(!empty($featured_events))
 						{
@@ -323,83 +325,98 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						} 
 						$img_arr=$this->searchmodel->set_the_image($width,$height,60,60,TRUE);
 						?>
-						
-							<li>
-								<div>
-								<div class="page_data">
-										<div class="float_l page_data_item">
-											<span class="month"><?php echo $date[1]; ?></span> 
-											<span class="day"><?php echo $date[0]; ?></span>
+								<li>
+									<div>
+										<div class="float_l">
+											<div class="title_style"><a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission British Council British Council</h4></div>
 										</div>
-										<div class="year float_r"><span><?php echo $date[2]; ?></span></div>
-										<div class="clearfix"></div>
+										<div class="float_r">
+											<a onClick="voicepopup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+												<a onClick="popup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+												<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
+												<a href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
+										</div>
+										<div>
+											<div class="img_style float_l">
+												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
+											</div>
+											<div class="float_l text-width" style="font-size:14px;">
+												<h4 class="blue line_time"><?php echo $date[0].'  '.$date[1].','.$date[2]; ?></h4>
+												<h4 class="line_time"><?php echo $events['event_place']?$events['event_place'].',':''; 
+												 echo $events['cityname']?$events['cityname'].',':''; 
+												 echo $events['country_name']?$events['country_name']:'';?> </h4>
+												<!-- Hidden field for event registration -->
+												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
+												<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
+												<input type="submit" name="btn_event_register" id="<?php echo $events['event_id']; ?>" value="Register" class="btn btn-primary" />
+												
+											</div>
+											<div class="float_r registered">
+													<h2 class="blue">15</h2>	
+													<h4 class="blue">Registered</h4>
+											</div>
+											<div class="clearfix"></div>
+										</div>
 									</div>
-									<div class="float_l span1 img_logo_events aspectcorrect">
-					
-										<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
-									</div>
-									<div class="float_l span5">
-										<a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a>
-										<h4><?php
-										if(!empty($date))
-										{
-										echo $date[0].' '.$date[1].', '.$date[2].'|';
-										}
-										?> 
-										 <?php echo $events['event_time']; ?></h4>
-										<h4><?php echo ucwords(substr($events['event_detail'],0,50)); ?></h4>
-									</div>
-									<div class="float_r center">
-										<h3>
-										
-										<?php 
-										if($events['event_category'] == 'spot_admission'){
-										echo "Spot Admission"; 
-										}
-										else if($events['event_category'] == 'fairs'){
-										echo "Fairs"; 
-										}
-										else if($events['event_category'] == 'others'){
-										echo "Alumuni"; 
-										}
-										else if($events['event_category'] == 'alumuni'){
-										echo "Alumuni"; 
-										}
-										?>
-										
-										</h3>
-										
-									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
-									<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
-									<div class="float_r margin_t1">
-									<input type="submit" name="btn_event_register" id="<?php echo $events['event_id']; ?>" value="Register" class="btn btn-primary" /></div>
-										
-										
-									</div>
-									<div style="float:right;">
-									<input type="BUTTON" value="SMS ME" class="btn btn-primary" onClick="popup('<?php echo $events['event_id']; ?>')">
-									<input type="BUTTON" value="VOICE SMS" class="btn btn-primary" onClick="voicepopup('<?php echo $events['event_id']; ?>')">
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</li>
-						<?php } } else { echo "There is No Upcoming Events ! ! !"; } ?>
-							
-
+								</li>
+								<?php } } ?>
+								</form>
 							</ul>
+						</div>
 					</div>
-					</form>
-				</div>
-				<div class="grid_3">
-					<div class="home_artical_box feat_col">
-						<span>Featured Colleges</span>
-					</div>
-					<div class="col_box event_rad">
-						<ul class="col_img">
-							<li>
-				<?php 
-				$x=0;
+					<div class="float_l">
+						<div class="float_l span5">
+							<h2>News</h2>
+							<div id="slides_content">
+								<div class="slides_container">
+								<?php if(!empty($featured_news_show)) {
+								foreach($featured_news_show as $f_news)
+								{
+									$image_exist=0;	
+									$article_img = $f_news['news_image_path'];	
+									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
+								    }
+									if($article_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$article_img;
+									}
+									else
+									{
+									$image=$base.$img_path.'/default_logo.png';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
+							?>
+									<div>
+										<h3>Study Aboard</h3>
+										<span class="float_l" style="line-height: 8px;border: 2px solid #DDD;margin-right:15px;padding: 2px">
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+											
+										</span>
+										<p><?php echo substr($f_news['news_detail'],0,800).'...'; ?>	 </p>
+									
+									</div>
+									<?php } } ?>
+									
+								</div>
+							</div>
+						</div>
+						<div class="float_l span4">
+							<h2>Featured Colleges</h2>
+							<div>
+							<ul class="col_img">
+								<li>
+								<?php 
+				$f_coll=0;
 				foreach($featured_college as $featured_clg) {
+				if($f_coll < 6)
+				{
 				$image_exist=0;		
 				if(file_exists(getcwd().'/uploads/univ_gallery/'.$featured_clg['univ_logo_path']) && $featured_clg['univ_logo_path']!='')	
 				{
@@ -420,150 +437,167 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				} 
 				$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);
 				?>
-				
-									<div class="aspectcorrect featured_art <?php if($x % 3!=0){ ?>float_l<?php }else{echo "float_r";}if($x==2 || $x==5 || $x==8){ echo ""; } ?>" >
-				<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" >
-				
-				</a>
-						</div>							
-
-					
-				<?php $x++; }?>
-								
-							</li>
-						</ul>
+									<div class="float_l featured_art aspectcorrect">
+										<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
+									</div>
+				<?php $f_coll++; } } ?>					
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+							</div>
+							<div>
+								<div style="padding-top: 8px;">
+									<div class="btn-group">
+										<button class="btn status_bg" style="height: 43px;font-size: 24px;border: 1px solid 
+										#FDD69E;padding: 4px 32px 4px;">8999</button>
+										<button class="btn status_bg" style="height: 43px;font-size: 24px;border: 1px solid 
+										#FDD69E;padding: 4px 32px 4px;">2225</button>
+									</div>
+									<div class="label_text">
+										<ul>
+											<li><a href="#">EVENTS</a></li>
+											<li><a href="#">ANSWERS</a></li>
+										</ul>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
 					</div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
-		</div>
-		<div class="margin_t">
 			<div class="row">
-				<div class="yellow_bar margin_l" style="width:988px;">
-				<!--<marquee behavior="scroll" scrollamount="3" direction="left">-->
-					<ul class="yellow yellow_nav">
+				<div class="span16 margin_delta margin_t">
+					<div style="padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px
+					#999;-moz-box-shadow: 0px 0px 6px #888;">
+							<ul class="yellow yellow_nav">
 						<li><a href="#">Engineering</a></li>
 						<li><a href="#">Medical</a></li>
-						<li><a href="#">Media & Journalism</a></li>
+						<li><a href="#">Media &amp; Journalism</a></li>
 						<li><a href="#">Hospitality </a></li>
 						<li><a href="#">Technology  </a></li>
 						<li><a href="#">Science</a></li>
+						<li><a href="#">Animation</a></li>
 						<li><a href="#" style="border:none;">MBA</a></li>
 					</ul>
-			<!--</marquee>-->
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row margin_t">
-			<div class="grid_6 margin_l">
-				<div class="well margin_gamma padding_zero new_data">
-					<div>
-						<div class="float_l">
-							<div class="letter_uni">
-							<div>Q Go Ask </br><span>uestion</span></div>
+			<div class="row">
+				<div class="span16 margin_delta margin_t">
+					<div class="span7 margin_delta">
+						<div class="green_qust">
+							<div>
+								<div class="float_l">
+									<div class="letter_uni">
+									<div>Q Go Ask <br><span>uestion</span></div>
+									</div>
+								</div>
+								<div class="float_r Qust_content">
+									<span>Have a Question?</span>
+									<span>Ask our counselors!</span>
+								</div>
+								<div class="clearfix"></div>
 							</div>
-						</div>
-						<div class="float_r have_data">
-							<span>Have a Question?</span>
-							<span>Ask our counselors!</span>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="margin">
-						<div>
-							<div class="float_l wht_data">what are the type of questions they ask in iit?</div>
-							
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="margin">
-						<div>
-							<div class="float_l">
+							<h3>what are the type of questions they ask in iit?</h3>
+							<div class="margin_t1">
 								<div class="input-append">
-								<form action="<?php echo $base; ?>QuestandAns" method="post">
-									<input class="span6 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
-									<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
-								</form>
+									<form action="<?php echo $base; ?>QuestandAns" method="post">
+										<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
+										<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
+									</form>
 								</div>
 							</div>
-							<!--<div class="float_r">
-							<button class="btn btn-success more_btn" href="#">More Q&amp;A</button></div>-->
-							<div class="clearfix"></div>
+							<div class="margin_t1">
+								<h2>Latest Q&A</h2>
+								<ul class="prof_data">	
+								<?php 
+								
+				if(!empty($get_latest_question_home))
+				{
+				$a=0;
+				$q_count = 0;
+				foreach($get_latest_question_home['quest_detail'] as $quest_list)
+				{
+				if($q_count < 4)
+				{
+				if($quest_list['q_univ_id'] != '0')
+				{
+					$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+				}
+				else if($quest_list['q_country_id'] != '0')
+				{
+					$url = "";
+				}
+				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
+				{
+					$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
+				}
+				$q_date = explode(" ",$quest_list['q_asked_time']);
+				//print_r($q_date[0]);
+				$quest_ask_date = explode("-",$q_date[0]);
+				//print_r($quest_ask_date[0]);
+				$q_month = $quest_ask_date[1];
+				$quest_month = date('M', strtotime($q_month . '01'));
+				
+				//print_r($quest_ask_date[2]);
+				?>
+								
+									<li>
+
+										<div style="width: 34px;margin-right:20px" class="float_l">
+										<?php if($quest_list['user_pic_path'] !='') { ?>
+										<img src="<?php echo "$base"; ?>uploads/<?php echo $quest_list['user_pic_path']; ?>" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;" />
+										<?php } else { ?>
+										<img src="<?php echo "$base$img_path"; ?>/user_model.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;">
+										<?php } ?>
+										</div>
+										<span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
+										<div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
+										<div style="font-size: 11px;line-height: 12px;">
+										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
+										echo $quest_month?$quest_month.', ':'';
+										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
+										?></div>
+									</li>
+									<?php } $q_count++; } } ?>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="grid_3 margin_delta margin_t">
-					<div class="home_artical_heading">
-					<span>Featured Q & A</span>
-					</div>
-					<div class="box all_box">
-					<ul>
-					<?php
-					if(!empty($featured_quest))
-					{
-					if($featured_quest != 0)
-					{
-					foreach($featured_quest as $feature_questions)
-					{
-					if($feature_questions['q_univ_id'] != '0')
-					{
-						$url = "UniversityQuest/$feature_questions[q_univ_id]/$feature_questions[que_id]/$feature_questions[q_askedby]";
-					}
-					else if($feature_questions['q_country_id'] != '0')
-					{
-						$url = "";
-					}
-					?>
-					<li>
-						<div class="float_l">
-						<?php if($feature_questions['user_pic_path']!='' || $feature_questions['user_pic_path']!= '0') { ?>
-						<?php echo "<img src='".base_url()."uploads/".$feature_questions['user_pic_path']."' class='girls_img'/>"; ?>
-						<?php } else { echo "<img src='".base_url()."images/profile_icon.png' class='girls_img'/>"; } ?>
+					<div class="float_l">
+						<div class="float_l span5" style="text-align:justify">
+							<h2 style="line-height: 20px;">Article</h2>
+							<?php 
+							$article_count = 0;
+							foreach($featured_article as $article){ 
+							if($article_count < 2) {
+							?>
+							<div class="margin_t1 part_art">
+								<h3><?php echo substr($article['article_title'],0,35).'...'; ?></h3>
+									<span class="float_l" style="line-height: 8px;border: 2px solid #DDD;margin-right:15px;padding: 2px">
+										<?php if($article['article_image_path']==''){?>
+											<img src="images/default_logo.png" class="home_art">
+											<?php } else {?>
+											<img src="<?php echo $base; ?>/uploads/news_article_images/<?php echo $article['article_image_path']; ?>" class="home_art" style="width: 70px;height: 70px;">
+										<?php } ?>
+										
+									</span>
+									<p><?php echo substr($article['article_detail'],0,800).'...'; ?>	 </p>
+							</div>
+							<?php $article_count++; } } ?>
 						</div>
-						<div>
-						<a href="<?php echo "$base$url"; ?>"><?php echo $feature_questions['q_title'] ? substr($feature_questions['q_title'],0,15) : 'Not Available'; ?>...</a>
-						<div class="float_r"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+						<div class="float_l span4">
+							<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="326" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
 						</div>
-					</li>
-					<?php } } }  else { echo "Not Available"; } ?>
-					
-					</ul>
-					</div>
-				</div>
-				<div class="grid_3 margin_t">
-					<div class="home_artical_heading">
-						<span>Featured Article</span>
-					</div>
-					<div class="box">
-					<?php foreach($featured_article as $article){ ?>
-						<div class="float_l">
-						<?php if($article['article_image_path']==''){?>
-						<img src="images/default_logo.png" class="home_art">
-						<?php } else {?>
-						<img src="<?php echo $base; ?>/uploads/news_article_images/<?php echo $article['article_image_path']; ?>" class="home_art">
-						<?php } ?>	
-						</div>
-						<div class="justify">
-						<?php echo substr($article['article_detail'],0,800).'...'; ?>	 
-						</div>	
-						<?php } ?>	
 						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
-			<div class="grid_3">
-				<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="326" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
-			</div>
-			<div class="clearfix"></div>
 		</div>
-		<div class="margin_t">
-			<div class="row">
-				<div class="span8 margin_l"><img src="images/banner1.png"></div>
-				<div class="span8"><img src="images/banner1.png"></div>
-			</div>
-		</div>
-	</div>
-</div>
-<div id="myModal" class="model_back modal hide fade">
+		
+		<div id="myModal" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
 		<h3>Event Information</h3>
@@ -584,6 +618,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	</div>
 	</div>
 	<!-- End Here -->
+	<!-- Anusha
+	<div class="dropdown_box">
+							<div id="hello">
+								<span id="selected_value">All</span>
+								<span class="caret" style="float: right;margin-top: 7px;"></span>
+							</div>
+							<div id="open_box">
+								<input type="text" name="course" id="course" value=""/>
+								
+							</div>
+						</div>--->
+	<!-- End Here -->
 <style type="text/css">	
 .ddclass{
 list-style:none;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;
@@ -600,9 +646,6 @@ border:1px solid #ccc;width:86px;position:relative;left:186px;top:1px;display:no
 </style>
 <SCRIPT LANGUAGE="JavaScript">     
  function popup(id) {
- /* $('#myModal').modal({
-        keyboard: false
-    }) */
   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>leadcontroller/sms_me_event_ajax",
@@ -649,17 +692,204 @@ function voicepopup(id) {
 	  //$('#search_program').html(msg);
 	   }
 	   }) 
+//alert(id);
+/* var URL = "<?php echo site_url('leadcontroller/sms_me_event');?>";
+//window.open("<?php echo site_url('controller/method/param1/param2/etc');?>", 'width=150,height=150'); 
+day = new Date();
+id = day.getTime();
+window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
 } 
 
 </script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#open_box").hide();
+	
+	$("#city").autocomplete({
+		source: ["All", "BBSR", "New Delhi", "Southdelhi", "Jwala Heri", "Demo", "Sdsd"],
+		width: 260,
+		//matchContains: true,
+		//mustMatch: true,
+		//minChars: 0,
+		//multiple: true,
+		//highlight: false,
+		//multipleSeparator: ",",
+		selectFirst: false,
+		minLength: 0,
+		}).focus(function() {
+	$(this).autocomplete('search', '')
+	});
+		
+	$(document).keydown(function(event) {
+    if(event.keyCode == 13) {
+        var value = $("#city").val();
+		$("#selected_value").html(value);
+		$("#open_box").hide();
+		$("#city").val("");	
+    }
+	});
+	
+	$("html").click(function(e){
+		if((e.target.id == "city_dropdown")){
+			$("#open_box").show();
+			$("#city").trigger('focus');
+			$("#city").val("");
+		}else if(e.target.id == "city"){
+			$("#open_box").show();
+			$("#city").trigger('focus');
+			$("#city").val("");
+		}else{
+			$("#open_box").hide();
+		}
+	});
+	
+	
+	$(".ui-corner-all").click(function(){
+		var value = $("#city").val();
+		$("#selected_value").html(value);
+		$("#open_box").hide();
+		$("#city").val("");
+	});
+	
+	$("#open_box_country").hide();
+	
+	$("#search_country").autocomplete({
+		source: ["India", "U.K."],
+		width: 260,
+		//matchContains: true,
+		//mustMatch: true,
+		//minChars: 0,
+		//multiple: true,
+		//highlight: false,
+		//multipleSeparator: ",",
+		selectFirst: false,
+		minLength: 0,
+		}).focus(function() {
+	$(this).autocomplete('search', '')
+	});
+		
+	$(document).keydown(function(event) {
+    if(event.keyCode == 13) {
+        var value = $("#search_country").val();
+		$("#selected_country").html(value);
+		$("#open_box_country").hide();
+		$("#search_country").val("");	
+    }
+	});
+	
+	$("html").click(function(e){
+		if((e.target.id == "country_dropdown")){
+			$("#open_box_country").show();
+			$("#search_country").trigger('focus');
+			$("#search_country").val("");
+		}else if(e.target.id == "search_country"){
+			$("#open_box_country").show();
+			$("#search_country").trigger('focus');
+			$("#search_country").val("");
+		}else{
+			$("#open_box_country").hide();
+		}
+	});
+	
+	
+	$(".ui-corner-all").click(function(){
+		var value = $("#search_country").val();
+		$("#selected_country").html(value);
+		$("#open_box_country").hide();
+		$("#search_country").val("");
+	});
+
+	
+	$("#open_box_course").hide();
+	
+	$("#search_program").autocomplete({
+		source: ["Agriculture, Environment And Related Subjects", "Applied And Pure Sciences", "Architecture", "Building And Planning", "Creative Arts And Design", "Education And Teacher Training", "Engineering And Technology", "Humanities", "Health And Medicine"],
+		width: 260,
+		//matchContains: true,
+		//mustMatch: true,
+		//minChars: 0,
+		//multiple: true,
+		//highlight: false,
+		//multipleSeparator: ",",
+		selectFirst: false,
+		minLength: 0,
+		}).focus(function() {
+	$(this).autocomplete('search', '')
+	});
+		
+	$(document).keydown(function(event) {
+    if(event.keyCode == 13) {
+        var value = $("#search_program").val();
+		$("#selected_course").html(value);
+		$("#open_box_course").hide();
+		$("#search_program").val("");	
+    }
+	});
+	
+	$("html").click(function(e){
+		if((e.target.id == "course_dropdown")){
+			$("#open_box_course").show();
+			$("#search_program").trigger('focus');
+			$("#search_program").val("");
+		}else if(e.target.id == "search_program"){
+			$("#open_box_course").show();
+			$("#search_program").trigger('focus');
+			$("#search_program").val("");
+		}else{
+			$("#open_box_course").hide();
+		}
+	});
+	
+	
+	$(".ui-corner-all").click(function(){
+		var value = $("#search_program").val();
+		$("#selected_course").html(value);
+		$("#open_box_course").hide();
+		$("#search_program").val("");
+	});
+
+	
+	$("#event_button :button").click(function(){
+		if ($("#event_button :button").is('.active')) {
+			$("#event_button :button").removeClass("active");
+		//$(":button").addClass("active");
+			var id =$(this).attr('id');
+			$('#'+id).addClass("active");
+		}
+		
+	});
+	
+	$("#explore_button :button").click(function(){
+		if ($("#explore_button :button").is('.active')) {
+			$("#explore_button :button").removeClass("active");
+		//$(":button").addClass("active");
+			var id =$(this).attr('id');
+			$('#'+id).addClass("active");
+		}
+		
+	});
+	
+	$("#college_button :button").click(function(){
+		if ($("#college_button :button").is('.active')) {
+			$("#college_button :button").removeClass("active");
+		//$(":button").addClass("active");
+			var id =$(this).attr('id');
+			$('#'+id).addClass("active");
+		}
+		
+	});
+});
+</script>
+
 <script>
-$('#opendd').mouseenter(
-function(){
-$('.ddclass').css('display','block');
-}
-);
+//$('#opendd').mouseenter(/*Commented by Anusha*/
+$('#opendd').click(function(){
+	$('.ddclass').css('display','block');
+	//$('#opendd').removeClass('active');
+});
 $('.openddli').click(function()
-	{
+{
 	 $('.btnop').each(function()
 	 {
 	   $(this).removeClass('active');
@@ -676,18 +906,23 @@ $('.openddli').click(function()
 	  $('#type_search').val('alumuni');
 	  
 	  }
-	});
+});
 	
-	$("body").click
-(
-  function(e)
-  {
-    if(e.target.className !== "ddclass")
-    {
-      $('.ddclass').css('display','none');
-    }
-  }
-);
+	/*$("body").click Commented by Anusha*/
+	$("html").click
+	(
+	function(e)
+	{
+		/*if(e.target.className !== "ddclass")Commented by Anusha*/
+		if(e.target.id !== "opendd")
+		{
+		$('.ddclass').css('display','none');
+		//$('#opendd').removeClass('active');
+		}
+	}
+	);
+	
+	
 $(document).ready(function() {
 			$("#col").hide();
 	$('#colleges').click(function() {
@@ -816,8 +1051,49 @@ function fetch_programs(educ_level)
 			});
 		});
 </script>
+<script type="text/javascript">
+      $(function () {
+        $('#default_widget').monthpicker();
 
+        $('#custom_widget').monthpicker({
+            pattern: 'yyyy-mm',
+            selectedYear: 2010,
+            startYear: 2008,
+            finalYear: 2012,
+            monthNames: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+        });
 
+        $('#events_widget').monthpicker().bind('monthpicker-click-month', function (e, month) {
+            alert('You clicked on month ' + month);
+
+        }).bind('monthpicker-change-year', function (e, year) {
+            alert('You chosed the year ' + year);
+
+        }).bind('monthpicker-show', function () {
+            alert('showing... ' + $(this).attr('id'));
+            
+        }).bind('monthpicker-hide', function () {
+            alert('hiding... ' + $(this).attr('id'));
+        });
+
+        $('#last_widget').monthpicker({selectedYear: 2009, startYear: 2008, finalYear: 2010, openOnFocus: false});
+
+        $('#last_widget').monthpicker().bind('monthpicker-change-year', function (e, year) {
+            $('#last_widget').monthpicker('disableMonths', []);
+            if (year === '2008') {
+                $('#last_widget').monthpicker('disableMonths', [1, 2, 3, 4]);
+            }
+            if (year === '2010') {
+                $('#last_widget').monthpicker('disableMonths', [9, 10, 11, 12]);
+            }
+        });
+
+        $('#last_widget_button').bind('click', function () {
+            $('#last_widget').monthpicker('show');
+        });
+
+      });
+    </script>
 
 
     <style type="text/css">
@@ -834,4 +1110,15 @@ height:22px;
 #marquee span {white-space:nowrap;}
 
 </style>
+<script>
+		$(function(){
+			$('#slides_content').slides({
+				play: 5000,
+				pause: 2500,
+				hoverPause: true,
+				preload: true,
+				generateNextPrev: true
+			});
+		});
+	</script>
 

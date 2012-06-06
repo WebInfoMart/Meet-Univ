@@ -211,6 +211,10 @@ $detail_of_event = "";
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/image_scaling.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mtz.monthpicker.js"></script><!--Shweta-->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script><!--Added by Anusha-->
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/><!--Added by Anusha-->
+
 <?php
 $pageURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
 if ($_SERVER["SERVER_PORT"] != "80")

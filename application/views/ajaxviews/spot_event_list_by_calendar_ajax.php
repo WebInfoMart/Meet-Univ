@@ -44,7 +44,7 @@ gapi.plusone.go();
 				<div>
 									<div class="float_l">
 										
-										<span class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"></span>
+										<span class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"><?php echo $event_detail['event_date_time']; ?></span>
 										
 									</div>
 									<div class="float_r">

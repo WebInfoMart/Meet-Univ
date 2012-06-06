@@ -41,7 +41,7 @@
 										<h4><?php echo $event_detail['cityname'].",".$event_detail['statename'].",".$event_detail['country_name']?></a></h4>
 										<div>
 											<div class="float_l">
-												<span class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"></span>
+												<span class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"><?php echo $event_detail['event_date_time']; ?></span>
 											</div>
 											<div class="float_r">
 												<div id="gp" class="float_l">
