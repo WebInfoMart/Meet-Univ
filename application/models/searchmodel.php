@@ -514,27 +514,34 @@ function show_all_college_paging($current_url)
 						}
 						
 					}	
-						$this->db->select('*');
-						$this->db->from('university');
+						$join=" LEFT JOIN  `events` ON events.event_univ_id = university.univ_id";
+						$where='';
 						if($filter_country==1)
 						{
-						$this->db->where_in('country_id',$country_id);
+						$country_ids=implode(",",$chk_country);
+						$where.=" and university.country_id IN (".$country_ids.")";
 						}
 						if($filter_educ_level==1 )
 						{
-						$this->db->join('univ_program','univ_program.univ_id=university.univ_id');
-						$this->db->where_in('univ_program.prog_educ_level',$educ_level);
+						$educ_level_ids=implode(",",$chk_educ_level);
+						$join.=' JOIN univ_program ON univ_program.univ_id=university.univ_id';
+						$where.=" and univ_program.prog_educ_level IN(".$educ_level_ids.")";
 						}
 						if($filter_area_interest==1)
 						{
 						if($filter_educ_level!=1)
-						$this->db->join('univ_program','univ_program.univ_id=university.univ_id');
-						$this->db->where_in('univ_program.prog_parent_id',$area_intrest);
+						$join.=' JOIN univ_program ON univ_program.univ_id=university.univ_id';
+						$area_interest_ids=implode(',',$chk_area_intrest);
+						$where.=" and univ_program.prog_parent_id IN('".$area_interest_ids."')";
 						}
+						/*$this->db->join('events','events.event_univ_id=university.univ_id','left');
+						//$this->db->order_by('STR_TO_DATE(,"%d %M %Y")');
 						$this->db->group_by("university.univ_id"); 
-						$this->db->limit($univ_data['limit_res'],$offset);
-						$results = $this->db->get();
-						$univ_data['total_res']=$results->num_rows();
+						$this->db->order_by("STR_TO_DATE(event_date_time,`'%d %m %Y'')");
+						$results = $this->db->get();*/
+						echo $sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= now() ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT ".$offset.",".$univ_data['limit_res']."";
+						$results=$this->db->query($sql);
+						$univ_data['per_page_res']=$results->num_rows();
 						
 			if($results->num_rows()>0)
 			{
@@ -643,58 +650,53 @@ function show_all_college_paging($current_url)
 					}	
 						$univ_data['total_res']=0;
 						$univ_data['limit_res']=25;
-						$this->db->select('*');
-						$this->db->from('university');
+						//$this->db->select('*');
+						//$this->db->from('university');
+						$join=" LEFT JOIN  `events` ON events.event_univ_id = university.univ_id";
+						$where='';
 						if($filter_country==1)
 						{
-						$this->db->where_in('country_id',$country_id);
+						$country_ids=implode(",",$country_id);
+						$where.=" and university.country_id IN (".$country_ids.")";
 						}
 						if($filter_educ_level==1 )
 						{
-						$this->db->join('univ_program','univ_program.univ_id=university.univ_id');
-						$this->db->where_in('univ_program.prog_educ_level',$educ_level);
-						
+						$educ_level_ids=implode(",",$educ_level);
+						$join.=' JOIN univ_program ON univ_program.univ_id=university.univ_id';
+						$where.=" and univ_program.prog_educ_level IN(".$educ_level_ids.")";
 						}
 						if($filter_area_interest==1)
 						{
 						if($filter_educ_level!=1)
-						$this->db->join('univ_program','univ_program.univ_id=university.univ_id');
-						$this->db->where_in('univ_program.prog_parent_id',$area_interest);
+						$join.=' JOIN univ_program ON univ_program.univ_id=university.univ_id';
+						$area_interest_ids=implode(',',$area_interest_id);
+						$where.=" and univ_program.prog_parent_id IN(".$area_interest_ids.")";
 						}
+
+						/*$this->db->join('events','events.event_univ_id=university.univ_id','left');
+						//$this->db->order_by('STR_TO_DATE(,"%d %M %Y")');
 						$this->db->group_by("university.univ_id"); 
-						$results = $this->db->get();
+						$this->db->order_by("STR_TO_DATE(event_date_time,`'%d %m %Y'')");
+						$results = $this->db->get();*/
+						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= now() ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc";
+						$results=$this->db->query($sql);
 						$univ_data['total_res']=$results->num_rows();
 						if($results->num_rows()>$univ_data['limit_res']);
 						{
-						$this->db->select('*');
-						$this->db->from('university');
-						if($filter_country==1)
-						{
-						$this->db->where_in('country_id',$country_id);
+						$univ_data['per_page_res']=$univ_data['limit_res'];
 						}
-						if($filter_educ_level==1 )
-						{
-						$this->db->join('univ_program','univ_program.univ_id=university.univ_id');
-						$this->db->where_in('univ_program.prog_educ_level',$educ_level);
-						}
-						if($filter_area_interest==1)
-						{
-						if($filter_educ_level!=1)
-						$this->db->join('univ_program','univ_program.univ_id=university.univ_id');
-						$this->db->where_in('univ_program.prog_parent_id',$area_interest);
-						}
-						$this->db->group_by("university.univ_id"); 
-						$this->db->limit($univ_data['limit_res']);
-						$results = $this->db->get();
-						$univ_data['per_page_res']=$results->num_rows();
-						}
-						if($results->num_rows()<$univ_data['limit_res'])
+						if($results->num_rows()<=$univ_data['limit_res'])
 						{
 						$univ_data['per_page_res']=$univ_data['total_res'];
 						}
+						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= now() ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT 0,".$univ_data['limit_res']."";
+						//$this->db->limit($univ_data['limit_res']);
+						//$results = $this->db->get();
+						$results=$this->db->query($sql);
 						
 			if($results->num_rows()>0)
 			{
+			
 						$res_of_univ_search1 = $results->result_array();
 						//print_r($res_of_univ_search1);
 						foreach($res_of_univ_search1 as $univ_search_result)
