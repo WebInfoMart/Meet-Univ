@@ -26,7 +26,13 @@
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+									}
+									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']) && $articles_detail['univ_logo_path']!='')
+									{
+									$image_exist=2;
+								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']);
+									
 									}
 									else
 									{
@@ -35,6 +41,10 @@
 									if($article_img!='' && $image_exist==1)
 									{
 									$image=$base.'uploads/news_article_images/'.$article_img;
+									}
+									else if($articles_detail['univ_logo_path']!='' && $image_exist==2)
+									{
+									$image=$base.'uploads/univ_gallery/'.$articles_detail['univ_logo_path'];
 									}
 									else
 									{

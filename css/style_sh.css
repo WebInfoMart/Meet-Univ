@@ -1,4 +1,5 @@
 .padding{padding:10px;}
+.padding1{padding: 5px;}
 .padding_zero{padding:0px !important}
 .margin_zero{margin:0px!important;}
 .margin_t1{margin-top:10px;}
@@ -111,7 +112,7 @@ background: -o-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 6
 background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 62%,rgba(239,239,239,1) 66%,rgba(239,239,239,1) 77%,rgba(239,239,239,1) 100%); /* IE10+ */
 background: linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 62%,rgba(239,239,239,1) 66%,rgba(239,239,239,1) 77%,rgba(239,239,239,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#efefef',GradientType=0 ); /* IE6-9 */-webkit-border-radius: 8px 8px 0 0;-moz-border-radius: 8px 8px 0 0;border-radius: 8px 8px 0 0;padding:0px 10px;font-size: 20px;font-family: Calibri;color:#ff4200;font-weight:bold;border-bottom: 1px solid #DDD;}
-.featured_art{width:106px;height:75px;}
+.featured_art{width:110px;height:75px;}
 .style_h3{color:#00a3e1;line-height:11px;}
 .events_img{width: 76px;height: 45px;vertical-align: middle;padding: 2px;}
 .box_list_img{border: 2px solid #EAEAEA;line-height: 10px;}
@@ -704,7 +705,7 @@ border-radius: 8px;
 -webkit-border-radius: 8px;
 background: #D9D9D9;
 }
-.fliters_data{padding: 0px 0px 0px 10px;width: 155px;}
+.fliters_data{width: 155px;}
 .fliters_data h3{line-height: 11px;}
 .events_holder_box{border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;width:570px;-webkit-box-shadow: 0px 0px 5px #333333;-moz-box-shadow: 0px 0px 5px #333333;box-shadow: 0px 0px 5px #333333;padding: 0px 0px 0px 10px;color:#666666;}
 .events_holder_box:hover{background-color:#fffbbf;}
@@ -734,8 +735,8 @@ background: -ms-linear-gradient(top,  rgba(160,34,69,1) 0%,rgba(204,44,88,1) 100
 background: linear-gradient(top,  rgba(160,34,69,1) 0%,rgba(204,44,88,1) 100%,rgba(246,41,12,1) 100%,rgba(241,111,92,1) 100%,rgba(246,41,12,1) 100%,rgba(240,47,23,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a02245', endColorstr='#f02f17',GradientType=0 ); /* IE6-9 */
 padding:3px;color: #ffffff;border-bottom:1px solid #ededed;-moz-border-bottom:1px solid #ededed;-webkit-border-bottom:1px solid #ededed;font-size: 15px;}
-.page2_col{width:287px;}
-.page4_col{width: 100px;font-size: 15px;}
+.page2_col{width:233px;}
+.page4_col{margin-right:10px;width: 78px;}
 .page4_col ul{margin:0px;list-style: none;}
 .page4_col ul li{margin-bottom: 10px;}
 .box_col{background: #ffffff; /* Old browsers */
@@ -759,13 +760,13 @@ background: linear-gradient(top,  #ffffff 0%,#e5e5e5 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 border-top: 1px solid #CCC;-moz-border-top: 1px solid #CCC;-webkit-border-top: 1px solid #CCC;
 -moz-border-left: 1px solid #CCC;-webkit-border-left: 1px solid #CCC;border-left: 1px solid #CCC;
-border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;padding: 7px 6px 9px 8px;bottom-right-radius:none;}
+border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;padding-bottom: 6px;padding-right: 22px;bottom-right-radius:none;}
 .blue{color: #08C;}
 .top_page{padding-top:13px;}
 .green{color:#667f00}
 .margin_nec{margin-left: 5px;}
 .date{color: #08C;;font-size: 324%;font-family: Georgia;}
-.done{width: 135px;}
+.done{width: 125px;}
 .courses_data{width:160px}
 
 
@@ -876,7 +877,7 @@ border: 1px solid #ddd;width:58px;padding: 7px 1px 5px 28px;z-index: 1;position:
 top: 0px;
 position: absolute;
 left: 14px;}
-.course_des{text-align: justify;width: 213px}
+.course_des{text-align: justify;width: 189px;margin-left: 25px!important;}
 .dropdown_box, .dropdown_box_country, .dropdown_box_course{width: 280px;
 background: #E6E6E6;
 padding: 5px;
@@ -1001,7 +1002,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 #slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block;margin-top: 25px;}
 .btn_cal{width:192px;}
 .title_style{width: 365px;overflow: hidden;height: 29px;}
-.cal_style{cursor: pointer;z-index: 100;position: absolute;margin-top: -2px;margin-left: 14px;}
+.cal_style{cursor: pointer;z-index: 0;position: absolute;margin-top: 0px;margin-left: -25px;}
 
 
 
@@ -1015,3 +1016,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 .up_event li a:hover{text-decoration:none;}
 .span_content{height: 53px;
 overflow: hidden;}
+
+/*===========sumit sir============*/
+span.aspectcorrect {overflow: hidden;position: relative; }
+span.aspectcorrect  img { position: absolute; }

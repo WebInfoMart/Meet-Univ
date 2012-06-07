@@ -16,7 +16,8 @@
 					<h2 class="course_txt">Recent News</h2>
 					
 					<div class="margin_t1">
-					<?php foreach($news as $news_detail){
+					<?php
+					foreach($news as $news_detail){
 					
 					
 					?>
@@ -31,6 +32,11 @@
 									$image_exist=1;
 									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$news_img);
 									}
+									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$news_detail['univ_logo_path']) && $news_detail['univ_logo_path']!='')
+									{
+									$image_exist=2;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$news_detail['univ_logo_path']);
+								    }
 									else
 									{
 									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/news_default_image.jpg');
@@ -38,6 +44,10 @@
 									if($news_img!='' && $image_exist==1)
 									{
 									$image=$base.'uploads/news_article_images/'.$news_img;
+									}
+									else if($news_detail['univ_logo_path']!='' && $image_exist==2)
+									{
+									$image=$base.'uploads/univ_gallery/'.$news_detail['univ_logo_path'];
 									}
 									else
 									{

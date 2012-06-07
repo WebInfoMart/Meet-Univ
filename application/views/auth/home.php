@@ -137,7 +137,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<label class="control-label" for="focusedInput"><h4 class="white">in the Month of</h4></label>
 							<div class="float_l span4 margin_zero">
 								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
-								<input type="text" id="last_widget" class="btn_cal" onkeypress="return false;"> <img src="images/cal_img.png" id="last_widget_button" class="cal_style">
+								<input type="text" id="last_widget" class="btn_cal" onkeydown="return false;"> <img src="images/cal_img.png" id="last_widget_button" class="cal_style" >
 							</div>
 							<div class="float_l span1">
 									<input type="button" onclick="serch_events();" name="btn_evet_search" class="btn" value="Search"/>
@@ -165,17 +165,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h4 class="white">in Country</h4></label>
 							<div class="controls">
-								<!--<select id="search_country" name="search_country">
-									<option value="">Select Country</option>
-										<?php
-										foreach($country as $srch_country)
-										{
-										?>
-											<option value="<?php echo $srch_country['country_id'] ?>"><?php echo ucwords($srch_country['country_name']); ?></option>
-										<?php
-										}
-										?>
-								</select>-->
+								
 								<div class="dropdown_box_country">
 									<div id="select_country">
 										<span id="selected_country">Select Country</span>
@@ -267,7 +257,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	</div>
 	<div class="clearfix"></div>
 	<div class="body_container">
-			<div class="row">
+			<!--<div class="row">
 				<div class="span16 margin_zero">
 					<div style="padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px
 					#999;-moz-box-shadow: 0px 0px 6px #888;">
@@ -279,6 +269,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					</div>
 				</div>
 			</div>
+			-->
 			<div class="row">
 				<div class="span16 margin_t margin_delta">
 					<div class="float_l span7 margin_delta">
@@ -310,7 +301,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						{
 						$image=$base.$img_path.'/calendar.png';
 						} 
-						$img_arr=$this->searchmodel->set_the_image($width,$height,60,60,TRUE);
+						$img_arr=$this->searchmodel->set_the_image($width,$height,100,50,TRUE);
 						$event_register_user = $this->frontmodel->count_event_register($events['event_id']);
 						?>
 								<li>
@@ -325,7 +316,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												<a href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
 										</div>
 										<div>
-											<div class="img_style float_l">
+											<div class="img_style float_l aspectcorrect" style="height:50px;">
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
 											<div class="float_l text-width" style="font-size:14px;">
@@ -361,33 +352,47 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								foreach($featured_news_show as $f_news)
 								{
 									$image_exist=0;	
-									$article_img = $f_news['news_image_path'];	
-									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+									$news_img = $f_news['news_image_path'];	
+									if(file_exists(getcwd().'/uploads/news_article_images/'.$news_img) && $news_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$news_img);
 									}
-									else
+									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$f_news['univ_logo_path']) && $f_news['univ_logo_path']!='')
 									{
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
+									$image_exist=2;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$f_news['univ_logo_path']);
 								    }
-									if($article_img!='' && $image_exist==1)
+									else
 									{
-									$image=$base.'uploads/news_article_images/'.$article_img;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/news_default_image.jpg');
+								    }
+									if($news_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$news_img;
+									}
+									else if($f_news['univ_logo_path']!='' && $image_exist==2)
+									{
+									$image=$base.'uploads/univ_gallery/'.$f_news['univ_logo_path'];
 									}
 									else
 									{
-									$image=$base.$img_path.'/default_logo.png';
+									$image=$base.$img_path.'/news_default_image.jpg';
 									} 
 									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
 							?>
 									<div>
 										<h3>Study Aboard</h3>
-										<span class="float_l" style="line-height: 8px;border: 2px solid #DDD;margin-right:15px;padding: 2px">
+										<span class="float_l aspectcorrect" style="line-height: 8px;border: 2px solid #DDD;margin-right:15px;padding: 2px;width:80px;height:80px;">
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 											
 										</span>
-										<p><?php echo substr($f_news['news_detail'],0,800).'...'; ?>	 </p>
+										<p><?php echo substr($f_news['news_detail'],0,600).'...'; 
+										if(strlen($f_news['news_detail'])>600)
+										{
+										echo "..."?><a href="<?php echo 'univ-'.$f_news['news_univ_id'].'-news-'.$f_news['news_id'] ?>">View more</a>
+								<?php		}
+										?>	 </p>
 									
 									</div>
 									<?php } } ?>
@@ -426,7 +431,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				{
 				$image='univ_logo.png';
 				} 
-				$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);
+				$img_arr=$this->searchmodel->set_the_image($width,$height,106,75,TRUE);
 				?>
 									<div class="float_l featured_art aspectcorrect <?php if($f_coll%2) { echo "margin_zero"; } ?>">
 										<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
@@ -464,14 +469,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					<div style="padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px
 					#999;-moz-box-shadow: 0px 0px 6px #888;">
 							<ul class="yellow yellow_nav">
-						<li><a href="#">Engineering</a></li>
-						<li><a href="#">Medical</a></li>
-						<li><a href="#">Media &amp; Journalism</a></li>
-						<li><a href="#">Hospitality </a></li>
-						<li><a href="#">Technology  </a></li>
-						<li><a href="#">Science</a></li>
-						<li><a href="#">Animation</a></li>
-						<li><a href="#" style="border:none;">MBA</a></li>
+						<li><a href="<?php echo $base; ?>colleges/Applied_and_pure_sciences ">Applied and pure sciences</a></li>
+						<li><a href="<?php echo $base; ?>colleges/Education_and_teacher_training">Education and teacher training</a></li>
+						<li><a href="<?php echo $base; ?>colleges/Engineering_and_technology">Engineering and technology</a></li>
+						<li><a href="<?php echo $base; ?>colleges/Health_and_medicine">Health and medicine</a></li>
+						<li><a href="<?php echo $base; ?>colleges/Creative_arts_and_design">Creative arts and design</a></li>
+						
 					</ul>
 					</div>
 				</div>
@@ -567,21 +570,49 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							{
 							foreach($featured_article as $article){ 
 							if($article_count < 2) {
+							$image_exist=0;		
+							
+							if(file_exists(getcwd().'/uploads/univ_gallery/'.$article['article_image_path']))	
+							{
+							$image_exist=1;
+							list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article['article_image_path']);
+							}
+							else if(file_exists(getcwd().'/uploads/univ_gallery/'.$article['univ_logo_path']))
+							{
+							$image_exist=2;
+							list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$article['univ_logo_path']);
+							}
+							else
+							{
+							list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
+							}
+							if($article['article_image_path']!='' && $image_exist==1)
+							{
+							$image=$base.'uploads/news_article_images/'.$article['article_image_path'];
+							}
+							else if($article['univ_logo_path']!='' && $image_exist==2)
+							{
+							$image=$base.'uploads/univ_gallery/'.$article['univ_logo_path'];
+							}
+							else
+							{
+							$image=$base.$img_path.'/default_logo.png';
+							} 
+							$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);
+							
 							?>
 							<div class="margin_t1 part_art">
 								<h3><?php echo substr($article['article_title'],0,35).'...'; ?></h3>
-									<span class="float_l" style="line-height: 8px;border: 2px solid #DDD;margin-right:15px;padding: 2px">
-										<?php if($article['article_image_path']==''){?>
-											<img src="images/default_logo.png" class="home_art">
-											<?php } else {?>
-											<img src="<?php echo $base; ?>/uploads/news_article_images/<?php echo $article['article_image_path']; ?>" class="home_art" style="width: 70px;height: 70px;">
-										<?php } ?>
+									<span class="float_l aspectcorrect" style="line-height:8px;width:90px;height:90px;border: 2px solid #DDD;margin-right:15px;padding: 2px">
+										
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" class="home_art">
+											
 										
 									</span>
 									<p><?php
 									echo strlen($article['article_detail']);
-									echo substr($article['article_detail'],0,300); 
-									if(strlen($article['article_detail'])>300){ ?>
+									echo substr($article['article_detail'],0,278); 
+									if(strlen($article['article_detail'])>278){ ?>
 									..<a href="<?php echo $base; ?>univ-<?php echo $article['article_univ_id']; ?>-article-<?php echo $article['article_id']; ?>">View More</a>	
 									<?php }
 									?>	
@@ -647,23 +678,32 @@ $i++;
 //$city=$city['city_id'];
 
 } $arr.=']';
-/*$countrylist='[';
-$i=1;
-foreach($cities as $city)
+$countrylist='[';
+$c=1;
+foreach($country as $srch_country)
 {
-$countrylist.='{label: "'.$city['cityname'].'"}';
-if($i!=count($cities))
+$countrylist.='{label: "'.$srch_country['country_name'].'"}';
+if($c!=count($country))
 {
 $countrylist.=',';
 }
-$i++;
+$c++;
 //$city=$city['city_id'];
-
-} $countrylist.=']';
-foreach($country as $srch_country)
+}
+ $countrylist.=']';
+ 
+$area_interest_list='[';
+$ai=1;
+foreach($area_interest as $srch_course)
 {
-$srch_country['country_name']);
-}*/
+$area_interest_list.='{label: "'.$srch_course['program_parent_name'].'"}';
+if($ai!=count($area_interest))
+{
+$area_interest_list.=',';
+}
+$ai++;
+}
+ $area_interest_list.=']'; 
 ?>	
 <style type="text/css">	
 .ddclass{
@@ -787,7 +827,7 @@ $(document).ready(function(){
 	$("#open_box_country").hide();
 	
 	$("#selected_college_country").autocomplete({
-		source: [{ label: "India", value: "1" },{ label: "U.K.", value: "2" }],
+		source: <?php echo $countrylist; ?>,
 		select: function( event, ui ) {
 			$("#search_country").val(ui.item.value);
 			$("#selected_country").html(ui.item.label);
@@ -832,7 +872,7 @@ $(document).ready(function(){
 	$("#open_box_course").hide();
 	
 	$("#selected_college_course").autocomplete({
-		source: [{label: "Agriculture, Environment And Related Subjects", value: "1"},{label: "Applied And Pure Sciences", value: "2"},{label: "Architecture", value: "3"},{label: "Building And Planning", value: "4"},{label: "Creative Arts And Design", value: "5"},{label: "Education And Teacher Training", value: "6"},{label: "Engineering And Technology", value: "7"},{label: "Health And Medicine", value: "8"}],
+		source: <?php echo $area_interest_list; ?>,
 		select: function( event, ui ) {
 			$("#search_program").val(ui.item.value);
 			$("#selected_course").html(ui.item.label);

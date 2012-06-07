@@ -1,5 +1,5 @@
 
-<div id="pagination" style="margin-top:15px;" class="table_pagination right paging-margin">
+<div id="pagination" class="table_pagination right paging-margin">
    
 						   <?php
 						   $cc=$get_university['total_res'];
@@ -100,7 +100,7 @@
 												<div class="red_box">
 													Events
 												</div>
-												<div>
+												<div class="padding1">
 													<div class="float_l margin_t">
 													<?php 
 													if($get_university['univ_event'][$no_university]!=0)
@@ -112,7 +112,7 @@
 													?>
 														<span class="date"><?php echo $date_part[0]; ?></span>
 													</div>
-													<div class="float_l margin_t1">
+													<div class="float_l margin_l">
 														<span style="font-size:18px;">
 														<?php if($event_has) { echo $date_part[1]; ?> <br/>
 											<?php if($get_university['univ_event'][$no_university][0]['country_name']!='') {
@@ -125,7 +125,7 @@
 														</span>
 											<?php } else { ?>
 											
-											<div class="float_l margin_t1">
+											<div class="center">
 														<span style="font-size:18px;">No Recent Event </span> </div><?php } ?>			
 													</div>
 													</div>
@@ -151,8 +151,8 @@
 												&nbsp;&nbsp;Listed: <span class="blue">2980</span>
 											</div>
 											<div class="last_box_col float_r">
-												<img src="<?php echo "$base$img_path"; ?>/add.PNG"/>
-				<span class="green follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
+												<img src="<?php echo "$base$img_path"; ?>/add.PNG" class="img_set"/>
+				<span class="margin_l follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
 												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow<?php } else { ?>Unfollow<?php } ?>
 									   </span>
 		<input type="hidden" id="follow_count_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" value="<?php echo $get_university['followers'][$no_university]; ?>">								

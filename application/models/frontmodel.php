@@ -67,6 +67,7 @@ class Frontmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
 		$this->db->where(array('featured_home_article'=>'1','article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$this->db->limit(2);
 		$query = $this->db->get();
@@ -76,6 +77,7 @@ class Frontmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('news');
+		$this->db->join('university', 'news.news_univ_id = university.univ_id'); 
 		$this->db->where(array('featured_home_news'=>'1','news_type_ud'=>'univ_news'));
 		$this->db->limit(4);
 		$query = $this->db->get();
@@ -378,18 +380,6 @@ class Frontmodel extends CI_Model
 		return $query->result_array();
 	}
 	
-	function fetch_cities_having_events()
-	{
-		$this->db->select('*');
-		$this->db->from('city');
-		$this->db->join('events', 'events.event_city_id = city.city_id'); 
-		$this->db->where(array('event_type'=>'univ_event',
-		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
-		));
-		$this->db->order_by('cityname','asc');
-		$query=$this->db->get();
-		return $query->result_array();
-	}
 	function insert_user_comment()
 	{
 	$data=array(
@@ -630,7 +620,18 @@ class Frontmodel extends CI_Model
 		return 0;
 		}
 	}
-	
+	function fetch_cities_having_events()
+	{
+		$this->db->select('*');
+		$this->db->from('city');
+		$this->db->join('events', 'events.event_city_id = city.city_id'); 
+		$this->db->where(array('event_type'=>'univ_event',
+		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+		));
+		$this->db->order_by('cityname','asc');
+		$query=$this->db->get();
+		return $query->result_array();
+	}
 	function fetch_featured_events_of_univ($univ_id)
 	{
 		$this->db->select('*');

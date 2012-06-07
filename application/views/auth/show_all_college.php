@@ -46,8 +46,8 @@ $this->session->unset_userdata('follow_to_univ');
 		$sel='checked';
 		}
 		?>									
-		<input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo $countries['country_name'];
-							 ?></li>
+		<label class="checkbox"><input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo $countries['country_name'];
+							 ?></label></li>
 								<?php } ?>					
 									</ul>
 									
@@ -64,8 +64,8 @@ $this->session->unset_userdata('follow_to_univ');
 							$educ_level=str_replace(' ','_',$fetch_educ_levels['educ_level']);	
 							//$educ_level=str_replace(' ','_',$educ_level);		
 										?>			
-			<li href="/<?php echo $educ_level; ?>"><input type="checkbox" class="search_chkbox" <?php echo $educ_sel; ?>> 
-			<?php echo $fetch_educ_levels['educ_level']; ?></li>	
+			<li href="/<?php echo $educ_level; ?>"><label class="checkbox"><input type="checkbox" class="search_chkbox" <?php echo $educ_sel; ?>> 
+			<?php echo $fetch_educ_levels['educ_level']; ?></label></li>	
 										<?php } ?>
 											
 										  
@@ -82,8 +82,9 @@ $this->session->unset_userdata('follow_to_univ');
 							$area_interest_sel='checked';
 							}			
 										$area_intrest=str_replace(' ','_',$fetch_area_intrest1['program_parent_name']);	
-										?>			
-		<li href="/<?php echo $area_intrest; ?>"><input type="checkbox" class="search_chkbox" <?php echo $area_interest_sel; ?>><?php echo $fetch_area_intrest1['program_parent_name']; ?></li>	
+										?>	
+										
+		<li href="/<?php echo $area_intrest; ?>"><label class="checkbox"><input type="checkbox" class="search_chkbox" <?php echo $area_interest_sel; ?>><?php echo $fetch_area_intrest1['program_parent_name']; ?></label></li>	
 										<?php } ?>
 									</ul>
 									
@@ -96,7 +97,7 @@ $this->session->unset_userdata('follow_to_univ');
 						<?php if(!($count_array)){ ?>
 						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
 						<?php } ?>
-							<div id="pagination" style="margin-top:15px;" class="table_pagination right paging-margin">
+							<div id="pagination" class="table_pagination right paging-margin">
    
 						   <?php
 						   $cc=$get_university['total_res'];
@@ -196,8 +197,8 @@ $this->session->unset_userdata('follow_to_univ');
 												<div class="red_box">
 													Events
 												</div>
-												<div>
-													<div class="float_l margin_t">
+												<div class="padding1">
+													<div class="float_l margin_t1">
 													<?php 
 													if($get_university['univ_event'][$no_university]!=0)
 													{
@@ -208,20 +209,22 @@ $this->session->unset_userdata('follow_to_univ');
 													?>
 														<span class="date"><?php echo $date_part[0]; ?></span>
 													</div>
-													<div class="float_l margin_t1">
+													<div class="float_l margin_l">
 														<span style="font-size:18px;">
+				
 														<?php if($event_has) { echo $date_part[1]; ?> <br/>
+															<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
+											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
+											} ?><br />
 											<?php if($get_university['univ_event'][$no_university][0]['country_name']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['country_name']);
 											} ?><br />
 													
-											<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
-											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
-											} ?><br />
+										
 														</span>
 											<?php } else { ?>
 											
-											<div class="float_l margin_t1">
+											<div class="center">
 														<span style="font-size:18px;">No Recent Event </span> </div><?php } ?>			
 													</div>
 													</div>
@@ -247,8 +250,8 @@ $this->session->unset_userdata('follow_to_univ');
 												&nbsp;&nbsp;Listed: <span class="blue">2980</span>
 											</div>
 											<div class="last_box_col float_r">
-												<img src="<?php echo "$base$img_path"; ?>/add.PNG"/>
-				<span class="green follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
+												<img src="<?php echo "$base$img_path"; ?>/add.PNG" class="img_set">
+				<span class="margin_l follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
 												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow<?php } else { ?>Unfollow<?php } ?>
 									   </span>
 		<input type="hidden" id="follow_count_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" value="<?php echo $get_university['followers'][$no_university]; ?>">								

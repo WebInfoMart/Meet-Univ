@@ -539,7 +539,7 @@ function show_all_college_paging($current_url)
 						$this->db->group_by("university.univ_id"); 
 						$this->db->order_by("STR_TO_DATE(event_date_time,`'%d %m %Y'')");
 						$results = $this->db->get();*/
-						echo $sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= now() ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT ".$offset.",".$univ_data['limit_res']."";
+						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= now() ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT ".$offset.",".$univ_data['limit_res']."";
 						$results=$this->db->query($sql);
 						$univ_data['per_page_res']=$results->num_rows();
 						

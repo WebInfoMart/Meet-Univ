@@ -57,7 +57,13 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+									}
+									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']) && $articles_detail['univ_logo_path']!='')
+									{
+									$image_exist=2;
+								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']);
+									
 									}
 									else
 									{
@@ -67,12 +73,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									{
 									$image=$base.'uploads/news_article_images/'.$article_img;
 									}
+									else if($articles_detail['univ_logo_path']!='' && $image_exist==2)
+									{
+									$image=$base.'uploads/univ_gallery/'.$articles_detail['univ_logo_path'];
+									}
 									else
 									{
 									$image=$base.$img_path.'/default_logo.png';
 									} 
 									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
-							?>
+									?>
 
 							<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 							
