@@ -370,6 +370,7 @@ function ajax(a,pid)
 			//alert($(this).closest("li").attr("id"));
 			href=href.replace($(this).closest("li").attr("href"),'');
 			}
+			alert(href);
 			history.pushState('',href,href);
 			get_college_result_by_ajax();
 			});
