@@ -669,7 +669,7 @@ function show_all_college_paging($current_url)
 						{
 						if($filter_educ_level!=1)
 						$join.=' JOIN univ_program ON univ_program.univ_id=university.univ_id';
-						$area_interest_ids=implode(',',$area_interest_id);
+						$area_interest_ids=implode(',',$area_interest);
 						$where.=" and univ_program.prog_parent_id IN(".$area_interest_ids.")";
 						}
 

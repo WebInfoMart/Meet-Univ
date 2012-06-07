@@ -111,7 +111,7 @@ background: -o-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 6
 background: -ms-linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 62%,rgba(239,239,239,1) 66%,rgba(239,239,239,1) 77%,rgba(239,239,239,1) 100%); /* IE10+ */
 background: linear-gradient(top, rgba(245,245,245,1) 0%,rgba(239,239,239,1) 62%,rgba(239,239,239,1) 66%,rgba(239,239,239,1) 77%,rgba(239,239,239,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#efefef',GradientType=0 ); /* IE6-9 */-webkit-border-radius: 8px 8px 0 0;-moz-border-radius: 8px 8px 0 0;border-radius: 8px 8px 0 0;padding:0px 10px;font-size: 20px;font-family: Calibri;color:#ff4200;font-weight:bold;border-bottom: 1px solid #DDD;}
-.featured_art{width:106px;height:75px;}
+.featured_art{width:110px;height:75px;}
 .style_h3{color:#00a3e1;line-height:11px;}
 .events_img{width: 76px;height: 45px;vertical-align: middle;padding: 2px;}
 .box_list_img{border: 2px solid #EAEAEA;line-height: 10px;}
@@ -711,7 +711,7 @@ background: #D9D9D9;
 .events_holder_box h3 span{color:#08C;}
 .col_filter_list{list-style:none;color:#3881AB;margin: 0 0 0px 0px;}
 .col_filter_list li a{color:#666666;}
-.col_list_logo{background: white;border: 2px solid #EAEAEA;-moz-border: 2px solid #EAEAEA;-webkit-border: 2px solid #EAEAEA;width:110px;height:115px;text-align: center;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;padding: 0px 2px;}
+.col_list_logo{background: white;border: 2px solid #EAEAEA;-moz-border: 2px solid #EAEAEA;-webkit-border: 2px solid #EAEAEA;width:100px;height:115px;text-align: center;border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;padding: 0px 2px;}
 .col_list_logo:hover{-moz-box-shadow: 0 0 5px #888;-webkit-box-shadow: 0 0 5px#888;box-shadow: 0 0 5px #888;}
 .courses_list_style{list-style:none;margin:0px;height: 110px;overflow: hidden;}
 .courses_list_style li a{color:#666666;}
@@ -733,8 +733,8 @@ background: -ms-linear-gradient(top,  rgba(160,34,69,1) 0%,rgba(204,44,88,1) 100
 background: linear-gradient(top,  rgba(160,34,69,1) 0%,rgba(204,44,88,1) 100%,rgba(246,41,12,1) 100%,rgba(241,111,92,1) 100%,rgba(246,41,12,1) 100%,rgba(240,47,23,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a02245', endColorstr='#f02f17',GradientType=0 ); /* IE6-9 */
 padding:3px;color: #ffffff;border-bottom:1px solid #ededed;-moz-border-bottom:1px solid #ededed;-webkit-border-bottom:1px solid #ededed;font-size: 15px;}
-.page2_col{width:287px;}
-.page4_col{width: 100px;font-size: 15px;}
+.page2_col{width:233px;}
+.page4_col{margin-right:10px;width: 78px;}
 .page4_col ul{margin:0px;list-style: none;}
 .page4_col ul li{margin-bottom: 10px;}
 .box_col{background: #ffffff; /* Old browsers */
@@ -764,7 +764,7 @@ border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;padding: 7
 .green{color:#667f00}
 .margin_nec{margin-left: 5px;}
 .date{color: #08C;;font-size: 324%;font-family: Georgia;}
-.done{width: 135px;}
+.done{width: 125px;}
 .courses_data{width:160px}
 
 
@@ -866,7 +866,7 @@ background: -o-linear-gradient(top,  rgba(249,252,247,1) 0%,rgba(245,249,240,1) 
 background: -ms-linear-gradient(top,  rgba(249,252,247,1) 0%,rgba(245,249,240,1) 100%); /* IE10+ */
 background: linear-gradient(top,  rgba(249,252,247,1) 0%,rgba(245,249,240,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fcf7', endColorstr='#f5f9f0',GradientType=0 ); /* IE6-9 */
-border: 1px solid #ddd;width:58px;padding: 7px 1px 5px 28px;z-index: 1;position: relative;margin-top: 113px;border-radius: 3px;font-size: 15px;margin-left: 14px;border-top-left-radius: 0px;border-top-right-radius: 0px;-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;}
+border: 1px solid #ddd;width:58px;padding: 7px 1px 5px 28px;z-index: 1;position: relative;margin-top: 113px;border-radius: 3px;font-size: 15px;margin-left: 10px;border-top-left-radius: 0px;border-top-right-radius: 0px;-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;}
 .apply img{z-index: 1;position: absolute;left: 13px;top: 10px;}
 .apply a{color: #667F00;}
 .page4-font{font-size:15px;}
