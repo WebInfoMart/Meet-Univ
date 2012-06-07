@@ -51,9 +51,10 @@ if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 }
 $this->session->unset_userdata('msg_send_suc');
 $this->session->unset_userdata('msg_send_suc_voice');
-?>	
-
-			<div class="row" style="margin-top:-10px">
+?>
+		<div id="wrapper">
+			<div class="clearfix"></div>
+			<div class="row" style="margin-top:-12px">
 			<div class="modal" id="show_success" style="display:none;" >
 					  <div class="modal-header">
 						<a class="close" data-dismiss="modal"></a>
@@ -67,21 +68,15 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
 					  </div>
 				</div>
-				<div class="float_l span13 margin_l">
+				<div class="span16 margin_l">
+				<div class="float_l span13 margin_zero">
 					<div>
-					<div class="float_r">
-							<div class="float_l" style="margin-right:20px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-							<div class="float_l" style="margin-right:-30px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-							<div class="float_l">
-								<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-							</div>
-						</div>
-						<div class="float_l span4 margin_zero">
-							<div id="single_event_calendar">
+						<div class="float_l span8 margin_zero">
+						<div id="single_event_calendar">
 							
 							</div>
-						</div>
-						<?php 
+							<div class="span7 margin_zero span_content">
+							<?php 
 						if($event_detail['event_date_time'] !=0 || $event_detail['event_date_time'] != '')
 						{
 								$array_dates = array();
@@ -99,54 +94,113 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								array_push($array_dates,$var);
 						}
 								?>
-						<div class="float_r span9 page_univ">
-							<h2><?php echo $event_detail['event_title']; ?>  <small><?php 
+								<h2 style="line-height: 24px;">
+								<?php 
+								if($event_detail['event_category'] == "spot_admission"){
+									echo "Spot Admission";
+								} 
+								else if($event_detail['event_category'] == "fairs")
+								{
+									echo "Fairs";
+								}
+								else if($event_detail['event_category'] == "others")
+								{
+									echo "Counselling";
+								}
+								else if($event_detail['event_category'] == "alumuni")
+								{
+									echo "Counselling";
+								}
+								echo '<span class="inline"> &raquo; </span>'.$event_detail['event_title'];
+								?>
+								
+								</h2> 
+								
+							</div>
+							<div class="float_r">
+									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+										<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
+							</div>
+							<div>
+								<div class="float_l margin_t1">
+									<ul style="margin:0px;list-style:none">
+										<li>
+											<img src="images/city.png" class="line_img"><h4 class="h4_line"><span><?php 
 							if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
 							if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
-							if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} 
-								
-								
-								?></small></h2> 
-								<div class="float_r margin_t1">
-								<form action="EventRegistration" method="post">
+							if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} ?></span></h4>
+										</li>
+										<li>
+										
+											<img src="images/clock.png" class="line_img"><h4 class="h4_line"><span>Timings: <?php echo $extract_date[0] ?> <?php echo ','.$extract_date[1].' '.$event_detail['event_time'];?></span></h4>
+										</li>
+										<li>
+											<img src="images/group.png" class="line_img"><h4 class="h4_line"><span>Total Registered Users: <span class="blue" style="margin-left: 3px;margin-right: 9px;"><?php echo $total_register_user; ?></span></span></h4>
+										</li>
+										<li class="clearfix"></li>
+									</ul>
+									
+								</div>
+								<div class="float_r">
+									<form action="EventRegistration" method="post">
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
-									<div class="float_r margin_t1">
-									<input type="BUTTON" value="SMS ME" class="btn btn-primary" onClick="popup('<?php echo $event_detail['event_id']; ?>')">
-									<input type="BUTTON" value="VOICE SMS" class="btn btn-primary" onClick="voicepopup('<?php echo $event_detail['event_id']; ?>')">
-									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" /></div>
+									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" />
+									</form>
 								</div>
-							<h3><?php echo $extract_date[1] ?> <?php echo ' '.$extract_date[0].' '.$extract_date[2];?></h3> 
-							<h3>Timings: <?php echo $event_detail['event_time']; ?></h3>
-							<!--<h3>Total Registered Users: <span class="blue">25</span></h3>-->
-							
-							<div class="margin_t1">
-								<div class="course_cont"><?php echo $event_detail['event_detail']; ?></div>
+								<div class="clearfix"></div>
 							</div>
-							
-							<div class="margin_t1">
-								<div class="map_layout">
+								<div class="margin_t1">
+									<div class="float_l span5 margin_zero course_cont"><?php echo $event_detail['event_detail']; ?></div>
+									<div class="span3 float_r">
+										<div class="map_layout">
 									<?php echo $headerjs; ?>
 									<?php echo $headermap; ?>
 									<?php echo $onload; ?>
 									<?php echo $map; ?>
 									<?php echo $sidebar; ?>
 								</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+						</div>
+						<div class="float_r span5">
+							<div>
+								<div class="float_l" style="margin-right:20px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+								<div class="float_l" style="margin-right:-30px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+								<div class="float_l">
+									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+								</div>
+								<div class="clearfix"></div>
 							</div>
+							<div class="back_up">
+								<h2><img src="images/cal_img.png" style="z-index: 100;position: relative;top:6px;">Upcoming Event</h2>
+								<ul class="up_event">
+								<?php if(!empty($feature_event_of_univ)){
+								foreach($feature_event_of_univ as $upcoming_event)
+								{
+								?>
+									<li><a href="<?php echo $base;?>univ-<?php echo $upcoming_event['univ_id']; ?>-event-<?php echo $upcoming_event['event_id']; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
+								<?php } } ?>	
+								</ul>
+							</div>
+							
 						</div>
 						<div class="clearfix"></div>
+						
 					</div>
 					<div class="margin_t1">
 						<div class="event_border">
-							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($event_comments); ?>"/>
-								<h3><span id="cnt_comment_show"><?php if($event_comments!=0){ echo count($event_comments); } else { echo "0"; }; ?></span> Comments</h3>
-							</div> 
-							<?php 
+						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($event_comments); ?>"/>
+							<h3><span id="cnt_comment_show"><?php if($event_comments!=0){ echo count($event_comments); } else { echo "0"; }; ?></span> Comments</h3>
+						</div>
+						<?php 
 							if($event_comments!=0){
 						foreach($event_comments as $event_comments_detail){ ?>
-							<div class="event_border hover_delete_comment_<?php echo $event_comments_detail['comment_id']; ?>" >
-								<div class="float_l">
-									<div class="comment_img">
+						<div class="event_border hover_delete_comment_<?php echo $event_comments_detail['comment_id']; ?>">
+							<div class="float_l">
+								<div class="comment_img">
 									<?php if($event_comments_detail['user_pic_path'] !=''){ ?>
 									<img src="<?php echo "$base"; ?>uploads/<?php echo $event_comments_detail['user_pic_path']; ?>" />
 									<?php } 
@@ -156,19 +210,19 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									else { ?>		
 									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 									<?php } ?>
-									</div>
 								</div>
-								<div>
-			<?php if($user_is_logged_in ){
+							</div>
+							<div>
+							<?php if($user_is_logged_in ){
 			if($user_detail['user_id']==$event_comments_detail['user_id'])
 			{
 			?>					
 			<span class="float_r delete_comment" >
 					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php echo $event_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
-			<?php	} } ?>				
-									<h4 ><a href="#" class="course_txt">
-									<?php if($event_comments_detail['commented_by_user_name'] !=''){
+			<?php	} } ?>	
+								<h4><a href="#" class="course_txt">
+								<?php if($event_comments_detail['commented_by_user_name'] !=''){
 									echo $event_comments_detail['commented_by_user_name']; 
 									}
 									else if($event_comments_detail['fullname'] !='')
@@ -179,22 +233,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									{
 										echo $user_profile['name'];
 									} ?>
-									</a>
-									</h4>
-									<?php echo $event_comments_detail['commented_text'];?>
-									<div style="font-size;color:black;" class="float_r"><?php
+								</a></h4>
+								<?php echo $event_comments_detail['commented_text'];?>
+								<div style="font-size;color:black;" class="float_r"><?php
 									echo substr($event_comments_detail['comment_time'],0,16);?></div>
-								</div>
-								<div class="clearfix"></div>
 							</div>
-				<?php }
-					}?>			
-						
+							<div class="clearfix"></div>
+						</div> <?php } } ?>
 					</div>
 					<div class="margin_t margin_b">
 						<div class="events_box">
-							<?php if($user_is_logged_in==0){ ?>		
-				<div class="events_box" style="height: 53px;">
+						<?php if($user_is_logged_in==0){ ?>		
+						<div class="events_box" style="height: 53px;">
 				<div class="float_r">
 					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
 				</div>
@@ -202,8 +252,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				<center><h3>Please Login for comment</h3></center>
 				</div>
 				</div>
-				<?php } else { ?>
-				<div class="margin_t margin_bs">
+						<?php } else { ?>
+							<div class="margin_t margin_bs">
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
@@ -251,9 +301,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 								<div class="clearfix"></div>
 							</div>
-						</div>
-				<?php } ?>
-				
+						</div> <?php } ?>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -264,8 +312,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				<div class="clearfix"></div>
 			</div>
 		</div>
-	</div>
-<!--  Div For Text SMS  -->					
+	<!--  Div For Text SMS  -->					
 <div id="myModal" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
@@ -287,8 +334,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	</div>
 	</div>
 	<!-- End Here -->
-
-<SCRIPT LANGUAGE="JavaScript">     
+	
+	<SCRIPT LANGUAGE="JavaScript">     
  function popup(id) {
  var loc = window.location;
   $.ajax({
@@ -413,20 +460,3 @@ $show_date = '';
 			// foreach($array_dates as $dates){
 			// echo $dates;
 			// }?>
-<script type="text/javascript">
-var x = new Array(<?php echo $array_dates; ?>);
-//'12/04/2012';
-			$(document).ready(function () {
-				//$("#example").thingerlyCalendar();
-				$("#single_event_calendar").thingerlyCalendar({
-					'month' : <?php echo $number_month; ?>,
-					'year' : <?php echo $show_current_date[2]; ?>,
-          'transition' : 'slide',
-					'viewTransition' : 'fade',
-          'events' : [
-		  <?php echo $array_dates; ?>
-          ]
-          });
-
-			});
-		</script>

@@ -619,4 +619,28 @@ class Frontmodel extends CI_Model
 		}
 	}
 	
+	function fetch_featured_events_of_univ($univ_id)
+	{
+		$this->db->select('*');
+		$this->db->from('events');
+		$this->db->join('university', 'events.event_univ_id=university.univ_id');
+		$this->db->join('city','events.event_city_id=city.city_id');
+		$this->db->join('state','events.event_state_id=state.state_id');
+		$this->db->join('country','events.event_country_id=country.country_id');
+		$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		$this->db->where('event_univ_id',$univ_id);
+		$this->db->limit(5);
+		$query = $this->db->get();
+		//$x = $query->result_array();
+		//echo $x['event_id'];
+		if($query->num_rows>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	
 }

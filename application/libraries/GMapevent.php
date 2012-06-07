@@ -254,21 +254,21 @@ class GMapevent {
      *
      * @var int
      */
-    var $zoom = 16;
+    var $zoom = 10;
 
     /**
      * determines the map width
      *
      * @var string
      */
-    var $width = '565px';
+    var $width = '175px';
     
     /**
      * determines the map height
      *
      * @var string
      */
-    var $height = '284px';
+    var $height = '115px';
 
     /**
      * message that pops up when the browser is incompatible with Google Maps.
@@ -1167,7 +1167,7 @@ class GMapevent {
         $_marker['lon'] = $lon;
         $_marker['lat'] = $lat;
         $_marker['html'] = (is_array($html) || strlen($html) > 0) ? $html : $title;
-        $_marker['title'] = $title;
+        //$_marker['title'] = $title;
         $_marker['tooltip'] = $tooltip;
         
         if($icon_filename!=""){
@@ -1984,6 +1984,7 @@ class GMapevent {
 			$_prefix = "panorama".$this->street_view_dom_id;
 		}
         $_output = '';
+		$marker['title'] = '';
         foreach($this->_markers as $_marker) {
             $iw_html = str_replace('"','\"',str_replace(array("\n", "\r"), "", $_marker['html']));
             $_output .= "var point = new google.maps.LatLng(".$_marker['lat'].",".$_marker['lon'].");\n";
@@ -1991,7 +1992,8 @@ class GMapevent {
 				(($pano==true)?$_prefix:"")."markers".$map_id,
 				$_prefix,                
 				$map_id,
-				str_replace('"','\"',$_marker['title']),
+				
+				str_replace('"','\"',$marker['title']),
 				str_replace('/','\/',$iw_html),
 				(isset($_marker["icon_key"]))?"icon".$map_id."['".$_marker["icon_key"]."'].image":"''",
 				(isset($_marker["icon_key"])&&isset($_marker["shadow_icon"]))?"icon".$map_id."['".$_marker["icon_key"]."'].shadow":"''",

@@ -264,6 +264,9 @@ function university($univ_id='',$qid='',$uid='')
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['event_detail']=$this->frontmodel->get_event_detail_by_univ($univ_id,$event_id);
+			$data['total_register_user'] = $this->frontmodel->count_event_register($event_id);
+			$data['feature_event_of_univ'] = $this->frontmodel->fetch_featured_events_of_univ($univ_id);
+			
 			$this->load->view('auth/header',$data);
 			 if($data['university_details'] != 0 )
 			 {
