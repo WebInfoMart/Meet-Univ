@@ -387,7 +387,7 @@ class Auth extends CI_Controller
 					
 					 $this->email->from('info@meetuniversities.info', 'Meet Universities');
 					$this->email->to($uid);
-					$this->email->subject('New Registration');
+					$this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
 					$message = "$email_body" ;
 					//$message .="<br/>Thank you very much";
 					$this->email->message($message);

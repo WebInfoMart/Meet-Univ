@@ -8,6 +8,13 @@ $config['smtp_port'] = 587;
 $config['crlf'] = '\r\n';
 $config['newline'] = '\r\n';
 
+$config['tsms_uname'] = 'webinfo';
+$config['tsms_pass'] = 'e7w9Y~R9';
+$config['tsms_send'] = 'promot';
+
+$config['vsms_uid'] = '127';
+$config['vsms_pwd'] = 'restapi1103';
+$config['vsms_fid'] = '606';
 /* End of file sendgrid.php */
 /* Location: ./application/config/sendgrid.php */
 ?>

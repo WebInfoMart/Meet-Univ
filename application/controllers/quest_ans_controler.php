@@ -212,6 +212,12 @@ class Quest_ans_controler extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
+		$data['user_is_logged_in']=0;
+				if($this->tank_auth->is_logged_in())
+				{
+				$data['user_is_logged_in']=1;
+				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
+				}
 		if($quest_id!='' && $ask_user_id!='')
 		{
 			$univ_id = 'meetquest';

@@ -146,7 +146,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				?>			
 						</div>
 			<?php 
-			if(!empty($user_is_logged_in)) {
+			
 			if($user_is_logged_in == 0){ ?>		
 			<div class="events_box" style="height: 53px;">
 				<div class="float_r">
@@ -236,7 +236,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 						</div>
-		<?php } } ?>
+		<?php }  ?>
 					</div>
 				</div>
 				<div class="float_r span3">

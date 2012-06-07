@@ -14,6 +14,10 @@ input {width:200px;}
 }
 </style>
 <?php
+//Global Configuration access
+$sms_config['tsms_uname'] = $this->config->item('tsms_uname');
+$sms_config['tsms_pass'] = $this->config->item('tsms_pass');
+$sms_config['tsms_send'] = $this->config->item('tsms_send');
 $fullname = "";
 $mobno= "";
 	if(!empty($fetch_profile_user))
@@ -35,9 +39,9 @@ foreach($event_info_sms as $event_sms)
 	$url = 'leadcontroller/send_sms_of_event';
 	echo "
 	<form action='$base$url' method='post' id='sms_form'>
-	<input type='hidden' name='uname' value='webinfo'/>
-	<input type='hidden' name='pass' value='e7w9Y~R9'/>
-	<input type='hidden' name='send' value='promot'/>
+	<input type='hidden' name='uname' value='$sms_config[tsms_uname]'/>
+	<input type='hidden' name='pass' value='$sms_config[tsms_pass]'/>
+	<input type='hidden' name='send' value='$sms_config[tsms_send]'/>
 	<span>Name</span> <span style='margin-left: 5px;'><input type='text' style='margin-left:25px;' name='fullname' id='fullname' value='$fullname'/></span></br></br>
 	<span>Mobile No</span> <span style='margin-left: 5px;'><input type='text' name='dest' id='dest' value='$mobno'/></span></br></br>
 	<span>Email</span> <span style='margin-left: 29px;'><input type='text' name='email' id='email' value='$mobno'/></span></br>

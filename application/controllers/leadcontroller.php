@@ -397,12 +397,13 @@ class Leadcontroller extends CI_Controller
 		{ */
 		$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
 		$url = "http://www.unicel.in/SendSMS/sendmsg.php?uname=$username&pass=$password&send=$send&dest=$destination&msg=$message";
-		//$send_suc = file_get_contents($url);
+		$send_suc = file_get_contents($url);
 		$data['insert_in_user_aft_txt_msg'] = $this->leadmodel->insert_user_data_after_send_sms($msg_type);
 		//$red_url = $base.'msg_send_suc';
 		$this->session->set_userdata('msg_send_suc','1');
 		//}
 		//echo $current_url;
+		//echo $url;
 		if($page_to_redirect == 'home')
 		{
 			$current_url = base_url();
@@ -470,7 +471,7 @@ class Leadcontroller extends CI_Controller
 		$msg_type = 'voice';
 		$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
 
-		//$send_suc = file_get_contents($url);
+		$send_suc = file_get_contents($url);
 		//echo $send_suc;
 		//echo $url;
 		$data['insert_in_user_aft_voice_msg'] = $this->leadmodel->insert_user_data_after_send_sms($msg_type);

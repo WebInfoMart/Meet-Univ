@@ -30,11 +30,14 @@
      <tr>
       <td style="padding:0in 12.75pt 0in 12.75pt;display:inline-block">
       <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">
-	  Welcome to MeetUniversities.<br />
+	  
 	  <?php 
 	  echo "<h3>Dear &nbsp;".$fullname."</h3>";
 	  ?>
-	  <h3> Your have successfully Registered with MeetUniversities...Thank You.</h3>
+	  <span style="color:red;"><h3> Thanks for registering at Global University Events | MeetUniversities.com!</br>
+		   We are glad you have chosen to be a part of our community and we hope you enjoy your stay.</h3>
+		   <p style="margin-bottom: 19px;"> All the best,Global University Events – One Place  | <a href="www.meetuniversities.com">MeetUniversities.com</a></p> 
+		   </span>
 	  <u></u><u></u></span></p>
       </td>
      </tr>

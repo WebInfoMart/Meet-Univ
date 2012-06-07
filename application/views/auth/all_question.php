@@ -255,8 +255,12 @@
 							{
 								echo 'Category-Colleges,';
 							}
-							else {
+							else if($quest_list['q_country_id'] != '0' and $quest_list['q_univ_id'] == '0') 
+							{
 								echo 'Category-Study Abroad, ';
+							}
+							else{
+							echo 'Category-General Question,';
 							}
 							?>
 							-

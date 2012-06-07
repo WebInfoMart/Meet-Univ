@@ -14,6 +14,11 @@ input {width:200px;}
 }
 </style>
 <?php
+//Global Configuration access
+$vsms_config['vsms_uid'] = $this->config->item('vsms_uid');
+$vsms_config['vsms_pwd'] = $this->config->item('vsms_pwd');
+$vsms_config['vsms_fid'] = $this->config->item('vsms_fid');
+
 $fullname = "";
 $mobno= "";
 	if(!empty($fetch_profile_user))
@@ -50,9 +55,9 @@ foreach($event_info_sms as $event_sms)
 	$url = 'leadcontroller/send_sms_voice_of_event';
 	echo "
 	<form action='$base$url' method='post' id='sms_form_voice'>
-	<input type='hidden' name='uid' value='127'/>
-	<input type='hidden' name='pwd' value='restapi1103'/>
-	<input type='hidden' name='fid' value='606'/>
+	<input type='hidden' name='uid' value='$vsms_config[vsms_uid]'/>
+	<input type='hidden' name='pwd' value='$vsms_config[vsms_pwd]'/>
+	<input type='hidden' name='fid' value='$vsms_config[vsms_fid]'/>
 	<span>Name</span> <span style='margin-left:5px;'><input type='text' style='margin-left:25px;' name='fullname_voice' id='fullname_voice' value='$fullname'/></span></br></br>
 	<span>Mobile No</span> <span style='margin-left:5px;'><input type='text' name='mobno' id='mobno' value='$mobno'/></span></br></br>
 	<span>Email</span> <span style='margin-left: 29px;'><input type='text' name='email_voice' id='email_voice' value='$mobno'/></span></br>
