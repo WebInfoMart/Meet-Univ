@@ -23,7 +23,7 @@ $country_fb_user = trim($fb_user_country_city[1]);
 $fetch_country_result = $this->users->fetch_country_id($country_fb_user);
 
 $fetch_city_result = $this->users->fetch_city_id($city_fb_user);
-echo "city".$city_fb_user."country".$country_fb_user."FETCH country".$fetch_country_result."fetch city".$fetch_city_result;
+
 //$country = $fetch_country_result['country']['country_id'];
 
 //$city = $fetch_city_result['city']['city_id'];
