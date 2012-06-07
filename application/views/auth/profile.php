@@ -12,12 +12,10 @@ if ($user) {
     $user = null;
   }
 }
-echo "user".$user;
 if($user)
 {
 $fb_user_country_city = explode(",",$user_profile['location']['name']);
-echo "facebook detail";
-print_r($fb_user_country_city);
+
 $city_fb_user = trim($fb_user_country_city[0]);
 
 $country_fb_user = trim($fb_user_country_city[1]);
@@ -92,10 +90,8 @@ $(window).load(function(){
 			</div>
 			<div class="margin_t">
 				<div class="float_l span2 margin_zero"><h4>Gender</h4></div>
-				<div class="float_l span3 margin_l12">
-					<input type="radio" name="sex" value="male" /> Male
-					<input type="radio" name="sex" value="female" /> Female
-				</div>
+				<div class="float_l span3 margin_l12"><input type="radio" name="sex" value="male" /> Male
+					<input type="radio" name="sex" value="female" /> Female</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="margin_t">
@@ -107,11 +103,12 @@ $(window).load(function(){
 					<select name="educ_level">
 					<option value="">Select</option>
 					<?php
-						foreach($educ_level as $level)
-						{
-							if($level['prog_edu_lvl_id'] == $curent_quali) { $selected ='selected';}else{ $selected =''; }?>
+									foreach($educ_level as $level)
+									{
+									if($level['prog_edu_lvl_id'] == $curent_quali) { $selected ='selected';} else { $selected =''; }
+									?>
 									<option value="<?php echo $level['prog_edu_lvl_id']; ?>" <?php echo $selected; ?> > <?php echo $level['educ_level']; ?>  </option>
-					<?php } ?>
+									<?php } ?>
 					</select>
 				</div>
 				</div>
