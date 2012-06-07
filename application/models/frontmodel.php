@@ -378,6 +378,18 @@ class Frontmodel extends CI_Model
 		return $query->result_array();
 	}
 	
+	function fetch_cities_having_events()
+	{
+		$this->db->select('*');
+		$this->db->from('city');
+		$this->db->join('events', 'events.event_city_id = city.city_id'); 
+		$this->db->where(array('event_type'=>'univ_event',
+		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+		));
+		$this->db->order_by('cityname','asc');
+		$query=$this->db->get();
+		return $query->result_array();
+	}
 	function insert_user_comment()
 	{
 	$data=array(

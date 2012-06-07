@@ -104,7 +104,7 @@ class Events extends CI_Model
 		$this->db->where('university.user_id',$data['user_id']);
 		}
 		$query=$this->db->get();
-		$config['base_url']=base_url()."adminevents/index/";
+		$config['base_url']=base_url()."adminevents/manage_events/";
 		$config['total_rows']=$query->num_rows();
 		$config['per_page'] = '7'; 
 		//$config['use_page_numbers'] = TRUE;
@@ -180,6 +180,7 @@ class Events extends CI_Model
 	function update_event($event_id)
 	{
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();
+		$event_time=$this->input->post('event_start_timing').'-'.$this->input->post('event_end_timing');
 		$data = array(
 			   'event_title' => $this->input->post('title'),
 			   'event_detail' => $this->input->post('detail'),
@@ -191,9 +192,10 @@ class Events extends CI_Model
 			   'event_category' => $this->input->post('event_type'),
 			   'event_city_id' => $this->input->post('city'),
 				'event_place' => $this->input->post('event_place'),
-				'event_time' => $this->input->post('event_timing')
+				'event_time' => $event_time
 				
 			);
+
 			$this->db->update('events', $data, array('event_id' => $event_id));
 	}
 	

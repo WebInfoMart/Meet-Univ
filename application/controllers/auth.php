@@ -34,7 +34,9 @@ class Auth extends CI_Controller
 		
 		$data['gallery_home'] = $this->users->fetch_home_gallery();
 		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
-		$data['cities'] = $this->frontmodel->fetch_cities_having_univ();
+		//$data['cities'] = $this->frontmodel->fetch_cities_having_univ();
+		$data['cities'] = $this->frontmodel->fetch_cities_having_events();
+		
 		$data['area_interest'] = $this->frontmodel->fetch_area_interest_having_univ();
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();

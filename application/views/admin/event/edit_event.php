@@ -1,10 +1,10 @@
 <?php 
+//print_r($event_info);
 foreach($event_info as $event_detail) { 
 $univ_state_id=$event_detail['event_state_id'];
 $univ_city_id=$event_detail['event_city_id'];
 
 ?>
-
 <div id="content" class="content_msg" style="display:none;">
 <div class="span8 margin_t">
   <div class="message success"><p class="info_message"></p>
@@ -19,7 +19,8 @@ $class_state='';
 $class_city='';
 
 $error_title = form_error('title');
-$error_univ_name = form_error('university');
+$error_univ_id = form_error('university');
+$error_univ_name = form_error('university_name');
 $error_country=form_error('country');
 $error_state=form_error('state');
 $error_city=form_error('city');
@@ -27,17 +28,58 @@ $error_city=form_error('city');
 
 if($error_title != '') { $class_title = 'focused_error_univ'; } else { $class_title='text'; }
 
-if($error_univ_name != '') { $class_univ_name = 'focused_error_univ'; } else { $class_univ_name='text'; }
+if($error_univ_name != '' || $error_univ_id!='') { $class_univ_name = 'focused_error_univ'; } else { $class_univ_name='text'; }
+
 if($error_country != '') { $class_country = 'focused_error_univ'; } else { $class_country='text'; }
 if($error_state != '') { $class_state = 'focused_error_univ'; } else { $class_state='text'; }
 if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city='text'; }
 
 ?>
-  
+ <script type="text/javascript">
+ 
+$(document).ready(function() {
+	
+	$("#univ_name").autocomplete("<?php echo $base; ?>autosuggest/suggest_university", {
+		width: 260,
+		matchContains: true,
+		mustMatch: true
+	});
+	$("#univ_name").result(function(event, data, formatted) {
+		$("#university").val(data[1]);
+	});
+	
+	$("#country_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_country', {
+		width: 260,
+		matchContains: true,
+		mustMatch: true
+	});
+	$("#country_name").result(function(event1, data1, formatted1) {
+		$("#country").val(data1[1]);
+	});
+    $("#state_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_state', {
+		width: 260,
+		matchContains: true,
+		mustMatch: true,
+	});
+	$("#state_name").result(function(event2, data2, formatted2) {
+	$("#state").val(data2[1]);
+	});
+	$("#city_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_city', {
+		width: 260
+	});
+	$("#city_name").result(function(event3, data3, formatted3) {
+	$("#city").val(data3[1]);
+	});
+
+});
+</script>
+  <script type="text/javascript" src="<?php echo $base; ?>/js/jquery.timepicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="<?php echo $base; ?>css/admin/jquery.timepicker.css" />
+
  <div id="content">
-		<h2 class="margin">Create University Events</h2>
+		<h2 class="margin">Edit University Events</h2>
 		<div class="form span8">
-			<form action="<?php echo $base; ?>adminevents/edit_event/<?php echo $event_detail['event_id']; ?>" method="post" class="caption_form">
+			<form action="<?php echo $base; ?>adminevents/edit_event/<?php echo $event_detail['event_id']; ?>" autocomplete="off" method="post" class="caption_form">
 				<ul>
 					<li>
 						<div>
@@ -45,7 +87,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Title</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="<?php echo $class_title; ?>" name="title" value="<?php echo $event_detail['event_title']; ?>">
+								<input type="text" size="30" class="<?php echo $class_title; ?>" name="title" value='<?php echo $event_detail['event_title']; ?>'>
 								<span style="color: red;"> <?php echo form_error('event_title'); ?><?php echo isset($errors['event_title'])?$errors['event_title']:''; ?> </span>
 		
 							</div>
@@ -60,48 +102,33 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<label>Choose University</label>
 						</div>
 						<div class="float_l span3">
-							<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
-								<option value="">Please Select</option>
-									<?php foreach($univ_info as $univ_detail) { ?>
-<option value="<?php echo $univ_detail->univ_id; ?>" <?php if($univ_detail->univ_id==$event_detail['event_univ_id']) { ?> selected <?php } ?> ><?php echo $univ_detail->univ_name; ?></option>
-										<?php } ?>
-							</select>
-		<span style="color: red;"> <?php echo form_error('university'); ?><?php echo isset($errors['university'])?$errors['university']:''; ?> </span>
+						<input type="text" size="30" title="university"  value="<?php echo $event_detail['univ_name'] ?>" class="<?php echo $class_univ_name; ?>" title="university" name="university_name" id="univ_name" />
+						<input type="hidden" name="university" id="university" value="<?php echo $event_detail['univ_id'] ?>" />
+		<span style="color: red;">
+		<?php if($class_univ_name=='focused_error_univ') {
+		 echo form_error('university_name'); echo isset($errors['university_name'])?$errors['university_name']:'';
+		 } ?>
+		</span>
 		
 						</div>
 						<div class="clearfix"></div>
 						</div>
-					</li>
-					<!--<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>Event Type</label>
-						</div>
-						<div class="float_l span3">
-								<label><input type="radio" class="radio" name="demo" checked="checked" />University Event</label>
-								<label><input type="radio" class="radio" name="demo" />Study Abroad Event</label>
-				
-						</div>
-						<div class="clearfix"></div>
-						</div>
-					</li>
-					-->
+					</li>	
 					<?php } else { ?>
-	 				<input type="hidden" name="university" value="<?php echo $event_detail['event_univ_id']; ?>">
+					<li>
+					<input type="hidden" name="university" id="university" value="<?php echo $event_detail['univ_id']; ?>">
+					<input type="hidden" name="university_name" id="university_name" value="<?php echo $event_detail['univ_name']; ?>">
 					<?php }?>
+					</li>
+					
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
 								<label>Country</label>
 							</div>
 							<div class="float_l span3" >
-								<select class="<?php echo $class_country; ?> styled span3 margin_zero" name="country" id="country" onchange="fetchstates(0)">
-									<option value="">Please Select</option>
-									<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$event_detail['country_id']) { ?>selected <?php } ?> ><?php echo $country['country_name']; ?></option>
-										<?php } ?>
-	
-								</select>
+<input type="text"  size="30" class="<?php echo $class_country; ?>" value="<?php echo  $event_detail['country_name']; ?>" title="country" name="country_name" id="country_name" />
+				<input type="hidden" name="country" id="country" value="<?php echo $event_detail['country_id']; ?>" />
 			<span style="color: red;"> <?php echo form_error('country'); ?><?php echo isset($errors['country'])?$errors['country']:''; ?> </span>
 							
 							</div>
@@ -118,11 +145,11 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<label>State</label>
 						</div>
 						<div class="float_l span3">
-							<select class="<?php echo $class_state; ?> styled span3 margin_zero" name="state" onchange="fetchcities(0,0)" id="state" disabled="disabled">
-								<option value="">Please Select</option>
-							</select>
-		<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
-		
+					<input type="text" size="30" value="<?php echo $event_detail['statename']; ?>" class="<?php echo $class_state; ?>"  title="state" name="state_name" id="state_name" />
+					<input type="hidden" name="state" id="state" value="<?php echo $event_detail['state_id']; ?>" />
+				
+						<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
+			
 						</div>
 						<div class="float_l span3">
 							<a id="add_state" href="#" class="tdn">Add New State</a>
@@ -137,9 +164,11 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<label>City</label>
 						</div>
 						<div class="float_l span3">
-							<select class="<?php echo $class_city; ?> styled span3 margin_zero"  name="city" id="city" disabled="disabled">
-								<option value="">Please Select</option>
-							</select>
+						
+						<input type="text" size="30" class="<?php echo $class_city; ?>"  title="city" name="city_name" id="city_name" value="<?php echo $event_detail['cityname']; ?>" />
+						<input type="hidden" name="city" id="city" value="<?php echo $event_detail['city_id']; ?>" />
+				
+
 	<span style="color: red;"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
 				
 						</div>
@@ -149,26 +178,49 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 						<div class="clearfix"></div>
 						</div>
 					</li>
+					
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
-								<label>Event Time</label>
+								<label>Event Date</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="date_picker" name="event_time" value="<?php echo $event_detail['event_date_time']; ?>">
+								<input type="text" size="30" onkeydown="return false;" class="date_picker" value="<?php echo $event_detail['event_date_time']; ?>" name="event_time">
+	<span style="color: red;"> <?php echo form_error('event_time'); ?><?php echo isset($errors['event_time'])?$errors['event_time']:''; ?> </span>
+		
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<?php 
+					if($event_detail['event_time']=='')
+					{
+					$event_detail['event_time']=' - ';
+					}
+					$time= explode('-',$event_detail['event_time']); 
+					?>
+					<li>
+						<div >
+							<div class="float_l span3 margin_zero">
+								<label>Event Start Time</label>
+							</div>
+							<div class="float_l span3 ">
+								<input type="text" onkeydown="return false;" class="text time" id="event_time_start" size="30" value="<?php echo $time[0]; ?>" name="event_start_timing">
+							
 							</div>
 							
 							<div class="clearfix"></div>
 						</div>
 					</li>
 					<li>
-						<div>
+						<div >
 							<div class="float_l span3 margin_zero">
-								<label>Event Time</label>
+								<label>Event End Time</label>
 							</div>
-							<div class="float_l span3">
-								<input type="text" class="text" size="30" value="<?php echo $event_detail['event_time']; ?>" name="event_timing">
-	
+							<div class="float_l span3" >
+								<input type="text" onkeydown="return false;" class="text time" id="event_time_end" size="30" value="<?php echo $time[1]; ?>" name="event_end_timing">
+							
 							</div>
 							
 							<div class="clearfix"></div>
@@ -215,12 +267,12 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<div class="clearfix"></div>
 						</div>
 					</li>
+					
 				</ul>
-						<input type="submit" name="submit" class="submit" value="UPDATE">
+				<input type="submit" name="submit" class="submit" value="Submit">
 						
-			</form>
+				</form>
 		</div>
-		
 		
 	
 		<div class="form span11">
@@ -331,28 +383,15 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 	</div>
 <?php } ?>
 <script>
-$(document).ready(function()
+function fetchcountry(cid,cname)
 {
-fetchstates(<?php echo $univ_state_id; ?>);
-fetchcities(<?php echo $univ_state_id; ?>,<?php echo $univ_city_id; ?>);
-//fetchcities();
-});
-function fetchcountry(cid)
-{
-$.ajax({
-   type: "POST",
-   url: "<?php echo $base; ?>admin/country_list_ajax",
-   data: 'country_id='+cid,
-   cache: false,
-   async:false,
-   success: function(msg)
-   {
-   // $('#state').attr('disabled', false);
-	$('#country').html(msg);
-   }
-   });
+$('#country_name').val(cname);
+$('#country').val(cid);
+ $("#state_name").removeAttr("disabled");
+ $("#city_name").removeAttr("disabled");
+
 }
-function fetchstates(sid)
+function fetchstates(sid,sname)
 {
 var stid=sid;
 var cid;
@@ -360,11 +399,6 @@ if(sid=='-1')
 {
 stid='0';
 cid=$("#country_model2 option:selected").val();
-}
-else
-{
-var cid=$("#country option:selected").val();
-}
 $.ajax({
    type: "POST",
    url: "<?php echo $base; ?>admin/state_list_ajax/",
@@ -377,32 +411,23 @@ $.ajax({
 	$('#state_model2').attr('disabled', false);
 	$('#state_model2').html(msg);
 	}
-	else
-	{
-    $('#state').attr('disabled', false);
-	$('#state').html(msg);
-
-	}
    }
    });
- } 
-function fetchcities(state_id,cityid)
+}  
+else
 {
-if(state_id=='0')
-{
-state_id=$("#state option:selected").val();
+$('#state_name').val(sname);
+$('#state').val(sid);
+$("#state_name").removeAttr("disabled");
+$("#city_name").removeAttr("disabled");
 }
- $.ajax({
-   type: "POST",
-   url: "<?php echo $base; ?>admin/city_list_ajax/",
-   data: 'state_id='+state_id+'&sel_city_id='+cityid,
-   cache: false,
-   success: function(msg)
-   {
-    $('#city').attr('disabled', false);
-	$('#city').html(msg);
-   }
-   });  
+} 
+function fetchcities(cityid,cityname)
+{
+$('#city_name').val(cityname);
+$('#city').val(cityid);
+$("#state_name").removeAttr("disabled");
+ $("#city_name").removeAttr("disabled");
 }
 //for fancy box
 $.fn.center = function () {
@@ -440,6 +465,8 @@ $.fn.center = function () {
         $('.modal-profile1').fadeOut("slow");
         $('.modal-lightsout1').fadeOut("slow");
     });
+	
+	
 $('#addcountry').click(function(){
 	var country=$("#country_model").val();
 	var state=$("#state_model").val();
@@ -449,40 +476,40 @@ $('#addcountry').click(function(){
 	{
 	 $('#country_error').html("Please enter the country name"); 
 	 $('#country_model').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error').html("") 
 	 $('#country_model').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
 	$('#state_error').html("Please enter the state name"); 
 	$('#state_model').addClass('error');
-	flag=1;
+	flag=0;
 	
 	}
 	else
 	{
 	$('#state_error').html(""); 
 	$('#state_model').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error').html("Please enter the city"); 
 	$('#city_model').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error').html(""); 
 	$('#city_model').removeClass('error');
-	flag=0;
+	flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  countrystatus=0;
 		$.ajax({
@@ -517,9 +544,10 @@ $('#addcountry').click(function(){
 	   success: function(msg)
 	   {
 	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
+		fetchcountry(place[0],country);
+		fetchstates(place[1],state);
+		fetchcities(place[2],city);
+		
 		$('.modal-profile').fadeOut("slow");
         $('.modal-lightsout').fadeOut("slow");
 		$('#add_country_form').reset();
@@ -540,6 +568,8 @@ $('#addcountry').click(function(){
 
 $('#addstate').click(function(){
 	var country=$("#country_model1 option:selected").val();
+	var countrytext=$("#country_model1 option:selected").text();
+	
 	var state=$("#state_model1").val();
 	var city=$("#city_model1").val();
 	var flag=0;
@@ -547,13 +577,13 @@ $('#addstate').click(function(){
 	{
 	 $('#country_error1').html("Please select the country"); 
 	 $('#country_model1').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error1').html("");
 	 $('#country_model1').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
@@ -566,21 +596,21 @@ $('#addstate').click(function(){
 	{
 	$('#state_error1').html(""); 
 	$('#state_model1').removeClass('error');
-	 flag=0;
+	  flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error1').html("Please enter the city"); 
 	$('#city_model1').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error1').html(""); 
 	$('#city_model1').removeClass('error');
-	flag=0;
+	 flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  statestatus=0;
 		$.ajax({
@@ -615,9 +645,9 @@ $('#addstate').click(function(){
 	   success: function(msg)
 	   {
 	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
+		fetchcountry(place[0],countrytext);
+		fetchstates(place[1],state);
+		fetchcities(place[2],city);
 		$('.modal-profile').fadeOut("slow");
         $('.modal-lightsout').fadeOut("slow");
 		$('#add_state_form').reset();
@@ -636,46 +666,48 @@ $('#addstate').click(function(){
 
 $('#addcity').click(function(){
 	var country=$("#country_model2 option:selected").val();
+	var countrytext=$("#country_model2 option:selected").text();
 	var state=$("#state_model2 option:selected").val();
+	var statetext=$("#state_model2 option:selected").text();
 	var city=$("#city_model2").val();
 	var flag=0;
 	if(country=='' || country==null || country=='0')
 	{
 	 $('#country_error2').html("Please select the country"); 
 	 $('#country_model2').addClass('error');
-	 flag=1;
+	 flag=0;
 	}
 	else
 	{
 	$('#country_error2').html("");
 	 $('#country_model2').removeClass('error');
-	  flag=0;
+	  flag=flag+1;
 	}
 	if(state=='' || state==null || state=='0')
 	{
 	$('#state_error2').html("Please select the state "); 
 	$('#state_model2').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#state_error2').html(""); 
 	$('#state_model2').removeClass('error');
-	 flag=0;
+	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error2').html("Please enter the city"); 
 	$('#city_model2').addClass('error');
-	flag=1;
+	flag=0;
 	}
 	else
 	{
 	$('#city_error2').html(""); 
 	$('#city_model2').removeClass('error');
-	flag=0;
+	flag=flag+1;
 	}
-	if(!flag)
+	if(flag==3)
 	{
 	 var  citystatus=0;
 		$.ajax({
@@ -710,9 +742,9 @@ $('#addcity').click(function(){
 	   success: function(msg)
 	   {
 	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
+		fetchcountry(place[0],countrytext);
+		fetchstates(place[1],statetext);
+		fetchcities(place[2],city);
 		$('.modal-profile').fadeOut("slow");
         $('.modal-lightsout').fadeOut("slow");
 		$('#add_city_form').reset();
@@ -724,5 +756,10 @@ $('#addcity').click(function(){
 	   
 	}
 	
-});
-</script>	
+});			
+			$(function() {
+			$('#event_time_start').timepicker({ 'step': 15 });
+			$('#event_time_end').timepicker({ 'step': 15 });
+		  });
+
+</script>

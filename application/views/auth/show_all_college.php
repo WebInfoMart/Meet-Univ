@@ -46,7 +46,7 @@ $this->session->unset_userdata('follow_to_univ');
 		$sel='checked';
 		}
 		?>									
-		<input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo ucwords($countries['country_name']);;
+		<input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo $countries['country_name'];
 							 ?></li>
 								<?php } ?>					
 									</ul>
@@ -65,7 +65,7 @@ $this->session->unset_userdata('follow_to_univ');
 							//$educ_level=str_replace(' ','_',$educ_level);		
 										?>			
 			<li href="/<?php echo $educ_level; ?>"><input type="checkbox" class="search_chkbox" <?php echo $educ_sel; ?>> 
-			<?php echo ucwords($fetch_educ_levels['educ_level']); ?></li>	
+			<?php echo $fetch_educ_levels['educ_level']; ?></li>	
 										<?php } ?>
 											
 										  
@@ -83,7 +83,7 @@ $this->session->unset_userdata('follow_to_univ');
 							}			
 										$area_intrest=str_replace(' ','_',$fetch_area_intrest1['program_parent_name']);	
 										?>			
-		<li href="/<?php echo $area_intrest; ?>"><input type="checkbox" class="search_chkbox" <?php echo $area_interest_sel; ?>><?php echo ucwords($fetch_area_intrest1['program_parent_name']); ?></li>	
+		<li href="/<?php echo $area_intrest; ?>"><input type="checkbox" class="search_chkbox" <?php echo $area_interest_sel; ?>><?php echo $fetch_area_intrest1['program_parent_name']; ?></li>	
 										<?php } ?>
 									</ul>
 									
@@ -370,10 +370,6 @@ function ajax(a,pid)
 			history.pushState('',href,href);
 			get_college_result_by_ajax();
 			});
-
-			
-
-
 		});
 function get_college_result_by_ajax()
 {

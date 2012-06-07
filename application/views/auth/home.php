@@ -120,31 +120,16 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h4 class="white">in City</h4></label>
 							<div class="dropdown_box">
-								<div>
+								<div id="select_city">
 									<span id="selected_value">All</span>
 									<span id="city_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
 								</div>
+								<input type="hidden" name="event_city" id="city" value=""/>
 								<div id="open_box">
-									<input type="text" name="event_city" id="city" value=""/>
+									<input type="text" name="selected_event_city" id="selected_event_city" style="width:262px;" value=""/>
 								</div>
 							</div>
-							<?php
-									//foreach($cities as $city)
-									//{ ?>
-									 <?php //echo "value".$city['city_id']."<br/>"; ?><?php //echo ucwords($city['cityname']); ?>
-								
-								<?php //} ?>	
-							<!--<div class="controls">
-								<select name="event_city" id="city">
-									<option value="">All</option>
-									<?php
-									foreach($cities as $city)
-									{ ?>
-									<option value="<?php echo $city['city_id']; ?>"><?php echo ucwords($city['cityname']); ?></option>
-								
-								<?php } ?>	
-								</select>
-							</div>-->
+							
 							<div class="controls">
 							</div>
 						</div>
@@ -152,7 +137,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<label class="control-label" for="focusedInput"><h4 class="white">in the Month of</h4></label>
 							<div class="float_l span4 margin_zero">
 								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
-								<input type="text" id="last_widget" class="btn_cal"> <img src="images/cal_img.png" id="last_widget_button" class="cal_style">
+								<input type="text" id="last_widget" class="btn_cal" onkeypress="return false;"> <img src="images/cal_img.png" id="last_widget_button" class="cal_style">
 							</div>
 							<div class="float_l span1">
 									<input type="button" onclick="serch_events();" name="btn_evet_search" class="btn" value="Search"/>
@@ -192,12 +177,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										?>
 								</select>-->
 								<div class="dropdown_box_country">
-									<div>
-										<span id="selected_country">Selected Country</span>
+									<div id="select_country">
+										<span id="selected_country">Select Country</span>
 										<span id="country_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
 									</div>
+									<input type="hidden" name="search_country" id="search_country" value=""/>
 									<div id="open_box_country">
-										<input type="text" name="search_country" id="search_country" value=""/>
+										<input type="text" name="selected_college_country" style="width:220px;" id="selected_college_country" value=""/>
 									</div>
 								</div>
 							</div>
@@ -206,12 +192,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<label class="control-label" for="focusedInput"><h4 class="white">Course</h4></label>
 							<div class="controls">
 								<div class="dropdown_box_course">
-									<div>
+									<div id="select_course">
 										<span id="selected_course">Select</span>
 										<span id="course_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
 									</div>
+									<input type="hidden" name="search_program" id="search_program" value=""/>
 									<div id="open_box_course">
-										<input type="text" name="search_program" id="search_program" value=""/>
+										<input type="text" style="width:220px;" name="selected_college_course" id="selected_college_course" value=""/>
 									</div>
 								</div>
 								<!--<div class="float_l span4 margin_zero">
@@ -418,6 +405,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				if(!empty($featured_college))
 				{
 				foreach($featured_college as $featured_clg) {
+				$fc=0;
 				if($f_coll < 6)
 				{
 				$image_exist=0;		
@@ -440,10 +428,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				} 
 				$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);
 				?>
-									<div class="float_l featured_art aspectcorrect">
+									<div class="float_l featured_art aspectcorrect <?php if($f_coll%2) { echo "margin_zero"; } ?>">
 										<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id']; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
 									</div>
-				<?php $f_coll++; } } } else { echo "No Featured Colleges Available"; } ?>					
+				<?php $f_coll++;	
+				} } } else { echo "No Featured Colleges Available"; } ?>					
 								</li>
 							</ul>
 							<div class="clearfix"></div>
@@ -589,9 +578,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<?php } ?>
 										
 									</span>
-									<p><?php echo substr($article['article_detail'],0,800).'...'; ?>	 </p>
+									<p><?php
+									echo strlen($article['article_detail']);
+									echo substr($article['article_detail'],0,300); 
+									if(strlen($article['article_detail'])>300){ ?>
+									..<a href="<?php echo $base; ?>univ-<?php echo $article['article_univ_id']; ?>-article-<?php echo $article['article_id']; ?>">View More</a>	
+									<?php }
+									?>	
+									
+									</p>
 							</div>
-							<?php $article_count++; } } } else { echo "No Recent Articles Available"; } ?>
+							<?php 
+							$article_count++; } } } else { echo "No Recent Articles Available"; } ?>
 						</div>
 						<div class="float_l span4">
 							<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="240" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
@@ -635,6 +633,38 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>--->
 	<!-- End Here -->
+<?php
+$arr='[';
+$i=1;
+foreach($cities as $city)
+{
+$arr.='{label: "'.$city['cityname'].'"}';
+if($i!=count($cities))
+{
+$arr.=',';
+}
+$i++;
+//$city=$city['city_id'];
+
+} $arr.=']';
+/*$countrylist='[';
+$i=1;
+foreach($cities as $city)
+{
+$countrylist.='{label: "'.$city['cityname'].'"}';
+if($i!=count($cities))
+{
+$countrylist.=',';
+}
+$i++;
+//$city=$city['city_id'];
+
+} $countrylist.=']';
+foreach($country as $srch_country)
+{
+$srch_country['country_name']);
+}*/
+?>	
 <style type="text/css">	
 .ddclass{
 list-style:none;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;
@@ -711,149 +741,138 @@ window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resiza
 $(document).ready(function(){
 	$("#open_box").hide();
 	
-	$("#city").autocomplete({
-		source: ["All", "BBSR", "New Delhi", "Southdelhi", "Jwala Heri", "Demo", "Sdsd"],
+	$("#selected_event_city").autocomplete({
+		source:<?php echo $arr; ?>,
+		select: function( event, ui ) {
+			$("#city").val(ui.item.value);
+			$("#selected_value").html(ui.item.label);
+			$("#open_box").hide();
+			$("#selected_event_city").val('');
+			event.preventDefault();
+		},
+		focus:function( event, ui ) {
+			$("#city").val(ui.item.value);
+			$("#selected_event_city").val(ui.item.label);
+			event.preventDefault();
+		},
+		open:function( event, ui ) {
+			$("#selected_event_city").val('');
+			event.preventDefault();
+		},
 		width: 260,
-		//matchContains: true,
-		//mustMatch: true,
-		//minChars: 0,
-		//multiple: true,
-		//highlight: false,
-		//multipleSeparator: ",",
 		selectFirst: false,
 		minLength: 0,
 		}).focus(function() {
-	$(this).autocomplete('search', '')
-	});
-		
-	$(document).keydown(function(event) {
-    if(event.keyCode == 13) {
-        var value = $("#city").val();
-		$("#selected_value").html(value);
-		$("#open_box").hide();
-		$("#city").val("");	
-    }
-	});
+			$(this).autocomplete('search', '')
+		});
 	
 	$("html").click(function(e){
-		if((e.target.id == "city_dropdown")){
+		if((e.target.id == "select_city")){
 			$("#open_box").show();
-			$("#city").trigger('focus');
-			$("#city").val("");
-		}else if(e.target.id == "city"){
+			$("#selected_event_city").trigger('focus');
+			$("#selected_event_city").val("");
+		}else if((e.target.id == "city_dropdown")){
 			$("#open_box").show();
-			$("#city").trigger('focus');
-			$("#city").val("");
+			$("#selected_event_city").trigger('focus');
+			$("#selected_event_city").val("");
+		}else if(e.target.id == "selected_event_city"){
+			$("#open_box").show();
+			$("#selected_event_city").trigger('focus');
+			$("#selected_event_city").val("");
 		}else{
 			$("#open_box").hide();
 		}
 	});
 	
-	
-	$(".ui-corner-all").click(function(){
-		var value = $("#city").val();
-		$("#selected_value").html(value);
-		$("#open_box").hide();
-		$("#city").val("");
-	});
-	
 	$("#open_box_country").hide();
 	
-	$("#search_country").autocomplete({
-		source: ["India", "U.K."],
+	$("#selected_college_country").autocomplete({
+		source: [{ label: "India", value: "1" },{ label: "U.K.", value: "2" }],
+		select: function( event, ui ) {
+			$("#search_country").val(ui.item.value);
+			$("#selected_country").html(ui.item.label);
+			$("#open_box_country").hide();
+			$("#selected_college_country").val('');	
+			event.preventDefault();
+		},
+		focus:function( event, ui ) {
+			$("#search_country").val(ui.item.value);
+			$("#selected_country").val(ui.item.label);
+			event.preventDefault();
+		},
+		open:function( event, ui ) {
+			$("#selected_college_country").val('');	
+			event.preventDefault();
+		},
 		width: 260,
-		//matchContains: true,
-		//mustMatch: true,
-		//minChars: 0,
-		//multiple: true,
-		//highlight: false,
-		//multipleSeparator: ",",
 		selectFirst: false,
 		minLength: 0,
 		}).focus(function() {
 	$(this).autocomplete('search', '')
 	});
 		
-	$(document).keydown(function(event) {
-    if(event.keyCode == 13) {
-        var value = $("#search_country").val();
-		$("#selected_country").html(value);
-		$("#open_box_country").hide();
-		$("#search_country").val("");	
-    }
-	});
-	
 	$("html").click(function(e){
-		if((e.target.id == "country_dropdown")){
+		if((e.target.id == "select_country")){
 			$("#open_box_country").show();
-			$("#search_country").trigger('focus');
-			$("#search_country").val("");
-		}else if(e.target.id == "search_country"){
+			$("#selected_college_country").trigger('focus');
+			$("#selected_college_country").val("");
+		}else if((e.target.id == "city_dropdown")){
 			$("#open_box_country").show();
-			$("#search_country").trigger('focus');
-			$("#search_country").val("");
+			$("#selected_college_country").trigger('focus');
+			$("#selected_college_country").val("");
+		}else if(e.target.id == "selected_college_country"){
+			$("#open_box_country").show();
+			$("#selected_college_country").trigger('focus');
+			$("#selected_college_country").val("");
 		}else{
 			$("#open_box_country").hide();
 		}
 	});
 	
-	
-	$(".ui-corner-all").click(function(){
-		var value = $("#search_country").val();
-		$("#selected_country").html(value);
-		$("#open_box_country").hide();
-		$("#search_country").val("");
-	});
-
-	
 	$("#open_box_course").hide();
 	
-	$("#search_program").autocomplete({
-		source: ["Agriculture, Environment And Related Subjects", "Applied And Pure Sciences", "Architecture", "Building And Planning", "Creative Arts And Design", "Education And Teacher Training", "Engineering And Technology", "Humanities", "Health And Medicine"],
-		width: 260,
-		//matchContains: true,
-		//mustMatch: true,
-		//minChars: 0,
-		//multiple: true,
-		//highlight: false,
-		//multipleSeparator: ",",
+	$("#selected_college_course").autocomplete({
+		source: [{label: "Agriculture, Environment And Related Subjects", value: "1"},{label: "Applied And Pure Sciences", value: "2"},{label: "Architecture", value: "3"},{label: "Building And Planning", value: "4"},{label: "Creative Arts And Design", value: "5"},{label: "Education And Teacher Training", value: "6"},{label: "Engineering And Technology", value: "7"},{label: "Health And Medicine", value: "8"}],
+		select: function( event, ui ) {
+			$("#search_program").val(ui.item.value);
+			$("#selected_course").html(ui.item.label);
+			$("#open_box_country").hide();
+			$("#selected_college_course").val('');	
+			event.preventDefault();
+		},
+		focus:function( event, ui ) {
+			$("#search_program").val(ui.item.value);
+			$("#selected_course").val(ui.item.label);
+			event.preventDefault();
+		},
+		open:function( event, ui ) {
+			$("#selected_college_course").val('');
+			event.preventDefault();
+		},
+		width: 215,
 		selectFirst: false,
 		minLength: 0,
 		}).focus(function() {
 	$(this).autocomplete('search', '')
 	});
 		
-	$(document).keydown(function(event) {
-    if(event.keyCode == 13) {
-        var value = $("#search_program").val();
-		$("#selected_course").html(value);
-		$("#open_box_course").hide();
-		$("#search_program").val("");	
-    }
-	});
-	
 	$("html").click(function(e){
-		if((e.target.id == "course_dropdown")){
+		if((e.target.id == "select_course")){
 			$("#open_box_course").show();
-			$("#search_program").trigger('focus');
-			$("#search_program").val("");
-		}else if(e.target.id == "search_program"){
+			$("#selected_college_course").trigger('focus');
+			$("#selected_college_course").val("");
+		}else if((e.target.id == "course_dropdown")){
 			$("#open_box_course").show();
-			$("#search_program").trigger('focus');
-			$("#search_program").val("");
+			$("#selected_college_course").trigger('focus');
+			$("#selected_college_course").val("");
+		}else if(e.target.id == "selected_college_course"){
+			$("#open_box_course").show();
+			$("#selected_college_course").trigger('focus');
+			$("#selected_college_course").val("");
 		}else{
 			$("#open_box_course").hide();
 		}
 	});
-	
-	
-	$(".ui-corner-all").click(function(){
-		var value = $("#search_program").val();
-		$("#selected_course").html(value);
-		$("#open_box_course").hide();
-		$("#search_program").val("");
-	});
-
 	
 	$("#event_button :button").click(function(){
 		if ($("#event_button :button").is('.active')) {
@@ -985,9 +1004,9 @@ var url='<?php echo $base; ?>colleges/';
 var country;
 var educ_level;
 var area_interest;
-var country=$('#search_country option:selected').text();
+var country=$('#selected_country').html();
 country=country.replace(' ','_');
-var prog= $('#search_program option:selected').text();
+var prog= $('#selected_course').html();
 prog=prog.replace(/ /g,'_');
 var educ_level=$('#educ_level').val();
 if(country!='Select_Country')

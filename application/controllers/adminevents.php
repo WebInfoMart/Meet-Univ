@@ -506,6 +506,9 @@ class Adminevents extends CI_Controller
 			$this->form_validation->set_rules('country', 'country', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('state', 'state', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('city', 'City', 'trim|required|string');
+			$this->form_validation->set_rules('country', 'country_name', 'trim|xss_clean|required');
+			$this->form_validation->set_rules('state', 'state_name', 'trim|xss_clean|required');
+			$this->form_validation->set_rules('city', 'City_name', 'trim|required|string');
 			$this->form_validation->set_rules('event_time', 'Event Time', 'trim|xss_clean|required');
 			$this->form_validation->set_rules('detail', 'Detail', 'trim|string');
 			
