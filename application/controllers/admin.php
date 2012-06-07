@@ -1116,7 +1116,7 @@ class Admin extends CI_Controller
 		$this->load->view('admin/sidebar',$data);
 		if($this->input->post('submit'))
 		{
-		$this->form_validation->set_rules('univ_name', 'University', 'trim|required');
+		$this->form_validation->set_rules('univ_name', 'University', 'trim|required|is_unique[university.univ_name]');
 		$this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');

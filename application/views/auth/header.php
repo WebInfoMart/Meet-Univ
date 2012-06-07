@@ -197,7 +197,6 @@ $detail_of_event = "";
   });
 </script>
 <script src="<?php echo "$base$js";?>/jquery.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/marquee.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-collapse.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 <script src="<?php echo "$base$js";?>/bootstrap-alerts.js"></script>
@@ -207,7 +206,6 @@ $detail_of_event = "";
 
 <script type="text/javascript" src="<?php echo "$base$js";?>/slides.min.jquery.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/tinyeditor.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/image_scaling.js"></script>

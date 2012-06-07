@@ -28,6 +28,7 @@ class Auth extends CI_Controller
 		
 		$subdomain_arr = explode('.', $_SERVER['HTTP_HOST']);
 		
+		
 		$data = $this->path->all_path();
 		/*  Upload code */
 		//$this->load->model('Gallery_model');
