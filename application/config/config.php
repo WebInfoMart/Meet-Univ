@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url']	= 'http://localhost/Meet-Univ/';
+$config['base_url']	= 'http://www.meetuniv.com/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -366,5 +366,7 @@ $config['img_path'] = 'images';
 $config['admin_css_path'] ='css/admin';
 $config['admin_img']='images/admin';
 $config['js']='js';
+$config['domain']='.meetuniv.com';
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

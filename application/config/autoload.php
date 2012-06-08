@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 //$autoload['plugin'] = array('captcha');
-$autoload['model'] = array('path','adminmodel','events','courses','searchmodel','frontmodel','quest_ans_model','leadmodel','univ_vs_user_model','articlemodel','search_event_calendar','dashboard','autosuggest_model');
+$autoload['model'] = array('path','adminmodel','events','courses','searchmodel','frontmodel','quest_ans_model','leadmodel','univ_vs_user_model','articlemodel','search_event_calendar','dashboard','autosuggest_model','university_subdomain');
 //$autoload['css'];
 
 /* End of file autoload.php */

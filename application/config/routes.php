@@ -52,6 +52,7 @@ $route['univ-(:num)-news']='univ/university_news_list/$1';
 $route['univ-(:num)-articles']='univ/university_article_list/$1';
 $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
 $route['about-(:num)-university']='univ/univ_aboutus/$1';
+
 $route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
 $route['(Recent_Articles/articles)']='auth/articles';
 $route['(Recent_News/news/(:num))']='auth/news/$1';
@@ -62,8 +63,16 @@ $route['(college_search|events_search)'] = 'search/$1';
 $route['colleges/(.*)'] = 'auth/all_colleges/$1';
 $route['colleges']='auth/all_colleges';
 
+//define for subdomain
+$route['(about)']='univ/univ_aboutus';
+$route['(programs)']='univ/univ_programs';
+$route['(univ-events)']='univ/university_events_list';
+$route['(univ-questions)']='univ/UniversityQuest';
+$route['(univ-news)']='univ/university_news';
+$route['(univ-articles)']='univ/univ_article';
+$route['(univ-questions)']='univ/univ_questions';
 
-
+//end here
 
 $route['UniversityQuest/(:num)/(:num)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
 $route['MeetQuest/(:any)/(:any)'] = 'quest_ans_controler/MeetQuest/$1/$2';
@@ -90,7 +99,7 @@ $route['(delete_message_outbox/(:num)/(:num))'] = 'user/delete_message_outbox/$1
 
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(spot_admission_events|fairs_events|Counselling_events|login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
+$route['(subdomain|spot_admission_events|fairs_events|Counselling_events|login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
 $route['default_controller'] = 'auth';
 $route['(find_college)'] = 'leadcontroller/find_college';
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';

@@ -307,7 +307,16 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<li>
 									<div>
 										<div class="float_l">
-											<div class="title_style"><a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission British Council British Council</h4></div>
+		<div class="title_style"><a class="" href="<?php echo $base;?>univ-<?php echo $events['univ_id']; ?>-event-<?php echo $events['event_id']; ?>"><h3><?php echo $events['univ_name']; ?></h3></a><span class="inline"> &raquo; </span><h4 class="inline">
+		<?php if($events['event_category']=='spot_admission'){
+		echo "Spot Admission";
+		}
+		else
+		{
+		echo $events['event_category'];
+		}
+		?>
+		</h4></div>
 										</div>
 										<div class="float_r">
 											<a onClick="voicepopup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>

@@ -1553,7 +1553,69 @@ class Users extends CI_Model
 			  return $query->row_array();
 	 }	
 		
+	function authfunction()
+	{
+	 
+		$data = $this->path->all_path();
+		/*  Upload code */
+		//$this->load->model('Gallery_model');
 		
+		$data['gallery_home'] = $this->users->fetch_home_gallery();
+		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
+		//$data['cities'] = $this->frontmodel->fetch_cities_having_univ();
+		$data['cities'] = $this->frontmodel->fetch_cities_having_events();
+		
+		$data['area_interest'] = $this->frontmodel->fetch_area_interest_having_univ();
+		$data['featured_events']=$this->frontmodel->fetch_featured_events();
+		$data['featured_college']=$this->frontmodel->fetch_featured_college();
+		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
+		$data['featured_news']=$this->frontmodel->fetch_featured_news();
+		$data['featured_news_show']=$this->frontmodel->fetch_featured_news_home();
+		 $data['featured_quest'] = $this->frontmodel->fetch_home_featured_quest();
+		 $data['get_latest_question_home'] = $this->quest_ans_model->get_all_quest_user_info();
+		  
+	//	print_r($data['featured_events']);
+		/*  Upload code end */
+		$this->load->view('auth/header',$data);
+		$this->load->view('auth/home',$data);
+		
+		//$this->load->view('auth/home',$data);
+		/*if (!$this->tank_auth->is_logged_in()) {
+			redirect('/login/');
+		} else {
+			$data['user_id']	= $this->tank_auth->get_user_id();
+			$data['username']	= $this->tank_auth->get_username();
+			$logged_user = $data['user_id'];
+			$this->load->model('users');
+			$data['query'] = $this->users->fetch_all_data($logged_user);
+			$data['profile_pic'] = $this->users->fetch_profile_pic($logged_user);
+		//	print_r($data['profile_pic']);
+			$data['educ_level'] = $this->users->fetch_educ_level();
+			$data['country'] = $this->users->fetch_country();
+			//print_r($data['country']);
+			$data['area_interest'] = $this->users->fetch_area_interest();
+			$this->load->view('auth/profile',$data);
+			//$this->load->view('welcome', $data);
+		}
+		if ($this->input->post('upload')) {
+			$this->users->do_upload();
+		}*/
+		
+		//$data['images'] = $this->users->get_images();
+		$this->load->view('auth/footer',$data);
+	}
+	
+	function univ_id_of_domain($domain)
+	{
+	$this->db->select('*');
+	$this->db->from('university');
+	$this->db->where('subdomain_name',$domain);
+	$query=$this->db->get();
+	if($query->num_rows()>0)
+	return $query->row_array();
+	else
+	return 0;
+	}
 }
 
 /* End of file users.php */

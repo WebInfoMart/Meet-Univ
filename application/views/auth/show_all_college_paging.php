@@ -9,7 +9,7 @@
 							<div class="events_holder_box margin_t" date="<?php echo date("m-d-Y", strtotime($get_university['univ_event'][$no_university][0]['event_date_time'])); ?>" country="<?php echo $get_university['university'][$no_university]['country_name']; ?>" univ_name="<?php echo $get_university['university'][$no_university]['univ_name']; ?>">
 								<div class="row">
 									<div class="span8 float_l margin_l margin_t1">
-										<h3><span><a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>" >
+										<h3><span><a href="<?php echo 'http://'.$get_university['university'][$no_university]['subdomain_name'].$domain_name; ?>" >
 										
 										<?php echo $get_university['university'][$no_university]['univ_name']; ?></a></span>- 
 										<?php echo $get_university['university'][$no_university]['country_name']; ?></h3>
