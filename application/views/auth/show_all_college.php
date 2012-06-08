@@ -127,7 +127,12 @@ $this->session->unset_userdata('follow_to_univ');
 		<div class="events_holder_box margin_t" date="<?php echo date("m-d-Y", strtotime($get_university['univ_event'][$no_university][0]['event_date_time'])); ?>" country="<?php echo $get_university['university'][$no_university]['country_name']; ?>" univ_name="<?php echo $get_university['university'][$no_university]['univ_name']; ?>">
 								<div class="row">
 									<div class="span8 float_l margin_l margin_t1">
-										<h3><span><a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>" >
+			<?php
+$univ_name= str_replace(' ','-',$get_university['university'][$no_university]['univ_name']);
+									$univ_name= strtolower($univ_name);
+									$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
+?>												
+										<h3><span><a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id'].'/'.$univ_name; ?>" >
 										
 										<?php echo $get_university['university'][$no_university]['univ_name']; ?></a></span>- 
 										<?php echo $get_university['university'][$no_university]['country_name']; ?></h3>
@@ -185,15 +190,25 @@ $this->session->unset_userdata('follow_to_univ');
 											$overview=$get_university['university'][$no_university]['univ_overview'];
 											echo substr($overview,0,205);
 											if(strlen($overview)>205)
-											{											
+											{
+											$univ_name= str_replace(' ','-',$get_university['university'][$no_university]['univ_name']);
+									$univ_name= strtolower($univ_name);
+									$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
+																				
 											?>
-											..<div class="float_r"><a href="<?php echo $base; ?>about-<?php echo $get_university['university'][$no_university]['univ_id']  ;?>-university">View all&raquo;</a></div>
-											<?php } ?>
+											..<div class="float_r"><a href="<?php echo $base.$get_university['university'][$no_university]['univ_id']  ;?>/university/<?php echo $univ_name; ?>/about">View all&raquo;</a></div>
+											<?php } ?>											
+											
 										</div>
 									</div>
 									<div class="float_r page2_col">
 										<div class="float_l done margin_l">
-											<div class="events_dates float_l" onclick="gotoevent('<?php echo $get_university['university'][$no_university]['univ_id']  ;?>','<?php echo $get_university['univ_event'][$no_university][0]['event_id']; ?>');" style="cursor:pointer;">
+										<?php
+										$univ_name= str_replace(' ','-',$get_university['university'][$no_university]['univ_name']);
+									$univ_name= strtolower($univ_name);
+									$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
+										?>
+											<div class="events_dates float_l" onclick="gotoevent('<?php echo $get_university['university'][$no_university]['univ_id']  ;?>','<?php echo $univ_name  ;?>');" style="cursor:pointer;">
 												<div class="red_box">
 													Events
 												</div>
@@ -422,12 +437,12 @@ $('#'+id).html('<a href="javascript:void(0)" class="active" onclick="sortBy(\''+
 
 }
 
-function gotoevent(univ_id,event_id)
+function gotoevent(univ_id,univ_name)
 {
-if(univ_id!='' && event_id!='')
+/*if(univ_id!='' && event_id!='')
 {
-window.location='<?php echo $base; ?>univ-'+univ_id+'-event-'+event_id;
-}
+window.location='<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/'+univ_name+'/events';
+}*/
 }
 function send_steps(atr)
 {

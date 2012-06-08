@@ -61,7 +61,16 @@
 							<div class="dsolution" style="padding-left:20px;">
 								<div>
 									<div class="float_l">
-<h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
+<?php 
+$univ_name=str_replace(' ','-',$news_detail['univ_name']);
+$univ_name=strtolower($univ_name);
+$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
+$news_title=str_replace(' ','-',$news_detail['news_title']);
+$news_title=strtolower($news_title);
+$news_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $news_title);
+?>									
+<h3><a href="<?php echo $base.'university/'.$news_detail['univ_id'].'/'.$univ_name.'/news/'.$news_detail['news_id'].'/'.$news_title; ?>
+"><?php echo $news_detail['news_title']; ?></a></h3>
 										<span>
 										
 							<abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>

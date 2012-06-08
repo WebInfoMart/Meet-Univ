@@ -41,38 +41,38 @@
 $route['admin/update-(:num)-user-(:num)'] = 'admin/edituser/$1/$2';
 $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';
-$route['university/(:num)']='univ/university/$1';
-$route['univ_programs/(:num)/(:any)']='univ/univ_programs/$1/$2';
-$route['univ-(:num)-event-(:num)']='univ/univ_event/$1/$2';
-$route['univ-(:num)-news-(:num)']='univ/univ_news/$1/$2';
-$route['univ-(:num)-article-(:num)']='univ/univ_articles/$1/$2';
 
-$route['univ-(:num)-events']='univ/university_events_list/$1';
-$route['univ-(:num)-news']='univ/university_news_list/$1';
-$route['univ-(:num)-articles']='univ/university_article_list/$1';
+$route['university/(:num)/(:any)/article/(:num)/(:any)']='univ/univ_articles/$1/$3';
+
+$route['university/(:num)/(:any)/news/(:num)/(:any)']='univ/univ_programs/$1/$2';
+
+$route['(:num)/university/(:any)/event/(:num)/(:any)']='univ/univ_event/$1/$3';
+
+//$route['univ-(:num)-news-(:num)']='univ/univ_news/$1/$2';
+$route['university/(:num)/(:any)/news/(:num)/(:any)']='univ/univ_news/$1/$3';
+
+$route['(:num)/university/(:any)/about']='univ/univ_aboutus/$1';
+
+
+$route['(:num)/university/(:any)/events']='univ/university_events_list/$1';
+
+$route['(:num)/university/(:any)/news']='univ/university_news_list/$1';
+$route['(:num)/university/(:any)/articles']='univ/university_article_list/$1';
 $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
-$route['about-(:num)-university']='univ/univ_aboutus/$1';
 
 $route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
 $route['(Recent_Articles/articles)']='auth/articles';
 $route['(Recent_News/news/(:num))']='auth/news/$1';
 $route['(Recent_News/news)']='auth/news';
+$route['university/(:num)/(:any)']='univ/university/$1';
 
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 $route['(college_search|events_search)'] = 'search/$1';
 $route['colleges/(.*)'] = 'auth/all_colleges/$1';
 $route['colleges']='auth/all_colleges';
 
-//define for subdomain
-$route['(about)']='univ/univ_aboutus';
-$route['(programs)']='univ/univ_programs';
-$route['(univ-events)']='univ/university_events_list';
-$route['(univ-questions)']='univ/UniversityQuest';
-$route['(univ-news)']='univ/university_news';
-$route['(univ-articles)']='univ/univ_article';
-$route['(univ-questions)']='univ/univ_questions';
 
-//end here
+
 
 $route['UniversityQuest/(:num)/(:num)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
 $route['MeetQuest/(:any)/(:any)'] = 'quest_ans_controler/MeetQuest/$1/$2';
@@ -99,7 +99,7 @@ $route['(delete_message_outbox/(:num)/(:num))'] = 'user/delete_message_outbox/$1
 
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(subdomain|spot_admission_events|fairs_events|Counselling_events|login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
+$route['(subspot_admission_events|fairs_events|Counselling_events|login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
 $route['default_controller'] = 'auth';
 $route['(find_college)'] = 'leadcontroller/find_college';
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';
