@@ -130,7 +130,9 @@
 				{
 				if($quest_list['q_univ_id'] != '0')
 				{
-					$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+				$question_title = str_replace(' ','-',$quest_list['q_title']);
+					$url = "$quest_list[q_univ_id]/UniversityQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
+					//$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
 				}
 				else if($quest_list['q_country_id'] != '0')
 				{

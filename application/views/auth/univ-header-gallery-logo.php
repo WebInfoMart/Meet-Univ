@@ -134,7 +134,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 							<a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/about" class="active">About</a></li>
 							<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
 							<li><a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/events" class="active">Events</a></li>
-							<li><a href="<?php echo $base; ?>UniversityQuestSection/<?php echo $univ_id_for_program; ?>" class="active">Questions & Answers</a></li>
+							<li><a href="<?php echo $base; ?>UniversityQuestSection/<?php echo $univ_id_for_program; ?>/<?php echo $univ_name; ?>" class="active">Questions & Answers</a></li>
 							<li ><a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/news">News</a></li>
 							<li class="border_beta"><a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/articles" class="active">Articles</a></li>
 						</ul>
