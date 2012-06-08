@@ -135,7 +135,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h4 class="white">in the Month of</h4></label>
-							<div class="float_l span4 margin_zero">
+							<div class="float_l span3 margin_zero">
 								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
 								<input type="text" id="last_widget" class="btn_cal" onkeydown="return false;"> <img src="images/cal_img.png" id="last_widget_button" class="cal_style" >
 							</div>
@@ -623,7 +623,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							$article_count++; } } } else { echo "No Recent Articles Available"; } ?>
 						</div>
 						<div class="float_l span4">
-							<div class="fb-like-box" data-href="http://www.facebook.com/pages/MeetUniversity/366189663424238?ref=ts" data-width="240" data-height="514" data-show-faces="true" data-stream="true" data-header="true"></div>		
+							<div class="fb-like-box" data-href="http://www.facebook.com/MeetUniversities" data-width="240" data-height="440" data-show-faces="true" data-stream="true" data-header="true"></div>		
 						</div>
 						<div class="clearfix"></div>
 					</div>

@@ -1000,7 +1000,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 #slides_content .slider_pagination{display: none;}
 #slides_content .next{background:url(../images/next.png)no-repeat;height: 21px;width: 21px;display: inline-block;margin-top: 25px;}
 #slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block;margin-top: 25px;}
-.btn_cal{width:192px;}
+.btn_cal{width:155px;}
 .title_style{width: 365px;overflow: hidden;height: 29px;}
 .cal_style{cursor: pointer;z-index: 0;position: absolute;margin-top: 0px;margin-left: -25px;}
 

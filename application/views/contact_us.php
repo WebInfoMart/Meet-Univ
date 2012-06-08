@@ -6,24 +6,59 @@
 				
 				<div class="span13 about_back">
 					<div class="padding">
-					<h2>Contact Infomartion</h2>
-						<div class="float_l">
-							<h3>City, India</h3>
-							<address class="address_font">
-								<strong>Address</strong><br>
-								Not Available
-								<div class="margin_t1"><strong>Phone numbers:</strong><br> Not Available </div>
-								<div class="margin_t1"><strong>Fax:</strong><br> Not Available</div>
-								<div class="margin_t1"><strong>Email:</strong><br> Not Available</div>
-							</address>
-						</div>
-						<div class="float_r">
-							<div class='google_map'>
-								<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.co.in/maps?hl=en&amp;q=webinfomart&amp;ie=UTF8&amp;sqi=2&amp;hq=webinfomart&amp;hnear=New+Delhi,+Delhi&amp;t=h&amp;ll=28.667526,77.103182&amp;spn=0.07088,0.267912&amp;output=embed"></iframe><br /><small><a href="http://maps.google.co.in/maps?hl=en&amp;q=webinfomart&amp;ie=UTF8&amp;sqi=2&amp;hq=webinfomart&amp;hnear=New+Delhi,+Delhi&amp;t=h&amp;ll=28.667526,77.103182&amp;spn=0.07088,0.267912&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
-								
+					<h2>Contact Us</h2>
+					</div>
+					<div class="span8">
+						<form class="form-horizontal">
+						  <fieldset>
+							<div class="control-group">
+							  <label class="control-label" for="input01">Name</label>
+							  <div class="controls">
+								<input type="text" class="input-xlarge" id="input01">
+							  </div>
+							</div>
+						  </fieldset>
+						  <fieldset>
+							<div class="control-group">
+							  <label class="control-label" for="input01">Email</label>
+							  <div class="controls">
+								<input type="text" class="input-xlarge" id="input01">
+							  </div>
+							</div>
+						  </fieldset>
+						  <fieldset>
+							<div class="control-group">
+							  <label class="control-label" for="input01">Phone</label>
+							  <div class="controls">
+								<input type="text" class="input-xlarge" id="input01">
+							  </div>
+							</div>
+						  </fieldset>
+						  <fieldset>
+							<div class="control-group">
+							  <label class="control-label" for="input01">Organization</label>
+							  <div class="controls">
+								<input type="text" class="input-xlarge" id="input01">
+							  </div>
+							</div>
+						  </fieldset>
+						  <fieldset>
+							<div class="control-group">
+								<label class="control-label" for="textarea">Message</label>
+								<div class="controls">
+								  <textarea class="input-xlarge" id="textarea" rows="3"></textarea>
 								</div>
-						</div>
-						<div class="clearfix"></div>
+							</div>						  
+						</fieldset>
+						<fieldset>
+							<div class="control-group">
+								<label class="control-label"></label>
+								<div class="controls">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+						</fieldset>
+						</form>
 					</div>
 				</div>
 			</div>

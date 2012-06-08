@@ -54,12 +54,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 					<div class="footer margin_beta">
 						<h4 class="white">Reach Us</h4>
 						<div>
-								601, Topaz Building,<br />
-								Amrutha Hills, Punjagutta,<br />
-								Hyderabad - 500082<br />
-								India<br />
-								Email: meet@meetuniversities.com<br />
-								Call: +91-40-66364426
+								<a href="mailto:contact@meetuniversities.com">contact@meetuniversities.com</a>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -67,8 +62,8 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 						<div class="span4">
 							&copy; 2011 - 2012 Meet Universities
 						</div>
-						<div class="span4 offset6 text-right">
-							Powered by <a href="http://webinfomart.com" target="_blank">WebInfoMart</a>
+						<div class="span5 offset5 text-right">
+							Powered by Global Media Interactive Campus.
 						</div>
 					</div>
 				</div>
