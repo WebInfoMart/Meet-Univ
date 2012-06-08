@@ -377,12 +377,13 @@ class Leadcontroller extends CI_Controller
 	
 	function send_sms_of_event()
 	{
-		
+		$data = $this->path->all_path();
 		$username = $this->input->post('uname');
 		$password = $this->input->post('pass');
 		$send = $this->input->post('send');
 		$destination = $this->input->post('dest');
 		$fullname = $this->input->post('fullname');
+		$event_id_sms = $this->input->post('event_id_sms');
 		$page_to_redirect = $this->input->post('page_status');
 		$email_text_sms = $this->input->post('email');
 		//$message = $this->input->post('msg');
@@ -447,20 +448,21 @@ class Leadcontroller extends CI_Controller
 	
 	function send_sms_voice_of_event()
 	{
-		
+		$data = $this->path->all_path();
 		$username = $this->input->post('uid');
 		$password = $this->input->post('pwd');
 		$fid = $this->input->post('fid');
 		$destination = $this->input->post('mobno');
-		$fullname = $this->input->post('fullname');
+		$fullname = $this->input->post('fullname_voice');
+		$event_id = $this->input->post('event_id_voice');
 		$page_to_redirect = $this->input->post('page_status_voice');
 		//$message = $this->input->post('msg');
 		
 		$date_call = $this->input->post('call_date');
 		$month_call = $this->input->post('call_month');
 		$year_call = $this->input->post('call_year');
-		$hour_call = '19';
-		$minute_call = '42';
+		$hour_call = '12';
+		$minute_call = '00';
 		$second_call = '00';
 		$date_and_time = $year_call.'-'.$month_call.'-'.$date_call.'%20'.$hour_call.':'.$minute_call.':'.$second_call;
 		
@@ -469,6 +471,9 @@ class Leadcontroller extends CI_Controller
 		$event_time = $this->input->post('event_time_voice');
 		$event_place = $this->input->post('event_place_voice');
 		$event_city = $this->input->post('event_city_voice');
+		$voice_email = $this->input->post('email_voice');
+		$data['fullname'] = $fullname;
+		$data['event_id'] = $event_id;
 		//$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
 		$msg_type = 'voice';
 		$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
@@ -477,6 +482,16 @@ class Leadcontroller extends CI_Controller
 		//echo $send_suc;
 		//echo $url;
 		$data['insert_in_user_aft_voice_msg'] = $this->leadmodel->insert_user_data_after_send_sms($msg_type);
+		
+		$message_email = $this->load->view('auth/reminder_alert_content_email',$data,TRUE);
+		/* $this->email->from('info@meetuniversities.info', 'Meet Universities');
+					$this->email->to($voice_email);
+					$this->email->subject('Event Registration');
+					$message = "$message_email" ;
+					//$message .="<br/>Thank you very much";
+					$this->email->message($message);
+					print_r($message);
+					$this->email->send();  */
 		$this->session->set_userdata('msg_send_suc_voice','1');
 		//echo $current_url;
 		if($page_to_redirect == 'home')

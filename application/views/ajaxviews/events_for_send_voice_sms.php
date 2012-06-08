@@ -26,7 +26,10 @@ $mobno= "";
 	if($fetch_profile_user['fullname'] != '')
 	{
 		$fullname = $fetch_profile_user['fullname'];
-	} else { $fullname=''; }
+		$fullname_show = $fetch_profile_user['fullname'];
+	} else { $fullname='';
+	$fullname_show = "User";
+	}
 	
 	if($fetch_profile_user['mob_no'] != '')
 	{
@@ -37,6 +40,7 @@ if(!empty($event_info_sms))
 {
 foreach($event_info_sms as $event_sms)
 {
+	/* Event ID */ $event_id = $event_sms['event_id'];
 	/* event date */ $event_sms['event_date_time'];
 	/* exploding event date */ $date = explode(" ",$event_sms['event_date_time']);
 	
@@ -53,15 +57,27 @@ foreach($event_info_sms as $event_sms)
 	/* Month for call */ $month_for_call = $final_explode_date[1];
 	//print_r($final_explode_date);
 	$url = 'leadcontroller/send_sms_voice_of_event';
+	echo "<div style='float:left;'>";
+	  echo "<h4>Let Aisha remember this for you and personally send you an email to remind about the event
+	  </h4></br>";
+	  
 	echo "
 	<form action='$base$url' method='post' id='sms_form_voice'>
+	<div style='float:left;'>
 	<input type='hidden' name='uid' value='$vsms_config[vsms_uid]'/>
 	<input type='hidden' name='pwd' value='$vsms_config[vsms_pwd]'/>
 	<input type='hidden' name='fid' value='$vsms_config[vsms_fid]'/>
+	
+	<div style='float:left'>
 	<span>Name</span> <span style='margin-left:5px;'><input type='text' style='margin-left:25px;' name='fullname_voice' id='fullname_voice' value='$fullname'/></span></br></br>
 	<span>Mobile No</span> <span style='margin-left:5px;'><input type='text' name='mobno' id='mobno' value='$mobno'/></span></br></br>
 	<span>Email</span> <span style='margin-left: 29px;'><input type='text' name='email_voice' id='email_voice' value='$mobno'/></span></br>
-	
+	<span style='margin-left: 29px;'><input type='hidden' name='event_id_voice' id='event_id_voice' value='$event_id'/></span>
+	</div>
+	<div style='float:right;'>
+	<img src='$base/images/grammargirlavatar.jpg' style='width: 159px;height: 161px;'/>
+	<div class='clearfix'></div><div class='clearfix'></div></br></br>
+	</div>
 	<input type='hidden' name='call_date' value='$date_for_call'>
 	<input type='hidden' name='call_month' value='$month_for_call'>
 	<input type='hidden' name='call_year' value='$year_for_call'>
@@ -84,6 +100,8 @@ foreach($event_info_sms as $event_sms)
 	</div>
 	</br>
 	<input type='submit' value='SMS ME' name='btn_sms_me' class='btn btn-primary'/>
+	</div>
+	
 	</form>
 	";
 }

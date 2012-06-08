@@ -9,7 +9,7 @@ $config['crlf'] = '\r\n';
 $config['newline'] = '\r\n';
 
 $config['tsms_uname'] = 'webinfo';
-$config['tsms_pass'] = 'e7w9Y~R9';
+$config['tsms_pass'] = 'J)t8K6H)';
 $config['tsms_send'] = 'promot';
 
 $config['vsms_uid'] = '127';

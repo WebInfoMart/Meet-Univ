@@ -1178,7 +1178,10 @@ class Auth extends CI_Controller
 		$this->load->view('auth/header',$data);
 		$cat='all';
 		$data['events'] = $this->frontmodel->fetch_events($cat,$page);
-		//print_r($data['events']);
+		$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
+		$data['upcoming_event'] = $this->frontmodel->fetch_featured_events();
+		$data['country_name_having_event'] = $this->leadmodel->country_name_having_event();
+		
 		$this->load->view('auth/events',$data);
 		$this->load->view('auth/footer',$data);
 	}
@@ -1272,7 +1275,19 @@ class Auth extends CI_Controller
 		$this->load->view('ajaxviews/google_map',$data);
 	}
 	
-	
+	function all_events_search()
+ {
+  $current_url=$this->input->post('current_url');
+  $data = $this->path->all_path();
+  $data['get_university'] = $this->searchmodel->all_event_filteration($current_url);
+  if($data['get_university']!=0)
+  {
+  $college_list=$this->load->view('auth/show_all_college_search',$data);
+  $total_univ=$data['get_university']['total_res'];
+  $per_page_res=$data['get_university']['per_page_res'];
+  echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$college_list;
+  }
+ }
  
  
  
