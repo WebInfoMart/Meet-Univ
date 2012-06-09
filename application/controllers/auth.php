@@ -73,6 +73,7 @@ class Auth extends CI_Controller
 			$data['recent_articles']=$this->frontmodel->recent_articles();
 			$data['recent_news']=$this->frontmodel->recent_news();
 			$data['featured_events']=$this->frontmodel->fetch_recent_events();
+			$data['featured_question_profile'] = $this->quest_ans_model->latest_question_profile();
 			if($data['recent_articles']==0)
 			{
 			$data['recent_articles']=array();

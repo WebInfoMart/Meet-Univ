@@ -274,8 +274,36 @@ class Quest_ans_model extends CI_Model
 		}
 	}
 	
-	
-	
+	function latest_question_profile()
+	{
+		$this->db->select('*');
+		$this->db->from('questions');
+		$this->db->join('users','questions.q_askedby = users.id');
+		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
+		$this->db->order_by("que_id","desc");
+		$this->db->limit(5);
+		$query = $this->db->get(); 
+		if($query->num_rows() > 0)
+		{
+			$q_detail = $query->result_array();
+			foreach($q_detail as $getAns)
+			{
+				$this->db->select('*');
+				$this->db->from('answers');
+				$this->db->where('qid',$getAns['que_id']);
+				$query = $this->db->get();
+				$cntAns[] = $query->num_rows();
+			}
+			$quest_data = array();
+			$quest_data['quest_detail'] = $q_detail;
+			
+			$quest_data['ans_count'] = $cntAns;
+			return $quest_data;
+		}
+		else{
+		return 0;
+		}
+	}
 }
 
 

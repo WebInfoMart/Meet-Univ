@@ -228,11 +228,14 @@ $(window).load(function(){
 							<div class="events_box margin_t">
 								<h2>Events</h2>
 								<ul>
-							 <?php	foreach($featured_events as $featured_events_detail) { ?>							
+							 <?php
+							if(!empty($featured_events))
+							{
+							 foreach($featured_events as $featured_events_detail) { ?>							
 				<li>
 				<a style="color:#666;" href="<?php echo $base; ?>univ-<?php echo $featured_events_detail['event_univ_id']; ?>-event-<?php echo $featured_events_detail['event_id']; ?>"><?php echo substr($featured_events_detail['event_title'],0,100).'..'; ?></a>
 				<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
-				<?php } ?>
+				<?php } } else { echo " No Upcoming Events Available... "; } ?>
 									
 								</ul>
 							</div>
@@ -287,13 +290,16 @@ $(window).load(function(){
 									<div class="margin_zero">
 									<h2>News</h2>
 										<ul>
-				 <?php	foreach($recent_news as $recent_news_detail) { ?>					
+				 <?php	
+				 if(!empty($recent_news))
+				 {
+				 foreach($recent_news as $recent_news_detail) { ?>					
 				<li>
 				<a style="color:#666;" href="<?php echo $base; ?>univ-<?php echo $recent_news_detail['news_univ_id']; ?>-news-<?php echo $recent_news_detail['news_id']; ?>">
 				<?php echo substr($recent_news_detail['news_title'],0,100); ?><img src="<?php echo "$base$img_path";  ?>/event_arrow.png" class="news_arrow">
 										</a>	</li>
 											
-					<?php } ?>						
+					<?php } } else { echo "No News Available..."; } ?>						
 										</ul>
 								`	</div>
 								<div class="clearfix"></div>
@@ -301,7 +307,51 @@ $(window).load(function(){
 								<div class="margin_t">
 									<div class="news_box">
 										<h2>Question and Answer</h2> 
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a dictum arcu. Vestibulum ultrices lacus in velit posuere sit amet elementum metus fringilla. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut at quam id velit pulvinar rutrum. Cras gravida velit id augue viverra eget tempus mauris mollis.Ut at quam id velit. </p>
+										<p>
+										<?php if(!empty($featured_question_profile))
+				{
+				$a=0;
+				foreach($featured_question_profile['quest_detail'] as $quest_list)
+				{
+				if($quest_list['q_univ_id'] != '0')
+				{
+					$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+				}
+				else if($quest_list['q_country_id'] != '0')
+				{
+					$url = "";
+				}
+				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
+				{
+					$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
+				}
+				$q_date = explode(" ",$quest_list['q_asked_time']);
+				//print_r($q_date[0]);
+				$quest_ask_date = explode("-",$q_date[0]);
+				//print_r($quest_ask_date[0]);
+				$q_month = $quest_ask_date[1];
+				$quest_month = date('M', strtotime($q_month . '01'));
+				
+				//print_r($quest_ask_date[2]);
+				?>
+				
+
+										
+										<a href="<?php echo "$base$url"; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
+										<?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
+										<div>
+										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
+										echo $quest_month?$quest_month.', ':'';
+										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
+										echo "Totoal Answer - ".$featured_question_profile['ans_count'][$a];
+										?></div>
+									
+									
+				
+				<?php
+					} $a++; } else { echo "No Latest Questions Available"; } 
+				?>
+										</p>
 									</div>
 								</div>
 						</div>

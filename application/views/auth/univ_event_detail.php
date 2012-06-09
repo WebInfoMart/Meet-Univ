@@ -126,17 +126,17 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<div class="float_l margin_t1">
 									<ul style="margin:0px;list-style:none">
 										<li>
-											<img src="images/city.png" class="line_img"><h4 class="h4_line"><span><?php 
+											<img src="<?php echo base_url(); ?>images/city.png" class="line_img"><h4 class="h4_line"><span><?php 
 							if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
 							if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
 							if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} ?></span></h4>
 										</li>
 										<li>
 										
-											<img src="images/clock.png" class="line_img"><h4 class="h4_line"><span>Timings: <?php echo $extract_date[0] ?> <?php echo ','.$extract_date[1].' '.$event_detail['event_time'];?></span></h4>
+											<img src="<?php echo base_url(); ?>images/clock.png" class="line_img"><h4 class="h4_line"><span>Timings: <?php echo $extract_date[0] ?> <?php echo ','.$extract_date[1].' '.$event_detail['event_time'];?></span></h4>
 										</li>
 										<li>
-											<img src="images/group.png" class="line_img"><h4 class="h4_line"><span>Total Registered Users: <span class="blue" style="margin-left: 3px;margin-right: 9px;"><?php echo $total_register_user; ?></span></span></h4>
+											<img src="<?php echo base_url(); ?>images/group.png" class="line_img"><h4 class="h4_line"><span>Total Registered Users: <span class="blue" style="margin-left: 3px;margin-right: 9px;"><?php echo $total_register_user; ?></span></span></h4>
 										</li>
 										<li class="clearfix"></li>
 									</ul>
@@ -175,7 +175,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<div class="clearfix"></div>
 							</div>
 							<div class="back_up">
-								<h2><img src="images/cal_img.png" style="z-index: 100;position: relative;top:6px;">Upcoming Event</h2>
+								<h2><img src="<?php echo base_url(); ?>images/cal_img.png" style="z-index: 100;position: relative;top:6px;">Upcoming Event</h2>
 								<ul class="up_event">
 								<?php if(!empty($feature_event_of_univ)){
 								foreach($feature_event_of_univ as $upcoming_event)
@@ -307,7 +307,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					</div>
 				</div>
 				<div class="float_r span3">
-					<img src="images/banner_img.png">
+					<img src="<?php echo base_url(); ?>images/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 			</div>

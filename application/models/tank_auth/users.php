@@ -269,7 +269,7 @@ class Users extends CI_Model
 		if ($this->db->insert($this->table_name, $fbdata)) {
 			$user_id = $this->db->insert_id();
 			$this->create_profile($user_id);
-			return array('user_id' => $user_id);
+			return $user_id;
 		}
 	}
 	
