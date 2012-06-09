@@ -42,7 +42,7 @@
 					<div class="margin_t1">
 						<form class="form-horizontal form_step_box" action="" method="post">
 							<div class="control-group">
-								<label class="control-label" for="focusedInput">Full Nmae</label>
+								<label class="control-label" for="focusedInput">Full Name</label>
 								<div class="controls">
 								<input type="text" class="input-xlarge focused" name="event_fullname" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['fullname']? $get_info_logged_user['fullname']:'Full Name'; }?>"/>
 <span style="color:red;"> <?php echo form_error('event_fullname'); ?> <?php echo isset($errors['event_fullname'])? $errors['event_fullname'] : ''; ?> </span>
