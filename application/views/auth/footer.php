@@ -63,7 +63,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 							&copy; 2011 - 2012 Meet Universities
 						</div>
 						<div class="span5 offset5 text-right">
-							Powered by Global Campus Media.
+							Powered by Global Campus Media Interactive.
 						</div>
 					</div>
 				</div>
