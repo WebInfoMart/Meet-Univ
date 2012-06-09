@@ -31,6 +31,7 @@ array_push($array_dates,$var);
 											<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>">
 												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
 												</a>
+												<span class="inline"> &raquo; </span>
 												<?php
 												echo "<h4 style='display:inline';>";
 												if($event_detail['event_category'] == "spot_admission")
@@ -50,7 +51,7 @@ array_push($array_dates,$var);
 													echo "Counselling";
 												}
 												echo "</h4>";
-												echo '<h5 style="display:inline;"><span class="inline"> &raquo; </span>'.$event_detail['event_title'].'</h5>';
+												echo '<h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
 											<div class="float_r">
@@ -116,7 +117,7 @@ array_push($array_dates,$var);
 												{
 												if($place==1)
 												{
-												echo ", "; 
+												echo ",&nbsp;"; 
 												}
 												echo $event_detail['cityname'];
 												$city=1;
@@ -125,7 +126,7 @@ array_push($array_dates,$var);
 												{
 												if($city==1 || $place==1)
 												{
-												echo ", ";
+												echo ",&nbsp;";
 												}
 												echo $event_detail['country_name'];
 												}
