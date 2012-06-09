@@ -1,0 +1,615 @@
+.span1{width:130px}
+.span3{width:250px}
+.span5{width:600px}
+.span6{width:450px}
+.span8{width:960px}
+.admin{width:600px}
+.span11{width:550px}
+[class*="span"] {
+float: left;
+margin-left: 20px;
+}
+
+.float_l{float:left}
+.float_r{float:right}
+/******************************margin**************************/
+.margin{margin:10px;}
+.margin_t{margin-top:10px;}
+.margin_l1{margin-left:10px;}
+.margin_l3{margin-left:30px;}
+.text_dec{text-decoration:line-through}
+
+#steps {
+margin-bottom: 15px;
+margin-top: 20px;
+background: #F0F0F0;
+border: 1px solid #E5E5E5;
+height: 28px;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+-khtml-border-radius: 5px;
+-webkit-background-clip: padding-box;
+border-radius: 5px;
+padding:11px 16px;
+}
+#steps .step .num {
+float: left;
+padding: 0px 5px;
+margin: 5px 0px 0 5px;
+background: white;
+color: #7D7D7D;
+font-size: 0.9em;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+-khtml-border-radius: 10px;
+-webkit-background-clip: padding-box;
+border-radius: 10px;
+text-shadow: none;
+}
+#steps .step .name {
+float: left;
+padding: 4px;
+margin: 2px 20px;
+}
+#steps .step img {
+float: left;
+display: inline;
+margin-left: 280px;
+margin-top: -12px;
+}
+#steps .step.first {
+padding-left: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomleft: 5px;
+-webkit-border-top-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-webkit-background-clip: padding-box;
+}
+#steps .step.active {
+background: #8B8B8B;
+color: white;
+}
+.margin_l2{margin-left:60px;}
+#content h5 {
+line-height: 24px;
+}
+.orange{color: #F89406!important;}
+.light{color:#666!important;}
+.blue{color:#0888C3!important;}
+/***************************caption**********************/
+.img_width{width:125px;height:60px;}
+.text_box{height: 50px;}
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+.center{text-align:center;}
+.margin_zero{margin:0px!important}
+.span0{width:60px}
+.span2{width:200px;}
+.span4{width:350px;}
+
+
+/*******************create university***********************/
+.logo_img{width:60px;height:60px;}
+.focused_error_univ
+{
+border-color: rgba(255, 0, 0, .8) !important;
+  -webkit-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+     -moz-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+          box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+  outline: 0 !important;
+  padding:7px;
+ /* width:290px !important;*/
+}
+.focused_error_univ_new
+{
+border-color: rgba(255, 0, 0, .8) !important;
+  -webkit-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+     -moz-box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+          box-shadow: inset 0 1px 3px rgba(255, 0, 0, .1), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+  outline: 0 !important;
+  padding:7px;
+  width:185px!important;
+}
+ #content form label .error {
+ color: red;
+}
+.tdn
+{
+text-decoration:none;
+}
+.country_select
+{
+width:230px;
+}
+
+/*****************model_box***********************************/
+.modal-profile h2 {
+    font-size:2em;
+    letter-spacing:-1px;
+}
+.modal-profile {
+    display:none;
+    width: 500px;
+    padding:25px;
+    border:1px solid #fff;
+    box-shadow: 0px 2px 7px #292929;
+    -moz-box-shadow: 0px 2px 7px #292929;
+    -webkit-box-shadow: 0px 2px 7px #292929;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    background: #f2f2f2;
+    z-index:50;
+}
+a.modal-close-profile {
+    position:absolute;
+    top:-15px;
+    right:-15px;
+}
+a.modal-social {
+    margin:0 10px 0 0;
+}
+.modal-lightsout {
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:25;
+    background:#000;
+}
+
+
+
+
+/****************button*******************/
+/* Patterns.less
+ * Repeatable UI elements outside the base styles provided from the scaffolding
+ * ---------------------------------------------------------------------------- */
+
+.nav {
+margin-left: 0;
+margin-bottom: 18px;
+list-style: none;
+}
+.nav > li > a {
+padding: 5px 9px;
+}
+.btn {
+display: inline-block;
+padding: 4px 10px 4px;
+margin-bottom: 0;
+font-size: 13px;
+line-height: 18px;
+color: #333;
+text-align: center;
+text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+vertical-align: middle;
+background-color: whiteSmoke;
+background-image: -moz-linear-gradient(top, white, #E6E6E6);
+background-image: -ms-linear-gradient(top, white, #E6E6E6);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E6E6E6));
+background-image: -webkit-linear-gradient(top, white, #E6E6E6);
+background-image: -o-linear-gradient(top, white, #E6E6E6);
+background-image: linear-gradient(top, white, #E6E6E6);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+border: 1px solid #CCC;
+border-bottom-color: #BBB;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+cursor: pointer;
+filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+ul ul, ul ol, ol ol, ol ul {
+margin-bottom: 0;
+}
+.dropdown-menu {
+position: absolute;
+top: 100%;
+left: 0;
+z-index: 1000;
+float: left;
+display: none;
+min-width: 160px;
+_width: 160px;
+padding: 4px 0;
+margin: 0;
+list-style: none;
+background-color: white;
+border-color: #CCC;
+border-color: rgba(0, 0, 0, 0.2);
+border-style: solid;
+border-width: 1px;
+-webkit-border-radius: 0 0 5px 5px;
+-moz-border-radius: 0 0 5px 5px;
+border-radius: 0 0 5px 5px;
+-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+-webkit-background-clip: padding-box;
+-moz-background-clip: padding;
+background-clip: padding-box;
+}
+.dropdown-menu a {
+display: block;
+padding: 3px 15px;
+clear: both;
+font-weight: normal;
+line-height: 18px;
+color: #555;
+white-space: nowrap;
+}
+.btn-primary {
+background-color: #006DCC;
+background-image: -moz-linear-gradient(top, #08C, #04C);
+background-image: -ms-linear-gradient(top, #08C, #04C);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08C), to(#04C));
+background-image: -webkit-linear-gradient(top, #08C, #04C);
+background-image: -o-linear-gradient(top, #08C, #04C);
+background-image: linear-gradient(top, #08C, #04C);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0044cc', GradientType=0);
+border-color: #04C #04C #002A80;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-primary, .btn-primary:hover, .btn-warning, .btn-warning:hover, .btn-danger, .btn-danger:hover, .btn-success, .btn-success:hover, .btn-info, .btn-info:hover, .btn-inverse, .btn-inverse:hover {
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+color: white;
+}
+
+.icon-white {
+background-image: url('../../images/admin/glyphicons-halflings-white.png')!important;
+}
+.icon-user {
+  background-position: -168px 0!important;
+  
+}
+[class^="icon-"], [class*=" icon-"] {
+display: inline-block;
+width: 14px;
+height: 14px;
+line-height: 14px;
+vertical-align: text-top;
+background-image: url("../../images/admin/glyphicons-halflings-white.png");
+background-repeat: no-repeat;
+}
+[class^="icon-"], [class*=" icon-"] {
+display: inline-block;
+width: 14px;
+height: 14px;
+line-height: 14px;
+vertical-align: text-top;
+background-image: url("../../images/admin/glyphicons-halflings.png");
+background-position: 14px 14px;
+background-repeat: no-repeat;
+}
+.icon-ban-circle {
+  background-position: -216px -96px;
+}
+.icon-trash {
+  background-position: -456px 0;
+}
+.btn-group .dropdown-toggle {
+padding-left: 8px;
+padding-right: 8px;
+-webkit-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn-group .btn:last-child, .btn-group .dropdown-toggle {
+-webkit-border-top-right-radius: 4px;
+-moz-border-radius-topright: 4px;
+border-top-right-radius: 4px;
+-webkit-border-bottom-right-radius: 4px;
+-moz-border-radius-bottomright: 4px;
+border-bottom-right-radius: 4px;
+}
+.btn-group .btn {
+margin-left: -1px;
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+}
+.topbar div > ul, .nav {
+	display: block;
+	float: left;
+	margin: 0 10px 0 0;
+	position: relative;
+	left: 0;
+}
+.topbar div > ul > li, .nav > li {
+	display: block;
+	float: left;
+	line-height: 19px;
+}
+.topbar div > ul a, .nav a {
+	
+	float: none;
+	text-decoration: none;
+}
+.topbar div > ul a:hover, .nav a:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+.topbar div > ul .active > a, .nav .active > a {
+	background-color: #222;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.topbar div > ul.secondary-nav, .nav.secondary-nav {
+	float: right;
+	margin-left: 10px;
+	margin-right: 0;
+}
+.topbar div > ul.secondary-nav .menu-dropdown, .nav.secondary-nav .menu-dropdown, .topbar div > ul.secondary-nav .dropdown-menu, .nav.secondary-nav .dropdown-menu {
+	right: 0;
+	border: 0;
+}
+.topbar div > ul a.menu:hover, .nav a.menu:hover, .topbar div > ul li.open .menu, .nav li.open .menu, .topbar div > ul .dropdown-toggle:hover, .nav .dropdown-toggle:hover, .topbar div > ul .dropdown.open .dropdown-toggle, .nav .dropdown.open .dropdown-toggle {
+	background: #444;
+	background: rgba(255, 255, 255, 0.05);
+}
+.topbar div > ul .menu-dropdown, .nav .menu-dropdown, .topbar div > ul .dropdown-menu, .nav .dropdown-menu {
+	background-color: #fff;
+}
+.topbar div > ul .menu-dropdown a.menu, .nav .menu-dropdown a.menu, .topbar div > ul .dropdown-menu a.menu, .nav .dropdown-menu a.menu, .topbar div > ul .menu-dropdown .dropdown-toggle, .nav .menu-dropdown .dropdown-toggle, .topbar div > ul .dropdown-menu .dropdown-toggle, .nav .dropdown-menu .dropdown-toggle {
+	color: #ffffff;
+}
+.topbar div > ul .menu-dropdown a.menu.open, .nav .menu-dropdown a.menu.open, .topbar div > ul .dropdown-menu a.menu.open, .nav .dropdown-menu a.menu.open, .topbar div > ul .menu-dropdown .dropdown-toggle.open, .nav .menu-dropdown .dropdown-toggle.open, .topbar div > ul .dropdown-menu .dropdown-toggle.open, .nav .dropdown-menu .dropdown-toggle.open {
+	background: #444;
+	background: rgba(255, 255, 255, 0.05);
+}
+.topbar div > ul .menu-dropdown li a, .nav .menu-dropdown li a, .topbar div > ul .dropdown-menu li a, .nav .dropdown-menu li a {
+	
+}
+.topbar div > ul .menu-dropdown li a:hover, .nav .menu-dropdown li a:hover, .topbar div > ul .dropdown-menu li a:hover, .nav .dropdown-menu li a:hover {
+	color: white;
+text-decoration: none;
+background-color: #08C;
+}
+.topbar div > ul .menu-dropdown .active a, .nav .menu-dropdown .active a, .topbar div > ul .dropdown-menu .active a, .nav .dropdown-menu .active a {
+	color: #ffffff;
+}
+.topbar div > ul .menu-dropdown .divider, .nav .menu-dropdown .divider, .topbar div > ul .dropdown-menu .divider, .nav .dropdown-menu .divider {
+	height: 1px;
+margin: 8px 1px;
+overflow: hidden;
+background-color: #E5E5E5;
+border-bottom: 1px solid white
+}
+.topbar ul .menu-dropdown li a, .topbar ul .dropdown-menu li a {
+	padding: 4px 15px;
+}
+li.menu, .dropdown {
+	position: relative;
+}
+a.menu:after, .dropdown-toggle:after {
+	width: 0;
+	height: 0;
+	display: inline-block;
+	content: "&darr;";
+	text-indent: -99999px;
+	vertical-align: top;
+	margin-top: 8px;
+	margin-left: 4px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #ffffff;
+	filter: alpha(opacity=50);
+	-khtml-opacity: 0.5;
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+}
+.menu-dropdown, .dropdown-menu {
+	background-color: #ffffff;
+	float: left;
+	display: none;
+	position: absolute;
+	top:23px;
+	z-index: 900;
+	min-width: 160px;
+	/*max-width: 220px;*/
+	_width: 160px;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 6px 0;
+	zoom: 1;
+	border-color: #999;
+	border-color: rgba(0, 0, 0, 0.2);
+	border-style: solid;
+	-webkit-border-radius: 0 0 6px 6px;
+	-moz-border-radius: 0 0 6px 6px;
+	border-radius: 0 0 6px 6px;
+	-webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+}
+.menu-dropdown li, .dropdown-menu li {
+	float: none;
+	display: block;
+	background-color: none;
+}
+.menu-dropdown .divider, .dropdown-menu .divider {
+	height: 1px;
+	margin: 5px 0;
+	overflow: hidden;
+	background-color: #eee;
+	border-bottom: 1px solid #ffffff;
+}
+.topbar .dropdown-menu a, .dropdown-menu a {
+	display: block;
+padding: 3px 15px;
+clear: both;
+font-weight: normal;
+line-height: 18px;
+color: #333;
+white-space: nowrap;
+}
+.icon-pencil {
+  background-position: 0 -72px;
+}
+.icon-unban-circle
+{
+background-position: -193px -95px;
+}
+.icon-view
+{
+background-position: -48px 1px;
+}
+.icon-univ
+{
+background-position: 0px -23px !important;
+}
+.icon-course-univ
+{
+background-position: -49px -48px !important;
+
+}
+.icon-univ-event
+{
+background-position: -192px -120px !important;
+}
+
+.open .menu, .dropdown.open .menu, .open .dropdown-toggle, .dropdown.open .dropdown-toggle {
+	color: #ffffff;
+	background: #ccc;
+	/*background: rgba(0, 0, 0, 0.3);*/
+}
+.open .menu-dropdown, .dropdown.open .menu-dropdown, .open .dropdown-menu, .dropdown.open .dropdown-menu {
+	display: block;
+}
+
+
+.tab-content > .tab-pane, .pill-content > .pill-pane, .tab-content > div, .pill-content > div {
+	display: none;
+}
+.tab-content > .active, .pill-content > .active {
+	display: block;
+}
+.button_cont{margin-left: 0;
+-webkit-border-top-left-radius: 4px;
+-moz-border-radius-topleft: 4px;
+border-top-left-radius: 4px;
+-webkit-border-bottom-left-radius: 4px;
+-moz-border-radius-bottomleft: 4px;
+border-bottom-left-radius: 4px;}
+.arrow_but{padding-bottom: 7px!important;;margin-left: -7px!important;margin-top: -4px;}
+.arrow_but:hover,.arrow_but:active,.arrow_but:visited{background-color: #05C!important;}
+
+
+
+/* for pagination */
+#pagination a, #pagination strong {
+text-decoration: none;
+border: 1px solid #CCC; 
+padding: 3px 7px;
+margin: 0 1px;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+border: 1px solid #0069AC;
+
+	}
+.paging-margin
+{
+margin-top:40px;
+}
+.styled{width: 235px;height: 30px;}
+
+.univ_logo_size{
+width:100px;
+height:70px;
+} 
+.closeimagesize
+{
+width:37px;
+height:35px
+}
+
+/*****************model_box_second***********************************/
+.modal-profile1 h2 {
+    font-size:2em;
+    letter-spacing:-1px;
+	line-height: 15px!important;
+}
+.modal-profile1 {
+    display:none;
+    width: 825px;
+    padding:25px 20px;
+    border:1px solid #fff;
+    box-shadow: 0px 2px 7px #292929;
+    -moz-box-shadow: 0px 2px 7px #292929;
+    -webkit-box-shadow: 0px 2px 7px #292929;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    background: #f2f2f2;
+    z-index:50;
+}
+
+a.modal-social1 {
+    margin:0 10px 0 0;
+}
+.modal-lightsout1 {
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:25;
+    background:#000;
+}
+.university_model div{padding: 3px 0px!important;;}
+.university_model p{padding:5px 0px!important;}
+.university_model input.text{width:185px;}
+.button_width{width: 110px;}
+.form_univ{width:210px;}
+.right_univ{border:1px dotted #aaa;float:left;width:0px;height:265px;margin-left: 10px;}
+form #add_user_form .university_model label_error{color:red;}
+.form_error{color:red !important;}
+
+.badge-info{background-color: #3A87AD!important;}
+
+.badge-warning {
+background-color: #F89406!important;
+}
+.badge {
+background-color: #999;
+margin-left: 10px;
+padding: 1px 9px 2px;
+-webkit-border-radius: 9px;
+-moz-border-radius: 9px;
+border-radius: 9px;
+font-size: 10.998px;
+font-weight: bold;
+line-height: 14px;
+color: white;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+white-space: nowrap;
+vertical-align: baseline;
+}
+.badge-success {
+background-color: #468847;
+}
+.small_size{font-size: 12px;}
+.list_univ{width: 455px;margin-top:20px;}
+.prog_css{margin-top:30px;margin-left:50px;}
+.univ_name_txt{background: none;border: none!important;}
+.new_div li div {padding-bottom:5px!important;padding-top:0px!important;}

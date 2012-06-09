@@ -56,7 +56,7 @@
 							</div>
 							<div class="dsolution" style="padding-left:20px;">
 								<div>
-									<div class="float_l">
+									<div class="float_l span7 margin_zero">
 <?php
 $univ_name=str_replace(' ','-',$articles_detail['univ_name']);
 									$univ_name=strtolower($univ_name);

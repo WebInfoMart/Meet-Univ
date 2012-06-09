@@ -18,10 +18,10 @@ src: url('HelveticaNeueLTStd56Italic.ttf');}
 font-family: 'HelveticaNeueLTStd46LightIt';
 src: url('HelveticaNeueLTStd46LightIt.ttf');}
 /*************************TAGS RESET*********************************/
-html,body {margin:0;padding:0;border:0;background:#f0f4f6 url(../images/bg.png);font-size:12px;color:#666;font-family:Arial;}
+html,body {margin:0;padding:0;border:0;background:#f0f4f6 url(../images/bg.png);font-size:12px;color:#666;}
 body {width:1040px;margin:0px auto;-webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);
 -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);
-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);font-family:Calibri;}
+box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);}
 header {z-index: 999;background:#3881AB;position:fixed;left:0;top:0;width:100%;opacity:0.9;height: 140px;}
 footer {position:absolute;left:0;background:#333;width:100%;opacity:0.8;height:170px;-webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);
 -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);
@@ -69,13 +69,13 @@ box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);color:#fff}
 .text-right{text-align:right;}
 /******************************MAIN MENU*******************************/
 .main_menu{text-align:right;}/*margin-top:10px; shweta*/
-.menu li{display:inline-block;border-right: 1px solid white;-moz-border-right: 1px solid white;-webkit-border-right: 1px solid white;font-size:16px;height: 18px;padding: 0px 19px;margin-top:10px;}
+.menu li{display:inline-block;border-right: 1px solid white;-moz-border-right: 1px solid white;-webkit-border-right: 1px solid white;font-size:14px;height: 18px;padding: 0px 19px;margin-top:10px;}
 .menu li a{color:white;text-shadow: 1px 1px 2px #000;filter: dropshadow(color=#000, offx=2, offy=1);text-decoration:none;}
 .menu li a.active,.menu li a:hover{color:#000}
 /***************************MAIN INDEX PAGE****************************/
 .body{background:#fff;padding:10px;}
 .round_box{-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;background: url(../images/events.png);padding:10px;border:solid 1px #ccc}
-.round_box img{margin:0px 5px;}
+.round_box img{margin:2px 5px;}
 .control-label{font-weight:700;}
 .notify_box{-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;background:#00a3e1;padding:3px;float:right;}
 .notify_box a,.notify_box a:hover{color:#fff}

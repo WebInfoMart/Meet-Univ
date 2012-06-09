@@ -90,7 +90,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<button type="button" class="btn active" id="events">Events</button>
 								<button type="button" class="btn" id="colleges">Colleges</button>
 							</div>
-							<p class="help-block white form_height">colleges by programs, country and course level</p>
+							<p class="help-block white help_line" id="sub-title">Events by country, city and months</p>
 						</div>
 						
 						
@@ -112,7 +112,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<div class="ddposition">
 									<ul class="ddclass">
 										<li class="li1 openddli" id="others"><a href="#" id="other_dd">Others</a></li>
-										<li class="li2 openddli" id="alumuni" ><a href="#" id="alu_dd">Alumuni</a></li>
+										<li class="li2 openddli" id="alumuni" ><a href="#" id="alu_dd">Alumni</a></li>
 									</ul>
 								</div>	
 							</div>
@@ -135,18 +135,20 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h4 class="white">in the Month of</h4></label>
-							<div class="float_l span3 margin_zero">
-								<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
-								<input type="text" id="last_widget" class="btn_cal" onkeydown="return false;"> <img src="images/cal_img.png" id="last_widget_button" class="cal_style" >
-							</div>
-							<div class="float_l span1">
-									<input type="button" onclick="serch_events();" name="btn_evet_search" class="btn" value="Search"/>
-									<input type="hidden" name="btn_event_serch" value="">
+							<div class="controls">
+								<div class="float_l span3 margin_zero">
+									<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
+									<input type="text" id="last_widget" class="btn_cal" onkeydown="return false;"> <img src="images/home_cal.gif" id="last_widget_button" class="cal_style" >
 								</div>
-								<div class="clearfix"></div>
+								<div class="float_l span1 cal_align">
+										<input type="button" onclick="serch_events();" name="btn_evet_search" class="btn" value="Search"/>
+										<input type="hidden" name="btn_event_serch" value="">
+								</div>
+									<div class="clearfix"></div>
+							</div>
 						</div>
 					</div>
-					<div class="college" id="col">
+					<div class="college" id="col"  style="display:none">
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h4 class="white">Type</h4></label>
 							<div class="controls">
@@ -406,7 +408,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							?>
 									<div>
 										<h3>Study Aboard</h3>
-										<span class="float_l aspectcorrect" style="line-height: 8px;border: 2px solid #DDD;margin-right:15px;padding: 2px;width:80px;height:80px;">
+										<span class="float_l aspectcorrect home_art">
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 											
 										</span>
@@ -422,7 +424,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										$news_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $news_title);	
 										
 										
-		echo "...";?><a href="<?php echo $base.'university/'.$f_news['news_univ_id'].'/'.$univ_name.'/news/'.$f_news['news_id'].'/'.$news_title; ?>">View more</a>
+		echo "...";?><br/><a href="<?php echo $base.'university/'.$f_news['news_univ_id'].'/'.$univ_name.'/news/'.$f_news['news_id'].'/'.$news_title; ?>" class="float_r">View more</a>
 								<?php		}
 										?>	 </p>
 									
@@ -482,12 +484,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<div class="clearfix"></div>
 							</div>
 							<div>
-								<div style="padding-top: 8px;">
+								<div class="home_padding">
 									<div class="btn-group">
-										<button class="btn status_bg" style="height: 43px;font-size: 24px;border: 1px solid 
-										#FDD69E;padding: 4px 32px 4px;">8999</button>
-										<button class="btn status_bg" style="height: 43px;font-size: 24px;border: 1px solid 
-										#FDD69E;padding: 4px 32px 4px;">2225</button>
+										<button class="btn status_bg number_bar">8999</button>
+										<button class="btn status_bg number_bar">2225</button>
 									</div>
 									<div class="label_text">
 										<ul>
@@ -505,8 +505,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 			</div>
 			<div class="row">
 				<div class="span16 margin_delta margin_t">
-					<div style="padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px
-					#999;-moz-box-shadow: 0px 0px 6px #888;">
+					<div class="center_bar">
 							<ul class="yellow yellow_nav">
 						<li><a href="<?php echo $base; ?>colleges/Applied_and_pure_sciences ">Applied and pure sciences</a></li>
 						<li><a href="<?php echo $base; ?>colleges/Education_and_teacher_training">Education and teacher training</a></li>
@@ -539,7 +538,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<div class="input-append">
 									<form action="<?php echo $base; ?>QuestandAns" method="post">
 										<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
-										<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
+										<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info btn_tab"  value="Ask">
 									</form>
 								</div>
 							</div>
@@ -582,14 +581,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 
 										<div style="width: 34px;margin-right:20px" class="float_l">
 										<?php if($quest_list['user_pic_path'] !='') { ?>
-										<img src="<?php echo "$base"; ?>uploads/<?php echo $quest_list['user_pic_path']; ?>" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;" />
+										<img src="<?php echo "$base"; ?>uploads/<?php echo $quest_list['user_pic_path']; ?>" class="latest_img" />
 										<?php } else { ?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;">
+										<img src="<?php echo "$base$img_path"; ?>/user_model.png" class="latest_img">
 										<?php } ?>
 										</div>
-										<span class="black"><a href="<?php echo "$base$url"; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a></span>
-										<div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
-										<div style="font-size: 11px;line-height: 12px;">
+										<a href="<?php echo "$base$url"; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
+										<div class="asked_home"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
+										<div class="asked_home">
 										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
 										echo $quest_month?$quest_month.', ':'';
 										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
@@ -642,9 +641,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							?>
 							<div class="margin_t1 part_art">
 								<h3><?php echo substr($article['article_title'],0,35).'...'; ?></h3>
-									<span class="float_l aspectcorrect" style="line-height:8px;width:90px;height:90px;border: 2px solid #DDD;margin-right:15px;padding: 2px">
+									<span class="float_l aspectcorrect home_art">
 										
-											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" class="home_art">
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 											
 										
 									</span>
@@ -659,7 +658,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									$article_title=strtolower($article_title);
 									$article_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $article_title);	
 									?>
-	..<a href="<?php echo $base.'university/'.$article['article_univ_id'].'/'.$univ_name.'/article/'.$article['article_id'].'/'.$article_title;?>">View More</a>	
+	..<br/><a href="<?php echo $base.'university/'.$article['article_univ_id'].'/'.$univ_name.'/article/'.$article['article_id'].'/'.$article_title;?>" class="float_r">View More</a>	
 									<?php }
 									?>	
 									
@@ -1038,10 +1037,12 @@ $(document).ready(function() {
 	$('#colleges').click(function() {
 		$("#events_col").hide();
 		$("#col").show();
+		$('p').replaceWith('<p class="help-block white help_line" id="sub-title">colleges by programs, country and course level</p>');
    });
    $('#events').click(function() {
 		$("#col").hide();
 		$("#events_col").show();
+		$('p').replaceWith('<p class="help-block white help_line" id="sub-title">Events by country, city and months</p>');
    });
 });
 </script>	

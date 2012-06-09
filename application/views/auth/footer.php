@@ -54,7 +54,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 					<div class="footer margin_beta">
 						<h4 class="white">Reach Us</h4>
 						<div>
-								<a href="mailto:contact@meetuniversities.com">contact@meetuniversities.com</a>
+								<a href="mailto:contact@meetuniversities.com" class="white">contact@meetuniversities.com</a>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -63,7 +63,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 							&copy; 2011 - 2012 Meet Universities
 						</div>
 						<div class="span5 offset5 text-right">
-							Powered by Global Media Interactive Campus.
+							Powered by Global Campus Media.
 						</div>
 					</div>
 				</div>
