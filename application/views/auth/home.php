@@ -486,8 +486,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<div>
 								<div class="home_padding">
 									<div class="btn-group">
-										<button class="btn status_bg number_bar">8999</button>
-										<button class="btn status_bg number_bar">2225</button>
+										<button class="btn status_bg number_bar"><?php echo $total_poste_event_count?$total_poste_event_count:'0'; ?></button>
+										<button class="btn status_bg number_bar"><span id="tot_reg_user">  </span></button>
+										
 									</div>
 									<div class="label_text">
 										<ul>
@@ -1239,3 +1240,22 @@ height:22px;
 		});
 	</script>
 
+<script>
+var timer, delay = 3000; //5 minutes counted in milliseconds.
+
+timer = setInterval(function(){
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo base_url().'auth/auto_count_register_user';?>',
+      success: function(response){
+	  //alert(response);
+	  $('#tot_reg_user').html(response);
+	  $('#tot_reg_user').show("slide", { direction: "down" }, 1000);
+	  //$('#tot_reg_user').slideUp($('#tot_reg_user').val(),function(){
+				//$('#tot_reg_user').html(response).slideDown(););
+	  //$('#tot_reg_user').html(response);
+        //$('.score_news').append(html);
+      }
+    });
+}, delay);
+</script>

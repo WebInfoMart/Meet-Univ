@@ -308,9 +308,10 @@ $(window).load(function(){
 									<div class="news_box">
 										<h2>Question and Answer</h2> 
 										<p>
-										<?php if(!empty($featured_question_profile))
+				<?php if(!empty($featured_question_profile))
 				{
 				$a=0;
+				$url = "";
 				foreach($featured_question_profile['quest_detail'] as $quest_list)
 				{
 				if($quest_list['q_univ_id'] != '0')

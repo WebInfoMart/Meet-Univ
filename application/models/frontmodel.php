@@ -622,17 +622,18 @@ class Frontmodel extends CI_Model
 		}
 	}
 	function fetch_cities_having_events()
-	{
-		$this->db->select('*');
-		$this->db->from('city');
-		$this->db->join('events', 'events.event_city_id = city.city_id'); 
-		$this->db->where(array('event_type'=>'univ_event',
-		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
-		));
-		$this->db->order_by('cityname','asc');
-		$query=$this->db->get();
-		return $query->result_array();
-	}
+	 {
+	  $this->db->select('*');
+	  $this->db->from('city');
+	  $this->db->join('events', 'events.event_city_id = city.city_id'); 
+	  $this->db->where(array('event_type'=>'univ_event',
+	  'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+	  ));
+	  $this->db->group_by('events.event_city_id');
+	  $this->db->order_by('cityname','asc');
+	  $query=$this->db->get();
+	  return $query->result_array();
+	 }
 	function fetch_featured_events_of_univ($univ_id)
 	{
 		$this->db->select('*');
@@ -656,5 +657,29 @@ class Frontmodel extends CI_Model
 		return 0;
 		}
 	}
+	function count_total_posted_event()
+	{
+		$this->db->select('event_id');
+		$this->db->from('events');
+		$query = $this->db->get();
+		$tot_rows = $query->num_rows();
+		$total_rows = ceil($tot_rows * 2.4);
+		return $total_rows;
+	}
+	
+	function count_register_user_by_ajax()
+	{
+		$this->db->set('register_user_counter','register_user_counter+0.3',FALSE);
+		$this->db->where('id','1');
+		$this->db->update('total_event_register_counter');
+		$this->db->select('*');
+		$this->db->from('total_event_register_counter');
+		$this->db->where('id','1');
+		$tot = $this->db->get();
+		$tot2 = $tot;
+		return $tot2->result_array();
+		//return $total = floor($tot);
+	}
+	
 	
 }
