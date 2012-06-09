@@ -629,7 +629,6 @@ class Frontmodel extends CI_Model
 		$this->db->where(array('event_type'=>'univ_event',
 		'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
 		));
-		$this->db->group_by('city.city_id');
 		$this->db->order_by('cityname','asc');
 		$query=$this->db->get();
 		return $query->result_array();
@@ -657,6 +656,5 @@ class Frontmodel extends CI_Model
 		return 0;
 		}
 	}
-	
 	
 }

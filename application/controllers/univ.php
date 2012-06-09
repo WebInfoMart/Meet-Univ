@@ -18,7 +18,7 @@ class Univ extends CI_Controller
 	}
 
 	/* Function used for single university page */
-function university($univ_id='',$qid='',$uid='')
+	function university($univ_id='')
 	{
 		$data = $this->path->all_path();
 		
