@@ -699,7 +699,8 @@ background: #D9D9D9;
 }
 .fliters_data{width: 156px;}
 .fliters_data h3{line-height: 11px;}
-.events_holder_box{border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;width:545px;-webkit-box-shadow: 0px 0px 5px #333333;-moz-box-shadow: 0px 0px 5px #333333;box-shadow: 0px 0px 5px #333333;padding:10px;color:#666666;padding-bottom:0px;}
+.events_holder_box{border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;width:570px;-webkit-box-shadow: 0px 0px 5px #333333;-moz-box-shadow: 0px 0px 5px #333333;box-shadow: 0px 0px 5px #333333;padding: 0px 0px 0px 10px;color:#666666;}
+.events_listing{border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;width:545px;-webkit-box-shadow: 0px 0px 5px #333333;-moz-box-shadow: 0px 0px 5px #333333;box-shadow: 0px 0px 5px #333333;padding:10px;color:#666666;padding-bottom:0px;}
 .events_holder_box:hover{background-color:#fffbbf;}
 .events_holder_box li a{color:#666666;}
 .events_holder_box h3 span{color:#08C;}

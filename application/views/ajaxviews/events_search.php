@@ -46,7 +46,7 @@ array_push($array_dates,$var);
 //end here 
 																			
 											?>
-									<div class="events_holder_box padding margin_t">
+									<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
 										<div>
 											<div class="float_l span7 margin_zero">
 											<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>">

@@ -208,12 +208,13 @@ array_push($array_dates,$var);
 //end here 
 																			
 											?>
-									<div class="events_holder_box padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
+									<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
 										<div>
 											<div class="float_l span7 margin_zero">
 											<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>">
-												<h3 class="inline"> <?php echo $event_detail['univ_name']; ?> </h3>
+												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
 												</a>
+												<span class="inline"> &raquo; </span>
 												<?php
 												echo "<h4 style='display:inline';>";
 												if($event_detail['event_category'] == "spot_admission")
@@ -233,7 +234,7 @@ array_push($array_dates,$var);
 													echo "Counselling";
 												}
 												echo "</h4>";
-												echo '<h5><span class="inline"> &raquo; </span>'.$event_detail['event_title'].'</h5>';
+												echo '<h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
 											<div class="float_r">
@@ -299,7 +300,7 @@ array_push($array_dates,$var);
 												{
 												if($place==1)
 												{
-												echo ","; 
+												echo ",&nbsp;"; 
 												}
 												echo $event_detail['cityname'];
 												$city=1;
@@ -308,7 +309,7 @@ array_push($array_dates,$var);
 												{
 												if($city==1 || $place==1)
 												{
-												echo ",";
+												echo ",&nbsp;";
 												}
 												echo $event_detail['country_name'];
 												}
@@ -327,10 +328,10 @@ array_push($array_dates,$var);
 											</div>
 											<div class="clearfix"></div>
 										</div>
-										<div class="float_r margin1">
-											<div id="gp" class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-												<div id="fb" class="float_l fb" style="margin-right:8px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
-												<div id="tw" class="float_r" style="margin-right:-30px"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
+										<div class="float_r">
+											<div id="gp" class="float_l" style="margin-right:15px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+												<div id="fb" class="float_l fb" style="margin-right:24px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
+												<div id="tw" class="float_r tw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
 										</div>
 										<div class="clearfix"></div>
 									</div>
