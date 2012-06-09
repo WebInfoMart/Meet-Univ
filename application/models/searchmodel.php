@@ -773,6 +773,14 @@ function show_all_college_paging($current_url)
 		$events_data['filter_country']=array();
 		$events_data['filter_city']=array();
 		$current_url=str_replace('_',' ',$current_url);
+		if($this->input->post('event_month'))
+		{
+		$month=$this->input->post('event_month');
+		}
+		else
+		{
+		$month='';
+		}
 		$pos = strpos($current_url,'events/');
 		$filter_event_types=0;
 		$filter_country=0;
@@ -855,10 +863,14 @@ function show_all_college_paging($current_url)
 			    $where.=" and events.event_category IN('".$event_type."')";
 			}
 			
-			if($filter_city==1 )
+			if($filter_city==1)
 			{
 				$city_ids=implode(",",$city_id);
 				$where.=" and events.event_city_id IN(".$city_ids.")";
+			}
+			if($month!='')
+			{
+			$where=" and events.event_date_time LIKE '%$month%' ";
 			}
 			$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>=now() ";
 			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc";

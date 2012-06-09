@@ -79,8 +79,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				</div>				
 			</div>
 			<div class="float_r span8 margin_t margin_l">
-				<form class="form-horizontal form_horizontal_home" id="search_form" action="" method="get">
-					<input type="hidden" name="type_search" id="type_search" value="0"/>
+				<form class="form-horizontal form_horizontal_home" id="search_form" action="" method="post">
+					<input type="hidden" name="type_search" id="type_search" value=""/>
 					<input type="hidden" name="educ_level" id="educ_level" value="All"/>
 					
 					<div class="control-group">
@@ -138,7 +138,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<div class="controls">
 								<div class="float_l span3 margin_zero">
 									<!--<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Month">-->
-									<input type="text" id="last_widget" class="btn_cal" onkeydown="return false;"> <img src="images/home_cal.gif" id="last_widget_button" class="cal_style" >
+									<input type="text" id="last_widget" class="btn_cal" name="event_month" onkeydown="return false;"> <img src="images/home_cal.gif" id="last_widget_button"  class="cal_style" >
 								</div>
 								<div class="float_l span1 cal_align">
 										<input type="button" onclick="serch_events();" name="btn_evet_search" class="btn" value="Search"/>
@@ -1048,7 +1048,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function(){
 $('#allcollege').click(function(){
-$('#type_search').val('0');
+$('#type_search').val('');
 fetch_programs(0);
 });
 
@@ -1062,11 +1062,8 @@ fetch_programs(2);
 $('#pg').click(function(){
 $('#type_search').val(4);
 $('#educ_level').val('PostGraduate');
-
 fetch_programs(4);
-
 });
-
 $('#ug').click(function(){
 $('#type_search').val(3);
 $('#educ_level').val('UnderGraduate');
@@ -1111,9 +1108,18 @@ window.location=url;
 }
 function serch_events()
 {
-
-$("#search_form").attr("action","events_search");
-$('#btn_event_serch').val('event_search');
+var event_type=$('#type_search').val();
+var city=$('#selected_value').text();
+url='<?php echo $base; ?>events'
+if(event_type!='')
+{
+url=url+'/'+event_type;
+}
+if(city != 'All')
+{
+url=url+'/'+city;
+}
+$("#search_form").attr("action",url);
 $('#search_form').submit();
 }
 

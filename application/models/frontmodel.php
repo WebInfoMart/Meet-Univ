@@ -658,4 +658,5 @@ class Frontmodel extends CI_Model
 		}
 	}
 	
+	
 }
