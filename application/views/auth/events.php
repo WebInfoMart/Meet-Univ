@@ -108,7 +108,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												echo "checked";
 												} ?>
 
-												>Counseling
+												>Counselling
 											</label></li>
 										</ul>
 									</form>

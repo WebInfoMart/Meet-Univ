@@ -1111,6 +1111,7 @@ window.location=url;
 }
 function serch_events()
 {
+
 $("#search_form").attr("action","events_search");
 $('#btn_event_serch').val('event_search');
 $('#search_form').submit();
