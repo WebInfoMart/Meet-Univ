@@ -337,6 +337,20 @@ class Searchmodel extends CI_Model
 		return 0;
 		}
 	}
+	function get_city_id_by_name($cityname){
+		$this->db->select('city_id');
+		$this->db->from('city');
+		$this->db->where('cityname',$cityname);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		{
+		 return $res->row_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
 	function get_educ_level_id_by_name($educ_level)
 	{
 		$this->db->select('prog_edu_lvl_id');
@@ -750,7 +764,259 @@ function show_all_college_paging($current_url)
 		
 	}
 //filteration end	
-
+	
+	//event filetration
+	/*Anusha*/
+	function all_event_filteration($current_url){
+	
+		$events_data['filter_event_type']=array();
+		$events_data['filter_country']=array();
+		$events_data['filter_city']=array();
+		$current_url=str_replace('_',' ',$current_url);
+		$pos = strpos($current_url,'events/');
+		$filter_event_types=0;
+		$filter_country=0;
+		$filter_city=0;
+		if($pos>0)
+		{
+			$arr=explode('events/',$current_url);
+			if(count($arr)>0 )
+			{
+				if($arr[1]!='' && $arr[1]!=NULL)
+				{
+					$filter_content=explode('/',$arr[1]);
+					for($f=0;$f<count($filter_content);$f++)
+					{
+					    $chk_country=$this->searchmodel->get_country_id_by_name($filter_content[$f]);
+						if($chk_country!=0)
+						{
+							$country_id[]=$chk_country['country_id'];
+							$events_data['filter_country'][]=$chk_country['country_id'];
+							$filter_country=1;
+							continue;
+						}
+						
+						$chk_city=$this->searchmodel->get_city_id_by_name($filter_content[$f]);
+						if($chk_city!=0)
+						{
+							$city_id[]=$chk_city['city_id'];
+							$events_data['filter_city'][]=$chk_city['city_id'];
+							$filter_city=1;
+							continue;
+						}
+						if($chk_country==0 && $chk_city==0)
+						{
+						 
+						 if($filter_content[$f]=='spot admission')
+						 {
+						 $events_data['filter_event_type'][]='spot_admission';
+						 $event_type_list='spot_admission';
+						 $filter_event_types=1; 
+						 continue;
+						 }
+						 else if($filter_content[$f]=='fairs')
+						 {
+						  $events_data['filter_event_type'][]='fairs';
+						  $event_type_list='fairs';
+						  $filter_event_types=1;	
+						  continue;
+						 }
+						 else if($filter_content[$f]=='counselling')
+						 {
+						 $events_data['filter_event_type'][]='counselling'; 
+						 $event_type_list='alumuni';
+						 $event_type_list='others'; 
+						 $events_data['filter_event_type'][]='';
+						 $filter_event_types=1;
+						 continue;						  
+						 } 
+							
+						}	
+					}
+				}
+			}
+			else
+			{
+				$filter_content=0;
+			}
+		}	
+			$events_data['total_res']=0;
+			$events_data['limit_res']=4;
+			$join=" LEFT JOIN  `university` ON events.event_univ_id = university.univ_id LEFT JOIN country ON country.country_id = events.event_country_id LEFT JOIN  state ON state.state_id = events.event_state_id LEFT JOIN city ON city.city_id = events.event_city_id";
+			$where='';
+			if($filter_country==1)
+			{
+				$country_ids=implode(",",$country_id);
+				$where.=" and events.event_country_id IN (".$country_ids.")";
+			}
+			if($filter_event_types==1 )
+			{
+				$event_type=implode("','",$events_data['filter_event_type']);
+			    $where.=" and events.event_category IN('".$event_type."')";
+			}
+			
+			if($filter_city==1 )
+			{
+				$city_ids=implode(",",$city_id);
+				$where.=" and events.event_city_id IN(".$city_ids.")";
+			}
+			$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>=now() ";
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc";
+			
+			$results=$this->db->query($sql);
+			$events_data['total_res']=$results->num_rows();
+			if($results->num_rows()>$events_data['limit_res']);
+			{
+				$events_data['per_page_res']=$events_data['limit_res'];
+			}
+			if($results->num_rows()<=$events_data['limit_res'])
+			{
+				$events_data['per_page_res']=$events_data['total_res'];
+			}
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT 0,".$events_data['limit_res']."";
+			
+			$results=$this->db->query($sql);
+			
+			if($results->num_rows()>0)
+			{
+			  $events_data['event_res'] = $results->result_array();
+				return $events_data;
+			}else{
+				$events_data['event_res']=array();
+				return $events_data;
+			}
+		
+	}
+	
+	function show_events_paging($current_url)
+	{
+		$events_data['filter_event_type']=array();
+		$events_data['filter_country']=array();
+		$events_data['filter_city']=array();
+		$current_url=str_replace('_',' ',$current_url);
+		$offset=$this->input->post('offset');
+		$pos = strpos($current_url,'events/');
+		$filter_event_types=0;
+		$filter_country=0;
+		$filter_city=0;
+		if($pos>0)
+		{
+			$arr=explode('events/',$current_url);
+			if(count($arr)>0 )
+			{
+				if($arr[1]!='' && $arr[1]!=NULL)
+				{
+					$filter_content=explode('/',$arr[1]);
+					for($f=0;$f<count($filter_content);$f++)
+					{
+					    $chk_country=$this->searchmodel->get_country_id_by_name($filter_content[$f]);
+						if($chk_country!=0)
+						{
+							$country_id[]=$chk_country['country_id'];
+							$events_data['filter_country'][]=$chk_country['country_id'];
+							$filter_country=1;
+							continue;
+						}
+						
+						$chk_city=$this->searchmodel->get_city_id_by_name($filter_content[$f]);
+						if($chk_city!=0)
+						{
+							$city_id[]=$chk_city['city_id'];
+							$events_data['filter_city'][]=$chk_city['city_id'];
+							$filter_city=1;
+							continue;
+						}
+						if($chk_country==0 && $chk_city==0)
+						{
+						 
+						 if($filter_content[$f]=='spot admission')
+						 {
+						 $events_data['filter_event_type'][]='spot_admission';
+						 $event_type_list='spot_admission';
+						 $filter_event_types=1; 
+						 continue;
+						 }
+						 else if($filter_content[$f]=='fairs')
+						 {
+						  $events_data['filter_event_type'][]='fairs';
+						  $event_type_list='fairs';
+						  $filter_event_types=1;	
+						  continue;
+						 }
+						 else if($filter_content[$f]=='counselling')
+						 {
+						 $events_data['filter_event_type'][]='counselling'; 
+						 $event_type_list='alumuni';
+						 $event_type_list='others'; 
+						 $events_data['filter_event_type'][]='';
+						 $filter_event_types=1;
+						 continue;						  
+						 } 
+							
+						}	
+					}
+				}
+			}
+			else
+			{
+				$filter_content=0;
+			}
+		}	
+			$events_data['total_res']=0;
+			$events_data['limit_res']=4;
+			$join=" LEFT JOIN  `university` ON events.event_univ_id = university.univ_id LEFT JOIN country ON country.country_id = events.event_country_id LEFT JOIN  state ON state.state_id = events.event_state_id LEFT JOIN city ON city.city_id = events.event_city_id";
+			$where='';
+			if($filter_country==1)
+			{
+				$country_ids=implode(",",$country_id);
+				$where.=" and events.event_country_id IN (".$country_ids.")";
+			}
+			if($filter_event_types==1 )
+			{
+				$event_type=implode("','",$events_data['filter_event_type']);
+			    $where.=" and events.event_category IN('".$event_type."')";
+			}
+			
+			if($filter_city==1 )
+			{
+				$city_ids=implode(",",$city_id);
+				$where.=" and events.event_city_id IN(".$city_ids.")";
+			}
+			$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>=now() ";
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT ".$offset.",".$events_data['limit_res']."";
+			
+			$results=$this->db->query($sql);
+			$events_data['per_page_res']=$results->num_rows();
+			
+			$results=$this->db->query($sql);
+			
+			if($results->num_rows()>0)
+			{
+			  $events_data['event_res'] = $results->result_array();
+				return $events_data;
+			}else{
+				$events_data['event_res']=array();
+				return $events_data;
+			}
+		
+	}
+	
+	
+	function get_event_id_by_event_type($event_type){
+		$this->db->select('event_id');
+		$this->db->from('events');
+		$this->db->where('event_category',$event_type);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		{
+		 return $res->row_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	
 	function set_the_image($img_width,$img_height,$div_width,$div_height,$flag)
     {
 			

@@ -25,24 +25,9 @@ if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 $this->session->unset_userdata('msg_send_suc');
 $this->session->unset_userdata('msg_send_suc_voice');
 ?>
-<?php 
-								if(!empty($events))
-								{
-								$array_dates = array();
-								foreach($events as $event_detail){ 
-								$var_date = '';
-								//echo $event_detail['event_date_time'];
-								$extract_date = explode(" ",$event_detail['event_date_time']);
-								//echo $extract_date[];
-								$month = $extract_date[1];
-								$number_month = date('m', strtotime($month));
-								//echo $extract_date[0];
-								//echo $number_months; //= $number_month-1 ;
-								//echo $extract_date[2];
-								$var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
-								array_push($array_dates,$var);
-								} }
-								?>
+
+<script type="text/javascript" src="http://meetuniversities.com/js/jquery.tinysort.js"></script>
+								
 <div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -73,14 +58,16 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	</div>
 				<div class="float_l span12 margin_l">
 					<div class="start_bar">
-						<div class="float_l"><h3>Viewing 1 - 20 universities of 5232.</h3></div>
+						<div class="float_l"><h3>Viewing 1 - <span id="listed_currently_event"><?php echo $events['per_page_res']; ?></span> events of <span id="red_total_univ"> <?php echo $events['total_res']; ?></span>.</h3></div>
 						<div class="float_r">
 							<div class="sort_contanier">
 								<ul class="sort_list">
 									<li><h4>Sort By:</h4></li>
-									<li><a href="#" class="active">Country</a></li>
-									<li><a href="#">University Name</a></li>
-									<li><a href="#">Events</a></li>
+									<li id="sort_country"><a href="javascript:void(0)"  onclick="eventsorting('country','desc','sort_country','Country')">Country</a>
+									</li>
+									
+									<li id="sort_univ_name"><a href="javascript:void(0)" onclick="eventsorting('univ_name','desc','sort_univ_name','University Name')">University Name</a></li>
+									<li id="sort_event_date"><a href="javascript:void(0)" onclick="eventsorting('date','desc','sort_event_date','Events')" class="active">Events</a></li>
 								</ul>
 							</div>
 						</div>
@@ -90,20 +77,38 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					<div class="margin_t">
 						<div class="float_l">
 							<div class="fliters_data">
+							<?php
+							?>
 								<h3>Filter your Search</h3>
 								<div class="margin_t">
 									<h4>Event Type</h4>
 									<form class="margin_zero">
 										<ul class="col_filter_list">
 											
-											<li><label class="checkbox">
-												<input type="checkbox" id="" value="">Spot Admission
+											<li href="/spot_admission"><label class="checkbox">
+												<input type="checkbox" class="search_chkbox"  id="" <?php
+												if(in_array('spot_admission',$events['filter_event_type']))
+												{
+												echo "checked";
+												} ?> value="">Spot Admission
 											</label></li>
-											<li><label class="checkbox">
-												<input type="checkbox" id="" value=""> Fairs
+											<li href="/fairs"><label class="checkbox" >
+							<input type="checkbox" class="search_chkbox" id="" value=""
+												<?php
+												if(in_array('fairs',$events['filter_event_type']))
+												{
+												echo "checked";
+												} ?>
+												> Fairs
 											</label></li>
-											<li><label class="checkbox">
-												<input type="checkbox" id="" value="">Counseling
+											<li href="/counselling"><label class="checkbox"  >
+												<input type="checkbox" class="search_chkbox" <?php
+												if(in_array('counselling',$events['filter_event_type']))
+												{
+												echo "checked";
+												} ?>
+
+												>Counseling
 											</label></li>
 										</ul>
 									</form>
@@ -118,7 +123,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 											$country_name=str_replace(' ','_',$country_name_having_event['country_name']);
 											?>
 											<li  href="/<?php echo $country_name; ?>"><label class="checkbox">
-												<input type="checkbox" id="" value="" class="search_chkbox"> <?php echo $country_name_having_event['country_name'];?>
+									<input type="checkbox" id="" class="search_chkbox" value=""
+												<?php if(in_array($country_name_having_event['country_id'],$events['filter_country']))
+												{
+												echo "checked";
+												}
+												?>												
+											   > <?php echo $country_name_having_event['country_name'];?>
 											</label></li>
 											<?php } } ?>
 										</ul>
@@ -134,8 +145,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										foreach($city_name_having_event as $city_name_have_event)
 										{
 										?>
-											<li><label class="checkbox">
-												<input type="checkbox" id="<?php echo $city_name_have_event['city_id']; ?>" value="<?php echo $city_name_have_event['cityname'];?>"> <?php echo $city_name_have_event['cityname'];?>
+											<li href="/<?php echo $city_name_have_event['cityname']; ?>"><label class="checkbox">
+		<input type="checkbox" class="search_chkbox" <?php if(in_array($city_name_have_event['city_id'],$events['filter_city']))
+												{
+												echo "checked";
+												}?>
+												id="<?php echo $city_name_have_event['city_id']; ?>"
+												value="<?php echo $city_name_have_event['cityname'];?>"> <?php echo $city_name_have_event['cityname'];?>
 											</label></li>
 										<?php } } ?>	
 										</ul>
@@ -145,19 +161,61 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>
 						<div class="float_r">
+						<?php if(!($events['event_res'])){ ?>
+						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
+						<?php } ?>
+						
+			<div id="event_results_filteration">
+									
+							<div id="pagination" class="table_pagination right paging-margin">
+   
+						   <?php
+						 $cc=$events['total_res'];
+						 $rl=$events['limit_res']; 
+						   if($cc>$rl)
+						   {
+						   $z=0;
+						   for($c=$cc;$c>0;$c=$c-$rl)
+						   {
+						   ?>
+						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="events_result_by_paging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <?php 
+						   }
+						   }
+						   ?>
+						   <input type="hidden" id="current_paging_value" value="0">	
+							</div>
+
 							<div class="row">
 								<div class="span9 float_l margin_zero" id="div_events">
-									<?php if(!empty($events))
+									<?php
+$array_dates = array();
+
+									if(!empty($events))
 										  {
-											foreach($events as $event_detail){  ?>
-									<div class="events_holder_box padding margin_t">
+											foreach($events['event_res'] as $event_detail){
+//code for apply comma in date											
+
+$var_date = '';
+//echo $event_detail['event_date_time'];
+$extract_date = explode(" ",$event_detail['event_date_time']);
+$month = $extract_date[1];
+$number_month = date('m', strtotime($month));
+$number_month = date('m', strtotime($month));
+$var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
+array_push($array_dates,$var);
+
+//end here 
+																			
+											?>
+									<div class="events_holder_box padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
 										<div>
 											<div class="float_l span7 margin_zero">
 											<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>">
 												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
-												
+												</a>
 												<?php
-												echo "<h3 style='display:inline';>";
+												echo "<h4 style='display:inline';>";
 												if($event_detail['event_category'] == "spot_admission")
 												{
 													echo "Spot Admission";
@@ -174,16 +232,15 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												{
 													echo "Counselling";
 												}
-												echo "</h3>";
+												echo "</h4>";
 												echo '<h5 style="display:inline;"><span class="inline"> &raquo; </span>'.$event_detail['event_title'].'</h5>';
 												?>
-												</a>
 											</div>
 											<div class="float_r">
-												<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-													<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+												<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+													<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 													<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-													<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
+													<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
 											</div>
 											<div class="clearfix"></div>
 										</div>
@@ -207,11 +264,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									}
 									else
 									{
-									$image=$base.$img_path.'default_logo.png';
+									$image=$base.$img_path.'/default_logo.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,92,87,TRUE);
 											?>
-											<img style="width: 100px;left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 												
 											</div>
 											<div class="float_l text-width" style="font-size:14px;">
@@ -225,8 +282,38 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								//echo $extract_date[2];
 								//echo $var = "'".$extract_dates[0].'/'.$extract_dates[1].'/'.$extract_dates[2]."'";
 											?>
-												<h4 class="blue line_time"><?php echo $extract_dates[0].' '.$extract_dates[1].' '.$extract_dates[2]; ?></h4>
-												<h4 class="line_time"><?php echo $event_detail['event_place']?$event_detail['event_place'].',':'';$event_detail['cityname']?$event_detail['cityname'].',':''; echo $event_detail['country_name']?$event_detail['country_name']:''; ?></h4>
+												<h4 class="blue line_time"><?php echo $extract_dates[0].' '.$extract_dates[1].' '.$extract_dates[2];
+												
+												 ?></h4>
+												<h4 class="line_time">
+												<?php
+												
+												$place=0;
+												$city=0;						
+												if($event_detail['event_place']!='')
+												{
+												echo $event_detail['event_place'];
+												$place=1;
+												}
+												if($event_detail['cityname']!=='')
+												{
+												if($place==1)
+												{
+												echo ","; 
+												}
+												echo $event_detail['cityname'];
+												$city=1;
+												}
+												if($event_detail['country_name']!='')
+												{
+												if($city==1 || $place==1)
+												{
+												echo ",";
+												}
+												echo $event_detail['country_name'];
+												}
+												?>
+												</h4>
 												<button class="btn btn-primary" href="#">Register</button>
 											</div>
 											
@@ -249,7 +336,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</div>
 									<?php } } ?>
 								</div>
+								
+								
+								
+								
+								
 							</div>
+						</div>	
 						</div>
 					</div>
 				</div>
@@ -286,7 +379,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	</div>
 	<!-- End Here -->
 <?php 
-if(!empty($events))
+if(!empty($events['event_res']))
 {
 $array_dates=implode(',',$array_dates);
 }
@@ -295,24 +388,25 @@ $array_dates = date("m/d/Y");
 }
 //echo $event_detail['event_date_time'];
 $show_date = '';
-								//echo $event_detail['event_date_time'];
-								if(!empty($events))
-								{
-								$show_current_date = explode(" ",$event_detail['event_date_time']);
-								//echo $extract_date[];
-								$month = $extract_date[1];
-								//echo $show_current_date[2];
-								$number_month = date('m', strtotime($month));
-								$number_month = $number_month -1;
-								}
-								else{
-								$show_current_date[2] = date('Y');
-								$number_month = date('m');
-								}
+//echo $event_detail['event_date_time'];
+if(!empty($events['event_res']))
+{
+$show_current_date = explode(" ",$event_detail['event_date_time']);
+//echo $extract_date[];
+$month = $extract_date[1];
+//echo $show_current_date[2];
+$number_month = date('m', strtotime($month));
+$number_month = $number_month -1;
+}
+else{
+$show_current_date[2] = date('Y');
+$number_month = date('m');
+}
 			// foreach($array_dates as $dates){
 			// echo $dates;
 			// }?>
-<SCRIPT LANGUAGE="JavaScript">     
+<SCRIPT LANGUAGE="JavaScript"> 
+    
  function popup(id) {
  /* $('#myModal').modal({
         keyboard: false
@@ -442,33 +536,33 @@ var x = new Array(<?php echo $array_dates; ?>);
 			});
 		</script>
 		<script>
-		var href=document.URL;;
+		var href=document.URL;
 		$(function() {
 			$('.search_chkbox').click(function(e) {
 			if($(this).is(':checked'))
 			{
-			lastcharhref=href.charAt( href.length-1); 
-			addhref=$(this).closest("li").attr("href");
-			if(lastcharhref=='/')
-			{
-			addhref=addhref.substr(1);
-			}
-			href = href+addhref;
+				lastcharhref=href.charAt( href.length-1); 
+				addhref=$(this).closest("li").attr("href");
+				if(lastcharhref=='/')
+				{
+					addhref=addhref.substr(1);
+				}
+				href = href+addhref;
 			}
 			else
 			{
-			//alert($(this).closest("li").attr("id"));
-			href=href.replace($(this).closest("li").attr("href"),'');
+				//alert($(this).closest("li").attr("id"));
+				href=href.replace($(this).closest("li").attr("href"),'');
 			}
 			history.pushState('',href,href);
-			get_college_result_by_ajax();
-			});
+			get_event_result_by_ajax();
+			});;
 
 			
 
 
 		});
-function get_college_result_by_ajax()
+function get_event_result_by_ajax()
 {
 	var url=document.URL;
 	var change_url=url.split('events/');
@@ -485,28 +579,89 @@ function get_college_result_by_ajax()
 	   cache: false,
 	   success: function(r)
 	   {
-	   alert(r);
+		
 	   res=r.split('!@#$%^&*');
-	   $('#search_results').animate({
+		$('#event_results_filteration').animate({
 		'opacity':1
 		},1000,function(){
 		});
 		if(res[2]!='0' && res[1]!='0')
 		{
-		$('#search_results').html(res[2]);
+		$('#event_results_filteration').html(res[2]);
 		}
 		else
 		{
-		$('#search_results').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
+		$('#event_results_filteration').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
 		}
-	  	$('#listed_currently_univ').html(res[1]);
+	  	$('#listed_currently_event').html(res[1]);
 	    $('#red_total_univ').html(res[0]);
 	   }
 	   })
+}	
+
+function events_result_by_paging(a,pid)
+{
+	cpage=$('#current_paging_value').val();
+	if(a!=cpage)	
+	{
+	var url=document.URL;
+	var change_url=url.split('colleges/');
+	if(!(change_url.length>1 && change_url[1]!=''))
+	{
+	url='<?php echo $base; ?>colleges';
+	}
+	$('#div_events').animate({
+	'opacity':0.5
+	},1000,function(){
+	});
+
+	$('#pagination a').removeClass('add_paging_background_class');
+	$('.'+pid).addClass('add_paging_background_class');
+	//$('#ajax_loader_paging').css('z-index','9');
+	//$('#col_paging').css('opacity','0.4');
+	$('#current_paging_value').val(a);
+ 	   $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>auth/all_events_paging",
+	   async:false,
+	   data: 'offset='+a+'&current_url='+url,
+	   cache: false,
+	   success: function(r)
+	   {
+	    res=r.split('!@#$%^&*');
+		$('#div_events').animate({
+		'opacity':1
+		},1,function(){
+		});
+		$('#div_events').html(res[1]);
+		$('#listed_currently_event').html(res[0]);
+	   }
+	   })
+	   
+   }
 }
-		</script>
-	<script>
-$(document).ready(function(){
-			FixImages(true);
-});			
-</script>	
+
+
+
+function eventsorting(what,orderBy,id,text){
+$('.sort_list a').removeClass('active');
+var od='desc';
+if(orderBy=='desc')
+{
+od='asc';
+}
+$('#'+id).html('<a href="javascript:void(0)" class="active" onclick="eventsorting(\''+what+'\',\''+od+'\',\''+id+'\',\''+text+'\')">'+text+'</a>');
+
+ $('.events_holder_box').tsort('',{attr:what,order:orderBy});
+
+}
+
+
+
+
+
+
+
+
+
+	</script>

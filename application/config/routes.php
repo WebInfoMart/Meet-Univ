@@ -71,8 +71,8 @@ $route['(college_search|events_search)'] = 'search/$1';
 $route['colleges/(.*)'] = 'auth/all_colleges/$1';
 $route['colleges']='auth/all_colleges';
 
-
-
+$route['events/(.*)'] = 'auth/events/$1';
+$route['events']='auth/events';
 
 $route['(:num)/UniversityQuest/(:num)/(:any)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
 $route['MeetQuest/(:num)/(:any)/(:num)'] = 'quest_ans_controler/MeetQuest/$1/$2';
@@ -88,6 +88,7 @@ $route['(compose_email)'] = 'user/$1';
 $route['BrowseQuestion/(:any)'] = 'quest_ans_controler/BrowseQuestion/$1';
 
 
+//profile messge
 $route['(delete_message_inbox)'] = 'user/delete_message_inbox';
 $route['(delete_message_inbox/(:num))'] = 'user/delete_message_inbox/$1';
 $route['(delete_message_inbox/(:num)/(:num))'] = 'user/delete_message_inbox/$1/$2';

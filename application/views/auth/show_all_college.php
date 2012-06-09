@@ -265,7 +265,7 @@ $univ_name= str_replace(' ','-',$get_university['university'][$no_university]['u
 												&nbsp;&nbsp;Listed: <span class="blue">2980</span>
 											</div>
 											<div class="last_box_col float_r">
-												<img src="<?php echo "$base$img_path"; ?>/add.PNG" class="img_set">
+												<img src="<?php echo "$base$img_path"; ?>/add.png" class="img_set">
 				<span class="margin_l follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
 												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow<?php } else { ?>Unfollow<?php } ?>
 									   </span>
