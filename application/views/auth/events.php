@@ -212,7 +212,7 @@ array_push($array_dates,$var);
 										<div>
 											<div class="float_l span7 margin_zero">
 											<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>">
-												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
+												<h3 class="inline"> <?php echo $event_detail['univ_name']; ?> </h3>
 												</a>
 												<?php
 												echo "<h4 style='display:inline';>";
@@ -233,7 +233,7 @@ array_push($array_dates,$var);
 													echo "Counselling";
 												}
 												echo "</h4>";
-												echo '<h5 style="display:inline;"><span class="inline"> &raquo; </span>'.$event_detail['event_title'].'</h5>';
+												echo '<h5><span class="inline"> &raquo; </span>'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
 											<div class="float_r">
@@ -323,14 +323,14 @@ array_push($array_dates,$var);
 											<div class="float_r registered">
 											<?php $event_register_user = $this->frontmodel->count_event_register($event_detail['event_id']); ?>
 													<h2 class="blue"><?php echo $event_register_user; ?></h2>	
-													<h4 class="blue">Registered</h4>
+													<h5 class="blue">Registered</h5>
 											</div>
 											<div class="clearfix"></div>
 										</div>
-										<div class="float_r">
-											<div id="gp" class="float_l" style="margin-right:15px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-												<div id="fb" class="float_l fb" style="margin-right:24px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
-												<div id="tw" class="float_r tw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
+										<div class="float_r margin1">
+											<div id="gp" class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+												<div id="fb" class="float_l fb" style="margin-right:8px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
+												<div id="tw" class="float_r" style="margin-right:-30px"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
 										</div>
 										<div class="clearfix"></div>
 									</div>
@@ -347,7 +347,7 @@ array_push($array_dates,$var);
 					</div>
 				</div>
 				<div class="span4 float_r">
-					<div class="college_form">
+					<div class="follow">
 						<div id="event_calendar">
 						</div>
 					</div>

@@ -116,7 +116,7 @@ array_push($array_dates,$var);
 												{
 												if($place==1)
 												{
-												echo ","; 
+												echo ", "; 
 												}
 												echo $event_detail['cityname'];
 												$city=1;
@@ -125,7 +125,7 @@ array_push($array_dates,$var);
 												{
 												if($city==1 || $place==1)
 												{
-												echo ",";
+												echo ", ";
 												}
 												echo $event_detail['country_name'];
 												}
@@ -140,7 +140,7 @@ array_push($array_dates,$var);
 											<div class="float_r registered">
 											<?php $event_register_user = $this->frontmodel->count_event_register($event_detail['event_id']); ?>
 													<h2 class="blue"><?php echo $event_register_user; ?></h2>	
-													<h4 class="blue">Registered</h4>
+													<h5 class="blue">Registered</h5>
 											</div>
 											<div class="clearfix"></div>
 										</div>
