@@ -42,6 +42,17 @@ $route['admin/update-(:num)-user-(:num)'] = 'admin/edituser/$1/$2';
 $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';
 
+
+//sumit munjal 
+$route['about']='univ/univ_aboutus';
+$route['programs']='univ/programs';
+$route['university_events']='univ/university_events';
+$route['university_news']='univ/university_news_list';
+$route['university_articles']='univ/university_articles_list';
+$route['university_qustions_qnswers']='univ/UniversityQuest';
+
+
+
 $route['university/(:num)/(:any)/article/(:num)/(:any)']='univ/univ_articles/$1/$3';
 
 $route['university/(:num)/(:any)/news/(:num)/(:any)']='univ/univ_programs/$1/$2';

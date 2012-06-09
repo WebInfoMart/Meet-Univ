@@ -20,6 +20,7 @@ class Univ extends CI_Controller
 	/* Function used for single university page */
 	function university($univ_id='')
 	{
+		
 		$data = $this->path->all_path();
 		
 		$this->load->view('auth/header',$data);
@@ -159,9 +160,10 @@ class Univ extends CI_Controller
 	}
 	
 	/* This Function used for get program categories provided by university */
-	function univ_programs($univ_id='',$prg='')
+	function programs()
 	{
 		$data = $this->path->all_path();
+		$univ_id=$this->subdomain->find_id_of_current_univ();
 		$data['err_div']=0;
 		$this->load->view('auth/header',$data);
 		$data['univ_id_for_program'] = $univ_id;
@@ -184,10 +186,7 @@ class Univ extends CI_Controller
 			$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
 			$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
 			$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
-			if($prg == 'program')
-		    {
 			$data['prog_title_of_univ'] = $this->users->fetch_program_title_of_univ($univ_id);
-		    }
 		$this->load->view('auth/univ-header-gallery-logo',$data);
 		$this->load->view('auth/university-courses',$data);
 		}
@@ -347,9 +346,10 @@ class Univ extends CI_Controller
 			}
 				$this->load->view('auth/footer',$data);
 		}
-	function university_events_list($univ_id='')
+	function university_events()
 	{
 			$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
 			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -388,9 +388,11 @@ class Univ extends CI_Controller
 			$this->load->view('auth/footer',$data);
 	}
 
-	function university_news_list($univ_id='')
+	function university_news_list()
 	{
+			
 			$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
 			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -429,9 +431,10 @@ class Univ extends CI_Controller
 			$this->load->view('auth/footer',$data);
 	}
 
-	function university_article_list($univ_id='')
+	function university_articles_list()
 	{
 			$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
 			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -614,6 +617,8 @@ class Univ extends CI_Controller
   function UniversityQuest($univ_id='',$quest_id='',$user_id='')
   {
    $data = $this->path->all_path();
+   $univ_id=$this->subdomain->find_id_of_current_univ();
+
    $this->load->view('auth/header',$data);
    $data['univ_id_for_program'] = $univ_id; 
    $data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -632,7 +637,7 @@ class Univ extends CI_Controller
     $data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
     $this->load->view('auth/univ-header-gallery-logo',$data);
 				
-    if($univ_id !=''&& $quest_id !='' && $user_id !='')
+    if($univ_id !='' && $quest_id !='' && $user_id !='')
     {
     $data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$user_id);
 	$data['clear_comment']=0;
@@ -765,9 +770,10 @@ class Univ extends CI_Controller
 			$this->load->view('auth/footer',$data);
 		}
 		
-	function univ_aboutus($univ_id='')
+	function univ_aboutus()
 	{
 			$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
 			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);

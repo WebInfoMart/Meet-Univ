@@ -19,15 +19,19 @@
 									<?php
 									$image_exist=0;	
 									$article_img = $articles_detail['article_image_path'];	
-									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+									$univ_image =$articles_detail['univ_logo_path'];
+									if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
 									{
 									$image_exist=1;
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+								 list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
 									}
+									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_image) && $univ_image!='')
+									{
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/univ_gallery'.$img_path.'/default_logo.png');
+								    }
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
-								    }
+									}
 									if($article_img!='' && $image_exist==1)
 									{
 									$image=$base.'uploads/news_article_images/'.$article_img;

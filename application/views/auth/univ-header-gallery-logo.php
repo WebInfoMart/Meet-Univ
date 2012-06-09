@@ -124,19 +124,28 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 				<div class="span9 float_r" id="main-nav-holder">
 					<nav id="main-nav">
 						<ul class="uni_menu">
-							<li><a href="<?php echo $base ?>university/<?php echo $univ_id_for_program; ?>/<?php echo $university_details['univ_name']; ?>" class="active">Home</a></li>
+							<li><a href="/" class="active">Home</a></li>
 							<li>
 							<?php 
 							$univ_name= str_replace(' ','-',$university_details['univ_name']);
 									$univ_name= strtolower($univ_name);
 									$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
 									?>
-							<a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/about" class="active">About</a></li>
-							<li><a href="<?php echo "$base"; ?>univ_programs/<?php echo $univ_id_for_program; ?>/program" class="active">Programs</a></li>
-							<li><a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/events" class="active">Events</a></li>
-							<li><a href="<?php echo $base; ?>UniversityQuestSection/<?php echo $univ_id_for_program; ?>/<?php echo $univ_name; ?>" class="active">Questions & Answers</a></li>
-							<li ><a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/news">News</a></li>
-							<li class="border_beta"><a href="<?php echo $base ?><?php echo $univ_id_for_program; ?>/university/<?php echo $univ_name; ?>/articles" class="active">Articles</a></li>
+		<?php 
+		$about_us_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'about','','');
+		$programs_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'programs','','');
+		$events_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_events','','');
+		$qna_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_qustions_qnswers','','');
+		$news_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_news','','');
+		$article_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_articles','','');
+		
+		?>							
+							<a href="<?php echo $about_us_link; ?>" class="active">About</a></li>
+							<li><a href="<?php echo $programs_link ?>" class="active">Programs</a></li>
+							<li><a href="<?php echo $events_link; ?>" class="active">Events</a></li>
+							<li><a href="<?php echo $qna_link; ?>" class="active">Questions & Answers</a></li>
+							<li ><a href="<?php echo $news_link; ?>">News</a></li>
+							<li class="border_beta"><a href="<?php echo $article_link; ?>" class="active">Articles</a></li>
 						</ul>
 					</nav>
 				</div>

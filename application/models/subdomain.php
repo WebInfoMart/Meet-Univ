@@ -24,7 +24,7 @@ class Subdomain extends CI_Model
 		$data['gallery_home'] = $this->users->fetch_home_gallery();
 		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
 		$data['cities'] = $this->frontmodel->fetch_cities_having_events();
-		
+		$data['total_poste_event_count'] = $this->frontmodel->count_total_posted_event();
 		$data['area_interest'] = $this->frontmodel->fetch_area_interest_having_univ();
 		$data['featured_events']=$this->frontmodel->fetch_featured_events();
 		$data['featured_college']=$this->frontmodel->fetch_featured_college();
@@ -225,7 +225,19 @@ class Subdomain extends CI_Model
 		}
 		}
 	}
-	
+	function find_id_of_current_univ()
+	{
+	    $subdomain_arr = explode('.', $_SERVER['HTTP_HOST']);
+		if(count($subdomain_arr)>2)
+		{
+		if($subdomain_arr[0]!='www')
+		{
+		$univ_subdomain['domain']=trim($subdomain_arr[0]);
+		$univ_subdomain['university']=$this->subdomain->univ_id_of_domain($univ_subdomain['domain']);
+		return $univ_subdomain['university']['univ_id'];
+		}
+		}
+	}
 	function generate_univ_link_by_subdomain($subdomain)
 	{
 	 $data = $this->path->all_path();
