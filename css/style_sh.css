@@ -258,7 +258,7 @@ border-bottom: 1px solid #E5E5E5;
 }
 .event_height_uni{min-height: 100px;max-height:132px;overflow:hidden;}
 .event_height_ul{height:75px;overflow:hidden;}
-.news_box_uni{height: 242px;overflow: hidden;}
+.news_box_uni{max-height: 242px;overflow: hidden;}
 .index_sidebar_box .index_sidebar_body .links {
 font-size: 1.1em;
 min-height: 90px;
