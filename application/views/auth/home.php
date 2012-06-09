@@ -568,6 +568,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				{
 					$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
 				}
+				else
+				{
+				$url='';
+				}
 				$q_date = explode(" ",$quest_list['q_asked_time']);
 				//print_r($q_date[0]);
 				$quest_ask_date = explode("-",$q_date[0]);
