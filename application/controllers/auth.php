@@ -69,11 +69,10 @@ class Auth extends CI_Controller
 			$data['query'] = $this->users->fetch_all_data($logged_user);
 			$data['profile_pic'] = $this->users->fetch_profile_data($logged_user); 
 			$data['pro_complete']=$this->users->chk_profile_completeness($data['profile_pic']);
-			
+			$data['featured_question_profile'] = $this->quest_ans_model->latest_question_profile();
 			$data['recent_articles']=$this->frontmodel->recent_articles();
 			$data['recent_news']=$this->frontmodel->recent_news();
 			$data['featured_events']=$this->frontmodel->fetch_recent_events();
-			$data['featured_question_profile'] = $this->quest_ans_model->latest_question_profile();
 			if($data['recent_articles']==0)
 			{
 			$data['recent_articles']=array();
@@ -1050,7 +1049,7 @@ class Auth extends CI_Controller
 	}
 	
 	
-	function all_colleges_paging()
+ function all_colleges_paging()
  {
   $data = $this->path->all_path();
   $current_url=$this->input->post('current_url');
@@ -1173,19 +1172,8 @@ class Auth extends CI_Controller
 		}
 	}
 	
-	function events($page='')
-	{
-		$data = $this->path->all_path();
-		$this->load->view('auth/header',$data);
-		$cat='all';
-		$data['events'] = $this->frontmodel->fetch_events($cat,$page);
-		$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
-		$data['upcoming_event'] = $this->frontmodel->fetch_featured_events();
-		$data['country_name_having_event'] = $this->leadmodel->country_name_having_event();
-		
-		$this->load->view('auth/events',$data);
-		$this->load->view('auth/footer',$data);
-	}
+	
+	
 	
 	function spot_admission_events($page='')
 	{
@@ -1276,22 +1264,52 @@ class Auth extends CI_Controller
 		$this->load->view('ajaxviews/google_map',$data);
 	}
 	
+	function events()
+	{
+		$data = $this->path->all_path();
+		$this->load->view('auth/header',$data);
+		$data = $this->path->all_path();
+		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		$change_url=explode("colleges/",$current_url);
+		if(count($change_url)>1)
+		{
+		if($change_url[1]=='')
+		$current_url=$data['base'].'events';
+		}
+		$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
+		$data['country_name_having_event'] = $this->leadmodel->country_name_having_event();
+		$data['events'] = $this->searchmodel->all_event_filteration($current_url);
+		
+		$this->load->view('auth/events',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	
 	function all_events_search()
- {
-  $current_url=$this->input->post('current_url');
-  $data = $this->path->all_path();
-  $data['get_university'] = $this->searchmodel->all_event_filteration($current_url);
-  if($data['get_university']!=0)
-  {
-  $college_list=$this->load->view('auth/show_all_college_search',$data);
-  $total_univ=$data['get_university']['total_res'];
-  $per_page_res=$data['get_university']['per_page_res'];
-  echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$college_list;
-  }
- }
- 
- 
- 
+	{
+		$current_url=$this->input->post('current_url');
+		$data = $this->path->all_path();
+		$data['events'] = $this->searchmodel->all_event_filteration($current_url);
+		if($data['events']!=0)
+		{
+			$events_list=$this->load->view('ajaxviews/events_search',$data);
+			$total_univ=$data['events']['total_res'];
+			$per_page_res=$data['events']['per_page_res'];
+			echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$events_list;
+		}
+	}
+	
+	function all_events_paging()
+	{
+	  $data = $this->path->all_path();
+	  $current_url=$this->input->post('current_url');
+	  $data['events'] = $this->searchmodel->show_events_paging($current_url);
+	  if($data['events']!=0)
+	  {
+	  $event_list=$this->load->view('ajaxviews/show_event_paging',$data);
+	  echo $data['events']['per_page_res'].'!@#$%^&*'.$event_list;
+	  }
+    }
+	
 	
 	
 }
