@@ -191,24 +191,24 @@ class Subdomain extends CI_Model
 	return 0;
 	}
 	
-	function genereate_the_link($cat_type,$cat_title,$catid)
+	function genereate_the_subdomain_link($subdomain,$cat_type,$cat_title,$catid)
 	{
 	 $data = $this->path->all_path();
-	 $domain=$this->subdomain->find_subdomain_name_and_id();
+	 $url='';
 	 if($cat_title!='' && $catid!='')
 	 {
 	 $cat_title=strtolower($cat_title);
 	 $cat_title=str_replace(' ','-',$cat_title);
 	 $cat_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $cat_title);
-	 $url=$domain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
+	 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
+	 }
+	 else if($cat_title=='' && $catid!='')
+	 {
+	 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type;
 	 }
 	 else if($cat_title=='' && $catid=='')
 	 {
-	 $url=$domain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
-	 }
-	 else if($cat_title && $cat_id!='')
-	 {
-	  $url=$domain.$data['domain_name'].'/'.$cat_type;
+	  $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type;
 	 }
 	 return $url;
 	}
@@ -224,6 +224,13 @@ class Subdomain extends CI_Model
 		return $univ_subdomain;
 		}
 		}
+	}
+	
+	function generate_univ_link_by_subdomain($subdomain)
+	{
+	 $data = $this->path->all_path();
+	 $univ_link='http://'.$subdomain.$data['domain_name'];
+	 return $univ_link;
 	}
 
 }
