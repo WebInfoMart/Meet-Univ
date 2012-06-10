@@ -66,7 +66,8 @@ if ($user) {
   'email'		=> $user_profile['email'],
   'activated'  => '1', 
   'createdby_user_id'  => '0',
-   'fb_user' =>'1'
+   'fb_user' =>'1',
+  //'last_ip'	=> $this->ci->input->ip_address(),
   );
   if($user_profile['name']!='' && $user_profile['name']!=NULL)
   {
@@ -78,14 +79,6 @@ if ($user) {
 						 'username'	=> $fb_name,
 						 'status'	=> STATUS_ACTIVATED,
 						 ));
-						 
-    //Post To Facebook
-		$attachment = array('message' => $fb_name.'joined meetuniversities.','link' => 'http://meetuniversities.com');
-      if(!($sendMessage = $facebook->api('/me/feed/','post',$attachment))){
-      $errors= error_get_last();
-      echo "Facebook publish error: ".$errors['type'];
-      echo "<br />\n".$errors['message'];
-      }
 						 
   }
   else if($fb_return_num_rows > 0)
@@ -184,35 +177,12 @@ $detail_of_event = "";
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">
-<title> List your global events.Let the international student community know about when you are visiting near them. </title>
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/home_slider.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-editor.css" />
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/thingerly-calendar.css" />
-<!--<script src="http://connect.facebook.net/en_US/all.js"></script>-->
-<div id="fb-root"></div>
-<script>
-  FB.init({appId: '415316545179174', status: true, cookie: true, xfbml: true});
-  FB.Event.subscribe('auth.sessionChange', function(response) {
-    if (response.session) {
-      // A user has logged in, and a new cookie has been saved
-        window.location.reload(true);
-    } else {
-      // The user has logged out, and the cookie has been cleared
-    }
-  });
-</script>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=415316545179174";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-</script>
 <script src="<?php echo "$base$js";?>/jquery.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-collapse.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
@@ -328,7 +298,27 @@ $('.menu a').each(function(){
 	<!-- ===================end slider_kit=================== -->
 </head>
 <body>
-<!--<div id="fb-root"></div> -->
+<div id="fb-root"></div>
+<script>
+/* <![CDATA[ */
+window.fbAsyncInit = function() {
+FB.init({
+appId      : '415316545179174', // App ID
+status     : true, // check login status
+cookie     : true, // enable cookies to allow the server to access the session
+xfbml      : true,  // parse XFBML
+oauth      : true
+});	 		 
+};
+// Load the SDK Asynchronously
+(function(d){
+var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+js = d.createElement('script'); js.id = id; js.async = true;
+js.src = "//connect.facebook.net/en_US/all.js#appId=415316545179174&amp;xfbml=1";
+d.getElementsByTagName('head')[0].appendChild(js);
+}(document));
+/* ]]> */
+</script>
 	<header>
 		<div class="header_bar">	
 			<div class="container">
@@ -400,8 +390,6 @@ $('.menu a').each(function(){
 
 }
 	</style>
-	<!--<div id="fb-root"></div>-->
-
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 <!-- Place this render call where appropriate -->
 <script type="text/javascript" src="http://apis.google.com/js/plusone.js">
