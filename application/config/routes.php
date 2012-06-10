@@ -60,11 +60,12 @@ $route['news/(:num)/(:any)']='univ/univ_news/$1';
 $route['articles/(:num)/(:any)']='univ/univ_articles/$1';
 //event detail page
 
+//for program page
+$route['programs/(:num)/(:any)']='univ/univ_programs/$1';
 
 //$route['university/(:num)/(:any)/article/(:num)/(:any)']='univ/univ_articles/$1/$3';
 
 //for news page
-$route['(:num)/(:any)/news/(:num)/(:any)']='univ/univ_programs/$1/$2';
 
 //for about us
 $route['(:num)/university/(:any)/about']='univ/univ_aboutus/$1';

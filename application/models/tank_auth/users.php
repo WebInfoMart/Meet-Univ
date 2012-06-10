@@ -1237,7 +1237,8 @@ class Users extends CI_Model
 			$this->db->from('univ_program');
 			$this->db->join('program', 'univ_program.program_id = program.prog_id');
 			$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
-			$this->db->where_in('univ_id',$univ_id);
+			$this->db->join('university', 'university.univ_id = univ_program.univ_id','left');
+			$this->db->where_in('univ_program.univ_id',$univ_id);
 			$res = $this->db->get();
 			//print_r($res->result_array());
 			//print_r($res->result_array());

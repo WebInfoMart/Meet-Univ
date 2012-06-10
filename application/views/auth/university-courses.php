@@ -5,7 +5,6 @@
 					<div>
 						<ul class="course_list">
 							<?php
-							print_r($prog_title_of_univ);
 							if(!empty($prog_title_of_univ))
 							{
 							foreach($prog_title_of_univ as $show_title)
