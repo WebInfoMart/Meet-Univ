@@ -14,11 +14,17 @@ if ($user) {
 }
 if($user)
 {
+if(!empty($user_profile['location']['name']))
+{
 $fb_user_country_city = explode(",",$user_profile['location']['name']);
-
 $city_fb_user = trim($fb_user_country_city[0]);
 
 $country_fb_user = trim($fb_user_country_city[1]);
+}
+else{
+$city_fb_user = " ";
+$country_fb_user = " ";
+}
 
 $fetch_country_result = $this->users->fetch_country_id($country_fb_user);
 
@@ -50,7 +56,25 @@ $(window).load(function(){
 });
 </script>
 
-
+<?php
+$select_male='';
+$select_female='';
+if($fetch_profile['gender'] != '' || $fetch_profile['gender']=0)
+{
+if($fetch_profile['gender'] == 'male')
+{
+	$select_male = 'checked';
+}
+else if($fetch_profile['gender'] == 'female')
+{
+	$select_female = 'checked';
+}
+else{
+$select_male='';
+$select_female='';
+}
+}
+?>
 
 
 
@@ -90,8 +114,8 @@ $(window).load(function(){
 			</div>
 			<div class="margin_t">
 				<div class="float_l span2 margin_zero"><h4>Gender</h4></div>
-				<div class="float_l span3 margin_l12"><input type="radio" name="sex" value="male" /> Male
-					<input type="radio" name="sex" value="female" /> Female</div>
+				<div class="float_l span3 margin_l12"><input type="radio" name="sex" value="male" <?php echo $select_male; ?> /> Male
+					<input type="radio" name="sex" value="female" <?php echo $select_female; ?> /> Female</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="margin_t">
