@@ -199,7 +199,9 @@ class Subdomain extends CI_Model
 	 {
 	 $cat_title=strtolower($cat_title);
 	 $cat_title=str_replace(' ','-',$cat_title);
+	 $cat_title=str_replace('&','and',$cat_title);
 	 $cat_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $cat_title);
+	 
 	 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
 	 }
 	 else if($cat_title=='' && $catid!='')

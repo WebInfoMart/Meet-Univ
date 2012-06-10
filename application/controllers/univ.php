@@ -249,9 +249,10 @@ class Univ extends CI_Controller
 			//$this->load->view('scrap',$data);
 		}
 		//function for shonwing the univ event
-		function univ_event($univ_id='',$event_id='')
+		function univ_event($event_id='')
 		{
 			$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
@@ -472,9 +473,10 @@ class Univ extends CI_Controller
 			}
 			$this->load->view('auth/footer',$data);
 	}
-		function univ_news($univ_id='',$news_id='')
+		function univ_news($news_id='')
 		{
 			$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
 			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);

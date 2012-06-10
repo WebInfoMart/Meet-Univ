@@ -27,25 +27,23 @@ class Auth extends CI_Controller
 	{
 		
 		$subdomain_arr = explode('.', $_SERVER['HTTP_HOST']);
-		$data = $this->path->all_path();
-		$data['gallery_home'] = $this->users->fetch_home_gallery();
-		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
-		$data['cities'] = $this->frontmodel->fetch_cities_having_events();
-		
-		$data['area_interest'] = $this->frontmodel->fetch_area_interest_having_univ();
-		$data['featured_events']=$this->frontmodel->fetch_featured_events();
-		$data['featured_college']=$this->frontmodel->fetch_featured_college();
-		$data['featured_article']=$this->frontmodel->fetch_featured_article_home();	
-		$data['featured_news']=$this->frontmodel->fetch_featured_news();
-		$data['featured_news_show']=$this->frontmodel->fetch_featured_news_home();
-		$data['featured_quest'] = $this->frontmodel->fetch_home_featured_quest();
-		$data['get_latest_question_home'] = $this->quest_ans_model->get_all_quest_user_info();
-		$data['total_poste_event_count'] = $this->frontmodel->count_total_posted_event();
-		$this->load->view('auth/header',$data);
-		$this->load->view('auth/home',$data);
-		
-		$this->load->view('auth/footer',$data);
-       		
+		if(count($subdomain_arr)>2)
+		{
+		if($subdomain_arr[0]!='www')
+		{
+		$univ_domain=$this->subdomain->find_subdomain_name_and_id();
+		$this->subdomain->university_by_domain($univ_domain['university']['univ_id'],$univ_domain['domain']);
+		}
+		else
+		{
+		$this->subdomain->homefunction();
+		}
+		}
+		else
+		{
+		$this->subdomain->homefunction();
+		}
+			
 	}
 	
 	function home($pwd_change='')
@@ -1299,23 +1297,23 @@ class Auth extends CI_Controller
 		}
 	}
 	
-	function all_events_paging()
+	function subdomain()
+   {
+    $this->db->select('*');
+	$this->db->from('university');
+	$query=$this->db->get();
+	$univ=$query->result_array();
+	foreach($univ as $univs)
 	{
-	  $data = $this->path->all_path();
-	  $current_url=$this->input->post('current_url');
-	  $data['events'] = $this->searchmodel->show_events_paging($current_url);
-	  if($data['events']!=0)
-	  {
-	  $event_list=$this->load->view('ajaxviews/show_event_paging',$data);
-	  echo $data['events']['per_page_res'].'!@#$%^&*'.$event_list;
-	  }
-    }
-	function auto_count_register_user()
-	{
-		$data['user_count'] = $this->frontmodel->count_register_user_by_ajax();
-		echo $data['user_count'][0]['register_user_counter'];
-		//$this->load->view('auth/event_register_user_counter',$data);
-	}
+	$univname=str_replace(' ','-',$univs['univ_name']);
+	$univname=str_replace('&','and',$univname);
+	$univname=str_replace(',','',$univname);
+	$univname=str_replace('.','',$univname);
+	$univname=str_replace("'",'',$univname);
+	
+	$this->db->query("update university set subdomain_name = '".$univname."' where univ_id='".$univs['univ_id']."'");
+	}	
+   }	
 	
 	
 }

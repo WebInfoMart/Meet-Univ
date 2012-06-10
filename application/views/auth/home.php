@@ -311,15 +311,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<div class="float_l">
 		<div class="title_style">
 		<?php 
-		$univ_name=strtolower($events['univ_name']);
-		$univ_name=str_replace(' ','-',$events['univ_name']);
-		$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
-									
-		$event_title=strtolower($events['event_title']);
-		$event_title=str_replace(' ','-',$event_title);
-		$event_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $event_title);						
+		$univ_name=$events['univ_name'];
+		$univ_domain=$events['subdomain_name'];
+		$event_title=$events['event_title'];
+		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'events',$event_title,$events['event_id']);					
 		?>
-		<a class="" href="<?php echo $base.$events['univ_id'].'/university/'.$univ_name.'/event/'.$events['event_id'].'/'.$event_title; ?>">
+		<a class="" href="<?php echo $event_link ?>">
 		
 		<h4 class="inline"><?php echo $events['univ_name']; ?></h4>
 		</a><span class="inline"> &raquo; </span>
@@ -415,16 +412,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<p><?php echo substr($f_news['news_detail'],0,600).'...'; 
 										if(strlen($f_news['news_detail'])>600)
 										{
-										$univ_name=str_replace(' ','-',$f_news['univ_name']);
-										$univ_name=strtolower($univ_name);
-										$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
-										
-										$news_title=str_replace(' ','-',$f_news['news_title']);
-										$news_title=strtolower($news_title);
-										$news_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $news_title);	
-										
-										
-		echo "...";?><br/><a href="<?php echo $base.'university/'.$f_news['news_univ_id'].'/'.$univ_name.'/news/'.$f_news['news_id'].'/'.$news_title; ?>" class="float_r view_back">View more&raquo;</a>
+	$univ_domain=$f_news['subdomain_name'];
+    $news_title=$f_news['news_title'];	
+	$news_id=$f_news['news_id'];
+	$news_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'news',$news_title,$news_id);							
+		echo "...";?><br/><a href="<?php echo $news_link; ?>" class="float_r view_back">View more&raquo;</a>
 								<?php		}
 										?>	 </p>
 									
