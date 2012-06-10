@@ -46,16 +46,18 @@ foreach($event_info_sms as $event_sms)
 {
 	/* Event ID */ $event_id = $event_sms['event_id'];
 	$url = 'leadcontroller/send_sms_of_event';
-	echo "<div>";
+	//echo "";
 	  echo "<h4>Let Aisha remember this for you and personally give you a call to remind you about the event
 	  </h4></br>";
 	echo "
-	<form action='$base$url' method='post' id='sms_form' style='height:350px;' class='form-horizontal'>
-	<div style='float:left;'>
+	
+	<div>
+	<div style='float:left;' class='span5'>
+	<form action='$base$url' method='post' id='sms_form' style='height:350px;width:305px' class='form-horizontal'>
 	<input type='hidden' name='uname' value='$sms_config[tsms_uname]'/>
 	<input type='hidden' name='pass' value='$sms_config[tsms_pass]'/>
 	<input type='hidden' name='send' value='$sms_config[tsms_send]'/>
-	<div style='float:left'>
+	
 	<div class='control-group'>
             <label class='control-label'>Name</label>
 			<div class='controls docs-input-sizes'>
@@ -75,26 +77,13 @@ foreach($event_info_sms as $event_sms)
 			</div>
 		</div>
 	
-	
-	
-	
-	<span style='margin-left: 29px;'><input type='hidden' name='event_id_sms' id='event_id_sms' value='$event_id'/></span>
-	</div>
-	
-	<input type='hidden' name='event_title' value='$event_sms[event_title]'>
-	<input type='hidden' name='event_date' value='$event_sms[event_date_time]'>
-	<input type='hidden' name='event_time' value='$event_sms[event_time]'>
-	<input type='hidden' name='event_place' value='$event_sms[event_place]'>
-	<input type='hidden' name='event_city' value='$event_sms[cityname]'>
-	<div style='width: 440px;border-radius: 4px;margin-top: 15px;'>
-	
 	<div class='control-group'>
             <label class='control-label'>Event- </label>
 			<div class='controls docs-input-sizes'>
 				$event_sms[event_title]
 			</div>
 	</div>
-	<div class=control-group'>
+	<div class='control-group'>
             <label class='control-label'>Event Date - </label>
 			<div class='controls docs-input-sizes'>
 				$event_sms[event_date_time]
@@ -112,18 +101,32 @@ foreach($event_info_sms as $event_sms)
 				$event_sms[event_place]
 			</div>
 	</div>
+	<div class='controls docs-input-sizes'>
 	<label class='checkbox' id='agree_terms'>
                 <input type='checkbox' value='yes' name='agree' id='agree'>
             <span id='agree_terms_span'> I agree to the terms and conditions</span>
     </label>
+	</div>
+	<div class='controls docs-input-sizes'>
 	<input type='submit' value='SMS ME' name='btn_sms_me' id='btn_sms_me' class='btn btn-primary'/>
+	</div>
+	<span style='margin-left: 29px;'><input type='hidden' name='event_id_sms' id='event_id_sms' value='$event_id'/></span>
+	
+	
+	<input type='hidden' name='event_title' value='$event_sms[event_title]'>
+	<input type='hidden' name='event_date' value='$event_sms[event_date_time]'>
+	<input type='hidden' name='event_time' value='$event_sms[event_time]'>
+	<input type='hidden' name='event_place' value='$event_sms[event_place]'>
+	<input type='hidden' name='event_city' value='$event_sms[cityname]'>
 	</div>
 	<div style='float:right;'>
 	<img src='$base/images/grammargirlavatar.jpg' style='width: 159px;height: 161px;'/>
-	
+	</form>
 	</div>
 	
-	</form>
+	<div class='clearfix'></div>
+	</div>
+	
 	";
 }
 }

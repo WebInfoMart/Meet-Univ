@@ -999,8 +999,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 #slides_content .next{background:url(../images/next.png)no-repeat;height: 21px;width: 21px;display: inline-block;}
 #slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block;}
 .btn_cal{width:155px;padding: 4px 4px 4px 7px;}
-.title_style{width: 365px;overflow: hidden;height: 80px;}
+.title_style{width: 365px;overflow: hidden;min-height:35px;}
 .cal_style{cursor: pointer;z-index: 0;position: absolute;margin-top: 5px;margin-left: -25px;}
+#sms_form .control-group label{width: 82px;}
+#sms_form .controls {margin-left:102px;}
 
 
 
