@@ -26,7 +26,7 @@ $this->session->unset_userdata('msg_send_suc');
 $this->session->unset_userdata('msg_send_suc_voice');
 ?>
 
-<script type="text/javascript" src="http://meetuniversities.com/js/jquery.tinysort.js"></script>
+<script type="text/javascript" src="<?php echo $base; ?>js/jquery.tinysort.js"></script>
 								
 <div class="container">
 		<div class="body_bar"></div>
@@ -665,7 +665,7 @@ od='asc';
 }
 $('#'+id).html('<a href="javascript:void(0)" class="active" onclick="eventsorting(\''+what+'\',\''+od+'\',\''+id+'\',\''+text+'\')">'+text+'</a>');
 
- $('.events_holder_box').tsort('',{attr:what,order:orderBy});
+ $('.events_listing').tsort('',{attr:what,order:orderBy});
 
 }
 
