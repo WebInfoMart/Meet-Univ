@@ -392,7 +392,7 @@ function postCook(url)
        'me/meetuniversities:view?event='+url,
         'post',
         function(response) {
-		alert(response.toSource());
+		//alert(response.toSource());
            if (!response || response.error) {
      
            } else {     

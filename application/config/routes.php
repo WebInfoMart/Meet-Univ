@@ -57,11 +57,12 @@ $route['event/(:num)/(:any)']='univ/univ_event/$1';
 //news detail page
 $route['news/(:num)/(:any)']='univ/univ_news/$1';
 //article detail page
+
 $route['articles/(:num)/(:any)']='univ/univ_articles/$1';
 //event detail page
 
 //for program page
-$route['programs/(:num)/(:any)']='univ/univ_programs/$1';
+$route['programs/(:num)/(:any)']='univ/program_detail/$1';
 
 //$route['university/(:num)/(:any)/article/(:num)/(:any)']='univ/univ_articles/$1/$3';
 

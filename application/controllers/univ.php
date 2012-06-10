@@ -201,9 +201,10 @@ class Univ extends CI_Controller
 	/* This Function used for get course detail of program category 
 	of university selected by user */
 	
-	function program_detail($univ_id='',$course_id='')
+	function program_detail($course_id='')
 	{
 		$data = $this->path->all_path();
+		$univ_id=$this->subdomain->find_id_of_current_univ();
 		$data['err_div']=0;
 		$this->load->view('auth/header',$data);
 		$data['univ_id_for_program'] = $univ_id;
@@ -952,6 +953,7 @@ class Univ extends CI_Controller
 		}
 		$this->load->view('auth/footer',$data);
 	}
+	
 	function event_filter_by_city()
 	{
 		$event_city = $this->input->post('event_city');

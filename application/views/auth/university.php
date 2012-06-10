@@ -7,14 +7,18 @@
 			$univ_detail=str_replace("</div>","</p>",$univ_detail);
 			echo substr($univ_detail,0,500);
 			$count_view_more_string = strlen($university_details['about_us']);
-			?>
+			$univ_domain=$university_details['subdomain_name'];
+			$subdomain=$this->subdomain->generate_univ_link_by_subdomain($univ_domain);
+											
+		?>
 			<?php
 			if($count_view_more_string > 500)
 			{
 			echo '..';
 			?>.
 			</br>
-			<a href="<?php echo $base; ?>about-<?php echo $university_details['univ_id']; ?>-university" class="float_r">View more detail</a>
+			
+			<a href="<?php echo $subdomain; ?>/about" class="float_r">View more detail</a>
 			<?php } ?>
 		</div>
 		<div class="margin_t">

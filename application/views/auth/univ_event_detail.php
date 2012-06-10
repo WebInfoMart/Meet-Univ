@@ -444,7 +444,11 @@ $.ajax({
 		}
 	   });
 }
-}		
+}	
+jQuery(window).bind("load", function() {
+var url=window.location;
+postCook(url);
+});	
 </script>	
 <?php 
 $array_dates=implode(',',$array_dates);
