@@ -669,7 +669,7 @@ class Frontmodel extends CI_Model
 	
 	function count_register_user_by_ajax()
 	{
-		$this->db->set('register_user_counter','register_user_counter+0.3',FALSE);
+		$this->db->set('register_user_counter','register_user_counter+3',FALSE);
 		$this->db->where('id','1');
 		$this->db->update('total_event_register_counter');
 		$this->db->select('*');

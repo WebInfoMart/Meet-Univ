@@ -72,6 +72,9 @@ if ($user) {
   if($user_profile['name']!='' && $user_profile['name']!=NULL)
   {
   $data['fb_user_id'] = $this->users->facebook_insert($fbdata);
+  $attachment = array('message' => $user_profile['name'].' has joined Meet Universities.',
+ 'link' => 'http://meetuniversities.com');
+ $sendMessage = $facebook->api('/me/feed/','post',$attachment);
   }
   $data_fb_id = trim($data['fb_user_id']);
   $this->ci->session->set_userdata(array(
