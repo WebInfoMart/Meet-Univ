@@ -1,5 +1,5 @@
 <?php
-
+ini_set('session.cookie_domain','.meetuniversities.com');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
