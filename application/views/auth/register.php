@@ -115,7 +115,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 							<label class="control-label" for="email">Email</label>
 							<div class="controls">
 								<div class="input-prepend">
-									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/at.png"></span><input class="<?php echo $class_email; ?>" name="email" id="email" value="<?php echo set_value('email') ?>"  placeholder="Email" type="text">
+									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/at.png" style="margin: 5px"></span><input class="<?php echo $class_email; ?>" name="email" id="email" value="<?php echo set_value('email') ?>"  placeholder="Email" type="text">
 									 <span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
 								</div>
 							</div>

@@ -40,7 +40,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 						<ul>
 							<li><a href="<?php echo $base; ?>about_us">About us</a></li>
 							<li><a href="<?php echo $base; ?>contact_us">Contact us</a></li>
-							<li><a href="<?php echo $base; ?>all_colleges">Colleges</a></li>
+							<li><a href="<?php echo $base; ?>colleges">Colleges</a></li>
 							<li><a href="<?php echo $base; ?>QuestandAns">Questions & Answers</a></li>
 							<li><a href="">Service Agreement</a></li>
 						</ul>
@@ -63,7 +63,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 							&copy; 2011 - 2012 Meet Universities
 						</div>
 						<div class="span5 offset5 text-right">
-							Powered by Global Campus Media Interactive.
+							Powered by Global Campus Media.
 						</div>
 					</div>
 				</div>

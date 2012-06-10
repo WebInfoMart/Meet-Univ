@@ -705,7 +705,7 @@ border-radius: 8px;
 -webkit-border-radius: 8px;
 background: #D9D9D9;
 }
-.fliters_data{width: 155px;}
+.fliters_data{width: 156px;}
 .fliters_data h3{line-height: 11px;}
 .events_holder_box{border-radius: 10px;-moz-border-radius: 10px;-webkit-border-radius: 10px;width:570px;-webkit-box-shadow: 0px 0px 5px #333333;-moz-box-shadow: 0px 0px 5px #333333;box-shadow: 0px 0px 5px #333333;padding: 0px 0px 0px 10px;color:#666666;}
 .events_holder_box:hover{background-color:#fffbbf;}
@@ -933,7 +933,7 @@ height: 48px;
 line-height: 53px;
 overflow: hidden;}
 .label_text ul{margin:0px;}
-.label_text ul li{padding: 0px 37px;display: inline;float: left;}
+.label_text ul li{padding: 0px 32px;display: inline;float: left;}
 .label_text ul li a{color:#333;}
 .status_bg,.status_bg:hover{background: #fcf4ea; /* Old browsers */
 background: -moz-linear-gradient(top,  #fcf4ea 0%, #fee6c5 100%); /* FF3.6+ */
@@ -995,11 +995,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 		}
 		
 
-#slides_content .slides_container .slides_control{height:280px!important}
+#slides_content .slides_container .slides_control{height:313px!important}
 #slides_content .slides_container .slides_control div{width:300px;text-align: justify;}
 #slides_content .slider_pagination{display: none;}
-#slides_content .next{background:url(../images/next.png)no-repeat;height: 21px;width: 21px;display: inline-block;margin-top: 10px;}
-#slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block;margin-top: 10px;}
+#slides_content .next{background:url(../images/next.png)no-repeat;height: 21px;width: 21px;display: inline-block;}
+#slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block;}
 .btn_cal{width:155px;padding: 4px 4px 4px 7px;}
 .title_style{width: 365px;overflow: hidden;height: 80px;}
 .cal_style{cursor: pointer;z-index: 0;position: absolute;margin-top: 5px;margin-left: -25px;}

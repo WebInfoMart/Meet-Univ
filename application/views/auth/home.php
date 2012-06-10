@@ -126,7 +126,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</div>
 								<input type="hidden" name="event_city" id="city" value=""/>
 								<div id="open_box">
-									<input type="text" name="selected_event_city" id="selected_event_city" style="width:262px;" value=""/>
+									<input type="text" name="selected_event_city" id="selected_event_city" style="width:249px;" value=""/>
 								</div>
 							</div>
 							
@@ -407,7 +407,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
 							?>
 									<div>
-										<h3>Study Aboard</h3>
+										<h4><?php echo substr($f_news['news_title'],0,35); ?></h4>
 										<span class="float_l aspectcorrect home_art">
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 											
@@ -424,7 +424,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										$news_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $news_title);	
 										
 										
-		echo "...";?><br/><a href="<?php echo $base.'university/'.$f_news['news_univ_id'].'/'.$univ_name.'/news/'.$f_news['news_id'].'/'.$news_title; ?>" class="float_r">View more</a>
+		echo "...";?><br/><a href="<?php echo $base.'university/'.$f_news['news_univ_id'].'/'.$univ_name.'/news/'.$f_news['news_id'].'/'.$news_title; ?>" class="float_r">View more&raquo;</a>
 								<?php		}
 										?>	 </p>
 									
@@ -609,13 +609,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							foreach($featured_article as $article){ 
 							if($article_count < 2) {
 							$image_exist=0;		
-							
-							if(file_exists(getcwd().'/uploads/univ_gallery/'.$article['article_image_path']))	
+							if(file_exists(getcwd().'/uploads/news_article_images/'.$article['article_image_path']) && $article['article_image_path']!='' )	
 							{
 							$image_exist=1;
 							list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article['article_image_path']);
 							}
-							else if(file_exists(getcwd().'/uploads/univ_gallery/'.$article['univ_logo_path']))
+							else if(file_exists(getcwd().'/uploads/univ_gallery/'.$article['univ_logo_path'] && $article['univ_logo_path']!=''))
 							{
 							$image_exist=2;
 							list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$article['univ_logo_path']);
@@ -658,7 +657,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									$article_title=strtolower($article_title);
 									$article_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $article_title);	
 									?>
-	..<br/><a href="<?php echo $base.'university/'.$article['article_univ_id'].'/'.$univ_name.'/article/'.$article['article_id'].'/'.$article_title;?>" class="float_r">View More</a>	
+	..<br/><a href="<?php echo $base.'university/'.$article['article_univ_id'].'/'.$univ_name.'/article/'.$article['article_id'].'/'.$article_title;?>" class="float_r">View More&raquo;</a>	
 									<?php }
 									?>	
 									
