@@ -275,6 +275,8 @@ class Leadcontroller extends CI_Controller
 	function EventRegistration()
 	{
 		$data = $this->path->all_path();
+		/* $facebook = new Facebook(); 
+		$fbUserId = $facebook->getUser(); */
 		/* $this->config->load('sendgrid');
 		$config['protocol'] = $this->config->item('protocol');
 		$config['smtp_host'] = $this->config->item('smtp_host');
@@ -347,7 +349,11 @@ class Leadcontroller extends CI_Controller
 					$this->email->message($message);
 					//print_r($message);
 					$this->email->send(); 
-					
+					/*Post To Facebook*/
+					/* $eventurl = 
+					if ($fbUserId) {
+					$facebook->api('/me/meetuniversities:attend?event='.$eventurl,'POST');
+					} */
 					
 					
 					$set_blank_session_event_register = array(

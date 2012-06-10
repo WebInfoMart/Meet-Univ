@@ -52,7 +52,12 @@ $captcha = array(
 	'maxlength'	=> 8,
 );*/
 ?>
-
+<style>
+.focused_error
+{
+	width: 252px !important;
+}
+</style>
 <?php
 $class_fullname='';
 $class_email='';
@@ -115,7 +120,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 							<label class="control-label" for="email">Email</label>
 							<div class="controls">
 								<div class="input-prepend">
-									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/at.png" style="margin: 5px"></span><input class="<?php echo $class_email; ?>" name="email" id="email" value="<?php echo set_value('email') ?>"  placeholder="Email" type="text">
+									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/at.png"></span><input class="<?php echo $class_email; ?>" name="email" id="email" value="<?php echo set_value('email') ?>"  placeholder="Email" type="text">
 									 <span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
 								</div>
 							</div>
@@ -171,22 +176,26 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						<h3>Newly Registered</h3>
 						<?php
 						$x=0;
+						if(!empty($new_users))
+						{
 						foreach($new_users as $newly_registered){ $x++; ?>
 <a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>"><img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $base; ?>images/user_model.png <?php } else { echo $base; ?>uploads/<?php echo $newly_registered['user_pic_path'];} ?> " /></a>				
 		
-					<?php } ?>	
+					<?php } } else { echo " No New Users Available... "; }; ?>	
 					</div>
 					<div class="span10">
 						<h2 class="orange">Upcoming Events</h2>
 						<ul class="events">
 						<?php
 						$c=0;
+						if(!empty($featured_events))
+						{
 						foreach($featured_events as $events) { $c=$c+1; ?>
 							<li <?php if($c==count($featured_events)){ echo "class='border_gamma' ";} ?>   style="cursor:pointer;"  onclick="gotoevent('<?php echo $base;?>univ-<?php echo $events['univ_id'];?>-event-<?php echo $events['event_id'];?>')">
 							<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/default_logo.png<?php } ?>" class="events_img" >
 							<span><?php echo ucwords(substr($events['event_detail'],0,176)); ?></span><h3><?php $date=explode(" ",$events['event_date_time']); echo $date[0]."-".$date[1]; ?><small>300 attending!</small></span></h3>
 							</li>
-						<?php } ?>	
+						<?php } } else { echo "NO Upcoming Events Available..."; }; ?>	
 						</ul>
 					</div>
 				</div>

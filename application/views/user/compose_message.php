@@ -83,12 +83,12 @@
 							<div class="margin_t" id="body_msg" style="display:none;">
 								
 								
-									<div class="control-group">
+									<!--<div class="control-group">
 										<label class="control-label" for="input01">Recipient</label>
 										<div class="controls">
 											<span class="help-inline" id="recipient_name"></span>
 										</div>
-									</div>
+									</div>-->
 									<div class="control-group">
 										<label class="control-label" for="input01">Subject</label>
 										<div class="controls">

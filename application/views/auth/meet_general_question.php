@@ -308,3 +308,9 @@ $.ajax({
 }
 }			
 </script>
+<script>
+/*input.focus(); //sets focus to element
+var val = this.input.value; //store the value of the element
+this.input.value = ''; //clear the value of the element
+this.input.value = val; //set that value back.*/  
+</script>
