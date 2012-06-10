@@ -641,10 +641,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										
 									</span>
 									<p><?php
-									echo strlen($article['article_detail']);
 									echo substr($article['article_detail'],0,180); 
 									if(strlen($article['article_detail'])>180){ 
-			$article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'articles',$article['article_title'],$article['article_id']);
+			$article_link=$this->subdomain->genereate_the_subdomain_link($article['subdomain_name'],'articles',$article['article_title'],$article['article_id']);
 			?>
 	..<br/><a href="<?php echo $article_link; ?>" class="float_r view_back">View More&raquo;</a>	
 									<?php }
