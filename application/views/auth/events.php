@@ -529,7 +529,9 @@ var x = new Array(<?php echo $array_dates; ?>);
 							//alert(href); 
 							
 							//href=href.replace(url,'');
-							//alert(href);
+							//alert(href);re
+							$('.search_chkbox').attr('checked',false);
+							href='<?php echo $base; ?>events/';
 							history.pushState('',href,href);
 							//window.history.replaceState(url);
 						}

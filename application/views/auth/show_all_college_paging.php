@@ -5,11 +5,14 @@
 						$cnt = 1;
 						for($no_university = 0; $no_university<$count_array; $no_university++)
 						{
+						$subdomain_name=$get_university['university'][$no_university]['subdomain_name'];
+						$domain_name_url=$this->subdomain->generate_univ_link_by_subdomain($subdomain_name);				
+
 						?>
 							<div class="events_holder_box margin_t" date="<?php echo date("m-d-Y", strtotime($get_university['univ_event'][$no_university][0]['event_date_time'])); ?>" country="<?php echo $get_university['university'][$no_university]['country_name']; ?>" univ_name="<?php echo $get_university['university'][$no_university]['univ_name']; ?>">
 								<div class="row">
-									<div class="span8 float_l margin_l margin_t1">
-										<h3><span><a href="<?php echo 'http://'.$get_university['university'][$no_university]['subdomain_name'].$domain_name; ?>" >
+									<div class="span8 float_l margin_l margin_t1">			
+										<h3><span><a href="<?php echo $domain_name_url ?>" >
 										
 										<?php echo $get_university['university'][$no_university]['univ_name']; ?></a></span>- 
 										<?php echo $get_university['university'][$no_university]['country_name']; ?></h3>
@@ -28,7 +31,7 @@
 								<div class="margin_t1"> 
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
-											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;>
+											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;">
 												<?php
 							$image_exist=0;	
 							$univ_img = $get_university['university'][$no_university]['univ_logo_path'];	
@@ -52,7 +55,10 @@
 							} 
 							$img_arr=$this->searchmodel->set_the_image($width,$height,110,115,TRUE);
 							?>
-							<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;"></a>
+
+							<a href="<?php echo $domain_name_url; ?>">
+							<img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" />
+							</a>
 											
 											</div>
 											<div class="apply">
@@ -67,20 +73,29 @@
 											$overview=$get_university['university'][$no_university]['univ_overview'];
 											echo substr($overview,0,205);
 											if(strlen($overview)>205)
-											{											
-											?>
-											..<div class="float_r"><a href="<?php echo $base; ?>about-<?php echo $get_university['university'][$no_university]['univ_id']  ;?>-university">View all&raquo;</a></div>
-											<?php } ?>
+											{
+											
+		$univ_about_link=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'about','',''); ?>											
+											..<div class="float_r">
+											<a href="<?php echo $univ_about_link; ?>">View all&raquo;
+											</a></div>
+											<?php } ?>										
+											
 										</div>
 									</div>
 									<div class="float_r page2_col">
 										<div class="float_l done margin_l">
-											<div class="events_dates float_l" onclick="gotoevent('<?php echo $get_university['university'][$no_university]['univ_id']  ;?>','<?php echo $get_university['univ_event'][$no_university][0]['event_id']; ?>');" style="cursor:pointer;">
+										<?php
+										$univ_name= str_replace(' ','-',$get_university['university'][$no_university]['univ_name']);
+									$univ_name= strtolower($univ_name);
+									$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
+										?>
+											<div class="events_dates float_l" onclick="gotoevent('<?php echo $get_university['university'][$no_university]['univ_id']  ;?>','<?php echo $univ_name  ;?>');" style="cursor:pointer;">
 												<div class="red_box">
 													Events
 												</div>
 												<div class="padding1">
-													<div class="float_l margin_t">
+													<div class="float_l margin_t1">
 													<?php 
 													if($get_university['univ_event'][$no_university]!=0)
 													{
@@ -93,14 +108,16 @@
 													</div>
 													<div class="float_l margin_l">
 														<span style="font-size:18px;">
+				
 														<?php if($event_has) { echo $date_part[1]; ?> <br/>
+						<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
+											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
+											} ?><br />
 											<?php if($get_university['univ_event'][$no_university][0]['country_name']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['country_name']);
 											} ?><br />
 													
-											<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
-											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
-											} ?><br />
+										
 														</span>
 											<?php } else { ?>
 											
@@ -113,10 +130,15 @@
 										</div>
 										<div class="float_r page4_col margin_l">
 											<ul>
-												<li><a href="<?php echo $base; ?>univ-<?php echo $get_university['university'][$no_university]['univ_id']; ?>-articles">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
-												<li><a href="<?php echo $base; ?>UniversityQuestSection/<?php echo $get_university['university'][$no_university]['univ_id']; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>
+	<?php 
+	$article_url=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_articles','',''); 
+	$programs=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'programs','',''); 
+	$questions=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_questions','',''); 
+	?>										
+												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
+												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>
 												<li><a href="#">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
-												<li><a href="<?php echo $base; ?>univ_programs/<?php echo $get_university['university'][$no_university]['univ_id']; ?>/program">Courses(<span class="blue"><?php echo count($get_university['program'][$no_university]); ?></span>)</a></li>
+												<li><a href="<?php echo $programs; ?>">Courses(<span class="blue"><?php echo count($get_university['program'][$no_university]); ?></span>)</a></li>
 												
 												<!--<li><a href="#">E-Brochure</a></li>-->
 											</ul>
@@ -130,7 +152,7 @@
 												&nbsp;&nbsp;Listed: <span class="blue">2980</span>
 											</div>
 											<div class="last_box_col float_r">
-												<img src="<?php echo "$base$img_path"; ?>/add.png" class="img_set"/>
+												<img src="<?php echo "$base$img_path"; ?>/add.png" class="img_set">
 				<span class="margin_l follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
 												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow<?php } else { ?>Unfollow<?php } ?>
 									   </span>

@@ -149,7 +149,7 @@ $this->session->unset_userdata('follow_to_univ');
 								<div class="margin_t1"> 
 									<div class="float_l margin_zero">
 										<div class="float_l span2 margin_zero">
-											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;>
+											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;">
 												<?php
 							$image_exist=0;	
 							$univ_img = $get_university['university'][$no_university]['univ_logo_path'];	
@@ -173,7 +173,10 @@ $this->session->unset_userdata('follow_to_univ');
 							} 
 							$img_arr=$this->searchmodel->set_the_image($width,$height,110,115,TRUE);
 							?>
-							<a href="<?php echo $base; ?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;"></a>
+
+							<a href="<?php echo $domain_name_url; ?>">
+							<img  title="<?php echo $get_university['university'][$no_university]['univ_name']; ?>" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" />
+							</a>
 											
 											</div>
 											<div class="apply">
@@ -246,9 +249,9 @@ $this->session->unset_userdata('follow_to_univ');
 										<div class="float_r page4_col margin_l">
 											<ul>
 	<?php 
-	$article_url=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'articles','',''); 
+	$article_url=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_articles','',''); 
 	$programs=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'programs','',''); 
-	$questions=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'questions','',''); 
+	$questions=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_questions','',''); 
 	?>										
 												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>

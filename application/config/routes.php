@@ -52,7 +52,7 @@ $route['university_articles']='univ/university_articles_list';
 $route['university_qustions_qnswers']='univ/UniversityQuest';
 
 
-//$route['(event_list/(:num)/(:any)']='univ/univ_event/$1';
+$route['event/(:num)/(:any)']='univ/univ_event/$1';
 
 //news detail page
 $route['news/(:num)/(:any)']='univ/univ_news/$1';
