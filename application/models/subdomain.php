@@ -56,7 +56,7 @@ function university_by_domain($univ_id,$univ_subdomain)
   $logged_user_id = $this->session->userdata('user_id');
   $pageURL = '';
   $domain = $_SERVER['HTTP_HOST'];
-  $pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];;
+  $pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
         
    $data['area_interest'] = $this->users->fetch_area_interest();
    $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
@@ -194,28 +194,28 @@ function university_by_domain($univ_id,$univ_subdomain)
 	
 	function genereate_the_subdomain_link($subdomain,$cat_type,$cat_title,$catid)
 	{
-	 $data = $this->path->all_path();
-	 $url='';
-	 $subdomain=str_replace(':','',$subdomain);
-	 if($cat_title!='' && $catid!='')
-	 {
-	 $cat_title=strtolower($cat_title);
-	 $cat_title=str_replace(' ','-',$cat_title);
-	 $cat_title=str_replace('&','and',$cat_title);
-	 $cat_title=str_replace(':','-',$cat_title);
-	 $cat_title=str_replace(';','-',$cat_title);
-	 $cat_title=preg_replace('/[^a-zA-Z0-9_ -%][().][\/]/s', '', $cat_title);
-	 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
-	 }
-	 else if($cat_title=='' && $catid!='')
-	 {
-	 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type;
-	 }
-	 else if($cat_title=='' && $catid=='')
-	 {
-	  $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type;
-	 }
-	 return $url;
+		 $data = $this->path->all_path();
+		 $url='';
+		 $subdomain=str_replace(':','',$subdomain);
+		 if($cat_title!='' && $catid!='')
+		 {
+		 $cat_title=strtolower($cat_title);
+		 $cat_title=str_replace(' ','-',$cat_title);
+		 $cat_title=str_replace('&','and',$cat_title);
+		 $cat_title=str_replace(':','-',$cat_title);
+		 $cat_title=str_replace(';','-',$cat_title);
+		 $cat_title=preg_replace('/[^a-zA-Z0-9_ -%][().][\/]/s', '', $cat_title);
+		 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
+		 }
+		 else if($cat_title=='' && $catid!='')
+		 {
+		 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type;
+		 }
+		 else if($cat_title=='' && $catid=='')
+		 {
+		  $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type;
+		 }
+		 return $url;
 	}
 	function find_subdomain_name_and_id()
 	{

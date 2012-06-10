@@ -5,12 +5,20 @@
 					<div>
 						<ul class="course_list">
 							<?php
+							print_r($prog_title_of_univ);
 							if(!empty($prog_title_of_univ))
 							{
 							foreach($prog_title_of_univ as $show_title)
 								{
-							?>
-								<li><a href="<?php echo "$base"; ?>program_detail/<?php echo $univ_id_for_program; ?>/<?php echo $show_title['prog_id']; ?>"><h2><?php echo $show_title['course_name']; ?> </h2></a>
+			
+		$univ_domain=$show_title['subdomain_name'];
+		$prog_title=$show_title['prog_title'];
+		$prog_id=$show_title['prog_id'];
+		
+		$prog_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'programs',$prog_title,$prog_id);?>
+							
+								<li>
+			<a href="<?php echo $prog_link; ?>"><h2><?php echo $show_title['course_name']; ?> </h2></a>
 								<span class="course_tit"><?php echo $show_title['educ_level']; ?> </span></li>
 								<?php 
 								}
