@@ -833,8 +833,12 @@ class Univ extends CI_Controller
 		}
 	}
 	
-	function search_event_by_calendar()
+	 function search_event_by_calendar()
 		{
+		
+		
+		
+			$current_url=$this->input->post('current_url');
 			$data = $this->path->all_path();
 			$event_date = $this->input->post('date');
 			$event_month = $this->input->post('month');
@@ -842,15 +846,17 @@ class Univ extends CI_Controller
 			$complete_event_date = $event_date .' '. $event_month .' '. $event_year;
 			$type= $this->input->post('type');
 			
-			if($type == "all")
-			{
 			$event_date = array(
 			'event_date_time'=>$complete_event_date,
 			'event_type'=>'univ_event'
 			);
-			$data['events'] = $this->search_event_calendar->get_event_list_by_calendar($event_date,$type);
-			$this->load->view('ajaxviews/all_event_list_by_calendar_ajax',$data);
 			
+			$data['events'] = $this->search_event_calendar->get_event_list_by_calendar($event_date,$type);
+			if($data['events']!=0)
+			{
+				$events_list = $this->load->view('ajaxviews/events_search',$data);
+				$total_univ=$data['events']['total_res'];
+				echo $total_univ.'!@#$%^&*'.$events_list;
 			}
 			
 		}

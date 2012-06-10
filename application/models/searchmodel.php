@@ -851,6 +851,7 @@ function show_all_college_paging($current_url)
 			$events_data['total_res']=0;
 			$events_data['limit_res']=10;
 			$join=" LEFT JOIN  `university` ON events.event_univ_id = university.univ_id LEFT JOIN country ON country.country_id = events.event_country_id LEFT JOIN  state ON state.state_id = events.event_state_id LEFT JOIN city ON city.city_id = events.event_city_id";
+			
 			$where='';
 			if($filter_country==1)
 			{

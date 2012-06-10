@@ -1102,74 +1102,75 @@ class Auth extends CI_Controller
 	}
 	
 	function user($id='')
-	{
-		if (!$this->tank_auth->is_logged_in()) {
-			redirect('/home');
-		} else {
-		$data = $this->path->all_path();
-		$this->load->view('auth/header',$data);
-		$logged_user_id = $this->session->userdata('user_id');
-		$data['educ_level'] = '';
-		$redirect_current_url = $this->config->site_url().$this->uri->uri_string();
-		$data['my_college'] = $this->users->my_collage_of_user($id);
-		$data['detail_visited_user'] = $this->users->fetch_profile($id);
-		$cur_educ_lvl = $data['detail_visited_user']['curr_educ_level'];
-		$area_interest = $data['detail_visited_user']['prog_parent_id'];
-		$data['educ_level'] = $this->users->fetch_educ_level_by_id($cur_educ_lvl);
-		$data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
-		$data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
-		$data['follower_detail'] = $this->users->get_followers_detail_of_person($id);
-		$data['send_message_to_user_error'] = 0;
-		$data['follow_own'] = 0;
-		$logged_user_id == $id ? $data['follow_own'] = 1 : $data['follow_own'] = 0;
-		$add_follower = array(
-			'followed_to_person_id' => $id,
-			'followed_by' => $logged_user_id
-			);
-			
-		$data['is_already_follow'] = $this->users->check_is_already_followed_to_person($add_follower);
-		//print_r($data['follower_detail']);
-		
-		if($this->input->post('follow_now'))
-		{
-			$data['user_follow_university'] = $this->users->add_followers_to_person($add_follower);
-			redirect($redirect_current_url);
-		}
+ {
+  if (!$this->tank_auth->is_logged_in()) {
+   redirect('/home');
+  } else {
+  $data = $this->path->all_path();
+  $this->load->view('auth/header',$data);
+  $logged_user_id = $this->session->userdata('user_id');
+  $data['educ_level'] = '';
+  $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
+  $data['my_college'] = $this->users->my_collage_of_user($id);
+  $data['detail_visited_user'] = $this->users->fetch_profile($id);
+  $cur_educ_lvl = $data['detail_visited_user']['curr_educ_level'];
+  $area_interest = $data['detail_visited_user']['prog_parent_id'];
+  $data['educ_level'] = $this->users->fetch_educ_level_by_id($cur_educ_lvl);
+  $data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
+  $data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
+  $data['follower_detail'] = $this->users->get_followers_detail_of_person($id);
+  $data['my_collage_of_user_visited'] = $this->users->my_collage_of_user($logged_user_id);
+  $data['send_message_to_user_error'] = 0;
+  $data['follow_own'] = 0;
+  $logged_user_id == $id ? $data['follow_own'] = 1 : $data['follow_own'] = 0;
+  $add_follower = array(
+   'followed_to_person_id' => $id,
+   'followed_by' => $logged_user_id
+   );
+   
+  $data['is_already_follow'] = $this->users->check_is_already_followed_to_person($add_follower);
+  //print_r($data['follower_detail']);
+  
+  if($this->input->post('follow_now'))
+  {
+   $data['user_follow_university'] = $this->users->add_followers_to_person($add_follower);
+   redirect($redirect_current_url);
+  }
 
-		else if($this->input->post('unfollow_now'))
-		{
-			$data['unjoin_now_success'] = $this->users->unfollow_now_to_user($add_follower);
-			redirect($redirect_current_url);
-		}
-		
-		$data['send_message_to'] = 0 ;
-		if($this->input->post('btn_msg_send'))
-		{
-			$this->form_validation->set_rules('subject_message','Subject box','trim|xss_clean|required');
-			$this->form_validation->set_rules('message_body','Message box','trim|xss_clean|required');
-			if($this->form_validation->run())
-			{
-				$sender_id = $this->session->userdata('user_id');
-				$recipent_id = $id;
-				$msg = array(
-				'sender_id'=>$sender_id,
-				'recipent_id'=>$recipent_id,
-				'subject'=> $this->input->post('subject_message'),
-				'body'=> $this->input->post('message_body'),
-				);
-				//print_r($msg);
-				$data['send_message_to'] = $this->users->send_message_to_user($msg);
-			}
-			else{
-			$errors = $this->tank_auth->get_error_message();
-					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
-			$data['send_message_to_user_error'] = 1;
-			}
-		}
-		$this->load->view('auth/visit-user-profile',$data);
-		$this->load->view('auth/footer',$data);
-		}
-	}
+  else if($this->input->post('unfollow_now'))
+  {
+   $data['unjoin_now_success'] = $this->users->unfollow_now_to_user($add_follower);
+   redirect($redirect_current_url);
+  }
+  
+  $data['send_message_to'] = 0 ;
+  if($this->input->post('btn_msg_send'))
+  {
+   $this->form_validation->set_rules('subject_message','Subject box','trim|xss_clean|required');
+   $this->form_validation->set_rules('message_body','Message box','trim|xss_clean|required');
+   if($this->form_validation->run())
+   {
+    $sender_id = $this->session->userdata('user_id');
+    $recipent_id = $id;
+    $msg = array(
+    'sender_id'=>$sender_id,
+    'recipent_id'=>$recipent_id,
+    'subject'=> $this->input->post('subject_message'),
+    'body'=> $this->input->post('message_body'),
+    );
+    //print_r($msg);
+    $data['send_message_to'] = $this->users->send_message_to_user($msg);
+   }
+   else{
+   $errors = $this->tank_auth->get_error_message();
+     foreach ($errors as $k => $v) $data['errors'][$k] = $this->lang->line($v);
+   $data['send_message_to_user_error'] = 1;
+   }
+  }
+  $this->load->view('auth/visit-user-profile',$data);
+  $this->load->view('auth/footer',$data);
+  }
+ }
 	
 	
 	

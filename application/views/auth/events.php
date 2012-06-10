@@ -517,13 +517,16 @@ var x = new Array(<?php echo $array_dates; ?>);
 						data:'date='+x+"&month="+y+"&year="+z+"&type=all",
 						success: function(response)
 						{
+							r=response.split('!@#$%^&*');
 							//$('#content_search').html(response);
 							//alert(response);
-							$('#div_events').html(response);
+							$('#div_events').html(r[1]);
 							$('#div_events').animate({
 								opacity: 1,
 							});
 							$('#loading_img').css('z-index',"-1");
+							$('#listed_currently_event').html(r[0]);
+							$('#red_total_univ').html(r[0]);
 							//var url = '<?php echo "$base"; ?>events';
 							//var href='<?php echo "$base"; ?>events';
 							//alert(href); 

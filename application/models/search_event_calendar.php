@@ -11,8 +11,9 @@ class Search_event_calendar extends CI_Model
 	
 	function get_event_list_by_calendar($event_date,$type)
 	{
-		$event=array();
-		
+		$event_data=array();
+		$events_data['total_res']=0;
+		$events_data['limit_res']=10;
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
@@ -21,12 +22,13 @@ class Search_event_calendar extends CI_Model
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
 		$this->db->where($event_date);
 		$query = $this->db->get();
-		if($query->num_rows() > 0)
+		if($query->num_rows()>0)
 		{
-		 	return $query->result_array();
-		}
-		else{
-		return 0;
+		  $events_data['event_res'] = $query->result_array();
+			return $events_data;
+		} else{
+			//$events_data['event_res']=array();
+			return 0;
 		}
 	}
 }
