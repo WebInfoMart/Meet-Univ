@@ -71,6 +71,7 @@
 					{
 					foreach($events_of_univ as $events)
 					{ 
+					
 					?>
 					<li>
 					<!-- Check upcoming events with date
@@ -84,9 +85,9 @@
 					<?php if($events['event_type'] == 'univ_event' )
 					{
 						echo $events['event_title'].','. $events['event_date_time'];
-					
+					$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$events['event_title'],$events['event_id'])
 					?>
-				<a href="<?php echo $base ?>univ-<?php echo $university_details['univ_id'] ?>-event-<?php echo $events['event_id']; ?>"><img src="<?php echo "$base$img_path" ?>/event_arrow.png">
+				<a href="<?php echo $event_link; ?>"><img src="<?php echo "$base$img_path" ?>/event_arrow.png">
 				</a>	<?php
 					//}
 					} ?>
@@ -143,9 +144,10 @@
 						{
 						foreach($news_gallery as $news)
 						{
-						
+						$news_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'news',$news['news_title'],$news['news_id'])
+					
 						?>
-						<li><a href="<?php echo $base ?>univ-<?php echo $university_details['univ_id'] ?>-news-<?php echo $news['news_id']; ?>">
+						<li><a href="<?php echo $news_link; ?>">
 						<?php echo substr($news['news_detail'],0,300).'..'; ?>
 						<img src="<?php echo "$base$img_path" ?>/event_arrow.png" class="news_arrow"></a>
 						</li>
@@ -186,13 +188,16 @@
 			<?php
 			foreach($article_gallery as $article)
 			{
+			$article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'articles',$article['article_title'],$article['article_id']);
+					
 			?>
 				<div class="span4 float_l margin_t">
 					<div class="index_sidebar_box">
-							<div class="artical_heading"><a href="<?php echo $base ?>univ-<?php echo $university_details['univ_id'] ?>-article-<?php echo $article['article_id']; ?>"><?php echo $article['article_title']; ?></a></div>
+							<div class="artical_heading"><a href="<?php echo $article_link; ?>" ><?php echo $article['article_title']; ?></a></div>
 						<div id="home" class="artical_box_data">
 							<div class="float_l content_art">
 								<?php
+								
 								if($article['article_image_path']!='')
 								{
 								echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['article_image_path']."'/>";

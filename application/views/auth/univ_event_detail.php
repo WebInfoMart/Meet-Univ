@@ -118,8 +118,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 							</div>
 							<div class="float_r">
-									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 										<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
 							</div>
 							<div>

@@ -618,8 +618,9 @@ class Univ extends CI_Controller
 			$this->load->view('ajaxviews/count_comment',$data);
 		}
 	
-  function UniversityQuest($univ_id='',$quest_id='',$user_id='')
+  function UniversityQuest($quest_id='',$user_id='')
   {
+  
    $data = $this->path->all_path();
    $univ_id=$this->subdomain->find_id_of_current_univ();
 

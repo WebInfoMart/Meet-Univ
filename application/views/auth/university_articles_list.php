@@ -13,7 +13,10 @@
 				</div>-->
 				<h2 class="course_txt">Recent Articles</h2>
 					<div class="margin_t1">
-				<?php foreach($articles_list_detail as $articles_detail){ ?>
+				<?php foreach($articles_list_detail as $articles_detail){ 
+				$articles_link=$this->subdomain->genereate_the_subdomain_link($articles_detail['subdomain_name'],'articles',$articles_detail['article_title'],$articles_detail['article_id']);
+					
+				?>
 						<div class="event_border">
 								<div class="float_l">
 									<?php
@@ -57,7 +60,7 @@
 				<div class="float_r"><div id="tw" class="float_r tw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a></div>
 	</div></div>
 								
-								<h3><a href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>"><?php echo $articles_detail['article_title']; ?></a></h3>
+								<h3><a href="<?php echo $articles_link; ?>"><?php echo $articles_detail['article_title']; ?></a></h3>
 								<span><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
 							</span><br/>
 								

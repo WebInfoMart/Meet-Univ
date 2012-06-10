@@ -143,7 +143,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 							<a href="<?php echo $about_us_link; ?>" class="active">About</a></li>
 							<li><a href="<?php echo $programs_link ?>" class="active">Programs</a></li>
 							<li><a href="<?php echo $events_link; ?>" class="active">Events</a></li>
-							<li><a href="<?php echo $qna_link; ?>" class="active">Questions & Answers</a></li>
+							<li><a href="<?php //echo $qna_link; ?>" class="active">Questions & Answers</a></li>
 							<li ><a href="<?php echo $news_link; ?>">News</a></li>
 							<li class="border_beta"><a href="<?php echo $article_link; ?>" class="active">Articles</a></li>
 						</ul>

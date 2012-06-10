@@ -12,7 +12,10 @@
 				</div>-->
 					<h2 class="course_txt">Upcoming Events</h2>
 					<div class="margin_t1">
-					<?php foreach($event_list_detail as $event_detail){ ?>
+					<?php foreach($event_list_detail as $event_detail){
+$events_link=$this->subdomain->genereate_the_subdomain_link($event_detail['subdomain_name'],'event',$event_detail['event_title'],$event_detail['event_id']);
+		
+					?>
 						<div class="event_border">
 							<div class="float_l">
 								<?php if($event_detail['univ_logo_path']==''){?>
@@ -24,7 +27,7 @@
 							<div class="dsolution">
 								<div>
 									<div class="float_l">
-<h3><a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>"><?php echo $event_detail['event_title']; ?>
+<h3><a href="<?php echo $events_link; ?>"><?php echo $event_detail['event_title']; ?>
 				-<?php echo $event_detail['cityname'].",".$event_detail['statename'].",".$event_detail['country_name']?></a></h3>
 										<span><?php echo $event_detail['event_date_time']; ?></span><br/>
 									</div>
@@ -38,7 +41,9 @@
 				<div class="float_l">
 					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
 				</div>
-									<h4>22 Register</h4>
+									<h4>
+								<?php 	echo $event_register_user = $this->frontmodel->count_event_register($event_detail['event_id']); ?>
+									Register</h4>
 									</div>
 									
 									<div class="clearfix"></div>

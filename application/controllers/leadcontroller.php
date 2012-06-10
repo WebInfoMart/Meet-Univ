@@ -349,11 +349,12 @@ class Leadcontroller extends CI_Controller
 					$this->email->message($message);
 					//print_r($message);
 					$this->email->send(); 
-					/*Post To Facebook*/
-					/* $eventurl = 
-					if ($fbUserId) {
-					$facebook->api('/me/meetuniversities:attend?event='.$eventurl,'POST');
-					} */
+					$facebook = new Facebook();
+					 $fbUserId = $facebook->getUser();
+					  $eventurl ='http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+					 if ($fbUserId) {
+					 $facebook->api('/me/meetuniversities:attend?event='.$eventurl,'POST');
+					 }
 					
 					
 					$set_blank_session_event_register = array(

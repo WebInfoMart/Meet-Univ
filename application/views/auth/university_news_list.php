@@ -10,7 +10,9 @@
 				</div>-->
 					<h2 class="course_txt">Recent News</h2>
 					<div class="margin_t1">
-					<?php foreach($news_list_detail as $news_detail){ ?>
+					<?php foreach($news_list_detail as $news_detail){
+					$news_link=$this->subdomain->genereate_the_subdomain_link($news_detail['subdomain_name'],'news',$news_detail['news_title'],$news_detail['news_id']);
+					?>
 						<div class="event_border">
 							<div class="float_l">
 							<?php
@@ -49,7 +51,7 @@
 							<div class="dsolution">
 								<div>
 									<div class="float_l">
-<h3><a href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
+<h3><a href="<?php echo $news_link; ?>"><?php echo $news_detail['news_title']; ?></a></h3>
 										<abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
 							
 										<br/>
