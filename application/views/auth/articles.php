@@ -24,7 +24,7 @@
 									<?php
 									$image_exist=0;	
 									$article_img = $articles_detail['article_image_path'];	
-									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+									if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
 									{
 									$image_exist=1;
 								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
@@ -32,8 +32,7 @@
 									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']) && $articles_detail['univ_logo_path']!='')
 									{
 									$image_exist=2;
-								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']);
-									
+								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']);			
 									}
 									else
 									{
@@ -59,19 +58,14 @@
 								<div>
 									<div class="float_l span7 margin_zero">
 												<?php
-												$univ_name=str_replace(' ','-',$articles_detail['univ_name']);
-													$univ_name=strtolower($univ_name);
-													$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
-													$article_title=str_replace(' ','-',$articles_detail['article_title']);
-													$article_title=strtolower($article_title);
-													$article_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $article_title);	
+												$univ_domain=str_replace(' ','-',$articles_detail['subdomain_name']);
+$article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'articles',$articles_detail['article_title'],$articles_detail['article_id']);							
+	
 												?>									
-												<a href="<?php echo $base.'university/'.$articles_detail['univ_id'].'/'.$univ_name.'/article/'.$articles_detail['article_id'].'/'.$article_title;?>
-												" class="txt_three">
-												<?php echo $articles_detail['article_title']; ?></a>
+		<a href="<?php echo $article_link; ?>" class="txt_three"><?php echo $articles_detail['article_title']; ?></a>
 									<br/>	<span>
 									<abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
-							
+						
 										</span><br/>
 									</div>
 									

@@ -52,20 +52,26 @@ $route['university_articles']='univ/university_articles_list';
 $route['university_qustions_qnswers']='univ/UniversityQuest';
 
 
+//$route['(event_list/(:num)/(:any)']='univ/univ_event/$1';
 
-$route['university/(:num)/(:any)/article/(:num)/(:any)']='univ/univ_articles/$1/$3';
+//news detail page
+$route['news/(:num)/(:any)']='univ/univ_news/$1';
+//article detail page
+$route['articles/(:num)/(:any)']='univ/univ_articles/$1';
+//event detail page
 
-$route['university/(:num)/(:any)/news/(:num)/(:any)']='univ/univ_programs/$1/$2';
 
-$route['(:num)/university/(:any)/event/(:num)/(:any)']='univ/univ_event/$1/$3';
+//$route['university/(:num)/(:any)/article/(:num)/(:any)']='univ/univ_articles/$1/$3';
 
-//$route['univ-(:num)-news-(:num)']='univ/univ_news/$1/$2';
-$route['university/(:num)/(:any)/news/(:num)/(:any)']='univ/univ_news/$1/$3';
+//for news page
+$route['(:num)/(:any)/news/(:num)/(:any)']='univ/univ_programs/$1/$2';
 
+//for about us
 $route['(:num)/university/(:any)/about']='univ/univ_aboutus/$1';
 
-
+//for event list
 $route['(:num)/university/(:any)/events']='univ/university_events_list/$1';
+
 
 $route['(:num)/university/(:any)/news']='univ/university_news_list/$1';
 $route['(:num)/university/(:any)/articles']='univ/university_article_list/$1';

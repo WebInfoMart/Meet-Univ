@@ -211,7 +211,14 @@ array_push($array_dates,$var);
 									<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
 										<div>
 											<div class="float_l span7 margin_zero">
-											<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>">
+		<?php
+		$univ_domain=$event_detail['subdomain_name'];
+		$event_title=$event_detail['event_title'];
+		$event_id=$event_detail['event_id'];
+		
+		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$event_id);									
+		?>		
+											<a href="<?php echo $event_link; ?>">
 												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
 												</a>
 												<span class="inline"> &raquo; </span>
@@ -241,7 +248,7 @@ array_push($array_dates,$var);
 												<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
 													<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 													<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-													<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
+													<a href="<?php echo $event_link; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
 											</div>
 											<div class="clearfix"></div>
 										</div>

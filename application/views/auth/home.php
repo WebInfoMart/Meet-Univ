@@ -314,7 +314,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		$univ_name=$events['univ_name'];
 		$univ_domain=$events['subdomain_name'];
 		$event_title=$events['event_title'];
-		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'events',$event_title,$events['event_id']);					
+		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$events['event_id']);					
 		?>
 		<a class="" href="<?php echo $event_link ?>">
 		
@@ -335,7 +335,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 											<a onClick="voicepopup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
 												<a onClick="popup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
 												<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-												<a href="<?php echo $base.$events['univ_id'].'/university/'.$univ_name.'/event/'.$events['event_id'].'/'.$event_title; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
+												<a href="<?php echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
 										</div>
 										<div>
 											<div class="img_style float_l aspectcorrect" style="height:50px;">
@@ -460,14 +460,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				$img_arr=$this->searchmodel->set_the_image($width,$height,106,75,TRUE);
 				?>
 									<div class="float_l featured_art aspectcorrect <?php if($f_coll%2) { echo "margin_zero"; } ?>">
-									<?php 
-									$univ_name= str_replace(' ','-',$featured_clg['univ_name']);
-									$univ_name= strtolower($univ_name);
-									$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
-									
-									
+									 
+		<?php $univ_link=$this->subdomain->generate_univ_link_by_subdomain($featured_clg['subdomain_name']);
+			
 									?>
-										<a href="<?php echo $base; ?>university/<?php echo $featured_clg['univ_id'].'/'.$univ_name; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
+										<a href="<?php echo $univ_link; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
 									</div>
 				<?php $f_coll++;	
 				} } } else { echo "No Featured Colleges Available"; } ?>					
@@ -526,7 +523,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</div>
 								<div class="clearfix"></div>
 							</div>
-							<h3>what are the type of questions they ask in iit?</h3>
+							<!--<h3>what are the type of questions they ask in iit?</h3>-->
 							<div class="margin_t1">
 								<div class="input-append">
 									<form action="<?php echo $base; ?>QuestandAns" method="post">
@@ -645,16 +642,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</span>
 									<p><?php
 									echo strlen($article['article_detail']);
-									echo substr($article['article_detail'],0,278); 
-									if(strlen($article['article_detail'])>278){ 
-									$univ_name=str_replace(' ','-',$article['univ_name']);
-									$univ_name=strtolower($univ_name);
-									$univ_name=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $univ_name);	
-									$article_title=str_replace(' ','-',$article['article_title']);
-									$article_title=strtolower($article_title);
-									$article_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $article_title);	
-									?>
-	..<br/><a href="<?php echo $base.'university/'.$article['article_univ_id'].'/'.$univ_name.'/article/'.$article['article_id'].'/'.$article_title;?>" class="float_r view_back">View More&raquo;</a>	
+									echo substr($article['article_detail'],0,180); 
+									if(strlen($article['article_detail'])>180){ 
+			$article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'articles',$article['article_title'],$article['article_id']);
+			?>
+	..<br/><a href="<?php echo $article_link; ?>" class="float_r view_back">View More&raquo;</a>	
 									<?php }
 									?>	
 									

@@ -534,9 +534,10 @@ class Univ extends CI_Controller
 		}
 		
 	
-		function univ_articles($univ_id='',$article_id='')
+		function univ_articles($article_id='')
 		{
 			$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
 			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);

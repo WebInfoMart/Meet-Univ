@@ -1316,13 +1316,8 @@ class Auth extends CI_Controller
 	$univ=$query->result_array();
 	foreach($univ as $univs)
 	{
-	$univname=str_replace(' ','-',$univs['univ_name']);
-	$univname=str_replace('&','and',$univname);
-	$univname=str_replace(',','',$univname);
-	$univname=str_replace('.','',$univname);
-	$univname=str_replace("'",'',$univname);
 	
-	$this->db->query("update university set subdomain_name = '".$univname."' where univ_id='".$univs['univ_id']."'");
+	//$this->db->query("update university set subdomain_name = '".$univname."' where univ_id='".$univs['univ_id']."'");
 	}	
    }	
 	function auto_count_register_user()
