@@ -21,6 +21,7 @@ $vsms_config['vsms_fid'] = $this->config->item('vsms_fid');
 
 $fullname = "";
 $mobno= "";
+$email = "";
 	if(!empty($fetch_profile_user))
 	{
 	if($fetch_profile_user['fullname'] != '')
@@ -35,6 +36,13 @@ $mobno= "";
 	{
 		$mobno = $fetch_profile_user['mob_no'];
 	} else { $mobno=''; }
+	if($fetch_profile_user['email'] != '')
+	{
+		$email = $fetch_profile_user['email'];
+	}
+	else{
+	$email = "";
+	}
 	}
 if(!empty($event_info_sms))
 {
@@ -71,7 +79,7 @@ foreach($event_info_sms as $event_sms)
 	<div style='float:left'>
 	<span>Name</span> <span style='margin-left:5px;'><input type='text' style='margin-left:25px;' name='fullname_voice' id='fullname_voice' value='$fullname'/></span></br></br>
 	<span>Mobile No</span> <span style='margin-left:5px;'><input type='text' name='mobno' id='mobno' value='$mobno'/></span></br></br>
-	<span>Email</span> <span style='margin-left: 29px;'><input type='text' name='email_voice' id='email_voice' value='$mobno'/></span></br>
+	<span>Email</span> <span style='margin-left: 29px;'><input type='text' name='email_voice' id='email_voice' value='$email'/></span></br>
 	<span style='margin-left: 29px;'><input type='hidden' name='event_id_voice' id='event_id_voice' value='$event_id'/></span>
 	</div>
 	<div style='float:right;'>

@@ -321,7 +321,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		?>
 		<a class="" href="<?php echo $base.$events['univ_id'].'/university/'.$univ_name.'/event/'.$events['event_id'].'/'.$event_title; ?>">
 		
-		<h3><?php echo $events['univ_name']; ?></h3>
+		<h4 class="inline"><?php echo $events['univ_name']; ?></h4>
 		</a><span class="inline"> &raquo; </span>
 		<h4 class="inline">
 		<?php if($events['event_category']=='spot_admission'){
@@ -357,7 +357,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 											</div>
 											<div class="float_r registered">
 													<h2 class="blue"><?php echo $event_register_user; ?></h2>	
-													<h4 class="blue">Registered</h4>
+													<h5 class="blue">Registered</h5>
 											</div>
 											<div class="clearfix"></div>
 										</div>
@@ -424,7 +424,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										$news_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $news_title);	
 										
 										
-		echo "...";?><br/><a href="<?php echo $base.'university/'.$f_news['news_univ_id'].'/'.$univ_name.'/news/'.$f_news['news_id'].'/'.$news_title; ?>" class="float_r">View more&raquo;</a>
+		echo "...";?><br/><a href="<?php echo $base.'university/'.$f_news['news_univ_id'].'/'.$univ_name.'/news/'.$f_news['news_id'].'/'.$news_title; ?>" class="float_r view_back">View more&raquo;</a>
 								<?php		}
 										?>	 </p>
 									
@@ -657,7 +657,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									$article_title=strtolower($article_title);
 									$article_title=preg_replace('/[^a-zA-Z0-9_ %\[\]\.\(\)%&-]/s', '', $article_title);	
 									?>
-	..<br/><a href="<?php echo $base.'university/'.$article['article_univ_id'].'/'.$univ_name.'/article/'.$article['article_id'].'/'.$article_title;?>" class="float_r">View More&raquo;</a>	
+	..<br/><a href="<?php echo $base.'university/'.$article['article_univ_id'].'/'.$univ_name.'/article/'.$article['article_id'].'/'.$article_title;?>" class="float_r view_back">View More&raquo;</a>	
 									<?php }
 									?>	
 									

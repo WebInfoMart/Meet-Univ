@@ -1028,3 +1028,4 @@ span.aspectcorrect  img { position: absolute; }
 .cal_align{margin-left: 43px;}
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{background:#dbeaf3!important;border:0px!important;}
 #effect-style:hover{background:#dbeaf3;}
+.view_back{background: #3881AB;padding: 1px 5px;font-size: 11px;color: white;text-decoration: none;}
