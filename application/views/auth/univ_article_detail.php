@@ -29,9 +29,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<div class="float_l span13 margin_l">
 				
 						<div class="">
-						<h2 class="course_txt"><?php echo $articles_detail['article_title']; ?></h2>
-						<div class="float_r">
-						<div class="float_l" style="margin-right:20px;">
+						<h2 class="course_txt span10 margin_delta"><?php echo $articles_detail['article_title']; ?></h2>
+						<div class="float_r" style="margin-top:25px;">
+						<div class="float_l" style="margin-right:-25px;">
 						<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 						</div>
 						<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
@@ -50,7 +50,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="clearfix"></div>
 						<div>
 							<h3>Details</h3>
-							<div class="float_l span4 margin_r2">
+							<div class="float_l margin_r2">
 							<?php
 									$image_exist=0;	
 									$article_img = $articles_detail['article_image_path'];	
@@ -218,7 +218,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
 									<?php } else { ?>		
 								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php }  ?>
+								<?php }  ?></br>
 								<span style='float: left;width: 46px;position: absolute;'>
 								<?php
 								if($user_detail['fullname'] !='')
@@ -258,7 +258,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					</div>
 				</div>
 				<div class="float_r span3">
-					<img src="images/banner_img.png">
+					
 				</div>
 				<div class="clearfix"></div>
 			</div>

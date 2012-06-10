@@ -1,3 +1,4 @@
+<form class="form-horizontal" action="" method="post">
 <div class="row" style="margin-top:-5px">
 	<div class="span8 margin_l float_l margin_t">
 		<div class="univ_content letter_first">
@@ -110,7 +111,7 @@
 				</div>
 				<div class="margin">
 					<div>
-						<div class="float_l wht_data">what are the type of questions they ask in iit?</div>
+						
 						
 						<div class="clearfix"></div>
 					</div>
@@ -213,3 +214,4 @@
 	<div class="clearfix"></div>
 </div>
 </div>
+</form>

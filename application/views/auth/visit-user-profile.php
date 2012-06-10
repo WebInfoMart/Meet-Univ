@@ -1,3 +1,18 @@
+<?php 
+$facebook = new Facebook();
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+?>
 <script>
 	$(document).ready(function(){
 	<?php if($send_message_to_user_error == 1) { ?>
@@ -56,7 +71,7 @@
 						echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/".$detail_visited_user['user_pic_path']."'/>"; 
 						}
 						else { ?>
-						<img class="profile_img_width" src="<?php echo "$base$img_path";  ?>/user_model.png">
+						<img class="profile_img_width" src="<?php echo "$base$img_path";?>/user_model.png">
 						<?php
 						}
 						?>
@@ -141,8 +156,15 @@
 								</div>
 								<div class="index_sidebar_content">
 									<ul class="links1">
-										<li><a href="http://workforcetrack.in/update_profile">Ramjas College, University of Delhi</a></li>
-										<li><a href="http://workforcetrack.in/update_password">Indian Institute of Technology Bombay</a></li>
+									<?php
+									if(!empty($my_collage_of_user_visited))
+									{
+									foreach($my_collage_of_user_visited as $my_collage)
+									{
+									?>
+									<li><a href="university/<?php echo $my_collage['univ_id']; ?>"><?php echo $my_collage['univ_name']; ?></a></li>
+										<!--<li><a href="http://workforcetrack.in/update_profile">Ramjas College, University of Delhi</a></li>-->
+									<?php } } else { echo "No Activity Yet."; } ?>	
 									</ul>
 								</div>
 							</div>
@@ -192,31 +214,83 @@
 					
 					<div class="span13 float_r">
 						<div class="span10 margin_zero">
-							<div class="events_box">
-								<h2>About Me</h2>
-								M a simple gal wid complicated attitude...infact m like an open book but no1 can read me so easily..In short M A TOUGH GAL!!!!!!
-							</div>
-							<div class="margin_t">
-								<div class="green_box margin_gamma padding_zero">
-									<div class="padding">
-										<div class="float_l">
-											<div class="letter_uni">
-											<div>Q Go Ask <br><span>uestion</span></div>
-											</div>
-										</div>
-										<div class="float_r span6 margin_zero uesr_question">
-											<span>4 Questions asked about </span>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-									<div class="question_data">
-										<span>Bcom without maths is it possible?</span></br>30 March,2011</br>
-										<p>You are currently doing one of the most secure and interesting course that generally people are advised to do. MCA after B.Com sounds very unusual. As you are currently doing B com and also you didn't have maths in 12th so you would not be very good in technical maths except statistics and math is very much important in MCA.<p>Reply by HansRaj Hans</p></p>
-										<span>Admission in journalism course?</span></br>30 March,2011</br>
-										<p>You are currently doing one of the most secure and interesting course that generally people are advised to do. MCA after B.Com sounds very unusual. As you are currently doing B com and also you didn't have maths in 12th so you would not be very good in technical maths except statistics and math is very much important in MCA.<p>Reply by HansRaj Hans</p></p>
+							
+							<div class="span7 margin_delta">
+						<div class="green_qust">
+							<div>
+								<div class="float_l">
+									<div class="letter_uni">
+									<div>Q Go Ask <br><span>uestion</span></div>
 									</div>
 								</div>
+								<div class="float_r Qust_content">
+									<span>Have a Question?</span>
+									<span>Ask our counselors!</span>
+								</div>
+								<div class="clearfix"></div>
 							</div>
+							
+							<div class="margin_t1">
+								<div class="input-append">
+									<form action="<?php echo $base; ?>QuestandAns" method="post">
+										<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
+										<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info btn_tab"  value="Ask">
+									</form>
+								</div>
+							</div>
+							<div class="margin_t1">
+								<h2>Latest Q&A</h2>
+								<ul class="prof_data">	
+								
+				<?php if(!empty($featured_question_visited_profile))
+				{
+				$a=0;
+				$url = "";
+				foreach($featured_question_visited_profile['quest_detail'] as $quest_list)
+				{
+				if($quest_list['q_univ_id'] != '0')
+				{
+					$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+				}
+				else if($quest_list['q_country_id'] != '0')
+				{
+					$url = "";
+				}
+				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
+				{
+					$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
+				}
+				$q_date = explode(" ",$quest_list['q_asked_time']);
+				//print_r($q_date[0]);
+				$quest_ask_date = explode("-",$q_date[0]);
+				//print_r($quest_ask_date[0]);
+				$q_month = $quest_ask_date[1];
+				$quest_month = date('M', strtotime($q_month . '01'));
+				
+				//print_r($quest_ask_date[2]);
+				?>
+				
+
+										
+										<a href="<?php echo "$base$url"; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
+										<?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
+										<div>
+										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
+										echo $quest_month?$quest_month.', ':'';
+										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
+										echo "Totoal Answer - ".$featured_question_visited_profile['ans_count'][$a];
+										?></div>
+									
+									
+				
+				<?php
+					} $a++; } else { echo "No Latest Questions Available"; } 
+				?>
+								
+							</ul>
+							</div>
+						</div>
+					</div>
 							<div class="margin_t">
 								<div class="span6 margin_zero padding_lefty">
 									<h2>Followers</h2>
@@ -225,11 +299,20 @@
 												<div class="float_l">
 													<div class="follow_img">
 													<?php 
-													if($follower_detail != '')
+													if(!empty($follower_detail))
 													{
-													foreach($follower_detail as $followers) { ?>
+													foreach($follower_detail as $followers) {
+													if($followers['user_pic_path'] != ''){
+													?>
 														<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>"><?php echo "<img style='width:63px;height:55px;' src='".base_url()."uploads/".$followers['user_pic_path']."'/>"; ?></a>
-													<?php } } ?>
+													<?php }
+													else if($user) { ?>
+													<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+													<?php } 
+													else{ ?>
+													<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>"><?php echo "<img style='width:63px;height:55px;' src='".base_url()."images/user_model.png'/>"; ?></a>
+													<?php }
+													} } ?>
 													</div>
 												</div>
 											</li>
