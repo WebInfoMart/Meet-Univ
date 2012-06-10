@@ -130,42 +130,25 @@ if ($user) {
     $curURL = currentPageURL();
 ?>
 <?php
-if(!empty($university_details))
-{
-if($university_details['univ_logo_path'] !=0 || $university_details['univ_logo_path'] != '')
+
+$title_of_event = "Meet Universities-List your global events.";
+$img_src = base_url()."uploads/univ_gallery/univ_logo.png";
+$detail_of_event="List your global events.Let the international student community know about when you are visiting near them.";
+if(!empty($university_details) && ($university_details['univ_logo_path'] !=0 || $university_details['univ_logo_path'] != ''))
 {
 $img_src = base_url()."uploads/univ_gallery/".$university_details['univ_logo_path'];
 }
-else{
-$img_src = base_url()."uploads/univ_gallery/univ_logo.png";
-}
-}
-else{
-$img_src = "";
-}
-if(!empty($event_detail))
+if(!empty($event_detail) && ($event_detail['event_title'] != 0 || $event_detail['event_title'] != ''))
 {
-if($event_detail['event_title'] != 0 || $event_detail['event_title'] != '')
-{
-$title_of_event = $event_detail['event_title'];	
+$title_of_event = $event_detail['event_title']; 
 }
-}
-else{
-$title_of_event = "";
-}
-
-if(!empty($event_detail))
-{
-if($event_detail['event_title'] != 0 || $event_detail['event_title'] != '')
+if(!empty($event_detail) && ($event_detail['event_detail'] != 0 || $event_detail['event_detail'] != ''))
 {
 $detail_of_event = $event_detail['event_detail'];
 }
-}
-else{
-$detail_of_event = "";
-}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# meetuniversities: http://ogp.me/ns/fb/meetuniversities#">
@@ -180,6 +163,7 @@ $detail_of_event = "";
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">
+<title><?php echo $title_of_event; ?></title>
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
