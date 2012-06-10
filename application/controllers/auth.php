@@ -1314,7 +1314,12 @@ class Auth extends CI_Controller
 	$this->db->query("update university set subdomain_name = '".$univname."' where univ_id='".$univs['univ_id']."'");
 	}	
    }	
-	
+	function auto_count_register_user()
+	{
+		$data['user_count'] = $this->frontmodel->count_register_user_by_ajax();
+		echo $data['user_count'][0]['register_user_counter'];
+		//$this->load->view('auth/event_register_user_counter',$data);
+	}
 	
 }
 /* End of file auth.php */
