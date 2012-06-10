@@ -593,7 +593,7 @@ background: url(../images/events.png);}
 }
 
 .event_home_text_color
-{
+{10
 color:#666 !important;
 }
 
@@ -615,7 +615,7 @@ word-wrap:break-word;
 .comment_img{height:69px; width:69px;}
 .date_heading{font-size:16px;}
 .my_form_controls{margin-left:14px;}
-.comment_img img{height:69px; width:69px;}
+.comment_img img{height:61px; width:61px;}
 
 
 /*==========================Q & A=================================*/
@@ -1017,7 +1017,7 @@ span.aspectcorrect {overflow: hidden;position: relative; }
 span.aspectcorrect  img { position: absolute; }
 .asked_home{font-size: 11px;line-height: 12px;}
 .home_padding{padding-top: 8px;}
-.number_bar{height: 43px;font-size: 24px;border: 1px solid #FDD69E;padding: 4px 32px 4px;}
+.number_bar{height: 43px;font-size: 24px;border: 1px solid #FDD69E;padding: 4px 32px 4px;width:120px;}
 .center_bar{padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px #999;-moz-box-shadow: 0px 0px 6px #888;}
 .btn_tab{padding: 3px 18px 6px 18px!important;color:#fff!important;font-size:16px;height:28px!important;}
 .latest_img{width:34px;height:34px;border: 2px solid #DDD;padding:2px;}

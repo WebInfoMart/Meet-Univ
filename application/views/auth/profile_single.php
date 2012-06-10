@@ -33,7 +33,7 @@ if ($user) {
 							<form class="form-horizontal form_data" action="update_profile" method="post" enctype="multipart/form-data">
 								<h2 class="profile_heading">Update Account Information</h2>
 								<div class="profile_border">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus, olor sit amet, consectetur adipiscing dolor ut posuere faucibus, nibh neque sollicitudin olor sit amet, consectetur adipiscing enim, non consectetur lorem odio eu lectus.
+									We will not share your information without your permission.
 									<div class="contact_box margin">
 										<div class="margin_l margin_t">
 											<h3>Personal Information <img src="<?php echo "$base$img_path";  ?>/ques_layer.png"></h3>
