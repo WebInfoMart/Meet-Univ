@@ -113,12 +113,11 @@ body {
   /*background-color: #ffffff;*/
 }
 a {
-  color: #0088cc;
-  font-size:12px;
+ color:#333;
   text-decoration: none;
 }
 a:hover {
-  color: #005580;
+  color: #000;
   text-decoration: underline;
 }
 .row {
