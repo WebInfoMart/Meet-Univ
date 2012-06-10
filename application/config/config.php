@@ -15,7 +15,7 @@
 |
 */
 
-$config['base_url']	= 'http://www.meetuniv.com/';
+$config['base_url']	= 'http://meetuniv.com/';
 /*
 |--------------------------------------------------------------------------
 | Index File

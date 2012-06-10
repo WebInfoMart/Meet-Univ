@@ -479,13 +479,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<div class="home_padding">
 									<div class="btn-group">
 										<button class="btn status_bg number_bar"><?php echo $total_poste_event_count?$total_poste_event_count:'0'; ?></button>
-										<button class="btn status_bg number_bar"><span id="tot_reg_user">  </span></button>
+										<button class="btn status_bg number_bar"><span id="tot_reg_user1">19</span></button>
 										
 									</div>
 									<div class="label_text">
 										<ul>
 											<li><a href="#">EVENTS</a></li>
-											<li><a href="#">ANSWERS</a></li>
+											<li><a href="#">Registered User</a></li>
 										</ul>
 									</div>
 									<div class="clearfix"></div>

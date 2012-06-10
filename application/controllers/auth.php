@@ -1296,7 +1296,18 @@ class Auth extends CI_Controller
 			echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$events_list;
 		}
 	}
-	
+	function all_events_paging()
+	{
+		$current_url=$this->input->post('current_url');
+		$data = $this->path->all_path();
+		$data['events'] = $this->searchmodel->show_events_paging($current_url);
+		if($data['events']!=0)
+		{
+			$events_list=$this->load->view('ajaxviews/show_event_paging',$data);
+			$per_page_res=$data['events']['per_page_res'];
+			echo $per_page_res.'!@#$%^&*'.$events_list;
+		}
+	}
 	function subdomain()
    {
     $this->db->select('*');
