@@ -268,9 +268,16 @@ class Users extends CI_Model
 	{
 		if ($this->db->insert($this->table_name, $fbdata)) {
 			$user_id = $this->db->insert_id();
-			$this->create_profile($user_id);
+			//$this->create_profile($user_id);
 			return $user_id;
 		}
+	}
+	
+	function facebook_profile_insert($user_id,$fb_gender)
+	{
+		$this->db->set('user_id', $user_id);
+		$this->db->set('gender', $fb_gender);
+		return $this->db->insert($this->profile_table_name);
 	}
 	
 	function fetch_fb_user_id($fb_email)

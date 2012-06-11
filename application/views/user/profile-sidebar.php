@@ -12,6 +12,7 @@ if ($user) {
     $user = null;
   }
 }
+print_r($profile_pic);
 ?>
 <div class="span3 margin_zero float_l">
 						<div class="sidebar_profic_pic">

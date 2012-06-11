@@ -766,23 +766,13 @@ border:1px solid #ccc;width:86px;position:relative;left:186px;top:1px;display:no
 		$('#myModal').modal({
         keyboard: false
     })
-	  //$('#search_program').html(msg);
 	   }
 	   }) 
-//alert(id);
-/* var URL = "<?php echo site_url('leadcontroller/sms_me_event');?>";
-//window.open("<?php echo site_url('controller/method/param1/param2/etc');?>", 'width=150,height=150'); 
-day = new Date();
-id = day.getTime();
-window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
 } 
 
 //Code For Voice API
 
 function voicepopup(id) {
- /* $('#myModal').modal({
-        keyboard: false
-    }) */
   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>leadcontroller/sms_voice_me_event_ajax",
@@ -796,15 +786,8 @@ function voicepopup(id) {
 		$('#myModal-voice').modal({
         keyboard: false
     })
-	  //$('#search_program').html(msg);
 	   }
 	   }) 
-//alert(id);
-/* var URL = "<?php echo site_url('leadcontroller/sms_me_event');?>";
-//window.open("<?php echo site_url('controller/method/param1/param2/etc');?>", 'width=150,height=150'); 
-day = new Date();
-id = day.getTime();
-window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=880,height=300'); */
 } 
 
 </script>

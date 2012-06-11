@@ -45,8 +45,9 @@ if ($user) {
  ******************************************/
   
   
-  $fb_email = $user_profile['email'];
-  $fb_name = $user_profile['name'];
+  if($user_profile['gender'] != ''){ $fb_gender = $user_profile['gender']; } else{$fb_gender='';}
+  if($user_profile['$fb_email'] != ''){ $fb_email = $user_profile['$fb_email']; } else{$fb_email='';}
+  if($user_profile['name'] != ''){ $fb_name = $user_profile['name']; } else{$fb_name='';}
 
 /**************************************** 
  *  Check if current facebook uesr      *
@@ -67,11 +68,15 @@ if ($user) {
   'activated'  => '1', 
   'createdby_user_id'  => '0',
    'fb_user' =>'1',
+   'gender'=> $fb_sex
   //'last_ip'	=> $this->ci->input->ip_address(),
   );
   if($user_profile['name']!='' && $user_profile['name']!=NULL)
   {
   $data['fb_user_id'] = $this->users->facebook_insert($fbdata);
+  $user_id = $data['fb_user_id'];
+  if($data['fb_user_id']!=''){
+  $data['fb_user_profile_insert'] = $this->users->facebook_profile_insert($user_id,$fb_gender);}
   $attachment = array('message' => $user_profile['name'].' has joined Meet Universities.',
  'link' => 'http://meetuniversities.com');
  $sendMessage = $facebook->api('/me/feed/','post',$attachment);
