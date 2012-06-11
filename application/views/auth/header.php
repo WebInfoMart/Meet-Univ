@@ -46,7 +46,7 @@ if ($user) {
   
   
   if($user_profile['gender'] != ''){ $fb_gender = $user_profile['gender']; } else{$fb_gender='';}
-  if($user_profile['$fb_email'] != ''){ $fb_email = $user_profile['$fb_email']; } else{$fb_email='';}
+  if($user_profile['email'] != ''){ $fb_email = $user_profile['email']; } else{$fb_email='';}
   if($user_profile['name'] != ''){ $fb_name = $user_profile['name']; } else{$fb_name='';}
 
 /**************************************** 
@@ -67,8 +67,7 @@ if ($user) {
   'email'		=> $user_profile['email'],
   'activated'  => '1', 
   'createdby_user_id'  => '0',
-   'fb_user' =>'1',
-   'gender'=> $fb_sex
+   'fb_user' =>'1'
   //'last_ip'	=> $this->ci->input->ip_address(),
   );
   if($user_profile['name']!='' && $user_profile['name']!=NULL)
@@ -151,10 +150,7 @@ if(!empty($event_detail) && ($event_detail['event_detail'] != 0 || $event_detail
 {
 $detail_of_event = $event_detail['event_detail'];
 }
-if(strpos($_SERVER['REQUEST_URI'],"/register")>0)
-{
-$img_src=base_url()."images/logo.png";
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -172,9 +168,6 @@ $img_src=base_url()."images/logo.png";
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">
 <title><?php echo $title_of_event; ?></title>
-<meta name="description" content="<?php echo $detail_of_event; ?>" />
-<meta name="keywords" content="Meet Universities,Global evnets, World Universities" />
-<meta name="robots" content="INDEX,FOLLOW" />
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
