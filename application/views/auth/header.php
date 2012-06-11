@@ -151,7 +151,10 @@ if(!empty($event_detail) && ($event_detail['event_detail'] != 0 || $event_detail
 {
 $detail_of_event = $event_detail['event_detail'];
 }
-
+if(strpos($_SERVER['REQUEST_URI'],"/register")>0)
+{
+$img_src=base_url()."images/logo.png";
+}
 ?>
 
 <!DOCTYPE html>
@@ -169,6 +172,9 @@ $detail_of_event = $event_detail['event_detail'];
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">
 <title><?php echo $title_of_event; ?></title>
+<meta name="description" content="<?php echo $detail_of_event; ?>" />
+<meta name="keywords" content="Meet Universities,Global evnets, World Universities" />
+<meta name="robots" content="INDEX,FOLLOW" />
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">

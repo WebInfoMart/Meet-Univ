@@ -680,6 +680,15 @@ class Frontmodel extends CI_Model
 		return $tot2->result_array();
 		//return $total = floor($tot);
 	}
-	
+	/*Anusha*/
+	function count_register_user()
+	{
+		$this->db->select('*');
+		$this->db->from('total_event_register_counter');
+		$this->db->where('id','1');
+		$tot = $this->db->get();
+		return $tot->result_array();
+		//return $total = floor($tot);
+	}
 	
 }
