@@ -12,10 +12,40 @@
 					<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 				</div>
 				<div class="clearfix"></div>
-				</div>-->	
-					<h2 class="course_txt">Recent Articles</h2>
+				</div>-->
+				<div class="span9 margin_zero float_l">
+					<h3>Recent Articles</h3>
 				<div class="margin_t1">
+				
+					<ul class="event_new">
 					<?php foreach($articles as $articles_detail){
+					
+				?>
+						<li>
+							<div class="float_l">
+								<h3>Lorem ipsum dolor sit amet</h3>
+							</div>
+							<div class="float_r span4 margin_zero">
+								<!--<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>-->
+								<div id="fbc" class="float_l" style="width:57px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+								<div class="float_l">
+								<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+							
+								</div>
+								<div id="tw" class="float_r tw" style="width:82px;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a></div>
+							</div>
+								<div class="clearfix"></div>
+							<div class="margin_t1">
+								<div class="img_style float_l img_r">
+									<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+								</div>
+								<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</div>
+						</li>
+						<?php } ?>
+					</ul>
+					<?php /*foreach($articles as $articles_detail){
 					
 				?>
 					<div id="effect-style">
@@ -86,17 +116,17 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 							<div class="clearfix"></div>
 						</div>
 						</div>
-					<?php } ?>	
+					<?php }*/ ?>	
 					</div>
 					
 				</div>
-			
+			</div>
 				<div class="float_r span3">
 					<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
 				</div>
 				
 				<div id="pagination" class="table_pagination right paging-margin">
-            <?php echo $this->pagination->create_links();?>
+            <?php //echo $this->pagination->create_links();?>
             </div>
 			
 				<div class="clearfix"></div>
