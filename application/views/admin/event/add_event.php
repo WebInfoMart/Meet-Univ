@@ -77,7 +77,7 @@ $(document).ready(function() {
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
-								<label>Title</label>
+								<label> Event Title</label>
 							</div>
 							<div class="float_l span3">
 								<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">
@@ -224,14 +224,13 @@ $(document).ready(function() {
 						</div>
 						<div class="float_l span3">
 							<select class="text styled span3 margin_zero"  name="event_type">
-								<option value="all">Select</option>
+								<option value="all">Select Category</option>
 								<option value="spot_admission">Spot Admission</option>
 								<option value="fairs">Fairs</option>
 								<option value="alumuni">Counselling-Alumuni</option>
 								<option value="others">Counselling-Others</option>
 								
 							</select>
-	<span style="color: red;"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
 				
 						</div>
 						

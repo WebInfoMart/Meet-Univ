@@ -55,7 +55,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
-							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($news_comments); ?>"/>
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php if($news_comments!=0){ echo count($news_comments); } else { echo "0";}; ?>"/>
 								<h3><span id="cnt_comment_show"><?php if($news_comments!=0){ echo count($news_comments); } else { echo "0";}; ?></span> Comments</h3>
 							</div> 
 				<?php if($news_comments!=0){
@@ -117,49 +117,6 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<center><h3>Please Login for comment</h3></center>
 				</div>
 				</div>			
-						<!--<div class="margin_t margin_bs">
-							<div class="events_box">
-								<h3>Your Comment</h3>
-								<div class="float_l span9 margin_zero">
-									<form class="form-horizontal" method="post" action="">
-									<input type="hidden" name="commented_on_id" value="<?php echo $news_detail['news_id']; ?>" >
-									<input type="hidden" name="commented_on" value="news" >
-									
-										<div class="control-group">
-											<label class="control-label" for="input01">Name:</label>
-											<div class="controls">
-												<input type="text" value="<?php if($clear_comment==1){ echo ""; } else{ echo set_value('full_name');} ?>" class="<?php echo $class_fullname; ?>" id="input01" name="full_name">
-												<span style="color: red;"> <?php echo form_error('full_name'); ?><?php echo isset($errors['full_name'])?$errors['full_name']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<label class="control-label" for="input01">Email:</label>
-											<div class="controls">
-												<input type="text" value="<?php if($clear_comment==1){ } else{ echo set_value('email');} ?>" class="<?php echo $class_email; ?>" id="input01" name="email">
-												<span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<label class="control-label" for="textarea">Comment:</label>
-											<div class="controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="textarea" name="commented_text" rows="3">
-												<?php if($clear_comment==1){ echo ""; } else{ echo set_value('commented_text');} ?></textarea>
-												<span style="color: red;"> <?php echo form_error('commented_text'); ?><?php echo isset($errors['commented_text'])?$errors['commented_text']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<div class="controls">
-												<input type="submit" class="btn btn-success" name="submit" value="Post Comment">
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="float_r">
-									Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>-->
 		<?php } else { ?>	
 			<div class="margin_t margin_bs">
 							<div class="events_box">
@@ -196,8 +153,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<input type="hidden" name="commented_on" id="commented_on" value="news" >
 										<div class="control-group">
 											<div class="my_form_controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
-												</textarea>
+												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
 												
 											</div>
 										</div>
@@ -232,13 +188,14 @@ var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) + 1;
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if($('#commented_text').val()!='')
 {
 	$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
 	   async:false,
-	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id,
+	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id,
 	   cache: false,
 	   success: function(msg)
 	   {
@@ -265,20 +222,21 @@ function delete_this_comment(comment_id)
 var r=confirm("Want to Delete this comment");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if(r)
 {
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/delete_comment",
 	   async:false,
-	   data: 'comment_id='+comment_id,
+	   data: 'comment_id='+comment_id+'&user_id='+user_id,
 	   cache: false,
 	   success: function(msg)
 	   {
 		$('.hover_delete_comment_'+comment_id).replaceWith('');
 		$('#txt_cnt_comment_show').val(parseInt(span_comment)-1);
 		$('#cnt_comment_show').html(span_comment_incr);
-		}
+	   }
 	   });
 }
 }

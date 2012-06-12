@@ -96,7 +96,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						</div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
-							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($article_comments); ?>"/>
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php if($article_comments!=0) { count($article_comments); }
+								else { echo "0"; } ?>"/>
 								<h3><span id="cnt_comment_show"><?php if($article_comments!=0) { count($article_comments); }
 								else { echo "0"; }
 								?></span> Comments</h3>
@@ -239,8 +240,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<input type="hidden" name="commented_on" id="commented_on" value="article" >
 										<div class="control-group">
 											<div class="my_form_controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
-												</textarea>
+												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
 											</div>
 										</div>
 										<div class="control-group">
@@ -271,13 +271,14 @@ var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) + 1;
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if($('#commented_text').val()!='')
 {
 	$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
 	   async:false,
-	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id,
+	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id,
 	   cache: false,
 	   success: function(msg)
 	   {
@@ -304,13 +305,14 @@ function delete_this_comment(comment_id)
 var r=confirm("Want to Delete this comment");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if(r)
 {
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/delete_comment",
 	   async:false,
-	   data: 'comment_id='+comment_id,
+	   data: 'comment_id='+comment_id+'&user_id='+user_id,
 	   cache: false,
 	   success: function(msg)
 	   {

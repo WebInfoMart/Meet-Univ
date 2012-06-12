@@ -241,7 +241,7 @@ array_push($array_dates,$var);
 													echo "Counselling";
 												}
 												echo "</h4>";
-												echo '<h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
+												echo ' <h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
 											<div class="float_r">
@@ -517,9 +517,8 @@ var x = new Array(<?php echo $array_dates; ?>);
 						data:'date='+x+"&month="+y+"&year="+z+"&type=all",
 						success: function(response)
 						{
+
 							r=response.split('!@#$%^&*');
-							//$('#content_search').html(response);
-							//alert(response);
 							$('#div_events').html(r[1]);
 							$('#div_events').animate({
 								opacity: 1,
@@ -527,22 +526,11 @@ var x = new Array(<?php echo $array_dates; ?>);
 							$('#loading_img').css('z-index',"-1");
 							$('#listed_currently_event').html(r[0]);
 							$('#red_total_univ').html(r[0]);
-							//var url = '<?php echo "$base"; ?>events';
-							//var href='<?php echo "$base"; ?>events';
-							//alert(href); 
-							
-							//href=href.replace(url,'');
-							//alert(href);re
 							$('.search_chkbox').attr('checked',false);
 							href='<?php echo $base; ?>events/';
 							history.pushState('',href,href);
-							//window.history.replaceState(url);
 						}
 					});
-						/* alert(complete_date);
-						alert(d.getDate());
-						alert(d.getMonth());
-						alert(d.getFullYear()); */
 					}
           });
 

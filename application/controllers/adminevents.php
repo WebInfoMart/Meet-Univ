@@ -105,15 +105,6 @@ class Adminevents extends CI_Controller
 	function add_event()
 	{
 		$data = $this->path->all_path();
-		/* $this->email->initialize(array(
-			'protocol' => 'smtp',
-			'smtp_host' => 'smtp.sendgrid.net',
-			'smtp_user' => 'meetinfo',
-			'smtp_pass' => 'meet2012univ',
-			'smtp_port' => 587,
-			'crlf' => "\r\n",
-			'newline' => "\r\n"
-		)); */
 		$this->config->load('sendgrid');
 		$config['protocol'] = $this->config->item('protocol');
 		$config['smtp_host'] = $this->config->item('smtp_host');
@@ -198,11 +189,7 @@ class Adminevents extends CI_Controller
 					$this->email->subject('Welcome To Meet Universities');
 					$this->email->message($message_body);
 					$this->email->send(); 
-			//$followers_email_for_sent = implode($followers_id,",");
-			//print_r($followers_email_for_sent);
-			//print_r($data['followers_of_univ']);
-			//$followers_id = $data['followers_of_univ'];
-			//print_r($followers_id);
+			
 			}
 			redirect('adminevents/manage_events/eas');
 			
@@ -614,8 +601,6 @@ class Adminevents extends CI_Controller
 			$this->form_validation->set_rules('detail', 'Detail', 'trim|string');
 			$this->form_validation->set_rules('event_place', 'Event Place', 'trim|string');
 			$this->form_validation->set_rules('event_timing', 'Event Time', 'trim|string');
-			
-			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {
 			$data['x']=$this->events->create_event();
 			redirect('adminevents/manage_events/eas');

@@ -366,7 +366,7 @@ class Frontmodel extends CI_Model
 		$this->db->from('users');
 		$this->db->join('user_profiles', 'user_profiles.user_id = users.id'); 
 		$this->db->where('level','1');
-		$this->db->order_by("id", "desc"); 
+		$this->db->order_by("id", "desc");
 		$this->db->limit(9);
 		$query=$this->db->get();
 		return $query->result_array();
@@ -425,7 +425,6 @@ class Frontmodel extends CI_Model
 	function delete_comment()
 	{
 	$this->db->delete('comment_table', array('comment_id' =>$this->input->post('comment_id')));
-	
 	}	
 	
 	function recent_articles()

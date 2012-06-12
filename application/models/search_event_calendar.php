@@ -24,6 +24,7 @@ class Search_event_calendar extends CI_Model
 		$query = $this->db->get();
 		if($query->num_rows()>0)
 		{
+		$events_data['total_res']=$query->num_rows();	
 		  $events_data['event_res'] = $query->result_array();
 			return $events_data;
 		} else{

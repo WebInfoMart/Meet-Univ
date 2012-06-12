@@ -196,7 +196,6 @@ function university_by_domain($univ_id,$univ_subdomain)
 	{
 		 $data = $this->path->all_path();
 		 $url='';
-		 $subdomain=str_replace(':','',$subdomain);
 		 if($cat_title!='' && $catid!='')
 		 {
 		 $cat_title=strtolower($cat_title);

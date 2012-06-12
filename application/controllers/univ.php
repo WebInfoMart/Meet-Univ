@@ -5,6 +5,7 @@ class Univ extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		header('Access-Control-Allow-Origin: *');
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->load->library('security');
@@ -596,18 +597,34 @@ class Univ extends CI_Controller
 		
 		function post_comment()
 		{
-			$data = $this->path->all_path();
-			$logged_in_user_id=$this->ci->session->userdata('user_id');
-			$data['commented_on']=$this->input->post('commentd_on');
-			$commented_on_id=$this->input->post('commented_on_id');
-			$data['commented_text']=$this->input->post('commented_text');
-	$data['delete_comment']=$this->frontmodel->post_comment_by_logged_in_user($logged_in_user_id,$data['commented_on'],$commented_on_id,$data['commented_text']);
-			$data['user_detail']=$this->users->fetch_profile($logged_in_user_id);
-			$this->load->view('ajaxviews/post_comment',$data);
+			$logged_in_user_id=$this->input->post('user_id');
+			if($logged_in_user_id=='' || $logged_in_user_id==NULL || $logged_in_user_id==0)
+			{
+			redirect(base_url().'/login');
+			}
+			else
+			{
+				$data = $this->path->all_path();
+				$data['commented_on']=$this->input->post('commentd_on');
+				$commented_on_id=$this->input->post('commented_on_id');
+				$data['commented_text']=$this->input->post('commented_text');
+				$data['delete_comment']=$this->frontmodel->post_comment_by_logged_in_user($logged_in_user_id,$data['commented_on'],$commented_on_id,$data['commented_text']);
+				$data['user_detail']=$this->users->fetch_profile($logged_in_user_id);
+				$view=$this->load->view('ajaxviews/post_comment',$data);
+				echo $view;
+			}	
 		}
 		function delete_comment()
 		{
+		$logged_in_user_id=$this->input->post('user_id');
+		if($logged_in_user_id=='' || $logged_in_user_id==NULL || $logged_in_user_id==0)
+		{
+			redirect(base_url().'/login');
+		}
+		else
+		{
 		$this->frontmodel->delete_comment();
+		}
 		}
 		
 		function count_comment($commented_on_id='')

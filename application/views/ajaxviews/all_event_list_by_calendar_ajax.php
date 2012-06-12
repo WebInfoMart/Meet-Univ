@@ -72,7 +72,7 @@ array_push($array_dates,$var);
 													echo "Counselling";
 												}
 												echo "</h4>";
-												echo '<h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
+												echo ' <h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
 											<div class="float_r">
