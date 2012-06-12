@@ -1,4 +1,4 @@
-/*!
+73/*!
  * Bootstrap v2.0.1
  *
  * Copyright 2012 Twitter, Inc
@@ -736,7 +736,7 @@ select:focus {
   width: 235px; /*width: 252px;*/
 }
 .input-xxlarge {
-  width: 530px;
+  width: 375px;
 }
 input[class*="span"],
 select[class*="span"],

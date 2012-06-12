@@ -75,7 +75,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						<div id="single_event_calendar">
 							
 							</div>
-							<div class="span7 margin_zero span_content">
+							<div class="span6 margin_zero">
 							<?php 
 						if($event_detail['event_date_time'] !=0 || $event_detail['event_date_time'] != '')
 						{
@@ -115,16 +115,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								?>
 								
 								</h3> 
-								
-							</div>
-							<div class="float_r">
-									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
-										<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-							</div>
-							<div>
-								<div class="float_l margin_t1">
-										<div><img src="<?php echo base_url(); ?>images/city.png" class="line_img inline"><span class="blue line_time inline"><?php 
+								<div>
+									<div><img src="<?php echo base_url(); ?>images/city.png" class="line_img inline"><span class="blue line_time inline"><?php 
 											if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
 											if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
 											if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} ?></span></div>
@@ -133,14 +125,21 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:
 										<?php echo $total_register_user; ?></span></div>
 								</div>
-								<div class="float_r">
+							</div>
+							<div class="float_r">
+								<div>
+									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+										<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
+										<div class="clearfix"></div>
+								</div>
+								<div>
 									<form action="EventRegistration" method="post">
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" />
 									</form>
 								</div>
-								<div class="clearfix"></div>
 							</div>
 								<div class="margin_t1">
 									<div class="float_l span5 margin_zero course_cont"><?php echo $event_detail['event_detail']; ?></div>
@@ -205,7 +204,72 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 							<div class="clearfix"></div>
 						</div> <?php } } ?>
-					</div>hello
+					</div>
+					<div class="margin_t margin_b">
+						<div>
+						<?php if($user_is_logged_in==0){ ?>		
+						<div class="events_box" style="height: 53px;">
+							<div>
+							<div class="float_r">
+								Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+							</div>
+							<div class="clearfix"></div>
+							</div>
+								<h3 class="center">Please Login for comment</h3>
+						</div>
+						<?php } else { ?>
+							<div class="margin_t margin_bs">
+							<div class="events_box">
+							<div class="float_l">
+									<div class="comment_img">
+									<?php if($user_detail['user_pic_path'] !=''){?>
+									<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
+										
+									<?php }
+									else if($user)
+									{ ?>
+									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+									<?php } else { ?>		
+								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
+								<?php }  ?>
+								<div style='width: 46px;position: absolute;' class="center">
+								<?php
+								if($user_detail['fullname'] !='')
+								{
+									echo $user_detail['fullname'];
+								}
+								else if($user)
+								{
+									echo $user_profile['name'];
+								}
+								?>
+								</div>
+									</div>
+								</div>
+								<div class="float_l span6 margin_zero">
+									<form class="form-horizontal" method="post" action="">
+									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $event_detail['event_id']; ?>" >
+									<input type="hidden" name="commented_on" id="commented_on" value="event" >
+										<div class="control-group">
+											<div class="my_form_controls">
+												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
+												</textarea>
+											</div>
+										</div>
+										<div class="control-group">
+											<div class="my_form_controls">
+												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">
+											</div>
+										</div>
+									</form>
+								</div>
+								
+								<div class="clearfix"></div>
+							</div>
+						</div> <?php } ?>
+							<div class="clearfix"></div>
+						</div>
+					</div>
 								
 						</div>
 						<div class="float_r span5">
@@ -234,71 +298,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						
 					</div>
 					
-					<div class="margin_t margin_b">
-						<div class="events_box">
-						<?php if($user_is_logged_in==0){ ?>		
-						<div class="events_box" style="height: 53px;">
-				<div class="float_r">
-					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-				</div>
-				<div class="float_l" style="margin-top: 30px; margin-left: 311px;">
-				<center><h3>Please Login for comment</h3></center>
-				</div>
-				</div>
-						<?php } else { ?>
-							<div class="margin_t margin_bs">
-							<div class="events_box">
-							<div class="float_l">
-									<div class="comment_img">
-									<?php if($user_detail['user_pic_path'] !=''){?>
-									<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-										
-									<?php }
-									else if($user)
-									{ ?>
-									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-									<?php } else { ?>		
-								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php }  ?>
-								<span style='float: left;width: 46px;position: absolute;'>
-								<?php
-								if($user_detail['fullname'] !='')
-								{
-									echo $user_detail['fullname'];
-								}
-								else if($user)
-								{
-									echo $user_profile['name'];
-								}
-								?>
-								</span>
-									</div>
-								</div>
-								<div class="float_l span9 margin_zero">
-									<form class="form-horizontal" method="post" action="">
-									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $event_detail['event_id']; ?>" >
-									<input type="hidden" name="commented_on" id="commented_on" value="event" >
-										<div class="control-group">
-											<div class="my_form_controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
-												</textarea>
-											</div>
-										</div>
-										<div class="control-group">
-											<div class="my_form_controls">
-												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">
-											</div>
-										</div>
-									</form>
-								</div>
-								
-								<div class="clearfix"></div>
-							</div>
-						</div> <?php } ?>
-							<div class="clearfix"></div>
-						</div>
 					</div>
-				</div>
 				<div class="float_r span3">
 					<img src="<?php echo base_url(); ?>images/banner_img.png">
 				</div>
