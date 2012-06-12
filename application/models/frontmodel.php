@@ -366,6 +366,7 @@ class Frontmodel extends CI_Model
 		$this->db->from('users');
 		$this->db->join('user_profiles', 'user_profiles.user_id = users.id'); 
 		$this->db->where('level','1');
+		$this->db->order_by("id", "desc"); 
 		$this->db->limit(9);
 		$query=$this->db->get();
 		return $query->result_array();

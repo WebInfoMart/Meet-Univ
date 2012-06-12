@@ -172,84 +172,87 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 						<h3>Just Joined in</h3>
 						<?php
 						$x=0;
-						foreach($new_users as $newly_registered){ $x++; ?>
-<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>"><img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $base; ?>images/user_model.png <?php } else { echo $base; ?>uploads/<?php echo $newly_registered['user_pic_path'];} ?> " /></a>				
+						if(!empty($new_users))
+						{
+						foreach($new_users as $newly_registered){ $x++; 
+						if($newly_registered['user_pic_path'] != '')
+						{ $user_pic = $newly_registered['user_pic_path']; }
+						else { $user_pic = 'user_model.png'; }
+						?>
+<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>">
+<img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $base; ?>images/<?php echo $user_pic; ?> <?php } else { echo $base; ?>uploads/<?php echo $user_pic; }?>"/>
+</a>				
 		
-					<?php } ?>	
+					<?php } } else { echo "No New Users Available"; } ?>	
 					</div>
 					<div class="span11 margin_delta margin_t">
 						<h3>Upcoming Events</h3>
 						<div>
 							<ul class="event_new">
+								<?php 
+								if(!empty($featured_events))
+								{
+									foreach($featured_events as $home_feature_event) 
+									{ 
+										if($home_feature_event['event_category'] == 'spot_admission') { $cat = 'Spot Admission'; }
+										else if($home_feature_event['event_category'] == 'fairs') { $cat = 'Fairs'; }
+										else if($home_feature_event['event_category'] == 'others') { $cat = 'Others'; }
+										else if($home_feature_event['event_category'] == 'alumuni') { $cat = 'Alumuni'; }
+									/* Extract Date and Time */
+									$date = explode(" ",$home_feature_event['event_date_time']);
+									/* Code For Center Image */
+									$image_exist=0;		
+									if(file_exists(getcwd().'/uploads/univ_gallery/'.$home_feature_event['univ_logo_path']))	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$home_feature_event['univ_logo_path']);
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize(getcwd().$img_path.'/calendar.png');
+									}
+									if($home_feature_event['univ_logo_path']!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/univ_gallery/'.$home_feature_event['univ_logo_path'];
+									}
+									else
+									{
+									$image=$base.$img_path.'/calendar.png';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,100,50,TRUE);
+									$event_register_user = $this->frontmodel->count_event_register($home_feature_event['event_id']);
+								?>
+								<?php
+								/* Code For Create Link Of Event */
+								$univ_name=$home_feature_event['univ_name'];
+								$univ_domain=$home_feature_event['subdomain_name'];
+								$event_title=$home_feature_event['event_title'];
+								$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$home_feature_event['event_id']);					
+								?>
 								<li>
 									<div class="event_meth float_l">
-										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
+										<h3 class="inline"><a href="<?php echo $event_link; ?>"><?php echo $home_feature_event['univ_name']; ?></a></h3><span class="inline"> &raquo; </span><h4 class="inline"><?php echo $cat; ?></h4>
 										<div class="margin_t1">
 											<div class="img_style float_l img_r">
-												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
-											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
-											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline"><?php echo $home_feature_event['event_place']? ucwords($home_feature_event['event_place']):''; echo $home_feature_event['cityname']?', '.ucwords($home_feature_event['cityname']):''; echo $home_feature_event['country_name']?', '.ucwords($home_feature_event['country_name']):''; ?></span></div>
+											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $date[0].'  '.$date[1].', '.$date[2]; echo $home_feature_event['event_time']?"&nbsp;&nbsp;&nbsp;&nbsp;Time:    ".$home_feature_event['event_time']:''; ?></span></div>
+											<?php echo substr($home_feature_event['event_detail'],0,180); ?>
 										</div>
 									</div>
 									<div class="float_r">
-											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
-											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
-											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
+											<a onClick="voicepopup('<?php echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+											<a onClick="popup('<?php echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="<?php echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
 										<div class="margin_t1 registered">		
-											<h2 class="blue">15</h2>	
+											<h2 class="blue"><?php echo $event_register_user; ?></h2>	
 											<h5 class="blue">Registered</h5>
 										</div>
 									</div>
 									<div class="clearfix"></div>
 								</li>
-								<li>
-									<div class="event_meth float_l">
-										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
-										<div class="margin_t1">
-											<div class="img_style float_l img_r">
-												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
-											</div>
-											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
-											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-										</div>
-									</div>
-									<div class="float_r">
-											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
-											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
-											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
-										<div class="margin_t1 registered">		
-											<h2 class="blue">15</h2>	
-											<h5 class="blue">Registered</h5>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</li>
-								<li>
-									<div class="event_meth float_l">
-										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
-										<div class="margin_t1">
-											<div class="img_style float_l img_r">
-												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
-											</div>
-											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
-											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-										</div>
-									</div>
-									<div class="float_r">
-											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
-											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
-											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
-										<div class="margin_t1 registered">		
-											<h2 class="blue">15</h2>	
-											<h5 class="blue">Registered</h5>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-								</li>
+								<?php } } else { echo "No Upcoming Events Available"; } ?>
 							</ul>
 						<?php
 						/*if(!empty($featured_events))
@@ -267,6 +270,27 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 		</div>
 	</div>
 </div>
+<!-- Div For Voice and SMS Popup -->	
+<div id="myModal" class="model_back modal hide fade">
+	<div class="modal-header no_border model_heading">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Event Information</h3>
+	</div>
+	<div id="event_det" class="modal-body model_body_height">
+	
+	</div>
+	</div>
+	
+	<!-- Div For Voice SMS -->
+	<div id="myModal-voice" class="model_back modal hide fade">
+	<div class="modal-header no_border model_heading">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>Event Information</h3>
+	</div>
+	<div id="event_det_voice" class="modal-body model_body_height">
+	
+	</div>
+	</div>
 <script>
 <?php if($email_send != 0) { ?>
 $(document).ready(function(){
@@ -276,4 +300,44 @@ $("#show_success").delay(3000).fadeOut(200);
 <?php } ?>
 	
 
+</script>
+
+<script>
+function popup(id) {
+  $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+id,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $('#event_det').html(msg);
+		$('#sms_form').append('<input type="hidden" name="page_status" value="home"/>');
+		$('#myModal').modal({
+        keyboard: false
+    })
+	   }
+	   }) 
+} 
+
+//Code For Voice API
+
+function voicepopup(id) {
+  $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_voice_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+id,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $('#event_det_voice').html(msg);
+		$('#sms_form_voice').append('<input type="hidden" name="page_status_voice" value="home"/>');
+		$('#myModal-voice').modal({
+        keyboard: false
+    })
+	   }
+	   }) 
+}
 </script>
