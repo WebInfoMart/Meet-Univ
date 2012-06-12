@@ -32,6 +32,7 @@ $no_of_student++;
 <li class="small_size">Admin<span class="badge badge-info"><?php echo $no_of_admin;?></span> </li><li class="small_size">University Admin<span class="badge"><?php echo $no_of_university_admin;?></span> </li><li class="small_size">Counsellor<span class="badge badge-warning"><?php echo $no_of_counsellor; ?></span></li><li class="small_size">
 Student<span class="badge badge-success"><?php echo $no_of_student;?></span></li></ul>
 </div>
+<div class="clearfix"></div>
 </div>
 
 			<form action="<?php echo $base ?>admin/deleteuser" method="post" id="deleteform">	

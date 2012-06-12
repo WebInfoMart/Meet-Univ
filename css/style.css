@@ -79,7 +79,7 @@ box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.8);color:#fff}
 .control-label{font-weight:700;}
 .notify_box{-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;background:#00a3e1;padding:3px;float:right;}
 .notify_box a,.notify_box a:hover{color:#fff}
-.thumb_box{width:175px!important;}
+.thumb_box{height: 220px;overflow: hidden;}
 img.thumb{border:solid 1px #ccc;margin:3px;}
 /***************************FOOTER***********************************/
 .footer{width:235px;margin:0px 10px;float:left;}

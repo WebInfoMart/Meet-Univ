@@ -733,7 +733,7 @@ select:focus {
   width: 210px;
 }
 .input-xlarge {
-  width: 252px;
+  width: 235px; /*width: 252px;*/
 }
 .input-xxlarge {
   width: 530px;

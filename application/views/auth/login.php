@@ -108,7 +108,9 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 		<div class="body_header"></div>
 		<div class="body_container">
 			<div class="row" style="display:"><!--LOGIN-->
-				<div class="span5 round_box margin_zero">
+				<div class="span16 margin_zero">
+				<div class="span5 margin_zero">	
+					<div class="round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
 					<h3 class="blue">Login</h3>
 					<div class="notify_box">
@@ -146,10 +148,11 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 							</span>
 					
 					<!--<span class="super">or</span> <img src="images/inconnect.png" />-->
+					</div>
 				</div>
-				<div class="row">
-					<div class="span7">
-						<h2 class="orange">5 reasons to join Meet Universities</h2>
+				<div class="span11">
+					<div class="span7 margin_zero">
+						<h3>5 reasons to join Meet Universities</h3>
 						<ul class="signup_benefits">
 							<li>Single largest University Event listing in the world.</li>
 							<li>Meet your dream university : Offline | Online</li>
@@ -159,7 +162,7 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 							<li>Guidance on visa ,immigration , education loans</li>
 						</ul>
 					</div>
-					<div class="span3 thumb_box">
+					<div class="span4 thumb_box">
 						<h3>Newly Registered</h3>
 						<?php
 						$x=0;
@@ -168,11 +171,76 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 		
 					<?php } ?>	
 					</div>
-					<div class="span10">
-						<h2 class="orange">Upcoming Events</h2>
-						<ul class="events">
+					<div class="span11 margin_zero">
+						<h3>Upcoming Events</h3>
+						<div class="fix-height">
+							<ul class="event_new">
+								<li>
+									<div class="event_meth float_l">
+										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
+										<div class="margin_t1">
+											<div class="img_style float_l img_r">
+												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+											</div>
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+									</div>
+									<div class="float_r">
+											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
+											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
+										<div class="margin_t1 registered">		
+											<h2 class="blue">15</h2>	
+											<h5 class="blue">Registered</h5>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+								<li>
+									<div class="event_meth float_l">
+										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
+										<div class="margin_t1">
+											<div class="img_style float_l img_r">
+												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+											</div>
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+									</div>
+									<div class="float_r">
+											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
+											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
+										<div class="margin_t1 registered">		
+											<h2 class="blue">15</h2>	
+											<h5 class="blue">Registered</h5>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+								<li>
+									<div class="event_meth float_l">
+										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
+										<div class="margin_t1">
+											<div class="img_style float_l img_r">
+												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+											</div>
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+									</div>
+									<div class="float_r">
+											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
+											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
+										<div class="margin_t1 registered">		
+											<h2 class="blue">15</h2>	
+											<h5 class="blue">Registered</h5>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+							</ul>
 						<?php
-						if(!empty($featured_events))
+						/*if(!empty($featured_events))
 						{
 						$c=0;
 						foreach($featured_events as $events) { $c=$c+1; ?>
@@ -180,13 +248,13 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 							<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/default_logo.png<?php } ?>" class="events_img" >
 							<span><?php echo ucwords(substr($events['event_detail'],0,176)); ?></span><h3><?php $date=explode(" ",$events['event_date_time']); echo $date[0]."-".$date[1]; ?><small>300 attending!</small></span></h3>
 							</li>
-						<?php } } else { echo "No Upcoming Events !!!"; } ?>	
-						</ul>
+						<?php } } else { echo "No Upcoming Events !!!"; } */?>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 <script>
 <?php if($email_send != 0) { ?>
 $(document).ready(function(){

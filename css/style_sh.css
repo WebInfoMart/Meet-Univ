@@ -3,7 +3,7 @@
 .padding_zero{padding:0px !important}
 .margin_zero{margin:0px!important;}
 .margin_t1{margin-top:10px;}
-
+.img_r{margin-right: 20px;}
 
 .margin_n{margin-top: 25px;}
 .margin_b{margin-bottom: 20px;}
@@ -1026,3 +1026,5 @@ span.aspectcorrect  img { position: absolute; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{background:#dbeaf3!important;border:0px!important;}
 #effect-style:hover{background:#dbeaf3;}
 .view_back{background: #3881AB;padding: 1px 5px;font-size: 11px;color: white;text-decoration: none;}
+.event_meth{width:85%;min-width:500px;}
+.img_event{width: 100px;}
