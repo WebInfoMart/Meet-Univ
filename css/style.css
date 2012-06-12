@@ -87,8 +87,8 @@ img.thumb{border:solid 1px #ccc;margin:3px;}
 .footer ul li a{color:#fff}
 .footer div{margin:0px 15px;}
 /***************************Signup***********************************/
-ul.signup_benefits{font-size:14px;}
-ul.signup_benefits li{list-style:none;background:url(../images/plus.png) no-repeat;padding-left:25px;margin:7px 0;}
+ul.signup_benefits{font-size:12px}
+ul.signup_benefits li{list-style:none;margin:7px 0;}
 ul.events{}
 ul.events li{list-style:none;height:50px;margin:5px 0;border-bottom:dashed 1px #ccc;padding:5px 0;}
 ul.events li:hover{background:#feffaa}

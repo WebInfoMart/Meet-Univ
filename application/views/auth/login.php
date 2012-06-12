@@ -152,18 +152,24 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 				</div>
 				<div class="span11">
 					<div class="span7 margin_zero">
-						<h3>5 reasons to join Meet Universities</h3>
-						<ul class="signup_benefits">
-							<li>Single largest University Event listing in the world.</li>
-							<li>Meet your dream university : Offline | Online</li>
-							<li>Free university information.</li>
-							<li>Free Career advice from experts.</li>
-							<li>One Click , dream university match engine.</li>
-							<li>Guidance on visa ,immigration , education loans</li>
-						</ul>
+						<div class="center_bar">
+							<span class="float_l reason">5</span>
+							<div class="margin_n">
+								<h3>Reasons to join Meet Universities</h3>
+								<ul class="signup_benefits">
+									<li>Single largest University Event listing in the world.</li>
+									<li>Meet your dream university : Offline | Online</li>
+									<li>Free university information.</li>
+									<li>Free Career advice from experts.</li>
+									<li>One Click , dream university match engine.</li>
+									<li>Guidance on visa ,immigration , education loans</li>
+								</ul>
+							</div>
+							<div class="clearfix"></div>
+						</div>
 					</div>
 					<div class="span4 thumb_box">
-						<h3>Newly Registered</h3>
+						<h3>Just Joined in</h3>
 						<?php
 						$x=0;
 						foreach($new_users as $newly_registered){ $x++; ?>
@@ -171,9 +177,9 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 		
 					<?php } ?>	
 					</div>
-					<div class="span11 margin_zero">
+					<div class="span11 margin_delta margin_t">
 						<h3>Upcoming Events</h3>
-						<div class="fix-height">
+						<div>
 							<ul class="event_new">
 								<li>
 									<div class="event_meth float_l">
@@ -182,6 +188,8 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 											<div class="img_style float_l img_r">
 												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
 											</div>
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
+											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 										</div>
 									</div>
@@ -203,6 +211,8 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 											<div class="img_style float_l img_r">
 												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
 											</div>
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
+											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 										</div>
 									</div>
@@ -224,6 +234,8 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 											<div class="img_style float_l img_r">
 												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
 											</div>
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
+											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
 											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 										</div>
 									</div>

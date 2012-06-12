@@ -85,7 +85,9 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 		<div class="body_header"></div>
 		<div class="body_container">
 			<div class="row">
-				<div class="span5 margin_zero round_box">
+				<div class="span16 margin_zero">
+				<div class="span5 margin_zero">
+					<div class="round_box">
 					<img src="<?php echo "$base$img_path" ?>/scholar.png" class="margin_delta float_l" />
 					<div class="notify_box _float_r">
 						<a href="login" class="white">Already a member? Sign in</a>
@@ -160,20 +162,27 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 							</span>
 					<!--<span class="super">or</span> <img src="images/inconnect.png" />-->
 				</div>
-				<div>
-					<div class="span7">
-						<h2 class="orange">5 reasons to join Meet Universities</h2>
-						<ul class="signup_benefits">
-							<li>Single largest University Event listing in the world.</li>
-							<li>Meet your dream university : Offline | Online</li>
-							<li>Free university information.</li>
-							<li>Free Career advice from experts.</li>
-							<li>One Click , dream university match engine.</li>
-							<li>Guidance on visa ,immigration , education loans</li>
-						</ul>
+				</div>
+				<div class="span11">
+					<div class="span7 margin_zero">
+						<div class="center_bar">
+							<span class="float_l reason">5</span>
+							<div class="margin_n">
+								<h3>Reasons to join Meet Universities</h3>
+								<ul class="signup_benefits">
+									<li>Single largest University Event listing in the world.</li>
+									<li>Meet your dream university : Offline | Online</li>
+									<li>Free university information.</li>
+									<li>Free Career advice from experts.</li>
+									<li>One Click , dream university match engine.</li>
+									<li>Guidance on visa ,immigration , education loans</li>
+								</ul>
+							</div>
+							<div class="clearfix"></div>
+						</div>
 					</div>
 					<div class="span4 thumb_box">
-						<h3>Newly Registered</h3>
+						<h3>Just Joined in</h3>
 						<?php
 						$x=0;
 						if(!empty($new_users))
@@ -183,10 +192,82 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 		
 					<?php } } else { echo " No New Users Available... "; }; ?>	
 					</div>
-					<div class="span10">
-						<h2 class="orange">Upcoming Events</h2>
-						<ul class="events">
+					<div class="span11 margin_delta margin_t">
+						<h3>Upcoming Events</h3>
+						<div>
+							<ul class="event_new">
+								<li>
+									<div class="event_meth float_l">
+										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
+										<div class="margin_t1">
+											<div class="img_style float_l img_r">
+												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+											</div>
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="h4_line blue line_time inline">British Council, New Delhi, India</span></div>
+											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+									</div>
+									<div class="float_r">
+											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
+											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
+										<div class="margin_t1 registered">		
+											<h2 class="blue">15</h2>	
+											<h5 class="blue">Registered</h5>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+								<li>
+									<div class="event_meth float_l">
+										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
+										<div class="margin_t1">
+											<div class="img_style float_l img_r">
+												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+											</div>
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
+											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+									</div>
+									<div class="float_r">
+											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
+											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
+										<div class="margin_t1 registered">		
+											<h2 class="blue">15</h2>	
+											<h5 class="blue">Registered</h5>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+								<li>
+									<div class="event_meth float_l">
+										<h3 class="inline">University of Greenwich</h3><span class="inline"> &raquo; </span><h4 class="inline">Spot Admission</h4>
+										<div class="margin_t1">
+											<div class="img_style float_l img_r">
+												<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
+											</div>
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">British Council, New Delhi, India</span></div>
+											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline">25 June, 2012</span></div>
+											Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+										</div>
+									</div>
+									<div class="float_r">
+											<a href="#"><img src="images/call.png" title="Share" alt="Share"></a>
+											<a href="#"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="#"><img src="images/map.png" title="Map" alt="Map"></a>
+										<div class="margin_t1 registered">		
+											<h2 class="blue">15</h2>	
+											<h5 class="blue">Registered</h5>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</li>
+							</ul>
 						<?php
+						/*
 						$c=0;
 						if(!empty($featured_events))
 						{
@@ -195,13 +276,12 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 							<img src="<?php if($events['univ_logo_path']!=''){ echo "$base";?>/uploads/univ_gallery/<?php echo $events['univ_logo_path'];} else { echo "$base$img_path";?>/default_logo.png<?php } ?>" class="events_img" >
 							<span><?php echo ucwords(substr($events['event_detail'],0,176)); ?></span><h3><?php $date=explode(" ",$events['event_date_time']); echo $date[0]."-".$date[1]; ?><small>300 attending!</small></span></h3>
 							</li>
-						<?php } } else { echo "NO Upcoming Events Available..."; }; ?>	
-						</ul>
+						<?php } } else { echo "NO Upcoming Events Available..."; }; */?>	
 					</div>
 				</div>
 			</div>
 			<div class="row" style="display:none"><!--LOGIN-->
-				<div class="span5 round_box">
+				<div class="span5">
 					<img src="<?php echo "$base$img_path" ?>/images/scholar.png" class="margin_delta float_l" />
 					<h3 class="blue">Login</h3>
 					<div class="notify_box">
@@ -227,6 +307,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<script>
 	function gotoevent(url)

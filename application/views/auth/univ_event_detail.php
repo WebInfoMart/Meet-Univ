@@ -94,7 +94,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								array_push($array_dates,$var);
 						}
 								?>
-								<h2 style="line-height: 24px;">
+								<h3 class="inline">
 								<?php 
 								if($event_detail['event_category'] == "spot_admission"){
 									echo "Spot Admission";
@@ -114,7 +114,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								echo '<span class="inline"> &raquo; </span>'.$event_detail['event_title'];
 								?>
 								
-								</h2> 
+								</h3> 
 								
 							</div>
 							<div class="float_r">
@@ -124,23 +124,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 							<div>
 								<div class="float_l margin_t1">
-									<ul style="margin:0px;list-style:none">
-										<li>
-											<img src="<?php echo base_url(); ?>images/city.png" class="line_img"><h4 class="h4_line"><span><?php 
-							if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
-							if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
-							if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} ?></span></h4>
-										</li>
-										<li>
-										
-											<img src="<?php echo base_url(); ?>images/clock.png" class="line_img"><h4 class="h4_line"><span>Timings: <?php echo $extract_date[0] ?> <?php echo ','.$extract_date[1].' '.$event_detail['event_time'];?></span></h4>
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>images/group.png" class="line_img"><h4 class="h4_line"><span>Total Registered Users: <span class="blue" style="margin-left: 3px;margin-right: 9px;"><?php echo $total_register_user; ?></span></span></h4>
-										</li>
-										<li class="clearfix"></li>
-									</ul>
-									
+										<div><img src="<?php echo base_url(); ?>images/city.png" class="line_img inline"><span class="blue line_time inline"><?php 
+											if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
+											if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
+											if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} ?></span></div>
+										<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class="blue line_time inline">Timings: 
+										<?php echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.$event_detail['event_time'];?></span></div>
+										<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:
+										<?php echo $total_register_user; ?></span></div>
 								</div>
 								<div class="float_r">
 									<form action="EventRegistration" method="post">
@@ -164,33 +155,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</div>
 									<div class="clearfix"></div>
 								</div>
-						</div>
-						<div class="float_r span5">
-							<div>
-								<div class="float_l" style="margin-right:20px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-								<div class="float_l" style="margin-right:-30px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-								<div class="float_l">
-									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="back_up">
-								<h2><img src="<?php echo base_url(); ?>images/cal_img.png" style="z-index: 100;position: relative;top:6px;">Upcoming Event</h2>
-								<ul class="up_event">
-								<?php if(!empty($feature_event_of_univ)){
-								foreach($feature_event_of_univ as $upcoming_event)
-								{
-								?>
-									<li><a href="<?php echo $base;?>univ-<?php echo $upcoming_event['univ_id']; ?>-event-<?php echo $upcoming_event['event_id']; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
-								<?php } } ?>	
-								</ul>
-							</div>
-							
-						</div>
-						<div class="clearfix"></div>
-						
-					</div>
-					<div class="margin_t1">
+								<div class="margin_t1">
 						<div class="event_border">
 						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($event_comments); ?>"/>
 							<h3><span id="cnt_comment_show"><?php if($event_comments!=0){ echo count($event_comments); } else { echo "0"; }; ?></span> Comments</h3>
@@ -240,7 +205,35 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 							<div class="clearfix"></div>
 						</div> <?php } } ?>
+					</div>hello
+								
+						</div>
+						<div class="float_r span5">
+							<div>
+								<div class="float_l" style="margin-right:20px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+								<div class="float_l" style="margin-right:-30px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+								<div class="float_l">
+									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="back_up">
+								<h2><img src="<?php echo base_url(); ?>images/cal_img.png" style="z-index: 100;position: relative;top:6px;">Upcoming Event</h2>
+								<ul class="up_event">
+								<?php if(!empty($feature_event_of_univ)){
+								foreach($feature_event_of_univ as $upcoming_event)
+								{
+								?>
+									<li><a href="<?php echo $base;?>univ-<?php echo $upcoming_event['univ_id']; ?>-event-<?php echo $upcoming_event['event_id']; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
+								<?php } } ?>	
+								</ul>
+							</div>
+							
+						</div>
+						<div class="clearfix"></div>
+						
 					</div>
+					
 					<div class="margin_t margin_b">
 						<div class="events_box">
 						<?php if($user_is_logged_in==0){ ?>		
