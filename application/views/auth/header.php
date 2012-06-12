@@ -168,9 +168,6 @@ $detail_of_event = $event_detail['event_detail'];
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">
 <title><?php echo $title_of_event; ?></title>
-<meta name="description" content="<?php echo $detail_of_event; ?>" />
-<meta name="keywords" content="Meet Universitirs,Global Events,World Uinversities" />
-<meta name="robots" content="INDEX,FOLLOW" />
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
