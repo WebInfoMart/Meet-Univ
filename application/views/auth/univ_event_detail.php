@@ -199,8 +199,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									} ?>
 								</a></h4>
 								<?php echo $event_comments_detail['commented_text'];?>
-								<div style="font-size;color:black;" class="float_r"><?php
-									echo substr($event_comments_detail['comment_time'],0,16);?></div>
+								<div style="font-size;color:black;" class="float_r">
+								<abbr class="timeago time_ago" title="<?php echo $event_comments_detail['comment_time']; ?>"></abbr>
+								</div>
 							</div>
 							<div class="clearfix"></div>
 						</div> <?php } } ?>

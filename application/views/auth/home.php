@@ -428,17 +428,21 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<div class="float_l span4">
 							<h2>Featured Colleges</h2>
-							<div>
-							<ul class="col_img">
-								<li>
+							<div id="slides_news">
+								<div class="slides_container"  style="width:237px!important;">
+									
 								<?php 
 				$f_coll=0;
 				if(!empty($featured_college))
 				{
+				$total_featured_clg=count($featured_college);
 				foreach($featured_college as $featured_clg) {
+				if(!($f_coll%6)) { ?>
+				<div>
+				<ul class="col_img">
+				<li>
+				<?php }
 				$fc=0;
-				if($f_coll < 6)
-				{
 				$image_exist=0;		
 				if(file_exists(getcwd().'/uploads/univ_gallery/'.$featured_clg['univ_logo_path']) && $featured_clg['univ_logo_path']!='')	
 				{
@@ -466,10 +470,21 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									?>
 										<a href="<?php echo $univ_link; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
 									</div>
-				<?php $f_coll++;	
-				} } } else { echo "No Featured Colleges Available"; } ?>					
-								</li>
-							</ul>
+				<?php 
+				$f_coll++;
+				if((!($f_coll%6)) || $f_coll==$total_featured_clg) { ?>	
+				</li></ul></div>	
+								
+				<?php }
+				}
+				}   
+				else 
+				{ 
+				echo "No Featured Colleges Available"; 
+				} ?>					
+								
+								</div>
+								
 							<div class="clearfix"></div>
 							</div>
 							<div>
@@ -477,7 +492,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<div class="btn-group">
 										<button class="btn status_bg number_bar"><?php echo $total_poste_event_count?$total_poste_event_count:'0'; ?></button>
 										<button class="btn status_bg number_bar"><span id="tot_reg_user"></span></button>
-										
+										<div class="clearfix"></div>
 									</div>
 									<div class="label_text">
 										<ul>
@@ -1209,22 +1224,34 @@ height:22px;
 			});
 		});
 	</script>
+<script>
+		$(function(){
+			$('#slides_news').slides({
+				effect: 'fade',
+				play: 6500,
+				pause: 10000,
+				hoverPause: true,
+				preload: true,
+				generateNextPrev: false
+			});
+		});
+	</script>
 
 <script>
 var timer, delay = 3000; //5 minutes counted in milliseconds.
-
+var lastval=0;
 timer = setInterval(function(){
     $.ajax({
       type: 'POST',
       url: '<?php echo base_url().'auth/auto_count_register_user';?>',
       success: function(response){
-	  //alert(response);
+	  if(response!=lastval)
+	  {
 	  $('#tot_reg_user').html(response);
 	  $('#tot_reg_user').show("slide", { direction: "down" }, 1000);
-	  //$('#tot_reg_user').slideUp($('#tot_reg_user').val(),function(){
-				//$('#tot_reg_user').html(response).slideDown(););
 	  $('#tot_reg_user').html(response);
-        //$('.score_news').append(html);
+	  }
+	  lastval=response;
       }
     });
 }, delay);
