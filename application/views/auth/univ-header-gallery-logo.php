@@ -49,15 +49,17 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 					} ?>
 					 </small></h2>
 				</div>
-				<div class="span4 float_r margin_t">
-					<div class="margin_zero float_l">
+				<div class="span3 float_r">
+					<img src="<?php echo "$base$img_path" ?>/user.png" class="line_img inline"><span class="align_text line_time inline">Followers <?php print_r($count_followers); ?></span>
+					<span class="margin_l"><img src="<?php echo "$base$img_path" ?>/document.png" class="line_img inline"><span class="line_time inline align_text">Articles <?php print_r($count_articles); ?></span></span>
+					<!--<div class="margin_zero float_l">
 						<div class="float_l"><img src="<?php echo "$base$img_path" ?>/user.png"></div>
 						<div class="float_r margin_l"><small>Followers <?php print_r($count_followers); ?></small></div>
 					</div>
 					<div class="margin_zero float_r">
 						<div class="float_l"><img src="<?php echo "$base$img_path" ?>/document.png"></div>
 						<div class="float_r margin_l"><small>Articles <?php print_r($count_articles); ?></small></div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 			

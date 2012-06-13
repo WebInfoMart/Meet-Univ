@@ -1011,7 +1011,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 .h4_line span{margin-left:25px;}
 .line_img{z-index: 10;position: absolute;margin-top:2px;}
 .map_data{border: 1px solid #DDD;padding: 2px;}
-.back_up{background:#fee6c5;padding: 10px;}
+.back_up{background:#dbeaf3;padding: 10px;-webkit-box-shadow: 0px 0px 5px 
+#333;-moz-box-shadow: 0px 0px 5px #333333;box-shadow: 0px 0px 5px #333;}
 .up_event li{color: #3881AB;}
 .up_event li a{color:#333}
 .up_event li a:hover{text-decoration:none;}
@@ -1039,3 +1040,6 @@ span.aspectcorrect  img { position: absolute; }
 .fb_set{width:57px;margin-left: 55px}
 .google_plus{margin-left:1px;}
 .img_height{min-height: 65px;}
+.align_text{top: 4px;
+position: relative;
+left: 9px;}

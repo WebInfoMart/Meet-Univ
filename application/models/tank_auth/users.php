@@ -1334,6 +1334,8 @@ class Users extends CI_Model
 		   $this->db->from('follow_univ');
 		   $this->db->where('followed_by',$logged_user);
 		   $this->db->join('university','follow_univ.follow_to_univ_id = university.univ_id');
+		   $this->db->order_by('ontime','desc');
+		   $this->db->limit(2);
 		   $query = $this->db->get();
 		   if($query->num_rows() > 0)
 		   {

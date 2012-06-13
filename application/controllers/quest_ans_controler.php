@@ -39,7 +39,6 @@ class Quest_ans_controler extends CI_Controller
 		if($this->input->post('post_quest'))
 		{
 		$this->form_validation->set_rules('quest_title','Question Title','required');
-		//$this->form_validation->set_rules('colleges','Category Field','required');
 		if($this->form_validation->run())
 		{
 		if (!$this->tank_auth->is_logged_in()) {
@@ -161,9 +160,9 @@ class Quest_ans_controler extends CI_Controller
 				$this->session->set_userdata('quest_send_suc','');
 			}
 			
-		$data['get_all_question'] = $this->quest_ans_model->get_all_quest_user_info();
+		$data['get_all_question'] = $this->quest_ans_model->get_recent_quest_user_info();
 		//echo count($data['get_all_question']);
-		$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
+		//$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
 		//print_r($data['count_all_question']);
 		$this->load->view('auth/all_question',$data);
 		$this->load->view('auth/footer',$data);
@@ -187,7 +186,7 @@ class Quest_ans_controler extends CI_Controller
 		if($type == 'allcol')
 		{
 		$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
-		$data['get_all_question'] = $this->quest_ans_model->get_all_quest_user_info();
+		$data['get_all_question'] = $this->quest_ans_model->get_recent_quest_user_info();
 		$this->load->view('auth/browse_all_quest',$data);
 		}
 		else if($type == 'univquest')

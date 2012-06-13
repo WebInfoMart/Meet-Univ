@@ -471,6 +471,7 @@ class Frontmodel extends CI_Model
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id=university.univ_id');
 		$this->db->where(array('STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		$this->db->order_by('event_date_time','desc');
 		$this->db->limit(5);
 		$query = $this->db->get();
 		if($query->num_rows>0)

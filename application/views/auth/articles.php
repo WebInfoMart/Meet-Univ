@@ -15,7 +15,7 @@
 				</div>-->
 				<div class="span9 margin_zero float_l">
 					<h3>Recent Articles</h3>
-				<div class="margin_t1">
+					<div class="margin_t1">
 				
 					<ul class="event_new">
 					<?php foreach($articles as $articles_detail){
@@ -23,19 +23,19 @@
 				?>
 						<li>
 							<div class="float_l">
-								<h3>Lorem ipsum dolor sit amet</h3>
+								<h3><a href="#">Lorem ipsum dolor sit amet</a></h3>
 							</div>
 							<div class="float_r span4 margin_zero">
 								<!--<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>-->
-								<div id="fbc" class="float_l" style="width:57px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
-								<div class="float_l">
+								<div id="fbc" class="float_l fb_set"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+								<div class="float_l" style="margin-left:1px;">
 								<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 							
 								</div>
 								<div id="tw" class="float_r tw" style="width:82px;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a></div>
 							</div>
 								<div class="clearfix"></div>
-							<div class="margin_t1">
+							<div class="margin_t1 img_height">
 								<div class="img_style float_l img_r">
 									<img src="http://workforcetrack.in/uploads/univ_gallery/uog20logo1.jpg" class="img_event"/>
 								</div>
@@ -116,9 +116,24 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 							<div class="clearfix"></div>
 						</div>
 						</div>
-					<?php }*/ ?>	
+					<?php }*/ ?>
+						
 					</div>
 					
+				</div>
+				<div class="float_l span4">
+					<div class="back_up">
+						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
+								<ul class="up_event">
+								<?php if(!empty($feature_event_of_univ)){
+								foreach($feature_event_of_univ as $upcoming_event)
+								{
+								?>
+									<li><a href="<?php echo $base;?>univ-<?php echo $upcoming_event['univ_id']; ?>-event-<?php echo $upcoming_event['event_id']; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
+								<?php } } ?>	
+								<li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li>
+								</ul>
+					</div>
 				</div>
 			</div>
 				<div class="float_r span3">

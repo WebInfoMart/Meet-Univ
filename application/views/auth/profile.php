@@ -255,71 +255,36 @@ $select_female='';
 							 <?php
 							if(!empty($featured_events))
 							{
-							 foreach($featured_events as $featured_events_detail) { ?>							
+							 foreach($featured_events as $featured_events_detail) { 
+							$univ_domain=$featured_events_detail['subdomain_name'];
+							$event_title=$featured_events_detail['event_title'];
+							$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$featured_events_detail['event_id']);
+							 ?>							
 				<li>
-				<a style="color:#666;" href="<?php echo $base; ?>univ-<?php echo $featured_events_detail['event_univ_id']; ?>-event-<?php echo $featured_events_detail['event_id']; ?>"><?php echo substr($featured_events_detail['event_title'],0,100).'..'; ?></a>
+				<a style="color:#666;" href="<?php echo $event_link; ?>"><?php echo substr($featured_events_detail['event_title'],0,100).'..'; ?></a>
 				<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
-				<?php } } else { echo " No Upcoming Events Available... "; } ?>
+				<?php 
+				} 
+				
+				} else { echo " No Upcoming Events Available... "; } ?>
 									
 								</ul>
 							</div>
 							<div class="margin_t news_box">
-								<!--<div class="span5 margin_zero">
-									<h2>Study Abroad</h2>
-									<div>
-										<ul class="study_point">
-											<li>
-												<div class="float_l count">
-													<div class="float_l"><a href="#" class="study_content">USA</a></div>
-													<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/us.png"></div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="float_l count">
-													<div class="float_l"><a href="#" class="study_content">UK</a></div>
-													<div class="float_r"><img src="<?php echo "$base$img_path"; ?>/gb.png"></div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="clearfix"></div>
-											</li>
-											<li>
-												<div class="float_l count">
-													<div class="float_l"><a href="#" class="study_content">Canada</a></div>
-													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ca.png"></div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="float_l count">
-													<div class="float_l"><a href="#" class="study_content">Korea</a></div>
-													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/kr.png"></div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="clearfix"></div>
-											</li>
-											<li>
-												<div class="float_l count">
-													<div class="float_l"><a href="#" class="study_content">India</a></div>
-													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/india.png"></div>
-													<div class="clearfix"></div>
-												</div>
-												<div class="float_l count">
-													<div class="float_l"><a href="#" class="study_content">Online</a></div>
-													<div class="float_r"><img src="<?php echo "$base$img_path";  ?>/ol.png"></div>
-													<div class="clearfix"></div>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="float_l right_border"></div> commented by sumit munjal-->
-							<!--	<div class="span5 margin_zero">  replaced by below line -->
 									<div class="margin_zero">
 									<h2>News</h2>
 										<ul>
 				 <?php	
 				 if(!empty($recent_news))
 				 {
-				 foreach($recent_news as $recent_news_detail) { ?>					
+				 foreach($recent_news as $recent_news_detail) {
+				$univ_domain=$recent_news_detail['subdomain_name'];
+				$news_title=$recent_news_detail['news_title'];
+				$news_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'news',$news_title,$recent_news_detail['news_id']);
+								
+				 ?>					
 				<li>
-				<a style="color:#666;" href="<?php echo $base; ?>univ-<?php echo $recent_news_detail['news_univ_id']; ?>-news-<?php echo $recent_news_detail['news_id']; ?>">
+				<a style="color:#666;" href="<?php echo $news_link; ?>">
 				<?php echo substr($recent_news_detail['news_title'],0,100); ?><img src="<?php echo "$base$img_path";  ?>/event_arrow.png" class="news_arrow">
 										</a>	</li>
 											

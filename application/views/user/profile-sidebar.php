@@ -61,7 +61,7 @@ if ($user) {
 									{ echo ''; } else {
 									echo $dob_explode[0].',';
 									}
-									if($profile_pic['gender'] != '') { echo $profile_pic['gender']; } else { echo " "; }
+									if($profile_pic['gender'] != '') { echo ucwords($profile_pic['gender']); } else { echo " "; }
 									?> </h4>
 										
 									</div>
@@ -93,7 +93,7 @@ if ($user) {
 										foreach($my_collage_of_user as $my_collage)
 										{
 									?>
-										<li><a href="university/<?php echo $my_collage['univ_id']; ?>"><?php echo $my_collage['univ_name']; ?></a></li>
+										<li><a href=""><?php echo $my_collage['univ_name']; ?></a></li>
 									<?php }
 											}
 									else { ?><li>No Activity Yet</li><?php } ?>			
@@ -131,21 +131,4 @@ if ($user) {
 									</div>
 								</div>
 							</div>
-							<!--<div class="part_second font_sidebar">
-								<div class="index_sidebar_content invite">
-									<div class="index_sidebar_header">
-										<a data-toggle="modal" href="#myModal" id="pulse"><span class="orange">+  Invite Friends</span></a>
-										<div id="myModal" class="modal hide fade" style="display: none; ">
-											<div class="modal-header">
-												<a class="close" data-dismiss="modal">×</a>
-												<h3>thank you</h3>
-											</div>
-											<div class="modal-footer">
-											<a href="#" class="btn btn-primary">Save changes</a>
-											<a href="#" class="btn" data-dismiss="modal">Close</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div> -->
 					</div>

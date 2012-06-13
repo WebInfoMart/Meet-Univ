@@ -635,12 +635,12 @@ class Univ extends CI_Controller
 			$this->load->view('ajaxviews/count_comment',$data);
 		}
 	
-  function UniversityQuest($quest_id='',$user_id='')
+  function UniversityQuest($quest_id='')
   {
   
    $data = $this->path->all_path();
    $univ_id=$this->subdomain->find_id_of_current_univ();
-
+   $user_id=$this->quest_ans_model->find_user_id_of_question($quest_id);
    $this->load->view('auth/header',$data);
    $data['univ_id_for_program'] = $univ_id; 
    $data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -691,6 +691,8 @@ class Univ extends CI_Controller
    }
    $this->load->view('auth/footer',$data);
   }
+  
+  
 		function UniversityQuestSection($univ_id='',$quest_id='',$user_id='')
 		{
 			$data = $this->path->all_path();

@@ -49,7 +49,7 @@ $route['programs']='univ/programs';
 $route['university_events']='univ/university_events';
 $route['university_news']='univ/university_news_list';
 $route['university_articles']='univ/university_articles_list';
-$route['university_qustions_qnswers']='univ/UniversityQuest';
+//$route['university_qustions_qnswers']='univ/UniversityQuest';
 
 
 $route['event/(:num)/(:any)']='univ/univ_event/$1';
@@ -63,6 +63,9 @@ $route['articles/(:num)/(:any)']='univ/univ_articles/$1';
 
 //for program page
 $route['programs/(:num)/(:any)']='univ/program_detail/$1';
+
+
+$route['question/(:num)/(:any)']='univ/UniversityQuest/$1';
 
 //$route['university/(:num)/(:any)/article/(:num)/(:any)']='univ/univ_articles/$1/$3';
 
@@ -93,10 +96,10 @@ $route['colleges']='auth/all_colleges';
 $route['events/(.*)'] = 'auth/events/$1';
 $route['events']='auth/events';
 
-$route['(:num)/UniversityQuest/(:num)/(:any)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
-$route['MeetQuest/(:num)/(:any)/(:num)'] = 'quest_ans_controler/MeetQuest/$1/$2';
-$route['UniversityQuestSection/(:num)/(:any)'] = 'univ/UniversityQuestSection/$1';
-$route['UniversityQuestSection'] = 'univ/UniversityQuestSection';
+//$route['(:num)/UniversityQuest/(:num)/(:any)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
+//$route['MeetQuest/(:num)/(:any)/(:num)'] = 'quest_ans_controler/MeetQuest/$1/$2';
+//$route['UniversityQuestSection/(:num)/(:any)'] = 'univ/UniversityQuestSection/$1';
+//$route['UniversityQuestSection'] = 'univ/UniversityQuestSection';
 $route['(QuestandAns)'] = 'quest_ans_controler/$1';
 
 $route['(inbox)'] = 'user/$1';

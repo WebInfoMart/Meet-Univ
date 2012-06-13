@@ -128,8 +128,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 							<div class="float_r">
 								<div>
-									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 										<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
 										<div class="clearfix"></div>
 								</div>
@@ -273,16 +273,17 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 						</div>
 						<div class="float_r span5">
-							<div>
-								<div class="float_l" style="margin-right:20px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-								<div class="float_l" style="margin-right:-30px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-								<div class="float_l">
+							<div class="span4 float_r">
+								<div class="float_l fb_set"><div class="fb-like" data-href="<?php //$_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true"></div></div>
+								<div class="float_l" style="margin-left:1px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php //$_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+								<div class="float_r tw" style="width:82px;">
 									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 								</div>
 								<div class="clearfix"></div>
 							</div>
+							<div class="clearfix"></div>
 							<div class="back_up">
-								<h2><img src="<?php echo base_url(); ?>images/cal_img.png" style="z-index: 100;position: relative;top:6px;">Upcoming Event</h2>
+								<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
 								<ul class="up_event">
 								<?php if(!empty($feature_event_of_univ)){
 								foreach($feature_event_of_univ as $upcoming_event)
