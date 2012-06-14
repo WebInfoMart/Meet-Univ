@@ -28,29 +28,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 	<div class="row ">
 				<div class="float_l span13 margin_l">
 					
-					<div class="">
-						<h2 class="course_txt"><?php echo $news_detail['news_title']; ?></h2>
-						<div class="float_r">
-						<div class="float_l">
-						<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
-						<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
-						</div>
-						<div class="float_l"><div class="fb-like" style="width:66px;margin-left: 23px;" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-						<div class="float_l">
-							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-						
-						</div>
-						</div>
-						<div class="float_l span9 margin_zero">
-							<div>
-								<div class="span-event-single" style="color:#333;"><strong>Posted Time</strong></div>  
-								<div class="date_heading">
-								<br /><abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
-								</div>
-								<h3>Details</h3>
-								<?php echo $news_detail['news_detail']; ?>
-							</div>
-						</div>
+					<div class="span9 margin_zero">
+						<h3><?php echo $news_detail['news_title']; ?></h3>
+						<div><abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr></div>
+						<?php echo $news_detail['news_detail']; ?>
 						
 						<div class="clearfix"></div>
 						<div class="margin_t" id="add_more_comment">
@@ -108,15 +89,18 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<?php }
 }				?>			
 						</div>
-			<?php if($user_is_logged_in==0){ ?>		
+			<?php if($user_is_logged_in==0){ ?>	
+		<div class="margin_t margin_b">
 			<div class="events_box" style="height: 53px;">
-				<div class="float_r">
-					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+				<div>
+					<div class="float_r">
+						Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="float_l" style="margin-top: 30px; margin-left: 311px;">
-				<center><h3>Please Login for comment</h3></center>
-				</div>
-				</div>			
+				<h3 class="center">Please Login for comment</h3>
+			</div>	
+		</div>
 		<?php } else { ?>	
 			<div class="margin_t margin_bs">
 							<div class="events_box">
@@ -171,9 +155,52 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						</div>
 		<?php } ?>
 					</div>
+					<div class="span4">
+						<div class="float_r">
+							
+								
+						
+							<div class="float_l fb_set"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+							<div class="float_l">
+							<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
+							<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+							</div>
+							
+							<div class="float_r tw" style="width:82px;">
+								<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+							
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="back_up">
+						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
+								<ul class="up_event">
+								<?php
+								$news=0;					
+					foreach($recent_news as $recent_news_detail) {
+					if($news==6)
+					{
+					break;
+					}					
+					$news_link=$this->subdomain->genereate_the_subdomain_link(
+								$recent_news_detail['subdomain_name'],'news',$recent_news_detail['news_title'],$recent_news_detail['news_id']);
+								?>
+									<li>
+									
+							<a href="<?php echo $news_link; ?>">
+							<?php echo substr($recent_news_detail['news_title'],0,60); ?>
+							</a>		
+									</li>
+							<?php 
+							$news++;
+							} ?>		
+								</ul>
+					</div>
+					</div>
 				</div>
 				<div class="float_r span3">
-					<img src="images/banner_img.png">
+					<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 				

@@ -147,7 +147,10 @@ class Quest_ans_controler extends CI_Controller
 			'q_featured_country_que'=>'0',
 			);
 			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
-			$data['show_quest_send_msg'] = '1';
+			$this->session->set_flashdata('success',1);
+			$domain = $_SERVER['HTTP_HOST'];
+			$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
+			redirect($pageURL);
 			}
 			
 			
@@ -179,18 +182,19 @@ class Quest_ans_controler extends CI_Controller
 		$this->load->view('ajaxviews/country_list_ajax',$data);
 	}
 	
-	function BrowseQuestion($type='',$univ_id='')
+	function Browse_Question($type='')
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		if($type == 'allcol')
+		if($type == 'All')
 		{
 		$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
 		$data['get_all_question'] = $this->quest_ans_model->get_recent_quest_user_info();
 		$this->load->view('auth/browse_all_quest',$data);
 		}
-		else if($type == 'univquest')
+		else if($type == 'All_Questions')
 		{
+			 $univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['get_all_question'] = $this->quest_ans_model->get_all_quest_of_univ_user_info($univ_id);
 			$data['count_all_question'] = $this->quest_ans_model->count_all_questions_of_univ($univ_id);
 			//print_r($data['get_all_question']);
@@ -207,9 +211,11 @@ class Quest_ans_controler extends CI_Controller
 		
 		$this->load->view('auth/footer',$data);
 	}
-	function MeetQuest($quest_id='', $ask_user_id='')
+	function AnotherQuestion($quest_id='')
 	{
+
 		$data = $this->path->all_path();
+		$ask_user_id=$this->quest_ans_model->find_user_id_of_question($quest_id);
 		$this->load->view('auth/header',$data);
 		$data['user_is_logged_in']=0;
 				if($this->tank_auth->is_logged_in())

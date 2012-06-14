@@ -50,6 +50,7 @@ class Quest_ans_model extends CI_Model
 		$this->db->from('questions');
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
+		$this->db->join('university','questions.q_univ_id = university.univ_id','left');
 		$this->db->order_by("que_id","desc");
 		//$this->db->limit($limit,$offset);
 		$query = $this->db->get(); 
@@ -159,6 +160,9 @@ class Quest_ans_model extends CI_Model
 		$this->db->where('q_univ_id',$univ_id);
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
+		$this->db->join('university','questions.q_univ_id = university.univ_id','left');
+		$this->db->order_by('q_asked_time','desc');
+		$this->db->limit(10);
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{
@@ -203,6 +207,7 @@ class Quest_ans_model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('questions');
 		$this->db->join('users','questions.q_askedby = users.id');
+		$this->db->join('university','questions.q_univ_id = university.univ_id','left');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
 		$this->db->order_by("que_id","desc");
 		$this->db->limit(5);

@@ -692,4 +692,15 @@ class Frontmodel extends CI_Model
 		//return $total = floor($tot);
 	}
 	
+	function popular_articles()
+	{
+		$this->db->select('*');
+		$this->db->from('articles');
+		$this->db->where('id','1');
+		$pa = $this->db->get();
+		return $pa->result_array();
+	}
+	
+	
+	
 }

@@ -13,18 +13,38 @@
 					<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 				</div>
 				</div>-->
-					<h2 class="course_txt">Recent News</h2>
-					
+				<div class="float_l span9 margin_zero">
+					<h2>Recent News</h2>
 					<div class="margin_t1">
+					
+					
+						<ul class="event_new">
 					<?php
 					foreach($news as $news_detail){
 					
 					
 					?>
-					<div id="effect-style">
-				
-					<div class="event_border">
-							<div class="float_l event_border_div aspectcorrect">
+						<li>
+							<div class="float_l span5 margin_zero">
+								<?php 
+										$news_link=$this->subdomain->genereate_the_subdomain_link(
+										$news_detail['subdomain_name'],'news',$news_detail['news_title'],$news_detail['news_id']);							
+											
+										?>	
+								<h3><a href="<?php echo $news_link; ?>"><?php echo $news_detail['title']; ?></a></h3>
+							</div>
+							<div class="float_r span4 margin_zero">
+								<div class="float_l fb_set"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+								</div>
+								<div class="float_l" style="margin-left:1px;"> <g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone> </div>
+								<div class="float_r tw" style="width:82px;">
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>
+								</div>
+							</div>
+								<div class="clearfix"></div>
+							<div class="margin_t1 img_height">
+								<div class="img_style float_l img_r aspectcorrect">
+									
 							<?php
 									$image_exist=0;	
 									$news_img = $news_detail['news_image_path'];	
@@ -54,48 +74,33 @@
 									{
 									$image=$base.$img_path.'/news_default_image.jpg';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,84,84,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 							?>
-<img src="<?php echo $image; ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;margin-right:20px">
+								
 									
-							</div>
-							<div class="dsolution" style="padding-left:20px;">
-								<div>
-									<div class="float_l span7 margin_zero">
-<?php 
-$news_link=$this->subdomain->genereate_the_subdomain_link(
-$news_detail['subdomain_name'],'news',$news_detail['news_title'],$news_detail['news_id']);							
-	
-?>									
-<h3><a href="<?php echo $news_link; ?>"><?php echo $news_detail['title']; ?></a></h3>
-										<span>
-										
-							<abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
-										</span><br/>
-									</div>
-									<div class="float_r">
-				<div class="float_l" style="margin-right:10px;"> <g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone> </div>
-				<!--<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>-->
-				<div class="float_l" style="width:55px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-									
-				</div>
-				<div class="float_l" style="width: 84px;">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>
-				</div>
-				</div>
-									
-									
-									
-									<div class="clearfix"></div>
+							
+									<img src="<?php echo $image; ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;margin-right:20px"/>
 								</div>
-								<div class="course_cont"><?php echo substr($news_detail['news_detail'],0,250).'..'; ?></div>
+								<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span><abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
+										</span></div>
+								<?php echo substr($news_detail['news_detail'],0,250).'..'; ?>
 							</div>
-							<div class="clearfix"></div>
-						</div>
-						</div>
-					<?php } ?>	
+						</li>
+						<?php } ?>
+					</ul>
+					
+				
 					</div>
 				</div>
+				<div class="float_l span4">
+					<div class="back_up">
+						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
+						<ul class="up_event">
+							<li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 			
 				<div class="float_r span3">
 					<img src="<?php echo "$base$img_path"; ?>/banner_img.png">

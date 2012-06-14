@@ -23,7 +23,9 @@
 		</script>
 <div class="row" style="margin-top:-30px">
 	<div class="float_l span13 margin_l margin_t">
-	<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on MeetUniversities</h3>
+	<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on 
+	<?php
+	echo $get_all_question_of_univ['quest_detail'][0]['univ_name']; ?></h3>
 		<div class="modal" id="show_success" style="display:none;" >
 			<div class="modal-header">
 			<a class="close" data-dismiss="modal"></a>
@@ -100,11 +102,11 @@
 														$url = "";
 													}
 													}
-													
+				$univ_domain=$this->subdomain->generate_univ_link_by_subdomain($get_all_question_of_univ['quest_detail'][0]['subdomain_name'])	
 											?>
 												<ul>
 													<li>
-														<a href="<?php echo "$base$url"; ?>">Browse All Questions of University</a>
+														<a href="<?php echo $univ_domain; ?>/Browse_Question/All_Questions">Browse All Questions of <?php echo $get_all_question_of_univ['quest_detail'][0]['univ_name']; ?></a>
 													</li>
 													
 												</ul>
@@ -130,11 +132,12 @@
 				{
 				if($quest_list['q_univ_id'] != '0')
 				{
-				$question_title = str_replace(' ','-',$quest_list['q_title']);
-					$url = "$quest_list[q_univ_id]/UniversityQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
-					//$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+				$univ_domain=$quest_list['subdomain_name'];
+				$quest_title=$quest_list['q_title'];
+				$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
+				$url = $que_link;
 				}
-				else if($quest_list['q_country_id'] != '0')
+				else if($quest_list['q_country_id'] != '0' && $quest_list['q_country_id'] != '')
 				{
 					$url = "";
 				}
@@ -144,17 +147,9 @@
 				<div class="quest_row_single">
 				<div id="quest_pic" class="quest_pic float_l"> <?php echo "<img style='width:40px;height:40px;margin:0px 10px;' src='".base_url()."uploads/".$quest_list['user_pic_path']."'/>";  ?> </div>
 				<div id="quest" class="quest_right">
-				<a href="<?php echo "$base$url"; ?>">
+				<a href="<?php echo $url; ?>">
 				<h3>
-				<?
-				// Quickly calculate the timespan
-					
-	// $time = $quest_list['q_asked_time'];
-	// $diferencia = time() - $quest_list['q_asked_time'];
-    ?>
-				
-				
-				<?php
+			<?php
 				echo $quest_list['q_title']."</br>";?></h3>
 				<span class="black"><?php echo "by&nbsp;".$quest_list['fullname']."&nbsp"; ?></span>
 				</a>
@@ -282,7 +277,7 @@ $.ajax({
 	</script>
 
 	<?php
-	if($show_quest_send_msg == 1)
+	if($this->session->flashdata('success'))
 	{
 	?>
 	<script>

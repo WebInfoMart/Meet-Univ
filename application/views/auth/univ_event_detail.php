@@ -116,6 +116,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 								</h3> 
 								<div>
+									<div><img src="<?php echo base_url(); ?>images/home.png" class="line_img inline"><span class="blue line_time inline">Event Venue: NG- 11, Paschim Vihar, New Delhi 
+										</span></div>
 									<div><img src="<?php echo base_url(); ?>images/city.png" class="line_img inline"><span class="blue line_time inline"><?php 
 											if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
 											if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
@@ -124,6 +126,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<?php echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.$event_detail['event_time'];?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:
 										<?php echo $total_register_user; ?></span></div>
+										
 								</div>
 							</div>
 							<div class="float_r">

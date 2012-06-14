@@ -52,14 +52,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 				<div class="span3 float_r">
 					<img src="<?php echo "$base$img_path" ?>/user.png" class="line_img inline"><span class="align_text line_time inline">Followers <?php print_r($count_followers); ?></span>
 					<span class="margin_l"><img src="<?php echo "$base$img_path" ?>/document.png" class="line_img inline"><span class="line_time inline align_text">Articles <?php print_r($count_articles); ?></span></span>
-					<!--<div class="margin_zero float_l">
-						<div class="float_l"><img src="<?php echo "$base$img_path" ?>/user.png"></div>
-						<div class="float_r margin_l"><small>Followers <?php print_r($count_followers); ?></small></div>
-					</div>
-					<div class="margin_zero float_r">
-						<div class="float_l"><img src="<?php echo "$base$img_path" ?>/document.png"></div>
-						<div class="float_r margin_l"><small>Articles <?php print_r($count_articles); ?></small></div>
-					</div>-->
+					
 				</div>
 			</div>
 			
@@ -137,7 +130,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 		$about_us_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'about','','');
 		$programs_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'programs','','');
 		$events_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_events','','');
-		$qna_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_qustions_qnswers','','');
+		$qna_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'Questions_Answers','','');
 		$news_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_news','','');
 		$article_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'university_articles','','');
 		
@@ -145,7 +138,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 							<a href="<?php echo $about_us_link; ?>" class="active">About</a></li>
 							<li><a href="<?php echo $programs_link ?>" class="active">Programs</a></li>
 							<li><a href="<?php echo $events_link; ?>" class="active">Events</a></li>
-							<li><a href="<?php //echo $qna_link; ?>" class="active">Questions & Answers</a></li>
+							<li><a href="<?php echo $qna_link; ?>" class="active">Questions & Answers</a></li>
 							<li ><a href="<?php echo $news_link; ?>">News</a></li>
 							<li class="border_beta"><a href="<?php echo $article_link; ?>" class="active">Articles</a></li>
 						</ul>

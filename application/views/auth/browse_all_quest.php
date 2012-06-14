@@ -8,14 +8,6 @@
 					
 				</div>
 				<div id="quest_div_show_right" class="span13 margin_l margin_t1">
-				<!--<div class="float_r" >
-				<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
-				<div class="float_l" style="margin-right:10px;"><div class="fb-like" data-href="<?php $_SERVER['REQUEST_URI']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
-				<div class="float_l">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-				</div>
-				<div class="clearfix"></div>
-				</div>-->
 				<h2 class="course_txt"><?php echo $count_all_question; ?> Questions asked on MeetUniversities</h2>
 				<div class="margin_t1">
 				<?php
@@ -26,9 +18,10 @@
 				{
 				if($quest_list['q_univ_id'] != '0')
 				{
-					//$univ_title = str_replace(' ','_',$quest_list['title']);
-					$question_title = str_replace(' ','-',$quest_list['q_title']);
-					$url = "$quest_list[q_univ_id]/UniversityQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
+				$univ_domain=$quest_list['subdomain_name'];
+				$quest_title=$quest_list['q_title'];
+				$url=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
+				
 				}
 				else if($quest_list['q_country_id'] != '0')
 				{
@@ -38,7 +31,7 @@
 				{
 					//$univ_title = str_replace(' ','_',$quest_list['title']);
 					$question_title = str_replace(' ','-',$quest_list['q_title']);
-					$url = "MeetQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
+					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				?>
 				<div id="effect-style">
@@ -57,7 +50,7 @@
 				<div id="quest" class="dsolution">
 				<div>
 				<div class="float_l">
-			<a href="<?php echo "$base$url"; ?>" class="black">
+			<a href="<?php echo $url; ?>" class="black">
 					<h3><?php echo $quest_list['q_title']."</br>";?></h3></a>
 				
 				<span style="color:black;">

@@ -89,7 +89,7 @@
 											<div class="margin_t1">
 												<ul class="browse_list">
 													<li>
-														<a href="BrowseQuestion/allcol">Browse All Questions</a>
+														<a href="Browse_Question/All">Browse All Questions</a>
 													</li>
 													
 												</ul>
@@ -107,7 +107,7 @@
 							<!-- Added by Subh -->
 				<div id="quest_div_1" class="margin_t">
 				<div id="quest_div_show_right" class="float_l">
-				<h3 class="heading_follow">
+				<h3 class="heading_follow">Recent 
 				<?php 
 				if($get_all_question!=0)
 				{ 
@@ -141,10 +141,10 @@
 				}
 				else
 				{
-					echo "jaaaaaaaaa";
 					//$univ_title = str_replace(' ','_',$quest_list['title']);
 					$question_title = str_replace(' ','-',$quest_list['q_title']);
 					$url = "MeetQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
+					$url = $base.'otherQuestion'.'/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				?>
 
@@ -326,7 +326,7 @@ $.ajax({
 	</script>
 	
 	<?php
-	if($show_quest_send_msg == 1)
+	if($this->session->flashdata('success'))
 	{
 	?>
 	<script>
@@ -339,7 +339,6 @@ $.ajax({
 	</script>
 	<?php
 	}
-	$show_quest_send_msg = '';
 	?>
 	
 	

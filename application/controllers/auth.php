@@ -1222,6 +1222,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$data['articles'] = $this->frontmodel->fetch_articles($page);
+		$data['recent_articles'] = $this->frontmodel->popular_articles();
 		$this->load->view('auth/articles',$data);
 		$this->load->view('auth/footer',$data);
 	}

@@ -253,7 +253,7 @@ array_push($array_dates,$var);
 											<div class="clearfix"></div>
 										</div>
 										<div>
-											<div class="img_style float_l">
+											<div class="img_style float_l aspectcorrect">
 											<?php
 											$image_exist=0;	
 									$event_img = $event_detail['univ_logo_path'];	
@@ -274,7 +274,7 @@ array_push($array_dates,$var);
 									{
 									$image=$base.$img_path.'/default_logo.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,92,87,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 											?>
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 												

@@ -491,7 +491,8 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['news_detail']=$this->frontmodel->get_news_detail_by_univ($univ_id,$news_id);
-			 if($data['university_details'] != 0 )
+			$data['recent_news'] = $this->frontmodel->fetch_news();
+			if($data['university_details'] != 0 )
 			{
 				
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -693,8 +694,9 @@ class Univ extends CI_Controller
   }
   
   
-		function UniversityQuestSection($univ_id='',$quest_id='',$user_id='')
+		function UniversityQuestSection()
 		{
+			 $univ_id=$this->subdomain->find_id_of_current_univ();
 			$data = $this->path->all_path();
 			$this->load->view('auth/header',$data);
 			if($this->session->userdata('quest_send_suc')=='1')
@@ -778,7 +780,12 @@ class Univ extends CI_Controller
 			);
 			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
 			$this->session->set_userdata('ask_quest_on_univ_page','');
-			$data['show_quest_send_msg'] = '1';
+			$this->session->set_flashdata('success',1);
+			//set session for show the message
+			$domain = $_SERVER['HTTP_HOST'];
+			$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
+			redirect($pageURL);
+			
 			}
 			}		
 			}		

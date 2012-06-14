@@ -87,6 +87,12 @@ $route['(Recent_Articles/articles)']='auth/articles';
 $route['(Recent_News/news/(:num))']='auth/news/$1';
 $route['(Recent_News/news)']='auth/news';
 $route['university/(:num)/(:any)']='univ/university/$1';
+$route['Questions_Answers']='univ/UniversityQuestSection';
+$route['otherQuestion/(:num)/(:any)']='quest_ans_controler/AnotherQuestion/$1';
+
+
+
+
 
 $route['change_user_password/(:any)/(:num)']='auth/change_user_password/$1/$2';
 $route['(college_search|events_search)'] = 'search/$1';
@@ -96,10 +102,6 @@ $route['colleges']='auth/all_colleges';
 $route['events/(.*)'] = 'auth/events/$1';
 $route['events']='auth/events';
 
-//$route['(:num)/UniversityQuest/(:num)/(:any)/(:num)'] = 'univ/UniversityQuest/$1/$2/$3';
-//$route['MeetQuest/(:num)/(:any)/(:num)'] = 'quest_ans_controler/MeetQuest/$1/$2';
-//$route['UniversityQuestSection/(:num)/(:any)'] = 'univ/UniversityQuestSection/$1';
-//$route['UniversityQuestSection'] = 'univ/UniversityQuestSection';
 $route['(QuestandAns)'] = 'quest_ans_controler/$1';
 
 $route['(inbox)'] = 'user/$1';
@@ -107,7 +109,7 @@ $route['inbox/(:any)']='user/inbox/$1';
 $route['(outbox)'] = 'user/$1';
 $route['outbox/(:any)']='user/outbox/$1';
 $route['(compose_email)'] = 'user/$1';
-$route['BrowseQuestion/(:any)'] = 'quest_ans_controler/BrowseQuestion/$1';
+$route['Browse_Question/(:any)'] = 'quest_ans_controler/Browse_Question/$1';
 
 
 //profile messge
