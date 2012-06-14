@@ -332,8 +332,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		</h4></div>
 										</div>
 										<div class="float_r">
-											<a onClick="voicepopup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-												<a onClick="popup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+										<!-- For VoiceCall PopOver -->
+										<a href="#" id="ex6b" class="ex6b_ccc" name="event-get-detail_<?php echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+											<span id="event_pop_<?php echo $events['event_id']; ?>" class="ex6a_ccc" ></span>
+											<!--<a onClick="voicepopup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>-->
+												<!-- For SMS PopOver -->
+												<a href="#" id="ex6b2" class="ex6b_ccc2" name="event-get-detail2_<?php echo $events['event_id']; ?>"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<span id="event_pop2_<?php echo $events['event_id']; ?>" class="ex6a_ccc2" ></span>
+												<!--<a onClick="popup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>-->
 												<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
 												<a href="<?php echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
 										</div>
@@ -678,7 +684,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 			</div>
 		</div>
 		
-		<div id="myModal" class="model_back modal hide fade">
+		<!--<div id="myModal" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
 		<h3>Event Information</h3>
@@ -686,10 +692,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	<div id="event_det" class="modal-body model_body_height">
 	
 	</div>
-	</div>
+	</div>-->
 	
 	<!-- Div For Voice SMS -->
-	<div id="myModal-voice" class="model_back modal hide fade">
+	<!--<div id="myModal-voice" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
 		<h3>Event Information</h3>
@@ -697,7 +703,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	<div id="event_det_voice" class="modal-body model_body_height">
 	
 	</div>
-	</div>
+	</div>-->
 	<!-- End Here -->
 	<!-- Anusha
 	<div class="dropdown_box">
@@ -767,7 +773,7 @@ border:1px solid #ccc;width:86px;position:relative;left:186px;top:1px;display:no
 .li2{padding-left:10px;margin-bottom:0px;padding-right:5px;padding-top:5px;}
 </style>
 <SCRIPT LANGUAGE="JavaScript">     
- function popup(id) {
+ /*function popup(id) {
   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>leadcontroller/sms_me_event_ajax",
@@ -803,7 +809,7 @@ function voicepopup(id) {
     })
 	   }
 	   }) 
-} 
+}*/ 
 
 </script>
 
@@ -1256,3 +1262,104 @@ timer = setInterval(function(){
     });
 }, delay);
 </script>
+
+<!-- Script For PopOver Ajax Content -->
+<script>
+var currentid=0;
+$(".ex6a_ccc").popover({
+	title: "Remind Me With Call",
+	content: "At least a popover that makes some sense..."
+});
+$(".ex6b_ccc").mouseover(function(event) {
+var id = $(this).attr('name');
+var array = id.split('_');
+var e_id = array[1];
+	event.preventDefault();
+	event.stopPropagation();
+	if(currentid!=0)
+		  {
+		$("#event_pop_"+currentid).popover(
+		'content',
+		''
+		).popover('hide');
+		$("#event_pop2_"+currentid).popover(
+		'content',
+		''
+		).popover('hide');
+		  }
+		  currentid=e_id;
+	$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_voice_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+e_id,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $(".wrap").css("margin-left","193px");
+	      $(this).removeClass("left-arrow"); 
+          $(this).addClass("left-arrow-overwrite"); 
+	   $("#event_pop_"+e_id).popover(
+		'content',
+		msg
+	).popover('show');
+	$("#event_pop_"+e_id).append('<input type="hidden" name="page_status_voice" value="home"/>');
+	   }
+	   }) 
+});
+
+<!------------------ ------------------------>
+$(".ex6a_ccc2").popover({
+	title: "SMS Me This Event",
+	content: "At least a popover that makes some sense..."
+});
+$(".ex6b_ccc2").mouseover(function(event) {
+
+
+var id = $(this).attr('name');
+var array = id.split('_');
+var e_id = array[1];
+	event.preventDefault();
+	event.stopPropagation();
+	if(currentid!=0)
+		  {   //$("#selector").popover('hide');
+		  //alert(currentid);
+		  $("#event_pop_"+currentid).popover(
+		  'content',
+		  ''
+	).popover('hide');
+		  
+		  $("#event_pop2_"+currentid).popover(
+		  'content',
+		  ''
+	).popover('hide');
+		  //$("#event_pop2_"+currentid).popover('hide');
+		  // $("#event_pop2_"+currentid).popover('setTrigger', 'click');
+          //$("#event_pop2_"+currentid).popover(["init", ] { title: "SMS Me This Event" });
+		  }
+		  currentid=e_id;
+	$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>leadcontroller/sms_me_event_ajax",
+	   async:false,
+	   data: 'event_id='+e_id,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $(".wrap").css("margin-left","193px");
+	      //$(this).removeClass("left-arrow"); 
+          //$(this).addClass("left-arrow-overwrite"); 
+		  
+	   $("#event_pop2_"+e_id).popover(
+		'content',
+		msg
+	).popover('show');
+	$("#event_pop2_"+e_id).append('<input type="hidden" name="page_status" value="home"/>');
+	   }
+	   }) 
+});
+
+</script>
+
+
+

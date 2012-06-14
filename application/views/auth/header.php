@@ -173,7 +173,9 @@ $detail_of_event = $event_detail['event_detail'];
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/home_slider.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style-editor.css" />
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/popover.css" />
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/thingerly-calendar.css" />
+<link rel="icon" type="image/png" href="<?php echo"$base$img_path"; ?>/fav_icon.png"/>
 <script src="<?php echo "$base$js";?>/jquery.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-collapse.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
@@ -181,6 +183,7 @@ $detail_of_event = $event_detail['event_detail'];
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/pic_upload_js.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-button.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.popover-1.1.0.js"></script>
 
 <script type="text/javascript" src="<?php echo "$base$js";?>/slides.min.jquery.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
