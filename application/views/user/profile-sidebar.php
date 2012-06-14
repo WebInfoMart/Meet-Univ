@@ -67,7 +67,6 @@ if ($user) {
 									</div>
 								</div>
 								<div class="part_second" style="">
-								<div class="index_sidebar_progress">
 									<div class="index_sidebar_body">
 										<h4 class="font_sidebar">Your Profile Completes <?php echo $pro_complete; ?>%</h4>
 										<div class="progress_outline progress_out">
@@ -77,7 +76,6 @@ if ($user) {
 											</div>
 										</div>
 									</div>
-								</div>
 								</div>
 							</div>
 							
@@ -96,8 +94,10 @@ if ($user) {
 										<li><a href=""><?php echo $my_collage['univ_name']; ?></a></li>
 									<?php }
 											}
-									else { ?><li>No Activity Yet</li><?php } ?>			
+									else { ?><li>No Activity Yet</li><?php } ?>	
+									
 									</ul>
+									<div class="clearfix"></div>
 									</div>
 								</div>
 							</div>
@@ -112,6 +112,7 @@ if ($user) {
            <li><div><div class="float_l"><a href="<?php echo "$base"; ?>inbox">Inbox </a></div><div class="float_r"><?php if($count_inbox) { ?><span class="badge badge-warning"><?php echo $count_inbox ? $count_inbox : ''; ?></span><?php } ?></div><div class="clearfix"></div></div></li><!--29-->
            <li><div><div class="float_l"><a href="<?php echo "$base"; ?>outbox">Outbox </a></div><div class="clearfix"></div></div></li><!--29-->
           </ul>
+		  <div class="clearfix"></div>
 									</div>
 								</div>
 							</div>
@@ -128,6 +129,7 @@ if ($user) {
 											<?php } ?>
 											
 										</ul>
+										<div class="clearfix"></div>
 									</div>
 								</div>
 							</div>

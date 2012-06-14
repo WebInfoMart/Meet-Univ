@@ -94,9 +94,16 @@
 				</div>
 				<div class="float_l span4">
 					<div class="back_up">
-						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
+						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Popular News</span></h3>
 						<ul class="up_event">
-							<li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li>
+						<?php if(!empty($popular_news)){
+								foreach($popular_news as $popular_news_detail)
+								{
+								$news_link=$this->subdomain->genereate_the_subdomain_link(
+								$popular_news_detail['subdomain_name'],'news',$popular_news_detail['news_title'],$popular_news_detail['news_id']);
+								?>
+									<li><a href="<?php echo $news_link; ?>"><?php echo substr($popular_news_detail['news_title'],0,60).'..'; ?></a></li>
+								<?php } } ?>
 						</ul>
 					</div>
 				</div>

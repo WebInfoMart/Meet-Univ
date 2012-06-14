@@ -29,14 +29,7 @@
 		<div class="modal" id="show_success" style="display:none;" >
 			<div class="modal-header">
 			<a class="close" data-dismiss="modal"></a>
-			<h3>Message For You</h3>
-			</div>
-			<div class="modal-body">
-			<p><center><h4>Your Question Has been posting successfully.....</h4></center></p>
-			</div>
-			<div class="modal-footer">
-			<!--<a href="#" class="btn">Close</a>-->
-			<!--<a href="#" class="btn btn-primary">Save changes</a>-->
+			<h3>Your Question Has been posted successfully..</h3>
 			</div>
 		</div>
 		<div class="green_box">

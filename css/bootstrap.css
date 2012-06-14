@@ -736,7 +736,7 @@ select:focus {
   width: 235px; /*width: 252px;*/
 }
 .input-xxlarge {
-  width: 375px;
+  width: 445px;
 }
 input[class*="span"],
 select[class*="span"],

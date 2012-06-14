@@ -249,8 +249,8 @@ $select_female='';
 								<button class="btn btn-success margin_l21" href="#">Search</button>
 							</div>
 						-->	
-							<div class="events_box margin_t">
-								<h2>Events</h2>
+							<div class="events_box">
+								<h3>Events</h3>
 								<ul>
 							 <?php
 							if(!empty($featured_events))
@@ -262,7 +262,7 @@ $select_female='';
 							 ?>							
 				<li>
 				<a style="color:#666;" href="<?php echo $event_link; ?>"><?php echo substr($featured_events_detail['event_title'],0,100).'..'; ?></a>
-				<src="<?php echo "$base$img_path";  ?>event_arrow.png"></li>
+				&nbsp; &raquo;
 				<?php 
 				} 
 				
@@ -270,9 +270,9 @@ $select_female='';
 									
 								</ul>
 							</div>
-							<div class="margin_t news_box">
+							<div class="margin_t events_box">
 									<div class="margin_zero">
-									<h2>News</h2>
+									<h3>News</h3>
 										<ul>
 				 <?php	
 				 if(!empty($recent_news))
@@ -285,7 +285,7 @@ $select_female='';
 				 ?>					
 				<li>
 				<a style="color:#666;" href="<?php echo $news_link; ?>">
-				<?php echo substr($recent_news_detail['news_title'],0,100); ?><img src="<?php echo "$base$img_path";  ?>/event_arrow.png" class="news_arrow">
+				<?php echo substr($recent_news_detail['news_title'],0,100); ?> &nbsp; &raquo;
 										</a>	</li>
 											
 					<?php } } else { echo "No News Available..."; } ?>						
@@ -294,10 +294,88 @@ $select_female='';
 								<div class="clearfix"></div>
 								</div>
 								<div class="margin_t">
-									<div class="news_box">
-										<h2>Question and Answer</h2> 
-										<p>
-				<?php if(!empty($featured_question_profile))
+									<div>
+										<div class="span7 float_l margin_zero green_qust">
+											<div>
+												<div class="float_l">
+													<div class="letter_uni">
+													<div>Q Go Ask <br><span>uestion</span></div>
+													</div>
+												</div>
+												<div class="float_r Qust_content">
+													<span>Have a Question?</span>
+													<span>Ask our counselors!</span>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<h3>what are the type of questions they ask in iit?</h3>
+											<div class="margin_t1">
+												<div class="input-append">
+													<form action="http://workforcetrack.in/QuestandAns" method="post">
+														<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
+														<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
+													</form>
+												</div>
+											</div>
+											<div class="margin_t1">
+								<h2>Latest Q&A</h2>
+								<ul class="prof_data">
+								<?php
+								if(!empty($featured_question_profile))
+								{
+								$a=0;
+								$url = "";
+								foreach($featured_question_profile['quest_detail'] as $quest_list)
+								{
+								if($quest_list['q_univ_id'] != '0')
+								{
+									$question_title = str_replace(' ','-',$quest_list['q_title']);
+									$univ_domain=$quest_list['subdomain_name'];
+									$quest_title=$quest_list['q_title'];
+									$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
+									$url = $que_link;
+								}
+								else if($quest_list['q_country_id'] != '0')
+								{
+									$url = "";
+								}
+								else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
+								{
+									$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$quest_list['q_title'];
+								}
+								$q_date = explode(" ",$quest_list['q_asked_time']);
+								$quest_ask_date = explode("-",$q_date[0]);
+								$q_month = $quest_ask_date[1]; ?>
+						
+									<li>
+										<div style="width: 34px;margin-right:20px" class="float_l"><img src="<?php echo $base; ?>images/stud.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;"></div>
+										<a href="<?php echo $url; ?>"><span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
+										</a><div style="font-size: 11px;line-height: 12px;">Asked by <?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
+										</div>
+										<div style="font-size: 11px;line-height: 12px;">
+										<?php
+										$q_date = explode(" ",$quest_list['q_asked_time']);
+										$quest_ask_date = explode("-",$q_date[0]);
+										$q_month = $quest_ask_date[1];
+										$quest_month = date('M', strtotime($q_month . '01'));
+										 echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
+										echo $quest_month?$quest_month.', ':'';
+										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
+										?></div>
+									</li>
+							<?php } $a++; } else { echo "No Latest Questions Available"; }
+				?>
+							
+								</ul>
+							</div>
+										</div>
+										
+										<div class="span2 float_l margin_zero">
+										
+										</div>
+										<div class="clearfix"></div>
+											
+				<?php /*if(!empty($featured_question_profile))
 				{
 				$a=0;
 				$url = "";
@@ -336,14 +414,15 @@ $select_female='';
 										echo $quest_month?$quest_month.', ':'';
 										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
 										echo "Totoal Answer - ".$featured_question_profile['ans_count'][$a];
-										?></div>
+										?><
+										/div>
 									
 									
 				
 				<?php
-					} $a++; } else { echo "No Latest Questions Available"; } 
+					} $a++; } else { echo "No Latest Questions Available"; } */
 				?>
-										</p>
+										
 									</div>
 								</div>
 						</div>

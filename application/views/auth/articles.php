@@ -157,13 +157,15 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 					<div class="back_up">
 						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Popular Articles</span></h3>
 								<ul class="up_event">
-								<?php if(!empty($feature_event_of_univ)){
-								foreach($feature_event_of_univ as $upcoming_event)
+								<?php if(!empty($popular_articles)){
+								foreach($popular_articles as $popular_articles_detail)
 								{
+								$article_link=$this->subdomain->genereate_the_subdomain_link(
+								$popular_articles_detail['subdomain_name'],'articles',$popular_articles_detail['article_title'],$popular_articles_detail['article_id']);
 								?>
-									<li><a href="<?php echo $base;?>univ-<?php echo $upcoming_event['univ_id']; ?>-event-<?php echo $upcoming_event['event_id']; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
+									<li><a href="<?php echo $article_link; ?>"><?php echo substr($popular_articles_detail['article_title'],0,60).'..'; ?></a></li>
 								<?php } } ?>	
-								<li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li><li>Lorem Ipsum has been the industry's standard dummy text</li>
+								
 								</ul>
 					</div>
 				</div>
@@ -172,8 +174,8 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 					<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
 				</div>
 				
-				<div id="pagination" class="table_pagination right paging-margin">
-            <?php //echo $this->pagination->create_links();?>
+			<div id="pagination" class="table_pagination right paging-margin">
+            <?php echo $this->pagination->create_links(); ?>
             </div>
 			
 				<div class="clearfix"></div>

@@ -118,7 +118,6 @@ class Auth extends CI_Controller
    $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
    $this->form_validation->set_rules('remember', 'Remember me', 'integer');
    $this->form_validation->set_rules('user_type', 'user_type', 'string');
-
    // Get login for counting attempts to login
    if ($this->config->item('login_count_attempts', 'tank_auth') AND
      ($login = $this->input->post('login'))) {
@@ -126,14 +125,6 @@ class Auth extends CI_Controller
    } else {
     $login = '';
    }
-
-   //$data['use_recaptcha'] = $this->config->item('use_recaptcha', 'tank_auth');
-   /*if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
-    if ($data['use_recaptcha'])
-     $this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
-    else
-     $this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
-   }*/
    $data['errors'] = array();
    //print_r($this->session->userdata);
    if ($this->form_validation->run()) {        // validation ok
@@ -151,61 +142,35 @@ class Auth extends CI_Controller
 		redirect('colleges');
 	  }
       /* Code for if user question should be insert after login */
-      if($this->session->userdata('quest_sess_active') == 'true')
+      if($this->session->userdata('quest_sess_active'))
       {
        $data['user_id'] = $this->tank_auth->get_user_id();
        //if asked on particular university
-       if($this->session->userdata('quest_cat_type') == 'col')
-       {
        $quest = array(
-       'q_category'=>'univ',
-       'q_univ_id'=>$this->session->userdata('q_univ_id'),
+       'q_category'=>$this->session->userdata('q_category'),
        'q_title'=>$this->session->userdata('q_title'),
        'q_detail'=>$this->session->userdata('q_detail'),
        'q_askedby'=>$data['user_id'],
-       'q_approve'=>$this->session->userdata('q_approve'),
-       'q_featured_home_que'=>$this->session->userdata('q_featured_home_que'),
-       'q_featured_country_que'=>$this->session->userdata('q_featured_country_que'),
+	   'q_approve'=>'0',
+	   'q_featured_home_que'=>'0',
+	   'q_featured_country_que'=>'0',
+	   'q_univ_id'=>$this->session->userdata('q_univ_id')
        );
        $data['post_quest'] = $this->quest_ans_model->post_quest($quest);
-       //destroy all sessions
-       $this->session->set_userdata('q_univ_id','');
-       $this->session->set_userdata('q_title','');
-       $this->session->set_userdata('q_detail','');
-       $this->session->set_userdata('q_approve','');
-       $this->session->set_userdata('q_featured_home_que','');
-       $this->session->set_userdata('q_featured_country_que','');
-       $this->session->set_userdata('ask_quest_on_univ_page','');
-       }
        //if asked on study abroad
-       else if($this->session->userdata('quest_cat_type') == 'sa')
-       {
-        $quest = array(
-       'q_category'=>'country',
-       'q_country_id'=>$this->session->userdata('q_country_id'),
-       'q_title'=>$this->session->userdata('q_title'),
-       'q_detail'=>$this->session->userdata('q_detail'),
-       'q_askedby'=>$data['user_id'],
-       'q_approve'=>$this->session->userdata('q_approve'),
-       'q_featured_home_que'=>$this->session->userdata('q_featured_home_que'),
-       'q_featured_country_que'=>$this->session->userdata('q_featured_country_que'),
+	   $quest = array(
+       'q_category'=>'',
+       'q_title'=>'',
+       'q_detail'=>'',
+       'q_askedby'=>'',
+	   'quest_sess_active'=>'',
+	   'q_univ_id'=>''
        );
-       $data['post_quest'] = $this->quest_ans_model->post_quest($quest);
-       //destroy all sessions
-       $this->session->userdata('q_univ_id');
-       $this->session->userdata('q_title','');
-       $this->session->userdata('q_detail','');
-       $this->session->userdata('q_approve','');
-       $this->session->userdata('q_featured_home_que','');
-       $this->session->userdata('q_featured_country_que','');
-	   
-       }
-	   $this->session->set_userdata('quest_sess_active','');
-	   $this->session->set_userdata('quest_cat_type','');
+	   $this->session->unset_userdata($quest);
+	   $this->session->set_flashdata('success',1);	
 	   if($this->session->userdata('redirect_section')!= '')
 	   {
-		$this->session->set_userdata('quest_send_suc','1');
-		$red = 'UniversityQuestSection/'.$this->session->userdata('redirect_section');
+		$red = $this->session->userdata('redirect_section');
 		$this->session->set_userdata('redirect_section','');
 		redirect($red);
 	   }
@@ -230,6 +195,11 @@ class Auth extends CI_Controller
       foreach ($errors as $k => $v) $data['errors'][$k] = $this->lang->line($v);
      }
     }
+   }
+   else
+   {
+   $this->form_validation->set_message('login', 'You must accept our terms and conditions'); 
+   
    }
    /*$data['show_captcha'] = FALSE;
    if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
@@ -1214,6 +1184,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$data['news'] = $this->frontmodel->fetch_news($page);
+		$data['popular_news'] = $this->frontmodel->popular_news();
 		$this->load->view('auth/news',$data);
 		$this->load->view('auth/footer',$data);
 	}
@@ -1222,7 +1193,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$data['articles'] = $this->frontmodel->fetch_articles($page);
-		$data['recent_articles'] = $this->frontmodel->popular_articles();
+		$data['popular_articles'] = $this->frontmodel->popular_articles();
 		$this->load->view('auth/articles',$data);
 		$this->load->view('auth/footer',$data);
 	}

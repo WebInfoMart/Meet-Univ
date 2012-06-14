@@ -30,139 +30,66 @@ class Quest_ans_controler extends CI_Controller
 		$data['show_quest_send_msg'] = '';
 		//$data['quest_var'] = '';
 		if($this->input->post('ask_quest'))
-			{
-				$data['quest_var'] = $this->input->post('quest_on_univ');
-			}
-			else{
+		{
+			$data['quest_var'] = $this->input->post('quest_on_univ');
+		}
+		else{
 			$data['quest_var'] = '';
-			}		
+		}		
 		if($this->input->post('post_quest'))
 		{
 		$this->form_validation->set_rules('quest_title','Question Title','required');
 		if($this->form_validation->run())
 		{
-		if (!$this->tank_auth->is_logged_in()) {
-			$univ_or_country_id = $this->input->post('colleges');
-			$quest_title = $this->input->post('quest_title');
-			$quest_detail = $this->input->post('quest_detail');
-			$quest_cat_type = $this->input->post('category');
-			if($quest_cat_type == 'col')
-			{
-				$quest = array(
-				'q_category'=>'univ',
+		$univ_or_country_id = $this->input->post('colleges');
+		$quest_title = $this->input->post('quest_title');
+		$quest_detail = $this->input->post('quest_detail');
+		$quest_cat_type = $this->input->post('category');
+		if($univ_or_country_id==0)
+		{
+			$univ_or_country_id='';
+		}
+		if($quest_cat_type=='col')
+		{
+		 $quest_cat_type='univ';
+		}
+		if($quest_cat_type=='gen')
+		{
+		$quest_cat_type='general';
+		}
+		$quest = array(
+				'q_category'=>$quest_cat_type,
 				'q_univ_id'=>$univ_or_country_id,
 				'q_title'=>$quest_title,
 				'q_detail'=>$quest_detail,
 				'q_approve'=>'0',
 				'q_featured_home_que'=>'0',
-				'q_featured_country_que'=>'0',
-				);
-			}
-			else if($quest_cat_type == 'sa')
-			{
-					$quest = array(
-				'q_category'=>'country',
-				'q_country_id'=>$univ_or_country_id,
-				'q_title'=>$quest_title,
-				'q_detail'=>$quest_detail,
-				'q_approve'=>'0',
-				'q_featured_home_que'=>'0',
-				'q_featured_country_que'=>'0',
-				);
-			}
-			else if($quest_cat_type == 'gen')
-			{
-					$quest = array(
-				'q_category'=>'general',
-				'q_country_id'=>'0',
-				'q_univ_id'=>'0',
-				'q_title'=>$quest_title,
-				'q_detail'=>$quest_detail,
-				'q_askedby'=>$data['user_id'],
-				'q_approve'=>'0',
-				'q_featured_home_que'=>'0',
-				'q_featured_country_que'=>'0',
-				);
-			}
-			
-			$quest_sess = array(
-			'quest_sess_active'=>'true'
-			);
-			$quest_cat_type = array(
-			'quest_cat_type'=>$this->input->post('category')
-			);
+				'q_featured_country_que'=>'0'
+		);
+		if (!$this->tank_auth->is_logged_in()) {	
+			$quest_sess = array('quest_sess_active'=>1);
 			$this->session->set_userdata($quest);
 			$this->session->set_userdata($quest_sess);
-			$this->session->set_userdata($quest_cat_type);
-			
-			redirect('/login/');
-		} else {
-			$univ_or_country_id = $this->input->post('colleges');
-			$quest_title = $this->input->post('quest_title');
-			$quest_detail = $this->input->post('quest_detail');
-			$data['user_id']	= $this->tank_auth->get_user_id();
-			$quest_cat_type = $this->input->post('category');
-			if($quest_cat_type == 'col')
-			{
-			$quest = array(
-			'q_category'=>'univ',
-			'q_univ_id'=>$univ_or_country_id,
-			'q_title'=>$quest_title,
-			'q_detail'=>$quest_detail,
-			'q_askedby'=>$data['user_id'],
-			'q_approve'=>'0',
-			'q_featured_home_que'=>'0',
-			'q_featured_country_que'=>'0',
-			);
-			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
-			$data['show_quest_send_msg'] = '1';
-			}
-			else if($quest_cat_type == 'sa')
-			{
-				$quest = array(
-			'q_category'=>'country',
-			'q_country_id'=>$univ_or_country_id,
-			'q_title'=>$quest_title,
-			'q_detail'=>$quest_detail,
-			'q_askedby'=>$data['user_id'],
-			'q_approve'=>'0',
-			'q_featured_home_que'=>'0',
-			'q_featured_country_que'=>'0',
-			);
-			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
-			$data['show_quest_send_msg'] = '1';
-			}
-			
-			else if($quest_cat_type == 'gen')
-			{
-				$quest = array(
-			'q_category'=>'general',
-			'q_country_id'=>'0',
-			'q_univ_id'=>'0',
-			'q_title'=>$quest_title,
-			'q_detail'=>$quest_detail,
-			'q_askedby'=>$data['user_id'],
-			'q_approve'=>'0',
-			'q_featured_home_que'=>'0',
-			'q_featured_country_que'=>'0',
-			);
+			redirect('/login/');			
+		}
+		else {
+			$quest['q_askedby']=$this->tank_auth->get_user_id();
 			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
 			$this->session->set_flashdata('success',1);
 			$domain = $_SERVER['HTTP_HOST'];
 			$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
 			redirect($pageURL);
-			}
+		}
 			
 			
 		}
-		}
-		}
+		
 		if($this->session->userdata('quest_send_suc') != '')
 			{
 				$data['show_quest_send_msg'] = '1';
 				$this->session->set_userdata('quest_send_suc','');
 			}
-			
+	    }		
 		$data['get_all_question'] = $this->quest_ans_model->get_recent_quest_user_info();
 		//echo count($data['get_all_question']);
 		//$data['count_all_question'] = $this->quest_ans_model->count_all_questions();

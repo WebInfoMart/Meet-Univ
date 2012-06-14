@@ -22,8 +22,8 @@ if ($user) {
 					<div class="float_l span3 margin_zero sidebar">
 						<div class="margin_t50 single_sidebar">
 							<ul>
-								<li class="active_side"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/account.png" class="margin_l"></div><div class="float_l margin_l">Account Information</div><div class="clearfix"></div></li>
-		<?php if(!$fetch_profile['fb_user']) { ?>						<li><a href="<?php echo "$base" ?>update_password"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/update.png" class="margin_l"></div><div class="float_l margin_l">Update Password</div></a><div class="clearfix"></div></li>
+								<li class="active_side"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/user.png" class="margin_l"></div><div class="float_l margin_l text-update">Account Information</div><div class="clearfix"></div></li>
+		<?php if(!$fetch_profile['fb_user']) { ?>						<li><a href="<?php echo "$base" ?>update_password"><div class="float_l"><img src="<?php echo "$base$img_path";  ?>/key.png" class="margin_l"></div><div class="float_l margin_l text-update update_info">Update Password</div></a><div class="clearfix"></div></li>
 						<?php } ?>		<!--<li><div class="float_l"><img src="images/key.png" class="margin_l"></div><div class="float_l margin_l">Update E-mail</div><div class="clearfix"></div></li>-->
 							</ul>
 						</div>
@@ -31,12 +31,12 @@ if ($user) {
 					<div class="float_l span13 margin_zero">
 						<div class="span10 margin_zero">
 							<form class="form-horizontal form_data" action="update_profile" method="post" enctype="multipart/form-data">
-								<h2 class="profile_heading">Update Account Information</h2>
+								<h3 class="profile_heading">Update Account Information</h3>
 								<div class="profile_border">
-									We will not share your information without your permission.
-									<div class="contact_box margin">
+									<span>We will not share your information without your permission.</span>
+									<div class="contact_box margin1">
 										<div class="margin_l margin_t">
-											<h3>Personal Information <img src="<?php echo "$base$img_path";  ?>/ques_layer.png"></h3>
+											<h4>Personal Information <img src="<?php echo "$base$img_path";  ?>/ques_layer.png"></h4>
 											<div class="margin1">
 												<div>
 													<label class="control-label padding_alpha">
@@ -119,9 +119,9 @@ if ($user) {
 										</div>
 										<div class="clearfix"></div>
 									</div>
-									<div class="contact_box margin">
+									<div class="contact_box margin1">
 										<div class="margin_t margin_l">
-											<h3>Contact Information</h3>
+											<h4>Contact Information</h4>
 												<div class="margin1">
 													<div class="control-group">
 														<label class="control-label">Home Address </label>
@@ -146,9 +146,9 @@ if ($user) {
 												</div>
 										</div>
 									</div>
-									<div class="contact_box margin">
+									<div class="contact_box margin1">
 										<div class="margin_t margin_l">
-											<h3>Educational Information</h3>
+											<h4>Educational Information</h4>
 												<div class="margin1">
 													<div class="control-group">
 														<label class="control-label">Current Qualification *</label>
@@ -183,7 +183,7 @@ if ($user) {
 												</div>
 										</div>
 									</div>
-									<div class="margin_t margin_l">
+									<div class="margin_t">
 										<input type="submit" name="update" class="btn btn-primary" value="Update"/>
 									</div>
 								</div>

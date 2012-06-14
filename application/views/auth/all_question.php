@@ -13,13 +13,7 @@
 				<div class="modal" id="show_success" style="display:none;" >
 								  <div class="modal-header">
 									<a class="close" data-dismiss="modal"></a>
-									<h3>Message For You</h3>
-								  </div>
-								  <div class="modal-body">
-									<p><center><h4>Your Question Has been sent successfully.....</h4></center></p>
-								  </div>
-								  <div class="modal-footer">
-									
+									<h3>Your Question Has been sent successfully.....</h3>
 								  </div>
 				</div>
 	

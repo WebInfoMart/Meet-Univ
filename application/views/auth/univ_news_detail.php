@@ -30,7 +30,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					
 					<div class="span9 margin_zero">
 						<h3><?php echo $news_detail['news_title']; ?></h3>
-						<div><abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr></div>
+						<!--<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:<?php echo $total_register_user; ?></span></div>-->
+						<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><abbr class="timeago time_ago inline" title="<?php echo $news_detail['publish_time']; ?>"></abbr></div>
 						<?php echo $news_detail['news_detail']; ?>
 						
 						<div class="clearfix"></div>
@@ -102,10 +103,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			</div>	
 		</div>
 		<?php } else { ?>	
-			<div class="margin_t margin_bs">
-							<div class="events_box">
-							<div class="float_l">
-									<div class="comment_img">
+			<div class="margin_t margin_b">
+				<div class="events_box">
+					<div class="float_l">
+						<div class="comment_img">
 									<?php if($user_detail['user_pic_path'] !=''){?>
 									<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
 										
@@ -116,7 +117,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<?php } else { ?>		
 								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php }  ?>
-								<span style='float: left;width: 46px;position: absolute;'>
+								<div class="center comment_style">
 								<?php
 								if($user_detail['fullname'] !='')
 								{
@@ -127,11 +128,11 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									echo $user_profile['name'];
 								}
 								?>
-								</span>
+								</div>
 									</div>
 								<p>		
 								</div>
-								<div class="float_l span9 margin_zero">
+								<div class="float_l span6 margin_zero">
 									<form class="form-horizontal" method="post" action="">
 									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $news_detail['news_id']; ?>" >
 									<input type="hidden" name="commented_on" id="commented_on" value="news" >
@@ -189,7 +190,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<li>
 									
 							<a href="<?php echo $news_link; ?>">
-							<?php echo substr($recent_news_detail['news_title'],0,60); ?>
+							<?php echo substr($recent_news_detail['news_title'],0,60).'..'; ?>
 							</a>		
 									</li>
 							<?php 

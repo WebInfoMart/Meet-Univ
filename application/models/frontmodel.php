@@ -695,11 +695,24 @@ class Frontmodel extends CI_Model
 	function popular_articles()
 	{
 		$this->db->select('*');
-		$this->db->from('articles');
-		$this->db->where('id','1');
+		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id=university.univ_id');
+		$this->db->order_by('article_id', 'RANDOM');
+		$this->db->limit(6);
 		$pa = $this->db->get();
 		return $pa->result_array();
 	}
+	function popular_news()
+	{
+		$this->db->select('*');
+		$this->db->from('news');
+		$this->db->join('university', 'news.news_univ_id=university.univ_id');
+		$this->db->order_by('news_id', 'RANDOM');
+		$this->db->limit(6);
+		$pa = $this->db->get();
+		return $pa->result_array();
+	}
+	
 	
 	
 	

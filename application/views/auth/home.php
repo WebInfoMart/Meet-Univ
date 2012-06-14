@@ -303,7 +303,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						{
 						$image=$base.$img_path.'/calendar.png';
 						} 
-						$img_arr=$this->searchmodel->set_the_image($width,$height,100,50,TRUE);
+						$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 						$event_register_user = $this->frontmodel->count_event_register($events['event_id']);
 						?>
 								<li>
@@ -344,7 +344,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												<a href="<?php echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
 										</div>
 										<div>
-											<div class="img_style float_l aspectcorrect" style="height:50px;">
+											<div class="img_style float_l aspectcorrect" >
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
 											<div class="float_l text-width" style="font-size:14px;">
@@ -407,7 +407,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									{
 									$image=$base.$img_path.'/news_default_image.jpg';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,88,88,TRUE);
 							?>
 									<div>
 										<h4><?php echo substr($f_news['news_title'],0,35); ?></h4>
@@ -467,7 +467,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				{
 				$image='univ_logo.png';
 				} 
-				$img_arr=$this->searchmodel->set_the_image($width,$height,106,75,TRUE);
+				$img_arr=$this->searchmodel->set_the_image($width,$height,114,79,TRUE);
 				?>
 									<div class="float_l featured_art aspectcorrect <?php if($f_coll%2) { echo "margin_zero"; } ?>">
 									 
@@ -522,7 +522,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						<li><a href="<?php echo $base; ?>colleges/Education_and_teacher_training">Education and teacher training</a></li>
 						<li><a href="<?php echo $base; ?>colleges/Engineering_and_technology">Engineering and technology</a></li>
 						<li><a href="<?php echo $base; ?>colleges/Health_and_medicine">Health and medicine</a></li>
-						<li><a href="<?php echo $base; ?>colleges/Creative_arts_and_design">Creative arts and design</a></li>
+						<li><a href="<?php echo $base; ?>colleges/Creative_arts_and_design" style="border-right-style:none;">Creative arts and design</a></li>
 						
 					</ul>
 					</div>
@@ -568,7 +568,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				{
 				if($quest_list['q_univ_id'] != '0')
 				{
-					$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+					$univ_domain=$quest_list['subdomain_name'];
+					$quest_title=$quest_list['q_title'];
+					$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
+					$url = $que_link;
 				}
 				else if($quest_list['q_country_id'] != '0')
 				{
@@ -576,7 +579,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				}
 				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
 				{
-					$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
+					$question_title = str_replace(' ','-',$quest_list['q_title']);
+					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				else
 				{
@@ -601,7 +605,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" class="latest_img">
 										<?php } ?>
 										</div>
-										<a href="<?php echo "$base$url"; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
+										<a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
 										<div class="asked_home"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
 										<div class="asked_home">
 										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
@@ -650,7 +654,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							{
 							$image=$base.$img_path.'/default_logo.png';
 							} 
-							$img_arr=$this->searchmodel->set_the_image($width,$height,90,90,TRUE);
+							$img_arr=$this->searchmodel->set_the_image($width,$height,84,84,TRUE);
 							
 							?>
 							<div class="margin_t1 part_art">
