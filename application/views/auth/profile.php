@@ -350,7 +350,7 @@ $select_female='';
 									<li>
 										<div style="width: 34px;margin-right:20px" class="float_l"><img src="<?php echo $base; ?>images/stud.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;"></div>
 										<a href="<?php echo $url; ?>"><span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
-										</a><div style="font-size: 11px;line-height: 12px;">Asked by <?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
+										</a><div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
 										</div>
 										<div style="font-size: 11px;line-height: 12px;">
 										<?php
