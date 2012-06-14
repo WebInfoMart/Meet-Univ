@@ -30,10 +30,10 @@ class Leadcontroller extends CI_Controller
 		//echo $this->session->userdata('apply_college');
 		$id = $request_univ_id;
 		$events_id = $event_id;
-		$data['country'] = $this->users->fetch_country();
+		$data['country'] = $this->frontmodel->fetch_search_country_having_univ();
 		$data['area_interest'] = $this->users->fetch_area_interest();
 		$data['educ_level'] = $this->users->fetch_educ_level();
-		$data['show_country_having_univ'] = $this->frontmodel->fetch_search_country_having_univ();
+		$data['show_country_having_univ'] = $this->users->fetch_country();
 		$level_steps = $this->session->userdata('level_steps');
 		
 		$country = $this->session->userdata('country');
@@ -253,7 +253,7 @@ class Leadcontroller extends CI_Controller
 		 else if($this->input->post('edit_search'))
 		 {
 			$this->session->set_userdata('level_steps','2');
-			redirect(find_college);
+			redirect('find_college');
 		 }
 		else{
 		$level_steps = $this->session->userdata('level_steps');

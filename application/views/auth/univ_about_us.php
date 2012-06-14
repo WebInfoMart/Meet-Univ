@@ -40,6 +40,7 @@
 		<div class="float_r span5">
 			<div class="about_round">
 			<?php
+			
 				echo "<h3>University Insights:</h3><div class='course_cont'>".$university_details['univ_insights']."</div>";?>
 			</div>
 		</div>
@@ -47,39 +48,45 @@
 	</div>
 	<div class="margin_t">
 	<?php
-	echo "<h3>University Campus Overview</h3><div class='course_cont'>".$university_details['univ_campus']."</div>";?>
+	if($university_details['univ_departments']!='' || $university_details['univ_expertise']!='' || $university_details['univ_interstudents']!='' || $university_details['univ_slife']!='' || $university_details['univ_faculties']!='' || $university_details['univ_alumni']!=''){
+	echo "<h3>University Campus Overview</h3><div class='course_cont'>".$university_details['univ_campus']."</div>"; }?>
 	</div>
-	<div class="margin_t">
-		<div class="float_l grid_2 margin_zero">
+	<div class="span13 margin_delta">
+	<?php if($university_details['univ_departments'] != '') { ?>
+		<div class="float_l grid_2 margin_delta margin_t left_about">
 			<?php echo "<h3>University Departments</h3><div class='about_fix'>".$university_details['univ_departments']."</div>";?>
 		</div>
-		<div class="left_about"></div>
-		<div class="float_l grid_2 margin_zero">
+	<?php } ?>
+	<?php if($university_details['univ_expertise'] != '') { ?>
+		<div class="float_l grid_2 margin_delta margin_t left_about">
 			<?php
 			echo "<h3>University Research Expertise</h3><div class='about_fix'>".$university_details['univ_expertise']."</div>";
 			?>
 		</div>
-		<div class="left_about"></div>
-		<div class="float_r grid_2 margin_zero">
-			<?php echo "<h3>International Students</h3><div class='about_fix'>".$university_details['univ_interstudents']."</div>";?>
+	<?php } ?>
+	<?php if($university_details['univ_interstudents'] != '') { ?>
+		<div class="float_l grid_2 margin_delta margin_t">
+		<?php echo "<h3>International Students</h3><div class='about_fix'>".$university_details['univ_interstudents']."</div>";?>
 		</div>
-		<div class="clearfix"></div>
-	</div>
-	<div class="margin_t">
-		<div class="float_l grid_2 margin_zero">
-			<?php 
+	<?php } ?>
+	<?php if($university_details['univ_slife'] != '') { ?>
+		<div class="margin_t left_about float_l grid_2 margin_delta">
+		<?php 
 			echo "<h3>University Student Life</h3><div class='about_fix'>".$university_details['univ_slife']."</div>";?>
 		</div>
-		<div class="left_about"></div>
-		<div class="float_l grid_2 margin_zero">
-			<?php
-			echo "<h3>University Faculties</h3><div class='about_fix'>".$university_details['univ_faculties']."</div>";
-			?>
+	<?php } ?>
+	<?php if($university_details['univ_faculties'] != '') { ?>
+		<div class="margin_t left_about float_l grid_2 margin_delta">
+		<?php
+		echo "<h3>University Faculties</h3><div class='about_fix'>".$university_details['univ_faculties']."</div>";
+		?>
 		</div>
-		<div class="left_about"></div>
-		<div class="float_r grid_2 margin_zero">
-			<?php echo "<h3>University Awarded Alumni</h3><div class='about_fix'>".$university_details['univ_alumni']."</div>";?>
+	<?php } ?>
+	<?php if($university_details['univ_alumni'] != '') { ?>
+		<div class="float_l grid_2 margin_delta margin_t">
+		<?php echo "<h3>University Awarded Alumni</h3><div class='about_fix'>".$university_details['univ_alumni']."</div>";?>
 		</div>
+	<?php } ?>
 		<div class="clearfix"></div>
 	</div>
 	<?php

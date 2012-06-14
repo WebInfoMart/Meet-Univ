@@ -101,7 +101,7 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 														foreach($show_country_having_univ as $show_country)
 														{
 														?>
-															<option value="<?php echo $show_country['country_id']; ?>" <?php echo ($this->input->post('home_country')==$show_country['country_id']?"selected='selected'":'') ?> ><?php echo $show_country['country_name']; ?></option>
+															<option value="<?php echo $show_country['country_id']; ?>" <?php echo ($this->input->post('home_country')==$show_country['country_id']?"selected='selected'":'') ?> ><?php echo ucwords($show_country['country_name']); ?></option>
 														<?php
 														} }
 														?>					

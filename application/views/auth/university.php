@@ -3,13 +3,15 @@
 	<div class="span8 margin_l float_l margin_t">
 		<div class="univ_content letter_first">
 			<?php
-			$univ_detail=str_replace("<div>","<p>",$university_details['about_us']);
+			$univ_detail=str_replace("<div>","<p>",$university_details['univ_overview']);
 			$univ_detail=str_replace("</div>","</p>",$univ_detail);
+			if($university_details['univ_overview'] != '')
+			{
 			echo substr($univ_detail,0,500);
-			$count_view_more_string = strlen($university_details['about_us']);
+			}
+			$count_view_more_string = strlen($university_details['univ_overview']);
 			$univ_domain=$university_details['subdomain_name'];
-			$subdomain=$this->subdomain->generate_univ_link_by_subdomain($univ_domain);
-											
+			$subdomain=$this->subdomain->generate_univ_link_by_subdomain($univ_domain);								
 		?>
 			<?php
 			if($count_view_more_string > 500)

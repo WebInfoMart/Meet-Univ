@@ -1,3 +1,4 @@
+
 	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -16,11 +17,11 @@
 								echo "<h4>Want to Register with more university...Select Universitys</h4>";
 							}
 							?>
-							<div>
 							<form action="" method="POST" name="frmSelectCoolege">
 								<?php
 								if(!empty($selected_college_step_three))
 								{
+								$clear_even_odd = 1;
 								$apply_by_univ_id = $this->session->userdata('apply_college');
 								foreach($selected_college_step_three as $select_univ)
 								{
@@ -31,6 +32,15 @@
 								else{
 								$check='';
 								}
+								$cnt_cont = strlen($select_univ['univ_overview']);
+								if($cnt_cont > 100)
+								{
+									$univ_detail=str_replace("<div>","<p>",$select_univ['univ_overview']);
+									$univ_detail=str_replace("</div>","</p>",$univ_detail);
+									$content = substr($univ_detail,0,100).'....';
+								}
+								else{ $content = $select_univ['univ_overview']; }
+								$programs_link=$this->subdomain->genereate_the_subdomain_link($select_univ['subdomain_name'],'programs','','');
 								?>
 								<div class="page3_step3_width float_l margin_t">
 									<div class="page3_step3">
@@ -49,16 +59,19 @@
 												}
 												?>
 											</div>
-											<div id="content" class="step3_content">
-												<?php echo substr($select_univ['about_us'],0,100).'....'; ?>
+											<div id="content">
+											<?php echo $content; ?>
 											</div>
-											<a href="<?php echo "$base"; ?>univ_programs/<?php echo $select_univ['univ_id']; ?>/program" class="float_r" target="_blank">View Courses</a>
+											<a href="<?php echo $programs_link; ?>" class="float_r">View Courses</a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
 								</div>
-								<?php } } else { echo "<h3> No Results Found According Search Criteria... </h3>"; } ?>
-								<div class="controls">
+								<?php if($clear_even_odd % 2 == 0) { ?>
+								<div class="clearfix"></div>
+								<?php } $clear_even_odd++; ?>
+							<?php } } else { echo "<h3> No Results Found According Search Criteria... </h3>"; } ?>
+							<div class="controls">
 								<?php if(empty($selected_college_step_three)) { ?>
 								<input type="submit" class="btn btn-success" name="edit_search" value="Modify Your search">
 								<?php } else { ?>
@@ -66,20 +79,18 @@
 									<?php } ?>
 								</div>
 								</form>
-								<div class="clearfix"></div>
-							</div>
-							</div>
 						</div>
 					</div>
 					<div class="float_r span3">
-						<img src="<?php echo "$base$img_path" ?>/banner_img.png">
+						<img src="images/banner_img.png">
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="float_r span3">
-					<img src="<?php echo "$base$img_path" ?>/banner_img.png">
+					<img src="images/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
+	

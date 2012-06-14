@@ -694,112 +694,89 @@ class Univ extends CI_Controller
   }
   
   
-		function UniversityQuestSection()
-		{
-			 $univ_id=$this->subdomain->find_id_of_current_univ();
-			$data = $this->path->all_path();
-			$this->load->view('auth/header',$data);
-			if($this->session->userdata('quest_send_suc')=='1')
-			{
-				$data['show_quest_send_msg'] = '1';
-				//$this->session->set_userdata('quest_send_suc','');
-				$this->session->set_userdata('quest_send_suc','');
-			}
-			else{
-				$data['show_quest_send_msg'] = '';
-			}
-			$data['univ_id_for_program'] = $univ_id;	
-			$data['university_details'] = $this->users->get_university_by_id($univ_id);
-			$country_id = $data['university_details']['country_id'];
-			$city_id = $data['university_details']['city_id'];
-			$state_id = $data['university_details']['state_id'];
-			$university_name = $data['university_details']['univ_name'];
-			$university_address = $data['university_details']['address_line1'];
-			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
-			if($data['university_details'] != 0 )
-			{
-				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
-				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
-				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
-				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
-				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
-				$data['get_all_question_of_univ'] = $this->quest_ans_model->get_all_quest_of_univ_user_info($univ_id);
-				$data['count_all_question_of_univ'] = $this->quest_ans_model->count_all_questions_of_univ($univ_id);
-				$this->load->view('auth/univ-header-gallery-logo',$data);
-				
-				if($this->input->post('post_quest_on_univ'))
-				{
-					$this->form_validation->set_rules('quest_title','Question Title','required');
-					if($this->form_validation->run())
-					{
-					
-					if (!$this->tank_auth->is_logged_in()) {
-			$univ_or_country_id = $univ_id;
-			$quest_title = $this->input->post('quest_title');
-			$quest_detail = $this->input->post('quest_detail');
-			//$quest_cat_type = 'col';
-			
-			$quest = array(
-			'q_category'=>'univ',
-			'q_univ_id'=>$univ_or_country_id,
-			'q_title'=>$quest_title,
-			'q_detail'=>$quest_detail,
-			'q_approve'=>'0',
-			'q_featured_home_que'=>'0',
-			'q_featured_country_que'=>'0',
-			);
-			$quest_sess = array(
-			'quest_sess_active'=>'true'
-			);
-			$quest_cat_type = array(
-			'quest_cat_type'=>'col'
-			);
-			
-			$this->session->set_userdata($quest);
-			$this->session->set_userdata('redirect_section',$univ_id);
-			$this->session->set_userdata($quest_sess);
-			$this->session->set_userdata($quest_cat_type);
-			
-			redirect('/login/');
-		} else {
-			$univ_or_country_id = $univ_id;
-			$quest_title = $this->input->post('quest_title');
-			$quest_detail = $this->input->post('quest_detail');
-			$data['user_id']	= $this->tank_auth->get_user_id();
-			$quest_cat_type = 'col';
-			
-			$quest = array(
-			'q_category'=>'univ',
-			'q_univ_id'=>$univ_or_country_id,
-			'q_title'=>$quest_title,
-			'q_detail'=>$quest_detail,
-			'q_askedby'=>$data['user_id'],
-			'q_approve'=>'0',
-			'q_featured_home_que'=>'0',
-			'q_featured_country_que'=>'0',
-			);
-			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
-			$this->session->set_userdata('ask_quest_on_univ_page','');
-			$this->session->set_flashdata('success',1);
-			//set session for show the message
-			$domain = $_SERVER['HTTP_HOST'];
-			$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
-			redirect($pageURL);
-			
-			}
-			}		
-			}		
-				
-				$this->load->view('auth/ask_quest_in_univ',$data);
-				
-			}
-			else{
-			$data['err_msg']='<h2> Sorry....</br><span class="text-align">Page Not Found.... </span> </h2>';
-			$data['err_div']=1;
-			$this->load->view('auth/NotFoundPage',$data);
-			}
-			$this->load->view('auth/footer',$data);
-		}
+  function UniversityQuestSection()
+   {
+   $univ_id=$this->subdomain->find_id_of_current_univ();
+   $subdomain=$this->subdomain->find_subdomain_name_and_id();
+   $data = $this->path->all_path();
+   $this->load->view('auth/header',$data);
+   if($this->session->userdata('quest_send_suc')=='1')
+   {
+    $data['show_quest_send_msg'] = '1';
+    //$this->session->set_userdata('quest_send_suc','');
+    $this->session->set_userdata('quest_send_suc','');
+   }
+   else{
+    $data['show_quest_send_msg'] = '';
+   }
+   $data['univ_id_for_program'] = $univ_id; 
+   $data['university_details'] = $this->users->get_university_by_id($univ_id);
+   $country_id = $data['university_details']['country_id'];
+   $city_id = $data['university_details']['city_id'];
+   $state_id = $data['university_details']['state_id'];
+   $university_name = $data['university_details']['univ_name'];
+   $university_address = $data['university_details']['address_line1'];
+   $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+   if($data['university_details'] != 0 )
+   {
+    $data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
+    $data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+    $data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
+    $data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
+    $data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+    $data['get_all_question_of_univ'] = $this->quest_ans_model->get_all_quest_of_univ_user_info($univ_id);
+    $data['count_all_question_of_univ'] = $this->quest_ans_model->count_all_questions_of_univ($univ_id);
+    $this->load->view('auth/univ-header-gallery-logo',$data);
+    
+   if($this->input->post('post_quest_on_univ'))
+   {
+   $this->form_validation->set_rules('quest_title','Question Title','required');
+   if($this->form_validation->run())
+   {
+   $domain = $_SERVER['HTTP_HOST'];
+   $pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
+   $univ_or_country_id = $univ_id;
+   $quest_title = $this->input->post('quest_title');
+   $quest_detail = $this->input->post('quest_detail');
+   //$quest_cat_type = 'col';
+   $quest = array(
+   'q_category'=>'univ',
+   'q_univ_id'=>$univ_or_country_id,
+   'q_title'=>$quest_title,
+   'q_detail'=>$quest_detail,
+   'q_approve'=>'0',
+   'q_featured_home_que'=>'0',
+   'q_featured_country_que'=>'0',
+   );  
+   if (!$this->tank_auth->is_logged_in()) {
+   $quest_sess = array(
+   'quest_sess_active'=>1
+   ); 
+   $this->session->set_userdata($quest);
+   $this->session->set_userdata('redirect_section',$pageURL);
+   $this->session->set_userdata($quest_sess);
+   redirect('/login/');
+  } else {
+      $quest['q_askedby']=$this->tank_auth->get_user_id();
+   $data['post_quest'] = $this->quest_ans_model->post_quest($quest);
+   $this->session->set_flashdata('success',1);
+   //set session for show the message
+   redirect($pageURL);
+   
+   }
+   }  
+   }  
+    
+    $this->load->view('auth/ask_quest_in_univ',$data);
+    
+   }
+   else{
+   $data['err_msg']='<h2> Sorry....</br><span class="text-align">Page Not Found.... </span> </h2>';
+   $data['err_div']=1;
+   $this->load->view('auth/NotFoundPage',$data);
+   }
+   $this->load->view('auth/footer',$data);
+  }
 		
 	function univ_aboutus()
 	{

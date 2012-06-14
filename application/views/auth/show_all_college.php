@@ -182,7 +182,7 @@ $this->session->unset_userdata('follow_to_univ');
 											<div class="apply">
 												<span id="send_steps_span">
 											<input type="hidden" id="steps_univ_id_<?php echo $cnt; ?>" name="steps_univ_id_<?php echo $cnt; ?>" value="<?php echo $get_university['university'][$no_university]['univ_id']; ?>"
-												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"/><a href="#" id="<?php echo $cnt; ?>" onclick="send_steps(this);">Apply</a></span>
+												<span class="green"><img src="<?php echo $base; ?>	images/tick.gif"/><a href="javascript:void(0);" id="<?php echo $cnt; ?>" onclick="send_steps(this);">Apply</a></span>
 											</span>
 											</div>
 										</div>

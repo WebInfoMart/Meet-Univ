@@ -29,7 +29,7 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 												<input type="text" name="apply_name" class="input-medium <?php echo $class_name; ?>" value="<?php echo set_value('apply_name') ?>" placeholder="Name">
 												<span style="color:red"><?php echo form_error('apply_name'); ?><?php echo isset($errors['apply_name'])?$errors['apply_name']:''; ?></span>
 											</div>
-											<div class="control-group">
+											<!--<div class="control-group">
 												<select name="apply_course_interest" style="width:172px;" id="apply_course_interest" class="grid_1 box_select <?php echo $class_course; ?>">
 													<option value="">Course of interest</option>
 													<?php
@@ -44,7 +44,7 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 													?>
 												</select>
 												<span style="color:red"><?php echo form_error('apply_course_interest'); ?><?php echo isset($errors['apply_course_interest'])?$errors['apply_course_interest']:''; ?></span>
-											</div>
+											</div>-->
 											<div class="control-group">
 												<input type="text" name="apply_email" id="apply_email" class="input-medium <?php echo $class_email; ?>" value="<?php echo set_value('apply_email') ?>" placeholder="Email Id">
 												<span style="color:red"><?php echo form_error('apply_email'); ?><?php echo isset($errors['apply_email'])?$errors['apply_email']:''; ?></span>

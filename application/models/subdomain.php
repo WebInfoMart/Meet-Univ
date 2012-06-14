@@ -106,12 +106,11 @@ function university_by_domain($univ_id,$univ_subdomain)
    if($level_steps != '')
    {
     $this->session->set_userdata('apply_college',$univ_id);
-    redirect(find_college);
+    redirect('find_college');
    }
    else {
    $condition = array(
     'firstname' => $this->input->post('apply_name'),
-    'prog_parent_id' => $this->input->post('apply_course_interest'),
     'email' => $this->input->post('apply_email'),
     'phone_no1' => $this->input->post('apply_mobile'),
     'applied_univ_id'=> $univ_id
@@ -119,7 +118,6 @@ function university_by_domain($univ_id,$univ_subdomain)
    //print_r($apply_now_data);
    //$this->session->set_userdata($apply_now_data);
    $this->form_validation->set_rules('apply_name', 'Name ', 'trim|required|xss_clean');
-   $this->form_validation->set_rules('apply_course_interest', 'Course', 'required');
    $this->form_validation->set_rules('apply_email', 'Email', 'trim|required|xss_clean|valid_email');
    $this->form_validation->set_rules('apply_mobile', 'Email', 'trim|required|xss_clean|numeric');
    if($this->form_validation->run())
