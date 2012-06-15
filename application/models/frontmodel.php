@@ -713,7 +713,11 @@ class Frontmodel extends CI_Model
 		return $pa->result_array();
 	}
 	
-	
+	function contact_form_submit($contact_submit_condition)
+	{
+		$this->db->insert('contact_us',$contact_submit_condition);
+		return $this->db->affected_rows() ? 1 : 0;
+	}
 	
 	
 }

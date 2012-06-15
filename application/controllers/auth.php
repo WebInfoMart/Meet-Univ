@@ -1210,6 +1210,19 @@ class Auth extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
+		if($this->input->post('contact_submit'))
+		{
+			$contact_submit_condition = array(
+			'contact_name'=>$this->input->post('contact_name'),
+			'contact_email'=>$this->input->post('contact_email'),
+			'contact_phone'=>$this->input->post('contact_phone'),
+			'contact_organization'=>$this->input->post('contact_organization'),
+			'contact_message'=>$this->input->post('contact_message')
+			);
+			$data['submit_contact'] = $this->frontmodel->contact_form_submit($contact_submit_condition);
+			$this->session->set_flashdata('contact_suc','1');
+			redirect('contact_us');
+		}
 		$this->load->view('contact_us',$data);
 		$this->load->view('auth/footer',$data);
 	}
