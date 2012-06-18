@@ -235,151 +235,155 @@ class Auth extends CI_Controller
 	 * @return void
 	 */
 	function register()
-	{
-	$data = $this->path->all_path();
-	$this->load->view('auth/header',$data);
-		/* $this->email->initialize(array(
-			'protocol' => 'smtp',
-			'smtp_host' => 'smtp.sendgrid.net',
-			'smtp_user' => 'meetinfo',
-			'smtp_pass' => 'meet2012univ',
-			'smtp_port' => 587,
-			'crlf' => "\r\n",
-			'newline' => "\r\n"
-		)); */
-		/* $this->config->load('sendgrid');
-		$config['protocol'] = $this->config->item('protocol');
-		$config['smtp_host'] = $this->config->item('smtp_host');
-		$config['smtp_user'] = $this->config->item('smtp_user');
-		$config['smtp_pass'] = $this->config->item('smtp_pass');
-		$config['smtp_port'] = $this->config->item('smtp_port');
-		$config['crlf'] = $this->config->item('crlf'); */
-		$config['newline'] = $this->config->item('newline');
-		$this->email->initialize($config);
-		if ($this->tank_auth->is_logged_in()) {									// logged in
-			redirect('home');
+ {
+ $data = $this->path->all_path();
+ $this->load->view('auth/header',$data);
+  /* $this->email->initialize(array(
+   'protocol' => 'smtp',
+   'smtp_host' => 'smtp.sendgrid.net',
+   'smtp_user' => 'meetinfo',
+   'smtp_pass' => 'meet2012univ',
+   'smtp_port' => 587,
+   'crlf' => "\r\n",
+   'newline' => "\r\n"
+  )); */
+  /* $this->config->load('sendgrid');
+  $config['protocol'] = $this->config->item('protocol');
+  $config['smtp_host'] = $this->config->item('smtp_host');
+  $config['smtp_user'] = $this->config->item('smtp_user');
+  $config['smtp_pass'] = $this->config->item('smtp_pass');
+  $config['smtp_port'] = $this->config->item('smtp_port');
+  $config['crlf'] = $this->config->item('crlf'); */
+  $config['newline'] = $this->config->item('newline');
+  $this->email->initialize($config);
+  if ($this->tank_auth->is_logged_in()) {         // logged in
+   redirect('home');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
-			redirect('/send_again/');
+  } elseif ($this->tank_auth->is_logged_in(FALSE)) {      // logged in, not activated
+   redirect('/send_again/');
 
-		} elseif (!$this->config->item('allow_registration', 'tank_auth')) {	// registration is off
-			$this->_show_message($this->lang->line('auth_message_registration_disabled'));
+  } elseif (!$this->config->item('allow_registration', 'tank_auth')) { // registration is off
+   $this->_show_message($this->lang->line('auth_message_registration_disabled'));
 
-		} else {
-			$use_username = $this->config->item('use_username', 'tank_auth');
-			if ($use_username) {
-				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
-			}
-			$this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('createdby', 'Createdby', 'trim');
-			$this->form_validation->set_rules('agree_term', 'I Agree', 'trim|required');
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
-			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
-			$this->form_validation->set_rules('level_user', 'level_user', 'trim|string');
-			$this->form_validation->set_rules('user_type', 'user_type', 'string');
-			
-			//$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
-			//$use_recaptcha			= $this->config->item('use_recaptcha', 'tank_auth');
-			/*if ($captcha_registration) {
-				if ($use_recaptcha) {
-					$this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
-				} else {
-					$this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
-				}
-			}*/
-			$data['errors'] = array();
+  } else {
+   $use_username = $this->config->item('use_username', 'tank_auth');
+   if ($use_username) {
+    $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
+   }
+   $this->form_validation->set_rules('fullname', 'Fullname', 'trim|required|xss_clean');
+   $this->form_validation->set_rules('createdby', 'Createdby', 'trim');
+   $this->form_validation->set_rules('agree_term', 'I Agree', 'trim|required');
+   $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email|is_unique[users.email]');
+   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+   $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
+   $this->form_validation->set_rules('level_user', 'level_user', 'trim|string');
+   $this->form_validation->set_rules('user_type', 'user_type', 'string');
+   
+   //$captcha_registration = $this->config->item('captcha_registration', 'tank_auth');
+   //$use_recaptcha   = $this->config->item('use_recaptcha', 'tank_auth');
+   /*if ($captcha_registration) {
+    if ($use_recaptcha) {
+     $this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
+    } else {
+     $this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
+    }
+   }*/
+   $data['errors'] = array();
 
-			$email_activation = $this->config->item('email_activation', 'tank_auth');
+   $email_activation = $this->config->item('email_activation', 'tank_auth');
 
-			if ($this->form_validation->run()) {								// validation ok
-				if (!is_null($data = $this->tank_auth->create_user(
-						$use_username ? $this->form_validation->set_value('username') : '',
-						$this->form_validation->set_value('fullname'),
-						$this->form_validation->set_value('createdby'),
-						$this->form_validation->set_value('level_user'),
-						$this->form_validation->set_value('email'),
-						$this->form_validation->set_value('password'),
-						$this->form_validation->set_value('user_type'),
-						$email_activation
-						))) {									// success
-						//$CI->session->userdata('name');
-						//Send Email for new registration
-						//print_r($this->session->userdata);
-						$uid = $this->session->userdata('user_id');
-						$data['logged_user_email'] = $this->users->get_email_by_userid($uid);
-						$data['password'] = $this->input->post('password');
-						$data['fullname'] = $this->input->post('fullname');
-						$uid = $data['logged_user_email'];
-						$email_body = $this->load->view('auth/new_signup_content_email',$data,TRUE);
-						$this->email->set_newline("\r\n");
-			
-			
-			//$message_email = $this->load->view('auth/event_register_content_email');
-					/* $this->email->from('info@meetuniversities.info', 'Meet Universities');
-					$this->email->to($uid);
-					//$this->email->cc('another@another-example.com');
-					//$this->email->bcc('them@their-example.com');
-					$this->email->subject('New Registration');
-					$this->email->message($email_body);
-					$this->email->send();
-					//echo $this->email->print_debugger(); 
-					redirect('home'); */
-					
-					 $this->email->from('info@meetuniversities.info', 'Meet Universities');
-					$this->email->to($uid);
-					$this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
-					$message = "$email_body" ;
-					//$message .="<br/>Thank you very much";
-					$this->email->message($message);
-					//print_r($message);
-					$this->email->send(); 
-					redirect('home');
-						
-						
-					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
+   if ($this->form_validation->run()) {        // validation ok
+    if (!is_null($data = $this->tank_auth->create_user(
+      $use_username ? $this->form_validation->set_value('username') : '',
+      $this->form_validation->set_value('fullname'),
+      $this->form_validation->set_value('createdby'),
+      $this->form_validation->set_value('level_user'),
+      $this->form_validation->set_value('email'),
+      $this->form_validation->set_value('password'),
+      $this->form_validation->set_value('user_type'),
+      $email_activation
+      ))) {         // success
+      //$CI->session->userdata('name');
+      //Send Email for new registration
+      //print_r($this->session->userdata);
+      $uid = $data['user_id'];
+      $data['logged_user_email'] = $this->users->get_email_by_userid($uid);
+      $data['password'] = $this->input->post('password');
+      $data['fullname'] = $this->input->post('fullname');
+      $new_email_key=$this->users->get_new_email_key_by_userid($uid);
+      $data['new_email_key']=$new_email_key['new_email_key'];
+      $uid = $data['logged_user_email'];
+      $email_body = $this->load->view('auth/new_signup_content_email',$data,TRUE);
+      $this->email->set_newline("\r\n");
+   
+   
+   //$message_email = $this->load->view('auth/event_register_content_email');
+     /* $this->email->from('info@meetuniversities.info', 'Meet Universities');
+     $this->email->to($uid);
+     //$this->email->cc('another@another-example.com');
+     //$this->email->bcc('them@their-example.com');
+     $this->email->subject('New Registration');
+     $this->email->message($email_body);
+     $this->email->send();
+     //echo $this->email->print_debugger(); 
+     redirect('home'); */
+     
+      $this->email->from('info@meetuniversities.info', 'Meet Universities');
+     $this->email->to($uid);
+     $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
+     $message = "$email_body" ;
+     //$message .="<br/>Thank you very much";
+     $this->email->message($message);
+     //print_r($message);
+     $this->email->send();
+     $this->session->set_flashdata('registeration_success','1');
+     redirect('login'); 
+     //redirect('home');
+      
+      
+     $data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
-					/* if ($email_activation) {									// send "activate" email
-						$data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
+     /* if ($email_activation) {         // send "activate" email
+      $data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
 
-						$this->_send_email('activate', $data['email'], $data);
+      $this->_send_email('activate', $data['email'], $data);
 
-						unset($data['password']); // Clear password (just for any case)
+      unset($data['password']); // Clear password (just for any case)
 
-						$this->_show_message($this->lang->line('auth_message_registration_completed_1'));
+      $this->_show_message($this->lang->line('auth_message_registration_completed_1'));
 
-					} else {
-						if ($this->config->item('email_account_details', 'tank_auth')) {	// send "welcome" email
+     } else {
+      if ($this->config->item('email_account_details', 'tank_auth')) { // send "welcome" email
 
-							$this->_send_email('welcome', $data['email'], $data);
-						}
-						unset($data['password']); // Clear password (just for any case)
+       $this->_send_email('welcome', $data['email'], $data);
+      }
+      unset($data['password']); // Clear password (just for any case)
 
-						$this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
-					} */
-					
-				} else {
-					$errors = $this->tank_auth->get_error_message();
-					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
-				}
-			}
-			/*if ($captcha_registration) {
-				if ($use_recaptcha) {
-					$data['recaptcha_html'] = $this->_create_recaptcha();
-				} else {
-					$data['captcha_html'] = $this->_create_captcha();
-				}
-			}*/
-			$data['use_username'] = $use_username;
-			//$data['captcha_registration'] = $captcha_registration;
-			//$data['use_recaptcha'] = $use_recaptcha;
-			//$data['base'] = $base;
-			$data['featured_events']=$this->frontmodel->fetch_featured_events();
-			$data['new_users']=$this->frontmodel->newly_registered_users();
-			$this->load->view('auth/register', $data);
-		}
-		$this->load->view('auth/footer',$data);
-	}
+      $this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
+     } */
+     
+    } else {
+     $errors = $this->tank_auth->get_error_message();
+     foreach ($errors as $k => $v) $data['errors'][$k] = $this->lang->line($v);
+    }
+   }
+   /*if ($captcha_registration) {
+    if ($use_recaptcha) {
+     $data['recaptcha_html'] = $this->_create_recaptcha();
+    } else {
+     $data['captcha_html'] = $this->_create_captcha();
+    }
+   }*/
+   $data['use_username'] = $use_username;
+   //$data['captcha_registration'] = $captcha_registration;
+   //$data['use_recaptcha'] = $use_recaptcha;
+   //$data['base'] = $base;
+   $data['featured_events']=$this->frontmodel->fetch_featured_events();
+   $data['new_users']=$this->frontmodel->newly_registered_users();
+   $this->load->view('auth/register', $data);
+  }
+  $this->load->view('auth/footer',$data);
+ }
 
 	/**
 	 * Send activation email again, to the same or new email address
@@ -423,20 +427,20 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function activate()
-	{
-		$user_id		= $this->uri->segment(3);
-		$new_email_key	= $this->uri->segment(4);
+	function activate($user_id,$new_email_key)
+ {
+  // Activate user
+  if ($this->users->activate_user($user_id, $new_email_key)) {  // success
+  // $this->tank_auth->logout();
+   redirect('login');
+   //$this->_show_message($this->lang->line('auth_message_activation_completed').' '.anchor('/auth/login/', 'Login'));
 
-		// Activate user
-		if ($this->tank_auth->activate_user($user_id, $new_email_key)) {		// success
-			$this->tank_auth->logout();
-			$this->_show_message($this->lang->line('auth_message_activation_completed').' '.anchor('/auth/login/', 'Login'));
+  } else {                // fail
+   //$this->_show_message($this->lang->line('auth_message_activation_failed'));
+   echo "Sorry.There is some problem in email activation";
+  }
+ }
 
-		} else {																// fail
-			$this->_show_message($this->lang->line('auth_message_activation_failed'));
-		}
-	}
 
 	/**
 	 * Generate reset code (to change password) and send it to user

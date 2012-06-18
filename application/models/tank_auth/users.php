@@ -350,6 +350,7 @@ class Users extends CI_Model
   return NULL;
  }*/
 
+ 
  function get_user_by_email($login,$user_type)
  {
   if($user_type=='admin')
@@ -360,7 +361,7 @@ class Users extends CI_Model
   {
   $level='1';
   }
-  $this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1' ");
+  $this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1' && activated!='0'");
   //$this->db->where('LOWER(username)=', strtolower($login));
   //$this->db->where('LOWER(level)=', '1');
  // $this->db->or_where("LOWER(username)='".strtolower($login)."' and level IN($level)");
@@ -434,30 +435,16 @@ class Users extends CI_Model
 	 * @param	bool
 	 * @return	bool
 	 */
-	function activate_user($user_id, $activation_key, $activate_by_email)
-	{
-		$this->db->select('1', FALSE);
-		$this->db->where('id', $user_id);
-		if ($activate_by_email) {
-			$this->db->where('new_email_key', $activation_key);
-		} else {
-			$this->db->where('new_password_key', $activation_key);
-		}
-		$this->db->where('activated', 0);
-		$query = $this->db->get($this->table_name);
-
-		if ($query->num_rows() == 1) {
-
-			$this->db->set('activated', 1);
-			$this->db->set('new_email_key', NULL);
-			$this->db->where('id', $user_id);
-			$this->db->update($this->table_name);
-
-			$this->create_profile($user_id);
-			return TRUE;
-		}
-		return FALSE;
-	}
+	function activate_user($user_id, $activation_key)
+ {
+  $data = array(
+               'activated' =>'1'
+            );
+  $this->db->where(array('id'=>$user_id,'new_email_key'=>$activation_key));
+  $this->db->update('users', $data);
+  return $this->db->affected_rows() ? 1 : 0;
+  
+ }
 
 	/**
 	 * Purge table of non-activated users
@@ -1626,6 +1613,20 @@ class Users extends CI_Model
 	else
 	return 0;
 	}
+	
+	function get_new_email_key_by_userid($uid)
+	{
+  $this->db->select('new_email_key');
+  $query = $this->db->get_where('users',array('id'=>$uid));
+  if($this->db->affected_rows() > 0)
+  {
+   return $query->row_array();
+  }
+  else{
+  return 0;
+  }
+ }
+
 }
 
 /* End of file users.php */

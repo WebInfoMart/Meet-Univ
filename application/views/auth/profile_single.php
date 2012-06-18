@@ -85,6 +85,7 @@ if ($user) {
 														$selected ='';
 														?>
 															<select name="country">
+															<option value="0"> Select </option>
 															<?php foreach($country as $countries) {
 															if($countries['country_id'] == $user_selected_country) { $selected ='selected';} else { $selected =''; }
 															?>
@@ -95,14 +96,50 @@ if ($user) {
 												</div>
 												<div class="control-group">
 													<label class="control-label">Birth Date </label>
-													<div class="controls contact_box_content">                
+													<div class="controls controls select_button">                
 													<?php
 													$dob = $fetch_profile['dob'];
-													$dob_explode = explode("-",$dob);   
+													$dob_explode = explode("-",$dob);
 													?>
-														<input type="text" class="input-small margin_all" value="<?php if($dob_explode[0] == '0000' ){ echo ''; } else { echo $dob_explode[0]; } ?>" name="year" id="year" placeholder="Year">/
-														<input type="text" class="input-small margin_all" value="<?php if($dob_explode[1] == '00' ){ echo ''; } else { echo $dob_explode[1]; } ?>" name="month" id="month" placeholder="Month">/
-														<input type="text" class="input-small margin_all" value="<?php if($dob_explode[2] == '00' ){ echo ''; } else { echo $dob_explode[2]; } ?>" name="date" id="date" placeholder="Date">
+														<!--<input type="text" class="input-small margin_all" value="<?php if($dob_explode[0] == '0000' ){ echo ''; } else { echo $dob_explode[0]; } ?>" name="year" id="year" placeholder="Year">/-->
+														
+													
+													
+													<select name="year" id="year" style="width:80px;">
+													<?php
+													$selected_year = '';
+													for($count_year=1980;$count_year<=2005;$count_year++)
+													{
+													if($count_year == $dob_explode[0]) { $selected_year ='selected=selected';} else { $selected_year =''; }
+													?>
+													<option value="<?php echo $count_year; ?>" <?php echo $selected_year; ?>><?php echo $count_year; ?></option>
+													<?php } ?>
+													</select>
+													
+														<!--<input type="text" class="input-small margin_all" value="<?php if($dob_explode[1] == '00' ){ echo ''; } else { echo $dob_explode[1]; } ?>" name="month" id="month" placeholder="Month">/-->
+													<?php $arr_month = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'); ?>	
+														<select name="month" id="month" style="width:80px;">
+													<?php
+													$selected_month = '';
+													for($count_month=1;$count_month<=12;$count_month++)
+													{
+													if($count_month == $dob_explode[1]) { $selected_month ='selected=selected';} else { $selected_month =''; }
+													?>
+													<option value="<?php echo $count_month; ?>" <?php echo $selected_month; ?>><?php echo $arr_month[$count_month-1]; ?></option>
+													<?php } ?>
+													</select>
+														
+														<!--<input type="text" class="input-small margin_all" value="<?php if($dob_explode[2] == '00' ){ echo ''; } else { echo $dob_explode[2]; } ?>" name="date" id="date" placeholder="Date">-->
+														<select name="date" id="date" style="width:80px;">
+													<?php
+													$selected_date = '';
+													for($count_date=1;$count_date<=31;$count_date++)
+													{
+													if($count_date == $dob_explode[2]) { $selected_date ='selected=selected';} else { $selected_date =''; }
+													?>
+													<option value="<?php echo $count_date; ?>" <?php echo $selected_date; ?>><?php echo $count_date; ?></option>
+													<?php } ?>
+													</select>
 														<!--<span style="color:red;"> <?php //echo form_error('year'); ?><?php //echo isset($errors['year'])?$errors['year']:''; ?> </span>
 														<span style="color:red;"> <?php //echo form_error('month'); ?><?php //echo isset($errors['month'])?$errors['month']:''; ?> </span>
 														<span style="color:red;"> <?php //echo form_error('date'); ?><?php //echo isset($errors['date'])?$errors['date']:''; ?> </span>-->
@@ -155,6 +192,7 @@ if ($user) {
 														<div class="controls select_button">
 														<?php $curent_quali = $fetch_profile['curr_educ_level']; ?>
 															<select name="curnt_quali">
+															<option value="0"> Select </option>
 															<?php
 															foreach($educ_level as $curnt_educ)
 															{
@@ -170,6 +208,7 @@ if ($user) {
 														<div class="controls select_button">
 														<?php $intrest_area_profile = $fetch_profile['prog_parent_id']; ?>
 															<select name="area_intrst">
+															<option value="0"> Select </option>
 																<?php
 															foreach($area_interest as $area)
 															{
