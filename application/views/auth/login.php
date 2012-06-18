@@ -57,14 +57,7 @@ $(document).ready(function(){
 <div class="modal" id="show_success" style="display:none;" >
   <div class="modal-header">
     <a class="close" data-dismiss="modal"></a>
-    <h3>Message For You</h3>
-  </div>
-  <div class="modal-body">
-    <p><center><h4>An link has been emailed to you.....</h4></center></p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn">Close</a>
-    <!--<a href="#" class="btn btn-primary">Save changes</a>-->
+    <h3>An Email has been sent to Your E-mail Id.For Login Please Activate your Account</h3>
   </div>
 </div>
 <div id="forget_model" class="model_back modal hide fade" style="display: none; ">
@@ -292,10 +285,10 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 	</div>
 	</div>
 <script>
-<?php if($email_send != 0) { ?>
+<?php if($this->session->flashdata('registeration_success')) { ?>
 $(document).ready(function(){
 $('#show_success').css('display','block');
-$("#show_success").delay(3000).fadeOut(200);
+$("#show_success").delay(7000).fadeOut(200);
 });
 <?php } ?>
 	

@@ -1,10 +1,6 @@
 <?php
 //$this->load->library('facebook'); 
-/****************************************** 
- *  Load Model and session library and    *
- *  Object                                *
- ******************************************/ 
-  
+ 
   $this->load->model('users');
   $this->ci =& get_instance();
   $this->ci->load->config('tank_auth', TRUE);
@@ -176,24 +172,9 @@ $detail_of_event = $event_detail['event_detail'];
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/popover.css" />
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/thingerly-calendar.css" />
 <link rel="icon" type="image/png" href="<?php echo"$base$img_path"; ?>/fav_icon.png"/>
+<link href="<?php echo "$base$css_path"?>/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="<?php echo "$base$js";?>/jquery.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-collapse.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
-<script src="<?php echo "$base$js";?>/bootstrap-alerts.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/pic_upload_js.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-button.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.popover-1.1.0.js"></script>
-
-<script type="text/javascript" src="<?php echo "$base$js";?>/slides.min.jquery.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.tinyscrollbar.min.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/image_scaling.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mtz.monthpicker.js"></script><!--Shweta-->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script><!--Added by Anusha-->
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/><!--Added by Anusha-->
-
+<script src="<?php echo "$base$js";?>/jquery-ui.min.js"></script>
 <?php
 $pageURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
 if ($_SERVER["SERVER_PORT"] != "80")
@@ -204,31 +185,7 @@ else
 {
     $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 }
-$ucurl=explode('/',$pageURL);
-$ncurl=$ucurl[count($ucurl)-1];
-if($ncurl!='' && $ncurl!='/')
-{?>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
-<?php 
-}
 ?>
-<script type="text/javascript">
-  $(document).ready(function(){
-   $('#scrollbar1').tinyscrollbar(); 
-  });
-  $(document).ready(function(){
-   $('#scrollbar2').tinyscrollbar(); 
-  });
-  $(document).ready(function(){
-   $('#scrollbar3').tinyscrollbar(); 
-  });
-  $(document).ready(function(){
-   $('#scrollbar4').tinyscrollbar(); 
-  });
-  $(document).ready(function(){
-   $('#scrollbar5').tinyscrollbar(); 
-  });
- </script>
 <script type="text/javascript">
  jQuery(document).ready(function() {
   jQuery("abbr.timeago").timeago();
@@ -253,9 +210,7 @@ $('#myModal2').modal('toggle');});
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-
-
-    var TheP   = window.location.pathname.split('/');
+var TheP   = window.location.pathname.split('/');
 var HeRe   = '<?php echo $base; ?>'+TheP[TheP.length-1];
 $('.menu a').each(function(){
  var Link  = $(this).attr('href');
@@ -264,32 +219,6 @@ $('.menu a').each(function(){
 
 });
 </script>
-<!-- ===================start slider_kit=================== -->
-		<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.sliderkit.1.9.2.pack.js"></script>
-		<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.easing.1.3.min.js"></script>
-		<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mousewheel.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="<?php echo "$base$css_path"?>/sliderkit-core.css" media="screen, projection" />
-		<link rel="stylesheet" type="text/css" href="<?php echo "$base$css_path"?>/sliderkit-demos.css" media="screen, projection" />
-		<link rel="stylesheet" type="text/css" href="<?php echo "$base$css_path"?>/sliderkit-site.css" media="screen, projection" />
-		
-			<script type="text/javascript">
-			$(window).load(function(){ //$(window).load() must be used instead of $(document).ready() because of Webkit compatibility		
-				
-				// Photo slider > Minimal
-				$(".contentslider-std").sliderkit({
-					auto:0,
-					tabs:1,
-					circular:1,
-					panelfx:"sliding",
-					panelfxfirst:"fading",
-					panelfxeasing:"easeInOutExpo",
-					fastchange:0,
-					keyboard:0
-				});
-				
-			});	
-		</script>
-	<!-- ===================end slider_kit=================== -->
 </head>
 <body>
 <div id="fb-root"></div>
@@ -373,17 +302,6 @@ d.getElementsByTagName('head')[0].appendChild(js);
 			</div>
 		</div>
 	</header>
-	<style>
-#fb_butonek a
-{
-
-}
-
-#fb_butonek a span
-{
-
-}
-	</style>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 <!-- Place this render call where appropriate -->
 <script type="text/javascript" src="http://apis.google.com/js/plusone.js">
@@ -410,17 +328,3 @@ function postCook(url)
    });
 }
 </script>
-
-<!--<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>-->				
-<!--<div>
-		<div class="body_bar"></div>
-		<div class="body_header"></div>
-		<div class="body"> -->
-		
-		

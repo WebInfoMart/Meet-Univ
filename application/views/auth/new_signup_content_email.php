@@ -38,6 +38,7 @@
 		   We are glad you have chosen to be a part of our community and we hope you enjoy your stay.</h3>
 		   <p style="margin-bottom: 19px;"> All the best,Global University Events – One Place  | <a href="www.meetuniversities.com">MeetUniversities.com</a></p> 
 		   </span>
+		   <a href="<?php echo $base;?>auth/activate/<?php echo $user_id.'/'.$new_email_key; ?>" style="color: #3366cc;">Click Here for Finish your registration and activate your account...</a>
 	  <u></u><u></u></span></p>
       </td>
      </tr>

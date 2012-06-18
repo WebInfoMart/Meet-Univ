@@ -843,6 +843,21 @@ class Adminmodel extends CI_Model
   return $query->result();
  }
 	
+  function home_featured_unfeatured_university($f_status,$univ_id)
+  {
+		if($f_status=='1')
+		{
+		$f_status='0';
+		}
+		else if($f_status=='0')
+		{
+		$f_status='1';
+		}
+		$data=array('featured_college'=>$f_status);
+		$this->db->update('university', $data, array('univ_id' => $univ_id));
+		return $f_status;
+  }  
+	
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

@@ -44,7 +44,7 @@
 	top: 4%;
 	left: 188px;
 	margin: -3px 0 0;
-	border-right: 5px solid #121212;
+	border-right: 5px solid #3881AB;
 	border-bottom: 10px solid transparent;
 	height: 3px;
 }
@@ -56,27 +56,31 @@
 }
 .popover .wrap {
 	background: white;
-	border: 3px solid #121212;
+	/*border: 1px solid #121212;*/
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	width: 533px;
 	height: 443px;
+	border-top:none;
 }
 .popover .title {
-	background: #121212 url(popover_gradient.png) repeat-x;
-	color: white;
+	background: #3881AB;
+	/*background: #121212 url(popover_gradient.png) repeat-x;*/
 	font-size: 1.3em;
 	text-align: center;
 	padding: 8px 0 0 0;
 	height: 27px;
 }
+.title h3{color: white;}
 .popover .content {
 	padding: 15px;
 	max-height: 369px;
 	overflow: auto;
 	line-height: 1.3em;
-	font-size: 0.9em;
+	box-shadow: 0px 0px 6px #999;
+	-webkit-box-shadow: 0px 0px 6px #999;
+-moz-box-shadow: 0px 0px 6px #888;
 }
 .popover.large .content {
 	max-height: 285px;

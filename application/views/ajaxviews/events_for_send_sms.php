@@ -52,8 +52,8 @@ foreach($event_info_sms as $event_sms)
 	echo "
 	
 	<div>
-	<div style='float:left;' class='span5'>
-	<form action='$base$url' method='post' id='sms_form' style='height:350px;width:305px' class='form-horizontal'>
+	<div class='span4 float_l margin_zero'>
+	<form action='$base$url' method='post' id='sms_form' class='form-horizontal'>
 	<input type='hidden' name='uname' value='$sms_config[tsms_uname]'/>
 	<input type='hidden' name='pass' value='$sms_config[tsms_pass]'/>
 	<input type='hidden' name='send' value='$sms_config[tsms_send]'/>
@@ -77,30 +77,30 @@ foreach($event_info_sms as $event_sms)
 			</div>
 		</div>
 	
-	<div class='control-group'>
+	<!--<div class='control-group'>
             <label class='control-label'>Event- </label>
 			<div class='controls docs-input-sizes'>
-				$event_sms[event_title]
+				<span class='model_style'>$event_sms[event_title]</span>
 			</div>
 	</div>
 	<div class='control-group'>
             <label class='control-label'>Event Date - </label>
 			<div class='controls docs-input-sizes'>
-				$event_sms[event_date_time]
+				<span class='model_style'>$event_sms[event_date_time]</span>
 			</div>
 	</div>
 	<div class='control-group'>
             <label class='control-label'>Event Time - </label>
 			<div class='controls docs-input-sizes'>
-				$event_sms[event_time]
+				<span class='model_style'>$event_sms[event_time]</span>
 			</div>
 	</div>
 	<div class='control-group'>
             <label class='control-label'>Venue - </label>
 			<div class='controls docs-input-sizes'>
-				$event_sms[event_place]
+				<span class='model_style'>$event_sms[event_place]</span>
 			</div>
-	</div>
+	</div>-->
 	<div class='controls docs-input-sizes'>
 	<label class='checkbox' id='agree_terms'>
                 <input type='checkbox' value='yes' name='agree' id='agree'>
@@ -119,8 +119,8 @@ foreach($event_info_sms as $event_sms)
 	<input type='hidden' name='event_place' value='$event_sms[event_place]'>
 	<input type='hidden' name='event_city' value='$event_sms[cityname]'>
 	</div>
-	<div style='float:right;'>
-	<img src='$base/images/grammargirlavatar.jpg' style='width: 159px;height: 161px;'/>
+	<div class='float_l'>
+	<img src='$base/images/grammargirlavatar.jpg' style='width: 120px;height: 130px;'/>
 	</form>
 	</div>
 	

@@ -65,52 +65,86 @@ foreach($event_info_sms as $event_sms)
 	/* Month for call */ $month_for_call = $final_explode_date[1];
 	//print_r($final_explode_date);
 	$url = 'leadcontroller/send_sms_voice_of_event';
-	echo "<div style='float:left;'>";
+	
 	  echo "<h4>Let Aisha remember this for you and personally send you an email to remind about the event
 	  </h4></br>";
 	  
 	echo "
-	<form action='$base$url' method='post' id='sms_form_voice'>
-	<div style='float:left;'>
+		<div>
+	<div class='span4 float_l margin_zero'>
+
+	<form action='$base$url' method='post' id='sms_form_voice' class='form-horizontal'>
 	<input type='hidden' name='uid' value='$vsms_config[vsms_uid]'/>
 	<input type='hidden' name='pwd' value='$vsms_config[vsms_pwd]'/>
 	<input type='hidden' name='fid' value='$vsms_config[vsms_fid]'/>
 	
-	<div style='float:left'>
-	<span>Name</span> <span style='margin-left:5px;'><input type='text' style='margin-left:25px;' name='fullname_voice' id='fullname_voice' value='$fullname'/></span></br></br>
-	<span>Mobile No</span> <span style='margin-left:5px;'><input type='text' name='mobno' id='mobno' value='$mobno'/></span></br></br>
-	<span>Email</span> <span style='margin-left: 29px;'><input type='text' name='email_voice' id='email_voice' value='$email'/></span></br>
-	<span style='margin-left: 29px;'><input type='hidden' name='event_id_voice' id='event_id_voice' value='$event_id'/></span>
+	<div class='control-group'>
+         <label class='control-label'>Name</label>
+		<div class='controls docs-input-sizes'>
+			<input class='span3' type='text' placeholder='Name' name='fullname_voice' id='fullname_voice' value='$fullname'/>
+		</div>
 	</div>
-	<div style='float:right;'>
-	<img src='$base/images/grammargirlavatar.jpg' style='width: 159px;height: 161px;'/>
-	<div class='clearfix'></div><div class='clearfix'></div></br></br>
+	<div class='control-group'>
+         <label class='control-label'>Mobile No</label>
+		<div class='controls docs-input-sizes'>
+			<input class='span3' type='text' placeholder='Mobile no.' name='mobno' id='mobno' value='$mobno'/>
+		</div>
 	</div>
+	<div class='control-group'>
+         <label class='control-label'>Email</label>
+		<div class='controls docs-input-sizes'>
+			<input class='span3' type='text' placeholder='Name' name='email_voice' id='email_voice' value='$email'/>
+		</div>
+	</div>
+	<!--<div class='control-group'>
+            <label class='control-label'>Event- </label>
+			<div class='controls docs-input-sizes'>
+				<span class='model_style'>$event_sms[event_title]</span>
+			</div>
+	</div>
+	<div class='control-group'>
+            <label class='control-label'>Event Date- </label>
+			<div class='controls docs-input-sizes'>
+				<span class='model_style'>$event_sms[event_date_time]</span>
+			</div>
+	</div>
+	<div class='control-group'>
+            <label class='control-label'>Event Time- </label>
+			<div class='controls docs-input-sizes'>
+				<span class='model_style'>$event_sms[event_time]</span>
+			</div>
+	</div>
+	<div class='control-group'>
+            <label class='control-label'>Venue- </label>
+			<div class='controls docs-input-sizes'>
+				<span class='model_style'>$event_sms[event_place] &nbsp;$event_sms[cityname]</span>
+			</div>
+	</div>-->
+	<input type='hidden' name='event_id_voice' id='event_id_voice' value='$event_id'/>
 	<input type='hidden' name='call_date' value='$date_for_call'>
 	<input type='hidden' name='call_month' value='$month_for_call'>
 	<input type='hidden' name='call_year' value='$year_for_call'>
-	
-	
 	<input type='hidden' name='event_title_voice' value='$event_sms[event_title]'>
 	<input type='hidden' name='event_date_voice' value='$event_sms[event_date_time]'>
 	<input type='hidden' name='event_time_voice' value='$event_sms[event_time]'>
 	<input type='hidden' name='event_place_voice' value='$event_sms[event_place]'>
 	<input type='hidden' name='event_city_voice' value='$event_sms[cityname]'>
-	<div style='width: 440px;border-radius: 4px;margin-top: 15px;'>
-	<div style='width: 434px;word-wrap: break-word;'><span style='font-size: 15px;color: black;'>Event </span>$event_sms[event_title]</div><div class='clearfix'></div>
-	<div style='float:left;'><span style='font-size: 15px;color: black;'>Event Date -</span>$event_sms[event_date_time]</div><div class='clearfix'></div>
-	<div style='float:left;'><span style='font-size: 15px;color: black;'>Event Time-</span>$event_sms[event_time]</div><div class='clearfix'></div>
-	<div style='float:left;'><span style='font-size: 15px;color: black;'>Venue -</span>$event_sms[event_place] &nbsp;$event_sms[cityname]</div><div class='clearfix'></div>
-	
+	<div class='controls docs-input-sizes'>
+		<label class='checkbox' id='agree_terms'>
+					<input type='checkbox' value='yes' name='agree' id='agree'>
+				<span id='agree_terms_span'> I agree to the terms and conditions</span>
+		</label>
 	</div>
-	<div id='agree_terms' style='float:left;'><span><input type='checkbox' value='yes' name='agree' id='agree'/></span>
-	<span id='agree_terms_span' style='font-size: 15px;color: black;margin-left:5px;'>I agree to the terms and conditions</span></div>
+	<div class='controls docs-input-sizes'>
+		<input type='submit' value='SMS ME' name='btn_sms_me' class='btn btn-primary'/>
 	</div>
-	</br>
-	<input type='submit' value='SMS ME' name='btn_sms_me' class='btn btn-primary'/>
-	</div>
-	
+</div>
+<div class='float_l'>
+	<img src='$base/images/grammargirlavatar.jpg' style='width: 120px;height: 130px;'/>
+</div>
 	</form>
+	<div class='clearfix'></div>
+	</div>
 	";
 }
 }

@@ -133,7 +133,7 @@
 	<?php 
 	$article_url=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_articles','',''); 
 	$programs=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'programs','',''); 
-	$questions=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_questions','',''); 
+	$questions=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'Questions_Answers','',''); 
 	?>										
 												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>

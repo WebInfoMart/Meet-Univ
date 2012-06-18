@@ -116,6 +116,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 								</h3> 
 								<div>
+									<div><img src="<?php echo base_url(); ?>images/home.png" class="line_img inline"><span class="blue line_time inline">Event Venue:<?php echo $event_detail['event_place']; ?>
+										</span></div>
 									<div><img src="<?php echo base_url(); ?>images/city.png" class="line_img inline"><span class="blue line_time inline"><?php 
 											if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
 											if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
@@ -124,12 +126,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<?php echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.$event_detail['event_time'];?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:
 										<?php echo $total_register_user; ?></span></div>
+										
 								</div>
 							</div>
 							<div class="float_r">
 								<div>
-									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 										<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
 										<div class="clearfix"></div>
 								</div>
@@ -199,8 +202,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									} ?>
 								</a></h4>
 								<?php echo $event_comments_detail['commented_text'];?>
-								<div style="font-size;color:black;" class="float_r"><?php
-									echo substr($event_comments_detail['comment_time'],0,16);?></div>
+								<div style="font-size;color:black;" class="float_r">
+								<abbr class="timeago time_ago" title="<?php echo $event_comments_detail['comment_time']; ?>"></abbr>
+								</div>
 							</div>
 							<div class="clearfix"></div>
 						</div> <?php } } ?>
@@ -252,8 +256,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<input type="hidden" name="commented_on" id="commented_on" value="event" >
 										<div class="control-group">
 											<div class="my_form_controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3">
-												</textarea>
+												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
 											</div>
 										</div>
 										<div class="control-group">
@@ -273,16 +276,17 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 						</div>
 						<div class="float_r span5">
-							<div>
-								<div class="float_l" style="margin-right:20px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-								<div class="float_l" style="margin-right:-30px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-								<div class="float_l">
+							<div class="span4 float_r">
+								<div class="float_l fb_set"><div class="fb-like" data-href="<?php //$_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true"></div></div>
+								<div class="float_l" style="margin-left:1px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php //$_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+								<div class="float_r tw" style="width:82px;">
 									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 								</div>
 								<div class="clearfix"></div>
 							</div>
+							<div class="clearfix"></div>
 							<div class="back_up">
-								<h2><img src="<?php echo base_url(); ?>images/cal_img.png" style="z-index: 100;position: relative;top:6px;">Upcoming Event</h2>
+								<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
 								<ul class="up_event">
 								<?php if(!empty($feature_event_of_univ)){
 								foreach($feature_event_of_univ as $upcoming_event)
@@ -387,13 +391,14 @@ var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) + 1;
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if($('#commented_text').val()!='')
 {
 	$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
 	   async:false,
-	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id,
+	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id,
 	   cache: false,
 	   success: function(msg)
 	   {
@@ -421,13 +426,14 @@ function delete_this_comment(comment_id)
 var r=confirm("Want to Delete this comment");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if(r)
 {
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/delete_comment",
 	   async:false,
-	   data: 'comment_id='+comment_id,
+	   data: 'comment_id='+comment_id+'&user_id='+user_id,
 	   cache: false,
 	   success: function(msg)
 	   {
@@ -443,17 +449,3 @@ var url=window.location;
 postCook(url);
 });	
 </script>	
-<?php 
-$array_dates=implode(',',$array_dates);
-//echo $event_detail['event_date_time'];
-$show_date = '';
-								//echo $event_detail['event_date_time'];
-								$show_current_date = explode(" ",$event_detail['event_date_time']);
-								//echo $extract_date[];
-								$month = $extract_date[1];
-								//echo $show_current_date[2];
-								$number_month = date('m', strtotime($month));
-								$number_month = $number_month -1;
-			// foreach($array_dates as $dates){
-			// echo $dates;
-			// }?>

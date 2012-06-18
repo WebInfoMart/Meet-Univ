@@ -136,13 +136,7 @@ $this->session->unset_userdata('follow_to_univ');
 										<?php echo $get_university['university'][$no_university]['country_name']; ?></h3>
 									</div>
 									<div class="float_r">
-										<!--<div class="box_col">
-										<div class="fb-like float_l" data-href="<?php echo $base;?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-										<div class="float_r">
-										<a href="https://twitter.com/share" data-url="<?php echo $base;?>university/<?php echo $get_university['university'][$no_university]['univ_id']; ?>"  class="twitter-share-button" data-count="none">Tweet</a>
-										</div>
-										<div class="clearfix"></div>
-										</div>-->
+										
 									</div>
 									<div class="clearfix"></div>
 								</div>
@@ -251,7 +245,7 @@ $this->session->unset_userdata('follow_to_univ');
 	<?php 
 	$article_url=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_articles','',''); 
 	$programs=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'programs','',''); 
-	$questions=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'university_questions','',''); 
+	$questions=$this->subdomain->genereate_the_subdomain_link($subdomain_name,'Questions_Answers','',''); 
 	?>										
 												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>

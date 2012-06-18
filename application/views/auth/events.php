@@ -3,11 +3,11 @@ $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)
 {
-	$show_suc_msg = "A Event Details has been send to you successfully.....";
+	$show_suc_msg = "A Event Details has been sent to you successfully.....";
 }
 else if($sms_voice_suc_sess_val == 1)
 {
-	$show_suc_msg = "A Reminder Voice SMS has been send to you successfully.....";
+	$show_suc_msg = "A Reminder Voice SMS has been sent to you successfully.....";
 }
 if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 {

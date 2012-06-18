@@ -1293,6 +1293,16 @@ class Admin extends CI_Controller
   $data['msg']='University Created Successfully';
   $this->load->view('admin/userupdated',$data);
   }
+  else if($mps=='fh')
+  {
+  $data['msg']='University set as Home featured university Successfully';
+  $this->load->view('admin/userupdated',$data);
+  }
+  else if($mps=='ufh')
+  {
+  $data['msg']='University set as Home Unfeatured university Successfully';
+  $this->load->view('admin/userupdated',$data);
+  }
   
   if($flag==0)
   {
@@ -1922,6 +1932,41 @@ class Admin extends CI_Controller
   $this->load->view('admin/update_university_of_univ_admin',$data);
   }
     }
+ }
+ 
+ function featured_unfeatured_university($f_status,$univ_id)
+ {
+ if (!$this->tank_auth->is_admin_logged_in()) {
+   redirect('admin/adminlogin/');
+   }
+   else{
+   //echo "Function call from controller";
+   $data = $this->path->all_path();
+   $data['user_id']	= $this->tank_auth->get_admin_user_id();
+   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+   $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+    if(!($data['admin_priv']))
+	{
+			redirect('admin/adminlogout');
+	}
+	if($data['admin_user_level']==5)
+	{
+	$fu_status=$this->adminmodel->home_featured_unfeatured_university($f_status,$univ_id);
+	if($fu_status)
+	{
+	redirect('admin/manage_university/fh');
+	}
+	else
+	{
+	redirect('admin/manage_university/ufh');
+	}
+	}
+	else
+	{
+	$this->load->view('admin/accesserror', $data);
+	}
+   //print_r($data['univ_info_search']);
+   }
  }
  
  

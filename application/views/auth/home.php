@@ -13,11 +13,11 @@ $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)
 {
-	$show_suc_msg = "A Event Details has been send to you successfully.....";
+	$show_suc_msg = "A Event Details has been sent to you successfully.....";
 }
 else if($sms_voice_suc_sess_val == 1)
 {
-	$show_suc_msg = "A Reminder Voice SMS has been send to you successfully.....";
+	$show_suc_msg = "A Reminder Voice SMS has been sent to you successfully.....";
 }
 if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 {
@@ -26,7 +26,7 @@ if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 	$(document).ready(function(){
 	$('#show_success').css('display','block');
 	$('#show_success').hide();
-	$('#show_success').show("show");
+	$('#show_success').show("slow");
 	$("#show_success").delay(3000).fadeOut(200);
 	});
 	</script>
@@ -44,17 +44,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		<div class="row">
 		<div class="modal" id="show_success" style="display:none;" >
 					  <div class="modal-header">
-						<a class="close" data-dismiss="modal"></a>
-						<h3>Message For You</h3>
+						<a class="close" data-dismiss="modal" "></a>
+						<h3><p><center><h4><?php echo $show_suc_msg; ?></h4></center></p></h3>
 					  </div>
-					  <div class="modal-body">
-						<p><center><h4><?php echo $show_suc_msg; ?></h4></center></p>
-					  </div>
-					  <div class="modal-footer">
-						<!--<a href="#" class="btn">Close</a>-->
-						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
-					  </div>
-				</div>
+					  
+					  
+	</div>
 			<div class="span8 real margin_t">
 				<div id="slider_slides"  class='gallery_div'>
 				<div class="slides_container">
@@ -193,19 +188,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<input type="text" style="width:220px;" name="selected_college_course" id="selected_college_course" value=""/>
 									</div>
 								</div>
-								<!--<div class="float_l span4 margin_zero">
-									<select id="search_program" name="search_program">
-										<option value="">Select</option>
-										<?php
-										foreach($area_interest as $srch_course)
-										{
-										?>
-											<option value="<?php echo $srch_course['prog_parent_id']; ?>"><?php echo ucwords($srch_course['program_parent_name']); ?></option>
-										<?php
-										}
-										?>
-									</select>
-								</div>-->
+								
 								<div class="float_l span1">
 									<input type="button" onclick="serach_results()" name="serach_col_btn" class="btn" value="Search"/>
 									<input type="hidden" name="btn_search" id="btn_col_search">
@@ -214,44 +197,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>
 					</div>
-					<!--<div class="search_layout">
-						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">City</h3></label>
-							<div class="controls">
-								<select id="select01">
-									<option>Select City</option>
-									<option>India</option>
-									<option>USA</option>
-									<option>Canada</option>
-									<option>New york</option>
-								</select>
-							</div>
-						</div>
-						<div class="control-group">
-							<div class="margin_b2">
-								<div class="float_l">
-									<img src="images/form_line_breaker.png">
-								</div>
-								<div class="float_l style_or">OR</div>
-								<div class="float_l"><img src="images/form_line_breaker2.png"></div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>-->
-					<!--<div class="control-group">
-						<label class="control-label" for="focusedInput"><h3 class="white">Search</h3></label>
-						<div class="controls">
-							<div class="float_l span4 margin_zero">
-								<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Search here...">
-								<p class="help-block ex_univ"><span class="white">ex:</span> mba, university of sydney, undergraduate course</p>
-							</div>
-							<div class="float_l span1">
-								<button class="btn" href="#">Submit</button>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					-->
+					
 				</form>
 			</div>
 			<div class="clearfix"></div>
@@ -259,23 +205,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	</div>
 	<div class="clearfix"></div>
 	<div class="body_container">
-			<!--<div class="row">
-				<div class="span16 margin_zero">
-					<div style="padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px
-					#999;-moz-box-shadow: 0px 0px 6px #888;">
-							<ul class="new_list">
-								<li><a>Lorem Ipsum has been the industry's standard dummy text.</a> </li>
-								<li><a>Lorem Ipsum has been the industry's standard dummy text.</a> </li>
-								<li><a>Lorem Ipsum has been standard dummy text.</a> </li>
-							</ul>
-					</div>
-				</div>
-			</div>
-			-->
+			
 			<div class="row">
 				<div class="span16 margin_t margin_delta">
 					<div class="float_l span7 margin_delta">
-						<h2>Upcoming Events</h2>
+						<h3>Upcoming Events</h3>
 						<div class="fix-height">
 							<ul class="event_new">
 							<form action="EventRegistration" method="post">
@@ -348,8 +282,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
 											<div class="float_l text-width" style="font-size:14px;">
-												<h4 class="blue line_time"><?php echo $date[0].'  '.$date[1].','.$date[2]; ?></h4>
-												<h4 class="line_time"><?php echo $events['event_place']?$events['event_place'].',':''; 
+												<h4 class="blue home_line"><?php echo $date[0].'  '.$date[1].','.$date[2]; ?></h4>
+												<h4 class="home_line"><?php echo $events['event_place']?$events['event_place'].',':''; 
 												 echo $events['cityname']?$events['cityname'].',':''; 
 												 echo $events['country_name']?$events['country_name']:'';?> </h4>
 												<!-- Hidden field for event registration -->
@@ -373,7 +307,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					</div>
 					<div class="float_l">
 						<div class="float_l span5">
-							<h2>News</h2>
+							<h3>News</h3>
 							<div id="slides_content">
 								<div class="slides_container">
 								<?php if(!empty($featured_news_show)) {
@@ -433,7 +367,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>
 						<div class="float_l span4">
-							<h2>Featured Colleges</h2>
+							<h3>Featured Colleges</h3>
 							<div id="slides_news">
 								<div class="slides_container"  style="width:237px!important;">
 									
@@ -554,7 +488,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</div>
 							</div>
 							<div class="margin_t1">
-								<h2>Latest Q&A</h2>
+								<h3>Latest Q&A </h3>
 								<ul class="prof_data">	
 								<?php 
 								
@@ -598,29 +532,33 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 									<li>
 
-										<div style="width: 34px;margin-right:20px" class="float_l">
+										<div class="float_l span1 margin_zero">
 										<?php if($quest_list['user_pic_path'] !='') { ?>
 										<img src="<?php echo "$base"; ?>uploads/<?php echo $quest_list['user_pic_path']; ?>" class="latest_img" />
 										<?php } else { ?>
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" class="latest_img">
 										<?php } ?>
 										</div>
-										<a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
+										<div class="float_l span5">
+											<div class="height_quest"><a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a></div>
 										<div class="asked_home"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
 										<div class="asked_home">
 										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
 										echo $quest_month?$quest_month.', ':'';
 										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
 										?></div>
+										</div>
+									<div class="clearfix"></div>
 									</li>
 									<?php } $q_count++; } } ?>
 								</ul>
+									
 							</div>
 						</div>
 					</div>
 					<div class="float_l">
-						<div class="float_l span5" style="text-align:justify">
-							<h2 style="line-height: 20px;">Article</h2>
+						<div class="float_l span5 justify">
+							<h3 class="line">Article</h3>
 							<?php 
 							$article_count = 0;
 							if(!empty($featured_article))
@@ -658,7 +596,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							
 							?>
 							<div class="margin_t1 part_art">
-								<h3><?php echo substr($article['article_title'],0,35).'...'; ?></h3>
+								<h4><?php echo substr($article['article_title'],0,35).'...'; ?></h4>
 									<span class="float_l aspectcorrect home_art">
 										
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
@@ -1229,7 +1167,6 @@ height:22px;
 				play: 5000,
 				pause: 2500,
 				hoverPause: true,
-				preload: true,
 				generateNextPrev: true
 			});
 		});
@@ -1241,7 +1178,6 @@ height:22px;
 				play: 6500,
 				pause: 10000,
 				hoverPause: true,
-				preload: true,
 				generateNextPrev: false
 			});
 		});
@@ -1271,7 +1207,7 @@ timer = setInterval(function(){
 <script>
 var currentid=0;
 $(".ex6a_ccc").popover({
-	title: "Remind Me With Call",
+	title: "<h3>Remind Me With Call</h3>",
 	content: "At least a popover that makes some sense..."
 });
 $(".ex6b_ccc").mouseover(function(event) {
@@ -1314,7 +1250,7 @@ var e_id = array[1];
 
 <!------------------ ------------------------>
 $(".ex6a_ccc2").popover({
-	title: "SMS Me This Event",
+	title: "<h3>SMS Me This Event</h3>",
 	content: "At least a popover that makes some sense..."
 });
 $(".ex6b_ccc2").mouseover(function(event) {

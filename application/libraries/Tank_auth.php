@@ -299,14 +299,14 @@ class Tank_auth
 				$data['user_id'] = $res['user_id'];
 				$data['password'] = $password;
 				}
-				$this->ci->session->set_userdata(array(
+				/*$this->ci->session->set_userdata(array(
 						 'user_id'	=> $res['user_id'],
 						 'username'	=> $username,
 						 'fullname' => $fullname,
 						 'status'	=> STATUS_ACTIVATED,
 						 'user_type'=>$user_type,
 						 ));
-						 //redirect('home');
+						 //redirect('home');*/
 				unset($data['last_ip']);
 				return $data;
 			}
