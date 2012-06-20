@@ -47,7 +47,7 @@ foreach($event_info_sms as $event_sms)
 	/* Event ID */ $event_id = $event_sms['event_id'];
 	$url = 'leadcontroller/send_sms_of_event';
 	//echo "";
-	  echo "<h4>Let Aisha remember this for you and personally give you a call to remind you about the event
+	  echo "<h4>Let Aisha remember this for you and personally</br> give you a call to remind you about the event
 	  </h4></br>";
 	echo "
 	

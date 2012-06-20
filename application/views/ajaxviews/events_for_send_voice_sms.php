@@ -66,7 +66,7 @@ foreach($event_info_sms as $event_sms)
 	//print_r($final_explode_date);
 	$url = 'leadcontroller/send_sms_voice_of_event';
 	
-	  echo "<h4>Let Aisha remember this for you and personally send you an email to remind about the event
+	  echo "<h4>Let Aisha remember this for you and personally</br> send you an email to remind about the event
 	  </h4></br>";
 	  
 	echo "

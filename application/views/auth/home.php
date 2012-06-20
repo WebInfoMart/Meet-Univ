@@ -44,7 +44,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		<div class="row">
 		<div class="modal" id="show_success" style="display:none;" >
 					  <div class="modal-header">
-						<a class="close" data-dismiss="modal" "></a>
+						<a class="close" data-dismiss="modal"> </a>
 						<h3><p><center><h4><?php echo $show_suc_msg; ?></h4></center></p></h3>
 					  </div>
 					  
@@ -258,6 +258,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		<?php if($events['event_category']=='spot_admission'){
 		echo "Spot Admission";
 		}
+		else if($events['event_category']=='fairs')
+		{
+			echo "Fairs";
+		}
+		else if($events['event_category']=='others')
+		{
+			echo "Counselling";
+		}
+		else if($events['event_category']=='alumuni')
+		{
+			echo "Counselling";
+		}
 		else
 		{
 		echo $events['event_category'];
@@ -267,15 +279,15 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										</div>
 										<div class="float_r">
 										<!-- For VoiceCall PopOver -->
-										<a href="#" id="ex6b" class="ex6b_ccc" name="event-get-detail_<?php echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<a href="#" id="ex6b" class="ex6b_ccc inline" name="event-get-detail_<?php echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
 											<span id="event_pop_<?php echo $events['event_id']; ?>" class="ex6a_ccc" ></span>
 											<!--<a onClick="voicepopup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>-->
 												<!-- For SMS PopOver -->
-												<a href="#" id="ex6b2" class="ex6b_ccc2" name="event-get-detail2_<?php echo $events['event_id']; ?>"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+												<a href="#" id="ex6b2" class="ex6b_ccc2 inline" name="event-get-detail2_<?php echo $events['event_id']; ?>"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
 											<span id="event_pop2_<?php echo $events['event_id']; ?>" class="ex6a_ccc2" ></span>
 												<!--<a onClick="popup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>-->
 												<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-												<a href="<?php echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
+												<a href="<?php echo $event_link; ?>" class="inline"><img src="images/map.png" title="Map" alt="Map"></a>
 										</div>
 										<div>
 											<div class="img_style float_l aspectcorrect" >
@@ -283,9 +295,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 											</div>
 											<div class="float_l text-width" style="font-size:14px;">
 												<h4 class="blue home_line"><?php echo $date[0].'  '.$date[1].','.$date[2]; ?></h4>
-												<h4 class="home_line"><?php echo $events['event_place']?$events['event_place'].',':''; 
-												 echo $events['cityname']?$events['cityname'].',':''; 
-												 echo $events['country_name']?$events['country_name']:'';?> </h4>
+												<h4 class="home_line">
+												<?php echo $events['event_place']?$events['event_place']:''; 
+												if($events['event_place']!='' && $events['cityname']!=''){ echo ','.$events['cityname']; } else{ echo $events['cityname']; }
+												if($events['country_name']!='' && $events['event_place']!='' || $events['cityname']!=''){ echo ','.$events['country_name']; } else{ echo $events['country_name']; }
+												?> </h4>
 												<!-- Hidden field for event registration -->
 												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
 												<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
@@ -1210,7 +1224,7 @@ $(".ex6a_ccc").popover({
 	title: "<h3>Remind Me With Call</h3>",
 	content: "At least a popover that makes some sense..."
 });
-$(".ex6b_ccc").mouseover(function(event) {
+$(".ex6b_ccc").click(function(event) {
 var id = $(this).attr('name');
 var array = id.split('_');
 var e_id = array[1];
@@ -1253,7 +1267,7 @@ $(".ex6a_ccc2").popover({
 	title: "<h3>SMS Me This Event</h3>",
 	content: "At least a popover that makes some sense..."
 });
-$(".ex6b_ccc2").mouseover(function(event) {
+$(".ex6b_ccc2").click(function(event) {
 
 
 var id = $(this).attr('name');

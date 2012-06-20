@@ -53,7 +53,7 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 									
 				?>
 						<li>
-							<div class="float_l">
+							<div class="float_l span5 margin_zero">
 								<h3><a href="<?php echo $article_link; ?>"><?php echo $articles_detail['article_title']; ?></a></h3>
 							</div>
 							<div class="float_r span4 margin_zero">

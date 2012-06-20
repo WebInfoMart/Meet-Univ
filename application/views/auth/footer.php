@@ -76,7 +76,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/pic_upload_js.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-button.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.popover-1.1.0.js"></script>
+
 <script type="text/javascript" src="<?php echo "$base$js";?>/slides.min.jquery.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>

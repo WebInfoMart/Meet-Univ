@@ -884,6 +884,9 @@ class Auth extends CI_Controller
 	/* Reset Email By User- Code by Subhanarayan */
 	function forgot_password()
 	{
+		if ($this->tank_auth->is_logged_in()) {
+			redirect('/home');
+		} else {
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		
@@ -916,7 +919,7 @@ class Auth extends CI_Controller
 				$this->users->set_key_forgot_password($set_key,$user_id);
 				$this->email->set_newline("\r\n");
 
-            $this->email->from('Workforcetrack.in', 'Meet University');
+            $this->email->from('meetuniversities.com', 'MeetUniversities');
             $this->email->to($email);
             $this->email->subject('Lost Password');
             $key = $key;
@@ -948,6 +951,7 @@ class Auth extends CI_Controller
 		$this->load->view('auth/login',$data);
 		}
 		$this->load->view('auth/footer',$data);
+		}
 	}
 	/* Check if recovery password link is valid */
 	

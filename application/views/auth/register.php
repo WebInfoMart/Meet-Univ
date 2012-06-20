@@ -58,6 +58,21 @@ $captcha = array(
 	width: 252px !important;
 }
 </style>
+<style>
+input {width:200px;}
+.submit {width:120px;}
+
+#error {
+	color:red;
+	font-size:10px;
+	display:none;
+}
+.needsfilled {
+	background:whitesmoke !important;
+	color:red !important;
+	border-color:red !important;
+}
+</style>
 <?php
 $class_fullname='';
 $class_email='';
@@ -146,7 +161,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="checkbox <?php echo $class_iagree; ?>">
+							<label id="label_agree" class="checkbox <?php echo $class_iagree; ?>">
 								<input type="checkbox" name="agree_term" id="agree_term" value="1">
 								I agree to the <a href="href">terms and conditions</a> of Meet Universities.
 							</label>
@@ -251,7 +266,10 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 											</div>
 											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline"><?php echo $home_feature_event['event_place']? ucwords($home_feature_event['event_place']):''; echo $home_feature_event['cityname']?', '.ucwords($home_feature_event['cityname']):''; echo $home_feature_event['country_name']?', '.ucwords($home_feature_event['country_name']):''; ?></span></div>
 											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $date[0].'  '.$date[1].', '.$date[2];?></span></div>
-											<?php echo substr($home_feature_event['event_detail'],0,180); ?>
+											<?php
+											$event_detail=str_replace('<div>','',$home_feature_event['event_detail']);
+											$event_detail=str_replace('</div>','',$event_detail);
+											//echo substr($event_detail,0,180); ?>
 										</div>
 									</div>
 									<div class="float_r">
@@ -378,3 +396,74 @@ function voicepopup(id) {
 	   }) 
 }
 </script>
+<script>
+$(document).ready(function(){
+	// Place ID's of all required fields here.
+	required = ["fullname", "email", "password","confirm_password","agree_term"];
+	// If using an ID other than #email or #error then replace it here
+	email = $("#email");
+	agree_terms = $("#label_agree");
+	//agree_terms_span = $("#agree_terms_span");
+	check_agree = $("#agree_term");
+	//phone = $("#dest");
+	errornotice = $("#error");
+	//var regEx = /^(\+\d)*\s*(\(\d{3}\)\s*)*\d{3}(-{0,1}|\s{0,1})\d{2}(-{0,1}|\s{0,1})\d{2}$/;
+	phone = $("#mobno");
+	// The text to show up within a field when it is incorrect
+	emptyerror = "Please fill out this field.";
+	emailerror = "Please enter a valid e-mail.";
+	phoneerror_digit = "Mobile no should be in digit";
+	phoneerror_digit_ten = "Please enter in Number & 10 digit";
+	$("#signup").submit(function(){	
+		//Validate required fields
+		for (i=0;i<required.length;i++) {
+			var input = $('#'+required[i]);
+			if ((input.val() == "") || (input.val() == emptyerror)) {
+				input.addClass("needsfilled");
+				input.val(emptyerror);
+				errornotice.fadeIn(750);
+			} else {
+				input.removeClass("needsfilled");
+			}
+		}
+		// Validate the e-mail.
+		if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email.val())) {
+			email.addClass("needsfilled");
+			email.val(emailerror);
+		}
+		//Validate the Mobile no should be 10 characters long
+		/* if (phone.val().length != 10) {
+            phone.addClass("needsfilled");
+			phone.val(phoneerror_digit_ten);
+        } */
+		
+		// Validate the Mobile no should be digit
+       /* if (!/[0-9]/.test(phone.val())) {
+	   
+
+            phone.addClass("needsfilled");
+			phone.val(phoneerror_digit);
+        } */
+			
+		if(!$('#agree_term[type="checkbox"]').is(':checked')){
+		check_agree.addClass("needsfilled");
+		agree_terms.addClass("needsfilled");
+		}
+		//if any inputs on the page have the class 'needsfilled' the form will not submit
+		if ($(":input").hasClass("needsfilled")) {
+			return false;
+		} else {
+			errornotice.hide();
+			return true;
+		}
+	});
+	
+	// Clears any fields in the form when the user clicks on them
+	$(":input").focus(function(){		
+	   if ($(this).hasClass("needsfilled") ) {
+			$(this).val("");
+			$(this).removeClass("needsfilled");
+	   }
+	});
+});	
+</script>				

@@ -175,6 +175,16 @@ $detail_of_event = $event_detail['event_detail'];
 <link href="<?php echo "$base$css_path"?>/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="<?php echo "$base$js";?>/jquery.js"></script>
 <script src="<?php echo "$base$js";?>/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.popover-1.1.0.js"></script>
+<script>  <!-- for IE8, IE7 -->
+document.createElement('header');
+document.createElement('nav');
+document.createElement('section');
+document.createElement('article');
+document.createElement('aside');
+document.createElement('footer');
+document.createElement('hgroup');
+</script>
 <?php
 $pageURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
 if ($_SERVER["SERVER_PORT"] != "80")

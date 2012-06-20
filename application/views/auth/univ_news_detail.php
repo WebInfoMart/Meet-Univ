@@ -25,13 +25,13 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-	<div class="row ">
+	<div class="row" style="margin-top:-10px">
 				<div class="float_l span13 margin_l">
 					
 					<div class="span9 margin_zero">
 						<h3><?php echo $news_detail['news_title']; ?></h3>
 						<!--<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:<?php echo $total_register_user; ?></span></div>-->
-						<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><abbr class="timeago time_ago inline" title="<?php echo $news_detail['publish_time']; ?>"></abbr></div>
+						<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class=" line_time"><abbr class="timeago time_ago inline" title="<?php echo $news_detail['publish_time']; ?>"></span></abbr></div>
 						<?php echo $news_detail['news_detail']; ?>
 						
 						<div class="clearfix"></div>
@@ -43,8 +43,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<?php if($news_comments!=0){
 						foreach($news_comments as $news_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $news_comments_detail['comment_id']; ?>" >
-								<div class="float_l">
-									<div class="comment_img" style="margin-right:10px;">
+								<div class="float_l comment_img center">
 									<?php if($news_comments_detail['user_pic_path'] !=''){ ?>
 									<img src="<?php echo "$base"; ?>uploads/<?php echo $news_comments_detail['user_pic_path']; ?>" />
 									<?php } 
@@ -54,18 +53,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									else { ?>		
 									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 									<?php } ?>
-									</div>
-								</div>
-								<div>
-			<?php if($user_is_logged_in ){
-			if($user_detail['user_id']==$news_comments_detail['user_id'])
-			{
-			?>					
-			<span class="float_r delete_comment" >
-					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $news_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
-			</span>
-			<?php	} } ?>				
-									<h4 ><span class="course_txt">
+									<h4 ><span>
 									<?php 
 									if($news_comments_detail['commented_by_user_name'] !=''){
 									echo $news_comments_detail['commented_by_user_name']; 
@@ -81,9 +69,20 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									?>
 									</span>
 									</h4>
-									<?php echo $news_comments_detail['commented_text'];?>
-									<div style="font-size;color:black;" class="float_r">
+								</div>
+								<?php if($user_is_logged_in ){
+			if($user_detail['user_id']==$news_comments_detail['user_id'])
+			{
+			?>	
+			
+			<span class="float_r delete_comment" >
+					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $news_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
+			</span>
+			<div>
 									<abbr class="timeago time_ago" title="<?php echo $news_comments_detail['comment_time']; ?>"></abbr></div>
+			<?php	} } ?>	
+								<div class="span6 margin_zero">
+									<?php echo $news_comments_detail['commented_text'];?>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -158,18 +157,13 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					</div>
 					<div class="span4">
 						<div class="float_r">
-							
-								
-						
 							<div class="float_l fb_set"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
 							<div class="float_l">
 							<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
 							<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 							</div>
-							
 							<div class="float_r tw" style="width:82px;">
 								<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-							
 							</div>
 							<div class="clearfix"></div>
 						</div>

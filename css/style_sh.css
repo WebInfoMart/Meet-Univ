@@ -174,7 +174,6 @@ ul.navigation li a {padding: 0.5em 0 0.5em 20px;border-bottom: 1px solid #CCC;di
 .follow{margin:10px;}
 .follow li{list-style:none;}
 .follow_img{margin: 0px 0px 0px 10px;}
-.heading_follow{color:#f89406;}
 .close_cont{font-size:14px;}
 nav#help-tools {
 height: 40px;
@@ -615,7 +614,7 @@ line-height: 22px;
 word-wrap:break-word; 
 }
 .event_comment{background-color: #DFF0D8;border: 1px solid #DDD;border-radius:4px;padding:10px;}
-.comment_img{height:69px; width:69px;}
+.comment_img{width:67px;margin-right:10px}
 .date_heading{font-size:16px;}
 .my_form_controls{margin-left:14px;}
 .comment_img img{height:61px; width:61px;border: 1px solid #DDD;-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;padding: 2px;}
@@ -648,7 +647,7 @@ width: 122px;}
 #ajax_loader_paging{left:37%;top:49%;position:absolute;z-index:-9;}
 
 .add_paging_background_class{background:#008EE8 !important;color:white !important}
-.time_ago{cursor:default !important;text-transform:none !important;font-size:12px;margin-left: 20px;color: #08C;}
+.time_ago{cursor:default !important;text-transform:none !important;font-size:12px;color: #08C;}
 .tabs_events a{font-size:15px;font-size: 15px;color: #555555;}
 .nav-tabs > .active1 > a, .nav-tabs > .active1 > a:hover {
   color: #F89406;
@@ -909,7 +908,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 .event_new{list-style:none;margin:0px;}
 .event_new li{padding: 7px 0px;border-bottom:1px solid #DDD;-moz-border-bottom:1px solid #DDD;-webkit-border-bottom:1px solid #DDD;}
 .img_style{border:1px solid #ddd;width: 100px;padding: 5px;background:#fff;height:65px;}
-.inline{display:inline;}
+.inline{display:inline-block;}
 .happen{background:#e6f4dd;height: 49px;border-radius: 4px;}
 .happen ul li {
 float: left;
@@ -950,7 +949,7 @@ overflow-y: hidden;}
 .prof_data li{margin-bottom: 10px;}
 .part_art{height: 188px;overflow: hidden;}
 .text-width{width:205px;margin-left:20px}
-.line_time{line-height: 22px;overflow-y: hidden;height: 20px;margin-left:20px}
+.line_time{line-height:15px;overflow-y: hidden;height: 20px;margin-left:20px}
 .registered{text-align: center;background: #eeeeee; /* Old browsers */
 background: -moz-linear-gradient(left,  #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
@@ -1011,6 +1010,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 #sms_form_voice .controls, #sms_form .controls {margin-left:102px;}
 #sms_form_voice .control-group label, #sms_form .control-group label{padding-top: 0px;}
 #sms_form_voice .control-group, #sms_form .control-group{margin-bottom:8px;}
+#slides_boxes .slides_container .slides_control{width: 500px!important;height: 260px!important;overflow: hidden;}
+#slides_boxes .slides_container{border:none;}
+#slides_boxes .slider_pagination{margin:0px;width:0px;top: 0px;}
+#slides_boxes .slider_pagination li{display:inline-block}
+#slides_boxes .slider_pagination li a{padding:10px 0px;cursor:pointer;width: 120px;float:left;overflow: visible;background-image:none;display:inline-block}
 
 .h4_line{line-height: 22px;}
 .h4_line span{margin-left:25px;}
@@ -1053,3 +1057,9 @@ left: 9px;}
 .height_quest{min-height: 15px;overflow: hidden;max-height: 35px;}
 .manage_l{margin-left: 148px;}
 .home_line{line-height: 22px;overflow-y: hidden;height: 20px;}
+.quest_fix{min-height: 15px;overflow: hidden;max-height: 35px;}
+.none{display:none!important;}
+.fix_h3{min-height: 15px;
+overflow: hidden;
+max-height: 55px;}
+.art_img{border: 1px solid #DDD;padding: 2px}
