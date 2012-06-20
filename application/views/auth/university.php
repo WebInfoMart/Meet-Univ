@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="" method="post">
+<form class="form-horizontal" action="" method="post" id="frm_university">
 <div class="row" style="margin-top:-5px">
 	<div class="span8 margin_l float_l margin_t">
 		<div class="univ_content letter_first">

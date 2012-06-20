@@ -23,10 +23,10 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 								<span>in studying at <?php echo ucwords($university_details['univ_name']);?></span>
 								Fill details for the institute to counsel you
 								<div class="margin_t text_align"> 
-									 <form class="form-horizontal" action="" method="post">
+									 <form class="form-horizontal" action="" method="post" id="frm_univ_fb_sidebar">
 										<fieldset>
 											<div class="control-group">
-												<input type="text" name="apply_name" class="input-medium <?php echo $class_name; ?>" value="<?php echo set_value('apply_name') ?>" placeholder="Name">
+												<input type="text" name="apply_name" id="apply_name" class="input-medium <?php echo $class_name; ?>" value="<?php echo set_value('apply_name') ?>" placeholder="Name">
 												<span style="color:red"><?php echo form_error('apply_name'); ?><?php echo isset($errors['apply_name'])?$errors['apply_name']:''; ?></span>
 											</div>
 											<!--<div class="control-group">
@@ -50,7 +50,7 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 												<span style="color:red"><?php echo form_error('apply_email'); ?><?php echo isset($errors['apply_email'])?$errors['apply_email']:''; ?></span>
 											</div>
 											<div class="control-group">
-												<input type="text" name="apply_mobile" class="input-medium <?php echo $class_mobile; ?>" value="<?php echo set_value('apply_mobile') ?>" placeholder="Mobile Number">
+												<input type="text" name="apply_mobile" id="apply_mobile" class="input-medium <?php echo $class_mobile; ?>" value="<?php echo set_value('apply_mobile') ?>" placeholder="Mobile Number">
 												<span style="color:red"><?php echo form_error('apply_mobile'); ?><?php echo isset($errors['apply_mobile'])?$errors['apply_mobile']:''; ?></span>
 											</div>
 											<!--<div class="control-group">
@@ -74,3 +74,6 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 					</div>
 					<div class="clearfix"></div>
 				</div>
+
+				
+				

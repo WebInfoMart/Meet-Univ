@@ -26,87 +26,64 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>
 	<div class="row" style="margin-top:-10px">
-				<div class="float_l span13 margin_l">
-				
-						<div class="">
-						<h2 class="course_txt span10 margin_delta"><?php echo $articles_detail['article_title']; ?></h2>
-						<div class="float_r" style="margin-top:25px;">
-						<div class="float_l" style="margin-right:-25px;">
-						<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
-						</div>
-						<div class="float_l"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-						<div class="float_l">
-							<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-						
-						</div>
-						</div>
-						<div class="float_l span9 margin_zero">
-							<div>
-								<div class="date_heading">
-								<span><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
-							</span></div>
-							</div>
-						</div>
-						<div class="clearfix"></div>
-						<div>
-							<h3>Details</h3>
-							<div class="float_l margin_r2">
+		<div class="float_l span13 margin_l">
+			<div class="span9 margin_zero">
+				<div class="fix_h3"><h3><?php echo $articles_detail['article_title']; ?></h3></div>
+				<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class=" line_time"><abbr class="timeago time_ago inline" title="<?php echo $articles_detail['publish_time']; ?>"></span></abbr></div>
+				<div class="margin_t1">
+					<div class="float_l margin_r2">
 							<?php
-									$image_exist=0;	
-									$article_img = $articles_detail['article_image_path'];	
-									if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
-									{
-									$image_exist=1;
-								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
-									}
-									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']) && $articles_detail['univ_logo_path']!='')
-									{
-									$image_exist=2;
-								   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']);
-									
-									}
-									else
-									{
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
-								    }
-									if($article_img!='' && $image_exist==1)
-									{
-									$image=$base.'uploads/news_article_images/'.$article_img;
-									}
-									else if($articles_detail['univ_logo_path']!='' && $image_exist==2)
-									{
-									$image=$base.'uploads/univ_gallery/'.$articles_detail['univ_logo_path'];
-									}
-									else
-									{
-									$image=$base.$img_path.'/default_logo.png';
-									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
-									?>
-
-							<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+							$image_exist=0;	
+							$article_img = $articles_detail['article_image_path'];	
+							if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+							{
+							$image_exist=1;
+						   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+							}
+							else if(file_exists(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']) && $articles_detail['univ_logo_path']!='')
+							{
+							$image_exist=2;
+						   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$articles_detail['univ_logo_path']);
 							
-								
-							</div>
-							<div>
-								<?php echo $articles_detail['article_detail']; ?>
-								
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="margin_t" id="add_more_comment">
-							<div class="event_border">
-							<input type="hidden" id="txt_cnt_comment_show" value="<?php if($article_comments!=0) { count($article_comments); }
-								else { echo "0"; } ?>"/>
-								<h3><span id="cnt_comment_show"><?php if($article_comments!=0) { count($article_comments); }
-								else { echo "0"; }
-								?></span> Comments</h3>
-							</div> 
-				<?php if($article_comments!=0){
+							}
+							else
+							{
+							list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
+						    }
+							if($article_img!='' && $image_exist==1)
+							{
+							$image=$base.'uploads/news_article_images/'.$article_img;
+							}
+							else if($articles_detail['univ_logo_path']!='' && $image_exist==2)
+							{
+							$image=$base.'uploads/univ_gallery/'.$articles_detail['univ_logo_path'];
+							}
+							else
+							{
+							$image=$base.$img_path.'/default_logo.png';
+							} 
+							$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
+							?>
+
+					<!--<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" class="art_img">-->
+					<img style="width:60px;height:60px;" src="<?php echo $image; ?>" class="art_img">
+					</div>
+					<div class="margin_l justify">
+						<?php echo $articles_detail['article_detail']; ?>
+					</div>
+				</div>
+				<div id="add_more_comment">
+					<div class="event_border">
+						<input type="hidden" id="txt_cnt_comment_show" value="<?php if($article_comments!=0) { count($article_comments); }
+						else { echo "0"; } ?>"/>
+						<h3><span id="cnt_comment_show"><?php if($article_comments!=0) { count($article_comments); }
+						else { echo "0"; }
+						?></span> Comments</h3>
+					</div>
+					<?php if($article_comments!=0){
 						foreach($article_comments as $article_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $article_comments_detail['comment_id']; ?>" >
-								<div class="float_l">
-									<div class="comment_img">
+								<div class="float_l comment_img center">
 									<?php if($article_comments_detail['user_pic_path'] !=''){ ?>
 									<img src="<?php echo "$base"; ?>uploads/<?php echo $article_comments_detail['user_pic_path']; ?>" />
 									<?php } 
@@ -116,18 +93,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									else { ?>		
 									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 									<?php } ?>
-									</div>
-								</div>
-								<div>
-			<?php if($user_is_logged_in ){
-			if($user_detail['user_id']==$article_comments_detail['user_id'])
-			{
-			?>					
-			<span class="float_r delete_comment" >
-					<img style="cursor:pointer;width: 10px;height: 10px;" class="del_icon" onclick='delete_this_comment("<?php echo $article_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
-			</span>
-			<?php	} } ?>				
-									<h4 ><a href="#" class="course_txt">
+									<h4><a href="#">
 									<?php 
 									if($article_comments_detail['commented_by_user_name'] !=''){
 									echo $article_comments_detail['commented_by_user_name']; 
@@ -143,26 +109,34 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									?>
 									</a>
 									</h4>
-									<span><?php echo $article_comments_detail['commented_text'];?></span>
-									
-									<div style="font-size;color:black;" class="float_r">
-									<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr></div>
 								</div>
-								<div class="clearfix"></div>
-							</div>
-				<?php }
-}				?>			
-						</div>
-			<?php if($user_is_logged_in==0){ ?>			
-			<div class="events_box" style="height: 53px;">
+								<?php if($user_is_logged_in ){
+			if($user_detail['user_id']==$article_comments_detail['user_id'])
+			{
+			?>					
+			<span class="float_r delete_comment" >
+					<img style="cursor:pointer;width: 10px;height: 10px;" class="del_icon" onclick='delete_this_comment("<?php echo $article_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
+			</span>
+									<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr>
+			<?php	} } ?>			
+									
+									
+									<div class="span6 margin_zero">
+									<span><?php echo $article_comments_detail['commented_text'];?></span>
+									</div>
+									
+							<div class="clearfix"></div>		
+					</div>
+					<?php }
+}				?>		
+				</div>
+				<?php if($user_is_logged_in==0){ ?>			
+			<div class="events_box margin_t1" style="height: 53px;">
 				<div class="float_r">
 					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
 				</div>
-				<div class="float_l" style="margin-top: 30px; margin-left: 311px;">
-				<center><h3>Please Login for comment</h3></center>
-				</div>
-				</div>
-						<!--<div class="margin_t margin_bs">
+				<h3 class="center">Please Login for comment</h3>
+				<!--<div class="margin_t margin_bs">
 							<div class="events_box">
 								<h3>Your Comment</h3>
 								<div class="float_l span9 margin_zero">
@@ -205,8 +179,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 						</div>-->
-		<?php } else { ?>	
-			<div class="margin_t margin_bs">
+					</div>
+					<?php } else { ?>	
+			<div class="margin_t margin_b">
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
@@ -220,7 +195,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<?php } else { ?>		
 								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 								<?php }  ?></br>
-								<span style='float: left;width: 46px;position: absolute;'>
+								<span class='center comment_style'>
 								<?php
 								if($user_detail['fullname'] !='')
 								{
@@ -234,35 +209,47 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								</span>
 									</div>
 								</div>
-								<div class="float_l span9 margin_zero">
+								<div class="float_l span6 margin_zero">
 									<form class="form-horizontal" method="post" action="">
 									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $articles_detail['article_id']; ?>" >
 									<input type="hidden" name="commented_on" id="commented_on" value="article" >
 										<div class="control-group">
-											<div class="my_form_controls">
 												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
-											</div>
 										</div>
 										<div class="control-group">
-											<div class="my_form_controls">
 												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">
-											</div>
 										</div>
 									</form>
 								</div>
-								
 								<div class="clearfix"></div>
 							</div>
 						</div>
 		<?php } ?>
-					</div>
+			</div>	
+			<div class="float_l span4">			
+				<div class="float_l fb_set"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+				<div class="float_l">
+				<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 				</div>
-				<div class="float_r span3">
-					
+				<div class="float_r tw" style="width:82px;">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 				</div>
 				<div class="clearfix"></div>
+				<div class="back_up">
+						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
+						<ul class="up_event">
+							<li><a href="#">how hkshkcfhskjl</a></li>
+						</ul>
+				</div>
 			</div>
+		<div class="clearfix"></div>
 		</div>	
+		<div class="float_r span3">
+			<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
+		</div>
+		<div class="clearfix"></div>		
+	</div>	
+</div>	
 <script>
 function post_comment()
 {

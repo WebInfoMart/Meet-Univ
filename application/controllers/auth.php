@@ -936,7 +936,7 @@ class Auth extends CI_Controller
                 {
                     show_error($this->email->print_debugger());
                 }
-					$data['msg'] = 1;
+					//$data['msg'] = 1;
 					$this->load->view('auth/login',$data);
 				}
 			}

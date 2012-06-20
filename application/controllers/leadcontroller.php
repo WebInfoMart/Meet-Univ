@@ -341,7 +341,7 @@ class Leadcontroller extends CI_Controller
 					$this->email->message($message_email);
 					$this->email->send(); */
 					
-					$this->email->from('info@meetuniversities.info', 'Meet Universities');
+					$this->email->from('meetuniversities.com', 'Meet Universities');
 					$this->email->to($user_email);
 					$this->email->subject('Event Registration');
 					$message = "$message_email" ;
@@ -349,12 +349,14 @@ class Leadcontroller extends CI_Controller
 					$this->email->message($message);
 					//print_r($message);
 					$this->email->send(); 
-					$facebook = new Facebook();
+					
+					//Facebook Code commented For Application not published
+					/* $facebook = new Facebook();
 					 $fbUserId = $facebook->getUser();
 					  $eventurl ='http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 					 if ($fbUserId) {
 					 $facebook->api('/me/meetuniversities:attend?event='.$eventurl,'POST');
-					 }
+					 } */
 					
 					
 					$set_blank_session_event_register = array(

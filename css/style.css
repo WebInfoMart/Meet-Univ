@@ -406,3 +406,14 @@ text-align: center;
 cursor: pointer;
 margin-bottom:9px;
 }
+
+#error {
+	color:red;
+	font-size:10px;
+	display:none;
+}
+.needsfilled {
+	background:whitesmoke !important;
+	color:red !important;
+	border-color:red !important;
+}

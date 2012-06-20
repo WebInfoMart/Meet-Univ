@@ -56,7 +56,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 							</div>
 							<h2>Your University & College Search</h2>
 							<div class="margin_t">
-											<form class="form-horizontal form_step_box" action="" method="post">
+											<form class="form-horizontal form_step_box" action="" method="post" id="frm_step_two">
 											
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">When do you want to begin?</label>
@@ -411,7 +411,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label" for="inlineCheckboxes">Home Address</label>
 														<div class="controls">
-															<input class="<?php echo $class_home_adress; ?>" type="text" name="home_address" value="<?php echo set_value('home_address') ?>">
+															<input class="<?php echo $class_home_adress; ?>" type="text" name="home_address" id="st_home_address" value="<?php echo set_value('home_address') ?>">
 															<span style="color:red"> <?php echo form_error('home_address'); ?><?php echo isset($errors['home_address'])?$errors['home_address']:''; ?> </span>
 														</div>
 														
@@ -454,7 +454,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label">Area of Interest</label>
 													<div class="controls docs-input-sizes">
-														<select class="<?php echo $class_area_interest; ?>" name="area_interest">
+														<select class="<?php echo $class_area_interest; ?>" name="area_interest" id="st_area_interest">
 															<option selected="selected" value="">— Please Select —</option>
 															<?php 
 															foreach($area_interest as $interest)
@@ -480,7 +480,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label">Current Education Level</label>
 													<div class="controls docs-input-sizes">
-														<select class="<?php echo $class_current_educ; ?>" name="current_educ_level">
+														<select class="<?php echo $class_current_educ; ?>" name="current_educ_level" id="st_current_educ_level">
 															<option selected="selected" value="">— Please Select —</option>
 															<?php foreach($educ_level as $education_level) { ?>
 																<option value="<?php echo $education_level['prog_edu_lvl_id']; ?>" <?php echo $this->input->post('current_educ_level')==$education_level['prog_edu_lvl_id']?"selected='selected'":'' ?> > <?php echo $education_level['educ_level']; ?> </option>
@@ -493,7 +493,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 												<div class="control-group">
 													<label class="control-label">Next Education Level</label>
 													<div class="controls docs-input-sizes">
-														<select class="<?php echo $class_next_educ; ?>" name="next_educ_level">
+														<select class="<?php echo $class_next_educ; ?>" name="next_educ_level" id="st_next_educ_level">
 															<option selected="selected" value="">— Please Select —</option>
 															<?php foreach($educ_level as $education_level) { 
 																	
@@ -525,7 +525,7 @@ if($error_academic_exam_score != '') { $class_academic_exam_score = 'focused_err
 																<option value="GRE">GRE</option>
 																<option value="GMAT">GMAT</option>
 															</select>
-															<input class="<?php echo $class_academic_exam_score; ?>" type="text" name="academic_exam_score1" value="<?php echo set_value('academic_exam_score1') ?>"/>
+															<input class="<?php echo $class_academic_exam_score; ?>" type="text" name="academic_exam_score1" id="st_academic_exam_score1" value="<?php echo set_value('academic_exam_score1') ?>"/>
 															<a id="academic_add" style="cursor:pointer;">Add Another »</a><br/>
 														</div>
 														<span id="academic_another" style="display:none;">

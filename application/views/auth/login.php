@@ -52,24 +52,20 @@ $(document).ready(function(){
 <?php if($msg == 1) { ?>
  $('#forget_model').modal('toggle');
  <?php } ?>
+ <?php if($email_send == 1) { ?>
+ $('#link_send_for_fpass').css('display','block');
+$("#link_send_for_fpass").delay(7000).fadeOut(200);
+ <?php } ?>
 });
 </script>
-<!-- Css For Login Validation -->
-<style>
-input {width:200px;}
-.submit {width:120px;}
+<div class="modal" id="link_send_for_fpass" style="display:none;" >
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>An Email has been sent to Your E-mail Id.For Change Password Please Activate your Account</h3>
+  </div>
+</div>
 
-#error {
-	color:red;
-	font-size:10px;
-	display:none;
-}
-.needsfilled {
-	background:whitesmoke !important;
-	color:red !important;
-	border-color:red !important;
-}
-</style>
+<!-- Css For Login Validation -->
 <div class="modal" id="show_success" style="display:none;" >
   <div class="modal-header">
     <a class="close" data-dismiss="modal"></a>
@@ -140,11 +136,11 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 							<label class="control-label" for="password">Password</label>
 							<div class="controls">
 								<div class="input-prepend">
-									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png"></span><input type="password" class="<?php echo $class_pass; ?>" name="password" id="pass_login" placeholder="Password" value="">
+									<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png"></span><input type="password" class="<?php echo $class_pass; ?>" name="password" id="pass_login" placeholder="Password" value="" onfocus="$(this).prop('type','password');">
 									<span style="color:red;"> <?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></td> </span>
 								</div>
 							</div>
-							<small><a data-toggle="modal" style="cursor:pointer;" id="pulse">Forgot your password?</a></small>
+							<small><a style="cursor:pointer;" id="forgot_pass">Forgot your password?</a></small>
 							
 							<input type="hidden" name="user_type" id="student" value="student">
 						</div>
@@ -245,7 +241,19 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 											<div class="img_style float_l img_r">
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
-											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline"><?php echo $home_feature_event['event_place']? ucwords($home_feature_event['event_place']):''; echo $home_feature_event['cityname']?', '.ucwords($home_feature_event['cityname']):''; echo $home_feature_event['country_name']?', '.ucwords($home_feature_event['country_name']):''; ?></span></div>
+											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">
+											<?php 
+											echo $home_feature_event['event_place']? ucwords($home_feature_event['event_place']):''; 
+											if($home_feature_event['event_place']!='' && $home_feature_event['cityname']!='')
+											{
+											echo ', '.ucwords($home_feature_event['cityname']);
+											} else { echo $home_feature_event['cityname']; }
+											//echo $home_feature_event['cityname']?', '.ucwords($home_feature_event['cityname']):''; 
+											if($home_feature_event['country_name']!='' && $home_feature_event['event_place']!='' || $home_feature_event['cityname']!='')
+											{
+												echo ', '.ucwords($home_feature_event['country_name']);
+											} else { echo $home_feature_event['country_name']; }
+											?></span></div>
 											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $date[0].'  '.$date[1].', '.$date[2];?></span></div>
 											<?php
 											$event_detail=str_replace('<div>','',$home_feature_event['event_detail']);
@@ -355,78 +363,7 @@ function voicepopup(id) {
 </script>
 <!-- Code For Jquery Validation -->
 <script>
-$(document).ready(function(){
-	// Place ID's of all required fields here.
-	required = ["pass_login", "email_login"];
-	// If using an ID other than #email or #error then replace it here
-	email = $("#email_login");
-	//agree_terms = $("#agree_terms");
-	//agree_terms_span = $("#agree_terms_span");
-	//phone = $("#dest");
-	errornotice = $("#error");
-	//var regEx = /^(\+\d)*\s*(\(\d{3}\)\s*)*\d{3}(-{0,1}|\s{0,1})\d{2}(-{0,1}|\s{0,1})\d{2}$/;
-	//phone = $("#dest");
-	//check_agree = $("#agree");
-	// The text to show up within a field when it is incorrect
-	emptyerror = "Please fill out this field.";
-	emailerror = "Please enter a valid e-mail.";
-	//phoneerror_digit = "Mobile no should be in digit";
-	//phoneerror_digit_ten = "Please enter in Number & 10 digit";
-	$("#login_form").submit(function(){	
-		//Validate required fields
-		for (i=0;i<required.length;i++) {
-        
-			var input = $('#'+required[i]);
-			if ((input.val() == "") || (input.val() == emptyerror)) {
-				input.addClass("needsfilled");
-				input.val(emptyerror);
-				errornotice.fadeIn(750);
-			} else {
-				input.removeClass("needsfilled");
-			}
-		}
-		// Validate the e-mail.
-		if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email.val())) {
-			email.addClass("needsfilled");
-			email.val(emailerror);
-		}
-		//Validate the Mobile no should be 10 characters long
-		/* if (phone.val().length != 10) {
-	   
-	  // phone.match(regEx)) {
-            phone.addClass("needsfilled");
-			phone.val(phoneerror_digit_ten);
-        } */
-		
-		// Validate the Mobile no should be digit
-       /* if (!/[0-9]/.test(phone.val())) {
-	   
-	  // phone.match(regEx)) {
-            phone.addClass("needsfilled");
-			phone.val(phoneerror_digit);
-        } */
-		 
-		/* if(!$('#agree[type="checkbox"]').is(':checked')){
-		check_agree.addClass("needsfilled");
-		agree_terms.addClass("needsfilled");
-		agree_terms_span.addClass("needsfilled");
-		} */
-
-		//if any inputs on the page have the class 'needsfilled' the form will not submit
-		if ($(":input").hasClass("needsfilled")) {
-			return false;
-		} else {
-			errornotice.hide();
-			return true;
-		}
-	});
-	
-	// Clears any fields in the form when the user clicks on them
-	$(":input").focus(function(){		
-	   if ($(this).hasClass("needsfilled") ) {
-			$(this).val("");
-			$(this).removeClass("needsfilled");
-	   }
-	});
-});	
+$('#forgot_pass').click(function(){
+$('#forget_model').modal('toggle');
+});
 </script>
