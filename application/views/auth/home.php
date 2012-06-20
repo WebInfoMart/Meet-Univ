@@ -334,6 +334,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		<?php if($events['event_category']=='spot_admission'){
 		echo "Spot Admission";
 		}
+		else if($events['event_category']=='fairs')
+		{
+			echo "Fairs";
+		}
+		else if($events['event_category']=='others')
+		{
+			echo "Counselling";
+		}
+		else if($events['event_category']=='alumuni')
+		{
+			echo "Counselling";
+		}
 		else
 		{
 		echo $events['event_category'];
@@ -358,10 +370,17 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
 											<div class="float_l text-width" style="font-size:14px;">
-												<h4 class="blue home_line"><?php echo $date[0].'  '.$date[1].','.$date[2]; ?></h4>
-												<h4 class="home_line"><?php echo $events['event_place']?$events['event_place'].',':''; 
-												 echo $events['cityname']?$events['cityname'].',':''; 
-												 echo $events['country_name']?$events['country_name']:'';?> </h4>
+												<h4 class="blue home_line"><?php 
+												echo $date[0]?$date[0]:'';
+												echo $date[1]?'&nbsp;'.$date[1]:'';
+												if($date[0]!='' || $date[1]!='') { echo ',&nbsp;&nbsp;'.$date[2];} else { echo ''; } 
+												?></h4>
+												<h4 class="home_line">
+												<?php 
+												echo $events['event_place']?$events['event_place']:''; 
+												if($events['event_place']!='' && $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['cityname']; } else{ echo $events['cityname']; }
+												if($events['country_name']!='' && $events['event_place']!='' || $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['country_name']; } else{ echo $events['country_name']; }
+												?> </h4>
 												<!-- Hidden field for event registration -->
 												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
 												<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
