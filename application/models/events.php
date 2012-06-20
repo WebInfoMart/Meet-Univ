@@ -119,6 +119,7 @@ class Events extends CI_Model
 		{
 		$this->db->where('university.user_id',$data['user_id']);
 		}
+		$this->db->order_by('event_created_time','desc');
 		$this->db->limit($limit,$offset);
 		$query=$this->db->get();
 		$this->pagination->initialize($config);
@@ -219,7 +220,7 @@ class Events extends CI_Model
 		$this->db->from('events');
 		$this->db->where($field,'1');
 		$query = $this->db->get();
-		if($query->num_rows()<5)
+		if($query->num_rows()<4)
 		return 1;
 		else
 		return 0;

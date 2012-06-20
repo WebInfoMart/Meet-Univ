@@ -14,9 +14,9 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id=university.univ_id');
-		$this->db->join('city','events.event_city_id=city.city_id');
-		$this->db->join('state','events.event_state_id=state.state_id');
-		$this->db->join('country','events.event_country_id=country.country_id');
+		$this->db->join('city','events.event_city_id=city.city_id','left');
+		$this->db->join('state','events.event_state_id=state.state_id','left');
+		$this->db->join('country','events.event_country_id=country.country_id','left');
 		$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		$this->db->limit(3);
 		$query = $this->db->get();

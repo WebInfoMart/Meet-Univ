@@ -45,6 +45,9 @@ $insert=1;
 						<th class="header" style="cursor: pointer; ">Event Title</th>
 						<th class="header" style="cursor: pointer; ">University Name</th>
 						<th class="header" style="cursor: pointer; ">Event's Place</th>
+						<th class="header" style="cursor: pointer; ">Featured/Unfeatured</th>
+						<th class="header" style="cursor: pointer; ">Event Date</th>
+						
 						<th></th>
 					</tr>
 				</thead>
@@ -65,6 +68,9 @@ $insert=1;
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
 						<td><a href="#"><?php echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>
+						<td><a href="#"><?php if($row->featured_home_event=='1'){?>Featured Event <?php } ?></a></td>
+						<td><a href="#"><?php echo $row->event_date_time; ?></a></td>
+						
 						<td>
 			
 		<ul class="nav">
@@ -79,8 +85,9 @@ $insert=1;
 			  <?php } if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3') { ?>
 <li><a href="#" onclick="featured_home_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_home_event; ?>','<?php echo $row->event_id; ?>');"><i class="<?php if($row->featured_home_event=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_home_event=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a>
 			 </li>	
-			  <li><a href="#" onclick="featured_dest_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_dest_event; ?>','<?php echo $row->event_id; ?>');"><i class="<?php if($row->featured_dest_event=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_dest_event=='1'){?> Make Study-Abroad Unfeatured <?php } else {?> Make Study-Abroad Featured <?php } ?></a>
-			 </li>	
+			 <!-- <li><a href="#" onclick="featured_dest_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_dest_event; ?>','<?php echo $row->event_id; ?>');"><i class="<?php if($row->featured_dest_event=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_dest_event=='1'){?> Make Study-Abroad Unfeatured <?php } else {?> Make Study-Abroad Featured <?php } ?></a>
+			 </li>
+			-->	
 			<?php }	 if($delete==1) { ?>
 			 <li><a href="#" onclick="delete_confirm('<?php echo $row->event_id; ?>');" ><i class="icon-trash"></i> Delete</a></li>
 				<?php }?>
@@ -158,7 +165,7 @@ if (r==true)
 }
 else
 {
-alert("Max Limit 5 reached,To make this home featured event,make other to unfeature");
+alert("Max Limit 3 reached,To make this home featured event,make other to unfeature");
 }
 }
 function featured_dest_confirm(a,b,c)
@@ -187,7 +194,7 @@ if (r==true)
 }
 else
 {
-alert("Max Limit 5 reached,To make this home featured event,First make other to unfeature");
+alert("Max Limit 3 reached,To make this home featured event,First make other to unfeature");
 }
 }
 function action_formsubmit(id,flag)
