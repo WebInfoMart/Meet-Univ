@@ -69,10 +69,11 @@ $(document).ready(function() {
   <script type="text/javascript" src="<?php echo $base; ?>/js/jquery.timepicker.js"></script>
   <link rel="stylesheet" type="text/css" href="<?php echo $base; ?>css/admin/jquery.timepicker.css" />
 
- <div id="content">
-		<h2 class="margin">Create University Events</h2>
-		<div class="form span8">
-			<form action="<?php echo $base; ?>adminevents/add_event" autocomplete="off" method="post" class="caption_form">
+ <div id="content" >
+	
+		<div class="form span8 content_event_form1">
+		<h4 class="margin">Create University Events Step1</h4>
+			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
 				<ul>
 					<li>
 						<div>
@@ -103,7 +104,7 @@ $(document).ready(function() {
 										<?php } ?>
 							</select>
 						-->	
-						<input type="text" size="30" title="university"  value="<?php echo set_value('university_name'); ?>" class="<?php echo $class_univ_name; ?>" title="university" name="university_name" id="univ_name" />
+						<input type="text" size="30" title="university" autocomplete="off"   value="<?php echo set_value('university_name'); ?>" class="<?php echo $class_univ_name; ?>" title="university" name="university_name" id="univ_name" />
 						<input type="hidden" name="university" id="university" value="<?php echo set_value('university'); ?>" />
 		<span style="color: red;">
 		<?php if($class_univ_name=='focused_error_univ') {
@@ -140,16 +141,8 @@ $(document).ready(function() {
 								<label>Country</label>
 							</div>
 							<div class="float_l span3" >
-								<!--
-								<select class="<?php echo $class_country; ?> styled span3 margin_zero" name="country" id="country" onchange="fetchstates(0)">
-									<option value="">Please Select</option>
-									<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
-										<?php } ?>
-	
-								</select>
-								-->
-<input type="text"  size="30" class="<?php echo $class_country; ?>" value="<?php echo set_value('country_name'); ?>" title="country" name="country_name" id="country_name" />
+								
+<input type="text"  size="30" class="<?php echo $class_country; ?>" autocomplete="off"  value="<?php echo set_value('country_name'); ?>" title="country" name="country_name" id="country_name" />
 				<input type="hidden" name="country" id="country" value="<?php echo set_value('country'); ?>" />
 			<span style="color: red;"> <?php echo form_error('country'); ?><?php echo isset($errors['country'])?$errors['country']:''; ?> </span>
 							
@@ -167,10 +160,8 @@ $(document).ready(function() {
 							<label>State</label>
 						</div>
 						<div class="float_l span3">
-							<!--<select class="<?php echo $class_state; ?> styled span3 margin_zero" name="state" onchange="fetchcities(0,0)" id="state" disabled="disabled">
-								<option value="">Please Select</option>
-							</select>-->
-	<input type="text" size="30" value="<?php echo set_value('state_name'); ?>" class="<?php echo $class_state; ?>" disabled="disabled" title="state" name="state_name" id="state_name" />
+							
+	<input type="text" size="30" autocomplete="off"  value="<?php echo set_value('state_name'); ?>" class="<?php echo $class_state; ?>" disabled="disabled" title="state" name="state_name" id="state_name" />
 						<input type="hidden" name="state" id="state" value="<?php echo set_value('state'); ?>" />
 				
 						<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
@@ -189,11 +180,8 @@ $(document).ready(function() {
 							<label>City</label>
 						</div>
 						<div class="float_l span3">
-						<!--	<select class="<?php echo $class_city; ?> styled span3 margin_zero"  name="city" id="city" disabled="disabled">
-								<option value="">Please Select</option>
-							</select>
-						-->	
-						<input type="text" size="30" class="<?php echo $class_city; ?>" disabled title="city" name="city_name" id="city_name" value="<?php echo set_value('city_name'); ?>" />
+						
+						<input type="text" size="30" autocomplete="off"  class="<?php echo $class_city; ?>" disabled title="city" name="city_name" id="city_name" value="<?php echo set_value('city_name'); ?>" />
 						<input type="hidden" name="city" id="city" value="<?php echo set_value('city'); ?>" />
 				
 
@@ -206,6 +194,16 @@ $(document).ready(function() {
 						<div class="clearfix"></div>
 						</div>
 					</li>
+					
+				</ul>
+				<input type="button" onclick="add_event()" name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
+						
+				</form>
+		</div>
+		<div class="form span8 content_event_form2">
+		<h4 class="margin">Create University Events step II</h4>
+			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
+				<ul>
 					<li>
 						<div>
 						<div class="float_l span3 margin_zero">
@@ -310,11 +308,11 @@ $(document).ready(function() {
 					</li>
 					
 				</ul>
-				<input type="submit" name="submit" class="submit" value="Submit">
+				<input type="button" onclick="add_event()" name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
 						
 				</form>
 		</div>
-		
+	</div>	
 	
 		<div class="form span11">
 			
@@ -803,4 +801,16 @@ $('#addcity').click(function(){
 			$('#event_time_end').timepicker({ 'step': 15 });
 		  });
 
+function add_event()
+{
+$('.content_event_form1').animate({
+left:'-690',
+top:'50'
+},2000);
+$('.content_event_form2').animate({
+left:'220',
+top:'50'
+
+},2000);
+}		  
 </script>

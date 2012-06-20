@@ -54,7 +54,8 @@ array_push($array_dates,$var);
 		$event_title=$event_detail['event_title'];
 		$event_id=$event_detail['event_id'];
 		
-		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$event_id);									
+		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$event_id);
+		$event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
 		?>		
 			
 											<a href="<?php echo $event_link; ?>">
@@ -92,7 +93,7 @@ array_push($array_dates,$var);
 											<div class="clearfix"></div>
 										</div>
 										<div>
-											<div class="img_style float_l aspectcorrect">
+											<div class="img_style float_l">
 											<?php
 											$image_exist=0;	
 									$event_img = $event_detail['univ_logo_path'];	
@@ -113,7 +114,7 @@ array_push($array_dates,$var);
 									{
 									$image=$base.$img_path.'/default_logo.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,122,77,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,92,87,TRUE);
 											?>
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 												
@@ -161,7 +162,11 @@ array_push($array_dates,$var);
 												}
 												?>
 												</h5>
+												<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post">
 												<button class="btn btn-primary" href="#">Register</button>
+												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
+												<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
+												</form>
 											</div>
 											
 											<div class="float_l">

@@ -51,7 +51,7 @@ $route['university_news']='univ/university_news_list';
 $route['university_articles']='univ/university_articles_list';
 //$route['university_qustions_qnswers']='univ/UniversityQuest';
 
-$route['(event/(:num)/EventRegistration)'] = 'leadcontroller/EventRegistration';
+$route['(event/EventRegistration)'] = 'leadcontroller/EventRegistration';
 $route['event/(:num)/(:any)']='univ/univ_event/$1';
 
 //news detail page
@@ -128,8 +128,5 @@ $route['(subdomain|subspot_admission_events|fairs_events|Counselling_events|logi
 $route['default_controller'] = 'auth';
 $route['(find_college)'] = 'leadcontroller/find_college';
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';
-$route['(find_college/(:num)/(:num))'] = 'leadcontroller/find_college/$1/$2';
-
-$route['(EventRegistration)'] = 'leadcontroller/EventRegistration';
-/* End of file routes.php */
+$route['(find_college/(:num)/(:num))'] = 'leadcontroller/find_college/$1/$2';/* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -38,12 +38,21 @@ class Autosuggest extends CI_Controller
 	  $data['univ_info']=$this->autosuggest_model->get_univ_detail($hint);
 	  if($data['univ_info']!=0)
 	  {
-	  foreach($data['univ_info'] as $univ_info) {
-			$univ_name=$univ_info->univ_name;
-			$univ_id=$univ_info->univ_id;
-			echo "$univ_name|$univ_id\n";
-	 }
-	 }
+		foreach($data['univ_info'] as $univ_info) {
+				$univ_name=$univ_info->univ_name;
+				$univ_id=$univ_info->univ_id;
+		if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_info->univ_logo_path) && $univ_info->univ_logo_path!='')	
+		{
+		$img_name=$univ_info->univ_logo_path;
+		}		
+		else
+		{
+		$img_name='logo.png';
+		}
+		$img='<img src="'.base_url().'/uploads/univ_gallery/'.$img_name.'" style="width:50px;height:50px;">';
+		echo "$img&nbsp;&nbsp;&nbsp;$univ_name|$univ_id\n";
+		}
+	}
 	 else
 	 {
 	 echo 'No Result Found';

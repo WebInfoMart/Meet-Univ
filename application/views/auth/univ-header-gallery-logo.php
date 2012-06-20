@@ -103,10 +103,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 					</li>
 				<?php
 				}
-				else{ ?>
-				<li class="univ_page_gal"><?php echo "No Image Available"; ?></li>
-				<?php
-				}
+				
 				}
 				}
 				}

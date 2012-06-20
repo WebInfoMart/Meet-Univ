@@ -1,4 +1,7 @@
 <?php
+//code for subdomain event link
+
+$event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detail['subdomain_name'],'event','','');
 $facebook = new Facebook();
 $user = $facebook->getUser();
 $this->load->model('users');
@@ -137,7 +140,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<div class="clearfix"></div>
 								</div>
 								<div>
-									<form action="EventRegistration" method="post">
+									<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post">
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 									<input type="submit" name="btn_event_register" value="Register" class="btn btn-success" />

@@ -33,7 +33,8 @@ array_push($array_dates,$var);
 		$event_title=$event_detail['event_title'];
 		$event_id=$event_detail['event_id'];
 		
-		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$event_id);									
+		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$event_id);$event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
+											
 		?>	
 											<a href="<?php echo $event_link; ?>">
 												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
@@ -139,7 +140,11 @@ array_push($array_dates,$var);
 												}
 												?>
 												</h5>
+												<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post">
 												<button class="btn btn-primary" href="#">Register</button>
+												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
+												<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
+												</form>
 											</div>
 											
 											<div class="float_l">
