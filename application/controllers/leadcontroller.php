@@ -327,10 +327,10 @@ class Leadcontroller extends CI_Controller
 				$id_university = $this->session->userdata('register_event_university_id');
 				$id_event = $this->session->userdata('register_event_id');
 				$data['success_event_register'] = $this->leadmodel->event_registration($id_university,$id_event);
-				$latest_registered_event_id = $data['success_event_register']['id'];
+				$latest_registered_event_id = $data['success_event_register']['event_id'];
 				//if($data['success_event_register'] != 0)
 				//{
-					$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
+				$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
 					//print_r($data['latest_register_event_info']);
 					$message_email = $this->load->view('auth/event_register_content_email',$data,TRUE);
 					/* $this->email->from('info@meetuniversities.info', 'Meet Universities');
@@ -470,8 +470,8 @@ class Leadcontroller extends CI_Controller
 		$date_call = $this->input->post('call_date');
 		$month_call = $this->input->post('call_month');
 		$year_call = $this->input->post('call_year');
-		$hour_call = '12';
-		$minute_call = '00';
+		$hour_call = '19';
+		$minute_call = '24';
 		$second_call = '00';
 		$date_and_time = $year_call.'-'.$month_call.'-'.$date_call.'%20'.$hour_call.':'.$minute_call.':'.$second_call;
 		

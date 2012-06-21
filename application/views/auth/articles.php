@@ -58,12 +58,12 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 							</div>
 							<div class="float_r span4 margin_zero">
 								<!--<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>-->
-								<div id="fbc" class="float_l fb_set"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+								<div id="fbc" class="float_l fb_set"><div class="fb-like" data-href="<?php echo $article_link; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
 								<div class="float_l" style="margin-left:1px;">
-								<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+								<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $article_link; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 							
 								</div>
-								<div id="tw" class="float_r tw" style="width:82px;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a></div>
+								<div id="tw" class="float_r tw" style="width:82px;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $article_link; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a></div>
 							</div>
 								<div class="clearfix"></div>
 							<div class="margin_t1 img_height">

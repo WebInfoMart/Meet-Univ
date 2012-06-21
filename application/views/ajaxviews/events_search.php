@@ -180,9 +180,10 @@ array_push($array_dates,$var);
 											<div class="clearfix"></div>
 										</div>
 										<div class="float_r">
-											<div id="gp" class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-												<div id="fb" class="float_l fb" style="margin-right:8px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
-												<div id="tw" class="float_r" style="margin-right:-30px"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
+											<div id="gp" class="float_l">
+											<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $event_link; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+												<div id="fb" class="float_l fb" style="margin-right:8px;"><div class="fb-like" data-href="<?php echo $event_link; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
+												<div id="tw" class="float_r" style="margin-right:-30px"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $event_link; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
 										</div>
 										<div class="clearfix"></div>
 									</div>
