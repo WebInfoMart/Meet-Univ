@@ -470,8 +470,8 @@ class Leadcontroller extends CI_Controller
 		$date_call = $this->input->post('call_date');
 		$month_call = $this->input->post('call_month');
 		$year_call = $this->input->post('call_year');
-		$hour_call = '19';
-		$minute_call = '24';
+		$hour_call = '12';
+		$minute_call = '00';
 		$second_call = '00';
 		$date_and_time = $year_call.'-'.$month_call.'-'.$date_call.'%20'.$hour_call.':'.$minute_call.':'.$second_call;
 		

@@ -220,7 +220,7 @@ array_push($array_dates,$var);
 $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
 		?>		
 											<a href="<?php echo $event_link; ?>">
-												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
+												<h3 class="inline"> <?php echo $event_detail['univ_name']; ?> </h3>
 												</a>
 												<span class="inline"> &raquo; </span>
 												<?php
