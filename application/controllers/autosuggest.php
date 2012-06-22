@@ -49,8 +49,8 @@ class Autosuggest extends CI_Controller
 		{
 		$img_name='logo.png';
 		}
-		$img='<img src="'.base_url().'/uploads/univ_gallery/'.$img_name.'" style="width:50px;height:50px;">';
-		echo "$img&nbsp;&nbsp;&nbsp;$univ_name|$univ_id\n";
+		$img='<img src="'.base_url().'/uploads/univ_gallery/'.$img_name.'" style="width:50px;height:25px;">';
+		echo $img.'<b>'."$univ_name|$univ_id\n";
 		}
 	}
 	 else

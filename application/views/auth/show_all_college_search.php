@@ -120,8 +120,8 @@
 													?>
 														<span class="date"><?php echo $date_part[0]; ?></span>
 													</div>
-													<div class="float_l margin_l">
-														<span style="font-size:18px;">
+													<div class="span1 float_l margin_l">
+														<span >
 				
 														<?php if($event_has) { echo $date_part[1]; ?> <br/>
 						<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
@@ -136,7 +136,7 @@
 											<?php } else { ?>
 											
 											<div class="center">
-														<span style="font-size:18px;">No Recent Event </span> </div><?php } ?>			
+														<span>No Recent Event </span> </div><?php } ?>			
 													</div>
 													</div>
 											</div>

@@ -250,10 +250,11 @@ class Users extends CI_Model
 	 }
 	function get_user_by_id($user_id, $activated)
 	{
-		$this->db->where('id', $user_id);
-		$this->db->where('activated', $activated ? 1 : 0);
-
-		$query = $this->db->get($this->table_name);
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('id',$user_id);
+		$query = $this->db->get();
+		// return $query->result_array();
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
 	}

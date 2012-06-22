@@ -174,8 +174,15 @@ $.Autocompleter = function(input, options) {
 			var result;
 			if( data && data.length ) {
 				for (var i=0; i < data.length; i++) {
-					if( data[i].result.toLowerCase() == q.toLowerCase() ) {
-						result = data[i];
+				var cdata=data[i].result.toLowerCase();
+				cdata=cdata.replace(' ','');
+				cdatarr=cdata.split('<b>');
+				if(cdatarr.length>1)
+				{
+				cdata=cdatarr[1];
+				}
+					if( cdata == q.toLowerCase() ) {
+					result = data[i];
 						break;
 					}
 				}
@@ -231,6 +238,12 @@ $.Autocompleter = function(input, options) {
 		}
 		if(v!="No Result Found")
 		{
+		v=v.replace(' ','');
+		varr=v.split("<b>");
+		if(varr.length>1)
+		{
+		v=varr[1];
+		}
 		$input.val(v);
 		hideResultsNow();
 		$input.trigger("result", [selected.data, selected.value]);

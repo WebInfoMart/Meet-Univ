@@ -33,7 +33,7 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 $(document).ready(function() {
 	
 	$("#univ_name").autocomplete("<?php echo $base; ?>autosuggest/suggest_university", {
-		width: 260,
+		width: 320,
 		matchContains: true,
 		mustMatch: true
 	});
@@ -96,14 +96,7 @@ $(document).ready(function() {
 							<label>Choose University</label>
 						</div>
 						<div class="float_l span3">
-						
-							<!--<select class="<?php echo $class_univ_name; ?> styled span3 margin_zero" name="university">
-								<option value="">Please Select</option>
-									<?php foreach($univ_info as $univ_detail) { ?>
-										<option value="<?php echo $univ_detail->univ_id; ?>" ><?php echo $univ_detail->univ_name; ?></option>
-										<?php } ?>
-							</select>
-						-->	
+	
 						<input type="text" size="30" title="university" autocomplete="off"   value="<?php echo set_value('university_name'); ?>" class="<?php echo $class_univ_name; ?>" title="university" name="university_name" id="univ_name" />
 						<input type="hidden" name="university" id="university" value="<?php echo set_value('university'); ?>" />
 		<span style="color: red;">
@@ -113,6 +106,17 @@ $(document).ready(function() {
 		</span>
 		
 						</div>
+						<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Checked IF Event IS Online</label>
+						</div>
+					<div class="float_l span3">
+					<label><input type="checkbox"  name="location_event" id="location_event"  /></label>
+					</div>
 						<div class="clearfix"></div>
 						</div>
 					</li>
@@ -196,13 +200,16 @@ $(document).ready(function() {
 					</li>
 					
 				</ul>
-				<input type="button" onclick="add_event()" name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
+				<input type="button" onclick="add_event_step1()" name="submit" class="ajaxsubmit margin_left_ajax" value="Next">
 						
 				</form>
 		</div>
 		<div class="form span8 content_event_form2">
 		<h4 class="margin">Create University Events step II</h4>
+				
 			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
+			<input type="button" onclick="gotostep1()" name="submit" class="ajaxsubmit margin_left_ajax" value="Back">
+		
 				<ul>
 					<li>
 						<div>
@@ -301,14 +308,14 @@ $(document).ready(function() {
 								<label>Detail</label>
 							</div>
 							<div class="">
-								<textarea rows="12" name="detail" class="wysiwyg" cols="103"><?php echo set_value('detail'); ?></textarea>
+								<textarea rows="4" name="detail" class="wysiwyg" cols="103"><?php echo set_value('detail'); ?></textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
 					</li>
 					
 				</ul>
-				<input type="button" onclick="add_event()" name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
+				<input type="button" onclick="add_event_step2()" name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
 						
 				</form>
 		</div>
@@ -801,16 +808,29 @@ $('#addcity').click(function(){
 			$('#event_time_end').timepicker({ 'step': 15 });
 		  });
 
-function add_event()
+function add_event_step1()
 {
 $('.content_event_form1').animate({
 left:'-690',
 top:'50'
-},2000);
+},1000);
 $('.content_event_form2').animate({
 left:'220',
 top:'50'
 
-},2000);
-}		  
+},1000);
+} 
+function gotostep1()
+{
+$('.content_event_form1').animate({
+left:'200',
+top:'50'
+},1000);
+$('.content_event_form2').animate({
+left:'1350',
+top:'50'
+
+},1000);
+}
+
 </script>

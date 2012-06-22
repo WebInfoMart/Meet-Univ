@@ -44,6 +44,7 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery-admin-validation.js"></script>
 	
 </head>
 

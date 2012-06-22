@@ -18,7 +18,7 @@
 							<div>
 								<h3 class="profile_heading">Update Password</h3>
 								<div class="profile_border">
-									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus, olor sit amet, consectetur adipiscing dolor ut posuere faucibus, nibh neque sollicitudin olor sit amet, consectetur adipiscing enim, non consectetur lorem odio eu lectus.
+								To make your Password more secure,it contains a special character and a digit.
 									<div class="contact_box margin1">
 										<div class="margin_l margin_t">
 											<h4> Change Password</h4>
