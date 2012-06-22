@@ -1289,13 +1289,21 @@ height:22px;
 	</script>
 
 <script>
-var timer, delay = 3000; //5 minutes counted in milliseconds.
+noofregister();
+var delay = 10000; //5 minutes counted in milliseconds.
 var lastval=0;
-timer = setInterval(function(){
-    $.ajax({
+setInterval(function(){
+ noofregister()   
+}, delay);
+function noofregister()
+{
+$.ajax({
       type: 'POST',
       url: '<?php echo base_url().'auth/auto_count_register_user';?>',
       success: function(response){
+	  delay=10000;
+	  response=parseFloat(response);
+	  response = Math.floor( response );
 	  if(response!=lastval)
 	  {
 	  $('#tot_reg_user').html(response);
@@ -1305,7 +1313,7 @@ timer = setInterval(function(){
 	  lastval=response;
       }
     });
-}, delay);
+}
 </script>
 
 <!-- Script For PopOver Ajax Content -->

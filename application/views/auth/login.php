@@ -91,7 +91,7 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 									<label class="control-label" for="prependedInput">Enter Your Email</label>
 									<div class="controls">
 										<div class="input-prepend">
-											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png" class="email_forget"></span><input type="text" class="<?php echo $class_modal_email; ?>" name="email" size="16" >
+											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png" ></span><input type="text" class="<?php echo $class_modal_email; ?>" name="email" size="16" >
 											<span style="color:red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
 										</div>
 									</div>
@@ -241,7 +241,7 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 											<div class="img_style float_l img_r">
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
-											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">
+											<div><img src="<?php echo $base; ?>images/city.png" class="line_img inline"><span class="blue line_time inline">
 											<?php 
 											echo $home_feature_event['event_place']? ucwords($home_feature_event['event_place']):''; 
 											if($home_feature_event['event_place']!='' && $home_feature_event['cityname']!='')

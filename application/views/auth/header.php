@@ -1,6 +1,10 @@
 <?php
 //$this->load->library('facebook'); 
- 
+/****************************************** 
+ *  Load Model and session library and    *
+ *  Object                                *
+ ******************************************/ 
+  
   $this->load->model('users');
   $this->ci =& get_instance();
   $this->ci->load->config('tank_auth', TRUE);
@@ -10,6 +14,11 @@ $facebook = new Facebook();
 $base = base_url();
 //$base['fb_redirect'] = "'".base_url()."'/auth/facebook";
 $user = $facebook->getUser();
+
+if((!($user)) && $this->session->userdata('fb_login'))
+{
+$this->tank_auth->logout();  
+}
 if ($user) {
 //$logoutUrl2 = $this->tank_auth->logout();
   try {
@@ -73,13 +82,14 @@ if ($user) {
   if($data['fb_user_id']!=''){
   $data['fb_user_profile_insert'] = $this->users->facebook_profile_insert($user_id,$fb_gender);}
   $attachment = array('message' => $user_profile['name'].' has joined Meet Universities.',
- 'link' => 'http://meetuniversities.com');
+ 'link' => 'http://meetuniversities.com/register');
  $sendMessage = $facebook->api('/me/feed/','post',$attachment);
   }
   $data_fb_id = trim($data['fb_user_id']);
   $this->ci->session->set_userdata(array(
 						 'user_id'	=> $data_fb_id,
 						 'username'	=> $fb_name,
+						 'fb_login'=>1,
 						 'status'	=> STATUS_ACTIVATED,
 						 ));
 						 
@@ -98,6 +108,7 @@ if ($user) {
 	$this->ci->session->set_userdata(array(
 						 'user_id'	=> $fb_user_id,
 						 'username'	=> $fb_name,
+						 'fb_login'=>1,
 						 'status'	=> STATUS_ACTIVATED,
 						 ));
 						 //redirect('');
@@ -127,13 +138,13 @@ if ($user) {
     return $curpageURL;
     }
 
-    $curURL = currentPageURL();
+    $curURL = currentPageURL(); 
 ?>
 <?php
 
-$title_of_event = "Meet Universities-List your global events.";
+$title_of_event = "Meet Universities - Get connected to your dream university.";
 $img_src = base_url()."uploads/univ_gallery/univ_logo.png";
-$detail_of_event="List your global events.Let the international student community know about when you are visiting near them.";
+$detail_of_event="Study Abroad - Research, Connect &  Meet Your Dream University.";
 if(!empty($university_details) && ($university_details['univ_logo_path'] !=0 || $university_details['univ_logo_path'] != ''))
 {
 $img_src = base_url()."uploads/univ_gallery/".$university_details['univ_logo_path'];
@@ -143,8 +154,10 @@ if(!empty($event_detail) && ($event_detail['event_title'] != 0 || $event_detail[
 $title_of_event = $event_detail['event_title']; 
 }
 if(!empty($event_detail) && ($event_detail['event_detail'] != 0 || $event_detail['event_detail'] != ''))
-{
-$detail_of_event = $event_detail['event_detail'];
+{ 
+$event_details=str_replace('<div>','',$event_detail['event_detail']);
+$event_details=str_replace('</div>','',$event_details);
+$detail_of_event = $event_details; 
 }
 
 ?>
