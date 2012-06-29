@@ -107,7 +107,6 @@ textarea {
 body {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
   line-height: 18px;
   color: #333333;
   /*background-color: #ffffff;*/
@@ -566,7 +565,7 @@ input,
 button,
 select,
 textarea {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
   line-height: 18px;
 }

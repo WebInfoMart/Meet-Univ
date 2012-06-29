@@ -20,7 +20,6 @@ class Events extends CI_Model
 		parent::__construct();
 		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
 		$this->univ_gallery_path = realpath(APPPATH . '../uploads/univ_gallery');
-		$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
 		$this->load->library('pagination');
 		$this->load->database();
 	}
@@ -44,7 +43,7 @@ class Events extends CI_Model
 		$i=0;
 		foreach($res as $res1)
 		{
-		$r[]=$res1[$i]['event_id'];
+		$r[]=$res1['event_id'];
 		$i++;
 		}
 		return $r;
@@ -71,7 +70,7 @@ class Events extends CI_Model
 	function create_event()
 	{
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();
-		$event_time=$this->input->post('event_start_timing').'-'.$this->input->post('event_end_timing');
+		//$event_time=$this->input->post('event_start_timing').'-'.$this->input->post('event_end_timing');
 		$data = array(
 			   'event_title' => $this->input->post('title'),
 			   'event_detail' => $this->input->post('detail'),
@@ -83,7 +82,7 @@ class Events extends CI_Model
 			   'event_state_id' => $this->input->post('state'),
 			   'event_city_id' => $this->input->post('city'),
 			   'event_place' => $this->input->post('event_place'),
-			   'event_time' => $event_time
+			   'event_time' => $this->input->post('event_timing')
 			);
 			$this->db->insert('events', $data);
 			$current_id = $this->db->insert_id();
@@ -181,7 +180,7 @@ class Events extends CI_Model
 	function update_event($event_id)
 	{
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();
-		$event_time=$this->input->post('event_start_timing').'-'.$this->input->post('event_end_timing');
+		$event_time=$this->input->post('event_timing');
 		$data = array(
 			   'event_title' => $this->input->post('title'),
 			   'event_detail' => $this->input->post('detail'),

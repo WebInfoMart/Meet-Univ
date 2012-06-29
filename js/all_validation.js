@@ -426,26 +426,6 @@ required = ["event_fullname", "event_email", "event_phone"];
 				input.removeClass("needsfilled");
 			}
 		}
-		// Validate the e-mail.
-		/* if (!/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email.val())) {
-			email.addClass("needsfilled");
-			email.val(emailerror);
-		} */
-		//Validate the Mobile no should be 10 characters long
-		/* if (phone.val().length != 10) {
-	   
-	  // phone.match(regEx)) {
-            phone.addClass("needsfilled");
-			phone.val(phoneerror_digit_ten);
-        } */
-		
-		// Validate the Mobile no should be digit
-       /* if (!/[0-9]/.test(phone.val())) {
-	   
-	  // phone.match(regEx)) {
-            phone.addClass("needsfilled");
-			phone.val(phoneerror_digit);
-        } */
 		
 		//if any inputs on the page have the class 'needsfilled' the form will not submit
 		if ($(":input").hasClass("needsfilled")) {

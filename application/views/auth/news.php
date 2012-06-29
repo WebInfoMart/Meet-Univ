@@ -4,20 +4,9 @@
 		<div class="body">
 			<div class="row margin_t1">
 				<div class="float_l span13 margin_l">
-				<!--<div class="float_r">
-				<div class="float_l" style="margin-right:15px;"><g:plusone size="medium" annotation="none"></g:plusone></div>
-				<div class="float_l" style="margin-right:10px;"><div class="fb-like" data-href="<?php $_SERVER['REQUEST_URI']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-									
-				</div>
-				<div class="float_l">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-				</div>
-				</div>-->
 				<div class="float_l span9 margin_zero">
 					<h2>Recent News</h2>
-					<div class="margin_t1">
-					
-					
+					<div>
 						<ul class="event_new">
 					<?php
 					foreach($news as $news_detail){
@@ -30,15 +19,17 @@
 										$news_link=$this->subdomain->genereate_the_subdomain_link(
 										$news_detail['subdomain_name'],'news',$news_detail['news_title'],$news_detail['news_id']);							
 											
-										?>	
+										?>
+								<div class="margin_zero grid_3 fix_h3">	
 								<h3><a href="<?php echo $news_link; ?>"><?php echo $news_detail['title']; ?></a></h3>
+								</div>
 							</div>
 							<div class="float_r span4 margin_zero">
-								<div class="float_l fb_set"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+								<div class="float_l fb_set"><div class="fb-like" data-href="<?php echo $news_link; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
 								</div>
-								<div class="float_l" style="margin-left:1px;"> <g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone> </div>
+								<div class="float_l" style="margin-left:1px;"> <g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $news_link; ?>' callback='countGoogleShares' data-count="true"></g:plusone> </div>
 								<div class="float_r tw" style="width:82px;">
-									<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $news_detail['univ_id']; ?>-news-<?php echo $news_detail['news_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $news_link; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>
 								</div>
 							</div>
 								<div class="clearfix"></div>
@@ -102,7 +93,7 @@
 								$news_link=$this->subdomain->genereate_the_subdomain_link(
 								$popular_news_detail['subdomain_name'],'news',$popular_news_detail['news_title'],$popular_news_detail['news_id']);
 								?>
-									<li><a href="<?php echo $news_link; ?>"><?php echo substr($popular_news_detail['news_title'],0,60).'..'; ?></a></li>
+									<li><a href="<?php echo $news_link; ?>"><?php echo $popular_news_detail['news_title']; ?></a></li>
 								<?php } } ?>
 						</ul>
 					</div>

@@ -11,15 +11,19 @@ class Frontmodel extends CI_Model
 	
 	function fetch_featured_events()
 	{
-		$this->db->select('*');
+		/*$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id=university.univ_id');
 		$this->db->join('city','events.event_city_id=city.city_id','left');
 		$this->db->join('state','events.event_state_id=state.state_id','left');
 		$this->db->join('country','events.event_country_id=country.country_id','left');
 		$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
-		$this->db->limit(3);
-		$query = $this->db->get();
+		$this->db->limit(3);*/
+		//$date=date('Y-m-d')
+		$where='and events.featured_home_event="1" and STR_TO_DATE(event_date_time, "%d %M %Y")>="'.date('Y-m-d').'"';
+		$join=" JOIN  `university` ON events.event_univ_id = university.univ_id LEFT JOIN country ON country.country_id = events.event_country_id LEFT JOIN  state ON state.state_id = events.event_state_id LEFT JOIN city ON city.city_id = events.event_city_id";
+		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT 3";
+		$query=$this->db->query($sql);
 		//$x = $query->result_array();
 		//echo $x['event_id'];
 		if($query->num_rows>0)
@@ -32,21 +36,22 @@ class Frontmodel extends CI_Model
 		}
 	}
 	function count_event_register($event_id)
-	{
-		/*$this->db->select('*');
-		$this->db->from('event_register');
-		$this->db->where('register_event_id',$event_id);
-		return $this->db->count_all_results();*/
-		$this->db->select('no_of_register_user');
-		$this->db->from('events');
-		$this->db->where('event_id',$event_id);
-		$query=$this->db->get();
-		$res=$query->row_array();
-		if($res['no_of_register_user']<=0 || $res['no_of_register_user']=='')
-		return 0;
-		else
-		return $res['no_of_register_user'];
-	}
+	 {
+	  $this->db->select('*');
+	  $this->db->from('event_register');
+	  $this->db->where('register_event_id',$event_id);
+	  $c=$this->db->count_all_results()+5;
+	  return $c;
+	  /*$this->db->select('no_of_register_user');
+	  $this->db->from('events');
+	  $this->db->where('event_id',$event_id);
+	  $query=$this->db->get();
+	  $res=$query->row_array();
+	  if($res['no_of_register_user']<=0 || $res['no_of_register_user']=='')
+	  return 0;
+	  else
+	  return $res['no_of_register_user'];*/
+	 }
 	
 	function fetch_featured_news()
 	{
@@ -686,7 +691,7 @@ class Frontmodel extends CI_Model
 		$tot2 = $tot;
 		$res=$tot2->row_array();
 		$val=$res['register_user_counter'];
-		$val=$val+0.3;
+		$val=$val+0.01;
 		$data = array(
                'register_user_counter' => $val
             );

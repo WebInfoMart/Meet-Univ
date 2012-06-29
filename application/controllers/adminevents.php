@@ -518,6 +518,7 @@ class Adminevents extends CI_Controller
 		}
 	  }
 	 
+	 
 	function delete_events()
 	{
 	if (!$this->tank_auth->is_admin_logged_in()) {
@@ -659,6 +660,103 @@ class Adminevents extends CI_Controller
 		}	
 		}
 	}
+	
+	//function add event by ajax 
+	function create_event_ajax()
+	{
+		$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			echo "0";
+		} else {
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			echo "0";
+			}
+			$add_events=array('4','6','8','10');
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv']){
+			if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$add_events) )
+			{
+			$flag=1;
+			break;
+			}
+			}
+			if($flag==0)
+			{
+			echo "sorry";
+			}
+			else
+			{
+			if($this->input->post('submit'))
+			{
+			 $this->events->create_event();
+			 echo "1";
+			}
+			}
+			
+		}
+		}
+		
+	function edit_event_ajax($event_id)
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			echo "0";
+		}
+		else{
+		$data = $this->path->all_path();
+		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		if(!($data['admin_priv']))
+		{
+			echo "0";
+		}
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$edit_events=array('3','6','7','10');
+		$flag=0;
+		foreach($data['admin_priv'] as $userdata['admin_priv']){
+		if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$edit_events) )
+		{
+		$flag=1;
+		break;
+		}
+		}
+		if($flag==0)
+		{
+		echo "sorry";
+		}
+		else
+		{
+		$f=1;
+		if($data['admin_user_level']=='3')
+		{
+		$admin_univ_id=$this->events->fetch_univ_id($data['user_id']);
+		$event_list=$this->events->fetch_events_ids($admin_univ_id['univ_id']);
+		if(!in_array($event_id,$event_list))
+		{
+			$f=0;
+		}
+		}
+		if($f=='1')
+		{
+			if($this->input->post('submit'))
+			{
+			$this->events->update_event($event_id);
+			echo "1";
+		}
+		}
+		else
+		{
+		echo "0";
+		}
+		}
+		}
+	}	
+	
 }
 
 /* End of file auth.php */

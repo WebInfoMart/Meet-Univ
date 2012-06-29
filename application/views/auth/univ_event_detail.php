@@ -1,6 +1,4 @@
 <?php
-//code for subdomain event link
-
 $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detail['subdomain_name'],'event','','');
 $facebook = new Facebook();
 $user = $facebook->getUser();
@@ -122,9 +120,27 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<div><img src="<?php echo base_url(); ?>images/home.png" class="line_img inline"><span class="blue line_time inline">Event Venue:<?php echo $event_detail['event_place']; ?>
 										</span></div>
 									<div><img src="<?php echo base_url(); ?>images/city.png" class="line_img inline"><span class="blue line_time inline"><?php 
-											if($event_detail['cityname']==''){} else{echo $event_detail['cityname'];}
-											if($event_detail['statename']==''){} else{echo ', '.$event_detail['statename'];}
-											if($event_detail['country_name']==''){} else{echo ', '.$event_detail['country_name'];} ?></span></div>
+										
+						if($event_detail['country_name']!='') { 
+						echo $event_detail['country_name'];
+						}
+						if($event_detail['country_name']!='' && $event_detail['statename']!='')
+						{
+						echo ','.$event_detail['statename'];
+						}
+						else if($event_detail['statename']!='')
+						{
+						echo $event_detail['statename'];
+						}
+						if(($event_detail['country_name']!='' || $event_detail['statename']!='') && $event_detail['cityname']!='')
+						{
+						echo ','.$event_detail['cityname'];
+						}
+						else
+						{
+						echo $event_detail['cityname'];
+						}
+						?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class="blue line_time inline">Timings: 
 										<?php echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.$event_detail['event_time'];?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:
@@ -134,10 +150,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 							<div class="float_r">
 								<div>
-									<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-										<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
-										<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-										<div class="clearfix"></div>
+									<!--<a onclick="voicepopup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php //echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<a onclick="popup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php //echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+										<div class="clearfix"></div>-->
 								</div>
 								<div>
 									<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post">
@@ -280,10 +295,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<div class="float_r span5">
 							<div class="span4 float_r">
-								<div class="float_l fb_set"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true"></div></div>
-								<div class="float_l" style="margin-left:1px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+								<div class="float_l fb_set"><div class="fb-like" data-href="<?php //$_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true"></div></div>
+								<div class="float_l" style="margin-left:1px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php //$_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
 								<div class="float_r tw" style="width:82px;">
-									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-url="<?php $_SERVER["REQUEST_URI"]; ?>"  data-count="none">Tweet</a>
+									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -294,9 +309,16 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<?php if(!empty($feature_event_of_univ)){
 								foreach($feature_event_of_univ as $upcoming_event)
 								{
+								$event_link=$this->subdomain->genereate_the_subdomain_link(
+								$upcoming_event['subdomain_name'],'event',$upcoming_event['event_title'],$upcoming_event['event_id']);
 								?>
-									<li><a href="<?php echo $base;?>univ-<?php echo $upcoming_event['univ_id']; ?>-event-<?php echo $upcoming_event['event_id']; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
-								<?php } } ?>	
+									<li><a href="<?php echo $event_link; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
+								<?php } }
+								else
+								{
+								echo "No Recent Event";
+								}
+								?>	
 								</ul>
 							</div>
 							

@@ -163,7 +163,7 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 								$article_link=$this->subdomain->genereate_the_subdomain_link(
 								$popular_articles_detail['subdomain_name'],'articles',$popular_articles_detail['article_title'],$popular_articles_detail['article_id']);
 								?>
-									<li><a href="<?php echo $article_link; ?>"><?php echo substr($popular_articles_detail['article_title'],0,60).'..'; ?></a></li>
+									<li><a href="<?php echo $article_link; ?>"><?php echo $popular_articles_detail['article_title']; ?></a></li>
 								<?php } } ?>	
 								
 								</ul>

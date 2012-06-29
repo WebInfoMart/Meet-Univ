@@ -246,10 +246,9 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												?>
 											</div>
 											<div class="float_r">
-												<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-													<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
-													<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-													<a href="<?php echo $event_link; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
+												<!--<a onclick="popup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+													<a onclick="voicepopup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+													<a href="<?php //echo $event_link; ?>"><img src="<?php //echo $base; ?>images/map.png" title="Map" alt="Map"></a>-->
 											</div>
 											<div class="clearfix"></div>
 										</div>
@@ -299,11 +298,11 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												
 												$place=0;
 												$city=0;						
-												if($event_detail['event_place']!='')
+												/*if($event_detail['event_place']!='')
 												{
 												echo $event_detail['event_place'];
 												$place=1;
-												}
+												}*/
 												if($event_detail['cityname']!=='')
 												{
 												if($place==1)

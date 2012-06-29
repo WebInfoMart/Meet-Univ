@@ -9,7 +9,7 @@ $flag=1;
   }
   }
  if($flag==1) { ?> 
-	<div id="sidebar">
+	<div id="sidebar" style="background-color:#eceff1;z-index:99">
 
 		<ul id="nav">
 			<li><a href="<?php echo $base; ?>admin"><strong><img src="<?php echo "$base$admin_img" ?>/nav/dashboard.png" alt="" /> Dashboard</strong></a></li>

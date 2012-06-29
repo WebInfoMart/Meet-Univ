@@ -42,9 +42,9 @@ $insert=1;
 				<thead>
 					<tr>
 						<th ><input type="checkbox" class="check_all" ></th>
-						<th class="header" style="cursor: pointer; ">Event Title</th>
-						<th class="header" style="cursor: pointer; ">University Name</th>
-						<th class="header" style="cursor: pointer; ">Event's Place</th>
+						<th class="header tabledata_width" style="cursor: pointer; ">Event Title</th>
+						<th class="header tabledata_width" style="cursor: pointer; ">University Name</th>
+						<th class="header" style="cursor: pointer; ">Event's Country</th>
 						<th class="header" style="cursor: pointer; ">Featured/Unfeatured</th>
 						<th class="header" style="cursor: pointer; ">Event Date</th>
 						
@@ -63,10 +63,10 @@ $insert=1;
 						<input type="hidden" name="event_id[]" value="<?php echo $row->event_id ?>" >
 						</td>
 						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
-						<td>
+						<td class="tabledata_width">
 						<?php echo ucwords(substr($row->event_title,0,50)); ?>
 						</td>
-						<td><?php echo ucwords($row->univ_name); ?></td>
+						<td class="tabledata_width"><?php echo ucwords($row->univ_name); ?></td>
 						<td><a href="#"><?php echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>
 						<td><a href="#"><?php if($row->featured_home_event=='1'){?>Featured Event <?php } ?></a></td>
 						<td><a href="#"><?php echo $row->event_date_time; ?></a></td>

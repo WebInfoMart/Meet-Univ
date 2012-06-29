@@ -20,8 +20,8 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 								<div class="college_form">
 							<div>
 							<h2 class="text_align">I AM INTERESTED</h2>
-								<span>in studying at <?php echo ucwords($university_details['univ_name']);?></span>
-								Fill details for the institute to counsel you
+								<span>In studying at <?php echo ucwords($university_details['univ_name']);?></span>
+								.Fill details for the institute to counsel you
 								<div class="margin_t text_align"> 
 									 <form class="form-horizontal" action="" method="post" id="frm_univ_fb_sidebar">
 										<fieldset>

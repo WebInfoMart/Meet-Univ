@@ -1,4 +1,4 @@
-<div id="content" class="content_msg" style="display:none;">
+<div id="content" class="content_msg" style="display:none;z-index:99;position:absolute;left:190px;">
 <div class="span8 margin_t">
   <div class="message success"><p class="info_message"></p>
 </div>
@@ -52,13 +52,15 @@ $(document).ready(function() {
     $("#state_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_state', {
 		width: 260,
 		matchContains: true,
-		mustMatch: true,
+		mustMatch: true
 	});
 	$("#state_name").result(function(event2, data2, formatted2) {
 	$("#state").val(data2[1]);
 	});
 	$("#city_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_city', {
-		width: 260
+		width: 260,
+		matchContains: true,
+		mustMatch: true
 	});
 	$("#city_name").result(function(event3, data3, formatted3) {
 	$("#city").val(data3[1]);
@@ -71,7 +73,7 @@ $(document).ready(function() {
 
  <div id="content" >
 	
-		<div class="form span8 content_event_form1">
+		<div class="form span8 content_event_form1" >
 		<h4 class="margin">Create University Events Step1</h4>
 			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
 				<ul>
@@ -81,9 +83,9 @@ $(document).ready(function() {
 								<label> Event Title</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">
-								<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> </span>
-		
+								<input type="text" id="title_event" size="30" title="Event Title" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">
+								<span class="fillthis" id="title_event_ajax_err"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> </span>
+								
 							</div>
 							
 							<div class="clearfix"></div>
@@ -99,7 +101,7 @@ $(document).ready(function() {
 	
 						<input type="text" size="30" title="university" autocomplete="off"   value="<?php echo set_value('university_name'); ?>" class="<?php echo $class_univ_name; ?>" title="university" name="university_name" id="univ_name" />
 						<input type="hidden" name="university" id="university" value="<?php echo set_value('university'); ?>" />
-		<span style="color: red;">
+		<span class="fillthis" id="univ_name_ajax_err">
 		<?php if($class_univ_name=='focused_error_univ') {
 		 echo form_error('university_name'); echo isset($errors['university_name'])?$errors['university_name']:'';
 		 } ?>
@@ -109,17 +111,7 @@ $(document).ready(function() {
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>Checked IF Event IS Online</label>
-						</div>
-					<div class="float_l span3">
-					<label><input type="checkbox"  name="location_event" id="location_event"  /></label>
-					</div>
-						<div class="clearfix"></div>
-						</div>
-					</li>
+					
 					<!--<li>
 						<div>
 						<div class="float_l span3 margin_zero">
@@ -141,6 +133,30 @@ $(document).ready(function() {
 					<?php }?>
 					<li>
 						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Checked IF Event IS Online</label>
+						</div>
+					<div class="float_l span3">
+					<label><input type="checkbox"  name="location_event" id="location_event"  /></label>
+					</div>
+						<div class="clearfix"></div>
+						</div>
+					</li>
+					<li class="location_hide_show">
+						<div>
+							<div class="float_l span3 margin_zero">
+								<label></label>
+							</div>
+							<div class="float_l span4" style="font-style:italic;font-weight:bold;color:#000" >
+								<span>First Fill the Country and then State and then City..</span>
+							
+							</div>
+								
+								<div class="clearfix"></div>
+						</div>
+					</li>
+					<li class="location_hide_show">
+						<div>
 							<div class="float_l span3 margin_zero">
 								<label>Country</label>
 							</div>
@@ -148,7 +164,7 @@ $(document).ready(function() {
 								
 <input type="text"  size="30" class="<?php echo $class_country; ?>" autocomplete="off"  value="<?php echo set_value('country_name'); ?>" title="country" name="country_name" id="country_name" />
 				<input type="hidden" name="country" id="country" value="<?php echo set_value('country'); ?>" />
-			<span style="color: red;"> <?php echo form_error('country'); ?><?php echo isset($errors['country'])?$errors['country']:''; ?> </span>
+			<span class="fillthis" id="country_name_ajax_err" > <?php echo form_error('country'); ?><?php echo isset($errors['country'])?$errors['country']:''; ?> </span>
 							
 							</div>
 								<div class="float_l span3">
@@ -158,7 +174,7 @@ $(document).ready(function() {
 						</div>
 					</li>
 					
-					<li>
+					<li class="location_hide_show">
 						<div>
 						<div class="float_l span3 margin_zero">
 							<label>State</label>
@@ -168,7 +184,7 @@ $(document).ready(function() {
 	<input type="text" size="30" autocomplete="off"  value="<?php echo set_value('state_name'); ?>" class="<?php echo $class_state; ?>" disabled="disabled" title="state" name="state_name" id="state_name" />
 						<input type="hidden" name="state" id="state" value="<?php echo set_value('state'); ?>" />
 				
-						<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
+						<span class="fillthis" id="state_name_ajax_err"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
 			
 						</div>
 						<div class="float_l span3">
@@ -178,7 +194,7 @@ $(document).ready(function() {
 						</div>
 					</li>
 					
-					<li>
+					<li class="location_hide_show">
 						<div>
 						<div class="float_l span3 margin_zero">
 							<label>City</label>
@@ -189,7 +205,7 @@ $(document).ready(function() {
 						<input type="hidden" name="city" id="city" value="<?php echo set_value('city'); ?>" />
 				
 
-	<span style="color: red;"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
+	<span class="fillthis" id="city_name_ajax_err"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
 				
 						</div>
 						<div class="float_l span3">
@@ -198,9 +214,19 @@ $(document).ready(function() {
 						<div class="clearfix"></div>
 						</div>
 					</li>
-					
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Event Place</label>
+						</div>
+						<div class="float_l span3">
+						<input type="text" size="30" id="event_place" class="text" value="<?php echo set_value('event_place'); ?>" name="event_place">	
+					<span class="fillthis" id="event_place_ajax_err" > </span>
+						</div>
+						</div>
+					</li>
 				</ul>
-				<input type="button" onclick="add_event_step1()" name="submit" class="ajaxsubmit margin_left_ajax" value="Next">
+				<input type="button" id="add_event_step1" name="submit" class="ajaxsubmit margin_left_ajax" value="Next">
 						
 				</form>
 		</div>
@@ -208,35 +234,26 @@ $(document).ready(function() {
 		<h4 class="margin">Create University Events step II</h4>
 				
 			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
-			<input type="button" onclick="gotostep1()" name="submit" class="ajaxsubmit margin_left_ajax" value="Back">
+			<input type="button" id="add_event_step2" name="submit" class="ajaxsubmit margin_left_ajax" value="Back">
 		
 				<ul>
-					<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>Event Place</label>
-						</div>
-						<div class="float_l span3">
-						<input type="text" size="30" class="text" value="<?php echo set_value('event_place'); ?>" name="event_place">	
-				
-						</div>
-						</div>
-					</li>
+					
 					<li>
 						<div>
 						<div class="float_l span3 margin_zero">
 							<label>Event Type</label>
 						</div>
 						<div class="float_l span3">
-							<select class="text styled span3 margin_zero"  name="event_type">
-								<option value="all">Select Category</option>
+							<select class="text styled span3 margin_zero" id="event_type"   name="event_type">
+								<option value="">Select Category</option>
 								<option value="spot_admission">Spot Admission</option>
 								<option value="fairs">Fairs</option>
 								<option value="alumuni">Counselling-Alumuni</option>
 								<option value="others">Counselling-Others</option>
 								
 							</select>
-				
+				<span class="fillthis" id="event_type_ajax_err" > </span>
+					
 						</div>
 						
 						<div class="clearfix"></div>
@@ -251,52 +268,64 @@ $(document).ready(function() {
 								<label>Event Date</label>
 							</div>
 							<div class="float_l span3">
-								<input type="text" size="30" onkeydown="return false;" class="date_picker" value="<?php echo set_value('event_time'); ?>" name="event_time">
-	<span style="color: red;"> <?php echo form_error('event_time'); ?><?php echo isset($errors['event_time'])?$errors['event_time']:''; ?> </span>
+								<input type="text" size="30" id="event_date" style="background-color:none;" onkeydown="return false;" class="date_picker" value="<?php echo set_value('event_time'); ?>" name="event_time">
+								<span class="fillthis" id="event_date_ajax_err" > </span>
+					
 		
 							</div>
 							
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					
-					
-					<!--<li>
+					<li>
 						<div>
+						<div class="float_l span3 margin_zero">
+							<label>Checked IF Event Timing Is <br />
+							(<i>Appintment based,Not Fixed etc.</i>)</label>
+						</div>
+						<div class="float_l span3">
+						<label><input type="checkbox"  name="event_timing_not_fixed" id="event_timing_fixed_not_fixed"  /></label>
+						</div>
+						<div class="clearfix"></div>
+						</div>
+					</li>
+					<li class="notfixed_event_timing" style="display:none;">
+						<div >
 							<div class="float_l span3 margin_zero">
-								<label>Event Time</label>
+								<label>Mention Event Timing </label>
 							</div>
-							<div class="float_l span3">
-								<input type="text" class="text" size="30" value="<?php echo set_value('event_timing'); ?>" name="event_timing">
+							<div class="float_l span3 ">
+								<input type="text" class="text time" id="event_timing" size="30" value="" name="event_timing">
+							<span class="fillthis" id="event_timing_ajax_err" > </span>
 	
 							</div>
 							
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					-->
-					
-					<li>
+					<li class="fix_event_timing">
 						<div >
 							<div class="float_l span3 margin_zero">
 								<label>Event Start Time</label>
 							</div>
 							<div class="float_l span3 ">
 								<input type="text" onkeydown="return false;" class="text time" id="event_time_start" size="30" value="<?php echo set_value('event_start_timing'); ?>" name="event_start_timing">
-							
+							<span class="fillthis" id="event_time_start_ajax_err" > </span>
+	
 							</div>
 							
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					<li>
+					<li class="fix_event_timing">
 						<div >
 							<div class="float_l span3 margin_zero">
 								<label>Event End Time</label>
 							</div>
 							<div class="float_l span3" >
 								<input type="text" onkeydown="return false;" class="text time" id="event_time_end" size="30" value="<?php echo set_value('event_end_timing'); ?>" name="event_end_timing">
-							
+							<span class="fillthis" id="event_time_end_ajax_err" > </span>
+	
 							</div>
 							
 							<div class="clearfix"></div>
@@ -308,18 +337,18 @@ $(document).ready(function() {
 								<label>Detail</label>
 							</div>
 							<div class="">
-								<textarea rows="4" name="detail" class="wysiwyg" cols="103"><?php echo set_value('detail'); ?></textarea>
+								<textarea rows="4" name="detail" id="event_detail" class="wysiwyg" cols="103"><?php echo set_value('detail'); ?></textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
 					</li>
 					
 				</ul>
-				<input type="button" onclick="add_event_step2()" name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
+				<input type="hidden" name="edit_event" id="edit_event" value="0" >
+				<input type="button" id="submit_event"  name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
 						
 				</form>
 		</div>
-	</div>	
 	
 		<div class="form span11">
 			
@@ -427,7 +456,8 @@ $(document).ready(function() {
 				</div>
 			</div>
 	</div>
-
+</div>	
+	
 <script>
 function fetchcountry(cid,cname)
 {
@@ -598,7 +628,7 @@ $('#addcountry').click(function(){
         $('.modal-lightsout').fadeOut("slow");
 		$('#add_country_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
-		$('.content_msg').css('display','block');
+		$('.content_msg').show(500);
 	   }
 	   });
 	 } 
@@ -808,29 +838,6 @@ $('#addcity').click(function(){
 			$('#event_time_end').timepicker({ 'step': 15 });
 		  });
 
-function add_event_step1()
-{
-$('.content_event_form1').animate({
-left:'-690',
-top:'50'
-},1000);
-$('.content_event_form2').animate({
-left:'220',
-top:'50'
 
-},1000);
-} 
-function gotostep1()
-{
-$('.content_event_form1').animate({
-left:'200',
-top:'50'
-},1000);
-$('.content_event_form2').animate({
-left:'1350',
-top:'50'
-
-},1000);
-}
 
 </script>

@@ -63,10 +63,9 @@ array_push($array_dates,$var);
 												?>
 											</div>
 											<div class="float_r">
-												<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-													<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
-													<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-													<a href="<?php echo $event_link; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
+												<!--<a onclick="popup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+													<a onclick="voicepopup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+													<a href="<?php //echo $event_link; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>-->
 											</div>
 											<div class="clearfix"></div>
 										</div>
@@ -116,11 +115,11 @@ array_push($array_dates,$var);
 												
 												$place=0;
 												$city=0;						
-												if($event_detail['event_place']!='')
+												/*if($event_detail['event_place']!='')
 												{
 												echo $event_detail['event_place'];
 												$place=1;
-												}
+												}*/
 												if($event_detail['cityname']!=='')
 												{
 												if($place==1)
@@ -158,9 +157,9 @@ array_push($array_dates,$var);
 											<div class="clearfix"></div>
 										</div>
 										<div class="float_r">
-											<div id="gp" class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-												<div id="fb" class="float_l fb" style="margin-right:8px;"><div class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
-												<div id="tw" class="float_r" style="margin-right:-30px"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
+											<div id="gp" class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $event_link; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+												<div id="fb" class="float_l fb" style="margin-right:8px;"><div class="fb-like" data-href="<?php echo $event_link; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
+												<div id="tw" class="float_r" style="margin-right:-30px"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $event_link; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
 										</div>
 										<div class="clearfix"></div>
 									</div>

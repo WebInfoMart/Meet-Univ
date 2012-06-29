@@ -331,7 +331,7 @@ function follow_university(univ_id,follow_count)
 }
 function ajax(a,pid)
 {
-
+	$('#col_paging').css('opacity','0.4');	
 	cpage=$('#current_paging_value').val();
 	if(a!=cpage)	
 	{
@@ -344,7 +344,6 @@ function ajax(a,pid)
 	$('#pagination a').removeClass('add_paging_background_class');
 	 $('.'+pid).addClass('add_paging_background_class');
 	//$('#ajax_loader_paging').css('z-index','9');
-	$('#col_paging').css('opacity','0.4');
 	$('#current_paging_value').val(a);
  	   $.ajax({
 	   type: "POST",

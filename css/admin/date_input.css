@@ -14,7 +14,7 @@
 	background: url(../../images/admin/tt.png) 0 0 repeat;
 	padding: 10px;
 	margin: 0;
-	position: absolute;
+	/*position: absolute;*/
 	z-index: 100000;
 	display: none;
 	border: 1px solid #000;

@@ -76,15 +76,11 @@ array_push($array_dates,$var);
 												?>
 											</div>
 											<div class="float_r">
-												<!--<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>-->
-												<a href="#" id="ex6b" class="ex6b_ccc" name="event-get-detail_<?php echo $event_detail['event_id']; ?>"><img src="<?php echo$base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-											<span id="event_pop_<?php echo $event_detail['event_id']; ?>" class="ex6a_ccc" ></span>
-													<!--<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>-->
-													<a href="#" id="ex6b2" class="ex6b_ccc2" name="event-get-detail2_<?php echo $event_detail['event_id']; ?>"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
-											<span id="event_pop2_<?php echo $event_detail['event_id']; ?>" class="ex6a_ccc2" ></span>
-													<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-													<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-													<a href="<?php echo $base;?>univ-<?php echo $event_detail['univ_id']; ?>-event-<?php echo $event_detail['event_id']; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
+											<!--	<a href="#" id="ex6b" class="ex6b_ccc" name="event-get-detail_<?php //echo $event_detail['event_id']; ?>"><img src="<?php //echo$base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+											<span id="event_pop_<?php //echo $event_detail['event_id']; ?>" class="ex6a_ccc" ></span>
+													<a href="#" id="ex6b2" class="ex6b_ccc2" name="event-get-detail2_<?php //echo $event_detail['event_id']; ?>"><img src="<?php //echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<span id="event_pop2_<?php //echo $event_detail['event_id']; ?>" class="ex6a_ccc2" ></span>
+												<a href="<?php //echo $base;?>univ-<?php //echo $event_detail['univ_id']; ?>-event-<?php //echo $event_detail['event_id']; ?>"><img src="<?php //echo $base; ?>images/map.png" title="Map" alt="Map"></a>-->
 											</div>
 											<div class="clearfix"></div>
 										</div>
@@ -134,11 +130,11 @@ array_push($array_dates,$var);
 												
 												$place=0;
 												$city=0;						
-												if($event_detail['event_place']!='')
+												/*if($event_detail['event_place']!='')
 												{
 												echo $event_detail['event_place'];
 												$place=1;
-												}
+												}*/
 												if($event_detail['cityname']!=='')
 												{
 												if($place==1)

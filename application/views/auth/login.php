@@ -262,9 +262,10 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 										</div>
 									</div>
 									<div class="float_r">
-											<a onClick="voicepopup('<?php echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-											<a onClick="popup('<?php echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
-											<a href="<?php echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
+											<!--<a onClick="voicepopup('<?php //echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+											<a onClick="popup('<?php //echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="<?php //echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
+											-->
 										<div class="margin_t1 registered">		
 											<h2 class="blue"><?php echo $event_register_user; ?></h2>	
 											<h5 class="blue">Registered</h5>

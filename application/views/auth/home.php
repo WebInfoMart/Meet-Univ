@@ -56,7 +56,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					  </div>
 				</div>
 			<div class="span8 real margin_t">
-				<div id="slider_slides"  class='gallery_div'>
+				<div id="slider_img"  class='gallery_div'>
 				<div class="slides_container">
 				<?php
 					foreach($gallery_home as $galery_images)
@@ -276,13 +276,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				<div class="span16 margin_t margin_delta">
 					<div class="float_l span7 margin_delta">
 						<h2>Upcoming Events</h2>
-						<div class="fix-height">
+						<div class="fix-height ">
 							<ul class="event_new">
 							
 							<?php 
 						if(!empty($featured_events))
 						{
-						$rc=2;
+						$rc=9;
 						foreach($featured_events as $events) {
 						$univ_domain=$events['subdomain_name'];
 		$event_title=$events['event_title'];
@@ -313,19 +313,19 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						} 
 						$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 						$event_register_user = $this->frontmodel->count_event_register($events['event_id']);
+						
+		$univ_name=$events['univ_name'];
+		$univ_domain=$events['subdomain_name'];
+		$event_title=$events['event_title'];
+		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$events['event_id']);
 						?>
-								<li>
+								<li onclick="gotoevent('<?php echo $event_link; ?>');" style="cursor:pointer;">
 								<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post" class="margin_zero">
 						
 									<div>
 										<div class="float_l">
 		<div class="title_style">
-		<?php
-		$univ_name=$events['univ_name'];
-		$univ_domain=$events['subdomain_name'];
-		$event_title=$events['event_title'];
-		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$events['event_id']);
-		?>
+		
 		<a class="" href="<?php echo $event_link ?>">
 		
 		<h4 class="inline"><?php echo $events['univ_name']; ?></h4>
@@ -355,15 +355,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										</div>
 										<div class="float_r">
 										<!-- For VoiceCall PopOver -->
-										<a href="#" id="ex6b" class="ex6b_ccc inline" name="event-get-detail_<?php echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-											<span id="event_pop_<?php echo $events['event_id']; ?>" class="ex6a_ccc" ></span>
-											<!--<a onClick="voicepopup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>-->
-												<!-- For SMS PopOver -->
+										<!--<a href="#" id="ex6b" class="ex6b_ccc inline" name="event-get-detail_<?php echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+											<span id="event_pop_<?php //echo $events['event_id']; ?>" class="ex6a_ccc" ></span>
 												<a href="#" id="ex6b2" class="ex6b_ccc2 inline" name="event-get-detail2_<?php echo $events['event_id']; ?>"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
-											<span id="event_pop2_<?php echo $events['event_id']; ?>" class="ex6a_ccc2" ></span>
-												<!--<a onClick="popup('<?php echo $events['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>-->
-												<!--<a href="#"><img src="images/msg_box.png" title="Send Meassage" alt="Send Meassage"></a>-->
-												<a href="<?php echo $event_link; ?>" class="inline"><img src="images/map.png" title="Map" alt="Map"></a>
+											<span id="event_pop2_<?php //echo $events['event_id']; ?>" class="ex6a_ccc2" ></span>
+											<a href="<?php echo $event_link; ?>" class="inline"><img src="images/map.png" title="Map" alt="Map"></a>-->
 										</div>
 										<div>
 											<div class="img_style float_l aspectcorrect" >
@@ -373,11 +369,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												<h4 class="blue home_line"><?php 
 												echo $date[0]?$date[0]:'';
 												echo $date[1]?'&nbsp;'.$date[1]:'';
-												if($date[0]!='' || $date[1]!='') { echo ',&nbsp;&nbsp;'.$date[2];} else { echo ''; } 
+												if($date[0]!='' || $date[1]!='') { echo ',&nbsp;&nbsp;'.$date[2];} else { echo ''; }
 												?></h4>
-												<h4 class="home_line">
-												<?php 
-												echo $events['event_place']?$events['event_place']:''; 
+												<h4 class="home_line"><?php echo $events['event_place']?$events['event_place']:''; 
 												if($events['event_place']!='' && $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['cityname']; } else{ echo $events['cityname']; }
 												if($events['country_name']!='' && $events['event_place']!='' || $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['country_name']; } else{ echo $events['country_name']; }
 												?> </h4>
@@ -391,8 +385,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 													<h2 class="blue"><?php
 													//commented by sumit munjal now shoing here static user
 													//echo $event_register_user;
-													echo $rc;
-													$rc=$rc+3;
+													echo $event_register_user;
+													$rc=$rc+4; 
 													?>
 													
 													</h2>	
@@ -411,7 +405,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					</div>
 					<div class="float_l">
 						<div class="float_l span5">
-							<h2>News</h2>
+							<h3>News</h3>
 							<div id="slides_content">
 								<div class="slides_container">
 								<?php if(!empty($featured_news_show)) {
@@ -446,9 +440,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									$image=$base.$img_path.'/news_default_image.jpg';
 									} 
 									$img_arr=$this->searchmodel->set_the_image($width,$height,88,88,TRUE);
+									$univ_domain=$f_news['subdomain_name'];
+    $news_title=$f_news['news_title'];	
+	$news_id=$f_news['news_id'];
+	$news_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'news',$news_title,$news_id);							
+	
 							?>
 									<div>
-										<h4><?php echo substr($f_news['news_title'],0,35); ?></h4>
+										<h4><a href="<?php echo $news_link; ?>"><?php echo substr($f_news['news_title'],0,35); ?></a></h4>
 										<span class="float_l aspectcorrect home_art">
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 											
@@ -456,10 +455,6 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<p><?php echo substr($f_news['news_detail'],0,600).'...'; 
 										if(strlen($f_news['news_detail'])>600)
 										{
-	$univ_domain=$f_news['subdomain_name'];
-    $news_title=$f_news['news_title'];	
-	$news_id=$f_news['news_id'];
-	$news_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'news',$news_title,$news_id);							
 		echo "...";?><br/><a href="<?php echo $news_link; ?>" class="float_r view_back">View more&raquo;</a>
 								<?php		}
 										?>	 </p>
@@ -471,7 +466,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>
 						<div class="float_l span4">
-							<h2>Featured Colleges</h2>
+							<h3>Featured Colleges</h3>
 							<div id="slides_news">
 								<div class="slides_container"  style="width:237px!important;">
 									
@@ -538,9 +533,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<button class="btn status_bg number_bar"><span id="tot_reg_user"></span></button>
 										<div class="clearfix"></div>
 									</div>
-									<div class="label_text">
+									<div class="label_text" style="width:350px;height:20px;">
 										<ul>
-											<li><a href="#">EVENTS</a></li>
+											<li style="margin-left:20px;"><a href="#">EVENTS</a></li>
 											<li><a href="#">Registered User</a></li>
 										</ul>
 									</div>
@@ -592,7 +587,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</div>
 							</div>
 							<div class="margin_t1">
-								<h2>Latest Q&A</h2>
+								<h3>Latest Q&A </h3>
 								<ul class="prof_data">	
 								<?php 
 								
@@ -636,14 +631,16 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 									<li>
 
-										<div style="width: 34px;margin-right:20px" class="float_l">
+										<div class="float_l green_box_img">
 										<?php if($quest_list['user_pic_path'] !='') { ?>
 										<img src="<?php echo "$base"; ?>uploads/<?php echo $quest_list['user_pic_path']; ?>" class="latest_img" />
 										<?php } else { ?>
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" class="latest_img">
 										<?php } ?>
 										</div>
-										<a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
+										<div class="quest_fix">
+											<span><a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a></span>
+										</div>
 										<div class="asked_home"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
 										<div class="asked_home">
 										<?php
@@ -652,6 +649,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										echo $quest_month?$quest_month.', ':'';
 										 echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
 										?></div>
+										<div class="clearfix"></div>
 									</li>
 									<?php } $q_count++; } } ?>
 								</ul>
@@ -660,7 +658,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					</div>
 					<div class="float_l">
 						<div class="float_l span5" style="text-align:justify">
-							<h2 style="line-height: 20px;">Article</h2>
+							<h3 style="line-height: 20px;">Article</h3>
 							<?php 
 							$article_count = 0;
 							if(!empty($featured_article))
@@ -697,8 +695,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							$img_arr=$this->searchmodel->set_the_image($width,$height,84,84,TRUE);
 							
 							?>
-							<div class="margin_t1 part_art">
-								<h3><?php echo substr($article['article_title'],0,35).'...'; ?></h3>
+							<div class="part_art">
+								<h4><?php echo substr($article['article_title'],0,35).'...'; ?></h4>
 									<span class="float_l aspectcorrect home_art">
 										
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
@@ -1175,7 +1173,7 @@ function fetch_programs(educ_level)
 	   })
 }
 		$(function(){
-			$('#slider_slides').slides({
+			$('#slider_img').slides({
 				play: 5000,
 				pause: 2500,
 				hoverPause: true,
@@ -1290,8 +1288,8 @@ height:22px;
 
 <script>
 noofregister();
-var delay = 10000; //5 minutes counted in milliseconds.
-var lastval=0;
+var delay = 5000; //5 minutes counted in milliseconds.
+var cval=0;
 setInterval(function(){
  noofregister()   
 }, delay);
@@ -1300,19 +1298,19 @@ function noofregister()
 $.ajax({
       type: 'POST',
       url: '<?php echo base_url().'auth/auto_count_register_user';?>',
+	  async:false,
       success: function(response){
-	  delay=10000;
 	  response=parseFloat(response);
 	  response = Math.floor( response );
-	  if(response!=lastval)
+	  if(cval==0 || cval!=response || cval==null)
 	  {
 	  $('#tot_reg_user').html(response);
 	  $('#tot_reg_user').show("slide", { direction: "down" }, 1000);
 	  $('#tot_reg_user').html(response);
-	  }
-	  lastval=response;
+	  cval=response;
       }
-    });
+    }
+	});
 }
 </script>
 
@@ -1411,7 +1409,10 @@ var e_id = array[1];
 	   }
 	   }) 
 });
-
+function gotoevent(go)
+{
+window.location.href=go;
+}
 </script>
 
 

@@ -365,6 +365,7 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['event_list_detail']=$this->frontmodel->get_events_list_by_univ($univ_id);
+			$data['feature_events']=$this->frontmodel->fetch_featured_events();
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -408,6 +409,7 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['news_list_detail']=$this->frontmodel->get_news_list_by_univ($univ_id);
+			$data['popular_news'] = $this->frontmodel->popular_news();
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -450,6 +452,7 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['articles_list_detail']=$this->frontmodel->get_articles_list_by_univ($univ_id);
+			$data['popular_articles'] = $this->frontmodel->popular_articles();
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -553,6 +556,8 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['articles_detail']=$this->frontmodel->get_article_detail_by_univ($univ_id,$article_id);
+			$data['recent_articles'] = $this->frontmodel->fetch_articles();
+		
 			 if($data['university_details'] != 0 )
 			{
 				

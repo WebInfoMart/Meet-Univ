@@ -31,7 +31,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<div class="fix_h3"><h3><?php echo $articles_detail['article_title']; ?></h3></div>
 				<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class=" line_time"><abbr class="timeago time_ago inline" title="<?php echo $articles_detail['publish_time']; ?>"></span></abbr></div>
 				<div class="margin_t1">
-					<div class="float_l margin_r2">
+					<div class="float_l margin_r2 img_style aspectcorrect">
 							<?php
 							$image_exist=0;	
 							$article_img = $articles_detail['article_image_path'];	
@@ -62,11 +62,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							{
 							$image=$base.$img_path.'/default_logo.png';
 							} 
-							$img_arr=$this->searchmodel->set_the_image($width,$height,80,80,TRUE);
+							$img_arr=$this->searchmodel->set_the_image($width,$height,112,77,TRUE);
 							?>
 
-					<!--<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" class="art_img">-->
-					<img style="width:60px;height:60px;" src="<?php echo $image; ?>" class="art_img">
+					<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 					</div>
 					<div class="margin_l justify">
 						<?php echo $articles_detail['article_detail']; ?>
@@ -136,49 +135,6 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
 				</div>
 				<h3 class="center">Please Login for comment</h3>
-				<!--<div class="margin_t margin_bs">
-							<div class="events_box">
-								<h3>Your Comment</h3>
-								<div class="float_l span9 margin_zero">
-									<form class="form-horizontal" method="post" action="">
-									<input type="hidden" name="commented_on_id" value="<?php echo $articles_detail['article_id']; ?>" >
-									<input type="hidden" name="commented_on" value="article" >
-									
-										<div class="control-group">
-											<label class="control-label" for="input01">Name:</label>
-											<div class="controls">
-												<input type="text" value="<?php if($clear_comment==1){ echo ""; } else{ echo set_value('full_name');} ?>" class="<?php echo $class_fullname; ?>" id="input01" name="full_name">
-												<span style="color: red;"> <?php echo form_error('full_name'); ?><?php echo isset($errors['full_name'])?$errors['full_name']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<label class="control-label" for="input01">Email:</label>
-											<div class="controls">
-												<input type="text" value="<?php if($clear_comment==1){ } else{ echo set_value('email');} ?>" class="<?php echo $class_email; ?>" id="input01" name="email">
-												<span style="color: red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<label class="control-label" for="textarea">Comment:</label>
-											<div class="controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="textarea" name="commented_text" rows="3">
-												<?php if($clear_comment==1){ echo ""; } else{ echo set_value('commented_text');} ?></textarea>
-												<span style="color: red;"> <?php echo form_error('commented_text'); ?><?php echo isset($errors['commented_text'])?$errors['commented_text']:''; ?> </span>
-											</div>
-										</div>
-										<div class="control-group">
-											<div class="controls">
-												<input type="submit" class="btn btn-success" name="submit" value="Post Comment">
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="float_r">
-									Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>-->
 					</div>
 					<?php } else { ?>	
 			<div class="margin_t margin_b">
@@ -232,14 +188,32 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 				</div>
 				<div class="float_r tw" style="width:82px;">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php $_SERVER["REQUEST_URI"]; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
 				</div>
 				<div class="clearfix"></div>
 				<div class="back_up">
 						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
 						<ul class="up_event">
-							<li><a href="#">how hkshkcfhskjl</a></li>
-						</ul>
+								<?php
+								$articles=0;					
+					foreach($recent_articles as $recent_articles_detail) {
+					if($articles==5)
+					{
+					break;
+					}					
+					$article_link=$this->subdomain->genereate_the_subdomain_link(
+								$recent_articles_detail['subdomain_name'],'articles',$recent_articles_detail['article_title'],$recent_articles_detail['article_id']);
+								?>
+									<li>
+									
+							<a href="<?php echo $article_link; ?>">
+							<?php echo $recent_articles_detail['article_title']; ?>
+							</a>		
+									</li>
+							<?php 
+							$articles++;
+							} ?>		
+								</ul>
 				</div>
 			</div>
 		<div class="clearfix"></div>

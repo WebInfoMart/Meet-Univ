@@ -150,7 +150,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						<div class="control-group">
 							<label id="label_agree" class="checkbox <?php echo $class_iagree; ?>">
 								<input type="checkbox" name="agree_term" id="agree_term" value="1">
-								I agree to the <a href="href">terms and conditions</a> of Meet Universities.
+								I agree to the <a href="#">terms and conditions</a> of Meet Universities.
 							</label>
 							<span style="color: red;"> <?php echo form_error('agree_term'); ?><?php echo isset($errors['agree_term'])?$errors['agree_term']:''; ?> </span>
 						</div>
@@ -274,9 +274,9 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 										</div>
 									</div>
 									<div class="float_r">
-											<a onClick="voicepopup('<?php echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-											<a onClick="popup('<?php echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
-											<a href="<?php echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>
+											<!--<a onClick="voicepopup('<?php //echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+											<a onClick="popup('<?php //echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+											<a href="<?php //echo $event_link; ?>"><img src="images/map.png" title="Map" alt="Map"></a>-->
 										<div class="margin_t1 registered">		
 											<h2 class="blue"><?php echo $event_register_user; ?></h2>	
 											<h5 class="blue">Registered</h5>
