@@ -58,11 +58,11 @@ foreach($event_info_sms as $event_sms)
 	 /* converted month in number */ $month_call = $number_month_array['month'];
 	/* concatenate date as Y-m-d */ $now_db_date = $date[2].'-'.$month_call.'-'.$date[0];
 	/* getting previous date for call */ $previous_day = date('Y-m-d',strtotime('-1 day',strtotime($now_db_date)));
-	/* exploding final call date */ $final_explode_date = explode('-',$previous_day);
+	/* exploding final call date */ $final_explode_date = explode('-',$now_db_date);
 	
-	/* Date for call */  $date_for_call = $final_explode_date[2];
-	/* Year for call */  $year_for_call = $final_explode_date[0];
-	/* Month for call */ $month_for_call = $final_explode_date[1];
+	/* Date for call */   $date_for_call = $final_explode_date[2];
+	/* Year for call */   $year_for_call = $final_explode_date[0];
+	/* Month for call */  $month_for_call = $final_explode_date[1];
 	//print_r($final_explode_date);
 	$url = 'leadcontroller/send_sms_voice_of_event';
 	
@@ -125,6 +125,7 @@ foreach($event_info_sms as $event_sms)
 	<input type='hidden' name='call_month' value='$month_for_call'>
 	<input type='hidden' name='call_year' value='$year_for_call'>
 	<input type='hidden' name='event_title_voice' value='$event_sms[event_title]'>
+	<input type='hidden' name='event_univ_name_voice' value='$event_sms[univ_name]'>
 	<input type='hidden' name='event_date_voice' value='$event_sms[event_date_time]'>
 	<input type='hidden' name='event_time_voice' value='$event_sms[event_time]'>
 	<input type='hidden' name='event_place_voice' value='$event_sms[event_place]'>
@@ -136,10 +137,10 @@ foreach($event_info_sms as $event_sms)
 		</label>
 	</div>
 	<div class='controls docs-input-sizes'>
-		<input type='submit' value='SMS ME' name='btn_sms_me' class='btn btn-primary'/>
+		<input type='submit' value='Call Me !' name='btn_sms_me' class='btn btn-primary'/>
 	</div>
 </div>
-<div class='float_l'>
+<div class='float_r' style='margin-right: 84px;'>
 	<img src='$base/images/grammargirlavatar.jpg' style='width: 120px;height: 130px;'/>
 </div>
 	</form>

@@ -17,7 +17,7 @@ $user = $facebook->getUser();
 
 if((!($user)) && $this->session->userdata('fb_login'))
 {
-$this->tank_auth->logout();  
+//$this->tank_auth->logout();  
 }
 if ($user) {
 //$logoutUrl2 = $this->tank_auth->logout();
@@ -190,6 +190,7 @@ $detail_of_event = $event_details;
 <script src="<?php echo "$base$js";?>/jquery-ui.min.js"></script>
 <script src="<?php echo "$base$js";?>/all_validation.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.popover-1.1.0.js"></script>
+<!--<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>-->
 <script>  <!-- for IE8, IE7 -->
 document.createElement('header');
 document.createElement('nav');

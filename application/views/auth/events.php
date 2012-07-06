@@ -3,11 +3,11 @@ $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)
 {
-	$show_suc_msg = "A Event Details has been send to you successfully.....";
+	$show_suc_msg = "Thanks ! SMS sent to the registered mobile number with the event details";
 }
 else if($sms_voice_suc_sess_val == 1)
 {
-	$show_suc_msg = "A Reminder Voice SMS has been send to you successfully.....";
+	$show_suc_msg = "Thanks ! Will call and remind you about the event";
 }
 if($sms_suc_sess_val == '1' || $sms_voice_suc_sess_val == '1')
 {
@@ -245,11 +245,14 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												echo ' <h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
+											<?php 
+											if($event_detail['event_id'] == 55) { ?>
 											<div class="float_r">
-												<!--<a onclick="popup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-													<a onclick="voicepopup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
-													<a href="<?php //echo $event_link; ?>"><img src="<?php //echo $base; ?>images/map.png" title="Map" alt="Map"></a>-->
+												<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+													<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+													<a href="<?php echo $event_link; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
 											</div>
+											<?php } ?>
 											<div class="clearfix"></div>
 										</div>
 										<div>

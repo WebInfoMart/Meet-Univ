@@ -254,7 +254,7 @@ if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } e
 												echo ', '.ucwords($home_feature_event['country_name']);
 											} else { echo $home_feature_event['country_name']; }
 											?></span></div>
-											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $date[0].'  '.$date[1].', '.$date[2];?></span></div>
+											<div><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $date[0].'  '.$date[1].', '.$date[2];?></span></div>
 											<?php
 											$event_detail=str_replace('<div>','',$home_feature_event['event_detail']);
 											$event_detail=str_replace('</div>','',$event_detail);

@@ -81,5 +81,6 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mtz.monthpicker.js"></script>	
+
 </body>
 </html>

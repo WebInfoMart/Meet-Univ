@@ -371,7 +371,7 @@ class Leadcontroller extends CI_Controller
 		$this->load->view('auth/event_register',$data);
 		$this->load->view('auth/footer',$data);
 	}
-	
+
 	function sms_me_event_ajax()
 	{
 	$data = $this->path->all_path();
@@ -467,14 +467,15 @@ class Leadcontroller extends CI_Controller
 		$page_to_redirect = $this->input->post('page_status_voice');
 		//$message = $this->input->post('msg');
 		
-		$date_call = $this->input->post('call_date');
-		$month_call = $this->input->post('call_month');
-		$year_call = $this->input->post('call_year');
-		$hour_call = '12';
+		$date_call = (int)$this->input->post('call_date');
+		$month_call = (int)$this->input->post('call_month');
+		$year_call = (int) $this->input->post('call_year');
+		$hour_call = '00';
 		$minute_call = '00';
 		$second_call = '00';
 		$date_and_time = $year_call.'-'.$month_call.'-'.$date_call.'%20'.$hour_call.':'.$minute_call.':'.$second_call;
 		
+		$event_univ_name = $this->input->post('event_univ_name_voice');
 		$event_title = $this->input->post('event_title_voice');
 		$event_date = $this->input->post('event_date_voice');
 		$event_time = $this->input->post('event_time_voice');
@@ -483,10 +484,23 @@ class Leadcontroller extends CI_Controller
 		$voice_email = $this->input->post('email_voice');
 		$data['fullname'] = $fullname;
 		$data['event_id'] = $event_id;
+		
+		
+		$letter_year = $this->leadmodel->translate_to_words($year_call);
+		$letter_date = $this->leadmodel->translate_to_words($date_call);
+		$letter_month = date( 'F', mktime(0, 0, 0, $month_call) );
+		
+		$subject_of_voice_sms = "Dear User You are invited of $event_univ_name";
+		$invited_date = "on $letter_date $letter_month $letter_year";
+		
 		//$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
 		$msg_type = 'voice';
-		$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
-
+		
+		$url_execute = "http://www.hostedivr.in/obdapi/inserteventdata.php?uid=$username&pwd=$password&mobno=$destination&name=$subject_of_voice_sms&eventdate=$invited_date";
+		//$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
+		//echo $year_call;
+		$url = str_replace(" ", "%20", $url_execute);
+		
 		$send_suc = file_get_contents($url);
 		//echo $send_suc;
 		//echo $url;

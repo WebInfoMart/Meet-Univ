@@ -238,7 +238,7 @@ $.Autocompleter = function(input, options) {
 		}
 		if(v!="No Result Found")
 		{
-		v=v.replace(' ','');
+		//v=v.replace(' ','');
 		varr=v.split("<b>");
 		if(varr.length>1)
 		{

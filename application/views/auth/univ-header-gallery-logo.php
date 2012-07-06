@@ -16,7 +16,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 		<div class="body">
 		<div class="row">
 				<div class="span10">
-					<h2><?php 
+					<h2 style="margin-bottom: 10px;"><?php 
 					$comcount=0;
 					if($university_details['univ_name'] != '' || $university_details['univ_name']!= '0')
 					{
@@ -49,9 +49,9 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 					} ?>
 					 </small></h2>
 				</div>
-				<div class="span3 float_r">
-					<img src="<?php echo "$base$img_path" ?>/user.png" class="line_img inline"><span class="align_text line_time inline">Followers <?php print_r($count_followers); ?></span>
-					<span class="margin_l"><img src="<?php echo "$base$img_path" ?>/document.png" class="line_img inline"><span class="line_time inline align_text">Articles <?php print_r($count_articles); ?></span></span>
+				<div class="span3 float_r margin1">
+					<img src="<?php echo "$base$img_path" ?>/user.png" class="header_img inline"><span class="align_text line_time inline">Followers <?php print_r($count_followers); ?></span>
+					<span class="margin_l"><img src="<?php echo "$base$img_path" ?>/document.png" class="header_img inline"><span class="line_time inline align_text">Articles <?php print_r($count_articles); ?></span></span>
 					
 				</div>
 			</div>
@@ -113,7 +113,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 			</ul>
 			
 			<div class="row uni_menu_placeholder">
-				<div class="span9 float_r" id="main-nav-holder">
+				<div class="grid_7 float_r" id="main-nav-holder">
 					<nav id="main-nav">
 						<ul class="uni_menu">
 							<li><a href="/" class="active">Home</a></li>
@@ -153,7 +153,7 @@ $(document).scroll(function() {
     if( $(this).scrollTop() >= 75 ) {
         if( !fixed ) {
             fixed = true;
-            $('#main-nav').css({position:'fixed',top:140,left:628});
+            $('#main-nav').css({position:'fixed',top:140,left:657});
 			 $('.uni_menu').css({opacity:1});
 			// Or set top:20px; in CSS
         }                                           // It won't matter when static

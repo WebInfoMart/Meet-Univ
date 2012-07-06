@@ -327,11 +327,11 @@ class Auth extends CI_Controller
      $this->email->send();
      //echo $this->email->print_debugger(); 
      redirect('home'); */
-     
-      $this->email->from('info@meetuniversities.info', 'Meet Universities');
+ $this->email->initialize($config);    
+     $this->email->from('info@meetuniversities.com', 'Meet Universities');
      $this->email->to($uid);
      $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
-     $message = "$email_body" ;
+     $message = $email_body ;
      //$message .="<br/>Thank you very much";
      $this->email->message($message);
      //print_r($message);
@@ -639,7 +639,7 @@ class Auth extends CI_Controller
 	{
 		$this->load->library('email');
 		$this->email->from($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
-		$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
+		//$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
 		$this->email->to($email);
 		$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
 		$this->email->message($this->load->view('email/'.$type.'-html', $data, TRUE));
@@ -1311,8 +1311,9 @@ class Auth extends CI_Controller
 	$univ=$query->result_array();
 	foreach($univ as $univs)
 	{
-	
-	//$this->db->query("update university set subdomain_name = '".$univname."' where univ_id='".$univs['univ_id']."'");
+	$univ_name=$univs['univ_name'];
+	$univ_name=str_replace(' ','',$univ_name);
+	$this->db->query("update university set univ_name = '".$univname."' where univ_id='".$univs['univ_id']."'");
 	}	
    }	
 	function auto_count_register_user()

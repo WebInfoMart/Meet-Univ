@@ -33,7 +33,6 @@
 
 /*******************************gridsystem****************/
 [class*="grid"] {
-  float: left;
   margin-left: 20px;
   /*border:solid 1px red;Debal*/
 }
@@ -43,6 +42,7 @@
 .grid_1{width:195px;}
 .grid_5{width:294px}
 .grid_6{width:672px;}
+.grid_7{width: 528px;}
 
 /************************welcome********************/
 .back_img{background:url(../images/events.png)repeat;border-radius: 2px;border: 1px solid #AAA;-webkit-border: 1px solid #AAA;-moz-border: 1px solid #AAA;padding: 10px 20px;}
@@ -602,7 +602,7 @@ color:#666 !important;
 /*================events page==================================*/
 .dsolution{overflow: hidden;min-height: 85px;max-height:170px;}
 .dsolution .txt_three{font-size:18px;font-weight: bold;}
-.event_border{border-bottom: 1px solid #DDD;padding: 10px 0px;}
+.event_border{border-bottom: 1px solid #DDD;-webkit-border-bottom: 1px solid #DDD;-moz-border-bottom: 1px solid #DDD;padding-top: 10px;}
 .event_border_div{width: 84px;height:40px;}
 .event_border img{margin-right: 20px;}
 .event_border_style{border: 1px solid #DDD;text-align: center;width: 80px;height:80px;margin-right: 20px;}
@@ -614,10 +614,10 @@ line-height: 22px;
 word-wrap:break-word; 
 }
 .event_comment{background-color: #DFF0D8;border: 1px solid #DDD;border-radius:4px;padding:10px;}
-.comment_img{width:67px;margin-right:10px}
+.comment_img{width:55px;}
 .date_heading{font-size:16px;}
 .my_form_controls{margin-left:14px;}
-.comment_img img{height:61px; width:61px;border: 1px solid #DDD;-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;padding: 2px;}
+.comment_img img{height:50px; width:50px;border: 1px solid #DDD;-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;padding: 2px;}
 
 
 /*==========================Q & A=================================*/
@@ -972,6 +972,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 		#slides_content .slides_container {
 			width:305px;
 			display:none;
+			height:292px;
 		}
 
 		/*
@@ -991,8 +992,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 #slides_content .slides_container .slides_control{height:313px!important}
 #slides_content .slides_container .slides_control div{width:300px;text-align: justify;}
 #slides_content .slider_pagination{display: none;}
-#slides_content .next{background:url(../images/next.png)no-repeat;height: 21px;width: 21px;display: inline-block;}
-#slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block;}
+#slides_content .next{background:url(../images/next.png)no-repeat;height: 21px;width: 21px;display: inline-block!important;margin-top:2px;}
+#slides_content .prev{background:url(../images/prev.png)no-repeat;height: 21px;width: 21px;display: inline-block!important;margin-top:2px;}
 .btn_cal{width:155px;padding: 4px 4px 4px 7px;}
 .title_style{width: 365px;overflow: hidden;max-height: 38px;min-height: 20px;}
 .cal_style{cursor: pointer;z-index: 0;position: absolute;margin-top: 5px;margin-left: -25px;}
@@ -1023,6 +1024,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 
 .h4_line{line-height: 22px;}
 .h4_line span{margin-left:25px;}
+.header_img{z-index: 10;position: absolute;margin-top: 7px;margin-left: 10px;}
 .line_img{z-index: 10;position: absolute;margin-top:2px;}
 .map_data{border: 1px solid #DDD;padding: 2px;}
 .back_up{background:#ECF2F9;padding: 10px;-webkit-box-shadow: 0px 0px 5px 
@@ -1038,7 +1040,7 @@ span.aspectcorrect {overflow: hidden;position: relative; }
 span.aspectcorrect  img { position: absolute; }
 .asked_home{font-size: 11px;line-height: 12px;}
 .home_padding{padding-top: 8px;}
-.number_bar{height: 43px;font-size: 24px;border: 1px solid #FDD69E;padding: 4px 32px 4px;width:120px;}
+.number_bar{height: 43px;font-size: 24px;border: 1px solid #FDD69E;-moz-border: 1px solid #FDD69E;-webkit-border: 1px solid #FDD69E;padding: 4px 21px 4px;width:120px;}
 .center_bar{padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px #999;-moz-box-shadow: 0px 0px 6px #888;}
 .btn_tab{padding: 3px 18px 6px 18px!important;color:#fff!important;font-size:16px;height:28px!important;}
 .latest_img{width:45px;height:45px;border: 2px solid #DDD;padding:2px;}
@@ -1089,3 +1091,4 @@ abbr[title], acronym[title] {
 	background-position:0 -12px;
 }
 .univ_page_gal{height:100px;width:175px;}
+.status_numb{border-radius: 4px!important;-webkit-border-radius: 4px!important;-moz-border-radius: 4px!important;}

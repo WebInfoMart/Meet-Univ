@@ -104,8 +104,22 @@ class Adminevents extends CI_Controller
 	
 	function add_event()
 	{
+		 $this->load->library('fbConn/facebook');
 		$data = $this->path->all_path();
+		$data['fb_permissions']='no';
+		$facebook = new Facebook();
+			
+		if(isset($facebook->access_token) && $facebook->access_token!='')
+			{
+		    $permissions = $facebook->api("/me/permissions?access_token=".$facebook->access_token);
+			if(array_key_exists('create_event', $permissions['data'][0]) && array_key_exists('manage_pages', $permissions['data'][0])) 
+		    {
+			$data['fb_permissions']='yes';
+			}
+		}
 		$this->config->load('sendgrid');
+		//$this->load->library('fbConn/facebook');
+		//$facebook = new Facebook();
 		$config['protocol'] = $this->config->item('protocol');
 		$config['smtp_host'] = $this->config->item('smtp_host');
 		$config['smtp_user'] = $this->config->item('smtp_user');
@@ -664,7 +678,7 @@ class Adminevents extends CI_Controller
 	//function add event by ajax 
 	function create_event_ajax()
 	{
-		$data = $this->path->all_path();
+		
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			echo "0";
 		} else {
@@ -692,8 +706,66 @@ class Adminevents extends CI_Controller
 			{
 			if($this->input->post('submit'))
 			{
-			 $this->events->create_event();
-			 echo "1";
+			$this->events->create_event();
+			 
+			 
+			$this->load->library('fbConn/facebook');
+			$facebook = new Facebook();
+			$access_token = $facebook->getAccessToken();
+
+			$data['fb_permissions']='no';
+			if(isset($facebook->access_token) && $facebook->access_token!='' && $this->input->post('share_facebook')=='on')
+			{
+		    $permissions = $facebook->api("/me/permissions?access_token=".$facebook->access_token);
+			if(array_key_exists('create_event', $permissions['data'][0]) && array_key_exists('manage_pages', $permissions['data'][0])) 
+		    {
+			$data['fb_permissions']='yes';
+			}
+			}
+			if($this->input->post('share_facebook')=='on')
+			{
+				//$page_id = '198465570173386';
+				$page_id = '132735360191608';
+				 
+				 $access_token = $facebook->getAccessToken();
+				if($this->input->post('etiming'))
+				{
+				if($this->input->post('fixedloc'))
+				{
+				 $event_loc=$this->input->post('cityname');
+				}
+				else
+				{
+				  $event_loc=$this->input->post('event_place');
+				}
+				$event_data = array('name' =>$this->input->post('university_name') ,'start_time' => $this->input->post('event_time').' '.$this->input->post('event_time_start'),
+				'end_time' => $this->input->post('event_time').' '.$this->input->post('event_time_end'),
+				'city' =>$event_loc,
+				'email'=>'info@meetuniversities.com',
+				'page_id' => $page_id,
+				'access_token'=>$access_token
+				);
+				$post = $facebook->api("/".$page_id."/events", 'POST', $event_data);
+			   	
+				}
+				else
+				{
+				$event_data = array('name' =>$this->input->post('university_name'),
+				'page_id' => $page_id,
+				'access_token'=>$access_token
+				);
+				}
+				$page_id = '198465570173386';
+				/*$event_data = array('name' =>'Testing' ,'start_time' => '11-07-2012'.' '.'11-11-11',
+				'end_time' => '15-07-2012'.' '.'11-11-11',
+				'page_id' => $page_id,
+				'access_token'=>$access_token
+				);*/
+               echo "1";
+			}
+			 
+			 
+			 
 			}
 			}
 			

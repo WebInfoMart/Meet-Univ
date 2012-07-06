@@ -275,7 +275,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 			<div class="row">
 				<div class="span16 margin_t margin_delta">
 					<div class="float_l span7 margin_delta">
-						<h2>Upcoming Events</h2>
+						<h3>Upcoming Events</h3>
 						<div class="fix-height ">
 							<ul class="event_new">
 							
@@ -530,7 +530,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<div class="home_padding">
 									<div class="btn-group">
 										<button class="btn status_bg number_bar"><?php echo $total_poste_event_count?$total_poste_event_count:'0'; ?></button>
-										<button class="btn status_bg number_bar"><span id="tot_reg_user"></span></button>
+										<button class="btn status_bg number_bar status_numb"><span id="tot_reg_user"></span></button>
 										<div class="clearfix"></div>
 									</div>
 									<div class="label_text" style="width:350px;height:20px;">
@@ -624,8 +624,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				$quest_ask_date = explode("-",$q_date[0]);
 				//print_r($quest_ask_date[0]);
 				$q_month = $quest_ask_date[1];
-				$quest_month = date('M', strtotime($q_month . '01'));
-				
+				//$quest_month = date('M', strtotime($q_month . '01'));
+				$quest_month = date( 'F', mktime(0, 0, 0, $q_month) );
 				//print_r($quest_ask_date[2]);
 				?>
 								
@@ -695,8 +695,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							$img_arr=$this->searchmodel->set_the_image($width,$height,84,84,TRUE);
 							
 							?>
-							<div class="part_art">
-								<h4><?php echo substr($article['article_title'],0,35).'...'; ?></h4>
+							<div>
+								<h4><?php echo substr($article['article_title'],0,45).'...'; ?></h4>
 									<span class="float_l aspectcorrect home_art">
 										
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
@@ -704,11 +704,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										
 									</span>
 									<p><?php
-									echo substr($article['article_detail'],0,180); 
-									if(strlen($article['article_detail'])>180){ 
+									echo substr($article['article_detail'],0,325); 
+									if(strlen($article['article_detail'])>325){ 
 			$article_link=$this->subdomain->genereate_the_subdomain_link($article['subdomain_name'],'articles',$article['article_title'],$article['article_id']);
 			?>
-	..<br/><a href="<?php echo $article_link; ?>" class="float_r view_back">View More&raquo;</a>	
+	..<br/>
+	<div class="margin_b"><a href="<?php echo $article_link; ?>" class="float_r view_back">View More&raquo;</a>	</div>
 									<?php }
 									?>	
 									

@@ -33,34 +33,34 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 $(document).ready(function() {
 	
 	$("#univ_name").autocomplete("<?php echo $base; ?>autosuggest/suggest_university", {
-		width: 320,
-		matchContains: true,
-		mustMatch: true
+		width: 320
+		//matchContains: true,
+		//mustMatch: true
 	});
 	$("#univ_name").result(function(event, data, formatted) {
 		$("#university").val(data[1]);
 	});
 	
 	$("#country_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_country', {
-		width: 260,
-		matchContains: true,
-		mustMatch: true
+		width: 260
+		//matchContains: true,
+		//mustMatch: true
 	});
 	$("#country_name").result(function(event1, data1, formatted1) {
 		$("#country").val(data1[1]);
 	});
     $("#state_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_state', {
-		width: 260,
-		matchContains: true,
-		mustMatch: true
+		width: 260
+		//matchContains: true,
+		//mustMatch: true
 	});
 	$("#state_name").result(function(event2, data2, formatted2) {
 	$("#state").val(data2[1]);
 	});
 	$("#city_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_city', {
-		width: 260,
-		matchContains: true,
-		mustMatch: true
+		width: 260
+		//matchContains: true,
+		//mustMatch: true
 	});
 	$("#city_name").result(function(event3, data3, formatted3) {
 	$("#city").val(data3[1]);
@@ -331,6 +331,22 @@ $(document).ready(function() {
 							<div class="clearfix"></div>
 						</div>
 					</li>
+					
+					
+					<li class="share_facebook_show_hide">
+						<div >
+							<div class="float_l span3 margin_zero">
+								<label>Share on Facebook</label>
+							</div>
+							<div class="float_l span3" >
+								<input type="checkbox"  class="text time" id="share_facebook"  name="share_facebook" onchange="jQuery('#fb_button').toggle();"/><?php if(isset($fb_permissions) && $fb_permissions=='no') { ?><span id="fb_button" style="display:none;">
+							<fb:login-button perms="email,user_checkins,publish_stream,user_events,read_stream,create_event,manage_pages" id="fb_butonek" onlogin="jQuery('#fb_button').toggle();">Connect with Facebook</fb:login-button>
+							</span><?php }?>					
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</li>
 					<li>
 						<div>
 							<div class="float_l span3 margin_zero">
@@ -345,6 +361,8 @@ $(document).ready(function() {
 					
 				</ul>
 				<input type="hidden" name="edit_event" id="edit_event" value="0" >
+				<input type="hidden" name="submit"  value="1" >
+				
 				<input type="button" id="submit_event"  name="submit" class="ajaxsubmit margin_left_ajax" value="Submit">
 						
 				</form>

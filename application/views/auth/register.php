@@ -251,7 +251,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 											<div class="img_style float_l img_r">
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
-											<div><img src="http://meetuniv.com/images/city.png" class="line_img inline"><span class="blue line_time inline">
+											<div><img src="<?php echo "$base$img_path" ?>/city.png" class="line_img inline"><span class="blue line_time inline">
 											<?php 
 											echo $home_feature_event['event_place']? ucwords($home_feature_event['event_place']):''; 
 											if($home_feature_event['event_place']!='' && $home_feature_event['cityname']!='')
@@ -266,7 +266,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 											//echo $home_feature_event['country_name']?', '.ucwords($home_feature_event['country_name']):''; 
 											?>
 											</span></div>
-											<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $date[0].'  '.$date[1].', '.$date[2];?></span></div>
+											<div><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $date[0].'  '.$date[1].', '.$date[2];?></span></div>
 											<?php
 											$event_detail=str_replace('<div>','',$home_feature_event['event_detail']);
 											$event_detail=str_replace('</div>','',$event_detail);

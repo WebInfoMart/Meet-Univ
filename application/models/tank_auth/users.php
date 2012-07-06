@@ -1449,10 +1449,17 @@ class Users extends CI_Model
 		 {
 		 if($profile_data=='' || $profile_data==NULL || $profile_data=='0' || $profile_data=='0000-00-00')
 		 {
+			if($pro<12)
+			{
 			$pro++;
+			}
 		 }
 		 }
 		 $pro_complete=100-(($pro-2)*10);
+		 if($pro_complete>100)
+		 {
+		 $pro_complete=100;
+		 }
 		 return $pro_complete ;
 		
 		}

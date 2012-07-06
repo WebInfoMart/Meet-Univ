@@ -37,60 +37,38 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body">
-<div class="row" style="margin-top:-20px">
-	<div>
-	
-		<div class="float_l span13 margin_l">
-		<div class="float_r" >
-				<div class="float_l" style="margin-right:20px;">	
-				<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
-				</div>
-				
-				<div class="float_l" style="margin-left:10px;"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
-				<div class="float_l">
-				<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
-				</div>
-				<div class="clearfix"></div>
-				</div>
-			<div>
-				<div class="float_l span12 margin_zero">
-				<h3>Question:<span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span></h3>
-				<?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?>
-				</div>
-				
-				<div class="clearfix"></div>
-			</div>
-			<div>
-				<div class="margin_t1">
-					<div class="float_l span1" style="margin-right:20px;">
-						<?php 
-						if($single_quest['user_pic_path']!= '')
-						{
-						
-						echo "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>";
-						}
-						else {
-						echo "<img style='width:40px;height:40px;' src='".base_url()."images/user_model.png'/>" ;
-						}
-						?>
-					</div>
+		<div class="row margin_t1">
+			<div class="float_l span13 margin_l">
+				<div class="float_l span9 margin_zero">
 					<div>
-						<?php echo $single_quest['q_detail']; ?><br/>
-						<div class="float_r margin_t1" style="color:#000" >
-						<abbr class="timeago time_ago" title="<?php echo $single_quest['q_asked_time'] ?>"></abbr>
-				
+						<div class="float_l comment_img margin_delta" style="margin-right:10px;">
+							<?php 
+							if($single_quest['user_pic_path']!= '')
+							{
+							
+							echo "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>";
+							}
+							else {
+							echo "<img src='".base_url()."images/user_model.png'/>" ;
+							}
+							?>
 						</div>
+						<div class="float_l span8 margin_delta">
+							<h3><span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span></h3>
+							<h4><?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?></h4>
+							<div><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="line_time"><abbr class="timeago time_ago" title="<?php echo $single_quest['q_asked_time'] ?>"></abbr></span>
+							</div>
+						</div>
+						<div class="clearfix"></div>
 					</div>
-				<div class="clearfix"></div>
-				</div>
-				
-				
-				<div class="clearfix"></div>
-						<div class="margin_t" id="add_more_comment">
-							<div class="event_border">
-							<input type="hidden" id="txt_cnt_comment_show" value="<?php if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?>"/>
-								<h3><span id="cnt_comment_show"><?php if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?></span> Comments</h3>
-							</div> 
+						<?php echo $single_quest['q_detail']; ?><br/>
+					<div class="margin_t1">
+					<div class="clearfix"></div>
+					<div class="margin_t" id="add_more_comment">
+							<!--<div class="event_border">
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php //if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?>"/>
+								<h3><span id="cnt_comment_show"><?php //if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?></span> Comments</h3>
+							</div>--> 
 				<?php 
 				if(!empty($question_comments))
 				{
@@ -145,17 +123,36 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				} }				
 				?>			
 						</div>
-			<?php 
+						<div class="fb-comments" data-href="http://<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ;?>" data-num-posts="2" data-width="500"></div>
+				<div class="clearfix"></div>
+				</div>
+				</div>
+				<div class="float_l span4">
+					<div class="float_l fb_set">
+						<div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+					</div>
+					<div class="float_l">	
+						<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+					</div>
+					<div class="float_r tw" style="width:82px;">
+						<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="float_r span3">
+				<img src="<?php echo "$base$img_path"; ?>/banner_img.png">
+			</div>
+			<div class="clearfix"></div>
+		
 			
-			if($user_is_logged_in == 0){ ?>		
-			<div class="events_box" style="height: 53px;">
-				<div class="float_r">
-					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-				</div>
-				<div class="float_l" style="margin-top: 30px; margin-left: 311px;">
-				<center><h3>Please Login for comment</h3></center>
-				</div>
-				</div>			
+			<div>
+				
+				
+				
+				<div class="clearfix"></div>
+						
+					
 						<!--<div class="margin_t margin_bs">
 							<div class="events_box">
 								<h3>Your Comment</h3>
@@ -199,51 +196,13 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 						</div>-->
-		<?php } else { ?>	
-			<div class="margin_t margin_bs">
-							<div class="events_box">
-							<div class="float_l">
-									<div class="comment_img">
-									<?php if($user)
-									{ ?>
-									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-									<?php }
-									else if($user_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } ?>
-									</div>
-								</div>
-								<div class="float_l span9 margin_zero">
-									<form class="form-horizontal" method="post" action="">
-									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $single_quest['que_id']; ?>" >
-									<input type="hidden" name="commented_on" id="commented_on" value="qna" >
-										<div class="control-group">
-											<div class="my_form_controls">
-												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
-											</div>
-										</div>
-										<div class="control-group">
-											<div class="my_form_controls">
-												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">
-											</div>
-										</div>
-									</form>
-								</div>
-								
-								<div class="clearfix"></div>
-							</div>
-						</div>
-		<?php }  ?>
+		
 					</div>
 				</div>
-				<div class="float_r span3">
-					
-					<img src="<?php echo $base; ?>images/banner_img.png">
-				</div>
+				
 				<div class="clearfix"></div>
 				
+</div>
 </div>
 </div>
 </div>

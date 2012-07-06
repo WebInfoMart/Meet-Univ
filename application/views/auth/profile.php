@@ -1,3 +1,4 @@
+
 <?php
 $facebook = new Facebook();
 $user = $facebook->getUser();
@@ -308,10 +309,9 @@ $select_female='';
 												</div>
 												<div class="clearfix"></div>
 											</div>
-											<h3>what are the type of questions they ask in iit?</h3>
 											<div class="margin_t1">
 												<div class="input-append">
-													<form action="http://workforcetrack.in/QuestandAns" method="post">
+													<form action="<?php echo $base; ?>QuestandAns" method="post">
 														<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
 														<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
 													</form>
@@ -348,7 +348,7 @@ $select_female='';
 								$q_month = $quest_ask_date[1]; ?>
 						
 									<li>
-										<div style="width: 34px;margin-right:20px" class="float_l"><img src="<?php echo $base; ?>images/stud.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;"></div>
+										<div style="width: 34px;margin-right:20px" class="float_l"><img src="<?php echo $base; ?>images/user_model.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;"></div>
 										<a href="<?php echo $url; ?>"><span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
 										</a><div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
 										</div>

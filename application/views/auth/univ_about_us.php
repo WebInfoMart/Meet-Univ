@@ -51,40 +51,40 @@
 	if($university_details['univ_departments']!='' || $university_details['univ_expertise']!='' || $university_details['univ_interstudents']!='' || $university_details['univ_slife']!='' || $university_details['univ_faculties']!='' || $university_details['univ_alumni']!=''){
 	echo "<h3>University Campus Overview</h3><div class='course_cont'>".$university_details['univ_campus']."</div>"; }?>
 	</div>
-	<div class="span13 margin_delta">
+	<div class="span13 margin_delta margin_b">
 	<?php if($university_details['univ_departments'] != '') { ?>
 		<div class="float_l grid_2 margin_delta margin_t left_about">
-			<?php echo "<h3>University Departments</h3><div class='about_fix'>".$university_details['univ_departments']."</div>";?>
+			<?php echo "<div class='about_fix'><h3>University Departments</h3>".$university_details['univ_departments']."</div>";?>
 		</div>
 	<?php } ?>
 	<?php if($university_details['univ_expertise'] != '') { ?>
 		<div class="float_l grid_2 margin_delta margin_t left_about">
 			<?php
-			echo "<h3>University Research Expertise</h3><div class='about_fix'>".$university_details['univ_expertise']."</div>";
+			echo "<div class='about_fix'><h3>University Research Expertise</h3>".$university_details['univ_expertise']."</div>";
 			?>
 		</div>
 	<?php } ?>
 	<?php if($university_details['univ_interstudents'] != '') { ?>
-		<div class="float_l grid_2 margin_delta margin_t">
-		<?php echo "<h3>International Students</h3><div class='about_fix'>".$university_details['univ_interstudents']."</div>";?>
+		<div class="float_l grid_2 margin_delta margin_t left_about">
+		<?php echo "<div class='about_fix'><h3>International Students</h3>".$university_details['univ_interstudents']."</div>";?>
 		</div>
 	<?php } ?>
 	<?php if($university_details['univ_slife'] != '') { ?>
-		<div class="margin_t left_about float_l grid_2 margin_delta">
+		<div class="margin_t float_l grid_2 margin_delta left_about">
 		<?php 
-			echo "<h3>University Student Life</h3><div class='about_fix'>".$university_details['univ_slife']."</div>";?>
+			echo "<div class='about_fix'><h3>University Student Life</h3>".$university_details['univ_slife']."</div>";?>
 		</div>
 	<?php } ?>
 	<?php if($university_details['univ_faculties'] != '') { ?>
-		<div class="margin_t left_about float_l grid_2 margin_delta">
+		<div class="margin_t float_l grid_2 margin_delta left_about">
 		<?php
-		echo "<h3>University Faculties</h3><div class='about_fix'>".$university_details['univ_faculties']."</div>";
+		echo "<div class='about_fix'><h3>University Faculties</h3>".$university_details['univ_faculties']."</div>";
 		?>
 		</div>
 	<?php } ?>
 	<?php if($university_details['univ_alumni'] != '') { ?>
-		<div class="float_l grid_2 margin_delta margin_t">
-		<?php echo "<h3>University Awarded Alumni</h3><div class='about_fix'>".$university_details['univ_alumni']."</div>";?>
+		<div class="float_l grid_2 margin_delta margin_t left_about">
+		<?php echo "<div class='about_fix'><h3>University Awarded Alumni</h3>".$university_details['univ_alumni']."</div>";?>
 		</div>
 	<?php } ?>
 		<div class="clearfix"></div>

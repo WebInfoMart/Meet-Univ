@@ -126,6 +126,7 @@ $('#event_time_end').removeClass("needsfilled");
 $('#event_time_start').removeClass("needsfilled");
 $('#event_time_end_ajax_err').text("");
 $('#event_time_start_ajax_err').text("");
+$('.share_facebook_show_hide').hide();
 }
 else
 {
@@ -133,7 +134,7 @@ $('.notfixed_event_timing').hide(1000);
 $('.fix_event_timing').show(1000);
 $('#event_timing').removeClass("needsfilled")
 $('#event_timing_ajax_err').text("");
-
+$('.share_facebook_show_hide').show();
 }
 });	
 
@@ -170,26 +171,33 @@ $('#submit_event').click(function()
 		if($('#event_timing_fixed_not_fixed').is(':checked'))
 		{
 		var event_timing=$('#event_timing').val();
+		var etiming=0
 		}
 		else
 		{
 		var event_timing=$('#event_time_start').val()+'-'+$('#event_time_end').val();
+		var etiming=1;
 		}
 		if(!($('#location_event').is(':checked')))
 		{
 		var country_id=$('#country').val();
 		var state_id=$('#state').val();
 		var city_id=$('#city').val();
+		var fixedloc=1;
 		}
 		else
 		{
 		var country_id=0;
 		var state_id=0;
 		var city_id=0;
+		var fixedloc=0;
 		}
 			  var form_data = {
 			   title : $('#title_event').val(),
 			   university : $('#university').val(),
+			   university_name :$('#univ_name').val(),
+			   event_time_start:$('#event_time_start').val(),
+			   event_time_end:$('#event_time_end').val(),
 			   country : country_id,
 			   state : state_id,
 			   city : city_id,
@@ -197,7 +205,11 @@ $('#submit_event').click(function()
 			   event_type : $('#event_type').val(),
 			   event_time : $('#event_date').val(),
 			   event_timing: event_timing,
+			   share_facebook:$('#share_facebook').val(),
 			   detail : $('#event_detail').val(),
+			   etiming:etiming,
+			   fixedloc:fixedloc,
+			   cityname:$('#city_name').val(),
 			   submit:1
 			  };
 			
@@ -221,7 +233,7 @@ $('#submit_event').click(function()
 				  data:form_data,
 				  async:false,
 				  success: function(response){
-					if(response==0)
+				 if(response==0)
 					{
 					window.location.href="../admin/adminlogin";
 					}

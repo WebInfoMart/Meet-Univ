@@ -108,7 +108,7 @@ foreach($event_info_sms as $event_sms)
     </label>
 	</div>
 	<div class='controls docs-input-sizes'>
-	<input type='submit' value='SMS ME' name='btn_sms_me' id='btn_sms_me' class='btn btn-primary'/>
+	<input type='submit' value='SMS ME !' name='btn_sms_me' id='btn_sms_me' class='btn btn-primary'/>
 	</div>
 	<span style='margin-left: 29px;'><input type='hidden' name='event_id_sms' id='event_id_sms' value='$event_id'/></span>
 	
@@ -119,7 +119,7 @@ foreach($event_info_sms as $event_sms)
 	<input type='hidden' name='event_place' value='$event_sms[event_place]'>
 	<input type='hidden' name='event_city' value='$event_sms[cityname]'>
 	</div>
-	<div class='float_l'>
+	<div class='float_r' style='margin-right: 84px;'>
 	<img src='$base/images/grammargirlavatar.jpg' style='width: 120px;height: 130px;'/>
 	</form>
 	</div>

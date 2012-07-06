@@ -324,6 +324,139 @@ class Leadmodel extends CI_Model
 		}
 		
 	}
+	
+	
+
+ 
+ function translate_to_words($number) 
+		{
+			$max_size = pow(10,18);
+			if (!$number) return "zero";
+			if (is_int($number) && $number < abs($max_size)) 
+			{
+				$prefix = '';
+				$suffix = '';
+				switch ($number) 
+				{
+					// set up some rules for converting digits to words
+
+					case $number < 0:
+						$prefix = "negative";
+						$suffix = $this->translate_to_words(-1*$number);
+						$string = $prefix . " " . $suffix;
+						break;
+					case 1:
+						$string = "one";
+						break;
+					case 2:
+						$string = "two";
+						break;
+					case 3:
+						$string = "three";
+						break;
+					case 4: 
+						$string = "four";
+						break;
+					case 5:
+						$string = "five";
+						break;
+					case 6:
+						$string = "six";
+						break;
+					case 7:
+						$string = "seven";
+						break;
+					case 8:
+						$string = "eight";
+						break;
+					case 9:
+						$string = "nine";
+						break;                
+					case 10:
+						$string = "ten";
+						break;            
+					case 11:
+						$string = "eleven";
+						break;            
+					case 12:
+						$string = "twelve";
+						break;            
+					case 13:
+						$string = "thirteen";
+						break;            
+					// fourteen handled later
+
+					case 15:
+						$string = "fifteen";
+						break;            
+					case $number < 20:
+						$string = $this->translate_to_words($number%10);
+						// eighteen only has one "t"
+
+						if ($number == 18)
+						{
+						$suffix = "een";
+						} else 
+						{
+						$suffix = "teen";
+						}
+						$string .= $suffix;
+						break;            
+					case 20:
+						$string = "twenty";
+						break;            
+					case 30:
+						$string = "thirty";
+						break;            
+					case 40:
+						$string = "forty";
+						break;            
+					case 50:
+						$string = "fifty";
+						break;            
+					case 60:
+						$string = "sixty";
+						break;            
+					case 70:
+						$string = "seventy";
+						break;            
+					case 80:
+						$string = "eighty";
+						break;            
+					case 90:
+						$string = "ninety";
+						break;                
+					case $number < 100:
+						$prefix = $this->translate_to_words($number-$number%10);
+						$suffix = $this->translate_to_words($number%10);
+						//$string = $prefix . "-" . $suffix;
+
+						$string = $prefix . " " . $suffix;
+						break;
+					// handles all number 100 to 999
+
+					case $number < pow(10,3):                    
+						// floor return a float not an integer
+
+						$prefix = $this->translate_to_words(intval(floor($number/pow(10,2)))) . " hundred";
+						if ($number%pow(10,2)) $suffix = " and " . $this->translate_to_words($number%pow(10,2));
+						$string = $prefix . $suffix;
+						break;
+					case $number < pow(10,6):
+						// floor return a float not an integer
+
+						$prefix = $this->translate_to_words(intval(floor($number/pow(10,3)))) . " thousand";
+						if ($number%pow(10,3)) $suffix = $this->translate_to_words($number%pow(10,3));
+						$string = $prefix . " " . $suffix;
+						break;
+				}
+			} else
+			{
+				echo "ERROR with - $number<br/> Number must be an integer between -" . number_format($max_size, 0, ".", ",") . " and " . number_format($max_size, 0, ".", ",") . " exclussive.";
+			}
+			return $string;    
+		}
+
 }
 
 

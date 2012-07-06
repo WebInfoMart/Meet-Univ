@@ -79,9 +79,9 @@
 				?>
 				</div>
 	<?php //$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]"; ?>			
-				<div class="float_r">
+				<div class="float_r" id="soc_button">
 				<div class="float_l" style="margin-right:15px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-							<div class="float_l" style="width: 58px"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
+						<div class="float_l" style="width: 58px"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
 							<div class="float_l">
 								<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
 							</div>

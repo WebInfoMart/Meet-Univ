@@ -70,7 +70,7 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 								<div class="img_style float_l img_r aspectcorrect">
 									<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" class="img_event">
 								</div>
-								<div><img src="http://meetuniv.com/images/clock.png" class="line_img inline"><span class="blue line_time inline"><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
+								<div><img src="<?php echo "$base$img_path"; ?>/clock.png" class="line_img inline"><span class="blue line_time inline"><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
 								</span></div>
 								<?php echo substr($articles_detail['article_detail'],0,250).'..'; ?>
 							</div>
