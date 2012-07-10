@@ -946,7 +946,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf4ea', end
 .prof_data{margin:0px;list-style:none;}
 .prof_data li{margin-bottom: 10px;}
 .part_art{height: 150px;overflow: hidden;}
-.text-width{width:205px;margin-left:20px}
+.text-width{width:200px;margin-left:20px}
 .line_time{line-height:20px;overflow-y: hidden;margin-left:20px}
 .registered{text-align: center;background: #eeeeee; /* Old browsers */
 background: -moz-linear-gradient(left,  #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
@@ -1092,3 +1092,5 @@ abbr[title], acronym[title] {
 }
 .univ_page_gal{height:100px;width:175px;}
 .status_numb{border-radius: 4px!important;-webkit-border-radius: 4px!important;-moz-border-radius: 4px!important;}
+.event-page{line-height: 20px;
+overflow-y: hidden;}

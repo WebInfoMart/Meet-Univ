@@ -128,7 +128,6 @@ class Admin extends CI_Controller
 						$this->form_validation->set_value('user_type')
 						)) {								// success
 					redirect('/admin/');
-
 				} else {
 					$errors = $this->tank_auth->get_error_message();
 					if (isset($errors['banned'])) {								// banned user
@@ -1129,7 +1128,7 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('fax_address', 'Fax Address', 'trim|xss_clean');
 		$this->form_validation->set_rules('univ_email', 'university email', 'trim|xss_clean|valid_email');
 		$this->form_validation->set_rules('web_address', 'Web Address', 'trim|xss_clean');
-		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
+		$$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]|max_length[50]');
 		if ($this->form_validation->run()) {
 		$data['x']=$this->adminmodel->create_univ();
 		//print_r($data['x']);
@@ -1511,7 +1510,7 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
-		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|callback_check_subdomain');
+		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|callback_check_subdomain|max_length[50]');
 		if ($this->form_validation->run()) {
 		$data['x']=$this->adminmodel->update_university($univ_id);
 		//print_r($data['x']);

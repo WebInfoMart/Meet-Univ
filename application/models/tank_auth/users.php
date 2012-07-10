@@ -357,12 +357,15 @@ class Users extends CI_Model
   if($user_type=='admin')
   {
   $level='2,3,4,5';
+  $this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1'");
+  
   }
   else if($user_type=='student')
   {
   $level='1';
-  }
   $this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1' && activated!='0'");
+  }
+  //$this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1' && activated!='0'");
   //$this->db->where('LOWER(username)=', strtolower($login));
   //$this->db->where('LOWER(level)=', '1');
  // $this->db->or_where("LOWER(username)='".strtolower($login)."' and level IN($level)");
@@ -370,8 +373,14 @@ class Users extends CI_Model
   
 
   $query = $this->db->get($this->table_name);
-  if ($query->num_rows() == 1) return $query->row();
+ if ($query->num_rows() == 1) 
+  {
+  return $query->row();
+  }
+  else
+  {
   return NULL;
+  }
  }
 
 	/**

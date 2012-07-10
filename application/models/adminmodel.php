@@ -282,7 +282,7 @@ class Adminmodel extends CI_Model
 			}
 			$level=array('1','2','4','5');
 			//$query = $this->db->get_where('basic_operation', array('operation_level' => $level));	
-			$this->db->select('id,fullname');
+			$this->db->select('id,fullname,email');
 			$this->db->from('users');
 			//$this->db->join('university', 'users.id != university.user_id','right');
 			$this->db->where_not_in('id',$userid); 

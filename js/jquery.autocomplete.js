@@ -174,14 +174,14 @@ $.Autocompleter = function(input, options) {
 			var result;
 			if( data && data.length ) {
 				for (var i=0; i < data.length; i++) {
-				var cdata=data[i].result.toLowerCase();
-				cdata=cdata.replace(' ','');
+				var cdata=data[i].result.toLowerCase().trim();
+				//cdata=cdata.replace(' ','');
 				cdatarr=cdata.split('<b>');
 				if(cdatarr.length>1)
 				{
 				cdata=cdatarr[1];
 				}
-					if( cdata == q.toLowerCase() ) {
+					if( cdata == q.toLowerCase().trim()) {
 					result = data[i];
 						break;
 					}

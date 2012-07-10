@@ -742,6 +742,9 @@ class Adminevents extends CI_Controller
 				'end_time' => $this->input->post('event_time').' '.$this->input->post('event_time_end'),
 				'city' =>$event_loc,
 				'email'=>'info@meetuniversities.com',
+				'description' => $this->input->post('detail'),
+				'location' => $this->input->post('event_place'),
+				"privacy"=>"OPEN",
 				'page_id' => $page_id,
 				'access_token'=>$access_token
 				);

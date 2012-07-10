@@ -120,7 +120,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 							<select class="<?php echo $class_univ_owner; ?> styled span3 margin_zero" name="univ_owner" id="univ_owner">
 								<option value="">Please Select</option>
 								<?php foreach($univ_admins as $univ_detail) { ?>
-								<option value="<?php echo $univ_detail['id']; ?>"><?php echo ucwords($univ_detail['fullname']); ?></option>
+								<option value="<?php echo $univ_detail['id']; ?>"><?php echo ucwords($univ_detail['fullname']).'('.$univ_detail['email'].')'; ?></option>
 							<?php } ?>
 							</select>
 							<span style="color: red;"> <?php echo form_error('univ_owner'); ?><?php echo isset($errors['univ_owner'])?$errors['univ_owner']:''; ?> </span>

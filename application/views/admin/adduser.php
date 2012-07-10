@@ -52,10 +52,11 @@ if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $clas
 						<div><label>USER ROLL</label></br>
 						<select  class="<?php echo $class_level_user; ?> styled" name="level_user" id="level_user">
 							<option value="">SELECT</option>
-							<option value="4">ADMIN</option>
-							<option value="3">UNIVERSITY ADMIN</option>
-							<option value="2">COUNSELLOR</option>
-							<option value="1">STUDENT</option>	
+							<option value="4" <?php if(set_value('level_user')==4) { ?> selected <?php } ?>>ADMIN</option>
+							<option value="3" <?php if(set_value('level_user')==3) { ?> selected <?php } ?>>UNIVERSITY ADMIN</option>
+							<option value="2" <?php if(set_value('level_user')==2) { ?> selected <?php } ?>>COUNSELLOR</option>
+							<option value="1" <?php if(set_value('level_user')==1) { ?> selected <?php } ?>>STUDENT</option>	
+						
 						</select>
 						<span style="color: red;"> <?php echo form_error('level_user'); ?><?php echo isset($errors['level_user'])?$errors['level_user']:''; ?> </span>
 					

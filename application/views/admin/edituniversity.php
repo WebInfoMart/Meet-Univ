@@ -139,15 +139,15 @@ $univ_city_id=$univ_detail_update['city_id'];
 							<label style="color:#2E64FE">University Owner</label>
 						</div>
 						<div class="float_l span3" >
-						<!--<input type="text" size="30" class="text" readonly name="univ_owner" value="<?php echo ucwords($univ_detail_update['fullname']); ?>" >-->
+						<!--<input type="text" size="30" class="text" readonly name="univ_owner" value="<?php //echo ucwords($univ_detail_update['fullname']); ?>" >-->
 							<select class="<?php echo $class_univ_owner; ?> styled span3 margin_zero" id="univ_owner" name="univ_owner">
 							
 								<option value="">Please Select</option>
 					<?php if($univ_detail_update['user_id']!='' && $univ_detail_update['user_id']!=0 && $univ_detail_update['user_id']!=NULL){ ?>
-					<option value="<?php echo $univ_detail_update['user_id']; ?>" selected><?php echo ucwords($univ_detail_update['fullname']); ?></option>
-					<?php } ?>		
+					<option value="<?php echo $univ_detail_update['user_id']; ?>" selected><?php echo ucwords($univ_detail_update['fullname']).'('.$univ_detail_update['email'].')'; ?></option>
+					<?php } ?>		 
 								<?php foreach($univ_admins as $univ_detail) { ?>
-								<option value="<?php echo $univ_detail['id']; ?>"><?php echo ucwords($univ_detail['fullname']); ?></option>
+								<option value="<?php echo $univ_detail['id']; ?>"><?php echo ucwords($univ_detail['fullname']).'('.$univ_detail['email'].')'; ?></option>
 							<?php } ?>
 							</select>
 							

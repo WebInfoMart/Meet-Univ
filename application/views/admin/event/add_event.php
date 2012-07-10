@@ -33,34 +33,34 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 $(document).ready(function() {
 	
 	$("#univ_name").autocomplete("<?php echo $base; ?>autosuggest/suggest_university", {
-		width: 320
-		//matchContains: true,
-		//mustMatch: true
+		width: 320,
+		matchContains: true,
+		mustMatch: true
 	});
 	$("#univ_name").result(function(event, data, formatted) {
 		$("#university").val(data[1]);
 	});
 	
 	$("#country_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_country', {
-		width: 260
-		//matchContains: true,
-		//mustMatch: true
+		width: 260,
+		matchContains: true,
+		mustMatch: true
 	});
 	$("#country_name").result(function(event1, data1, formatted1) {
 		$("#country").val(data1[1]);
 	});
     $("#state_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_state', {
-		width: 260
-		//matchContains: true,
-		//mustMatch: true
+		width: 260,
+		matchContains: true,
+		mustMatch: true
 	});
 	$("#state_name").result(function(event2, data2, formatted2) {
 	$("#state").val(data2[1]);
 	});
 	$("#city_name").autocomplete('<?php echo $base; ?>autosuggest/suggest_city', {
-		width: 260
-		//matchContains: true,
-		//mustMatch: true
+		width: 260,
+		matchContains: true,
+		mustMatch: true
 	});
 	$("#city_name").result(function(event3, data3, formatted3) {
 	$("#city").val(data3[1]);
