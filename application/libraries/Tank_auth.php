@@ -240,8 +240,11 @@ class Tank_auth
 				'email'		=> $this->ci->session->userdata('newadmin_email'),
 				'createdby_user_id' =>$this->ci->session->userdata('newadmin_createdby_user_id'),
 				'last_ip'	=> $this->ci->input->ip_address(),
+				'activated'=>'1'
 				
 			);
+			echo $email_activation;
+			print_r($data);
 		if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];
 				//$data['password'] = $password;

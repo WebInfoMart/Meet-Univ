@@ -79,7 +79,7 @@
 								
 								</div>
 							</div>
-							<center><div id="show_process" style="display:none;"> <img src="<?php echo "$base$img_path" ?>/searching.gif" /> </div></center>
+							<center><div id="show_process" style="display:none;"> <img src="<?php echo "$base$img_path" ?>/ajax-loader.gif" /> </div></center>
 							<div class="margin_t" id="body_msg" style="display:none;">
 								
 								

@@ -336,9 +336,10 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												<!--<img src="images/map_data.png" style="width: 112px;height: 62px;border: 1px solid #DDD;padding: 2px;">-->
 											</div>
 											<div class="float_r registered">
+											<a href="<?php echo $event_link; ?>" style="text-decoration:none;">
 											<?php $event_register_user = $this->frontmodel->count_event_register($event_detail['event_id']); ?>
 													<h2 class="blue"><?php echo $event_register_user; ?></h2>	
-													<h5 class="blue">Registered</h5>
+													<h5 class="blue">Registered</h5></a>
 											</div>
 											<div class="clearfix"></div>
 										</div>
@@ -386,7 +387,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 	</div>
 <!-- End Here -->	
 <!-- Div For Voice SMS -->
-	<div id="myModal-voice" class="model_back modal hide fade">
+	<div id="myModal_voice" class="model_back modal hide fade">
 	<div class="modal-header no_border model_heading">
 		<a class="close" data-dismiss="modal">x</a>
 		<h3>Event Information</h3>
@@ -439,9 +440,13 @@ $number_month = date('m');
 	   {
 	   $('#event_det').html(msg);
 		$('#sms_form').append('<input type="hidden" name="page_status" value="events"/>');
-		$('#myModal').modal({
+		$("#myModal").modal({                    
+		  "keyboard"  : true,
+		  "show"      : true                     
+		});
+		/* $('#myModal').modal({
         keyboard: false
-    })
+    }) */
 	  //$('#search_program').html(msg);
 	   }
 	   }) 
@@ -467,9 +472,13 @@ function voicepopup(id) {
 	   {
 	   $('#event_det_voice').html(msg);
 		$('#sms_form_voice').append('<input type="hidden" name="page_status_voice" value="events"/>');
-		$('#myModal-voice').modal({
+		$("#myModal_voice").modal({                    
+		  "keyboard"  : true,
+		  "show"      : true                     
+		});
+		/* $('#myModal-voice').modal({
         keyboard: false
-    })
+    }) */
 	  //$('#search_program').html(msg);
 	   }
 	   }) 

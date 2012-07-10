@@ -32,9 +32,7 @@ if ($user) {
 					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $delete_comment; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
 
-									<h4><a href="#" class="course_txt">
-									<?php echo $user_detail['fullname']; ?>
-									</a></h4>
+									
 									<?php echo $commented_text; ?>
 									
 									<div style="font-size;color:black;" class="float_r">
@@ -46,10 +44,14 @@ if ($user) {
 											$sec = 0;
 											$modified = $original+$sec+($min*60)+($hr*60*60);				
 								   ?>		
-								<abbr class="timeago time_ago" title="<?php echo date('Y-m-d H:i:s', $modified) ?>"></abbr>
+								<abbr class="timeago time_ago" style="margin-right: 7px;" title="<?php echo date('Y-m-d H:i:s', $modified) ?>"></abbr>
 									</div>
 								</div>
+								
 								<div class="clearfix"></div>
+								<h4><span class="course_txt">
+									<?php echo $user_detail['fullname']; ?>
+									</span></h4>
 </div>
 <script>
 jQuery(document).ready(function() {

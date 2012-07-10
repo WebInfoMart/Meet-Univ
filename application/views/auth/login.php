@@ -33,9 +33,12 @@ $captcha = array(
 
 $class_login='';
 $class_pass='';
+$class_modal_email='';
 $error_login = form_error('login');
 $error_password = form_error('password');
+$error_modal_email = form_error('email');
 
+if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } else { $class_modal_email='span3'; }
 if($error_login != '') { $class_login = 'focused_error'; } else { $class_login='input-xlarge'; }
 
 if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass='input-xlarge'; }
@@ -48,15 +51,13 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 	}
 	</script>
 <script>
-$(document).ready(function(){
 <?php if($msg == 1) { ?>
- $('#forget_model').modal('toggle');
+ $('#forget_model').modal('show');
  <?php } ?>
  <?php if($email_send == 1) { ?>
  $('#link_send_for_fpass').css('display','block');
 $("#link_send_for_fpass").delay(7000).fadeOut(200);
  <?php } ?>
-});
 </script>
 <div class="modal" id="link_send_for_fpass" style="display:none;" >
   <div class="modal-header">
@@ -73,12 +74,7 @@ $("#link_send_for_fpass").delay(7000).fadeOut(200);
   </div>
 </div>
 <div id="forget_model" class="model_back modal hide fade" style="display: none; ">
-<?php 
-$class_modal_email='';
-$error_modal_email = form_error('email');
 
-if($error_modal_email != '') { $class_modal_email = 'focused_error_stepone'; } else { $class_modal_email='span3'; }
- ?>
 					<div class="modal-header no_border forget_heading">
 						<a class="close" data-dismiss="modal">x</a>
 						<h3>Forget Password</h3>

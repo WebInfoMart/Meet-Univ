@@ -142,10 +142,10 @@ if ($user) {
 ?>
 <?php
 
-$title_of_event = "Meet Universities - Get connected to your dream university.";
-$img_src = base_url()."uploads/univ_gallery/univ_logo.png";
-$detail_of_event="Study Abroad - Research, Connect &  Meet Your Dream University.";
-if(!empty($university_details) && ($university_details['univ_logo_path'] !=0 || $university_details['univ_logo_path'] != ''))
+ if(empty($header_title)){$header_title = "Meet Universities - Get connected to your dream university.";}
+ if(empty($img_src)){ $img_src = base_url()."uploads/univ_gallery/univ_logo.png";}
+ if(empty($header_detail)) { $header_detail = "Study Abroad - Research, Connect &  Meet Your Dream University.";}
+/*if(!empty($university_details) && ($university_details['univ_logo_path'] !=0 || $university_details['univ_logo_path'] != ''))
 {
 $img_src = base_url()."uploads/univ_gallery/".$university_details['univ_logo_path'];
 }
@@ -158,7 +158,7 @@ if(!empty($event_detail) && ($event_detail['event_detail'] != 0 || $event_detail
 $event_details=str_replace('<div>','',$event_detail['event_detail']);
 $event_details=str_replace('</div>','',$event_details);
 $detail_of_event = $event_details; 
-}
+} */
 
 ?>
 
@@ -168,15 +168,15 @@ $detail_of_event = $event_details;
   <meta property="fb:app_id" content="415316545179174" /> 
   <meta property="og:type"   content="meetuniversities:event" /> 
   <meta property="og:url"    content="<?php echo $curURL; ?>" /> 
-  <meta property="og:title"  content="<?php echo $title_of_event; ?>" /> 
+  <meta property="og:title"  content="<?php echo $header_title; ?>" /> 
   <meta property="og:image"  content="<?php echo $img_src; ?>" />
-  <meta property="og:description"  content="<?php echo $detail_of_event; ?>" />
+  <meta property="og:description"  content="<?php echo $header_detail; ?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="keywords" content="">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">
-<title><?php echo $title_of_event; ?></title>
+<title><?php echo $header_title; ?></title>
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style_sh.css">

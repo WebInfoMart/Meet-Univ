@@ -53,7 +53,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									else { ?>		
 									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 									<?php } ?>
-									<h4 ><span>
+									<h4 ><span class="course_txt">
 									<?php 
 									if($news_comments_detail['commented_by_user_name'] !=''){
 									echo $news_comments_detail['commented_by_user_name']; 
@@ -78,7 +78,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			<span class="float_r delete_comment" >
 					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $news_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
-			<div>
+			<div class="float_r">
 									<abbr class="timeago time_ago" title="<?php echo $news_comments_detail['comment_time']; ?>"></abbr></div>
 			<?php	} } ?>	
 								<div class="span6 margin_zero">
