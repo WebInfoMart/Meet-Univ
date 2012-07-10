@@ -202,11 +202,18 @@ $this->session->unset_userdata('msg_send_suc_voice');
 			if($user_detail['user_id']==$event_comments_detail['user_id'])
 			{
 			?>					
-			<span class="float_r delete_comment" >
+			<span class="float_r delete_comment">
 					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php echo $event_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
 			<?php	} } ?>	
-								<h4><a href="#" class="course_txt">
+								
+								<?php echo $event_comments_detail['commented_text'];?>
+								<div style="font-size;color:black;" class="float_r">
+								<abbr class="timeago time_ago" title="<?php echo $event_comments_detail['comment_time']; ?>"></abbr>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<h4><span class="course_txt">
 								<?php if($event_comments_detail['commented_by_user_name'] !=''){
 									echo $event_comments_detail['commented_by_user_name']; 
 									}
@@ -218,13 +225,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									{
 										echo $user_profile['name'];
 									} ?>
-								</a></h4>
-								<?php echo $event_comments_detail['commented_text'];?>
-								<div style="font-size;color:black;" class="float_r">
-								<abbr class="timeago time_ago" title="<?php echo $event_comments_detail['comment_time']; ?>"></abbr>
-								</div>
-							</div>
-							<div class="clearfix"></div>
+								</span></h4>
 						</div> <?php } } ?>
 					</div>
 					<div class="margin_t margin_b">

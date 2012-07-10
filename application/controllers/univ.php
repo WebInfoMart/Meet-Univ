@@ -269,6 +269,31 @@ class Univ extends CI_Controller
 			$data['total_register_user'] = $this->frontmodel->count_event_register($event_id);
 			$data['feature_event_of_univ'] = $this->frontmodel->fetch_featured_events_of_univ($univ_id);
 			
+			if($data['university_details']['univ_logo_path'] !='' || $data['university_details']['univ_logo_path']!= 0)
+			{
+				$data['img_src'] = base_url()."uploads/univ_gallery/".$data['university_details']['univ_logo_path'];
+			}
+			else{
+				$data['img_src'] = base_url()."uploads/univ_gallery/univ_logo.png";
+			}
+			if($data['event_detail']['event_title'] != '' || $data['event_detail']['event_title'] != 0)
+			{
+				$data['header_title'] = $data['event_detail']['event_title'];
+			}
+			else {
+				$data['header_title'] = "Meet Universities - Get connected to your dream university.";
+			}
+			
+			if($data['event_detail']['event_detail'] != '' || $data['event_detail']['event_detail'] != 0)
+			{
+				$event_details=str_replace('<div>','',$data['event_detail']['event_detail']);
+				$event_details=str_replace('</div>','',$event_details);
+				$data['header_detail'] = $event_details; 
+			}
+			else {
+				$data['header_detail'] = "Study Abroad - Research, Connect &  Meet Your Dream University.";
+			}
+			
 			$this->load->view('auth/header',$data);
 			 if($data['university_details'] != 0 )
 			 {
@@ -483,7 +508,6 @@ class Univ extends CI_Controller
 			$data = $this->path->all_path();
 			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
-			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -495,6 +519,44 @@ class Univ extends CI_Controller
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['news_detail']=$this->frontmodel->get_news_detail_by_univ($univ_id,$news_id);
 			$data['recent_news'] = $this->frontmodel->fetch_news();
+			
+			
+			
+			
+			if($data['news_detail']['news_image_path'] !='' || $data['news_detail']['news_image_path']!= 0)
+			{
+				$data['img_src'] = base_url()."/uploads/news_article_images/".$data['news_detail']['news_image_path'];
+			}
+			else if($data['university_details']['univ_logo_path'] !='' || $data['university_details']['univ_logo_path']!= 0)
+			{
+				$data['img_src'] = base_url()."/uploads/news_article_images/".$data['university_details']['univ_logo_path'];
+			}
+			else{
+				$data['img_src'] = base_url().'images/default_logo.png';
+			}
+			if($data['news_detail']['news_title'] != '' || $data['news_detail']['news_title'] != 0)
+			{
+				$data['header_title'] = $data['news_detail']['news_title'];
+			}
+			else {
+				$data['header_title'] = "Meet Universities - Get connected to your dream university.";
+			}
+			
+			if($data['news_detail']['news_detail'] != '' || $data['news_detail']['news_detail'] != 0)
+			{
+				$event_details=str_replace('<div>','',$data['news_detail']['news_detail']);
+				$event_details=str_replace('</div>','',$event_details);
+				$data['header_detail'] = $event_details; 
+			}
+			else {
+				$data['header_detail'] = "Study Abroad - Research, Connect &  Meet Your Dream University.";
+			}
+			$this->load->view('auth/header',$data);
+			
+			
+			
+			
+			
 			if($data['university_details'] != 0 )
 			{
 				
@@ -545,7 +607,7 @@ class Univ extends CI_Controller
 			$data = $this->path->all_path();
 			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
-			$this->load->view('auth/header',$data);
+			
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -556,6 +618,42 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['articles_detail']=$this->frontmodel->get_article_detail_by_univ($univ_id,$article_id);
+			//print_r($data['articles_detail']);
+			
+			
+			
+			if($data['articles_detail']['article_image_path'] !='' || $data['articles_detail']['article_image_path']!= 0)
+			{
+				$data['img_src'] = base_url()."/uploads/news_article_images/".$data['articles_detail']['article_image_path'];
+			}
+			else if($data['university_details']['univ_logo_path'] !='' || $data['university_details']['univ_logo_path']!= 0)
+			{
+				$data['img_src'] = base_url()."/uploads/news_article_images/".$data['university_details']['univ_logo_path'];
+			}
+			else{
+				$data['img_src'] = base_url().'images/default_logo.png';
+			}
+			if($data['articles_detail']['article_title'] != '' || $data['articles_detail']['article_title'] != 0)
+			{
+				$data['header_title'] = $data['articles_detail']['article_title'];
+			}
+			else {
+				$data['header_title'] = "Meet Universities - Get connected to your dream university.";
+			}
+			
+			if($data['articles_detail']['article_detail'] != '' || $data['articles_detail']['article_detail'] != 0)
+			{
+				$event_details=str_replace('<div>','',$data['articles_detail']['article_detail']);
+				$event_details=str_replace('</div>','',$event_details);
+				$data['header_detail'] = $event_details; 
+			}
+			else {
+				$data['header_detail'] = "Study Abroad - Research, Connect &  Meet Your Dream University.";
+			}
+			$this->load->view('auth/header',$data);
+			
+			
+			
 			$data['recent_articles'] = $this->frontmodel->fetch_articles();
 		
 			 if($data['university_details'] != 0 )
@@ -647,7 +745,7 @@ class Univ extends CI_Controller
    $data = $this->path->all_path();
    $univ_id=$this->subdomain->find_id_of_current_univ();
    $user_id=$this->quest_ans_model->find_user_id_of_question($quest_id);
-   $this->load->view('auth/header',$data);
+   
    $data['univ_id_for_program'] = $univ_id; 
    $data['university_details'] = $this->users->get_university_by_id($univ_id);
    $country_id = $data['university_details']['country_id'];
@@ -656,6 +754,7 @@ class Univ extends CI_Controller
    $university_name = $data['university_details']['univ_name'];
    $university_address = $data['university_details']['address_line1'];
    $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+   
    if($data['university_details'] != 0 )
    {
     $data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -663,11 +762,42 @@ class Univ extends CI_Controller
 	$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
     $data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
     $data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
-    $this->load->view('auth/univ-header-gallery-logo',$data);
+    
 				
     if($univ_id !='' && $quest_id !='' && $user_id !='')
     {
     $data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$user_id);
+	
+	
+	if($data['university_details']['univ_logo_path'] !='' || $data['university_details']['univ_logo_path']!= 0)
+			{
+				$data['img_src'] = base_url()."uploads/univ_gallery/".$data['university_details']['univ_logo_path'];
+			}
+			else{
+				$data['img_src'] = base_url()."uploads/univ_gallery/univ_logo.png";
+			}
+			if($data['single_quest']['q_title'] != '' || $data['single_quest']['q_title'] != 0)
+			{
+				$data['header_title'] = $data['single_quest']['q_title'];
+			}
+			else {
+				$data['header_title'] = "Meet Universities - Get connected to your dream university.";
+			}
+			
+			if($data['single_quest']['q_detail'] != '' || $data['single_quest']['q_detail'] != 0)
+			{
+				$event_details=str_replace('<div>','',$data['single_quest']['q_detail']);
+				$event_details=str_replace('</div>','',$event_details);
+				$data['header_detail'] = $event_details; 
+			}
+			else {
+				$data['header_detail'] = "Study Abroad - Research, Connect &  Meet Your Dream University.";
+			}
+	
+	
+	$this->load->view('auth/header',$data);
+	$this->load->view('auth/univ-header-gallery-logo',$data);
+	
 	$data['clear_comment']=0;
 	if($data['single_quest']!=0)
 	{
@@ -691,10 +821,13 @@ class Univ extends CI_Controller
     $this->load->view('auth/univ_questions',$data);
    }
    else{
+   $this->load->view('auth/header',$data);
+	$this->load->view('auth/univ-header-gallery-logo',$data);
    $data['err_msg']='<h2> Sorry....</br><span class="text-align">Page Not Found.... </span> </h2>';
    $data['err_div']=1;
    $this->load->view('auth/NotFoundPage',$data);
    }
+   //$this->load->view('auth/header',$data);
    $this->load->view('auth/footer',$data);
   }
   

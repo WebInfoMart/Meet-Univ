@@ -193,7 +193,10 @@ class Frontmodel extends CI_Model
 	
 	function get_events_list_by_univ($univ_id='')
 	{
-		/*$this->db->select('*');
+		$data = $this->path->all_path();
+		$subdomain_name = $this->subdomain->find_subdomain_name_and_id();
+		$subdomain_name_for_paging = $subdomain_name['domain'];
+		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
@@ -202,11 +205,11 @@ class Frontmodel extends CI_Model
 		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event'));
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
-		$config['base_url']=base_url()."univ/university_events_list";
+		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/event-list/university_events";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '2'; 
+		$config['per_page'] = '1'; 
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
-        $limit = $config['per_page'];*/
+        $limit = $config['per_page'];
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
@@ -214,9 +217,9 @@ class Frontmodel extends CI_Model
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
 		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event'));
-		//$this->db->limit($limit,$offset);
+		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
-		//$this->pagination->initialize($config);
+		$this->pagination->initialize($config);
 		if($query->num_rows()>0)
 		{
 		  return $query->result_array();
@@ -229,27 +232,28 @@ class Frontmodel extends CI_Model
 	}
 	function get_news_list_by_univ($univ_id='')
 	{
-		/*$this->db->select('*');
-		$this->db->from('events');
-		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
-		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
-		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
-		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event'));
-		$query = $this->db->get();
-		$numrows=$query->num_rows();
-		$config['base_url']=base_url()."univ/university_events_list";
-		$config['total_rows']=$numrows;
-		$config['per_page'] = '2'; 
-		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
-        $limit = $config['per_page'];*/
+		$data = $this->path->all_path();
+		$subdomain_name = $this->subdomain->find_subdomain_name_and_id();
+		$subdomain_name_for_paging = $subdomain_name['domain'];
 		$this->db->select('*');
 		$this->db->from('news');
 		$this->db->join('university', 'news.news_univ_id = university.univ_id'); 
 		$this->db->where(array('news_univ_id'=>$univ_id,'news_type_ud'=>'univ_news'));
-		//$this->db->limit($limit,$offset);
 		$query = $this->db->get();
-		//$this->pagination->initialize($config);
+		$numrows=$query->num_rows();
+		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/news-list/university_news_list";
+		//$config['base_url']=base_url()."news-list/university_news_list";
+		$config['total_rows']=$numrows;
+		$config['per_page'] = '5'; 
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('news');
+		$this->db->join('university', 'news.news_univ_id = university.univ_id'); 
+		$this->db->where(array('news_univ_id'=>$univ_id,'news_type_ud'=>'univ_news'));
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
 		if($query->num_rows()>0)
 		{
 		  return $query->result_array();
@@ -343,28 +347,28 @@ class Frontmodel extends CI_Model
 	}
 	function get_articles_list_by_univ($univ_id)
 	{
-		
-		/*$this->db->select('*');
-		$this->db->from('events');
-		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 
-		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
-		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
-		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event'));
-		$query = $this->db->get();
-		$numrows=$query->num_rows();
-		$config['base_url']=base_url()."univ/university_events_list";
-		$config['total_rows']=$numrows;
-		$config['per_page'] = '2'; 
-		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
-        $limit = $config['per_page'];*/
+		$data = $this->path->all_path();
+		$subdomain_name = $this->subdomain->find_subdomain_name_and_id();
+		$subdomain_name_for_paging = $subdomain_name['domain'];
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
 		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article','article_approve_status'=>'1'));
-		//$this->db->limit($limit,$offset);
 		$query = $this->db->get();
-		//$this->pagination->initialize($config);
+		$numrows=$query->num_rows();
+		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/article-list/university_articles_list";
+		//$config['base_url']=base_url()."article-list/university_articles_list";
+		$config['total_rows']=$numrows;
+		$config['per_page'] = '1'; 
+		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('article');
+		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
+		$this->db->where(array('article_univ_id'=>$univ_id,'article_type_ud'=>'univ_article','article_approve_status'=>'1'));
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
 		if($query->num_rows()>0)
 		{
 		  return $query->result_array();

@@ -143,7 +143,7 @@ class Quest_ans_controler extends CI_Controller
 
 		$data = $this->path->all_path();
 		$ask_user_id=$this->quest_ans_model->find_user_id_of_question($quest_id);
-		$this->load->view('auth/header',$data);
+		
 		$data['user_is_logged_in']=0;
 				if($this->tank_auth->is_logged_in())
 				{
@@ -154,7 +154,30 @@ class Quest_ans_controler extends CI_Controller
 		{
 			$univ_id = 'meetquest';
 			$data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$ask_user_id);
-			//print_r($data['single_quest']);
+			
+			
+			$data['img_src'] = base_url()."uploads/univ_gallery/univ_logo.png";
+
+			if($data['single_quest']['q_title'] != '' || $data['single_quest']['q_title'] != 0)
+			{
+				$data['header_title'] = $data['single_quest']['q_title'];
+			}
+			else {
+				$data['header_title'] = "Meet Universities - Get connected to your dream university.";
+			}
+			
+			if($data['single_quest']['q_detail'] != '' || $data['single_quest']['q_detail'] != 0)
+			{
+				$event_details=str_replace('<div>','',$data['single_quest']['q_detail']);
+				$event_details=str_replace('</div>','',$event_details);
+				$data['header_detail'] = $event_details; 
+			}
+			else {
+				$data['header_detail'] = "Study Abroad - Research, Connect &  Meet Your Dream University.";
+			}
+			
+			$this->load->view('auth/header',$data);
+			
 			if($data['single_quest'] == 0)
 			{
 				$data['err_msg']='<h2> Sorry....</br><span class="text-align">Question Detail Not Found.... </span> </h2>';
@@ -166,6 +189,7 @@ class Quest_ans_controler extends CI_Controller
 			}
 		}
 		else{
+		$this->load->view('auth/header',$data);
 		$data['err_msg']='<h2> Sorry....</br><span class="text-align">No Question Found.... </span> </h2>';
 			$data['err_div']=1;
 		$this->load->view('auth/NotFoundPage',$data);

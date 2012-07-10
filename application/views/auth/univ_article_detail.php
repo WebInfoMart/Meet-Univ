@@ -73,13 +73,15 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				</div>
 				<div id="add_more_comment">
 					<div class="event_border">
-						<input type="hidden" id="txt_cnt_comment_show" value="<?php if($article_comments!=0) { count($article_comments); }
-						else { echo "0"; } ?>"/>
-						<h3><span id="cnt_comment_show"><?php if($article_comments!=0) { count($article_comments); }
+					<?php if($article_comments!=0) { $all_comment =  count($article_comments); }
+						else { $all_comment = 0; } ?>
+						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $all_comment; ?>"/>
+						<h3><span id="cnt_comment_show"><?php if($article_comments!=0) { echo count($article_comments); }
 						else { echo "0"; }
 						?></span> Comments</h3>
 					</div>
 					<?php if($article_comments!=0){
+					//print_r($article_comments);
 						foreach($article_comments as $article_comments_detail){ ?>
 							<div class="event_border hover_delete_comment_<?php echo $article_comments_detail['comment_id']; ?>" >
 								<div class="float_l comment_img center">
@@ -92,7 +94,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									else { ?>		
 									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 									<?php } ?>
-									<h4><a href="#">
+									<h4><span class="course_txt">
 									<?php 
 									if($article_comments_detail['commented_by_user_name'] !=''){
 									echo $article_comments_detail['commented_by_user_name']; 
@@ -106,7 +108,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										echo $user_profile['name'];
 									}
 									?>
-									</a>
+									</span>
 									</h4>
 								</div>
 								<?php if($user_is_logged_in ){

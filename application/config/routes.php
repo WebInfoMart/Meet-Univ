@@ -47,8 +47,11 @@ $route['user/(:num)']='auth/user/$1';
 $route['about']='univ/univ_aboutus';
 $route['programs']='univ/programs';
 $route['university_events']='univ/university_events';
+$route['(:any)/(:any)/(:num)']='univ/university_events';
 $route['university_news']='univ/university_news_list';
+$route['(:any)/(:any)/(:num)']='univ/university_news_list';
 $route['university_articles']='univ/university_articles_list';
+$route['(:any)/(:any)/(:num)']='univ/university_articles_list';
 //$route['university_qustions_qnswers']='univ/UniversityQuest';
 
 $route['(event/EventRegistration)'] = 'leadcontroller/EventRegistration';

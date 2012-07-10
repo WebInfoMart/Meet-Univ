@@ -65,6 +65,9 @@
 						</li>
 					<?php } ?>
 					</ul>
+					<div id="pagination" class="table_pagination right paging-margin">
+            <?php echo $this->pagination->create_links();?>
+            </div>
 				</div>
 				</div>
 				<div class="float_l span4">			

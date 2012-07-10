@@ -26,7 +26,7 @@
 						<h3>Message For You</h3>
 					  </div>
 					  <div class="modal-body">
-						<p><center><h4>Event Has been registred successfully.....</h4></center></p>
+						<p><center><h4>Dear User ! You Have Successfull Registered On This Event !!!</h4></center></p>
 					  </div>
 					  <div class="modal-footer">
 						<!--<a href="#" class="btn">Close</a>-->
