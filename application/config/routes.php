@@ -130,6 +130,16 @@ $route['(delete_message_outbox/(:num)/(:num))'] = 'user/delete_message_outbox/$1
 $route['(subdomain|subspot_admission_events|fairs_events|Counselling_events|login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
 $route['default_controller'] = 'auth';
 $route['(find_college)'] = 'leadcontroller/find_college';
+
+$route['(alumini-detail)'] = 'univ/univ_overview_detail/$1';
+$route['(faculties-detail)'] = 'univ/univ_overview_detail/$1';
+$route['(studentlife-detail)'] = 'univ/univ_overview_detail/$1';
+$route['(internationalstudent-detail)'] = 'univ/univ_overview_detail/$1';
+$route['(expertise-detail)'] = 'univ/univ_overview_detail/$1';
+$route['(departments-detail)'] = 'univ/univ_overview_detail/$1';
+
+
+
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';
 $route['(find_college/(:num)/(:num))'] = 'leadcontroller/find_college/$1/$2';/* End of file routes.php */
 /* Location: ./application/config/routes.php */

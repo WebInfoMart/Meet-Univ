@@ -1104,6 +1104,53 @@ class Univ extends CI_Controller
 		//print_r($data['search_event_by_calendar']);
 		$this->load->view('ajaxviews/all_event_list_on_search_page_calendar_ajax',$data);
 	}
+	
+	function univ_overview_detail($univ_overview='')
+	{
+		$overview_cond = '';
+		$data['overview_type'] = '';
+		
+		if(trim($univ_overview) == "alumini-detail"){ $overview_cond = "univ_alumni";}
+		else if(trim($univ_overview) == "faculties-detail"){ $overview_cond = "univ_faculties";}
+		else if(trim($univ_overview) == "studentlife-detail"){ $overview_cond = "univ_slife";}
+		else if(trim($univ_overview) == "internationalstudent-detail"){ $overview_cond = "univ_interstudents";}
+		else if(trim($univ_overview) == "expertise-detail"){ $overview_cond = "univ_expertise";}
+		else if(trim($univ_overview) == "departments-detail"){ $overview_cond = "univ_departments";}
+		$data = $this->path->all_path();
+			$univ_id=$this->subdomain->find_id_of_current_univ();
+			$data['err_div']=0;
+			$this->load->view('auth/header',$data);
+			if($overview_cond!=''){
+			$data['view_overview_detail'] = $this->users->get_univ_overview_detail($univ_id,$overview_cond);
+			$data['overview_type'] = $overview_cond;
+			}
+			//print_r($data['view_overview_detail']);
+			//$this->load->view('auth/univ-header-gallery-logo',$data);
+			$data['univ_id_for_program'] = $univ_id;	
+			$data['university_details'] = $this->users->get_university_by_id($univ_id);
+			$country_id = $data['university_details']['country_id'];
+			$city_id = $data['university_details']['city_id'];
+			$state_id = $data['university_details']['state_id'];
+			$university_name = $data['university_details']['univ_name'];
+			$university_address = $data['university_details']['address_line1'];
+			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+			if($data['university_details'] != 0 )
+			{
+				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
+				$data['city_name_university'] = $this->users->fetch_city_name_by_id($city_id);
+				$data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
+				$data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
+				$data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+				$this->load->view('auth/univ-header-gallery-logo',$data);
+				$this->load->view('auth/univ_overview_detail',$data);
+			}
+			else{
+			$data['err_msg']='<h2> Sorry....</br><span class="text-align">Page Not Found.... </span> </h2>';
+			$data['err_div']=1;
+			$this->load->view('auth/NotFoundPage',$data);
+			}
+		$this->load->view('auth/footer',$data);
+	}
 }		
 	
 ?>

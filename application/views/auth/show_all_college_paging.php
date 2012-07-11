@@ -29,7 +29,7 @@
 									<div class="clearfix"></div>
 								</div>
 								<div class="margin_t1"> 
-									<div class="float_l margin_zero">
+									<div class="float_l margin_zero" style="width:310px;">
 										<div class="float_l span2 margin_zero">
 											<div class="col_list_logo aspectcorrect" style="position: absolute;z-index: 100;">
 												<?php
@@ -68,7 +68,7 @@
 											</span>
 											</div>
 										</div>
-										<div class="float_r course_des margin_l">
+										<div class="float_r course_des margin_l" style="margin-left:0px!important;">
 											<?php 
 											$overview=$get_university['university'][$no_university]['univ_overview'];
 											echo substr($overview,0,205);
@@ -83,7 +83,7 @@
 											
 										</div>
 									</div>
-									<div class="float_r page2_col">
+									<div class="float_r page2_col" style="width:254px;">
 										<div class="float_l done margin_l">
 										<?php
 										$univ_name= str_replace(' ','-',$get_university['university'][$no_university]['univ_name']);

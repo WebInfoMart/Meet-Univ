@@ -1643,6 +1643,21 @@ class Users extends CI_Model
   return 0;
   }
  }
+ 
+ function get_univ_overview_detail($univ_id,$overview_cond)
+ {
+	$this->db->select($overview_cond);
+	$this->db->from('university');
+	$this->db->where('univ_id',$univ_id);
+	$query = $this->db->get();
+	if($query->num_rows() > 0)
+	{
+		return $query->row_array();
+	}
+	else {
+	return 0;
+	}
+ }
 
 }
 
