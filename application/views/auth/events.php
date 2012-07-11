@@ -301,12 +301,12 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												
 												$place=0;
 												$city=0;						
-												/*if($event_detail['event_place']!='')
+												if($event_detail['event_place']!='' && $event_detail['event_place']!=$event_detail['cityname'])
 												{
 												echo $event_detail['event_place'];
 												$place=1;
-												}*/
-												if($event_detail['cityname']!=='')
+												} 
+												if($event_detail['cityname']!=='' && $event_detail['cityname']!=NULL)
 												{
 												if($place==1)
 												{
@@ -315,7 +315,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												echo $event_detail['cityname'];
 												$city=1;
 												}
-												if($event_detail['country_name']!='')
+												if($event_detail['country_name']!='' && $event_detail['cityname']!=NULL)
 												{
 												if($city==1 || $place==1)
 												{
