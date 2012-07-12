@@ -871,14 +871,14 @@ class Auth extends CI_Controller
 	
 	function state_list_ajax($cid='0')
 	{
-		
+		$cid = $this->input->post('cid');
 		$data['region']=$this->adminmodel->fetch_states($cid);
 		$this->load->view('ajaxviews/state_ajax',$data);
 	}
 	
 	function city_list_ajax($sid='0')
 	{
-		
+		$sid = $this->input->post('sid');
 		$data['region']=$this->adminmodel->fetch_city($sid);
 		$this->load->view('ajaxviews/city_ajax',$data);
 	}

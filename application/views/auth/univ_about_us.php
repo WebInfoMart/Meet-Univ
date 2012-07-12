@@ -48,10 +48,24 @@
 	$univ_overview_link=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'about','',''); */
 	?>
 	<div>
+	<?php if($university_details['univ_overview'] != '') { ?>
 		<div class="float_l span8 margin_zero about_depend">
 		<?php
 		echo "<h3>Overview University</h3><div class='course_cont'>".$university_details['univ_overview']."</div>";?>
+		
 		</div>
+		<?php } ?>
+		<div class="float_l">
+		<?php if($university_details['univ_overview'] == "" && $university_details['univ_campus'] == ""
+		&& $university_details['univ_departments'] == "" && $university_details['univ_expertise'] == ""
+		&& $university_details['univ_interstudents'] == "" && $university_details['univ_slife'] == ""
+		&& $university_details['univ_faculties'] == "" && $university_details['univ_alumni'] == "") { 
+		echo "<h4>";
+		echo "We are gathering information about the".$university_details['univ_name'].". Please visit back soon";
+		echo "</h4>";
+	} ?>
+		</div>
+		
 		<div class="float_r span5">
 			<div class="about_round">
 			<?php

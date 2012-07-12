@@ -41,8 +41,13 @@
 								}
 								else{ $content = $select_univ['univ_overview']; }
 								$programs_link=$this->subdomain->genereate_the_subdomain_link($select_univ['subdomain_name'],'programs','','');
+								 if($clear_even_odd % 2 == 0) {
+								$class_left_margin = 'style="margin-left:7px;"';
+								}
+								else { $class_left_margin = ''; }
 								?>
-								<div class="page3_step3_width float_l margin_t">
+								
+								<div class="page3_step3_width float_l margin_t"<?php echo $class_left_margin; ?>>
 									<div class="page3_step3">
 									<input type="checkbox" id="<?php echo $select_univ['univ_id']; ?>" class="check" name="select_id[]" value="<?php echo $select_univ['univ_id']; ?>" <?php echo $check; ?>>
 										<h3><?php echo $select_univ['univ_name']; ?></h3>
@@ -62,7 +67,7 @@
 											<div id="content">
 											<?php echo $content; ?>
 											</div>
-											<a href="<?php echo $programs_link; ?>" class="float_r">View Courses</a>
+											<a href="<?php echo $programs_link; ?>" class="float_r" target="_blank">View Courses</a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -71,7 +76,8 @@
 								<div class="clearfix"></div>
 								<?php } $clear_even_odd++; ?>
 							<?php } } else { echo "<h3> No Results Found According Search Criteria... </h3>"; } ?>
-							<div class="controls">
+							<div class="clearfix"></div>
+							<div class="controls" style="margin-top: 12px;">
 								<?php if(empty($selected_college_step_three)) { ?>
 								<input type="submit" class="btn btn-success" name="edit_search" value="Modify Your search">
 								<?php } else { ?>

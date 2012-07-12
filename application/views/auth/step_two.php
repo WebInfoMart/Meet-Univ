@@ -604,8 +604,8 @@ function fetchstates(a)
 var cid=$("#interest_study_country option:selected").val();
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>auth/state_list_ajax/"+cid,
-   data: '',
+   url: "<?php echo $base; ?>auth/state_list_ajax",
+   data: 'cid='+cid,
    cache: false,
    success: function(msg)
    {
@@ -619,8 +619,8 @@ function fetchcities(a)
 var sid=$("#state option:selected").val();
 $.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>auth/city_list_ajax/"+sid,
-   data: '',
+   url: "<?php echo $base; ?>auth/city_list_ajax",
+   data: 'sid='+sid,
    cache: false,
    success: function(msg)
    {
