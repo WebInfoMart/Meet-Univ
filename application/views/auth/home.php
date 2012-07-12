@@ -535,7 +535,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</div>
 									<div class="label_text" style="width:350px;height:20px;">
 										<ul>
-											<li style="margin-left:20px;"><a href="#">EVENTS</a></li>
+											<li style="margin-left:20px;"><a href="#">Evnts</a></li>
 											<li><a href="#">Registered User</a></li>
 										</ul>
 									</div>

@@ -301,10 +301,10 @@ d.getElementsByTagName('head')[0].appendChild(js);
 				<div class="margin">
 					<div class="row"><!--LOGO-->
 						<div class="span5 margin_zeros">
-						<a href="<?php echo $base; ?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" /></a>
+						<a href="<?php echo $base; ?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" alt="Meet Universities" title="Meet Universities"/></a>
 						</div>
 						<div class="span7 float_r">
-							<img src="<?php echo "$base$img_path" ?>/banner.png" />
+							<img src="<?php echo "$base$img_path" ?>/banner.png" alt="Meet Universities" title="Meet Universities"/>
 						</div>
 						<div class="clearfix"></div>
 					</div>

@@ -69,11 +69,11 @@ top:'50'
 	$("#add_event_step1").click(function(){
 	if($('#location_event').is(':checked'))
 	{
-	required = ["title_event", "univ_name","event_place"];
+	required = ["univ_name","event_place"];
 	}
 	else
 	{
-	required = ["title_event", "univ_name","country_name","state_name","city_name","event_place"];
+	required = ["univ_name","country_name","state_name","city_name","event_place"];
 	}
 	//errornotice = $("#error");
 	emptyerror = "Please fill out this field.";
