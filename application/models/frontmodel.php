@@ -359,7 +359,7 @@ class Frontmodel extends CI_Model
 		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/article-list/university_articles_list";
 		//$config['base_url']=base_url()."article-list/university_articles_list";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '1'; 
+		$config['per_page'] = '5'; 
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');

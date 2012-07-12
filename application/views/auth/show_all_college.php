@@ -219,12 +219,12 @@ $this->session->unset_userdata('follow_to_univ');
 														<span class="date"><?php echo $date_part[0]; ?></span>
 													</div>
 													<div class="span1 float_l margin_l">
-														<span >
+														<span>
 				
-														<?php if($event_has) { echo $date_part[1]; ?> <br/>
-						<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
+														<span class="blue bold"><?php if($event_has) { echo $date_part[1]; ?></span> <br/>
+												<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
-											} ?><br />
+											} ?>,&nbsp;
 											<?php if($get_university['univ_event'][$no_university][0]['country_name']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['country_name']);
 											} ?><br />
@@ -249,7 +249,7 @@ $this->session->unset_userdata('follow_to_univ');
 	?>										
 												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>
-												<li><a href="#">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
+												<li><a style="text-decoration:none;">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $programs; ?>">Courses(<span class="blue"><?php echo count($get_university['program'][$no_university]); ?></span>)</a></li>
 												
 												<!--<li><a href="#">E-Brochure</a></li>-->

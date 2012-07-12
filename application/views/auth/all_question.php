@@ -54,7 +54,7 @@
 													<option value="col">College</option>
 													
 												</select>
-												<select id="colleges" name="colleges">
+												<select id="colleges" name="colleges" class="colege_set">
 												<option value="0"> select </option>	
 												</select>
 											</div>

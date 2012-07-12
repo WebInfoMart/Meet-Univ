@@ -241,7 +241,7 @@ if($('#commented_text').val()!='')
             );*/
 function delete_this_comment(comment_id)
 {
-var r=confirm("Want to Delete this comment");
+var r=confirm("Do you want to delete the comment?");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';

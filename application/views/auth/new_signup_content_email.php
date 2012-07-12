@@ -11,7 +11,9 @@
     <table border="0" cellspacing="0" cellpadding="0" align="right">
      <tbody>
 	 <tr style="min-height:10.5pt">
-		<td style="float:left;width:385px;padding:7px;"><img src="<?php echo "$base$img_path" ?>/logo.png"></td>
+		<td style="float:left;width:385px;padding:7px;"><img src="<?php echo "$base$img_path" ?>/logo.png">
+		<br><span style="color:white;">Get connected to your dream university</span>
+		</td>
 		<td style="float:right;width:385px;"></td>
      </tr>
     </tbody></table>
@@ -34,11 +36,14 @@
 	  <?php 
 	  echo "<h3>Dear &nbsp;".$fullname."</h3>";
 	  ?>
-	  <span style="color:red;"><h3> Thanks for registering at Global University Events | MeetUniversities.com!</br>
-		   We are glad you have chosen to be a part of our community and we hope you enjoy your stay.</h3>
+	  <span style="color:red;"><h3> Thank you for registering with Global University Events | MeetUniversities.com! </br>
+		   We are glad to you for chosing to be a part of our community and we hope you </br></h3>
+		   <h3> enjoy your stay. </h3>
 		   <p style="margin-bottom: 19px;"> All the best,Global University Events – One Place  | <a href="www.meetuniversities.com">MeetUniversities.com</a></p> 
 		   </span>
 		   <a href="<?php echo $base;?>auth/activate/<?php echo $user_id.'/'.$new_email_key; ?>" style="color: #3366cc;">Click Here for Finish your registration and activate your account...</a>
+			</br></br>
+			If you are facing trouble opening the above link please copy the url: <span style="color: #3366cc;">(<?php echo $base;?>auth/activate/<?php echo $user_id.'/'.$new_email_key; ?>)</span> and paste it on your browser to activate your account.
 	  <u></u><u></u></span></p>
       </td>
      </tr>

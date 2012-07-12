@@ -59,6 +59,13 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 $("#link_send_for_fpass").delay(7000).fadeOut(200);
  <?php } ?>
 </script>
+<div class="modal" id="activated_user" style="display:none;" >
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal"></a>
+    <h3>Congratulations! Your account has been successfully activated. Please login with your credentials.</h3>
+  </div>
+</div>
+
 <div class="modal" id="link_send_for_fpass" style="display:none;" >
   <div class="modal-header">
     <a class="close" data-dismiss="modal"></a>
@@ -70,7 +77,7 @@ $("#link_send_for_fpass").delay(7000).fadeOut(200);
 <div class="modal" id="show_success" style="display:none;" >
   <div class="modal-header">
     <a class="close" data-dismiss="modal"></a>
-    <h3>An Email has been sent to Your E-mail Id.For Login Please Activate your Account</h3>
+    <h3>You are one step away from signing up at Meet Universities. Please check your email and activate your account.</h3>
   </div>
 </div>
 <div id="forget_model" class="model_back modal hide fade" style="display: none; ">
@@ -308,6 +315,12 @@ $("#link_send_for_fpass").delay(7000).fadeOut(200);
 	
 	</div>
 	</div>
+<script>
+<?php if($this->session->flashdata('activated')!="") { ?>
+$("#activated_user").css("display","block");
+$("#activated_user").delay(7000).fadeOut(200);
+<?php } ?>
+</script>	
 <script>
 <?php if($this->session->flashdata('registeration_success')) { ?>
 $(document).ready(function(){

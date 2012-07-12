@@ -166,10 +166,11 @@ class Univ extends CI_Controller
 		$data = $this->path->all_path();
 		$univ_id=$this->subdomain->find_id_of_current_univ();
 		$data['err_div']=0;
+		$data['university_name'] = '';
 		$this->load->view('auth/header',$data);
 		$data['univ_id_for_program'] = $univ_id;
 		$data['university_details'] = $this->users->get_university_by_id($univ_id);
-		
+		$data['university_name'] = $data['university_details']['univ_name'];
 		$country_id = $data['university_details']['country_id'];
 		$city_id = $data['university_details']['city_id'];
 		$state_id = $data['university_details']['state_id'];
@@ -405,7 +406,7 @@ class Univ extends CI_Controller
 				}
 				else
 				{
-				$data['err_msg']='<h2> Sorry....</br><span class="text-align">No Upcoming Event.... </span> </h2>';
+				$data['err_msg']='<h3><span class="text-align">The college does not have any upcoming event at this moment. </span> </h3>';
 				$this->load->view('auth/NotFoundPage',$data);
 				}
 			}

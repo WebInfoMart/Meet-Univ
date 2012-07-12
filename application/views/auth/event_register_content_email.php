@@ -12,7 +12,9 @@
     <table border="0" cellspacing="0" cellpadding="0" align="right">
      <tbody>
 	 <tr style="min-height:10.5pt">
-		<td style="float:left;width:385px;padding:7px;"><img src="<?php echo "$base$img_path" ?>/logo.png"></td>
+		<td style="float:left;width:385px;padding:7px;"><img src="<?php echo "$base$img_path" ?>/logo.png">
+		<br><span style="color:white;">Get connected to your dream university</span>
+		</td>
 		<td style="float:right;width:385px;"></td>
      </tr>
     </tbody></table>
@@ -32,14 +34,19 @@
       <td style="padding:0in 12.75pt 0in 12.75pt;display:inline-block">
       <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">
 	 <!-- Hi--> <?php //echo $send_info['fullname']; ?> Welcome to MeetUniversities.<br />
-	  <h3>Your Event Registration Have been Completed Successfully........</br>
 	  
-	  <h3> Your Event Registration Detail Are... </h3>
+	  
+	  <!--<h3> Event Registration Detail: </h3>-->
 	  <?php 
 	  if(!empty($latest_register_event_info))
 	  {
 	  foreach($latest_register_event_info as $event_detail)
 	  {
+	  echo "<h3>";
+	  echo "You have successfully registered to the event of&nbsp;&nbsp;";
+	  echo $event_detail['title']?$event_detail['title']:''."</br>";
+	  echo "</h3>";
+	  echo "<h3> Event Registration Detail: </h3>";	
 		if($event_detail['event_category'] == 'spot_admission'){
 										$event_cat =  "Spot Admission"; 
 										}
@@ -67,18 +74,18 @@
 		{
 		echo "<h4>Event Of University-: &nbsp;".$event_detail['title']."</h4></br>"; 
 		}
-		if($event_detail['country_name'] != '')
+		/*if($event_detail['country_name'] != '')
 		{
 		echo "<h4>Event Country-: &nbsp;".$event_detail['country_name']."</h4></br>"; 
-		}
-		if($event_detail['statename'] != '')
+		}*/
+		/*if($event_detail['statename'] != '')
 		{
 		echo "<h4>Event State-: &nbsp;".$event_detail['statename']."</h4></br>"; 
-		}
-		if($event_detail['cityname'] != '')
+		}*/
+		/*if($event_detail['cityname'] != '')
 		{
 		echo "<h4>Event City-: &nbsp;".$event_detail['cityname']."</h4></br>"; 
-		}
+		}*/
 		if($event_detail['event_date_time'] != '')
 		{
 		echo "<h4>Event Date-: &nbsp;".$event_detail['event_date_time']."</h4></br>"; 
@@ -94,7 +101,7 @@
 	  }
 	  }
 	  ?>
-	  Thanks For Registration...</h3>
+	  Thanks for registering.</h3>
 	 <!-- <h3> Registered Event Information </h3></br>
 	  Event Title : <?php //echo $send_info['event_title']; ?></br>
 	  Event Date & Time : <?php //echo $send_info['event_date_time']; ?>-->

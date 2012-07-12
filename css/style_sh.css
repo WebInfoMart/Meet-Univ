@@ -13,6 +13,7 @@
 .margin_t50{margin-top: 53px;}
 .margin_bot{margin-bottom: 18px;}
 .line{line-height: 20px;}
+.bold{font-weight:bold;}
 /*.margin_l4{margin-left:4px;}
 .margin_twenty{margin:20px;}
 .margin_l8{margin-left: 5px;}
@@ -1009,7 +1010,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 #sms_form_voice .controls, #sms_form .controls {margin-left:102px;}
 #sms_form_voice .control-group label, #sms_form .control-group label{padding-top: 0px;}
 #sms_form_voice .control-group, #sms_form .control-group{margin-bottom:8px;}
-#slides_boxes .slides_container .slides_control{width: 500px!important;height: 260px!important;overflow: hidden;}
+#slides_boxes .slides_container .slides_control{width: 500px!important;height: 404px!important;max-height:315px!important;overflow: hidden;}
 #slides_boxes .slides_container{border:none;}
 #slides_boxes .slider_pagination{margin:0px;width:275px;top: 0px;}
 #slides_boxes .slider_pagination li{display:inline-block}
@@ -1094,3 +1095,9 @@ abbr[title], acronym[title] {
 .status_numb{border-radius: 4px!important;-webkit-border-radius: 4px!important;-moz-border-radius: 4px!important;}
 .event-page{line-height: 20px;
 overflow-y: hidden;}
+
+
+.colege_set{width:180px;margin-left: 10px;}
+.heading_follow{font-size: 18px;margin: 0;font-weight: bold;color: #333;}
+.tw{margin-right: -39px;margin-left: 10px;}
+.social_set{width:222px;}

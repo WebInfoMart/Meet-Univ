@@ -112,7 +112,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								{
 									echo "Counselling";
 								}
-								echo '<span class="inline"> &raquo; </span>'.$event_detail['event_title'];
+								echo '&nbsp;<span class="inline"> &raquo; </span>&nbsp;'.$event_detail['event_title'];
 								?>
 								
 								</h3> 
@@ -120,29 +120,48 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<div><img src="<?php echo base_url(); ?>images/home.png" class="line_img inline"><span class="blue line_time inline">Event Venue:<?php echo $event_detail['event_place']; ?>
 										</span></div>
 									<div><img src="<?php echo base_url(); ?>images/city.png" class="line_img inline"><span class="blue line_time inline"><?php 
-										
-						if($event_detail['country_name']!='') { 
-						echo $event_detail['country_name'];
-						}
-						if($event_detail['country_name']!='' && $event_detail['statename']!='')
-						{
-						echo ','.$event_detail['statename'];
-						}
-						else if($event_detail['statename']!='')
-						{
-						echo $event_detail['statename'];
-						}
-						if(($event_detail['country_name']!='' || $event_detail['statename']!='') && $event_detail['cityname']!='')
-						{
-						echo ','.$event_detail['cityname'];
-						}
-						else
-						{
-						echo $event_detail['cityname'];
-						}
+									
+									if($event_detail['cityname']!='') { 
+										echo $event_detail['cityname'];
+									}
+									if($event_detail['cityname']!='' && $event_detail['statename']!='')
+									{
+										echo ',&nbsp;'.$event_detail['statename'];
+									}
+									else if($event_detail['statename']!='')
+									{
+										echo $event_detail['statename'];
+									}
+									if(($event_detail['cityname']!='' || $event_detail['statename']!='') && $event_detail['country_name']!='')
+									{
+										echo ',&nbsp;'.$event_detail['country_name'];
+									}
+									else
+									{
+										echo $event_detail['country_name'];
+									}
+						// if($event_detail['country_name']!='') { 
+						// echo $event_detail['country_name'];
+						// }
+						// if($event_detail['country_name']!='' && $event_detail['statename']!='')
+						// {
+						// echo ','.$event_detail['statename'];
+						// }
+						// else if($event_detail['statename']!='')
+						// {
+						// echo $event_detail['statename'];
+						// }
+						// if(($event_detail['country_name']!='' || $event_detail['statename']!='') && $event_detail['cityname']!='')
+						// {
+						// echo ','.$event_detail['cityname'];
+						// }
+						// else
+						// {
+						// echo $event_detail['cityname'];
+						// }
 						?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class="blue line_time inline">Timings: 
-										<?php echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.$event_detail['event_time'];?></span></div>
+										<?php //echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.?><?php echo $event_detail['event_time'];?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:
 										<?php echo $total_register_user; ?></span></div>
 										
@@ -154,7 +173,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<a onclick="popup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer" class="float_r"><img src="<?php //echo $base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 										<div class="clearfix"></div>-->
 								</div>
-								<div>
+								<div class="margin_t1">
 									<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post">
 									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 									<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
@@ -295,12 +314,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 						</div>
 						<div class="float_r span5">
-							<div class="span4 float_r">
-								<div class="float_l fb_set"><div class="fb-like" data-href="<?php //$_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true"></div></div>
-								<div class="float_l" style="margin-left:1px;"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php //$_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
-								<div class="float_r tw" style="width:82px;">
-									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+							<div class="float_r social_set">
+								<div class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php //$_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
+								<div class="float_l tw">
+									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit">Tweet</a>
 								</div>
+								<div class="float_r fb"><div class="fb-like" data-href="<?php //$_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true"></div></div>
 								<div class="clearfix"></div>
 							</div>
 							<div class="clearfix"></div>
@@ -449,7 +468,7 @@ if($('#commented_text').val()!='')
             );*/
 function delete_this_comment(comment_id)
 {
-var r=confirm("Want to Delete this comment");
+var r=confirm("Do you want to delete the comment?");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';

@@ -10,7 +10,7 @@
 							<div class="center handle_img step4_posit">
 							</div>
 								<div class="page3_step3 center">
-									<h1>Thanks you for submiting your form!</h1>
+									<h1>Your query has been successfully submitted. A counselor will soon attend you.</h1>
 								</div>
 						</div>
 					</div>

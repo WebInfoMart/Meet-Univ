@@ -413,7 +413,7 @@ margin-bottom:9px;
 	display:none;
 }
 .needsfilled {
-	background:#FFFFFF !important;
+	/*background:#FFFFFF !important;*/
 	color:red !important;
 	border-color:red !important;
 }

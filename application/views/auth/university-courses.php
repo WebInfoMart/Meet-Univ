@@ -5,6 +5,7 @@
 					<div>
 						<ul class="course_list">
 							<?php
+							//echo $university_name;
 							if(!empty($prog_title_of_univ))
 							{
 							foreach($prog_title_of_univ as $show_title)
@@ -21,7 +22,7 @@
 								<span class="course_tit"><?php echo $show_title['educ_level']; ?> </span></li>
 								<?php 
 								}
-							}?>
+							} else { echo "</br><h4>We are gathering information about $university_name. Please visit back soon</h4>"; } ?>
 							
 						</ul>
 					</div>
