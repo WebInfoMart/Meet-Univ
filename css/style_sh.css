@@ -1100,4 +1100,6 @@ overflow-y: hidden;}
 .colege_set{width:180px;margin-left: 10px;}
 .heading_follow{font-size: 18px;margin: 0;font-weight: bold;color: #333;}
 .tw{margin-right: -39px;margin-left: 10px;}
-.social_set{width:222px;}
+.social_set{width:204px;}
+.fb_iframe_widget span{width: 72px!important}
+a:hover{text-decoration:none;}

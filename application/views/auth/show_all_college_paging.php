@@ -137,7 +137,7 @@
 	?>										
 												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>
-												<li><a href="#">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
+												<li>Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</li>
 												<li><a href="<?php echo $programs; ?>">Courses(<span class="blue"><?php echo count($get_university['program'][$no_university]); ?></span>)</a></li>
 												
 												<!--<li><a href="#">E-Brochure</a></li>-->
@@ -149,7 +149,10 @@
 												Views: <span class="blue"><?php echo $get_university['university'][$no_university]['univ_views_count']; ?></span>
 											</div>
 											<div class="float_l top_page margin_l">
-												&nbsp;&nbsp;Listed: <span class="blue">2980</span>
+												&nbsp;&nbsp;Listed: <span class="blue"><?php 
+												$viwed=$get_university['university'][$no_university]['univ_views_count'];
+												echo $listed=ceil((($viwed*5)/3))+10;
+												?></span>
 											</div>
 											<div class="last_box_col float_r">
 												<img src="<?php echo "$base$img_path"; ?>/add.png" class="img_set">

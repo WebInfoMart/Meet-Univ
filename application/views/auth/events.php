@@ -118,7 +118,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<form class="margin_zero">
 										<ul class="col_filter_list">
 											
-											<?php if(!empty($country_name_having_event)) {
+											<?php
+											if(!empty($country_name_having_event) && ($country_name_having_event!=1)) {
 											foreach($country_name_having_event as $country_name_having_event){
 											$country_name=str_replace(' ','_',$country_name_having_event['country_name']);
 											?>
@@ -131,7 +132,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												?>												
 											   > <?php echo $country_name_having_event['country_name'];?>
 											</label></li>
-											<?php } } ?>
+											<?php } } 
+										else
+										{ ?>
+										<li>Sorry,No Country avaliable</li>
+										<?php
+										}										
+										?>	
+											
 										</ul>
 									</form>
 									<!--<div class="float_r"><a href="">more</a></div>-->
@@ -140,7 +148,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<h4>City</h4>
 									<form class="margin_zero">
 										<ul class="col_filter_list">
-										<?php if(!empty($city_name_having_event))
+										<?php if(!empty($city_name_having_event) && ($city_name_having_event!=1))
 										{
 										foreach($city_name_having_event as $city_name_have_event)
 										{
@@ -153,7 +161,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												id="<?php echo $city_name_have_event['city_id']; ?>"
 												value="<?php echo $city_name_have_event['cityname'];?>"> <?php echo $city_name_have_event['cityname'];?>
 											</label></li>
-										<?php } } ?>	
+										<?php } }
+										else
+										{ 
+										?>
+										<li>Sorry,No city avaliable</li>
+										<?php
+										}										
+										?>	
 										</ul>
 									</form>
 									<!--<div class="float_r"><a href="">more</a></div>-->
@@ -224,7 +239,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												</a>
 												<span class="inline"> &raquo; </span>
 												<?php
-												echo "<h4 style='display:inline';>";
+												echo "<h4 class='inline'>";
 												if($event_detail['event_category'] == "spot_admission")
 												{
 													echo "Spot Admission";
@@ -242,7 +257,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 													echo "Counselling";
 												}
 												echo "</h4>";
-												echo ' <h5 style="display:inline;">'.$event_detail['event_title'].'</h5>';
+												echo ' <h5>'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
 											<?php 
@@ -344,11 +359,15 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 											<div class="clearfix"></div>
 										</div>
 										<div class="float_r">
-											<div id="gp" class="float_l">
-											<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $event_link; ?>'callback='countGoogleShares' data-count="true"></g:plusone> 
+											<div class="social_set float_r">
+												<div id="gp" class="float_l">
+													<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $event_link; ?>'callback='countGoogleShares' data-count="true"></g:plusone> 
+												</div>
+												<div id="tw" class="float_l tw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $event_link; ?>" data-via="your_screen_name" data-lang="en">Tweet</a>
+												</div>
+												<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php echo $event_link; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" data-font="arial"></div>
+												</div>
 											</div>
-											<div id="tw" class="float_l tw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $event_link; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
-											<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php echo $event_link; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
 										</div>
 										<div class="clearfix"></div>
 									</div>
@@ -535,7 +554,7 @@ var x = new Array(<?php echo $array_dates; ?>);
 						{
 
 							r=response.split('!@#$%^&*');
-							$('#div_events').html(r[1]);
+							$('#event_results_filteration').html(r[1]);
 							$('#div_events').animate({
 								opacity: 1,
 							});

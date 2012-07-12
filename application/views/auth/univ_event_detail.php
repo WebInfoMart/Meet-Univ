@@ -435,7 +435,7 @@ var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
-var span_comment_incr = parseInt(span_comment) + 1;
+var span_comment_incr = parseInt(span_comment);
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if($('#commented_text').val()!='')
 {
@@ -447,7 +447,6 @@ if($('#commented_text').val()!='')
 	   cache: false,
 	   success: function(msg)
 	   {
-		
 		$(".event_border:last").after(msg);
 		$('#commented_text').val('');
 		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);

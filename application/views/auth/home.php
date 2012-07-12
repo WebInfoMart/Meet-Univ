@@ -1071,12 +1071,12 @@ $(document).ready(function() {
 	$('#colleges').click(function() {
 		$("#events_col").hide();
 		$("#col").show();
-		$('p').replaceWith('<p class="help-block white help_line" id="sub-title">colleges by programs, country and course level</p>');
+		$('#sub-title').replaceWith('<p class="help-block white help_line" id="sub-title">colleges by programs, country and course level</p>');
    });
    $('#events').click(function() {
 		$("#col").hide();
 		$("#events_col").show();
-		$('p').replaceWith('<p class="help-block white help_line" id="sub-title">Events by country, city and months</p>');
+		$('#sub-title').replaceWith('<p class="help-block white help_line" id="sub-title">Events by country, city and months</p>');
    });
 });
 </script>	

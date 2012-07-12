@@ -13,7 +13,7 @@ class Search_event_calendar extends CI_Model
 	{
 		$event_data=array();
 		$events_data['total_res']=0;
-		$events_data['limit_res']=10;
+		$events_data['limit_res']=1000;
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id = university.univ_id'); 

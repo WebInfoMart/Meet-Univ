@@ -97,7 +97,6 @@ $this->session->unset_userdata('follow_to_univ');
 						<?php if(!($count_array)){ ?>
 						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
 						<?php } ?>
-						<div class="show_loading_image" style="position:absolute;left:40%;top:58%;display:none;"><img src="<?php echo $base; ?>images/ajax-loader.gif"></div>
 						
 							<div id="pagination" class="table_pagination right paging-margin">
    
@@ -251,7 +250,7 @@ $this->session->unset_userdata('follow_to_univ');
 	?>										
 												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>
-												<li><a href="#">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
+												<li>Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</li>
 												<li><a href="<?php echo $programs; ?>">Courses(<span class="blue"><?php echo count($get_university['program'][$no_university]); ?></span>)</a></li>
 												
 												<!--<li><a href="#">E-Brochure</a></li>-->
@@ -263,7 +262,11 @@ $this->session->unset_userdata('follow_to_univ');
 												Views: <span class="blue"><?php echo $get_university['university'][$no_university]['univ_views_count']; ?></span>
 											</div>
 											<div class="float_l top_page margin_l">
-												&nbsp;&nbsp;Listed: <span class="blue">2980</span>
+												&nbsp;&nbsp;Listed: <span class="blue"><?php 
+												$viwed=$get_university['university'][$no_university]['univ_views_count'];
+												echo $listed=ceil((($viwed*5)/3))+10;
+												?></span>
+												
 											</div>
 											<div class="last_box_col float_r">
 												<img src="<?php echo "$base$img_path"; ?>/add.png" class="img_set">
@@ -356,7 +359,6 @@ function follow_university(univ_id,follow_count)
 function ajaxpaging(a,pid)
 {
 	$('#search_results').css('opacity','0.4');
-$('.show_loading_image').show();	
 	cpage=$('#current_paging_value').val();
 	if(a!=cpage)	
 	{
@@ -385,10 +387,6 @@ $('.show_loading_image').show();
 		});
 		$('#col_paging').html(res[1]);
 		$('#listed_currently_univ').html(res[0]);
-	   },
-	   complete:function()
-	   {
-	   $('.show_loading_image').hide();	
 	   }
 	   })
 	   
@@ -420,7 +418,6 @@ function get_college_result_by_ajax()
 {
 	var url=document.URL;
 	var change_url=url.split('colleges/');
-	   $('.show_loading_image').show();	
 	if(!(change_url.length>1 && change_url[1]!=''))
 	{
 	url='<?php echo $base; ?>colleges';
@@ -448,10 +445,6 @@ function get_college_result_by_ajax()
 		}
 	  	$('#listed_currently_univ').html(res[1]);
 	    $('#red_total_univ').html(res[0]);
-	   },
-	   complete:function()
-	   {
-	   $('.show_loading_image').hide();	
 	   }
 	   })
 }

@@ -35,7 +35,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<?php
 							$image_exist=0;	
 							$article_img = $articles_detail['article_image_path'];	
-							if(file_exists(getcwd().'/uploads/univ_gallery/'.$article_img) && $article_img!='')	
+							if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
 							{
 							$image_exist=1;
 						   list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
@@ -118,10 +118,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			<span class="float_r delete_comment" >
 					<img style="cursor:pointer;width: 10px;height: 10px;" class="del_icon" onclick='delete_this_comment("<?php echo $article_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
-									<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr>
 			<?php	} } ?>			
 									
-									
+										<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr>
+								
 									<div class="span6 margin_zero">
 									<span><?php echo $article_comments_detail['commented_text'];?></span>
 									</div>
