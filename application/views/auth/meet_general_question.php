@@ -54,7 +54,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							?>
 						</div>
 						<div class="float_l span8 margin_delta">
-							<h3><span class="heading_follow" style="margin-left: 12px;"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span></h3>
+							<span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span>
 							<h4 style="margin-left: 12px;"><?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?></h4>
 							<div style="margin-left: 12px;"><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="line_time"><abbr class="timeago time_ago" title="<?php echo $single_quest['q_asked_time'] ?>"></abbr></span>
 							</div>
@@ -128,14 +128,14 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				</div>
 				</div>
 				<div class="float_l span4">
-					<div class="float_l fb_set">
-						<div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
-					</div>
-					<div class="float_l">	
-						<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
-					</div>
-					<div class="float_r tw" style="width:82px;">
-						<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+					<div class="social_set float_r">
+						<div id="gp" class="float_l">
+							<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+						</div>
+						<div id="tw" class="float_l tw"><a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit">Tweet</a>
+						</div>
+						<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div>
+						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>

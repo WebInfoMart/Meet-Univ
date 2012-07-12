@@ -172,12 +172,17 @@
 				
 				</div>
 				<div class="float_r">
-					<div id="fb" class="float_l fb_set"> <div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div> </div>
-					<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
-					<div id="gp" class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+					<div class="social_set float_r">
+						<div id="gp" class="float_l">
+							<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+						</div>
+						<div id="tw" class="float_l tw">
+							<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="your_screen_name" data-lang="en">Tweet</a>
+						</div>
+						<div id="fb" class="float_r fb">
+							<div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" data-font="arial"></div> 
+						</div>
 					</div>
-					<div id="tw" class="float_r tw" style="width:82px;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
-					<!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>-->
 				</div>
 				<div class="clearfix"></div>
 				</li>

@@ -118,10 +118,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			<span class="float_r delete_comment" >
 					<img style="cursor:pointer;width: 10px;height: 10px;" class="del_icon" onclick='delete_this_comment("<?php echo $article_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
 			</span>
+									
 			<?php	} } ?>			
 									
-										<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr>
-								
+							<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr>		
 									<div class="span6 margin_zero">
 									<span><?php echo $article_comments_detail['commented_text'];?></span>
 									</div>
@@ -184,14 +184,17 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						</div>
 		<?php } ?>
 			</div>	
-			<div class="float_l span4">			
-				<div class="float_l fb_set"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
-				<div class="float_l">
-				<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+			<div class="float_l span4">	
+				<div class="social_set float_r">
+					<div id="gp" class="float_l">
+					<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+					</div>
+					<div id="tw" class="float_l tw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php $_SERVER["REQUEST_URI"]; ?>" data-via="munjal_sumit">Tweet</a>
+					</div>
+					<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
 				</div>
-				<div class="float_r tw" style="width:82px;">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php $_SERVER["REQUEST_URI"]; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
-				</div>
+				
+				
 				<div class="clearfix"></div>
 				<div class="back_up">
 						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Recently Added</span></h3>
