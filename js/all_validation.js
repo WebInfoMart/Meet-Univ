@@ -153,6 +153,14 @@ required = ["fullname", "email", "password_register","conf_password_register","a
 	   }
 	});
 	
+	$('#agree_term').click(function(){
+	var thisCheck = $(this);
+	if(thisCheck.is(":checked"))
+	{
+	$('#label_agree').removeClass("needsfilled");
+	}
+	});
+	
 	
 	/* Validation Code For Event Registration */
 	
