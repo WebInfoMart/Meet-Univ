@@ -97,6 +97,8 @@ $this->session->unset_userdata('follow_to_univ');
 						<?php if(!($count_array)){ ?>
 						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
 						<?php } ?>
+						<div class="show_loading_image" style="position:absolute;left:40%;top:58%;display:none;"><img src="<?php echo $base; ?>images/ajax-loader.gif"></div>
+						
 							<div id="pagination" class="table_pagination right paging-margin">
    
 						   <?php
@@ -108,7 +110,7 @@ $this->session->unset_userdata('follow_to_univ');
 						   for($c=$cc;$c>0;$c=$c-$rl)
 						   {
 						   ?>
-						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajaxpaging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
 						 <?php 
 						   }
 						   }
@@ -219,12 +221,12 @@ $this->session->unset_userdata('follow_to_univ');
 														<span class="date"><?php echo $date_part[0]; ?></span>
 													</div>
 													<div class="span1 float_l margin_l">
-														<span>
+														<span >
 				
-														<span class="blue bold"><?php if($event_has) { echo $date_part[1]; ?></span> <br/>
-												<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
+														<?php if($event_has) { echo $date_part[1]; ?> <br/>
+						<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
-											} ?>,&nbsp;
+											} ?><br />
 											<?php if($get_university['univ_event'][$no_university][0]['country_name']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['country_name']);
 											} ?><br />
@@ -249,7 +251,7 @@ $this->session->unset_userdata('follow_to_univ');
 	?>										
 												<li><a href="<?php echo $article_url; ?>">Articles (<span class="blue"><?php echo $get_university['article'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $questions; ?>">Q/A (<span class="blue"><?php echo $get_university['questions'][$no_university]; ?></span>)</a></li>
-												<li><a style="text-decoration:none;">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
+												<li><a href="#">Followers (<span class="blue followers_<?php echo $get_university['university'][$no_university]['univ_id']; ?>"><?php echo $get_university['followers'][$no_university]; ?></span>)</a></li>
 												<li><a href="<?php echo $programs; ?>">Courses(<span class="blue"><?php echo count($get_university['program'][$no_university]); ?></span>)</a></li>
 												
 												<!--<li><a href="#">E-Brochure</a></li>-->
@@ -279,6 +281,28 @@ $this->session->unset_userdata('follow_to_univ');
 							</div>
 					<?php $cnt++; } ?>	
 						</div>
+						<!--paging start-->
+						<div id="pagination" class="table_pagination right paging-margin" style="margin-top:20px;">
+   
+						   <?php
+						   $cc=$get_university['total_res'];
+						   $rl=$get_university['limit_res']; 
+						   if($cc>$rl)
+						   {
+						   $z=0;
+						   for($c=$cc;$c>0;$c=$c-$rl)
+						   {
+						   ?>
+						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajaxpaging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <?php 
+						   }
+						   }
+						   ?>
+						   <input type="hidden" id="current_paging_value" value="0">	
+						</div>
+						<!--paging end -->
+						
+						
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -329,9 +353,10 @@ function follow_university(univ_id,follow_count)
 	   }
 	   });
 }
-function ajax(a,pid)
+function ajaxpaging(a,pid)
 {
-	$('#col_paging').css('opacity','0.4');	
+	$('#search_results').css('opacity','0.4');
+$('.show_loading_image').show();	
 	cpage=$('#current_paging_value').val();
 	if(a!=cpage)	
 	{
@@ -354,12 +379,16 @@ function ajax(a,pid)
 	   success: function(r)
 	   {
 	    res=r.split('!@#$%^&*');
-		$('#col_paging').animate({
+		 $('#search_results').animate({
 		'opacity':1
 		},1000,function(){
 		});
 		$('#col_paging').html(res[1]);
 		$('#listed_currently_univ').html(res[0]);
+	   },
+	   complete:function()
+	   {
+	   $('.show_loading_image').hide();	
 	   }
 	   })
 	   
@@ -391,11 +420,11 @@ function get_college_result_by_ajax()
 {
 	var url=document.URL;
 	var change_url=url.split('colleges/');
+	   $('.show_loading_image').show();	
 	if(!(change_url.length>1 && change_url[1]!=''))
 	{
 	url='<?php echo $base; ?>colleges';
 	}
-	
 	$('#search_results').css('opacity','0.4');
 	   $.ajax({
 	   type: "POST",
@@ -419,6 +448,10 @@ function get_college_result_by_ajax()
 		}
 	  	$('#listed_currently_univ').html(res[1]);
 	    $('#red_total_univ').html(res[0]);
+	   },
+	   complete:function()
+	   {
+	   $('.show_loading_image').hide();	
 	   }
 	   })
 }

@@ -10,7 +10,7 @@
 						   for($c=$cc;$c>0;$c=$c-$rl)
 						   {
 						   ?>
-						 <a style="cursor:pointer;" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajax('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <a style="cursor:pointer;" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajaxpaging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
 						 <?php 
 						   }
 						   }
@@ -183,4 +183,25 @@
 					<?php $cnt++; } ?>	
 					
 						</div>
+						<!--paging start-->
+						<div id="pagination" class="table_pagination right paging-margin" style="margin-top:20px;">
+   
+						   <?php
+						   $cc=$get_university['total_res'];
+						   $rl=$get_university['limit_res']; 
+						   if($cc>$rl)
+						   {
+						   $z=0;
+						   for($c=$cc;$c>0;$c=$c-$rl)
+						   {
+						   ?>
+						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajaxpaging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
+						 <?php 
+						   }
+						   }
+						   ?>
+						   <input type="hidden" id="current_paging_value" value="0">	
+						</div>
+						<!--paging end -->
+						
 						</div>

@@ -378,7 +378,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 												<!-- Hidden field for event registration -->
 												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
 												<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
-												<input type="submit" name="btn_event_register" id="<?php echo $events['event_id']; ?>" value="Register" class="btn btn-primary" />
+												<input type="submit" name="btn_event_register" id="<?php echo $events['event_id']; ?>" value="Register" class="btn btn-success" />
 												
 											</div>
 											<div class="float_r registered">
@@ -444,10 +444,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
     $news_title=$f_news['news_title'];	
 	$news_id=$f_news['news_id'];
 	$news_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'news',$news_title,$news_id);							
+	
 							?>
 									<div>
-										<h4><?php //echo $image_exist;?>
-										<a href="<?php echo $news_link; ?>"><?php echo substr($f_news['news_title'],0,35); ?></a></h4>
+										<h4><a href="<?php echo $news_link; ?>"><?php echo substr($f_news['news_title'],0,35); ?></a></h4>
 										<span class="float_l aspectcorrect home_art">
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 											
@@ -632,7 +632,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<li>
 
 										<div class="float_l green_box_img">
-										<?php if($quest_list['user_pic_path'] !='') { ?>
+										<?php if($quest_list['user_pic_path'] !='' && file_exists(getcwd().'/uploads/'.$quest_list['user_pic_path'])) { ?> 
 										<img src="<?php echo "$base"; ?>uploads/<?php echo $quest_list['user_pic_path']; ?>" class="latest_img" />
 										<?php } else { ?>
 										<img src="<?php echo "$base$img_path"; ?>/user_model.png" class="latest_img">

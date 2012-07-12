@@ -293,7 +293,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 								//echo $extract_date[2];
 								//echo $var = "'".$extract_dates[0].'/'.$extract_dates[1].'/'.$extract_dates[2]."'";
 											?>
-												<h4 class="blue line_time"><?php echo $extract_dates[0].' '.$extract_dates[1].' '.$extract_dates[2];
+												<h4 class="blue line_time"><?php echo $extract_dates[0].' '.$extract_dates[1].', '.$extract_dates[2];
 												
 												 ?></h4>
 												<h5 class="line_time">
@@ -301,12 +301,12 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												
 												$place=0;
 												$city=0;						
-												if($event_detail['event_place']!='' && $event_detail['event_place']!=$event_detail['cityname'])
+												/*if($event_detail['event_place']!='')
 												{
 												echo $event_detail['event_place'];
 												$place=1;
-												} 
-												if($event_detail['cityname']!=='' && $event_detail['cityname']!=NULL)
+												}*/
+												if($event_detail['cityname']!=='')
 												{
 												if($place==1)
 												{
@@ -315,7 +315,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												echo $event_detail['cityname'];
 												$city=1;
 												}
-												if($event_detail['country_name']!='' && $event_detail['cityname']!=NULL)
+												if($event_detail['country_name']!='')
 												{
 												if($city==1 || $place==1)
 												{
@@ -326,7 +326,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												?>
 												</h5>
 												<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post">
-												<button class="btn btn-primary" href="#">Register</button>
+												<button class="btn btn-success" href="#">Register</button>
 												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 												<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 												</form>
@@ -347,9 +347,8 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 											<div id="gp" class="float_l">
 											<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $event_link; ?>'callback='countGoogleShares' data-count="true"></g:plusone> 
 											</div>
-												
-												<div id="fb" class="float_l fb" style="margin-right:8px;"><div class="fb-like" data-href="<?php echo $event_link; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
-												<div id="tw" class="float_r" style="margin-right:-30px"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $event_link; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
+											<div id="tw" class="float_l tw"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $event_link; ?>" data-via="your_screen_name" data-lang="en">Tweet</a></div>
+											<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php echo $event_link; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial" style="width:48px;"></div></div>
 										</div>
 										<div class="clearfix"></div>
 									</div>
@@ -366,9 +365,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 					</div>
 				</div>
 				<div class="span4 float_r">
-					<div class="follow">
-						<div id="event_calendar">
-						</div>
+					<div id="event_calendar">
 					</div>
 				</div>
 			</div>
