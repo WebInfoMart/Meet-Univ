@@ -73,7 +73,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<div class="clearfix"></div>
 					</div>
-					<div id="loading_img" style="z-index:-1;margin-left: 448px;margin-top: 228px;position:absolute;"> <img src="<?php echo "$base$img_path"; ?>/AjaxLoading.gif"/> </div>
+					<div id="loading_img" style="z-index:-1;margin-left: 405px;margin-top: 197px;position:absolute;"> <img src="<?php echo "$base$img_path"; ?>/ajax-loader.gif"/> </div>
 					<div class="margin_t">
 						<div class="float_l">
 							<div class="fliters_data">
@@ -208,9 +208,13 @@ $array_dates = array();
 
 									if(!empty($events))
 										  {
+$count_event_date = 1;										  
 											foreach($events['event_res'] as $event_detail){
-//code for apply comma in date											
-
+//code for apply comma in date			
+if($count_event_date == 1)
+{								
+$current_event_month =  $event_detail['event_date_time'];
+}
 $var_date = '';
 //echo $event_detail['event_date_time'];
 $extract_date = explode(" ",$event_detail['event_date_time']);
@@ -219,6 +223,7 @@ $number_month = date('m', strtotime($month));
 $number_month = date('m', strtotime($month));
 $var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
 array_push($array_dates,$var);
+$count_event_date++;
 
 //end here 
 																			
@@ -297,7 +302,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 												
 											</div>
-											<div class="float_l text-width" style="font-size:14px;">
+											<div class="float_l span5 margin_l" style="font-size:14px;">
 											<?php
 											$extract_dates = explode(" ",$event_detail['event_date_time']);
 								//echo $extract_date[];
@@ -426,12 +431,12 @@ $show_date = '';
 //echo $event_detail['event_date_time'];
 if(!empty($events['event_res']))
 {
-$show_current_date = explode(" ",$event_detail['event_date_time']);
+$show_current_date = explode(" ",$current_event_month);
 //echo $extract_date[];
 $month = $extract_date[1];
 //echo $show_current_date[2];
 $number_month = date('m', strtotime($month));
-$number_month = $number_month -1;
+$number_month = $number_month - 2;
 }
 else{
 $show_current_date[2] = date('Y');
