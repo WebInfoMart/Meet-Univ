@@ -695,13 +695,11 @@ function events_result_by_paging(a,pid)
 	   cache: false,
 	   success: function(r)
 	   {
-	   alert(r);
 	    res=r.split('!@#$%^&*');
 		$('#div_events').animate({
 		'opacity':1
 		},1,function(){
 		});
-		alert(res[1]);
 		$('#div_events').html(res[1]);
 		$('#listed_currently_event').html(res[0]);
 	   }
