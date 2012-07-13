@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Kolkata'); 
 //$this->load->library('facebook'); 
 /****************************************** 
  *  Load Model and session library and    *
