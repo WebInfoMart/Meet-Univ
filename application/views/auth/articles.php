@@ -49,7 +49,7 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 									{
 									$image=$base.$img_path.'/default_logo.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,106,71,TRUE);
 									
 				?>
 						<li>
@@ -74,7 +74,13 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 								</div>
 								<div><img src="<?php echo "$base$img_path"; ?>/clock.png" class="line_img inline"><span class="blue line_time inline"><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
 								</span></div>
-								<?php echo substr($articles_detail['article_detail'],0,250).'..'; ?>
+								<?php echo substr($articles_detail['article_detail'],0,420).'..';
+								if((strlen($articles_detail['article_detail'])>420))
+								{?>
+								<a href="<?php echo $article_link; ?>" style="font-size:13px;font-weight:bold">view more</a>
+								<?php
+								}
+								?>
 							</div>
 						</li>
 						<?php } ?>

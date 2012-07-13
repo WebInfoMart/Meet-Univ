@@ -32,9 +32,45 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<h3><?php echo $news_detail['news_title']; ?></h3>
 						<!--<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:<?php echo $total_register_user; ?></span></div>-->
 						<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class=" line_time"><abbr class="timeago time_ago inline" title="<?php echo $news_detail['publish_time']; ?>"></span></abbr></div>
-						<?php echo $news_detail['news_detail']; ?>
-						
-						<div class="clearfix"></div>
+						<div class="margin_t1">
+							<div class="float_l margin_r2 img_style aspectcorrect">
+							<?php
+									$image_exist=0;	
+									$news_img = $news_detail['news_image_path'];	
+									if(file_exists(getcwd().'/uploads/news_article_images/'.$news_img) && $news_img!='')	
+									{
+									$image_exist=1;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$news_img);
+									}
+									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$news_detail['univ_logo_path']) && $news_detail['univ_logo_path']!='')
+									{
+									$image_exist=2;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$news_detail['univ_logo_path']);
+								    }
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/news_default_image.jpg');
+								    }
+									if($news_img!='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$news_img;
+									}
+									else if($news_detail['univ_logo_path']!='' && $image_exist==2)
+									{
+									$image=$base.'uploads/univ_gallery/'.$news_detail['univ_logo_path'];
+									}
+									else
+									{
+									$image=$base.$img_path.'/news_default_image.jpg';
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
+							?>
+							<img src="<?php echo $image; ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;margin-right:20px"/>	
+						</div>
+							<div class="margin_l justify">
+								<?php echo $news_detail['news_detail']; ?>
+							</div>
+						</div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
 							<input type="hidden" id="txt_cnt_comment_show" value="<?php if($news_comments!=0){ echo count($news_comments); } else { echo "0";}; ?>"/>

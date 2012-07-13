@@ -62,7 +62,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							{
 							$image=$base.$img_path.'/default_logo.png';
 							} 
-							$img_arr=$this->searchmodel->set_the_image($width,$height,112,77,TRUE);
+							$img_arr=$this->searchmodel->set_the_image($width,$height,106,71,TRUE);
 							?>
 
 					<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
@@ -122,7 +122,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			<?php	} } ?>			
 									
 							<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr>		
-									<div class="span6 margin_zero">
+									<div class="span6 margin_l">
 									<span><?php echo $article_comments_detail['commented_text'];?></span>
 									</div>
 									

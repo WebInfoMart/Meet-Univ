@@ -59,7 +59,14 @@
 										</div>
 										<div><img src="<?php echo "$base$img_path"; ?>/clock.png" class="line_img inline"><span class="blue line_time inline"><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
 										</span></div>
-									<span class="wrap"><?php echo substr($articles_detail['article_detail'],0,250).'..'; ?></span>	
+									<span class="wrap"><?php echo substr($articles_detail['article_detail'],0,420).'..';
+									if((strlen($articles_detail['article_detail'])>420))
+								{?>
+								<a href="<?php echo $articles_link; ?>" style="font-size:13px;font-weight:bold">view more</a>
+								<?php
+								}
+								?>
+									</span>	
 								
 							</div>
 						</li>

@@ -59,6 +59,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<?php echo $single_quest['q_detail']; ?><br/>
 				</div>
 				<div class="clearfix"></div>
+										<div class="fb-comments" data-href="http://<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ;?>" data-num-posts="2" data-width="500"></div>			
+
 			</div>
 			<div class="float_l span4">
 				<div class="social_set">
@@ -74,14 +76,12 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			</div>
 			<div>
 				
-						<div class="margin_t" id="add_more_comment">
+						
 						<!--<div class="event_border">
 							<input type="hidden" id="txt_cnt_comment_show" value="<?php //if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?>"/>
 								<h3><span id="cnt_comment_show"><?php //if(!empty($question_comments)) { echo count($question_comments); } else { echo "0"; } ?></span> Comments</h3>
 							</div> -->
 						
-						</div>
-						<div class="fb-comments" data-href="http://<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ;?>" data-num-posts="2" data-width="500"></div>			
 							<!--<fb:comments href="http://<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ;?>" width='640' publish_feed='true' migrated='1'></fb:comments>-->
 		
 					</div>
