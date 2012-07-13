@@ -1274,6 +1274,7 @@ class Auth extends CI_Controller
 		$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
 		$data['country_name_having_event'] = $this->leadmodel->country_name_having_event();
 		$data['events'] = $this->searchmodel->all_event_filteration($current_url);
+		$data['events_for_calendar'] = $this->frontmodel->fetch_events_for_calendar();
 		
 		$this->load->view('auth/events',$data);
 		$this->load->view('auth/footer',$data);

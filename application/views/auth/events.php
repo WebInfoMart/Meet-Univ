@@ -203,13 +203,15 @@ $this->session->unset_userdata('msg_send_suc_voice');
 
 							<div class="row">
 								<div class="span9 float_l margin_zero" id="div_events">
-									<?php
+<?php
+/********************************************
+* Loop For Show Dates In Calendar. By Subh. *
+*********************************************/
 $array_dates = array();
-
-									if(!empty($events))
-										  {
+if(!empty($events_for_calendar))
+{
 $count_event_date = 1;										  
-											foreach($events['event_res'] as $event_detail){
+foreach($events_for_calendar as $event_detail){
 //code for apply comma in date			
 if($count_event_date == 1)
 {								
@@ -224,6 +226,26 @@ $number_month = date('m', strtotime($month));
 $var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
 array_push($array_dates,$var);
 $count_event_date++;
+}
+}
+if(!empty($events))
+{
+//$count_event_date = 1;										  
+foreach($events['event_res'] as $event_detail){
+//code for apply comma in date			
+/* if($count_event_date == 1)
+{								
+$current_event_month =  $event_detail['event_date_time'];
+} */
+$var_date = '';
+//echo $event_detail['event_date_time'];
+//$extract_date = explode(" ",$event_detail['event_date_time']);
+//$month = $extract_date[1];
+//$number_month = date('m', strtotime($month));
+//$number_month = date('m', strtotime($month));
+//$var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
+//array_push($array_dates,$var);
+//$count_event_date++;
 
 //end here 
 																			
@@ -433,10 +455,14 @@ if(!empty($events['event_res']))
 {
 $show_current_date = explode(" ",$current_event_month);
 //echo $extract_date[];
-$month = $extract_date[1];
+//print_r($show_current_date);
+$month = $show_current_date[1];
 //echo $show_current_date[2];
+//$dates = date_parse($month);
+//var_dump($dates);
+//echo $dates['month'];
 $number_month = date('m', strtotime($month));
-$number_month = $number_month - 2;
+$number_month = $number_month - 1;
 }
 else{
 $show_current_date[2] = date('Y');
@@ -669,11 +695,13 @@ function events_result_by_paging(a,pid)
 	   cache: false,
 	   success: function(r)
 	   {
+	   alert(r);
 	    res=r.split('!@#$%^&*');
 		$('#div_events').animate({
 		'opacity':1
 		},1,function(){
 		});
+		alert(res[1]);
 		$('#div_events').html(res[1]);
 		$('#listed_currently_event').html(res[0]);
 	   }

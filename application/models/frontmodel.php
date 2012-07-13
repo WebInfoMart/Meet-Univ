@@ -8,7 +8,22 @@ class Frontmodel extends CI_Model
 		$this->load->library('pagination');
 		$this->load->database();
 	}
-	
+	function fetch_events_for_calendar()
+	{
+		//$sql = "select * from events where STR_TO_DATE(event_date_time, '%d %M %Y')>=".date('Y-m-d');
+		$this->db->select('*');
+		$this->db->from('events');
+		$sql = $this->db->where("STR_TO_DATE(event_date_time, '%d %M %Y')>=".date('Y-m-d'));
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		return $query->result_array();
+		}
+		else {
+		return 0;
+		}
+		//print_r($x);
+	}
 	function fetch_featured_events()
 	{
 		/*$this->db->select('*');
