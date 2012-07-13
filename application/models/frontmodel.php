@@ -13,7 +13,7 @@ class Frontmodel extends CI_Model
 		//$sql = "select * from events where STR_TO_DATE(event_date_time, '%d %M %Y')>=".date('Y-m-d');
 		$this->db->select('*');
 		$this->db->from('events');
-		$sql = $this->db->where("STR_TO_DATE(event_date_time, '%d %M %Y')>=".date('Y-m-d'));
+		$sql = $this->db->where("STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."'");
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{

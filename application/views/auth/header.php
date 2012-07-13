@@ -161,6 +161,8 @@ $event_details=str_replace('</div>','',$event_details);
 $detail_of_event = $event_details; 
 } */
 
+if(empty($keyword_content)) { $keyword_content="universities events,university events in india,study abroad"; }
+if(empty($description_content)) { $description_content=" "; }
 ?>
 
 <!DOCTYPE html>
@@ -173,7 +175,8 @@ $detail_of_event = $event_details;
   <meta property="og:image"  content="<?php echo $img_src; ?>" />
   <meta property="og:description"  content="<?php echo $header_detail; ?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="keywords" content="">
+<meta name="keywords" content="<?php echo $keyword_content; ?>">
+<meta name="description" content="<?php echo $description_content; ?>">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="WebInfoMart.com">

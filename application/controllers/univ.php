@@ -270,6 +270,8 @@ class Univ extends CI_Controller
 			$data['total_register_user'] = $this->frontmodel->count_event_register($event_id);
 			$data['feature_event_of_univ'] = $this->frontmodel->fetch_featured_events_of_univ($univ_id);
 			
+			$data['keyword_content'] = "Study in ".$data['event_detail']['univ_name'].', '.'event in '.$data['event_detail']['cityname'].' ,events in '.$data['event_detail']['event_date_time'];
+			$data['description_content'] = "event of ".$data['event_detail']['univ_name']. ' in ' .$data['event_detail']['cityname'].', '.$data['event_detail']['statename'].', '.$data['event_detail']['event_date_time']; 
 			if($data['university_details']['univ_logo_path'] !='' || $data['university_details']['univ_logo_path']!= 0)
 			{
 				$data['img_src'] = base_url()."uploads/univ_gallery/".$data['university_details']['univ_logo_path'];
@@ -380,7 +382,7 @@ class Univ extends CI_Controller
 			$data = $this->path->all_path();
 			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
-			$this->load->view('auth/header',$data);
+			
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -392,6 +394,10 @@ class Univ extends CI_Controller
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['event_list_detail']=$this->frontmodel->get_events_list_by_univ($univ_id);
 			$data['feature_events']=$this->frontmodel->fetch_featured_events();
+			
+			$data['keyword_content'] = $university_name." events, ".$university_name." events in india,study abroad.";
+			$data['description_content'] = "List of ".$university_name." events, ".$university_name." events in india,study abroad.";
+			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -424,7 +430,7 @@ class Univ extends CI_Controller
 			$data = $this->path->all_path();
 			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
-			$this->load->view('auth/header',$data);
+			
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -436,6 +442,10 @@ class Univ extends CI_Controller
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['news_list_detail']=$this->frontmodel->get_news_list_by_univ($univ_id);
 			$data['popular_news'] = $this->frontmodel->popular_news();
+			
+			$data['keyword_content'] = "Articles Of ".$university_name;
+			$data['description_content'] = "List Of ". $university_name ."Univesity Articles";
+			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -467,7 +477,6 @@ class Univ extends CI_Controller
 			$data = $this->path->all_path();
 			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
-			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -479,6 +488,9 @@ class Univ extends CI_Controller
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['articles_list_detail']=$this->frontmodel->get_articles_list_by_univ($univ_id);
 			$data['popular_articles'] = $this->frontmodel->popular_articles();
+			$data['keyword_content'] = "Articles Of ".$university_name;
+			$data['description_content'] = "List Of ". $university_name ."Univesity Articles";
+			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -520,7 +532,8 @@ class Univ extends CI_Controller
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['news_detail']=$this->frontmodel->get_news_detail_by_univ($univ_id,$news_id);
 			$data['recent_news'] = $this->frontmodel->fetch_news();
-			
+			$data['keyword_content'] = $data['news_detail']['univ_name'].' news, study abroad news, event news';
+			$data['description_content'] = $data['news_detail']['news_title'];
 			
 			
 			
@@ -619,6 +632,8 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['articles_detail']=$this->frontmodel->get_article_detail_by_univ($univ_id,$article_id);
+			$data['keyword_content'] = $data['articles_detail']['univ_name'].'article, study abroad article, event article';
+			$data['description_content'] = $data['articles_detail']['article_title'];
 			//print_r($data['articles_detail']);
 			
 			

@@ -1191,6 +1191,8 @@ class Auth extends CI_Controller
 	function news($page='')
 	{
 		$data = $this->path->all_path();
+		$data['keyword_content'] = "Univesity News";
+		$data['description_content'] = "List Of Univesity News";
 		$this->load->view('auth/header',$data);
 		$data['news'] = $this->frontmodel->fetch_news($page);
 		$data['popular_news'] = $this->frontmodel->popular_news();
@@ -1200,6 +1202,8 @@ class Auth extends CI_Controller
 	function articles($page='')
 	{
 		$data = $this->path->all_path();
+		$data['keyword_content'] = "Univesity Articles";
+		$data['description_content'] = "List Of Univesity Articles";
 		$this->load->view('auth/header',$data);
 		$data['articles'] = $this->frontmodel->fetch_articles($page);
 		$data['popular_articles'] = $this->frontmodel->popular_articles();
@@ -1262,6 +1266,8 @@ class Auth extends CI_Controller
 	function events()
 	{
 		$data = $this->path->all_path();
+		$data['keyword_content'] = "universities events,university events in india,study abroad.";
+		$data['description_content'] = "List of universities events,university events in india,study abroad.";
 		$this->load->view('auth/header',$data);
 		$data = $this->path->all_path();
 		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
