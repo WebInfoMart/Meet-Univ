@@ -251,6 +251,7 @@ class Univ extends CI_Controller
 			$data['scrapdata'] = $this->users->get_content($url);
 			//$this->load->view('scrap',$data);
 		}
+		//function for shonwing the univ event
 		function univ_event($event_id='')
 		{
 			$data = $this->path->all_path();
@@ -269,6 +270,8 @@ class Univ extends CI_Controller
 			$data['total_register_user'] = $this->frontmodel->count_event_register($event_id);
 			$data['feature_event_of_univ'] = $this->frontmodel->fetch_featured_events_of_univ($univ_id);
 			
+			$data['keyword_content'] = "Study in ".$data['event_detail']['univ_name'].', '.'event in '.$data['event_detail']['cityname'].' ,events in '.$data['event_detail']['event_date_time'];
+			$data['description_content'] = "event of ".$data['event_detail']['univ_name']. ' in ' .$data['event_detail']['cityname'].', '.$data['event_detail']['statename'].', '.$data['event_detail']['event_date_time']; 
 			if($data['university_details']['univ_logo_path'] !='' || $data['university_details']['univ_logo_path']!= 0)
 			{
 				$data['img_src'] = base_url()."uploads/univ_gallery/".$data['university_details']['univ_logo_path'];
