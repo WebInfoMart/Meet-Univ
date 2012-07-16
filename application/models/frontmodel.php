@@ -428,15 +428,42 @@ class Frontmodel extends CI_Model
 	
 	function fetch_all_comments($commented_on,$commented_on_id)
 	{
+		$limit=4;
+		$data['show_more']=0;
+		if($this->input->post('offset'))
+		{
+		$offset=$this->input->post('offset');
+		$offset=$limit*$offset;
+		$moreresult=$offset+$limit;
+		}
+		else
+		{
+		$offset=0;
+		$moreresult=0;
+		}
 		$this->db->select('*');
 		$this->db->from('comment_table');
 		$this->db->join('users', 'users.id = comment_table.commented_by','left');
 		$this->db->join('user_profiles','user_profiles.user_id = users.id','left');	
 		$this->db->where(array('comment_on_id'=>$commented_on_id,'commented_on'=>$commented_on));
 		$query=$this->db->get();
-		if($query->num_rows() > 0)
+		$data['total_comment']=$query->num_rows();
+		if($data['total_comment'] > 0)
 		{
-		return $query->result_array();
+		$this->db->select('*');
+		$this->db->from('comment_table');
+		$this->db->join('users', 'users.id = comment_table.commented_by','left');
+		$this->db->join('user_profiles','user_profiles.user_id = users.id','left');	
+		$this->db->where(array('comment_on_id'=>$commented_on_id,'commented_on'=>$commented_on));
+		$this->db->order_by('comment_table.comment_time','desc');
+		$this->db->limit($limit,$offset);
+		$query=$this->db->get();
+		$data['comments']=$query->result_array();
+		if($moreresult<$data['total_comment'])
+		{
+		$data['show_more']=1;
+		}
+		return $data;
 		}
 		else {
 		return 0;
