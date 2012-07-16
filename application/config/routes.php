@@ -43,17 +43,33 @@ $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';
 
 
-//sumit munjal 
+$route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
+$route['(Recent_Articles/articles)']='auth/articles';
+
+$route['article-list/university_articles_list/(:num)']='univ/university_articles_list/$1';
+$route['article-list/university_articles_list']='univ/university_articles_list';
+
+$route['(Recent_News/news/(:num))']='auth/news/$1';
+$route['(Recent_News/news)']='auth/news';
+
+$route['news-list/university_news_list/(:num)']='univ/university_news_list/$1';
+$route['news-list/university_news_list']='univ/university_news_list';
+
+$route['university_events']='univ/university_events';
+$route['event-list/university_events/(:num)']='univ/university_events/$1';
+$route['event-list/university_events']='univ/university_events';
+
+$route['university_articles']='univ/university_articles_list';
+
+
 $route['about']='univ/univ_aboutus';
 $route['programs']='univ/programs';
-$route['university_events']='univ/university_events';
-$route['(:any)/(:any)/(:num)']='univ/university_events';
-$route['university_news']='univ/university_news_list';
-$route['(:any)/(:any)/(:num)']='univ/university_news_list';
-$route['university_articles']='univ/university_articles_list';
-$route['(:any)/(:any)/(:num)']='univ/university_articles_list';
-//$route['university_qustions_qnswers']='univ/UniversityQuest';
 
+$route['university_news']='univ/university_news_list';
+
+
+//$route['university_qustions_qnswers']='univ/UniversityQuest';
+//$route['(:any)/(:any)/(:num)']='univ/university_articles_list';
 $route['(event/EventRegistration)'] = 'leadcontroller/EventRegistration';
 $route['event/(:num)/(:any)']='univ/univ_event/$1';
 
@@ -85,10 +101,7 @@ $route['(:num)/university/(:any)/news']='univ/university_news_list/$1';
 $route['(:num)/university/(:any)/articles']='univ/university_article_list/$1';
 $route['program_detail/(:num)/(:num)']='univ/program_detail/$1/$2';
 
-$route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
-$route['(Recent_Articles/articles)']='auth/articles';
-$route['(Recent_News/news/(:num))']='auth/news/$1';
-$route['(Recent_News/news)']='auth/news';
+
 $route['university/(:num)/(:any)']='univ/university/$1';
 $route['Questions_Answers']='univ/UniversityQuestSection';
 $route['otherQuestion/(:num)/(:any)']='quest_ans_controler/AnotherQuestion/$1';

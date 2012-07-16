@@ -259,7 +259,7 @@ class Frontmodel extends CI_Model
 		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/news-list/university_news_list";
 		//$config['base_url']=base_url()."news-list/university_news_list";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '5'; 
+		$config['per_page'] = '1'; 
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -289,7 +289,7 @@ class Frontmodel extends CI_Model
 		$numrows=$query->num_rows();
 		$config['base_url']=base_url()."Recent_News/news/";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = 7; 
+		$config['per_page'] = 1; 
 		$offset = $this->uri->segment('3');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -312,11 +312,11 @@ class Frontmodel extends CI_Model
 		$this->db->where(array('article_type_ud'=>'univ_article','article_approve_status'=>'1'));
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
-		$config['base_url']=base_url()."Recent_Articles/articles";
+		$config['base_url']= base_url()."Recent_Articles/articles";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '7'; 
+		$config['per_page'] = '1'; 
 		$offset = $this->uri->segment('3');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
-        $limit = $config['per_page'];
+		$limit = $config['per_page'];
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id'); 
@@ -324,7 +324,9 @@ class Frontmodel extends CI_Model
 		$this->db->limit($limit,$offset);
 		$this->db->order_by("publish_time", "desc"); 
 		$query = $this->db->get();
-		$this->pagination->initialize($config);
+		$a = $this->pagination->initialize($config);
+		$x = $query->result_array();
+	    //print_r($a);
 		return $query->result_array();
 	}
 	
@@ -374,7 +376,7 @@ class Frontmodel extends CI_Model
 		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/article-list/university_articles_list";
 		//$config['base_url']=base_url()."article-list/university_articles_list";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '5'; 
+		$config['per_page'] = '1'; 
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');

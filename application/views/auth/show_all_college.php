@@ -381,12 +381,9 @@ function ajaxpaging(a,pid)
 	   success: function(r)
 	   {
 	    res=r.split('!@#$%^&*');
-		 $('#search_results').animate({
-		'opacity':1
-		},1000,function(){
-		});
 		$('#col_paging').html(res[1]);
 		$('#listed_currently_univ').html(res[0]);
+		$("#search_results").animate({opacity:'1'},10000);
 	   }
 	   })
 	   
