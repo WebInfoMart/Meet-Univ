@@ -1243,7 +1243,7 @@ class Admin extends CI_Controller
 		$this->load->view('ajaxviews/check_unique_field', $data);
 	}
 	
-	function manage_university($mps='')
+function manage_university($mps='')
  {
      if (!$this->tank_auth->is_admin_logged_in()) {
    redirect('admin/adminlogin/');

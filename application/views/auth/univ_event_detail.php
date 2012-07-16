@@ -247,9 +247,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</span></h4>
 						</div> <?php } } ?>
 					</div>
-					<div class="loading_image_show_hide" style="display:none;"><img src="<?php echo "$base$img_path"; ?>/ajax-loader.gif"></div >
 					<?php if($total_comment>4) { ?>
-					<div class="events_box" id="show_more">show more comment</div>
+					<div  id="show_more">show more comment</div>
 					<input type="hidden" id="show_more_offset" value="1">
 					<?php } ?>
 					<div class="margin_t margin_b">
@@ -314,6 +313,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div> <?php } ?>
 						<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $event_detail['event_id']; ?>" >
 						<input type="hidden" name="commented_on" id="commented_on" value="event" >
+						<input type="hidden"  id="lastcommentid" value="0" >
 									
 							<div class="clearfix"></div>
 						</div>
@@ -439,6 +439,7 @@ var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment)+1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
+var lastpostcommentid=$('#lastcommentid').val();
 if($('#commented_text').val()!='')
 {
 	$.ajax({
@@ -449,7 +450,13 @@ if($('#commented_text').val()!='')
 	   cache: false,
 	   success: function(msg)
 	   {
-		$(".event_border:last").after(msg);
+	    msgarr=msg.split('!@#$%^&*');
+		var lastinsid=parseInt(msgarr[0]);
+		if(lastpostcommentid=='0')
+		{
+		$('#lastcommentid').val(lastinsid);
+		}
+		$(".event_border:last").after(msgarr[1]);
 		$('#commented_text').val('');
 		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
 		$('#cnt_comment_show').html(span_comment_incr);
@@ -497,13 +504,14 @@ $.ajax({
 
 $('#show_more').click(function()
 {
-$('.loading_image_show_hide').show();
+$('#show_more').text('Loading..');
 var commentd_on=$('#commented_on').val();
 var commented_on_id=$('#commented_on_id').val();
 var offset=$('#show_more_offset').val();
 offset=parseInt(offset);
+var lastpostcommentid=$('#lastcommentid').val();
 $('#show_more_offset').val(offset+1);
-var data={'commented_on':commentd_on,'commented_on_id':commented_on_id,'offset':offset};
+var data={'commented_on':commentd_on,'commented_on_id':commented_on_id,'offset':offset,'lastpostcommentid':lastpostcommentid};
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/show_more_comment",
@@ -518,7 +526,9 @@ $.ajax({
 	   {
 	   $('#show_more').hide();
 	   }
-	   $('.loading_image_show_hide').hide();
+	   
+	   $('#show_more').text('show more comment');
+
 		//	alert(msg.toSource());
 	}
 	   });

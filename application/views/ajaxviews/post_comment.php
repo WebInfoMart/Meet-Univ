@@ -33,9 +33,7 @@ if ($user) {
 					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php //echo $delete_comment; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
 			</span>-->
 
-									<h4><a href="#" class="course_txt">
-									<?php echo $user_detail['fullname']; ?>
-									</a></h4>
+									
 									
 									<?php echo $commented_text; ?>
 									
@@ -45,6 +43,9 @@ if ($user) {
 									</div>
 								</div>
 								<div class="clearfix"></div>
+								<h4><a href="#" class="course_txt">
+									<?php echo $user_detail['fullname']; ?>
+									</a></h4>
 </div>
 <script>
 jQuery(document).ready(function() {

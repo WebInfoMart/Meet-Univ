@@ -453,8 +453,8 @@ class Univ extends CI_Controller
 			$data['news_list_detail']=$this->frontmodel->get_news_list_by_univ($univ_id);
 			$data['popular_news'] = $this->frontmodel->popular_news();
 			
-			$data['keyword_content'] = "Articles Of ".$university_name;
-			$data['description_content'] = "List Of ". $university_name ."Univesity Articles";
+			$data['keyword_content'] = "News Of ".$university_name;
+			$data['description_content'] = "List Of ". $university_name ."Univesity News";
 			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
@@ -499,7 +499,7 @@ class Univ extends CI_Controller
 			$data['articles_list_detail']=$this->frontmodel->get_articles_list_by_univ($univ_id);
 			$data['popular_articles'] = $this->frontmodel->popular_articles();
 			$data['keyword_content'] = "Articles Of ".$university_name;
-			$data['description_content'] = "List Of ". $university_name ."Univesity Articles";
+			$data['description_content'] = "List Of ". $university_name ."Articles";
 			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
@@ -600,7 +600,17 @@ class Univ extends CI_Controller
 				$this->frontmodel->insert_user_comment();
 				$data['clear_comment']=1;
 				}
-				$data['news_comments']=$this->frontmodel->fetch_all_comments('news',$news_id);
+				$comments=$this->frontmodel->fetch_all_comments('news',$news_id);
+				if($comments!=0)
+				{
+				$data['news_comments']=$comments['comments'];
+				$data['total_comment']=$comments['total_comment'];
+				}
+				else
+				{
+				$data['news_comments']=0;
+				$data['total_comment']=0;
+				}
 				$data['user_is_logged_in']=0;
 				if($this->tank_auth->is_logged_in())
 				{
@@ -642,7 +652,7 @@ class Univ extends CI_Controller
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['articles_detail']=$this->frontmodel->get_article_detail_by_univ($univ_id,$article_id);
-			$data['keyword_content'] = $data['articles_detail']['univ_name'].'article, study abroad article, event article';
+			$data['keyword_content'] = $data['articles_detail']['univ_name'].' article, study abroad article, event article';
 			$data['description_content'] = $data['articles_detail']['article_title'];
 			//print_r($data['articles_detail']);
 			
@@ -701,7 +711,17 @@ class Univ extends CI_Controller
 				$this->frontmodel->insert_user_comment();
 				$data['clear_comment']=1;
 				}
-				$data['article_comments']=$this->frontmodel->fetch_all_comments('article',$article_id);
+				$comments=$this->frontmodel->fetch_all_comments('article',$article_id);
+				if($comments!=0)
+				{
+				$data['article_comments']=$comments['comments'];
+				$data['total_comment']=$comments['total_comment'];
+				}
+				else
+				{
+				$data['article_comments']=0;
+				$data['total_comment']=0;
+				}
 				$data['user_is_logged_in']=0;
 				if($this->tank_auth->is_logged_in())
 				{
@@ -741,7 +761,7 @@ class Univ extends CI_Controller
 				$data['delete_comment']=$this->frontmodel->post_comment_by_logged_in_user($logged_in_user_id,$data['commented_on'],$commented_on_id,$data['commented_text']);
 				$data['user_detail']=$this->users->fetch_profile($logged_in_user_id);
 				$view=$this->load->view('ajaxviews/post_comment',$data);
-				echo $view;
+				echo $data['delete_comment'].'!@#$%^&*'.$view;
 			}	
 		}
 		function delete_comment()
@@ -1176,6 +1196,25 @@ class Univ extends CI_Controller
 			$this->load->view('auth/NotFoundPage',$data);
 			}
 		$this->load->view('auth/footer',$data);
+	}
+	//find more comment
+	function show_more_comment()
+	{
+	$data = $this->path->all_path();
+	$data['user_is_logged_in']=0;
+	if($this->tank_auth->is_logged_in())
+	{
+	$data['user_is_logged_in']=1;
+	$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
+	}
+	$commented_on=$this->input->post('commented_on');
+	$commented_on_id=$this->input->post('commented_on_id');
+	$comment=$this->frontmodel->fetch_all_comments($commented_on,$commented_on_id);
+	$data['comments']=$comment['comments'];
+	$show_more=$comment['show_more'];
+	$comments=$this->load->view('ajaxviews/show_more_comment',$data);
+	//echo '({show_more:"'.$show_more.'",comments:"'.$comments.'"})';
+	echo $show_more.'!@#$%^&*'.$comments;
 	}
 }		
 	

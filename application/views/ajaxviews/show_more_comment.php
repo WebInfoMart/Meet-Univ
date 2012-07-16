@@ -30,7 +30,6 @@ if ($user) {
 							</div>
 							<div>
 							<?php if($user_is_logged_in ){
-							echo "hi";
 			if($user_detail['user_id']==$comments_detail['user_id'])
 			{
 			?>					

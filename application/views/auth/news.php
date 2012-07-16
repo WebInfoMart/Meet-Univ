@@ -74,13 +74,7 @@
 								</div>
 								<div><img src="<?php echo "$base$img_path"; ?>/clock.png" class="line_img inline"><span class="line_time"><abbr class="timeago time_ago" title="<?php echo $news_detail['publish_time']; ?>"></abbr>
 										</span></div>
-								<?php echo substr($news_detail['news_detail'],0,420).'..';
-								if((strlen($news_detail['news_detail'])>420))
-								{?>
-								<a href="<?php echo $news_link; ?>" style="font-size:13px;font-weight:bold">view more</a>
-								<?php
-								}
-								?>
+								<?php echo substr($news_detail['news_detail'],0,250).'..'; ?>
 							</div>
 						</li>
 						<?php } ?>

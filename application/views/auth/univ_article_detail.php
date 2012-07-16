@@ -25,7 +25,7 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>
-	<div class="row" style="margin-top:-10px">
+	<div id="id_for_news_comment" class="row" style="margin-top:-10px">
 		<div class="float_l span13 margin_l">
 			<div class="span9 margin_zero">
 				<div class="fix_h3"><h3><?php echo $articles_detail['article_title']; ?></h3></div>
@@ -71,22 +71,19 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<?php echo $articles_detail['article_detail']; ?>
 					</div>
 				</div>
-				<div id="add_more_comment">
-					<div class="event_border">
-					<?php if($article_comments!=0) { $all_comment =  count($article_comments); }
-						else { $all_comment = 0; } ?>
-						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $all_comment; ?>"/>
-						<h3><span id="cnt_comment_show"><?php if($article_comments!=0) { echo count($article_comments); }
-						else { echo "0"; }
-						?></span> Comments</h3>
-					</div>
-					<?php if($article_comments!=0){
-					//print_r($article_comments);
-						foreach($article_comments as $article_comments_detail){ ?>
-							<div class="event_border hover_delete_comment_<?php echo $article_comments_detail['comment_id']; ?>" >
-								<div class="float_l comment_img center">
-									<?php if($article_comments_detail['user_pic_path'] !=''){ ?>
-									<img src="<?php echo "$base"; ?>uploads/<?php echo $article_comments_detail['user_pic_path']; ?>" />
+						<div class="margin_t1">
+						<div class="event_border">
+						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
+							<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Comments Yet</h3>
+						</div>
+						<?php 
+							if($article_comments!=0){
+						foreach($article_comments as $article_comment_detail){ ?>
+						<div class="event_border find_comment hover_delete_comment_<?php echo $article_comment_detail['comment_id']; ?>">
+							<div class="float_l">
+								<div class="comment_img">
+									<?php if($article_comment_detail['user_pic_path'] !=''){ ?>
+									<img src="<?php echo "$base"; ?>uploads/<?php echo $article_comment_detail['user_pic_path']; ?>" />
 									<?php } 
 									else if($user) { ?>
 								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
@@ -94,52 +91,57 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									else { ?>		
 									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
 									<?php } ?>
-									<h4><span class="course_txt">
-									<?php 
-									if($article_comments_detail['commented_by_user_name'] !=''){
-									echo $article_comments_detail['commented_by_user_name']; 
+								</div>
+							</div>
+							<div>
+							<?php if($user_is_logged_in ){
+			if($user_detail['user_id']==$article_comment_detail['user_id'])
+			{
+			?>					
+			<!--<span class="float_r delete_comment">
+					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $article_comment_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
+			</span>-->
+			<?php	} } ?>	
+								
+								<?php echo $article_comment_detail['commented_text'];?>
+								<div style="font-size;color:black;" class="float_r">
+								<abbr class="timeago time_ago" title="<?php echo $article_comment_detail['comment_time']; ?>"></abbr>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<h4><span class="course_txt">
+								<?php if($article_comment_detail['commented_by_user_name'] !=''){
+									echo $article_comment_detail['commented_by_user_name']; 
 									}
-									else if($article_comments_detail['fullname'] !='')
+									else if($article_comment_detail['fullname'] !='')
 									{
-										echo $article_comments_detail['fullname'];
+										echo $article_comment_detail['fullname'];
 									}
 									else if($user)
 									{
 										echo $user_profile['name'];
-									}
-									?>
-									</span>
-									</h4>
-								</div>
-								<?php if($user_is_logged_in ){
-			if($user_detail['user_id']==$article_comments_detail['user_id'])
-			{
-			?>					
-			<span class="float_r delete_comment" >
-					<img style="cursor:pointer;width: 10px;height: 10px;" class="del_icon" onclick='delete_this_comment("<?php echo $article_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
-			</span>
-									
-			<?php	} } ?>			
-									
-							<abbr class="timeago time_ago" title="<?php echo $article_comments_detail['comment_time']; ?>"></abbr>		
-									<div class="span6 margin_l">
-									<span><?php echo $article_comments_detail['commented_text'];?></span>
-									</div>
-									
-							<div class="clearfix"></div>		
+									} ?>
+								</span></h4>
+						</div> <?php } } ?>
 					</div>
-					<?php }
-}				?>		
-				</div>
-				<?php if($user_is_logged_in==0){ ?>			
-			<div class="events_box margin_t1" style="height: 53px;">
-				<div class="float_r">
-					Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-				</div>
-				<h3 class="center">Please Login for comment</h3>
-					</div>
-					<?php } else { ?>	
-			<div class="margin_t margin_b">
+					<?php if($total_comment>4) { ?>
+					<div  id="show_more">show more comment</div>
+					<input type="hidden" id="show_more_offset" value="1">
+					<?php } ?>
+					<div class="margin_t margin_b">
+						<div>
+						<?php if($user_is_logged_in==0){ ?>		
+						<div class="events_box" style="height: 53px;">
+							<div>
+							<div class="float_r">
+								Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
+							</div>
+							<div class="clearfix"></div>
+							</div>
+								<h3 class="center">Please Login for comment</h3>
+						</div>
+						<?php } else { ?>
+							<div class="margin_t margin_bs">
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
@@ -152,8 +154,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
 									<?php } else { ?>		
 								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php }  ?></br>
-								<span class='center comment_style'>
+								<?php }  ?>
+								<div style='width: 46px;position: absolute;' class="center">
 								<?php
 								if($user_detail['fullname'] !='')
 								{
@@ -164,27 +166,37 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									echo $user_profile['name'];
 								}
 								?>
-								</span>
+								</div>
 									</div>
 								</div>
 								<div class="float_l span6 margin_zero">
+									
 									<form class="form-horizontal" method="post" action="">
-										<div class="control-group">
+									<div class="control-group">
+											<div class="my_form_controls">
 												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
+											</div>
 										</div>
 										<div class="control-group">
+											<div class="my_form_controls">
 												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">
+											</div>
 										</div>
 									</form>
 								</div>
+								
+								<div class="clearfix"></div>
+							</div>
+						</div> <?php } ?>	
 								<div class="clearfix"></div>
 							</div>
 						</div>
-		<?php } ?>
-			</div>	
-				<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $articles_detail['article_id']; ?>" >
-				<input type="hidden" name="commented_on" id="commented_on" value="article" >
-								
+		<?php// } ?>
+		<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $articles_detail['article_id']; ?>" >
+		<input type="hidden" name="commented_on" id="commented_on" value="article" >
+		<input type="hidden"  id="lastcommentid" value="0" >
+													
+					</div>
 			<div class="float_l span4">	
 				<div class="social_set float_r">
 					<div id="gp" class="float_l">
@@ -231,14 +243,16 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 	</div>	
 </div>	
 <script>
+
 function post_comment()
 {
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
-var span_comment_incr = parseInt(span_comment) + 1;
+var span_comment_incr = parseInt(span_comment)+1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
+var lastpostcommentid=$('#lastcommentid').val();
 if($('#commented_text').val()!='')
 {
 	$.ajax({
@@ -249,14 +263,20 @@ if($('#commented_text').val()!='')
 	   cache: false,
 	   success: function(msg)
 	   {
-		
-		$(".event_border:last").after(msg);
+	    msgarr=msg.split('!@#$%^&*');
+		var lastinsid=parseInt(msgarr[0]);
+		if(lastpostcommentid=='0')
+		{
+		$('#lastcommentid').val(lastinsid);
+		}
+		$(".event_border:last").after(msgarr[1]);
 		$('#commented_text').val('');
 		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
 		$('#cnt_comment_show').html(span_comment_incr);
 		}
 	   });
-}	   
+}
+   
 }
 
 /*$('.hover_delete_comment').hover(
@@ -272,6 +292,10 @@ function delete_this_comment(comment_id)
 var r=confirm("Do you want to delete the comment?");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
+if(span_comment_incr=='0')
+{
+span_comment_incr='No';
+}
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if(r)
 {
@@ -289,5 +313,40 @@ $.ajax({
 		}
 	   });
 }
-}			
-</script>	
+}	
+
+$('#show_more').click(function()
+{
+$('#show_more').text('Loading..');
+var commentd_on=$('#commented_on').val();
+var commented_on_id=$('#commented_on_id').val();
+var offset=$('#show_more_offset').val();
+offset=parseInt(offset);
+var lastpostcommentid=$('#lastcommentid').val();
+$('#show_more_offset').val(offset+1);
+var data={'commented_on':commentd_on,'commented_on_id':commented_on_id,'offset':offset,'lastpostcommentid':lastpostcommentid};
+$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>univ/show_more_comment",
+	   async:false,
+	   data: data,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   msgarr=msg.split('!@#$%^&*');
+	   $('#id_for_news_comment').find('.find_comment:last').after(msgarr[1]);
+	   if(msgarr[0]=='0')
+	   {
+	   $('#show_more').hide();
+	   }
+	   
+	   $('#show_more').text('show more comment');
+
+		//	alert(msg.toSource());
+	}
+	   });
+});
+jQuery(document).ready(function() {
+ jQuery("abbr.timeago").timeago();
+});			
+</script>
