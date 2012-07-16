@@ -169,8 +169,6 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								</div>
 								<div class="float_l span6 margin_zero">
 									<form class="form-horizontal" method="post" action="">
-									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $articles_detail['article_id']; ?>" >
-									<input type="hidden" name="commented_on" id="commented_on" value="article" >
 										<div class="control-group">
 												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
 										</div>
@@ -184,6 +182,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						</div>
 		<?php } ?>
 			</div>	
+				<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $articles_detail['article_id']; ?>" >
+				<input type="hidden" name="commented_on" id="commented_on" value="article" >
+								
 			<div class="float_l span4">	
 				<div class="social_set float_r">
 					<div id="gp" class="float_l">

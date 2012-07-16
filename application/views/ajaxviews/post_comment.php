@@ -29,9 +29,9 @@ if ($user) {
 									</div>
 								</div>
 								<div>
-				<span class="float_r delete_comment" >
-					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php echo $delete_comment; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
-			</span>
+				<!--<span class="float_r delete_comment" >
+					<img style="cursor:pointer" class="del_icon" onclick='delete_this_comment("<?php //echo $delete_comment; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
+			</span>-->
 
 									<h4><a href="#" class="course_txt">
 									<?php echo $user_detail['fullname']; ?>

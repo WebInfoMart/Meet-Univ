@@ -196,13 +196,13 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</div>
 								<div class="margin_t1">
 						<div class="event_border">
-						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo count($event_comments); ?>"/>
-							<h3><span id="cnt_comment_show"><?php if($event_comments!=0){ echo count($event_comments); } else { echo "0"; }; ?></span> Comments</h3>
+						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
+							<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Comments Yet</h3>
 						</div>
 						<?php 
 							if($event_comments!=0){
 						foreach($event_comments as $event_comments_detail){ ?>
-						<div class="event_border hover_delete_comment_<?php echo $event_comments_detail['comment_id']; ?>">
+						<div class="event_border find_comment hover_delete_comment_<?php echo $event_comments_detail['comment_id']; ?>">
 							<div class="float_l">
 								<div class="comment_img">
 									<?php if($event_comments_detail['user_pic_path'] !=''){ ?>
@@ -221,9 +221,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 			if($user_detail['user_id']==$event_comments_detail['user_id'])
 			{
 			?>					
-			<span class="float_r delete_comment">
-					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php echo $event_comments_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
-			</span>
+			<!--<span class="float_r delete_comment">
+					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $event_comments_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
+			</span>-->
 			<?php	} } ?>	
 								
 								<?php echo $event_comments_detail['commented_text'];?>
@@ -247,6 +247,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</span></h4>
 						</div> <?php } } ?>
 					</div>
+					<div class="loading_image_show_hide" style="display:none;"><img src="<?php echo "$base$img_path"; ?>/ajax-loader.gif"></div >
+					<?php if($total_comment>4) { ?>
+					<div class="events_box" id="show_more">show more comment</div>
+					<input type="hidden" id="show_more_offset" value="1">
+					<?php } ?>
 					<div class="margin_t margin_b">
 						<div>
 						<?php if($user_is_logged_in==0){ ?>		
@@ -289,10 +294,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</div>
 								</div>
 								<div class="float_l span6 margin_zero">
+									
 									<form class="form-horizontal" method="post" action="">
-									<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $event_detail['event_id']; ?>" >
-									<input type="hidden" name="commented_on" id="commented_on" value="event" >
-										<div class="control-group">
+									<div class="control-group">
 											<div class="my_form_controls">
 												<textarea class="<?php echo $class_commented_text; ?>" id="commented_text" name="commented_text" rows="3"></textarea>
 											</div>
@@ -308,6 +312,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<div class="clearfix"></div>
 							</div>
 						</div> <?php } ?>
+						<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $event_detail['event_id']; ?>" >
+						<input type="hidden" name="commented_on" id="commented_on" value="event" >
+									
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -424,18 +431,13 @@ var loc = window.location;
 	   }) 
 }
 
-</script>			
-
-	
-<script>
-
 function post_comment()
 {
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
-var span_comment_incr = parseInt(span_comment);
+var span_comment_incr = parseInt(span_comment)+1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if($('#commented_text').val()!='')
 {
@@ -470,6 +472,10 @@ function delete_this_comment(comment_id)
 var r=confirm("Do you want to delete the comment?");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
+if(span_comment_incr=='0')
+{
+span_comment_incr='No';
+}
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 if(r)
 {
@@ -488,6 +494,35 @@ $.ajax({
 	   });
 }
 }	
+
+$('#show_more').click(function()
+{
+$('.loading_image_show_hide').show();
+var commentd_on=$('#commented_on').val();
+var commented_on_id=$('#commented_on_id').val();
+var offset=$('#show_more_offset').val();
+offset=parseInt(offset);
+$('#show_more_offset').val(offset+1);
+var data={'commented_on':commentd_on,'commented_on_id':commented_on_id,'offset':offset};
+$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>univ/show_more_comment",
+	   async:false,
+	   data: data,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   msgarr=msg.split('!@#$%^&*');
+	   $('#wrapper').find('.find_comment:last').after(msgarr[1]);
+	   if(msgarr[0]=='0')
+	   {
+	   $('#show_more').hide();
+	   }
+	   $('.loading_image_show_hide').hide();
+		//	alert(msg.toSource());
+	}
+	   });
+});
 jQuery(window).bind("load", function() {
 var url=window.location;
 postCook(url);

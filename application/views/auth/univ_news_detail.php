@@ -73,8 +73,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						</div>
 						<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
-							<input type="hidden" id="txt_cnt_comment_show" value="<?php if($news_comments!=0){ echo count($news_comments); } else { echo "0";}; ?>"/>
-								<h3><span id="cnt_comment_show"><?php if($news_comments!=0){ echo count($news_comments); } else { echo "0";}; ?></span> Comments</h3>
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
+								<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Comments yet</h3>
 							</div> 
 				<?php if($news_comments!=0){
 						foreach($news_comments as $news_comments_detail){ ?>
@@ -280,6 +280,10 @@ var r=confirm("Do you want to delete the comment?");
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) - 1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
+if(span_comment_incr=='0')
+{
+span_comment_incr='No';
+}
 if(r)
 {
 $.ajax({
