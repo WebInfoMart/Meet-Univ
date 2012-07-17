@@ -161,7 +161,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						// }
 						?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/clock.png" class="line_img inline"><span class="blue line_time inline">Timings: 
-										<?php //echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.?><?php echo $event_detail['event_time'];?></span></div>
+										<?php //echo $extract_date[0].' '.$extract_date[1].', '.$extract_date[2].'&nbsp;&nbsp;&nbsp;'.?><?php echo $event_detail['event_date_time'].' , '.$event_detail['event_time'];?></span></div>
 										<div><img src="<?php echo base_url(); ?>images/group.png" class="line_img inline"><span class="blue line_time inline">Total Registered Users:
 										<?php echo $total_register_user; ?></span></div>
 										

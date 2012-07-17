@@ -11,7 +11,16 @@ class Frontmodel extends CI_Model
 	function fetch_events_for_calendar()
 	{
 		//$sql = "select * from events where STR_TO_DATE(event_date_time, '%d %M %Y')>=".date('Y-m-d');
-		$this->db->select('*');
+		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events where STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."' order by dt asc";
+		$results=$this->db->query($sql);
+		if($results->num_rows()>0)
+		{
+		return $results->result_array();
+		}
+		else {
+		return 0;
+		}
+		/*$this->db->select('*');
 		$this->db->from('events');
 		$sql = $this->db->where("STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."'");
 		$query = $this->db->get();
@@ -21,7 +30,7 @@ class Frontmodel extends CI_Model
 		}
 		else {
 		return 0;
-		}
+		}*/
 		//print_r($x);
 	}
 	function fetch_featured_events()

@@ -766,7 +766,6 @@ function show_all_college_paging($current_url)
 //filteration end	
 	
 	//event filetration
-	/*Anusha*/
 	function all_event_filteration($current_url){
 	
 		$events_data['filter_event_type']=array();
