@@ -191,7 +191,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<div class="clearfix"></div>
 							</div>
 						</div>
-		<?php// } ?>
+		<?php // } ?>
 		<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $news_detail['news_id']; ?>" >
 		<input type="hidden" name="commented_on" id="commented_on" value="news" >
 		<input type="hidden"  id="lastcommentid" value="0" >
