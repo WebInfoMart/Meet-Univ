@@ -632,11 +632,21 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<li>
 
 										<div class="float_l green_box_img">
-										<?php if($quest_list['user_pic_path'] !='' && file_exists(getcwd().'/uploads/'.$quest_list['user_pic_path'])) { ?> 
-										<img src="<?php echo "$base"; ?>uploads/<?php echo $quest_list['user_pic_path']; ?>" class="latest_img" />
-										<?php } else { ?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" class="latest_img">
-										<?php } ?>
+										<?php
+										if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
+										{
+										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+										
+											echo "<img src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."' class='latest_img'/>";
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
+										{
+											echo "<img src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."' class='latest_img'/>";
+										}
+										else{
+											echo "<img src='".base_url()."images/profile_icon.png'/>";
+										}
+										?>
 										</div>
 										<div class="quest_fix">
 											<span><a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a></span>

@@ -38,16 +38,31 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 		<div class="float_l span13 margin_l">
 			<div class="float_l span9 margin_delta margin_t">
 				<div class="float_l comment_img margin_delta" style="margin-right:10px;">
-						<?php 
-						if($single_quest['user_pic_path']!= '')
-						{
+				
+				<?php
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$single_quest['user_thumb_pic_path']) && $single_quest['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img class='question_user' src='".base_url()."uploads/user_pic/thumbs/".$single_quest['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$single_quest['user_pic_path']) && $single_quest['user_pic_path']!='')
+							{
+								echo "<img class='question_user' src='".base_url()."uploads/user_pic/".$single_quest['user_pic_path']."'/>";
+							}
+							else if($user)
+							{
+							?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+							<?php
+							}
+							else{
+							echo "<img style='width:40px;height:40px;' src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
+							
+							
 						
-						echo "<img class='question_user' src='".base_url()."uploads/".$single_quest['user_pic_path']."'/>";
-						}
-						else {
-						echo "<img style='width:40px;height:40px;' src='".base_url()."images/user_model.png'/>" ;
-						}
-						?>
 				</div>
 				<div>
 					<span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span>

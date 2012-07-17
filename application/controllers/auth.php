@@ -55,7 +55,6 @@ class Auth extends CI_Controller
 		if (!$this->tank_auth->is_logged_in()) {
 			redirect('/login/');
 		} else {
-		
 			$subdomain_arr = explode('.', $_SERVER['HTTP_HOST'], 2);	
 			$this->load->view('auth/header',$data);
 			$data['user_id']	= $this->tank_auth->get_user_id();
@@ -834,7 +833,6 @@ class Auth extends CI_Controller
 		$data['user_profile_update'] = $this->users->user_profile_update($logged_user);
 		$this->users->do_upload_profile_pic();
 		$data['pus'] = 1;
-		redirect('home/pus');
 		}
 		else
 		{

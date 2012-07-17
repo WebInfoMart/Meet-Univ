@@ -16,9 +16,15 @@ if ($user) {
 <div class="span3 margin_zero float_l">
 						<div class="sidebar_profic_pic">
 							<?php
-							if($profile_pic['user_pic_path'] != '')
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$profile_pic['user_thumb_pic_path']) && $profile_pic['user_thumb_pic_path']!='' )
 							{
-							echo "<img src='".base_url()."uploads/".$profile_pic['user_pic_path']."'/>";
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$profile_pic['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$profile_pic['user_pic_path']) && $profile_pic['user_pic_path']!='')
+							{
+								echo "<img src='".base_url()."uploads/user_pic/".$profile_pic['user_pic_path']."'/>";
 							}
 							else if($user)
 							{

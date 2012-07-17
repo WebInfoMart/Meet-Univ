@@ -41,26 +41,40 @@ if ($user) {
 												<div>
 													<label class="control-label padding_alpha">
 													<?php
-													if($fetch_profile['user_pic_path'] != '')
+													if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$fetch_profile['user_thumb_pic_path']) && $fetch_profile['user_thumb_pic_path']!='' )
 													{
-														echo "<img class='profile_img_width' src='".base_url()."uploads/".$fetch_profile['user_pic_path']."'/>";
+													//echo $image_thumb = $fetch_profile['user_pic_path'].'_thumb';
+													
+														echo "<img src='".base_url()."uploads/user_pic/thumbs/".$fetch_profile['user_thumb_pic_path']."'/>";
 													}
-													else if($user) { ?>
-													<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+													else if(file_exists(getcwd().'/uploads/user_pic/'.$fetch_profile['user_pic_path']) && $fetch_profile['user_pic_path']!='')
+													{
+														echo "<img src='".base_url()."uploads/user_pic/".$fetch_profile['user_pic_path']."'/>";
+													}
+													
+													else if($user)
+													{
+													?>
+														<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
 													<?php
 													}
-													
 													else{
-													?>
-													<img class="profile_img_width" src="<?php echo "$base$img_path";  ?>/user_model.png">
-													
-													
-													<?php } ?></label>
+													echo "<img src='".base_url()."images/profile_icon.png'/>";
+													}		
+													?></label>
 													<div class="controls contact_box_content">
 													
 														<input type="file" name="userfile" class="button_profile"/><div class="change_profile">Change your pic</div>
 													</div>
 													<div class="clearfix"></div>
+													<span style="color:red;">
+													<?php
+													if($this->session->flashdata('update_upload_pic_error')!='')
+													{
+														echo $this->session->flashdata('update_upload_pic_error');
+													}
+													?>
+													</span>
 												</div>
 												<div class="control-group">
 													<label class="control-label">Full Name *</label>

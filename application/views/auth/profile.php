@@ -90,10 +90,17 @@ $select_female='';
 				<div class="float_l span2 margin_zero">
 				
 				<?php
-							if($profile_pic['user_pic_path'] != '')
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$profile_pic['user_thumb_pic_path']) && $profile_pic['user_thumb_pic_path']!='' )
 							{
-							echo "<img src='".base_url()."uploads/".$profile_pic['user_pic_path']."'/>";
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$profile_pic['user_thumb_pic_path']."'/>";
 							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$profile_pic['user_pic_path']) && $profile_pic['user_pic_path']!='')
+							{
+								echo "<img src='".base_url()."uploads/user_pic/".$profile_pic['user_pic_path']."'/>";
+							}
+							
 							else if($user)
 							{
 							?>
@@ -113,6 +120,14 @@ $select_female='';
 			<div id="show_img_bar" class="img_bar_profile_modal">
 			<img src="<?php echo "$base$img_path" ?>/ajax-loader.gif"/>
 			</div>
+			<span style="color:red"> 
+				<?php
+				if($this->session->flashdata('upload_pic_error')!='')
+				{
+					echo $this->session->flashdata('upload_pic_error');
+				}
+				?>
+			</span>
 			<div class="margin_t">
 				<div class="float_l span2 margin_zero"><h4>Gender</h4></div>
 				<div class="float_l span3 margin_l12"><input type="radio" name="sex" value="male" <?php echo $select_male; ?> /> Male
@@ -348,7 +363,28 @@ $select_female='';
 								$q_month = $quest_ask_date[1]; ?>
 						
 									<li>
-										<div style="width: 34px;margin-right:20px" class="float_l"><img src="<?php echo $base; ?>images/user_model.png" style="width:34px;height:34px;border: 2px solid #DDD;padding:2px;"></div>
+										<div style="width: 34px;margin-right:20px" class="float_l">
+										<?php
+										if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
+										{
+										
+											echo "<img src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."' style='width:34px;height:34px;border: 2px solid #DDD;padding:2px;'/>";
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
+										{
+											echo "<img src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."' style='width:34px;height:34px;border: 2px solid #DDD;padding:2px;'/>";
+										}
+										else if($user)
+										{
+										?>
+											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+										<?php
+										}
+										else{
+										echo "<img src='".base_url()."images/profile_icon.png'/>";
+										}
+										?>
+										</div>
 										<a href="<?php echo $url; ?>"><span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
 										</a><div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
 										</div>

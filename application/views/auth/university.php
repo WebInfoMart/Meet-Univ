@@ -37,13 +37,21 @@
 						?>
 							<div class="float_l">
 								<div class="follow_img">
-					<?php 		if($followers['user_pic_path']!='')  { ?>	
-									<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>">
-									<img style='width:63px;height:55px;' src='<?php echo $base; ?>uploads/<?php echo$followers['user_pic_path']; ?>' /></a>
-				<?php } else { ?>
-						<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>">
-									<img style='width:63px;height:55px;' src='<?php echo $base; ?>images/user_model.png' /></a>
-				<?php } ?>
+								<?php
+								if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$followers['user_thumb_pic_path']) && $followers['user_thumb_pic_path']!='' )
+										{
+										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+										$link = base_url().'user/'.$followers['id'];
+											echo "<a href=$link><img src='".base_url()."uploads/user_pic/thumbs/".$followers['user_thumb_pic_path']."' class='latest_img' style='width:63px;height:55px;'/></a>";
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$followers['user_pic_path']) && $followers['user_pic_path']!='')
+										{
+											echo "<a href=$link><img src='".base_url()."uploads/user_pic/".$followers['user_pic_path']."' class='latest_img' style='width:63px;height:55px;'/></a>";
+										}
+										else{
+											echo "<a href=$link><img src='".base_url()."images/profile_icon.png'/></a>";
+										}
+								?>
 									</br>
 								</div>
 							</div>

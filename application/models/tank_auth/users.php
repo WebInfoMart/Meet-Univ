@@ -20,12 +20,13 @@ class Users extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
-		$this->gallery_path = realpath(APPPATH . '../uploads');
-		$this->gallery_path_url = base_url().'uploads/';
+		$this->gallery_path = realpath(APPPATH . '../uploads/user_pic/');
+		$this->gallery_path_url = base_url().'uploads/user_pic/';
 		$ci =& get_instance();
 		$this->table_name			= $ci->config->item('db_table_prefix', 'tank_auth').$this->table_name;
 		$this->profile_table_name	= $ci->config->item('db_table_prefix', 'tank_auth').$this->profile_table_name;
 		$this->load->library('pagination');
+		$this->load->library('session');
 		//$this->program_parent	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_parent;
 		//$this->program_educ_level	= $ci->config->item('db_table_prefix', 'tank_auth').$this->program_educ_level;
 		//$this->country	= $ci->config->item('db_table_prefix', 'tank_auth').$this->country;
@@ -111,36 +112,45 @@ class Users extends CI_Model
 	
 	function do_upload() {
 		 //$this->ci->load->config('tank_auth', TRUE);
-  
+		 $user_id = $this->tank_auth->get_user_id();
+		 $image_data['file_name'] = "";
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->gallery_path,
-			'max_size' => 2000 
+			'min_width'=> '175',
+			'min_height'=> '138',
+			'file_name'=>'user_'.$user_id
 		);
-		
+        
 		$this->load->library('upload', $config);
-		$this->upload->do_upload();
+		$this->upload->overwrite = true;
+		if (!$this->upload->do_upload())
+        {
+          $data['error'] = $this->upload->display_errors();
+		  $data['upload_errors'] = $data['error']."";
+		  $this->session->set_flashdata('upload_pic_error',$data['error']);
+        }
+		else{
+		//$this->upload->do_upload();
 		$image_data = $this->upload->data();
 		
 		$config = array(
 			'source_image' => $image_data['full_path'],
+			'create_thumb'=> TRUE,
 			'new_image' => $this->gallery_path . '/thumbs',
 			'maintain_ration' => true,
-			'width' => 150,
-			'height' => 100
+			'width' => 200,
+			'height' => 200
 		);
 		
 		$this->load->library('image_lib', $config);
 		$this->image_lib->resize();
-		//print_r($config);
-		//print_r($image_data['file_name']);
-		//$img_path_store = $this->input->post('userfile');
-		//$img_path_store = $config['new_image'];
-		//print_r($this->session->userdata());
+		}
+		$data['thumb_image_name'] = $image_data['raw_name'].'_thumb'.$image_data['file_ext'];
 		$data['user_id'] = $this->tank_auth->get_user_id();
 		if($image_data['file_name'] != '')
 		{
-		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
+		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."',user_thumb_pic_path = '".$data['thumb_image_name']."' where user_id='".$data['user_id']."'");
 		}
 		if($this->input->post('area_interest') != '')
 		{
@@ -165,38 +175,59 @@ class Users extends CI_Model
 	
 	function do_upload_profile_pic() {
 		 //$this->ci->load->config('tank_auth', TRUE);
-  
+		 $data['user_id'] = $this->tank_auth->get_user_id();
+		 $redirect_false_update_profile = "";
+		 $image_data['file_name'] = "";
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->gallery_path,
-			'max_size' => 2000
+			'min_width'=> '175',
+			'min_height'=> '138',
+			'file_name'=>'user_'.$data['user_id']
 		);
 		
 		$this->load->library('upload', $config);
-		$this->upload->do_upload();
+		$this->upload->overwrite = true;
+		if (!$this->upload->do_upload())
+        {
+          $data['error'] = $this->upload->display_errors();
+		  $data['upload_errors'] = $data['error'];
+		  $this->session->set_flashdata('update_upload_pic_error',$data['error']);
+		  $redirect_false_update_profile = 'notredirect';
+        }
+		else{
+		//$this->upload->do_upload();
 		$image_data = $this->upload->data();
 		
 		$config = array(
 			'source_image' => $image_data['full_path'],
+			'create_thumb'=> TRUE,
 			'new_image' => $this->gallery_path . '/thumbs',
 			'maintain_ration' => true,
-			'width' => 150,
-			'height' => 100
+			'width' => 200,
+			'height' => 200
 		);
 		
 		$this->load->library('image_lib', $config);
 		$this->image_lib->resize();
-		//print_r($config);
-		//print_r($image_data['file_name']);
+		}
+		$data['thumb_image_name'] = $image_data['raw_name'].'_thumb'.$image_data['file_ext'];
 		//$img_path_store = $this->input->post('userfile');
 		//$img_path_store = $config['new_image'];
 		//print_r($this->session->userdata());
-		$data['user_id'] = $this->tank_auth->get_user_id();
+		
 		if($image_data['file_name'] != '')
 		{
-		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."' where user_id='".$data['user_id']."'");
+		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."',user_thumb_pic_path = '".$data['thumb_image_name']."' where user_id='".$data['user_id']."'");
 		}
 		//echo $this->session->userdata('user_id');
+		if($redirect_false_update_profile != '')
+		{
+		redirect('update_profile');
+		}
+		else{
+		redirect('home/pus');
+		}
 	}
 	
 	/*function get_images() {

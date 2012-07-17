@@ -17,15 +17,28 @@ if ($user) {
 <div class="event_border hover_delete_comment_<?php echo $delete_comment; ?>">
 								<div class="float_l">
 									<div class="comment_img" style="margin-right:10px;">
-									<?php if($user)
-									{ ?>
-									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-									<?php }
-									else if($user_detail['user_pic_path']==''){?>
-										<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php } else { ?>		
-								<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-								<?php } ?>
+									<?php
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_detail['user_thumb_pic_path']) && $user_detail['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$user_detail['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$user_detail['user_pic_path']) && $user_detail['user_pic_path']!='')
+							{
+								echo "<img src='".base_url()."uploads/user_pic/".$user_detail['user_pic_path']."'/>";
+							}
+							else if($user)
+							{
+							?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+							<?php
+							}
+							else{
+							echo "<img src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
+									
 									</div>
 								</div>
 								<div>

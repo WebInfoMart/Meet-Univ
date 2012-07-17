@@ -82,15 +82,29 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="event_border find_comment hover_delete_comment_<?php echo $news_comments_detail['comment_id']; ?>">
 							<div class="float_l">
 								<div class="comment_img">
-									<?php if($news_comments_detail['user_pic_path'] !=''){ ?>
-									<img src="<?php echo "$base"; ?>uploads/<?php echo $news_comments_detail['user_pic_path']; ?>" />
-									<?php } 
-									else if($user) { ?>
+								
+								<?php
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$news_comments_detail['user_thumb_pic_path']) && $news_comments_detail['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$news_comments_detail['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$news_comments_detail['user_pic_path']) && $news_comments_detail['user_pic_path']!='')
+							{
+								echo "<img src='".base_url()."uploads/user_pic/".$news_comments_detail['user_pic_path']."'/>";
+							}
+							else if($user)
+							{
+							?>
 								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-								<?php } 
-									else { ?>		
-									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-									<?php } ?>
+							<?php
+							}
+							else{
+							echo "<img src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
+								
 								</div>
 							</div>
 							<div>
@@ -145,16 +159,27 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
-									<?php if($user_detail['user_pic_path'] !=''){?>
-									<img src="<?php echo "$base"; ?>uploads/<?php echo $user_detail['user_pic_path']; ?>" />
-										
-									<?php }
-									else if($user)
-									{ ?>
-									<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-									<?php } else { ?>		
-								<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-								<?php }  ?>
+									<?php
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$news_comments_detail['user_thumb_pic_path']) && $news_comments_detail['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$news_comments_detail['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$news_comments_detail['user_pic_path']) && $news_comments_detail['user_pic_path']!='')
+							{
+								echo "<img src='".base_url()."uploads/user_pic/".$news_comments_detail['user_pic_path']."'/>";
+							}
+							else if($user)
+							{
+							?>
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+							<?php
+							}
+							else{
+							echo "<img src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
 								<div style='width: 46px;position: absolute;' class="center">
 								<?php
 								if($user_detail['fullname'] !='')

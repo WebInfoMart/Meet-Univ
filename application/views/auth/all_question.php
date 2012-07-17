@@ -1,3 +1,18 @@
+<?php 
+$facebook = new Facebook();
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+?>	
 	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -128,13 +143,29 @@
 				<li>
 				
 					<div id="quest_pic" class="float_l">
-						<?php if($quest_list['user_pic_path']!='')
-						{
-						echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/".$quest_list['user_pic_path']."'/>"; 
-						} else
-						{
-						echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/user_model.png'/>"; 
-						} ?>
+					
+					<?php
+					if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
+					{
+					//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+					
+						echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+					}
+					else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
+					{
+						echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+					}
+				
+					else if($user)
+					{
+					?>
+						<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+					<?php
+					}
+					else{
+					echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/profile_icon.png'/>";
+					}
+					?>
 					</div>
 						<div class="float_l span8 margin_zero">
 							<div class="quest_fix">

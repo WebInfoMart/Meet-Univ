@@ -66,14 +66,20 @@ if ($user) {
 						<div class="sidebar_profic_pic">
 						
 						<?php 
-						if($detail_visited_user['user_pic_path'] != '')
+						if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$detail_visited_user['user_thumb_pic_path']) && $detail_visited_user['user_thumb_pic_path']!='' )
 						{
-						echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/".$detail_visited_user['user_pic_path']."'/>"; 
+						//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+						
+							echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/user_pic/thumbs/".$detail_visited_user['user_thumb_pic_path']."' class='latest_img'/>";
 						}
-						else { ?>
-						<img class="profile_img_width" src="<?php echo "$base$img_path";?>/user_model.png">
-						<?php
+						else if(file_exists(getcwd().'/uploads/user_pic/'.$detail_visited_user['user_pic_path']) && $detail_visited_user['user_pic_path']!='')
+						{
+							echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/user_pic/".$detail_visited_user['user_pic_path']."' class='latest_img'/>";
 						}
+						else{
+							echo "<img class='profile_img_width' src='".base_url()."images/profile_icon.png'/>";
+						}
+						
 						?>
 							
 							<h3 class="text_align">
@@ -302,16 +308,27 @@ if ($user) {
 													if(!empty($follower_detail))
 													{
 													foreach($follower_detail as $followers) {
-													if($followers['user_pic_path'] != ''){
+													$link = base_url().'user/'.$followers['id'];
+													if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$followers['user_thumb_pic_path']) && $followers['user_thumb_pic_path']!='' )
+													{
+													//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+													
+														echo "<a href=$link><img style='width:63px;height:55px;' src='".base_url()."uploads/user_pic/thumbs/".$followers['user_thumb_pic_path']."'/></a>";
+													}
+													else if(file_exists(getcwd().'/uploads/user_pic/'.$followers['user_pic_path']) && $followers['user_pic_path']!='')
+													{
+														echo "<a href=$link><img style='width:63px;height:55px;' src='".base_url()."uploads/user_pic/".$followers['user_pic_path']."'/></a>";
+													}
+												
+													else if($user)
+													{
 													?>
-														<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>"><?php echo "<img style='width:63px;height:55px;' src='".base_url()."uploads/".$followers['user_pic_path']."'/>"; ?></a>
-													<?php }
-													else if($user) { ?>
-													<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-													<?php } 
-													else{ ?>
-													<a href="<?php echo "$base"; ?>user/<?php echo $followers['id']; ?>"><?php echo "<img style='width:63px;height:55px;' src='".base_url()."images/user_model.png'/>"; ?></a>
-													<?php }
+														<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+													<?php
+													}
+													else{
+													echo "<img src='".base_url()."images/profile_icon.png'/>";
+													}
 													} } ?>
 													</div>
 												</div>

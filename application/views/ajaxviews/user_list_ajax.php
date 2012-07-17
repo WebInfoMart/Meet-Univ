@@ -4,19 +4,24 @@ if(!empty($user_list))
 {
 foreach($user_list as $user_list)
 {
-if($user_list['user_pic_path'] != '')
+if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_list['user_thumb_pic_path']) && $user_list['user_thumb_pic_path']!='' )
 {
-	$pic = $user_list['user_pic_path'];
+	$pic = base_url().'/uploads/user_pic/thumbs/'.$user_list['user_thumb_pic_path'];
 }
-else if($user_list['gender'] == 'male'){
+else if(file_exists(getcwd().'/uploads/user_pic/'.$user_list['user_pic_path']) && $user_list['user_pic_path']!='')
+{
+	$pic = base_url().'/uploads/user_pic/'.$user_list['user_pic_path'];
+}
+else{
+$pic = base_url()."images/profile_icon.png";
+}
+/* else if($user_list['gender'] == 'male'){
 $pic = "user_model.png";
 }
 else if($user_list['gender'] == 'female'){
 $pic = "user_model_female.jpg";
-}
-else{
-$pic = "user_model.png";
-}
+} */
+
 if($user_list['fullname'] != '')
 {
 	$name = $user_list['fullname'];
@@ -25,7 +30,7 @@ else {
 $name = "Name not available";
 }
 $content.= "<div class='float_l'>".
-				"<img src='".base_url()."uploads/".$pic."' class='search_result'/>".
+				"<img src='".$pic."' class='search_result'/>".
 				"</div>".
 				"<div class='float_l span8 margin_l margin_t1'>".
 				"<a href='#' class='user_color'>".$name."</a></br>".
