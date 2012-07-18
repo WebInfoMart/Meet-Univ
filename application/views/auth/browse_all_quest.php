@@ -23,7 +23,7 @@ if ($user) {
 					
 				</div>
 				<div id="quest_div_show_right" class="span13 margin_l margin_t1">
-				<h2 class="course_txt"><?php echo $count_all_question; ?> Questions asked on MeetUniversities</h2>
+				<h2 class="course_txt"><?php echo $count_all_question; ?> Questions Asked.</h2>
 				<div class="margin_t1">
 				<?php
 				if(!empty($get_all_question))

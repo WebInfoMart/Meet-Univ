@@ -76,12 +76,12 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
 							<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Comments Yet</h3>
 						</div>
+						<div class="span9 margin_delta">
 						<?php 
 							if($article_comments!=0){
 						foreach($article_comments as $article_comment_detail){ ?>
 						<div class="event_border find_comment hover_delete_comment_<?php echo $article_comment_detail['comment_id']; ?>">
-							<div class="float_l">
-								<div class="comment_img">
+							<div class="float_l comment_img">
 								<?php
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$article_comment_detail['user_thumb_pic_path']) && $article_comment_detail['user_thumb_pic_path']!='' )
 							{
@@ -103,26 +103,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							echo "<img src='".base_url()."images/profile_icon.png'/>";
 							}
 							?>
-							
-								</div>
-							</div>
-							<div>
-							<?php if($user_is_logged_in ){
-			if($user_detail['user_id']==$article_comment_detail['user_id'])
-			{
-			?>					
-			<!--<span class="float_r delete_comment">
-					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $article_comment_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
-			</span>-->
-			<?php	} } ?>	
-								
-								<?php echo $article_comment_detail['commented_text'];?>
-								<div style="font-size;color:black;" class="float_r">
-								<abbr class="timeago time_ago" title="<?php echo $article_comment_detail['comment_time']; ?>"></abbr>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-							<h4><span class="course_txt">
+							<h4 class="center">
 								<?php if($article_comment_detail['commented_by_user_name'] !=''){
 									echo $article_comment_detail['commented_by_user_name']; 
 									}
@@ -134,15 +115,35 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									{
 										echo $user_profile['name'];
 									} ?>
-								</span></h4>
+							</h4>
+							</div>
+							<div class="word">
+							<?php if($user_is_logged_in ){
+			if($user_detail['user_id']==$article_comment_detail['user_id'])
+			{
+			?>					
+			<!--<span class="float_r delete_comment">
+					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $article_comment_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
+			</span>-->
+			<?php	} } ?>	
+								
+								<?php echo $article_comment_detail['commented_text'];?>
+								
+							</div><br/>
+							<div class="float_r span2 margin_delta">
+								<abbr class="timeago time_ago" title="<?php echo $article_comment_detail['comment_time']; ?>"></abbr>
+							</div>
+							<div class="clearfix"></div>
+							
 						</div> <?php } } ?>
+					</div>
 					</div>
 					<?php if($total_comment>4) { ?>
 					<div  id="show_more">show more comment</div>
 					<input type="hidden" id="show_more_offset" value="1">
 					<?php } ?>
+					<div class="clearfix"></div>
 					<div class="margin_t margin_b">
-						<div>
 						<?php if($user_is_logged_in==0){ ?>		
 						<div class="events_box" style="height: 53px;">
 							<div>
@@ -154,7 +155,6 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<h3 class="center">Please Login for comment</h3>
 						</div>
 						<?php } else { ?>
-							<div class="margin_t margin_bs">
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
@@ -195,7 +195,6 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									</div>
 								</div>
 								<div class="float_l span6 margin_zero">
-									
 									<form class="form-horizontal" method="post" action="">
 									<div class="control-group">
 											<div class="my_form_controls">
@@ -209,12 +208,10 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										</div>
 									</form>
 								</div>
-								
 								<div class="clearfix"></div>
 							</div>
-						</div> <?php } ?>	
+						 <?php } ?>	
 								<div class="clearfix"></div>
-							</div>
 						</div>
 		<?php // } ?>
 		<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $articles_detail['article_id']; ?>" >

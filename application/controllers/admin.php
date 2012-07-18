@@ -1128,7 +1128,7 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('fax_address', 'Fax Address', 'trim|xss_clean');
 		$this->form_validation->set_rules('univ_email', 'university email', 'trim|xss_clean|valid_email');
 		$this->form_validation->set_rules('web_address', 'Web Address', 'trim|xss_clean');
-		$$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]|max_length[50]');
+		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]|max_length[50]');
 		if ($this->form_validation->run()) {
 		$data['x']=$this->adminmodel->create_univ();
 		//print_r($data['x']);
@@ -1697,6 +1697,7 @@ function manage_university($mps='')
 		if($submit=='1')
 		{	
 		$x=$this->adminmodel->upload_univ_gallery($university_id);
+		redirect('admin/manage_univ_gallery/ius');
 		}
 		}
 		$this->load->view('admin/add_univ_gallery', $data);

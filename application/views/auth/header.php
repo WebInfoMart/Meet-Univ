@@ -275,7 +275,7 @@ d.getElementsByTagName('head')[0].appendChild(js);
 		<div class="header_bar">	
 			<div class="container">
 				<div class="row">
-					<div class="span5 offset9">
+					<div class="span6 offset8">
 						<div class="bar">
 						<?php
 						if($this->ci->session->userdata('status')){ ?>

@@ -1,3 +1,19 @@
+<?php
+ //date_default_timezone_set('Asia/Kolkata');
+$facebook = new Facebook();
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+?>
 <div class="row" style="margin-top:-30px">
 	<div class="float_l span13 margin_l margin_t">
 		<h3 class="heading_follow"><?php echo $count_all_question_of_univ; ?> Questions asked on 
@@ -104,7 +120,29 @@
 					?>
 					<li>
 						<div id="quest_pic" class="float_l">
-							<?php echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/".$quest_list['user_pic_path']."'/>";  ?> 
+						
+						<?php
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
+							{
+								echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+							}
+							else if($user)
+							{
+							?>
+								<img style='width:40px;height:40px;margin-right:10px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+							<?php
+							}
+							else{
+							echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
+						
 						</div>
 						<div class="float_l span8 margin_zero">
 							<div class="quest_fix">

@@ -6,7 +6,6 @@
 .img_r{margin-right: 20px;}
 .margin-t3{margin-top: 30px;}
 .margin_n{margin-top: 25px;}
-.margin_b{margin-bottom: 20px;}
 .margin_all{margin:0px 10px;}
 .padding_all{padding: 10px 0px;}
 .padding_lefty{padding:0px 10px;}
@@ -14,6 +13,7 @@
 .margin_bot{margin-bottom: 18px;}
 .line{line-height: 20px;}
 .bold{font-weight:bold;}
+.word{word-wrap: break-word;}
 /*.margin_l4{margin-left:4px;}
 .margin_twenty{margin:20px;}
 .margin_l8{margin-left: 5px;}
@@ -603,7 +603,7 @@ color:#666 !important;
 /*================events page==================================*/
 .dsolution{overflow: hidden;min-height: 85px;max-height:170px;}
 .dsolution .txt_three{font-size:18px;font-weight: bold;}
-.event_border{border-bottom: 1px solid #DDD;-webkit-border-bottom: 1px solid #DDD;-moz-border-bottom: 1px solid #DDD;padding-top: 10px;}
+.event_border{background:#ffffff;border-bottom: 1px solid #DDD;-webkit-border-bottom: 1px solid #DDD;-moz-border-bottom: 1px solid #DDD;padding-top: 10px;}
 .event_border_div{width: 84px;height:40px;}
 .event_border img{margin-right: 20px;}
 .event_border_style{border: 1px solid #DDD;text-align: center;width: 80px;height:80px;margin-right: 20px;}
@@ -615,9 +615,9 @@ line-height: 22px;
 word-wrap:break-word; 
 }
 .event_comment{background-color: #DFF0D8;border: 1px solid #DDD;border-radius:4px;padding:10px;}
-.comment_img{width:55px;}
+.comment_img{width:55px;margin-right: 10px;}
 .date_heading{font-size:16px;}
-.my_form_controls{margin-left:14px;}
+
 .comment_img img{height:50px; width:50px;border: 1px solid #DDD;-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;padding: 2px;}
 
 
@@ -1099,7 +1099,7 @@ overflow-y: hidden;}
 
 .colege_set{width:180px;margin-left: 10px;}
 .heading_follow{font-size: 18px;margin: 0;font-weight: bold;color: #333;}
-.tw{margin-right: -39px;margin-left: 10px;}
+.tw{margin-right: -39px;margin-left: 6px;}
 .social_set{width:204px;}
 .fb_iframe_widget span{width: 72px!important}
 .show_error{border:1px solid #990000;-moz-border:1px solid #990000;-webkit-border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;}
@@ -1107,7 +1107,5 @@ overflow-y: hidden;}
 a:hover{text-decoration:none;}
 
 .loading_image_show_hide{text-align:center;}
-#show_more{border-radius: 4px;
-background: url(../images/events.png);
-text-align: center;
+#show_more{text-align: right;
 cursor:pointer;}

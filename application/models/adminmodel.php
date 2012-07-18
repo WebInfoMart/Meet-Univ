@@ -308,14 +308,20 @@ class Adminmodel extends CI_Model
 		$query=$this->db->get();
 		return $query->result_array();
 	 }
-		
+	
 	function create_univ()
 	{
-	
+		$this->db->select_max('univ_id');
+		$this->db->from('university');
+		$query = $this->db->get();
+		$last_id = $query->row_array();
+		$last_id['univ_id'];
+		$current_id = $last_id['univ_id'] + 1;
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			'max_size' => 500
+			'max_size' => 500,
+			'file_name'=>'univ_logo_'.$current_id
 		);
 		
 		$this->load->library('upload', $config);
@@ -685,7 +691,7 @@ class Adminmodel extends CI_Model
         
         $this->load->library('upload', $config);
         $this->load->library('Multi_upload');
-		if ($_FILES['userfile1']['name'][0]=='')
+		if (empty($_FILES))
 		{
 		return 1;
 		}

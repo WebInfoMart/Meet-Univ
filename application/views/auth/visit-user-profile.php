@@ -355,7 +355,7 @@ if ($user) {
 						<!-- End Here -->
 						</div>
 						<div class="span3 float_l">
-							<img src="http://workforcetrack.in/images/banner_img.png">
+							<img src="<?php echo $base; ?>images/banner_img.png">
 						</div>
 						<div class="clearfix"></div>
 					</div>

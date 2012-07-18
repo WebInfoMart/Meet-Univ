@@ -14,7 +14,7 @@ if($error_univ_name != '') { $class_univ_name = 'focused_error_univ'; } else { $
 <h2>Upload University Gallery</h2>
 <h4>1.File size must be less than 500kb</h4>
 <?php if (isset($a)) echo $a;?>
-<input type="file" name="userfile[]"  class="multi" multiple />
+<input type="file" name="userfile1[]"  class="multi" multiple />
 <br />
 <input type="submit" class="submit" name="upload">
 </form>
@@ -46,7 +46,7 @@ else
 					</li>
 				</ul>
 <?php if (isset($a)) echo $a;?>
-<input type="file" name="userfile[]"  class="multi" multiple />
+<input type="file" name="userfile1[]"  class="multi" multiple />
 <br />
 <input type="submit" class="submit" name="upload">
 </form>

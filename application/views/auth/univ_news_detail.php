@@ -76,6 +76,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
 							<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Comments Yet</h3>
 						</div>
+						<div class="span9 margin_delta">
 						<?php 
 							if($news_comments!=0){
 						foreach($news_comments as $news_comments_detail){ ?>
@@ -104,26 +105,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							echo "<img src='".base_url()."images/profile_icon.png'/>";
 							}
 							?>
-								
-								</div>
-							</div>
-							<div>
-							<?php if($user_is_logged_in ){
-			if($user_detail['user_id']==$news_comments_detail['user_id'])
-			{
-			?>					
-			<!--<span class="float_r delete_comment">
-					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $news_comments_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
-			</span>-->
-			<?php	} } ?>	
-								
-								<?php echo $news_comments_detail['commented_text'];?>
-								<div style="font-size;color:black;" class="float_r">
-								<abbr class="timeago time_ago" title="<?php echo $news_comments_detail['comment_time']; ?>"></abbr>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-							<h4><span class="course_txt">
+								<h4 class="center">
 								<?php if($news_comments_detail['commented_by_user_name'] !=''){
 									echo $news_comments_detail['commented_by_user_name']; 
 									}
@@ -135,13 +117,36 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									{
 										echo $user_profile['name'];
 									} ?>
-								</span></h4>
+								</h4>
+								</div>
+								
+							</div>
+							<div class="word">
+							<?php if($user_is_logged_in ){
+			if($user_detail['user_id']==$news_comments_detail['user_id'])
+			{
+			?>					
+			<!--<span class="float_r delete_comment">
+					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $news_comments_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
+			</span>-->
+			<?php	} } ?>	
+								
+								<?php echo $news_comments_detail['commented_text'];?>
+								
+							</div><br/>
+							<div class="float_r">
+									<abbr class="timeago time_ago" title="<?php echo $news_comments_detail['comment_time']; ?>"></abbr>
+							</div>
+							<div class="clearfix"></div>
+							
 						</div> <?php } } ?>
+					</div>
 					</div>
 					<?php if($total_comment>4) { ?>
 					<div  id="show_more">show more comment</div>
 					<input type="hidden" id="show_more_offset" value="1">
 					<?php } ?>
+					<div class="clearfix"></div>
 					<div class="margin_t margin_b">
 						<div>
 						<?php if($user_is_logged_in==0){ ?>		

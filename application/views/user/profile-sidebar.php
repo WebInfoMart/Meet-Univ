@@ -20,20 +20,20 @@ if ($user) {
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 							
-								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$profile_pic['user_thumb_pic_path']."'/>";
+								echo "<img style='max-height:210px;' src='".base_url()."uploads/user_pic/thumbs/".$profile_pic['user_thumb_pic_path']."'/>";
 							}
 							else if(file_exists(getcwd().'/uploads/user_pic/'.$profile_pic['user_pic_path']) && $profile_pic['user_pic_path']!='')
 							{
-								echo "<img src='".base_url()."uploads/user_pic/".$profile_pic['user_pic_path']."'/>";
+								echo "<img style='max-height:210px;' src='".base_url()."uploads/user_pic/".$profile_pic['user_pic_path']."'/>";
 							}
 							else if($user)
 							{
 							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+								<img style='max-height:210px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
 							<?php
 							}
 							else{
-							echo "<img src='".base_url()."images/profile_icon.png'/>";
+							echo "<img style='max-height:210px;' src='".base_url()."images/profile_icon.png'/>";
 							}
 							?>
 								<!--<src="<?php echo "$base$img_path";  ?>profile_pic.png">-->
