@@ -33,6 +33,8 @@ class Subdomain extends CI_Model
 		$data['featured_news_show']=$this->frontmodel->fetch_featured_news_home();
 		$data['featured_quest'] = $this->frontmodel->fetch_home_featured_quest();
 		$data['get_latest_question_home'] = $this->quest_ans_model->get_all_quest_user_info();
+		$data['keyword_content'] = "higher studies,  international students, upcoming events, global events, universities events, study in UK, UK scholarship, higher education, uk student visa, sponsorship, study in Canada, expenditure, Counselling.";
+		$data['description_content'] = "Attend Events, Study Abroad - Research, Connect & Meet Your Dream University";
 		$this->load->view('auth/header',$data);
 		$this->load->view('auth/home',$data);
 		$this->load->view('auth/footer',$data);

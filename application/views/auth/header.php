@@ -161,8 +161,8 @@ $event_details=str_replace('</div>','',$event_details);
 $detail_of_event = $event_details; 
 } */
 
-if(empty($keyword_content)) { $keyword_content="universities events,university events in india,study abroad"; }
-if(empty($description_content)) { $description_content=" "; }
+if(empty($keyword_content)) { $keyword_content="higher studies,  international students, upcoming events, global events, universities events, study in UK, UK scholarship, higher education, uk student visa, sponsorship, study in Canada, expenditure, Counselling."; }
+if(empty($description_content)) { $description_content="Attend Events, Study Abroad - Research, Connect & Meet Your Dream University"; }
 ?>
 
 <!DOCTYPE html>
