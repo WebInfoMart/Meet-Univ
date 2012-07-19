@@ -275,6 +275,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 </div>
 <script>
 
+
 function post_comment()
 {
 var commentedtext=$('#commented_text').val();
@@ -283,6 +284,7 @@ var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment)+1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
+var fb_user_id='<?php echo $user; ?>';
 var lastpostcommentid=$('#lastcommentid').val();
 if($('#commented_text').val()!='')
 {
@@ -290,7 +292,7 @@ if($('#commented_text').val()!='')
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
 	   async:false,
-	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id,
+	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id+'&fb_user_id='+fb_user_id,
 	   cache: false,
 	   success: function(msg)
 	   {
@@ -355,7 +357,10 @@ var offset=$('#show_more_offset').val();
 offset=parseInt(offset);
 var lastpostcommentid=$('#lastcommentid').val();
 $('#show_more_offset').val(offset+1);
-var data={'commented_on':commentd_on,'commented_on_id':commented_on_id,'offset':offset,'lastpostcommentid':lastpostcommentid};
+var fb_user_id='<?php echo $user; ?>';
+
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
+var data={'user_id':user_id,'commented_on':commentd_on,'commented_on_id':commented_on_id,'offset':offset,'lastpostcommentid':lastpostcommentid,'fb_user_id':fb_user_id };
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/show_more_comment",
@@ -377,7 +382,8 @@ $.ajax({
 	}
 	   });
 });
-jQuery(document).ready(function() {
- jQuery("abbr.timeago").timeago();
-});			
+jQuery(window).bind("load", function() {
+var url=window.location;
+postCook(url);
+});		
 </script>

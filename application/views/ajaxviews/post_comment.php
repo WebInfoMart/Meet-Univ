@@ -13,6 +13,7 @@ if ($user) {
     $user = null;
   }
 }
+$user=$fb_user_id;
 ?>
 <div class="event_border hover_delete_comment_<?php echo $delete_comment; ?>">
 								<div class="float_l">

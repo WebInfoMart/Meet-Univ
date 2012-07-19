@@ -760,6 +760,7 @@ class Univ extends CI_Controller
 				$data['commented_text']=$this->input->post('commented_text');
 				$data['delete_comment']=$this->frontmodel->post_comment_by_logged_in_user($logged_in_user_id,$data['commented_on'],$commented_on_id,$data['commented_text']);
 				$data['user_detail']=$this->users->fetch_profile($logged_in_user_id);
+				$data['fb_user_id']=$this->input->post('fb_user_id');
 				$view=$this->load->view('ajaxviews/post_comment',$data);
 				echo $data['delete_comment'].'!@#$%^&*'.$view;
 			}	
@@ -1212,6 +1213,8 @@ class Univ extends CI_Controller
 	$comment=$this->frontmodel->fetch_all_comments($commented_on,$commented_on_id);
 	$data['comments']=$comment['comments'];
 	$show_more=$comment['show_more'];
+	$data['logged_user_id']=$this->input->post('user_id');
+	$data['fb_user_id']=$this->input->post('fb_user_id');
 	$comments=$this->load->view('ajaxviews/show_more_comment',$data);
 	//echo '({show_more:"'.$show_more.'",comments:"'.$comments.'"})';
 	echo $show_more.'!@#$%^&*'.$comments;
