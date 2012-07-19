@@ -196,7 +196,7 @@ class Adminevents extends CI_Controller
 			}
 			$message_body;
 			$followers_email_for_sent = implode($followers_id,",");
-				 $this->email->from('info@meetuniversities.info', 'Meet Universities');
+				 $this->email->from('info@meetuniversities.com', 'Meet Universities');
 					$this->email->to($followers_id);
 					//$this->email->cc('another@another-example.com');
 					//$this->email->bcc('them@their-example.com');
