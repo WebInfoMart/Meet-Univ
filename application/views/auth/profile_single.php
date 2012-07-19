@@ -1,4 +1,22 @@
 	<?php
+	
+$class_year_name='';
+$class_month_name='';
+$class_day_name='';
+if(form_error('year')!='')
+{
+$class_year_name='focuse_red_err';
+}
+if(form_error('month')!='')
+{
+$class_month_name='focuse_red_err';
+}
+if(form_error('date')!='')
+{
+$class_day_name='focuse_red_err';
+
+}
+
 $facebook = new Facebook();
 $user = $facebook->getUser();
 $this->load->model('users');
@@ -80,6 +98,7 @@ if ($user) {
 													<label class="control-label">Full Name *</label>
 													<div class="controls contact_box_content">
 														<input type="text" class="input_xxxx-large" value="<?php echo $fetch_profile['fullname']; ?>" name="full_name" id="full_name" placeholder="Fullname">
+														<span style="color:red;"> <?php echo form_error('full_name'); ?><?php echo isset($errors['full_name'])?$errors['full_name']:''; ?> </span>
 													</div>
 												</div>
 												<div class="control-group">
@@ -118,38 +137,111 @@ if ($user) {
 														<!--<input type="text" class="input-small margin_all" value="<?php if($dob_explode[0] == '0000' ){ echo ''; } else { echo $dob_explode[0]; } ?>" name="year" id="year" placeholder="Year">/-->
 														
 													
-													
-													<select name="year" id="year" style="width:80px;">
+													<?php //echo $dob_explode[0]; ?>
+													<select name="year" id="year" class="<?php echo $class_year_name; ?>" style="width:110px;">
 													<?php
-													$selected_year = '';
+													$selected_year='';
+													$selected_default_year='';
+													if($class_year_name!='')
+													{
+													$selected_default_year='selected';
+													}
+													?>
+														<option value="-1" <?php echo $selected_default_year; ?> >Select Year</option> 
+													<?php
+													$year_status=0;
 													for($count_year=1980;$count_year<=2005;$count_year++)
 													{
-													if($count_year == $dob_explode[0]) { $selected_year ='selected=selected';} else { $selected_year =''; }
+													if($selected_default_year=='') {
+													if(set_value('year')==$count_year)
+													{
+													$selected_year='selected';
+													$year_status=1;
+													}
+													else if($year_status==0)
+													{
+													$selected_year='';
+													if($count_year == $dob_explode[0]) { $selected_year ='selected';} else { $selected_year =''; }
+													}
+													else
+													{
+													$selected_year='';
+													}
+													}
 													?>
-													<option value="<?php echo $count_year; ?>" <?php echo $selected_year; ?>><?php echo $count_year; ?></option>
+													<option  value="<?php echo $count_year; ?>" <?php echo $selected_year; ?>><?php echo $count_year; ?></option>
 													<?php } ?>
 													</select>
 													
 														<!--<input type="text" class="input-small margin_all" value="<?php if($dob_explode[1] == '00' ){ echo ''; } else { echo $dob_explode[1]; } ?>" name="month" id="month" placeholder="Month">/-->
 													<?php $arr_month = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'); ?>	
-														<select name="month" id="month" style="width:80px;">
+														<select name="month" class="<?php echo $class_month_name; ?>" id="month" style="width:110px;">
+														<?php
+													$selected_month='';
+													$selected_default_month='';
+													if($class_month_name != '')
+													{
+													$selected_default_month='selected';
+													}
+													?>
+													<option value="-1" <?php echo $selected_default_month; ?> >Select Month</option> 
+											
 													<?php
-													$selected_month = '';
+													$month_status=0;
 													for($count_month=1;$count_month<=12;$count_month++)
 													{
-													if($count_month == $dob_explode[1]) { $selected_month ='selected=selected';} else { $selected_month =''; }
+													if($selected_default_month =='') {
+													if(set_value('month')==$count_month)
+													{
+													$selected_month='selected';
+													$month_status=1;
+													}
+													else if($month_status==0)
+													{
+													$selected_month='';
+													if($count_month == $dob_explode[1]) { $selected_month ='selected';} else { $selected_month =''; }
+													}
+													else
+													{
+													$selected_month='';
+													}
+													}
 													?>
 													<option value="<?php echo $count_month; ?>" <?php echo $selected_month; ?>><?php echo $arr_month[$count_month-1]; ?></option>
 													<?php } ?>
 													</select>
 														
 														<!--<input type="text" class="input-small margin_all" value="<?php if($dob_explode[2] == '00' ){ echo ''; } else { echo $dob_explode[2]; } ?>" name="date" id="date" placeholder="Date">-->
-														<select name="date" id="date" style="width:80px;">
+														<select class="<?php echo $class_day_name; ?>" name="date" id="date" style="width:110px;">
 													<?php
-													$selected_date = '';
+													$selected_date='';
+													$selected_default_date='';
+													if($class_day_name!='')
+													{
+													$selected_default_date='selected';
+													}
+													?>
+														<option value="-1" <?php echo $selected_default_date; ?> >Select Date</option> 
+													<?php
+													$date_status=0;
 													for($count_date=1;$count_date<=31;$count_date++)
 													{
-													if($count_date == $dob_explode[2]) { $selected_date ='selected=selected';} else { $selected_date =''; }
+													if($selected_default_date=='') {
+													if(set_value('date')==$count_date)
+													{
+													$selected_date='selected';
+													$date_status=1;
+													}
+													else if($date_status==0)
+													{
+													$selected_date='';
+													if($count_date == $dob_explode[2]) { $selected_date ='selected';} else { $selected_date =''; }
+													}
+													else
+													{
+													$selected_date='';
+													}
+													}
 													?>
 													<option value="<?php echo $count_date; ?>" <?php echo $selected_date; ?>><?php echo $count_date; ?></option>
 													<?php } ?>
@@ -254,3 +346,6 @@ if ($user) {
 	<script type="text/javascript">
     $("[rel=tooltip]").tooltip();
 // </script>
+<style type="text/css">
+.focuse_red_err{border:1px solid red;}
+</style>

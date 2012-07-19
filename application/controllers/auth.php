@@ -822,9 +822,16 @@ class Auth extends CI_Controller
 		
 		if($this->input->post('update'))
 		{
+		$this->form_validation->set_rules('full_name','Full Name','trim|required');
 		$this->form_validation->set_rules('alt_email','Alternate Email','trim|xss_clean|valid_email');
 		$this->form_validation->set_rules('mob_no','Mobile Phone','trim|integer|xss_clean');
 		$this->form_validation->set_rules('sex','Sex','trim|required');
+		if($this->input->post('year')!='-1' || $this->input->post('month')!='-1' || $this->input->post('date')!='-1')
+		{
+		$this->form_validation->set_rules('year','year','trim|required|is_natural');
+		$this->form_validation->set_rules('month','Month','trim|required|is_natural');
+		$this->form_validation->set_rules('date','Date','trim|required|is_natural');
+		}
 		//$this->form_validation->set_rules('year','Year','trim|required');
 		//$this->form_validation->set_rules('month','Month','trim|required');
 		//$this->form_validation->set_rules('date','Date','trim|required');

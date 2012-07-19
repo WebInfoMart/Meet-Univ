@@ -78,9 +78,17 @@ class Users extends CI_Model
 	 
 	 function user_profile_update($logged_user)
 	 {
+		if($this->input->post('year')=='-1')
+		{
+		$year='0000';
+		$month='00';
+		$date='00';
+		}
+		else{
 		$year = $this->input->post('year');
 		$month = $this->input->post('month');
 		$date = $this->input->post('date');
+		}
 		$dob = $year.'-'.$month.'-'.$date;
 		$data = array(
 		'full_name' => $this->input->post('full_name'),
@@ -181,18 +189,16 @@ class Users extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->gallery_path,
-			'min_width'=> '175',
-			'min_height'=> '138',
 			'file_name'=>'user_'.$data['user_id']
 		);
-		
+		if($_FILES['userfile']['name']!='') {
 		$this->load->library('upload', $config);
 		$this->upload->overwrite = true;
 		if (!$this->upload->do_upload())
         {
           $data['error'] = $this->upload->display_errors();
 		  $data['upload_errors'] = $data['error'];
-		  $this->session->set_flashdata('update_upload_pic_error',$data['error']);
+		  $this->session->set_flashdata('update_upload_pic_error','please upload the image file');
 		  $redirect_false_update_profile = 'notredirect';
         }
 		else{
@@ -219,6 +225,7 @@ class Users extends CI_Model
 		if($image_data['file_name'] != '')
 		{
 		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."',user_thumb_pic_path = '".$data['thumb_image_name']."' where user_id='".$data['user_id']."'");
+		}
 		}
 		//echo $this->session->userdata('user_id');
 		if($redirect_false_update_profile != '')
