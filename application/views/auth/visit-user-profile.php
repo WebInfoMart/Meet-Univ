@@ -320,7 +320,7 @@ if ($user) {
 														echo "<a href=$link><img style='width:63px;height:55px;' src='".base_url()."uploads/user_pic/".$followers['user_pic_path']."'/></a>";
 													}
 												
-													else if($user)
+													else if($user && $followers['followed_by'] == $logged_user_id)
 													{
 													?>
 														<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">

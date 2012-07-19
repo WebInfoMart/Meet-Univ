@@ -220,9 +220,9 @@ $this->session->unset_userdata('follow_to_univ');
 														<span class="date"><?php echo $date_part[0]; ?></span>
 													</div>
 													<div class="span1 float_l margin_l">
-														<span >
+														<span>
 				
-														<?php if($event_has) { echo $date_part[1]; ?> <br/>
+														<span class="blue"><?php if($event_has) { echo $date_part[1]; ?> </span><br/>
 						<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
 											} ?><br />

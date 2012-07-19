@@ -118,7 +118,7 @@ array_push($array_dates,$var);
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 												
 											</div>
-											<div class="float_l span5 margin_l" style="font-size:14px;">
+											<div class="float_l span5 margin_delta" style="font-size:14px;">
 											<?php
 											$extract_dates = explode(" ",$event_detail['event_date_time']);
 								//echo $extract_date[];
@@ -162,7 +162,7 @@ array_push($array_dates,$var);
 												?>
 												</h5>
 												<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post">
-												<button class="btn btn-primary" href="#">Register</button>
+												<button class="btn btn-success margin_l1" href="#">Register</button>
 												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $event_detail['univ_id']; ?>"/>
 												<input type="hidden" name="event_register_id" value="<?php echo $event_detail['event_id']; ?>"/>
 												</form>

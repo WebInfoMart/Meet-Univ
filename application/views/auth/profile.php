@@ -365,25 +365,28 @@ $select_female='';
 									<li>
 										<div style="width: 34px;margin-right:20px" class="float_l">
 										<?php
-										if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
-										{
-										
-											echo "<img src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."' style='width:34px;height:34px;border: 2px solid #DDD;padding:2px;'/>";
-										}
-										else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
-										{
-											echo "<img src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."' style='width:34px;height:34px;border: 2px solid #DDD;padding:2px;'/>";
-										}
-										else if($user)
-										{
-										?>
-											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-										<?php
-										}
-										else{
-										echo "<img src='".base_url()."images/profile_icon.png'/>";
-										}
-										?>
+							$logged_user_id = $this->tank_auth->get_user_id();
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
+							{
+								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+							}
+							
+							else if($user && $quest_list['q_askedby'] == $logged_user_id)
+							{
+							?>
+								<img style='max-height:100px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+							<?php
+							}
+							else{
+							echo "<img style='max-height:100px;' src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
 										</div>
 										<a href="<?php echo $url; ?>"><span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
 										</a><div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>

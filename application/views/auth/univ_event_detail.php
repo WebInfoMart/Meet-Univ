@@ -201,6 +201,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<?php 
 							if($event_comments!=0){
+							$logged_user_id = $this->tank_auth->get_user_id(); 
 						foreach($event_comments as $event_comments_detail){ ?>
 						<div class="event_border find_comment hover_delete_comment_<?php echo $event_comments_detail['comment_id']; ?>">
 							<div class="float_l">
@@ -217,7 +218,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							{
 								echo "<img src='".base_url()."uploads/user_pic/".$event_comments_detail['user_pic_path']."'/>";
 							}
-							else if($user)
+							else if($user && $event_comments_detail['commented_by'] == $logged_user_id)
 							{
 							?>
 								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">

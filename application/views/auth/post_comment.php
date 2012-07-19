@@ -18,6 +18,7 @@ if ($user) {
 								<div class="float_l">
 									<div class="comment_img">
 									<?php
+							$logged_user_id = $this->tank_auth->get_user_id();
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_detail['user_thumb_pic_path']) && $user_detail['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
@@ -28,7 +29,7 @@ if ($user) {
 							{
 								echo "<img src='".base_url()."uploads/user_pic/".$user_detail['user_pic_path']."'/>";
 							}
-							else if($user)
+							else if($user && $user_detail['q_askedby'] == $logged_user_id)
 							{
 							?>
 								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">

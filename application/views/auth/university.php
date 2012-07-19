@@ -1,3 +1,18 @@
+<?php
+$facebook = new Facebook();
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+?>
 <form class="form-horizontal" action="" method="post" id="frm_university">
 <div class="row" style="margin-top:-5px">
 	<div class="span8 margin_l float_l margin_t">
@@ -29,6 +44,7 @@
 					<ul class="follow">
 						<li>
 						<?php
+						$logged_user_id = $this->tank_auth->get_user_id(); 
 						if(!empty($followers_detail_of_univ))
 						{
 						foreach($followers_detail_of_univ as $followers)
@@ -47,6 +63,12 @@
 										else if(file_exists(getcwd().'/uploads/user_pic/'.$followers['user_pic_path']) && $followers['user_pic_path']!='')
 										{
 											echo "<a href=$link><img src='".base_url()."uploads/user_pic/".$followers['user_pic_path']."' class='latest_img' style='width:63px;height:55px;'/></a>";
+										}
+										else if($user && $followers['id'] == $logged_user_id)
+										{
+										?>
+											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+										<?php
 										}
 										else{
 											echo "<a href=$link><img src='".base_url()."images/profile_icon.png'/></a>";

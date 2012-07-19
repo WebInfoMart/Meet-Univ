@@ -1100,7 +1100,7 @@ overflow-y: hidden;}
 .colege_set{width:180px;margin-left: 10px;}
 .heading_follow{font-size: 18px;margin: 0;font-weight: bold;color: #333;}
 .tw{margin-right: -39px;margin-left: 6px;}
-.social_set{width:204px;}
+.social_set{width:196px;}
 .fb_iframe_widget span{width: 72px!important}
 .show_error{border:1px solid #990000;-moz-border:1px solid #990000;-webkit-border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;}
 
@@ -1109,3 +1109,4 @@ a:hover{text-decoration:none;}
 .loading_image_show_hide{text-align:center;}
 #show_more{text-align: right;
 cursor:pointer;}
+#quest_pic{margin-left:10px;}

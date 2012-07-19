@@ -101,6 +101,7 @@ if ($user) {
 				<div>
 					<ul class="course_list">
 					<?php
+					$logged_user_id = $this->tank_auth->get_user_id();
 					if(!empty($get_all_question_of_univ))
 					{
 					$a=0;
@@ -132,7 +133,7 @@ if ($user) {
 							{
 								echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
 							}
-							else if($user)
+							else if($user && $quest_list['q_askedby'] == $logged_user_id)
 							{
 							?>
 								<img style='width:40px;height:40px;margin-right:10px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
@@ -175,12 +176,15 @@ if ($user) {
 						</div>
 						</div>	
 						<div class="float_r">
-							<div class="float_l fb_set"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
-							<div class="float_l" class="float_l">
-							<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
-							</div>			
-							<div class="float_r tw" style="width:82px;">
-								<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
+							<div class="social_set">
+								<div class="float_l">	
+									<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+								</div>
+								<div class="float_l tw">
+									<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo "$base$url"; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
+								</div>
+								<div class="float_r fb"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+								<div class="clearfix"></div>
 							</div>
 							<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
 						</div>

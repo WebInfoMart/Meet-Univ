@@ -9,6 +9,22 @@
 
 </script>-->
 <?php
+ //date_default_timezone_set('Asia/Kolkata');
+$facebook = new Facebook();
+$user = $facebook->getUser();
+$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+?>
+<?php
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)
@@ -590,7 +606,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<h3>Latest Q&A </h3>
 								<ul class="prof_data">	
 								<?php 
-								
+				$logged_user_id = $this->tank_auth->get_user_id();							
 				if(!empty($get_latest_question_home))
 				{
 				$a=0;
@@ -642,6 +658,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
 										{
 											echo "<img src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."' class='latest_img'/>";
+										}
+										else if($user && $quest_list['q_askedby'] == $logged_user_id)
+										{
+										?>
+											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+										<?php
 										}
 										else{
 											echo "<img src='".base_url()."images/profile_icon.png'/>";

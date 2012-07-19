@@ -37,7 +37,7 @@ array_push($array_dates,$var);
 											
 		?>	
 											<a href="<?php echo $event_link; ?>">
-												<h3 class="inline"> <?php echo $event_detail['univ_name']; ?> </h3>
+												<h3> <?php echo $event_detail['univ_name']; ?> </h3>
 												</a>
 												<span class="inline"> &raquo; </span>
 												<?php

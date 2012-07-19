@@ -17,15 +17,28 @@ if ($user) {
 						<div class="event_border find_comment hover_delete_comment_<?php echo $comments_detail['comment_id']; ?>">
 							<div class="float_l">
 								<div class="comment_img">
-									<?php if($comments_detail['user_pic_path'] !=''){ ?>
-									<img src="<?php echo "$base"; ?>uploads/<?php echo $comments_detail['user_pic_path']; ?>" />
-									<?php } 
-									else if($user) { ?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-								<?php } 
-									else { ?>		
-									<img src="<?php echo "$base$img_path"; ?>/user_model.png" />
-									<?php } ?>
+								<?php $logged_user_id = $this->tank_auth->get_user_id(); 
+									if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$comments_detail['user_thumb_pic_path']) && $comments_detail['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/thumbs/".$comments_detail['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$comments_detail['user_pic_path']) && $comments_detail['user_pic_path']!='')
+							{
+								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/".$comments_detail['user_pic_path']."'/>";
+							}
+							
+							else if($user && $comments_detail['q_askedby'] == $logged_user_id)
+							{
+							?>
+								<img style='max-height:100px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+							<?php
+							}
+							else{
+							echo "<img style='max-height:100px;' src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
 									<h4 class="center">
 								<?php if($comments_detail['commented_by_user_name'] !=''){
 									echo $comments_detail['commented_by_user_name']; 

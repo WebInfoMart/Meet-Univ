@@ -79,6 +79,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="span9 margin_delta">
 						<?php 
 							if($news_comments!=0){
+							$logged_user_id = $this->tank_auth->get_user_id(); 
 						foreach($news_comments as $news_comments_detail){ ?>
 						<div class="event_border find_comment hover_delete_comment_<?php echo $news_comments_detail['comment_id']; ?>">
 							<div class="float_l">
@@ -95,7 +96,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							{
 								echo "<img src='".base_url()."uploads/user_pic/".$news_comments_detail['user_pic_path']."'/>";
 							}
-							else if($user)
+							else if($user && $news_comments_detail['commented_by'] == $logged_user_id)
 							{
 							?>
 								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">

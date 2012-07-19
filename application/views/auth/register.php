@@ -190,12 +190,22 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						if(!empty($new_users))
 						{
 						foreach($new_users as $newly_registered){ $x++; 
-						if($newly_registered['user_pic_path'] != '')
-						{ $user_pic = $newly_registered['user_pic_path']; }
-						else { $user_pic = 'user_model.png'; }
+						if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$newly_registered['user_thumb_pic_path']) && $newly_registered['user_thumb_pic_path']!='' )
+						{
+						//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+						
+							$user_pic =  base_url()."uploads/user_pic/thumbs/".$newly_registered['user_thumb_pic_path'];
+						}
+						else if(file_exists(getcwd().'/uploads/user_pic/'.$newly_registered['user_pic_path']) && $newly_registered['user_pic_path']!='')
+						{
+							$user_pic = base_url()."uploads/user_pic/".$newly_registered['user_pic_path'];
+						}
+						else{
+							$user_pic = base_url()."images/profile_icon.png";
+						}
 						?>
 <a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>">
-<img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $base; ?>images/<?php echo $user_pic; ?> <?php } else { echo $base; ?>uploads/<?php echo $user_pic; }?>"/>
+<img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $base; ?>uploads/<?php echo $user_pic; }?>"/>
 </a>				
 		
 					<?php } } else { "No New Users Available"; } ?>	

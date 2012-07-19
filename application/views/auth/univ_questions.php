@@ -40,6 +40,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				<div class="float_l comment_img margin_delta" style="margin-right:10px;">
 				
 				<?php
+				$logged_user_id = $this->tank_auth->get_user_id();
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$single_quest['user_thumb_pic_path']) && $single_quest['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
@@ -50,7 +51,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							{
 								echo "<img class='question_user' src='".base_url()."uploads/user_pic/".$single_quest['user_pic_path']."'/>";
 							}
-							else if($user)
+							else if($user && $single_quest['q_askedby'] == $logged_user_id)
 							{
 							?>
 								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
@@ -66,8 +67,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				</div>
 				<div>
 					<span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span>
-					<h4 style="margin-left: 12px;"><?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?></h4>
-					<div style="margin-left: 12px;"><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="line_time"><abbr class="timeago time_ago" title="<?php echo $single_quest['q_asked_time'] ?>"></abbr></span>
+					<h4><?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?></h4>
+					<div><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="line_time"><abbr class="timeago time_ago" title="<?php echo $single_quest['q_asked_time'] ?>"></abbr></span>
 					</div>
 				</div>
 				<div class="margin1">

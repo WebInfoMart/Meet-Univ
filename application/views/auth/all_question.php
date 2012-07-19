@@ -114,6 +114,7 @@ if ($user) {
 					</div>
 						<ul class="course_list">
 							<?php
+				$logged_user_id = $this->tank_auth->get_user_id();
 				if(!empty($get_all_question))
 				{
 				$a=0;
@@ -156,7 +157,7 @@ if ($user) {
 						echo "<img style='width:40px;height:40px;margin-right:10px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
 					}
 				
-					else if($user)
+					else if($user && $quest_list['q_askedby'] == $logged_user_id)
 					{
 					?>
 						<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
