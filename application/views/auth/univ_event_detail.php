@@ -27,6 +27,9 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
 <?php
+$sms_suc_sess_val = "";
+$sms_voice_suc_sess_val = "";
+$show_suc_msg = "";
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)
