@@ -85,7 +85,7 @@ $select_female='';
 		<h3>Your Profile Information</h3>
 	</div>
 	<div class="modal-body model_body_height">
-		<form method="post" action="home" enctype="multipart/form-data">
+		<form method="post" action="<?php echo $base; ?>home" enctype="multipart/form-data">
 			<div>
 				<div class="float_l span2 margin_zero">
 				

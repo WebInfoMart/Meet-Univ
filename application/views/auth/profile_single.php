@@ -54,7 +54,7 @@ if ($user) {
 									<span>We will not share your information without your permission.</span>
 									<div class="contact_box margin1">
 										<div class="margin_l margin_t">
-											<h4>Personal Information <img src="<?php echo "$base$img_path";  ?>/ques_layer.png"></h4>
+											<h4>Personal Information<img src="<?php echo "$base$img_path";  ?>/ques_layer.png"></h4>
 											<div class="margin1">
 												<div>
 													<label class="control-label padding_alpha">

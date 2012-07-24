@@ -88,7 +88,6 @@ class Auth extends CI_Controller
 			$data['count_inbox'] = $this->users->count_inbox_user($logged_user);
 			$data['count_outbox'] = $this->users->count_outbox_user($logged_user);
 			$this->load->view('auth/profile',$data);
-			
 		}
 		if ($this->input->post('upload')) {
 			$this->users->do_upload();

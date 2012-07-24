@@ -121,6 +121,8 @@ class Users extends CI_Model
 	function do_upload() {
 		 //$this->ci->load->config('tank_auth', TRUE);
 		 $user_id = $this->tank_auth->get_user_id();
+		 $data['user_id'] = $this->tank_auth->get_user_id();
+		
 		 $image_data['file_name'] = "";
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
@@ -153,13 +155,13 @@ class Users extends CI_Model
 		
 		$this->load->library('image_lib', $config);
 		$this->image_lib->resize();
-		}
 		$data['thumb_image_name'] = $image_data['raw_name'].'_thumb'.$image_data['file_ext'];
-		$data['user_id'] = $this->tank_auth->get_user_id();
 		if($image_data['file_name'] != '')
 		{
 		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."',user_thumb_pic_path = '".$data['thumb_image_name']."' where user_id='".$data['user_id']."'");
 		}
+		}
+		
 		if($this->input->post('area_interest') != '')
 		{
 		 $this->db->query("update user_profiles set prog_parent_id = '".$this->input->post('area_interest')."' where user_id='".$data['user_id']."'");
@@ -216,7 +218,6 @@ class Users extends CI_Model
 		
 		$this->load->library('image_lib', $config);
 		$this->image_lib->resize();
-		}
 		$data['thumb_image_name'] = $image_data['raw_name'].'_thumb'.$image_data['file_ext'];
 		//$img_path_store = $this->input->post('userfile');
 		//$img_path_store = $config['new_image'];
@@ -226,6 +227,8 @@ class Users extends CI_Model
 		{
 		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."',user_thumb_pic_path = '".$data['thumb_image_name']."' where user_id='".$data['user_id']."'");
 		}
+		}
+		
 		}
 		//echo $this->session->userdata('user_id');
 		if($redirect_false_update_profile != '')

@@ -175,7 +175,7 @@ $('#submit_event').click(function()
 		}
 		else
 		{
-		var event_timing=$('#event_time_start').val()+'-'+$('#event_time_end').val();
+		var event_timing=$('#event_time_start').val()+' - '+$('#event_time_end').val();
 		var etiming=1;
 		}
 		if(!($('#location_event').is(':checked')))

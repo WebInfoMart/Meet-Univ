@@ -1201,6 +1201,7 @@ class Univ extends CI_Controller
 	//find more comment
 	function show_more_comment()
 	{
+	
 	$data = $this->path->all_path();
 	$data['user_is_logged_in']=0;
 	if($this->tank_auth->is_logged_in())
@@ -1218,6 +1219,7 @@ class Univ extends CI_Controller
 	$comments=$this->load->view('ajaxviews/show_more_comment',$data);
 	//echo '({show_more:"'.$show_more.'",comments:"'.$comments.'"})';
 	echo $show_more.'!@#$%^&*'.$comments;
+	
 	}
 }		
 	

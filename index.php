@@ -18,7 +18,6 @@ ini_set('session.cookie_domain','.meetuniversities.com');
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -27,7 +26,7 @@ ini_set('session.cookie_domain','.meetuniversities.com');
  * Different environments will require different levels of error reporting.
  * By default development will show errors but testing and live will hide them.
  */
-
+define('ENVIRONMENT', 'development');
 if (defined('ENVIRONMENT'))
 {
 	switch (ENVIRONMENT)

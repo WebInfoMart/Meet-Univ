@@ -449,11 +449,11 @@ requires jQuery 1.6+
 			switch (code) {
 
 				case 'a':
-					output += (time.getHours() > 11) ? 'pm' : 'am';
+					output += (time.getHours() > 11) ? ' pm' : ' am';
 					break;
 
 				case 'A':
-					output += (time.getHours() > 11) ? 'PM' : 'AM';
+					output += (time.getHours() > 11) ? ' PM' : ' AM';
 					break;
 
 				case 'g':

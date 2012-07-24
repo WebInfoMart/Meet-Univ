@@ -200,7 +200,7 @@ $("#link_send_for_fpass").delay(7000).fadeOut(200);
 						
 						?>
 <a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>">
-<img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $base; ?>uploads/<?php echo $user_pic; }?>"/>
+<img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $user_pic; }?>"/>
 </a>				
 		
 					<?php } } else { echo "No New Users Available"; } ?>	
