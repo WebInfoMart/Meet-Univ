@@ -32,13 +32,15 @@ $this->session->unset_userdata('follow_to_univ');
 								<div class="margin_t">
 									<h4>Country</h4>
 									<ul class="col_filter_list">
+									<?php $count_country = count($country); ?>
+									<input type="hidden" id="total_records_country" value="<?php echo $count_country; ?>"/>
 							<?php 
 							foreach($country as $countries) { 
 							$sel='';
 							$country_name=str_replace(' ','_',$countries['country_name']);	
 							//$country_name=str_replace(' ','_',$country_name);	
 							?>	
-											<li  href="/<?php echo $country_name; ?>">
+											<li class="listitem_country"  href="/<?php echo $country_name; ?>">
 		<?php 
 		
 		if(in_array($countries['country_id'],$get_university['filter_country']))
@@ -48,7 +50,10 @@ $this->session->unset_userdata('follow_to_univ');
 		?>									
 		<label class="checkbox"><input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo $countries['country_name'];
 							 ?></label></li>
-								<?php } ?>					
+								<?php } ?>	
+		<?php if($count_country > 1) { ?>											
+		<li class="more_country"> <div style="cursor:pointer; width:60px;height:20px;background-color: whiteSmoke;"> showmore </div>  </li>
+		<?php } ?>
 									</ul>
 									
 								</div>
@@ -74,8 +79,11 @@ $this->session->unset_userdata('follow_to_univ');
 								</div>
 								<div class="margin_t">
 									<h4>Area of Interest</h4>
+									<?php $count_area_of_interest = count($fetch_area_intrest); ?>
+									<input type="hidden" id="total_records_area_interest" value="<?php echo $count_area_of_interest; ?>"/>
 									<ul class="col_filter_list">
-										<?php foreach($fetch_area_intrest as $fetch_area_intrest1) { 
+										<?php 
+										foreach($fetch_area_intrest as $fetch_area_intrest1) { 
 							$area_interest_sel='';			
 							if(in_array($fetch_area_intrest1['prog_parent_id'],$get_university['filter_area_intrest']))
 							{
@@ -84,8 +92,11 @@ $this->session->unset_userdata('follow_to_univ');
 										$area_intrest=str_replace(' ','_',$fetch_area_intrest1['program_parent_name']);	
 										?>	
 										
-		<li href="/<?php echo $area_intrest; ?>"><label class="checkbox"><input type="checkbox" class="search_chkbox" <?php echo $area_interest_sel; ?>><?php echo $fetch_area_intrest1['program_parent_name']; ?></label></li>	
+		<li class="area_of_interest" href="/<?php echo $area_intrest; ?>"><label class="checkbox"><input type="checkbox" class="search_chkbox" <?php echo $area_interest_sel; ?>><?php echo $fetch_area_intrest1['program_parent_name']; ?></label></li>	
 										<?php } ?>
+        <?php if($count_area_of_interest > 5) { ?>											
+		<li class="more"> <div style="cursor:pointer; width:60px;height:20px;background-color: whiteSmoke;"> showmore </div>  </li>
+		<?php } ?>
 									</ul>
 									
 								</div>
@@ -474,3 +485,33 @@ $('#frm_search_steps').submit();
 //redirect(find_college);
 }
 </script>	 
+
+<script>
+$(".area_of_interest").hide();
+$(".area_of_interest").slice(0,5).show();
+
+$(".more").click(function(){
+var showing = $(".area_of_interest:visible").length;
+$(".area_of_interest").slice(showing - 5, showing + 5).show();
+var area_interest_record = $("#total_records_area_interest").val();
+var total_list_item_area_interest = $(".area_of_interest:visible").length;
+if(total_list_item_area_interest == area_interest_record)
+{
+	$(".more").hide();
+}
+});
+
+$(".listitem_country").hide();
+$(".listitem_country").slice(0,5).show();
+
+$(".more_country").click(function(){
+var showing = $(".listitem_country:visible").length;
+$(".listitem_country").slice(showing - 5, showing + 5).show();
+var country_record = $("#total_records_country").val();
+var total_list_item_country = $(".listitem_country:visible").length;
+if(total_list_item_country == country_record)
+{
+	$(".more_country").hide();
+}
+});
+</script>

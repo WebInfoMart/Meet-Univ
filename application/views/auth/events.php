@@ -117,13 +117,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<h4>Country</h4>
 									<form class="margin_zero">
 										<ul class="col_filter_list">
-											
+										<?php $count_country = count($country_name_having_event); ?>
+											<input type="hidden" id="total_records_country" value="<?php echo $count_country; ?>"
 											<?php
 											if(!empty($country_name_having_event) && ($country_name_having_event!=1)) {
 											foreach($country_name_having_event as $country_name_having_event){
 											$country_name=str_replace(' ','_',$country_name_having_event['country_name']);
 											?>
-											<li  href="/<?php echo $country_name; ?>"><label class="checkbox">
+											<li class="listitem_country"  href="/<?php echo $country_name; ?>"><label class="checkbox">
 									<input type="checkbox" id="" class="search_chkbox" value=""
 												<?php if(in_array($country_name_having_event['country_id'],$events['filter_country']))
 												{
@@ -139,7 +140,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<?php
 										}										
 										?>	
-											
+		<?php if($count_country > 6) { ?>											
+		<li class="more_country"> <div style="cursor:pointer; width:60px;height:20px;background-color: whiteSmoke;"> showmore </div>  </li>
+		<?php } ?>
 										</ul>
 									</form>
 									<!--<div class="float_r"><a href="">more</a></div>-->
@@ -148,12 +151,15 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<h4>City</h4>
 									<form class="margin_zero">
 										<ul class="col_filter_list">
-										<?php if(!empty($city_name_having_event) && ($city_name_having_event!=1))
+										<?php $city_count = count($city_name_having_event); ?>
+										<input type="hidden" id="total_records_city" value="<?php echo $city_count; ?>"/>
+										<?php 
+										if(!empty($city_name_having_event) && ($city_name_having_event!=1))
 										{
 										foreach($city_name_having_event as $city_name_have_event)
 										{
 										?>
-											<li href="/<?php echo $city_name_have_event['cityname']; ?>"><label class="checkbox">
+											<li class="listitem_city" href="/<?php echo $city_name_have_event['cityname']; ?>"><label class="checkbox">
 		<input type="checkbox" class="search_chkbox" <?php if(in_array($city_name_have_event['city_id'],$events['filter_city']))
 												{
 												echo "checked";
@@ -168,7 +174,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<li>Sorry,No city avaliable</li>
 										<?php
 										}										
-										?>	
+										?>
+									<?php if($city_count > 6) { ?>											
+		<li class="more_city"> <div style="cursor:pointer; width:60px;height:20px;background-color: whiteSmoke;"> showmore </div>  </li>
+		<?php } ?>
 										</ul>
 									</form>
 									<!--<div class="float_r"><a href="">more</a></div>-->
@@ -722,13 +731,33 @@ $('#'+id).html('<a href="javascript:void(0)" class="active" onclick="eventsortin
  $('.events_listing').tsort('',{attr:what,order:orderBy});
 
 }
+</script>
+<script>
+$(".listitem_country").hide();
+$(".listitem_country").slice(0,6).show();
 
+$(".more_country").click(function(){
+var showing = $(".listitem_country:visible").length;
+var total_list_item_country = $(".listitem_country").length;
+$(".listitem_country").slice(showing - 6, showing + 6).show();
+var country_record = $("#total_records_country").val();
+if(total_list_item_country == country_record)
+{
+	$(".more_country").hide();
+}
+});
 
+$(".listitem_city").hide();
+$(".listitem_city").slice(0,8).show();
 
-
-
-
-
-
-
-	</script>
+$(".more_city").click(function(){
+var showing = $(".listitem_city:visible").length;
+$(".listitem_city").slice(showing - 4, showing + 4).show();
+var city_record = $("#total_records_city").val();
+var total_list_item = $(".listitem_city:visible").length;
+if(total_list_item == city_record)
+{
+	$(".more_city").hide();
+}
+});
+</script>
