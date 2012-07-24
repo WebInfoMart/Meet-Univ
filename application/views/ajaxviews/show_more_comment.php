@@ -52,12 +52,12 @@ if ($user) {
 			<?php	} } ?>	
 								
 								<?php echo $comments_detail['commented_text'];?>
-								<div style="font-size;color:black;" class="float_r">
+								<div class="float_r span2 margin_delta">
 								<abbr class="timeago time_ago" title="<?php echo $comments_detail['comment_time']; ?>"></abbr>
 								</div>
 							</div>
 							<div class="clearfix"></div>
-							<h4><span class="course_txt">
+							<h4><span class="">
 								<?php if($comments_detail['commented_by_user_name'] !=''){
 									echo $comments_detail['commented_by_user_name']; 
 									}
