@@ -51,7 +51,7 @@ $this->session->unset_userdata('follow_to_univ');
 		<label class="checkbox"><input type="checkbox" class="search_chkbox" <?php echo $sel; ?>> <?php echo $countries['country_name'];
 							 ?></label></li>
 								<?php } ?>	
-		<?php if($count_country > 1) { ?>											
+		<?php if($count_country > 5) { ?>											
 		<li class="more_country"> <div style="cursor:pointer; width:60px;height:20px;background-color: whiteSmoke;"> showmore </div>  </li>
 		<?php } ?>
 									</ul>

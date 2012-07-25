@@ -45,7 +45,7 @@ if ($user) {
 				<div class="clearfix"></div>
 				<div class="slides_container">
 					<div>
-						<form action="QuestandAns" method="post" class="margin_t">
+						<form action="" method="post" class="margin_t">
 							<div class="control-group">
 								<?php
 									if($this->session->userdata('ask_quest_on_univ_page') != '');
