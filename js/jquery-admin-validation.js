@@ -210,6 +210,8 @@ $('#submit_event').click(function()
 			   etiming:etiming,
 			   fixedloc:fixedloc,
 			   cityname:$('#city_name').val(),
+			   countryname:$('#country_name').val(),
+			   statename:$('#state_name').val(),
 			   submit:1
 			  };
 			

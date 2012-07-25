@@ -106,7 +106,7 @@ array_push($array_dates,$var);
 									{
 									$image=$base.$img_path.'/default_logo.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,112,77,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,106,71,TRUE);
 											?>
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 												

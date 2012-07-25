@@ -709,63 +709,55 @@ class Adminevents extends CI_Controller
 			$this->events->create_event();
 			 
 			 
-			$this->load->library('fbConn/facebook');
-			$facebook = new Facebook();
-			$access_token = $facebook->getAccessToken();
-
-			$data['fb_permissions']='no';
-			if(isset($facebook->access_token) && $facebook->access_token!='' && $this->input->post('share_facebook')=='on')
+			if(($this->input->post('share_facebook')=='on') && ($this->input->post('etiming')))
 			{
-		    $permissions = $facebook->api("/me/permissions?access_token=".$facebook->access_token);
-			if(array_key_exists('create_event', $permissions['data'][0]) && array_key_exists('manage_pages', $permissions['data'][0])) 
-		    {
-			$data['fb_permissions']='yes';
-			}
-			}
-			if($this->input->post('share_facebook')=='on')
-			{
-				//$page_id = '198465570173386';
-				$page_id = '132735360191608';
+			//$page_id = '198465570173386';
+			$page_id = '132735360191608';
 				 
-				 $access_token = $facebook->getAccessToken();
-				if($this->input->post('etiming'))
-				{
+			$this->load->library('fbConn/facebook');
+			$facebook=new Facebook();
+			$facebook->setAccessToken("AAAF5umslDiYBAPWI4wabsTXGZBZB7s8SUXmncUUECOrldte1NZC2RnEIEGHH6EsZAR5sStgRZBZCL1LFQeT29ZBjZAR24K0PoxPffZCmPj6nUvQZDZD");
+			$page_access_token=$facebook->getAccessToken();
+				
 				if($this->input->post('fixedloc'))
 				{
-				 $event_loc=$this->input->post('cityname');
+				$street=$this->input->post('event_place');
+				$city=$this->input->post('cityname');
+				$state=$this->input->post('statename');
+				$country= $this->input->post('countryname'); 
+
+				$places =json_decode(file_get_contents("https://graph.facebook.com/search?q=".urlencode($street.", ".$city.",".$state.", ".$country)."&type=place&access_token=".$page_access_token));
+				$venue=array();
+				$venue["street"]=$street;
+				$venue["city"]=$city;
+				$venue["state"]=$state;
+				$venue["country"]= $country; 
+				if(count($places->data)>0)
+				{
+				$locid=$places->data[0];
+				$venue["location_id"]=$locid->id;
+				$event_info['location_id']=$locid->id;
+				}
+				$event_info['venue'] =$venue;
 				}
 				else
 				{
-				  $event_loc=$this->input->post('event_place');
+				  $event_info['location'] = $this->input->post('event_place'); 
+				
 				}
-				$event_data = array('name' =>$this->input->post('university_name') ,'start_time' => $this->input->post('event_time').' '.$this->input->post('event_time_start'),
-				'end_time' => $this->input->post('event_time').' '.$this->input->post('event_time_end'),
-				'city' =>$event_loc,
-				'email'=>'info@meetuniversities.com',
-				'description' => $this->input->post('detail'),
-				'location' => $this->input->post('event_place'),
-				"privacy"=>"OPEN",
-				'page_id' => $page_id,
-				'access_token'=>$access_token
-				);
-				$post = $facebook->api("/".$page_id."/events", 'POST', $event_data);
-			   	
-				}
-				else
-				{
-				$event_data = array('name' =>$this->input->post('university_name'),
-				'page_id' => $page_id,
-				'access_token'=>$access_token
-				);
-				}
-				$page_id = '198465570173386';
-				/*$event_data = array('name' =>'Testing' ,'start_time' => '11-07-2012'.' '.'11-11-11',
-				'end_time' => '15-07-2012'.' '.'11-11-11',
-				'page_id' => $page_id,
-				'access_token'=>$access_token
-				);*/
-               echo "1";
+				
+				$event_info['name']= $this->input->post('university_name');
+				$event_info['start_time'] = $this->input->post('event_time').' '.$this->input->post('event_time_start');
+				$event_info['end_time'] =$this->input->post('event_time').' '.$this->input->post('event_time_end');
+				$event_info['email'] ='info@meetuniversities.com';
+				$event_info['description'] =$this->input->post('detail');				
+				$event_info['access_token'] = $page_access_token;
+				//$event_info['city'] = $event_loc;
+				$event_info['page_id'] = $page_id;
+				$event_info['privacy'] ="OPEN";
+				$accounts = $facebook->api("/100003807361769/events","POST",$event_info);
 			}
+			echo "1";
 			 
 			 
 			 
@@ -774,7 +766,7 @@ class Adminevents extends CI_Controller
 			
 		}
 		}
-		
+	 
 	function edit_event_ajax($event_id)
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {

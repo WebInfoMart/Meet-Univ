@@ -339,9 +339,25 @@ $(document).ready(function() {
 								<label>Share on Facebook</label>
 							</div>
 							<div class="float_l span3" >
-								<input type="checkbox"  class="text time" id="share_facebook"  name="share_facebook" onchange="jQuery('#fb_button').toggle();"/><?php if(isset($fb_permissions) && $fb_permissions=='no') { ?><span id="fb_button" style="display:none;">
-							<fb:login-button perms="email,user_checkins,publish_stream,user_events,read_stream,create_event,manage_pages" id="fb_butonek" onlogin="jQuery('#fb_button').toggle();">Connect with Facebook</fb:login-button>
-							</span><?php }?>					
+								<input type="checkbox"  class="text time" id="share_facebook"  name="share_facebook" />
+						</span>					
+							</div>
+							
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<li class="post_facebook_show_hide">
+						<div >
+							<div class="float_l span3 margin_zero">
+								<label>Post To Facebook Before</label>
+							</div> 
+							<div class="float_l span1" >
+								<input type="checkbox"  class="text time" />&nbsp;3 days
+							</div>
+							<div class="float_l span1" >
+								<input type="checkbox"  class="text time" />&nbsp;7 days
+							</div><div class="float_l span1" >
+								<input type="checkbox"  class="text time" />&nbsp;15 days
 							</div>
 							
 							<div class="clearfix"></div>
