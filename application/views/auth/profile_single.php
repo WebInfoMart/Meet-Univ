@@ -73,7 +73,7 @@ if ($user) {
 													else if($user)
 													{
 													?>
-														<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+														<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
 													<?php
 													}
 													else{

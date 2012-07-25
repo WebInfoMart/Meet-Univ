@@ -793,7 +793,10 @@ class Univ extends CI_Controller
    $data = $this->path->all_path();
    $univ_id=$this->subdomain->find_id_of_current_univ();
    $user_id=$this->quest_ans_model->find_user_id_of_question($quest_id);
-   
+   if(!($user_id))
+   {
+   $user_id='new';
+   }
    $data['univ_id_for_program'] = $univ_id; 
    $data['university_details'] = $this->users->get_university_by_id($univ_id);
    $country_id = $data['university_details']['country_id'];
@@ -811,12 +814,11 @@ class Univ extends CI_Controller
     $data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
     $data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
     
-				
+	$data['single_quest']='';			
     if($univ_id !='' && $quest_id !='' && $user_id !='')
     {
     $data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$user_id);
-	
-	
+	//print_r($data['single_quest']);
 	if($data['university_details']['univ_logo_path'] !='' || $data['university_details']['univ_logo_path']!= 0)
 			{
 				$data['img_src'] = base_url()."uploads/univ_gallery/".$data['university_details']['univ_logo_path'];

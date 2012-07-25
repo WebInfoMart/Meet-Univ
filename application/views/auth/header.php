@@ -73,7 +73,8 @@ if ($user) {
   'email'		=> $user_profile['email'],
   'activated'  => '1', 
   'createdby_user_id'  => '0',
-   'fb_user' =>'1'
+   'fb_user' =>'1',
+   'user_type' =>'fb_login'
   //'last_ip'	=> $this->ci->input->ip_address(),
   );
   if($user_profile['name']!='' && $user_profile['name']!=NULL)
