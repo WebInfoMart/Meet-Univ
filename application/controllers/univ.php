@@ -16,6 +16,7 @@ class Univ extends CI_Controller
 		$this->load->library('email');
 		$this->ci =& get_instance();
 		$this->load->library('fbConn/facebook');
+		date_default_timezone_set('Asia/Kolkata');
 	}
 
 	/* Function used for single university page */
@@ -932,6 +933,7 @@ class Univ extends CI_Controller
    'q_approve'=>'0',
    'q_featured_home_que'=>'0',
    'q_featured_country_que'=>'0',
+   'q_asked_time'=>date('Y-m-d H:i:s',time())
    );  
    if (!$this->tank_auth->is_logged_in()) {
    $quest_sess = array(
