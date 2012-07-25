@@ -7,6 +7,7 @@ class Frontmodel extends CI_Model
 	{
 		$this->load->library('pagination');
 		$this->load->database();
+		date_default_timezone_set('Asia/Kolkata');
 	}
 	function fetch_events_for_calendar()
 	{
@@ -231,7 +232,7 @@ class Frontmodel extends CI_Model
 		$numrows=$query->num_rows();
 		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/event-list/university_events";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '1'; 
+		$config['per_page'] = '6'; 
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -268,7 +269,7 @@ class Frontmodel extends CI_Model
 		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/news-list/university_news_list";
 		//$config['base_url']=base_url()."news-list/university_news_list";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '1'; 
+		$config['per_page'] = '6'; 
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -298,7 +299,7 @@ class Frontmodel extends CI_Model
 		$numrows=$query->num_rows();
 		$config['base_url']=base_url()."Recent_News/news/";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = 1; 
+		$config['per_page'] = '6'; 
 		$offset = $this->uri->segment('3');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -323,7 +324,7 @@ class Frontmodel extends CI_Model
 		$numrows=$query->num_rows();
 		$config['base_url']= base_url()."Recent_Articles/articles";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '1'; 
+		$config['per_page'] = '6'; 
 		$offset = $this->uri->segment('3');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
 		$limit = $config['per_page'];
 		$this->db->select('*');
@@ -385,7 +386,7 @@ class Frontmodel extends CI_Model
 		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/article-list/university_articles_list";
 		//$config['base_url']=base_url()."article-list/university_articles_list";
 		$config['total_rows']=$numrows;
-		$config['per_page'] = '1'; 
+		$config['per_page'] = '6'; 
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
@@ -433,6 +434,7 @@ class Frontmodel extends CI_Model
 	'commented_on'=>$this->input->post('commented_on'),
 	'comment_on_id'=>$this->input->post('commented_on_id'),
 	'commented_text'=>$this->input->post('commented_text'),
+	'comment_time'=>date('Y-m-d H:i:s',time())
 	);
 	$this->db->insert('comment_table',$data);
 	}
@@ -488,6 +490,7 @@ class Frontmodel extends CI_Model
 		'commented_on'=>$commented_on,
 		'comment_on_id'=>$commented_on_id,
 		'commented_text'=>$commented_text,
+		'comment_time'=>date('Y-m-d H:i:s',time())
 		);
 	$this->db->insert('comment_table',$data);
 		return $this->db->insert_id();

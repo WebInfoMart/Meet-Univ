@@ -64,7 +64,8 @@ class Quest_ans_controler extends CI_Controller
 				'q_detail'=>$quest_detail,
 				'q_approve'=>'0',
 				'q_featured_home_que'=>'0',
-				'q_featured_country_que'=>'0'
+				'q_featured_country_que'=>'0',
+				'q_asked_time'=>date('Y-m-d H:i:s',time())
 		);
 		if (!$this->tank_auth->is_logged_in()) {	
 			$quest_sess = array('quest_sess_active'=>1);
