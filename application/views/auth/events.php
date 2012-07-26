@@ -214,7 +214,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<div class="float_r">
 						<?php if(!($events['event_res'])){ ?>
-						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
+						<div class="events_holder_box no_result_found_class margin_t"><h3>Sorry,NO Result Found</h3></div>
 						<?php } ?>
 						
 			<div id="event_results_filteration">
@@ -691,11 +691,12 @@ function get_event_result_by_ajax()
 		});
 		if(res[2]!='0' && res[1]!='0')
 		{
+		$('.no_result_found_class').replaceWith('');
 		$('#event_results_filteration').html(res[2]);
 		}
 		else
 		{
-		$('#event_results_filteration').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
+		$('#event_results_filteration').html('<div class="events_holder_box no_result_found_class margin_t"><h3>Sorry,NO Result Found</h3></div>');	
 		}
 	  	$('#listed_currently_event').html(res[1]);
 	    $('#red_total_univ').html(res[0]);
