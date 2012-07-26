@@ -154,5 +154,9 @@ $route['(departments-detail)'] = 'univ/univ_overview_detail/$1';
 
 
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';
-$route['(find_college/(:num)/(:num))'] = 'leadcontroller/find_college/$1/$2';/* End of file routes.php */
+$route['(find_college/(:num)/(:num))'] = 'leadcontroller/find_college/$1/$2';
+
+$route['(MeetUniversities-Canvas)'] = 'user/meet_canvas_page';
+$route['(submit_canvas_data)'] = 'user/submit_canvas_data';
+/* End of file routes.php */
 /* Location: ./application/config/routes.php */

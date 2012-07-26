@@ -196,7 +196,7 @@ class Leadmodel extends CI_Model
 				$user_insert_clause = array(
 				'fullname'=>$fullname,
 				'email'=>$email,
-				'user_type'=> "event"
+				'user_type'=> "event_user"
 				);
 				if($this->db->insert('users',$user_insert_clause))
 				{
