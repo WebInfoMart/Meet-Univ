@@ -1,4 +1,17 @@
 <?php
+if($this->session->flashdata('eve_reg_suc')!= '')
+{
+?>
+<script>
+	$(document).ready(function(){
+	$('#show_success_event').css('display','block');
+	$('#show_success_event').hide();
+	$('#show_success_event').show("show");
+	$("#show_success_event").delay(3000).fadeOut(200);
+	});
+	</script>
+<?php
+}
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)
@@ -33,6 +46,21 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		<div class="body_header"></div>
 		<div class="body">
 			<div class="row margin_t1">
+			
+			<div class="modal" id="show_success_event" style="display:none;" >
+					  <div class="modal-header">
+						<a class="close" data-dismiss="modal"></a>
+						<h3>Message For You</h3>
+					  </div>
+					  <div class="modal-body">
+						<p><center><h4>You have successfully registered to the event.</h4></center></p>
+					  </div>
+					  <div class="modal-footer">
+						<!--<a href="#" class="btn">Close</a>-->
+						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
+					  </div>
+				</div>
+			
 			<div class="modal" id="show_success" style="display:none;" >
 					  <div class="modal-header">
 						<a class="close" data-dismiss="modal"></a>
@@ -328,7 +356,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 									{
 									$image=$base.$img_path.'/default_logo.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,106,71,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 											?>
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
 												

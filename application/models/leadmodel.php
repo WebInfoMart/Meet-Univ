@@ -180,10 +180,39 @@ class Leadmodel extends CI_Model
 		'register_event_id'=>$event_id,
 		'register_event_univ_id'=>$university_id
 		);
-		$this->db->insert('event_register',$clause);
+		if($this->db->insert('event_register',$clause))
+		{
+			$current_insert_id = $this->db->insert_id();
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('email',$email);
+			$get_result = $this->db->get();
+			if($get_result->num_rows() > 0)
+			{
+				$msg_data = "Email Already Exists";
+			}
+			else
+			{
+				$user_insert_clause = array(
+				'fullname'=>$fullname,
+				'email'=>$email,
+				'user_type'=> "event"
+				);
+				if($this->db->insert('users',$user_insert_clause))
+				{
+					$current_user_table_insert_id = $this->db->insert_id();
+					$user_profile_clause = array(
+					'user_id'=>$current_user_table_insert_id,
+					'mob_no'=>$phone,
+					'full_name'=>$fullname
+					);
+			
+			$this->db->insert('user_profiles',$user_profile_clause);
+				}
+			}
+		}
 		if($this->db->affected_rows() > 0)
 		{
-		$current_insert_id = $this->db->insert_id();
 		$this->db->select('*');
 		$this->db->from('event_register');
 		$this->db->join('events','event_register.register_event_id=events.event_id');

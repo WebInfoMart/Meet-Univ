@@ -1,4 +1,4 @@
-<?php
+<?/*<?php
 	if($eve_reg_suc == 'suc')
 	{
 	?>
@@ -13,14 +13,14 @@
 	<?php
 	}
 	$eve_reg_suc = '';
-	?>
+	?>*/?>
 	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
 		<div class="body">
 		
 		
-		<div class="modal" id="show_success" style="display:none;" >
+		<!--<div class="modal" id="show_success" style="display:none;" >
 					  <div class="modal-header">
 						<a class="close" data-dismiss="modal"></a>
 						<h3>Message For You</h3>
@@ -28,11 +28,11 @@
 					  <div class="modal-body">
 						<p><center><h4>You have successfully registered to the event.</h4></center></p>
 					  </div>
-					  <div class="modal-footer">
+					  <div class="modal-footer">-->
 						<!--<a href="#" class="btn">Close</a>-->
 						<!--<a href="#" class="btn btn-primary">Save changes</a>-->
-					  </div>
-				</div>
+					  <!--</div>
+				</div>-->
 		
 		
 			<div class="row margin_t1">

@@ -364,7 +364,8 @@ class Leadcontroller extends CI_Controller
 						'register_event_id'=>''
 					);
 					$this->session->set_userdata($set_blank_session_event_register);
-					$data['eve_reg_suc'] = "suc";
+					$this->session->set_flashdata('eve_reg_suc','suc');
+					redirect('events');
 				//}
 			}
 		}
