@@ -152,7 +152,7 @@ if ($user) {
 													$year_status=0;
 													for($count_year=1920;$count_year<=2005;$count_year++)
 													{
-													if($selected_default_year=='') {
+													if($selected_default_year=='') { 
 													if(set_value('year')==$count_year)
 													{
 													$selected_year='selected';
