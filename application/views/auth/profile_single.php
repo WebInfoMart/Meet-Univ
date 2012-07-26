@@ -150,7 +150,7 @@ if ($user) {
 														<option value="-1" <?php echo $selected_default_year; ?> >Select Year</option> 
 													<?php
 													$year_status=0;
-													for($count_year=1980;$count_year<=2005;$count_year++)
+													for($count_year=1920;$count_year<=2005;$count_year++)
 													{
 													if($selected_default_year=='') {
 													if(set_value('year')==$count_year)
