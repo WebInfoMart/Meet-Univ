@@ -483,7 +483,7 @@ if(!empty($events['event_res']))
 $array_dates=implode(',',$array_dates);
 }
 else{
-$array_dates = date("m/d/Y");
+$array_dates = '';
 }
 //echo $event_detail['event_date_time'];
 $show_date = '';
@@ -508,6 +508,7 @@ $number_month = date('m');
 			// foreach($array_dates as $dates){
 			// echo $dates;
 			// }?>
+			<?php //echo $array_dates; ?>
 <SCRIPT LANGUAGE="JavaScript"> 
     
  function popup(id) {
@@ -567,8 +568,6 @@ function voicepopup(id) {
 	   }
 	   }) 
 }
-</script>			
-<script type="text/javascript">
 var x = new Array(<?php echo $array_dates; ?>);
 //'12/04/2012';
 			$(document).ready(function () {
