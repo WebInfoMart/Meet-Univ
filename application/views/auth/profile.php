@@ -274,10 +274,20 @@ $select_female='';
 							 foreach($featured_events as $featured_events_detail) { 
 							$univ_domain=$featured_events_detail['subdomain_name'];
 							$event_title=$featured_events_detail['event_title'];
+							if($event_title=='')
+							{
+							$event_title='event';
+							}
 							$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$featured_events_detail['event_id']);
 							 ?>							
 				<li>
-				<a style="color:#666;" href="<?php echo $event_link; ?>"><?php echo substr($featured_events_detail['event_title'],0,100).'..'; ?></a>
+				<a style="color:#666;" href="<?php echo $event_link; ?>">
+				<?php if($featured_events_detail['event_title']!=''){ ?>
+				
+				<?php echo substr($featured_events_detail['event_title'],0,100).'..'; } else { ?>
+				
+				<?php echo $featured_events_detail['univ_name']; } ?>
+				</a>
 				&nbsp; &raquo;
 				<?php 
 				} 
@@ -311,7 +321,7 @@ $select_female='';
 								</div>
 								<div class="margin_t">
 									<div>
-										<div class="span7 float_l margin_zero green_qust">
+										<div class="span7 float_l margin_zero green_qust12">
 											<div>
 												<div class="float_l">
 													<div class="letter_uni">
@@ -370,25 +380,26 @@ $select_female='';
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 							
-								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
 							}
 							else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
 							{
-								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
 							}
 							
 							else if($user && $quest_list['q_askedby'] == $logged_user_id)
 							{
 							?>
-								<img style='max-height:100px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+								<img style='height:35px;width:35px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
 							<?php
 							}
 							else{
-							echo "<img style='max-height:100px;' src='".base_url()."images/profile_icon.png'/>";
+							echo "<img style='height:35px;width:35px;' src='".base_url()."images/profile_icon.png'/>";
 							}
 							?>
 										</div>
-										<a href="<?php echo $url; ?>"><span class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></span>
+										<a href="<?php echo $url; ?>"><div class="black height_setup"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></div>
+										
 										</a><div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
 										</div>
 										<div style="font-size: 11px;line-height: 12px;">

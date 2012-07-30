@@ -56,9 +56,9 @@ class Admin extends CI_Controller
    }
    }
    $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-   if(!($data['admin_priv']))
+   if((!($data['admin_priv'])) && ($data['admin_user_level']!=6 && $data['admin_user_level']!=2))
    {
-   redirect('admin/adminlogout');
+    redirect('admin/adminlogout');
    }
    //fetch user privilege data from model
    $this->load->view('admin/header', $data);
@@ -184,6 +184,7 @@ class Admin extends CI_Controller
 		}
 	else {
 	$data = $this->path->all_path();
+	
 	$data['user_id']	= $this->tank_auth->get_admin_user_id();
 	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 	$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
@@ -209,7 +210,7 @@ class Admin extends CI_Controller
 			$email_activation = $this->config->item('email_activation', 'tank_auth');
 
 			if ($this->form_validation->run()) {								// validation ok
-				if (!is_null($data = $this->tank_auth->create_user(
+				if (!is_null($data1 = $this->tank_auth->create_user(
 						$use_username ? $this->form_validation->set_value('username') : '',
 						$this->form_validation->set_value('fullname'),
 						$this->form_validation->set_value('createdby'),
@@ -710,7 +711,12 @@ class Admin extends CI_Controller
 		
 		
 		$data = $this->path->all_path();
-		$this->adminmodel->insert_userprivlege_data($newadminid);
+		
+		$admin_level=$this->session->userdata('newadmin_level');
+		if(!($admin_level==1 || $admin_level==6 || $admin_level=2))
+		{
+		 $this->adminmodel->insert_userprivlege_data($newadminid);
+		}
 		$this->tank_auth->delete_newadmin_sessiondata();
 		redirect('admin/manageusers/ucs');
 	//	print_r($data);
@@ -1813,7 +1819,7 @@ function manage_university($mps='')
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
+		if(!($data['admin_priv']) && ($data['admin_user_level']!='2' && $data['admin_user_level']!='6'))
 		{
 			redirect('admin/adminlogout');
 		}

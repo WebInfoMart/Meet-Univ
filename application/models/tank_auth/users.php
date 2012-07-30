@@ -122,13 +122,12 @@ class Users extends CI_Model
 		 //$this->ci->load->config('tank_auth', TRUE);
 		 $user_id = $this->tank_auth->get_user_id();
 		 $data['user_id'] = $this->tank_auth->get_user_id();
-		
+		if($_FILES['userfile']['name']!='')
+		{
 		 $image_data['file_name'] = "";
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->gallery_path,
-			'min_width'=> '175',
-			'min_height'=> '138',
 			'file_name'=>'user_'.$user_id
 		);
         
@@ -161,7 +160,7 @@ class Users extends CI_Model
 		 $this->db->query("update user_profiles set user_pic_path = '".$image_data['file_name']."',user_thumb_pic_path = '".$data['thumb_image_name']."' where user_id='".$data['user_id']."'");
 		}
 		}
-		
+		}
 		if($this->input->post('area_interest') != '')
 		{
 		 $this->db->query("update user_profiles set prog_parent_id = '".$this->input->post('area_interest')."' where user_id='".$data['user_id']."'");
@@ -343,7 +342,7 @@ class Users extends CI_Model
 	{
 		if($user_type=='admin')
 		{
-		$level='2,3,4,5';
+		$level='2,3,4,5,6';
 		}
 		else if($user_type=='student')
 		{
@@ -397,7 +396,7 @@ class Users extends CI_Model
  {
   if($user_type=='admin')
   {
-  $level='2,3,4,5';
+  $level='2,3,4,5,6';
   $this->db->where("LOWER(email)='".strtolower($login)."' && level IN($level) && banned!='1'");
   
   }
@@ -466,7 +465,7 @@ class Users extends CI_Model
 	{
 		//$data['created'] = date('Y-m-d H:i:s');
 		//$data['activated'] = $activated ? 1 : 0;
-		$data['activated'] = 1;
+		$data['activated'] = '1';
 
 		if ($this->db->insert($this->table_name, $data)) {
 			$user_id = $this->db->insert_id();

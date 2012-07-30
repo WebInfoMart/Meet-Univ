@@ -349,7 +349,7 @@ color: #08C;}
 .contact_box_content{width:500px;}
 .contact_box_content .input-small{width:76px;}
 .contact_box_content .input-medium{width:184px;}
-.form_data .control-label{font-size:15px;text-align: left;width: 163px;}
+.form_data .control-label{font-size:15px;text-align: left;width: 155px;}
 .input_xxx-large{width: 400px;margin-left: 11px;}
 .input_xxxx-large{width: 300px;margin-left: 11px;}
 .select_button select{width: 300px;margin-left: 11px;}
@@ -1105,7 +1105,19 @@ overflow-y: hidden;}
 .show_error{border:1px solid #990000;-moz-border:1px solid #990000;-webkit-border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;}
 
 a:hover{text-decoration:none;}
-
+.green_qust12{background-color: #DFF0D8;
+border: 1px solid #C0E3B1;
+padding: 10px;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+height: 324px;
+overflow-y: hidden;}
+.height_setup{height: 16px;
+overflow-y: hidden;}
 .loading_image_show_hide{text-align:center;}
 #show_more{text-align: right;
 cursor:pointer;}

@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller
+class Adminleads extends CI_Controller
 {
 	function __construct()
 	{
@@ -8,28 +8,37 @@ class Welcome extends CI_Controller
 
 		$this->load->helper('url');
 		$this->load->library('tank_auth');
+		$this->load->model('lead_tele_model');
+		$this->load->library('pagination');
+
+
 	}
 
-	function index()
+	function managetelecalls($start=0)
 	{
 		$data = $this->path->all_path();
-  //$this->load->view('auth/header',$data);
-  //$this->load->view('auth/footer',$data);
-  if (!$this->tank_auth->is_admin_logged_in()) {
+		if (!$this->tank_auth->is_admin_logged_in()) {
    
    redirect('admin/adminlogin/');
-  } else {
+	} else {
 	   $flag=0;
-	   $data['username'] = $this->tank_auth->get_username();
+	  $data['username'] = $this->tank_auth->get_username();
 	   $data['user_id'] = $this->tank_auth->get_admin_user_id();
 	   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		   //fetch user privilege data from model
-		   $this->load->view('admin/header', $data);
-	 if($flag==0)
+	  if($flag==0)
 	 {
+	  $data['teleleads']=$this->lead_tele_model->tele_lead_users($start);
+	  if ($this->input->post('ajax')) {
+      $this->load->view('ajaxviews/admin_engage/manage_tele_leads', $data);
+    } else {
+	$this->load->view('admin/header', $data);
 	  $this->load->view('admin/sidebar', $data); 
+      $this->load->view('admin/leads/manage_tele_leads', $data);
+    }
+	 
 	 }
-	 $this->load->view('admin/main', $data);
+		
 		 
 	}
 	

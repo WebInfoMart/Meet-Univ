@@ -89,7 +89,7 @@ class Tank_auth
 						//for admin login session
 						else if($user_type=='admin')
 						{
-						$this->ci->session->set_userdata(array(
+						  $this->ci->session->set_userdata(array(
 									'admin_user_id'	=> $user->id,
 									'admin_fullname' => $user->fullname,
 									'admin_username'	=> $user->username,
@@ -243,8 +243,8 @@ class Tank_auth
 				'activated'=>'1'
 				
 			);
-			echo $email_activation;
-			print_r($data);
+			//echo $email_activation;
+			//print_r($data);
 		if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];
 				//$data['password'] = $password;
@@ -296,7 +296,7 @@ class Tank_auth
 		
 			
 			// if admin create user then no	need to store this in session	
-		   if($createdby!='admin')
+		   if($createdby!='admin' )
 			{
 				if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];

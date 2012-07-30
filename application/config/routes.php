@@ -37,6 +37,7 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+//$route['(admin/manage_leads)']='adminleads/managetelecalls';
 
 $route['admin/update-(:num)-user-(:num)'] = 'admin/edituser/$1/$2';
 $route['404_override'] = '';
@@ -150,7 +151,6 @@ $route['(studentlife-detail)'] = 'univ/univ_overview_detail/$1';
 $route['(internationalstudent-detail)'] = 'univ/univ_overview_detail/$1';
 $route['(expertise-detail)'] = 'univ/univ_overview_detail/$1';
 $route['(departments-detail)'] = 'univ/univ_overview_detail/$1';
-
 
 
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';

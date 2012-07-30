@@ -94,6 +94,10 @@ else if($row->level=='4')
 {
 echo "Admin";
 }
+else if($row->level=='6')
+{
+echo "Telecaller";
+}
 
  ?>
 						</td>
@@ -119,6 +123,8 @@ $user_can_edit=1;
               <li><a href="<?php echo "$base$admin"; ?>/update-<?php echo $row->id; ?>-user-<?php echo $row->level; ?>">
 			  <i class="icon-pencil"></i> Edit</a></li>
 			 <li><a href="#" onclick="ban_confirm('<?php  echo "$base$admin";?>','<?php  echo $row->banned; ?>','<?php echo $row->id; ?>','<?php echo $row->level; ?>');">
+			 
+			 
 			 <i class="<?php if($row->banned=='1'){ echo "icon-unban-circle"; } else { echo "icon-ban-circle"; }?>"></i>
 			 <?php if($row->banned=='1'){?> Unban<?php } else {?> Ban <?php } ?></a></li>	
 			 <?php } 

@@ -21,21 +21,22 @@ if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $clas
 		
 		
 		<div class="span8">
-			<div id="steps">
+			<div id="steps" style="width:500px;">
 				<div class="step first active">
 					<div class="num"><h3>1</h3></div>
-					<div class="name"><h3>Sign Up</h3></div>
-					<img src="http://apply.learnhub.com/layouts/default/images/dark_arrow.png" width="19" height="50" alt="Grey Arrow">
+					<div class="name"><h3>Create User</h3></div>
+					<img src="<?php echo $base ;?>images/dark_arrow.png" width="19" height="50" alt="Grey Arrow">
 				</div>
 				
-				<div class="step first">
+				<!--<div class="step first">
 					<div class="num margin_l2"><h3>2</h3></div>
 					<div class="name"><h3>Privileges</h3></div>
-					<img src="http://apply.learnhub.com/layouts/default/images/grey_arrow.png" width="19" height="50" alt="Grey Arrow">
+					<img src="<?php// echo $base ;?>images/dark_arrow.png" width="19" height="50" alt="Grey Arrow">
 				</div>
+				-->
 			</div>
 			<div class="form span7">
-				<form action="" method="post">
+				<form action="adduser" method="post">
 						<div>
 							<label>FULLNAME:</label><br>
 							<input type="text" size="30" class="<?php echo $class_fullname; ?>"value="<?php echo set_value('fullname') ?>" name="fullname"> 
@@ -55,6 +56,7 @@ if($error_pwd != '') { $class_confirm_password = 'focused_error'; } else { $clas
 							<option value="4" <?php if(set_value('level_user')==4) { ?> selected <?php } ?>>ADMIN</option>
 							<option value="3" <?php if(set_value('level_user')==3) { ?> selected <?php } ?>>UNIVERSITY ADMIN</option>
 							<option value="2" <?php if(set_value('level_user')==2) { ?> selected <?php } ?>>COUNSELLOR</option>
+							<option value="6" <?php if(set_value('level_user')==1) { ?> selected <?php } ?>>TELECALLER</option>	
 							<option value="1" <?php if(set_value('level_user')==1) { ?> selected <?php } ?>>STUDENT</option>	
 						
 						</select>
