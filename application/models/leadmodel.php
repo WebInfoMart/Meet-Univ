@@ -144,13 +144,58 @@ class Leadmodel extends CI_Model
 		$to_insert_id = $this->session->userdata('current_insert_lead_id');
 		$this->db->where('id',$to_insert_id);
 		$this->db->update('lead_data',$cond_clause);
+		
+		/* select user type */
+		/* if ($this->tank_auth->is_logged_in()) 
+		{
+			$userTypeIS = $this->session->userdata('user_login_type');
+		} */
+		//$email_of_curr_lead = $this->session->userdata('sess_lead_email');
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('email',$email_of_curr_lead);
+		$sql_user_available = $this->db->get();
+		$sql_email_user_available = $sql_user_available->row_array();
+		//print_r($sql_email_user_available);
+		if ($sql_user_available->num_rows() > 0) {
+		$userTypeIS = $sql_email_user_available['user_type'];
+		}
+		else {
+		$userTypeIS = "college_request";
+		}
+		/* Insert data in users table */
+		if ($sql_user_available->num_rows() < 1) {
+		$sql_user = "insert into users (fullname,email)select fullname,email from lead_data where id='".$to_insert_id."'";
+		mysql_query($sql_user);
+		$last_user_id = mysql_insert_id();
+		
+		/* Fetch last insert data from lead table */
+		$select_user_info = "select fullname,phone_no1,email from lead_data where id='".$to_insert_id."'";
+		$res1 = mysql_query($select_user_info);
+		$res2 = mysql_fetch_array($res1);
+		
+		/* Insert data in user profiles table */
+		$sql_user_profile = "insert into user_profiles(user_id,full_name,mob_no,email_as_lead) values('".$last_user_id."','".$res2[0]."','".$res2[1]."','".$res2[2]."')";
+		$exec_sql_user_profile = mysql_query($sql_user_profile);
+		}
+		else{
+		$last_user_id = $sql_email_user_available['id'];
+		}
+		/* Update requested user id in lead table */
+		$sql_user_update = "update lead_data set user_id='".$last_user_id."',lead_source='".$userTypeIS."' where id='".$to_insert_id."'";
+		mysql_query($sql_user_update);
+		
 		if($this->db->affected_rows() > 0)
 		{
 			return 1;
 		}
 		else {
-		return 0;
+			
+			return 0;
 		}
+		//$x3 = mysql_fetch_array($x2);
+		
+		
 	}
 	
 	function get_university_title_by_id($college_for_apply)
@@ -187,8 +232,10 @@ class Leadmodel extends CI_Model
 			$this->db->from('users');
 			$this->db->where('email',$email);
 			$get_result = $this->db->get();
+			$event_detail_users = $get_result->row_array();
 			if($get_result->num_rows() > 0)
 			{
+				$current_user_table_insert_id = $event_detail_users['id'];
 				$msg_data = "Email Already Exists";
 			}
 			else
@@ -204,12 +251,24 @@ class Leadmodel extends CI_Model
 					$user_profile_clause = array(
 					'user_id'=>$current_user_table_insert_id,
 					'mob_no'=>$phone,
-					'full_name'=>$fullname
+					'full_name'=>$fullname,
+					'email_as_lead'=>$email
 					);
 			
 			$this->db->insert('user_profiles',$user_profile_clause);
+			
 				}
 			}
+			$value_for_lead_table = array(
+			'user_id'=>$current_user_table_insert_id,
+			'fullname'=>$fullname,
+			'email'=>$email,
+			'phone_no1'=>$phone,
+			'applied_univ_id'=>$university_id,
+			'applied_event_id'=>$event_id,
+			'lead_source'=>'event_user'
+			);
+			$this->db->insert('lead_data',$value_for_lead_table);
 		}
 		if($this->db->affected_rows() > 0)
 		{
@@ -348,7 +407,7 @@ class Leadmodel extends CI_Model
 			if($this->db->affected_rows() > 0)
 			{
 				$current_id = $this->db->insert_id();
-				$this->db->insert('user_profiles',array('user_id'=>$current_id,'full_name'=>$name,'mob_no'=>$mobile));
+				$this->db->insert('user_profiles',array('user_id'=>$current_id,'full_name'=>$name,'mob_no'=>$mobile,'email_as_lead'=>$email));
 			}
 		}
 		
@@ -485,6 +544,9 @@ class Leadmodel extends CI_Model
 			}
 			return $string;    
 		}
+		
+		
+		
 
 }
 

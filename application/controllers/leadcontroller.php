@@ -22,6 +22,8 @@ class Leadcontroller extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
+		//echo $this->session->userdata('user_type');
+		$this->session->userdata('current_insert_lead_id');
 		if($this->input->post('hid_send_univ_id_frm_search'))
 		{
 			$unvid = $this->input->post('hid_send_univ_id_frm_search');
@@ -93,12 +95,12 @@ class Leadcontroller extends CI_Controller
 			//print_r($condition);echo "h2";
 			} */
 			//else{
+			$this->session->set_userdata('sess_lead_email',$this->input->post('step_email'));
 			$condition = array(
 			'home_country_id' => $this->input->post('home_country'),
 			'email' => $this->input->post('step_email'),
 			'title'=> $this->input->post('title'),
-			'firstname'=> $this->input->post('first_name'),
-			'lastname'=> $this->input->post('last_name'),
+			'fullname'=> $this->input->post('first_name').' '.$this->input->post('last_name'),
 			'dob'=> $this->input->post('dob_year').'-'.$this->input->post('dob_month').'-'.$this->input->post('dob_day'),
 			'phone_type1'=> $this->input->post('phone_type'),
 			'phone_no1'=> $this->input->post('phone')
@@ -182,6 +184,9 @@ class Leadcontroller extends CI_Controller
 				'next_educ_level'=>$next_educ_level
 				);
 				$this->session->set_userdata($user_listed_college_data);
+				$this->session->userdata('country');
+				$this->session->userdata('area_interest');
+				$this->session->userdata('next_educ_level');
 				$data['selected_college_step_three'] = $this->leadmodel->fetch_college_step_three($country,$area_interest,$next_educ_level);
 				//print_r($data['selected_college_step_three']);
 				$id_for_session = array(

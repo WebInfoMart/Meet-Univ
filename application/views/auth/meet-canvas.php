@@ -1,10 +1,34 @@
+<?php
+$facebook = new Facebook();
+$user = $facebook->getUser();
+//$this->load->model('users');
+if ($user) {
+//$logoutUrl2 = $this->tank_auth->logout();
+  try {
+    // Proceed knowing you have a logged in user who's authenticated.
+    $user_profile = $facebook->api('/me'); 
+  } catch (FacebookApiException $e) {
+    error_log($e);
+    $user = null;
+  }
+}
+
+$signed_request = $facebook->getSignedRequest();
+
+// Return you the Page like status
+$like_status = $signed_request["page"]["liked"];
+if($like_status)
+{
+	$this->session->set_flashdata('like','yes');
+}
+?>
 <html>
 <head>
 <link href="http://www.webdigi.co.uk/css/fb.css" rel="stylesheet" type="text/css" />
 <style>
 html,body{padding:0px;margin:0px}
 .input-xlarge{width:150px;border-radius: 5px;border: 1px solid white;}
-.control{margin-bottom:20px;}
+.control{margin-bottom:12px;}
 .data_label{float:left;width:65px;color:white;font-family:arial;font-weight:bold;}
 .control_data{float:left;width:100px}
 .clearfix:after {
@@ -28,14 +52,22 @@ html,body{padding:0px;margin:0px}
 }
 </style>
 </head>
-<body>
-<div style="background:url('../images/background.jpg')no-repeat;width:810px;height:100%;" id="info_box_centered_container">
-	 <div align="left" class="info_box_middle">
-	<div style="background:url('../images/form_bg.png')no-repeat;width:259;height:242px;float:right;margin-right: 40px;margin-top: 115px;s">
+<div style="background:url('../images/background_canvas.jpg')no-repeat;width:788px;height:97%;" id="info_box_centered_container">
+	 <?php
+	 if($like_status)
+		{ }
+	else {
+	 ?>
+	 <div align="right" style="background:url('../images/like-png.png')no-repeat;float: right;width: 298px;height: 56px;margin-left: 466px;margin-top: 0px;" id="div_like"></div>
+	<?php
+	}
+	?>	
+	<div align="left" class="info_box_middle">
+	<div style="background:url('../images/form_bg.png')no-repeat;width:259;height:242px;float:right;margin-right: 40px;margin-top: 72px;">
 		<div style="padding:20px;">
 			<span style="font-family:arial;font-weight:bold;color:#f3b700;">REGISTER NOW :</span>
 			<div style="background:url('../images/divider.png')no-repeat;width: 228px;height: 7px;margin: 10px 0px;"></div>
-			<form action="<?php echo base_url(); ?>user/submit_canvas_datauser/submit_canvas_data" id="ContactForm" name="ContactForm" method="post">
+			<form action="<?php echo base_url(); ?>user/submit_canvas_data" id="ContactForm" name="ContactForm" method="post">
 			<div class="control">
 				<label class="data_label">Name : </label>
 				<div class="control_data">
@@ -54,8 +86,9 @@ html,body{padding:0px;margin:0px}
 				<label class="data_label">Email : </label>
 				<div class="control_data">
 					<input type="text" class="input-xlarge" id="email" name="email">
+					
 				</div>
-				
+				<div class="clearfix"></div>
 			</div>
 			<div style="font-family:arial;float:right;background:url('../images/btn.png')no-repeat;width: 45px;padding: 5px 18px;cursor:pointer" id="submit_canvas_data" onclick="submit_form();">Submit</div>
 			</form>
@@ -63,9 +96,19 @@ html,body{padding:0px;margin:0px}
 	</div>
 	</div>
 </div>
-</body>
+
+
+
+
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+function submitAJAXForm() 
+{
+//var a = window.document.getElementById("name").value;
+
+}
+</script>
 
 <script>
 /* var name = $('#name').val(); 
@@ -148,4 +191,11 @@ required = ["name", "email","phone"];
 	   }
 	});
 	
+</script>
+
+<script>
+function submit_form()
+{
+
+}
 </script>

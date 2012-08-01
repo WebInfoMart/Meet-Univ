@@ -804,12 +804,19 @@ class Frontmodel extends CI_Model
 	
 	function submit_canvas_data()
 	{
+		$ret = 0;
 		$canvas_insert_clause = array(
 		'fullname'=>$this->input->post('name'),
 		'email'=>$this->input->post('email'),
 		'user_type'=> "fb_canvas"
 		);
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('email',$this->input->post('email'));
+		$query = $this->db->get();
 		//'canvas_phone'=>$this->input->post('phone')
+		if($query->num_rows() < 1)
+		{
 		if($this->db->insert('users',$canvas_insert_clause))
 		{
 			$user_id = $this->db->insert_id();
@@ -817,18 +824,21 @@ class Frontmodel extends CI_Model
 			$canvas_user_profile_clause = array(
 			'user_id'=>$user_id,
 			'mob_no'=>$this->input->post('phone'),
-			'full_name'=>$this->input->post('name')
+			'full_name'=>$this->input->post('name'),
+			'email_as_lead'=>$this->input->post('email')
 			);
 			
 			$this->db->insert('user_profiles',$canvas_user_profile_clause);
 		}
 		if($this->db->affected_rows() > 0)
 		{
-			return 1;
+			$ret = 1;
+		}
 		}
 		else{
-		return 0;
+			$ret = 0;
 		}
+		return $ret;
 	}
 	
 }

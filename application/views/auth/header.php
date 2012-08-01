@@ -31,6 +31,7 @@ if ($user) {
   }
 }
 if ($user) {
+$this->session->set_userdata('login_by_fb','1');
 /****************************************** 
  * Logout Link for Facebook and MU site   *
  ******************************************/
@@ -79,10 +80,11 @@ if ($user) {
   );
   if($user_profile['name']!='' && $user_profile['name']!=NULL)
   {
+  $email = $user_profile['email'];
   $data['fb_user_id'] = $this->users->facebook_insert($fbdata);
   $user_id = $data['fb_user_id'];
   if($data['fb_user_id']!=''){
-  $data['fb_user_profile_insert'] = $this->users->facebook_profile_insert($user_id,$fb_gender);}
+  $data['fb_user_profile_insert'] = $this->users->facebook_profile_insert($user_id,$fb_gender,$email);}
   $attachment = array('message' => $user_profile['name'].' has joined Meet Universities.',
  'link' => 'http://meetuniversities.com/register');
  $sendMessage = $facebook->api('/me/feed/','post',$attachment);
@@ -126,6 +128,7 @@ if ($user) {
 				//'redirect_uri'      => $base['url'],
             ));
 	$_SESSION['fb'] = '';
+	$this->session->set_userdata('login_by_fb','');
 	   }
 	  //print_r($this->session->userdata);
 	  function currentPageURL() {
@@ -165,7 +168,15 @@ $detail_of_event = $event_details;
 if(empty($keyword_content)) { $keyword_content="higher studies,  international students, upcoming events, global events, universities events, study in UK, UK scholarship, higher education, uk student visa, sponsorship, study in Canada, expenditure, Counselling."; }
 if(empty($description_content)) { $description_content="Attend Events, Study Abroad - Research, Connect & Meet Your Dream University"; }
 ?>
-
+<?php
+/* if($this->session->userdata('login_by_site')=='' && $this->session->userdata('login_by_fb')=='' && !($user))
+{
+	$this->tank_auth->logout();
+	$this->session->set_userdata('login_by_site','');
+	$this->session->set_userdata('login_by_fb','');
+	redirect('login');
+} */
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# meetuniversities: http://ogp.me/ns/fb/meetuniversities#">
