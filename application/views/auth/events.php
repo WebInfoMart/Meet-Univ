@@ -214,7 +214,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						</div>
 						<div class="float_r">
 						<?php if(!($events['event_res'])){ ?>
-						<div class="events_holder_box no_result_found_class margin_t"><h3>Sorry,NO Result Found</h3></div>
+						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
 						<?php } ?>
 						
 			<div id="event_results_filteration">
@@ -325,13 +325,13 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 												?>
 											</div>
 											<?php 
-											if($event_detail['event_id'] == 55) { ?>
-											<div class="float_r">
+											//if($event_detail['event_id'] == 55) { ?>
+											<!--<div class="float_r">
 												<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
 													<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 													<a href="<?php echo $event_link; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
-											</div>
-											<?php } ?>
+											</div>-->
+											<?php // } ?>
 											<div class="clearfix"></div>
 										</div>
 										<div>
@@ -508,7 +508,6 @@ $number_month = date('m');
 			// foreach($array_dates as $dates){
 			// echo $dates;
 			// }?>
-			<?php //echo $array_dates; ?>
 <SCRIPT LANGUAGE="JavaScript"> 
     
  function popup(id) {
@@ -568,6 +567,8 @@ function voicepopup(id) {
 	   }
 	   }) 
 }
+</script>			
+<script type="text/javascript">
 var x = new Array(<?php echo $array_dates; ?>);
 //'12/04/2012';
 			$(document).ready(function () {
@@ -690,12 +691,11 @@ function get_event_result_by_ajax()
 		});
 		if(res[2]!='0' && res[1]!='0')
 		{
-		$('.no_result_found_class').replaceWith('');
 		$('#event_results_filteration').html(res[2]);
 		}
 		else
 		{
-		$('#event_results_filteration').html('<div class="events_holder_box no_result_found_class margin_t"><h3>Sorry,NO Result Found</h3></div>');	
+		$('#event_results_filteration').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
 		}
 	  	$('#listed_currently_event').html(res[1]);
 	    $('#red_total_univ').html(res[0]);

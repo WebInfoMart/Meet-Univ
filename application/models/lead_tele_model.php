@@ -31,18 +31,16 @@ class Lead_tele_model extends CI_Model
 	{
 		$config['base_url']   = site_url('adminleads/managetelecalls');
 		$this->db->select('*');
-		$this->db->from('users');
-		$this->db->join('user_profiles','users.id=user_profiles.user_id');
-		$this->db->where(array('users.level'=>'1','users.telecaller_verified_status'=>'0'));
+		$this->db->from('lead_data');
+		$this->db->order_by('email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page']   = 20;
+		$config['per_page']   = 5;
 		$limit=$config['per_page'];
 		$offset=$start;
 		$this->db->select('*');
-		$this->db->from('users');
-		$this->db->join('user_profiles','users.id=user_profiles.user_id');
-		$this->db->where(array('users.level'=>'1','users.telecaller_verified_status'=>'0'));
+		$this->db->from('lead_data');
+		$this->db->order_by('email');
 		$this->db->limit($limit,$offset);
 		$query=$this->db->get();
 		$this->pagination->initialize($config);
@@ -52,7 +50,19 @@ class Lead_tele_model extends CI_Model
 		return 0;
 	}
 
-	
+	function lead_user_info($user_id)
+	{
+		$this->db->select('*');
+		$this->db->from('lead_data');
+		//$this->db->join('user_profiles','users.id=user_profiles.user_id');
+		$this->db->join('country','country.country_id=lead_data.home_country_id','left');
+		$this->db->where(array('lead_data.id'=>$user_id));
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		return $query->row_array();
+		else
+		return 0;
+	}
 
 }
 

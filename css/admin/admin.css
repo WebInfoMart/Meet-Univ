@@ -3,6 +3,8 @@
 .span5{width:600px}
 .span6{width:450px}
 .span8{width:960px}
+.span0{width:60px}
+.span9{width:900px}
 .admin{width:600px}
 .span11{width:550px}
 [class*="span"] {
@@ -635,3 +637,23 @@ background-color: #468847;
 			.ui-timepicker-div td { font-size: 90%; }
 
 			.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+			.edit{color: #8cc63f;}
+.label_data{float: left;width: 105px;padding-top: 5px;text-align: right;display:inline}
+.controls_data{margin-left:20px;display:inline}
+.input_text{position: relative;top: 4px;width:160px}
+.control_full{width:290px;margin-bottom:10px}
+.data{padding:20px}
+.btn_save{padding:4px 7px;background: #ffa84c; /* Old browsers */
+background: -moz-linear-gradient(left,  #ffa84c 0%, #ff7b0d 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffa84c), color-stop(100%,#ff7b0d)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #ffa84c 0%,#ff7b0d 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #ffa84c 0%,#ff7b0d 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #ffa84c 0%,#ff7b0d 100%); /* IE10+ */
+background: linear-gradient(to right,  #ffa84c 0%,#ff7b0d 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa84c', endColorstr='#ff7b0d',GradientType=1 ); /* IE6-9 */
+border:1px solid #ff7b0d;color:white}
+.inline{display:inline}
+.loading_img_set{position: absolute;
+top: 104px;
+right: 225px;}

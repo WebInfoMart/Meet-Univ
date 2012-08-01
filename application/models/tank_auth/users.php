@@ -3,6 +3,7 @@
 /**
  * Users
  *
+
  * This model represents user authentication data. It operates the following tables:
  * - user account data,
  * - user profiles
@@ -47,7 +48,6 @@ class Users extends CI_Model
 		$this->db->from('country');
 		$this->db->order_by('country_name','asc');
 		$query=$this->db->get();
-		//$query = $this->db->query("select * from country");
 		return $query->result_array();
 	 }
 	 

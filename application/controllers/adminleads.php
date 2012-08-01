@@ -43,6 +43,29 @@ class Adminleads extends CI_Controller
 	}
 	
 	}
+	
+	function fetch_user_info_for_tele()
+	{
+	  $data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+   
+	   redirect('admin/adminlogin/');
+		} else {
+		   $flag=0;
+		   $user_id=$this->input->post('id');
+		   $data['username'] = $this->tank_auth->get_username();
+		   $data['user_id'] = $this->tank_auth->get_admin_user_id();
+		   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		   $data['lead_info']=$this->lead_tele_model->lead_user_info($user_id);
+		   $data['country_res']=$this->users->fetch_country();
+		   //print_r( $data['lead_info']);
+		   $view=$this->load->view('ajaxviews/admin_engage/edit_tele_user', $data,TRUE);
+		   echo $view;
+		 }
+			
+			 
+	}
+	
 
 }
 
