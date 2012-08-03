@@ -32,6 +32,7 @@ class Lead_tele_model extends CI_Model
 		$config['base_url']   = site_url('adminleads/managetelecalls');
 		$this->db->select('*');
 		$this->db->from('lead_data');
+		$this->db->where('lead_verified','0');
 		$this->db->order_by('email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
@@ -40,6 +41,7 @@ class Lead_tele_model extends CI_Model
 		$offset=$start;
 		$this->db->select('*');
 		$this->db->from('lead_data');
+		$this->db->where('lead_verified','0');
 		$this->db->order_by('email');
 		$this->db->limit($limit,$offset);
 		$query=$this->db->get();
@@ -62,6 +64,47 @@ class Lead_tele_model extends CI_Model
 		return $query->row_array();
 		else
 		return 0;
+	}
+	
+	function fetch_state()
+	{
+		$this->db->select('*');
+		$this->db->from('state');
+		$this->db->order_by('statename','asc');
+		$query=$this->db->get();
+		//$query = $this->db->query("select * from country");
+		return $query->result_array();
+	}
+	
+	function fetch_city()
+	{
+		$this->db->select('*');
+		$this->db->from('city');
+		$this->db->order_by('cityname','asc');
+		$query=$this->db->get();
+		//$query = $this->db->query("select * from country");
+		return $query->result_array();
+	}
+	
+	function save_verified_lead_info($lead_info)
+	{
+		if($this->db->insert('verified_lead_data',$lead_info))
+		{
+			$update_lead_data = array(
+			'lead_verified'=>'1'
+			);
+			$this->db->where('id',$this->input->post('current_lead_id'));
+			$this->db->update('lead_data',$update_lead_data);
+			
+			if($this->db->affected_rows() > 0)
+			{
+				return 1;
+			}
+			else {
+				return 0;
+			}
+		}
+		
 	}
 
 }

@@ -2,11 +2,6 @@
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
  <script src="<?php echo $base; ?>js/admin/fcbkcomplete.js" type="text/javascript" charset="utf-8"></script>    
  
- 
- 
- 
- 
- 
  <div id="edit_data_<?php echo $lead_info['id']; ?>" class="data update_lead_data" style="display:none">
 			<div>
 				<div class="control_full float_l">
@@ -58,7 +53,7 @@
 						{
 						$mobile=$lead_info['phone_no1'];
 						}?>
-						<input type="text" class="input_text" name="phone" id="phone_<?php echo $lead_info['id']; ?>" value="<?php echo $mobile; ?>">
+						<input type="text" class="input_text" name="phone" id="lead_user_phone_<?php echo $lead_info['id']; ?>" value="<?php echo $mobile; ?>">
 
 					</div>
 				</div>
@@ -111,12 +106,11 @@
 					</div>
 					
 				</div>
-	
 				<div class="control_full float_l">
 					<label class="label_data">Country</label>
 					<div class="controls_data">
-						<select name="country" id="country" onchange="fetchstates('<?php echo $lead_info['id']; ?>')">
-						<option value="">country</option>
+						<select name="country" id="country_<?php echo $lead_info['id']; ?>" onchange="fetchstates('<?php echo $lead_info['id']; ?>')">
+						<option value="">Select country</option>
 					<?php	foreach($country_res as $country_result) { 
 					$selected='';
 					if($country_result['country_id']==$lead_info['home_country_id']) { 
@@ -126,41 +120,81 @@
 					<option value="<?php echo $country_result['country_id']; ?>" <?php echo $selected; ?>><?php echo $country_result['country_name']; ?></option>
 					<?php } ?>
 						</select>
-						
+					 <!--<div class="float_l span3">
+								<a rel="modal-profile" href="#" id="add_country" class="tdn">Add New Country</a>
+								</div>	-->
 					</div>
 				</div>
 				
 				<div class="control_full float_l">
 					<label class="label_data">State</label>
-					<select name="country" id="state" onchange="">
-							
+					<select name="state" id="state_<?php echo $lead_info['id']; ?>" onchange="fetchcities(<?php echo $lead_info['id']; ?>);">
+					<option> Select State </option>	
+					
+					<?php 
+					$selected_state = '';
+					foreach($state_res as $state_result)
+					{
+						if($state_result['state_id'] == $lead_info['state'])
+						{ $selected_state = 'selected'; } else { $selected_state = ''; }
+					
+					 ?>
+						<option value="<?php echo $state_result['state_id']; ?>" <?php echo $selected_state; ?>><?php echo $state_result['statename']; ?></option>
+					<?php } 
+					?>
+					
 					</select>
+					<!--<div class="float_l span3">
+										<a id="add_state" href="#" class="tdn">Add New State</a>
+										</div>-->
 				</div>
 				
 				<div class="control_full float_l">
 					<label class="label_data">City</label>
 					<div class="controls_data">
-						<select name="city" id="city">
+						<select name="city" id="city_<?php echo $lead_info['id']; ?>">
+						<option> Select City </option>
+						<?php 
+					foreach($city_res as $city_result)
+					{
+						$selected_city = '';
+						if($city_result['city_id'] == $lead_info['city'])
+						{ $selected_city = 'selected'; } else { $selected_city = ''; }
+					
+					?>
+						<option value="<?php echo $city_result['city_id']; ?>" <?php echo $selected_city; ?>><?php echo $city_result['cityname']; ?></option>
+					<?php }
+					?>
 						</select>
-					</select>
+					<!--<div class="float_l span3">
+										<a id="add_city" href="#" class="tdn">Add New City</a>
+										</div>-->
 					</div>
 				</div>
 				<div class="control_full float_l">
 					<label class="label_data">Enroll K12</label>
 					<div class="controls_data">
-						<input type="text" class="input_text" id="input01">
+						<input type="text" class="lead_tele_enroll" id="lead_tele_enroll_<?php echo $lead_info['id']; ?>">
 					</div>
 				</div>
-				<div class="control_full float_l">
+				<!--<div class="control_full float_l">
 					<label class="label_data">Interested Courses</label>
 					<div class="controls_data">
 						<input type="text" class="input_text" id="input01">
 					</div>
-				</div>
+				</div>-->
 				<div class="control_full float_l">
 					<label class="label_data">Interested Country</label>
 					<div class="controls_data">
-						<input type="text" class="input_text" id="input01">
+						<!--<input type="text" class="country_auto" id="country_auto"/>-->
+						<!--<span id="callbackResult" style="display: none;">Callback triggered!</span><br />-->
+				<select id="interested_country_<?php echo $lead_info['id']; ?>" name="interested_country_<?php echo $lead_info['id']; ?>">
+				<option value="">Select country</option>
+					<?php	foreach($country_res as $interested_country) { 
+					?>	
+					<option value="<?php echo $interested_country['country_id']; ?>"><?php echo $interested_country['country_name']; ?></option>
+					<?php } ?>
+				</select>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -168,14 +202,524 @@
 			<div class="float_r">
 			<label class="label_data">Add Notes</label>
 					
-				<textarea cols="52" rows="4"></textarea>
+				<textarea cols="52" rows="4" id="notes_<?php echo $lead_info['id']; ?>"></textarea>
 				<br/>
 				<input type="button" name="cancel" class="margin_l1 margin_t btn_save float_r cancel_update" id="cancel_data_<?php echo $lead_info['id']; ?>" value="Cancel" onclick="canceldata('<?php echo $lead_info['id']; ?>')">
-				<input type="button" name="save" class="margin_t margin_l1 btn_save float_r save" id="save_data_<?php echo $lead_info['id']; ?>" value="save">
+				<input type="button" name="<?php echo $lead_info['id']; ?>" class="margin_t margin_l1 btn_save float_r save" id="save_data_<?php echo $lead_info['id']; ?>" value="save" onclick="save_form(this);">
 				<div class="float_r margin_t ajax_loading_img_<?php echo $lead_info['id']; ?>" style="display:none;" ><img src="<?php echo $base; ?>images/ajax_loader.gif"></div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
  
+ <!-- Form for Add Country, State and City -->	
+	
+	<div class="modal-lightsout" id="add-country">
+				<div class="modal-profile" id="add-country1">
+					<h2>Add Your Place</h2>
+					<a href="#" title="Close profile window" class="modal-close-profile">
+					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" class="closeimagesize" alt="Close window"/></a>
+					<form action="" method="post" id="form_country" id="add_country_form" >
+						<p>
+							<label>Country:</label><br>
+							<input type="text" size="30" class="text" name="country_model" id="country_model" value=""> 
+							<label class="form_error"  id="country_error"></label>
+						</p>
+						<p>
+							<label>State:</label><br>
+							<input type="text" size="30" class="text" name="state_model" id="state_model" value=""> 
+							<label class="form_error"  id="state_error"></label>
+						</p>
+						<p>
+							<label>City:</label><br>
+							<input type="text" size="30" class="text" name="city_model" id="city_model" value=""> 
+							<label class="form_error"  id="city_error"></label>
+						</p>
+						<p>
+							<input type="button" class="submit" name="addcountry" id="addcountry" value="Submit">
+						</p>
+					</form>
+				</div>
+			</div>
+			
+			<div class="modal-lightsout" id="add-state">
+				<div class="modal-profile" id="add-state1">
+					<h2>Add Your Place</h2>
+					<a href="#" title="Close profile window" class="modal-close-profile">
+					<img src="<?php echo "$base$img_path/$admin"; ?>/close_model.png" class="closeimagesize" alt="Close window"/></a>
+						<form action="" method="post" id="form_state" id="add_state_form">
+						<p>
+							<label>Country:</label><br>
+						<select class="text country_select margin_zero" name="country_model1" id="country_model1" >
+										<option value="">Select Country</option>
+							<?php foreach($country_res as $country) { ?>
+										<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
+										<?php } ?>
+						</select>
+							<label class="form_error"  id="country_error1"></label>
+						
+						</p>
+							
+						<p>
+							<label>State:</label><br>
+							<input type="text" size="30" class="text" name="state_model1" id="state_model1" value=""> 
+								<label class="form_error"  id="state_error1"></label>
+						
+						</p>
+						<p>
+							<label>City:</label><br>
+							<input type="text" size="30" class="text" name="city_model1" id="city_model1" value=""> 
+								<label class="form_error"  id="city_error1"></label>
+						
+						</p>
+						<p>
+							<input type="button" class="submit" name="addstate" id="addstate" value="Submit">
+						</p>
+					</form>
+					
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
  
+ <script>
+ var current_lead_id = <?php echo $lead_info['id']; ?>;
+ function save_form(control){
+ var form_id = control.name;
+ var fullname = $('#lead_full_name_'+form_id).val();
+ var email = $('#lead_user_email_'+form_id).val();
+ var phone = $('#lead_user_phone_'+form_id).val();
+ var country = $('#country_'+form_id).val();
+ var state = $('#state_'+form_id).val();
+ var city = $('#city_'+form_id).val();
+ var enroll = $('#lead_tele_enroll_'+form_id).val();
+ var notes = $('#notes_'+form_id).val();
+ var year = $('#year_'+form_id).val();
+ var month = $('#month_'+form_id).val();
+ var date = $('#date_'+form_id).val();
+ var interested_cont = $('#interested_country_'+form_id).val();
+
+ $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>adminleads/save_verified_leads",
+	   async:false,
+	   data: 'current_lead_id='+current_lead_id+'&interested_cont='+interested_cont+'&fullname='+fullname+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&notes='+notes+'&year='+year+'&month='+month+'&date='+date,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   $("#edit_data_"+form_id).hide(1000);
+					$('#edit_data_'+form_id).replaceWith('');
+					$('#data_'+form_id).show();
+		$("#content_msg").css("display","block");
+	   }
+});
+ //var interested_country = $('#interested_country').val();
+ //alert(interested_country);
+ }
+ //for fancy box
+$.fn.center = function () {
+        this.css("position","absolute");
+        this.css("top","100px");
+        this.css("left","330px");
+        return this;
+      }
  
+    $(".modal-profile").center();
+	$(".modal-profile1").center();
+    $('.modal-lightsout').css("height", jQuery(document).height()); 
+ 
+    $('#add_country').click(function() {
+		 $('#add-country').fadeIn("slow");
+        $('#add-country1').fadeTo("slow", .9);
+    });
+	$('#add_state').click(function() {
+		//remove city and state form
+		 $('#add-state').fadeIn("slow");
+        $('#add-state1').fadeTo("slow", .9);
+    });
+	$('#add_city').click(function() {
+		//remove city and state form
+		$('#add-city').fadeIn("slow");
+        $('#add-city1').fadeTo("slow", .9);
+    });
+	$('#add_univ_admin').click(function() {
+		//remove city and state form
+		$('#add-univ').fadeIn("slow");
+        $('#add-univ1').fadeTo("slow", .9);
+    });
+    $('a.modal-close-profile').click(function() {
+			//remove country and state form
+        $('.modal-profile').fadeOut("slow");
+        $('.modal-lightsout').fadeOut("slow");
+    });
+	$('a.modal-close-profile').click(function() {
+			//remove country and state form
+        $('.modal-profile1').fadeOut("slow");
+        $('.modal-lightsout1').fadeOut("slow");
+    });
+	
+	
+	$('#addcountry').click(function(){
+	var country=$("#country_model").val();
+	var state=$("#state_model").val();
+	var city=$("#city_model").val();
+	
+	var flag=0;
+	if(country=='' || country==null)
+	{
+	 $('#country_error').html("Please enter the country name"); 
+	 $('#country_model').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	$('#country_error').html("") 
+	 $('#country_model').removeClass('error');
+	  flag=flag+1;
+	}
+	if(state=='' || state==null)
+	{
+	$('#state_error').html("Please enter the state name"); 
+	$('#state_model').addClass('error');
+	flag=0;
+	
+	}
+	else
+	{
+	$('#state_error').html(""); 
+	$('#state_model').removeClass('error');
+	 flag=flag+1;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error').html("Please enter the city"); 
+	$('#city_model').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#city_error').html(""); 
+	$('#city_model').removeClass('error');
+	flag=flag+1;
+	}
+	if(flag==3)
+	{
+	 var  countrystatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/check_unique_field/country_name/country",
+	   async:false,
+	   data: 'field='+country,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   //alert(msg);
+	   if(msg=='1')
+		{
+		$('#country_error').html('Country Already Exist');
+		$('#country_model').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#country_model').html('');
+		$('#country_error').addClass('');
+		countrystatus=1;
+		}
+	   }
+	   });
+	 if(countrystatus)
+	 {
+	$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_country_ajax",
+	   async:false,
+	   data: 'country_model='+country+'&state_model='+state+'&city_model='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   //alert(msg);
+	    var place=msg.split('##');
+		fetchcountry(place[0]);
+		fetchstates(place[1]);
+		fetchcities(place[1],place[2]);
+		$('.modal-profile').fadeOut("slow");
+        $('.modal-lightsout').fadeOut("slow");
+		$('#add_country_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+
+function fetchcountry(cid)
+{
+$.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin/country_list_ajax",
+   data: 'country_id='+cid,
+   cache: false,
+   async:false,
+   success: function(msg)
+   {
+   // $('#state').attr('disabled', false);
+	$('#country').html(msg);
+   }
+   });
+}
+
+function fetchstates(sid)
+{
+var cont_id = "country_"+sid;
+var stid=sid;
+var cid;
+if(sid=='-1')
+{
+stid='0';
+cid=$("#"+cont_id).val();
+}
+else
+{
+var cid=$("#"+cont_id).val();
+}
+$.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin/state_list_ajax/",
+   data: 'country_id='+cid+'&sel_state_id='+stid,
+   cache: false,
+   success: function(msg)
+   {
+    if(sid=='-1')
+	{
+	$('#state_model2').attr('disabled', false);
+	$('#state_model2').html(msg);
+	}
+	else
+	{
+    $('#state_'+sid).attr('disabled', false);
+	$('#state_'+sid).html(msg);
+
+	}
+   }
+   });
+ }
+
+
+
+function fetchcities(state_id,cityid)
+{
+var stateID = "state_"+state_id;
+var cityID = "city_"+state_id;
+
+state_id=$("#"+stateID).val();
+ $.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin/city_list_ajax/",
+   data: 'state_id='+state_id+'&sel_city_id='+cityid,
+   cache: false,
+   success: function(msg)
+   {
+    $('#'+cityID).attr('disabled', false);
+	$('#'+cityID).html(msg);
+   }
+   });  
+}
+
+$('#addstate').click(function(){
+	var country=$("#country_model1 option:selected").val();
+	var state=$("#state_model1").val();
+	var city=$("#city_model1").val();
+	var flag=0;
+	if(country=='' || country==null || country=='0')
+	{
+	 $('#country_error1').html("Please select the country"); 
+	 $('#country_model1').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	$('#country_error1').html("");
+	 $('#country_model1').removeClass('error');
+	  flag=flag+1;
+	}
+	if(state=='' || state==null)
+	{
+	$('#state_error1').html("Please enter the state name"); 
+	$('#state_model1').addClass('error');
+	flag=1;
+	
+	}
+	else
+	{
+	$('#state_error1').html(""); 
+	$('#state_model1').removeClass('error');
+	  flag=flag+1;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error1').html("Please enter the city"); 
+	$('#city_model1').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#city_error1').html(""); 
+	$('#city_model1').removeClass('error');
+	 flag=flag+1;
+	}
+	if(flag==3)
+	{
+	 var  statestatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/state_check",
+	   async:false,
+	   data: 'state_model1='+state+'&country_model1='+country,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    if(msg=='1')
+		{
+		$('#state_error1').html('State Already Exist in Selected Country');
+		$('#state_model1').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#state_error1').html('');
+		$('#state_model1').addClass('');
+		statestatus=1;
+		}
+	   }
+	   });
+	 if(statestatus)
+	 {
+	 $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_state_ajax",
+	   async:false,
+	   data: 'country_model1='+country+'&state_model1='+state+'&city_model1='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0]);
+		fetchstates(place[1]);
+		fetchcities(place[1],place[2]);
+		$('.modal-profile').fadeOut("slow");
+        $('.modal-lightsout').fadeOut("slow");
+		$('#add_state_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+
+
+
+
+$('#addcity').click(function(){
+	var country=$("#country_model2 option:selected").val();
+	var state=$("#state_model2 option:selected").val();
+	var city=$("#city_model2").val();
+	var flag=0;
+	if(country=='' || country==null || country=='0')
+	{
+	 $('#country_error2').html("Please select the country"); 
+	 $('#country_model2').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	$('#country_error2').html("");
+	 $('#country_model2').removeClass('error');
+	  flag=flag+1;
+	}
+	if(state=='' || state==null || state=='0')
+	{
+	$('#state_error2').html("Please select the state "); 
+	$('#state_model2').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#state_error2').html(""); 
+	$('#state_model2').removeClass('error');
+	 flag=flag+1;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error2').html("Please enter the city"); 
+	$('#city_model2').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#city_error2').html(""); 
+	$('#city_model2').removeClass('error');
+	flag=flag+1;
+	}
+	if(flag==3)
+	{
+	 var  citystatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/city_check",
+	   async:false,
+	   data: 'state_model2='+state+'&country_model2='+country+'&city_model2='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    if(msg=='1')
+		{
+		$('#city_error2').html('CIty Already Exist in Selected State');
+		$('#city_model2').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#city_error2').html('');
+		$('#city_model2').addClass('');
+		citystatus=1;
+		}
+	   }
+	   });
+	 if(citystatus)
+	 {
+	 $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_city_ajax",
+	   async:false,
+	   data: 'country_model2='+country+'&state_model2='+state+'&city_model2='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0]);
+		fetchstates(place[1]);
+		fetchcities(place[1],place[2]);
+		$('.modal-profile').fadeOut("slow");
+        $('.modal-lightsout').fadeOut("slow");
+		$('#add_city_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+ </script>

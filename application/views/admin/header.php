@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/tipsy.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/admin.css">
 	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/jquery.autocomplete.css">
+	<link rel="stylesheet" href="<?php echo "$base$admin_css"; ?>/jquery.multiSelect.css">
 	
 	<!--<link rel="stylesheet" href="<?php //echo "$base$css_path"?>/bootstrap.css">-->
 
@@ -44,6 +45,7 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.multiSelect.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery-admin-validation.js"></script>
 	
 </head>

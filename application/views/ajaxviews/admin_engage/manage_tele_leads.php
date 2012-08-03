@@ -1,3 +1,4 @@
+
 	<?php 
 	$sno=1;
 	foreach($teleleads as $teleleadsres) { ?>	
@@ -19,14 +20,14 @@
 			<div class="span1 float_l">
 				<?php
 if($teleleadsres['lead_source']=='site_user'){ 
-$lead_sorce="Site User"; }
-else if($lead_info['lead_sorce']=='fb_login'){ $lead_sorce="FB Login(Site User)"; }
-else if($lead_info['lead_sorce']=='android_user'){ $lead_sorce="Mobile App"; }
-else if($lead_info['lead_sorce']=='event_user'){ $lead_sorce="Event Registration"; }
-else if($lead_info['lead_sorce']=='fb_canvas'){ $lead_sorce="FB Application"; }
-else if($lead_info['lead_sorce']=='college_request') { $lead_sorce="Request College"; }
-else{$lead_sorce="Other";};
-echo $lead_sorce;
+$lead_source="Site User"; }
+else if($teleleadsres['lead_source']=='fb_login'){ $lead_source="FB Login(Site User)"; }
+else if($teleleadsres['lead_source']=='android_user'){ $lead_source="Mobile App"; }
+else if($teleleadsres['lead_source']=='event_user'){ $lead_source="Event Registration"; }
+else if($teleleadsres['lead_source']=='fb_canvas'){ $lead_source="FB Application"; }
+else if($teleleadsres['lead_source']=='college_request') { $lead_source="Request College"; }
+else{$lead_source="Other";};
+echo $lead_source;
 ?>
 			</div>
 			<div class="span3 float_l">
