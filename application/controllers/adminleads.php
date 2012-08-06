@@ -71,6 +71,7 @@ class Adminleads extends CI_Controller
 	function save_verified_leads()
 	{
 		$dob = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('date');
+		
 		$lead_info = array(
 		'v_fullname'=>$this->input->post('fullname'),
 		'v_email'=>$this->input->post('email'),
@@ -81,9 +82,22 @@ class Adminleads extends CI_Controller
 		'v_city'=>$this->input->post('city'),
 		'v_enroll_key'=>$this->input->post('enroll'),
 		'v_notes'=>$this->input->post('notes'),
-		'v_interested_country'=>$this->input->post('interested_cont')
+		'v_interested_country'=>$this->input->post('interested_cont'),
+		'v_user_type'=>$this->input->post('lead_source')
 		);
-		$data['submit_verified_lead_info'] = $this->lead_tele_model->save_verified_lead_info($lead_info);
+		
+		$update_old_lead_info = array(
+		'fullname'=>$this->input->post('fullname'),
+		'email'=>$this->input->post('email'),
+		'phone_no1'=>$this->input->post('phone'),
+		'dob'=>$dob,
+		'home_country_id'=>$this->input->post('country'),
+		'state'=>$this->input->post('state'),
+		'city'=>$this->input->post('city'),
+		'lead_verified'=>'1',
+		'studying_country_id'=>$this->input->post('interested_cont')
+		);
+		$data['submit_verified_lead_info'] = $this->lead_tele_model->save_verified_lead_info($lead_info,$update_old_lead_info);
 		if($data['submit_verified_lead_info'] == 1)
 		{
 			echo "1";

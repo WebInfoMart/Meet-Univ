@@ -86,15 +86,15 @@ class Lead_tele_model extends CI_Model
 		return $query->result_array();
 	}
 	
-	function save_verified_lead_info($lead_info)
+	function save_verified_lead_info($lead_info,$update_old_lead_info)
 	{
 		if($this->db->insert('verified_lead_data',$lead_info))
 		{
-			$update_lead_data = array(
+			/* $update_lead_data = array(
 			'lead_verified'=>'1'
-			);
+			); */
 			$this->db->where('id',$this->input->post('current_lead_id'));
-			$this->db->update('lead_data',$update_lead_data);
+			$this->db->update('lead_data',$update_old_lead_info);
 			
 			if($this->db->affected_rows() > 0)
 			{

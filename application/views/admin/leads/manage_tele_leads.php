@@ -5,6 +5,12 @@
 	left: 220px;
 	width: 82%;
 	}
+#content_verify_message {
+	overflow: hidden;
+	padding: 0 20px;
+	left: 220px;
+	width: 82%;
+	}	
 .message.info {
 	border: 1px solid #bbdbe0;
 	background: #ecf9ff url(../../images/admin/info.gif) 12px 12px no-repeat;
@@ -25,52 +31,57 @@
 <div id="content_msg" style="display:none;">
 <div class="message info"><p>Student has been verified !!!</p></div> 
 </div>
+<div id="content_verify_message" class="content_verify_msg" style="display:none;">
+<div class="message info"><p>No Verify has selected!!!</p></div> 
+</div>
 	
 	<div id="content" style="margin-left: 200px;">
 		
 			<?php if($teleleads!='0') { ?>
 			<!-- .breadcrumb ends -->
+	<div class="grid10 margin-delta margin_t">
 		<div>
-			<div class="span0 float_l">
+			<div class="grid1 float_l">
 				<b>Sr.no</b>
 			</div>
-			<div class="span1 float_l">
-				<b>FullName</b>
+			<div class="span14 float_l">
+				<b class="blue">FullName</b>
 			</div>
-			<div class="span3 float_l">
-				<b>Email Verfied</b>
+			<div class="span14 float_l">
+				<b class="green">Email Verfied</b>
 			</div>
-			<div class="span1 float_l">
-				<b>Source</b>
+			<div class="span14 float_l">
+				<b class="blue">Source</b>
 			</div>
-			<div class="span3 float_l">
-				<b>Phone Verified</b>
+			<div class="span14 float_l">
+				<b class="green">Phone Verified</b>
 			</div>
-			<div class="span1 float_l">
+			<div class="span14 float_l">
 				
 			</div>
 			<div class="clearfix"></div>
 		</div>
+		<div class="dotted_line"></div>
 		<div id="content_data">
 		<?php 
 	$sno=1;
 	foreach($teleleads as $teleleadsres) { ?>	
 		<div id="data_data_<?php echo $teleleadsres['id']; ?>" class="old_data old_data_paging">
-			<div class="span0 float_l">
+			<div class="grid1 float_l">
 					<?php echo $sno++ ;?>
 			</div>
-			<div class="span1 float_l">
+			<div class="span14 float_l" id="lead_fname_<?php echo $teleleadsres['id']; ?>">
 				<?php echo $teleleadsres['fullname']; ?>
 			</div>
-			<div class="span3 float_l">
-				<?php echo $teleleadsres['email']; ?>(
+			<div class="span14 float_l" >
+				<span id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>(
 <?php if($teleleadsres['email_verified']) { echo '<span style="color:green;font-size:10px;">Verified</span>' ;}
- else { echo '<span style="color:red;font-size:10px;">Not Verified</span>'; } ?>
+ else { echo '<span style="color:red;font-size:10px;" id="span_not_verified_'.$teleleadsres['id'].'">Not Verified</span>'; } ?>
  )
 			</div>
 			
 			
-			<div class="span1 float_l">
+			<div class="span14 float_l">
 				<?php
 if($teleleadsres['lead_source']=='site_user'){ 
 $lead_source="Site User"; }
@@ -83,17 +94,17 @@ else{$lead_source="Other";};
 echo $lead_source;
 ?>
 			</div>
-			<div class="span3 float_l">
+			<div class="span14 float_l">
 				<?php 
 if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) {
 echo "<span style='color:blue'>Not Available</span>(<span style='color:red;font-size:10px;'>Not Verified</span>)";
 }
 else {
-echo $teleleadsres['phone_no1']; ?>(
+echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</span>"; ?>(
 <?php if($teleleadsres['phone_verified']) { echo '<span style="color:green;font-size:10px;">Verified</span>' ;}
- else { echo '<span style="color:red;font-size:10px;"> Not Verified</span>'; } ?> )<?php }?>
+ else { echo '<span style="color:red;font-size:10px;" id="span_not_verified_phone_'.$teleleadsres['id'].'"> Not Verified</span>'; } ?> )<?php }?>
 			</div>
-			<div class="span1 float_l">
+			<div class="span14 float_l">
 				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 			</div>
@@ -111,8 +122,38 @@ echo $teleleadsres['phone_no1']; ?>(
 </div>
 <?php	}?>	
 	</div>
+	</div>
 		
 	<script type="text/javascript">
+	var main_url = "<?php echo $base ?>";
+	function verify_lead(id)
+	{
+		var dynamic_lead_id = id.name;
+		var verify_image_yes = main_url+'images/admin/success.gif';
+		var verify_image_no = main_url+'images/admin/error.gif';
+		if(id.id == "check_verify_lead_email_"+dynamic_lead_id)
+		{
+			if($("#check_verify_lead_email_"+dynamic_lead_id).is(':checked'))
+			{
+			$("#verify_img_email_"+dynamic_lead_id).html('<img src="'+verify_image_yes+'" />');
+			}
+			else{
+			$("#verify_img_email_"+dynamic_lead_id).html('<img src="'+verify_image_no+'" />');
+			}
+		}
+		else if(id.id == "check_verify_lead_phone_"+dynamic_lead_id)
+		{
+			if($("#check_verify_lead_phone_"+dynamic_lead_id).is(':checked'))
+			{
+			$("#verify_img_phone_"+dynamic_lead_id).html('<img src="'+verify_image_yes+'" />');
+			}
+			else{
+			$("#verify_img_phone_"+dynamic_lead_id).html('<img src="'+verify_image_no+'" />');
+			}
+		}
+	}
+	
+	
 	function edit_user_lead(id)
 	{
 	//alert(id);
@@ -137,7 +178,7 @@ echo $teleleadsres['phone_no1']; ?>(
 		  $('#ajax_loading_img_'+id).hide();
 		  $('#data_data_'+id).after(msg);
 		  $('#edit_data_'+id).slideDown(500);
-		  $("#edit_data_"+id).css("width","589").css("padding-top","10px").css("border-color", "#000").css("border-width", "1px").css('border-style','solid');
+		  //$("#edit_data_"+id).css("width","589").css("padding-top","10px").css("border-color", "#000").css("border-width", "1px").css('border-style','solid');
 		  $('#data_'+id).hide();
 				 // $(this).after(msg);
           //  $("#xx").html(msg);
