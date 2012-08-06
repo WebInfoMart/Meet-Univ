@@ -15,7 +15,12 @@ $flag=1;
 			<li><a href="<?php echo $base; ?>admin"><strong><img src="<?php echo "$base$admin_img" ?>/nav/dashboard.png" alt="" /> Dashboard</strong></a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" /> Pages</a></li>
 			<?php if($admin_user_level==6) { ?>
-			<li><a href="<?php echo $base; ?>adminleads/managetelecalls"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" />Manage Leads</a></li>
+			<li>
+			<a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Manage Leads</a>
+			
+			<ul>
+			<li><a href="<?php echo $base; ?>adminleads/managetelecalls"><img src="" alt="" />Unverified Leads</a></li>
+			<li><a href="<?php echo $base; ?>adminleads/manage_verified_telecalls"><img src="" alt="" />Verified Leads</a></li></ul></li>
 			<?php } ?>
 		<!--	<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/media.png" alt="" /> Media</a>
 				<ul>
