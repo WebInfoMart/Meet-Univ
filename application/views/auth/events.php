@@ -692,13 +692,18 @@ function get_event_result_by_ajax()
 		if(res[2]!='0' && res[1]!='0')
 		{
 		$('#event_results_filteration').html(res[2]);
+		$('.events_holder_box').replaceWith('');
 		}
 		else
 		{
+		if($('.events_holder_box h3').html()!='Sorry,NO Result Found')
+		{
 		$('#event_results_filteration').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
+		}
 		}
 	  	$('#listed_currently_event').html(res[1]);
 	    $('#red_total_univ').html(res[0]);
+		
 	   }
 	   })
 }	

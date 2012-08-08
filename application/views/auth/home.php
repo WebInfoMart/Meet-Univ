@@ -414,7 +414,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</form>
 								
 								</li>
-								<?php } } ?>
+								<?php } } else {
+								echo "<h4>No Recent Event.</h4>";
+								}?>
 								
 							</ul>
 						</div>
