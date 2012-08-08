@@ -53,3 +53,8 @@ echo '<span style="color:green;font-size:10px;">Verified</span>' ;
 		<div id="<?php echo $teleleadsres['v_id']; ?>"></div>
 	<?php }
 ?>
+<div id="pagination" class="table_pagination right paging-margin float_r" style="margin-right:50px;">
+            <?php echo $this->pagination->create_links();?>
+           
+  </div>
+  <input type="hidden" id="lastviewdlead" value="0">	

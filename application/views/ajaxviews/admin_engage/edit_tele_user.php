@@ -4,6 +4,7 @@
  
  <div id="edit_data_<?php echo $lead_info['id']; ?>" class="open_box data update_lead_data" style="display:none">
  <div class="open_form_holder">
+ <span id="error_message" style="color:red;margin-left: 294px;">  </span>
 			<div>
 				<div class="span15 float_l">
 					<div class="control-group">
@@ -342,6 +343,13 @@
 	$("#date_"+form_id).css("border-color","red");
  }
  else{
+ if(phone_digit<10 || phone_digit>10)
+ {
+	$("#lead_user_phone_"+form_id).css("border-color","red");
+	$('#error_message').html("Phone number should be 10 digit");
+	$('#error_message').css("display","block");
+ }
+ else{
 if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
 {
 $.ajax({
@@ -392,15 +400,52 @@ if(ask_confirm)
 	   }
 });
 }
+else{
+$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>adminleads/save_verified_leads",
+	   async:false,
+	   data: 'current_lead_id='+current_lead_id+'&interested_cont='+interested_cont+'&fullname='+fullname+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&notes='+notes+'&year='+year+'&month='+month+'&date='+date+"&lead_source="+lead_source,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   alert(msg);
+		if($("#check_verify_lead_email_"+current_lead_id).is(':checked'))
+		{
+		$("#span_not_verified_"+current_lead_id).css("color","green");
+		$("#span_not_verified_"+current_lead_id).html('Verified');
+		}
+		if($("#check_verify_lead_phone_"+current_lead_id).is(':checked'))
+		{
+		$("#span_not_verified_phone_"+current_lead_id).css("color","green");
+		$("#span_not_verified_phone_"+current_lead_id).html('Verified');
+		}
+		
+	   $("#edit_data_"+form_id).hide(1000);
+	   $('#edit_data_'+form_id).replaceWith('');
+	   $('#data_'+form_id).show();
+	   
+		$("#lead_fname_"+current_lead_id).html(fullname);
+		$("#lead_phone_"+current_lead_id).html(phone);
+		$("#lead_email_"+current_lead_id).html(email);
+		
+		$("#error_message").css("display","none");
+		$("#content_msg").css("display","block");
+		
+	   }
+});
+}
 }
 });
 }
 else{
-$("#content_verify_message").css("display","block");
+$('#error_message').html("Student Not Verified");
+	$('#error_message').css("display","block");
 }
 }
  //var interested_country = $('#interested_country').val();
  //alert(interested_country);
+ }
  }
  //for fancy box
 $.fn.center = function () {

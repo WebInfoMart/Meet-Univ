@@ -81,3 +81,8 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 		<div id="<?php echo $teleleadsres['id']; ?>"></div>
 	<?php $cnt_rows_verify_table++; }
 ?>
+<div id="pagination" class="table_pagination right paging-margin float_r" style="margin-right:50px;">
+            <?php echo $this->pagination->create_links();?>
+           
+  </div>
+  <input type="hidden" id="lastviewdlead" value="0">	
