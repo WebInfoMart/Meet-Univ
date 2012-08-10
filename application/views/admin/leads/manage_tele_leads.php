@@ -50,19 +50,19 @@
 			<div class="grid1 float_l">
 				<b>Sr.no</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				<b class="blue">FullName</b>
 			</div>
 			<div class="span14 float_l">
 				<b class="green">Email Verfied</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				<b class="blue">Source</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				<b class="green">Phone Verified</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				
 			</div>
 			<div class="clearfix"></div>
@@ -80,20 +80,20 @@
 			<div class="grid1 float_l">
 					<?php echo $sno++ ;?>
 			</div>
-			<div class="span14 float_l" id="lead_fname_<?php echo $teleleadsres['id']; ?>">
+			<div class="span1 float_l" id="lead_fname_<?php echo $teleleadsres['id']; ?>">
 				<?php echo $teleleadsres['fullname']; ?>
 			</div>
 			<div class="span14 float_l" >
-				<span id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>(
+				<span id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>
 <?php if($teleleadsres['email_verified']) {
 ?>
-<span id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
-<img src="<?php echo base_url(); ?>images/admin/success.gif"/>
+<span class="float_r" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<img class="float_r" src="<?php echo base_url(); ?>images/admin/success.gif"/>
 </span>
 <?php } else { ?>
 
-<span id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
- <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
+<span class="float_r" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+ <img class="float_r" src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
  <?php }  
  //if($all_verify_email_phone[$cnt_rows_verify_table]['v_email'] == $)
  $check_lead_email = $teleleadsres['email'];
@@ -105,11 +105,11 @@
 	$temp_var_for_verify_email_phone++;
  }
  ?>
- )
+ 
 			</div>
 			
 			
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				<?php
 if($teleleadsres['lead_source']=='site_user'){ 
 $lead_source="Site User"; }
@@ -122,7 +122,7 @@ else{$lead_source="Other";};
 echo $lead_source;
 ?>
 			</div>
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				<?php 
 if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) { ?>
 <span style='color:blue'>Not Available</span><span style='color:red;font-size:10px;'>
@@ -134,11 +134,11 @@ else {
 echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</span>"; ?>
 <?php if($teleleadsres['phone_verified']) { ?>
 <span id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
- <img src="<?php echo base_url(); ?>images/admin/success.gif"/> </span>
+ <img src="<?php echo base_url(); ?>images/admin/success.gif" class="margin-r2"/> </span>
 <?php }
  else { ?>
- <span id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
- <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
+ <span class="float_r" id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
+ <img src="<?php echo base_url(); ?>images/admin/error.gif" class="margin-r2"/> </span>
  <?php } ?><?php }
  if($temp_var_for_verify_email_phone < 1)
  {
@@ -152,7 +152,7 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
  }
  ?>
 			</div>
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 			

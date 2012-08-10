@@ -198,6 +198,39 @@ class Adminleads extends CI_Controller
 		$data['drop_record'] = $this->lead_tele_model->drop_record_from_lead($id);
 		echo $data['drop_record'];
 	}
+	
+	function permotional_panel()
+	{
+	$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+   
+	   redirect('admin/adminlogin/');
+		} else {
+	 $this->load->view('admin/engage/promotional',$data);
+	 }
+	}
+	
+	function sms_capaign()
+	{
+	$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+   
+	   redirect('admin/adminlogin/');
+		} else {
+	 $this->load->view('admin/engage/sms_capaign',$data);
+	 }
+	}
+	
+	function counsellor()
+	{
+	$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+   
+	   redirect('admin/adminlogin/');
+		} else {
+	 $this->load->view('admin/engage/counsellor',$data);
+	 }
+	}
 
 }
 

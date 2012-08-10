@@ -1,4 +1,4 @@
-.span1{width:130px}
+.span1{width:130px;word-wrap: break-word;}
 .span3{width:250px}
 .span5{width:600px}
 .span6{width:450px}
@@ -15,6 +15,7 @@ margin-left: 20px;
 .float_l{float:left}
 .float_r{float:right}
 /******************************margin**************************/
+.margin-r2{margin-right: 30px;}
 .margin{margin:10px;}
 .margin_t{margin-top:10px;}
 .margin_l1{margin-left:10px;}
@@ -690,7 +691,7 @@ right: 225px;}
   width: 780px;
 }
 .grid11 {
-  width: 860px;
+  width: 1010px;
 }
 .grid12, .container {
   width: 940px;
@@ -705,13 +706,13 @@ right: 225px;}
 .input-xlarge-data {
   width: 318px;
 }
-.span14{width: 130px;
+.span14{width:202px;
 word-wrap: break-word;}
 .span15{width: 320px;margin-left: 0px;}
 .blue{color:#0071bc}
 .green{color:#8cc63f}
 .dotted_line{margin: 10px 0px;height:6px;background:url(/images/admin/images/dotted.png) repeat-x;}
-.open_box{height: 408px;background:url(/images/admin/images/open_box.png) no-repeat;width:725px;}
+.open_box{height: 454px;background:url(/images/admin/images/open_box.png) no-repeat;width:725px;}
 .open_form_holder{padding: 35px 20px 10px;}
 .label-control{float: left;
 width: 100px;
@@ -776,3 +777,4 @@ width: 220px;
 background-color: white;
 }
 .text-area{height:71px}
+img{vertical-align: middle;}
