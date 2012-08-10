@@ -183,6 +183,32 @@
 							</div>
 						</div>
 				</div>
+				<div class="span15 float_l">
+					<div class="control-group">
+							<label class="label-control" for="input01">Lead Status</label>
+							<div class="controls-input">
+							<select id="lead_status_<?php echo $lead_info['id']; ?>" name="lead_status_<?php echo $lead_info['id']; ?>" class="select_width">
+							<option value="none">select</option>
+							<option value="valid" <?php if($lead_info['lead_status']=='valid') { echo "selected"; } ?> >Valid</option>
+							<option value="india_only" <?php if($lead_info['lead_status']=='india_only') { echo "selected"; } ?>>India Only</option>
+							<option value="paused" <?php if($lead_info['lead_status']=='paused') { echo "selected"; } ?>>Paused</option>
+							</select>
+							</div>
+					</div>
+				</div>
+				<div class="span15 float_l">
+					<div class="control-group">
+							<label class="label-control" for="input01">Next Action</label>
+							<div class="controls-input select_width">
+							<select id="next_action_<?php echo $lead_info['id']; ?>" name="next_action_<?php echo $lead_info['id']; ?>" class="select_width">
+							<option value="none">select</option>
+							<option value="counsellor" <?php if($lead_info['next_action']=='counsellor') { echo "selected"; } ?> >Counsellor</option>
+							<option value="paused" <?php if($lead_info['next_action']=='paused') { echo "selected"; } ?>>Paused</option>
+							<option value="hot" <?php if($lead_info['next_action']=='hot') { echo "selected"; } ?>>Hot</option>
+							</select>
+							</div>
+					</div>
+				</div>
 				
 				
 				
@@ -335,6 +361,9 @@
  var date = $('#date_'+form_id).val();
  var interested_cont = $('#interested_country_'+form_id).val();
  var lead_source = $("#lead_source_"+form_id).val();
+ var lead_status = $("#lead_status"+form_id).val();
+ var next_action = $("#next_action"+form_id).val();
+ 
  if(year==0 || month==0 || date==0)
  {
 	if(year==0)
@@ -385,7 +414,6 @@
  //if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
 else 
 {
-
 $('#error_message').html("");
 $('#error_message').css("display","none");
 var email_stauts='';
@@ -429,7 +457,9 @@ year:year,
 month:month,
 date:date,
 lead_source:lead_source,
-lead_verfied:lead_verfied
+lead_verfied:lead_verfied,
+lead_status:lead_status,
+next_action:next_action
  };
 $.ajax({
 	   type: "POST",

@@ -134,7 +134,9 @@ class Adminleads extends CI_Controller
 		'v_enroll_key'=>$this->input->post('enroll'),
 		'v_notes'=>$this->input->post('notes'),
 		'v_interested_country'=>$this->input->post('interested_cont'),
-		'v_user_type'=>$this->input->post('lead_source')
+		'v_user_type'=>$this->input->post('lead_source'),
+		'v_lead_status'=>$this->input->post('lead_status'),
+		'v_next_action'=>$this->input->post('next_action')
 		);
 		
 		$update_old_lead_info = array(
@@ -146,7 +148,9 @@ class Adminleads extends CI_Controller
 		'state'=>$this->input->post('state'),
 		'city'=>$this->input->post('city'),
 		'lead_verified'=>$this->input->post('lead_verfied'),
-		'studying_country_id'=>$this->input->post('interested_cont')
+		'studying_country_id'=>$this->input->post('interested_cont'),
+		'lead_status'=>$this->input->post('lead_status'),
+		'next_action'=>$this->input->post('next_action')
 		);
 		$data['submit_verified_lead_info'] = $this->lead_tele_model->save_verified_lead_info($lead_info,$update_old_lead_info);
 		if($data['submit_verified_lead_info'] == 1)
