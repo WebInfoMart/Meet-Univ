@@ -186,8 +186,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										{
 										foreach($city_name_having_event as $city_name_have_event)
 										{
+										$city_name_have_event_list=str_replace(' ','_',$city_name_have_event['cityname']);
 										?>
-											<li class="listitem_city" href="/<?php echo $city_name_have_event['cityname']; ?>"><label class="checkbox">
+											<li class="listitem_city" href="/<?php echo $city_name_have_event_list; ?>"><label class="checkbox">
 		<input type="checkbox" class="search_chkbox" <?php if(in_array($city_name_have_event['city_id'],$events['filter_city']))
 												{
 												echo "checked";

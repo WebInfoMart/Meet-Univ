@@ -1561,9 +1561,15 @@ class Users extends CI_Model
 	{
 		$this->db->select("*");
 		$this->db->from('events');
+		//upcoming event code
+		// $condition=array('event_univ_id'=>$univ_id,
+						// 'event_type'=>'univ_event',
+						// 'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d"));
+		
 		$condition=array('event_univ_id'=>$univ_id,
-						'event_type'=>'univ_event',
-						'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d"));
+						'event_type'=>'univ_event');
+						
+						
 		$this->db->join('country','country.country_id=events.event_country_id','left');
 		$this->db->join('city','city.city_id=events.event_city_id','left');
 		

@@ -12,7 +12,13 @@ class Frontmodel extends CI_Model
 	function fetch_events_for_calendar()
 	{
 		//$sql = "select * from events where STR_TO_DATE(event_date_time, '%d %M %Y')>=".date('Y-m-d');
-		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events where STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."' order by dt asc";
+		
+		//event of greater than now
+		// $sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events where STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."' order by dt asc";
+		
+		//all event
+		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events order by dt asc";
+		
 		$results=$this->db->query($sql);
 		if($results->num_rows()>0)
 		{
@@ -45,7 +51,13 @@ class Frontmodel extends CI_Model
 		$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		$this->db->limit(3);*/
 		//$date=date('Y-m-d')
-		$where='and events.featured_home_event="1" and STR_TO_DATE(event_date_time, "%d %M %Y")>="'.date('Y-m-d').'"';
+		
+		//event of greater than now
+		
+		//$where='and events.featured_home_event="1" and STR_TO_DATE(event_date_time, "%d %M %Y")>="'.date('Y-m-d').'"';
+		
+		$where='and events.featured_home_event="1"';
+		
 		$join=" JOIN  `university` ON events.event_univ_id = university.univ_id LEFT JOIN country ON country.country_id = events.event_country_id LEFT JOIN  state ON state.state_id = events.event_state_id LEFT JOIN city ON city.city_id = events.event_city_id";
 		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT 3";
 		$query=$this->db->query($sql);
@@ -544,7 +556,11 @@ class Frontmodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('events');
 		$this->db->join('university', 'events.event_univ_id=university.univ_id');
-		$this->db->where(array('STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		
+		//by sumit 
+		// event of greater than now
+		//$this->db->where(array('STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		
 		$this->db->order_by('event_date_time','desc');
 		$this->db->limit(5);
 		$query = $this->db->get();
@@ -701,8 +717,13 @@ class Frontmodel extends CI_Model
 	  $this->db->select('*');
 	  $this->db->from('city');
 	  $this->db->join('events', 'events.event_city_id = city.city_id'); 
-	  $this->db->where(array('event_type'=>'univ_event',
-	  'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+	  
+	  //event of upcoming date
+	  // $this->db->where(array('event_type'=>'univ_event',
+	  // 'STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")
+	  // ));
+	  
+	  $this->db->where(array('event_type'=>'univ_event'
 	  ));
 	  $this->db->group_by('events.event_city_id');
 	  $this->db->order_by('cityname','asc');
@@ -717,7 +738,11 @@ class Frontmodel extends CI_Model
 		$this->db->join('city','events.event_city_id=city.city_id');
 		$this->db->join('state','events.event_state_id=state.state_id');
 		$this->db->join('country','events.event_country_id=country.country_id');
-		$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		//event of ujpcoming date
+		//$this->db->where(array('featured_home_event' =>'1','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
+		
+		$this->db->where(array('featured_home_event' =>'1'));
+		
 		$this->db->where('event_univ_id',$univ_id);
 		$this->db->limit(5);
 		$query = $this->db->get();

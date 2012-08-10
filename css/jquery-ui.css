@@ -63,6 +63,9 @@
 	margin: 0;
 	display:block;
 	float: left;
+	height:150px;
+	overflow-y:scroll;
+	/*by sumit munjal*/
 }
 .ui-menu .ui-menu {
 	margin-top: -3px;

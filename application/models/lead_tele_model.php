@@ -36,7 +36,7 @@ class Lead_tele_model extends CI_Model
 		$this->db->order_by('email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page']   = 5;
+		$config['per_page']   = 50;
 		$limit=$config['per_page'];
 		$offset=$start;
 		$this->db->select('*');
@@ -61,7 +61,7 @@ class Lead_tele_model extends CI_Model
 		$this->db->order_by('v_email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page']   = 2;
+		$config['per_page']   = 50;
 		$limit=$config['per_page'];
 		$offset=$start;
 		$this->db->select('*');
@@ -127,22 +127,20 @@ class Lead_tele_model extends CI_Model
 	
 	function save_verified_lead_info($lead_info,$update_old_lead_info)
 	{
-		if($this->db->insert('verified_lead_data',$lead_info))
+		if($this->input->post('lead_verfied'))
 		{
-			/* $update_lead_data = array(
-			'lead_verified'=>'1'
-			); */
-			$this->db->where('id',$this->input->post('current_lead_id'));
-			$this->db->update('lead_data',$update_old_lead_info);
-			
-			if($this->db->affected_rows() > 0)
-			{
-				return 1;
-			}
-			else {
-				return 0;
-			}
+		//$this->db->insert('verified_lead_data',$lead_info);
+		//$this->db->where('id',$this->input->post('current_lead_id'));
+		//$this->db->update('lead_data',$update_old_lead_info);
+		return 1;
 		}
+		else
+		{
+		//$this->db->where('id',$this->input->post('current_lead_id'));
+		//$this->db->update('lead_data',$update_old_lead_info);
+		return 0;
+		}
+		
 		
 	}
 	

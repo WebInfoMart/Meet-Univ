@@ -39,7 +39,7 @@
 		
 			<?php if($verify_teleleads!='0') { ?>
 			<!-- .breadcrumb ends -->
-	<div class="grid10 margin-delta margin_t">
+	<div class="grid11 margin-delta margin_t">
 		<div>
 			<div class="grid1 float_l">
 				<b>Sr.no</b>

@@ -705,7 +705,8 @@ right: 225px;}
 .input-xlarge-data {
   width: 318px;
 }
-.span14{width:120px}
+.span14{width: 130px;
+word-wrap: break-word;}
 .span15{width: 320px;margin-left: 0px;}
 .blue{color:#0071bc}
 .green{color:#8cc63f}

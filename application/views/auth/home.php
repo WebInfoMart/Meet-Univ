@@ -544,7 +544,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 							<div class="clearfix"></div>
 							</div>
-							<div>
+							<!--<div>
 								<div class="home_padding">
 									<div class="btn-group">
 										<button class="btn status_bg number_bar"><?php echo $total_poste_event_count?$total_poste_event_count:'0'; ?></button>
@@ -559,7 +559,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</div>
 									<div class="clearfix"></div>
 								</div>
-							</div>
+							</div>-->
 						</div>
 					</div>
 					<div class="clearfix"></div>

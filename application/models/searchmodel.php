@@ -553,7 +553,10 @@ function show_all_college_paging($current_url)
 						$this->db->group_by("university.univ_id"); 
 						$this->db->order_by("STR_TO_DATE(event_date_time,`'%d %m %Y'')");
 						$results = $this->db->get();*/
+						
 						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= '".date('Y-m-d')."' ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT ".$offset.",".$univ_data['limit_res']."";
+						
+						
 						$results=$this->db->query($sql);
 						$univ_data['per_page_res']=$results->num_rows();
 						
@@ -872,7 +875,11 @@ function show_all_college_paging($current_url)
 			{
 			$where=" and events.event_date_time LIKE '%$month%' ";
 			}
-			$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
+			//event of upcoming month
+			
+			//$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
+			$where.="";
+			
 			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc";
 			
 			$results=$this->db->query($sql);
@@ -994,7 +1001,9 @@ function show_all_college_paging($current_url)
 				$city_ids=implode(",",$city_id);
 				$where.=" and events.event_city_id IN(".$city_ids.")";
 			}
-			$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
+			//upcoming event code
+			//$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
+			$where.="";
 			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT ".$offset.",".$events_data['limit_res']."";
 			
 			$results=$this->db->query($sql);

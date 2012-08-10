@@ -14,8 +14,16 @@
 			</div>
 			<div class="span14 float_l" >
 				<span id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>(
-<?php if($teleleadsres['email_verified']) { echo '<span style="color:green;font-size:10px;">Verified</span>' ;}
- else { echo '<span style="color:red;font-size:10px;" id="span_not_verified_'.$teleleadsres['id'].'">Not Verified</span>'; } 
+<?php if($teleleadsres['email_verified']) {
+?>
+<span id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<img src="<?php echo base_url(); ?>images/admin/success.gif"/>
+</span>
+<?php } else { ?>
+
+<span id="span_not_verified_phone_<?php echo $teleleadsres['id']; ?>">
+ <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
+ <?php }  
  //if($all_verify_email_phone[$cnt_rows_verify_table]['v_email'] == $)
  $check_lead_email = $teleleadsres['email'];
  $email_check = $this->lead_tele_model->check_lead_email_in_verify_table($check_lead_email);
@@ -45,13 +53,22 @@ echo $lead_source;
 			</div>
 			<div class="span14 float_l">
 				<?php 
-if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) {
-echo "<span style='color:blue'>Not Available</span>(<span style='color:red;font-size:10px;'>Not Verified</span>)";
+if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) { ?>
+<span style='color:blue'>Not Available</span><span style='color:red;font-size:10px;'>
+<img src="<?php echo base_url(); ?>images/admin/success.gif"/>
+</span>
+<?php
 }
 else {
-echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</span>"; ?>(
-<?php if($teleleadsres['phone_verified']) { echo '<span style="color:green;font-size:10px;">Verified</span>' ;}
- else { echo '<span style="color:red;font-size:10px;" id="span_not_verified_phone_'.$teleleadsres['id'].'"> Not Verified</span>'; } ?> )<?php }
+echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</span>"; ?>
+<?php if($teleleadsres['phone_verified']) { ?>
+<span id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
+ <img src="<?php echo base_url(); ?>images/admin/success.gif"/> </span>
+<?php }
+ else { ?>
+ <span id="span_not_verified_phone_<?php echo $teleleadsres['id']; ?>">
+ <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
+ <?php } ?><?php }
  if($temp_var_for_verify_email_phone < 1)
  {
 	$check_lead_phone = $teleleadsres['phone_no1'];
@@ -60,7 +77,7 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
  {
  $record_verified_true = 1;
  }
- else { echo "Phone Lead"; } 
+ else { echo "<br />Phone Lead"; } 
  }
  ?>
 			</div>

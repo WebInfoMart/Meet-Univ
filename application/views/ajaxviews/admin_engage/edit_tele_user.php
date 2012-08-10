@@ -10,7 +10,7 @@
 					<div class="control-group">
 							<label class="label-control" for="input01">Full Name: </label>
 							<div class="controls-input">
-							<input type="text" class="input-large"  name="full_name" id="lead_full_name_<?php echo $lead_info['id']; ?>" value=" <?php echo $lead_info['fullname']; ?>">
+							<input type="text" class="input-large"  name="full_name" id="lead_full_name_<?php echo $lead_info['id']; ?>" value="<?php echo $lead_info['fullname']; ?>">
 							</div>
 						</div>
 				</div>
@@ -114,7 +114,7 @@
 					<div class="control-group">
 							<label class="label-control" for="input01">Country: </label>
 							<div class="controls-input select_width">
-							<select name="country" id="country_<?php echo $lead_info['id']; ?>" onchange="fetchstates('<?php echo $lead_info['id']; ?>')" class="select_width">
+							<select name="country" id="country_<?php echo $lead_info['id']; ?>" onchange="fetchstates('<?php echo $lead_info['id']; ?>','-1')" class="select_width">
 								<option value="">Select country</option>
 					<?php	foreach($country_res as $country_result) { 
 					$selected='';
@@ -135,20 +135,10 @@
 					<div class="control-group">
 							<label class="label-control" for="input01">State: </label>
 							<div class="controls-input select_width">
-							<select name="state" id="state_<?php echo $lead_info['id']; ?>" onchange="fetchcities(<?php echo $lead_info['id']; ?>);" class="select_width">
+			<select name="state" id="state_<?php echo $lead_info['id']; ?>" onchange="fetchcities('<?php echo $lead_info['id']; ?>',this.value,'0');" class="select_width">
 								<option> Select State </option>	
 					
-					<?php 
-					$selected_state = '';
-					foreach($state_res as $state_result)
-					{
-						if($state_result['state_id'] == $lead_info['state'])
-						{ $selected_state = 'selected'; } else { $selected_state = ''; }
 					
-					 ?>
-						<option value="<?php echo $state_result['state_id']; ?>" <?php echo $selected_state; ?>><?php echo $state_result['statename']; ?></option>
-					<?php } 
-					?>
 					
 					</select>
 							</div>
@@ -161,18 +151,8 @@
 							<label class="label-control" for="input01">City: </label>
 							<div class="controls-input select_width">
 							<select name="city" id="city_<?php echo $lead_info['id']; ?>" class="select_width">
-								<option> Select City </option>
-						<?php 
-					foreach($city_res as $city_result)
-					{
-						$selected_city = '';
-						if($city_result['city_id'] == $lead_info['city'])
-						{ $selected_city = 'selected'; } else { $selected_city = ''; }
-					
-					?>
-						<option value="<?php echo $city_result['city_id']; ?>" <?php echo $selected_city; ?>><?php echo $city_result['cityname']; ?></option>
-					<?php }
-					?>
+								<option value=""> Select City </option>
+
 					
 					</select>
 							</div>
@@ -319,39 +299,96 @@
 			
  
  <script>
- var current_lead_id = <?php echo $lead_info['id']; ?>;
+ 
+ var current_lead_id = "<?php echo $lead_info['id']; ?>";
+ var home_country = "<?php echo $lead_info['home_country_id']; ?>";
+ var selstateid="<?php echo $lead_info['state']; ?>";
+ var selcityid="<?php echo $lead_info['city']; ?>";
+ 
+ if(home_country !=''&& home_country!='0' && home_country!=null)
+ {
+  fetchstates(current_lead_id,selstateid);
+ }
+ if(selstateid !=''&& selstateid!='0' && selstateid!=null)
+ {
+  fetchcities(current_lead_id,selstateid,selcityid);
+ }
+ 
  function save_form(control){
  var form_id = control.name;
   //alert($("#lead_full_name_"+current_lead_id).val());		
  var fullname = $('#lead_full_name_'+form_id).val();
+ fullname=fullname.trim();
  var email = $('#lead_user_email_'+form_id).val();
+ email=email.trim();
  var phone = $('#lead_user_phone_'+form_id).val();
+ phone=phone.trim();
+ var phone_digit = phone.length;
  var country = $('#country_'+form_id).val();
  var state = $('#state_'+form_id).val();
  var city = $('#city_'+form_id).val();
  var enroll = $('#lead_tele_enroll_'+form_id).val();
  var notes = $('#notes_'+form_id).val();
+ notes=notes.trim();
  var year = $('#year_'+form_id).val();
  var month = $('#month_'+form_id).val();
  var date = $('#date_'+form_id).val();
  var interested_cont = $('#interested_country_'+form_id).val();
  var lead_source = $("#lead_source_"+form_id).val();
- if(year==0 && month!=0 && date==0 || year!=0 && month==0 && date==0 || year==0 && month==0 && date!=0 || year==0 && month!=0 && date!=0 || year!=0 && month==0 && date!=0 || year!=0 && month!=0 && date==0)
+ if(year==0 || month==0 || date==0)
  {
+	if(year==0)
+	{
 	$("#year_"+form_id).css("border-color","red");
+	}
+	else
+	{
+	$("#year_"+form_id).css("border-color","#ccc");
+	}
+	if(month==0)
+	{
 	$("#month_"+form_id).css("border-color","red");
+	}
+	else
+	{
+	$("#month_"+form_id).css("border-color","#ccc");
+	}
+	if(date==0)
+	{
 	$("#date_"+form_id).css("border-color","red");
+	}
+	else
+	{
+	$("#date_"+form_id).css("border-color","#ccc");
+	}
+	if(year==0 && month==0 && date==0)
+	{
+	$("#year_"+form_id).css("border-color","#ccc");
+	$("#month_"+form_id).css("border-color","#ccc");
+	$("#date_"+form_id).css("border-color","#ccc");
+	}
+	
  }
- else{
- if(phone_digit<10 || phone_digit>10)
+ else
+ {
+ $("#year_"+form_id).css("border-color","#ccc");
+	$("#month_"+form_id).css("border-color","#ccc");
+	$("#date_"+form_id).css("border-color","#ccc");
+ }
+ 
+ if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
  {
 	$("#lead_user_phone_"+form_id).css("border-color","red");
 	$('#error_message').html("Phone number should be 10 digit");
 	$('#error_message').css("display","block");
  }
- else{
-if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
+ //if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
+else 
 {
+
+$('#error_message').html("");
+$('#error_message').css("display","none");
+var email_stauts='';
 $.ajax({
 type: "POST",
 url: "<?php echo $base; ?>adminleads/check_email_exist",
@@ -360,57 +397,81 @@ data: 'email='+email+'&phone='+phone,
 cache: false,
 success: function(msg)
 {
-//alert(msg);
-if(msg == '3') { var ask_confirm=confirm("Do you want to replace on both existing email and phone number?"); }
-else if(msg == '1') { var ask_confirm=confirm("Do you want to replace on existing email?"); }
-else if(msg == '2') { var ask_confirm=confirm("Do you want to replace on existing phone number?"); }
-if(ask_confirm)
-{
- $.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>adminleads/save_verified_leads",
-	   async:false,
-	   data: 'current_lead_id='+current_lead_id+'&interested_cont='+interested_cont+'&fullname='+fullname+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&notes='+notes+'&year='+year+'&month='+month+'&date='+date+"&lead_source="+lead_source,
-	   cache: false,
-	   success: function(msg)
-	   {
-	   
-		if($("#check_verify_lead_email_"+current_lead_id).is(':checked'))
-		{
-		$("#span_not_verified_"+current_lead_id).css("color","green");
-		$("#span_not_verified_"+current_lead_id).html('Verified');
-		}
-		if($("#check_verify_lead_phone_"+current_lead_id).is(':checked'))
-		{
-		$("#span_not_verified_phone_"+current_lead_id).css("color","green");
-		$("#span_not_verified_phone_"+current_lead_id).html('Verified');
-		}
-		
-	   $("#edit_data_"+form_id).hide(1000);
-	   $('#edit_data_'+form_id).replaceWith('');
-	   $('#data_'+form_id).show();
-	   
-		$("#lead_fname_"+current_lead_id).html(fullname);
-		$("#lead_phone_"+current_lead_id).html(phone);
-		$("#lead_email_"+current_lead_id).html(email);
-		
-		$("#content_verify_message").css("display","none");
-		$("#content_msg").css("display","block");
-		
-	   }
-});
+email_stauts=msg;
 }
-else{
+});
+email_stauts=parseInt(email_stauts);
+if(email_stauts) {
+alert("For This Email or Phone No. Lead is already verified.");
+}
+else
+{
+if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
+{
+var lead_verfied=1;
+}
+else
+{
+lead_verfied=0;
+}
+var data={
+current_lead_id :current_lead_id,
+interested_cont :interested_cont,
+fullname: fullname,
+email : email,
+phone:phone,
+country:country,
+state:state,
+city :city,
+enroll:enroll,
+notes:notes,
+year:year,
+month:month,
+date:date,
+lead_source:lead_source,
+lead_verfied:lead_verfied
+ };
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>adminleads/save_verified_leads",
 	   async:false,
-	   data: 'current_lead_id='+current_lead_id+'&interested_cont='+interested_cont+'&fullname='+fullname+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&notes='+notes+'&year='+year+'&month='+month+'&date='+date+"&lead_source="+lead_source,
+	   data: data,
 	   cache: false,
 	   success: function(msg)
 	   {
-	   alert(msg);
+	   if(msg=='0')
+	   {
+	    $("#lead_fname_"+current_lead_id).html(fullname);
+		$("#lead_phone_"+current_lead_id).html(phone);
+		$("#lead_email_"+current_lead_id).html(email);
+		$("#content_msg").css("display","block");
+		$('#content_msg p').html("Student has been verified !!!");
+		$("#content_msg").hide(4000);
+		
+		$('#data_'+current_lead_id).show();	
+	   }
+	   else
+	   {
+	    $("#lead_fname_"+current_lead_id).html(fullname);
+		$("#lead_phone_"+current_lead_id).html(phone);
+		$("#lead_email_"+current_lead_id).html(email);
 		if($("#check_verify_lead_email_"+current_lead_id).is(':checked'))
+		{
+		 $("#span_verified_email_"+current_lead_id+ ' img').attr('src','<?php echo $base; ?>images/admin/success.gif');
+		 
+		}
+		if($("#check_verify_lead_phone_"+current_lead_id).is(':checked'))
+		{
+		 $("#span_verified_phone_"+current_lead_id+ ' img').attr('src','<?php echo $base; ?>images/admin/success.gif');
+		}
+		 $("#content_msg").css("display","block");
+		 $('#content_msg p').html("Lead Verified successfully");
+		 // $("#content_msg").hide(1000);
+		
+	   }
+		 $("#edit_data_"+form_id).hide(1000);
+	     $('#edit_data_'+form_id).replaceWith('');
+		/*if($("#check_verify_lead_email_"+current_lead_id).is(':checked'))
 		{
 		$("#span_not_verified_"+current_lead_id).css("color","green");
 		$("#span_not_verified_"+current_lead_id).html('Verified');
@@ -425,27 +486,16 @@ $.ajax({
 	   $('#edit_data_'+form_id).replaceWith('');
 	   $('#data_'+form_id).show();
 	   
-		$("#lead_fname_"+current_lead_id).html(fullname);
-		$("#lead_phone_"+current_lead_id).html(phone);
-		$("#lead_email_"+current_lead_id).html(email);
 		
-		$("#error_message").css("display","none");
-		$("#content_msg").css("display","block");
+		$("#content_verify_message").css("display","none");
+		$("#content_msg").css("display","block");*/
 		
 	   }
 });
 }
 }
-});
-}
-else{
-$('#error_message').html("Student Not Verified");
-	$('#error_message').css("display","block");
-}
-}
  //var interested_country = $('#interested_country').val();
  //alert(interested_country);
- }
  }
  //for fancy box
 $.fn.center = function () {
@@ -598,59 +648,37 @@ $.ajax({
    });
 }
 
-function fetchstates(sid)
+function fetchstates(cid,ssid)
 {
-var cont_id = "country_"+sid;
-var stid=sid;
-var cid;
-if(sid=='-1')
-{
-stid='0';
-cid=$("#"+cont_id).val();
-}
-else
-{
-var cid=$("#"+cont_id).val();
-}
+
+var scid=$('#country_'+cid+' option:selected').val();
 $.ajax({
    type: "POST",
    url: "<?php echo $base; ?>admin/state_list_ajax/",
-   data: 'country_id='+cid+'&sel_state_id='+stid,
+   data: 'country_id='+scid+'&sel_state_id='+ssid,
    cache: false,
    success: function(msg)
    {
-    if(sid=='-1')
-	{
-	$('#state_model2').attr('disabled', false);
-	$('#state_model2').html(msg);
+    $('#state_'+cid).attr('disabled', false);
+	$('#state_'+cid).html(msg);
+	$('#city_'+cid).html('<option value="">Select City </option>');
 	}
-	else
-	{
-    $('#state_'+sid).attr('disabled', false);
-	$('#state_'+sid).html(msg);
-
-	}
-   }
    });
  }
 
 
 
-function fetchcities(state_id,cityid)
+function fetchcities(curcid,state_id,cityid)
 {
-var stateID = "state_"+state_id;
-var cityID = "city_"+state_id;
-
-state_id=$("#"+stateID).val();
- $.ajax({
+$.ajax({
    type: "POST",
    url: "<?php echo $base; ?>admin/city_list_ajax/",
    data: 'state_id='+state_id+'&sel_city_id='+cityid,
    cache: false,
    success: function(msg)
    {
-    $('#'+cityID).attr('disabled', false);
-	$('#'+cityID).html(msg);
+    $('#city_'+curcid).attr('disabled', false);
+	$('#city_'+curcid).html(msg);
    }
    });  
 }

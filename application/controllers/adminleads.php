@@ -145,7 +145,7 @@ class Adminleads extends CI_Controller
 		'home_country_id'=>$this->input->post('country'),
 		'state'=>$this->input->post('state'),
 		'city'=>$this->input->post('city'),
-		'lead_verified'=>'1',
+		'lead_verified'=>$this->input->post('lead_verfied'),
 		'studying_country_id'=>$this->input->post('interested_cont')
 		);
 		$data['submit_verified_lead_info'] = $this->lead_tele_model->save_verified_lead_info($lead_info,$update_old_lead_info);
