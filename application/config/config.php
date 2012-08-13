@@ -267,7 +267,7 @@ $config['sess_time_to_update']	= 300;
 |
 */
 $config['cookie_prefix']	= "";
-$config['cookie_domain']	= ".meetuniversities.info/";
+$config['cookie_domain']	= ".meetuniversities.info";
 $config['cookie_path']		= "/";
 $config['cookie_secure']	= FALSE;
 
@@ -365,7 +365,7 @@ $config['img_path'] = 'images';
 $config['admin_css_path'] ='css/admin';
 $config['admin_img']='images/admin';
 $config['js']='js';
-$config['domain']='.meetuniversities.info/';
+$config['domain']='.meetuniversities.info';
 $config['mailtype'] = 'html';
 //$config['protocol'] = 'sendmail';
 $config['protocol'] = 'mail';
