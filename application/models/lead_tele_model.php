@@ -254,6 +254,39 @@ class Lead_tele_model extends CI_Model
 		}
 		
 	}
+	
+	function fetch_states_by_country_ajax($country_id)
+	{
+		$this->db->select('*');
+		$this->db->from('state');
+		$this->db->where('country_id',$country_id);
+		$query = $this->db->get();
+		if($query->num_rows()>0)
+		{
+		 return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	  
+	}
+	
+	function fetch_cities_by_state_ajax($state_id)
+	{
+		$this->db->select('*');
+		$this->db->from('city');
+		$this->db->where('state_id',$state_id);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		 return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
 
 }
 

@@ -1,10 +1,12 @@
-<link rel="stylesheet" href="<?php echo $base; ?>css/admin/autosuggest.css" type="text/css" media="screen" title="Test Stylesheet" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo $base; ?>css/admin/autocomplete.css" type="text/css" media="screen"  charset="utf-8" />
+<link rel="stylesheet" href="<?php echo $base; ?>css/admin/jquery-ui-1.8.custom.css" type="text/css" media="screen"  charset="utf-8" />
+
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
- <script src="<?php echo $base; ?>js/admin/fcbkcomplete.js" type="text/javascript" charset="utf-8"></script>    
+<script src="<?php echo $base; ?>js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>    
  
  <div id="edit_data_<?php echo $lead_info['id']; ?>" class="open_box data update_lead_data" style="display:none">
- <div class="open_form_holder">
- <span id="error_message" style="color:red;margin-left: 294px;">  </span>
+  <div class="open_form_holder">
+  <span id="error_message" style="color:red;margin-left: 294px;">  </span>
 			<div>
 				<div class="span15 float_l">
 					<div class="control-group">
@@ -12,7 +14,7 @@
 							<div class="controls-input">
 							<input type="text" class="input-large"  name="full_name" id="lead_full_name_<?php echo $lead_info['id']; ?>" value="<?php echo $lead_info['fullname']; ?>">
 							</div>
-						</div>
+					</div>
 				</div>
 				<div class="mail_set float_l">
 					<div class="control-group">
@@ -116,7 +118,8 @@
 							<div class="controls-input select_width">
 							<select name="country" id="country_<?php echo $lead_info['id']; ?>" onchange="fetchstates('<?php echo $lead_info['id']; ?>','-1')" class="select_width">
 								<option value="">Select country</option>
-					<?php	foreach($country_res as $country_result) { 
+					<?php
+					foreach($country_res as $country_result) { 
 					$selected='';
 					if($country_result['country_id']==$lead_info['home_country_id']) { 
 					$selected='selected';
@@ -135,9 +138,24 @@
 					<div class="control-group">
 							<label class="label-control" for="input01">State: </label>
 							<div class="controls-input select_width">
-			<select name="state" id="state_<?php echo $lead_info['id']; ?>" onchange="fetchcities('<?php echo $lead_info['id']; ?>',this.value,'0');" class="select_width">
-								<option> Select State </option>	
-					
+					<select name="state" id="state_<?php echo $lead_info['id']; ?>" onchange="fetchcities('<?php echo $lead_info['id']; ?>',this.value,'0');" class="select_width">
+								<option value=''> Select State </option>	
+					<?php
+					$state_list=$this->lead_tele_model->fetch_states_by_country_ajax($lead_info['home_country_id']);
+					if($state_list!='0')
+					{ 
+					foreach($state_list as $state_list_ajax){
+					$selected = '';
+					if($state_list_ajax['state_id']==$lead_info['state'])
+					{
+					$selected='selected';
+					}
+					?>
+					<option value="<?php echo $state_list_ajax['state_id']; ?>" <?php echo $selected; ?> ><?php echo $state_list_ajax['statename']; ?></option>
+					<?php
+					}
+					}
+					?>		
 					
 					
 					</select>
@@ -153,7 +171,22 @@
 							<select name="city" id="city_<?php echo $lead_info['id']; ?>" class="select_width">
 								<option value=""> Select City </option>
 
-					
+					<?php
+					$city_list=$this->lead_tele_model->fetch_cities_by_state_ajax($lead_info['state']);
+					if($city_list!='0')
+					{ 
+					foreach($city_list as $city_list_ajax){
+					$selected = '';
+					if($city_list_ajax['city_id']==$lead_info['city'])
+					{
+					$selected='selected';
+					}
+					?>
+					<option value="<?php echo $city_list_ajax['city_id']; ?>" <?php echo $selected; ?> ><?php echo $city_list_ajax['cityname']; ?></option>
+					<?php
+					}
+					}
+					?>
 					</select>
 							</div>
 						</div>
@@ -165,14 +198,14 @@
 					<div class="control-group">
 							<label class="label-control" for="input01">Enroll K12: </label>
 							<div class="controls-input">
-							<input type="text" class="input-large" id="lead_tele_enroll_<?php echo $lead_info['id']; ?>">
+			<input type="text" class="input-large" id="lead_tele_enroll_<?php echo $lead_info['id']; ?>" value="<?php echo  $lead_info['enroll_key']; ?>">
 							</div>
 						</div>
 				</div>
 				<div class="span15 float_l">
 					<div class="control-group">
 							<label class="label-control" for="input01">Interested Country: </label>
-							<div class="controls-input select_width">
+							<!--<div class="controls-input select_width">
 							<select id="interested_country_<?php echo $lead_info['id']; ?>" name="interested_country_<?php echo $lead_info['id']; ?>" class="select_width">
 					<option value="">Select country</option>
 					<?php	foreach($country_res as $interested_country) { 
@@ -180,6 +213,10 @@
 					<option value="<?php echo $interested_country['country_id']; ?>"><?php echo $interested_country['country_name']; ?></option>
 					<?php } ?>
 				</select>
+							</div>
+							-->
+							<div id="intrested_countries" class="ui-helper-clearfix">
+							<input id="auto_intrested_countries" type="text">
 							</div>
 						</div>
 				</div>
@@ -325,20 +362,10 @@
 			
  
  <script>
- 
- var current_lead_id = "<?php echo $lead_info['id']; ?>";
+var current_lead_id = "<?php echo $lead_info['id']; ?>";
  var home_country = "<?php echo $lead_info['home_country_id']; ?>";
  var selstateid="<?php echo $lead_info['state']; ?>";
  var selcityid="<?php echo $lead_info['city']; ?>";
- 
- if(home_country !=''&& home_country!='0' && home_country!=null)
- {
-  fetchstates(current_lead_id,selstateid);
- }
- if(selstateid !=''&& selstateid!='0' && selstateid!=null)
- {
-  fetchcities(current_lead_id,selstateid,selcityid);
- }
  
  function save_form(control){
  var form_id = control.name;
@@ -361,8 +388,8 @@
  var date = $('#date_'+form_id).val();
  var interested_cont = $('#interested_country_'+form_id).val();
  var lead_source = $("#lead_source_"+form_id).val();
- var lead_status = $("#lead_status"+form_id).val();
- var next_action = $("#next_action"+form_id).val();
+ var lead_status = $("#lead_status_"+form_id).val();
+ var next_action = $("#next_action_"+form_id).val();
  
  if(year==0 || month==0 || date==0)
  {
@@ -436,10 +463,20 @@ else
 {
 if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
 {
+if($("#check_verify_lead_email_"+form_id).is(':checked'))
+{
+var email_verified=1;
+}
+else
+{
+var phone_verified=1;
+}
 var lead_verfied=1;
 }
 else
 {
+var email_verified=0;
+var phone_verified=0;
 lead_verfied=0;
 }
 var data={
@@ -457,6 +494,8 @@ year:year,
 month:month,
 date:date,
 lead_source:lead_source,
+phone_verified:phone_verified,
+email_verified:email_verified,
 lead_verfied:lead_verfied,
 lead_status:lead_status,
 next_action:next_action
@@ -475,7 +514,7 @@ $.ajax({
 		$("#lead_phone_"+current_lead_id).html(phone);
 		$("#lead_email_"+current_lead_id).html(email);
 		$("#content_msg").css("display","block");
-		$('#content_msg p').html("Student has been verified !!!");
+		$('#content_msg p').html("Lead has been saved !!!");
 		$("#content_msg").hide(4000);
 		
 		$('#data_'+current_lead_id).show();	
@@ -681,6 +720,10 @@ $.ajax({
 function fetchstates(cid,ssid)
 {
 
+if(ssid=='' || ssid==null)
+{
+ssid=0;
+}
 var scid=$('#country_'+cid+' option:selected').val();
 $.ajax({
    type: "POST",
@@ -700,6 +743,11 @@ $.ajax({
 
 function fetchcities(curcid,state_id,cityid)
 {
+//alert(cityid);
+if(cityid=='' || cityid==null)
+{
+cityid=0;
+}
 $.ajax({
    type: "POST",
    url: "<?php echo $base; ?>admin/city_list_ajax/",

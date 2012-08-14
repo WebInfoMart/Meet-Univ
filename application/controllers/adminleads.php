@@ -37,9 +37,7 @@ class Adminleads extends CI_Controller
       $this->load->view('admin/leads/manage_tele_leads', $data);
     }
 	 
-	 }
-		
-		 
+	 }	 
 	}
 	
 	}
@@ -135,6 +133,8 @@ class Adminleads extends CI_Controller
 		'v_notes'=>$this->input->post('notes'),
 		'v_interested_country'=>$this->input->post('interested_cont'),
 		'v_user_type'=>$this->input->post('lead_source'),
+		'v_verified_email'=>$this->input->post('email_verified'),
+		'v_verified_phone'=>$this->input->post('phone_verified'),
 		'v_lead_status'=>$this->input->post('lead_status'),
 		'v_next_action'=>$this->input->post('next_action')
 		);
@@ -147,7 +147,10 @@ class Adminleads extends CI_Controller
 		'home_country_id'=>$this->input->post('country'),
 		'state'=>$this->input->post('state'),
 		'city'=>$this->input->post('city'),
-		'lead_verified'=>$this->input->post('lead_verfied'),
+		'email_verified'=>$this->input->post('email_verified'),
+		'phone_verified'=>$this->input->post('phone_verified'),
+		'enroll_key'=>$this->input->post('enroll'),
+		'lead_verified'=>$this->input->post('lead_verified'),
 		'studying_country_id'=>$this->input->post('interested_cont'),
 		'lead_status'=>$this->input->post('lead_status'),
 		'next_action'=>$this->input->post('next_action')
@@ -199,6 +202,11 @@ class Adminleads extends CI_Controller
 		echo $data['drop_record'];
 	}
 	
+	function fetch_selected_state()
+	{
+	
+	}
+	
 	function permotional_panel()
 	{
 	$data = $this->path->all_path();
@@ -230,6 +238,24 @@ class Adminleads extends CI_Controller
 		} else {
 	 $this->load->view('admin/engage/counsellor',$data);
 	 }
+	}
+	
+	function get_country_list()
+	{
+	$param=$_GET["term"];
+	 parse_str($_SERVER['QUERY_STRING'], $_GET);
+	 $query = mysql_query("SELECT * FROM country WHERE country_name REGEXP '^$param'");
+	
+		//build array of results
+		for ($x = 0, $numrows = mysql_num_rows($query); $x < $numrows; $x++) {
+			$row = mysql_fetch_assoc($query);
+		
+			$friends[$x] = array("name" => $row["country_name"],"id" => $row["country_id"]);		
+		}
+	
+		//echo JSON to page
+		$response = $_GET["callback"] . "(" . json_encode($friends) . ")";
+		echo $response;
 	}
 
 }
