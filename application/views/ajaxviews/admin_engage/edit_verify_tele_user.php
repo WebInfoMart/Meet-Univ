@@ -1,7 +1,4 @@
-<link rel="stylesheet" href="<?php echo $base; ?>css/admin/autosuggest.css" type="text/css" media="screen" title="Test Stylesheet" charset="utf-8" />
-<script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
- <script src="<?php echo $base; ?>js/admin/fcbkcomplete.js" type="text/javascript" charset="utf-8"></script>    
- 
+
  <div id="edit_data_<?php echo $lead_info['v_id']; ?>" class="open_box data update_lead_data" style="display:block">
  <div class="open_form_holder">
 			<div>
@@ -18,8 +15,7 @@
 							<label class="label-control" for="input01">Email: </label>
 							<div class="controls-input">
 							<input type="text" class="input-large inline" name="email" id="lead_user_email_<?php echo $lead_info['v_id']; ?>" value="<?php echo $lead_info['v_email']; ?>">
-							<?/*<input type="checkbox" class="inline" name="<?php echo $lead_info['v_id']; ?>" id="check_verify_lead_email_<?php echo $lead_info['v_id']; ?>" value="verify" onclick="verify_lead(this);" />
-							<span class="inline" id="verify_img_email_<?php echo $lead_info['v_id']; ?>"> <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>*/?>
+							
 							</div>
 						</div>
 				</div>
@@ -55,8 +51,7 @@
 						$mobile=$lead_info['v_phone'];
 						}?>
 							<input type="text" class="input-large inline" name="phone" id="lead_user_phone_<?php echo $lead_info['v_id']; ?>" value="<?php echo $mobile; ?>">
-							<?/*<input type="checkbox" name="<?php echo $lead_info['v_id']; ?>" id="check_verify_lead_phone_<?php echo $lead_info['v_id']; ?>" value="verify" onclick="verify_lead(this);" />
-							<span id="verify_img_phone_<?php echo $lead_info['v_id']; ?>"> <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>*/?>
+							
 							</div>
 						</div>
 				</div>
@@ -134,38 +129,50 @@
 							<select name="state" id="state_<?php echo $lead_info['v_id']; ?>" onchange="fetchcities(<?php echo $lead_info['v_id']; ?>);" class="select_width">
 								<option> Select State </option>	
 					
-					<?php 
-					$selected_state = '';
-					foreach($state_res as $state_result)
+					<?php
+					$state_list=$this->lead_tele_model->fetch_states_by_country_ajax($lead_info['v_country']);
+					if($state_list!='0')
+					{ 
+					foreach($state_list as $state_list_ajax){
+					$selected = '';
+					if($state_list_ajax['state_id']==$lead_info['v_state'])
 					{
-						if($state_result['state_id'] == $lead_info['v_state'])
-						{ $selected_state = 'selected'; } else { $selected_state = ''; }
-					
-					 ?>
-						<option value="<?php echo $state_result['state_id']; ?>" <?php echo $selected_state; ?>><?php echo $state_result['statename']; ?></option>
-					<?php } 
+					$selected='selected';
+					}
 					?>
+					<option value="<?php echo $state_list_ajax['state_id']; ?>" <?php echo $selected; ?> ><?php echo $state_list_ajax['statename']; ?></option>
+					<?php
+					}
+					}
+					?>	
 					
 					</select>
 							</div>
 						</div>
-				</div><div class="span15 float_l">
+				</div>
+				<div class="span15 float_l">
 					<div class="control-group">
 							<label class="label-control" for="input01">City: </label>
 							<div class="controls-input select_width">
 							<select name="city" id="city_<?php echo $lead_info['v_id']; ?>" class="select_width">
 								<option> Select City </option>
-						<?php 
-					foreach($city_res as $city_result)
+								
+						<?php
+					$city_list=$this->lead_tele_model->fetch_cities_by_state_ajax($lead_info['v_state']);
+					if($city_list!='0')
+					{ 
+					foreach($city_list as $city_list_ajax){
+					$selected = '';
+					if($city_list_ajax['city_id']==$lead_info['v_city'])
 					{
-						$selected_city = '';
-						if($city_result['city_id'] == $lead_info['v_city'])
-						{ $selected_city = 'selected'; } else { $selected_city = ''; }
-					
+					$selected='selected';
+					}
 					?>
-						<option value="<?php echo $city_result['city_id']; ?>" <?php echo $selected_city; ?>><?php echo $city_result['cityname']; ?></option>
-					<?php }
-					?>
+					<option value="<?php echo $city_list_ajax['city_id']; ?>" <?php echo $selected; ?> ><?php echo $city_list_ajax['cityname']; ?></option>
+					<?php
+					}
+					}
+					?>		
 					
 					</select>
 							</div>
@@ -211,12 +218,7 @@
 							<label class="label-control" for="input01"><img src="../images/admin/images/note_icon.png" class="note_img">Note:</label>
 							<div class="controls-input">
 								<textarea class="input-xlarge text-area" id="notes_<?php echo $lead_info['v_id']; ?>" rows="4">
-								<?php
-								if($lead_info['v_notes']!='')
-								{
-								echo $lead_info['v_notes'];
-								}
-								?>
+								
 								</textarea>
 							</div>
 						</div>
@@ -321,6 +323,7 @@
  var fullname = $('#lead_full_name_'+form_id).val();
  var email = $('#lead_user_email_'+form_id).val();
  var phone = $('#lead_user_phone_'+form_id).val();
+ var phone_digit=phone.length;
  var country = $('#country_'+form_id).val();
  var state = $('#state_'+form_id).val();
  var city = $('#city_'+form_id).val();
@@ -331,15 +334,63 @@
  var date = $('#date_'+form_id).val();
  var interested_cont = $('#interested_country_'+form_id).val();
  var lead_source = $("#lead_source_"+form_id).val();
- if(year==0 && month!=0 && date==0 || year!=0 && month==0 && date==0 || year==0 && month==0 && date!=0 || year==0 && month!=0 && date!=0 || year!=0 && month==0 && date!=0 || year!=0 && month!=0 && date==0)
+ var p_err=0;
+ if(year==0 || month==0 || date==0)
  {
+	p_err=1;
+	if(year==0)
+	{
 	$("#year_"+form_id).css("border-color","red");
+	}
+	else
+	{
+	$("#year_"+form_id).css("border-color","#ccc");
+	}
+	if(month==0)
+	{
 	$("#month_"+form_id).css("border-color","red");
+	}
+	else
+	{
+	$("#month_"+form_id).css("border-color","#ccc");
+	}
+	if(date==0)
+	{
 	$("#date_"+form_id).css("border-color","red");
+	}
+	else
+	{
+	$("#date_"+form_id).css("border-color","#ccc");
+	}
+	if(year==0 && month==0 && date==0)
+	{
+	p_err=0;
+	$("#year_"+form_id).css("border-color","#ccc");
+	$("#month_"+form_id).css("border-color","#ccc");
+	$("#date_"+form_id).css("border-color","#ccc");
+	}
+}
+ else
+ {
+ p_err=0;
+ $("#year_"+form_id).css("border-color","#ccc");
+	$("#month_"+form_id).css("border-color","#ccc");
+	$("#date_"+form_id).css("border-color","#ccc");
  }
- else{
+if(p_err)
+ {
+ }
+ else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
+ {
+ 
+	$("#lead_user_phone_"+form_id).css("border-color","red");
+	$('#error_message').html("Phone number should be 10 digit");
+	$('#error_message').css("display","block");
+}	
+  else{
 /* if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
 { */
+
 $.ajax({
 type: "POST",
 url: "<?php echo $base; ?>adminleads/check_email_exist",
@@ -348,17 +399,33 @@ data: 'email='+email+'&phone='+phone,
 cache: false,
 success: function(msg)
 {
-	//alert(msg);
-if(msg == '3') { var r=confirm("Do you want to replace on both existing email and phone number?"); }
-else if(msg == '1') { var r=confirm("Do you want to replace on existing email?"); }
-else if(msg == '2') { var r=confirm("Do you want to replace on existing phone number?"); }
-if(r)
-{
+//alert(msg);
+//if(msg == '3') { var r=confirm("Do you want to replace on both existing email and phone number?"); }
+//else if(msg == '1') { var r=confirm("Do you want to replace on existing email?"); }
+//else if(msg == '2') { var r=confirm("Do you want to replace on existing phone number?"); }
+//if(r)
+//{
+var data={
+current_lead_id :current_lead_id,
+interested_cont :interested_cont,
+fullname: fullname,
+email : email,
+phone:phone,
+country:country,
+state:state,
+city :city,
+enroll:enroll,
+notes:notes,
+year:year,
+month:month,
+date:date,
+lead_source:lead_source,
+ };
  $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>adminleads/update_verify_leads",
 	   async:false,
-	   data: 'current_lead_id='+current_lead_id+'&interested_cont='+interested_cont+'&fullname='+fullname+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&notes='+notes+'&year='+year+'&month='+month+'&date='+date+"&lead_source="+lead_source,
+	   data: data,
 	   cache: false,
 	   success: function(msg)
 	   {
@@ -386,8 +453,8 @@ if(r)
 		
 	   }
 });
-}
-else { $x_x = 0; }
+//}
+//else { $x_x = 0; }
 }
 });
 /* }
@@ -398,145 +465,7 @@ $("#content_verify_message").css("display","block");
  //var interested_country = $('#interested_country').val();
  //alert(interested_country);
  }
- //for fancy box
-$.fn.center = function () {
-        this.css("position","absolute");
-        this.css("top","100px");
-        this.css("left","330px");
-        return this;
-      }
  
-    $(".modal-profile").center();
-	$(".modal-profile1").center();
-    $('.modal-lightsout').css("height", jQuery(document).height()); 
- 
-    $('#add_country').click(function() {
-		 $('#add-country').fadeIn("slow");
-        $('#add-country1').fadeTo("slow", .9);
-    });
-	$('#add_state').click(function() {
-		//remove city and state form
-		 $('#add-state').fadeIn("slow");
-        $('#add-state1').fadeTo("slow", .9);
-    });
-	$('#add_city').click(function() {
-		//remove city and state form
-		$('#add-city').fadeIn("slow");
-        $('#add-city1').fadeTo("slow", .9);
-    });
-	$('#add_univ_admin').click(function() {
-		//remove city and state form
-		$('#add-univ').fadeIn("slow");
-        $('#add-univ1').fadeTo("slow", .9);
-    });
-    $('a.modal-close-profile').click(function() {
-			//remove country and state form
-        $('.modal-profile').fadeOut("slow");
-        $('.modal-lightsout').fadeOut("slow");
-    });
-	$('a.modal-close-profile').click(function() {
-			//remove country and state form
-        $('.modal-profile1').fadeOut("slow");
-        $('.modal-lightsout1').fadeOut("slow");
-    });
-	
-	
-	$('#addcountry').click(function(){
-	var country=$("#country_model").val();
-	var state=$("#state_model").val();
-	var city=$("#city_model").val();
-	
-	var flag=0;
-	if(country=='' || country==null)
-	{
-	 $('#country_error').html("Please enter the country name"); 
-	 $('#country_model').addClass('error');
-	 flag=0;
-	}
-	else
-	{
-	$('#country_error').html("") 
-	 $('#country_model').removeClass('error');
-	  flag=flag+1;
-	}
-	if(state=='' || state==null)
-	{
-	$('#state_error').html("Please enter the state name"); 
-	$('#state_model').addClass('error');
-	flag=0;
-	
-	}
-	else
-	{
-	$('#state_error').html(""); 
-	$('#state_model').removeClass('error');
-	 flag=flag+1;
-	}
-	if(city=='' || city==null)
-	{
-	$('#city_error').html("Please enter the city"); 
-	$('#city_model').addClass('error');
-	flag=0;
-	}
-	else
-	{
-	$('#city_error').html(""); 
-	$('#city_model').removeClass('error');
-	flag=flag+1;
-	}
-	if(flag==3)
-	{
-	 var  countrystatus=0;
-		$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>admin/check_unique_field/country_name/country",
-	   async:false,
-	   data: 'field='+country,
-	   cache: false,
-	   success: function(msg)
-	   {
-	   //alert(msg);
-	   if(msg=='1')
-		{
-		$('#country_error').html('Country Already Exist');
-		$('#country_model').addClass('error');
-		}
-		else if(msg=='0')
-		{
-		$('#country_model').html('');
-		$('#country_error').addClass('');
-		countrystatus=1;
-		}
-	   }
-	   });
-	 if(countrystatus)
-	 {
-	$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>admin/add_country_ajax",
-	   async:false,
-	   data: 'country_model='+country+'&state_model='+state+'&city_model='+city,
-	   cache: false,
-	   success: function(msg)
-	   {
-	   //alert(msg);
-	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
-		$('.modal-profile').fadeOut("slow");
-        $('.modal-lightsout').fadeOut("slow");
-		$('#add_country_form').reset();
-		$('.info_message').html('Your Place Added Successfully');
-		$('.content_msg').css('display','block');
-	   }
-	   });
-	 } 
-	   
-	}
-	
-});
-
 function fetchcountry(cid)
 {
 $.ajax({
@@ -610,191 +539,4 @@ state_id=$("#"+stateID).val();
    });  
 }
 
-$('#addstate').click(function(){
-	var country=$("#country_model1 option:selected").val();
-	var state=$("#state_model1").val();
-	var city=$("#city_model1").val();
-	var flag=0;
-	if(country=='' || country==null || country=='0')
-	{
-	 $('#country_error1').html("Please select the country"); 
-	 $('#country_model1').addClass('error');
-	 flag=0;
-	}
-	else
-	{
-	$('#country_error1').html("");
-	 $('#country_model1').removeClass('error');
-	  flag=flag+1;
-	}
-	if(state=='' || state==null)
-	{
-	$('#state_error1').html("Please enter the state name"); 
-	$('#state_model1').addClass('error');
-	flag=1;
-	
-	}
-	else
-	{
-	$('#state_error1').html(""); 
-	$('#state_model1').removeClass('error');
-	  flag=flag+1;
-	}
-	if(city=='' || city==null)
-	{
-	$('#city_error1').html("Please enter the city"); 
-	$('#city_model1').addClass('error');
-	flag=0;
-	}
-	else
-	{
-	$('#city_error1').html(""); 
-	$('#city_model1').removeClass('error');
-	 flag=flag+1;
-	}
-	if(flag==3)
-	{
-	 var  statestatus=0;
-		$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>admin/state_check",
-	   async:false,
-	   data: 'state_model1='+state+'&country_model1='+country,
-	   cache: false,
-	   success: function(msg)
-	   {
-	    if(msg=='1')
-		{
-		$('#state_error1').html('State Already Exist in Selected Country');
-		$('#state_model1').addClass('error');
-		}
-		else if(msg=='0')
-		{
-		$('#state_error1').html('');
-		$('#state_model1').addClass('');
-		statestatus=1;
-		}
-	   }
-	   });
-	 if(statestatus)
-	 {
-	 $.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>admin/add_state_ajax",
-	   async:false,
-	   data: 'country_model1='+country+'&state_model1='+state+'&city_model1='+city,
-	   cache: false,
-	   success: function(msg)
-	   {
-	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
-		$('.modal-profile').fadeOut("slow");
-        $('.modal-lightsout').fadeOut("slow");
-		$('#add_state_form').reset();
-		$('.info_message').html('Your Place Added Successfully');
-		$('.content_msg').css('display','block');
-	   }
-	   });
-	 } 
-	   
-	}
-	
-});
-
-
-
-
-$('#addcity').click(function(){
-	var country=$("#country_model2 option:selected").val();
-	var state=$("#state_model2 option:selected").val();
-	var city=$("#city_model2").val();
-	var flag=0;
-	if(country=='' || country==null || country=='0')
-	{
-	 $('#country_error2').html("Please select the country"); 
-	 $('#country_model2').addClass('error');
-	 flag=0;
-	}
-	else
-	{
-	$('#country_error2').html("");
-	 $('#country_model2').removeClass('error');
-	  flag=flag+1;
-	}
-	if(state=='' || state==null || state=='0')
-	{
-	$('#state_error2').html("Please select the state "); 
-	$('#state_model2').addClass('error');
-	flag=0;
-	}
-	else
-	{
-	$('#state_error2').html(""); 
-	$('#state_model2').removeClass('error');
-	 flag=flag+1;
-	}
-	if(city=='' || city==null)
-	{
-	$('#city_error2').html("Please enter the city"); 
-	$('#city_model2').addClass('error');
-	flag=0;
-	}
-	else
-	{
-	$('#city_error2').html(""); 
-	$('#city_model2').removeClass('error');
-	flag=flag+1;
-	}
-	if(flag==3)
-	{
-	 var  citystatus=0;
-		$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>admin/city_check",
-	   async:false,
-	   data: 'state_model2='+state+'&country_model2='+country+'&city_model2='+city,
-	   cache: false,
-	   success: function(msg)
-	   {
-	    if(msg=='1')
-		{
-		$('#city_error2').html('CIty Already Exist in Selected State');
-		$('#city_model2').addClass('error');
-		}
-		else if(msg=='0')
-		{
-		$('#city_error2').html('');
-		$('#city_model2').addClass('');
-		citystatus=1;
-		}
-	   }
-	   });
-	 if(citystatus)
-	 {
-	 $.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>admin/add_city_ajax",
-	   async:false,
-	   data: 'country_model2='+country+'&state_model2='+state+'&city_model2='+city,
-	   cache: false,
-	   success: function(msg)
-	   {
-	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
-		$('.modal-profile').fadeOut("slow");
-        $('.modal-lightsout').fadeOut("slow");
-		$('#add_city_form').reset();
-		$('.info_message').html('Your Place Added Successfully');
-		$('.content_msg').css('display','block');
-	   }
-	   });
-	 } 
-	   
-	}
-	
-});
  </script>

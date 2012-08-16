@@ -182,14 +182,14 @@ class Lead_tele_model extends CI_Model
 	function check_for_email_existing($email,$phone)
 	{
 		$clause_one = array(
-		'v_email'=>$this->input->post('email'),
-		'v_phone'=>$this->input->post('phone')
+		'v_email'=>'!='.$email,
+		'v_phone'=>'!='.$phone
 		);
 		$clause_two = array(
-		'v_email'=>$this->input->post('email')
+		'v_email'=>'!='.$email
 		);
 		$clause_three = array(
-		'v_phone'=>$this->input->post('phone')
+		'v_phone'=>'!='.$phone
 		);
 		
 		$this->db->select('*');
@@ -207,15 +207,15 @@ class Lead_tele_model extends CI_Model
 		$this->db->where($clause_three);
 		$query_three = $this->db->get();
 		
-		if($query_one->num_rows() > 0)
+		if($query_one->num_rows() == 0)
 		{
 			return 3;
 		}
-		else if($query_two->num_rows() > 0)
+		else if($query_two->num_rows() == 0)
 		{
 			return 1;
 		}
-		else if($query_three->num_rows() > 0)
+		else if($query_three->num_rows() == 0)
 		{
 			return 2;
 		}

@@ -417,6 +417,7 @@ var current_lead_id = "<?php echo $lead_info['id']; ?>";
  var next_action = $("#next_action_"+form_id).val();
  //start store intrested countries
  var c_id_list=0;
+ var p_err=0;
  $("input[name^=country_ids]").each(function() {
 var val=$(this).val();
 						val=val.trim();
@@ -427,6 +428,7 @@ var val=$(this).val();
 
  if(year==0 || month==0 || date==0)
  {
+	p_err=1;
 	if(year==0)
 	{
 	$("#year_"+form_id).css("border-color","red");
@@ -453,6 +455,7 @@ var val=$(this).val();
 	}
 	if(year==0 && month==0 && date==0)
 	{
+	p_err=0;
 	$("#year_"+form_id).css("border-color","#ccc");
 	$("#month_"+form_id).css("border-color","#ccc");
 	$("#date_"+form_id).css("border-color","#ccc");
@@ -461,12 +464,15 @@ var val=$(this).val();
  }
  else
  {
+ p_err=0;
  $("#year_"+form_id).css("border-color","#ccc");
 	$("#month_"+form_id).css("border-color","#ccc");
 	$("#date_"+form_id).css("border-color","#ccc");
  }
- 
- if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
+ if(p_err)
+ {
+ }
+ else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
  {
 	$("#lead_user_phone_"+form_id).css("border-color","red");
 	$('#error_message').html("Phone number should be 10 digit");

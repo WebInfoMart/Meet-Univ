@@ -194,8 +194,6 @@ class Adminleads extends CI_Controller
 		'v_city'=>$this->input->post('city'),
 		'v_enroll_key'=>$this->input->post('enroll'),
 		//kulbir
-		'v_notes'=>$this->input->post('notes'),
-		//kulbir
 		
 		'v_interested_country'=>$this->input->post('interested_cont'),
 		'v_user_type'=>$this->input->post('lead_source')
