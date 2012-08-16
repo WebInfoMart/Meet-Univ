@@ -90,7 +90,21 @@ class Lead_tele_model extends CI_Model
 		else
 		return 0;
 	}
-	
+	//kulbir
+	function v_note($user_id)
+	{
+		$this->db->select('*');
+		$this->db->from('verified_notes');
+		//$this->db->join('user_profiles','users.id=user_profiles.user_id');
+		//$this->db->join('country','country.country_id=lead_data.home_country_id','left');
+		$this->db->where(array('lead_id'=>$user_id));
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		return $query->result_array();
+		else
+		return 0;
+	}
+	//kulbir
 	function verify_lead_user_info($user_id)
 	{
 		$this->db->select('*');
@@ -125,17 +139,25 @@ class Lead_tele_model extends CI_Model
 		return $query->result_array();
 	}
 	
-	function save_verified_lead_info($lead_info,$update_old_lead_info)
+	function save_verified_lead_info($lead_info,$update_old_lead_info,$notes)
 	{
-		if($this->input->post('lead_verfied'))
+		if($this->input->post('lead_verified'))
 		{
-		$this->db->insert('verified_lead_data',$lead_info);
+		$this->db->insert('verified_lead_data',$lead_info);		
 		$this->db->where('id',$this->input->post('current_lead_id'));
 		$this->db->update('lead_data',$update_old_lead_info);
+		if($this->input->post('notes')!='')
+		{
+		 $this->db->insert('verified_notes',$notes);
+		}		
 		return 1;
 		}
 		else
 		{
+		if($this->input->post('notes')!='')
+		{
+		 $this->db->insert('verified_notes',$notes);
+		}	
 		$this->db->where('id',$this->input->post('current_lead_id'));
 		$this->db->update('lead_data',$update_old_lead_info);
 		return 0;
@@ -281,6 +303,22 @@ class Lead_tele_model extends CI_Model
 		if($query->num_rows() > 0)
 		{
 		 return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}
+	}
+	
+	function country_name_by_id($cid)
+	{
+	    $this->db->select('country_name');
+		$this->db->from('country');
+		$this->db->where('country_id',$cid);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+		 return $query->row_array();
 		}
 		else
 		{

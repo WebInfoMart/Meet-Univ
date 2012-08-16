@@ -25,6 +25,7 @@ if ($user) {
 }
 ?>
 <?php
+$show_suc_msg='';
 $sms_suc_sess_val = $this->session->userdata('msg_send_suc');
 $sms_voice_suc_sess_val = $this->session->userdata('msg_send_suc_voice');
 if($sms_suc_sess_val == 1)

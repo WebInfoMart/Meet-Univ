@@ -166,15 +166,15 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="float_l">
 									<div class="comment_img">
 									<?php
-							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$news_comments_detail['user_thumb_pic_path']) && $news_comments_detail['user_thumb_pic_path']!='' )
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$news_comments['user_thumb_pic_path']) && $news_comments['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 							
-								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$news_comments_detail['user_thumb_pic_path']."'/>";
+								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$news_comments['user_thumb_pic_path']."'/>";
 							}
-							else if(file_exists(getcwd().'/uploads/user_pic/'.$news_comments_detail['user_pic_path']) && $news_comments_detail['user_pic_path']!='')
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$news_comments['user_pic_path']) && $news_comments['user_pic_path']!='')
 							{
-								echo "<img src='".base_url()."uploads/user_pic/".$news_comments_detail['user_pic_path']."'/>";
+								echo "<img src='".base_url()."uploads/user_pic/".$news_comments['user_pic_path']."'/>";
 							}
 							else if($user)
 							{

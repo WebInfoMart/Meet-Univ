@@ -1,7 +1,7 @@
 
-#telecaller_Form span { display:block; width:326px; padding:10px 0; margin:0 0 20px; text-indent:20px; background-color:#bbb; border-bottom:1px solid #333; font:18px Georgia, Serif; color:#fff; }
-#intrested_countries { width:274px; padding:3px 3px 0; margin:0 auto;cursor:text; }
-#telecaller_Form #auto_intrested_countries { width:30px; margin:0 0 2px 0; padding:0 0 3px; position:relative; top:0; float:left; border:none; }
-#intrested_countries span { display:block; width:auto; margin:0 3px 3px 0; padding:3px 20px 4px 8px; position:relative; float:left; text-indent:0; background-color:#eee; border:1px solid #333; -moz-border-radius:7px; -webkit-border-radius:7px; border-radius:7px; color:#333; font:normal 11px Verdana, Sans-serif; }
+#intrested_countries span { display:block; width:326px; padding:10px 0; margin:0 0 20px; text-indent:20px; background-color:#bbb; border-bottom:1px solid #333; font:18px Georgia, Serif; color:#fff; }
+#intrested_countries { width:192px; padding:3px 3px 0; margin:0 auto; float: right;height: 30px;overflow-y: scroll;border:1px solid #ccc;-moz-border:1px solid #ccc;-webkit-border:1px solid #ccc; background-color:#fff; cursor:text; }
+#intrested_countries #auto_intrested_countries { width:30px; margin:3px 0 2px 0; padding:0 0 3px; position:relative; top:0; float:left; border:none; }
+#intrested_countries span { display:block; width:auto; margin: 3px 3px 0px 0; padding:3px 20px 4px 8px; position:relative; float:left; text-indent:0; background-color:#eee; border:1px solid #333; -moz-border-radius:7px; -webkit-border-radius:7px; border-radius:7px; color:#333; font:normal 11px Verdana, Sans-serif; }
 #intrested_countries span a { position:absolute; right:8px; top:2px; color:#666; font:bold 12px Verdana, Sans-serif; text-decoration:none; }
 #intrested_countries span a:hover { color:#ff0000; }

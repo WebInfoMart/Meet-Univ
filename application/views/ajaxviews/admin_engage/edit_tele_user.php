@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="<?php echo $base; ?>css/admin/jquery-ui-1.8.custom.css" type="text/css" media="screen"  charset="utf-8" />
 
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
-<script src="<?php echo $base; ?>js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>    
+<script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>    
  
  <div id="edit_data_<?php echo $lead_info['id']; ?>" class="open_box data update_lead_data" style="display:none">
   <div class="open_form_holder">
@@ -205,21 +205,28 @@
 				<div class="span15 float_l">
 					<div class="control-group">
 							<label class="label-control" for="input01">Interested Country: </label>
-							<!--<div class="controls-input select_width">
-							<select id="interested_country_<?php echo $lead_info['id']; ?>" name="interested_country_<?php echo $lead_info['id']; ?>" class="select_width">
-					<option value="">Select country</option>
-					<?php	foreach($country_res as $interested_country) { 
-					?>	
-					<option value="<?php echo $interested_country['country_id']; ?>"><?php echo $interested_country['country_name']; ?></option>
-					<?php } ?>
-				</select>
-							</div>
-							-->
+							
 							<div id="intrested_countries" class="ui-helper-clearfix">
+				<?php 			
+				if($lead_info['studying_country_id']!='' && $lead_info['studying_country_id']!='0')
+				{
+				$studying_country_id_list=explode(",",$lead_info['studying_country_id']);
+				foreach($studying_country_id_list as $studying_country_id_list_arr) { 
+				if($studying_country_id_list_arr!='0' ){
+				$cnt_name=$this->lead_tele_model->country_name_by_id($studying_country_id_list_arr);
+				
+				?>
+							<span id="remove_country_<?php echo $studying_country_id_list_arr; ?>"><?php echo ucwords($cnt_name['country_name']); ?><a class="remove" onclick="removecountry(this.id)" href="javascript:" title="Remove <?php echo ucwords($cnt_name['country_name']); ?>" id="<?php echo $studying_country_id_list_arr; ?>">x</a><input type="hidden" name="country_ids[]" id="country_<?php echo $studying_country_id_list_arr; ?>" value="<?php echo $studying_country_id_list_arr; ?>"></span>
+				<?php
+				}}
+				}			
+				?>			
 							<input id="auto_intrested_countries" type="text">
 							</div>
 						</div>
+						<div class="clearfix"></div>
 				</div>
+				<div class="clearfix"></div>
 				<div class="span15 float_l">
 					<div class="control-group">
 							<label class="label-control" for="input01">Lead Status</label>
@@ -260,10 +267,27 @@
 					</div>
 				</div>-->
 			<div class="float_l">
-						<div class="control-group">
+						<div class="control-group" >
 							<label class="label-control" for="input01"><img src="../images/admin/images/note_icon.png" class="note_img">Note:</label>
 							<div class="controls-input">
-								<textarea class="input-xlarge text-area" id="notes_<?php echo $lead_info['id']; ?>" rows="4"></textarea>
+							 <div class="v_notes">
+								<?php if($note_info!='')
+								{						
+								 foreach($note_info as $n)
+								  { echo $n['v_note']; ?>								  
+								<div>
+									
+								<div class="notes_data"></div>
+								<div class="notes_d"><?php $d=$n['updated_on'];
+											$d1=strtotime($d);
+											$date=date('h:m d M Y ',$d1);											
+											echo $date;?></div>
+								<div class="clearfix"></div>
+								</div>
+								<?php }} ?>
+								
+							 </div>							
+							<textarea  class="input-xlarge" id="notes_<?php echo $lead_info['id']; ?>" rows="1"></textarea>											
 							</div>
 						</div>
 					</div>
@@ -348,9 +372,7 @@
 			</div>
 			
 			
-			
-			
-			
+
 			
 			
 			
@@ -367,8 +389,11 @@ var current_lead_id = "<?php echo $lead_info['id']; ?>";
  var selstateid="<?php echo $lead_info['state']; ?>";
  var selcityid="<?php echo $lead_info['city']; ?>";
  
+//$("#notes_"+current_lead_id).click(function(){$("#v_note_"+current_lead_id).show()});
+
  function save_form(control){
  var form_id = control.name;
+ 
   //alert($("#lead_full_name_"+current_lead_id).val());		
  var fullname = $('#lead_full_name_'+form_id).val();
  fullname=fullname.trim();
@@ -390,7 +415,16 @@ var current_lead_id = "<?php echo $lead_info['id']; ?>";
  var lead_source = $("#lead_source_"+form_id).val();
  var lead_status = $("#lead_status_"+form_id).val();
  var next_action = $("#next_action_"+form_id).val();
- 
+ //start store intrested countries
+ var c_id_list=0;
+ $("input[name^=country_ids]").each(function() {
+var val=$(this).val();
+						val=val.trim();
+						c_id_list=c_id_list+','+val;
+						
+});
+//end code here			
+
  if(year==0 || month==0 || date==0)
  {
 	if(year==0)
@@ -463,25 +497,26 @@ else
 {
 if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
 {
-if($("#check_verify_lead_email_"+form_id).is(':checked'))
-{
-var email_verified=1;
+	if($("#check_verify_lead_email_"+form_id).is(':checked'))
+	{
+		var email_verified=1;
+	}
+	else
+	{
+		var phone_verified=1;
+	}
+	var lead_verified=1;
 }
 else
 {
-var phone_verified=1;
+	var email_verified=0;
+	var phone_verified=0;
+	var lead_verified=0;
 }
-var lead_verfied=1;
-}
-else
-{
-var email_verified=0;
-var phone_verified=0;
-lead_verfied=0;
-}
+//alert(lead_verfied);
 var data={
 current_lead_id :current_lead_id,
-interested_cont :interested_cont,
+interested_cont :c_id_list,
 fullname: fullname,
 email : email,
 phone:phone,
@@ -496,7 +531,7 @@ date:date,
 lead_source:lead_source,
 phone_verified:phone_verified,
 email_verified:email_verified,
-lead_verfied:lead_verfied,
+lead_verified:lead_verified,
 lead_status:lead_status,
 next_action:next_action
  };
@@ -563,6 +598,7 @@ $.ajax({
 });
 }
 }
+
  //var interested_country = $('#interested_country').val();
  //alert(interested_country);
  }
@@ -949,4 +985,85 @@ alert('called');
 	}
 	
 });
+ $(function(){
+				var suggest_country_ids = new Array();
+				//attach autocomplete
+				$("#auto_intrested_countries").autocomplete({
+					
+					//define callback to format results
+					source: function(req, add){
+						var c_id_list=0;
+						$("input[name^=country_ids]").each(function() {
+						var val=$(this).val();
+						val=val.trim();
+						c_id_list=c_id_list+','+val;
+					});
+						//pass request to server
+						$.getJSON("<?php echo $base; ?>adminleads/get_country_list/"+c_id_list+"?callback=?", req, function(data) {
+							
+							//create array for response objects
+							var suggestions = [];
+							
+							//process response
+							$.each(data, function(i, val){	
+								suggestions.push(val.name);
+								suggest_country_ids[val.name]=val.id;
+							});
+							
+							//pass array to callback
+							add(suggestions);
+						});
+					},
+					
+					//define select handler
+					select: function(e, ui) {
+						//create formatted friend
+						var country_name = ui.item.value;
+						var country_id=suggest_country_ids[country_name];
+						var exist_int_c_list=$('#intrested_country_list').val();
+						
+							var span = $("<span id='remove_country_"+country_id+"' onclick='removecountry("+country_id+")'>").text(country_name);
+							var a = $("<a>").addClass("remove").attr({
+								href: "javascript:",
+								title: "Remove " + country_name,
+								id: country_id
+							}).text("x");
+							var h= $('<input/>',{type:'hidden',name:'country_ids[]',id:'country_'+country_id,value:country_id});
+							
+							//var h='<input type="hidden" name="country_ids" id="country" value="">';	
+							a.appendTo(span);
+						  h.appendTo(span);
+						//add friend to friend div
+//auto_intrested_countries').val('');
+						span.insertBefore("#auto_intrested_countries");
+						
+						//alert("hi");
+					},
+					
+					//define select handler
+					change: function() {
+						
+						//prevent 'to' field being updated and correct position
+						$("#auto_intrested_countries").val("").css("top", 2);
+					}
+				});
+				
+				//add click handler to friends div
+				$("#intrested_countries").click(function(){
+					
+					//focus 'to' field
+					$("#auto_intrested_countries").focus();
+				});
+				
+				//add live handler for clicks on remove links
+							
+			});
+			function removecountry(id){
+					$('#remove_country_'+id).replaceWith('');
+					//$(this).parent().remove();
+					//correct 'to' field position
+					if($("#intrested_countries span").length === 0) {
+					$("#auto_intrested_countries").css("top", 0);
+					}				
+				}	
  </script>

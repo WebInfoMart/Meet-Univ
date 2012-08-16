@@ -17,28 +17,32 @@ class Adminleads extends CI_Controller
 	function managetelecalls($start=0)
 	{
 		$data = $this->path->all_path();
-		if (!$this->tank_auth->is_admin_logged_in()) {
-   
-   redirect('admin/adminlogin/');
-	} else {
-	   $flag=0;
-	  $data['username'] = $this->tank_auth->get_username();
-	   $data['user_id'] = $this->tank_auth->get_admin_user_id();
-	   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		   //fetch user privilege data from model
-	  if($flag==0)
-	 {
-	  $data['teleleads']=$this->lead_tele_model->tele_lead_users($start);
-	  if ($this->input->post('ajax')) {
-      $this->load->view('ajaxviews/admin_engage/manage_tele_leads', $data);
-    } else {
-	$this->load->view('admin/header', $data);
-	  $this->load->view('admin/sidebar', $data); 
-      $this->load->view('admin/leads/manage_tele_leads', $data);
-    }
-	 
-	 }	 
-	}
+		if (!$this->tank_auth->is_admin_logged_in()) 
+		{   
+		redirect('admin/adminlogin/');
+		} 
+		else
+		{
+			$flag=0;
+			$data['username'] = $this->tank_auth->get_username();
+			$data['user_id'] = $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			//fetch user privilege data from model
+			if($flag==0)
+			{
+				$data['teleleads']=$this->lead_tele_model->tele_lead_users($start);
+				if ($this->input->post('ajax'))
+				{
+					$this->load->view('ajaxviews/admin_engage/manage_tele_leads', $data);
+				} 
+				else 
+				{
+					$this->load->view('admin/header', $data);
+					$this->load->view('admin/sidebar', $data); 
+					$this->load->view('admin/leads/manage_tele_leads', $data);
+				} 
+			}	 
+		}
 	
 	}
 	
@@ -83,6 +87,9 @@ class Adminleads extends CI_Controller
 		   $data['username'] = $this->tank_auth->get_username();
 		   $data['user_id'] = $this->tank_auth->get_admin_user_id();
 		   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		    //kulbir
+		   $data['note_info']=$this->lead_tele_model->v_note($user_id);
+		   //kulbir
 		   $data['lead_info']=$this->lead_tele_model->lead_user_info($user_id);
 		   $data['country_res']=$this->users->fetch_country();
 		   $data['state_res'] = $this->lead_tele_model->fetch_state();
@@ -123,6 +130,7 @@ class Adminleads extends CI_Controller
 		
 		$lead_info = array(
 		'v_fullname'=>$this->input->post('fullname'),
+		'v_lead_id'=>$this->input->post('current_lead_id'),
 		'v_email'=>$this->input->post('email'),
 		'v_phone'=>$this->input->post('phone'),
 		'v_dob'=>$dob,
@@ -130,14 +138,21 @@ class Adminleads extends CI_Controller
 		'v_state'=>$this->input->post('state'),
 		'v_city'=>$this->input->post('city'),
 		'v_enroll_key'=>$this->input->post('enroll'),
-		'v_notes'=>$this->input->post('notes'),
+		//'v_notes'=>$this->input->post('notes'),
 		'v_interested_country'=>$this->input->post('interested_cont'),
 		'v_user_type'=>$this->input->post('lead_source'),
 		'v_verified_email'=>$this->input->post('email_verified'),
-		'v_verified_phone'=>$this->input->post('phone_verified'),
+		'v_verified_phone'=>$this->input->post('phone_verified'),		
 		'v_lead_status'=>$this->input->post('lead_status'),
 		'v_next_action'=>$this->input->post('next_action')
 		);
+		//kulbir
+		$notes = array(
+		'lead_id'=>$this->input->post('current_lead_id'),
+		'v_note'=>$this->input->post('notes'),
+		'updated_on'=>date('Y-m-d H:i:s', time())		
+		);
+	 //kulbir
 		
 		$update_old_lead_info = array(
 		'fullname'=>$this->input->post('fullname'),
@@ -155,7 +170,7 @@ class Adminleads extends CI_Controller
 		'lead_status'=>$this->input->post('lead_status'),
 		'next_action'=>$this->input->post('next_action')
 		);
-		$data['submit_verified_lead_info'] = $this->lead_tele_model->save_verified_lead_info($lead_info,$update_old_lead_info);
+		$data['submit_verified_lead_info'] = $this->lead_tele_model->save_verified_lead_info($lead_info,$update_old_lead_info,$notes);
 		if($data['submit_verified_lead_info'] == 1)
 		{
 			echo "1";
@@ -178,7 +193,10 @@ class Adminleads extends CI_Controller
 		'v_state'=>$this->input->post('state'),
 		'v_city'=>$this->input->post('city'),
 		'v_enroll_key'=>$this->input->post('enroll'),
+		//kulbir
 		'v_notes'=>$this->input->post('notes'),
+		//kulbir
+		
 		'v_interested_country'=>$this->input->post('interested_cont'),
 		'v_user_type'=>$this->input->post('lead_source')
 		);
@@ -240,17 +258,21 @@ class Adminleads extends CI_Controller
 	 }
 	}
 	
-	function get_country_list()
+	function get_country_list($c_list)
 	{
-	$param=$_GET["term"];
+	
+	 $param=$_GET["term"];
 	 parse_str($_SERVER['QUERY_STRING'], $_GET);
 	 $query = mysql_query("SELECT * FROM country WHERE country_name REGEXP '^$param'");
 	
 		//build array of results
 		for ($x = 0, $numrows = mysql_num_rows($query); $x < $numrows; $x++) {
 			$row = mysql_fetch_assoc($query);
-		
-			$friends[$x] = array("name" => $row["country_name"],"id" => $row["country_id"]);		
+			$country_list=explode(",",$c_list);
+			if(!(in_array($row["country_id"],$country_list)))
+			{
+			$friends[$x] = array("name" => $row["country_name"],"id" => $row["country_id"]);
+			}	
 		}
 	
 		//echo JSON to page

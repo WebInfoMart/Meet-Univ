@@ -778,3 +778,24 @@ background-color: white;
 }
 .text-area{height:71px}
 img{vertical-align: middle;}
+
+.v_notes{
+background:#fff;
+border-radius: 2px;
+border:1px solid #ccc;
+width: 315px;
+height:42px;
+overflow-y:scroll;
+border-bottom: none;
+padding: 5px;
+}
+.notes_data{
+float:left;
+width:205px;
+border-top:1px solid #ccc;
+margin:10px 0px;
+}
+.notes_d{
+float:right;
+font-size:10px;
+}

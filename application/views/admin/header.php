@@ -29,8 +29,10 @@
 	
 	
 	
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/ui/1.8.16/jquery-ui.min.js"></script>
+	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.8.16/jquery-ui.min.js"></script>-->
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery-ui.min.js"></script>
 	
 	<script type="text/javascript" src="<?php echo "$base$js";?>/excanvas.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.visualize.js"></script>
