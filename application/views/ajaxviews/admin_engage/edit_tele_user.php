@@ -415,19 +415,20 @@ var current_lead_id = "<?php echo $lead_info['id']; ?>";
  var lead_status = $("#lead_status_"+form_id).val();
  var next_action = $("#next_action_"+form_id).val();
  //start store intrested countries
+ //start store intrested countries
  var c_id_list=0;
- var p_err=0;
  $("input[name^=country_ids]").each(function() {
-var val=$(this).val();
-						val=val.trim();
-						c_id_list=c_id_list+','+val;
-						
-});
-//end code here			
+	var val=$(this).val();
+	val=val.trim();
+	c_id_list=c_id_list+','+val;
+
+	});
+//end code here	
+var success=1;	
 
  if(year==0 || month==0 || date==0)
  {
-	p_err=1;
+	success=0;
 	if(year==0)
 	{
 	$("#year_"+form_id).css("border-color","red");
@@ -463,20 +464,40 @@ var val=$(this).val();
  }
  else
  {
- p_err=0;
+ success=1;
  $("#year_"+form_id).css("border-color","#ccc");
 	$("#month_"+form_id).css("border-color","#ccc");
 	$("#date_"+form_id).css("border-color","#ccc");
  }
- if(p_err)
+ if(!success)
  {
  }
+else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
+{
+ 
+	$("#lead_user_phone").css("border-color","red");
+	$('#error_message').html("Phone number should be 10 digit");
+	$('#error_message').css("display","block");
+	success=0;
+}	
  else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
  {
 	$("#lead_user_phone_"+form_id).css("border-color","red");
 	$('#error_message').html("Phone number should be 10 digit");
 	$('#error_message').css("display","block");
  }
+ else if(validate_email(email)=='0')
+{
+$("#lead_user_phone_"+form_id).css("border-color","#ccc");
+success=0;
+$("#lead_user_email_"+form_id).css("border-color","red");
+}
+else if(fullname=='')
+{
+$("#lead_user_email_"+form_id).css("border-color","#ccc");
+$('#lead_full_name_'+form_id).css("border-color","red");
+success=0;
+}
  //if($("#check_verify_lead_email_"+form_id).is(':checked') || $("#check_verify_lead_phone_"+form_id).is(':checked'))
 else 
 {
