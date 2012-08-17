@@ -166,64 +166,73 @@ class Lead_tele_model extends CI_Model
 		
 	}
 	
-	function update_verify_lead_model($update_verify_lead_info)
+	function update_verify_lead_model($update_verify_lead_info,$notes)
 	{
+		
 		$this->db->where('v_id',$this->input->post('current_lead_id'));
 		$this->db->update('verified_lead_data',$update_verify_lead_info);
+		if($this->input->post('notes')!='')
+		$this->db->insert('verified_notes',$notes);
 		if($this->db->affected_rows() > 0)
-			{
+		{
 				return 1;
-			}
-			else {
+		}
+		else
+		{
 				return 0;
-			}
+		}
 	}
 	
-	function check_for_email_existing($email,$phone)
-	{
-		$clause_one = array(
-		'v_email'=>'!='.$email,
-		'v_phone'=>'!='.$phone
-		);
-		$clause_two = array(
-		'v_email'=>'!='.$email
-		);
-		$clause_three = array(
-		'v_phone'=>'!='.$phone
-		);
+		function check_for_email_existing()
+		{ 
+		 $email = $this->input->post('email');
+		 if($this->input->post('phone'))
+		 {
+		  $phone = $this->input->post('phone');
+		  }
+		  else
+		  { $phone=1;}
+		 $query_one=$this->db->query("select * from verified_lead_data where v_email='".$email."' || v_phone='".$phone."' "); 
+		 
+		 if($query_one->num_rows())
+		 {
+		  return 1;
+		 }
+		 else 
+		 {
+		  return 0;
+		 }
+		}
 		
-		$this->db->select('*');
-		$this->db->from('verified_lead_data');
-		$this->db->where($clause_one);
-		$query_one = $this->db->get();
-		
-		$this->db->select('*');
-		$this->db->from('verified_lead_data');
-		$this->db->where($clause_two);
-		$query_two = $this->db->get();
-		
-		$this->db->select('*');
-		$this->db->from('verified_lead_data');
-		$this->db->where($clause_three);
-		$query_three = $this->db->get();
-		
-		if($query_one->num_rows() == 0)
+		function check_for_email_phone_existing($email,$phone,$mob,$mail)
 		{
-			return 3;
-		}
-		else if($query_two->num_rows() == 0)
+		if($phone=='' || $phone==0)
 		{
-			return 1;
+		$phone=1;
 		}
-		else if($query_three->num_rows() == 0)
+		if($mail)
 		{
-			return 2;
+		$where=" v_email='".$email."'";
 		}
-		else {
-			
-			return 0;
+		else if($mob)
+		{
+		$where=" v_phone='".$phone."'";
 		}
-	}
+		else
+		{
+		$where=" v_email='".$email."' || v_phone='".$phone."'";
+		}
+		 $query_one=$this->db->query("select * from verified_lead_data where ".$where); 
+		 
+		 if($query_one->num_rows())
+		 {
+		  return 1;
+		 }
+		 else 
+		 {
+		  return 0;
+		 }
+		}
 	
 	function check_lead_email_in_verify_table($check_lead_email)
 	{
@@ -325,6 +334,66 @@ class Lead_tele_model extends CI_Model
 		return 0;
 		}
 	}
+	
+	
+	
+	
+		 function save_lead_info()
+		 {
+		  $dob = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('date');
+		  $insert_lead_info = array(
+		  'fullname'=>$this->input->post('fullname'),
+		  'email'=>$this->input->post('email'),
+		  'phone_no1'=>$this->input->post('phone'),
+		  'dob'=>$dob,
+		  'home_country_id'=>$this->input->post('country'),
+		  'state'=>$this->input->post('state'),
+		  'city'=>$this->input->post('city'),
+		  'email_verified'=>$this->input->post('email_verified'),
+		  'phone_verified'=>$this->input->post('phone_verified'),
+		  'enroll_key'=>$this->input->post('enroll'),
+		  'lead_verified'=>$this->input->post('lead_verified'),
+		  'studying_country_id'=>$this->input->post('interested_cont'),
+		  'lead_status'=>$this->input->post('lead_status'),
+		  'next_action'=>$this->input->post('next_action')
+		  );
+		  $query=$this->db->insert('lead_data',$insert_lead_info);  
+		  $id=$this->db->insert_id($query);
+		  if($id!='')
+		  {
+		  $verify_lead_info = array(
+		  'v_lead_id'=>$id,
+		  'v_fullname'=>$this->input->post('fullname'),
+		  'v_email'=>$this->input->post('email'),
+		  'v_phone'=>$this->input->post('phone'),
+		  'v_dob'=>$dob,
+		  'v_country'=>$this->input->post('country'),
+		  'v_state'=>$this->input->post('state'),
+		  'v_city'=>$this->input->post('city'),
+		  'v_enroll_key'=>$this->input->post('enroll'), 
+		  'v_interested_country'=>$this->input->post('interested_cont'),
+		  'v_user_type'=>$this->input->post('lead_source'),
+		  'v_verified_email'=>$this->input->post('email_verified'),
+		  'v_verified_phone'=>$this->input->post('phone_verified'),
+		  'v_lead_status'=>$this->input->post('lead_status'),
+		  'v_next_action'=>$this->input->post('next_action')
+		  
+		  );
+		  if($this->input->post('notes')!='')
+		   {   
+			$notes = array(
+			'lead_id'=>$id,
+			'v_note'=>$this->input->post('notes'),
+			'updated_on'=>date('Y-m-d H:i:S', time())  
+			);
+			$this->db->insert('verified_notes',$notes);
+		   }
+		  $this->db->insert('verified_lead_data',$verify_lead_info);
+		  
+			  return $this->db->affected_rows()? 1 : 0;
+		  }
+		}
+	
 
 }
 

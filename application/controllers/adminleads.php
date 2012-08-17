@@ -115,6 +115,7 @@ class Adminleads extends CI_Controller
 		   $data['user_id'] = $this->tank_auth->get_admin_user_id();
 		   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		   $data['lead_info']=$this->lead_tele_model->verify_lead_user_info($user_id);
+		   $data['note_info']=$this->lead_tele_model->v_note($user_id);
 		   $data['country_res']=$this->users->fetch_country();
 		   $data['state_res'] = $this->lead_tele_model->fetch_state();
 		   $data['city_res'] = $this->lead_tele_model->fetch_city();
@@ -193,12 +194,20 @@ class Adminleads extends CI_Controller
 		'v_state'=>$this->input->post('state'),
 		'v_city'=>$this->input->post('city'),
 		'v_enroll_key'=>$this->input->post('enroll'),
-		//kulbir
-		
 		'v_interested_country'=>$this->input->post('interested_cont'),
-		'v_user_type'=>$this->input->post('lead_source')
+		'v_user_type'=>$this->input->post('lead_source'),
+		'v_verified_email'=>$this->input->post('verified_email'),
+		'v_verified_phone'=>$this->input->post('verified_phone'),
+		'v_lead_status'=>$this->input->post('lead_status'),
+		'v_next_action'=>$this->input->post('next_action'),
+		'updated_on' => date('Y-m-d H:i:s', time())
 		);
-		$data['update_verify_lead_info'] = $this->lead_tele_model->update_verify_lead_model($update_verify_lead_info);
+		$notes = array(
+		'lead_id'=>$this->input->post('current_lead_id'),
+		'v_note'=>$this->input->post('notes'),
+		'updated_on'=>date('Y-m-d H:i:s', time())		
+		);
+		$data['update_verify_lead_info'] = $this->lead_tele_model->update_verify_lead_model($update_verify_lead_info,$notes);
 		echo $data['update_verify_lead_info'];
 	}
 	
@@ -210,17 +219,33 @@ class Adminleads extends CI_Controller
 		$data['check_email'] = $this->lead_tele_model->check_for_email_existing($email,$phone);
 		echo $data['check_email'];
 	}
+	function chk_email_phone_exists()
+	{
+		$email = $this->input->post('email');
+		$cur_email=$this->input->post('cur_email');
+		$phone = $this->input->post('phone');
+		$cur_phone = $this->input->post('cur_phone');
+		$mob=0;
+		$mail=0;
+		if($email==$cur_email)
+		{
+		$mob=1;
+		}
+		else if($phone==$cur_phone)
+		{
+		$mail=1;
+		}
+		$data['check_email'] = $this->lead_tele_model->check_for_email_phone_existing($email,$phone,$mob,$mail);
+		
+		echo $data['check_email'];
+	
+	}
 	
 	function droprecord()
 	{
 		$id = $this->input->post('id');
 		$data['drop_record'] = $this->lead_tele_model->drop_record_from_lead($id);
 		echo $data['drop_record'];
-	}
-	
-	function fetch_selected_state()
-	{
-	
 	}
 	
 	function permotional_panel()
@@ -277,7 +302,47 @@ class Adminleads extends CI_Controller
 		$response = $_GET["callback"] . "(" . json_encode($friends) . ")";
 		echo $response;
 	}
+	
+		function add_new_leads()
+	  {
+	   $data = $this->path->all_path();
+	   if (!$this->tank_auth->is_admin_logged_in()) {
 
+	   redirect('admin/adminlogin/');
+	   } 
+	   else 
+	   {
+		
+		$data['username'] = $this->tank_auth->get_username();
+		$data['user_id'] = $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+
+		//$data['lead_info']=$this->lead_tele_model->lead_user_info();
+		$data['country_res']=$this->users->fetch_country();
+		$data['state_res'] = $this->lead_tele_model->fetch_state();
+		$data['city_res'] = $this->lead_tele_model->fetch_city();
+
+		$view=$this->load->view('admin/leads/add_new_leads', $data,TRUE);
+		echo $view;
+	   }
+
+
+	  }
+	
+	 function add_new()
+	 {
+	  
+	  $data['insert_lead_info'] = $this->lead_tele_model->save_lead_info();  
+	  
+	  if($data['insert_lead_info']=='1')
+	  {
+	   echo '1';
+	  }
+	  else
+	  {
+	   echo '0';
+	  }
+	 }
 }
 
 /* End of file welcome.php */

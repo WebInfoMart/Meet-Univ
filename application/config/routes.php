@@ -39,6 +39,8 @@
 */
 //$route['(admin/manage_leads)']='adminleads/managetelecalls';
 
+
+
 $route['admin/update-(:num)-user-(:num)'] = 'admin/edituser/$1/$2';
 $route['404_override'] = '';
 $route['user/(:num)']='auth/user/$1';

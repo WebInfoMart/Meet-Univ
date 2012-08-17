@@ -411,7 +411,6 @@ var current_lead_id = "<?php echo $lead_info['id']; ?>";
  var year = $('#year_'+form_id).val();
  var month = $('#month_'+form_id).val();
  var date = $('#date_'+form_id).val();
- var interested_cont = $('#interested_country_'+form_id).val();
  var lead_source = $("#lead_source_"+form_id).val();
  var lead_status = $("#lead_status_"+form_id).val();
  var next_action = $("#next_action_"+form_id).val();

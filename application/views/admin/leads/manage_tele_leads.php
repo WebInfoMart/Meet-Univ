@@ -41,7 +41,7 @@
 <div class="message info"><p>Record dropped !!!</p></div> 
 </div>
 	
-	<div id="content" style="margin-left: 200px;">
+<div id="content" style="margin-left: 200px;">
 		
 			<?php if($teleleads!='0') { ?>
 			<!-- .breadcrumb ends -->
@@ -63,7 +63,7 @@
 				<b class="green">Phone Verified</b>
 			</div>
 			<div class="span1 float_l">
-				
+				<input id="adduser" type="button" style="cursor:pointer;" value="Add New Lead" onclick="add_user_lead()" class="edit inline">	
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -153,7 +153,7 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
  ?>
 			</div>
 			<div class="span1 float_l">
-				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>
+				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>			
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 			
 			<!--<a href="javascript:void();" class="edit inline" style="margin-left:19px;cursor:pointer;" id="img_delete_lead_<?php echo $teleleadsres['id']; ?>" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>');">Delete</a>-->
@@ -173,9 +173,10 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 
 </div>
 <?php	}?>	
-	</div>
-	</div>
-		
+
+</div>	
+</div>
+	<div id="xxx"></div>
 	<script type="text/javascript">
 	var main_url = "<?php echo $base ?>";
 	function delete_this_record(id)
@@ -266,6 +267,20 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
         });
 	}
 	
+	function add_user_lead()
+	{
+	$("#content_msg").css("display","none");	
+	var url='<?php echo $base;?>adminleads/add_new_leads';
+	$.ajax({
+          type: "POST",         
+          url: url,         
+          success: function(msg) {
+		  $('#xxx').html(msg);
+          }
+        });
+	
+	}
+	
 	$(function() {
     applyPagination();
 
@@ -312,8 +327,243 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 					$('#data_'+id).show();
 					//$("#data_"+id).show('slow');
 				};
-				
-				
+				function cancel(){
+					$("#edit_data").hide(1000);
+					$('#edit_data').replaceWith('');
+					$('#data').show();
+					//$("#data_"+id).show('slow');
+				};
+		function fetchstates(cid,ssid)
+	{
+		ssid=0;
+		var scid=$('#country option:selected').val();
+		$.ajax({
+		type: "POST",
+		url: "<?php echo $base; ?>admin/state_list_ajax/",
+		data: 'country_id='+scid+'&sel_state_id='+ssid,
+		cache: false,
+		success: function(msg)
+		{
+		
+		$('#state').attr('disabled', false);
+		$('#state').html(msg);
+		$('#city').html('<option value="">Select City </option>');
+		}
+		});
+	}	
+
+function fetchcities(state_id)
+{
+
+$.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin/city_list_ajax/",
+   data: 'state_id='+state_id,
+   cache: false,
+   success: function(msg)
+   {
+    $('#city').attr('disabled', false);
+	$('#city').html(msg);
+   }
+   });  
+}	
+	
+ function save_form()
+ { 		
+ var fullname = $('#lead_full_name').val();
+ fullname=fullname.trim();
+ var email = $('#lead_user_email').val();
+ email=email.trim();
+ var phone = $('#lead_user_phone').val();
+ phone=phone.trim();
+ var phone_digit = phone.length;
+ var country = $('#country').val();
+ var state = $('#state').val();
+ var city = $('#city').val();
+ var enroll = $('#lead_tele_enroll').val();
+ var notes = $('#notes').val();
+ notes=notes.trim();
+ var year = $('#year').val();
+ var month = $('#month').val();
+ var date = $('#date').val();
+ var interested_cont = $('#interested_country').val();
+ var lead_source = $("#lead_source").val();
+ var lead_status = $("#lead_status").val();
+ var next_action = $("#next_action").val();
+ //start store intrested countries
+ var c_id_list=0;
+ $("input[name^=country_ids]").each(function() {
+	var val=$(this).val();
+	val=val.trim();
+	c_id_list=c_id_list+','+val;
+
+	});
+//end code here			
+var success=1;
+
+if(year==0 || month==0 || date==0)
+ {
+	success=0;
+	if(year==0)
+	{
+	$("#year").css("border-color","red");
+	}
+	else
+	{
+	$("#year").css("border-color","#ccc");
+	}
+	if(month==0)
+	{
+	$("#month").css("border-color","red");
+	}
+	else
+	{
+	$("#month").css("border-color","#ccc");
+	}
+	if(date==0)
+	{
+	$("#date").css("border-color","red");
+	}
+	else
+	{
+	$("#date").css("border-color","#ccc");
+	}
+	if(year==0 && month==0 && date==0)
+	{
+	success=1;
+	$("#year").css("border-color","#ccc");
+	$("#month").css("border-color","#ccc");
+	$("#date").css("border-color","#ccc");
+	}
+	
+ }
+ else
+ {
+ success=1;
+ $("#year").css("border-color","#ccc");
+	$("#month").css("border-color","#ccc");
+	$("#date").css("border-color","#ccc");
+ }
+ if(!success)
+ {
+ }
+else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
+{
+ 
+	$("#lead_user_phone").css("border-color","red");
+	$('#error_message').html("Phone number should be 10 digit");
+	$('#error_message').css("display","block");
+	success=0;
+}	
+else if(validate_email(email)=='0')
+{
+$("#lead_user_phone").css("border-color","#ccc");
+success=0;
+$("#lead_user_email").css("border-color","red");
+}
+else if(fullname=='')
+{
+$("#lead_user_email").css("border-color","#ccc");
+$('#lead_full_name').css("border-color","red");
+success=0;
+}
+ //if($("#check_verify_lead_email").is(':checked') || $("#check_verify_lead_phone").is(':checked'))
+else 
+{
+$('#lead_full_name').css("border-color","#ccc");
+	$('#error_message').html("");
+	$('#error_message').css("display","none");
+	var email_stauts='';
+	$.ajax({
+	type: "POST",
+	url: "<?php echo $base; ?>adminleads/check_email_exist",
+	async: false,
+	data: 'email='+email+'&phone='+phone,
+	cache: false,
+	success: function(msg)
+	{
+		email_stauts=msg;
+	}
+});
+email_stauts=parseInt(email_stauts);
+if(email_stauts) {
+alert("For This Email or Phone No. Lead is already verified.");
+}
+else
+{
+
+	if(email!='')
+	{
+	var email_verified=1;
+	}
+	else
+	{
+	 var email_verified=0;
+	}
+	if(phone!='')
+	{
+	var phone_verified=1;
+	}
+	else
+	{
+	 var phone_verified=0;
+	}
+	var lead_verified=1;
+
+//alert(lead_verfied);
+var data={
+interested_cont :c_id_list,
+fullname: fullname,
+email : email,
+phone:phone,
+country:country,
+state:state,
+city :city,
+enroll:enroll,
+notes:notes,
+year:year,
+month:month,
+date:date,
+lead_source:lead_source,
+phone_verified:phone_verified,
+email_verified:email_verified,
+lead_verified:lead_verified,
+lead_status:lead_status,
+next_action:next_action
+ };
+$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>adminleads/add_new",
+	   async:false,
+	   data: data,
+	   cache: false,
+	   success: function(msg)
+	   {
+	  // alert(msg);
+	   if(msg=='1')
+	   {
+	    $("#content_msg").css("display","block");
+		 $('#content_msg p').html("Lead Verified successfully");
+		
+		
+	   }	   
+		 $("#edit_data").hide();
+	     $('#edit_data').replaceWith('');
+		 $('#adduser').show();
+		
+		
+	   }
+});
+}
+}
+}	
+function validate_email(email)
+{
+ var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+   if(reg.test(email) == false) {
+      return 0;
+   }
+}			
 </script>
 
 </body>

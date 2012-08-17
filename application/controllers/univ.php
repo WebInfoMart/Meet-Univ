@@ -1225,6 +1225,9 @@ class Univ extends CI_Controller
 	echo $show_more.'!@#$%^&*'.$comments;
 	
 	}
+	
+	
+	
 }		
 	
 ?>
