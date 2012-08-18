@@ -8,19 +8,19 @@
 			<div class="span1 float_l" id="lead_fname_<?php echo $teleleadsres['v_id']; ?>">
 				<?php echo $teleleadsres['v_fullname']; ?>
 			</div>
-			<div class="span14 float_l" >
+			<div class="width_adjust float_l" >
 				
 <?php if($teleleadsres['v_verified_email']) {
 ?>
-<span  id="span_verified_email_<?php echo $teleleadsres['v_id']; ?>" style="float: left;">
+<span  class="float_l data_img" id="span_verified_email_<?php echo $teleleadsres['v_id']; ?>" style="float: left;">
 <img  src="<?php echo base_url(); ?>images/admin/success.gif"/>
 </span>
 <?php } else { ?>
 
-<span  id="span_verified_email_<?php echo $teleleadsres['v_id']; ?>" style="float: left;">
+<span  class="float_l data_img" id="span_verified_email_<?php echo $teleleadsres['v_id']; ?>" style="float: left;">
  <img  src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
  <?php }  ?>
- <span id="lead_email_<?php echo $teleleadsres['v_id']; ?>"><?php echo $teleleadsres['v_email']; ?></span>
+ <span class="email_data" id="lead_email_<?php echo $teleleadsres['v_id']; ?>"><?php echo $teleleadsres['v_email']; ?></span>
 			</div>
 			
 			
@@ -44,12 +44,12 @@ echo $lead_source;
 
  if($teleleadsres['v_verified_phone']) {
 ?>
-<span  id="span_verified_phone_<?php echo $teleleadsres['v_id']; ?>">
+<span class="float_l data_img" id="span_verified_phone_<?php echo $teleleadsres['v_id']; ?>">
 <img  src="<?php echo base_url(); ?>images/admin/success.gif"/>
 </span>
 <?php } else { ?>
 
-<span  id="span_verified_phone_<?php echo $teleleadsres['v_id']; ?>">
+<span  class="float_l data_img" id="span_verified_phone_<?php echo $teleleadsres['v_id']; ?>">
  <img  src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
  <?php }  ?>
 <?php if($teleleadsres['v_phone']=='' || $teleleadsres['v_phone']==0 || $teleleadsres['v_phone']==NULL) {
@@ -61,7 +61,7 @@ echo "<span id='lead_phone_$teleleadsres[v_id]'>".$teleleadsres['v_phone']."</sp
 </div>
 
 
- <div class="span1 float_l">
+ <div class="span0 float_l">
 				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['v_id']; ?>')" id="data_<?php echo $teleleadsres['v_id']; ?>" class="edit inline">Edit</a>
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['v_id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 </div>

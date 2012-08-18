@@ -367,7 +367,8 @@ class Users extends CI_Model
 	 * @param	string
 	 * @return	object
 	 */
-	function get_user_by_username($username)
+
+	 function get_user_by_username($username)
 	{
 		$this->db->where('LOWER(username)=', strtolower($username));
 

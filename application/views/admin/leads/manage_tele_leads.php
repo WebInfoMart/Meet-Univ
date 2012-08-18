@@ -45,7 +45,7 @@
 		
 			<?php if($teleleads!='0') { ?>
 			<!-- .breadcrumb ends -->
-	<div class="grid11 margin-delta margin_t">
+	<div class="margin-delta margin_t" style="width: 945px;">
 		<div>
 			<div class="grid1 float_l">
 				<b>Sr.no</b>
@@ -53,7 +53,7 @@
 			<div class="span1 float_l">
 				<b class="blue">FullName</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="width_adjust float_l">
 				<b class="green">Email Verfied</b>
 			</div>
 			<div class="span1 float_l">
@@ -62,37 +62,42 @@
 			<div class="span1 float_l">
 				<b class="green">Phone Verified</b>
 			</div>
-			<div class="span1 float_l">
+			<div class="span0 float_l">
 				<input id="adduser" type="button" style="cursor:pointer;" value="Add New Lead" onclick="add_user_lead()" class="edit inline">
                <div class="inline margin_l1" id="add_user_lead_loading_img" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>				
 			</div>
 			<div class="clearfix"></div>
 		</div>
 		<div class="dotted_line"></div>
-		<div id="content_data" style="width: 911px;">
+		<div id="content_data">
 		<?php 
 	$sno=1;
 	$cnt_rows_verify_table = 0;
 	foreach($teleleads as $teleleadsres) {
+	if($sno % 2) {
+        $class = 'back_diff';
+    } else {
+	$class = '';
+    }
 	$record_verified_true = 0;
 	$temp_var_for_verify_email_phone = 0;
 	?>	
-		<div id="data_data_<?php echo $teleleadsres['id']; ?>" class="old_data old_data_paging" style="border-bottom: 1px solid #CCC;-webkit-border-bottom: 1px solid #CCC;-moz-border-bottom: 1px solid #CCC;padding: 3px 0px;">
+		<div id="data_data_<?php echo $teleleadsres['id']; ?>" class="<?php echo $class; ?> old_data old_data_paging" style="border-bottom: 1px solid #CCC;-webkit-border-bottom: 1px solid #CCC;-moz-border-bottom: 1px solid #CCC;padding: 3px 0px;">
 			<div class="grid1 float_l">
 					<?php echo $sno++ ;?>
 			</div>
 			<div class="span1 float_l" id="lead_fname_<?php echo $teleleadsres['id']; ?>">
 				<?php echo $teleleadsres['fullname']; ?>
 			</div>
-			<div class="span14 float_l" >
+			<div class="width_adjust float_l" >
 			<?php if($teleleadsres['email_verified']) {
 ?>
-<span class="float_l" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<span class="float_l data_img" id="span_verified_email_<?php echo $teleleadsres['id']; ?>" >
 <img src="<?php echo base_url(); ?>images/admin/success.gif"/>
 </span>
 <?php } else { ?>
 
-<span class="float_l" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<span class="float_l data_img" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
  <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
  <?php } 
  //if($all_verify_email_phone[$cnt_rows_verify_table]['v_email'] == $)
@@ -105,7 +110,7 @@
 	$temp_var_for_verify_email_phone++;
  }
  ?>
-				<span id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>
+				<span class="email_data" id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>
  
  
  
@@ -135,11 +140,11 @@ if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleads
 }
 else {
 if($teleleadsres['phone_verified']) { ?>
-<span id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
+<span class="float_l data_img" id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
  <img src="<?php echo base_url(); ?>images/admin/success.gif"/> </span>
 <?php }
  else { ?>
- <span id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
+ <span class="float_l data_img" id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
  <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
  <?php }
 echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</span>"; ?>
@@ -155,7 +160,7 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
  }
  ?>
 			</div>
-			<div class="span1 float_l">
+			<div class="span0 float_l">
 				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>			
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 			
@@ -349,19 +354,18 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 					$('#edit_data').replaceWith('');
 					$('#data').show();
 					//$("#data_"+id).show('slow');
-				};
-		function fetchstates(cid,ssid)
+				}
+	function fetchstates(cid,ssid)
 	{
 		ssid=0;
 		var scid=$('#country option:selected').val();
 		$.ajax({
 		type: "POST",
-		url: "<?php echo $base; ?>admin/state_list_ajax/",
+		url: "<?php echo $base; ?>admin/state_list_ajax",
 		data: 'country_id='+scid+'&sel_state_id='+ssid,
 		cache: false,
 		success: function(msg)
 		{
-		
 		$('#state').attr('disabled', false);
 		$('#state').html(msg);
 		$('#city').html('<option value="">Select City </option>');

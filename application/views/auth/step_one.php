@@ -72,8 +72,37 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 															<option value="11">November</option>
 															<option value="12">December</option>
 											</select>
-											<input class="<?php echo $class_dob_day; ?>" type="text" placeholder="Day" name="dob_day" id="so_dob_day" value="<?php echo set_value('dob_day') ?>">
+											
+											<select class="<?php echo $class_dob_day; ?>"  name="dob_day" id="so_dob_day"  >
+
+												<option value="" >Date</option> 
+												<?php
+
+												for($count_date=1;$count_date<=31;$count_date++)
+												{
+												?>
+												<option value="<?php echo $count_date; ?>" ><?php echo $count_date; ?></option>
+												<?php } ?>
+											</select>
+											
+											<select  name="dob_year" id="so_dob_year" class="<?php echo $class_dob_day; ?>" >
+											<option value="" >Year</option> 
+											<?php
+											for($count_year=1920;$count_year<=2005;$count_year++)
+											{ ?>
+											<option  value="<?php echo $count_year; ?>"><?php echo $count_year; ?></option>
+											<?php } ?>
+											</select>
+											
+											
+											
+											<!--<input class="<?php echo $class_dob_day; ?>" type="text" placeholder="Day" name="dob_day" id="so_dob_day" value="<?php echo set_value('dob_day') ?>">
 														<input class="<?php echo $class_dob_year; ?>" type="text" placeholder="Year" name="dob_year" id="so_dob_year" value="<?php echo set_value('dob_year') ?>">
+											-->			
+														
+														
+														
+														
 														<span style="color:red"> <?php echo form_error('dob_day'); ?><?php echo isset($errors['dob_day'])?$errors['dob_day']:''; ?> </span> 
 													<span style="color:red"> <?php echo form_error('dob_year'); ?><?php echo isset($errors['dob_year'])?$errors['dob_year']:''; ?> </span>
 											<!--<input class="span2 margin_l" type="text" placeholder="Day">

@@ -150,7 +150,7 @@ class Leadmodel extends CI_Model
 		{
 			$userTypeIS = $this->session->userdata('user_login_type');
 		} */
-		//$email_of_curr_lead = $this->session->userdata('sess_lead_email');
+		$email_of_curr_lead = $this->session->userdata('sess_lead_email');
 		$this->db->select('*');
 		$this->db->from('users');
 		$this->db->where('email',$email_of_curr_lead);

@@ -4,7 +4,7 @@
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>    
  
- <div id="edit_data" class="open_box data update_lead_data" style="position: absolute;left: 348px;top: 89px;">
+ <div id="edit_data" class="open_box data update_lead_data" style="position: absolute;left: 393px;top: 89px;">
   <div class="open_form_holder">
   <span id="error_message" style="color:red;margin-left: 294px;">  </span>
 			<div>
@@ -50,7 +50,7 @@
 					for($count_month=1;$count_month<=12;$count_month++)
 					{
 					?>
-					<option value="<?php echo $count_month; ?>" ><?php echo $arr_month[$count_month-1]; ?></option>
+					<option value="<?php echo $count_month; ?>"><?php echo $arr_month[$count_month-1]; ?></option>
 					<?php } ?>
 					</select>
 				 
@@ -162,6 +162,7 @@
 							</div>
 					</div>
 				</div>
+				
 				<div class="span15 float_l">
 					<div class="control-group">
 							<label class="label-control" for="input01">Next Action</label>

@@ -759,6 +759,7 @@ border: 1px solid #CCC;
 border-radius: 3px;
 }
 input, textarea {
+resize: none;
 -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -799,3 +800,10 @@ margin:10px 0px;
 float:right;
 font-size:10px;
 }
+.data_img{width:22px}
+.email_data{float: left;
+word-break: break-all;
+width: 255px;}
+.back_diff{background: #F6F6F6;
+}
+.width_adjust{width: 277px;}
