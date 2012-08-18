@@ -50,7 +50,7 @@
 			<div class="grid1 float_l">
 				<b>Sr.no</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="span1 float_l">
 				<b class="blue">FullName</b>
 			</div>
 			<div class="span14 float_l">
@@ -63,7 +63,8 @@
 				<b class="green">Phone Verified</b>
 			</div>
 			<div class="span1 float_l">
-				<input id="adduser" type="button" style="cursor:pointer;" value="Add New Lead" onclick="add_user_lead()" class="edit inline">	
+				<input id="adduser" type="button" style="cursor:pointer;" value="Add New Lead" onclick="add_user_lead()" class="edit inline">
+               <div class="inline margin_l1" id="add_user_lead_loading_img" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>				
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -150,8 +151,7 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
   if($phone_check == 1)
  {
  $record_verified_true = 1;
- }
- else { echo "<br />Phone Lead"; } 
+ } 
  }
  ?>
 			</div>
@@ -276,9 +276,23 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 	var url='<?php echo $base;?>adminleads/add_new_leads';
 	$.ajax({
           type: "POST",         
-          url: url,         
+          url: url, 
+		beforeSend:function()
+		{
+		$('#add_user_lead_loading_img').show();
+		var lasteditleadid=$('#lastviewdlead').val();
+		   //alert(lasteditleadid);
+		   if(lasteditleadid!='0')
+		   {
+		    $('#edit_data_'+lasteditleadid).hide(1000);
+			$('#edit_data_'+lasteditleadid).replaceWith('');
+			 $('#data_'+lasteditleadid).show();
+		   }
+		},
           success: function(msg) {
+		  $('#add_user_lead_loading_img').hide();
 		  $('#xxx').html(msg);
+		  
           }
         });
 	
