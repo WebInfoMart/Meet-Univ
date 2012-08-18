@@ -50,7 +50,7 @@
 			<div class="grid1 float_l">
 				<b>Sr.no</b>
 			</div>
-			<div class="span1 float_l">
+			<div class="span14 float_l">
 				<b class="blue">FullName</b>
 			</div>
 			<div class="span14 float_l">
@@ -68,7 +68,7 @@
 			<div class="clearfix"></div>
 		</div>
 		<div class="dotted_line"></div>
-		<div id="content_data">
+		<div id="content_data" style="width: 911px;">
 		<?php 
 	$sno=1;
 	$cnt_rows_verify_table = 0;
@@ -76,7 +76,7 @@
 	$record_verified_true = 0;
 	$temp_var_for_verify_email_phone = 0;
 	?>	
-		<div id="data_data_<?php echo $teleleadsres['id']; ?>" class="old_data old_data_paging">
+		<div id="data_data_<?php echo $teleleadsres['id']; ?>" class="old_data old_data_paging" style="border-bottom: 1px solid #CCC;-webkit-border-bottom: 1px solid #CCC;-moz-border-bottom: 1px solid #CCC;padding: 3px 0px;">
 			<div class="grid1 float_l">
 					<?php echo $sno++ ;?>
 			</div>
@@ -84,17 +84,16 @@
 				<?php echo $teleleadsres['fullname']; ?>
 			</div>
 			<div class="span14 float_l" >
-				<span id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>
-<?php if($teleleadsres['email_verified']) {
+			<?php if($teleleadsres['email_verified']) {
 ?>
-<span class="float_r" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
-<img class="float_r" src="<?php echo base_url(); ?>images/admin/success.gif"/>
+<span id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<img src="<?php echo base_url(); ?>images/admin/success.gif"/>
 </span>
 <?php } else { ?>
 
-<span class="float_r" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
- <img class="float_r" src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
- <?php }  
+<span id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+ <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
+ <?php } 
  //if($all_verify_email_phone[$cnt_rows_verify_table]['v_email'] == $)
  $check_lead_email = $teleleadsres['email'];
  $email_check = $this->lead_tele_model->check_lead_email_in_verify_table($check_lead_email);
@@ -105,6 +104,9 @@
 	$temp_var_for_verify_email_phone++;
  }
  ?>
+				<span id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>
+ 
+ 
  
 			</div>
 			
@@ -125,21 +127,22 @@ echo $lead_source;
 			<div class="span1 float_l">
 				<?php 
 if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) { ?>
-<span style='color:blue'>Not Available</span><span style='color:red;font-size:10px;'>
 <img src="<?php echo base_url(); ?>images/admin/success.gif"/>
+<span style='color:blue'>Not Available</span><span style='color:red;font-size:10px;'>
 </span>
 <?php
 }
 else {
-echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</span>"; ?>
-<?php if($teleleadsres['phone_verified']) { ?>
+if($teleleadsres['phone_verified']) { ?>
 <span id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
- <img src="<?php echo base_url(); ?>images/admin/success.gif" class="margin-r2"/> </span>
+ <img src="<?php echo base_url(); ?>images/admin/success.gif"/> </span>
 <?php }
  else { ?>
- <span class="float_r" id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
- <img src="<?php echo base_url(); ?>images/admin/error.gif" class="margin-r2"/> </span>
- <?php } ?><?php }
+ <span id="span_verified_phone_<?php echo $teleleadsres['id']; ?>">
+ <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
+ <?php }
+echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</span>"; ?>
+<?php }
  if($temp_var_for_verify_email_phone < 1)
  {
 	$check_lead_phone = $teleleadsres['phone_no1'];

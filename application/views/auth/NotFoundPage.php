@@ -6,17 +6,16 @@
 		<div class="body">
 <?php } ?>		
 	<div class="row offset2">
-				<div class="span10 margin_t1">
-					<div class="back_img">
-						<h2 class="border_bot_wel">Meet Univerties</h2>
-						<div class="span8 margin_t alert alert-error">
-							<center><?php echo $err_msg; ?></center>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
+		<div class="span10 margin_t1">
+			<div class="back_img alert alert-info">
+				<center class="not_found"><?php echo $err_msg; ?></center>
+				<div class="clearfix"></div>
 			</div>
+		</div>
+	</div>
 <?php if($err_div=='1'){ ?>			
 </div>
+</div>		
+</div>		
 </div>		
 <?php } ?>

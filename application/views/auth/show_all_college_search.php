@@ -123,7 +123,7 @@
 													<div class="span1 float_l margin_l">
 														<span >
 				
-														<?php if($event_has) { echo $date_part[1]; ?> <br/>
+														<span class="blue"><?php if($event_has) { echo $date_part[1]; ?></span> <br/>
 						<?php if($get_university['univ_event'][$no_university][0]['cityname']!='') {
 											echo ucwords($get_university['univ_event'][$no_university][0]['cityname']); }
 											} ?><br />

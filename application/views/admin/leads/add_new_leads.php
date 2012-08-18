@@ -4,7 +4,7 @@
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>    
  
- <div id="edit_data" class="open_box data update_lead_data" style="position: absolute;left: 300px;top: 89px;">
+ <div id="edit_data" class="open_box data update_lead_data" style="position: absolute;left: 345px;top: 89px;">
   <div class="open_form_holder">
   <span id="error_message" style="color:red;margin-left: 294px;">  </span>
 			<div>
@@ -23,16 +23,6 @@
 							<input type="text" class="input-large inline" name="email" id="lead_user_email" value="">
 							<input type="hidden" class="input-large" id="lead_source" value="other"/>
 					
-							</div>
-						</div>
-				</div>
-				
-				<div class="mail_set float_l">
-					<div class="control-group">
-							<label class="label-control" for="input01">Phone: </label>
-							<div class="controls-input">						
-							<input type="text" class="input-large inline" name="phone" id="lead_user_phone" value="">
-							
 							</div>
 						</div>
 				</div>
@@ -78,6 +68,16 @@
 							</div>
 						</div>
 				</div>
+				<div class="mail_set float_l">
+					<div class="control-group">
+							<label class="label-control" for="input01">Phone: </label>
+							<div class="controls-input">						
+							<input type="text" class="input-large inline" name="phone" id="lead_user_phone" value="">
+							
+							</div>
+						</div>
+				</div>
+				
 				<div class="span15 float_l">
 					<div class="control-group">
 							<label class="label-control" for="input01">Country: </label>
@@ -178,9 +178,9 @@
 				
 			<div class="float_l">
 						<div class="control-group" >
-							<label class="label-control" for="input01"><img src="../images/admin/images/note_icon.png" style="position: absolute;left: 69px;top: 372px;" class="note_img">Note:</label>
+							<label class="label-control" for="input01"><img src="../images/admin/images/note_icon.png" style="left: 69px;" class="note_img">Note:</label>
 							<div class="controls-input">													
-							<textarea  class="input-xlarge" id="notes" rows="1"></textarea>											
+							<textarea  class="input-xlarge" id="notes" rows="4"></textarea>											
 							</div>
 						</div>
 					</div>
