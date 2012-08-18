@@ -36,7 +36,7 @@ class Lead_tele_model extends CI_Model
 		$this->db->order_by('email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page']   = 50;
+		$config['per_page']   = 30;
 		$limit=$config['per_page'];
 		$offset=$start;
 		$this->db->select('*');
@@ -61,7 +61,7 @@ class Lead_tele_model extends CI_Model
 		$this->db->order_by('v_email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page']   = 50;
+		$config['per_page']   = 30;
 		$limit=$config['per_page'];
 		$offset=$start;
 		$this->db->select('*');

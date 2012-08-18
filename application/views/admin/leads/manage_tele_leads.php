@@ -86,12 +86,12 @@
 			<div class="span14 float_l" >
 			<?php if($teleleadsres['email_verified']) {
 ?>
-<span id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<span class="float_l" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
 <img src="<?php echo base_url(); ?>images/admin/success.gif"/>
 </span>
 <?php } else { ?>
 
-<span id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<span class="float_l" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
  <img src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
  <?php } 
  //if($all_verify_email_phone[$cnt_rows_verify_table]['v_email'] == $)

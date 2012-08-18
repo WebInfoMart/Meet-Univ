@@ -4,7 +4,7 @@
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>    
  
- <div id="edit_data" class="open_box data update_lead_data" style="position: absolute;left: 345px;top: 89px;">
+ <div id="edit_data" class="open_box data update_lead_data" style="position: absolute;left: 415px;top: 89px;">
   <div class="open_form_holder">
   <span id="error_message" style="color:red;margin-left: 294px;">  </span>
 			<div>
