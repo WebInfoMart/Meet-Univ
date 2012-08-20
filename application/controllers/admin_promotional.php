@@ -36,7 +36,12 @@ class Admin_promotional extends CI_Controller
 	
 	function count_student_country_wise()
 	{
-	 
+	  $country=$this->input->post('country');	
+	  $sql="SELECT id,if(ld.home_country_id='',up.country_id,ld.home_country_id) as country from user_profiles up,verified_lead_data as vl,users u where up.user_id=u.id and u.email=ld.email and if(ld.home_country_id='',up.country_id,ld.home_country_id)='".$country."'";
+	  $res=$this->db->query($sql);
+	  echo $res->num_rows();
+	  
+
 	}
 
 }

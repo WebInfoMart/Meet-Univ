@@ -1,7 +1,7 @@
 <?php
 $class_email='';
 $class_agree='';
-$class_firstname='';
+$class_firstname=''; 
 $class_lastname='';
 $class_dob_day='';
 $class_dob_year='';

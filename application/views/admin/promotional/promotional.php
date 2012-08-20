@@ -165,7 +165,8 @@
 function find_no_of_user_in_country()
 {
 var country_id=$('#country_list option:selected').val();
-url=
+var data={country_id:country_id};
+url='count_student_country_wise';
 $.ajax({
 	   type: "POST",
 	   url: url,
@@ -173,6 +174,7 @@ $.ajax({
 	   data: data,
 	   success: function(msg)
 	   {
+	   alert(msg);
 	   }
 });
 }
