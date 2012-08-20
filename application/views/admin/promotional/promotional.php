@@ -5,53 +5,8 @@
 <link rel="stylesheet" href="<?php echo $base; ?>css/admin/engage/bootstrap.css">
 <link rel="stylesheet" href="<?php echo $base; ?>css/admin/engage/style.css">
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<script src="<?php echo $base; ?>js/jquery.js"></script>
 
-</head>
-<body>
-	<header>
-		<div class="span6 float_r margin2">
-			<div class="float_l border_holder">
-				<img src="<?php echo $base; ?>images/images/user.png" alt="User" title="User"/>
-				<span class="margin_l">Hello Administrator</span>
-			</div>
-			<div class="float_l border_holder">
-				<img src="<?php echo $base; ?>images/images/msg.png" alt="User" title="User"/>
-			</div>
-			<div class="float_l border_holder">
-				<img src="<?php echo $base; ?>images/images/setting.png" alt="User" title="User"/>
-			</div>
-			<div class="float_l border_holder border_beta">
-				logout
-			</div>
-		</div>
-	</header>
-	<div class="float_l sidebar">
-		<div class="search_box">
-			<img src="<?php echo $base; ?>images/images/search_icon.png" class="search_input_set"><input type="text" name="search" value="search" class="search_input">
-		</div>
-		<div class="menu">
-			<ul id="nav">
-                <li class="active"><a href="#"><img src="<?php echo $base; ?>images/images/home_icon.png" /> <span>Dashboard</span></a></li>
-                <li><a href="#"><img src="<?php echo $base; ?>images/images/paged_icon.png" /><span>Pages</span></a>
-                </li>
-               <li><a href="#"><img src="<?php echo $base; ?>images/images/side_user_icon.png" /><span>Users</span></a>
-                </li>
-                <li><a href="#"><img src="<?php echo $base; ?>images/images/edit_icon.png" /><span>Articles</span></a></li>
-                <li><a href="#"><img src="<?php echo $base; ?>images/images/cal_icon.png" /><span>Events</span></a></li>
-                <li><a href="#"><img src="<?php echo $base; ?>images/images/lib_icon.png" /><span>Manage Universities</span></a></li> 
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/img_icon.png" /><span>Manage Home Gallery</span></a></li> 
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/book_icon.png" /><span>Proagram/Courses</span></a></li> 
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/book_icon.png" /><span>University/Courses</span></a></li>
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/img_icon.png" /><span>University Gallery</span></a></li>
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/clip_icon.png" /><span>Manage Univ/Proagram</span> </a></li>
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/clip_icon.png" /><span>Manage Univ/Users</span> </a></li>
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/setting.png" /><span>Settings</span> </a></li>
-				<li><a href="#"><img src="<?php echo $base; ?>images/images/bulb_icon.png" /><span>Supports</span></a></li>
-            </ul>
-		</div>
-	</div>
-	<div class="body">
+	<div class="body" id="content">
 		<div class="span12">
 		<a href="<?php echo $base; ?>adminleads/counsellor" style="float:right;">Counsellor</a>
 			
@@ -103,7 +58,7 @@
 								<div class="control-group2">
 									<label class="control-label" for="input01">Country: </label>
 									<div class="controls">
-										<select id="country_list" onchange="find_no_of_user_in_country()">
+										<select id="country_list" onchange="find_no_of_user_on_onchange(this)">
 											<option value="0">Select your location</option>
 											<?php foreach($country_list as $country_lists) { ?>
 											<option value="<?php echo $country_lists['country_id']; ?>"><?php echo $country_lists['country_name']; ?></option>
@@ -114,21 +69,22 @@
 								<div class="control-group2">
 									<label class="control-label" for="select01">City: </label>
 									<div class="controls">
-										<select id="city_list">
-											<option value="">Select your location</option>
-											<option value=""></option>
+										<select id="city_list" onchange="find_no_of_user_on_onchange(this)">
+											<option value="0">Select your location</option>
+								<?php foreach($all_cities as $all_city) { ?>			
+											<option value="<?php echo $all_city['city_id']; ?>"><?php echo $all_city['cityname']; ?></option>
+								<?php } ?>			
 										</select>
 									</div>
 								</div>
 								<div class="control-group2">
 									<label class="control-label" for="select01">Educational level: </label>
 									<div class="controls">
-										<select id="select01">
-											<option>Select your location</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
+										<select id="educ_level" onchange="find_no_of_user_on_onchange(this)">
+											<option value="0">Select your location</option>
+											<option value="2">Fondation</option>
+											<option value="3">UnderGraduate</option>
+											<option value="4">PostGraduate</option>
 										</select>
 									</div>
 								</div>
@@ -138,21 +94,21 @@
 						<div class="hori_dotted"></div>
 						<div class="span4 float_l margin_delta">
 							<div class="orange_icon float_l">
-								<span class="data_text">Worldwide</span>
+								<span class="data_text" id="country_text_name" >Worldwide</span>
 							</div>
-							<h3 class="count_txt" id="no_of_student" ><?php echo $total_student; ?></h3>
+							<h3 class="count_txt" id="total_no_of_student_in_country" ><?php echo $total_student; ?></h3>
 							<div class="clearfix"></div>
 							<div class="down_arrow"></div>
 							<div class="blue_icon float_l">
-								<span class="data_text">India</span>
+								<span class="data_text" id="city_text_name">India</span>
 							</div>
-							<h3 class="count_txt">1,000</h3>
+							<h3 class="count_txt" id="no_of_student_in_city"><?php echo $total_student_in_india; ?></h3>
 							<div class="clearfix"></div>
 							<div class="down_arrow"></div>
 							<div class="green_icon float_l">
-								<span class="data_text">Post graduation</span>
+								<span class="data_text" id="educ_lvl_text_name">Under Graduate</span>
 							</div>
-							<h3 class="count_txt">456</h3>
+							<h3 class="count_txt" id="no_of_student_in_educ_lvl"><?php echo $undergraduate_in_india; ?></h3>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -162,11 +118,17 @@
 </body>
 </html>
 <script>
-function find_no_of_user_in_country()
+function find_no_of_user_on_onchange(select)
 {
 var country_id=$('#country_list option:selected').val();
-var data={country_id:country_id};
-url='count_student_country_wise';
+var country_text=$('#country_list option:selected').text();
+var city_id=$('#city_list option:selected').val();
+var city_text=$('#city_list option:selected').text();
+var educ_level=$('#educ_level option:selected').val();
+var educ_level_text=$('#educ_level option:selected').text();
+
+var data={country_id:country_id,city_id:city_id,educ_level:educ_level};
+url='count_student_change_wise';
 $.ajax({
 	   type: "POST",
 	   url: url,
@@ -174,7 +136,21 @@ $.ajax({
 	   data: data,
 	   success: function(msg)
 	   {
-	   alert(msg);
+	    if(select.id=='country_list')
+		{
+		 $('#country_text_name').html(country_text);
+		 $('#total_no_of_student_in_country').html(msg);
+		}
+		else if(select.id=='city_list')
+		{
+		$('#city_text_name').html(country_text);
+		 $('#no_of_student_in_city').html(msg);
+		}
+		else if(select.id=='city_list')
+		{
+		$('#city_text_name').html(country_text);
+		 $('#no_of_student_in_educ_lvl').html(msg);
+		}
 	   }
 });
 }

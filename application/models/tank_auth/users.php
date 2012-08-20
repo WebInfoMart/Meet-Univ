@@ -467,9 +467,14 @@ class Users extends CI_Model
 		//$data['created'] = date('Y-m-d H:i:s');
 		//$data['activated'] = $activated ? 1 : 0;
 		$data['activated'] = '1';
-
+		
 		if ($this->db->insert($this->table_name, $data)) {
 			$user_id = $this->db->insert_id();
+			if($data['level']=='1')
+			{
+			$lead_data=array('user_id'=>$user_id,'fullname'=>$data['fullname'],'email'=>$data['email']);
+			$this->db->insert('lead_data',$lead_data);
+			}
 			//if ($activated) by sumit wim 
 			$this->create_profile($user_id);
 			return array('user_id' => $user_id);

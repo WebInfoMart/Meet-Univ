@@ -14,7 +14,10 @@ $flag=1;
 		<ul id="nav">
 			<li><a href="<?php echo $base; ?>admin"><strong><img src="<?php echo "$base$admin_img" ?>/nav/dashboard.png" alt="" /> Dashboard</strong></a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" /> Pages</a></li>
-			<li><a href="<?php echo $base; ?>adminleads/permotional_panel"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" />Permotional Panel </a></li>
+			<?php if($admin_user_level=='5' || $admin_user_level=='3')
+			{ ?>
+			<li><a href="<?php echo $base; ?>admin_promotional"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" />Permotional Panel </a></li>
+			<?php } ?>
 			<?php if($admin_user_level=='5' || $admin_user_level=='2')
 			{ ?>
 			<li>

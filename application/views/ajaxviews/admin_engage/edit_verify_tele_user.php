@@ -159,7 +159,7 @@
 					<div class="control-group">
 							<label class="label-control" for="input01">State: </label>
 							<div class="controls-input select_width">
-							<select name="state" id="state_<?php echo $lead_info['v_id']; ?>" onchange="fetchcities(<?php echo $lead_info['v_id']; ?>);" class="select_width">
+							<select name="state" id="state_<?php echo $lead_info['v_id']; ?>" onchange="fetchcities(<?php echo $lead_info['v_id']; ?>,'-1');" class="select_width">
 								<option> Select State </option>	
 					
 					<?php
@@ -667,8 +667,12 @@ $.ajax({
 
 function fetchcities(state_id,cityid)
 {
-var stateID = "state_"+state_id;
-var cityID = "city_"+state_id;
+if(cityid=='-1')
+{
+cityid=0;
+}
+ var stateID = "state_"+state_id;
+ var cityID = "city_"+state_id;
 
 state_id=$("#"+stateID).val();
  $.ajax({
