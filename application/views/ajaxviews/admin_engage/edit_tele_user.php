@@ -213,8 +213,7 @@
 				$studying_country_id_list=explode(",",$lead_info['studying_country_id']);
 				foreach($studying_country_id_list as $studying_country_id_list_arr) { 
 				if($studying_country_id_list_arr!='0' ){
-				$cnt_name=$this->lead_tele_model->country_name_by_id($studying_country_id_list_arr);
-				
+				$cnt_name=$this->lead_tele_model->country_name_by_id($studying_country_id_list_arr);				
 				?>
 							<span id="remove_country_<?php echo $studying_country_id_list_arr; ?>"><?php echo ucwords($cnt_name['country_name']); ?><a class="remove" onclick="removecountry(this.id)" href="javascript:" title="Remove <?php echo ucwords($cnt_name['country_name']); ?>" id="<?php echo $studying_country_id_list_arr; ?>">x</a><input type="hidden" name="country_ids[]" id="country_<?php echo $studying_country_id_list_arr; ?>" value="<?php echo $studying_country_id_list_arr; ?>"></span>
 				<?php

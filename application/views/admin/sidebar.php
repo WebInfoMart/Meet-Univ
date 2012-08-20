@@ -9,14 +9,24 @@ $flag=1;
   }
   }
  if($flag==1) { ?> 
-	<div id="sidebar" style="background-color:#eceff1;z-index:99">
+	<div id="sidebar">
 
 		<ul id="nav">
 			<li><a href="<?php echo $base; ?>admin"><strong><img src="<?php echo "$base$admin_img" ?>/nav/dashboard.png" alt="" /> Dashboard</strong></a></li>
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" /> Pages</a></li>
 			<li><a href="<?php echo $base; ?>adminleads/permotional_panel"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" />Permotional Panel </a></li>
-			
-			<?php if($admin_user_level==6) { ?>
+			<?php if($admin_user_level=='5' || $admin_user_level=='2')
+			{ ?>
+			<li>
+			<a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Manage Leads</a>			
+			<ul>
+			<li><a href="<?php echo $base; ?>admin_counsellor/permotional_panel"><img src="" alt="" />Unverified Leads</a></li>
+			<li><a href="<?php echo $base; ?>admin_counsellor/permotional_panel"><img src="" alt="" />Verified Leads</a></li></ul>
+			</li>
+			<?php
+			}
+			if($admin_user_level=='6' || $admin_user_level=='5') 
+			{ ?>
 			<li>
 			<a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Manage Leads</a>
 			

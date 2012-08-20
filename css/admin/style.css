@@ -38,10 +38,9 @@ a:hover {
 /* Header */
 	
 #header {
-	background: #35383d;
-	padding: 0 20px;
-	height: 50px;
+	font-size: 15px;background:url(../../images/admin/images/header_bg.png) repeat-x;height:56px;color:white
 	}
+	
 	
 #header h1 {
 	font-size: 18px;
@@ -218,45 +217,36 @@ a:hover {
 /* Sidebar */
 	
 #sidebar {
-	width: 200px;
-	float: left;
-	z-index:200;
-	position:relative;
-	background: url(../images/sb.gif) top left repeat-y;
+	z-index: 10;
+position: absolute;float:left;height:1200px;width: 200px;background:url(../../images/admin/images/side_img.png) repeat-y;
 	}
 	
 #sidebar ul#nav li {
 	font-size: 14px;
+		margin-bottom: 10px;
+
 	}
 
 #sidebar ul#nav li a {
 	display: block;
-	padding: 10px 0 10px 20px;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #bec9d0;
-	color: #5e6a80;
+	padding: 4px 0 10px 20px;
+	color: #fff;
 	text-decoration: none;
-	text-shadow: 0 1px 0 #fff;
-	font-weight: bold;
 	}
 
 #sidebar ul#nav li a strong {
-	background: url(../../images/admin/mac.png) center right no-repeat;
 	display: block;
 	margin-right: -1px;
-	color: #333;
+	color: #fff;
 	}
-
+#nav{padding-top: 20px;}
 #sidebar ul#nav li a img {
 	vertical-align: text-bottom;
 	}
 
 #sidebar ul#nav li a:hover {
-	background: #005598 url(../../images/admin/mbg.jpg) 0 0 repeat-x;
-	border-top: 1px solid #0095d8;
-	border-bottom: 1px solid #003868;
-	color: #fff;
-	text-shadow: 0 1px 0 #014076;
+	  background: url("../../images/admin/images/orange_img.png") no-repeat;
+color:#fff;
 	}
 
 #sidebar ul#nav li a:hover strong {
@@ -293,9 +283,14 @@ a:hover {
 
 #sidebar ul#nav li ul {
 	padding: 5px 0;
-	padding-left: 15px;
-	background: #e0e5e9;
-	border-bottom: 1px solid #becad1;
+padding-left: 15px;
+background: #595959;
+border: 1px solid gray;
+border-left: none;
+border-right: none;
+}
+#sidebar ul#nav li ul li{
+margin-left:0px
 	}
 
 #sidebar ul#nav li ul li {
@@ -310,8 +305,8 @@ a:hover {
 
 #sidebar ul#nav li ul li a:hover {
 	border: 0;
-	background: none;
-	color: #008ee8;
+	 background: url("../../images/admin/images/orange_img.png") no-repeat;
+color:#fff;
 	text-shadow: 0 1px 0 #fff;
 	}
 
@@ -367,10 +362,10 @@ a:hover {
 /* Content */
 	
 #content {
-	overflow: hidden;
-	padding: 0 20px;
-	left: 220px;
 width: 82%;
+margin-left: 200px;
+margin-top: 20px;
+padding: 0 20px;
 	}
 	
 #content .breadcrumb {
@@ -1475,6 +1470,7 @@ margin-left:270px;
 .content_event_form1
 {
 position:absolute;
+z-index: 1;
 left:200px;
 top:50px;
 }
