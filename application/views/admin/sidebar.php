@@ -20,12 +20,12 @@ $flag=1;
 			<?php } ?>
 			<?php if($admin_user_level=='5' || $admin_user_level=='2')
 			{ ?>
-			<li>
+			<!--<li>
 			<a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Manage Leads</a>			
 			<ul>
 			<li><a href="<?php echo $base; ?>admin_counsellor/permotional_panel"><img src="" alt="" />Unverified Leads</a></li>
 			<li><a href="<?php echo $base; ?>admin_counsellor/permotional_panel"><img src="" alt="" />Verified Leads</a></li></ul>
-			</li>
+			</li>-->
 			<?php
 			}
 			if($admin_user_level=='6' || $admin_user_level=='5') 

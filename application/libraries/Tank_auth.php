@@ -817,6 +817,15 @@ class Tank_auth
   }
   return FALSE;
  }
+ 
+ function genrate_hash_passsword($pwd)
+ {
+  $hasher = new PasswordHash(
+					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+					$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+			$hashed_password = $hasher->HashPassword($pwd);
+ return $hashed_password;
+ }
 }
 
 /* End of file Tank_auth.php */

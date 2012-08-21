@@ -329,10 +329,26 @@ class Adminleads extends CI_Controller
 
 	  }
 	
-	 function add_new()
+	 function add_new_verified_lead()
 	 {
-	  
-	  $data['insert_lead_info'] = $this->lead_tele_model->save_lead_info();  
+	  $email=$this->input->post('email');
+	  if($email!='' && $this->input->post('lead_as_site_user')!='0')
+	  {
+	  $lead_as_user=$this->lead_tele_model->email_as_site_user($email);
+	  if($lead_as_user)
+	  {
+	   $user_id=$lead_as_user['id'];
+	  }
+	  else
+	  {
+	   $user_id=0;
+	  }
+	  }
+	  else
+	  {
+	  $user_id='';
+	  }
+	  $data['insert_lead_info'] = $this->lead_tele_model->save_lead_info($user_id);  
 	  
 	  if($data['insert_lead_info']=='1')
 	  {

@@ -1,4 +1,4 @@
-<?php 
+		<?php 
 	$sno=1;
 	$cnt_rows_verify_table = 0;
 	foreach($teleleads as $teleleadsres) {
@@ -20,7 +20,7 @@
 			<div class="width_adjust float_l" >
 			<?php if($teleleadsres['email_verified']) {
 ?>
-<span class="float_l data_img" id="span_verified_email_<?php echo $teleleadsres['id']; ?>">
+<span class="float_l data_img" id="span_verified_email_<?php echo $teleleadsres['id']; ?>" >
 <img src="<?php echo base_url(); ?>images/admin/success.gif"/>
 </span>
 <?php } else { ?>
@@ -84,13 +84,13 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
   if($phone_check == 1)
  {
  $record_verified_true = 1;
- }
- else { echo "<br />Phone Lead"; } 
+ } 
  }
  ?>
 			</div>
-			<div class="span0 float_l">
-				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>			
+			<div class="float_l" style="width:66px;">
+				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>	
+                <a href="javascript:void(0);" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Delete</a>				
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 			
 			<!--<a href="javascript:void();" class="edit inline" style="margin-left:19px;cursor:pointer;" id="img_delete_lead_<?php echo $teleleadsres['id']; ?>" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>');">Delete</a>-->

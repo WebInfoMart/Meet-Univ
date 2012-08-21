@@ -3,7 +3,8 @@
 	overflow: hidden;
 	padding: 0 20px;
 	left: 220px;
-	width: 82%;
+	width: 40%;
+	position:absolute;
 	}
 #content_verify_message {
 	overflow: hidden;
@@ -15,7 +16,8 @@
 	overflow: hidden;
 	padding: 0 20px;
 	left: 220px;
-	width: 82%;
+	width: 35%;
+	position:absolute;
 	}		
 .message.info {
 	border: 1px solid #bbdbe0;
@@ -160,8 +162,9 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
  }
  ?>
 			</div>
-			<div class="span0 float_l">
-				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>			
+			<div class="float_l" style="width:66px;">
+				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Edit</a>	
+                <a href="javascript:void(0);" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline">Delete</a>				
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 			
 			<!--<a href="javascript:void();" class="edit inline" style="margin-left:19px;cursor:pointer;" id="img_delete_lead_<?php echo $teleleadsres['id']; ?>" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>');">Delete</a>-->
@@ -206,7 +209,6 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 			{
 				$("#data_data_"+current_id).hide("slow");
 				$("#data_data_"+current_id).replaceWith("");
-				
 				$("#content_drop_msg").css("display","block");
 			}
 		}
@@ -389,7 +391,7 @@ $.ajax({
    });  
 }	
 	
- function save_form()
+ function save_lead_form()
  { 		
  var fullname = $('#lead_full_name').val();
  fullname=fullname.trim();
@@ -411,6 +413,7 @@ $.ajax({
  var lead_source = $("#lead_source").val();
  var lead_status = $("#lead_status").val();
  var next_action = $("#next_action").val();
+ var success_exists=0;
  //start store intrested countries
  var c_id_list=0;
  $("input[name^=country_ids]").each(function() {
@@ -468,15 +471,14 @@ if(year==0 || month==0 || date==0)
  if(!success)
  {
  }
-else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
+else if(phone_digit>0  && phone_digit<3)
 {
- 
-	$("#lead_user_phone").css("border-color","red");
+ 	$("#lead_user_phone").css("border-color","red");
 	$('#error_message').html("Phone number should be 10 digit");
 	$('#error_message').css("display","block");
 	success=0;
 }	
-else if(validate_email(email)=='0')
+else if(validate_email(email)=='0' && email!='')
 {
 $("#lead_user_phone").css("border-color","#ccc");
 success=0;
@@ -494,6 +496,13 @@ else
 $('#lead_full_name').css("border-color","#ccc");
 	$('#error_message').html("");
 	$('#error_message').css("display","none");
+if(email=='' && phone=='' )
+{
+alert("Please Fill Either Email or Phone");
+success_exists=0;
+}
+else {	
+success_exists=1;
 	var email_stauts='';
 	$.ajax({
 	type: "POST",
@@ -506,11 +515,12 @@ $('#lead_full_name').css("border-color","#ccc");
 		email_stauts=msg;
 	}
 });
+}
 email_stauts=parseInt(email_stauts);
 if(email_stauts) {
 alert("For This Email or Phone No. Lead is already verified.");
 }
-else
+else if(success_exists)
 {
 
 	if(email!='')
@@ -531,7 +541,12 @@ else
 	}
 	var lead_verified=1;
 
-//alert(lead_verfied);
+ // make as site user
+ var lead_as_site_user=0;
+ if($('#lead_as_site_user').is(':checked'))
+ {
+ lead_as_site_user=1;
+ }
 var data={
 interested_cont :c_id_list,
 fullname: fullname,
@@ -550,17 +565,19 @@ phone_verified:phone_verified,
 email_verified:email_verified,
 lead_verified:lead_verified,
 lead_status:lead_status,
-next_action:next_action
+next_action:next_action,
+lead_as_site_user:lead_as_site_user
  };
+ 
 $.ajax({
 	   type: "POST",
-	   url: "<?php echo $base; ?>adminleads/add_new",
+	   url: "<?php echo $base; ?>adminleads/add_new_verified_lead",
 	   async:false,
 	   data: data,
 	   cache: false,
 	   success: function(msg)
 	   {
-	  // alert(msg);
+	   alert(msg);
 	   if(msg=='1')
 	   {
 	    $("#content_msg").css("display","block");

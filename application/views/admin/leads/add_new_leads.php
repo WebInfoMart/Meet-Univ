@@ -176,6 +176,14 @@
 							</div>
 					</div>
 				</div>
+				<div class="span15 float_l">
+					<div class="control-group">
+							<label class="label-control" for="input01">Add As Site User</label>
+							<div class="controls-input select_width">
+							<input type="checkbox" name="lead_as_site_user" id="lead_as_site_user">
+							</div>
+					</div>
+				</div>
 				
 			<div class="float_l">
 						<div class="control-group" >
@@ -187,7 +195,7 @@
 					</div>
 					<div class="span2 float_l">
 						<div class="control-group">
-							<button class="btn_img" style="cursor:pointer;" name="save" id="save_data" value="save" onclick="save_form(this);">Save now</button>
+							<button class="btn_img" style="cursor:pointer;" name="save" id="save_data" value="save" onclick="save_lead_form(this);">Save now</button>
 							<button class="btn_img" style="cursor:pointer;" name="cancel" id="cancel_data" value="Cancel" onclick="cancel()">Cancel</button>
 							<div class="float_r margin_t ajax_loading_img" style="display:none;" ><img src="<?php echo $base; ?>images/ajax_loader.gif"></div>
 						</div>

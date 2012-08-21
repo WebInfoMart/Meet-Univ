@@ -37,7 +37,9 @@
 	  echo "<h3>Dear &nbsp;".$fullname."</h3>";
 	  ?>
 	  <span style="color:red;"><h3> Thank you for registering with Global University Events | MeetUniversities.com! </br>
-		   We are glad to you for chosing to be a part of our community and we hope you </br></h3>
+		   We are glad to you for chosing to be a part of our community and we hope you
+			Your Password is <?php echo $password; ?>
+		   </br></h3>
 		   <h3> enjoy your stay. </h3>
 		   <p style="margin-bottom: 19px;"> All the best,Global University Events – One Place  | <a href="www.meetuniversities.com">MeetUniversities.com</a></p> 
 		   </span>
