@@ -141,9 +141,9 @@
 					<div class="control-group">
 							<label class="label-control" for="input01">Country: </label>
 							<div class="controls-input select_width">
-							<select name="country" id="country_<?php echo $lead_info['v_id']; ?>" onchange="fetchstates('<?php echo $lead_info['v_id']; ?>')" class="select_width">
+							<select name="country" id="country_<?php echo $lead_info['v_id']; ?>" onchange="fetchstates('<?php echo $country_result['country_id']; ?>')" class="select_width">
 								<option value="">Select country</option>
-					<?php	foreach($country_res as $country_result) { 
+					<?php foreach($country_res as $country_result) { 
 					$selected='';
 					if($country_result['country_id']==$lead_info['v_country']) { 
 					$selected='selected';
@@ -408,8 +408,7 @@
  var notes = $('#notes_'+form_id).val();
  var year = $('#year_'+form_id).val();
  var month = $('#month_'+form_id).val();
- var date = $('#date_'+form_id).val();
- var interested_cont = $('#interested_country_'+form_id).val();
+ var date = $('#date_'+form_id).val(); 
  var lead_source = $("#lead_source_"+form_id).val();
  var lead_status= $('#lead_status_'+form_id).val();
  var next_action=$('#next_action_'+form_id).val();

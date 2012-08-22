@@ -1,26 +1,42 @@
 <link rel="stylesheet" href="<?php echo $base; ?>css/admin/engage/style.css">
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>  
-<div class="body" style="margin-left: 200px;">
+<div id="content">
 		<div class="big_width margin_delta">
 			<div class="counsel_bg">
-			<div class="float_l span3 margin_delta">
+			<div class="float_l span77 margin_delta">
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Source country: </label>
 					<div class="controls-input-data">
-					<input type="text" class="large" id="input01">
+					<select class="large" id="country" onchange="fetchcities()">
+					<option>-Select Country-</option>
+					<?php foreach($country as $cntry)
+					{ ?>
+					<option value="<?php echo $cntry['country_id']; ?>"><?php echo $cntry['country_name']; ?></option>
+					<?php
+					}
+					?>
+					</select>
 					</div>
 				</div>
 			</div>
-			<div class="float_l span3">
+			<div class="float_l span77">
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Source city: </label>
 					<div class="controls-input-data">
-					<input type="text" class="large" id="input01">
+					<select class="large" id="city">
+					<option>-Select City-</option>
+					<?php foreach($city as $ct)
+					{ ?>
+					<option value="<?php echo $ct['city_id']; ?>"><?php echo $ct['cityname']; ?></option>
+					<?php
+					}
+					?>
+					</select>
 					</div>
 				</div>
 			</div>
-			<div class="float_l span3">
+			<div class="float_l span77">
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Leads: </label>
 					<div class="controls-input-data">
@@ -28,43 +44,57 @@
 					</div>
 				</div>
 			</div>
-			<div class="float_l span3">
+			<div class="float_l span77">
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Next action: </label>
 					<div class="controls-input-data">
-					<input type="text" class="large" id="input01">
+					<select class="large" id="next_action">
+					<option>-Select Action-</option>
+					<option value="none">none</option>
+					<option value="counsellor">counsellor</option>
+					<option value="hot">hot</option>
+					<option value="paused">paused</option>
+					</select>
 					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 			<div class="bottom_line"></div>
-			<div class="float_l span3 margin_delta">
+			<div class="float_l span77 margin_delta">
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Source: </label>
 					<div class="controls-input-data">
-					<input type="text" class="large" id="input01">
+					<select class="large" id="source">
+					<option>-Select Source-</option>
+					<option value="site_user">Siteuser</option>
+					<option value="fb_login">fb Login</option>
+					<option value="fb_canvas">fb Canvas</option>
+					<option value="android_user">Android User</option>
+					<option value="event_user">Event USer</option>
+					<option value="other">Other</option>
+					</select>
 					</div>
 				</div>
 			</div>
-			<div class="float_l span3">
+			<div class="float_l span77">
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Phone no: </label>
 					<div class="controls-input-data">
-					<input type="checkbox" class="checkbox_set">
+					<input type="checkbox" id="phone">
 					</div>
 				</div>
 			</div>
-			<div class="float_l span3">
+			<div class="float_l span77">
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01"> Email address: </label>
 					<div class="controls-input-data">
-					<input type="checkbox" class="checkbox_set">
+					<input type="checkbox" id="email">
 					</div>
 				</div>
 			</div>
-			<div class="float_r">
+			<div class="float_1 span77">
 				<div class="control-group">
-					<button type="button" class="search_btn">
+					<button type="button" id="search_btn" value="Search" onclick="search();" style="width:80px;height:30px;">
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -72,7 +102,7 @@
 		</div>
 		<!--
 		<pre>
-		<?php print_r($verify_teleleads); ?>
+		<?php //print_r($country); ?>
 		</pre> -->
 		<div class="margin_t">
 			<div class="span1 float_l">
@@ -107,7 +137,7 @@
 				<?php  echo $result['v_email']; ?>
 			</div>
 			<div class="span14 float_l">
-				<?php  echo $result['v_user_type'];  ?>
+				<?php if($result['v_user_type']){echo '';}else{ echo $result['v_user_type']; } ?>
 			</div>
 			<div class="span14 float_l">
 				<?php  echo $result['v_phone'];  ?>
@@ -132,11 +162,61 @@ $.ajax({
 	   data: 'id='+id,
 	   cache: false,
 	   success: function(msg)
-	   {alert(msg);
-	    $('.body').hide();
+	   {//alert(msg);
+	    $('#content').hide();
+		$("#c_edit").show();
 		$('#c_edit').html(msg);		 
 	   }
 	   });
 });
+function cancel()
+{
+	$("#c_edit").hide();
+	//$('#c_edit').replaceWith('');
+	$('#content').show();
+	//$("#data_"+id).show('slow');
+}
+function fetchcities()
+{
+var cityid=0;
+var country_id=$("#country").val();
+
+ $.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin_counsellor/city_list/",
+   data: 'country_id='+country_id+'&sel_city_id='+cityid,
+   cache: false,
+   success: function(msg)
+   {
+    //$('#'+cityID).attr('disabled', false);
+	$('#city').html(msg);
+   }
+   });  
+}
+function search()
+{
+	var cnt_id=$("#country").val();
+	var ct_id=$("#city").val();
+	var action_id=$("#next_action").val();
+	var src_id=$("#source").val();
+	var phone=$("#phone").is(':checked');
+	var email=$("#email").is(':checked');
+	var data='country='+cnt_id+'&city='+ct_id+'&action_id='+action_id+'&src_id='+src_id+'&phone='+phone+'&email='+email;
+	alert(data);
+	$.ajax({
+	type:"POST",
+	url:"<?php echo $base; ?>admin_counsellor/search_lead",
+	data: data,
+	cache: false,
+	async:false,
+	success:function(msg)
+	{
+		alert(msg);
+		
+	}
+	});
+	
+	
+}	 
 </script>	
 

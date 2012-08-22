@@ -1,21 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-
-	<meta http-equiv="X-UA-Compatible" content="IE=7" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
-	<title>Adminium - Modern Admin Panel Interface</title>	
-	<meta name="description" content="." />
-	<meta name="keywords" content="." />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="http://meetuniv.com/css/admin/style.css">
-	<link rel="stylesheet" href="http://meetuniv.com/css/admin/visualize.css">
-	<link rel="stylesheet" href="http://meetuniv.com/css/admin/date_input.css">
-	<link rel="stylesheet" href="http://meetuniv.com/css/admin/jquery.minicolors.css">
-	<link rel="stylesheet" href="http://meetuniv.com/css/admin/admin.css">
-	<link rel="stylesheet" href="http://meetuniv.com/css/admin/jquery.autocomplete.css">
-	<link rel="stylesheet" href="http://meetuniv.com/css/admin/jquery.multiSelect.css">
-
+<script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script> 
+<link rel="stylesheet" href="<?php echo $base; ?>css/admin/autocomplete.css" type="text/css" media="screen"  charset="utf-8" />
+<link rel="stylesheet" href="<?php echo $base; ?>css/admin/jquery-ui-1.8.custom.css" type="text/css" media="screen"  charset="utf-8" /> 
 <script type="text/javascript">
  var globalid=0;
 $(document).ready(function(){
@@ -63,112 +49,127 @@ $(document).ready(function(){
  $("#view_more_"+globalid).show(1000);
  }
 </script>
-
-	<!--[if lt IE 9]>
-	<style type="text/css" media="all"> @import url("css/ie.css"); </style>
-	<![endif]-->
-	
-
-</head>
-<body>
-
-<!--
-	<div id="header_id">
-		<div class="span61 float_r margin2">
-			<div class="float_l border_holder">
-				<img src="../images/admin/images/user.png" alt="User" title="User"/>
-				<span class="margin_l">Hello Administrator</span>
-			</div>
-			<div class="float_l border_holder">
-				<img src="../images/admin/images/setting.png" alt="User" title="User"/>
-			</div>
-			<div class="float_l border_holder">
-				<img src="../images/admin/images/setting.png" alt="User" title="User"/>
-			</div>
-			<div class="float_l border_holder border_beta">
-				logout
-			</div>
-		</div>
-	</div>			<!-- #header ends -->
-	<!--
-		<div class="float_l sidebar">
-		<div class="search_box">
-			<img src="../images/admin/images/search_icon.png" class="search_input_set"><input type="text" name="search" value="search" class="search_input">
-		</div>
-		<div class="menu">
-			<ul id="nav">
-                <li class="active"><a href="#"><img src="../images/admin/images/home_icon.png" /> <span>Dashboard</span></a></li>
-                <li><a href="#"><img src="../images/admin/images/paged_icon.png" /><span>Pages</span></a>
-                </li>
-               <li><a href="#"><img src="../images/admin/images/side_user_icon.png" /><span>Users</span></a>
-                </li>
-                <li><a href="#"><img src="../images/admin/images/edit_icon.png" /><span>Articles</span></a></li>
-                <li><a href="#"><img src="../images/admin/images/cal_icon.png" /><span>Events</span></a></li>
-                <li><a href="#"><img src="../images/admin/images/lib_icon.png" /><span>Manage Universities</span></a></li> 
-				<li><a href="#"><img src="../images/admin/images/img_icon.png" /><span>Manage Home Gallery</span></a></li> 
-				<li><a href="#"><img src="../images/admin/images/book_icon.png" /><span>Proagram/Courses</span></a></li> 
-				<li><a href="#"><img src="../images/admin/images/book_icon.png" /><span>University/Courses</span></a></li>
-				<li><a href="#"><img src="../images/admin/images/img_icon.png" /><span>University Gallery</span></a></li>
-				<li><a href="#"><img src="../images/admin/images/clip_icon.png" /><span>Manage Univ/Proagram</span> </a></li>
-				<li><a href="#"><img src="../images/admin/images/clip_icon.png" /><span>Manage Univ/Users</span> </a></li>
-				<li><a href="#"><img src="../images/admin/images/setting.png" /><span>Settings</span> </a></li>
-				<li><a href="#"><img src="../images/admin/images/bulb_icon.png" /><span>Supports</span></a></li>
-            </ul>
-		</div>
-	</div>		<!-- #sidebar ends -->
 	<div id="content" class="data_shif">
 
-<?php print_r($country); ?>	
 		<div class="counsel_next_bg span13 margin_delta">
-			<div class="float_l span21 margin_delta">
+			<div class="float_l data2 margin_delta">
 				<img src="images/user_img.png" class="user_img"/>
 			</div>
-			<div class="float_r span101">
+			<div class="float_r data12">
 				<div class="float_l span16 margin_delta">
 					<div class="control-group1">
-						<label class="control-data" for="input01">First Name: </label>
-						<div class="input-data">
+						<label class="control-data12" for="input01">First Name: </label>
+						<div class="input-data12">
 							<span   class="selector"><?php echo $verify_teleleads['v_fullname'];  ?></span>
-							<input type="text" id="name" name="name" class="edit_box" value="<?php echo $verify_teleleads['v_fullname'];  ?>"/>
+							<input type="hidden" id="lead_id" value="<?php echo $verify_teleleads['v_lead_id']; ?>"/>
+							<input type="text" id="name" name="name" class="edit_box large_data" value="<?php echo $verify_teleleads['v_fullname'];  ?>" style="display:none"/>
 						</div>
 					</div>
 				</div>
 				<div class="float_l span16">
 					<div class="control-group1">
-						<label class="control-data" for="input01">DOB:</label>
-						<div class="input-data">
-							<span  class="dob selector"><?php echo $verify_teleleads['v_dob'];  ?> </span>
-							<input type="text" id="dob" name="dob" class="edit_box" value="<?php echo $verify_teleleads['v_dob'];  ?>"/>
-						</div>
+						<label class="control-data12" for="input01">DOB:</label>
+						<div class="input-data12">
+							<span  class="dob selector"><?php echo $verify_teleleads['v_dob']; ?> </span>					
+							<?php
+					$dob=$verify_teleleads['v_dob'];
+					 if($dob=='' || $dob==NULL || $dob=='0')
+					 {
+					 $dob='0000-00-00';
+					 }
+					 $d_of_b=explode("-",$dob);	
+					?> 
+					<select name="year" id="year" class="margin-delta grid1 edit_box " style="display:none" >
+					<option value="0" >Year</option> 
+					<?php
+					for($count_year=1920;$count_year<=2005;$count_year++)
+					{ ?>
+					<option  value="<?php echo $count_year; ?>" <?php if($count_year==$d_of_b[0]){ echo "selected"; } ?> ><?php echo $count_year; ?></option>
+					<?php } ?>
+					</select>
+																		
+						
+					<select name="month"  id="month" class="grid1 margin_l6 edit_box" style="display:none">
+					<option value="0" >Month</option> 
+					<?php
+					$arr_month = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'); 
+					for($count_month=1;$count_month<=12;$count_month++)
+					{
+					?>
+					<option value="<?php echo $count_month; ?>" <?php if($count_month==$d_of_b[1]){ echo "selected"; } ?>><?php echo $arr_month[$count_month-1]; ?></option>
+					<?php } ?>
+					</select>
+				 
+				 <select  name="date" id="date" class="grid1 margin_l6 edit_box" style="display:none">
+					<option value="0" >Date</option> 
+				<?php
+
+				for($count_date=1;$count_date<=31;$count_date++)
+				{
+				?>
+				<option value="<?php echo $count_date; ?>" <?php if($count_date==$d_of_b[2]){ echo "selected"; } ?> ><?php echo $count_date; ?></option>
+				<?php } ?>
+				</select>
+							</div>
 					</div>
 				</div>
 				<div class="float_l span16">
 					<div class="control-group1">
-						<label class="control-data" for="input01"> Email: </label>
-						<div class="input-data">
+						<label class="control-data12" for="input01"> Email: </label>
+						<div class="input-data12">
 						<span class="selector"><?php echo $verify_teleleads['v_email'];  ?> </span>
-						<input type="text"name="Email" id="Email" class="edit_box" value="<?php echo $verify_teleleads['v_email'];  ?>"/>
+						<input type="text"name="email" id="email" class="edit_box large_data" value="<?php echo $verify_teleleads['v_email'];  ?>" style="display:none"/>
 						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class="bottom_line_second margin_b"></div>
-				<div class="float_l span16">
+				<div class="float_l span16 margin_delta">
 					<div class="control-group1">
 						<label class="control-data" for="input01">Country: </label>
-						<div class="input-data">
+						<div class="input-data12">
 						<span class="country_drop selector"><?php echo $verify_teleleads['country_name'];  ?> </span>
-						<Select  name="Country" id="Country" class='edit_box'><option>Select Country</option>  </select>
+						<Select  name="country" id="country" class='edit_box large_data' onchange="fetchstates()" style="display:none">
+						<option>Select Country</option> 
+						<?php foreach($country as $cntry){
+						$selected='';
+						if($cntry['country_name']==$verify_teleleads['country_name']) { 
+						$selected='selected';
+						}
+						 ?>
+						<option value="<?php echo $cntry['country_id']; ?>" <?php echo $selected;?>><?php echo $cntry['country_name']; ?></option>
+						<?php } ?>						
+						</select>
 						</div>
 					</div>
 				</div>
 				<div class="float_l span16">
 					<div class="control-group1">
 						<label class="control-data" for="input01">State: </label>
-						<div class="input-data">
-						<span class="state_drop selector"><?php echo $verify_teleleads['statename'];  ?> </span>
+						<div class="input-data12">
+						<span class="state_drop selector"><?php echo $verify_teleleads['statename']; ?> </span>			
+						<Select  name="state" id="state" class='edit_box' onchange="fetchcities()" style="display:none">
+						<option>Select state</option>
 						
-						<Select  name="State" id="State" class='edit_box'><option>Select Country</option>  </select>
+					<?php
+					
+					if($state!='0')
+					{ 
+						foreach($state as $st){
+						$selected = '';
+						if($st['statename']==$verify_teleleads['statename'])
+						{
+						$selected='selected';
+						?>
+						<option value="<?php echo $st['state_id']; ?>" <?php echo $selected; ?> ><?php echo $st['statename']; ?></option>
+						<?php
+						}
+						
+						}
+					}
+					?>	
+					
+						</select>
 						</div>
 					</div>
 				</div>
@@ -177,7 +178,25 @@ $(document).ready(function(){
 						<label class="control-data" for="input01"> City: </label>
 						<div class="input-data">
 						<span class="city_drop selector"><?php echo $verify_teleleads['cityname'];  ?> </span>
-						<Select  name="city" id="city" class='edit_box'><option>Select Country</option>  </select>
+						<Select  name="city" id="city" class='edit_box' style="display:none">
+						<option>Select City</option>								
+						<?php
+					
+						if($city!='0')
+						{ 
+							foreach($city as $ct){
+							$selected = '';
+							if($ct['cityname']==$verify_teleleads['cityname'])
+							{
+							$selected='selected';
+							?>
+							<option value="<?php echo $ct['city_id']; ?>" <?php echo $selected; ?> ><?php echo $ct['cityname']; ?></option>
+							<?php
+							}					
+							}
+						}
+					?>							
+						</select>
 						</div>
 					</div>
 				</div>
@@ -188,7 +207,7 @@ $(document).ready(function(){
 						<label class="control-data" for="input01">Phone: </label>
 						<div class="input-data">
 						<span  class="selector"><?php echo $verify_teleleads['v_phone'];  ?> </span>
-						<input type="text" name="Phone" id="Phone" class="edit_box" value="<?php echo $verify_teleleads['v_phone'];  ?>"/>
+						<input type="text" name="phone" id="phone" class="edit_box" value="<?php echo $verify_teleleads['v_phone']; ?>" style="display:none"/>
 						</div>
 					</div>
 				</div>
@@ -197,33 +216,30 @@ $(document).ready(function(){
 						<label class="control-data" for="input01"> Enroll K12: </label>
 						<div class="input-data">
 						<span  class="selector"><?php echo $verify_teleleads['v_enroll_key'];  ?> </span>
-						<input name="Enroll" id="Enroll" id="Phone" class="edit_box" value="<?php echo $verify_teleleads['v_enroll_key'];  ?>"/>
+						<input name="enroll" id="enroll" class="edit_box" value="<?php echo $verify_teleleads['v_enroll_key']; ?>" style="display:none"/>
 						</div>
 					</div>
 				</div>
 				<div class="float_l span16 margin_delta">
-					<div class="control-group1">
-						<label class="control-data" for="input01"> Intrested country: </label>
-						<div class="input-data">
-								<?php 			
-				if($verify_teleleads['v_interested_country']!='' && $verify_teleleads['v_interested_country']!='0')
-				{
-				$interested_cntry=explode(",",$verify_teleleads['v_interested_country']);
-				foreach($interested_cntry as $interested_cntry_arr) 
-				{ 
-					if($interested_cntry_arr!='0' )
+				<div class="control-group1">
+				<label class="control-data" for="input01"> Intrested country: </label>
+				<div id="intrested_countries" class="ui-helper-clearfix edit_box" >
+					<?php 			
+					if($verify_teleleads['v_interested_country']!='' && $verify_teleleads['v_interested_country']!='0')
 					{
-					$cnt_name=$this->lead_tele_model->country_name_by_id($interested_cntry_arr);				
-				?>
-				<span><?php echo ucwords($cnt_name['country_name']); ?>
-				<input type="hidden" name="country_ids[]" id="country_<?php echo $interested_cntry_arr; ?>" value="<?php echo $interested_cntry_arr; ?>"></span>
-				<?php
-				}}
-				}			
-				?>
-				<Select  name="Intrestedcount" id="Interestedcount" class='edit_box'><option>Select Country</option>  </select>
-						</div>
-					</div>
+					$int_country=explode(",",$verify_teleleads['v_interested_country']);
+					foreach($int_country as $int_country_id_list) { 
+					if($int_country_id_list!='0' ){
+					$cnt_name=$this->lead_tele_model->country_name_by_id($int_country_id_list);				
+					?>
+					<span id="remove_country_<?php echo $int_country_id_list; ?>" class="edit_box"><?php echo ucwords($cnt_name['country_name']); ?><a class="remove edit_box" onclick="removecountry(this.id)" href="javascript:" title="Remove <?php echo ucwords($cnt_name['country_name']); ?>" id="<?php echo $int_country_id_list; ?>">x</a><input type="hidden" name="country_ids[]" id="country_<?php echo $int_country_id_list; ?>" value="<?php echo $int_country_id_list; ?>"></span>
+					<?php
+					}}
+					}			
+					?>			
+					<input id="auto_intrested_countries" class="edit_box" type="text" style="display:none">
+				</div>
+				</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class="bottom_line_second"></div>
@@ -233,8 +249,43 @@ $(document).ready(function(){
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Intrested in courses: </label>
 					<div class="input-left">
-						<span  class="courses selector"><?php echo $verify_teleleads['course_name'];  ?></span>
-						<Select name="courses" id="courses" class='edit_box'><option>Select Country</option>  </select>
+					<span class="courses selector">
+					<?php 
+					$courses=array();
+					if($verify_teleleads['v_program']!='')
+					{
+						$courses=explode(",",$verify_teleleads['v_program']);
+						$count=count($courses);					
+						for($i=0;$i<$count;$i++)
+						{ 
+							$sub=$this->admin_counsellor_model->fetch_program_model($courses[$i]); 
+							//print_r($sub);
+							echo $sub[0]['course_name'];if($i<$count-1){ echo ',';}
+						}
+					}
+					?>
+					</span>
+						<Select name="courses[]" id="courses" multiple="multiple" class='edit_box' style="height: 200px;display:none">
+						 						
+						<?php foreach($program_parent as $prog)
+						{ ?>
+						<optgroup label="<?php echo $prog['program_parent_name'];?>">
+						 <?php 						 
+						 $program=$this->admin_counsellor_model->program_model($prog['prog_parent_id']);					
+						 if(count($program)>0)
+						 {
+							 foreach($program as $course)
+							 {?>
+							 <option value="<?php echo $course['prog_id'];?>" <?php if(in_array($course['prog_id'],$courses)) { ?> selected <?php } ?>><?php echo $course['course_name'];?></option>	
+							 <?php
+							 }
+						 } ?>
+						 </optgroup>
+						 <?php
+						}
+						?>
+						</select>
+						
 					</div>
 				</div>
 			</div>
@@ -243,27 +294,60 @@ $(document).ready(function(){
 					<label class="big-data padding_alpha" for="input01">When do you want to begin:  </label>
 					<div class="input-left">
 				<span name="begin" id="begin" class="selector2 selector"><?php echo $verify_teleleads['v_enroll_date'];?></span>
-						<input name="Enroll" id="Enroll" id="Phone" class="edit_box" value="<?php echo $verify_teleleads['v_enroll_date'];  ?>"/>
+						<input name="enroll_date" id="enroll_date" class="edit_box" value="<?php echo $verify_teleleads['v_enroll_date'];  ?>" style="display:none"/>
 					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
-				<div class="bottom_line1"></div>
-				<div class="float_l span61 margin_delta">
-				<div class="control-group1">
-					<label class="big-data padding_alpha" for="input01">Exam score:  </label>
-					<div class="input-left">
-						<span class="selector2 selector"><?php echo $verify_teleleads['v_aggregate_percentage'];  ?></span>
-						<input name="Exam" id="Exam"  class="edit_box" value="<?php echo $verify_teleleads['v_aggregate_percentage'];  ?>"/>
-					</div>
-				</div>
+			<div class="bottom_line1"></div>
+			<div class="float_l span61 margin_delta">
+			<div class="control-group1">
+			<label class="big-data padding_alpha" for="input01">Exam 1:  </label>
+			<div class="input-left">
+				<span class="selector2 selector"><?php echo $verify_teleleads['v_acedmic_exam_score_type1'];  ?></span>				
+				<select id="exam1"  class="edit_box" style="display:none">
+				<option value="">Select</option>
+				<option value="SAT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='SAT'){ ?> selected <?php } ?>>SAT</option>
+				<option value="ACT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='ACT'){ ?> selected <?php } ?>>ACT</option>
+				<option value="GRE" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='GRE'){ ?> selected <?php } ?>>GRE</option>
+				<option value="GMAT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='GMAT'){ ?> selected <?php } ?>>GMAT</option>	
+				</select>					
+			</div>			
+			</div>
+			<div class="control-group1">
+			<label class="big-data padding_alpha" for="input01">Score Exam 1:  </label>
+			<div class="input-left">
+				<span class="selector2 selector"><?php echo $verify_teleleads['acedmic_exam_score1'];  ?></span>						
+				<input type="text" id="exam1_score" class="edit_box"  value="<?php echo $verify_teleleads['acedmic_exam_score1']; ?>" style="display:none">		
+			</div>			
+			</div>
+			<div class="control-group1">
+			<label class="big-data padding_alpha" for="input01">Exam 2:  </label>
+			<div class="input-left">
+				<span class="selector2 selector"><?php echo $verify_teleleads['v_acedmic_exam_score_type2'];  ?></span>				
+				<select id="exam2"  class="edit_box" style="display:none">
+				<option value="">Select</option>
+				<option value="SAT" <?php if($verify_teleleads['v_acedmic_exam_score_type2']=='SAT'){ ?> selected <?php } ?>>SAT</option>
+				<option value="ACT" <?php if($verify_teleleads['v_acedmic_exam_score_type2']=='ACT'){ ?> selected <?php } ?>>ACT</option>
+				<option value="GRE" <?php if($verify_teleleads['v_acedmic_exam_score_type2']=='GRE'){ ?> selected <?php } ?>>GRE</option>
+				<option value="GMAT" <?php if($verify_teleleads['v_acedmic_exam_score_type2']=='GMAT'){ ?> selected <?php } ?>>GMAT</option>	
+				</select>					
+			</div>			
+			</div>
+			<div class="control-group1">
+			<label class="big-data padding_alpha" for="input01">Score Exam 2:  </label>
+			<div class="input-left">
+				<span class="selector2 selector"><?php echo $verify_teleleads['v_acedmic_exam_score2'];  ?></span>						
+				<input type="text" id="exam2_score" class="edit_box"  value="<?php echo $verify_teleleads['v_acedmic_exam_score2']; ?>" style="display:none" />		
+			</div>			
+			</div>
 			</div>
 			<div class="float_l span61">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">The last institution that you attended:  </label>
 					<div class="input-left">
 						<span class="selector2 selector"><?php echo $verify_teleleads['v_last_institute'];  ?></span>
-							<input name="attended" id="attended"   class="edit_box" value="<?php echo $verify_teleleads['v_last_institute'];  ?>"/>
+							<input name="attended" id="attended" class="edit_box" value="<?php echo $verify_teleleads['v_last_institute'];  ?>" style="display:none"/>
 						
 					</div>
 				</div>
@@ -275,9 +359,9 @@ $(document).ready(function(){
 					<label class="big-data padding_alpha" for="input01">Other exams if any:  </label>
 					<div class="input-left">
 						<span  class="selector2 selector"><?php echo $verify_teleleads['v_other_exam'];  ?></span>
-						<input name="Other" id="Other"  class="edit_box" value="<?php echo $verify_teleleads['v_other_exam'];  ?>"/>
+						<input name="other_exam_name" id="other_exam_name"  class="edit_box" value="<?php echo $verify_teleleads['v_other_exam']; ?>" style="display:none"/>
 						<span  class="selector2 selector"><?php echo $verify_teleleads['v_other_exam_score'];  ?></span>
-						<input name="Other" id="Other"  class="edit_box" value="<?php echo $verify_teleleads['v_other_exam_score'];  ?>"/>
+						<input name="other_exam_score" id="other_exam_score"  class="edit_box" value="<?php echo $verify_teleleads['v_other_exam_score']; ?>" style="display:none"/>
 					</div>
 				</div>
 			</div>
@@ -285,8 +369,40 @@ $(document).ready(function(){
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Status:  </label>
 					<div class="input-left">
-						<span class="Status selector"><?php echo $verify_teleleads['v_lead_status'];  ?></span>
-						<input name="Status" id="Status" class="edit_box" value="<?php echo $verify_teleleads['v_lead_status'];  ?>"/>
+						<span class="Status selector"><?php echo $verify_teleleads['v_status'];  ?></span>						
+						<select name="status" id="status"  class="edit_box" style="display:none">
+						<option value="">--Please Select--</option>
+						<option value="Valid" <?php if($verify_teleleads['v_status']=='Valid'){ ?> selected="selected" <?php } ?>>Valid</option>
+						<optgroup label="Invalid Reason">
+						<option value="None Given" <?php if($verify_teleleads['v_status']=='None Given'){ ?> selected="selected" <?php } ?>>None Given</option>
+						<option value="Poor Candidate Data" <?php if($verify_teleleads['v_status']=='Poor Candidate Data'){ ?> selected="selected" <?php } ?>>Poor Candidate Data</option>
+						<option value="Incorrect Academic Level" <?php if($verify_teleleads['v_status']=='Incorrect Academic Level'){ ?> selected="selected" <?php } ?>>Incorrect Academic Level</option>
+						<option value="Program/School Fit" <?php if($verify_teleleads['v_status']=='Program/School Fit'){ ?> selected="selected" <?php } ?>>Program/School Fit</option>
+						<option value="No Reply" <?php if($verify_teleleads['v_status']=='No Reply'){ ?> selected="selected" <?php } ?>>No Reply</option>
+						<option value="Spammers/Agents" <?php if($verify_teleleads['v_status']=='Spammers/Agents'){ ?> selected="selected" <?php } ?>>Spammers/Agents</option>
+						<option value="Invalid Contact Details" <?php if($verify_teleleads['v_status']=='Invalid Contact Details'){ ?> selected="selected" <?php } ?>>Invalid Contact Details</option>
+						<option value="Looking For Different Country" <?php if($verify_teleleads['v_status']=='Looking For Different Country'){ ?> selected="selected" <?php } ?>>Looking For Different Country</option>
+						<option value="Fail to meet filters" <?php if($verify_teleleads['v_status']=='Fail to meet filters'){ ?> selected="selected" <?php } ?>>Fail to meet filters</option>
+						<option value="Duplicate" <?php if($verify_teleleads['v_status']=='Duplicate'){ ?> selected="selected" <?php } ?>>Duplicate</option>
+						<option value="Incomplete" <?php if($verify_teleleads['v_status']=='Incomplete'){ ?> selected="selected" <?php } ?>>Incomplete</option>
+						<option value="Cap met" <?php if($verify_teleleads['v_status']=='Cap met'){ ?> selected="selected" <?php } ?>>Cap met</option>
+						<option value="Velocity limit met" <?php if($verify_teleleads['v_status']=='Velocity limit met'){ ?> selected="selected" <?php } ?>>Velocity limit met</option>
+						<option value="Because of year" <?php if($verify_teleleads['v_status']=='Because of year'){ ?> selected="selected" <?php } ?>>Because of year</option>
+						<option value="Unable to Establish Contact- 3 Attempts"<?php if($verify_teleleads['v_status']=='Unable to Establish Contact- 3 Attempts'){ ?> selected="selected" <?php } ?> >Unable to Establish Contact- 3 Attempts</option>
+						<option value="Incorrect/Wrong Number" <?php if($verify_teleleads['v_status']=='Incorrect/Wrong Number'){ ?> selected="selected" <?php } ?>>Incorrect/Wrong Number</option>
+						<option value="Hasn't Decided yet" <?php if($verify_teleleads['v_status']=="Hasn't Decided yet"){ ?> selected="selected" <?php } ?>>Hasn't Decided yet</option>
+						<option value="Looking for Different Course" <?php if($verify_teleleads['v_status']=='Looking for Different Course'){ ?> selected="selected" <?php } ?>>Looking for Different Course</option>
+						<option value="Not Looking for further studies" <?php if($verify_teleleads['v_status']=='Not Looking for further studies'){ ?> selected="selected" <?php } ?>>Not Looking for further studies</option>
+						<option value="Due to Location of the colllege" <?php if($verify_teleleads['v_status']=='Due to Location of the colllege'){ ?> selected="selected" <?php } ?>>Due to Location of the colllege</option>
+						<option value="Looking for Part-time Course" <?php if($verify_teleleads['v_status']=='Looking for Part-time Course'){ ?> selected="selected" <?php } ?>>Looking for Part-time Course</option>
+						<option value="Poor Lead Quality" <?php if($verify_teleleads['v_status']=='Poor Lead Quality'){ ?> selected="selected" <?php } ?>>Poor Lead Quality</option>
+						<option value="Looking for Lateral entry" <?php if($verify_teleleads['v_status']=='Looking for Lateral entry'){ ?> selected="selected" <?php } ?>>Looking for Lateral entry</option>
+						<option value="Already applied/Enrolled" <?php if($verify_teleleads['v_status']=='Already applied/Enrolled'){ ?> selected="selected" <?php } ?>>Already applied/Enrolled</option>
+						<option value="Language Problem" <?php if($verify_teleleads['v_status']=='Language Problem'){ ?> selected="selected" <?php } ?>>Language Problem</option>
+						<option value="Just Browsing/Looking for information only" <?php if($verify_teleleads['v_status']=='Just Browsing/Looking for information only'){ ?> selected="selected" <?php } ?>>Just Browsing/Looking for information only</option>
+						<option value="Looking for Different college" <?php if($verify_teleleads['v_status']=='Looking for Different college'){ ?> selected="selected" <?php } ?>>Looking for Different college</option>						
+						</optgroup>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -296,16 +412,43 @@ $(document).ready(function(){
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Current education level:  </label>
 					<div class="input-left">
-						<span  class="current selector"><?php echo $verify_teleleads['v_current_educ_level'];  ?></span>
-						<input name="education" id="education" class="edit_box" value="<?php echo $verify_teleleads['v_current_educ_level'];  ?>"/>
-					</div>
+						<span  class="current selector"><?php echo $verify_teleleads['current'];  ?></span>
+						<select name="c_educ_level" id="c_educ_level" class="edit_box" style="display:none">
+						<option>Select Level</option>
+						<?php foreach($program_level as $level)
+						{?>
+						<option value="<?php echo $level['prog_edu_lvl_id']; ?>" <?php if($level['educ_level']==$verify_teleleads['current']) { ?> selected <?php } ?> ><?php echo $level['educ_level'];?></option>
+						<?php } ?>
+						</select>					
+						</div>
 				</div>
 			</div>
 			<div class="float_l span61">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Stage:  </label>
 					<div class="input-left">
-						<span name="Stage" id="Stage" class="Stage selector"><?php echo $verify_teleleads['v_enroll_key'];  ?></span>
+						<span  class="Stage selector"><?php echo $verify_teleleads['v_stage'];  ?></span>
+						<select name="stage" id="stage"  class="edit_box" style="display:none">
+						<option value="">--Please Select--</option>
+						<option value="1:New" <?php if($verify_teleleads['v_stage']=='1:New'){ ?> selected="selected" <?php } ?>>1:New</option>
+						<option value="2:Invalid" <?php if($verify_teleleads['v_stage']=='2:Invalid'){ ?> selected="selected" <?php } ?>>2:Invalid</option>
+						<option value="3:Call 1 - Ongoing" <?php if($verify_teleleads['v_stage']=='3:Call 1 - Ongoing'){ ?> selected="selected" <?php } ?>>3:Call 1 - Ongoing</option>
+						<option value="4:Call 1 - Rejected" <?php if($verify_teleleads['v_stage']=='4:Call 1 - Rejected'){ ?> selected="selected" <?php } ?>>4:Call 1 - Rejected</option>
+						<option value="5:Sent" <?php if($verify_teleleads['v_stage']=='5:Sent'){ ?> selected="selected" <?php } ?>>5:Sent</option>
+						<option value="6:Sent - Call 2 Attemp Pending" <?php if($verify_teleleads['v_stage']=='6:Sent - Call 2 Attemp Pending'){ ?> selected="selected" <?php } ?>>6:Sent - Call 2 Attemp Pending</option>
+						<option value="7:Sent - Call 2 Ongoing" <?php if($verify_teleleads['v_stage']=='7:Sent - Call 2 Ongoing'){ ?> selected="selected" <?php } ?>>7:Sent - Call 2 Ongoing</option>
+						<option value="8:Sent - Call 2 Rejected" <?php if($verify_teleleads['v_stage']=='8:Sent - Call 2 Rejected'){ ?> selected="selected" <?php } ?>>8:Sent - Call 2 Rejected</option>
+						<option value="9:Sent - Call 3 Attemp Pending" <?php if($verify_teleleads['v_stage']=='9:Sent - Call 3 Attemp Pending'){ ?> selected="selected" <?php } ?>>9:Sent - Call 3 Attemp Pending</option>
+						<option value="10:Sent - Call 3 Ongoing" <?php if($verify_teleleads['v_stage']=='10:Sent - Call 3 Ongoing'){ ?> selected="selected" <?php } ?>>10:Sent - Call 3 Ongoing</option>
+						<option value="11:Sent - Call 3 Rejected" <?php if($verify_teleleads['v_stage']=='11:Sent - Call 3 Rejected'){ ?> selected="selected" <?php } ?>>11:Sent - Call 3 Rejected</option>
+						<option value="12:Completed - Dropped after counseling" <?php if($verify_teleleads['v_stage']=='12:Completed - Dropped after counseling'){ ?> selected="selected" <?php } ?>>12:Completed - Dropped after counseling</option>
+						<option value="13:Completed - Filled the application form" <?php if($verify_teleleads['v_stage']=='13:Completed - Filled the application form'){ ?> selected="selected" <?php } ?>>13:Completed - Filled the application form</option>
+						<option value="14:Completed - Joined other school" <?php if($verify_teleleads['v_stage']=='14:Completed - Joined other school'){ ?> selected="selected" <?php } ?>>14:Completed - Joined other school</option>
+						<option value="15:Completed - Joined our school" <?php if($verify_teleleads['v_stage']=='15:Completed - Joined our school'){ ?> selected="selected" <?php } ?>>15:Completed - Joined our school</option>
+						
+						
+						
+						</select>
 					</div>
 				</div>
 			</div>
@@ -315,8 +458,14 @@ $(document).ready(function(){
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Next education level:  </label>
 					<div class="input-left">
-						<span  class="next selector"><?php echo $verify_teleleads['v_next_educ_level'];  ?></span>
-						<input name="Next" id="Next" class="edit_box" value="<?php echo $verify_teleleads['v_next_educ_level'];  ?>"/>
+						<span  class="next selector"><?php echo $verify_teleleads['next'];  ?></span>
+						<select name="next_educ_level" id="next_educ_level" class="edit_box" style="display:none">
+						<option>Select Level</option>
+						<?php foreach($program_level as $level)
+						{?>
+						<option value="<?php echo $level['prog_edu_lvl_id']; ?>" <?php if($level['educ_level']==$verify_teleleads['next']) { ?> selected <?php } ?> ><?php echo $level['educ_level'];?></option>
+						<?php } ?>
+						</select>	
 					</div>
 				</div>
 			</div>
@@ -324,8 +473,15 @@ $(document).ready(function(){
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Priority:  </label>
 					<div class="input-left">
-						<span name="Priority" id="Priority" class="Priority selector"><?php echo $verify_teleleads['v_enroll_key'];  ?></span>
-						
+						<span class="Priority selector"><?php echo $verify_teleleads['v_priority'];  ?></span>
+						<select name="priority" id="priority"  class="edit_box" style="display:none">
+						<option>--Please Select--</option>
+						<option value="1" <?php if($verify_teleleads['v_priority']==1){ ?> selected="selected" <?php } ?> >1</option>
+						<option value="2" <?php if($verify_teleleads['v_priority']==2){ ?> selected="selected" <?php } ?> >2</option>
+						<option value="3" <?php if($verify_teleleads['v_priority']==3){ ?> selected="selected" <?php } ?> >3</option>
+						<option value="4" <?php if($verify_teleleads['v_priority']==4){ ?> selected="selected" <?php } ?> >4</option>
+						<option value="5" <?php if($verify_teleleads['v_priority']==5){ ?> selected="selected" <?php } ?> >5</option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -336,7 +492,7 @@ $(document).ready(function(){
 					<label class="big-data padding_alpha" for="input01">Most Recent Overall Academic Percentage:  </label>
 					<div class="input-left">
 						<span  class="selector2 selector"><?php echo $verify_teleleads['v_aggregate_percentage'];  ?></span>
-						<input name="Academic" id="Academic" class="edit_box" value="<?php echo $verify_teleleads['v_aggregate_percentage'];  ?>"/>
+						<input name="academic" id="academic" class="edit_box" value="<?php echo $verify_teleleads['v_aggregate_percentage'];  ?>" style="display:none"/>
 					</div>
 				</div>
 			</div>
@@ -346,149 +502,219 @@ $(document).ready(function(){
 			<div class="span121 margin_delta">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Notes:  </label>
-					<div class="input-left">
-						<span  class="note selector"><?php echo $verify_teleleads['v_enroll_key'];  ?></span>
-						<textarea name="Notes" id="Notes" class="edit_box"><?php echo $verify_teleleads['v_enroll_key']; ?></textarea>
-					</div>
+					<div class="input-left">						
+						<?php 
+						$note_info=$this->lead_tele_model->v_note($verify_teleleads['v_lead_id']);
+						?>
+						<div class="controls-input" >
+							 <div class="v_notes">
+								<?php if($note_info!='')
+								{						
+								 foreach($note_info as $n)
+								  { echo $n['v_note']; ?>								  
+								<div>									
+								<div class="notes_data"></div>
+								<div class="notes_d"><?php $d=$n['updated_on'];
+											$d1=strtotime($d);
+											$date=date('h:m d M Y ',$d1);											
+											echo $date;?></div>
+								<div class="clearfix"></div>
+								</div>
+								<?php }} ?>								
+							 </div>							
+						<textarea name="notes" id="notes" rows="2" cols="37" class="edit_box" style="display:none"></textarea>
+						</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 			<div class="bottom_line1"></div>
 			<div class="span21" style="margin-left: 406px;">
-					<button class="btn_img">Save now</button>
+					<button onclick="verifyLead('<?php echo $verify_teleleads['v_id'];  ?>')" class="btn_img edit_box" style="display:none">Save now</button>
+					<button onclick="cancel()" class="btn_img edit_box" style="display:none">Cancel</button>
 				</div>
 	</div>
 </div>	
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/ui/1.8.16/jquery-ui.min.js"></script>
-	
-	<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
-	<script type="text/javascript" src="js/jquery.date_input.min.js"></script>
-	<script type="text/javascript" src="js/jquery.minicolors.min.js"></script>
-	<script type="text/javascript" src="js/jquery.wysiwyg.js"></script>
-	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
-	<script type="text/javascript" src="js/jquery.tipsy.js"></script>
-	<script type="text/javascript" src="js/custom.js"></script>
-</body>
-</html>
 <script type="text/javascript">
-	 $(document).ready(function() {
-	 $(".edit_box").hide();
+$(document).ready(function() {
+	 //$(".edit_box").hide();
 	 $(".counsel_next_bg").click(function(){
 	  $(".selector").hide();
 	   $(".edit_box").show();
 	 });
-		// $('.selector').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<input type='text' class='large1' value='"+n+"' id='"+glob_id+"' name='"+glob_name+"'> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.selector2').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<input type='text' class='input-large input-large_set' value='"+n+"' id='"+glob_id+"' name='"+glob_name+"'> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.country_drop').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='large1 input-large_set' ><option>Select Country</option>  </select>");
-			// $(this).removeClass('selector');
-		// });
-		// $('.state_drop').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='large1 input-large_set' ><option>Select Country</option>  </select>");
-			// $(this).removeClass('selector');
-		// });
-		// $('.city_drop').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='large1 input-large_set' ><option>Select Country</option>  </select>");
-			// $(this).removeClass('selector');
-		// });
-		// $('.Intrestedcount').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='selector large1 input-large_set' ><option>Select Country</option>  </select>");
-			// $(this).removeClass('selector');
-		// });
-		// $('.courses').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='select_input input-large_set'><option>Select Country</option>  </select> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.Status').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='select_input input-large_set'><option>Select Country</option>  </select> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.Stage').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
+});
+
+function fetchstates()
+{
+var cid=$("#country").val();
+
+$.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin/state_list_ajax/",
+   data: 'country_id='+cid,
+   cache: false,
+   success: function(msg)
+   {    
+	$("#state").html(msg);	
+	$('#city').html('<option value="0">select city</option>')
+   }
+   });
+}
+
+function fetchcities()
+{
+var cityid=0;
+var state_id=$("#state").val();
+
+ $.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin/city_list_ajax/",
+   data: 'state_id='+state_id+'&sel_city_id='+cityid,
+   cache: false,
+   success: function(msg)
+   {
+    //$('#'+cityID).attr('disabled', false);
+	$('#city').html(msg);
+   }
+   });  
+}
+ $(function()
+ {
+var suggest_country_ids = new Array();
+//attach autocomplete
+$("#auto_intrested_countries").autocomplete({
+
+//define callback to format results
+source: function(req, add){
+var c_id_list=0;
+$("input[name^=country_ids]").each(function() {
+var val=$(this).val();
+val=val.trim();
+c_id_list=c_id_list+','+val;
+});
+//pass request to server
+$.getJSON("<?php echo $base; ?>adminleads/get_country_list/"+c_id_list+"?callback=?", req, function(data) {
+
+//create array for response objects
+var suggestions = [];
+
+//process response
+$.each(data, function(i, val){	
+suggestions.push(val.name);
+suggest_country_ids[val.name]=val.id;
+});
+
+//pass array to callback
+add(suggestions);
+});
+},
+
+//define select handler
+select: function(e, ui) {
+//create formatted friend
+var country_name = ui.item.value;
+var country_id=suggest_country_ids[country_name];
+var exist_int_c_list=$('#intrested_country_list').val();
+
+var span = $("<span id='remove_country_"+country_id+"' onclick='removecountry("+country_id+")'>").text(country_name);
+var a = $("<a>").addClass("remove").attr({
+href: "javascript:",
+title: "Remove " + country_name,
+id: country_id
+}).text("x");
+var h= $('<input/>',{type:'hidden',name:'country_ids[]',id:'country_'+country_id,value:country_id});
+
+//var h='<input type="hidden" name="country_ids" id="country" value="">';	
+a.appendTo(span);
+h.appendTo(span);
+//add friend to friend div
+//auto_intrested_countries').val('');
+span.insertBefore("#auto_intrested_countries");
+
+//alert("hi");
+},
+
+//define select handler
+change: function() {
+
+//prevent 'to' field being updated and correct position
+$("#auto_intrested_countries").val("").css("top", 2);
+}
+});
+
+//add click handler to friends div
+$("#intrested_countries").click(function(){
+
+//focus 'to' field
+$("#auto_intrested_countries").focus();
+});
+
+//add live handler for clicks on remove links
+
+});
+function removecountry(id){
+$('#remove_country_'+id).replaceWith('');
+//$(this).parent().remove();
+//correct 'to' field position
+if($("#intrested_countries span").length === 0) {
+$("#auto_intrested_countries").css("top", 0);
+}				
+}
+
+function verifyLead(id)
+{
+	var id=id;
+	var lead_id=$('#lead_id').val();	
+	var name=$('#name').val();	
+	var year=$('#year').val();
+	var month=$('#month').val();
+	var date=$('#date').val();
+	var email=$('#email').val();
+	var phone=$('#phone').val();
+	var country=$('#country').val();
+	var state=$('#state').val();	
+	var city=$('#city').val();
+	var enroll=$('#enroll').val();
+	var auto_intrested_countries=$('#auto_intrested_countries').val();
+	var courses=$('#courses').val();
+	var enroll_date=$('#enroll_date').val();
+	var exam1=$('#exam1').val();
+	var exam1_score=$('#exam1_score').val();
+	var exam2=$('#exam2').val();
+	var exam2_score=$('#exam2_score').val();
+	var attended=$('#attended').val();
+	var other_exam_name=$('#other_exam_name').val();
+	var other_exam_score=$('#other_exam_score').val();
+	var status=$('#status').val();
+	var stage=$('#stage').val();
+	var priority=$('#priority').val();
+	var next_educ_level=$('#next_educ_level').val();
+	var c_educ_level=$('#c_educ_level').val();
+	var academic=$('#academic').val();
+	var notes=$('#notes').val();
+	 
+	  var interested_cont=0;
+		$("input[name^=country_ids]").each(function() {
+		var val=$(this).val();
+		val=val.trim();
+		interested_cont=interested_cont+','+val;
+							
+		});
+	var data='id='+id+'&lead_id='+lead_id+'&name='+name+'&year='+year+'&month='+month+'&date='+date+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&auto_intrested_countries='+auto_intrested_countries+'&courses='+courses+'&enroll_date='+enroll_date+'&exam1='+exam1+'&exam1_score='+exam1_score+'&exam2='+exam2+'&exam2_score='+exam2_score+'&attended='+attended+'&other_exam_name='+other_exam_name+'&other_exam_score='+other_exam_score+'&status='+status+'&stage='+stage+'&priority='+priority+'&next_educ_level='+next_educ_level+'&c_educ_level='+c_educ_level+'&academic='+academic+'&notes='+notes+'&interested_cont='+interested_cont;
+	//alert(data);
+	$.ajax({
+	type:"POST",
+	url:"<?php echo $base; ?>admin_counsellor/verified_lead",
+	data: data,
+	cache: false,
+	async:false,
+	success:function(msg)
+	{
+		alert('Lead updated successfully');
 		
-			// $(this).parent().html("<Select id='"+glob_id+"' class='select_input input-large_set'><option>Select Country</option>  </select> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.Priority').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='select_input input-large_set'><option>Select Country</option>  </select> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.current').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<Select id='"+glob_id+"' class='select_input input-large_set'><option>Select Current Education</option>  </select> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.next').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
+	}
 	
-			// $(this).parent().html("<Select id='"+glob_id+"' class='select_input input-large_set'><option>Select Next Education</option>  </select> ");
-			// $(this).removeClass('selector');
-		// });
-		// $('.dob').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-		
-			// $(this).parent().html("<Select id='"+glob_id+"' class='input-large_set' style='width:42px'><option id='1'>19</option><option id='2'>2</option><option id='3'>3</option>  </select><Select id='"+glob_id+"' class='input-large_set' style='width:50px'><option id='jan'>Jan</option><option id='feb'>Feb</option><option id='Mar'>Mar</option>  </select><Select id='"+glob_id+"' class='input-large_set' style='width:58px'><option id='1'>1999</option><option id='2'>2</option><option id='3'>3</option>  </select>");
-			// $(this).removeClass('selector');
-		// });
-		// $('.note').click(function () {
-			// var n = $(this).text();
-			// var glob_id = $(this).attr('id');
-			// var glob_name = $(this).attr('name');
-			
-			// $(this).parent().html("<textarea class='span8 margin_delta' id='"+glob_id+"' name='"+glob_name+"'>" +n+ "</textarea>");
-			// $(this).removeClass('selector');
-		// });
- });
+	});
+	
+}
+ 
 </script>
