@@ -41,7 +41,7 @@ class Lead_tele_model extends CI_Model
 		$this->db->order_by('email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page']   = 15;
+		$config['per_page']   = 30;
 		$limit=$config['per_page'];
 		$offset=$start;
 		$this->db->select('*');
@@ -66,7 +66,7 @@ class Lead_tele_model extends CI_Model
 		$this->db->order_by('v_email');
 		$query=$this->db->get();
 		$config['total_rows'] = $query->num_rows();
-		$config['per_page']   = 15;
+		$config['per_page']   = 30;
 		$limit=$config['per_page'];
 		$offset=$start;
 		$this->db->select('*');
@@ -379,8 +379,7 @@ class Lead_tele_model extends CI_Model
 				'password'	=> $hashed_password,
 				'email'		=> $this->input->post('email'),
 				'createdby_user_id' =>$logged_in_user_id,
-				'last_ip'	=> $this->input->ip_address(),
-				'user_type' => 'other'
+				'last_ip'	=> $this->input->ip_address()
 			);
 		$site_user_data['new_email_key'] = md5(rand().microtime());
 			$profile_user_data=array(

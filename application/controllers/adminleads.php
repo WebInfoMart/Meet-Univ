@@ -27,6 +27,7 @@ class Adminleads extends CI_Controller
 			$data['username'] = $this->tank_auth->get_username();
 			$data['user_id'] = $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 			//fetch user privilege data from model
 			if($flag==0)
 			{
@@ -57,6 +58,8 @@ class Adminleads extends CI_Controller
 	  $data['username'] = $this->tank_auth->get_username();
 	   $data['user_id'] = $this->tank_auth->get_admin_user_id();
 	   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+	   $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+		
 		   //fetch user privilege data from model
 	  if($flag==0)
 	 {

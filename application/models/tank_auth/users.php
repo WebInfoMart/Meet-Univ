@@ -1685,15 +1685,15 @@ class Users extends CI_Model
 	
 	function get_new_email_key_by_userid($uid)
 	{
-  $this->db->select('new_email_key');
-  $query = $this->db->get_where('users',array('id'=>$uid));
-  if($this->db->affected_rows() > 0)
-  {
-   return $query->row_array();
-  }
-  else{
-  return 0;
-  }
+	  $this->db->select('new_email_key');
+	  $query = $this->db->get_where('users',array('id'=>$uid));
+	  if($this->db->affected_rows() > 0)
+	  {
+	   return $query->row_array();
+	  }
+	  else{
+	  return 0;
+	  }
  }
  
  function get_univ_overview_detail($univ_id,$overview_cond)

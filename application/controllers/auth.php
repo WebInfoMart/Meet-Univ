@@ -439,6 +439,33 @@ class Auth extends CI_Controller
    echo "Sorry.There is some problem in email activation";
   }
  }
+ 
+ function copy_data_to_lead()
+ {
+  $this->db->select('id,fullname,email');
+  $this->db->from('users');
+  $this->db->where('level','1');
+  $query=$this->db->get();
+  $res=$query->result_array();
+  foreach($res as $res1) {
+   $data['fullname']=$res1['fullname'];
+   $data['email']=$res1['email'];
+   $data['user_id']=$res1['id'];
+   $data['email_verified']='1';
+   $data['lead_verified']='1';
+   $query=$this->db->insert('lead_data',$data);
+   $lead_id=$this->db->insert_id($query);
+   $data1['v_fullname']=$res1['fullname'];
+   $data1['v_verified_email']='1';
+   $data1['v_email']=$res1['email'];
+   $data1['v_user_id']=$res1['id'];
+   $data1['v_lead_id']=$lead_id;
+   $this->db->insert('verified_lead_data',$data1);
+   echo mysql_error();
+   
+  }
+  
+ }
 
 
 	/**
@@ -1315,7 +1342,7 @@ class Auth extends CI_Controller
 			echo $per_page_res.'!@#$%^&*'.$events_list;
 		}
 	}
-	function subdomain()
+   function subdomain()
    {
     $this->db->select('*');
 	$this->db->from('university');

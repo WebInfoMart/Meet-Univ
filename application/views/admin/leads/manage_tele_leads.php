@@ -45,7 +45,7 @@
 	
 <div id="content" style="margin-left: 200px;">
 		
-			<?php if($teleleads!='0') { ?>
+			
 			<!-- .breadcrumb ends -->
 	<div class="margin-delta margin_t" style="width: 945px;">
 		<div>
@@ -71,6 +71,7 @@
 			<div class="clearfix"></div>
 		</div>
 		<div class="dotted_line"></div>
+		<?php if($teleleads!='0') { ?>
 		<div id="content_data">
 		<?php 
 	$sno=1;
@@ -135,7 +136,7 @@ echo $lead_source;
 			<div class="span1 float_l">
 				<?php 
 if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) { ?>
-<img src="<?php echo base_url(); ?>images/admin/success.gif"/>
+<img src="<?php echo base_url(); ?>images/admin/error.gif"/>
 <span style='color:blue'>Not Available</span><span style='color:red;font-size:10px;'>
 </span>
 <?php
@@ -577,7 +578,7 @@ $.ajax({
 	   cache: false,
 	   success: function(msg)
 	   {
-	   alert(msg);
+	  // alert(msg);
 	   if(msg=='1')
 	   {
 	    $("#content_msg").css("display","block");

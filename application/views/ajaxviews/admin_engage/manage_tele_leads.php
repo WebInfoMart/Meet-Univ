@@ -61,7 +61,7 @@ echo $lead_source;
 			<div class="span1 float_l">
 				<?php 
 if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) { ?>
-<img src="<?php echo base_url(); ?>images/admin/success.gif"/>
+<img src="<?php echo base_url(); ?>images/admin/error.gif"/> 
 <span style='color:blue'>Not Available</span><span style='color:red;font-size:10px;'>
 </span>
 <?php
