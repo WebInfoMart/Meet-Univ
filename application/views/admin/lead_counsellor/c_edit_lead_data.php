@@ -126,10 +126,10 @@ $(document).ready(function(){
 				<div class="bottom_line_second margin_b"></div>
 				<div class="float_l span16 margin_delta">
 					<div class="control-group1">
-						<label class="control-data" for="input01">Country: </label>
+						<label class="control-data12" for="input01">Country: </label>
 						<div class="input-data12">
 						<span class="country_drop selector"><?php echo $verify_teleleads['country_name'];  ?> </span>
-						<Select  name="country" id="country" class='edit_box large_data' onchange="fetchstates()" style="display:none">
+						<Select  name="country" id="country" class='edit_box large_data input-large_set' onchange="fetchstates()" style="display:none">
 						<option>Select Country</option> 
 						<?php foreach($country as $cntry){
 						$selected='';
@@ -145,10 +145,10 @@ $(document).ready(function(){
 				</div>
 				<div class="float_l span16">
 					<div class="control-group1">
-						<label class="control-data" for="input01">State: </label>
+						<label class="control-data12" for="input01">State: </label>
 						<div class="input-data12">
 						<span class="state_drop selector"><?php echo $verify_teleleads['statename']; ?> </span>			
-						<Select  name="state" id="state" class='edit_box' onchange="fetchcities()" style="display:none">
+						<Select  name="state" id="state" class='edit_box large_data input-large_set' onchange="fetchcities()" style="display:none">
 						<option>Select state</option>
 						
 					<?php
@@ -173,12 +173,12 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</div>
-				<div class="float_l span16 margin_delta">
+				<div class="float_l span16">
 					<div class="control-group1">
-						<label class="control-data" for="input01"> City: </label>
-						<div class="input-data">
+						<label class="control-data12" for="input01"> City: </label>
+						<div class="input-data12">
 						<span class="city_drop selector"><?php echo $verify_teleleads['cityname'];  ?> </span>
-						<Select  name="city" id="city" class='edit_box' style="display:none">
+						<Select  name="city" id="city" class='edit_box large_data input-large_set' style="display:none">
 						<option>Select City</option>								
 						<?php
 					
@@ -202,28 +202,28 @@ $(document).ready(function(){
 				</div>
 				<div class="clearfix"></div>
 				<div class="bottom_line_second margin_b"></div>
-				<div class="float_l span16">
-					<div class="control-group1">
-						<label class="control-data" for="input01">Phone: </label>
-						<div class="input-data">
-						<span  class="selector"><?php echo $verify_teleleads['v_phone'];  ?> </span>
-						<input type="text" name="phone" id="phone" class="edit_box" value="<?php echo $verify_teleleads['v_phone']; ?>" style="display:none"/>
-						</div>
-					</div>
-				</div>
-				<div class="float_l span16">
-					<div class="control-group1">
-						<label class="control-data" for="input01"> Enroll K12: </label>
-						<div class="input-data">
-						<span  class="selector"><?php echo $verify_teleleads['v_enroll_key'];  ?> </span>
-						<input name="enroll" id="enroll" class="edit_box" value="<?php echo $verify_teleleads['v_enroll_key']; ?>" style="display:none"/>
-						</div>
-					</div>
-				</div>
 				<div class="float_l span16 margin_delta">
+					<div class="control-group1">
+						<label class="control-data12" for="input01">Phone: </label>
+						<div class="input-data12">
+						<span  class="selector"><?php echo $verify_teleleads['v_phone'];  ?> </span>
+						<input type="text" name="phone" id="phone" class="edit_box large_data" value="<?php echo $verify_teleleads['v_phone']; ?>" style="display:none"/>
+						</div>
+					</div>
+				</div>
+				<div class="float_l span16">
+					<div class="control-group1">
+						<label class="control-data12" for="input01"> Enroll K12: </label>
+						<div class="input-data12">
+						<span  class="selector"><?php echo $verify_teleleads['v_enroll_key'];  ?> </span>
+						<input name="enroll" id="enroll" class="edit_box large_data" value="<?php echo $verify_teleleads['v_enroll_key']; ?>" style="display:none"/>
+						</div>
+					</div>
+				</div>
+				<div class="float_l span16">
 				<div class="control-group1">
-				<label class="control-data" for="input01"> Intrested country: </label>
-				<div id="intrested_countries" class="ui-helper-clearfix edit_box" >
+				<label class="control-data12" for="input01"> Intrested country: </label>
+				<div id="intrested_countries" class="ui-helper-clearfix edit_box" style="width: 178px;">
 					<?php 			
 					if($verify_teleleads['v_interested_country']!='' && $verify_teleleads['v_interested_country']!='0')
 					{
@@ -232,12 +232,12 @@ $(document).ready(function(){
 					if($int_country_id_list!='0' ){
 					$cnt_name=$this->lead_tele_model->country_name_by_id($int_country_id_list);				
 					?>
-					<span id="remove_country_<?php echo $int_country_id_list; ?>" class="edit_box"><?php echo ucwords($cnt_name['country_name']); ?><a class="remove edit_box" onclick="removecountry(this.id)" href="javascript:" title="Remove <?php echo ucwords($cnt_name['country_name']); ?>" id="<?php echo $int_country_id_list; ?>">x</a><input type="hidden" name="country_ids[]" id="country_<?php echo $int_country_id_list; ?>" value="<?php echo $int_country_id_list; ?>"></span>
+					<span id="remove_country_<?php echo $int_country_id_list; ?>" class="edit_box large_data"><?php echo ucwords($cnt_name['country_name']); ?><a class="remove edit_box" onclick="removecountry(this.id)" href="javascript:" title="Remove <?php echo ucwords($cnt_name['country_name']); ?>" id="<?php echo $int_country_id_list; ?>">x</a><input type="hidden" name="country_ids[]" id="country_<?php echo $int_country_id_list; ?>" value="<?php echo $int_country_id_list; ?>"></span>
 					<?php
 					}}
 					}			
 					?>			
-					<input id="auto_intrested_countries" class="edit_box" type="text" style="display:none">
+					<input id="auto_intrested_countries" class="edit_box large_data" type="text" style="display:none">
 				</div>
 				</div>
 				</div>
@@ -245,7 +245,7 @@ $(document).ready(function(){
 				<div class="bottom_line_second"></div>
 			</div>
 			
-			<div class="float_l span61 margin_delta">
+			<div class="float_l data7 margin_delta">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Intrested in courses: </label>
 					<div class="input-left">
@@ -265,7 +265,7 @@ $(document).ready(function(){
 					}
 					?>
 					</span>
-						<Select name="courses[]" id="courses" multiple="multiple" class='edit_box' style="height: 200px;display:none">
+						<Select name="courses[]" id="courses" multiple="multiple" class='edit_box large_box' style="height: 92px;display:none">
 						 						
 						<?php foreach($program_parent as $prog)
 						{ ?>
@@ -289,43 +289,51 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<div class="float_l span61">
-				<div class="control-group1">
+			<div class="float_l data7">
+				<div class="control-group21">
 					<label class="big-data padding_alpha" for="input01">When do you want to begin:  </label>
 					<div class="input-left">
 				<span name="begin" id="begin" class="selector2 selector"><?php echo $verify_teleleads['v_enroll_date'];?></span>
-						<input name="enroll_date" id="enroll_date" class="edit_box" value="<?php echo $verify_teleleads['v_enroll_date'];  ?>" style="display:none"/>
+						<input name="enroll_date" id="enroll_date" class="edit_box large_box" value="<?php echo $verify_teleleads['v_enroll_date'];  ?>" style="display:none"/>
+					</div>
+				</div>
+				<div class="control-group1" style="margin_t">
+					<label class="big-data padding_alpha" for="input01">The last institution that you attended:  </label>
+					<div class="input-left">
+						<span class="selector2 selector"><?php echo $verify_teleleads['v_last_institute'];  ?></span>
+							<input name="attended" id="attended" class="edit_box large_box" value="<?php echo $verify_teleleads['v_last_institute'];  ?>" style="display:none"/>
+						
 					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 			<div class="bottom_line1"></div>
-			<div class="float_l span61 margin_delta">
-			<div class="control-group1">
-			<label class="big-data padding_alpha" for="input01">Exam 1:  </label>
-			<div class="input-left">
-				<span class="selector2 selector"><?php echo $verify_teleleads['v_acedmic_exam_score_type1'];  ?></span>				
-				<select id="exam1"  class="edit_box" style="display:none">
-				<option value="">Select</option>
-				<option value="SAT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='SAT'){ ?> selected <?php } ?>>SAT</option>
-				<option value="ACT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='ACT'){ ?> selected <?php } ?>>ACT</option>
-				<option value="GRE" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='GRE'){ ?> selected <?php } ?>>GRE</option>
-				<option value="GMAT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='GMAT'){ ?> selected <?php } ?>>GMAT</option>	
-				</select>					
-			</div>			
-			</div>
-			<div class="control-group1">
-			<label class="big-data padding_alpha" for="input01">Score Exam 1:  </label>
-			<div class="input-left">
+			<div class="margin_delta">
+				<div class="float_l data9">
+				<label class="big-data1 padding_alpha" for="input01">Exam 1:  </label>
+				<div class="input-left1">
+					<span class="selector2 selector"><?php echo $verify_teleleads['v_acedmic_exam_score_type1'];  ?></span>				
+					<select id="exam1"  class="edit_box large_data_value" style="display:none">
+					<option value="">Select</option>
+					<option value="SAT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='SAT'){ ?> selected <?php } ?>>SAT</option>
+					<option value="ACT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='ACT'){ ?> selected <?php } ?>>ACT</option>
+					<option value="GRE" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='GRE'){ ?> selected <?php } ?>>GRE</option>
+					<option value="GMAT" <?php if($verify_teleleads['v_acedmic_exam_score_type1']=='GMAT'){ ?> selected <?php } ?>>GMAT</option>	
+					</select>					
+				</div>			
+				</div>
+			<div class="float_l data9">
+			<label class="big-data1 padding_alpha" for="input01">Score Exam 1:  </label>
+			<div class="input-left1">
 				<span class="selector2 selector"><?php echo $verify_teleleads['acedmic_exam_score1'];  ?></span>						
-				<input type="text" id="exam1_score" class="edit_box"  value="<?php echo $verify_teleleads['acedmic_exam_score1']; ?>" style="display:none">		
+				<input type="text" id="exam1_score" class="edit_box large_data_value"  value="<?php echo $verify_teleleads['acedmic_exam_score1']; ?>" style="display:none">		
 			</div>			
 			</div>
-			<div class="control-group1">
-			<label class="big-data padding_alpha" for="input01">Exam 2:  </label>
-			<div class="input-left">
+			<div class="float_l data9">
+			<label class="big-data1 padding_alpha" for="input01">Exam 2:  </label>
+			<div class="input-left1">
 				<span class="selector2 selector"><?php echo $verify_teleleads['v_acedmic_exam_score_type2'];  ?></span>				
-				<select id="exam2"  class="edit_box" style="display:none">
+				<select id="exam2"  class="edit_box large_data_value" style="display:none">
 				<option value="">Select</option>
 				<option value="SAT" <?php if($verify_teleleads['v_acedmic_exam_score_type2']=='SAT'){ ?> selected <?php } ?>>SAT</option>
 				<option value="ACT" <?php if($verify_teleleads['v_acedmic_exam_score_type2']=='ACT'){ ?> selected <?php } ?>>ACT</option>
@@ -334,43 +342,33 @@ $(document).ready(function(){
 				</select>					
 			</div>			
 			</div>
-			<div class="control-group1">
-			<label class="big-data padding_alpha" for="input01">Score Exam 2:  </label>
-			<div class="input-left">
+			<div class="float_l data9">
+				<label class="big-data1 padding_alpha" for="input01">Score Exam 2:  </label>
+			<div class="input-left1">
 				<span class="selector2 selector"><?php echo $verify_teleleads['v_acedmic_exam_score2'];  ?></span>						
-				<input type="text" id="exam2_score" class="edit_box"  value="<?php echo $verify_teleleads['v_acedmic_exam_score2']; ?>" style="display:none" />		
+				<input type="text" id="exam2_score" class="edit_box large_data_value"  value="<?php echo $verify_teleleads['v_acedmic_exam_score2']; ?>" style="display:none" />		
 			</div>			
 			</div>
-			</div>
-			<div class="float_l span61">
-				<div class="control-group1">
-					<label class="big-data padding_alpha" for="input01">The last institution that you attended:  </label>
-					<div class="input-left">
-						<span class="selector2 selector"><?php echo $verify_teleleads['v_last_institute'];  ?></span>
-							<input name="attended" id="attended" class="edit_box" value="<?php echo $verify_teleleads['v_last_institute'];  ?>" style="display:none"/>
-						
-					</div>
-				</div>
-			</div>
 			<div class="clearfix"></div>
-				<div class="bottom_line1"></div>
-			<div class="float_l span61 margin_delta">
+			</div>
+			<div class="bottom_line1"></div>
+			<div class="float_l data7 margin_delta">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Other exams if any:  </label>
 					<div class="input-left">
 						<span  class="selector2 selector"><?php echo $verify_teleleads['v_other_exam'];  ?></span>
-						<input name="other_exam_name" id="other_exam_name"  class="edit_box" value="<?php echo $verify_teleleads['v_other_exam']; ?>" style="display:none"/>
+						<input name="other_exam_name" id="other_exam_name"  class="edit_box small_box" value="<?php echo $verify_teleleads['v_other_exam']; ?>" style="display:none"/>
 						<span  class="selector2 selector"><?php echo $verify_teleleads['v_other_exam_score'];  ?></span>
-						<input name="other_exam_score" id="other_exam_score"  class="edit_box" value="<?php echo $verify_teleleads['v_other_exam_score']; ?>" style="display:none"/>
+						<input name="other_exam_score" id="other_exam_score"  class="edit_box small_box" value="<?php echo $verify_teleleads['v_other_exam_score']; ?>" style="display:none"/>
 					</div>
 				</div>
 			</div>
-			<div class="float_l span61">
+			<div class="float_l data7">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Status:  </label>
 					<div class="input-left">
 						<span class="Status selector"><?php echo $verify_teleleads['v_status'];  ?></span>						
-						<select name="status" id="status"  class="edit_box" style="display:none">
+						<select name="status" id="status"  class="edit_box large_box" style="display:none">
 						<option value="">--Please Select--</option>
 						<option value="Valid" <?php if($verify_teleleads['v_status']=='Valid'){ ?> selected="selected" <?php } ?>>Valid</option>
 						<optgroup label="Invalid Reason">
@@ -408,12 +406,12 @@ $(document).ready(function(){
 			</div>
 			<div class="clearfix"></div>
 			<div class="bottom_line1"></div>
-				<div class="float_l span61 margin_delta">
+				<div class="float_l data7 margin_delta">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Current education level:  </label>
 					<div class="input-left">
 						<span  class="current selector"><?php echo $verify_teleleads['current'];  ?></span>
-						<select name="c_educ_level" id="c_educ_level" class="edit_box" style="display:none">
+						<select name="c_educ_level" id="c_educ_level" class="edit_box large_box" style="display:none">
 						<option>Select Level</option>
 						<?php foreach($program_level as $level)
 						{?>
@@ -423,12 +421,12 @@ $(document).ready(function(){
 						</div>
 				</div>
 			</div>
-			<div class="float_l span61">
+			<div class="float_l data7">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Stage:  </label>
 					<div class="input-left">
 						<span  class="Stage selector"><?php echo $verify_teleleads['v_stage'];  ?></span>
-						<select name="stage" id="stage"  class="edit_box" style="display:none">
+						<select name="stage" id="stage"  class="edit_box large_box" style="display:none">
 						<option value="">--Please Select--</option>
 						<option value="1:New" <?php if($verify_teleleads['v_stage']=='1:New'){ ?> selected="selected" <?php } ?>>1:New</option>
 						<option value="2:Invalid" <?php if($verify_teleleads['v_stage']=='2:Invalid'){ ?> selected="selected" <?php } ?>>2:Invalid</option>
@@ -454,12 +452,12 @@ $(document).ready(function(){
 			</div>
 			<div class="clearfix"></div>
 				<div class="bottom_line1"></div>
-			<div class="float_l span61 margin_delta">
+			<div class="float_l data7 margin_delta">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Next education level:  </label>
 					<div class="input-left">
 						<span  class="next selector"><?php echo $verify_teleleads['next'];  ?></span>
-						<select name="next_educ_level" id="next_educ_level" class="edit_box" style="display:none">
+						<select name="next_educ_level" id="next_educ_level" class="edit_box large_box" style="display:none">
 						<option>Select Level</option>
 						<?php foreach($program_level as $level)
 						{?>
@@ -469,12 +467,12 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<div class="float_l span61">
+			<div class="float_l data7">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Priority:  </label>
 					<div class="input-left">
 						<span class="Priority selector"><?php echo $verify_teleleads['v_priority'];  ?></span>
-						<select name="priority" id="priority"  class="edit_box" style="display:none">
+						<select name="priority" id="priority"  class="edit_box large_box" style="display:none">
 						<option>--Please Select--</option>
 						<option value="1" <?php if($verify_teleleads['v_priority']==1){ ?> selected="selected" <?php } ?> >1</option>
 						<option value="2" <?php if($verify_teleleads['v_priority']==2){ ?> selected="selected" <?php } ?> >2</option>
@@ -487,22 +485,22 @@ $(document).ready(function(){
 			</div>
 			<div class="clearfix"></div>
 				<div class="bottom_line1"></div>
-			<div class="float_l span61 margin_delta">
+			<div class="float_l data7 margin_delta">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Most Recent Overall Academic Percentage:  </label>
 					<div class="input-left">
 						<span  class="selector2 selector"><?php echo $verify_teleleads['v_aggregate_percentage'];  ?></span>
-						<input name="academic" id="academic" class="edit_box" value="<?php echo $verify_teleleads['v_aggregate_percentage'];  ?>" style="display:none"/>
+						<input name="academic" id="academic" class="edit_box large_box" value="<?php echo $verify_teleleads['v_aggregate_percentage'];  ?>" style="display:none"/>
 					</div>
 				</div>
 			</div>
 			
 			<div class="clearfix"></div>
 				<div class="bottom_line1"></div>
-			<div class="span121 margin_delta">
+			<div class="margin_delta">
 				<div class="control-group1">
 					<label class="big-data padding_alpha" for="input01">Notes:  </label>
-					<div class="input-left">						
+					<div class="input_post">						
 						<?php 
 						$note_info=$this->lead_tele_model->v_note($verify_teleleads['v_lead_id']);
 						?>
@@ -526,8 +524,7 @@ $(document).ready(function(){
 						</div>
 				</div>
 			</div>
-			<div class="clearfix"></div>
-			<div class="bottom_line1"></div>
+			</div>
 			<div class="span21" style="margin-left: 406px;">
 					<button onclick="verifyLead('<?php echo $verify_teleleads['v_id'];  ?>')" class="btn_img edit_box" style="display:none">Save now</button>
 					<button onclick="cancel()" class="btn_img edit_box" style="display:none">Cancel</button>
@@ -541,8 +538,7 @@ $(document).ready(function() {
 	  $(".selector").hide();
 	   $(".edit_box").show();
 	 });
-});
-
+});	 
 function fetchstates()
 {
 var cid=$("#country").val();
@@ -562,8 +558,8 @@ $.ajax({
 
 function fetchcities()
 {
-var cityid=0;
-var state_id=$("#state").val();
+cityid=0;
+state_id=$("#state").val();
 
  $.ajax({
    type: "POST",

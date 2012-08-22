@@ -9,7 +9,7 @@
 					<label class="label-control-data blue" for="input01">Source country: </label>
 					<div class="controls-input-data">
 					<select class="large" id="country" onchange="fetchcities()">
-					<option>-Select Country-</option>
+					<option value="0">-Select Country-</option>
 					<?php foreach($country as $cntry)
 					{ ?>
 					<option value="<?php echo $cntry['country_id']; ?>"><?php echo $cntry['country_name']; ?></option>
@@ -25,7 +25,7 @@
 					<label class="label-control-data blue" for="input01">Source city: </label>
 					<div class="controls-input-data">
 					<select class="large" id="city">
-					<option>-Select City-</option>
+					<option value="0">-Select City-</option>
 					<?php foreach($city as $ct)
 					{ ?>
 					<option value="<?php echo $ct['city_id']; ?>"><?php echo $ct['cityname']; ?></option>
@@ -49,7 +49,7 @@
 					<label class="label-control-data blue" for="input01">Next action: </label>
 					<div class="controls-input-data">
 					<select class="large" id="next_action">
-					<option>-Select Action-</option>
+					<option value="0">-Select Action-</option>
 					<option value="none">none</option>
 					<option value="counsellor">counsellor</option>
 					<option value="hot">hot</option>
@@ -65,7 +65,7 @@
 					<label class="label-control-data blue" for="input01">Source: </label>
 					<div class="controls-input-data">
 					<select class="large" id="source">
-					<option>-Select Source-</option>
+					<option value="0">-Select Source-</option>
 					<option value="site_user">Siteuser</option>
 					<option value="fb_login">fb Login</option>
 					<option value="fb_canvas">fb Canvas</option>
@@ -80,7 +80,7 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Phone no: </label>
 					<div class="controls-input-data">
-					<input type="checkbox" id="phone">
+					<input type="checkbox" id="phone" class="checkbox_set">
 					</div>
 				</div>
 			</div>
@@ -88,13 +88,13 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01"> Email address: </label>
 					<div class="controls-input-data">
-					<input type="checkbox" id="email">
+					<input type="checkbox" id="email" class="checkbox_set">
 					</div>
 				</div>
 			</div>
 			<div class="float_1 span77">
 				<div class="control-group">
-					<button type="button" id="search_btn" value="Search" onclick="search();" style="width:80px;height:30px;">
+					<button type="button" id="search_btn" value="" onclick="search();" style="width:80px;height:30px;">Search</button>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -104,7 +104,7 @@
 		<pre>
 		<?php //print_r($country); ?>
 		</pre> -->
-		<div class="margin_t">
+		<div class="margin_t " id="main_content" >
 			<div class="span1 float_l">
 				<b>Sr.no</b>
 			</div>
@@ -127,23 +127,22 @@
 			foreach($verify_teleleads as $result)
 			{ ?>
 			<div id="c_lead_<?php echo $result['v_id']; ?>" class="old_data update_verify_lead">
-			<div class="span1 float_l">
-					<?php $sr_no++; echo $sr_no; ?>
-			</div>
-			<div class="span14 float_l">
-				<?php  echo $result['v_fullname']; ?>
-			</div>
-			<div class="span14 float_l">
-				<?php  echo $result['v_email']; ?>
-			</div>
-			<div class="span14 float_l">
-				<?php if($result['v_user_type']){echo '';}else{ echo $result['v_user_type']; } ?>
-			</div>
-			<div class="span14 float_l">
-				<?php  echo $result['v_phone'];  ?>
-			</div>
-			
-			<div class="clearfix"></div>
+				<div class="span1 float_l">
+						<?php $sr_no++; echo $sr_no; ?>
+				</div>
+				<div class="span14 float_l">
+					<?php  echo $result['v_fullname']; ?>
+				</div>
+				<div class="span14 float_l">
+					<?php  echo $result['v_email']; ?>
+				</div>
+				<div class="span14 float_l">
+					<?php if($result['v_user_type']==''){ echo ''; } else { echo $result['v_user_type']; } ?>
+				</div>
+				<div class="span14 float_l">
+					<?php  echo $result['v_phone'];  ?>
+				</div>				
+				<div class="clearfix"></div>
 			</div>
 			<?php } ?>
 		
@@ -154,6 +153,7 @@
 <script type="text/javascript">
 $('.update_verify_lead').click(function(){
 var id=$(this).attr("id");
+
 id=id.replace("c_lead_","");
 $.ajax({
 	   type: "POST",
@@ -201,8 +201,7 @@ function search()
 	var src_id=$("#source").val();
 	var phone=$("#phone").is(':checked');
 	var email=$("#email").is(':checked');
-	var data='country='+cnt_id+'&city='+ct_id+'&action_id='+action_id+'&src_id='+src_id+'&phone='+phone+'&email='+email;
-	alert(data);
+	var data='country='+cnt_id+'&city='+ct_id+'&action_id='+action_id+'&src_id='+src_id+'&phone='+phone+'&email='+email;	
 	$.ajax({
 	type:"POST",
 	url:"<?php echo $base; ?>admin_counsellor/search_lead",
@@ -211,8 +210,8 @@ function search()
 	async:false,
 	success:function(msg)
 	{
-		alert(msg);
-		
+		//alert(msg);
+		$("#main_content").html(msg);
 	}
 	});
 	

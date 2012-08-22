@@ -6,17 +6,67 @@ Author: enstyled
 Author URI: http://themeforest.net/user/enstyled
 */
 
+.data1 {
+  width: 60px;
+}
+.data2 {
+  width: 140px;
+}
+.data3 {
+  width: 220px;
+}
+.data4 {
+  width: 300px;
+}
+.data5 {
+  width: 380px;
+}
+.data6 {
+  width: 460px;
+}
+.data7 {
+  width: 540px;
+}
+.data8 {
+  width: 620px;
+}
+.data9 {
+  width: 700px;
+}
+.data10 {
+  width: 780px;
+}
+.data11 {
+  width: 860px;
+}
+.data12 {
+  width: 1030px;
+}
+.margin_alpha{margin-top:0px!important;}
+.margin_beta{margin-right:0px!important}
+.margin_gamma{margin-bottom:0px;}
+.margin_delta{margin-left:0px !important}
+.padding_alpha{padding-top:0px!important;}
+.padding_beta{padding-right:0px!important}
+.padding_gamma{padding-bottom:0px;}
+.padding_delta{padding-left:0px!important;}
+.border_alpha{border-top:none;}
+.border_beta{border-right:none!important}
+.border_gamma{border-bottom:none!important}
+.border_delta{border-left:none!important;}
+
 
 * { padding:0; margin:0; }
 	
 body {
-	background: #fff url(../../images/admin/sb.gif) top left repeat-y;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 13px;
 	color: #454545;
 	line-height: 20px;
 	overflow-x:hidden;
-	min-width: 900px;
+	background: url(../../images/admin/images/side_img.png) repeat-y;
+float: left;
+width: 100%;
 	}
 	
 p { padding-bottom: 15px; }
@@ -38,10 +88,9 @@ a:hover {
 /* Header */
 	
 #header {
-	background: #35383d;
-	padding: 0 20px;
-	height: 50px;
+	font-size: 15px;background:url(../../images/admin/images/header_bg.png) repeat-x;height:56px;color:white
 	}
+	
 	
 #header h1 {
 	font-size: 18px;
@@ -218,45 +267,38 @@ a:hover {
 /* Sidebar */
 	
 #sidebar {
-	width: 200px;
-	float: left;
-	z-index:200;
-	position:relative;
-	background: url(../images/sb.gif) top left repeat-y;
+	z-index: 10;
+position: absolute;
+float:left;
+width:200px;
 	}
 	
 #sidebar ul#nav li {
 	font-size: 14px;
+		margin-bottom: 10px;
+
 	}
 
 #sidebar ul#nav li a {
 	display: block;
-	padding: 10px 0 10px 20px;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #bec9d0;
-	color: #5e6a80;
+	padding: 4px 0 10px 20px;
+	color: #fff;
 	text-decoration: none;
-	text-shadow: 0 1px 0 #fff;
-	font-weight: bold;
 	}
 
 #sidebar ul#nav li a strong {
-	background: url(../../images/admin/mac.png) center right no-repeat;
 	display: block;
 	margin-right: -1px;
-	color: #333;
+	color: #fff;
 	}
-
+#nav{padding-top: 20px;}
 #sidebar ul#nav li a img {
 	vertical-align: text-bottom;
 	}
 
 #sidebar ul#nav li a:hover {
-	background: #005598 url(../../images/admin/mbg.jpg) 0 0 repeat-x;
-	border-top: 1px solid #0095d8;
-	border-bottom: 1px solid #003868;
-	color: #fff;
-	text-shadow: 0 1px 0 #014076;
+	  background: url("../../images/admin/images/orange_img.png") no-repeat;
+color:#fff;
 	}
 
 #sidebar ul#nav li a:hover strong {
@@ -293,9 +335,14 @@ a:hover {
 
 #sidebar ul#nav li ul {
 	padding: 5px 0;
-	padding-left: 15px;
-	background: #e0e5e9;
-	border-bottom: 1px solid #becad1;
+padding-left: 15px;
+background: #595959;
+border: 1px solid gray;
+border-left: none;
+border-right: none;
+}
+#sidebar ul#nav li ul li{
+margin-left:0px
 	}
 
 #sidebar ul#nav li ul li {
@@ -306,12 +353,13 @@ a:hover {
 #sidebar ul#nav li ul li a {
 	padding: 3px 10px;
 	border: 0;
+	height:28px;
 	}
 
 #sidebar ul#nav li ul li a:hover {
 	border: 0;
-	background: none;
-	color: #008ee8;
+	 background: url("../../images/admin/images/orange_img.png") no-repeat;
+color:#fff;
 	text-shadow: 0 1px 0 #fff;
 	}
 
@@ -367,10 +415,10 @@ a:hover {
 /* Content */
 	
 #content {
-	overflow: hidden;
-	padding: 0 20px;
-	left: 220px;
 width: 82%;
+margin-left: 200px;
+margin-top: 20px;
+padding: 0 20px;
 	}
 	
 #content .breadcrumb {
@@ -1475,6 +1523,7 @@ margin-left:270px;
 .content_event_form1
 {
 position:absolute;
+z-index: 1;
 left:200px;
 top:50px;
 }
@@ -1518,7 +1567,12 @@ font-style:italic;
 {
 width:270px;
 }
-
+.form-horizontal .control-label5 {
+float: left;
+width: 140px;
+padding-top: 12px;
+text-align: right;
+}
 
 
 

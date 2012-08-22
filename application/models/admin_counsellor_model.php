@@ -151,40 +151,50 @@ function city_list_model()
 }
 function search_lead_model()
 {
-	$country="";
-	$city="";
-	$action="";
-	$src="";
-	$phone="";
-	$email="";	
-	if($this->input>post('country'))
+	$where="1";
+	
+	if($this->input->post('country'))
 	{
-		$country="v_country='".$this->input->post('country')."' ||";
+		$where=$where."&& v_country='".$this->input->post('country')."'";
+	}
+	if($this->input->post('city'))
+	{
+		$where=$where."&& v_city='".$this->input->post('city')."'";
+	}
+	if($this->input->post('action_id'))
+	{
+		$where=$where."&& v_next_action='".$this->input->post('action_id')."'";
+	}
+	if($this->input->post('src_id'))
+	{
+		$where=$where."&& v_user_type='".$this->input->post('src_id')."'";
+	}
+	if($this->input->post('phone')=='true')
+	{
+		$where=$where."&& v_phone!='' && v_phone!='0'";
+	}
+	if($this->input->post('email')=='true')
+	{
+		$where=$where."&& v_email!=''";
 	}
 	
-	if($this->input>post('city'))
+	$query=$this->db->query("select v_id from verified_lead_data where ".$where."");
+	$data=$query->result_array();	
+	foreach($data as $d)
 	{
-		$city="v_city='".$this->input->post('city')."'";
-	}
-	if($this->input>post('action_id'))
-	{
-		$action="v_next_action='".$this->input->post('action_id')."' ||";
-	}
-	if($this->input>post('src_id'))
-	{
-		$src="v_user_type='".$this->input->post('src_id')."' ||";
-	}
-	if($this->input>post('phone')=='true')
-	{
-		$phone="v_phone!='' ||";
-	}
-	if($this->input>post('email')=='true')
-	{
-		$email="v_email!='' ||";
-	}
-	$query=mysql_query("select * from verified_lead_data where ".$country" ".$city." ".$action." ".$src." ".$phone." ".$email." ");
-	echo "select * from verified_lead_data where ".$country" ".$city." ".$action." ".$src." ".$phone." ".$email."";
-	return $query->result_array();
+		$ids[]=$d['v_id'];
+	}	
+	$array=implode(',',$ids);
+	
+	 $query2=$this->db->query("select *,a.educ_level as current,b.educ_level as next from verified_lead_data as vld
+left join country on vld.v_country=country.country_id
+left join state on vld.v_state=state.state_id
+left join city on vld.v_city=city.city_id
+left join program_educ_level a on vld.v_current_educ_level=a.prog_edu_lvl_id
+left join program_educ_level b on vld.v_next_educ_level=b.prog_edu_lvl_id
+where vld.v_id in ($array) order by vld.v_email");
+
+	return $query2->result_array();
 }
 
 }

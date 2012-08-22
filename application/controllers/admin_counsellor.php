@@ -139,8 +139,9 @@ function search_lead()
 	} 
 	else
 	{
-		$data=$this->admin_counsellor_model->search_lead_model();
-		echo $data;
+		$data['verify_teleleads']=$this->admin_counsellor_model->search_lead_model();
+		
+		$this->load->view('admin/lead_counsellor/search_lead',$data);
 	}
 }	
 
