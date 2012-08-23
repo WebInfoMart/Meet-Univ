@@ -51,11 +51,21 @@ class Promotional_panel extends CI_Model
 		
 		$this->db->select('v_id');
 		$this->db->from('verified_lead_data');
+		if($country!='0')
 		$this->db->where('v_country',$country);
 		$query=$this->db->get();
 		return $query->num_rows();
 		}
 		
+		function total_student_in_city($city)
+		{
+		$this->db->select('v_id');
+		$this->db->from('verified_lead_data');
+		$this->db->where('v_city',$city);
+		$query=$this->db->get();
+		return $query->num_rows();
+
+		}
 		function total_student_in_ug($country_id,$educ_level)
 		{
 			// $c_where=" and if(ld.home_country_id <>'0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id) = '".$country_id."'";
@@ -78,6 +88,29 @@ class Promotional_panel extends CI_Model
 			$query=$this->db->get();
 			return $query->num_rows();
 	
+		}
+		
+		function total_student_in_city_ug($country_id,$city_id,$educ_level)
+		{
+		    $this->db->select('v_id');
+			$this->db->from('verified_lead_data');
+			$where=array();
+			if($country_id!='0')
+			{
+			 $where['v_country']=$country_id;
+			}
+			if($city_id!='0')
+			{
+			$where['v_city']=$city_id;
+			}
+			if($educ_level!='0')
+			{
+			$where['v_current_educ_level']=$educ_level;
+			}
+			$this->db->where($where);
+			$query=$this->db->get();
+			return $query->num_rows();
+		
 		}
 		function fetch_all_cities()
 		{

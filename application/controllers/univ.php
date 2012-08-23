@@ -972,7 +972,6 @@ class Univ extends CI_Controller
 			$data = $this->path->all_path();
 			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;
-			$this->load->view('auth/header',$data);
 			//$this->load->view('auth/univ-header-gallery-logo',$data);
 			$data['univ_id_for_program'] = $univ_id;	
 			$data['university_details'] = $this->users->get_university_by_id($univ_id);
@@ -982,6 +981,9 @@ class Univ extends CI_Controller
 			$university_name = $data['university_details']['univ_name'];
 			$university_address = $data['university_details']['address_line1'];
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+			$data['header_title'] = 'About ' . $university_name;
+			$this->load->view('auth/header',$data);
+			
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);

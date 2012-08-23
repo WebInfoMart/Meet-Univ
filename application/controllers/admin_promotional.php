@@ -40,16 +40,30 @@ class Admin_promotional extends CI_Controller
 		}
 	}
 	
-	function count_student_change_wise()
+	function count_student_change_wise($change)
 	{
 	 $country=$this->input->post('country_id');
 	 $city=$this->input->post('city_id');
 	 $educ_lvl=$this->input->post('educ_level');
 	 $c_where=array();
+	 if($change=='country')
+	 {
+	 $count=$this->promotional_panel->total_student_in_country($country);
+	 $city_list=$this->promotional_panel->fetch_cities_having_country($country);
+	 $educ_in_country=$this->promotional_panel->total_student_in_ug($country,$educ_lvl);
+	 echo $city_list.'!@#$%'.$count.'!@#$%'.$educ_in_country;
+	 }
+	 else if($change=='city')
+	 {
+	 $count=$this->promotional_panel->total_student_in_city($city);
+	 $educ_in_city=$this->promotional_panel->total_student_in_city_ug($country,$city,$educ_lvl);
+	 echo $count.'!@#$%'.$educ_in_city;
+	 }
+	 else
+	 {
      if($country!='0')
 	 {
 	 $c_where['v_country']=$country;
-	 
 	 }
 	 if($city!='0')
 	 {
@@ -64,13 +78,6 @@ class Admin_promotional extends CI_Controller
 	 $this->db->where($c_where);
 	 $query=$this->db->get();
 	 $count=$query->num_rows(); 
-	 if($this->input->post('c_change'))
-	 {
-	 $city_list=$this->promotional_panel->fetch_cities_having_country($country);
-	 echo $city_list.'!@#$%'.$count;
-	 }
-	 else
-	 {
 	 echo $count;
 	 }
 	}

@@ -1,8 +1,7 @@
 	<div class="body" id="content">
-		<div class="data12">
-		<a href="<?php echo $base; ?>adminleads/counsellor" style="float:right;">Counsellor</a>
+		<div class="data13">
 			
-			<div class="data12 promot_holder">
+			<div class="data13 promot_holder">
 				<div class="promot_heading">
 				Promote
 				</div>
@@ -40,7 +39,7 @@
 					<div class="clearfix"></div>
 				</div>
 			</div>
-			<div class="data12 second_holder">
+			<div class="data13 second_holder">
 				<div class="promot_heading">
 				Super Intelligent comparison
 				</div>
@@ -64,7 +63,7 @@
 									<label class="control-label5" for="select01">City: </label>
 									<div class="controls">
 										<select id="city_list" onchange="find_no_of_user_on_onchange(this)">
-											<option value="0">Select your location</option>
+											<option value="0">Select Educ Level</option>
 								<?php foreach($all_cities as $all_city) { ?>			
 											<option value="<?php echo $all_city['city_id']; ?>"><?php echo $all_city['cityname']; ?></option>
 								<?php } ?>			
@@ -94,25 +93,22 @@
 							<div class="clearfix"></div>
 							<div class="down_arrow city_div"></div>
 							<div class="blue_icon float_l city_div">
-								<data class="data_text" id="city_text_name">India</data>
+								<data class="data_text" id="city_text_name">Select City</data>
 							</div>
-							<h3 class="count_txt city_div" id="no_of_student_in_city"><?php echo $total_student_in_india; ?></h3>
+							<h3 class="count_txt city_div" id="no_of_student_in_city">0<?php // echo $total_student_in_india; ?></h3>
 							<div class="clearfix"></div>
 							<div class="down_arrow educ_div"></div>
 							<div class="green_icon educ_div float_l">
-								<data class="data_text" id="educ_lvl_text_name">Under Graduate</data>
+								<data class="data_text" id="educ_lvl_text_name">Select Educ. Level</data>
 							</div>
-							<h3 class="count_txt educ_div" id="no_of_student_in_educ_lvl"><?php echo $undergraduate_in_india; ?></h3>
+							<h3 class="count_txt educ_div" id="no_of_student_in_educ_lvl">0<?php //echo $undergraduate_in_india; ?></h3>
 						</div>
 						<div class="clearfix"></div>
+						<div><img src="<?php echo $base; ?>images/admin/graph.png" style="width:416px;"></div>
 					</div>
 			</div>
 		</div>
 	</div>
-<style type="text/css">
-.city_div{display:none;}
-.educ_div{display:none;}
-</style>
 <script>
 function find_no_of_user_on_onchange(select)
 {
@@ -123,17 +119,21 @@ var city_text=$('#city_list option:selected').text();
 var educ_level=$('#educ_level option:selected').val();
 var educ_level_text=$('#educ_level option:selected').text();
 var data;
-var c_change=0;
+var change='';
 if(select.id=='country_list')
 {
-c_change=1;
-data={country_id:country_id,city_id:city_id,educ_level:educ_level,c_change:c_change};
+change='country';
+}
+else if(select.id=='city_list')
+{
+change='city';
 }
 else
 {
-data={country_id:country_id,city_id:city_id,educ_level:educ_level};
+change='educ_level';
 }
-url='<?php echo $base; ?>admin_promotional/count_student_change_wise';
+data={country_id:country_id,city_id:city_id,educ_level:educ_level};
+url='<?php echo $base; ?>admin_promotional/count_student_change_wise/'+change;
 $.ajax({
 	   type: "POST",
 	   url: url,
@@ -146,43 +146,37 @@ $.ajax({
 		 if(country_id==0)
 		 {
 		 $('#country_text_name').html('Worldwide');
-		  if(c_change)
-		  {
-		  $('.city_div').hide();
-		   res=msg.split('!@#$%');
-		 $('#city_list').html(res[0]);
-		 $('#total_no_of_student_in_country').html(res[1]);
-		
-		  }
 		 }
-		 else if(c_change)
-		 {
-		 res=msg.split('!@#$%');
+		 var res=msg.split('!@#$%');
 		 $('#city_list').html(res[0]);
 		 $('#total_no_of_student_in_country').html(res[1]);
 		 $('#country_text_name').html(country_text);
-		  $('.city_div').hide();
-		 // if()
-		 }
+		 $('#city_text_name').html('Select City');
+		 $('#no_of_student_in_city').html('0');
+		  $('#no_of_student_in_educ_lvl').html(res[2]);
 		}
 		else if(select.id=='city_list')
 		{
-		if(city_id!='0'){
+		var res=msg.split('!@#$%');
 		$('#city_text_name').html(city_text);
-		$('#no_of_student_in_city').html(msg);
+		$('#no_of_student_in_city').html(res[0]);
+		if(educ_level!='0'){
+		 $('#no_of_student_in_educ_lvl').html(res[1]);
+		 }
 		$('.city_div').show();
-		}else{
-		$('.city_div').hide();
-		}
 		}
 		else if(select.id=='educ_level')
 		{
-		//$('#educ_lvl_text_name').text();
-		if(educ_level!='0')
-		$('#educ_lvl_text_name').html(educ_level_text);
-		 $('#no_of_student_in_educ_lvl').html(msg);
-		 $('.educ_div').show();
+		if(educ_level==0)
+		{
+		$('#educ_lvl_text_name').html('Select Educ. Level');
+		 $('#no_of_student_in_educ_lvl').html('0');
 		}
+		else {
+		 $('#educ_lvl_text_name').html(educ_level_text);
+		 $('#no_of_student_in_educ_lvl').html(msg);
+		}
+	   }
 	   }
 });
 }

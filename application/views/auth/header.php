@@ -293,7 +293,7 @@ d.getElementsByTagName('head')[0].appendChild(js);
 						if($this->ci->session->userdata('status')){ ?>
 						<?php if($user) { ?>
 						<a href="<?php echo $base?>home"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('username')); ?></div></a>
-						<a href="<?=$logoutUrl ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png"/> </a>
+						<a href="<?=$logoutUrl ?>"><img src="<?php echo "$base$img_path" ?>/facebook_logout_button.png" alt="facebook" title="facebook"/> </a>
 						<?php } else { ?>	
 						<a href="<?php echo $base?>home"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div></a>
 						<a href="<?php echo $base ?>logout"> <div class="login">Logout</div></a>

@@ -82,7 +82,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					{
 					?>			
 					<div class="slide">
-						<a href="#" title=""><img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="" width="700" height="360" title="" alt="" rel=" "></a>
+						<a href="#" title=""><img src="<?php echo "$base"; ?>uploads/home_gallery/<?php echo $galery_images['image_path']; ?>" alt="Meet Universities" width="700" height="360" title="" alt="" rel=" "></a>
 						<div class="slider_caption" style="bottom:0">
 							<p><?php echo $galery_images['title'].'</br>'.$galery_images['image_caption']; ?></p>
 						</div>
@@ -184,7 +184,6 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h4 class="white">in Country</h4></label>
 							<div class="controls">
-								
 								<div class="dropdown_box_country">
 									<div id="select_country">
 										<span id="selected_country">Select Country</span>
@@ -380,7 +379,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										</div>
 										<div>
 											<div class="img_style float_l aspectcorrect" >
-												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
+												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" alt="<?php echo $events['univ_name']; ?>" title="<?php echo $events['univ_name']; ?>" >
 											</div>
 											<div class="float_l text-width" style="font-size:14px;">
 												<h4 class="blue home_line"><?php 
@@ -468,7 +467,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<div>
 										<h4><a href="<?php echo $news_link; ?>"><?php echo substr($f_news['news_title'],0,35); ?></a></h4>
 										<span class="float_l aspectcorrect home_art">
-											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" alt="Counselling" title="Counselling">
 											
 										</span>
 										<p><?php echo substr($f_news['news_detail'],0,600).'...'; 
@@ -526,7 +525,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		<?php $univ_link=$this->subdomain->generate_univ_link_by_subdomain($featured_clg['subdomain_name']);
 			
 									?>
-										<a href="<?php echo $univ_link; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" ></a>
+										<a href="<?php echo $univ_link; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" alt="<?php echo $featured_clg['subdomain_name']; ?>" title="<?php echo $featured_clg['subdomain_name']; ?>"></a>
 									</div>
 				<?php 
 				$f_coll++;
@@ -656,16 +655,16 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										{
 										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 										
-											echo "<img src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."' class='latest_img'/>";
+											echo "<img src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."' class='latest_img' alt='Qusetion about universities' title='Qusetion about universities'/>";
 										}
 										else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
 										{
-											echo "<img src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."' class='latest_img'/>";
+											echo "<img src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."' class='latest_img' alt='Qusetion about universities' title='Qusetion about universities'/>";
 										}
 										else if($user && $quest_list['q_askedby'] == $logged_user_id)
 										{
 										?>
-											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="Qusetion about universities">
 										<?php
 										}
 										else{
@@ -734,7 +733,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<h4><?php echo substr($article['article_title'],0,45).'...'; ?></h4>
 									<span class="float_l aspectcorrect home_art">
 										
-											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>">
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" alt="Article Offered By Meet Universities" title="Article Offered By Meet Universities" >
 											
 										
 									</span>
