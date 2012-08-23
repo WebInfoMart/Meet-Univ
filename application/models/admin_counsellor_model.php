@@ -17,7 +17,7 @@ class Admin_counsellor_model extends CI_Model
 	function c_manage_verify_teleleads($start)
 	{   
 	    
-		$config['base_url']   = site_url('adminleads/manage_verified_telecalls');
+		$config['base_url'] = site_url('admin_counsellor/counsellor');
 		
 		if($this->input->post('id')!='')
 		{	
@@ -28,7 +28,7 @@ left join state on vld.v_state=state.state_id
 left join city on vld.v_city=city.city_id
 left join program_educ_level a on vld.v_current_educ_level=a.prog_edu_lvl_id
 left join program_educ_level b on vld.v_next_educ_level=b.prog_edu_lvl_id
-where vld.v_id=".$id." order by vld.v_email");
+where vld.v_id=".$id." ");
 			if(mysql_num_rows($query)>0)
 			{
 				return mysql_fetch_array($query);
@@ -45,12 +45,11 @@ where vld.v_id=".$id." order by vld.v_email");
 			$this->db->order_by('v_email');
 			$query=$this->db->get();
 			$config['total_rows'] = $query->num_rows();
-			$config['per_page']   = 30;
+			$config['per_page']   = 15;
 			$limit=$config['per_page'];
 			$offset=$start;
 			$this->db->select('*');
-			$this->db->from('verified_lead_data');
-			//$this->db->where('lead_verified','0');
+			$this->db->from('verified_lead_data');			
 			$this->db->order_by('v_email');
 			$this->db->limit($limit,$offset);
 			$query=$this->db->get();
@@ -161,6 +160,10 @@ function search_lead_model()
 	{
 		$where=$where."&& v_city='".$this->input->post('city')."'";
 	}
+	if($this->input->post('status'))
+	{
+		$where=$where."&& v_status='".$this->input->post('status')."'";
+	}
 	if($this->input->post('action_id'))
 	{
 		$where=$where."&& v_next_action='".$this->input->post('action_id')."'";
@@ -186,15 +189,9 @@ function search_lead_model()
 	}	
 	$array=implode(',',$ids);
 	
-	 $query2=$this->db->query("select *,a.educ_level as current,b.educ_level as next from verified_lead_data as vld
-left join country on vld.v_country=country.country_id
-left join state on vld.v_state=state.state_id
-left join city on vld.v_city=city.city_id
-left join program_educ_level a on vld.v_current_educ_level=a.prog_edu_lvl_id
-left join program_educ_level b on vld.v_next_educ_level=b.prog_edu_lvl_id
-where vld.v_id in ($array) order by vld.v_email");
-
+	 $query2=$this->db->query("select * from verified_lead_data as vld where vld.v_id in ($array) order by vld.v_email");
 	return $query2->result_array();
+
 }
 
 }

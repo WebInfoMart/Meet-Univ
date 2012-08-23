@@ -46,7 +46,6 @@
 <script type="text/javascript">
 $('.update_verify_lead').click(function(){
 var id=$(this).attr("id");
-alert(id);
 id=id.replace("c_lead_","");
 $.ajax({
 	   type: "POST",

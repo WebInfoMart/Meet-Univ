@@ -46,14 +46,20 @@ function counsellor($start='0')
 			$data['verify_teleleads']=$this->admin_counsellor_model->c_manage_verify_teleleads($start);
 			$data['country']=$this->admin_counsellor_model->country_model();
 			$data['city']=$this->admin_counsellor_model->city_model();	
-			if ($this->input->post('id'))
+			if($this->input->post('ajax'))
+			{			   	
+				$data['sr_id']=$start;
+				$this->load->view('admin/lead_counsellor/ajax_counsellor',$data);
+			}
+			else if ($this->input->post('id')!='')
 			{
 				//$data['country']=$this->admin_counsellor_model->country_model();
 				$data['state']=$this->admin_counsellor_model->state_model();
 				//$data['city']=$this->admin_counsellor_model->city_model();				
 				$data['program_parent']=$this->admin_counsellor_model->program_parent_model();
 				$data['program_level']=$this->admin_counsellor_model->program_level();
-				$this->load->view('admin/lead_counsellor/c_edit_lead_data',$data);				
+				$this->load->view('admin/lead_counsellor/c_edit_lead_data',$data);	
+				
 			}
 			else
 			{
@@ -140,7 +146,6 @@ function search_lead()
 	else
 	{
 		$data['verify_teleleads']=$this->admin_counsellor_model->search_lead_model();
-		
 		$this->load->view('admin/lead_counsellor/search_lead',$data);
 	}
 }	

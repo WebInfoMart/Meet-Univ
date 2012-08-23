@@ -8,7 +8,7 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Source country: </label>
 					<div class="controls-input-data">
-					<select class="large" id="country" onchange="fetchcities()">
+					<select class="large" id="s_country" onchange="fetchcities()">
 					<option value="0">-Select Country-</option>
 					<?php foreach($country as $cntry)
 					{ ?>
@@ -24,7 +24,7 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Source city: </label>
 					<div class="controls-input-data">
-					<select class="large" id="city">
+					<select class="large" id="s_city">
 					<option value="0">-Select City-</option>
 					<?php foreach($city as $ct)
 					{ ?>
@@ -40,7 +40,39 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Leads: </label>
 					<div class="controls-input-data">
-					<input type="text" class="large" id="input01">
+					<select name="status" id="s_status"  class="edit_box large" >
+						<option value="0">--Please Select--</option>
+						<option value="Valid" >Valid</option>
+						<optgroup label="Invalid Reason">
+						<option value="None Given">None Given</option>
+						<option value="Poor Candidate Data" >Poor Candidate Data</option>
+						<option value="Incorrect Academic Level" >Incorrect Academic Level</option>
+						<option value="Program/School Fit" >Program/School Fit</option>
+						<option value="No Reply">No Reply</option>
+						<option value="Spammers/Agents">Spammers/Agents</option>
+						<option value="Invalid Contact Details">Invalid Contact Details</option>
+						<option value="Looking For Different Country" >Looking For Different Country</option>
+						<option value="Fail to meet filters" >Fail to meet filters</option>
+						<option value="Duplicate" >Duplicate</option>
+						<option value="Incomplete">Incomplete</option>
+						<option value="Cap met" >Cap met</option>
+						<option value="Velocity limit met" >Velocity limit met</option>
+						<option value="Because of year" >Because of year</option>
+						<option value="Unable to Establish Contact- 3 Attempts">Unable to Establish Contact- 3 Attempts</option>
+						<option value="Incorrect/Wrong Number" >Incorrect/Wrong Number</option>
+						<option value="Hasn't Decided yet" >Hasn't Decided yet</option>
+						<option value="Looking for Different Course" >Looking for Different Course</option>
+						<option value="Not Looking for further studies" >Not Looking for further studies</option>
+						<option value="Due to Location of the colllege" >Due to Location of the colllege</option>
+						<option value="Looking for Part-time Course" >Looking for Part-time Course</option>
+						<option value="Poor Lead Quality" >Poor Lead Quality</option>
+						<option value="Looking for Lateral entry" >Looking for Lateral entry</option>
+						<option value="Already applied/Enrolled" >Already applied/Enrolled</option>
+						<option value="Language Problem" >Language Problem</option>
+						<option value="Just Browsing/Looking for information only" >Just Browsing/Looking for information only</option>
+						<option value="Looking for Different college" >Looking for Different college</option>						
+						</optgroup>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -48,7 +80,7 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Next action: </label>
 					<div class="controls-input-data">
-					<select class="large" id="next_action">
+					<select class="large" id="s_next_action">
 					<option value="0">-Select Action-</option>
 					<option value="none">none</option>
 					<option value="counsellor">counsellor</option>
@@ -64,7 +96,7 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Source: </label>
 					<div class="controls-input-data">
-					<select class="large" id="source">
+					<select class="large" id="s_source">
 					<option value="0">-Select Source-</option>
 					<option value="site_user">Siteuser</option>
 					<option value="fb_login">fb Login</option>
@@ -80,7 +112,7 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01">Phone no: </label>
 					<div class="controls-input-data">
-					<input type="checkbox" id="phone" class="checkbox_set">
+					<input type="checkbox" id="s_phone" class="checkbox_set">
 					</div>
 				</div>
 			</div>
@@ -88,7 +120,7 @@
 				<div class="control-group">
 					<label class="label-control-data blue" for="input01"> Email address: </label>
 					<div class="controls-input-data">
-					<input type="checkbox" id="email" class="checkbox_set">
+					<input type="checkbox" id="s_email" class="checkbox_set">
 					</div>
 				</div>
 			</div>
@@ -100,10 +132,7 @@
 			<div class="clearfix"></div>
 			<div class="bottom_line"></div>
 		</div>
-		<!--
-		<pre>
-		<?php //print_r($country); ?>
-		</pre> -->
+	
 		<div class="margin_t " id="main_content" >
 			<div class="span1 float_l">
 				<b>Sr.no</b>
@@ -122,13 +151,18 @@
 			</div>
 			<div class="clearfix"></div>
 			<div class="dotted_line"></div>
+			
 			<?php 
-			$sr_no=0;
+			$sno=1;
 			foreach($verify_teleleads as $result)
-			{ ?>
-			<div id="c_lead_<?php echo $result['v_id']; ?>" class="old_data update_verify_lead">
+			{if($sno % 2) {
+			$class = 'back_diff';
+			} else {
+			$class = '';
+			} ?>
+  			<div id="c_lead_<?php echo $result['v_id']; ?>" class="old_data update_verify_lead" style="cursor:pointer;">
 				<div class="span1 float_l">
-						<?php $sr_no++; echo $sr_no; ?>
+						<?php echo $sno++; ?>
 				</div>
 				<div class="span14 float_l">
 					<?php  echo $result['v_fullname']; ?>
@@ -137,7 +171,7 @@
 					<?php  echo $result['v_email']; ?>
 				</div>
 				<div class="span14 float_l">
-					<?php if($result['v_user_type']==''){ echo ''; } else { echo $result['v_user_type']; } ?>
+					<?php  echo $result['v_user_type']; ?>
 				</div>
 				<div class="span14 float_l">
 					<?php  echo $result['v_phone'];  ?>
@@ -145,7 +179,10 @@
 				<div class="clearfix"></div>
 			</div>
 			<?php } ?>
-		
+					<div id="pagination" class="table_pagination right paging-margin float_r" style="margin-right:50px;">
+            <?php echo $this->pagination->create_links();?>          
+			</div>
+
 		</div>
 	</div>
 </div>	
@@ -153,7 +190,6 @@
 <script type="text/javascript">
 $('.update_verify_lead').click(function(){
 var id=$(this).attr("id");
-
 id=id.replace("c_lead_","");
 $.ajax({
 	   type: "POST",
@@ -176,11 +212,13 @@ function cancel()
 	$('#content').show();
 	//$("#data_"+id).show('slow');
 }
+
 function fetchcities()
 {
 var cityid=0;
-var country_id=$("#country").val();
-
+var e = document.getElementById("s_country");
+var country_id=e.options[e.selectedIndex].value;
+//alert(country_id);
  $.ajax({
    type: "POST",
    url: "<?php echo $base; ?>admin_counsellor/city_list/",
@@ -189,19 +227,24 @@ var country_id=$("#country").val();
    success: function(msg)
    {
     //$('#'+cityID).attr('disabled', false);
-	$('#city').html(msg);
+	$('#s_city').html(msg);
    }
    });  
 }
 function search()
-{
-	var cnt_id=$("#country").val();
-	var ct_id=$("#city").val();
-	var action_id=$("#next_action").val();
-	var src_id=$("#source").val();
-	var phone=$("#phone").is(':checked');
-	var email=$("#email").is(':checked');
-	var data='country='+cnt_id+'&city='+ct_id+'&action_id='+action_id+'&src_id='+src_id+'&phone='+phone+'&email='+email;	
+{   var a=document.getElementById("s_country");
+	var cnt_id=a.options[a.selectedIndex].value;
+	var b=document.getElementById("s_city");
+	var ct_id=b.options[b.selectedIndex].value;
+	var c=document.getElementById("s_status");
+	var status=c.options[c.selectedIndex].value;
+	var d=document.getElementById("s_next_action");
+	var action_id=d.options[d.selectedIndex].value;
+	var f=document.getElementById("s_source");
+	var src_id=f.options[f.selectedIndex].value;
+	var phone=$("#s_phone").is(':checked');
+	var email=$("#s_email").is(':checked');
+	var data='country='+cnt_id+'&city='+ct_id+'&status='+status+'&action_id='+action_id+'&src_id='+src_id+'&phone='+phone+'&email='+email;	
 	$.ajax({
 	type:"POST",
 	url:"<?php echo $base; ?>admin_counsellor/search_lead",
@@ -215,7 +258,32 @@ function search()
 	}
 	});
 	
+}
+
+	$(function(){
+    applyPagination();
+    function applyPagination() 
+	{
 	
-}	 
+      $("#pagination a").click(function() {
+        var url = $(this).attr("href");
+        $.ajax({
+          type: "POST",
+          data: 'ajax=1',
+          url: url,
+          beforeSend: function() {
+		  $("#main_content").html("");
+          },
+          success: function(msg) {			
+            $("#main_content").html(msg);
+            applyPagination();
+          }
+        });
+        return false;
+      });
+    }
+  });
+  
+	  
 </script>	
 

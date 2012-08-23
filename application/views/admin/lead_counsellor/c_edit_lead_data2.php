@@ -129,7 +129,7 @@ $(document).ready(function(){
 						<label class="control-data12" for="input01">Country: </label>
 						<div class="input-data12">
 						<span class="country_drop selector"><?php echo $verify_teleleads['country_name'];  ?> </span>
-						<Select  name="country" id="country_id" class='edit_box large_data input-large_set' onchange="fetchstates()" style="display:none">
+						<Select  name="country" id="country" class='edit_box large_data input-large_set' onchange="fetchstates()" style="display:none">
 						<option>Select Country</option> 
 						<?php foreach($country as $cntry){
 						$selected='';
@@ -148,7 +148,7 @@ $(document).ready(function(){
 						<label class="control-data12" for="input01">State: </label>
 						<div class="input-data12">
 						<span class="state_drop selector"><?php echo $verify_teleleads['statename']; ?> </span>			
-						<Select  name="state" id="state_id" class='edit_box large_data input-large_set' onchange="fetchcities()" style="display:none">
+						<Select  name="state" id="state" class='edit_box large_data input-large_set' onchange="fetchcities()" style="display:none">
 						<option>Select state</option>
 						
 					<?php
@@ -178,7 +178,7 @@ $(document).ready(function(){
 						<label class="control-data12" for="input01"> City: </label>
 						<div class="input-data12">
 						<span class="city_drop selector"><?php echo $verify_teleleads['cityname'];  ?> </span>
-						<Select  name="city" id="city_id" class='edit_box large_data input-large_set' style="display:none">
+						<Select  name="city" id="city" class='edit_box large_data input-large_set' style="display:none">
 						<option>Select City</option>								
 						<?php
 					
@@ -252,8 +252,8 @@ $(document).ready(function(){
 					<span class="courses selector">
 					<?php 
 					$courses=array();
-					if($verify_teleleads['v_program']!='0' && $verify_teleleads['v_program']!='' && $verify_teleleads['v_program']!='null')
-					{//echo 'hhh'.$verify_teleleads['v_program'];
+					if($verify_teleleads['v_program']!='')
+					{
 						$courses=explode(",",$verify_teleleads['v_program']);
 						$count=count($courses);					
 						for($i=0;$i<$count;$i++)
@@ -520,28 +520,30 @@ $(document).ready(function(){
 								</div>
 								<?php }} ?>								
 							 </div>							
-						<textarea name="notes" id="notes" rows="2" cols="50" class="edit_box" style="width:506px;display:none"></textarea>
+						<textarea name="notes" id="notes" rows="2" cols="37" class="edit_box" style="width:506px;display:none"></textarea>
 						</div>
 				</div>
 			</div>
 			</div>
 			<div class="span21" style="margin-left: 406px;">
 					<button onclick="verifyLead('<?php echo $verify_teleleads['v_id'];  ?>')" class="btn_img edit_box" style="display:none">Save now</button>
-					<button onclick="cancel()" class="btn_img edit_box">Cancel</button>
+					<button onclick="cancel()" class="btn_img edit_box" >Cancel</button>
+
 				</div>
 	</div>
 </div>	
 <script type="text/javascript">
 $(document).ready(function() {
-	  $(".counsel_next_bg").click(function(){
+	 //$(".edit_box").hide();
+	 $(".counsel_next_bg").click(function(){
 	  $(".selector").hide();
 	   $(".edit_box").show();
 	 });
 });	 
 function fetchstates()
 {
-var e = document.getElementById("country_id");
-var cid=e.options[e.selectedIndex].value;
+var cid=$("#country").val();
+
 $.ajax({
    type: "POST",
    url: "<?php echo $base; ?>admin/state_list_ajax/",
@@ -549,18 +551,18 @@ $.ajax({
    cache: false,
    success: function(msg)
    {    
-	$("#state_id").html(msg);	
-	$('#city_id').html('<option value="0">select city</option>')
+	$("#state").html(msg);	
+	$('#city').html('<option value="0">select city</option>')
    }
    });
 }
 
 function fetchcities()
 {
-var cityid=0;
-var e = document.getElementById("state_id");
-var state_id=e.options[e.selectedIndex].value;
-$.ajax({
+cityid=0;
+state_id=$("#state").val();
+
+ $.ajax({
    type: "POST",
    url: "<?php echo $base; ?>admin/city_list_ajax/",
    data: 'state_id='+state_id+'&sel_city_id='+cityid,
@@ -568,7 +570,7 @@ $.ajax({
    success: function(msg)
    {
     //$('#'+cityID).attr('disabled', false);
-	$('#city_id').html(msg);
+	$('#city').html(msg);
    }
    });  
 }
@@ -665,9 +667,9 @@ function verifyLead(id)
 	var date=$('#date').val();
 	var email=$('#email').val();
 	var phone=$('#phone').val();
-	var country=$('#country_id').val();
-	var state=$('#state_id').val();	
-	var city=$('#city_id').val();
+	var country=$('#country').val();
+	var state=$('#state').val();	
+	var city=$('#city').val();
 	var enroll=$('#enroll').val();
 	var auto_intrested_countries=$('#auto_intrested_countries').val();
 	var courses=$('#courses').val();
@@ -685,7 +687,8 @@ function verifyLead(id)
 	var next_educ_level=$('#next_educ_level').val();
 	var c_educ_level=$('#c_educ_level').val();
 	var academic=$('#academic').val();
-	var notes=$('#notes').val();	 
+	var notes=$('#notes').val();
+	 
 	  var interested_cont=0;
 		$("input[name^=country_ids]").each(function() {
 		var val=$(this).val();
@@ -694,7 +697,7 @@ function verifyLead(id)
 							
 		});
 	var data='id='+id+'&lead_id='+lead_id+'&name='+name+'&year='+year+'&month='+month+'&date='+date+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&auto_intrested_countries='+auto_intrested_countries+'&courses='+courses+'&enroll_date='+enroll_date+'&exam1='+exam1+'&exam1_score='+exam1_score+'&exam2='+exam2+'&exam2_score='+exam2_score+'&attended='+attended+'&other_exam_name='+other_exam_name+'&other_exam_score='+other_exam_score+'&status='+status+'&stage='+stage+'&priority='+priority+'&next_educ_level='+next_educ_level+'&c_educ_level='+c_educ_level+'&academic='+academic+'&notes='+notes+'&interested_cont='+interested_cont;
-	alert(data);
+	//alert(data);
 	$.ajax({
 	type:"POST",
 	url:"<?php echo $base; ?>admin_counsellor/verified_lead",

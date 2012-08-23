@@ -17,6 +17,7 @@ margin-left: 20px;
 .float_l{float:left}
 .float_r{float:right}
 /******************************margin**************************/
+.margin_auto{margin: 0px auto;}
 .margin-r2{margin-right: 30px;}
 .margin{margin:10px;}
 .margin_t{margin-top:10px;}
@@ -516,7 +517,7 @@ border-top-left-radius: 4px;
 -webkit-border-bottom-left-radius: 4px;
 -moz-border-radius-bottomleft: 4px;
 border-bottom-left-radius: 4px;}
-.arrow_but{padding-bottom: 7px!important;;margin-left: -7px!important;margin-top: -4px;}
+.arrow_but{padding-bottom: 7px!important;;margin-left: -7px!important;margin-top: -3px;}
 .arrow_but:hover,.arrow_but:active,.arrow_but:visited{background-color: #05C!important;}
 
 
@@ -786,7 +787,7 @@ img{vertical-align: middle;}
 background:#fff;
 border-radius: 2px;
 border:1px solid #ccc;
-width: 315px;
+width: 506px;
 height:42px;
 overflow-y:scroll;
 border-bottom: none;
@@ -794,7 +795,7 @@ padding: 5px;
 }
 .notes_data{
 float:left;
-width:205px;
+width:397px;
 border-top:1px solid #ccc;
 margin:10px 0px;
 }
@@ -857,9 +858,9 @@ height: 34px;
 font-family: Myriad Pro;
 color: white;
 }
-.fix_height{height: 88px;
+.fix_height{height: 82px;
 overflow: hidden;
-padding: 2px;
+padding: 2px 8px;
 text-align: justify;}
 .line_back{border-top:1px solid #D2D2D2;-moz-border-top:1px solid #D2D2D2;-webkit-border-top:1px solid #D2D2D2;height: 1px;
 width: 100px;position: relative;margin-top: 104px;z-index: 100;float: left;}
@@ -998,3 +999,29 @@ width: 125px;
 padding: 0px;
 margin-bottom: 0px!important;}
 .input_post{margin-left: 142px;}
+.button_type{float: right;
+color: #333;
+text-decoration: none;
+background-color: #E6E6E6;
+background-position: 0 -15px;
+-webkit-transition: background-position 0.1s linear;
+-moz-transition: background-position 0.1s linear;
+-ms-transition: background-position 0.1s linear;
+-o-transition: background-position 0.1s linear;
+transition: background-position 0.1s linear;
+webkit-border-top-right-radius: 4px;
+-moz-border-radius-topright: 4px;
+border-radius: 4px;
+-webkit-border-bottom-right-radius: 4px;
+-moz-border-radius-bottomright: 4px;
+border-bottom-right-radius: 4px;
+-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+cursor: pointer;
+margin: 6px;
+padding: 4px;
+border: 1px solid #CCC;
+-moz-border: 1px solid #CCC;
+-webkit-border: 1px solid #CCC;}
+.button_type:hover{color:#333}
