@@ -500,7 +500,6 @@ success_exists=0;
 }
 else
 {
-alert("hi");
 success_exists=1;
 var dataemail_phone=
 {
@@ -535,7 +534,7 @@ else
 success_exists='1';
 }
 if(success_exists=='1') {
-if($('#check_verify_lead_phone_'+form_id).val()=='1')
+if($('#check_verify_lead_phone_'+form_id).val()=='1' && phone!='')
 {
 var verified_phone=1;
 }
@@ -543,7 +542,7 @@ else
 {
 var verified_phone=0;
 }
-if($('#check_verify_lead_email_'+form_id).val()=='1')
+if($('#check_verify_lead_email_'+form_id).val()=='1' && email!='')
 {
 verified_email=1;
 }
@@ -597,8 +596,20 @@ verified_phone:verified_phone
 	    $('#data_'+form_id).show();
 	   
 		$("#lead_fname_"+current_lead_id).html(fullname);
+		if(phone!=''){
 		$("#lead_phone_"+current_lead_id).html(phone);
+		}
+		else
+		{
+		$("#lead_phone_"+current_lead_id).html('Not Available');
+		$("#lead_phone_"+current_lead_id).css('color','blue');
+		}
+		if(email!='') {
 		$("#lead_email_"+current_lead_id).html(email);
+		}else
+		{
+		$("#lead_email_"+current_lead_id).css('color','blue');
+		}
 		if(verified_email=='1')
 		{
 		 $("#span_verified_email_"+current_lead_id+ ' img').attr('src','<?php echo $base; ?>images/admin/success.gif');

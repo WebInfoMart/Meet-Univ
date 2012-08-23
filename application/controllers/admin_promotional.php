@@ -45,27 +45,34 @@ class Admin_promotional extends CI_Controller
 	 $country=$this->input->post('country_id');
 	 $city=$this->input->post('city_id');
 	 $educ_lvl=$this->input->post('educ_level');
-	 $c_where='';
+	 $c_where=array();
      if($country!='0')
 	 {
-	 $c_where=" and if(ld.home_country_id <> '0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id) = '".$country."'";
+	 $c_where['v_country']=$country;
+	 
 	 }
 	 if($city!='0')
 	 {
-	 $c_where.=" and if(ld.city <> '0',if(ld.city <> '',if(ld.city IS NOT NULL,ld.city,up.city_id),up.city_id),up.city_id) = '".$city."'";		
+	 $c_where['v_city']=$city;		
 	 }
 	 if($educ_lvl!='0')
 	 {
-	 $c_where.=" and if(ld.current_educ_level <> '0',if(ld.current_educ_level <> '',if(ld.current_educ_level IS NOT NULL,ld.current_educ_level,up.curr_educ_level),up.curr_educ_level),up.curr_educ_level)='".$educ_lvl."'";		
+	 $c_where['v_current_educ_level']=$educ_lvl;		
 	 }
-	        $sql="SELECT *
-			FROM user_profiles up, lead_data AS ld, users u
-			WHERE up.user_id = u.id
-			AND u.email = ld.email".
-			$c_where;
-			$res=$this->db->query($sql);
-			echo $res->num_rows();
-			//echo $sql;	
+	 $this->db->select('v_id');
+	 $this->db->from('verified_lead_data');
+	 $this->db->where($c_where);
+	 $query=$this->db->get();
+	 $count=$query->num_rows(); 
+	 if($this->input->post('c_change'))
+	 {
+	 $city_list=$this->promotional_panel->fetch_cities_having_country($country);
+	 echo $city_list.'!@#$%'.$count;
+	 }
+	 else
+	 {
+	 echo $count;
+	 }
 	}
 
 }

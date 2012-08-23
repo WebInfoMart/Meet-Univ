@@ -454,12 +454,11 @@ var success=1;
 	}
 	if(year==0 && month==0 && date==0)
 	{
-	p_err=0;
+	success=1;
 	$("#year_"+form_id).css("border-color","#ccc");
 	$("#month_"+form_id).css("border-color","#ccc");
 	$("#date_"+form_id).css("border-color","#ccc");
 	}
-	
  }
  else
  {
@@ -478,13 +477,7 @@ else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
 	$('#error_message').html("Phone number should be 10 digit");
 	$('#error_message').css("display","block");
 	success=0;
-}	
- else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
- {
-	$("#lead_user_phone_"+form_id).css("border-color","red");
-	$('#error_message').html("Phone number should be 10 digit");
-	$('#error_message').css("display","block");
- }
+}
  else if(validate_email(email)=='0')
 {
 $("#lead_user_phone_"+form_id).css("border-color","#ccc");
@@ -596,10 +589,11 @@ $.ajax({
 		 $("#content_msg").css("display","block");
 		 $('#content_msg p').html("Lead Verified successfully");
 		 // $("#content_msg").hide(1000);
-		
+		$('#data_del_'+current_lead_id).replaceWith('');
 	   }
 		 $("#edit_data_"+form_id).hide(1000);
 	     $('#edit_data_'+form_id).replaceWith('');
+		 
 		/*if($("#check_verify_lead_email_"+current_lead_id).is(':checked'))
 		{
 		$("#span_not_verified_"+current_lead_id).css("color","green");
@@ -798,6 +792,7 @@ $.ajax({
 	$('#city_'+cid).html('<option value="">Select City </option>');
 	}
    });
+   
  }
 
 
@@ -919,7 +914,6 @@ $('#addstate').click(function(){
 
 
 $('#addcity').click(function(){
-alert('called');
 	var country=$("#country_model2 option:selected").val();
 	var state=$("#state_model2 option:selected").val();
 	var city=$("#city_model2").val();

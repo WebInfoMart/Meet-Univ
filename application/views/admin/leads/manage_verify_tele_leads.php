@@ -3,7 +3,9 @@
 	overflow: hidden;
 	padding: 0 20px;
 	left: 220px;
-	width: 82%;
+	width: 25%;
+	position: relative;
+	top: 22px;
 	}
 #content_verify_message {
 	overflow: hidden;
@@ -90,8 +92,20 @@
 
 <span  class="float_l data_img" id="span_verified_email_<?php echo $teleleadsres['v_id']; ?>" style="float: left;">
  <img  src="<?php echo base_url(); ?>images/admin/error.gif"/> </span>
- <?php }  ?>
- <span class="email_data" id="lead_email_<?php echo $teleleadsres['v_id']; ?>"><?php echo $teleleadsres['v_email']; ?></span>
+ <?php } 
+ if($teleleadsres['v_email']!='')
+       { ?>
+	   <span class="email_data" id="lead_email_<?php echo $teleleadsres['v_id']; ?>">
+ <?php
+	   echo $teleleadsres['v_email'];
+	   }
+	   else
+	   { ?>
+	      <span class="email_data" id="lead_email_<?php echo $teleleadsres['v_id']; ?>" style="color:blue;">
+      <?php
+	   echo "Not Availbale";
+	   }
+ ?></span>
 			</div>
 			
 			

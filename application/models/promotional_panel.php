@@ -13,7 +13,9 @@ class Promotional_panel extends CI_Model
 		function count_total_student_in_portal()
 		{
 			$this->db->select('id');
-			$this->db->from('lead_data');
+			$this->db->from('users');
+			$this->db->join('verified_lead_data','users.email=verified_lead_data.v_email','left');
+			$this->db->where('users.level','1');
 			$query = $this->db->get();
 			$no_of_student = $query->num_rows();
 			return $no_of_student;
@@ -38,30 +40,43 @@ class Promotional_panel extends CI_Model
 		
 		function total_student_in_country($country)
 		{
-		if($country!='0')
-	    {
-	    $c_where=" and if(ld.home_country_id <>'0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id)='".$country."'";
-	    }
-		$sql="SELECT * from lead_data ld LEFT JOIN user_profiles up on ld.user_id=up.user_id LEFT JOIN users u on up.user_id=u.id ".$c_where;
-		$res=$this->db->query($sql);
-	    return $res->num_rows();
+		
+	    // $c_where=" and if(ld.v_country <>'0',if(ld.v_country <> '',if(ld.v_country IS NOT NULL,ld.v_country,up.country_id),up.country_id),up.country_id)='".$country."'";
+	    // }
+		//$sql="SELECT * from lead_data ld LEFT JOIN user_profiles up on ld.user_id=up.user_id LEFT JOIN users u on up.user_id=u.id ".$c_where;
+		// $sql="SELECT * from users u  JOIN user_profiles up on u.id=up.user_id LEFT JOIN verified_lead_data ld  on u.email=ld.v_email ".$c_where;
+		// $res=$this->db->query($sql);
+	    // return $res->num_rows();
+		
+		
+		$this->db->select('v_id');
+		$this->db->from('verified_lead_data');
+		$this->db->where('v_country',$country);
+		$query=$this->db->get();
+		return $query->num_rows();
 		}
 		
 		function total_student_in_ug($country_id,$educ_level)
 		{
-			$c_where=" and if(ld.home_country_id <>'0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id) = '".$country_id."'";
+			// $c_where=" and if(ld.home_country_id <>'0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id) = '".$country_id."'";
 			
 	        //$educ_lvl_where="AND IF( ld.current_educ_level =  '0', up.curr_educ_level, ld.current_educ_level )='".$educ_level."'";
-			$educ_lvl_where="and if(ld.current_educ_level <> '0',if(ld.current_educ_level <> '',if(ld.current_educ_level IS NOT NULL,ld.current_educ_level,up.curr_educ_level),up.curr_educ_level),up.curr_educ_level)='".$educ_level."'";
+			// $educ_lvl_where="and if(ld.current_educ_level <> '0',if(ld.current_educ_level <> '',if(ld.current_educ_level IS NOT NULL,ld.current_educ_level,up.curr_educ_level),up.curr_educ_level),up.curr_educ_level)='".$educ_level."'";
 			
-			$sql="SELECT * 
-			FROM user_profiles up, lead_data AS ld, users u
-			WHERE up.user_id = u.id
-			AND u.email = ld.email".
-			$c_where." ".$educ_lvl_where;
-			$res=$this->db->query($sql);
-			return $res->num_rows(); 
+			// $sql="SELECT * 
+			// FROM user_profiles up, lead_data AS ld, users u
+			// WHERE up.user_id = u.id
+			// AND u.email = ld.email".
+			// $c_where." ".$educ_lvl_where;
+			// $res=$this->db->query($sql);
+			// return $res->num_rows(); 
 			//return $sql;
+
+			$this->db->select('v_id');
+			$this->db->from('verified_lead_data');
+			$this->db->where(array('v_country'=>$country_id,'v_current_educ_level'=>$educ_level));
+			$query=$this->db->get();
+			return $query->num_rows();
 	
 		}
 		function fetch_all_cities()
@@ -70,6 +85,21 @@ class Promotional_panel extends CI_Model
 		 $this->db->from('city');
 		 $query = $this->db->get();
 		 return $query->result_array();
+		}
+		
+		function fetch_cities_having_country($cid)
+		{
+		 $this->db->select('*');
+		 $this->db->from('city');
+		 if($cid!='0')
+		 $this->db->where('country_id',$cid);
+		 $query = $this->db->get();
+		 $res= $query->result_array();
+		 $city_list='<option value="0">select city</option>';
+		 foreach($res as $res1) { 
+		 $city_list.='<option value="'.$res1['city_id'].'">'.$res1['cityname'].'</option>';
+		 } 
+		 echo $city_list;	
 		}
 }
 
