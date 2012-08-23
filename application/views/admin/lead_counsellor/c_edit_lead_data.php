@@ -694,7 +694,7 @@ function verifyLead(id)
 							
 		});
 	var data='id='+id+'&lead_id='+lead_id+'&name='+name+'&year='+year+'&month='+month+'&date='+date+'&email='+email+'&phone='+phone+'&country='+country+'&state='+state+'&city='+city+'&enroll='+enroll+'&auto_intrested_countries='+auto_intrested_countries+'&courses='+courses+'&enroll_date='+enroll_date+'&exam1='+exam1+'&exam1_score='+exam1_score+'&exam2='+exam2+'&exam2_score='+exam2_score+'&attended='+attended+'&other_exam_name='+other_exam_name+'&other_exam_score='+other_exam_score+'&status='+status+'&stage='+stage+'&priority='+priority+'&next_educ_level='+next_educ_level+'&c_educ_level='+c_educ_level+'&academic='+academic+'&notes='+notes+'&interested_cont='+interested_cont;
-	alert(data);
+	//alert(data);
 	$.ajax({
 	type:"POST",
 	url:"<?php echo $base; ?>admin_counsellor/verified_lead",

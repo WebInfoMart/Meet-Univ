@@ -146,7 +146,14 @@ function search_lead()
 	else
 	{
 		$data['verify_teleleads']=$this->admin_counsellor_model->search_lead_model();
+		if($data['verify_teleleads']=='0')
+		{
+		 echo '0';
+		}
+		else
+		{
 		$this->load->view('admin/lead_counsellor/search_lead',$data);
+		}
 	}
 }	
 

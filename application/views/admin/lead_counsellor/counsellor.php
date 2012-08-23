@@ -140,13 +140,13 @@
 			<div class="span14 float_l">
 				<b class="blue">FullName</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="data4 float_l">
 				<b class="green">Email</b>
 			</div>
 			<div class="span14 float_l">
 				<b class="blue">Source</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="data2 float_l">
 				<b class="green">Phone</b>
 			</div>
 			<div class="clearfix"></div>
@@ -167,13 +167,13 @@
 				<div class="span14 float_l">
 					<?php  echo $result['v_fullname']; ?>
 				</div>
-				<div class="span14 float_l">
+				<div class="data4 float_l">
 					<?php  echo $result['v_email']; ?>
 				</div>
 				<div class="span14 float_l">
 					<?php  echo $result['v_user_type']; ?>
 				</div>
-				<div class="span14 float_l">
+				<div class="data2 float_l">
 					<?php  echo $result['v_phone'];  ?>
 				</div>				
 				<div class="clearfix"></div>
@@ -253,8 +253,15 @@ function search()
 	async:false,
 	success:function(msg)
 	{
-		//alert(msg);
-		$("#main_content").html(msg);
+	   //alert(msg);
+		if(msg=='0')
+		{
+			$("#main_content").html('No Result Found');
+		}
+		else
+		{
+			$("#main_content").html(msg);
+		}
 	}
 	});
 	

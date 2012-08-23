@@ -43,7 +43,7 @@
 <div class="message info"><p>Record dropped !!!</p></div> 
 </div>
 	
-<div id="content" style="margin-left: 200px;">
+<div id="content">
 		
 			
 			<!-- .breadcrumb ends -->

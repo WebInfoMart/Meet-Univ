@@ -37,7 +37,7 @@
 <div class="message info"><p>No Verify has selected!!!</p></div> 
 </div>
 	
-	<div id="content" style="margin-left: 200px;">
+	<div id="content" >
 		
 			<?php if($verify_teleleads!='0') { ?>
 			<!-- .breadcrumb ends -->

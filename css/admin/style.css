@@ -1380,7 +1380,7 @@ float: left;
 #content.loginbox {
 	background: #fff;
 	width: 400px;
-	margin: 150px auto 100px;
+	margin: 150px auto;
 	border: 1px solid #b0bec6;
 	padding: 20px 0 0;
 	

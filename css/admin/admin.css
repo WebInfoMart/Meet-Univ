@@ -1025,3 +1025,17 @@ border: 1px solid #CCC;
 -moz-border: 1px solid #CCC;
 -webkit-border: 1px solid #CCC;}
 .button_type:hover{color:#333}
+.univ_box{background: white;
+border-radius: 2px;
+border: 1px solid #CCC;
+width: 316px;
+height: 42px;
+overflow-y: scroll;
+border-bottom: none;
+padding: 5px;}
+.notes_line {
+float: left;
+width: 208px;
+border-top: 1px solid #CCC;
+margin: 10px 0px;
+}

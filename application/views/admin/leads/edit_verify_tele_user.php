@@ -252,10 +252,38 @@
 							<label class="label-control" for="input01">Lead Status</label>
 							<div class="controls-input">
 							<select id="lead_status_<?php echo $lead_info['v_id']; ?>" name="lead_status_<?php echo $lead_info['v_id']; ?>" class="select_width">
-							<option value="none">select</option>
-							<option value="valid" <?php if($lead_info['v_lead_status']=='valid') { echo "selected"; } ?> >Valid</option>
-							<option value="india_only" <?php if($lead_info['v_lead_status']=='india_only') { echo "selected"; } ?>>India Only</option>
-							<option value="paused" <?php if($lead_info['v_lead_status']=='paused') { echo "selected"; } ?>>Paused</option>
+							<option value="">--Please Select--</option>
+						<option value="Valid" <?php if($lead_info['lead_status']=='Valid'){ ?> selected="selected" <?php } ?>>Valid</option>
+						<optgroup label="Invalid Reason">
+						<option value="None Given" <?php if($lead_info['lead_status']=='None Given'){ ?> selected="selected" <?php } ?>>None Given</option>
+						<option value="Poor Candidate Data" <?php if($lead_info['lead_status']=='Poor Candidate Data'){ ?> selected="selected" <?php } ?>>Poor Candidate Data</option>
+						<option value="Incorrect Academic Level" <?php if($lead_info['lead_status']=='Incorrect Academic Level'){ ?> selected="selected" <?php } ?>>Incorrect Academic Level</option>
+						<option value="Program/School Fit" <?php if($lead_info['lead_status']=='Program/School Fit'){ ?> selected="selected" <?php } ?>>Program/School Fit</option>
+						<option value="No Reply" <?php if($lead_info['lead_status']=='No Reply'){ ?> selected="selected" <?php } ?>>No Reply</option>
+						<option value="Spammers/Agents" <?php if($lead_info['lead_status']=='Spammers/Agents'){ ?> selected="selected" <?php } ?>>Spammers/Agents</option>
+						<option value="Invalid Contact Details" <?php if($lead_info['lead_status']=='Invalid Contact Details'){ ?> selected="selected" <?php } ?>>Invalid Contact Details</option>
+						<option value="Looking For Different Country" <?php if($lead_info['lead_status']=='Looking For Different Country'){ ?> selected="selected" <?php } ?>>Looking For Different Country</option>
+						<option value="Fail to meet filters" <?php if($lead_info['lead_status']=='Fail to meet filters'){ ?> selected="selected" <?php } ?>>Fail to meet filters</option>
+						<option value="Duplicate" <?php if($lead_info['lead_status']=='Duplicate'){ ?> selected="selected" <?php } ?>>Duplicate</option>
+						<option value="Incomplete" <?php if($lead_info['lead_status']=='Incomplete'){ ?> selected="selected" <?php } ?>>Incomplete</option>
+						<option value="Cap met" <?php if($lead_info['lead_status']=='Cap met'){ ?> selected="selected" <?php } ?>>Cap met</option>
+						<option value="Velocity limit met" <?php if($lead_info['lead_status']=='Velocity limit met'){ ?> selected="selected" <?php } ?>>Velocity limit met</option>
+						<option value="Because of year" <?php if($lead_info['lead_status']=='Because of year'){ ?> selected="selected" <?php } ?>>Because of year</option>
+						<option value="Unable to Establish Contact- 3 Attempts"<?php if($lead_info['lead_status']=='Unable to Establish Contact- 3 Attempts'){ ?> selected="selected" <?php } ?> >Unable to Establish Contact- 3 Attempts</option>
+						<option value="Incorrect/Wrong Number" <?php if($lead_info['lead_status']=='Incorrect/Wrong Number'){ ?> selected="selected" <?php } ?>>Incorrect/Wrong Number</option>
+						<option value="Hasn't Decided yet" <?php if($lead_info['lead_status']=="Hasn't Decided yet"){ ?> selected="selected" <?php } ?>>Hasn't Decided yet</option>
+						<option value="Looking for Different Course" <?php if($lead_info['lead_status']=='Looking for Different Course'){ ?> selected="selected" <?php } ?>>Looking for Different Course</option>
+						<option value="Not Looking for further studies" <?php if($lead_info['lead_status']=='Not Looking for further studies'){ ?> selected="selected" <?php } ?>>Not Looking for further studies</option>
+						<option value="Due to Location of the colllege" <?php if($lead_info['lead_status']=='Due to Location of the colllege'){ ?> selected="selected" <?php } ?>>Due to Location of the colllege</option>
+						<option value="Looking for Part-time Course" <?php if($lead_info['lead_status']=='Looking for Part-time Course'){ ?> selected="selected" <?php } ?>>Looking for Part-time Course</option>
+						<option value="Poor Lead Quality" <?php if($lead_info['lead_status']=='Poor Lead Quality'){ ?> selected="selected" <?php } ?>>Poor Lead Quality</option>
+						<option value="Looking for Lateral entry" <?php if($lead_info['lead_status']=='Looking for Lateral entry'){ ?> selected="selected" <?php } ?>>Looking for Lateral entry</option>
+						<option value="Already applied/Enrolled" <?php if($lead_info['lead_status']=='Already applied/Enrolled'){ ?> selected="selected" <?php } ?>>Already applied/Enrolled</option>
+						<option value="Language Problem" <?php if($lead_info['lead_status']=='Language Problem'){ ?> selected="selected" <?php } ?>>Language Problem</option>
+						<option value="Just Browsing/Looking for information only" <?php if($lead_info['lead_status']=='Just Browsing/Looking for information only'){ ?> selected="selected" <?php } ?>>Just Browsing/Looking for information only</option>
+						<option value="Looking for Different college" <?php if($lead_info['lead_status']=='Looking for Different college'){ ?> selected="selected" <?php } ?>>Looking for Different college</option>						
+						</optgroup>
+
 							</select>
 							</div>
 					</div>

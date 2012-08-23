@@ -154,10 +154,37 @@
 							<label class="label-control" for="input01">Lead Status</label>
 							<div class="controls-input">
 							<select id="lead_status" name="lead_status" class="select_width">
-							<option value="none">select</option>
-							<option value="valid" >Valid</option>
-							<option value="india_only" >India Only</option>
-							<option value="paused" >Paused</option>
+							<option value="0">--Please Select--</option>
+						<option value="Valid" >Valid</option>
+						<optgroup label="Invalid Reason">
+						<option value="None Given">None Given</option>
+						<option value="Poor Candidate Data" >Poor Candidate Data</option>
+						<option value="Incorrect Academic Level" >Incorrect Academic Level</option>
+						<option value="Program/School Fit" >Program/School Fit</option>
+						<option value="No Reply">No Reply</option>
+						<option value="Spammers/Agents">Spammers/Agents</option>
+						<option value="Invalid Contact Details">Invalid Contact Details</option>
+						<option value="Looking For Different Country" >Looking For Different Country</option>
+						<option value="Fail to meet filters" >Fail to meet filters</option>
+						<option value="Duplicate" >Duplicate</option>
+						<option value="Incomplete">Incomplete</option>
+						<option value="Cap met" >Cap met</option>
+						<option value="Velocity limit met" >Velocity limit met</option>
+						<option value="Because of year" >Because of year</option>
+						<option value="Unable to Establish Contact- 3 Attempts">Unable to Establish Contact- 3 Attempts</option>
+						<option value="Incorrect/Wrong Number" >Incorrect/Wrong Number</option>
+						<option value="Hasn't Decided yet" >Hasn't Decided yet</option>
+						<option value="Looking for Different Course" >Looking for Different Course</option>
+						<option value="Not Looking for further studies" >Not Looking for further studies</option>
+						<option value="Due to Location of the colllege" >Due to Location of the colllege</option>
+						<option value="Looking for Part-time Course" >Looking for Part-time Course</option>
+						<option value="Poor Lead Quality" >Poor Lead Quality</option>
+						<option value="Looking for Lateral entry" >Looking for Lateral entry</option>
+						<option value="Already applied/Enrolled" >Already applied/Enrolled</option>
+						<option value="Language Problem" >Language Problem</option>
+						<option value="Just Browsing/Looking for information only" >Just Browsing/Looking for information only</option>
+						<option value="Looking for Different college" >Looking for Different college</option>						
+						</optgroup>
 							</select>
 							</div>
 					</div>

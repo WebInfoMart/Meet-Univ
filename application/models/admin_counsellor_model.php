@@ -183,15 +183,23 @@ function search_lead_model()
 	
 	$query=$this->db->query("select v_id from verified_lead_data where ".$where."");
 	$data=$query->result_array();	
+	$ids=array();
+	$ids[]=0;
 	foreach($data as $d)
 	{
 		$ids[]=$d['v_id'];
 	}	
-	$array=implode(',',$ids);
-	
-	 $query2=$this->db->query("select * from verified_lead_data as vld where vld.v_id in ($array) order by vld.v_email");
-	return $query2->result_array();
-
+	$array=implode(',',$ids);	
+	 $query2=$this->db->query("select * from verified_lead_data as vld where vld.v_id in ($array) order by vld.v_email");	
+	$rows=$query2->num_rows();
+	if($rows==0)
+	{
+		return '0';
+	}
+	else
+	{
+		return $query2->result_array();
+	}
 }
 
 }

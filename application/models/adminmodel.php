@@ -190,7 +190,7 @@ class Adminmodel extends CI_Model
         if ( ! $files )        
         {
             $data['err_msg'] ='Error!  Please Check Your file size and type';
-            $this->load->view('admin/show_error', $data);
+            $this->load->view('admin/show_rror', $data);
         }    
         else
         {
