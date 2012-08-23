@@ -1086,8 +1086,9 @@ class Auth extends CI_Controller
  }
 	
 	function all_colleges($parms='')
-	{
+	{ 
 		$data = $this->path->all_path();
+		$data['header_title'] = 'College | Meet Universities';
 		$this->load->view('auth/header',$data);
 		$data = $this->path->all_path();
 		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
@@ -1224,6 +1225,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$data['keyword_content'] = "Univesity News";
 		$data['description_content'] = "List Of Univesity News";
+		$data['header_title'] = 'News | Meet Universities';
 		$this->load->view('auth/header',$data);
 		$data['news'] = $this->frontmodel->fetch_news($page);
 		$data['popular_news'] = $this->frontmodel->popular_news();
@@ -1235,6 +1237,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$data['keyword_content'] = "Univesity Articles";
 		$data['description_content'] = "List Of Univesity Articles";
+		$data['header_title'] = 'Articles | Meet Universities';
 		$this->load->view('auth/header',$data);
 		$data['articles'] = $this->frontmodel->fetch_articles($page);
 		$data['popular_articles'] = $this->frontmodel->popular_articles();
@@ -1245,6 +1248,7 @@ class Auth extends CI_Controller
 	function about_us()
 	{
 		$data = $this->path->all_path();
+		$data['header_title'] = 'About us | Meet Universities';
 		$this->load->view('auth/header',$data);
 		$this->load->view('about_us',$data);
 		$this->load->view('auth/footer',$data);
@@ -1253,6 +1257,7 @@ class Auth extends CI_Controller
 	function contact_us()
 	{
 		$data = $this->path->all_path();
+		$data['header_title'] = 'Contact | Meet Universities';
 		$this->load->view('auth/header',$data);
 		if($this->input->post('contact_submit'))
 		{
@@ -1299,6 +1304,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$data['keyword_content'] = "universities events,university events in india,study abroad.";
 		$data['description_content'] = "List of universities events,university events in india,study abroad.";
+		$data['header_title'] = 'Events | Meet Universities';
 		$this->load->view('auth/header',$data);
 		$data = $this->path->all_path();
 		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];

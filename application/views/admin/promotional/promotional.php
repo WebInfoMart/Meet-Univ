@@ -119,7 +119,7 @@ var educ_level=$('#educ_level option:selected').val();
 var educ_level_text=$('#educ_level option:selected').text();
 
 var data={country_id:country_id,city_id:city_id,educ_level:educ_level};
-url='count_student_change_wise';
+url='<?php echo $base; ?>admin_promotional/count_student_change_wise';
 $.ajax({
 	   type: "POST",
 	   url: url,
@@ -127,7 +127,8 @@ $.ajax({
 	   data: data,
 	   success: function(msg)
 	   {
-	    if(select.id=='country_list')
+	   alert(msg);
+	   /* if(select.id=='country_list')
 		{
 		 $('#country_text_name').html(country_text);
 		 $('#total_no_of_student_in_country').html(msg);
@@ -141,7 +142,7 @@ $.ajax({
 		{
 		$('#city_text_name').html(country_text);
 		 $('#no_of_student_in_educ_lvl').html(msg);
-		}
+		}*/
 	   }
 });
 }

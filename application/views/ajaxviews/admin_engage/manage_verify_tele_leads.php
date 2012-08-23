@@ -62,7 +62,7 @@ echo "<span id='lead_phone_$teleleadsres[v_id]'>".$teleleadsres['v_phone']."</sp
 
 
  <div class="span0 float_l">
-				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['v_id']; ?>')" id="data_<?php echo $teleleadsres['v_id']; ?>" class="edit inline">Edit</a>
+				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['v_id']; ?>')" id="data_<?php echo $teleleadsres['v_id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['v_id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 </div>
 			<div class="clearfix"></div>

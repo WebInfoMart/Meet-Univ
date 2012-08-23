@@ -12,8 +12,8 @@ class Promotional_panel extends CI_Model
 
 		function count_total_student_in_portal()
 		{
-			$this->db->from('users');
-			$this->db->where('level','1');
+			$this->db->select('id');
+			$this->db->from('lead_data');
 			$query = $this->db->get();
 			$no_of_student = $query->num_rows();
 			return $no_of_student;
@@ -40,18 +40,21 @@ class Promotional_panel extends CI_Model
 		{
 		if($country!='0')
 	    {
-	    $c_where=" and if(ld.current_educ_level='',up.curr_educ_level,ld.home_country_id)='".$country."'";
+	    $c_where=" and if(ld.home_country_id <>'0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id)='".$country."'";
 	    }
-		$sql="SELECT *,if(ld.home_country_id='',up.country_id,ld.home_country_id) as country from user_profiles up,lead_data as ld,users u where up.user_id=u.id and u.email=ld.email".$c_where;
+		$sql="SELECT * from lead_data ld LEFT JOIN user_profiles up on ld.user_id=up.user_id LEFT JOIN users u on up.user_id=u.id ".$c_where;
 		$res=$this->db->query($sql);
 	    return $res->num_rows();
 		}
 		
 		function total_student_in_ug($country_id,$educ_level)
 		{
-			$c_where=" AND IF( ld.home_country_id =  '0', up.country_id, ld.home_country_id ) = '".$country_id."'";
-	        $educ_lvl_where="AND IF( ld.current_educ_level =  '0', up.curr_educ_level, ld.current_educ_level )='".$educ_level."'";
-			$sql="SELECT * , IF( ld.current_educ_level =  '0', up.curr_educ_level, ld.current_educ_level ) AS el, IF( ld.home_country_id =  '0', up.country_id, ld.home_country_id ) AS hc
+			$c_where=" and if(ld.home_country_id <>'0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id) = '".$country_id."'";
+			
+	        //$educ_lvl_where="AND IF( ld.current_educ_level =  '0', up.curr_educ_level, ld.current_educ_level )='".$educ_level."'";
+			$educ_lvl_where="and if(ld.current_educ_level <> '0',if(ld.current_educ_level <> '',if(ld.current_educ_level IS NOT NULL,ld.current_educ_level,up.curr_educ_level),up.curr_educ_level),up.curr_educ_level)='".$educ_level."'";
+			
+			$sql="SELECT * 
 			FROM user_profiles up, lead_data AS ld, users u
 			WHERE up.user_id = u.id
 			AND u.email = ld.email".

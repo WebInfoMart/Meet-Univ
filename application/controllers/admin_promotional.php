@@ -45,22 +45,20 @@ class Admin_promotional extends CI_Controller
 	 $country=$this->input->post('country_id');
 	 $city=$this->input->post('city_id');
 	 $educ_lvl=$this->input->post('educ_level');
+	 $c_where='';
      if($country!='0')
 	 {
-	 $c_where=" and if(ld.home_country_id='',up.country_id,ld.home_country_id)='".$country."'";
+	 $c_where=" and if(ld.home_country_id <> '0',if(ld.home_country_id <> '',if(ld.home_country_id IS NOT NULL,ld.home_country_id,up.country_id),up.country_id),up.country_id) = '".$country."'";
 	 }
 	 if($city!='0')
 	 {
-	 $c_where.=" AND IF( ld.city =  '0', up.city_id, ld.city )='".$city."'";		
+	 $c_where.=" and if(ld.city <> '0',if(ld.city <> '',if(ld.city IS NOT NULL,ld.city,up.city_id),up.city_id),up.city_id) = '".$city."'";		
 	 }
 	 if($educ_lvl!='0')
 	 {
-	 $c_where.=" AND IF( ld.current_educ_level =  '0', up.curr_educ_level, ld.current_educ_level )='".$educ_level."'";		
+	 $c_where.=" and if(ld.current_educ_level <> '0',if(ld.current_educ_level <> '',if(ld.current_educ_level IS NOT NULL,ld.current_educ_level,up.curr_educ_level),up.curr_educ_level),up.curr_educ_level)='".$educ_lvl."'";		
 	 }
-	        $sql="SELECT * ,
-			IF( ld.current_educ_level =  '0', up.curr_educ_level, ld.current_educ_level ) AS el,
-			IF( ld.home_country_id =  '0', up.country_id, ld.home_country_id ) AS hc,
-			IF( ld.city =  '0', up.city_id, ld.city ) as city
+	        $sql="SELECT *
 			FROM user_profiles up, lead_data AS ld, users u
 			WHERE up.user_id = u.id
 			AND u.email = ld.email".

@@ -395,6 +395,7 @@
  <script>
  var current_lead_id = <?php echo $lead_info['v_id']; ?>;
  function save_form(control){
+
  var form_id = control.name;
  var fullname = $('#lead_full_name_'+form_id).val();
  var email = $('#lead_user_email_'+form_id).val();
@@ -416,7 +417,7 @@
  var current_email = $("#current_email_"+form_id).val();
  current_email=current_email.trim();
  var current_phone= $("#current_phone_"+form_id).val();
- 
+ var success_exists=0;
  current_phone=current_phone.trim();
  var p_err=0;
  var success=1;
@@ -429,6 +430,7 @@ var val=$(this).val();
 });
  if(year==0 || month==0 || date==0)
  {
+  
 	success=0;
 	if(year==0)
 	{
@@ -473,7 +475,7 @@ var val=$(this).val();
 if(!success)
  {
  }
-else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
+else if(phone_digit>0  && phone_digit<3)
 {
  
 	$("#lead_user_phone_"+form_id).css("border-color","red");
@@ -481,7 +483,7 @@ else if((phone_digit<10 && phone_digit>0)  || phone_digit>10)
 	$('#error_message').css("display","block");
 	success=0;
 }	
-else if(validate_email(email)=='0')
+else if(validate_email(email)=='0' && email!='')
 {
 $("#lead_user_phone_"+form_id).css("border-color","#ccc");
 success=0;
@@ -489,7 +491,17 @@ $("#lead_user_email_"+form_id).css("border-color","red");
 }
 else if(current_email!=email || current_phone!=phone)
 {
+
 $("#lead_user_email_"+form_id).css("border-color","#ccc");
+if(email=='' && phone=='' )
+{
+alert("Please Fill Either Email or Phone");
+success_exists=0;
+}
+else
+{
+alert("hi");
+success_exists=1;
 var dataemail_phone=
 {
 'email':email,
@@ -517,7 +529,12 @@ success=1;
 }
 });
 }
-
+}
+else
+{
+success_exists='1';
+}
+if(success_exists=='1') {
 if($('#check_verify_lead_phone_'+form_id).val()=='1')
 {
 var verified_phone=1;
@@ -605,6 +622,7 @@ verified_phone:verified_phone
 		
 	   }
 });
+}
 }
  //var interested_country = $('#interested_country').val();
  //alert(interested_country);

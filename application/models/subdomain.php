@@ -45,7 +45,6 @@ function university_by_domain($univ_id,$univ_subdomain)
  {
   $data = $this->path->all_path();
   
-  $this->load->view('auth/header',$data);
   $data['univ_id_for_program'] = $univ_id;
   $data['university_details'] = $this->users->get_university_by_id($univ_id);
   $country_id = $data['university_details']['country_id'];
@@ -166,6 +165,19 @@ function university_by_domain($univ_id,$univ_subdomain)
    $data['state_name_university'] = $this->users->fetch_state_name_by_id($state_id);
    $data['count_followers'] = $this->users->get_followers_of_univ($univ_id);
    $data['count_articles'] = $this->users->get_articles_of_univ($univ_id);
+   $data['university_name'] = $university_name;
+   //$data['header_title'] = $university_name;
+   $title=$university_name;
+    if($data['city_name_university'] != 0)
+    {
+		$title = $title. " - ". $data['city_name_university']['cityname'];
+	}
+	if($data['country_name_university'] != 0)
+	{
+		$title = $title. " , " . $data['country_name_university']['country_name'];
+	}
+	$data['header_title'] = $title;
+   $this->load->view('auth/header',$data);
    $this->load->view('auth/univ-header-gallery-logo',$data);
    $this->load->view('auth/university',$data);
   }

@@ -24,6 +24,7 @@ class Quest_ans_controler extends CI_Controller
 	function QuestandAns()
 	{
 		$data = $this->path->all_path();
+		$data['header_title'] = 'Question and Answer | Meet Universities';
 		$this->load->view('auth/header',$data);
 		$this->load->helper('date');
 		/// use session for show question send success--Subh

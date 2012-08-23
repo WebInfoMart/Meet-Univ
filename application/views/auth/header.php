@@ -87,7 +87,7 @@ $this->session->set_userdata('login_by_fb','1');
   $data['fb_user_profile_insert'] = $this->users->facebook_profile_insert($user_id,$fb_gender,$email);}
   $attachment = array('message' => $user_profile['name'].' has joined Meet Universities.',
  'link' => 'http://meetuniversities.com/register');
- $sendMessage = $facebook->api('/me/feed/','post',$attachment);
+  $sendMessage = $facebook->api('/me/feed/','post',$attachment);
   }
   $data_fb_id = trim($data['fb_user_id']);
   $this->ci->session->set_userdata(array(
@@ -180,18 +180,18 @@ if(empty($description_content)) { $description_content="Attend Events, Study Abr
 <!DOCTYPE html>
 <html lang="en-US">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# meetuniversities: http://ogp.me/ns/fb/meetuniversities#">
-  <meta property="fb:app_id" content="415316545179174" /> 
-  <meta property="og:type"   content="meetuniversities:event" /> 
-  <meta property="og:url"    content="<?php echo $curURL; ?>" /> 
-  <meta property="og:title"  content="<?php echo $header_title; ?>" /> 
-  <meta property="og:image"  content="<?php echo $img_src; ?>" />
-  <meta property="og:description"  content="<?php echo $header_detail; ?>" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="keywords" content="<?php echo $keyword_content; ?>">
-<meta name="description" content="<?php echo $description_content; ?>">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="author" content="WebInfoMart.com">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="author" content="WebInfoMart.com">
+	<meta charset="utf-8">
+	<meta property="fb:app_id" content="415316545179174" /> 
+	<meta property="og:type"   content="meetuniversities:event" /> 
+	<meta property="og:url"    content="<?php echo $curURL; ?>" /> 
+	<meta property="og:title"  content="<?php echo $header_title; ?>" /> 
+	<meta property="og:image"  content="<?php echo $img_src; ?>" />
+	<meta property="og:description"  content="<?php echo $header_detail; ?>" />
+	<meta name="description" content="<?php echo $description_content; ?>">
+	<meta name="keywords" content="<?php echo $keyword_content; ?>">
 <title><?php echo $header_title; ?></title>
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/bootstrap.css">
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/style.css">
