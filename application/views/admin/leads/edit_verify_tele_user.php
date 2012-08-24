@@ -314,7 +314,7 @@
 								  { echo $n['v_note']; ?>								  
 								<div>
 									
-								<div class="notes_data"></div>
+								<div class="notes_data" "></div>
 								<div class="notes_d"><?php $d=$n['updated_on'];
 											$d1=strtotime($d);
 											$date=date('h:m d M Y ',$d1);											

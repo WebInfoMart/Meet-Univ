@@ -308,14 +308,14 @@
 						<div class="control-group">
 							<label class="label-control" for="input01"><img src="../images/admin/images/note_icon.png" class="note_img">Note:</label>
 							<div class="controls-input">
-							 <div class="v_notes">
+							 <div class="v_notes" style="width:315px;">
 								<?php if($note_info!='')
 								{						
 								 foreach($note_info as $n)
 								  { echo $n['v_note']; ?>								  
 								<div>
 									
-								<div class="notes_data"></div>
+								<div class="notes_data" style="width:210px;"></div>
 								<div class="notes_d"><?php $d=$n['updated_on'];
 											$d1=strtotime($d);
 											$date=date('h:m d M Y ',$d1);											
