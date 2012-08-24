@@ -168,7 +168,6 @@ class Univ extends CI_Controller
 		$univ_id=$this->subdomain->find_id_of_current_univ();
 		$data['err_div']=0;
 		$data['university_name'] = '';
-		$this->load->view('auth/header',$data);
 		$data['univ_id_for_program'] = $univ_id;
 		$data['university_details'] = $this->users->get_university_by_id($univ_id);
 		$data['university_name'] = $data['university_details']['univ_name'];
@@ -181,7 +180,8 @@ class Univ extends CI_Controller
 		 $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
 		 $data['area_interest'] = $this->users->fetch_area_interest();
 		 $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
-		
+		 $data['header_title'] = 'Programs Offered By ' . $data['university_name'];
+		$this->load->view('auth/header',$data);
 		 if($data['university_details'] != 0)
 		{
 			$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -297,7 +297,6 @@ class Univ extends CI_Controller
 			else {
 				$data['header_detail'] = "Study Abroad - Research, Connect &  Meet Your Dream University.";
 			}
-			
 			$this->load->view('auth/header',$data);
 			 if($data['university_details'] != 0 )
 			 {
@@ -408,6 +407,7 @@ class Univ extends CI_Controller
 			
 			$data['keyword_content'] = $university_name." events, ".$university_name." events in india,study abroad.";
 			$data['description_content'] = "List of ".$university_name." events, ".$university_name." events in india,study abroad.";
+			$data['header_title'] = 'Events Organized By ' . $university_name;
 			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
@@ -456,6 +456,7 @@ class Univ extends CI_Controller
 			
 			$data['keyword_content'] = "News Of ".$university_name;
 			$data['description_content'] = "List Of ". $university_name ."Univesity News";
+			 $data['header_title'] = 'News Offered By ' . $university_name;
 			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
@@ -501,6 +502,7 @@ class Univ extends CI_Controller
 			$data['popular_articles'] = $this->frontmodel->popular_articles();
 			$data['keyword_content'] = "Articles Of ".$university_name;
 			$data['description_content'] = "List Of ". $university_name ."Articles";
+			 $data['header_title'] = 'Articles Offered By ' . $university_name;
 			$this->load->view('auth/header',$data);
 			if($data['university_details'] != 0 )
 			{
@@ -805,7 +807,6 @@ class Univ extends CI_Controller
    $university_name = $data['university_details']['univ_name'];
    $university_address = $data['university_details']['address_line1'];
    $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
-   
    if($data['university_details'] != 0 )
    {
     $data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -843,7 +844,6 @@ class Univ extends CI_Controller
 			else {
 				$data['header_detail'] = "Study Abroad - Research, Connect &  Meet Your Dream University.";
 			}
-	
 	
 	$this->load->view('auth/header',$data);
 	$this->load->view('auth/univ-header-gallery-logo',$data);
@@ -887,7 +887,6 @@ class Univ extends CI_Controller
    $univ_id=$this->subdomain->find_id_of_current_univ();
    $subdomain=$this->subdomain->find_subdomain_name_and_id();
    $data = $this->path->all_path();
-   $this->load->view('auth/header',$data);
    if($this->session->userdata('quest_send_suc')=='1')
    {
     $data['show_quest_send_msg'] = '1';
@@ -905,6 +904,8 @@ class Univ extends CI_Controller
    $university_name = $data['university_details']['univ_name'];
    $university_address = $data['university_details']['address_line1'];
    $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
+    $data['header_title'] = 'Qusetion And Answer Offered By ' . $university_names;
+   $this->load->view('auth/header',$data);
    if($data['university_details'] != 0 )
    {
     $data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
@@ -983,7 +984,6 @@ class Univ extends CI_Controller
 			$data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
 			$data['header_title'] = 'About ' . $university_name;
 			$this->load->view('auth/header',$data);
-			
 			if($data['university_details'] != 0 )
 			{
 				$data['country_name_university'] = $this->users->fetch_country_name_by_id($country_id);
