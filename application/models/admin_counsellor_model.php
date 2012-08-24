@@ -60,6 +60,22 @@ where vld.v_id=".$id." ");
 			return 0;
 		}	
 	}
+	
+function drop_record_from_lead($id)
+{
+	
+	$this->db->where('v_id',$id);
+	$this->db->delete('verified_lead_data');
+	
+	if($this->db->affected_rows() > 0)
+	{
+		return 1;
+	}
+	else {
+	return 0;
+	}
+	
+}
 function country_model()
 {
 	$query=$this->db->get('country');

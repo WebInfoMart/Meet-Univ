@@ -5,40 +5,39 @@
 			<div class="span14 float_l">
 				<b class="blue">FullName</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="data4 float_l">
 				<b class="green">Email</b>
 			</div>
 			<div class="span14 float_l">
 				<b class="blue">Source</b>
 			</div>
-			<div class="span14 float_l">
+			<div class="data2 float_l">
 				<b class="green">Phone</b>
 			</div>
 			<div class="clearfix"></div>
 			<div class="dotted_line"></div>
 			<?php 
 			//print_r($verify_teleleads);
-			$sr_no=0;
+			$sr_no=1;
 			foreach($verify_teleleads as $result)
 			{ ?>
-			<div id="c_lead_<?php echo $result['v_id']; ?>" class="old_data update_verify_lead">
+				<div id="c_lead_<?php echo $result['v_id']; ?>" class="old_data update_verify_lead" style="cursor:pointer;">
 			<div class="span1 float_l">
-					<?php $sr_no++; echo $sr_no; ?>
-			</div>
-			<div class="span14 float_l">
-				<?php  echo $result['v_fullname']; ?>
-			</div>
-			<div class="span14 float_l">
-				<?php  echo $result['v_email']; ?>
-			</div>
-			<div class="span14 float_l">
-				<?php echo $result['v_user_type']; ?>
-			</div>
-			<div class="span14 float_l">
-				<?php  echo $result['v_phone'];  ?>
-			</div>
-			
-			<div class="clearfix"></div>
+						<?php echo $sr_no++; ?>
+				</div>
+				<div class="span14 float_l">
+					<?php  echo $result['v_fullname']; ?>
+				</div>
+				<div class="data4 float_l">
+					<?php  if($result['v_email']==""){ echo 'Not Available';} else { echo $result['v_email'];} ?>
+				</div>
+				<div class="span14 float_l">
+					<?php if($result['v_user_type']==""){ echo 'Not Available';} else { echo $result['v_user_type'];} ?>
+				</div>
+				<div class="data2 float_l">
+					<?php  if($result['v_phone']=="" || $result['v_phone']=="0"){ echo 'Not Available';} else { echo $result['v_phone'];}  ?>
+				</div>				
+				<div class="clearfix"></div>
 			</div>
 			<?php } ?>
 		

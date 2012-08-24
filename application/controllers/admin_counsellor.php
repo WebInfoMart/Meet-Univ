@@ -40,10 +40,11 @@ function counsellor($start='0')
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-	   if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
+	   // if(!($data['admin_priv']))
+		// {
+			// echo 'hello';exit;
+			// redirect('admin/adminlogout');
+		// }
 		//fetch user privilege data from model
 		if($data['admin_user_level']==2 || $data['admin_user_level']==5)
 		{
@@ -73,6 +74,13 @@ function counsellor($start='0')
 			} 
 		}		
 	}
+}
+
+function droprecord()
+{
+	$id = $this->input->post('id');
+	$data['drop_record'] = $this->admin_counsellor_model->drop_record_from_lead($id);
+	echo $data['drop_record'];
 }
 function fetch_country()
 {

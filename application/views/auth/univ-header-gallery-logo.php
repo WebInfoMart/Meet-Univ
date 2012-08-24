@@ -50,8 +50,8 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 					 </small></h2>
 				</div>
 				<div class="span3 float_r margin1">
-					<img src="<?php echo "$base$img_path" ?>/user.png" class="header_img inline"><span class="align_text line_time inline">Followers <?php print_r($count_followers); ?></span>
-					<span class="margin_l"><img src="<?php echo "$base$img_path" ?>/document.png" class="header_img inline"><span class="line_time inline align_text">Articles <?php print_r($count_articles); ?></span></span>
+					<img src="<?php echo "$base$img_path" ?>/user.png" alt="Numbers of Followers <?php print_r($count_followers); ?>"  title="Numbers of followers : <?php print_r($count_followers); ?>" class="header_img inline"><span class="align_text line_time inline">Followers <?php print_r($count_followers); ?></span>
+					<span class="margin_l"><img src="<?php echo "$base$img_path" ?>/document.png" class="header_img inline" alt="Number of articles <?php print_r($count_articles); ?>" title="Number of articles : <?php print_r($count_articles); ?>"><span class="line_time inline align_text">Articles <?php print_r($count_articles); ?></span></span>
 					
 				</div>
 			</div>
@@ -81,7 +81,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 									} 
 									$img_arr=$this->searchmodel->set_the_image($width,$height,150,150,TRUE);
 				?>
-				<img  title="" src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;">
+				<img title='<?php echo $university_details['univ_name']; ?>' alt='<?php echo $university_details['univ_name'];?>' src='<?php echo $image;?>' style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;">
 	
 				</div>
 				

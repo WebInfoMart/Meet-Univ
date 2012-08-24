@@ -36,6 +36,9 @@
 <div id="content_verify_message" class="content_verify_msg" style="display:none;">
 <div class="message info"><p>No Verify has selected!!!</p></div> 
 </div>
+<div id="content_drop_msg" style="display:none;">
+<div class="message info"><p>Record dropped !!!</p></div> 
+</div>
 	
 	<div id="content" >
 		
@@ -148,6 +151,7 @@ echo "<span id='lead_phone_$teleleadsres[v_id]'>".$teleleadsres['v_phone']."</sp
 
  <div class="span0 float_l">
 				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['v_id']; ?>')" id="data_<?php echo $teleleadsres['v_id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>
+				<a href="javascript:void(0);" onclick="delete_this_record('<?php echo $teleleadsres['v_id']; ?>')" id="data_del_<?php echo $teleleadsres['v_id']; ?>" class="edit inline"><img style="height:18px;" src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>	
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['v_id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 </div>
 			<div class="clearfix"></div>
@@ -166,8 +170,34 @@ echo "<span id='lead_phone_$teleleadsres[v_id]'>".$teleleadsres['v_phone']."</sp
 	</div>
 	</div>
 		
-	<script type="text/javascript">
+<script type="text/javascript">
 	var main_url = "<?php echo $base ?>";
+	function delete_this_record(id)
+	{//alert(id);
+		var current_id = id;
+		var ask_confirm = confirm("Do you want to drop this record?");
+		var url='<?php echo $base;?>admin_counsellor/droprecord';
+		if(ask_confirm)
+		{
+		$.ajax({
+		type: "POST",
+		data: "id="+id,
+		url: url,
+		async: false,
+		cache: false,
+		success: function(msg)
+		{
+			if(msg == '1')
+			{
+				$("#data_data_"+current_id).hide("slow");
+				$("#data_data_"+current_id).replaceWith("");
+				$("#content_drop_msg").css("display","block");
+				$("#content_drop_msg").hide(5000);
+			}
+		}
+		});
+		}
+	}
 	function verify_lead(id)
 	{
 		var dynamic_lead_id = id.name;
