@@ -878,7 +878,7 @@ margin-top: 14px;
 color: white;
 font-size: 15px;}
 .form-horizontal .control-group2 {padding-top: 0px !important;}
-.count_txt{margin-top: 9px;}
+.count_txt{margin-top: 19px;}
 /*----------Second page permotional---------------------*/
 .one_more{padding:40px;position: absolute;-moz-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px;background: #F8F8F8;
 margin-top: -13px;border: 1px solid #C9C9C9;-moz-border: 1px solid #C9C9C9;-webkit-border: 1px solid #C9C9C9;z-index:1;
@@ -891,9 +891,10 @@ padding: 2px;}
 .old_data1{background: #f6f6f6;
 margin-top:2px;
 padding: 2px;}
-.dotted_width{width:22px;margin:12px 20px}
+.dotted_width{width:22px;margin: 32px 20px 0px 20px;height: 6px;
+background: url(/images/admin/images/dotted.png) repeat-x;}
 .second_set{margin-top:50px}
-.mbl_bg{background: url(../../../images/images/mbl.png) no-repeat;height: 470px;}
+.mbl_bg{background: url(../../images/admin/images/mbl.png) no-repeat;height: 470px;}
 .mbl_text{margin-top: 113px;
 background: #EEE;
 width: 152px;
@@ -906,7 +907,7 @@ width: 196px;
 border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;
 margin-left:93px}
 .control_form{padding-top: 40px;}
-.btn_dark_blue{background: url(../../../images/images/btn_dark_blue.png) no-repeat;margin-left: 119px;
+.btn_dark_blue{background: url(../images/admin/images/btn_dark_blue.png) no-repeat;margin-left: 119px;
 border: 0px;
 height: 30px;
 color: white;

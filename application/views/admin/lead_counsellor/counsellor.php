@@ -1,8 +1,7 @@
-<link rel="stylesheet" href="<?php echo $base; ?>css/admin/engage/style.css">
-<script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
+
 <script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>  
 <div id="content">
-		<div class="big_width margin_delta">
+		<div class="margin_delta">
 			<div class="counsel_bg">
 			<div class="float_l span77 margin_delta">
 				<div class="control-group">

@@ -174,12 +174,12 @@
 ?>
 					</div>
 				</div>
-				<div class="float_r span3" style="margin-top: -5px;">
+				
+				
+<div class="float_r span3" style="margin-top: -5px;">
 					<img src="<?php echo $base; ?>images/banner_img.png">
 				</div>
 				<div class="clearfix"></div>
-				
-</div>
 </div>
 
 
