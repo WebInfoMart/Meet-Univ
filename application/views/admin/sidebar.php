@@ -16,12 +16,12 @@ $flag=1;
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" /> Pages</a></li>
 			<?php if($admin_user_level=='5' || $admin_user_level=='3')
 			{ ?>
-			<li><a href="<?php echo $base; ?>admin_promotional"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" />Permotional Panel </a></li>
+			<li><a href="<?php echo $base; ?>admin_promotional"><img src="<?php echo "$base$admin_img" ?>/nav/world.png" alt="" />Permotional Panel </a></li>
 			<?php } ?>
 			<?php if($admin_user_level=='5' || $admin_user_level=='2')
 			{ ?>
 			<li>
-			<a href="<?php echo $base; ?>admin_counsellor/counsellor"" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Counsellor</a>			
+			<a href="<?php echo $base; ?>admin_counsellor/counsellor"><img src="<?php echo "$base$admin_img" ?>/nav/email.png" alt="" /> Counsellor</a>			
 			</li>
 			<?php
 			}

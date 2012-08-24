@@ -39,9 +39,13 @@ function counsellor($start='0')
 		$data['username'] = $this->tank_auth->get_username();
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		
+		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+	   if(!($data['admin_priv']))
+		{
+			redirect('admin/adminlogout');
+		}
 		//fetch user privilege data from model
-		if($flag==0)
+		if($data['admin_user_level']==2 || $data['admin_user_level']==5)
 		{
 			$data['verify_teleleads']=$this->admin_counsellor_model->c_manage_verify_teleleads($start);
 			$data['country']=$this->admin_counsellor_model->country_model();
