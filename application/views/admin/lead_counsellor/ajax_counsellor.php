@@ -26,23 +26,25 @@
 			} else {
 			$class = '';
 			} ?>
-  			<div id="c_lead_<?php echo $result['v_id']; ?>" class="old_data update_verify_lead" style="cursor:pointer;">
+  			
+				<div id="c_lead_<?php echo $result['v_id']; ?>" class="old_data update_verify_lead" style="cursor:pointer;">
 				<div class="span1 float_l">
 						<?php echo $sno++; ?>
 				</div>
 				<div class="span14 float_l">
 					<?php  echo $result['v_fullname']; ?>
 				</div>
-				<div class="span14 float_l">
-					<?php  echo $result['v_email']; ?>
+				<div class="data4 float_l">
+					<?php  if($result['v_email']==""){ echo 'Not Available';} else { echo $result['v_email'];} ?>
 				</div>
 				<div class="span14 float_l">
-					<?php  echo $result['v_user_type']; ?>
+					<?php if($result['v_user_type']==""){ echo 'Not Available';} else { echo $result['v_user_type'];} ?>
 				</div>
-				<div class="span14 float_l">
-					<?php  echo $result['v_phone'];  ?>
+				<div class="data2 float_l">
+					<?php  if($result['v_phone']=="" || $result['v_phone']=="0"){ echo 'Not Available';} else { echo $result['v_phone'];}  ?>
 				</div>				
 				<div class="clearfix"></div>
+			</div>
 			</div>
 			<?php } ?>
 					<div id="pagination" class="table_pagination right paging-margin float_r" style="margin-right:50px;">

@@ -1,5 +1,5 @@
 		<?php 
-	$sno=1;
+	$sno=$sr_no+1;
 	$cnt_rows_verify_table = 0;
 	foreach($teleleads as $teleleadsres) {
 	if($sno % 2) {

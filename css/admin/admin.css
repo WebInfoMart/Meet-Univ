@@ -928,8 +928,7 @@ width: 120px;
 .controls-input-data {
 margin-left:5px;
 }
-.checkbox_set{position: absolute;
-top: 172px;}
+.checkbox_set{margin-top: 10px;position: relative;}
 .search_btn{background: url(../images/search_btn.png) no-repeat;width: 95px;height:30px;border:0px}
 .bottom_line{border-bottom:1px solid #000;-webkit-border-bottom:1px solid #000;-moz-border-bottom:1px solid #000;margin-bottom: 17px;}
 /*-----------------------counsel_second------------------*/

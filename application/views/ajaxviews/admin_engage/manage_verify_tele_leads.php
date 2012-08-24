@@ -1,5 +1,5 @@
 		<?php 
-	$sno=1;
+	$sno=$sr_id+1;
 	foreach($verify_teleleads as $teleleadsres) { ?>	
 		<div id="data_data_<?php echo $teleleadsres['v_id']; ?>" class="old_data old_data_paging" style="-webkit-border-bottom: 1px solid #CCC;-moz-border-bottom: 1px solid #CCC;border-bottom: 1px solid #CCC;padding: 3px 0px;">
 			<div class="grid1 float_l">

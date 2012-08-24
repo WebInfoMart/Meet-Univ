@@ -1,7 +1,29 @@
-
+<link rel="stylesheet" href="<?php echo $base; ?>css/admin/engage/style.css">
+<script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>  
+<style>
+.message.info {
+	border: 1px solid #bbdbe0;
+	background: #ecf9ff url(../../images/admin/info.gif) 12px 12px no-repeat;
+	color: #0888c3;
+	}
+	
+	.message {
+	padding: 10px 15px 10px 40px;
+	margin-bottom: 15px;
+	font-weight: bold;
+	overflow: hidden;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	}
+</style>
+
+<div id="lead_edit_msg" style="display:none;">
+<div class="message info"><p>Lead updated successfully !!!</p></div> 
+</div>
 <div id="content">
-		<div class="margin_delta">
+		<div class="big_width margin_delta">
 			<div class="counsel_bg">
 			<div class="float_l span77 margin_delta">
 				<div class="control-group">
@@ -167,13 +189,13 @@
 					<?php  echo $result['v_fullname']; ?>
 				</div>
 				<div class="data4 float_l">
-					<?php  echo $result['v_email']; ?>
+					<?php  if($result['v_email']==""){ echo 'Not Available';} else { echo $result['v_email'];} ?>
 				</div>
 				<div class="span14 float_l">
-					<?php  echo $result['v_user_type']; ?>
+					<?php if($result['v_user_type']==""){ echo 'Not Available';} else { echo $result['v_user_type'];} ?>
 				</div>
 				<div class="data2 float_l">
-					<?php  echo $result['v_phone'];  ?>
+					<?php  if($result['v_phone']=="" || $result['v_phone']=="0"){ echo 'Not Available';} else { echo $result['v_phone'];}  ?>
 				</div>				
 				<div class="clearfix"></div>
 			</div>

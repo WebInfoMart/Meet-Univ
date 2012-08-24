@@ -69,6 +69,8 @@ function drop_record_from_lead($id)
 	
 	if($this->db->affected_rows() > 0)
 	{
+	$this->db->where('v_id',$id);
+	$this->db->delete('verified_lead_data');
 		return 1;
 	}
 	else {
@@ -150,8 +152,11 @@ function verified_lead_model()
 			'v_current_educ_level'=>$this->input->post('c_educ_level'),
 			'v_aggregate_percentage'=>$this->input->post('academic'),
 			'v_interested_country'=>$this->input->post('interested_cont')			
-		);		
-	$this->db->insert('verified_notes',$notes);
+		);
+			if($this->input>post('notes')!="")
+			{
+				$this->db->insert('verified_notes',$notes);
+			}
 	$this->db->where('v_id',$id);
 	$this->db->update('verified_lead_data',$lead);				
 	return 1;		

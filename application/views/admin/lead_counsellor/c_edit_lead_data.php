@@ -703,7 +703,10 @@ function verifyLead(id)
 	async:false,
 	success:function(msg)
 	{
-		alert('Lead updated successfully');
+		$("#c_edit").hide();
+		$("#content").show();
+		$("#lead_edit_msg").show();
+		$("#lead_edit_msg").hide(10000);
 		
 	}
 	
