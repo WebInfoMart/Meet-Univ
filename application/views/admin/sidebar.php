@@ -21,10 +21,7 @@ $flag=1;
 			<?php if($admin_user_level=='5' || $admin_user_level=='2')
 			{ ?>
 			<li>
-			<a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Manage Leads</a>			
-			<ul>
-			<li><a href="<?php echo $base; ?>admin_counsellor/counsellor"><img src="" alt="" />Unverified Leads</a></li>
-			<li><a href="<?php echo $base; ?>admin_counsellor/counsellor"><img src="" alt="" />Verified Leads</a></li></ul>
+			<a href="<?php echo $base; ?>admin_counsellor/counsellor"" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Counsellor</a>			
 			</li>
 			<?php
 			}
