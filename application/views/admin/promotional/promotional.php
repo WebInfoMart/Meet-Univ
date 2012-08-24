@@ -13,7 +13,7 @@
 					<div class="float_l data3 center_color margin_delta">
 						<div class="bg_green">
 							<img src="<?php echo $base; ?>images/images/sms.png" class="icon_img"/>
-							<a href="<?php echo $base; ?>adminleads/sms_capaign" ><data class="icon_txt">SMS campaign</data></a>
+							<a href="<?php echo $base; ?>admin_promotional/sms_campaign" ><data class="icon_txt">SMS campaign</data></a>
 						</div>
 						<div class="padding fix_height">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>
 						<button type="button" class="promo_btn">View Plans & Pricing</button>

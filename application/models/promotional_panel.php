@@ -10,12 +10,16 @@ class Promotional_panel extends CI_Model
 			$this->load->database();
 		}
 
-		function count_total_student_in_portal()
+		function count_total_student_in_portal($type)
 		{
 			$this->db->select('id');
 			$this->db->from('users');
 			$this->db->join('verified_lead_data','users.email=verified_lead_data.v_email','left');
+			$where=array();
+			$where['users.level'] =  '1';
+			if($type=='sms') {
 			$this->db->where('users.level','1');
+			}
 			$query = $this->db->get();
 			$no_of_student = $query->num_rows();
 			return $no_of_student;
@@ -133,6 +137,14 @@ class Promotional_panel extends CI_Model
 		 $city_list.='<option value="'.$res1['city_id'].'">'.$res1['cityname'].'</option>';
 		 } 
 		 echo $city_list;	
+		}
+		
+		function find_all_area_of_intrests()
+		{
+		 $this->db->select('*');
+		 $this->db->from('program_parent');
+		 $query = $this->db->get();
+		 return $query->result_array();
 		}
 }
 
