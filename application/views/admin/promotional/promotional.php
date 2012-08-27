@@ -22,7 +22,7 @@
 					<div class="float_l data3 margin_delta center_color">
 						<div class="bg_orange">
 							<img src="<?php echo $base; ?>images/images/mail.png" class="icon_img"/>
-							<data class="icon_txt">EMAIL campaign</data>
+							<data class="icon_txt"><a href="<?php echo $base; ?>admin_promotional/email_campaign"> EMAIL campaign</a></data>
 						</div>
 						<div class="padding fix_height">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>
 						<button type="button" class="promo_btn">View Plans & Pricing</button>
@@ -153,6 +153,7 @@ $.ajax({
 		 $('#country_text_name').html(country_text);
 		 $('#city_text_name').html('Select City');
 		 $('#no_of_student_in_city').html('0');
+		 
 		  $('#no_of_student_in_educ_lvl').html(res[2]);
 		}
 		else if(select.id=='city_list')
