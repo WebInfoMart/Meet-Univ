@@ -150,7 +150,7 @@ echo "<span id='lead_phone_$teleleadsres[v_id]'>".$teleleadsres['v_phone']."</sp
 
 
  <div class="span0 float_l">
-				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['v_id']; ?>')" id="data_<?php echo $teleleadsres['v_id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>
+				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['v_id']; ?>','<?php echo $teleleadsres['v_lead_id']; ?>')" id="data_<?php echo $teleleadsres['v_id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>
 				<a href="javascript:void(0);" onclick="delete_this_record('<?php echo $teleleadsres['v_id']; ?>')" id="data_del_<?php echo $teleleadsres['v_id']; ?>" class="edit inline"><img style="height:18px;" src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>	
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['v_id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 </div>
@@ -226,13 +226,13 @@ echo "<span id='lead_phone_$teleleadsres[v_id]'>".$teleleadsres['v_phone']."</sp
 	}
 	
 	
-	function edit_user_lead(id)
+	function edit_user_lead(id,lead_id)
 	{
 	//alert(id);
 	var url='<?php echo $base;?>adminleads/fetch_user_info_for_verify_tele';
 	$.ajax({
           type: "POST",
-          data: "id="+id,
+          data: "id="+id+"&lead_id="+lead_id,
           url: url,
           beforeSend: function() {
            $('#ajax_loading_img_'+id).show();

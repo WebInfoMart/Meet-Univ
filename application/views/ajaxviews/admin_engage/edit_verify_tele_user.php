@@ -3,7 +3,7 @@
 
 <script src="<?php echo $base; ?>js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo $base; ?>js/jquery-ui-custom-autosuggest.js" type="text/javascript" charset="utf-8"></script>    
- 
+
  <div id="edit_data_<?php echo $lead_info['v_id']; ?>" class="open_box data update_lead_data" style="display:block">
  <div class="open_form_holder">
 			<div>
@@ -309,7 +309,8 @@
 							<label class="label-control" for="input01"><img src="../images/admin/images/note_icon.png" class="note_img">Note:</label>
 							<div class="controls-input">
 							 <div class="v_notes" style="width:315px;">
-								<?php if($note_info!='')
+								<?php
+								if($note_info!='')
 								{						
 								 foreach($note_info as $n)
 								  { echo $n['v_note']; ?>								  
@@ -424,7 +425,6 @@
  <script>
  var current_lead_id = <?php echo $lead_info['v_id']; ?>;
  function save_form(control){
-
  var form_id = control.name;
  var fullname = $('#lead_full_name_'+form_id).val();
  var email = $('#lead_user_email_'+form_id).val();
@@ -444,6 +444,7 @@
  var lead_status= $('#lead_status_'+form_id).val();
  var next_action=$('#next_action_'+form_id).val();
  var current_email = $("#current_email_"+form_id).val();
+ var lead_id=<?php echo $lead_info['v_lead_id']; ?>;
  current_email=current_email.trim();
  var current_phone= $("#current_phone_"+form_id).val();
  var success_exists=0;
@@ -592,6 +593,7 @@ state:state,
 city :city,
 enroll:enroll,
 notes:notes,
+lead_id:lead_id,
 year:year,
 month:month,
 date:date,
