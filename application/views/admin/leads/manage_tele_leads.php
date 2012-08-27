@@ -557,7 +557,7 @@ else if(success_exists)
  var lead_as_site_user=0;
  if($('#lead_as_site_user').is(':checked'))
  {
- lead_as_site_user=1;
+ lead_as_site_user='1';
  }
 var data={
 interested_cont :c_id_list,

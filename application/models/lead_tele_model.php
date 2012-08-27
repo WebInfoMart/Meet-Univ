@@ -368,7 +368,7 @@ class Lead_tele_model extends CI_Model
 		 {
 		 $logged_in_user_id	= $this->tank_auth->get_admin_user_id();
 		 $dob = $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('date');
-		 if($user_id==0)
+		 if($user_id=='No')
 		  {
 		  $password=rand(14543423,64543423);
 		  $hashed_password=$this->tank_auth->genrate_hash_passsword($password);
