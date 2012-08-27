@@ -27,9 +27,15 @@ class Promotional_panel extends CI_Model
 		{
 			if($type=='sms')
 			{
-			$res=$this->db->query("select * from verified_lead_data vl where vl.v_phone!='' && vl.v_phone!='NULL' && vl.v_phone!=0");
-			return $res->num_rows();
+			$where=' v_phone!="" && v_phone!="NULL" && v_phone!="0"';
 			}
+			if($type=='email')
+			{
+			$where=' v_email!="" && v_email!="NULL" && v_email!="0"';
+		    }
+			$res=$this->db->query("select * from verified_lead_data vl where ".$where);
+			return $res->num_rows();
+			
 		}
 		function show_country_list()
 		{
@@ -106,6 +112,10 @@ class Promotional_panel extends CI_Model
 			{
 			$where=' v_phone!="" && v_phone!="NULL" && v_phone!="0"';
 		    }
+			if($type=='email')
+			{
+			$where=' v_email!="" && v_email!="NULL" && v_email!="0"';
+			}
 			if($country_id!=0)
 			{
 			$where.=' && v_country ='.$country_id;
@@ -117,10 +127,21 @@ class Promotional_panel extends CI_Model
 		
 		function count_total_student_in_educ_sms_email_send($country_id,$educ_level,$type)
 		{
-			$where=' v_country='.$country_id.' && v_current_educ_level IN(".$educ_level.")';
+			$where=' 1';
+			if($country_id!='0'){
+			$where.=' && v_country='.$country_id;
+			}
+			if($educ_level!=''){
+			$where.=' && v_current_educ_level IN('.$educ_level.')';
+			}
+			
 			if($type=='sms')
 			{
 			$where.=' && v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+		    }
+			if($type=='email')
+			{
+			$where.=' && v_email!="" && v_email!="NULL" && v_email!="0"';
 		    }
 			$res=$this->db->query('select * from verified_lead_data where'.$where);
 			return $res->num_rows();
@@ -144,6 +165,10 @@ class Promotional_panel extends CI_Model
 		    if($type=='sms')
 			{
 			$where.=' && v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+		    }
+			if($type=='email')
+			{
+			$where.=' && v_email!="" && v_email!="NULL" && v_email!="0"';
 		    }
 			$res=$this->db->query('select * from verified_lead_data where'.$where);
 			return $res->num_rows();
@@ -208,6 +233,10 @@ class Promotional_panel extends CI_Model
 			if($type=='sms')
 			{
 			$where.=' && v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+		    }
+			if($type=='email')
+			{
+			$where.=' && v_email!="" && v_email!="NULL" && v_email!="0"';
 		    }
 			$res=$this->db->query('select * from verified_lead_data where'.$where);
 			return $res->num_rows();

@@ -166,7 +166,7 @@ class Admin_promotional extends CI_Controller
 		
 		if($data['admin_user_level']==3 || $data['admin_user_level']==5)
 		{
-		$data['total_student']=$this->promotional_panel->count_total_student_in_sms_email_send('sms');
+		$data['total_student']=$this->promotional_panel->count_total_student_in_sms_email_send('email');
 		$data['country_list']=$this->promotional_panel->show_country_list();
 		$data['area_interest']=$this->promotional_panel->find_all_area_of_intrests();
 		

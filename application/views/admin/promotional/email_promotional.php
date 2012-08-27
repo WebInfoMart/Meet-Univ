@@ -4,10 +4,10 @@
 			<div class="float_l data8 margin_delta">
 				<div>
 					<div class="green_sms float_l">
-						SMS
+						<a href="<?php echo $base; ?>admin_promotional/sms_campaign" style="color:white;text-decoration:none">SMS</a>
 					</div>
 					<div class="orange_active float_l">
-						EMAIL
+						<a href="<?php echo $base; ?>admin_promotional/email_campaign" style="color:white;text-decoration:none">EMAIL</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -27,7 +27,7 @@
 								</div>
 							</div>
 							<div class="dotted_width float_l"></div>
-							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><p class="country_text_name">Worldwide</p>
+							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><span class="inline country_text_name">( Worldwide )</span>
 						</div>
 						<div class="control-group2">
 							<div class="float_l">
@@ -149,6 +149,7 @@ $.ajax({
 	   data: data,
 	   success: function(msg)
 	   {
+	   // alert(msg);
 	    if(select.id=='country_list')
 		{
 		 if(country_id==0)
@@ -157,7 +158,7 @@ $.ajax({
 		 }
 		 else
 		 {
-		 $('.country_text_name').text(country_text);
+		 $('.country_text_name').text('');
 		 }
 		 var res=msg.split('!@#$%');
 		 $('#city_list').html(res[0]);
@@ -169,9 +170,15 @@ $.ajax({
 		else if(select.id=='city_list')
 		{
 		var res=msg.split('!@#$%');
+		
+		if(city_id=='0')
+		{
+		$('#no_of_student_in_city').html('0');
+		} else { 
 		$('#no_of_student_in_city').html(res[0]);
-		if(educ_level!='0'){
-		 $('#no_of_student_in_educ_lvl').html(res[1]);
+		}
+		if(educ_chk!=''){
+		$('#no_of_student_in_educ_lvl').html(res[1]);
 		 }
 		}
 		else

@@ -3,11 +3,11 @@
 			
 			<div class="float_l data8 margin_delta">
 				<div>
-					<div class="green_block float_l">
-						SMS
+					<div class="green_sms float_l">
+						<a href="<?php echo $base; ?>admin_promotional/sms_campaign" style="color:white;text-decoration:none">SMS</a>
 					</div>
-					<div class="orange_block float_l">
-						EMAIL
+					<div class="orange_active float_l">
+						<a href="<?php echo $base; ?>admin_promotional/email_campaign" style="color:white;text-decoration:none">EMAIL</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -27,7 +27,7 @@
 								</div>
 							</div>
 							<div class="dotted_width float_l"></div>
-							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><p class="country_text_name">Worldwide</p>
+							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><span class="country_text_name inline"> ( Worldwide )</span>
 						</div>
 						<div class="control-group2">
 							<div class="float_l">
@@ -149,7 +149,7 @@ $.ajax({
 		 }
 		 else
 		 {
-		 $('.country_text_name').text(country_text);
+		 $('.country_text_name').text('');
 		 }
 		 var res=msg.split('!@#$%');
 		 $('#city_list').html(res[0]);

@@ -436,7 +436,8 @@ class Auth extends CI_Controller
 
   } else {                // fail
    //$this->_show_message($this->lang->line('auth_message_activation_failed'));
-   echo "Sorry.There is some problem in email activation";
+   redirect('login');
+ //  echo "Sorry.There is some problem in email activation";
   }
  }
  

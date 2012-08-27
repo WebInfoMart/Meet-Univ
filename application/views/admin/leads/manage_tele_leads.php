@@ -165,9 +165,9 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 <?php }
  if($temp_var_for_verify_email_phone < 1)
  {
-	$check_lead_phone = $teleleadsres['phone_no1'];
-	$phone_check = $this->lead_tele_model->check_lead_phone_in_verify_table($check_lead_phone);
-  if($phone_check == 1)
+ $check_lead_phone = $teleleadsres['phone_no1'];
+ $phone_check = $this->lead_tele_model->check_lead_phone_in_verify_table($check_lead_phone);
+ if($phone_check == 1)
  {
  $record_verified_true = 1;
  } 
