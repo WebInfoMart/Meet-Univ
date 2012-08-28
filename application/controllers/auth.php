@@ -1082,15 +1082,13 @@ class Auth extends CI_Controller
   $college_list=$this->load->view('auth/show_all_college_search',$data);
   $total_univ=$data['get_university']['total_res'];
   $per_page_res=$data['get_university']['per_page_res'];
-  echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$college_list;
+  $header_title=$data['get_university']['title'];
+  echo $header_title.'!@#$%^&*'.$total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$college_list;
   }
  }
 	
 	function all_colleges($parms='')
 	{ 
-		$data = $this->path->all_path();
-		$data['header_title'] = 'College | Meet Universities';
-		$this->load->view('auth/header',$data);
 		$data = $this->path->all_path();
 		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		$change_url=explode("colleges/",$current_url);
@@ -1103,6 +1101,9 @@ class Auth extends CI_Controller
 		$data['fetch_educ_level'] =$this->users->fetch_educ_level();
 		$data['fetch_area_intrest'] =$this->users->fetch_area_interest_having_univ();
 		$data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
+		$data['header_title'] = $data['get_university']['title'];
+		$this->load->view('auth/header',$data);
+		
 		$this->load->view('auth/show_all_college',$data);
 		/*else
 		{
@@ -1305,8 +1306,7 @@ class Auth extends CI_Controller
 		$data = $this->path->all_path();
 		$data['keyword_content'] = "universities events,university events in india,study abroad.";
 		$data['description_content'] = "List of universities events,university events in india,study abroad.";
-		$data['header_title'] = 'Events | Meet Universities';
-		$this->load->view('auth/header',$data);
+		//$data['header_title'] = 'Events | Meet Universities';
 		$data = $this->path->all_path();
 		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		$change_url=explode("colleges/",$current_url);
@@ -1318,8 +1318,9 @@ class Auth extends CI_Controller
 		$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
 		$data['country_name_having_event'] = $this->leadmodel->country_name_having_event();
 		$data['events'] = $this->searchmodel->all_event_filteration($current_url);
+		$data['header_title']=$data['events']['title'];
 		$data['events_for_calendar'] = $this->frontmodel->fetch_events_for_calendar();
-		
+		$this->load->view('auth/header',$data);
 		$this->load->view('auth/events',$data);
 		$this->load->view('auth/footer',$data);
 	}
@@ -1329,12 +1330,13 @@ class Auth extends CI_Controller
 		$current_url=$this->input->post('current_url');
 		$data = $this->path->all_path();
 		$data['events'] = $this->searchmodel->all_event_filteration($current_url);
+		$title=$data['events']['title'];
 		if($data['events']!=0)
 		{
 			$events_list=$this->load->view('ajaxviews/events_search',$data);
 			$total_univ=$data['events']['total_res'];
 			$per_page_res=$data['events']['per_page_res'];
-			echo $total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$events_list;
+			echo $title.'!@#$%^&*'.$total_univ.'!@#$%^&*'.$per_page_res.'!@#$%^&*'.$events_list;
 		}
 	}
 	function all_events_paging()
