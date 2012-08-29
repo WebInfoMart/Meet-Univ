@@ -1,5 +1,5 @@
 		<?php 
-	$sno=$sr_no+1;
+	$sno=$sr_id+1;
 	$cnt_rows_verify_table = 0;
 	foreach($teleleads as $teleleadsres) {
 	if($sno % 2) {
@@ -38,7 +38,18 @@
 	$temp_var_for_verify_email_phone++;
  }
  ?>
-				<span class="email_data" id="lead_email_<?php echo $teleleadsres['id']; ?>"><?php echo $teleleadsres['email']; ?></span>
+ 
+				<span class="email_data" id="lead_email_<?php echo $teleleadsres['id']; ?>">
+				<?php
+				if($teleleadsres['email']!='') { 
+				echo $teleleadsres['email'];
+				} 
+				else
+				{
+				echo "Not Available";
+				}
+				?>
+				</span>
  
  
  
@@ -61,7 +72,7 @@ echo $lead_source;
 			<div class="span1 float_l">
 				<?php 
 if($teleleadsres['phone_no1']=='' || $teleleadsres['phone_no1']==0 || $teleleadsres['phone_no1']==NULL) { ?>
-<img src="<?php echo base_url(); ?>images/admin/error.gif"/> 
+<img src="<?php echo base_url(); ?>images/admin/error.gif"/>
 <span style='color:blue'>Not Available</span><span style='color:red;font-size:10px;'>
 </span>
 <?php
@@ -79,9 +90,9 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 <?php }
  if($temp_var_for_verify_email_phone < 1)
  {
-	$check_lead_phone = $teleleadsres['phone_no1'];
-	$phone_check = $this->lead_tele_model->check_lead_phone_in_verify_table($check_lead_phone);
-  if($phone_check == 1)
+ $check_lead_phone = $teleleadsres['phone_no1'];
+ $phone_check = $this->lead_tele_model->check_lead_phone_in_verify_table($check_lead_phone);
+ if($phone_check == 1)
  {
  $record_verified_true = 1;
  } 
@@ -90,10 +101,10 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 			</div>
 			<div class="float_l" style="width:66px;">
 				<a href="javascript:void(0);" onclick="edit_user_lead('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>	
-                <a href="javascript:void(0);" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>')" id="data_<?php echo $teleleadsres['id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>				
+                <a href="javascript:void(0);" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>')" id="data_del_<?php echo $teleleadsres['id']; ?>" class="edit inline"><img style="height:18px;" src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>				
 				<div class="inline margin_l1" id="ajax_loading_img_<?php echo $teleleadsres['id']; ?>" style="display:none;"><img src="<?php echo $base ;?>images/ajax_loader.gif"></div>
 			
-			<!--<a href="javascript:void();" class="edit inline" style="margin-left:19px;cursor:pointer;" id="img_delete_lead_<?php echo $teleleadsres['id']; ?>" onclick="delete_this_record('<?php echo $teleleadsres['id']; ?>');">Delete</a>-->
+			<!--<a href="javascript:void();" class="edit inline" style="margin-left:19px;cursor:pointer;" id="img_delete_lead_<?php echo $teleleadsres['id']; ?>" onclick="delete_this_record('<?php //echo $teleleadsres['id']; ?>');">Delete</a>-->
 			
 			</div>
 			<div class="clearfix"></div>

@@ -641,11 +641,11 @@ function show_all_college_paging($current_url)
 						  {
 						   if($title1=='')
 						   {
-						   $title1=' in '.$filter_content[$f];
+						   $title1=' in '.ucwords($filter_content[$f]);
 						   }
 						   else
 						   {
-						    $title1.=','.$filter_content[$f];
+						    $title1.=' , '.ucwords($filter_content[$f]);
 						   }
 						  // $title='Colleges in '.$filter_content[$f];
 						   $country_id[]=$chk_country['country_id'];
@@ -658,11 +658,11 @@ function show_all_college_paging($current_url)
 						  {
 						  if($title2=='')
 						  {
-						  $title2=$filter_content[$f];
+						  $title2=ucwords($filter_content[$f]);
 						  }
 						  else
 						  {
-						  $title2.=','.$filter_content[$f];
+						  $title2.=','.ucwords($filter_content[$f]);
 						  }
 						  $educ_level[]=$chk_educ_level['prog_edu_lvl_id'];
 						  $filter_educ_level=1;
@@ -677,11 +677,11 @@ function show_all_college_paging($current_url)
 						  
 						  if($title3=='')
 						  {
-						  $title3.=$filter_content[$f];
+						  $title3.=ucwords($filter_content[$f]);
 						  }
 						  else
 						  {
-						  $title3.=','.$filter_content[$f];
+						  $title3.=' , '.ucwords($filter_content[$f]);
 						  }
 						  //$title3='  in '.$filter_content[$f];
 						  }
@@ -713,11 +713,11 @@ function show_all_college_paging($current_url)
 						}
 						if($title1!='' || $title2!='' || $title3!='')
 						{
-						$title.='Colleges '.$title1.' '.$title2.' '.$title3.' | MeetUniversities';
+						$title.='Colleges '.$title1.' '.$title2.' '.$title3.' | Meet Universities';
 						}
 						else
 						{
-						$title='Colleges | MeetUniversities';
+						$title='Colleges | Meet Universities';
 						}
 						$univ_data['total_res']=0;
 						$univ_data['limit_res']=25;
@@ -863,11 +863,11 @@ function show_all_college_paging($current_url)
 							$events_data['filter_country'][]=$chk_country['country_id'];
 							if($title3!='')
 							{
-							$title3.=','.$filter_content[$f];
+							$title3.=' , '.ucwords($filter_content[$f]);
 							}
 							else
 							{
-							$title3=$filter_content[$f];
+							$title3=ucwords($filter_content[$f]);
 							}
 							$filter_country=1;
 							continue;
@@ -880,11 +880,11 @@ function show_all_college_paging($current_url)
 							$events_data['filter_city'][]=$chk_city['city_id'];
 							if($title2!='')
 							{
-							$title2.=','.$filter_content[$f];
+							$title2.=' , '.ucwords($filter_content[$f]);
 							}
 							else
 							{
-							$title2=$filter_content[$f];
+							$title2=ucwords($filter_content[$f]);
 							}
 							$filter_city=1;
 							continue;
@@ -899,11 +899,11 @@ function show_all_college_paging($current_url)
 						 $filter_event_types=1; 
 						    if($title1!='')
 							 {
-							 $title1.=','.$filter_content[$f];
+							 $title1.=' , '.ucwords($filter_content[$f]);
 							 }
 							 else
 							 {
-							 $title1=$filter_content[$f];
+							 $title1=ucwords($filter_content[$f]);
 							 }
 						 continue;
 						 }
@@ -912,30 +912,31 @@ function show_all_college_paging($current_url)
 						  $events_data['filter_event_type'][]='fairs';
 						  $event_type_list='fairs';
 						  $filter_event_types=1;
-						  if($title1!='')
+						   if($title1!='')
 							 {
-							 $title1.=','.$filter_content[$f];
+							 $title1.=' , '.ucwords($filter_content[$f]);
 							 }
 							 else
 							 {
-							 $title1=$filter_content[$f];
+							 $title1=ucwords($filter_content[$f]);
 							 }
 						  continue;
 						 }
 						 else if($filter_content[$f]=='counselling')
 						 {
 						 $events_data['filter_event_type'][]='others'; 
+						 $events_data['filter_event_type'][]='counselling'; 
 						 $event_type_list='alumuni';
 						 $event_type_list='others'; 
 						 $events_data['filter_event_type'][]='alumuni';
 						 $filter_event_types=1;
 						  if($title1!='')
 							 {
-							 $title1.=','.$filter_content[$f];
+							 $title1.=' , '.ucwords($filter_content[$f]);
 							 }
 							 else
 							 {
-							 $title1=$filter_content[$f];
+							 $title1=ucwords($filter_content[$f]);
 							 }
 						 continue;						  
 						 }
@@ -958,7 +959,7 @@ function show_all_college_paging($current_url)
 			{
 			if($title2!='')
 			{
-			$title3=','.$title3;
+			$title3=' , '.$title3;
 			}
 			else
 			{
@@ -966,9 +967,9 @@ function show_all_college_paging($current_url)
 			}
 			}
 			if($title1!='' || $title2!='' || $title3!='')
-			$title=$title1.' Events '.$title2.' '.$title3.' | MeetUniversities';
+			$title=$title1.' Events '.$title2.' '.$title3.' | Meet Universities';
             else
-			$title='Events | MeetUniversities';
+			$title='Events | Meet Universities';
 			$events_data['title']=$title;
 			$events_data['total_res']=0;
 			$events_data['limit_res']=10;
