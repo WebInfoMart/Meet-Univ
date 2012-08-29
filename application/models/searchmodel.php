@@ -713,7 +713,7 @@ function show_all_college_paging($current_url)
 						}
 						if($title1!='' || $title2!='' || $title3!='')
 						{
-						$title.='Colleges '.$title1.' '.$title2.' '.$title3.' | MeetUniversties';
+						$title.='Colleges '.$title1.' '.$title2.' '.$title3.' | MeetUniversities';
 						}
 						else
 						{
