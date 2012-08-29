@@ -130,7 +130,7 @@ $(document).ready(function(){
 						<div class="input-data12">
 						<span class="country_drop selector"><?php echo $verify_teleleads['country_name'];  ?> </span>
 						<Select  name="country" id="country_id" class='edit_box large_data input-large_set' onchange="fetchstates()" style="display:none">
-						<option>Select Country</option> 
+						<option value="">Select Country</option> 
 						<?php foreach($country as $cntry){
 						$selected='';
 						if($cntry['country_name']==$verify_teleleads['country_name']) { 
@@ -149,7 +149,7 @@ $(document).ready(function(){
 						<div class="input-data12">
 						<span class="state_drop selector"><?php echo $verify_teleleads['statename']; ?> </span>			
 						<Select  name="state" id="state_id" class='edit_box large_data input-large_set' onchange="fetchcities()" style="display:none">
-						<option>Select state</option>
+						<option value="">Select state</option>
 						
 					<?php
 					
@@ -179,7 +179,7 @@ $(document).ready(function(){
 						<div class="input-data12">
 						<span class="city_drop selector"><?php echo $verify_teleleads['cityname'];  ?> </span>
 						<Select  name="city" id="city_id" class='edit_box large_data input-large_set' style="display:none">
-						<option>Select City</option>								
+						<option value="">Select City</option>								
 						<?php
 					
 						if($city!='0')
@@ -412,7 +412,7 @@ $(document).ready(function(){
 					<div class="input-left">
 						<span  class="current selector"><?php echo $verify_teleleads['current'];  ?></span>
 						<select name="c_educ_level" id="c_educ_level" class="edit_box large_box" style="display:none">
-						<option>Select Level</option>
+						<option value="">Select Level</option>
 						<?php foreach($program_level as $level)
 						{?>
 						<option value="<?php echo $level['prog_edu_lvl_id']; ?>" <?php if($level['educ_level']==$verify_teleleads['current']) { ?> selected <?php } ?> ><?php echo $level['educ_level'];?></option>
@@ -458,7 +458,7 @@ $(document).ready(function(){
 					<div class="input-left">
 						<span  class="next selector"><?php echo $verify_teleleads['next'];  ?></span>
 						<select name="next_educ_level" id="next_educ_level" class="edit_box large_box" style="display:none">
-						<option>Select Level</option>
+						<option value="">Select Level</option>
 						<?php foreach($program_level as $level)
 						{?>
 						<option value="<?php echo $level['prog_edu_lvl_id']; ?>" <?php if($level['educ_level']==$verify_teleleads['next']) { ?> selected <?php } ?> ><?php echo $level['educ_level'];?></option>
@@ -473,7 +473,7 @@ $(document).ready(function(){
 					<div class="input-left">
 						<span class="Priority selector"><?php echo $verify_teleleads['v_priority'];  ?></span>
 						<select name="priority" id="priority"  class="edit_box large_box" style="display:none">
-						<option>--Please Select--</option>
+						<option value="">--Please Select--</option>
 						<option value="1" <?php if($verify_teleleads['v_priority']==1){ ?> selected="selected" <?php } ?> >1</option>
 						<option value="2" <?php if($verify_teleleads['v_priority']==2){ ?> selected="selected" <?php } ?> >2</option>
 						<option value="3" <?php if($verify_teleleads['v_priority']==3){ ?> selected="selected" <?php } ?> >3</option>
@@ -706,7 +706,7 @@ function verifyLead(id)
 		$("#c_edit").hide();
 		$("#content").show();
 		$("#lead_edit_msg").show();
-		$("#lead_edit_msg").hide(10000);
+		setInterval(function(){$("#lead_edit_msg").hide(3000)},5000);
 		
 	}
 	

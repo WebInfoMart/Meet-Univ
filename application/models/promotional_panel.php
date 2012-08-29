@@ -10,21 +10,33 @@ class Promotional_panel extends CI_Model
 			$this->load->database();
 		}
 
-		function count_total_student_in_portal($type)
+		function count_total_student_in_portal()
 		{
 			$this->db->select('id');
 			$this->db->from('users');
 			$this->db->join('verified_lead_data','users.email=verified_lead_data.v_email','left');
 			$where=array();
 			$where['users.level'] =  '1';
-			if($type=='sms') {
-			$this->db->where('users.level','1');
-			}
+			$this->db->where($where);
 			$query = $this->db->get();
 			$no_of_student = $query->num_rows();
 			return $no_of_student;
 		}
 		
+		function count_total_student_in_sms_email_send($type)
+		{
+			if($type=='sms')
+			{
+			$where=' v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+			}
+			if($type=='email')
+			{
+			$where=' v_email!="" && v_email!="NULL" && v_email!="0"';
+		    }
+			$res=$this->db->query("select * from verified_lead_data vl where ".$where);
+			return $res->num_rows();
+			
+		}
 		function show_country_list()
 		{
 		 $this->db->select('*');
@@ -94,6 +106,73 @@ class Promotional_panel extends CI_Model
 	
 		}
 		
+		function total_student_in_country_sms_email($country_id,$type)
+		{
+			if($type=='sms')
+			{
+			$where=' v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+		    }
+			if($type=='email')
+			{
+			$where=' v_email!="" && v_email!="NULL" && v_email!="0"';
+			}
+			if($country_id!=0)
+			{
+			$where.=' && v_country ='.$country_id;
+			}
+			//echo 'select * from verified_lead_data where'.$where;
+			$res=$this->db->query('select * from verified_lead_data where'.$where);
+			return $res->num_rows();
+		}
+		
+		function count_total_student_in_educ_sms_email_send($country_id,$educ_level,$type)
+		{
+			$where=' 1';
+			if($country_id!='0'){
+			$where.=' && v_country='.$country_id;
+			}
+			if($educ_level!=''){
+			$where.=' && v_current_educ_level IN('.$educ_level.')';
+			}
+			
+			if($type=='sms')
+			{
+			$where.=' && v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+		    }
+			if($type=='email')
+			{
+			$where.=' && v_email!="" && v_email!="NULL" && v_email!="0"';
+		    }
+			$res=$this->db->query('select * from verified_lead_data where'.$where);
+			return $res->num_rows();
+		}
+		
+		function total_student_in_sms_email_educ_change($country,$city,$educ_lvl,$type)
+		{
+			$where=' 1';
+			if($country!='0')
+			{
+			$where.=' && v_country='.$country;
+			}
+			if($city!='0')
+			{
+			$where.=' && v_city='.$city;
+			}
+			if($educ_lvl!='')
+			{
+			$where.=' && v_current_educ_level IN ('.$educ_lvl.')';
+			}
+		    if($type=='sms')
+			{
+			$where.=' && v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+		    }
+			if($type=='email')
+			{
+			$where.=' && v_email!="" && v_email!="NULL" && v_email!="0"';
+		    }
+			$res=$this->db->query('select * from verified_lead_data where'.$where);
+			return $res->num_rows();
+		}
 		function total_student_in_city_ug($country_id,$city_id,$educ_level)
 		{
 		    $this->db->select('v_id');
@@ -145,6 +224,22 @@ class Promotional_panel extends CI_Model
 		 $this->db->from('program_parent');
 		 $query = $this->db->get();
 		 return $query->result_array();
+		}
+		
+		function total_student_in_city_sms_email($city,$type)
+		{
+			
+			$where=' v_city='.$city;
+			if($type=='sms')
+			{
+			$where.=' && v_phone!="" && v_phone!="NULL" && v_phone!="0"';
+		    }
+			if($type=='email')
+			{
+			$where.=' && v_email!="" && v_email!="NULL" && v_email!="0"';
+		    }
+			$res=$this->db->query('select * from verified_lead_data where'.$where);
+			return $res->num_rows();
 		}
 }
 

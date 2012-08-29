@@ -617,24 +617,37 @@ function show_all_college_paging($current_url)
 						$univ_data['filter_educ_level']=array(0);
 						//$current_url=str_replace('-',',',$current_url);
 						$current_url=str_replace('_',' ',$current_url);
-						
+						//$univ_data['title']='Colleges | MeetUniversities';
 						$pos = strpos($current_url,'colleges/');
 						$filter_country=0;
 						$filter_educ_level=0;
 						$filter_area_interest=0;
+						 $title1='';
+						 $title2='';
+						 $title3='';
 						if($pos>0)
 						{
 						$arr=explode('colleges/',$current_url);
-						if(count($arr)>0 )
+						if(count($arr)>0)
 						{
 						if($arr[1]!='' && $arr[1]!=NULL)
 						{
 						 $filter_content=explode('/',$arr[1]);
+						
 						for($f=0;$f<count($filter_content);$f++)
 						{
 						  $chk_country=$this->searchmodel->get_country_id_by_name($filter_content[$f]);
 						  if($chk_country!=0)
 						  {
+						   if($title1=='')
+						   {
+						   $title1=' in '.$filter_content[$f];
+						   }
+						   else
+						   {
+						    $title1.=','.$filter_content[$f];
+						   }
+						  // $title='Colleges in '.$filter_content[$f];
 						   $country_id[]=$chk_country['country_id'];
 						   $univ_data['filter_country'][]=$chk_country['country_id'];
 						   $filter_country=1;
@@ -643,6 +656,14 @@ function show_all_college_paging($current_url)
 						  $chk_educ_level=$this->searchmodel->get_educ_level_id_by_name($filter_content[$f]);
 						  if($chk_educ_level!=0)
 						  {
+						  if($title2=='')
+						  {
+						  $title2=$filter_content[$f];
+						  }
+						  else
+						  {
+						  $title2.=','.$filter_content[$f];
+						  }
 						  $educ_level[]=$chk_educ_level['prog_edu_lvl_id'];
 						  $filter_educ_level=1;
 						  $univ_data['filter_educ_level'][]=$chk_educ_level['prog_edu_lvl_id'];  
@@ -653,6 +674,17 @@ function show_all_college_paging($current_url)
 						  {
 						  $area_interest[]=$chk_area_intrest['prog_parent_id'];
 						  $filter_area_interest=1;
+						  
+						  if($title3=='')
+						  {
+						  $title3.=$filter_content[$f];
+						  }
+						  else
+						  {
+						  $title3.=','.$filter_content[$f];
+						  }
+						  //$title3='  in '.$filter_content[$f];
+						  }
 						  $univ_data['filter_area_intrest'][]=$chk_area_intrest['prog_parent_id'];
 						  continue;
 						  }
@@ -664,9 +696,32 @@ function show_all_college_paging($current_url)
 						$filter_content=0;
 						}
 						
-					}	
+						
+						//set title of page
+						$title='';
+						if($title2!='')
+						{
+						$title2=' offering '.$title2.' Courses';
+						if($title3!='')
+						{
+						$title2.=' in';
+						}
+						}
+						if($title2=='' && $title3!='')
+						{
+						$title3=' offering Courses in '.$title3;
+						}
+						if($title1!='' || $title2!='' || $title3!='')
+						{
+						$title.='Colleges '.$title1.' '.$title2.' '.$title3.' | MeetUniversities';
+						}
+						else
+						{
+						$title='Colleges | MeetUniversities';
+						}
 						$univ_data['total_res']=0;
 						$univ_data['limit_res']=25;
+						$univ_data['title']=$title;
 						//$this->db->select('*');
 						//$this->db->from('university');
 						$join=" LEFT JOIN  `events` ON events.event_univ_id = university.univ_id";
@@ -770,7 +825,6 @@ function show_all_college_paging($current_url)
 	
 	//event filetration
 	function all_event_filteration($current_url){
-	
 		$events_data['filter_event_type']=array();
 		$events_data['filter_country']=array();
 		$events_data['filter_city']=array();
@@ -787,6 +841,10 @@ function show_all_college_paging($current_url)
 		$filter_event_types=0;
 		$filter_country=0;
 		$filter_city=0;
+		
+		$title1='';
+		$title2='';
+		$title3='';
 		if($pos>0)
 		{
 			$arr=explode('events/',$current_url);
@@ -797,11 +855,20 @@ function show_all_college_paging($current_url)
 					$filter_content=explode('/',$arr[1]);
 					for($f=0;$f<count($filter_content);$f++)
 					{
+						$filter_educ=0;
 					    $chk_country=$this->searchmodel->get_country_id_by_name($filter_content[$f]);
 						if($chk_country!=0)
 						{
 							$country_id[]=$chk_country['country_id'];
 							$events_data['filter_country'][]=$chk_country['country_id'];
+							if($title3!='')
+							{
+							$title3.=','.$filter_content[$f];
+							}
+							else
+							{
+							$title3=$filter_content[$f];
+							}
 							$filter_country=1;
 							continue;
 						}
@@ -811,6 +878,14 @@ function show_all_college_paging($current_url)
 						{
 							$city_id[]=$chk_city['city_id'];
 							$events_data['filter_city'][]=$chk_city['city_id'];
+							if($title2!='')
+							{
+							$title2.=','.$filter_content[$f];
+							}
+							else
+							{
+							$title2=$filter_content[$f];
+							}
 							$filter_city=1;
 							continue;
 						}
@@ -822,13 +897,29 @@ function show_all_college_paging($current_url)
 						 $events_data['filter_event_type'][]='spot_admission';
 						 $event_type_list='spot_admission';
 						 $filter_event_types=1; 
+						    if($title1!='')
+							 {
+							 $title1.=','.$filter_content[$f];
+							 }
+							 else
+							 {
+							 $title1=$filter_content[$f];
+							 }
 						 continue;
 						 }
 						 else if($filter_content[$f]=='fairs')
 						 {
 						  $events_data['filter_event_type'][]='fairs';
 						  $event_type_list='fairs';
-						  $filter_event_types=1;	
+						  $filter_event_types=1;
+						  if($title1!='')
+							 {
+							 $title1.=','.$filter_content[$f];
+							 }
+							 else
+							 {
+							 $title1=$filter_content[$f];
+							 }
 						  continue;
 						 }
 						 else if($filter_content[$f]=='counselling')
@@ -838,8 +929,16 @@ function show_all_college_paging($current_url)
 						 $event_type_list='others'; 
 						 $events_data['filter_event_type'][]='alumuni';
 						 $filter_event_types=1;
+						  if($title1!='')
+							 {
+							 $title1.=','.$filter_content[$f];
+							 }
+							 else
+							 {
+							 $title1=$filter_content[$f];
+							 }
 						 continue;						  
-						 } 
+						 }
 							
 						}	
 					}
@@ -850,6 +949,27 @@ function show_all_college_paging($current_url)
 				$filter_content=0;
 			}
 		}	
+		
+		    if($title2!='')
+			{
+			$title2=' in '.$title2;
+			}
+			if($title3!='')
+			{
+			if($title2!='')
+			{
+			$title3=','.$title3;
+			}
+			else
+			{
+			$title3=' in '.$title3;
+			}
+			}
+			if($title1!='' || $title2!='' || $title3!='')
+			$title=$title1.' Events '.$title2.' '.$title3.' | MeetUniversities';
+            else
+			$title='Events | MeetUniversities';
+			$events_data['title']=$title;
 			$events_data['total_res']=0;
 			$events_data['limit_res']=10;
 			$join=" LEFT JOIN  `university` ON events.event_univ_id = university.univ_id LEFT JOIN country ON country.country_id = events.event_country_id LEFT JOIN  state ON state.state_id = events.event_state_id LEFT JOIN city ON city.city_id = events.event_city_id";

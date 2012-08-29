@@ -146,7 +146,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<form class="margin_zero">
 										<ul class="col_filter_list">
 										<?php $count_country = count($country_name_having_event); ?>
-											<input type="hidden" id="total_records_country" value="<?php echo $count_country; ?>"
+											<input type="hidden" id="total_records_country" value="<?php echo $count_country; ?>">
 											<?php
 											if(!empty($country_name_having_event) && ($country_name_having_event!=1)) {
 											foreach($country_name_having_event as $country_name_having_event){
@@ -686,13 +686,14 @@ function get_event_result_by_ajax()
 	   {
 		
 	   res=r.split('!@#$%^&*');
+	   document.title=res[0];
 		$('#event_results_filteration').animate({
 		'opacity':1
 		},1000,function(){
 		});
-		if(res[2]!='0' && res[1]!='0')
+		if(res[3]!='0' && res[2]!='0')
 		{
-		$('#event_results_filteration').html(res[2]);
+		$('#event_results_filteration').html(res[3]);
 		$('.events_holder_box').replaceWith('');
 		}
 		else
@@ -702,8 +703,8 @@ function get_event_result_by_ajax()
 		$('#event_results_filteration').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
 		}
 		}
-	  	$('#listed_currently_event').html(res[1]);
-	    $('#red_total_univ').html(res[0]);
+	  	$('#listed_currently_event').html(res[2]);
+	    $('#red_total_univ').html(res[1]);
 		
 	   }
 	   })

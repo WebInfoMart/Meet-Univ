@@ -439,20 +439,21 @@ function get_college_result_by_ajax()
 	   success: function(r)
 	   {
 	   res=r.split('!@#$%^&*');
+	    document.title=res[0];
 	   $('#search_results').animate({
 		'opacity':1
 		},1000,function(){
 		});
-		if(res[2]!='0' && res[1]!='0')
+		if(res[3]!='0' && res[2]!='0')
 		{
-		$('#search_results').html(res[2]);
+		$('#search_results').html(res[3]);
 		}
 		else
 		{
 		$('#search_results').html('<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>');	
 		}
-	  	$('#listed_currently_univ').html(res[1]);
-	    $('#red_total_univ').html(res[0]);
+	  	$('#listed_currently_univ').html(res[2]);
+	    $('#red_total_univ').html(res[1]);
 	   }
 	   })
 }

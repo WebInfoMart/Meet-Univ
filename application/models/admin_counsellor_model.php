@@ -153,7 +153,7 @@ function verified_lead_model()
 			'v_aggregate_percentage'=>$this->input->post('academic'),
 			'v_interested_country'=>$this->input->post('interested_cont')			
 		);
-			if($this->input>post('notes')!="")
+			if($this->input->post('notes')!="")
 			{
 				$this->db->insert('verified_notes',$notes);
 			}

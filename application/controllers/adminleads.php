@@ -115,11 +115,12 @@ class Adminleads extends CI_Controller
 		} else {
 		   $flag=0;
 		   $user_id=$this->input->post('id');
+		   $lead_id=$this->input->post('lead_id');
 		   $data['username'] = $this->tank_auth->get_username();
 		   $data['user_id'] = $this->tank_auth->get_admin_user_id();
 		   $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		   $data['lead_info']=$this->lead_tele_model->verify_lead_user_info($user_id);
-		   $data['note_info']=$this->lead_tele_model->v_note($user_id);
+		   $data['note_info']=$this->lead_tele_model->v_note($lead_id);
 		   $data['country_res']=$this->users->fetch_country();
 		   $data['state_res'] = $this->lead_tele_model->fetch_state();
 		   $data['city_res'] = $this->lead_tele_model->fetch_city();
@@ -207,7 +208,7 @@ class Adminleads extends CI_Controller
 		'updated_on' => date('Y-m-d H:i:s', time())
 		);
 		$notes = array(
-		'lead_id'=>$this->input->post('current_lead_id'),
+		'lead_id'=>$this->input->post('lead_id'),
 		'v_note'=>$this->input->post('notes'),
 		'updated_on'=>date('Y-m-d H:i:s', time())		
 		);

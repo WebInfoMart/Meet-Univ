@@ -3,11 +3,11 @@
 			
 			<div class="float_l data8 margin_delta">
 				<div>
-					<div class="green_block float_l">
-						SMS
+					<div class="green_sms float_l">
+						<a href="<?php echo $base; ?>admin_promotional/sms_campaign" style="color:white;text-decoration:none">SMS</a>
 					</div>
-					<div class="orange_block float_l">
-						EMAIL
+					<div class="orange_active float_l">
+						<a href="<?php echo $base; ?>admin_promotional/email_campaign" style="color:white;text-decoration:none">EMAIL</a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -18,7 +18,7 @@
 							<div class="float_l">
 								<label class="label-control-data" for="select01">Country: </label>
 								<div class="controls-input-data">
-									<select id="select01"  id="country_list" onchange="find_no_of_user_on_onchange(this)">
+									<select  id="country_list" onchange="count_student_change_sms_email_wise(this)">
 										<option value="0">Select Country</option>
 											<?php foreach($country_list as $country_lists) { ?>
 											<option value="<?php echo $country_lists['country_id']; ?>"><?php echo $country_lists['country_name']; ?></option>
@@ -27,13 +27,13 @@
 								</div>
 							</div>
 							<div class="dotted_width float_l"></div>
-							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3>
+							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><span class="country_text_name inline"> ( Worldwide )</span>
 						</div>
 						<div class="control-group2">
 							<div class="float_l">
-								<label class="label-control-data" id="no_of_student_in_city" for="select01">City: </label>
+								<label class="label-control-data"  for="select01">City: </label>
 								<div class="controls-input-data">
-									<select id="city_list" onchange="find_no_of_user_on_onchange(this)" >
+									<select id="city_list" onchange="count_student_change_sms_email_wise(this);" >
 											<option value="0">Select CIty</option>
 								<?php foreach($all_cities as $all_city) { ?>			
 											<option value="<?php echo $all_city['city_id']; ?>"><?php echo $all_city['cityname']; ?></option>
@@ -42,17 +42,17 @@
 								</div>
 							</div>
 							<div class="dotted_width float_l"></div>
-							<h3 class="count_txt" >0</h3>
+							<h3 class="count_txt"  id="no_of_student_in_city">0</h3>
 						</div>
 						<div class="control_form">
 							<div class="float_l">
 								<label class="label-control-data" for="select01">Educational level: </label>
 								<div class="controls-input-data checkbox_bg">
-									<input type="checkbox"  value="4">
+									<input type="checkbox" id="educ_pg"  value="4" onclick="count_student_change_sms_email_wise(this)">
 									Post Graduate</br>
-									<input type="checkbox"  value="3">
+									<input type="checkbox" id="educ_ug"  value="3" onclick="count_student_change_sms_email_wise(this)">
 									Under Graduate<br />
-									<input type="checkbox"  value="2">
+									<input type="checkbox" id="educ_foundation"  value="2" onclick="count_student_change_sms_email_wise(this)">
 									Foundation
 								</div>
 							</div>
@@ -95,15 +95,30 @@
 		</div>
 	</div>
 <script>	
-function find_no_of_user_on_onchange(select)
+function count_student_change_sms_email_wise(select)
 {
 var country_id=$('#country_list option:selected').val();
 var country_text=$('#country_list option:selected').text();
 var city_id=$('#city_list option:selected').val();
 var city_text=$('#city_list option:selected').text();
-var educ_level=$('#educ_level option:selected').val();
-var educ_level_text=$('#educ_level option:selected').text();
-var data;
+var educ_chk='';
+if($('#educ_pg').is(':checked'))
+{
+educ_chk=$('#educ_pg').val();
+}
+if($('#educ_ug').is(':checked'))
+{
+if(educ_chk!=''){
+educ_chk=educ_chk+',';
+}
+educ_chk=educ_chk+$('#educ_ug').val();
+}
+if($('#educ_foundation').is(':checked'))
+{
+if(educ_chk!=''){educ_chk=educ_chk+',';}
+educ_chk=educ_chk+$('#educ_foundation').val();
+}
+
 var change='';
 if(select.id=='country_list')
 {
@@ -117,8 +132,8 @@ else
 {
 change='educ_level';
 }
-data={country_id:country_id,city_id:city_id,educ_level:educ_level};
-url='<?php echo $base; ?>admin_promotional/count_student_change_wise_for_sms/'+change;
+data={country_id:country_id,city_id:city_id,educ_level:educ_chk};
+url='<?php echo $base; ?>admin_promotional/count_student_change_sms_email_wise/'+change+'/sms';
 $.ajax({
 	   type: "POST",
 	   url: url,
@@ -126,43 +141,44 @@ $.ajax({
 	   data: data,
 	   success: function(msg)
 	   {
-	   if(select.id=='country_list')
+	    if(select.id=='country_list')
 		{
 		 if(country_id==0)
 		 {
-		 $('#country_text_name').html('Worldwide');
+		 $('.country_text_name').text('Worldwide');
+		 }
+		 else
+		 {
+		 $('.country_text_name').text('');
 		 }
 		 var res=msg.split('!@#$%');
 		 $('#city_list').html(res[0]);
 		 $('#total_no_of_student_in_country').html(res[1]);
-		 $('#country_text_name').html(country_text);
-		 $('#city_text_name').html('Select City');
 		 $('#no_of_student_in_city').html('0');
-		  $('#no_of_student_in_educ_lvl').html(res[2]);
+		 if(educ_chk!='')
+		 $('#no_of_student_in_educ_lvl').html(res[2]);
 		}
 		else if(select.id=='city_list')
 		{
 		var res=msg.split('!@#$%');
-		$('#city_text_name').html(city_text);
 		$('#no_of_student_in_city').html(res[0]);
 		if(educ_level!='0'){
 		 $('#no_of_student_in_educ_lvl').html(res[1]);
 		 }
-		$('.city_div').show();
 		}
-		else if(select.id=='educ_level')
+		else
 		{
-		if(educ_level==0)
+		if(educ_chk=='')
 		{
-		$('#educ_lvl_text_name').html('Select Educ. Level');
+		//$('#educ_lvl_text_name').html('Select Educ. Level');
 		 $('#no_of_student_in_educ_lvl').html('0');
 		}
 		else {
-		 $('#educ_lvl_text_name').html(educ_level_text);
+		// $('#educ_lvl_text_name').html(educ_level_text);
 		 $('#no_of_student_in_educ_lvl').html(msg);
 		}
 	   }
-	   }
+	}
 });
 }
 </script>
