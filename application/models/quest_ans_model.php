@@ -84,10 +84,29 @@ class Quest_ans_model extends CI_Model
 		$this->db->join('users','questions.q_askedby = users.id');
 		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
 		$this->db->order_by("que_id","desc");
-		$this->db->limit(10);
 		$query = $this->db->get(); 
-		$quest_data['no_of_que']=$query->num_rows();
-		if($query->num_rows() > 0)
+		$no_of_que=$query->num_rows();
+		$quest_data['no_of_que']=$no_of_que;
+		$config['base_url']= base_url()."Recent_Questions/question/all";
+		$config['total_rows']=$no_of_que;
+		$config['per_page'] = '6'; 
+		$offset = $this->uri->segment('4');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+		$limit = $config['per_page'];
+		
+		$this->db->select('*');
+		$this->db->from('questions');
+		$this->db->join('university','questions.q_univ_id = university.univ_id','left');
+		$this->db->join('users','questions.q_askedby = users.id');
+		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
+		$this->db->limit($limit,$offset);
+		$this->db->order_by("que_id","desc");
+		$query = $this->db->get(); 
+		$q_detail=$query->result_array();
+		$quest_data['quest_detail'] = $q_detail;
+		$quest_data['ans_count'] = 0;
+		$this->pagination->initialize($config);
+		return $quest_data;
+		/*if($no_of_que > 0)
 		{
 			$q_detail = $query->result_array();
 			foreach($q_detail as $getAns)
@@ -105,7 +124,7 @@ class Quest_ans_model extends CI_Model
 		}
 		else{
 		return 0;
-		}
+		}*/
 	}
 	public function count_all_questions()
 	{

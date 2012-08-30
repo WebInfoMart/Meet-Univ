@@ -45,7 +45,8 @@ if ($user) {
 				else
 				{
 					//$univ_title = str_replace(' ','_',$quest_list['title']);
-					$question_title = str_replace(' ','-',$quest_list['q_title']);
+					//$question_title = str_replace(' ','-',$quest_list['q_title']);
+					$question_title =$this->subdomain->process_url_title($quest_list['q_title']);
 					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				?>
@@ -54,24 +55,25 @@ if ($user) {
 				<div>
 				<div id="quest_pic" class="float_l">
 				<?php
+				$logged_user_id = $this->tank_auth->get_user_id();
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 							
-								echo "<img style='width:80px;height:80px;margin-right:20px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+								echo "<img style='width:40px;height:40px;margin-right:40px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
 							}
 							else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
 							{
-								echo "<img style='width:80px;height:80px;margin-right:20px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+								echo "<img style='width:40px;height:40px;margin-right:40px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
 							}
-							else if($user)
+							else if($user && $quest_list['q_askedby'] == $logged_user_id)
 							{
 							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
 							<?php
 							}
 							else{
-							echo "<img style='width:80px;height:80px;margin-right:20px;' src='".base_url()."images/profile_icon.png'/>";
+							echo "<img style='width:40px;height:40px;margin-right:40;' src='".base_url()."images/profile_icon.png'/>";
 							}
 							?>
 				</div>
@@ -131,11 +133,15 @@ if ($user) {
 				}
 				}
 				?>
+				<div id="pagination" class="table_pagination right paging-margin">
+				<?php echo $this->pagination->create_links(); ?>
+				</div>
 				</div>
 				
 				</div>
 				
 				<div class="clearfix"></div>
+				
 </div>
 </div>
 </div>

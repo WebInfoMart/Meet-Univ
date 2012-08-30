@@ -931,7 +931,7 @@ function show_all_college_paging($current_url)
 						 $events_data['filter_event_type'][]='alumuni';
 						 $filter_event_types=1;
 						  if($title1!='')
-							 {
+						{
 							 $title1.=' , '.ucwords($filter_content[$f]);
 							 }
 							 else

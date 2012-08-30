@@ -41,7 +41,7 @@ class Subdomain extends CI_Model
        	
     }	
 	
-function university_by_domain($univ_id,$univ_subdomain)
+ function university_by_domain($univ_id,$univ_subdomain)
  {
   $data = $this->path->all_path();
   
@@ -210,17 +210,8 @@ function university_by_domain($univ_id,$univ_subdomain)
 		 $url='';
 		 if($cat_title!='' && $catid!='')
 		 {
-		 $cat_title=strtolower($cat_title);
-		 $cat_title=str_replace("'",' ',$cat_title);
-		 $cat_title=str_replace(' ','-',$cat_title);
-		 $cat_title=str_replace('&','and',$cat_title);
-		 $cat_title=str_replace(':','-',$cat_title);
-		 $cat_title=str_replace(';','-',$cat_title);
-		 $cat_title=str_replace('(','',$cat_title);
-		 $cat_title=str_replace(')','',$cat_title);
-		 
-		 $cat_title=preg_replace('/[^a-zA-Z0-9_ -%][().][\/]/s', '', $cat_title);
-		 $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
+		 $cat_title=$this->process_url_title($cat_title);
+		  $url='http://'.$subdomain.$data['domain_name'].'/'.$cat_type.'/'.$catid.'/'.$cat_title;
 		 }
 		 else if($cat_title=='' && $catid!='')
 		 {
@@ -263,6 +254,26 @@ function university_by_domain($univ_id,$univ_subdomain)
 	 $data = $this->path->all_path();
 	 $univ_link='http://'.$subdomain.$data['domain_name'];
 	 return $univ_link;
+	}
+	
+	function process_url_title($cat_title)
+	{
+	     $cat_title=strtolower($cat_title);
+		 $cat_title=str_replace("'",' ',$cat_title);
+		 $cat_title=str_replace(' ','-',$cat_title);
+		 $cat_title=str_replace('&','and',$cat_title);
+		 $cat_title=str_replace(':','-',$cat_title);
+		 $cat_title=str_replace(';','-',$cat_title);
+		 $cat_title=str_replace('(','',$cat_title);
+		 $cat_title=str_replace(')','',$cat_title);
+		 $cat_title=str_replace('?','',$cat_title);
+		 $cat_title=preg_replace('/[^a-zA-Z0-9_ -%][().][\/]/s', '', $cat_title);
+		 if(strlen($cat_title)>150)
+		 {
+		 $cat_title=substr($cat_title,0,150);
+		 }
+		 return $cat_title;
+		 
 	}
 
 }

@@ -115,7 +115,7 @@ class Quest_ans_controler extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
-		if($type == 'All')
+		if($type == 'All' || $type=='all')
 		{
 		$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
 		$data['get_all_question'] = $this->quest_ans_model->get_recent_quest_user_info();

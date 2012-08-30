@@ -1,12 +1,12 @@
 	<div class="body" id="content">
-		<div class="data13 margin_auto">
+		<div class="data13">
 			
 			<div class="float_l data8 margin_delta">
 				<div>
-					<div class="green_sms float_l">
+					<div class="green_block float_l">
 						<a href="<?php echo $base; ?>admin_promotional/sms_campaign" style="color:white;text-decoration:none">SMS</a>
 					</div>
-					<div class="orange_active float_l">
+					<div class="orange_block float_l">
 						<a href="<?php echo $base; ?>admin_promotional/email_campaign" style="color:white;text-decoration:none">EMAIL</a>
 					</div>
 					<div class="clearfix"></div>
@@ -27,7 +27,7 @@
 								</div>
 							</div>
 							<div class="dotted_width float_l"></div>
-							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><span class="country_text_name inline"> ( Worldwide )</span>
+							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><span class="country_text_name margin_l1 inline"> ( Worldwide )</span>
 						</div>
 						<div class="control-group2">
 							<div class="float_l">
@@ -76,7 +76,7 @@
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
-								<textarea cols="31" rows="3"></textarea>
+								<textarea cols="31" rows="3" placeholder="Message Here..."></textarea>
 							</div>
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 				</div>
 			</div>
 			<div class="float_l data4 margin_4 mbl_bg">
-				<textarea class="mbl_text">Message Here...</textarea>
+				<textarea class="mbl_text" placeholder="Message Here..."></textarea>
 			</div>
 			<div class="clearfix"></div>
 		</div>

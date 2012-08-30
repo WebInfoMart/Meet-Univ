@@ -76,7 +76,7 @@
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
-								<textarea cols="31" rows="1">Subject : </textarea>
+								<textarea cols="31" rows="1" placeholder="Subject : "></textarea>
 							</div>
 							</div>
 						</div>
@@ -84,7 +84,7 @@
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
-								<textarea cols="31" rows="3">Type your text here..</textarea>
+								<textarea cols="31" rows="3" placeholder="Type your text here.."></textarea>
 							</div>
 							</div>
 						</div>

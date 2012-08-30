@@ -75,12 +75,15 @@ class Promotional_panel extends CI_Model
 		
 		function total_student_in_city($city)
 		{
+		if($city!='0')
+		{
 		$this->db->select('v_id');
 		$this->db->from('verified_lead_data');
 		$this->db->where('v_city',$city);
 		$query=$this->db->get();
 		return $query->num_rows();
-
+		}
+		return 0;
 		}
 		function total_student_in_ug($country_id,$educ_level)
 		{
@@ -228,7 +231,7 @@ class Promotional_panel extends CI_Model
 		
 		function total_student_in_city_sms_email($city,$type)
 		{
-			
+			if($city!='0'){
 			$where=' v_city='.$city;
 			if($type=='sms')
 			{
@@ -240,6 +243,11 @@ class Promotional_panel extends CI_Model
 		    }
 			$res=$this->db->query('select * from verified_lead_data where'.$where);
 			return $res->num_rows();
+			}
+			else
+			{
+			return 0;
+			}
 		}
 }
 

@@ -136,7 +136,8 @@ if ($user) {
 				else
 				{
 					//$univ_title = str_replace(' ','_',$quest_list['title']);
-					$question_title = str_replace(' ','-',$quest_list['q_title']);
+					//$question_title = str_replace(' ','-',$quest_list['q_title']);
+					$question_title =$this->subdomain->process_url_title($quest_list['q_title']);	
 					$url = "MeetQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
 					$url = $base.'otherQuestion'.'/'.$quest_list['que_id'].'/'.$question_title;
 				}

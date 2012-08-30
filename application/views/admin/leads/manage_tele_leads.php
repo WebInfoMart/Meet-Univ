@@ -593,7 +593,7 @@ $.ajax({
 	   if(msg=='1')
 	   {
 	    $("#content_msg").css("display","block");
-		 $('#content_msg p').html("Lead Verified successfully");
+		 $('#content_msg p').html("Verified Lead Added successfully");
 		
 		
 	   }	   

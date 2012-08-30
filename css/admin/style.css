@@ -42,6 +42,9 @@ Author URI: http://themeforest.net/user/enstyled
 .data12 {
   width: 915px;
 }
+.data19 {
+  width: 680px;
+}
 .data13{width:940px}
 .margin_alpha{margin-top:0px!important;}
 .margin_beta{margin-right:0px!important}
@@ -416,12 +419,9 @@ color:#fff;
 /* Content */
 	
 #content {
-/*margin-left: 200px;
-margin-left: 275px;*/
-width: 82%;
-margin-top: 20px;
-padding: 0 20px;
+width: 80%;
 float: left;
+margin: 20px;
 	}
 	
 #content .breadcrumb {

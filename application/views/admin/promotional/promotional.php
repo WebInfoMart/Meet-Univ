@@ -146,7 +146,7 @@ $.ajax({
 		 if(country_id==0)
 		 {
 		 $('#country_text_name').html('Worldwide');
-		 }
+		 } 
 		 var res=msg.split('!@#$%');
 		 $('#city_list').html(res[0]);
 		 $('#total_no_of_student_in_country').html(res[1]);
