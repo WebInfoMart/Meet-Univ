@@ -163,8 +163,7 @@ class adminarticles extends CI_Controller
 			   'article_type_ud' => $this->input->post('article_type_ud')
 			); */
 			//print_r($datas);
-			$data['create_article_data']=$this->articlemodel->create_article();
-			//print_r($data['create_article_data']);
+			if(!$this->articlemodel->create_article())
 			redirect('adminarticles/manage_articles/eas');
 			}
 			//fetch user privilege data from model

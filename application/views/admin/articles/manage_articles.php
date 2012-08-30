@@ -203,7 +203,7 @@ if(b==1)
 {
 status='make country page unfeatured';
 }
-var r=confirm("Are U sure u want to " +status+ " to this event?");
+var r=confirm("Are U sure u want to " +status+ " to this article?");
 if (r==true)
 {
   window.location.href=a+'/featured_unfeatured_dest_event/'+b+'/'+c+'/';
@@ -232,7 +232,7 @@ $('#deletearticleform').submit();
 }
 else
 {
-alert("please select al least one university");
+alert("please select al least one article");
 return false;
 }
 }

@@ -20,7 +20,6 @@ class Articlemodel extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			'max_size' => 500
 		);
 		
 		$this->load->library('upload', $config);
@@ -58,7 +57,11 @@ class Articlemodel extends CI_Model
 			   'article_approve_status'=>'0'
 			);
 			$this->db->insert('article', $data_insert);
-
+		return $flag;
+	}
+	else
+	{
+	return $flag;
 	}
 	}
 	

@@ -445,7 +445,7 @@ class Lead_tele_model extends CI_Model
 		  'v_user_type'=>$this->input->post('lead_source'),
 		  'v_verified_email'=>$this->input->post('email_verified'),
 		  'v_verified_phone'=>$this->input->post('phone_verified'),
-		  'v_lead_status'=>$this->input->post('lead_status'),
+		  'v_status'=>$this->input->post('lead_status'),
 		  'v_next_action'=>$this->input->post('next_action'),
 		  'v_user_id'=>$user_id
 		  

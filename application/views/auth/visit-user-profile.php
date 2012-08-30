@@ -17,10 +17,11 @@ if ($user) {
 	$(document).ready(function(){
 	<?php if($send_message_to_user_error == 1) { ?>
 	$('#myModal2').modal('toggle');
+	//$('#myModal3').modal('toggle');
 	<?php } ?>
+	
 	});
 	</script>
-	
 	<div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>
@@ -99,6 +100,10 @@ if ($user) {
 										$dob_explode = explode("-",$dob);
 									?>
 									<h4><?php 
+									if($dob=='0000-00-00' || $dob=='0-0-0')
+									{
+									}
+									else {
 									if($dob_explode[2] == 00 || $dob_explode[2] == '')
 									{ echo '00'.'&nbsp;';} else {
 									echo $dob_explode[2].'&nbsp;';
@@ -117,11 +122,12 @@ if ($user) {
 										 else if($dob_explode[1] ==11) { echo 'Nov';} 
 										 else if($dob_explode[1] ==12) { echo 'Dec';} ?>
 									<?php
-									if($dob_explode[0] == 0000 || $dob_explode[0] == '')
+									if($dob_explode[0] == '0000' || $dob_explode[0] == '')
 									{ echo '0000'.'&nbsp;'; } else {
 									echo $dob_explode[0].',';
 									}
-									if($detail_visited_user['gender'] != '') { echo $detail_visited_user['gender']; }
+									}
+									if($detail_visited_user['gender'] != '') { echo ucwords($detail_visited_user['gender']); }
 									?> </h4>
 								</div>
 							</div>
@@ -181,7 +187,11 @@ if ($user) {
 						<div class="part_second font_sidebar">
 							<div class="index_sidebar_content invite">
 								<div class="index_sidebar_header">
+								<?php if($logged_user_id) { ?>
 									<a style="cursor:pointer;" id="pulse2" data-toggle="modal"><span class="orange"><img src="<?php echo "$base$img_path"; ?>/mail.png"> &nbsp; Send Message</span></a>
+								<?php } else {  ?>
+									<a style="cursor:pointer;" id="pulse3" data-toggle="modal"><span class="orange"><img src="<?php echo "$base$img_path"; ?>/mail.png"> &nbsp; Send Message</span></a>
+								<?php } ?>	
 								</div>
 							</div>
 							<div id="myModal2" class="model_back modal hide fade" style="display: none; ">
@@ -212,6 +222,15 @@ if ($user) {
 												</div>
 										</div>
 									</form>
+								</div>
+							</div>
+							<div id="myModal3" class="model_back modal hide fade" style="display: none; ">
+								<div class="modal-header no_border model_heading">
+									<a class="close" data-dismiss="modal">x</a>
+									<h3>Send Message</h3>
+								</div>
+								<div class="margin_t">
+								Please <a href="<?php echo $base; ?>login"> Login </a> for Continue.
 								</div>
 							</div>
 						</div>

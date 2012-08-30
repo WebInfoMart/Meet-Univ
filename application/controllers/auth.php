@@ -1114,14 +1114,16 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer',$data);
 	}
 	
-	function user($id='')
+ function user($id='')
  {
-  if (!$this->tank_auth->is_logged_in()) {
-   redirect('/home');
-  } else {
+  
   $data = $this->path->all_path();
   $this->load->view('auth/header',$data);
   $logged_user_id = $this->session->userdata('user_id');
+  if($logged_user_id)
+  $data['logged_user_id']=$logged_user_id;
+  else
+  $data['logged_user_id']=0;
   $data['educ_level'] = '';
   $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
   $data['my_college'] = $this->users->my_collage_of_user($id);
@@ -1183,7 +1185,7 @@ class Auth extends CI_Controller
   }
   $this->load->view('auth/visit-user-profile',$data);
   $this->load->view('auth/footer',$data);
-  }
+  
  }
 	
 	

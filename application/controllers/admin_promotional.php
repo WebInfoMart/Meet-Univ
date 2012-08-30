@@ -131,7 +131,7 @@ class Admin_promotional extends CI_Controller
 	 $city_list=$this->promotional_panel->fetch_cities_having_country($country);
 	 $educ_in_country=$this->promotional_panel->count_total_student_in_educ_sms_email_send($country,$educ_lvl,$type);
 	 echo $city_list.'!@#$%'.$count.'!@#$%'.$educ_in_country;
-	//echo $count;
+	 //echo $count;
 	 }
 	 else if($change=='city')
 	 {
