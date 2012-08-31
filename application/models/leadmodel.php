@@ -213,12 +213,13 @@ class Leadmodel extends CI_Model
 		}
 	}
 	
-	function event_registration($university_id,$event_id)
+	function event_registration($logged_user_id,$university_id,$event_id)
 	{
 		$fullname = $this->input->post('event_fullname');
 		$email = $this->input->post('event_email');
 		$phone = $this->input->post('event_phone');
 		$clause = array(
+		'user_id'=>$logged_user_id,
 		'fullname'=>$fullname,
 		'email'=>$email,
 		'phone'=>$phone,

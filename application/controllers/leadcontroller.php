@@ -46,11 +46,6 @@ class Leadcontroller extends CI_Controller
 		$data['selected_college_step_three'] = $this->leadmodel->fetch_college_step_three($country,$area_interest,$next_educ_level);
 		$college_for_apply = $this->session->userdata('apply_college');
 		$data['selected_university_name_by_step'] = $this->leadmodel->get_university_title_by_id($college_for_apply);
-		/* if($data['selected_university_name_by_step'] == 0)
-		{
-			//echo "xxxxxxxxxxxxxx";
-			$this->session->set_userdata('level_steps','2');
-		} */
 		}
 		if($this->input->post('process_step_one'))
 		{
@@ -64,37 +59,6 @@ class Leadcontroller extends CI_Controller
 		if($this->form_validation->run())
 		{
 			
-			/* if($id=='')
-			{
-			$condition = array(
-			'home_country_id' => $this->input->post('home_country'),
-			'email' => $this->input->post('step_email'),
-			'title'=> $this->input->post('title'),
-			'firstname'=> $this->input->post('first_name'),
-			'lastname'=> $this->input->post('last_name'),
-			'dob'=> $this->input->post('dob_year').'-'.$this->input->post('dob_month').'-'.$this->input->post('dob_day'),
-			'phone_type1'=> $this->input->post('phone_type'),
-			'phone_no1'=> $this->input->post('phone')
-			);
-			//print_r($condition);echo "h3";
-			} */
-			/* else if($id!='' && $events_id!='')
-			{
-				$condition = array(
-			'home_country_id' => $this->input->post('home_country'),
-			'email' => $this->input->post('step_email'),
-			'title'=> $this->input->post('title'),
-			'firstname'=> $this->input->post('first_name'),
-			'lastname'=> $this->input->post('last_name'),
-			'dob'=> $this->input->post('dob_year').'-'.$this->input->post('dob_month').'-'.$this->input->post('dob_day'),
-			'phone_type1'=> $this->input->post('phone_type'),
-			'phone_no1'=> $this->input->post('phone'),
-			'applied_univ_id'=>$id,
-			'applied_event_id'=>$events_id
-			);
-			//print_r($condition);echo "h2";
-			} */
-			//else{
 			$this->session->set_userdata('sess_lead_email',$this->input->post('step_email'));
 			$condition = array(
 			'home_country_id' => $this->input->post('home_country'),
@@ -105,12 +69,9 @@ class Leadcontroller extends CI_Controller
 			'phone_type1'=> $this->input->post('phone_type'),
 			'phone_no1'=> $this->input->post('phone')
 			);
-			//print_r($condition);echo "h1";
-			//}
+			
 			$insert_type = '1';
-			$data['insert_step_one_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);
-			//print_r($data['insert_step_one_data']);
-			//$this->session->set_userdata($data_stepone);
+			$data['insert_step_one_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);			
 			if($data['insert_step_one_data'] != 0)
 			{
 			$this->session->set_userdata('current_insert_lead_id', $data['insert_step_one_data']);
@@ -120,16 +81,14 @@ class Leadcontroller extends CI_Controller
 			$this->session->set_userdata($id_for_session);
 			}
 			$this->load->view('auth/step_two',$data);
-			/* else{
-			$this->load->view('auth/step_one',$data);
-			} */
-		}
-		else{
-					$errors = $this->tank_auth->get_error_message();
-					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
-					
-					$this->load->view('auth/step_one',$data);
-		}
+			
+			}
+			else{
+						$errors = $this->tank_auth->get_error_message();
+						foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+						
+						$this->load->view('auth/step_one',$data);
+			}
 		}
 		 else if($this->input->post('submit_step_data'))
 		 {
@@ -331,7 +290,7 @@ class Leadcontroller extends CI_Controller
 				$user_email = $this->input->post('event_email');
 				$id_university = $this->session->userdata('register_event_university_id');
 				$id_event = $this->session->userdata('register_event_id');
-				$data['success_event_register'] = $this->leadmodel->event_registration($id_university,$id_event);
+				$data['success_event_register'] = $this->leadmodel->event_registration($logged_user_id,$id_university,$id_event);
 				$latest_registered_event_id = $data['success_event_register']['event_id'];
 				//if($data['success_event_register'] != 0)
 				//{
