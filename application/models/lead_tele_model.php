@@ -447,7 +447,7 @@ class Lead_tele_model extends CI_Model
 		  'v_verified_phone'=>$this->input->post('phone_verified'),
 		  'v_status'=>$this->input->post('lead_status'),
 		  'v_next_action'=>$this->input->post('next_action'),
-		  'v_user_id'=>$user_id
+		  'v_user_id'=>$user_id 
 		  
 		  );
 		  if($this->input->post('notes')!='')

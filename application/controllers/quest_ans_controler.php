@@ -131,7 +131,7 @@ class Quest_ans_controler extends CI_Controller
 		}
 		else
 		{
-		$data['err_msg']='<h2> Sorry....</br><span class="text-align">No Results Found.... </span> </h2>';
+		    $data['err_msg']='<h2> Sorry....</br><span class="text-align">No Results Found.... </span> </h2>';
 			$data['err_div']=1;
 			$this->load->view('auth/NotFoundPage',$data);
 		}
@@ -140,6 +140,7 @@ class Quest_ans_controler extends CI_Controller
 		
 		$this->load->view('auth/footer',$data);
 	}
+	
 	function AnotherQuestion($quest_id='')
 	{
 

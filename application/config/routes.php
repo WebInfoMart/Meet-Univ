@@ -49,6 +49,7 @@ $route['user/(:num)']='auth/user/$1';
 $route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
 $route['(Recent_Articles/articles)']='auth/articles';
 
+
 $route['(Recent_Questions/question/all/(:num))']='quest_ans_controler/Browse_Question/all/$1';
 $route['(Recent_Questions/question/all)']='quest_ans_controler/Browse_Question/all';
 
@@ -134,8 +135,7 @@ $route['outbox/(:any)']='user/outbox/$1';
 $route['(compose_email)'] = 'user/$1';
 $route['Browse_Question/(:any)'] = 'quest_ans_controler/Browse_Question/$1';
 
-
-//profile messge
+//profile messages
 $route['(delete_message_inbox)'] = 'user/delete_message_inbox';
 $route['(delete_message_inbox/(:num))'] = 'user/delete_message_inbox/$1';
 $route['(delete_message_inbox/(:num)/(:num))'] = 'user/delete_message_inbox/$1/$2';

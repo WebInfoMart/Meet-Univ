@@ -244,13 +244,6 @@ $('#forget_model').modal('toggle');});
 
 <script type="text/javascript">
 $(document).ready(function(){
- $('#pulse2').click(function(){
-$('#myModal2').modal('toggle');});
- });
-
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
 var TheP   = window.location.pathname.split('/');
 var HeRe   = '<?php echo $base; ?>'+TheP[TheP.length-1];
 $('.menu a').each(function(){

@@ -190,7 +190,9 @@ if ($user) {
 								<?php if($logged_user_id) { ?>
 									<a style="cursor:pointer;" id="pulse2" data-toggle="modal"><span class="orange"><img src="<?php echo "$base$img_path"; ?>/mail.png"> &nbsp; Send Message</span></a>
 								<?php } else {  ?>
-									<a style="cursor:pointer;" id="pulse3" data-toggle="modal"><span class="orange"><img src="<?php echo "$base$img_path"; ?>/mail.png"> &nbsp; Send Message</span></a>
+									<a style="cursor:pointer;" id="pulse3" data-toggle="modal">
+									<span class="orange"><img src="<?php echo "$base$img_path"; ?>/mail.png"> &nbsp; Send Message</span>
+									</a>
 								<?php } ?>	
 								</div>
 							</div>
@@ -230,7 +232,7 @@ if ($user) {
 									<h3>Send Message</h3>
 								</div>
 								<div class="margin_t">
-								Please <a href="<?php echo $base; ?>login"> Login </a> for Continue.
+									<h3>Please <a href="<?php echo $base; ?>login" style="color:green;">Login</a>/<a style="color:green;" href="<?php echo $base; ?>">Signup</a> for send message.</h3>
 								</div>
 							</div>
 						</div>
@@ -399,17 +401,16 @@ if ($user) {
 	}
 	?>
 	
-	<?php
-	//if($follow_own == 1)
-	//{
-	?>
-	<script>
-	// $(document).ready(function(){
-	// $('#show_error').css('display','block');
-	// $("#show_error").delay(3000).fadeOut(200);
-	// });
-	</script>
-	<?php
-	//}
-	?>
+	
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#pulse2').click(function(){
+$('#myModal2').modal('toggle');});
+ });
+$(document).ready(function(){
+ $('#pulse3').click(function(){
+// alert("hii");
+$('#myModal3').modal('toggle');});
+ });
+</script>
 	

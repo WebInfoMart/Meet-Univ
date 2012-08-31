@@ -1123,7 +1123,7 @@ class Auth extends CI_Controller
   if($logged_user_id)
   $data['logged_user_id']=$logged_user_id;
   else
-  $data['logged_user_id']=0;
+  $data['logged_user_id']=0; 
   $data['educ_level'] = '';
   $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
   $data['my_college'] = $this->users->my_collage_of_user($id);
@@ -1147,13 +1147,13 @@ class Auth extends CI_Controller
   $data['is_already_follow'] = $this->users->check_is_already_followed_to_person($add_follower);
   //print_r($data['follower_detail']);
   
-  if($this->input->post('follow_now'))
+  if($this->input->post('follow_now')  && $logged_user_id)
   {
    $data['user_follow_university'] = $this->users->add_followers_to_person($add_follower);
    redirect($redirect_current_url);
   }
 
-  else if($this->input->post('unfollow_now'))
+  if($this->input->post('unfollow_now') && $logged_user_id)
   {
    $data['unjoin_now_success'] = $this->users->unfollow_now_to_user($add_follower);
    redirect($redirect_current_url);
