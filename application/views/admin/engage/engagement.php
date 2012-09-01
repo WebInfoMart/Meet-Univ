@@ -12,7 +12,7 @@
 			
 	?>
 	</pre>
-		<div class="engage_bg float_l data10 margin_t3">
+		<div class="lead_back float_l data10 margin_t3">
 		<div class="lead_bg">Lead Source</div>		
 				<div id="chart_div" style="width: 670px;height: 300px;margin:30px auto"></div>			
 		</div>
@@ -25,6 +25,7 @@
 				$event=0;
 				$site_user=0;
 				$fb_canvas=0;
+				$college_request=0;
 				$other=0;
 				$total=0;
 				foreach($type_info as  $type)
@@ -48,12 +49,16 @@
 						{
 							$fb_canvas=$type['count'];
 						}
+						if($type['lead_source']=='college_request')
+						{
+							$college_request=$type['count'];
+						}
 						if($type['lead_source']=='other')
 						{
 							$other=$type['count'];
 						}
 					}
-					$total=$site_user+$android+$fb_user+$event+$fb_canvas+$other;
+					$total=$site_user+$android+$fb_user+$event+$fb_canvas+$college_request+$other;
 					
 				?></span>
 			</div>
@@ -76,6 +81,9 @@
 							<td width="50%" class="table_bott">fb_canvas</td><td width="50%" class="table_bott"><?php echo $fb_canvas; ?></td>
 						</tr>
 						<tr class="none">
+							<td width="50%" class="table_bott">College Request</td><td width="50%" class="table_bott"><?php echo $college_request; ?></td>
+						</tr>
+						<tr class="none">
 							<td width="50%" class="none">other</td><td width="50%" class="none"><?php echo $other; ?></td>
 						</tr>
 					</tbody>
@@ -84,7 +92,7 @@
 		</div>
 		<div class="clearfix"></div>
 	</div>
-		<div class="engage_bg float_l data7 margin_t3">
+		<div class="lead_back float_l data7 margin_t3">
 			<div class="lead_bg">Lead Analytics</div>
 			<div style="width: 412px;margin:30px auto">
 				<div id="chart_div1" style="width: 400px; height: 300px;"></div>
@@ -107,11 +115,13 @@
 						<tr>
 							<td width="33%" class="table_bott2"><?php echo $recent['fullname']; ?></td>
 							<td width="33%" class="table_bott2"><?php if($recent['email']==''){ echo 'Not Available'; } else { echo $recent['email']; } ?></td>
-							<td width="33%" class="table_bott2"><?php echo date('d-M-y h:m',strtotime($recent['lead_created_time'])); ?></td>
+							<td width="33%" class="table_bott2 border_right"><?php echo date('d-M-y h:m',strtotime($recent['lead_created_time'])); ?></td>
 						</tr>
 						<?php } else {?>
 						<tr>
-							<td width="33%" class="table_bott1"><?php echo $recent['fullname']; ?></td><td width="33%" class="table_bott1"><?php if($recent['email']==''){ echo 'Not Available'; } else { echo $recent['email']; } ?></td><td width="33%" class="table_bott1 border_right"><?php echo date('d-M-y h:m',strtotime($recent['lead_created_time'])); ?></td>
+							<td width="33%" class="table_bott1"><?php echo $recent['fullname']; ?></td>
+							<td width="33%" class="table_bott1"><?php if($recent['email']==''){ echo 'Not Available'; } else { echo $recent['email']; } ?></td>
+							<td width="33%" class="table_bott1 border_right"><?php echo date('d-M-y h:m',strtotime($recent['lead_created_time'])); ?></td>
 						</tr>
 						<?php } } ?>	
 					</tbody>
@@ -201,10 +211,18 @@ function eventDetail(univ_id,event_city_id)
 				url: url,
 				data:data,
 				success:function(msg){
-				//alert(msg);
+				if(msg=='logout')
+					{
+					  window.location="<?php echo $base;?>/admin/adminlogin";
+					}
+				else
+				{
 					$("#stud_detail").hide();
-				$("#cityevent").html(msg);
-				$("#cityevent").show();
+					$("#cityevent").html(msg);	
+					$("#cityevent").show();
+					$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				}
+			
 				}
 			});
 	
@@ -219,9 +237,16 @@ function eventStudents(event_id)
 				url: url,
 				data:data,
 				success:function(msg){
-				//alert(msg);
-				$("#stud_detail").html(msg);
-				$("#stud_detail").show();
+				if(msg=='logout')
+					{
+					  window.location="<?php echo $base;?>/admin/adminlogin";
+					}
+				else
+				{
+					$("#stud_detail").html(msg);
+					$("#stud_detail").show();
+					$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				}
 				}
 			});
 }			
@@ -239,6 +264,7 @@ function eventStudents(event_id)
           ['Events',<?php echo $event;?>],
           ['Siteusers',<?php echo $site_user;?>],
           ['fb_canvas',<?php echo $fb_canvas;?>],
+		  ['collesge_request',<?php echo $college_request;?>],
 		  ['other',<?php echo $other;?>],
         ]);
 
@@ -255,11 +281,11 @@ function eventStudents(event_id)
       function drawChart1() {
         var data1 = google.visualization.arrayToDataTable([
          
-		  ['month', 'facebook', 'Android','Event','Siteuser','fbcanvas','other'],
-          ['4',  1000,        400,      100,     546,		654,		876],
-          ['5',  1170,      400,      100,     546,		654,		876], 
-          ['6',  660,       400,      100,     546,		654,		876],
-          ['7',  1030,      400,      100,     546,		654,		876]
+		  ['month', 'facebook', 'Android','Event','Siteuser','fbcanvas','College request','other'],
+          ['4',  1000,        400,      100,     546,		654,		876,		876],
+          ['5',  1170,      400,      100,     546,		654,		876,		876], 
+          ['6',  660,       400,      100,     546,		654,		876,		876],
+          ['7',  1030,      400,      100,     546,		654,		876,		876]
         ]);
 
         var options1 = {
@@ -270,4 +296,22 @@ function eventStudents(event_id)
         chart1.draw(data1, options1);
       }
     </script>
+		
+<script type="text/javascript">
+	function moreData(id,end)
+	{//alert(id);
+		 var url='<?php echo $base;?>admin_engagement/city_students';
+		 var data={event_id :id,end:end,more:'more'};
+		 $.ajax({
+				type: "POST",
+				url: url,
+				data:data,
+				success:function(msg){				
+				$("#stud_detail").html(msg);
+				$("#stud_detail").show();
+				$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+				}
+			});
+	}
+</script>	
 	

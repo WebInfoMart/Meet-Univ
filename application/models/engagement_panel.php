@@ -39,12 +39,21 @@ function city_events_model()
 	return $query->result_array();
 	 
 }
-function cityevents_stud_model()
+function cityevents_stud_model($start,$end)
 {
+	
 	$event_id=$this->input->post('event_id');
 	//$city_id=$this->input->post('city_id');
-	$query=$this->db->query("select * from event_register where register_event_id='".$event_id."' group by email ");	
+	$query=$this->db->query("select * from event_register where register_event_id='".$event_id."' group by email limit ".$start.",".$end." ");	
 	return $query->result_array();
+	 
+}
+function cityevents_stud_count()
+{
+	
+	$event_id=$this->input->post('event_id');	
+	$query=$this->db->query("select * from event_register where register_event_id='".$event_id."' group by email ");	
+	return $query->num_rows();
 	 
 }
 function month_event_count_model($u_id,$mon)

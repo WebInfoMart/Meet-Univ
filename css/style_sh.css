@@ -370,7 +370,7 @@ float: left;
 }
 .letter_uni div span{color: #f89406;line-height:16px;}
 .letter_uni div{color:#333;font-size:193%}
-.change_profile{position: absolute;}
+.change_profile{position: absolute;top:323px}
 .button_profile{margin-top:50px;}
 .profile_img_width{width:100px;height:100px;}
 

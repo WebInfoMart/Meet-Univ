@@ -10,7 +10,8 @@ if(!empty($event_stud))
 							<td width="25%"><b>Email</b></td>
 							<td width="25%"><b>Phone no.</b></td>							
 						</tr>
-						<?php foreach($event_stud as $desc)
+						<?php //echo $dact_more; 
+						foreach($event_stud as $desc)
 					{ ?>
 						<tr>
 							<td width="25%"><b><?php echo $desc['fullname'] ?></b></td>
@@ -20,16 +21,9 @@ if(!empty($event_stud))
 						<?php } ?>
 					</tbody>
 				</table>
-				<div class="float_r" id="more">more...</div> 
+				<div class="float_r" id="more" <?php if($dact_more=='nomore'){ ?> style="display:none;" <?php } ?> onclick="moreData('<?php echo $id;?>','<?php echo $end;?>')">more...</div> 
 				<?php }else{ ?>
 <div><?php echo 'No Registration Yet...';?> </div>
 <?php } ?>				
 				<div class="clearfix"></div>			
 		</div>
-		
-<script type="text/javascript">
-	$("#more").click(function() {
-		$(".last_table tr:last").after('<tr><td width="25%">shweta</td><td width="25%">shweta@gmail.com</td><td width="25%">9270012444</td></tr>');
-		
-	});
-</script>

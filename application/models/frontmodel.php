@@ -349,7 +349,14 @@ class Frontmodel extends CI_Model
 		$a = $this->pagination->initialize($config);
 		$x = $query->result_array();
 	    //print_r($a);
-		return $query->result_array();
+		if($query->num_rows()>0)
+		{
+		 return $query->result_array();
+		 }
+		 else
+		 {
+		 return 0;
+		 }
 	}
 	
 	function get_news_detail_by_univ($univ_id,$news_id)

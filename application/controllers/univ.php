@@ -1,5 +1,5 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
+<?php 
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Univ extends CI_Controller
 {
 	function __construct()
@@ -749,11 +749,11 @@ class Univ extends CI_Controller
 		}
 		
 		function post_comment()
-		{
+		{//ob_start();
 			$logged_in_user_id=$this->input->post('user_id');
-			if($logged_in_user_id=='' || $logged_in_user_id==NULL || $logged_in_user_id==0)
+			if(!$this->tank_auth->is_logged_in())
 			{
-			redirect(base_url().'/login');
+				redirect(base_url().'/login');
 			}
 			else
 			{

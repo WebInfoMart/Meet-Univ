@@ -100,11 +100,11 @@ d.getElementsByTagName('head')[0].appendChild(js);
   }
   $img_arr=$this->searchmodel->set_the_image($width,$height,50,180,TRUE);
 	?>						
-		<div class="aspectcorrect float_l" ><img style="height:50px;width:180px;"  src="<?php echo $univ_image;?>" alt=""  />
+		<div class="aspectcorrect float_l" ><img style="height:50px;width:180px;"  src="<?php echo $base;?>/images/logo.png" alt=""  />
 		</div>
 	<?php  if($admin_user_level==3){
 			if($univ_detail_edit!=0){ ?>
-		<div class="float_l univ_name_margin" ><h3><?php echo $univ_detail_edit[0]->univ_name; ?></h3></div>
+		<div class="float_l univ_name_margin" ><h3><?php //echo $univ_detail_edit[0]->univ_name; ?></h3></div>
 		<?php } } ?>
 		<form action="" method="post" class="searchform">
 			<input type="text" class="text" value="Search..." />

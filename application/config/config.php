@@ -374,6 +374,7 @@ $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
 $config['crlf'] = "\r\n";
 $config['newline'] = "\r\n";
+$autoload['helper'] = array('otherhelper1', 'isajax', 'otherhelper2');
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -58,7 +58,7 @@ function city_events()
 		$data = $this->path->all_path();
 		if (!$this->tank_auth->is_admin_logged_in()) 
 		{   
-		redirect('admin/adminlogin/');
+		 echo 'logout';
 		} 
 		else
 		{
@@ -69,16 +69,52 @@ function city_events()
 	
 	}
 	
-function city_students()
+function city_students($start='',$end='')
 	{
 		$data = $this->path->all_path();
 		if (!$this->tank_auth->is_admin_logged_in()) 
 		{   
-		redirect('admin/adminlogin/');
+			echo 'logout';
 		} 
 		else
 		{
-			$result['event_stud']=$this->engagement_panel->cityevents_stud_model();
+			if($this->input->post('more'))
+			{
+			  $start=0;
+			  $end=$this->input->post('end');
+				$end=$end+5;
+				$result['end']=$end;
+				$result['id']=$this->input->post('event_id');
+			  $result['event_stud']=$this->engagement_panel->cityevents_stud_model($start,$end);
+				$total=$this->engagement_panel->cityevents_stud_count();
+			  if($total-$end==0)
+			  {
+				$result['dact_more']='nomore';
+			  }
+			  else
+			  {
+				$result['dact_more']='';
+			  }			  
+			}
+			else
+			{
+				$start=0;
+				$end=5;
+				$result['end']=$end;
+				$result['id']=$this->input->post('event_id');				
+				$result['event_stud']=$this->engagement_panel->cityevents_stud_model($start,$end);
+				$total=$this->engagement_panel->cityevents_stud_count();
+			  if($total-$end<=0)
+			  {
+				$result['dact_more']='nomore';
+			  }
+			  else
+			  {
+				$result['dact_more']='';
+			  }
+
+			}
+							
 			//print_r($result['city_event']);
 			$this->load->view('admin/engage/event_student_detail',$result);
 		}
