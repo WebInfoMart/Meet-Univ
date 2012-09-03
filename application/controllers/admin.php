@@ -38,6 +38,8 @@ class Admin extends CI_Controller
    if($data['univ_detail_edit']==0)
    {
    $flag=1;
+   $data['msg']='No University Assigned Yet';
+   $this->load->view('admin/userupdated',$data);
    }
    else
    {
@@ -713,7 +715,7 @@ class Admin extends CI_Controller
 		$data = $this->path->all_path();
 		
 		$admin_level=$this->session->userdata('newadmin_level');
-		if(!($admin_level==1 || $admin_level==6 || $admin_level=2))
+		if(!($admin_level==1 || $admin_level==6 || $admin_level==2))
 		{
 		 $this->adminmodel->insert_userprivlege_data($newadminid);
 		}
@@ -1899,8 +1901,10 @@ function manage_university($mps='')
   $this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
   $this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
   if ($this->form_validation->run()) {
-  $data['x']=$this->adminmodel->update_univ_admin_university($univ_id);
+  $flag=$this->adminmodel->update_univ_admin_university($univ_id);
+  if(!$flag) { 
   redirect('admin/index/uus');
+  }
   //print_r($data['x']);
   //$this->adminmodel->edit_user_data();
   //redirect('admin/manageusers/ups');

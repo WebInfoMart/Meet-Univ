@@ -325,8 +325,14 @@ class Tank_auth
 						'newadmin_createdby_user_id' =>$createdby_user_id,
 						'newadmin_inprocess' => '1',
 						 ));
-						 
+				if($level_user=='6' || $level_user=='2' || $level_user=='1')	
+				{
+				redirect('admin/usercreated');
+				}
+				else
+				{
 				redirect('admin/user_privileges');
+				}
 			}
 			
 			

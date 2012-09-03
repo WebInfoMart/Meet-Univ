@@ -81,6 +81,7 @@ class Quest_ans_controler extends CI_Controller
 			$domain = $_SERVER['HTTP_HOST'];
 			$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
 			redirect($pageURL);
+			
 		}
 			
 			

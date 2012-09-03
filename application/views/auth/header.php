@@ -18,9 +18,11 @@ $user = $facebook->getUser();
 
 if((!($user)) && $this->session->userdata('fb_login'))
 {
+echo "hi";
 //$this->tank_auth->logout();  
 }
 if ($user) {
+echo "hanji";
 //$logoutUrl2 = $this->tank_auth->logout();
   try {
     // Proceed knowing you have a logged in user who's authenticated.

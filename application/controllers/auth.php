@@ -325,6 +325,10 @@ class Auth extends CI_Controller
      $this->email->send();
      //echo $this->email->print_debugger(); 
      redirect('home'); */
+	 $config['protocol'] = 'sendmail';
+	 $config['smtp_host'] = 'relay.mailserv.in';
+	 $config['smtp_user'] = 'relay@meetuniversities.com';
+	 $config['smtp_pass'] = 'M^et4025';
 	 $this->email->initialize($config);    
      $this->email->from('info@meetuniversities.com', 'Meet Universities');
      $this->email->to($uid);
@@ -335,10 +339,10 @@ class Auth extends CI_Controller
      //print_r($message);
      $this->email->send();
      $this->session->set_flashdata('registeration_success','1');
-     redirect('login'); 
+    // redirect('login'); 
      //redirect('home');
       
-      
+      echo "hiii";
      $data['site_name'] = $this->config->item('website_name', 'tank_auth');
 
      /* if ($email_activation) {         // send "activate" email
@@ -1152,11 +1156,19 @@ class Auth extends CI_Controller
    $data['user_follow_university'] = $this->users->add_followers_to_person($add_follower);
    redirect($redirect_current_url);
   }
+  else if($this->input->post('follow_now'))
+  {
+   redirect('login');
+  }
 
   if($this->input->post('unfollow_now') && $logged_user_id)
   {
    $data['unjoin_now_success'] = $this->users->unfollow_now_to_user($add_follower);
    redirect($redirect_current_url);
+  }
+  else if($this->input->post('follow_now'))
+  {
+   redirect('login');
   }
   
   $data['send_message_to'] = 0 ;
@@ -1372,7 +1384,42 @@ class Auth extends CI_Controller
 		echo $data['user_count'][0]['register_user_counter'];
 		//$this->load->view('auth/event_register_user_counter',$data);
 	}
-	
+
+   function sendemail()
+   {
+	  $data = $this->path->all_path();
+ 	  $config['newline'] = $this->config->item('newline');
+	  $data['user_id']=123;
+      $data['logged_user_email'] = 'sumitmunjal@webinfomart.com';
+      $data['password'] = 'demo';
+      $data['fullname'] = 'Sumit Munjal';
+      $data['new_email_key']=123456;
+      echo $email_body = $this->load->view('auth/new_signup_content_email',$data,TRUE);
+	  $config['protocol'] = 'smtp';
+	  $config['smtp_host'] = 'relay.mailserv.in';
+	  $config['smtp_user'] = 'relay@meetuniversities.com';
+	  $config['smtp_pass'] = 'M^et4025';
+	  $this->email->initialize($config);    
+      $this->email->from('info@meetuniversities.com', 'Meet Universities');
+      $this->email->to('sumitmunjal@webinfomart.com');
+      $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
+    // $message = 'hiiiiiiiii';
+     //$message .="<br/>Thank you very much";
+     $this->email->message($email_body);
+     if($this->email->send())
+	 {
+	 echo ":) Email Sent";
+	 
+	 }
+	 else
+	 {
+	 echo ":( Email Sendin Failed";
+	 echo $this->email->print_debugger();
+	 }
+   }
+   
+   
+   
 }
 /* End of file auth.php */
 /* Location: ./application/controllers/auth.php */

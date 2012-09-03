@@ -743,7 +743,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 			$article_link=$this->subdomain->genereate_the_subdomain_link($article['subdomain_name'],'articles',$article['article_title'],$article['article_id']);
 			?>
 	..<br/>
-	<div class="margin_b"><a href="<?php echo $article_link; ?>" class="float_r view_back">View More&raquo;</a>	</div>
+	<div class="padding_b"><a href="<?php echo $article_link; ?>" class="float_r view_back">View More&raquo;</a>	</div>
 									<?php }
 									?>	
 									

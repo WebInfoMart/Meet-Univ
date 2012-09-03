@@ -178,7 +178,7 @@ class Adminmodel extends CI_Model
 		
 		$config['upload_path'] = $this->gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
-        $config['max_size']    = '100'; // in kb
+       // $config['max_size']    = '100'; // in kb
         $config['max_width']  = '1024';
         $config['max_height']  = '768';
         
@@ -320,7 +320,7 @@ class Adminmodel extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			'max_size' => 500,
+			//'max_size' => 500,
 			'file_name'=>'univ_logo_'.$current_id
 		);
 		
@@ -604,7 +604,7 @@ class Adminmodel extends CI_Model
 	$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			'max_size' => 2000
+			//'max_size' => 2000
 		);
 		$myflag=0;
 		$this->load->library('upload', $config);
@@ -666,10 +666,10 @@ class Adminmodel extends CI_Model
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			}
 			$check=$this->adminmodel->upload_univ_gallery($univ_id);	
-			if($check)
-			{
+			//if($check)
+			//{
 			redirect('admin/manage_university/uus');
-			}
+		//	}
 			
 			//redirect('admin/manage_university/uus');
 	}
@@ -687,7 +687,7 @@ class Adminmodel extends CI_Model
 	{
 		$config['upload_path'] = $this->univ_gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
-        $config['max_size']    = '100'; // in kb
+        //$config['max_size']    = '100'; // in kb
         
         $this->load->library('upload', $config);
         $this->load->library('Multi_upload');
@@ -767,14 +767,22 @@ class Adminmodel extends CI_Model
  $config = array(
    'allowed_types' => 'jpg|jpeg|gif|png',
    'upload_path' => $this->univ_gallery_path,
-   'max_size' => 2000
   );
   $myflag=0;
+  $image_uploaded=0;
   $this->load->library('upload', $config);
-  if($this->upload->do_upload())
-  {
-  $myflag=1;
-  }
+		if($_FILES["userfile"]["name"]!=''){
+		$image_uploaded=1;
+		if(!$this->upload->do_upload())
+		{
+		  $myflag=1;
+		  $data['err_msg']=$this->upload->display_errors();
+		  $this->load->view('admin/show_error',$data);
+		 
+		}
+		}
+		if(!$myflag){
+ if($image_uploaded) {
   $image_data = $this->upload->data();
   
   $config = array(
@@ -787,7 +795,7 @@ class Adminmodel extends CI_Model
   
   $this->load->library('image_lib', $config);
   $this->image_lib->resize();
- 
+ }
   $cretedby_admin=$this->tank_auth->get_admin_user_id();
       $data = array(
       'univ_name' => $this->input->post('univ_name'),
@@ -812,14 +820,14 @@ class Adminmodel extends CI_Model
       'univ_departments'=>$this->input->post('txtareadepartments'),
       'univ_insights'=>$this->input->post('txtareainsights')
    );
-   $this->db->update('university', $data,array('univ_id'=>$univ_id));  
-   if($myflag==1)
+   if($image_uploaded)
    {
-   $data=array('univ_logo_path' =>$image_data['file_name']);
-   $this->db->update('university', $data,array('univ_id'=>$univ_id)); 
-   //redirect('admin) 
+   $data['univ_logo_path']=$image_data['file_name'];
    }
+   $this->db->update('university', $data,array('univ_id'=>$univ_id)); 
    
+   }
+   return $myflag;
  }
  
  function get_assigned_univ_info($paging='')
