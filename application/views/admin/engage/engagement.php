@@ -7,10 +7,92 @@
 	<div>
 	<pre>
 	<?php 
-			
-			// print_r($type_count);
-			
-	?>
+	//$arr1=array('site_user', 'fb_login', 'fb_canvas', 'android_user', 'event_user', 'college_request', 'other');
+	//print_r($arr1);exit;
+	$arr[][]=array();
+			$max=date('m');
+		 $min=$max-6;
+			for($i=$min;$i<$max;$i++)
+			{//print_r($type_count[$i]);
+			 if($type_count[$i]==0)
+			 {
+				for($j=0;$j<7;$j++)
+				{
+					$arr[$i][$j]=0;
+					//print_r($arr[$i][$j]);
+				}				
+			 }
+			 else 
+			 {
+				$j=0;
+				$size=count($type_count[$i]);				
+				if($j<$size && in_array('site_user',$type_count[$i][$j]))
+				{
+					$arr[$i][0]=$type_count[$i][$j]['count'];
+					$j++;
+					
+				}
+				else
+				{
+					$arr[$i][0]=0;
+				}
+				if($j<$size && in_array('fb_login',$type_count[$i][$j]))
+				{
+					$arr[$i][1]=$type_count[$i][$j]['count'];
+					$j++;
+				}
+				else
+				{
+					$arr[$i][1]=0;
+				}
+				if($j<$size && in_array('fb_canvas',$type_count[$i][$j])) 
+				{
+					$arr[$i][2]=$type_count[$i][$j]['count'];
+					$j++;
+				}
+				else
+				{
+					$arr[$i][2]=0;
+				}
+				if($j<$size &&  in_array('android_user',$type_count[$i][$j]))
+				{
+					$arr[$i][3]=$type_count[$i][$j]['count'];
+					$j++;
+				}
+				else
+				{
+					$arr[$i][3]=0;
+				}
+				if($j<$size && in_array('event_user',$type_count[$i][$j]))
+				{
+					$arr[$i][4]=$type_count[$i][$j]['count'];
+					$j++;
+				}
+				else
+				{
+					$arr[$i][4]=0;
+				}
+				if($j<$size && in_array('college_request',$type_count[$i][$j]) )
+				{
+					$arr[$i][5]=$type_count[$i][$j]['count'];
+					$j++;
+				}
+				else
+				{
+					$arr[$i][5]=0;
+				}
+				if($j<$size && in_array('other',$type_count[$i][$j]) )
+				{
+					$arr[$i][6]=$type_count[$i][$j]['count'];
+					$j++;
+				}
+				else
+				{
+					$arr[$i][6]=0;
+				}
+			 }
+			}
+		?>
 	</pre>
 		<div class="lead_back float_l data10 margin_t3">
 		<div class="lead_bg">Lead Source</div>		
@@ -279,13 +361,33 @@ function eventStudents(event_id)
      // google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart1);
       function drawChart1() {
-        var data1 = google.visualization.arrayToDataTable([
-         
-		  ['month', 'facebook', 'Android','Event','Siteuser','fbcanvas','College request','other'],
-          ['4',  1000,        400,      100,     546,		654,		876,		876],
-          ['5',  1170,      400,      100,     546,		654,		876,		876], 
-          ['6',  660,       400,      100,     546,		654,		876,		876],
-          ['7',  1030,      400,      100,     546,		654,		876,		876]
+        var data1 = google.visualization.arrayToDataTable([			
+		  ['month', 'site_user', 'fb_login', 'fb_canvas', 'android_user', 'event_user', 'college_request', 'other'],		 
+         <?php			
+		for($i=$min;$i<$max;$i++)
+			{ 
+				echo "['".$i."',";
+				for($j=0;$j<7;$j++)
+					{ if($j!=6)
+						 {
+						 echo $arr[$i][$j].",";
+						 }
+						 else
+						 {
+							echo $arr[$i][$j];
+						 }
+					}
+				if($i!=$max-1)
+				{				
+					echo "],";
+				}
+				else
+				{
+					echo "]";
+				}
+			}
+
+			?>
         ]);
 
         var options1 = {

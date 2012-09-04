@@ -66,26 +66,113 @@ class Adminmodel extends CI_Model
 		return $privileges;
 	}
 	public function fetch_user_data($paging)
-	{
-		$user_id	= $this->tank_auth->get_admin_user_id();
-		$this->db->select('*');
-		$this->db->from('users');
-		$this->db->join('user_profiles', 'users.id = user_profiles.user_id'); 
-		$this->db->where(array('level !=' => '5','id !='=>$user_id));
-		$query = $this->db->get();
+	{ 	
+		$user_id= $this->tank_auth->get_admin_user_id();
+		if($this->input->post('toSearch')=='' && $this->input->post('banned')=='')
+		{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->join('user_profiles', 'users.id = user_profiles.user_id'); 
+			if($this->input->post('level') && $this->input->post('level')!=0)
+			{
+				$level=$this->input->post('level');
+				$this->db->where(array('level =' => $level));
+			}
+			else
+			{
+			 $this->db->where(array('level !=' => '5','id !='=>$user_id));
+			}
+			$query = $this->db->get();
+		}
+		else
+		{ $arr=array();		
+			if($this->input->post('toSearch'))
+			{ 
+				$mystring = trim($this->input->post('toSearch'));
+				$findme   = '@';
+				$pos = strpos($mystring, $findme);
+				if ($pos === false)
+				{//echo "select id from users where fullname like '%$mystring%' ";exit;
+					$query=$this->db->query("select id from users where fullname like '%$mystring%' ");					
+					$result=$query->result_array();
+					foreach($result as $res)				
+					{
+					 array_push($arr,$res['id']);
+					}
+					//$arrr=implode("','",$arr);
+					//print_r($arrr);exit;
+					
+				}
+				else
+				{
+					$query=$this->db->query("select id from users where email like '%$mystring%'");
+					$result=$query->result_array();
+					foreach($result as $res)				
+					{
+					 array_push($arr,$res['id']);
+					}
+					//$arrr=implode(',',$arr);
+				}
+			
+			}
+			else
+			{
+				$mystring = trim($this->input->post('banned'));
+				$query=$this->db->query("select id from users where banned='$mystring'");
+				$result=$query->result_array();
+					foreach($result as $res)				
+					{
+					 array_push($arr,$res['id']);
+					}
+					//$arrr=implode(',',$arr);
+			}
+			
+		}
+		
+		
 		$config['base_url']=base_url()."admin/manageusers/";
 		$config['total_rows']=$query->num_rows();
 		$config['per_page'] = '7'; 
 		//$config['use_page_numbers'] = TRUE;
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
-		$this->db->select('*');
-		$this->db->from('users');
-		$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
-		$this->db->join('university', 'university.user_id = users.id','left');
-		$this->db->where(array('level !=' => '5','id !='=>$user_id));
-		$this->db->limit($limit,$offset);
-		$query = $this->db->get();
+		if($this->input->post('toSearch')=='' && $this->input->post('banned')=='')
+		{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+			$this->db->join('university', 'university.user_id = users.id','left');
+			if($this->input->post('level') && $this->input->post('level')!=0)
+			{  
+				$level=$this->input->post('level');
+				$this->db->where(array('level =' => $level));
+			}
+			else
+			{
+			 $this->db->where(array('level !=' => '5','id !='=>$user_id));
+			}
+			$this->db->limit($limit,$offset);
+			$query = $this->db->get();
+		}
+		else
+		{
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->join('user_profiles', 'users.id = user_profiles.user_id');
+			$this->db->join('university', 'university.user_id = users.id','left');
+			$this->db->where_in('id',$arr);
+			if($this->input->post('level') && $this->input->post('level')!=0)
+			{  
+				$level=$this->input->post('level');
+				$this->db->where(array('level =' => $level));
+			}
+			else
+			{
+			 $this->db->where(array('level !=' => '5','id !='=>$user_id));
+			}
+			$this->db->limit($limit,$offset);
+			$query = $this->db->get();
+		}
 		$this->pagination->initialize($config);
 		//$this->load->library('table');
 		//$table= $this->table->generate($query);
@@ -178,7 +265,7 @@ class Adminmodel extends CI_Model
 		
 		$config['upload_path'] = $this->gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
-       // $config['max_size']    = '100'; // in kb
+        $config['max_size']    = '100'; // in kb
         $config['max_width']  = '1024';
         $config['max_height']  = '768';
         
@@ -320,7 +407,7 @@ class Adminmodel extends CI_Model
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			//'max_size' => 500,
+			'max_size' => 500,
 			'file_name'=>'univ_logo_'.$current_id
 		);
 		
@@ -604,7 +691,7 @@ class Adminmodel extends CI_Model
 	$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			//'max_size' => 2000
+			'max_size' => 2000
 		);
 		$myflag=0;
 		$this->load->library('upload', $config);
@@ -666,10 +753,10 @@ class Adminmodel extends CI_Model
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			}
 			$check=$this->adminmodel->upload_univ_gallery($univ_id);	
-			//if($check)
-			//{
+			if($check)
+			{
 			redirect('admin/manage_university/uus');
-		//	}
+			}
 			
 			//redirect('admin/manage_university/uus');
 	}
@@ -687,7 +774,7 @@ class Adminmodel extends CI_Model
 	{
 		$config['upload_path'] = $this->univ_gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
-        //$config['max_size']    = '100'; // in kb
+        $config['max_size']    = '100'; // in kb
         
         $this->load->library('upload', $config);
         $this->load->library('Multi_upload');
@@ -767,22 +854,14 @@ class Adminmodel extends CI_Model
  $config = array(
    'allowed_types' => 'jpg|jpeg|gif|png',
    'upload_path' => $this->univ_gallery_path,
+   'max_size' => 2000
   );
   $myflag=0;
-  $image_uploaded=0;
   $this->load->library('upload', $config);
-		if($_FILES["userfile"]["name"]!=''){
-		$image_uploaded=1;
-		if(!$this->upload->do_upload())
-		{
-		  $myflag=1;
-		  $data['err_msg']=$this->upload->display_errors();
-		  $this->load->view('admin/show_error',$data);
-		 
-		}
-		}
-		if(!$myflag){
- if($image_uploaded) {
+  if($this->upload->do_upload())
+  {
+  $myflag=1;
+  }
   $image_data = $this->upload->data();
   
   $config = array(
@@ -795,7 +874,7 @@ class Adminmodel extends CI_Model
   
   $this->load->library('image_lib', $config);
   $this->image_lib->resize();
- }
+ 
   $cretedby_admin=$this->tank_auth->get_admin_user_id();
       $data = array(
       'univ_name' => $this->input->post('univ_name'),
@@ -820,14 +899,14 @@ class Adminmodel extends CI_Model
       'univ_departments'=>$this->input->post('txtareadepartments'),
       'univ_insights'=>$this->input->post('txtareainsights')
    );
-   if($image_uploaded)
+   $this->db->update('university', $data,array('univ_id'=>$univ_id));  
+   if($myflag==1)
    {
-   $data['univ_logo_path']=$image_data['file_name'];
-   }
+   $data=array('univ_logo_path' =>$image_data['file_name']);
    $this->db->update('university', $data,array('univ_id'=>$univ_id)); 
-   
+   //redirect('admin) 
    }
-   return $myflag;
+   
  }
  
  function get_assigned_univ_info($paging='')

@@ -34,15 +34,14 @@ class Admin_engagement extends CI_Controller
 		 $u_id=$univ[0]['univ_id']; 
 		 $data['u_id']=$u_id;
 		 $data['type_info']=$this->engagement_panel->count_students_type($u_id);
-		// $data['recent_leads']=$this->engagement_panel->recent_leads();
-		// $data['count']=$this->engagement_panel->count_students_in_univ($u_id);
-		 //$data['city_wise']=$this->engagement_panel->count_univ_event_citywise($u_id);
+		 $data['recent_leads']=$this->engagement_panel->recent_leads();
+		 $data['count']=$this->engagement_panel->count_students_in_univ($u_id);
+		 $data['city_wise']=$this->engagement_panel->count_univ_event_citywise($u_id);
 		 $max=date('m');
 		 $min=$max-6;
-			for($i=$min;$i<=$max;$i++)
+			for($i=$min;$i<$max;$i++)
 			{
-			//	$data['type_count'][]=$this->engagement_panel->month_event_count_model($u_id,$i);
-				
+				$data['type_count'][$i]=$this->engagement_panel->month_event_count_model($u_id,$i);		
 			}			
 		 
 		 $this->load->view('admin/engage/engagement',$data);

@@ -753,8 +753,11 @@ class Admin extends CI_Controller
 			redirect('admin/adminlogout');
 		}
 		$data['no_of_users']=$this->adminmodel->get_user_info();
-		$this->load->view('admin/header',$data);
-		$this->load->view('admin/sidebar',$data);
+		if($this->input->post('ajax')!=1)
+		{
+			$this->load->view('admin/header',$data);
+			$this->load->view('admin/sidebar',$data);
+		}
 		$data['user_detail']= $this->adminmodel->fetch_user_data($paging);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
@@ -785,6 +788,12 @@ class Admin extends CI_Controller
 		$data['msg']='Selected User Unban Successfully';
 		$this->load->view('admin/userupdated',$data);
 		}
+		$data['level']='';
+		$data['level']=$this->input->post('level');
+		$data['toSearch']='';
+		$data['toSearch']=$this->input->post('toSearch');
+		$data['banned']='';
+		$data['banned']=$this->input->post('banned');
 		$this->load->view('admin/manageuser',$data);
 		$flag=1;
 		break;
@@ -796,6 +805,8 @@ class Admin extends CI_Controller
 		}
 	  }
 	}
+	
+	
 	function user_detail($id,$level)
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {

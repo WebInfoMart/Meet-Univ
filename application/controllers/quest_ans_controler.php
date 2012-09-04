@@ -164,7 +164,7 @@ class Quest_ans_controler extends CI_Controller
 
 			if($data['single_quest']['q_title'] != '' || $data['single_quest']['q_title'] != 0)
 			{
-				$data['header_title'] = $data['single_quest']['q_title'];
+				$data['header_title'] = $data['single_quest']['q_title'].' | Meet Universities';
 			}
 			else {
 				$data['header_title'] = "Meet Universities - Get connected to your dream university.";

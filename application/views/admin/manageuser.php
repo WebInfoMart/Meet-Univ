@@ -1,12 +1,79 @@
+<script type="text/javascript">
+jQuery(document).ready(function(){			 
+	 jQuery("#drop").change(function()
+		{  
+			 var e = document.getElementById("drop");
+			 var dataString = e.options[e.selectedIndex].value
+			 if(dataString==1 || dataString==2)
+				{							  
+				  $("#name").show();
+				  $("#search").show();
+				}	
+				if(dataString==3)
+				{
+				  $("#name").hide();							
+				  $("#search").hide();
+				  var banned='1';
+						var url='<?php echo $base;?>admin/manageusers';
+						$.ajax({
+							  type: "POST",
+							  data: "banned="+banned+"&ajax=1",
+							  url: url,
+							  beforeSend: function() {
+								$("#ajax_load").html("");
+							  },
+							  success: function(msg) {
+							  //alert(msg);
+								$("#ajax_load").html(msg);           
+							  }
+							});
+				}								
+		});
+});
+function search()
+{	
+	var toSearch=$("#name").val();
+	var url='<?php echo $base;?>admin/manageusers';
+	$.ajax({
+          type: "POST",
+          data: "toSearch="+toSearch+"&ajax=1",
+          url: url,
+          beforeSend: function() {
+            $("#ajax_load").html("");
+          },
+          success: function(msg) {
+		  //alert(msg);
+            $("#ajax_load").html(msg);           
+          }
+        });
+	
+}
+</script>
+<div id="ajax_load">
 <div id="content">	
+<input type="button" onclick="fetch(0)" class="submit tiny" value="Reset" />
+	<div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
+	<span >Filter</span>
+	<select id="drop" name="drop" >
+	<option>Select to Search</option>
+	<option value="1">Name</option>														
+	<option value="2">Email Id</option>
+	<option value="3">Ban</option>
+	</select>
+	<input id="name"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
+	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
+	</div>
 <div class="margin_t">
 <div class="float_l">
 <h2>DETAIL OF USERS</h2>
 </div>
-<?php
+<?php 
+$user_can_delete=0;
+if($level==''){ $level=0;}
 $no_of_admin=0;
 $no_of_university_admin=0;
 $no_of_counsellor=0;
+$no_of_telecallers=0;
 $no_of_student=0;
  foreach($no_of_users as $no_of_user){
 if($no_of_user['level']=='4')
@@ -25,12 +92,20 @@ if($no_of_user['level']=='1')
 {
 $no_of_student++;
 }
+if($no_of_user['level']=='6')
+{
+$no_of_telecallers++;
+}
 }
 ?>
 <div class="float_r">
 <ul>
-<li class="small_size">Admin<span class="badge badge-info"><?php echo $no_of_admin;?></span> </li><li class="small_size">University Admin<span class="badge"><?php echo $no_of_university_admin;?></span> </li><li class="small_size">Counsellor<span class="badge badge-warning"><?php echo $no_of_counsellor; ?></span></li><li class="small_size">
-Student<span class="badge badge-success"><?php echo $no_of_student;?></span></li></ul>
+<li onclick="fetch('4')" style="cursor:pointer;" class="small_size">Admin<span class="badge badge-info"><?php echo $no_of_admin;?></span> </li>
+<li  onclick="fetch('3')" style="cursor:pointer;" class="small_size">University Admin<span class="badge"><?php echo $no_of_university_admin;?></span> </li>
+<li onclick="fetch('2')" style="cursor:pointer;" class="small_size">Counsellor<span class="badge badge-warning"><?php echo $no_of_counsellor; ?></span></li>
+<li onclick="fetch('6')" style="cursor:pointer;" class="small_size">Telecallers<span class="badge badge-warning"><?php echo $no_of_telecallers; ?></span></li>
+<li onclick="fetch('1')" style="cursor:pointer;" class="small_size">Student<span class="badge badge-success"><?php echo $no_of_student;?></span></li>
+</ul>
 </div>
 <div class="clearfix"></div>
 </div>
@@ -103,7 +178,7 @@ echo "Telecaller";
 						</td>
 						<td>
 <?php 
-$user_can_delete=0;
+
 $user_can_edit=0;
 if($admin_user_level=='5' || $admin_user_level=='4') {
 $user_edit_op=array('3','6','7','10');
@@ -167,7 +242,7 @@ $user_can_edit=1;
 			
 		</form>
 		</div>
-		
+</div>		
 <script>
 function delete_confirm(userid,level)
 {
@@ -244,5 +319,50 @@ $(this).val('');
 });
 }
 
+$(function() {
+    applyPagination();
 
+    function applyPagination() {
+      $("#pagination a").click(function() {
+        var url = $(this).attr("href");
+		var level='<?php echo $level; ?>';
+		var toSearch='<?php echo $toSearch; ?>';
+		var banned='<?php echo $banned; ?>';
+		//alert(level);
+        $.ajax({
+          type: "POST",
+          data: "level="+level+"&toSearch="+toSearch+"&banned="+banned+"&ajax=1",
+          url: url,
+          beforeSend: function() {
+            $("#ajax_load").html("");
+          },
+          success: function(msg) {
+		  //alert(msg);
+            $("#ajax_load").html(msg);
+            applyPagination();
+          }
+        });
+        return false;
+      });
+    }
+  });
+function fetch(level)
+{
+	//alert(level);
+	 //var data={level :level,ajax:'1'};
+	//alert(data);
+	var url='<?php echo $base;?>admin/manageusers';
+	$.ajax({
+          type: "POST",
+          data: "level="+level+"&ajax=1",
+          url: url,
+          beforeSend: function() {
+            $("#ajax_load").html("");
+          },
+          success: function(msg) {
+		  //alert(msg);
+            $("#ajax_load").html(msg);           
+          }
+        });
+}
 </script>		

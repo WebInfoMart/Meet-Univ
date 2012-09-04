@@ -49,7 +49,6 @@ $route['user/(:num)']='auth/user/$1';
 $route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
 $route['(Recent_Articles/articles)']='auth/articles';
 
-
 $route['(Recent_Questions/question/all/(:num))']='quest_ans_controler/Browse_Question/all/$1';
 $route['(Recent_Questions/question/all)']='quest_ans_controler/Browse_Question/all';
 

@@ -193,11 +193,12 @@
 				</div>
 				<div class="data2 float_l">
 					<?php  if($result['v_phone']=="" || $result['v_phone']=="0"){ echo 'Not Available';} else { echo $result['v_phone'];}  ?>
-				</div>				
+				</div>
+				 <div class="inline margin_l1" ><img id="loading_image_<?php echo $result['v_id']; ?>" style="display:none;" src="<?php echo $base ;?>images/ajax_loader.gif"></div>		
 				<div class="clearfix"></div>
 			</div>
 			<?php } ?>
-					<div id="pagination" class="table_pagination right paging-margin float_r" style="margin-right:50px;">
+			<div id="pagination" class="table_pagination right paging-margin float_r" style="margin-right:50px;">
             <?php echo $this->pagination->create_links();?>          
 			</div>
 
@@ -209,17 +210,17 @@
 $('.update_verify_lead').click(function(){
 var id=$(this).attr("id");
 id=id.replace("c_lead_","");
+$('#loading_image_'+id).show();
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>admin_counsellor/counsellor",
-	   async:false,
 	   data: 'id='+id,
-	   cache: false,
 	   success: function(msg)
-	   {//alert(msg);
+	   {
 	    $('#content').hide();
 		$("#c_edit").show();
-		$('#c_edit').html(msg);		 
+		$('#c_edit').html(msg);	
+		$('#loading_image_'+id).hide();
 	   }
 	   });
 });

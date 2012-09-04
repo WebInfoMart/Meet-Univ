@@ -361,6 +361,7 @@ echo "<span id='lead_phone_$teleleadsres[id]'>".$teleleadsres['phone_no1']."</sp
 					$("#edit_data_"+id).hide(1000);
 					$('#edit_data_'+id).replaceWith('');
 					$('#data_'+id).show();
+					$('#cancel_data_'+id).html('Canceling..');
 					//$("#data_"+id).show('slow');
 				};
 				function cancel(){

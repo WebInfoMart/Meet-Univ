@@ -321,6 +321,11 @@
 					</div>
 					<div class="span2 float_l">
 						<div class="control-group">
+						
+						
+						
+							
+							
 							<button class="btn_img" style="cursor:pointer;" name="<?php echo $lead_info['id']; ?>" id="save_data_<?php echo $lead_info['id']; ?>" value="save" onclick="save_form(this);">Save now</button>
 							<button class="btn_img" style="cursor:pointer;" name="cancel" id="cancel_data_<?php echo $lead_info['id']; ?>" value="Cancel" onclick="canceldata('<?php echo $lead_info['id']; ?>')">Cancel</button>
 							<div class="float_r margin_t ajax_loading_img_<?php echo $lead_info['id']; ?>" style="display:none;" ><img src="<?php echo $base; ?>images/ajax_loader.gif"></div>
@@ -420,6 +425,7 @@ var current_lead_id = "<?php echo $lead_info['id']; ?>";
 //$("#notes_"+current_lead_id).click(function(){$("#v_note_"+current_lead_id).show()});
 
  function save_form(control){
+ 
  var form_id = control.name;
  
   //alert($("#lead_full_name_"+current_lead_id).val());		
@@ -582,12 +588,13 @@ lead_verified:lead_verified,
 lead_status:lead_status,
 next_action:next_action
  };
+ //$('#save_cancel_loading_img').css('display','block');
+ $('#save_data_'+current_lead_id).html('Save...');
+ 
 $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>adminleads/save_verified_leads",
-	   async:false,
 	   data: data,
-	   cache: false,
 	   success: function(msg)
 	   {
 	   if(msg=='0')
@@ -622,7 +629,8 @@ $.ajax({
 	   }
 		 $("#edit_data_"+form_id).hide(1000);
 	     $('#edit_data_'+form_id).replaceWith('');
-		 
+		 $('#save_data_'+current_lead_id).html('Save');
+ 
 		/*if($("#check_verify_lead_email_"+current_lead_id).is(':checked'))
 		{
 		$("#span_not_verified_"+current_lead_id).css("color","green");
