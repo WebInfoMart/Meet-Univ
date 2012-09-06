@@ -19,9 +19,9 @@ jQuery(document).ready(function(){
 							  type: "POST",
 							  data: "banned="+banned+"&ajax=1",
 							  url: url,
-							  beforeSend: function() {
-								$("#ajax_load").html("");
-							  },
+							  // beforeSend: function() {
+								// $("#ajax_load").html("");
+							  // },
 							  success: function(msg) {
 							  //alert(msg);
 								$("#ajax_load").html(msg);           
@@ -128,6 +128,8 @@ $no_of_telecallers++;
 				
 				<tbody>
 				<?php
+				if($user_detail!='0')
+				{
 				foreach($user_detail as $row){
 				if($row->level!='5' && $row->level!='' && $row->level!='0'){
 				?>
@@ -219,6 +221,11 @@ $user_can_edit=1;
 </tr>
 <?php
 }
+}
+}
+else
+{
+	echo 'no record found';
 }
 ?>					
 					
@@ -320,9 +327,9 @@ $(this).val('');
 }
 
 $(function() {
-    applyPagination();
+    //applyPagination();
 
-    function applyPagination() {
+    //function applyPagination() {
       $("#pagination a").click(function() {
         var url = $(this).attr("href");
 		var level='<?php echo $level; ?>';
@@ -339,12 +346,12 @@ $(function() {
           success: function(msg) {
 		  //alert(msg);
             $("#ajax_load").html(msg);
-            applyPagination();
+            //applyPagination();
           }
         });
         return false;
       });
-    }
+    //}
   });
 function fetch(level)
 {

@@ -1,3 +1,24 @@
+<script type="text/javascript">
+jQuery(document).ready(function(){			 
+	 jQuery("#drop").change(function()
+		{  
+			 var e = document.getElementById("drop");
+			 var dataString = e.options[e.selectedIndex].value;
+			 if(dataString==1 || dataString==2 || dataString==3)
+				{		 
+				  $("#search_box").show();
+				  $("#btnUnivSearch").show();
+				}				
+				if(dataString==4)
+				{
+					$("#search_bbox").hide();				  
+					$("#btnUnivSearch").hide();
+					search_university();
+				}								
+		});
+});
+</script>
+
 <?php 
 $edit=0;
 $delete=0;
@@ -19,25 +40,30 @@ $delete=1;
 }
 }
 ?>
-
+<div id="ajax_load">	
 <div id="content">	
 
 <h2>DETAIL OF UNIVERSITY</h2>
 			<div id="search_university" style="width: 425px;"> 
-			<div class="float_l"><input type="text" name="txt_search_univ" id="txt_search_univ" style="width: 331px;height: 29px;margin-left: 11px;"/></div>
-			<div class="float_r"><input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_university();"></div> 
+			<span >Filter</span>
+			<select id="drop" name="drop" >
+			<option>Select to Search</option>
+			<option value="1">Univ Name</option>														
+			<option value="2">Country</option>
+			<option value="3">Admin Name</option>
+			<option value="4">Featured Univ</option>
+			</select>
+			<input type="text" id="search_box" style="width: 210px;height: 17px;margin-left: 256px;margin-top: -38px;display:none;"/>				
+			<input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_university();" style="display:none;margin-left: 480px;margin-top: -38px;">
 			 <div class="clearfix"></div>
 			 </div> 
 			
 			<form action="<?php echo $base ?>admin/delete_universities" method="post" id="deleteform">	
 			<div id="content_search">
-			<div id="pagination" class="table_pagination right paging-margin">
-			
+			<div id="pagination" class="table_pagination right paging-margin">			
             <?php echo $this->pagination->create_links();?>
 			</div>
-			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
-			
-			
+			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">			
            <thead>
 					<tr>
 						<th ><input type="checkbox" class="check_all" ></th>
@@ -49,7 +75,7 @@ $delete=1;
 						<th class="header" style="cursor: pointer; ">University Country</th>
 						<th></th>
 					</tr>
-		</thead>
+			</thead>
 				
 				<tbody>
 				<?php
@@ -63,8 +89,12 @@ $delete=1;
 						</td>
 						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
 						<td>
-						
-						<img src="<?php echo $base ?>uploads/univ_gallery/<?php if($row->univ_logo_path==''){ echo "univ_logo.png" ;} else { echo $row->univ_logo_path;} ?>" class="univ_logo_size">
+						<?php	
+						$image_exist=0;
+						$univ_img = $row->univ_logo_path;	
+						    if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	
+							{ $image_exist=1; }?>
+						<img src="<?php echo $base ?>uploads/univ_gallery/<?php if($row->univ_logo_path=='' || $image_exist!=1){ echo "univ_logo.png" ;} else { echo $row->univ_logo_path;} ?>" class="univ_logo_size">
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
 						<td><a href="#"><?php if($row->fullname==''){ echo "Not assigned Yet";}else{ echo ucwords($row->fullname);} ?></a></td>
@@ -102,12 +132,12 @@ $delete=1;
 				
 			<?php } ?>		
 				</tbody>
-			
 			</table>
 			<div id="pagination" class="table_pagination right paging-margin">
 			
             <?php echo $this->pagination->create_links();?>
 			</div>
+			
 			</div>
 		<?php if($delete==1) { ?> 	
 			<div class="tableactions" style="margin-top:40px;">
@@ -124,26 +154,49 @@ $delete=1;
 			
 		</form>
 		</div>
-		
+</div>		
 <script>
+$(function() {
+
+//applyPagination();
+   // function applyPagination() {
+      $("#pagination a").click(function() {
+	  //alert('hello');
+        var url = $(this).attr("href");		
+        $.ajax({
+          type:"POST",
+          data:"ajax=1",
+          url: url,
+          beforeSend: function() {
+            $("#ajax_load").html("");
+          },
+          success: function(msg) {
+		    $("#ajax_load").html(msg);
+        //    applyPagination();
+          }
+        });
+        return false;
+      });
+   // }
+  });
 function search_university()
 {
-	var search_box_val = $('#txt_search_univ').val();
-	
+	var search_box = $('#search_box').val();	
+	var a=document.getElementById("drop");	
+	var sel_id=a.options[a.selectedIndex].value;
 	var search_url = "<?php echo $base; ?>admin/ManageUniversitySearch";
-	//var search_url = "/index.php/control_form/get_selected_member/" + selected_member_id;
-	if(search_box_val != '' || search_box_val != null) 
-	{
+	
+	//var search_url = "/index.php/control_form/get_selected_member/" + selected_member_id;	
 	$.ajax({
     type: "POST",
     url: search_url,
-	data:'univ_name='+search_box_val,
+	data:'search_box='+search_box+"&sel_id="+sel_id+"&ajax=1",	
     success: function(response)
     {
 		$('#content_search').html(response);
     }
-});
-}
+	});
+
 }
 function delete_confirm(univid)
 {
@@ -184,7 +237,7 @@ if(action=='delete')
 var atLeastOneIsChecked = $('.setchkval:checked').length > 0;
 if(atLeastOneIsChecked)
 {
-var r=confirm("Are U sure u want to delete all the recoeds of selected university");
+var r=confirm("Are U sure u want to delete all the records of selected university");
 if(r)
 {
 set_chkbox_val();

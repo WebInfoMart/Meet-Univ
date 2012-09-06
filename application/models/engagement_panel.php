@@ -18,8 +18,11 @@ function count_students_type($u_id)
 function count_students_in_univ($u_id)
 {
 	
-	$query=$this->db->query("select ld.id from lead_data as ld left join verified_lead_data vld on ld.id=vld.v_lead_id where FIND_IN_SET('".$u_id."',ld.applied_univ_id) or FIND_IN_SET('".$u_id."',vld.v_applied_univ_id)");	
+	//$query=$this->db->query("select ld.id from lead_data as ld left join verified_lead_data vld on ld.id=vld.v_lead_id where FIND_IN_SET('".$u_id."',ld.applied_univ_id) or FIND_IN_SET('".$u_id."',vld.v_applied_univ_id)");	
+	$query=$this->db->query("select * from event_register where register_event_univ_id='".$u_id."'");	
+	
 	return $query->num_rows();
+	
 	 
 }
 function count_univ_event_citywise($u_id)

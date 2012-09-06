@@ -1264,84 +1264,90 @@ class Admin extends CI_Controller
 	
 function manage_university($mps='')
  {
-     if (!$this->tank_auth->is_admin_logged_in()) {
-   redirect('admin/adminlogin/');
-  }
-  else{
-  $data = $this->path->all_path();
-  $data['user_id'] = $this->tank_auth->get_admin_user_id();
-  $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-  $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-  if(!($data['admin_priv']))
+  if (!$this->tank_auth->is_admin_logged_in()) 
   {
-   redirect('admin/adminlogout');
-  }
-  $this->load->view('admin/header',$data);
-  $this->load->view('admin/sidebar',$data);
-  $flag=0;
-  foreach($data['admin_priv'] as $userdata['admin_priv']){
-  if($userdata['admin_priv']['privilege_type_id']==5 && $userdata['admin_priv']['privilege_level']!=0)
-  {
-  $flag=1;
-  break;
-  }
-  }
-  if($mps=='ban')
-  {
-  $data['msg']='Selected University Ban Successfully';
-  $this->load->view('admin/userupdated',$data);
-  }
-  else if($mps=='unban')
-  {
-  $data['msg']='Selected University Unban Successfully';
-  $this->load->view('admin/userupdated',$data);
-  }
-  else if($mps=='uds')
-  {
-  $data['msg']='Selected University Deleted Successfully';
-  $this->load->view('admin/userupdated',$data);
-  }
-  else if($mps=='uus')
-  {
-  $data['msg']='University Updated Successfully';
-  $this->load->view('admin/userupdated',$data);
-  }
-  else if($mps=='ucs')
-  {
-  $data['msg']='University Created Successfully';
-  $this->load->view('admin/userupdated',$data);
-  }
-  else if($mps=='fh')
-  {
-  $data['msg']='University set as Home featured university Successfully';
-  $this->load->view('admin/userupdated',$data);
-  }
-  else if($mps=='ufh')
-  {
-  $data['msg']='University set as Home Unfeatured university Successfully';
-  $this->load->view('admin/userupdated',$data);
-  }
-  
-  if($flag==0)
-  {
-  $this->load->view('admin/accesserror',$data);
+	  redirect('admin/adminlogin/');
   }
   else
   {
-  if($data['admin_user_level']=='5')
-  {
-  $data['univ_info']=$this->adminmodel->get_univ_info($mps);
-  }
-  else if($data['admin_user_level']=='4')
-  {
-  $data['univ_info']=$this->adminmodel->get_assigned_univ_info($mps);
-  }
-  $this->load->view('admin/manage_university',$data);
-  }
-  //$data['msg']='University Created Successfully';
-  //$this->load->view('admin/userupdated',$data);
-  
-  }
+	  $data = $this->path->all_path();
+	  $data['user_id'] = $this->tank_auth->get_admin_user_id();
+	  $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+	  $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+	  if(!($data['admin_priv']))
+	  {
+		redirect('admin/adminlogout');
+	  }
+	  if($this->input->post('ajax')!='1')
+	  {
+		  $this->load->view('admin/header',$data);
+		  $this->load->view('admin/sidebar',$data);
+	  }
+	  $flag=0;
+	  foreach($data['admin_priv'] as $userdata['admin_priv'])
+	  {
+		  if($userdata['admin_priv']['privilege_type_id']==5 && $userdata['admin_priv']['privilege_level']!=0)
+		  {
+			  $flag=1;
+			  break;
+		  }
+	  }
+	  if($mps=='ban')
+	  {
+		  $data['msg']='Selected University Ban Successfully';
+		  $this->load->view('admin/userupdated',$data);
+	  }
+	  else if($mps=='unban')
+	  {
+		  $data['msg']='Selected University Unban Successfully';
+		  $this->load->view('admin/userupdated',$data);
+	  }
+	  else if($mps=='uds')
+	  {
+		  $data['msg']='Selected University Deleted Successfully';
+		  $this->load->view('admin/userupdated',$data);
+	  }
+	  else if($mps=='uus')
+	  {
+		  $data['msg']='University Updated Successfully';
+		  $this->load->view('admin/userupdated',$data);
+	  }
+	  else if($mps=='ucs')
+	  {
+		  $data['msg']='University Created Successfully';
+		  $this->load->view('admin/userupdated',$data);
+	  }
+	  else if($mps=='fh')
+	  {
+		  $data['msg']='University set as Home featured university Successfully';
+		  $this->load->view('admin/userupdated',$data);
+	  }
+	  else if($mps=='ufh')
+	  {
+		  $data['msg']='University set as Home Unfeatured university Successfully';
+		  $this->load->view('admin/userupdated',$data);
+	  }
+	  
+	  if($flag==0)
+	  {
+		$this->load->view('admin/accesserror',$data);
+	  }
+	  else
+	  {
+		  if($data['admin_user_level']=='5')
+		  {
+			$data['univ_info']=$this->adminmodel->get_univ_info($mps);
+		  }
+		  else if($data['admin_user_level']=='4')
+		  {
+			$data['univ_info']=$this->adminmodel->get_assigned_univ_info($mps);
+		  }
+		  $this->load->view('admin/manage_university',$data);
+	  }
+	  //$data['msg']='University Created Successfully';
+	  //$this->load->view('admin/userupdated',$data);
+	  
+	  }
  }
 	//ban the user
 	function ban_unban_user($ban_status,$ban_user_id,$user_level)
@@ -1865,7 +1871,7 @@ function manage_university($mps='')
 	 }
 	}
 	
- function ManageUniversitySearch()
+ function ManageUniversitySearch($paging='')
  {
    if (!$this->tank_auth->is_admin_logged_in()) {
    redirect('admin/adminlogin/');
@@ -1880,10 +1886,15 @@ function manage_university($mps='')
 	{
 			redirect('admin/adminlogout');
 	}
-   $univ_name = $this->input->post('univ_name');
+   $univ_name = $this->input->post('search_box');
+   $data['univ_name']=$univ_name;
+   $sel_id = $this->input->post('sel_id');
+   $data['sel_id']=$sel_id;
+   $search_box = $this->input->post('search_box');
+   $data['search_box']=$search_box;
    $data['user_id'] = $this->tank_auth->get_admin_user_id();
    $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-   $data['univ_info_search']=$this->adminmodel->get_univ_info_search($univ_name);
+   $data['univ_info_search']=$this->adminmodel->get_univ_info_search($paging,$univ_name,$sel_id );
    $this->load->view('ajaxviews/search_manage_university',$data);
    //print_r($data['univ_info_search']);
    }

@@ -85,7 +85,7 @@ class Adminmodel extends CI_Model
 			$query = $this->db->get();
 		}
 		else
-		{ $arr=array();		
+		{ $arr=array('0');							
 			if($this->input->post('toSearch'))
 			{ 
 				$mystring = trim($this->input->post('toSearch'));
@@ -176,7 +176,14 @@ class Adminmodel extends CI_Model
 		$this->pagination->initialize($config);
 		//$this->load->library('table');
 		//$table= $this->table->generate($query);
+		if($query->num_rows()>0)
+		{
 		return $query->result();
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	public function get_user_privilege($user_id)
 	{
@@ -582,10 +589,11 @@ class Adminmodel extends CI_Model
 	
 	function get_univ_info($paging='')
 	{
+		
 		$this->db->select('*');
 		$this->db->from('university');
 		$this->db->join('users', 'users.id = university.user_id','left');
-		$this->db->join('country', 'country.country_id = university.country_id','left');
+		$this->db->join('country', 'country.country_id = university.country_id','left');				
 		$query =$this->db->get();
 		$config['base_url']=base_url()."admin/manage_university/";
 		$config['total_rows']=$query->num_rows();
@@ -602,16 +610,91 @@ class Adminmodel extends CI_Model
 		return $query->result();
 	}
 	
-	function get_univ_info_search($univ_name)
-	{
+	function get_univ_info_search($paging,$univ_name,$sel_id )
+	{$arr=array('0');
 		$this->db->select('*');
 		$this->db->from('university');
 		$this->db->join('users', 'users.id = university.user_id','left');
 		$this->db->join('country', 'country.country_id = university.country_id','left');
+		if($sel_id=='1')
+		{		  		  
 		$this->db->like('univ_name',$univ_name,'both');
+		}
+		if($sel_id=='2')
+		{
+		$query1=$this->db->query("select country_id from country as cnt where cnt.country_name like '%$univ_name%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['country_id']);
+					}
+		$this->db->where_in('country.country_id',$arr);
+		}	
+		if($sel_id=='3')
+		{
+		$query1=$this->db->query("select id from users as usr where usr.fullname like '%$univ_name%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['id']);
+					}
+		$this->db->where_in('users.id',$arr);
+		}
+		if($sel_id=='4')
+		{
+		 $featured='1';
+		$this->db->where('university.featured_college',$featured);
+		}
 		$query =$this->db->get();
-
+		$config['base_url']=base_url()."admin/ManageUniversitySearch/";
+		$config['total_rows']=$query->num_rows();
+		$config['per_page'] = 25; 
+		$offset = $paging; //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
+        $limit = $config['per_page'];
+		$this->db->select('*');
+		$this->db->from('university');
+		$this->db->join('users', 'users.id = university.user_id','left');
+		$this->db->join('country', 'country.country_id = university.country_id','left');
+		if($sel_id=='1')
+		{		  		  
+		$this->db->like('univ_name',$univ_name,'both');
+		}
+		if($sel_id=='2')
+		{
+		$query1=$this->db->query("select country_id from country as cnt where cnt.country_name like '%$univ_name%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['country_id']);
+					}
+		$this->db->where_in('country.country_id',$arr);
+		}	
+		if($sel_id=='3')
+		{
+		$query1=$this->db->query("select id from users as usr where usr.fullname like '%$univ_name%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['id']);
+					}
+		$this->db->where_in('users.id',$arr);
+		}
+		if($sel_id=='4')
+		{
+		 $featured='1';
+		$this->db->where('university.featured_college',$featured);
+		}
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		$this->pagination->initialize($config);
+		if($query->num_rows()>0)
+		{
 		return $query->result();
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	function ban_unban_university($ban_status,$univ_id)
 	{
@@ -645,7 +728,7 @@ class Adminmodel extends CI_Model
 	function delete_universities()
 	{
 	    $univcount=count($this->input->post('univ_id'));	
-		$univ_id=$this->input->post('univ_id');
+		$univ_id=$this->input->post('univ_id');		
 		for( $i =0; $i < $univcount ; $i++ )
 		{
 			if($this->input->post("check_university_".$univ_id[$i])=='checked')
@@ -653,7 +736,7 @@ class Adminmodel extends CI_Model
 			$this->db->delete('university', array('univ_id' => $univ_id[$i]));
 			$this->db->delete('univ_program', array('univ_id' => $univ_id[$i]));
 			$this->db->delete('follow_univ', array('follow_to_univ_id' => $univ_id[$i]));
-			$this->db->delete('events', array('event_univ_id' => $univ_id));
+			$this->db->delete('events', array('event_univ_id' => $univ_id[$i]));
 			$this->db->delete('mailchimp_detail', array('univ_id' => $univ_id[$i]));
 			$this->db->delete('news', array('news_univ_id' => $univ_id[$i]));
 			$this->db->delete('article', array('article_univ_id' => $univ_id[$i]));	

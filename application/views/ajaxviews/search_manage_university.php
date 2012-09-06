@@ -1,3 +1,5 @@
+<div id="search_manage">
+<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 <?php 
 $edit=0;
 $delete=0;
@@ -18,9 +20,15 @@ $delete=1;
 }
 }
 }
+if($univ_name==''){ $univ_name=0;}
+if($sel_id==''){ $sel_id=0;}
+if($search_box==''){ $search_box=0;}
 ?>
-<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
-			 
+
+<div id="pagination" class="table_pagination right paging-margin">
+<?php echo $this->pagination->create_links();?>
+</div>
+<table cellpadding="0" cellspacing="0" width="100%" class="sortable">			 
 				<thead>
 					<tr>
 						<th ><input type="checkbox" class="check_all" ></th>
@@ -32,10 +40,11 @@ $delete=1;
 						<th class="header" style="cursor: pointer; ">University Country</th>
 						<th></th>
 					</tr>
-				</thead>
-				
+				</thead>				
 				<tbody>
 				<?php
+				if($univ_info_search!='0')
+				{
 				foreach($univ_info_search as $row){
 				?>
 					<tr class="even">
@@ -46,8 +55,12 @@ $delete=1;
 						</td>
 						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
 						<td>
-						
-						<img src="<?php echo $base ?>uploads/univ_gallery/<?php if($row->univ_logo_path==''){ echo "univ_logo.png" ;} else { echo $row->univ_logo_path;} ?>" class="univ_logo_size">
+						<?php	
+						$image_exist=0;
+						$univ_img = $row->univ_logo_path;	
+						    if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	
+							{ $image_exist=1; }?>
+						<img src="<?php echo $base ?>uploads/univ_gallery/<?php if($row->univ_logo_path=='' || $image_exist!=1){ echo "univ_logo.png" ;} else { echo $row->univ_logo_path;} ?>" class="univ_logo_size">
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
 						<td><a href="#"><?php if($row->fullname==''){ echo "Not assigned Yet";}else{ echo ucwords($row->fullname);} ?></a></td>
@@ -80,7 +93,35 @@ $delete=1;
 </td>		
 </tr>
 				
-			<?php } ?>		
+			<?php } } 
+			else
+			{ ?>
+				<tr>
+				<td> No Result found </td>
+				</tr>
+				<?php
+			}
+			?>		
 				</tbody>
 				
 </table>
+</div>
+<script>
+$(function() {   
+      $("#pagination a").click(function() {	
+        var url = $(this).attr("href");
+        var univ_name='<?php echo $univ_name; ?>';
+		var search_box='<?php echo $search_box; ?>';
+		var sel_id='<?php echo $sel_id; ?>';	
+        $.ajax({
+          type:"POST",
+          data:"univ_name="+univ_name+"&search_box="+search_box+"&sel_id="+sel_id+"&ajax=1",
+          url: url,         
+          success: function(msg) {
+		    $("#search_manage").html(msg);          
+          }
+        });
+        return false;
+      });    
+  });
+</script>

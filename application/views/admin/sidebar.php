@@ -16,7 +16,7 @@ $flag=1;
 			<li><a href="#"><img src="<?php echo "$base$admin_img" ?>/nav/pages.png" alt="" /> Pages</a></li>
 			<?php if($admin_user_level=='5' || $admin_user_level=='3')
 			{ ?>
-			<li><a href="<?php echo $base; ?>admin_promotional"><img src="<?php echo "$base$admin_img" ?>/nav/world.png" alt="" />Permotional Panel </a></li>
+			<li><a href="<?php echo $base; ?>admin_promotional"><img src="<?php echo "$base$admin_img" ?>/nav/world.png" alt="" />Prmotional Panel </a></li>
 			<?php if($admin_user_level=='3')
 			{ ?>
 			<li><a href="<?php echo $base; ?>admin_engagement"><img src="<?php echo "$base$admin_img" ?>/nav/world.png" alt="" />Engagement Panel </a></li>
