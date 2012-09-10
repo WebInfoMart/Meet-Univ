@@ -25,7 +25,6 @@ class Auth extends CI_Controller
 
 	function index()
 	{
-		
 		$subdomain_arr = explode('.', $_SERVER['HTTP_HOST']);
 		if(count($subdomain_arr)>2)
 		{
@@ -108,6 +107,8 @@ class Auth extends CI_Controller
    redirect('home');
 
   } else {
+  $data['msg']=0;
+  $data['email_send']=0;
    $data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
      $this->config->item('use_username', 'tank_auth'));
    $data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
@@ -183,15 +184,8 @@ class Auth extends CI_Controller
 
     } else {
      $errors = $this->tank_auth->get_error_message();
-     if (isset($errors['banned'])) {        // banned user
-      $this->_show_message($this->lang->line('auth_message_banned').' '.$errors['banned']);
-
-     } elseif (isset($errors['not_activated'])) {    // not activated user
-      redirect('/auth/send_again/');
-
-     } else {             // fail
+     
       foreach ($errors as $k => $v) $data['errors'][$k] = $this->lang->line($v);
-     }
     }
    }
    else
@@ -236,34 +230,12 @@ class Auth extends CI_Controller
  {
  $data = $this->path->all_path();
  $this->load->view('auth/header',$data);
-  /* $this->email->initialize(array(
-   'protocol' => 'smtp',
-   'smtp_host' => 'smtp.sendgrid.net',
-   'smtp_user' => 'meetinfo',
-   'smtp_pass' => 'meet2012univ',
-   'smtp_port' => 587,
-   'crlf' => "\r\n",
-   'newline' => "\r\n"
-  )); */
-  /* $this->config->load('sendgrid');
-  $config['protocol'] = $this->config->item('protocol');
-  $config['smtp_host'] = $this->config->item('smtp_host');
-  $config['smtp_user'] = $this->config->item('smtp_user');
-  $config['smtp_pass'] = $this->config->item('smtp_pass');
-  $config['smtp_port'] = $this->config->item('smtp_port');
-  $config['crlf'] = $this->config->item('crlf'); */
   $config['newline'] = $this->config->item('newline');
   $this->email->initialize($config);
   if ($this->tank_auth->is_logged_in()) {         // logged in
    redirect('home');
 
-  } elseif ($this->tank_auth->is_logged_in(FALSE)) {      // logged in, not activated
-   redirect('/send_again/');
-
-  } elseif (!$this->config->item('allow_registration', 'tank_auth')) { // registration is off
-   $this->_show_message($this->lang->line('auth_message_registration_disabled'));
-
-  } else {
+  }  else {
    $use_username = $this->config->item('use_username', 'tank_auth');
    if ($use_username) {
     $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
@@ -313,57 +285,20 @@ class Auth extends CI_Controller
       $uid = $data['logged_user_email'];
       $email_body = $this->load->view('auth/new_signup_content_email',$data,TRUE);
       $this->email->set_newline("\r\n");
-   
-   
-   //$message_email = $this->load->view('auth/event_register_content_email');
-     /* $this->email->from('info@meetuniversities.info', 'Meet Universities');
-     $this->email->to($uid);
-     //$this->email->cc('another@another-example.com');
-     //$this->email->bcc('them@their-example.com');
-     $this->email->subject('New Registration');
-     $this->email->message($email_body);
-     $this->email->send();
-     //echo $this->email->print_debugger(); 
-     redirect('home'); */
-	 $config['protocol'] = 'sendmail';
-	 $config['smtp_host'] = 'relay.mailserv.in';
-	 $config['smtp_user'] = 'relay@meetuniversities.com';
-	 $config['smtp_pass'] = 'M^et4025';
+	 $config['protocol'] = $this->config->item('mail_protocol');
+	 $config['smtp_host'] = $this->config->item('smtp_server');
+	 $config['smtp_user'] = $this->config->item('smtp_user_name');
+	 $config['smtp_pass'] = $this->config->item('smtp_pass');
 	 $this->email->initialize($config);    
      $this->email->from('info@meetuniversities.com', 'Meet Universities');
      $this->email->to($uid);
      $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
      $message = $email_body ;
-     //$message .="<br/>Thank you very much";
      $this->email->message($message);
-     //print_r($message);
      $this->email->send();
      $this->session->set_flashdata('registeration_success','1');
-    // redirect('login'); 
-     //redirect('home');
-      
-      echo "hiii";
      $data['site_name'] = $this->config->item('website_name', 'tank_auth');
-
-     /* if ($email_activation) {         // send "activate" email
-      $data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
-
-      $this->_send_email('activate', $data['email'], $data);
-
-      unset($data['password']); // Clear password (just for any case)
-
-      $this->_show_message($this->lang->line('auth_message_registration_completed_1'));
-
-     } else {
-      if ($this->config->item('email_account_details', 'tank_auth')) { // send "welcome" email
-
-       $this->_send_email('welcome', $data['email'], $data);
-      }
-      unset($data['password']); // Clear password (just for any case)
-
-      $this->_show_message($this->lang->line('auth_message_registration_completed_2').' '.anchor('/auth/login/', 'Login'));
-     } */
-     
+	 redirect('login'); 
     } else {
      $errors = $this->tank_auth->get_error_message();
      foreach ($errors as $k => $v) $data['errors'][$k] = $this->lang->line($v);
@@ -925,17 +860,18 @@ class Auth extends CI_Controller
 			redirect('/home');
 		} else {
 		$data = $this->path->all_path();
+		$data['msg'] = 0;
+			$data['email_send'] = 0;
 		$this->load->view('auth/header',$data);
-		
+		 $data['featured_events']=$this->frontmodel->fetch_featured_events();
+		 $data['new_users']=$this->frontmodel->newly_registered_users();
 		if($this->input->post('reset_pass'))
 		{
-			$data['msg'] = 0;
+			
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email'); 
 			if($this->form_validation->run())
 			{
 				$data['email_check'] = $this->users->check_email_exists_lost_pass();
-				//print_r($data['email_check']);
-				//print_r($data);
 				if($data['email_check'] == 0)
 				{
 					$data['errors']['email'] = 'Email does not Exist';
@@ -943,7 +879,7 @@ class Auth extends CI_Controller
 					$this->load->view('auth/login',$data);
 				}
 				else{
-				$data['email_send'] = 0;
+				
 				//$data['errors']['email'] = 'Email Exist';
 				$key = md5(rand().microtime());
 				$user_id = $data['email_check']['id'];
@@ -955,16 +891,19 @@ class Auth extends CI_Controller
 				);
 				$this->users->set_key_forgot_password($set_key,$user_id);
 				$this->email->set_newline("\r\n");
-
-            $this->email->from('meetuniversities.com', 'MeetUniversities');
+			$config['protocol'] = $this->config->item('mail_protocol');
+			$config['smtp_host'] = $this->config->item('smtp_server');
+			$config['smtp_user'] = $this->config->item('smtp_user_name');
+			$config['smtp_pass'] = $this->config->item('smtp_pass');
+            $this->email->initialize($config);  
+			$this->email->from('info@meetuniversities.com', 'MeetUniversities');
             $this->email->to($email);
             $this->email->subject('Lost Password');
             $key = $key;
             $message = "Please click this url to change your password ". base_url()."change_user_password/".$key.'/'.$user_id ;
             $message .="<br/>Thank you very much";
             $this->email->message($message);
-			//print_r($message);
-			if($this->email->send())
+			  if($this->email->send())
                 {
                     $data['email_send'] = 1;
                 }

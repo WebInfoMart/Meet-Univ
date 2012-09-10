@@ -157,7 +157,7 @@ array_push($array_dates,$var);
 											<div class="clearfix"></div>
 										</div>
 										<div class="float_r">
-											<div class="social_set float_r">
+											<!--<div class="social_set float_r">
 												<div id="gp" class="float_l">
 													<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $event_link; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 												</div>
@@ -165,7 +165,7 @@ array_push($array_dates,$var);
 												</div>
 												<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php echo $event_link; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" data-font="arial"></div>
 												</div>
-											</div>
+											</div>-->
 										</div>
 										<div class="clearfix"></div>
 									</div>

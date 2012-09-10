@@ -13,6 +13,10 @@
 $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
 $config['newline'] = "\r\n";
+$config['mail_protocol']='smtp';
+$config['smtp_server']='relay.mailserv.in';
+$config['smtp_user_name']='relay@meetuniversities.com';
+$config['smtp_pass']='M^et4025';
 
 
 /* End of file email.php */

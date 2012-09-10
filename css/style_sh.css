@@ -475,7 +475,7 @@ background: -ms-linear-gradient(left,  rgba(228,239,192,1) 0%,rgba(171,189,115,1
 background: linear-gradient(left,  rgba(228,239,192,1) 0%,rgba(171,189,115,1) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4efc0', endColorstr='#abbd73',GradientType=1 ); /* IE6-9 */
 border: 1px solid #D6D4AD;}
-.forget_heading h3{color:#333!important;}
+.forget_heading h3{color:#04c!important;}
 .forget_back{background: rgb(255,255,255); /* Old browsers */
 background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(243,243,243,1) 39%, rgba(237,237,237,1) 51%, rgba(255,255,255,1) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(39%,rgba(243,243,243,1)), color-stop(51%,rgba(237,237,237,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
@@ -908,7 +908,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 .new_list li a:hover{text-decoration:none;text-shadow: 1px 1px 2px black;}
 .event_new{list-style:none;margin:0px;}
 .event_new li{padding: 7px 0px;border-bottom:1px solid #DDD;-moz-border-bottom:1px solid #DDD;-webkit-border-bottom:1px solid #DDD;}
-.img_style{-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;border: 1px solid #DDD;width: 100px;padding: 5px;background: white;height: 65pxwidth: 65px;padding: 2px;background: white;height: 65px;}
+.img_style{-moz-border: 1px solid #DDD;-webkit-border: 1px solid #DDD;border: 1px solid #DDD;width: 99px;padding: 5px;background: white;height: 65px;padding: 2px;background: white}
 .inline{display:inline-block;}
 .happen{background:#e6f4dd;height: 49px;border-radius: 4px;}
 .happen ul li {

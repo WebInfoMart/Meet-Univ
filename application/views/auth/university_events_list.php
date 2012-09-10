@@ -44,14 +44,14 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 								</div>
 							</div>
 							<div class="float_r span4 margin_zero">
-								<div class="float_r social_set">
+								<!--<div class="float_r social_set">
 									<div class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $events_link; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
 									<div class="float_l tw">
 										<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $events_link; ?>" data-via="munjal_sumit" data-count="none">Tweet</a>
 									</div>
 									<div class="float_r fb"><div class="fb-like" style="width:66px;" data-href="<?php echo $events_link; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" data-font="arial"></div></div>
 									<div class="clearfix"></div>
-								</div>
+								</div>-->
 							</div>
 							<div class="clearfix"></div>
 							<div class="margin_t1 img_height">

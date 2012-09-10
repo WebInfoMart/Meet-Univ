@@ -239,17 +239,6 @@ class Leadcontroller extends CI_Controller
 	function EventRegistration()
 	{
 		$data = $this->path->all_path();
-		/* $facebook = new Facebook(); 
-		$fbUserId = $facebook->getUser(); */
-		/* $this->config->load('sendgrid');
-		$config['protocol'] = $this->config->item('protocol');
-		$config['smtp_host'] = $this->config->item('smtp_host');
-		$config['smtp_user'] = $this->config->item('smtp_user');
-		$config['smtp_pass'] = $this->config->item('smtp_pass');
-		$config['smtp_port'] = $this->config->item('smtp_port');
-		$config['crlf'] = $this->config->item('crlf');
-		$config['newline'] = $this->config->item('newline');
-		$this->email->initialize($config); */
 		$this->load->view('auth/header',$data);
 		$data['get_info_logged_user'] = '';
 		$data['eve_reg_suc'] = '';
@@ -292,37 +281,19 @@ class Leadcontroller extends CI_Controller
 				$id_event = $this->session->userdata('register_event_id');
 				$data['success_event_register'] = $this->leadmodel->event_registration($logged_user_id,$id_university,$id_event);
 				$latest_registered_event_id = $data['success_event_register']['event_id'];
-				//if($data['success_event_register'] != 0)
-				//{
-				$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
-					//print_r($data['latest_register_event_info']);
+					$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
 					$message_email = $this->load->view('auth/event_register_content_email',$data,TRUE);
-					/* $this->email->from('info@meetuniversities.info', 'Meet Universities');
-					$this->email->to($user_email);
-					//$this->email->cc('another@another-example.com');
-					//$this->email->bcc('them@their-example.com');
-					$this->email->subject('Welcome To Meet Universities');
-					$this->email->message($message_email);
-					$this->email->send(); */
-					
-					$this->email->from('meetuniversities.com', 'Meet Universities');
-					$this->email->to($user_email);
-					$this->email->subject('Event Registration');
-					$message = "$message_email" ;
-					//$message .="<br/>Thank you very much";
-					$this->email->message($message);
-					//print_r($message);
-					$this->email->send(); 
-					
-					//Facebook Code commented For Application not published
-					/* $facebook = new Facebook();
-					 $fbUserId = $facebook->getUser();
-					  $eventurl ='http://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-					 if ($fbUserId) {
-					 $facebook->api('/me/meetuniversities:attend?event='.$eventurl,'POST');
-					 } */
-					
-					
+					 $config['protocol'] = $this->config->item('mail_protocol');
+					 $config['smtp_host'] = $this->config->item('smtp_server');
+					 $config['smtp_user'] = $this->config->item('smtp_user_name');
+					 $config['smtp_pass'] = $this->config->item('smtp_pass');
+					 $this->email->initialize($config);    
+					 $this->email->from('info@meetuniversities.com', 'Meet Universities');
+					 $this->email->to($user_email);
+					 $this->email->subject('Event Registration');
+					 $message = $message_email ;
+					 $this->email->message($message);
+					 $this->email->send(); 
 					$set_blank_session_event_register = array(
 						'register_event_university_id'=>'',
 						'register_event_id'=>''

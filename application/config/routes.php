@@ -43,9 +43,7 @@
 
 $route['admin/update-(:num)-user-(:num)'] = 'admin/edituser/$1/$2';
 $route['404_override'] = '';
-$route['user/(:num)']='auth/user/$1';
-
-
+$route['user/(:num)/(:any)']='auth/user/$1';
 $route['(Recent_Articles/articles/(:num))']='auth/articles/$1';
 $route['(Recent_Articles/articles)']='auth/articles';
 

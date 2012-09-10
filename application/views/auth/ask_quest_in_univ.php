@@ -177,7 +177,7 @@ if ($user) {
 						</div>
 						</div>	
 						<div class="float_r">
-							<div class="social_set">
+							<!--<div class="social_set">
 								<div class="float_l">	
 									<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo "$base$url"; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 								</div>
@@ -186,7 +186,7 @@ if ($user) {
 								</div>
 								<div class="float_r fb"><div class="fb-like" data-href="<?php echo "$base$url"; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
 								<div class="clearfix"></div>
-							</div>
+							</div>-->
 							<!--<g:plusone size="medium" annotation="none"></g:plusone>-->
 						</div>
 						<div class="clearfix"></div>

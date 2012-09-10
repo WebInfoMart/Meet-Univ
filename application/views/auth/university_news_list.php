@@ -46,7 +46,7 @@
 								</div>
 							</div>
 							<div class="float_r span4 margin_zero">
-								<div class="social_set float_r">
+								<!--<div class="social_set float_r">
 									<div id="gp" class="float_l">
 										<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $news_link; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 									</div>
@@ -55,7 +55,7 @@
 									</div>
 									<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php echo $news_link; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div></div>
 									<div class="clearfix"></div>
-								</div>
+								</div>-->
 							</div>
 							<div class="clearfix"></div>
 							<div class="margin_t1 img_height">

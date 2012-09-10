@@ -49,15 +49,8 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 	window.location.href=url;
 	//alert("hi");
 	}
-	</script>
-<script>
-<?php if($msg == 1) { ?>
- $('#forget_model').modal('show');
- <?php } ?>
- <?php if($email_send == 1) { ?>
- $('#link_send_for_fpass').css('display','block');
-$("#link_send_for_fpass").delay(7000).fadeOut(200);
- <?php } ?>
+	
+
 </script>
 <div class="modal" id="activated_user" style="display:none;" >
   <div class="modal-header">
@@ -88,13 +81,13 @@ $("#link_send_for_fpass").delay(7000).fadeOut(200);
 					</div>
 					<div class="forget_back">
 					<div class="modal-body forget_height">
-						<form class="form-horizontal" action="forgot_password" method="post">
+						<form class="form-horizontal" action="forgot_password" method="post" onsubmit="return validateform();">
 							<fieldset>
 								<div class="control-group">
 									<label class="control-label" for="prependedInput">Enter Your Email</label>
 									<div class="controls">
 										<div class="input-prepend">
-											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png" ></span><input type="text" class="<?php echo $class_modal_email; ?>" name="email" size="16" >
+											<span class="add-on"><img src="<?php echo "$base$img_path" ?>/lock.png" ></span><input type="text" class="<?php echo $class_modal_email; ?>" name="email" id="forgot_pwd_email" size="16" >
 											<span style="color:red;"> <?php echo form_error('email'); ?><?php echo isset($errors['email'])?$errors['email']:''; ?> </span>
 										</div>
 									</div>
@@ -383,10 +376,30 @@ function voicepopup(id) {
 	   }
 	   }) 
 }
-</script>
-<!-- Code For Jquery Validation -->
-<script>
+
+function validateform()
+{
+var email=$('#forgot_pwd_email').val();
+if (!validateEmail(email)) {
+    $('#forgot_pwd_email').addClass('needsfilled');
+	return false;
+  }
+}
+function validateEmail(email) { 
+
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 $('#forgot_pass').click(function(){
 $('#forget_model').modal('toggle');
 });
+<?php
+ if($email_send) { ?>
+ $('#link_send_for_fpass').css('display','block');
+$("#link_send_for_fpass").delay(7000).fadeOut(200);
+ <?php }  if($msg == 1) { ?>
+ $('#forget_model').css('display','block');
+ $('#forget_model').addClass('in');
+ <?php } ?>
 </script>
