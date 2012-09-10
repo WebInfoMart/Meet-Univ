@@ -32,7 +32,7 @@ array_push($array_dates,$var);
 		$univ_domain=$event_detail['subdomain_name'];
 		$event_title=$event_detail['event_title'];
 		$event_id=$event_detail['event_id'];
-		
+		$event_title =$this->subdomain->process_url_title($event_title);	
 		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$event_id);$event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
 											
 		?>	

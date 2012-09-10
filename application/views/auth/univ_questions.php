@@ -75,7 +75,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<?php echo $single_quest['q_detail']; ?><br/>
 				</div>
 				<div class="clearfix"></div>
-										<div class="fb-comments" data-href="http://<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ;?>" data-num-posts="2" data-width="500"></div>			
+										<div class="fb-comments" data-href="http://<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"] ;?>" data-num-posts="2" data-width="500">
+										</div>			
 
 			</div>
 			<div class="float_l span4">

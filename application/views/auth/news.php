@@ -16,10 +16,10 @@
 						<li>
 							<div class="float_l span5 margin_zero">
 								<?php 
-										$news_link=$this->subdomain->genereate_the_subdomain_link(
-										$news_detail['subdomain_name'],'news',$news_detail['news_title'],$news_detail['news_id']);							
-											
-										?>
+								$news_title =$this->subdomain->process_url_title($news_detail['news_title']);	
+								$news_link=$this->subdomain->genereate_the_subdomain_link(
+								$news_detail['subdomain_name'],'news',$news_title,$news_detail['news_id']);							
+								?>
 								<div class="margin_zero grid_3 fix_h3">	
 								<h3><a href="<?php echo $news_link; ?>"><?php echo $news_detail['title']; ?></a></h3>
 								</div>
@@ -94,8 +94,9 @@
 						<?php if(!empty($popular_news)){
 								foreach($popular_news as $popular_news_detail)
 								{
+								$news_title_list =$this->subdomain->process_url_title($popular_news_detail['news_title']);	
 								$news_link=$this->subdomain->genereate_the_subdomain_link(
-								$popular_news_detail['subdomain_name'],'news',$popular_news_detail['news_title'],$popular_news_detail['news_id']);
+								$popular_news_detail['subdomain_name'],'news',$news_title_list,$popular_news_detail['news_id']);
 								?>
 									<li><a href="<?php echo $news_link; ?>"><?php echo $popular_news_detail['news_title']; ?></a></li>
 								<?php } } ?>

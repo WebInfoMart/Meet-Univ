@@ -111,7 +111,7 @@ class Subdomain extends CI_Model
    }
    else {
    $condition = array(
-    'firstname' => $this->input->post('apply_name'),
+    'fullname' => $this->input->post('apply_name'),
     'email' => $this->input->post('apply_email'),
     'phone_no1' => $this->input->post('apply_mobile'),
     'applied_univ_id'=> $univ_id

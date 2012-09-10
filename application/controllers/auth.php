@@ -1120,18 +1120,25 @@ class Auth extends CI_Controller
 	
  function user($id='')
  {
-  
   $data = $this->path->all_path();
   $this->load->view('auth/header',$data);
   $logged_user_id = $this->session->userdata('user_id');
   if($logged_user_id)
+  {
   $data['logged_user_id']=$logged_user_id;
+  }
   else
+  {
   $data['logged_user_id']=0; 
+  }
   $data['educ_level'] = '';
   $redirect_current_url = $this->config->site_url().$this->uri->uri_string();
   $data['my_college'] = $this->users->my_collage_of_user($id);
   $data['detail_visited_user'] = $this->users->fetch_profile($id);
+  if(empty($data['detail_visited_user']))
+  {
+  redirect(base_url());
+  }
   $data['featured_question_visited_profile'] = $this->quest_ans_model->latest_question_profile();
   $cur_educ_lvl = $data['detail_visited_user']['curr_educ_level'];
   $area_interest = $data['detail_visited_user']['prog_parent_id'];
@@ -1417,7 +1424,6 @@ class Auth extends CI_Controller
 	 echo $this->email->print_debugger();
 	 }
    }
-   
    
    
 }

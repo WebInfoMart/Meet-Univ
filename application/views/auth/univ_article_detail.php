@@ -241,9 +241,11 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					if($articles==5)
 					{
 					break;
-					}					
+					}
+													$article_title_list =$this->subdomain->process_url_title($recent_articles_detail['article_title']);	
+		
 					$article_link=$this->subdomain->genereate_the_subdomain_link(
-								$recent_articles_detail['subdomain_name'],'articles',$recent_articles_detail['article_title'],$recent_articles_detail['article_id']);
+								$recent_articles_detail['subdomain_name'],'articles',$article_title_list,$recent_articles_detail['article_id']);
 								?>
 									<li>
 									

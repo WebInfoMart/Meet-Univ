@@ -111,6 +111,7 @@ if ($user) {
 					{
 					$univ_domain=$quest_list['subdomain_name'];
 					$quest_title=$quest_list['q_title'];
+					$quest_title =$this->subdomain->process_url_title($quest_title);	
 					$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
 					$url = $que_link;
 					}

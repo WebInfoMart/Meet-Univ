@@ -6,8 +6,8 @@
 				
 					<ul class="event_new">
 				<?php foreach($articles_list_detail as $articles_detail){ 
-				$articles_link=$this->subdomain->genereate_the_subdomain_link($articles_detail['subdomain_name'],'articles',$articles_detail['article_title'],$articles_detail['article_id']);
-					
+				$article_title =$this->subdomain->process_url_title($articles_detail['article_title']);	
+				$articles_link=$this->subdomain->genereate_the_subdomain_link($articles_detail['subdomain_name'],'articles',$article_title,$articles_detail['article_id']);
 				?>
 						<li>
 							<div class="float_l span5 margin_zero">
@@ -86,8 +86,10 @@
 							<?php if(!empty($popular_articles)){
 								foreach($popular_articles as $popular_article_detail)
 								{
+								
+								$article_title_list =$this->subdomain->process_url_title($popular_article_detail['article_title']);	
 								$article_link=$this->subdomain->genereate_the_subdomain_link(
-								$popular_article_detail['subdomain_name'],'articles',$popular_article_detail['article_title'],$popular_article_detail['article_id']);
+								$popular_article_detail['subdomain_name'],'articles',$article_title_list,$popular_article_detail['article_id']);
 								?>
 									<li><a href="<?php echo $article_link; ?>"><?php echo $popular_article_detail['article_title'];?></a></li>
 								<?php } } ?>

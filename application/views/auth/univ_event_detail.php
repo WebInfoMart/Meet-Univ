@@ -365,8 +365,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								<?php if(!empty($feature_event_of_univ)){
 								foreach($feature_event_of_univ as $upcoming_event)
 								{
+								$event_title =$this->subdomain->process_url_title($upcoming_event['event_title']);	
 								$event_link=$this->subdomain->genereate_the_subdomain_link(
-								$upcoming_event['subdomain_name'],'event',$upcoming_event['event_title'],$upcoming_event['event_id']);
+								$upcoming_event['subdomain_name'],'event',$event_title,$upcoming_event['event_id']);
 								?>
 									<li><a href="<?php echo $event_link; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
 								<?php } }

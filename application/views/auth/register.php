@@ -189,10 +189,11 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						$x=0;
 						if(!empty($new_users))
 						{
-						foreach($new_users as $newly_registered){ $x++; 
+						foreach($new_users as $newly_registered){
+						$x++; 
 						if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$newly_registered['user_thumb_pic_path']) && $newly_registered['user_thumb_pic_path']!='' )
 						{
-						//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 						
 							$user_pic =  base_url()."uploads/user_pic/thumbs/".$newly_registered['user_thumb_pic_path'];
 						}
@@ -203,9 +204,10 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						else{
 							$user_pic = base_url()."images/profile_icon.png";
 						}
+												$fullname =$this->subdomain->process_url_title($newly_registered['fullname']);	
 						?>
-<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>">
-<img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $base; ?>uploads/<?php echo $user_pic; }?>"/>
+<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>/<?php echo $newly_registered['fullname'];?>">
+<img style="width:50px;height:51px;" class="thumb <?php if(($x-1)%3){ echo "margin_delta";} else if(($x+1%3)){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $base; ?>uploads/<?php echo $user_pic; }?>"/>
 </a>				
 		
 					<?php } } else { "No New Users Available"; } ?>	
@@ -252,6 +254,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 								$univ_name=$home_feature_event['univ_name'];
 								$univ_domain=$home_feature_event['subdomain_name'];
 								$event_title=$home_feature_event['event_title'];
+								$event_title =$this->subdomain->process_url_title($event_title);	
 								$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$home_feature_event['event_id']);					
 								?>
 								<li>

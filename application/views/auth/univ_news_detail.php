@@ -250,8 +250,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					{
 					break;
 					}					
+				$news_title_list =$this->subdomain->process_url_title($recent_news_detail['news_title']);	
 					$news_link=$this->subdomain->genereate_the_subdomain_link(
-								$recent_news_detail['subdomain_name'],'news',$recent_news_detail['news_title'],$recent_news_detail['news_id']);
+								$recent_news_detail['subdomain_name'],'news',$news_title_list,$recent_news_detail['news_id']);
 								?>
 									<li>
 									

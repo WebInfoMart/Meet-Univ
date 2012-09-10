@@ -8,7 +8,8 @@
 				
 					<ul class="event_new">
 					<?php foreach($event_list_detail as $event_detail){
-$events_link=$this->subdomain->genereate_the_subdomain_link($event_detail['subdomain_name'],'event',$event_detail['event_title'],$event_detail['event_id']);
+				$event_title =$this->subdomain->process_url_title($event_detail['event_title']);	
+$events_link=$this->subdomain->genereate_the_subdomain_link($event_detail['subdomain_name'],'event',$event_title,$event_detail['event_id']);
 $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detail['subdomain_name'],'event','','');		
 		
 		
@@ -115,8 +116,9 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 						<?php if(!empty($feature_events)){
 								foreach($feature_events as $upcoming_event)
 								{
+								$event_title_list =$this->subdomain->process_url_title($upcoming_event['event_title']);	
 								$event_link=$this->subdomain->genereate_the_subdomain_link(
-								$upcoming_event['subdomain_name'],'event',$upcoming_event['event_title'],$upcoming_event['event_id']);
+								$upcoming_event['subdomain_name'],'event',$event_title_list,$upcoming_event['event_id']);
 								?>
 									<li><a href="<?php echo $event_link; ?>"><?php echo $upcoming_event['event_title']; ?></a></li>
 								<?php } }

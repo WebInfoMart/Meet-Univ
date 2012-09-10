@@ -18,9 +18,11 @@
 					<div class="margin_t1">
 				
 					<ul class="event_new">
-					<?php foreach($articles as $articles_detail){
+					<?php
+					foreach($articles as $articles_detail){
 					$univ_domain=str_replace(' ','-',$articles_detail['subdomain_name']);
-$article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'articles',$articles_detail['article_title'],$articles_detail['article_id']);							
+							$article_title =$this->subdomain->process_url_title($articles_detail['article_title']);	
+$article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'articles',$article_title,$articles_detail['article_id']);							
 					$image_exist=0;	
 									$article_img = $articles_detail['article_image_path'];	
 									if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
@@ -168,8 +170,9 @@ $article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'artic
 								<?php if(!empty($popular_articles)){
 								foreach($popular_articles as $popular_articles_detail)
 								{
+								$article_title =$this->subdomain->process_url_title($popular_articles_detail['article_title']);	
 								$article_link=$this->subdomain->genereate_the_subdomain_link(
-								$popular_articles_detail['subdomain_name'],'articles',$popular_articles_detail['article_title'],$popular_articles_detail['article_id']);
+								$popular_articles_detail['subdomain_name'],'articles',$article_title,$popular_articles_detail['article_id']);
 								?>
 									<li><a href="<?php echo $article_link; ?>"><?php echo $popular_articles_detail['article_title']; ?></a></li>
 								<?php } } ?>	

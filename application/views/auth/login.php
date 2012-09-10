@@ -197,10 +197,10 @@ $("#link_send_for_fpass").delay(7000).fadeOut(200);
 						else{
 							$user_pic = base_url()."images/profile_icon.png";
 						}
-						
+						$fullname =$this->subdomain->process_url_title($newly_registered['fullname']);	
 						?>
-<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>">
-<img style="width:50px;height:51px;" class="thumb <?php if($x==1 || $x==4 || $x==7){ echo "margin_delta";} else if($x==2 || $x==5 || $x==8){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $user_pic; }?>"/>
+<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>/<?php echo $fullname;?>">
+<img style="width:50px;height:51px;" class="thumb <?php if(($x-1)%3){ echo "margin_delta";} else if(($x+1%3)){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $user_pic; }?>"/>
 </a>				
 		
 					<?php } } else { echo "No New Users Available"; } ?>	
@@ -247,6 +247,7 @@ $("#link_send_for_fpass").delay(7000).fadeOut(200);
 								$univ_name=$home_feature_event['univ_name'];
 								$univ_domain=$home_feature_event['subdomain_name'];
 								$event_title=$home_feature_event['event_title'];
+								$event_title =$this->subdomain->process_url_title($event_title);	
 								$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$home_feature_event['event_id']);					
 								?>
 								<li>

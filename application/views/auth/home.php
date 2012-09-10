@@ -332,7 +332,8 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						
 		$univ_name=$events['univ_name'];
 		$univ_domain=$events['subdomain_name'];
-		$event_title=$events['event_title'];
+		$event_title=$events['event_title'].'()()';
+		$event_title=$this->subdomain->process_url_title($event_title);
 		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$events['event_id']);
 						?>
 								<li onclick="gotoevent('<?php echo $event_link; ?>');" style="cursor:pointer;">
@@ -460,6 +461,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									$img_arr=$this->searchmodel->set_the_image($width,$height,88,88,TRUE);
 									$univ_domain=$f_news['subdomain_name'];
     $news_title=$f_news['news_title'];	
+	$news_title=$this->subdomain->process_url_title($news_title);
 	$news_id=$f_news['news_id'];
 	$news_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'news',$news_title,$news_id);							
 	
@@ -631,6 +633,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
 				{
 					$question_title = str_replace(' ','-',$quest_list['q_title']);
+					$question_title=$this->subdomain->process_url_title($question_title);
 					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				else

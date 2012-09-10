@@ -904,7 +904,7 @@ class Univ extends CI_Controller
    $university_name = $data['university_details']['univ_name'];
    $university_address = $data['university_details']['address_line1'];
    $data['univ_gallery'] = $this->users->get_univ_gallery($univ_id);
-    $data['header_title'] = 'Qusetion And Answer Offered By ' . $university_names;
+   $data['header_title'] = 'Qusetion And Answer Offered By ' . $university_name;
    $this->load->view('auth/header',$data);
    if($data['university_details'] != 0 )
    {

@@ -54,7 +54,15 @@ if ($user) {
 							<div class="float_l">
 								<div class="follow_img" style="width:50px;height:50px;">
 								<?php
-								$link = base_url().'user/'.$followers['id'];
+								if($logged_user_id==$followers['id'])
+								{
+								$link=base_url().'home';
+								}
+								else
+								{
+								$link = base_url().'user/'.$followers['id'].'/'.$followers['fullname'];
+								
+								}
 								if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$followers['user_thumb_pic_path']) && $followers['user_thumb_pic_path']!='' )
 										{
 										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
