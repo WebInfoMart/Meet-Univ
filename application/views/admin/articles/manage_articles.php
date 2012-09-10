@@ -1,3 +1,53 @@
+<?php if($approved==''){ $approved=0;} ?>
+<script type="text/javascript">
+jQuery(document).ready(function(){			 
+	 jQuery("#drop").change(function()
+		{  
+			 var e = document.getElementById("drop");
+			 var dataString = e.options[e.selectedIndex].value
+			 if(dataString==1 || dataString==2)
+				{							  
+				  $("#name").show();
+				  $("#search").show();
+				}	
+				if(dataString==3)
+				{
+				  $("#name").hide();							
+				  $("#search").hide();
+				  var approved='1';
+						var url='<?php echo $base;?>adminarticles/manage_articles';
+						$.ajax({
+							  type: "POST",
+							  data: "approved="+approved+"&ajax=1",
+							  url: url,							  
+							  success: function(msg) {
+							  //alert(msg);
+								$("#ajax_load").html(msg);           
+							  }
+							});
+				}								
+		});
+});
+function search()
+{	
+	var toSearch=$("#name").val();
+	var url='<?php echo $base;?>adminarticles/manage_articles';
+	$.ajax({
+          type: "POST",
+          data: "toSearch="+toSearch+"&ajax=1",
+          url: url,
+          beforeSend: function() {
+            $("#ajax_load").html("");
+          },
+          success: function(msg) {
+		  //alert(msg);
+            $("#ajax_load").html(msg);           
+          }
+        });
+	
+}
+</script>
+<div id="ajax_load" >
 <?php 
 $edit=0;
 $delete=0;
@@ -34,7 +84,17 @@ $insert=1;
   </div>
   
  <div id="content">	
-
+<div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
+	<span >Filter</span>
+	<select id="drop" name="drop" >
+	<option>Select to Search</option>
+	<option value="1">Article_title</option>														
+	<option value="2">University_name</option>
+	<option value="3">Approved</option>
+	</select>
+	<input id="name"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
+	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
+	</div>
 <h2>DETAIL OF ARTICLES</h2>
 			<form action="<?php echo $base ?>adminarticles/delete_articles" method="post" id="deletearticleform" >	
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
@@ -112,17 +172,12 @@ $insert=1;
 				
 				<input type="button" onclick="action_formsubmit(0,0)" class="submit tiny" value="Apply to selected" />
 			</div>		<!-- .tableactions ends -->
-		<?php  } ?>	
-		
-			<div id="pagination" class="table_pagination right paging-margin">
-			
-            <?php echo $this->pagination->create_links();?>
-			
-            </div> 		
-			
-		
-		
+		<?php  } ?>			
+		<div id="pagination" class="table_pagination right paging-margin">			
+		<?php echo $this->pagination->create_links();?>			
+		</div> 
 		</div>
+</div>		
 <script>
 function delete_confirm(articleid)
 {
@@ -274,4 +329,23 @@ var f;
 	   });
 	 return f;
 }
+
+$(function() {
+		$("#pagination a").click(function() {
+        var url = $(this).attr("href");	
+		var approved='<?php echo $approved; ?>';
+        $.ajax({
+          type: "POST",
+          data: "approved="+approved+"&ajax=1",
+          url: url,
+          beforeSend: function() {
+            $("#ajax_load").html("");
+          },
+          success: function(msg) {		 
+            $("#ajax_load").html(msg);          
+          }
+        });
+        return false;
+      });   
+  });
 </script>		

@@ -72,6 +72,11 @@ class Articlemodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id');
+		if($this->input->post('approved')==1)
+		{
+			$status=$this->input->post('approved');
+			$this->db->where('article.article_approve_status',$status);
+		}
 		if($data['admin_user_level']=='3')
 		{
 		$this->db->where('university.user_id',$data['user_id']);

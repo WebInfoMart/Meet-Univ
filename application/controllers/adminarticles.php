@@ -45,8 +45,11 @@ class adminarticles extends CI_Controller
 			redirect('admin/adminlogout');
 			}
 			//fetch user privilege data from model
+			if($this->input->post('ajax')!='1')
+			{
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/sidebar', $data);
+			}
 			$flag=0;
 			foreach($data['admin_priv'] as $userdata['admin_priv']){
 			if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']!=0 )
@@ -107,6 +110,7 @@ class adminarticles extends CI_Controller
 			$this->load->view('admin/userupdated', $data);
 			}
 			$data['article_info']=$this->articlemodel->article_detail();
+			$data['approved']=$this->input->post('approved');
 			$this->load->view('admin/articles/manage_articles', $data);
 			}
 		}	
