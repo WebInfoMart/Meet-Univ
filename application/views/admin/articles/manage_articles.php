@@ -1,4 +1,7 @@
-<?php if($approved==''){ $approved=0;} ?>
+<?php if($approved==''){ $approved=0;}
+if($sel_id==''){ $sel_id=0;}
+if($search_box==''){ $search_box=0;}
+ ?>
 <script type="text/javascript">
 jQuery(document).ready(function(){			 
 	 jQuery("#drop").change(function()
@@ -7,12 +10,12 @@ jQuery(document).ready(function(){
 			 var dataString = e.options[e.selectedIndex].value
 			 if(dataString==1 || dataString==2)
 				{							  
-				  $("#name").show();
+				  $("#search_box").show();
 				  $("#search").show();
 				}	
 				if(dataString==3)
 				{
-				  $("#name").hide();							
+				  $("#search_box").hide();							
 				  $("#search").hide();
 				  var approved='1';
 						var url='<?php echo $base;?>adminarticles/manage_articles';
@@ -30,21 +33,19 @@ jQuery(document).ready(function(){
 });
 function search()
 {	
-	var toSearch=$("#name").val();
-	var url='<?php echo $base;?>adminarticles/manage_articles';
+	var search_box = $('#search_box').val();	
+	var a=document.getElementById("drop");	
+	var sel_id=a.options[a.selectedIndex].value;	
+	var search_url = "<?php echo $base; ?>adminarticles/manage_articles";
 	$.ajax({
-          type: "POST",
-          data: "toSearch="+toSearch+"&ajax=1",
-          url: url,
-          beforeSend: function() {
-            $("#ajax_load").html("");
-          },
-          success: function(msg) {
+    type: "POST",
+    url: search_url,
+	data:'search_box='+search_box+"&sel_id="+sel_id+"&ajax=1",	
+      success: function(msg) {
 		  //alert(msg);
             $("#ajax_load").html(msg);           
           }
-        });
-	
+	});
 }
 </script>
 <div id="ajax_load" >
@@ -92,7 +93,7 @@ $insert=1;
 	<option value="2">University_name</option>
 	<option value="3">Approved</option>
 	</select>
-	<input id="name"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
+	<input id="search_box"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
 	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
 	</div>
 <h2>DETAIL OF ARTICLES</h2>
@@ -113,6 +114,8 @@ $insert=1;
 				
 				<tbody>
 				<?php
+				if(!empty($article_info))
+				{
 				foreach($article_info as $row){
 				?>
 					<tr class="even">
@@ -128,7 +131,7 @@ $insert=1;
 						<td><?php echo ucwords($row->univ_name); ?></td>
 						<td><?php if($row->article_approve_status){ echo "Approved"; } else {  echo"Pending For Approve";} ?></td>
 						
-						<!--<td><a href="#"><?php echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>-->
+						<!--<td><a href="#"><?php //echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>-->
 						<td>
 			
 		<ul class="nav">
@@ -157,7 +160,7 @@ $insert=1;
 </td>		
 </tr>
 				
-			<?php } ?>		
+			<?php } }else { echo "<tr><td>".'No Result Found!'."<td></tr>"; } ?>		
 				</tbody>
 				
 			</table>
@@ -334,9 +337,12 @@ $(function() {
 		$("#pagination a").click(function() {
         var url = $(this).attr("href");	
 		var approved='<?php echo $approved; ?>';
+		var sel_id='<?php echo $sel_id; ?>';		
+		var search_box='<?php echo $search_box; ?>';
+		var data={sel_id:sel_id,search_box:search_box,approved:approved,ajax:'1'};		
         $.ajax({
           type: "POST",
-          data: "approved="+approved+"&ajax=1",
+          data: data,
           url: url,
           beforeSend: function() {
             $("#ajax_load").html("");

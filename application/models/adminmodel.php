@@ -82,6 +82,7 @@ class Adminmodel extends CI_Model
 			{
 			 $this->db->where(array('level !=' => '5','id !='=>$user_id));
 			}
+			$this->db->order_by('users.createdon','desc');
 			$query = $this->db->get();
 		}
 		else
@@ -151,6 +152,7 @@ class Adminmodel extends CI_Model
 			{
 			 $this->db->where(array('level !=' => '5','id !='=>$user_id));
 			}
+			$this->db->order_by('users.createdon','desc');
 			$this->db->limit($limit,$offset);
 			$query = $this->db->get();
 		}
@@ -170,6 +172,7 @@ class Adminmodel extends CI_Model
 			{
 			 $this->db->where(array('level !=' => '5','id !='=>$user_id));
 			}
+			$this->db->order_by('users.createdon','desc');
 			$this->db->limit($limit,$offset);
 			$query = $this->db->get();
 		}
@@ -178,7 +181,7 @@ class Adminmodel extends CI_Model
 		//$table= $this->table->generate($query);
 		if($query->num_rows()>0)
 		{
-		return $query->result();
+			return $query->result();
 		}
 		else
 		{
@@ -588,8 +591,7 @@ class Adminmodel extends CI_Model
 	}
 	
 	function get_univ_info($paging='')
-	{
-		
+	{		
 		$this->db->select('*');
 		$this->db->from('university');
 		$this->db->join('users', 'users.id = university.user_id','left');
@@ -604,13 +606,14 @@ class Adminmodel extends CI_Model
 		$this->db->from('university');
 		$this->db->join('users', 'users.id = university.user_id','left');
 		$this->db->join('country', 'country.country_id = university.country_id','left');
+		$this->db->order_by("university.createdon", "desc");
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
 		$this->pagination->initialize($config);
 		return $query->result();
 	}
 	
-	function get_univ_info_search($paging,$univ_name,$sel_id )
+	function get_univ_info_search($paging,$univ_name,$sel_id)
 	{$arr=array('0');
 		$this->db->select('*');
 		$this->db->from('university');
@@ -1013,6 +1016,7 @@ class Adminmodel extends CI_Model
   $this->db->where_in('univ_id',$univ);
   $this->db->join('users', 'users.id = university.user_id','left');
   $this->db->join('country', 'country.country_id = university.country_id','left');
+  $this->db->order_by("university.createdon", "desc");
   $this->db->limit($limit,$offset);
   $query = $this->db->get();
   $this->pagination->initialize($config);

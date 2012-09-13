@@ -21,7 +21,7 @@
 							<label class="label-control" for="input01">Email: </label>
 							<div class="controls-input">
 							<input type="text" class="input-large inline" name="email" id="lead_user_email" value="">
-							<input type="hidden" class="input-large" id="lead_source" value="other"/>
+							<input type="hidden" class="input-large" id="lead_source" value="offline"/>
 					
 							</div>
 						</div>

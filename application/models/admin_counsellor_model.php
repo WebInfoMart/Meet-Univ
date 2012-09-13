@@ -42,7 +42,7 @@ where vld.v_id=".$id." ");
 		{
 			$this->db->select('*');
 			$this->db->from('verified_lead_data');
-			$this->db->order_by('v_email');
+			$this->db->order_by('verified_lead_data.created_on');
 			$query=$this->db->get();
 			$config['total_rows'] = $query->num_rows();
 			$config['per_page']   = 15;
@@ -50,7 +50,7 @@ where vld.v_id=".$id." ");
 			$offset=$start;
 			$this->db->select('*');
 			$this->db->from('verified_lead_data');			
-			$this->db->order_by('v_email');
+			$this->db->order_by('verified_lead_data.created_on');
 			$this->db->limit($limit,$offset);
 			$query=$this->db->get();
 			$this->pagination->initialize($config);

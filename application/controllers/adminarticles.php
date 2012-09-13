@@ -111,6 +111,8 @@ class adminarticles extends CI_Controller
 			}
 			$data['article_info']=$this->articlemodel->article_detail();
 			$data['approved']=$this->input->post('approved');
+			$data['sel_id']=$this->input->post('sel_id');  
+			$data['search_box']= $this->input->post('search_box');  
 			$this->load->view('admin/articles/manage_articles', $data);
 			}
 		}	
@@ -477,7 +479,7 @@ class adminarticles extends CI_Controller
 		}
 		$data['countries']=$this->users->fetch_country();
 		$data['univ_info']=$this->events->get_univ_detail();
-		$data['article_info']=$this->articlemodel->fetch_article_detail($article_id);
+		$data['article_info']=$this->articlemodel->fetch_article_detail($article_id);print_r($data['article_info']);exit;
 		$this->load->view('admin/articles/edit_article', $data);	
 		}
 		else

@@ -66,21 +66,37 @@ class Articlemodel extends CI_Model
 	}
 	
 	function article_detail()
-	{
+	{$arr=array('0');
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id');
+		if($this->input->post('sel_id')=='1')
+		{		
+		$title=trim($this->input->post('search_box'));  		  
+		$this->db->like('article_title',$title,'both');
+		}
 		if($this->input->post('approved')==1)
 		{
 			$status=$this->input->post('approved');
 			$this->db->where('article.article_approve_status',$status);
 		}
+		if($this->input->post('sel_id')=='2')
+		{
+		$univ_name=trim($this->input->post('search_box'));  
+		$query1=$this->db->query("select univ_id from university as uni where uni.univ_name like '%$univ_name%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['univ_id']);
+					}
+		$this->db->where_in('article.article_univ_id',$arr);
+		}
 		if($data['admin_user_level']=='3')
 		{
 		$this->db->where('university.user_id',$data['user_id']);
-		}
+		}		
 		$query=$this->db->get();
 		$config['base_url']=base_url()."adminarticles/manage_articles/";
 		$config['total_rows']=$query->num_rows();
@@ -91,10 +107,27 @@ class Articlemodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id');
+		if($this->input->post('sel_id')=='1')
+		{		
+		$title=trim($this->input->post('search_box'));  		  
+		$this->db->like('article_title',$title,'both');
+		}
+		if($this->input->post('sel_id')=='2')
+		{
+		$univ_name=trim($this->input->post('search_box'));  
+		$query1=$this->db->query("select univ_id from university as uni where uni.univ_name like '%$univ_name%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['univ_id']);
+					}
+		$this->db->where_in('article.article_univ_id',$arr);
+		}
 		if($data['admin_user_level']=='3')
 		{
-		$this->db->where('university.user_id',$data['user_id']);
+			$this->db->where('university.user_id',$data['user_id']);
 		}
+		$this->db->order_by("publish_time", "desc");
 		$this->db->limit($limit,$offset);
 		$query=$this->db->get();
 		$this->pagination->initialize($config);
