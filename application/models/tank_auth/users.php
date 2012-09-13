@@ -314,10 +314,15 @@ class Users extends CI_Model
 		}
 	}
 	
-	function facebook_profile_insert($user_id,$fb_gender)
+	function facebook_profile_insert($user_id,$fb_gender,$limage,$simage)
 	{
+		$this->db->set('user_pic_path', $limage);
+		$this->db->set('user_thumb_pic_path', $simage);
+		
+		$this->db->set('gender', $fb_gender);
 		$this->db->set('user_id', $user_id);
 		$this->db->set('gender', $fb_gender);
+		
 		return $this->db->insert($this->profile_table_name);
 	}
 	

@@ -340,7 +340,7 @@ if($error_sub_domain != '') { $class_sub_domain = 'focused_error_univ'; } else {
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/icon_italic.gif" style="cursor:pointer" id="italic-0"/>
 		<img src="<?php echo "$base$img_path"; ?>/admin/iconset/list-index.png" style="cursor:pointer" id="ul-0"/>
 		</div>-->
-		<textarea rows="2" cols="5" style="height:136px;width:289px;" class="wysiwyg" onkeypress="return false;"  name="txtareaoverview" id="txtareaoverview" ></textarea></div><div class="clearfix"></div>
+		<textarea rows="2" cols="5" style="height:136px;width:289px;"  onkeypress="return false;"  name="txtareaoverview" id="txtareaoverview" ></textarea></div><div class="clearfix"></div>
 		
 		<div style="cursor:pointer;" id="campus"><h5>Campus Overview</h5></div><div class="clearfix"></div>
 		

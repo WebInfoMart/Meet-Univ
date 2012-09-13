@@ -1331,40 +1331,23 @@ class Auth extends CI_Controller
 		//$this->load->view('auth/event_register_user_counter',$data);
 	}
 
-   function sendemail()
+   
+   
+   //ie7 not working page
+   
+   function use_higer_browser()
    {
-	  $data = $this->path->all_path();
- 	  $config['newline'] = $this->config->item('newline');
-	  $data['user_id']=123;
-      $data['logged_user_email'] = 'sumitmunjal@webinfomart.com';
-      $data['password'] = 'demo';
-      $data['fullname'] = 'Sumit Munjal';
-      $data['new_email_key']=123456;
-      echo $email_body = $this->load->view('auth/new_signup_content_email',$data,TRUE);
-	  $config['protocol'] = 'smtp';
-	  $config['smtp_host'] = 'relay.mailserv.in';
-	  $config['smtp_user'] = 'relay@meetuniversities.com';
-	  $config['smtp_pass'] = 'M^et4025';
-	  $this->email->initialize($config);    
-      $this->email->from('info@meetuniversities.com', 'Meet Universities');
-      $this->email->to('sumitmunjal@webinfomart.com');
-      $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
-    // $message = 'hiiiiiiiii';
-     //$message .="<br/>Thank you very much";
-     $this->email->message($email_body);
-     if($this->email->send())
-	 {
-	 echo ":) Email Sent";
-	 
-	 }
-	 else
-	 {
-	 echo ":( Email Sendin Failed";
-	 echo $this->email->print_debugger();
-	 }
+    $data = $this->path->all_path();
+ 	$this->load->view('ie7_nf',$data); 
    }
    
+   function savepic()
+   {
    
+   // $url = 'http://inchoo.net/wp-content/uploads/2011/01/fbconnect.gif';
+	//$img = '../abcde.gif';
+	//file_put_contents($img, file_get_contents($url));
+   }
 }
 /* End of file auth.php */
 /* Location: ./application/controllers/auth.php */

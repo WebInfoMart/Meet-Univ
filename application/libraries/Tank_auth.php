@@ -80,7 +80,7 @@ class Tank_auth
 									'username'	=> $user->username,
 									'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 									'user_type' =>$user_type,
-									'fullname'  =>$user->fullname,
+									'fullname'  =>$user->fullname
 									
 									
 									//'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
@@ -138,8 +138,12 @@ class Tank_auth
 		$this->delete_autologin();
 
 		// See http://codeigniter.com/forums/viewreply/662369/ as the reason for the next line
-		$this->ci->session->set_userdata(array('user_id' => '','fullname' => '', 'username' => '', 'status' => '','user_type' =>''));
-
+		$destroy_session=array('user_id' => '','fullname' => '', 'username' => '', 'status' => 0,'user_type' =>'');
+		if($this->ci->session->userdata('login_by_fb'))
+		{
+		$destroy_session['login_by_fb']=0;
+		}
+		$this->ci->session->set_userdata($destroy_session);
 		//$this->ci->session->sess_destroy();
 	}
 	
