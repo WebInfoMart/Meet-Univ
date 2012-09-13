@@ -140,8 +140,8 @@ else if($teleleadsres['lead_source']=='android_user'){ $lead_source="Mobile App"
 else if($teleleadsres['lead_source']=='event_user'){ $lead_source="Event Registration"; }
 else if($teleleadsres['lead_source']=='fb_canvas'){ $lead_source="FB Application"; }
 else if($teleleadsres['lead_source']=='college_request') { $lead_source="Request College"; }
-else if($teleleadsres['lead_source']=='offline') { $lead_source="offline"; }
-else{$lead_source="Other";};
+//else if($teleleadsres['lead_source']=='offline') { $lead_source="offline"; }
+else{$lead_source="offline";};
 echo $lead_source;
 ?>
 			</div>

@@ -380,7 +380,7 @@ class Lead_tele_model extends CI_Model
 				'email'		=> $this->input->post('email'),
 				'createdby_user_id' =>$logged_in_user_id,
 				'last_ip'	=> $this->input->ip_address(),
-				'user_type' => 'other'
+				'user_type' => 'offline'
 			);
 		$site_user_data['new_email_key'] = md5(rand().microtime());
 			$profile_user_data=array(
@@ -424,6 +424,7 @@ class Lead_tele_model extends CI_Model
 		  'enroll_key'=>$this->input->post('enroll'),
 		  'lead_verified'=>$this->input->post('lead_verified'),
 		  'studying_country_id'=>$this->input->post('interested_cont'),
+		  'lead_source'=>$this->input->post('lead_source'),
 		  'lead_status'=>$this->input->post('lead_status'),
 		  'next_action'=>$this->input->post('next_action')
 		  );
