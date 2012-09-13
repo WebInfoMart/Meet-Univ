@@ -67,16 +67,16 @@ if ($user) {
 						<div class="sidebar_profic_pic">
 						
 						<?php 
-						if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$detail_visited_user['user_thumb_pic_path']) && $detail_visited_user['user_thumb_pic_path']!='' )
+						if(file_exists(getcwd().'/uploads/user_pic/'.$detail_visited_user['user_pic_path']) && $detail_visited_user['user_pic_path']!='')
+						{
+							echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/user_pic/".$detail_visited_user['user_pic_path']."' class='latest_img'/>";
+						}
+						else if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$detail_visited_user['user_thumb_pic_path']) && $detail_visited_user['user_thumb_pic_path']!='' )
 						{
 						//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 						
 							echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/user_pic/thumbs/".$detail_visited_user['user_thumb_pic_path']."' class='latest_img'/>";
-						}
-						else if(file_exists(getcwd().'/uploads/user_pic/'.$detail_visited_user['user_pic_path']) && $detail_visited_user['user_pic_path']!='')
-						{
-							echo "<img style='width:224px;height:224px;' src='".base_url()."uploads/user_pic/".$detail_visited_user['user_pic_path']."' class='latest_img'/>";
-						}
+						} 
 						else{
 							echo "<img class='profile_img_width' src='".base_url()."images/profile_icon.png'/>";
 						}

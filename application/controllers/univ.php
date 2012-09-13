@@ -751,9 +751,9 @@ class Univ extends CI_Controller
 		function post_comment()
 		{//ob_start();
 			$logged_in_user_id=$this->input->post('user_id');
-			if(!$this->tank_auth->is_logged_in())
+			if($logged_in_user_id=='' || $logged_in_user_id==NULL || $logged_in_user_id==0)
 			{
-				redirect(base_url().'/login');
+			redirect(base_url().'/login');
 			}
 			else
 			{

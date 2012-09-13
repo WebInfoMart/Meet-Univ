@@ -90,15 +90,16 @@ $select_female='';
 				<div class="float_l span2 margin_zero">
 				
 				<?php
-							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$profile_pic['user_thumb_pic_path']) && $profile_pic['user_thumb_pic_path']!='' )
+							if(file_exists(getcwd().'/uploads/user_pic/'.$profile_pic['user_pic_path']) && $profile_pic['user_pic_path']!='')
+							{
+								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/".$profile_pic['user_pic_path']."'/>";
+							}
+							
+							else if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$profile_pic['user_thumb_pic_path']) && $profile_pic['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 							
 								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/thumbs/".$profile_pic['user_thumb_pic_path']."'/>";
-							}
-							else if(file_exists(getcwd().'/uploads/user_pic/'.$profile_pic['user_pic_path']) && $profile_pic['user_pic_path']!='')
-							{
-								echo "<img style='max-height:100px;' src='".base_url()."uploads/user_pic/".$profile_pic['user_pic_path']."'/>";
 							}
 							
 							else if($user)

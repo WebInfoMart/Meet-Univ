@@ -1452,6 +1452,3 @@ function gotoevent(go)
 window.location.href=go;
 }
 </script>
-
-
-
