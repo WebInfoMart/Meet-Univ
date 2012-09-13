@@ -45,7 +45,7 @@ class Tank_auth
 	 */
 	function login($login, $password, $remember, $login_by_username, $login_by_email,$user_type)
 	{
-//	print_r($login);
+
 		if ((strlen($login) > 0) AND (strlen($password) > 0)) {
 
 			// Which function to use to login (based on config)
@@ -245,10 +245,10 @@ class Tank_auth
 				'createdby_user_id' =>$this->ci->session->userdata('newadmin_createdby_user_id'),
 				'last_ip'	=> $this->ci->input->ip_address(),
 				'activated'=>'1'
-				
 			);
 			//echo $email_activation;
 			//print_r($data);
+			
 		if (!is_null($res = $this->ci->users->create_user($data, !$email_activation))) {
 				$data['user_id'] = $res['user_id'];
 				//$data['password'] = $password;

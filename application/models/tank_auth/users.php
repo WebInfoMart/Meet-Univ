@@ -470,6 +470,7 @@ class Users extends CI_Model
 	function create_user($data, $activated = TRUE)
 	{
 		//$data['created'] = date('Y-m-d H:i:s');
+		if($data['createdby']!='admin')
 		$data['activated'] = $activated ? '1' : '0';
 		//$data['activated'] = '1';
 		

@@ -781,9 +781,14 @@ class Adminmodel extends CI_Model
 		);
 		$myflag=0;
 		$this->load->library('upload', $config);
-		if($this->upload->do_upload())
+		 if($_FILES["userfile"]["name"]!=''){
+	
+		if(!$this->upload->do_upload())
 		{
 		$myflag=1;
+		$data['err_msg']=$this->upload->display_errors();
+		$this->load->view('admin/show_error',$data);
+		}
 		}
 		$image_data = $this->upload->data();
 		
@@ -833,13 +838,13 @@ class Adminmodel extends CI_Model
 			);
 			//print_r($data);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
-			if($myflag==1)
+			if($myflag==0)
 			{
 			$data=array('univ_logo_path' =>$image_data['file_name']);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
 			}
 			$check=$this->adminmodel->upload_univ_gallery($univ_id);	
-			if($check)
+			if($myflag==0)
 			{
 			redirect('admin/manage_university/uus');
 			}
