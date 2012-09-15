@@ -864,14 +864,12 @@ class Adminmodel extends CI_Model
 	function upload_univ_gallery($univ_id)
 	{
 		$config['upload_path'] = $this->univ_gallery_path; // server directory
-        $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
-        $config['max_size']    = '100'; // in kb
-        
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|'; // by extension, will check for whether it is an image
         $this->load->library('upload', $config);
         $this->load->library('Multi_upload');
 		if (empty($_FILES))
 		{
-		return 1;
+		return 0;
 		}
 		else
 		{
@@ -879,13 +877,13 @@ class Adminmodel extends CI_Model
         
         if ( ! $files )        
         {
-            $data['err_msg'] ='Error!  Please Check Your file size and type';
+            $data['err_msg'] ='Error!  Please Check file size and type';
             $this->load->view('admin/show_error', $data);
 			return 0;
         }    
         else
         {
-		$f=0;
+		    $f=0;
 				$field = 'userfile1';
 				$user_id=$this->tank_auth->get_admin_user_id();
             $data1 = array('upload_data' => $files);

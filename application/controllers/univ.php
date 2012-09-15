@@ -56,8 +56,8 @@ class Univ extends CI_Controller
   $this->load->library('GMapuniv');
   $this->gmapuniv->GoogleMapAPI();
   $this->gmapuniv->setMapType('map');
-  //$this->gmapuniv->addMarkerByAddress($longitude,$latitude,$university_name,$university_address);
-  $this->gmapuniv->addMarkerByAddress($university_address,$university_name, $university_address);
+  $this->gmapuniv->addMarkerByAddress($longitude,$latitude,$university_name,$university_address);
+ // $this->gmapuniv->addMarkerByAddress($university_address,$university_name, $university_address);
   
       $data['headerjs'] = $this->gmapuniv->getHeaderJS();
       $data['headermap'] = $this->gmapuniv->getMapJS();
@@ -1228,6 +1228,22 @@ class Univ extends CI_Controller
 	
 	}
 	
+	function gaapi()
+	{
+		$this->load->library('ga_api');
+		$ga = new gapi('sumitmunjal@webinfomart.com','sumitkumarmunjal1');
+
+		$ga->requestReportData(60386809,array('browser','browserVersion'),array('pageviews','visits'));
+
+		foreach($ga->getResults() as $result)
+		{
+		  echo '<strong>'.$result.'</strong><br />';
+		  echo 'Pageviews: ' . $result->getPageviews() . ' ';
+		  echo 'Visits: ' . $result->getVisits() . '<br />';
+		}
+
+		echo '<p>Total pageviews: ' . $ga->getPageviews() . ' total visits: ' . $ga->getVisits() . '</p>';
+	}
 	
 	
 }		

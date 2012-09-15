@@ -386,7 +386,6 @@ function ajaxpaging(a,pid)
  	   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>auth/all_colleges_paging",
-	   async:false,
 	   data: 'offset='+a+'&current_url='+url,
 	   cache: false,
 	   success: function(r)
@@ -394,7 +393,7 @@ function ajaxpaging(a,pid)
 	    res=r.split('!@#$%^&*');
 		$('#col_paging').html(res[1]);
 		$('#listed_currently_univ').html(res[0]);
-		$("#search_results").animate({opacity:'1'},10000);
+		$("#search_results").css('opacity','1');
 	   }
 	   })
 	   

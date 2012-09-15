@@ -96,7 +96,18 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 								<label>Article Logo</label>
 							</div>
 							<div class="float_l span3">
-								<img src="<?php echo "$base";  ?>uploads/news_article_images/<?php if($article_detail['article_image_path']==''){ echo "default_article_img.png"; } else { echo $article_detail['article_image_path']; } ?>" class="logo_img">
+			<?php 
+		    if(file_exists(getcwd().'/uploads/news_article_images/'.$article_detail['article_image_path']) && $article_detail['article_image_path']!='') {
+			$article_img_path=$base.'uploads/news_article_images/'.$article_detail['article_image_path'];
+			}
+			else
+			{
+			$article_img_path=$base.'images/default_logo.png';
+			}
+			?>
+						
+						
+								<img src="<?php echo $article_img_path ?>" class="logo_img">
 							<input type="file" name="userfile" class="file">
 							</div>
 							
@@ -105,78 +116,6 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					<!--<li>
-						<div>
-							<div class="float_l span3 margin_zero">
-								<label>Country</label>
-							</div>
-							<div class="float_l span3" >
-								<select class="<?php echo $class_country; ?> styled span3 margin_zero" name="country" id="country" onchange="fetchstates(0)">
-									<option value="">Please Select</option>
-									<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$article_detail['country_id']) { ?>selected <?php } ?> ><?php echo $country['country_name']; ?></option>
-										<?php } ?>
-	
-								</select>
-			<span style="color: red;"> <?php echo form_error('country'); ?><?php echo isset($errors['country'])?$errors['country']:''; ?> </span>
-							
-							</div>
-								<div class="float_l span3">
-								<a rel="modal-profile" href="#" id="add_country" class="tdn">Add New Country</a>
-								</div>
-								<div class="clearfix"></div>
-						</div>
-					</li>-->
-					
-					<!--<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>State</label>
-						</div>
-						<div class="float_l span3">
-							<select class="<?php echo $class_state; ?> styled span3 margin_zero" name="state" onchange="fetchcities(0,0)" id="state" disabled="disabled">
-								<option value="">Please Select</option>
-							</select>
-		<span style="color: red;"> <?php echo form_error('state'); ?><?php echo isset($errors['state'])?$errors['state']:''; ?> </span>
-		
-						</div>
-						<div class="float_l span3">
-							<a id="add_state" href="#" class="tdn">Add New State</a>
-						</div>
-						<div class="clearfix"></div>
-						</div>
-					</li>-->
-					
-					<!--<li>
-						<div>
-						<div class="float_l span3 margin_zero">
-							<label>City</label>
-						</div>
-						<div class="float_l span3">
-							<select class="<?php echo $class_city; ?> styled span3 margin_zero"  name="city" id="city" disabled="disabled">
-								<option value="">Please Select</option>
-							</select>
-	<span style="color: red;"> <?php echo form_error('city'); ?><?php echo isset($errors['city'])?$errors['city']:''; ?> </span>
-				
-						</div>
-						<div class="float_l span3">
-						<a id="add_city" href="#" class="tdn">Add New City</a>
-						</div>
-						<div class="clearfix"></div>
-						</div>
-					</li>-->
-					<!--<li>
-						<div>
-							<div class="float_l span3 margin_zero">
-								<label>Event Time</label>
-							</div>
-							<div class="float_l span3">
-								<input type="text" size="30" class="text" name="event_time" value="<?php echo $article_detail['event_date_time']; ?>">
-							</div>
-							
-							<div class="clearfix"></div>
-						</div>
-					</li>-->
 					
 					<li>
 						<div>

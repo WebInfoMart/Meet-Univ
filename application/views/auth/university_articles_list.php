@@ -37,24 +37,31 @@
 									if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
 									{
 									$image_exist=1;
-								 list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+								    list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+									}
+									else if( file_exists(getcwd().'/images/default_logo.png'))
+									{
+									$image_exist =2;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/images/default_logo.png');
 									}
 									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_image) && $univ_image!='')
 									{
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/univ_gallery'.$img_path.'/default_logo.png');
+									$image_exist=3;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'uploads/univ_gallery'.$univ_image);
 								    }
-									else
-									{
-									}
-									if($article_img!='' && $image_exist==1)
+									if($article_img !='' && $image_exist==1)
 									{
 									$image=$base.'uploads/news_article_images/'.$article_img;
 									}
-									else
+									else if($image_exist==2)
 									{
-									$image=$base.$img_path.'/default_logo.png';
+									$image=$base.'images/default_logo.png';
+									}
+									else if($image_exist==3)
+									{
+									$image=$base.$img_path.'uploads/univ_gallery'.$univ_image;
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,112,77,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,105,71,TRUE);
 							?>
 
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" >

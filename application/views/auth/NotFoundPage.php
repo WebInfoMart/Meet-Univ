@@ -13,8 +13,11 @@
 			</div>
 		</div>
 	</div>
+	</div>
+	
 <?php if($err_div=='1'){ ?>			
 </div>
+</div>		
 </div>		
 </div>		
 </div>		

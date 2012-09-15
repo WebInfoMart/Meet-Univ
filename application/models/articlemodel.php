@@ -23,17 +23,17 @@ class Articlemodel extends CI_Model
 		);
 		
 		$this->load->library('upload', $config);
-		$flag=0;
+		$flag=1;
 		if($_FILES["userfile"]["name"]!=''){
 		if(!$this->upload->do_upload())
 		{
-		  $flag=1;
+		  $flag=0;
 		  $data['err_msg']=$this->upload->display_errors();
 		  $this->load->view('admin/show_error',$data);
 		 
 		}
 		}
-		if($flag==0){
+		if($flag==1){
 		$image_data = $this->upload->data();
 		
 		$config = array(
@@ -169,34 +169,36 @@ class Articlemodel extends CI_Model
 		return $query->result_array();
 		
 	}
+	
 	function update_article($article_id)
 	{
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();
 		$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			'max_size' => 2000
 		);
-		$myflag=0;
 		$this->load->library('upload', $config);
-		if($this->upload->do_upload())
-		{
 		$myflag=1;
+		if($_FILES["userfile"]["name"]!=''){
+		if(!$this->upload->do_upload())
+		{
+		  $myflag=0;
+		  $data['err_msg']=$this->upload->display_errors();
+		  $this->load->view('admin/show_error',$data);
 		}
+		}
+		if($myflag==1){
 		$image_data = $this->upload->data();
-		
-		$config = array(
+		 $config = array(
 			'source_image' => $image_data['full_path'],
 			'new_image' => $this->univ_gallery_path . '/thumbs',
 			'maintain_ration' => true,
 			'width' => 150,
 			'height' => 100
-		);
-		
-		$this->load->library('image_lib', $config);
-		$this->image_lib->resize();
-
-		$data = array(
+		 );
+		 $this->load->library('image_lib', $config);
+		 $this->image_lib->resize();
+			$data = array(
 			   'article_title' => $this->input->post('title'),
 			   'article_detail' => $this->input->post('detail'),
 			   'postedby' => $data['user_id'],
@@ -209,8 +211,9 @@ class Articlemodel extends CI_Model
 			$data=array('article_image_path' =>$image_data['file_name']);
 			$this->db->update('article', $data,array('article_id'=>$article_id));		
 			}
-			
-			//$this->db->update('events', $data, array('event_id' => $event_id));
+	 }
+	
+	return $myflag;
 	}
 	
 	function delete_single_article($article_id)

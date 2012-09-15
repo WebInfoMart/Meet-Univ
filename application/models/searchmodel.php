@@ -382,102 +382,7 @@ class Searchmodel extends CI_Model
 		return 0;
 		}
 	}
-	
-	//college page filteration,list of college,paging 
-//1.list of college
-			/*		function show_all_college()
-						{
-							if($results->num_rows()>$univ_data['limit_res']);
-							{
-							$this->db->select('*');
-							$this->db->from('university');
-							$chk_sc_sel=0;
-							$chk_c_id=0;
-							if($search_course!='' && $search_course!='0')
-							{
-							$search_array['univ_program.prog_parent_id']=$search_course;
-							$chk_sc_sel++;
-							}
-							if($type_educ_level!='' && $type_educ_level!=0)
-							{
-							$search_array['univ_program.prog_educ_level']=$type_educ_level;
-							$chk_sc_sel++;
-							}
-							if($search_country!='' && $search_country!=0)
-							{
-							$search_array['country_id']=$search_country;
-							$chk_c_id=1;
-							//$this->db->where('country_id',trim($search_country));
-							}
-							if($search_program!='' && $search_program!=0)
-							{
-							$search_array['univ_program.program_id']=$search_program;
-							$chk_sc_sel++;
-							}
-							if($chk_sc_sel>0 || $chk_c_id)
-							{
-							if($chk_sc_sel>0)
-							{
-							$this->db->join('univ_program','univ_program.univ_id=university.univ_id','left');
-							}
-							}
-							$this->db->group_by("university.univ_id"); 
-							$this->db->limit($univ_data['limit_res']);
-							$this->db->where($search_array);
-							$results = $this->db->get();
-							}
-				if($results->num_rows()>0)
-				{
-							$res_of_univ_search1 = $results->result_array();
-							//print_r($res_of_univ_search1);
-							foreach($res_of_univ_search1 as $univ_search_result)
-							{	
-									$university_id=$univ_search_result['univ_id'];
-									$this->db->select('*');
-									$this->db->from('university');
-									$this->db->where('univ_id',$university_id);
-									$this->db->join('country','country.country_id=university.country_id','left');
-									$results=$this->db->get();
-									$university_detail[] = $results->row_array();
-									$univ_follow[] = $this->users->get_followers_of_univ($university_id);
-									$univ_article[] = $this->users->get_articles_of_univ($university_id);
-									$univ_program[] = $this->users->get_program_provide_by_univ($university_id);
-									$univ_question[] = $this->users->get_question_by_univ($university_id);
-									$univ_event[] = $this->users->get_upcoming_event_by_univ($university_id);
-									
-									if ($this->tank_auth->is_logged_in()) {	
-									$user_id	= $this->tank_auth->get_user_id();
-									$add_follower = array(
-										'follow_to_univ_id' => $university_id,
-										'followed_by' => $user_id
-										); 
-									$is_already_follow[] = $this->users->check_is_already_followed($add_follower);
-									}
-									else
-									{
-									$is_already_follow[] = 0;
-									}
-							}		
-							$univ_data['university'] = $university_detail;
-							$univ_data['followers'] = $univ_follow;
-							$univ_data['article'] = $univ_article;
-							$univ_data['program'] = $univ_program;
-							$univ_data['questions'] = $univ_question;
-							$univ_data['is_already_follow']	=$is_already_follow	;
-							$univ_data['univ_event']	=$univ_event	;
-							
-							//$univ_data['total_univ']=$total_result;
-							//$univ_data['position'] = $marker;
-							return $univ_data;
-				}
-				else{
-				return 0;
-				}
-			
-		}
-*/		
-		
-//2.paging
+
 function show_all_college_paging($current_url)
 	{
 						$univ_data['total_res']=0;
@@ -750,7 +655,7 @@ function show_all_college_paging($current_url)
 						$this->db->group_by("university.univ_id"); 
 						$this->db->order_by("STR_TO_DATE(event_date_time,`'%d %m %Y'')");
 						$results = $this->db->get();*/
-						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= '".date('Y-m-d')."' ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc";
+						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= '".date('Y-m-d')."' ,1,2)) as st FROM university".$join."  where university.switch_off_univ != '1' and  1 ".$where." GROUP BY university.univ_id order by st asc,dt asc";
 						$results=$this->db->query($sql);
 						$univ_data['total_res']=$results->num_rows();
 						if($results->num_rows()>$univ_data['limit_res']);
@@ -761,7 +666,7 @@ function show_all_college_paging($current_url)
 						{
 						$univ_data['per_page_res']=$univ_data['total_res'];
 						}
-						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= '".date('Y-m-d')."' ,1,2)) as st FROM university".$join."  where 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT 0,".$univ_data['limit_res']."";
+						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= '".date('Y-m-d')."' ,1,2)) as st FROM university".$join."  where university.switch_off_univ != '1' and 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT 0,".$univ_data['limit_res']."";
 						//$this->db->limit($univ_data['limit_res']);
 						//$results = $this->db->get();
 						$results=$this->db->query($sql);

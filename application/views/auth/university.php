@@ -238,16 +238,40 @@ if ($user) {
 						<div id="home" class="artical_box_data">
 							<div class="float_l content_art">
 								<?php
-								
-								if($article['article_image_path']!='')
-								{
-								echo "<img class='artical_img' src='".base_url()."uploads/news_article_images/".$article['article_image_path']."'/>";
-								}
-								else
-								{
-								echo "<img class='artical_img' src=".base_url()."images/default_logo.png />";
-								}
-								?>
+									$image_exist=0;	
+									$article_img = $article['article_image_path'];	
+									if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
+									{
+									$image_exist=1;
+								    list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+									}
+									else if( file_exists(getcwd().'/images/default_logo.png'))
+									{
+									$image_exist =2;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/images/default_logo.png');
+									}
+									else
+									{
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/images/logo.png');
+									}
+									if($article_img !='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$article_img;
+									}
+									else if ($image_exist==2)
+									{
+									$image=$base.'images/default_logo.png';
+									}
+									else
+									{
+									$image=$base.'images/logo.png';
+									}
+									
+									$img_arr=$this->searchmodel->set_the_image($width,$height,105,71,TRUE);
+							?>
+
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" >
+									
 							</div>
 							<div>
 								<?php echo substr($article['article_detail'],0,380).'....'; ?>

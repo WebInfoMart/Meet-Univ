@@ -76,8 +76,15 @@ class Subdomain extends CI_Model
   $this->load->library('GMapuniv');
   $this->gmapuniv->GoogleMapAPI();
   $this->gmapuniv->setMapType('map');
+  /*if($longitude!='' && $latitude!='')
+  {
+  $this->gmapuniv->addMarkerByCoords($longitude,$latitude);
+  }
+  else
+  {*/
   //$this->gmapuniv->addMarkerByAddress($longitude,$latitude,$university_name,$university_address);
-  $this->gmapuniv->addMarkerByAddress($university_address,$university_name, $university_address);
+   $this->gmapuniv->addMarkerByAddress($university_address,$university_name, $university_address);
+ // }
   
       $data['headerjs'] = $this->gmapuniv->getHeaderJS();
       $data['headermap'] = $this->gmapuniv->getMapJS();

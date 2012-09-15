@@ -169,7 +169,7 @@ class adminarticles extends CI_Controller
 			   'article_type_ud' => $this->input->post('article_type_ud')
 			); */
 			//print_r($datas);
-			if(!$this->articlemodel->create_article())
+			if($this->articlemodel->create_article())
 			redirect('adminarticles/manage_articles/eas');
 			}
 			//fetch user privilege data from model
@@ -473,13 +473,14 @@ class adminarticles extends CI_Controller
 			
 			//$this->form_validation->set_rulesi('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|is_unique[university.subdomain_name]');
 			if ($this->form_validation->run()) {
-			$this->articlemodel->update_article($article_id);
+			if($this->articlemodel->update_article($article_id))
 			redirect('adminarticles/manage_articles/eus');
 			}
-		}
+		    }
 		$data['countries']=$this->users->fetch_country();
 		$data['univ_info']=$this->events->get_univ_detail();
-		$data['article_info']=$this->articlemodel->fetch_article_detail($article_id);print_r($data['article_info']);exit;
+		$data['article_info']=$this->articlemodel->fetch_article_detail($article_id);
+		//print_r($data['article_info']);exit;
 		$this->load->view('admin/articles/edit_article', $data);	
 		}
 		else

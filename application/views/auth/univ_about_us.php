@@ -14,7 +14,7 @@
 	<?php if($university_details['univ_overview'] != '') { ?>
 		<div class="float_l span8 margin_zero about_depend">
 		<?php
-		echo "<h3>Overview University</h3><div class='course_cont'>".$university_details['univ_overview'];?>
+		echo "<h3>Overview</h3><div class='course_cont'>".$university_details['univ_overview'];?>
 		</div>
 		</div>
 		<?php } ?>

@@ -17,13 +17,12 @@ class Admin extends CI_Controller
 		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
+		$this->load->library( 'gapi', array( 'email' =>'sumitmunjal@webinfomart.com', 'password' =>'sumitkumarmunjal1') );
 	}
 
  function index($msg='')
  {
   $data = $this->path->all_path();
-  //$this->load->view('auth/header',$data);
-  //$this->load->view('auth/footer',$data);
   if (!$this->tank_auth->is_admin_logged_in()) {
    
    redirect('admin/adminlogin/');
@@ -43,19 +42,26 @@ class Admin extends CI_Controller
    }
    else
    {
-	//$data['university_id']=2;
-	$data['university_id']=$data['univ_detail_edit'][0]->univ_id;
-	$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
-	$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
-	$data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
-	$data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
-	$data['fetch_recent_five_question']=$this->dashboard->fetch_recent_five_question($data['university_id']);
-	$data['recent_followers_of_univ']=$this->dashboard->recent_followers_of_univ($data['university_id']);
-	
-	//$data['date_wise_lead_data']=$this->dashboard->fetch_lead_data_date_wise('2');
-	//echo $lead_created_time=$data['date_wise_lead_data'][0]['lead_created_time'];
-	//echo $data['no_of_redisterd_user']=$this->dashboard->count_no_of_redisterd_user_by_date($lead_created_time);
+ //$data['university_id']=2;
+ $data['university_id']=$data['univ_detail_edit'][0]->univ_id;
+ $data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
+ $data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
+ $data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
+ $data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
+ $data['fetch_recent_five_question']=$this->dashboard->fetch_recent_five_question($data['university_id']);
+ $data['recent_followers_of_univ']=$this->dashboard->recent_followers_of_univ($data['university_id']); 
    }
+   }
+   if($data['admin_user_level']=='5')
+   { for($i = 1; $i <=31; $i++) 
+  {    
+   $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
+   $data['no_of_registerd_user'][$i]=$this->dashboard->count_lead_data_by_date($lead_created_time);
+    
+  }    
+ $data['latest_users']=$this->dashboard->latest_event_users();
+ $data['ten_question']=$this->dashboard->ten_question();
+ 
    }
    $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
    if((!($data['admin_priv'])) && ($data['admin_user_level']!=6 && $data['admin_user_level']!=2))
@@ -68,15 +74,27 @@ class Admin extends CI_Controller
    {
    $this->load->view('admin/sidebar', $data); 
    }
-   $this->load->view('admin/main', $data);
+   if($data['admin_user_level']!='5')
+   {
+ $this->load->view('admin/main', $data);
+   }
+    if($data['admin_user_level']=='5')
+   {
+   for($i = 0; $i < 30; $i++) { 
+     $start_date=date('Y-m-d',strtotime($i.' day ago'));
+ $this->gapi->requestReportData( (60386809),'hostName', array( 'uniquePageViews,ga:visitors' ), array('-uniquePageViews'), null, $start_date, $start_date, 1, 1 ); 
+ $data['objResults'][$start_date] = $this->gapi->getResults( ); 
+ }
+ //echo '<pre>'.print_r($data['objResults']).'</pre>';
+ $this->load->view('admin/adminhome', $data);
+   }
+   
    if($msg=='uus')
    {
    $data['msg']='University Updated Successfully';
    $this->load->view('admin/userupdated',$data);
-   }
-   
+   }   
   }
-
  }
 
 	/**
@@ -1536,6 +1554,7 @@ function manage_university($mps='')
 		$this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
 		$this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
 		$this->form_validation->set_rules('sub_domain', 'Sub Domain', 'xss_clean|alpha_dash|trim|required|string|callback_check_subdomain|max_length[50]');
+		$this->form_validation->set_rules('userfile1', 'File', 'callback_check_images');
 		if ($this->form_validation->run()) {
 		$data['x']=$this->adminmodel->update_university($univ_id);
 		//print_r($data['x']);
@@ -1705,6 +1724,11 @@ function manage_university($mps='')
 		$submit=0;
 		$data['univ_info']=$this->events->get_univ_detail();
 		if ($this->input->post('upload')) {
+		
+		//echo  $num_files = count($_FILES['userfile1']['name']);
+		$this->form_validation->set_rules('userfile1', 'File', 'callback_check_images');
+		if ($this->form_validation->run()) {
+		
 		if($data['admin_user_level']=='3')
 		{
 		$univ_info=$this->events->fetch_univ_id($data['user_id']);
@@ -1721,8 +1745,11 @@ function manage_university($mps='')
 		}
 		if($submit=='1')
 		{	
-		$x=$this->adminmodel->upload_univ_gallery($university_id);
+		if($this->adminmodel->upload_univ_gallery($university_id))
+		{
 		redirect('admin/manage_univ_gallery/ius');
+		}
+		}
 		}
 		}
 		$this->load->view('admin/add_univ_gallery', $data);
@@ -2001,6 +2028,48 @@ function manage_university($mps='')
    }
  }
  
+ function check_images()
+ {
+		//echo "hello";
+		if ($_FILES['userfile1']['name'][0]!='')
+		{		
+	    $num_files = count($_FILES['userfile1']['name'])-1;
+        for ($i=0; $i < $num_files; $i++) {
+		$png_mimes  = array('image/x-png','image/png');
+		$jpeg_mimes = array('image/jpg', 'image/jpe', 'image/jpeg', 'image/pjpeg');
+		if (in_array($_FILES['userfile1']['type'][$i], $png_mimes))
+		{
+			$filetype = 'image/png';
+		}
+
+		if (in_array($_FILES['userfile1']['type'][$i], $jpeg_mimes))
+		{
+			$filetype = 'image/jpeg';
+		}
+		else
+		{
+		$filetype=$_FILES['userfile1']['type'][$i];
+		}
+
+		$img_mimes = array(
+							'image/gif',
+							'image/jpeg',
+							'image/png',
+						);
+
+		if (! (in_array($filetype, $img_mimes)))
+		{
+		$data['err_msg']='Please Select the Image Gallery file in jpg/png/gif format.';
+		$this->load->view('admin/show_error',$data);
+		return false;
+		}
+		
+		}
+		return true;
+		}
+        return true; 
+ 
+ }
  
 }
 

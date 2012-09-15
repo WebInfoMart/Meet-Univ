@@ -353,6 +353,7 @@ class Users extends CI_Model
 		{
 		$level='1';
 		}
+		
 		$this->db->where("LOWER(username)='".strtolower($login)."' and level IN($level)");
 		//$this->db->where('LOWER(username)=', strtolower($login));
 		//$this->db->where('LOWER(level)=', '1');
@@ -400,6 +401,7 @@ class Users extends CI_Model
  
  function get_user_by_email($login,$user_type)
  {
+  $login=mysql_escape_string($login);
   if($user_type=='admin')
   {
   $level='2,3,4,5,6';
