@@ -1,4 +1,38 @@
+<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){			 
+	 jQuery("#drop").change(function()
+		{  
+			 var e = document.getElementById("drop");
+			 var dataString = e.options[e.selectedIndex].value;
+			 if(dataString==1 || dataString==2 || dataString==3)
+				{		 
+				  $("#search_box").show();
+				  $("#date_selector").hide();	
+				  $("#btnUnivSearch").show();
+				}				
+				if(dataString==5)
+				{
+					$("#search_box").hide();
+					$("#date_selector").show();				  
+					$("#btnUnivSearch").show();
+					//search_university();
+				}	
+				if(dataString==4)
+				{
+					$("#search_box").hide();
+					$("#date_selector").hide();				  
+					$("#btnUnivSearch").hide();
+					search_university();
+				}
+		});
+});
+</script>
 <?php 
+if($featured==''){ $featured=0;}
+if($sel_id==''){ $sel_id=0;}
+if($search_box==''){ $search_box=0;}
+if($date_selector==''){ $date_selector=0;}
 $edit=0;
 $delete=0;
 $view=0;
@@ -26,16 +60,29 @@ $insert=1;
 }
 }
 ?>
-<div id="content" class="content_msg" style="display:none;">
-<div class="span8 margin_t">
-  <div class="message success"><p class="info_message"></p>
-</div>
-  </div>
-  </div>
-  
- <div id="content">	
-
+<div id="ajax_load">
+<div  class="content_msg" style="display:none;">
+	<div class="span8 margin_t">
+		<div class="message success"><p class="info_message"></p></div>
+	</div>
+</div>  
+<div id="content">	
 <h2>DETAIL OF EVENTS</h2>
+			<div id="search_university" > 
+			<span >Filter</span>
+			<select id="drop" name="drop" >
+				<option>Select to Search</option>
+				<option value="1">Event Title</option>														
+				<option value="2">University Name</option>
+				<option value="3">Event's Country</option>
+				<option value="4">Featured Events</option>
+				<option value="5">Date Wise Events</option>
+			</select>
+			<input type="text" id="search_box" style="display:none;"/>	
+			<input type="text" id="date_selector" class="date_picker" style="display:none;"/>	
+			<input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_university();" style="display:none;">
+			 <div class="clearfix"></div>
+			 </div> 
 			<form action="<?php echo $base ?>adminevents/delete_events" method="post" id="deleteeventform" >	
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
 			
@@ -54,6 +101,8 @@ $insert=1;
 				
 				<tbody>
 				<?php
+				if(!empty($events_info))
+				{
 				foreach($events_info as $row){
 				?>
 					<tr class="even">
@@ -99,7 +148,9 @@ $insert=1;
 </td>		
 </tr>
 				
-			<?php } ?>		
+			<?php } } else { 
+			echo "<tr><td>".'No Result Found'."</td></tr>";
+			} ?>		
 				</tbody>
 				
 			</table>
@@ -115,17 +166,32 @@ $insert=1;
 				<input type="button" onclick="action_formsubmit(0,0)" class="submit tiny" value="Apply to selected" />
 			</div>		<!-- .tableactions ends -->
 		<?php  } ?>	
-		
-			<div id="pagination" class="table_pagination right paging-margin">
+		<div id="pagination" class="table_pagination right paging-margin">
+			<?php echo $this->pagination->create_links();?>
+		</div> 		
 			
-            <?php echo $this->pagination->create_links();?>
-			
-            </div> 		
-			
-		
+		</div>
 		
 		</div>
 <script>
+function search_university()
+{
+	var search_box = $('#search_box').val();
+	var date_selector=$('#date_selector').val();	
+	var a=document.getElementById("drop");	
+	var sel_id=a.options[a.selectedIndex].value;
+	var search_url = "<?php echo $base; ?>adminevents/manage_events";	
+	$.ajax({
+    type: "POST",
+    url: search_url,
+	data:'search_box='+search_box+"&sel_id="+sel_id+"&date_selector="+date_selector+"&ajax=1",	
+    success: function(response)
+    {//alert(response);
+		$('#ajax_load').html(response);
+    }
+	});
+
+}
 function delete_confirm(eventid)
 {
 $('#check_event_'+eventid).attr('checked','checked')
@@ -257,4 +323,27 @@ var f;
 	   });
 	 return f;
 }
+
+$(function() {
+		$("#pagination a").click(function() {
+        var url = $(this).attr("href");	
+		var featured='<?php echo $featured; ?>';
+		var sel_id='<?php echo $sel_id; ?>';		
+		var search_box='<?php echo $search_box; ?>';
+		var date_selector='<?php echo $date_selector; ?>';		
+		var data={sel_id:sel_id,search_box:search_box,featured:featured,date_selector:date_selector,ajax:'1'};			
+        $.ajax({
+          type: "POST",
+          data: data,
+          url: url,
+          beforeSend: function() {
+            $("#ajax_load").html("");
+          },
+          success: function(msg) {		 
+            $("#ajax_load").html(msg);          
+          }
+        });
+        return false;
+      });   
+  });
 </script>		

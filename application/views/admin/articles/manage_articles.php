@@ -49,6 +49,7 @@ function search()
 }
 </script>
 <div id="ajax_load" >
+<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 <?php 
 $edit=0;
 $delete=0;

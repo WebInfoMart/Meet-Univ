@@ -119,6 +119,31 @@ class Dashboard extends CI_Model
 		else
 		return 0;
 	}
+	function count_lead_data_by_date($timestamp)
+	{
+		$date=$timestamp;
+		$query=$this->db->query("SELECT * FROM `lead_data` where lead_created_time LIKE '$date%'");
+		return $query->num_rows();
+	}
+	function latest_event_users()
+	{
+		$query=$this->db->query("select * from users where user_type!='offline' order by createdon limit 0,15");	
+		return $query->result_array($query);
+	}
+	function ten_question()
+	{
+		$this->db->select("*");
+		$this->db->from('questions');		
+		$this->db->join('users','questions.q_askedby=users.id');
+		$this->db->join('user_profiles','user_profiles.user_id=users.id');		
+		$this->db->order_by("q_asked_time", "desc");
+		$this->db->limit(5);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		return $res->result_array();
+		else
+		return 0;
+	}
 }
 
 /* End of file users.php */

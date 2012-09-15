@@ -90,7 +90,7 @@ class Events extends CI_Model
 	}
 	
 	function events_detail()
-	{
+	{$arr=array('0');
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
@@ -98,6 +98,39 @@ class Events extends CI_Model
 		$this->db->join('university', 'events.event_univ_id = university.univ_id');
 		$this->db->join('country', 'country.country_id = events.event_country_id','left');
 		$this->db->join('city', 'events.event_city_id = city.city_id','left');
+		if($this->input->post('sel_id')==1)
+		{	$tosearch=$this->input->post('search_box');
+			$this->db->like('event_title',$tosearch);
+		}
+		if($this->input->post('sel_id')==2)
+		{$tosearch=trim($this->input->post('search_box'));			 
+		$query1=$this->db->query("select univ_id from university as uni where uni.univ_name like '%$tosearch%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['univ_id']);
+					}
+		$this->db->where_in('events.event_univ_id',$arr);
+		}
+		if($this->input->post('sel_id')==3)
+		{$tosearch=trim($this->input->post('search_box'));	
+			$query1=$this->db->query("select country_id from country as cnt where cnt.country_name like '%$tosearch%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['country_id']);
+					}
+		$this->db->where_in('events.event_country_id',$arr);
+		}
+		if($this->input->post('sel_id')==4)
+		{//$tosearch=$this->input->post('search_box');
+			$this->db->where('featured_home_event',1);
+		}
+		if($this->input->post('sel_id')==5)
+		{
+			$tosearch=trim($this->input->post('search_box'));	
+				$this->db->where('event_date_time',$tosearch);
+		}
 		if($data['admin_user_level']=='3')
 		{
 		$this->db->where('university.user_id',$data['user_id']);
@@ -114,6 +147,39 @@ class Events extends CI_Model
 		$this->db->join('university', 'events.event_univ_id = university.univ_id');
 		$this->db->join('country', 'country.country_id = events.event_country_id','left');
 		$this->db->join('city', 'events.event_city_id = city.city_id','left');
+		//echo $this->input->post('sel_id');exit;
+		if($this->input->post('sel_id')==1)
+		{	$tosearch=trim($this->input->post('search_box'));		
+			$this->db->like('event_title',$tosearch);
+		}
+		if($this->input->post('sel_id')==2)
+		{$tosearch=trim($this->input->post('search_box'));				 
+		$query1=$this->db->query("select univ_id from university as uni where uni.univ_name like '%$tosearch%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['univ_id']);
+					}
+		$this->db->where_in('events.event_univ_id',$arr);
+		}
+		if($this->input->post('sel_id')==3)
+		{$tosearch=trim($this->input->post('search_box'));	
+			$query1=$this->db->query("select country_id from country as cnt where cnt.country_name like '%$tosearch%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['country_id']);
+					}
+		$this->db->where_in('events.event_country_id',$arr);
+		}
+		if($this->input->post('sel_id')==4)
+		{//$tosearch=$this->input->post('search_box');
+			$this->db->where('featured_home_event',1);
+		}
+		if($this->input->post('sel_id')==5)
+		{$tosearch=trim($this->input->post('date_selector'));
+			$this->db->where('event_date_time',$tosearch);
+		}
 		if($data['admin_user_level']=='3')
 		{
 		$this->db->where('university.user_id',$data['user_id']);

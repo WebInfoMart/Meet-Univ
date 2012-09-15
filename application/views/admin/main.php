@@ -12,9 +12,7 @@ $flag=1;
 		<div class="message info"><p>Welcome to the Meet universities Admin Panel</p></div> 
 		
 		<?php if($admin_user_level=='3') { ?>
-		<h2>Statistics</h2>
-		
-		
+		<h2>Statistics</h2>		
 		<div class="stats_charts">
 		
 			<table class="stats" rel="line" cellpadding="0" cellspacing="0" width="100%">
@@ -32,18 +30,14 @@ $flag=1;
 			} 
 			?>		
 					</tr>
-				</thead>
-				
+				</thead>				
 				<tbody>
-					
-					
-					<tr>
-						<th>Event Request</th>								
-						<?php for($e=0;$e<count($no_of_event_registerd_user);$e++) { ?>
-						<td><?php echo $no_of_event_registerd_user[$e]; ?></td>
-						<?php } ?>	
-						
-					</tr>
+				<tr>
+					<th>Event Request</th>								
+					<?php for($e=0;$e<count($no_of_event_registerd_user);$e++) { ?>
+					<td><?php echo $no_of_event_registerd_user[$e]; ?></td>
+					<?php } ?>							
+				</tr>
 					
 					<tr>
 						<th>Program Request</th>	

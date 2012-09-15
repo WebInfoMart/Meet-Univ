@@ -45,8 +45,11 @@ class Adminevents extends CI_Controller
 			redirect('admin/adminlogout');
 			}
 			//fetch user privilege data from model
-			$this->load->view('admin/header', $data);
-			$this->load->view('admin/sidebar', $data);
+			if($this->input->post('ajax')!=1)
+			{
+				$this->load->view('admin/header', $data);
+				$this->load->view('admin/sidebar', $data);
+			}
 			$flag=0;
 			foreach($data['admin_priv'] as $userdata['admin_priv']){
 			if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']!=0 )
@@ -97,6 +100,10 @@ class Adminevents extends CI_Controller
 			$this->load->view('admin/userupdated', $data);
 			}
 			$data['events_info']=$this->events->events_detail();
+			$data['featured']=$this->input->post('featured');
+			$data['sel_id']=$this->input->post('sel_id');  
+			$data['search_box']= $this->input->post('search_box'); 
+			$data['date_selector']= $this->input->post('date_selector');
 			$this->load->view('admin/event/manage_events', $data);
 			}
 		}	

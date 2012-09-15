@@ -110,7 +110,7 @@ DateInput.prototype = {
         if (currentDay.getMonth() == date.getMonth()) {
 		var s=this.dateToString(currentDay).split(" ");
 		var p=this.dateToString(date).split(" ");
-		if(s[0] <p[0])
+		if(s[0] < p[0])
 		{
 		dayCells += '<td class="unselected_month" date="' + this.dateToString(currentDay) + '">' + currentDay.getDate() + '</td>';
 		}

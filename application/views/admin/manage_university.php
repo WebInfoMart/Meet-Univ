@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 				}				
 				if(dataString==4)
 				{
-					$("#search_bbox").hide();				  
+					$("#search_box").hide();				  
 					$("#btnUnivSearch").hide();
 					search_university();
 				}								
@@ -93,8 +93,7 @@ $delete=1;
 						$image_exist=0;
 						$univ_img = $row->univ_logo_path;	
 						    if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_img) && $univ_img!='')	
-							{ $image_exist=1;
-								}?>
+							{ $image_exist=1; }?>
 						<img src="<?php echo $base ?>uploads/univ_gallery/<?php if($row->univ_logo_path=='' || $image_exist!=1){ echo "univ_logo.png" ;} else { echo $row->univ_logo_path;} ?>" class="univ_logo_size">
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
