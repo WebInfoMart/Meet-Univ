@@ -6,14 +6,14 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['day', 'visitors','pageviews'],
-		  <?php for($i = 0; $i < 30; $i++) { 
+		  <?php for($i = 30; $i >=0; $i--) { 
 			$start_date=date('Y-m-d',strtotime($i.' day ago'));
 				foreach($objResults[$start_date] as $objResult )
 					{				   
 					   $Visitors = $objResult->getVisitors( );
 					   $intUniquePageViews = $objResult->getUniquePageViews( ); 
 						echo "['".$start_date."',".$Visitors.",".$intUniquePageViews."]";	
-						if($i!=29)
+						if($i!=0)
 						{
 						echo ',';
 						}
@@ -31,7 +31,7 @@
 	<div id="content">
 		<div class="message info"><p>Welcome to the Meet universities Admin Panel</p></div> 		
 		<h2>Statistics</h2>
-		<div class="stats_charts" id="chart_div" style="width: 1200px; height: 300px;"></div>	
+		<div class="stats_charts" id="chart_div" style="width: 1100px; height: 300px;"></div>	
 	
 		<div class="registerd_event_admin">
 		<center><h3>Latest Users</h3></center>
@@ -82,14 +82,29 @@
 			
 					<li>
 						<span><abbr class="timeago time_ago" title="<?php echo $ten_questions['q_asked_time']; ?>"></abbr></span>
-						<?php if($ten_questions['user_pic_path']!='') { ?>
-					<a href="#" class="avatar"><img src="<?php echo $base.'uploads/'.$ten_questions['user_pic_path']; ?>" /> </a>
-					<?php } else { ?>
-					<a href="#" class="avatar"><img src="<?php echo $base ?>uploads/user_model.png" /> </a>					
-					<?php } ?>						
+						<?php if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$ten_questions['user_thumb_pic_path']) && $ten_questions['user_thumb_pic_path']!='')
+						{
+						if(filesize(getcwd().'/uploads/user_pic/thumbs/'.$ten_questions['user_thumb_pic_path']))
+						{
+						 $user_pic =  base_url()."uploads/user_pic/thumbs/".$newly_registered['user_thumb_pic_path'];
+						}
+						else
+						{
+						 $user_pic = base_url()."images/profile_icon.png";
+						}
+						//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';	
+						}
+						else
+						{
+						$user_pic = base_url()."images/profile_icon.png";
+						}
+						?>
+					<a href="#" class="avatar"><img src="<?php echo $user_pic; ?>" /> </a>
+									
 						<a href="#" class="username"><?php echo $ten_questions['fullname']; ?></a>
+						<p><?php echo $ten_questions['email']; ?></p>
 						<p><?php echo $ten_questions['q_title']; ?></p>
-						<p class="q_detail"><?php $ten_questions['q_detail']; ?></p>
+						<p class="q_detail"><?php echo $ten_questions['q_detail']; ?></p>
 					
 					</li>
 				
