@@ -138,14 +138,7 @@ $flag=1;
 						<p><?php echo $fetch_recent_five_question_detail['q_title']; ?></p>
 						<p class="q_detail"><?php $fetch_recent_five_question_detail['q_detail']; ?></p>
 						
-						<!--<a href="javascript:return false;" onclick="answerthis('<?php echo $x; ?>');" class="answer_<?php echo $x; ?>">Answer This</a><span><?php   ?></span>
-						
-						<form action="" method="post" id="answer_form_<?php echo $x; ?>" style="display:none;">
-							<img src="<?php echo $base.'uploads/univ_gallery/'.$univ_detail_edit[0]->univ_logo_path; ?>" alt="" />
-							<input type="text" class="text"  id="answer_of_que_<?php echo $x; ?>" />
-							<input type="button" class="submit" value="Send" onclick="submitanswer('<?php echo $x; ?>')" />
-						</form>
-						-->
+					
 					</li>
 				
 				

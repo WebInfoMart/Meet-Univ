@@ -80,7 +80,7 @@ class Admin extends CI_Controller
    }
     if($data['admin_user_level']=='5')
    {
-   for($i = 0; $i < 30; $i++) { 
+   for($i = 30; $i >= 0; $i--) { 
      $start_date=date('Y-m-d',strtotime($i.' day ago'));
  $this->gapi->requestReportData( (60386809),'hostName', array( 'uniquePageViews,ga:visitors' ), array('-uniquePageViews'), null, $start_date, $start_date, 1, 1 ); 
  $data['objResults'][$start_date] = $this->gapi->getResults( ); 
