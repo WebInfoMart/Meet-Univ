@@ -187,30 +187,38 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 						<h3>Just Joined in</h3>
 						<?php
 						$x=0;
+						$user_pic='';
 						if(!empty($new_users))
 						{
 						foreach($new_users as $newly_registered){
 						$x++; 
-						if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$newly_registered['user_thumb_pic_path']) && $newly_registered['user_thumb_pic_path']!='' )
+					    if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$newly_registered['user_thumb_pic_path']) && $newly_registered['user_thumb_pic_path']!='')
 						{
-							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-						
-							$user_pic =  base_url()."uploads/user_pic/thumbs/".$newly_registered['user_thumb_pic_path'];
-						}
-						else if(file_exists(getcwd().'/uploads/user_pic/'.$newly_registered['user_pic_path']) && $newly_registered['user_pic_path']!='')
+						if(filesize(getcwd().'/uploads/user_pic/thumbs/'.$newly_registered['user_thumb_pic_path']))
 						{
-							$user_pic = base_url()."uploads/user_pic/".$newly_registered['user_pic_path'];
+						 $user_pic =  base_url()."uploads/user_pic/thumbs/".$newly_registered['user_thumb_pic_path'];
 						}
-						else{
-							$user_pic = base_url()."images/profile_icon.png";
+						//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';	
 						}
-												$fullname =$this->subdomain->process_url_title($newly_registered['fullname']);	
+						if(file_exists(getcwd().'/uploads/user_pic/'.$newly_registered['user_pic_path']) && $newly_registered['user_pic_path']!='' && $user_pic=='')
+						{
+						if(filesize(getcwd().'/uploads/user_pic/'.$newly_registered['user_pic_path']))
+						{
+						 $user_pic =  base_url()."uploads/user_pic/".$newly_registered['user_pic_path'];
+						}
+						}
+						if($user_pic==''){
+						$user_pic = base_url()."images/profile_icon.png";
+						}
+						$fullname =$this->subdomain->process_url_title($newly_registered['fullname']);	
 						?>
-<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>/<?php echo $newly_registered['fullname'];?>">
-<img style="width:50px;height:51px;" class="thumb <?php if(($x-1)%3){ echo "margin_delta";} else if(($x+1%3)){ echo "margin_beta";} ?>" src="<?php if($newly_registered['user_pic_path']==''){ echo $user_pic; } else { echo $base; ?>uploads/<?php echo $user_pic; }?>"/>
+<a href="<?php echo $base; ?>user/<?php echo $newly_registered['id'];?>/<?php echo $fullname;?>">
+<img style="width:50px;height:51px;" class="thumb <?php if(($x-1)%3){ echo "margin_delta";} else if(($x+1%3)){ echo "margin_beta";} ?>" src="<?php echo $user_pic; ?>"/>
 </a>				
 		
-					<?php } } else { "No New Users Available"; } ?>	
+					<?php
+					$user_pic='';
+					} } else { echo "No New Users Available"; } ?>	
 					</div>
 					<div class="span11 margin_delta margin_t">
 						<h3>Upcoming Events</h3>

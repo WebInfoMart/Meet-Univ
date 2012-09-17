@@ -227,8 +227,10 @@ if ($user) {
 		</div>
 		<div class="artical_width float_l">
 			<?php
+			$ac=0;
 			foreach($article_gallery as $article)
 			{
+			$ac++;
 			$article_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'articles',$article['article_title'],$article['article_id']);
 					
 			?>
@@ -281,7 +283,12 @@ if ($user) {
 					</div>
 				</div>
 				
-			<?php  } ?>		
+			<?php 
+			if($ac==2)
+			{
+			break;
+			}
+			} ?>		
 							
 		</div>
 	</div>

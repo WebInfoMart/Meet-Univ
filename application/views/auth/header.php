@@ -1,48 +1,23 @@
 <?php
 date_default_timezone_set('Asia/Kolkata'); 
-//$this->load->library('facebook'); 
-/****************************************** 
- *  Load Model and session library and    *
- *  Object                                *
- ******************************************/ 
-  
-  /* sm $this->load->model('users');
-  $this->ci =& get_instance();
-  $this->ci->load->config('tank_auth', TRUE);
-  $this->ci->load->library('session');*/
- 
- // chk want to login with facebook or not 
- //echo $this->ci->session->userdata('user_id');
 $user=null; 
 $facebook = new Facebook();
 $user = $facebook->getUser();
- //echo $this->ci->session->userdata('status');
 if($this->ci->session->userdata('login_by_fb') && (! $this->ci->session->userdata('status'))){
-//echo $this->ci->session->userdata('status');
-// sm $base = base_url();
-//$base['fb_redirect'] = "'".base_url()."'/auth/facebook";
-// by sm if((!($user)) && $this->session->userdata('fb_login'))
-// by sm {
-//$this->tank_auth->logout();   
-// by sm }
 if ($user) {
   try {
     // Proceed knowing you have a logged in user who's authenticated.
     $user_profile = $facebook->api('/me');
-//	print_r($user_profile);
   } catch (FacebookApiException $e) {
     error_log($e);
     $user = null;
   }
 }
 if ($user) {
-// by sm $this->session->set_userdata('login_by_fb','1');
   if($user_profile['gender'] != ''){ $fb_gender = $user_profile['gender']; } else{$fb_gender='';}
   if($user_profile['email'] != ''){ $fb_email = $user_profile['email']; } else{$fb_email='';}
   if($user_profile['name'] != ''){ $fb_name = $user_profile['name']; } else{$fb_name='';}
-  
-// Check if current facebook uesr email is available or not           
-  $fb_return_num_rows = $this->users->check_facebook_email($fb_email);
+    $fb_return_num_rows = $this->users->check_facebook_email($fb_email);
   if(!$fb_return_num_rows)
   {
   /**************************************** 
@@ -93,7 +68,6 @@ if ($user) {
  *  for store in session                  *
  ****************************************/
  	$get_fb_user_id['query'] = $this->users->fetch_fb_user_id($fb_email);
-	// by sm $fb_user_id = $get_fb_user_id['query']['id'];
 	$user_id = $get_fb_user_id['query']['id'];
   } 
   $this->ci->session->set_userdata(array(
@@ -104,22 +78,9 @@ if ($user) {
 } 
 
 }
-
-// by sm if(!$this->ci->session->userdata('status')) {
-//  Login URL of Facebook with perms 
- //by sm  $loginUrl = $facebook->getLoginUrl(array(
-         //  b sm      'scope'         => 'email,offline_access,publish_actions,user_birthday,user_location,user_work_history,user_about_me,user_hometown',
-                //'next' => $base['url']
-				//'redirect_uri'      => $base['url'],
-       // by sm     ));
-	//by sm $_SESSION['fb'] = '';
-	//by sm $this->session->set_userdata('login_by_fb','');
-	  // by sm   }
-	   
 	   
 	  function currentPageURL() {
     $curpageURL = 'http';
-    //if ($_SERVER["HTTPS"] == "on") {$curpageURL.= "s";}
     $curpageURL.= "://";
     if ($_SERVER["SERVER_PORT"] != "80") {
     $curpageURL.= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
@@ -154,15 +115,6 @@ $detail_of_event = $event_details;
 
 if(empty($keyword_content)) { $keyword_content="higher studies,  international students, upcoming events, global events, universities events, study in UK, UK scholarship, higher education, uk student visa, sponsorship, study in Canada, expenditure, Counselling."; }
 if(empty($description_content)) { $description_content="Attend Events, Study Abroad - Research, Connect & Meet Your Dream University"; }
-?>
-<?php
-/* if($this->session->userdata('login_by_site')=='' && $this->session->userdata('login_by_fb')=='' && !($user))
-{
-	$this->tank_auth->logout();
-	$this->session->set_userdata('login_by_site','');
-	$this->session->set_userdata('login_by_fb','');
-	redirect('login');
-} */
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -271,21 +223,16 @@ d.getElementsByTagName('head')[0].appendChild(js);
 						<div class="bar">
 						<?php
 						if($this->ci->session->userdata('status')){ ?>
-						<?php //by sm if($user) { ?>
-						<!--<a href="<?php echo $base?>home"><div class="login">Hi <?php //echo ucwords($this->ci->session->userdata('fullname')); ?></div></a>
-						<a href="<?= // $logoutUrl ?>"><img src="<?php //echo "$base$img_path" ?>/facebook_logout_button.png" alt="facebook" title="facebook"/> </a>
 						
-						<?php // by sm  } else { ?>	 -->
 						<a href="<?php echo $base?>home"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div></a>
 						<a href="<?php echo $base ?>logout"> <div class="login">Logout</div></a>
-						<?php //by sm  // } 
+						<?php 
 						} 
 						else { ?>
 							<a href="<?php echo $base ?>login"><div class="login">Login</div></a>
 							<a href="<?php echo $base ?>register"><div class="signup">Signup</div></a>
 							<span id="fb_button">
 							<fb:login-button   perms="email,user_checkins,publish_actions" id="fb_butonek" onlogin="reload_and_set_session()"></fb:login-button>
-							<!--<img src="<?php //echo "$base$img_path" ?>/inconnect.png" />-->
 							</span>
 							<?php } ?>
 						
