@@ -76,10 +76,10 @@ and (MONTH(lead_created_time)='".$mon."') group by lead_source ORDER BY ld.lead_
 	 
 }
 
-function recent_leads()
+function recent_leads($u_id)
 {
 	
-	$query=$this->db->query("SELECT `email`,`fullname`,`lead_created_time` from lead_data order by `lead_created_time` desc limit 0,10");	
+	$query=$this->db->query("SELECT `email`,`fullname`,`lead_created_time` from lead_data where FIND_IN_SET('".$u_id."',lead_data.applied_univ_id)  order by `lead_created_time` desc limit 0,10");	
 	return $query->result_array();
 	 
 }

@@ -34,7 +34,7 @@ class Admin_engagement extends CI_Controller
 		 $u_id=$univ[0]['univ_id']; 
 		 $data['u_id']=$u_id;
 		 $data['type_info']=$this->engagement_panel->count_students_type($u_id);
-		 $data['recent_leads']=$this->engagement_panel->recent_leads();
+		 $data['recent_leads']=$this->engagement_panel->recent_leads($u_id);
 		 $data['count']=$this->engagement_panel->count_students_in_univ($u_id);
 		 $data['city_wise']=$this->engagement_panel->count_univ_event_citywise($u_id);
 		 $max=date('m');
@@ -85,8 +85,8 @@ function city_students($start='',$end='')
 				$result['end']=$end;
 				$result['id']=$this->input->post('event_id');
 			  $result['event_stud']=$this->engagement_panel->cityevents_stud_model($start,$end);
-				$total=$this->engagement_panel->cityevents_stud_count();
-			  if($total-$end==0)
+				$total=$this->engagement_panel->cityevents_stud_count();				
+			  if($total-$end<=0)
 			  {
 				$result['dact_more']='nomore';
 			  }
@@ -102,7 +102,7 @@ function city_students($start='',$end='')
 				$result['end']=$end;
 				$result['id']=$this->input->post('event_id');				
 				$result['event_stud']=$this->engagement_panel->cityevents_stud_model($start,$end);
-				$total=$this->engagement_panel->cityevents_stud_count();
+				$total=$this->engagement_panel->cityevents_stud_count();				
 			  if($total-$end<=0)
 			  {
 				$result['dact_more']='nomore';

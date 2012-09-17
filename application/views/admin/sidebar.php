@@ -98,6 +98,19 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			</li>
 			<?php
 			}
+			if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
+			{?>
+			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" />News</a>
+			<ul><?php
+			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+			{?>
+			<li><?php echo anchor("$base".'adminnews/add_news', 'Add News'); ?></li>
+			<?php } ?>
+			<li><?php echo anchor("$base".'adminnews/manage_news', 'Manage News'); ?></li></ul>
+			
+			</li>
+			<?php
+			}
 			if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
