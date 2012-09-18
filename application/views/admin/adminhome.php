@@ -1,4 +1,3 @@
-
 <script type="text/javascript" src="<?php echo $base;?>/js/jsapi.js"></script>
 <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -31,14 +30,13 @@
 	<div id="content">
 		<div class="message info"><p>Welcome to the Meet universities Admin Panel</p></div> 		
 		<h2>Statistics</h2>
-		<div class="stats_charts" id="chart_div" style="width: 1100px; height: 300px;"></div>	
-	
-		<div class="registerd_event_admin">
-		<center><h3>Latest Users</h3></center>
-		</div>
-		<?php //print_r($latest_users); 
-		if($latest_users!=0){ ?>
-		<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
+		<div class="stats_charts" id="chart_div" style="width: 1100px; height: 300px;"></div>		
+		<div class="registerd_event_admin" style="width:50%;float:left">
+			<h3>Latest Users</h3>
+		
+				<?php //print_r($latest_users); 
+				if($latest_users!=0){ ?>
+				<table cellpadding="0" cellspacing="0" width="50%" class="sortable">
 			
 				<thead>
 					<tr>
@@ -66,9 +64,9 @@
 				</tbody>
 				
 			</table>
+		</div>
 	
-	
-	<div class="chat chat_admin">
+	<div class="chat chat_admin" style="float:left;width:45%;margin-left: 30px;margin-top:30px">
 <div class="chat_messages">
 				<h3>Question</h3>
 		<ul>

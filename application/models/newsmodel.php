@@ -72,12 +72,7 @@ class Newsmodel extends CI_Model
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
 		$this->db->from('news');
-		$this->db->join('university', 'news.news_univ_id = university.univ_id');
-		if($this->input->post('sel_id')=='1')
-		{		
-		$title=trim($this->input->post('search_box'));  		  
-		$this->db->like('news_title',$title,'both');
-		}
+		$this->db->join('university', 'news.news_univ_id = university.univ_id');		
 		if($this->input->post('approved')==1)
 		{
 			$status=$this->input->post('approved');

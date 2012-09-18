@@ -488,7 +488,7 @@ margin: 20px;
 #content table tr td,
 #content table tr th {
 	border-bottom: 1px solid #ddd;
-	padding: 10px;
+	padding: 7px;
 	line-height: normal;
 	text-align: left;
 	}
@@ -1184,14 +1184,14 @@ margin: 20px;
 	}
 
 #content .chat h3 {
-	font-size: 13px;
 	color: #454545;
 	text-transform: uppercase;
-	border-bottom: 1px solid #ddd;
+	/*font-size: 13px;
+	border-bottom: 1px solid #ddd;*/
 	}
 
 #content .chat_messages {
-	padding-right: 482px;
+	/*padding-right: 482px;*/
 	}
 .answer_box{margin-top:10px;background:#FBFBFB;border:1px solid #ccc;width:482px;border-radius:3px;padding:10px;}
 #content .chat_messages ul li {
@@ -1473,7 +1473,7 @@ border-radius: 3px;
 	height: 23px !important;
 }
 .registerd_event_admin{
-float:left;
+/*float:left;*/
 margin-top:30px;
 }
 .chat_admin{
