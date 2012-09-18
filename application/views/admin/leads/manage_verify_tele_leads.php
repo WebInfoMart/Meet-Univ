@@ -270,10 +270,12 @@ echo "<span id='lead_phone_$teleleadsres[v_id]'>".$teleleadsres['v_phone']."</sp
           data: "ajax=1",
           url: url,
           beforeSend: function() {
-            $("#content_data").html("");
+            //$("#content_data").html("");
+			 $("#content_data").css("opacity","0.5");
           },
           success: function(msg) {
 		  //alert(msg);
+		  $("#content_data").css("opacity","1");
             $("#content_data").html(msg);
             applyPagination();
           }

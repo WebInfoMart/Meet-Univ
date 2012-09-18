@@ -32,6 +32,7 @@ foreach($user_detail_edit as $user_detail){
 						else if($user_detail->level=='3') { echo "UNIVERSITY ADMIN" ;}
 						else if($user_detail->level=='2'){echo  "COUNSELLOR";}
 						else if($user_detail->level=='1') {echo "STUDENT";}
+						else if($user_detail->level=='6') {echo "Telecaller";}
 						//current user level and id		
 						$user_level=$user_detail->level;
 						$user_id=$user_detail->id;
@@ -39,18 +40,7 @@ foreach($user_detail_edit as $user_detail){
 						?>"></label>
 					</div>
 						
-					<!--	<div>
-							<label>Switch Status( On for Ban,Off for Unban)</label>
-							<div class="onoffswitch" <?php //if($user_detail->banned){?> style="background-position:-40px;"<?php//  }?>>
-								<span class="onoff_box checked" <?php// if($user_detail->banned){?> style="background-position:-40px;"<?php //} else {?> style="background-position-x: 0px; " <?php //} ?>>
-								
-								<input type="checkbox" <?php // if($user_detail->banned){?> checked }<?php //}?> id="switch_status"  class="onoffbtn"></span>
-								<input type="hidden" name="switch_user_status" id="switch_user_status" value="0">
-									<input type="hidden" id="chkcustomjs" value="0">
-							</div>
-							
-						</div>
-					-->	
+				
 						
 						
 						
@@ -62,7 +52,7 @@ foreach($user_detail_edit as $user_detail){
 						<!-- user privilege section for editing -->
 						<?php
 						//echo $user_detail_edit->level;
-						if($user_level!='1'){ ?>
+						if($user_level!='1' && $user_level!='2' && $user_level!='6'){ ?>
 						<ul>
 						<li>
 							<div class="span3">

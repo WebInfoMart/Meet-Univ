@@ -17,7 +17,7 @@ foreach($users_info as $get_user_info_list)
 
 <center>
 <div style="margin-top:30px;">
-<select name="university[]"  id="university" multiple size="25">
+<select name="university[]"  id="university" multiple size="25" style="height:400px;">
 <?php
 foreach($univ_info as $univ_info_list)
 {?>

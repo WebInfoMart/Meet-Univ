@@ -2,7 +2,11 @@
 if($sel_id==''){ $sel_id=0;}
 if($search_box==''){ $search_box=0;}
  ?>
+
 <script type="text/javascript">
+$('.check_all').click(function() {
+		$(this).parents('form').find('input:checkbox').attr('checked', $(this).is(':checked'));   
+	});
 jQuery(document).ready(function(){			 
 	 jQuery("#drop").change(function()
 		{  
@@ -49,8 +53,7 @@ function search()
 }
 </script>
 <div id="ajax_load" >
-<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
-<?php 
+<?php
 $edit=0;
 $delete=0;
 $view=0;

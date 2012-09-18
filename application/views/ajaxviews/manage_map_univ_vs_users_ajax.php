@@ -2,7 +2,7 @@
 $univ_id=explode('##',$univ_user_mapped_info);
  ?>
  <center>
-<select name="university[]" id="university" multiple size="30">
+<select name="university[]" id="university" multiple size="30" style="height:300px;">
 <?php foreach($univ_info as $univ_info1) { 
 $sel='';
 if(in_array($univ_info1['univ_id'],$univ_id))

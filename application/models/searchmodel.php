@@ -437,12 +437,12 @@ function show_all_college_paging($current_url)
 						$where='';
 						if($filter_country==1)
 						{
-						$country_ids=implode(",",$chk_country);
+						$country_ids=implode(",",$country_id);
 						$where.=" and university.country_id IN (".$country_ids.")";
 						}
 						if($filter_educ_level==1 )
 						{
-						$educ_level_ids=implode(",",$chk_educ_level);
+						$educ_level_ids=implode(",",$educ_level);
 						$join.=' JOIN univ_program ON univ_program.univ_id=university.univ_id';
 						$where.=" and univ_program.prog_educ_level IN(".$educ_level_ids.")";
 						}
@@ -450,7 +450,7 @@ function show_all_college_paging($current_url)
 						{
 						if($filter_educ_level!=1)
 						$join.=' JOIN univ_program ON univ_program.univ_id=university.univ_id';
-						$area_interest_ids=implode(',',$chk_area_intrest);
+						$area_interest_ids=implode(',',$area_interest);
 						$where.=" and univ_program.prog_parent_id IN('".$area_interest_ids."')";
 						}
 						/*$this->db->join('events','events.event_univ_id=university.univ_id','left');

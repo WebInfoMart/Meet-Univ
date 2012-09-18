@@ -1,5 +1,7 @@
-<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 <script type="text/javascript">
+$('.check_all').click(function() {
+		$(this).parents('form').find('input:checkbox').attr('checked', $(this).is(':checked'));   
+	})
 jQuery(document).ready(function(){			 
 	 jQuery("#drop").change(function()
 		{  
@@ -127,7 +129,7 @@ $insert=1;
 		  <a class="btn btn-primary dropdown-toggle arrow_but" data-toggle="dropdown" href="#"></a>
             <ul class="dropdown-menu">
 			<?php if($view==1) { ?>
-              <li><a href="<?php echo "$base"; ?>adminevents/view_event/<?php echo $row->event_id; ?>"><i class="icon-view" ></i> View</a></li>
+ <!--             <li><a href="<?php //echo "$base"; ?>adminevents/view_event/<?php //echo $row->event_id; ?>"><i class="icon-view" ></i> View</a></li>-->
 			<?php } if($edit==1) { ?>
               <li><a href="<?php echo "$base"; ?>adminevents/edit_event/<?php echo $row->event_id; ?>">
 			  <i class="icon-pencil"></i> Edit</a></li>

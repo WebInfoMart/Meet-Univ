@@ -124,7 +124,7 @@ class Adminevents extends CI_Controller
 			$data['fb_permissions']='yes';
 			}
 		}
-		$this->config->load('sendgrid');
+		//$this->config->load('sendgrid');
 		//$this->load->library('fbConn/facebook');
 		//$facebook = new Facebook();
 		$config['protocol'] = $this->config->item('protocol');

@@ -716,10 +716,10 @@ function events_result_by_paging(a,pid)
 	if(a!=cpage)	
 	{
 	var url=document.URL;
-	var change_url=url.split('colleges/');
+	var change_url=url.split('events/');
 	if(!(change_url.length>1 && change_url[1]!=''))
 	{
-	url='<?php echo $base; ?>colleges';
+	url='<?php echo $base; ?>events';
 	}
 	$('#div_events').animate({
 	'opacity':0.5

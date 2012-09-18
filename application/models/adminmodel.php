@@ -214,7 +214,7 @@ class Adminmodel extends CI_Model
 	public function edit_user_data()
 	{
 	
-		if($_POST['level_user']!=1)
+		if($_POST['level_user']!=1 && $_POST['level_user']!=6 && $_POST['level_user']!=2 && $_POST['level_user']!=5)
 		{
 		$this->db->delete('user_privilige', array('user_id' => $_POST['hid_user_id'])); 
 		$this->adminmodel->insert_userprivlege_data($_POST['hid_user_id']);

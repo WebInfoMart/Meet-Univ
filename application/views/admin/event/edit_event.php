@@ -73,7 +73,7 @@ $(document).ready(function() {
 
  <div id="content" >
 	
-		<div class="form span8 content_event_form1" style="z-index:-999;">
+		<div class="form span8 content_event_form1">
 		<h4 class="margin">Create University Events Step1</h4>
 			<form action="<?php echo $base; ?>adminevents/add_event" method="post" class="caption_form">
 				<ul>

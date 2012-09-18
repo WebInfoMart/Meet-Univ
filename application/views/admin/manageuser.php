@@ -39,11 +39,13 @@ function search()
           data: "toSearch="+toSearch+"&ajax=1",
           url: url,
           beforeSend: function() {
+		   $("#ajax_load").css("opacity","0.5");
             $("#ajax_load").html("");
           },
           success: function(msg) {
 		  //alert(msg);
-            $("#ajax_load").html(msg);           
+            $("#ajax_load").html(msg); 
+			$("#ajax_load").css("opacity","1");			
           }
         });
 	
@@ -341,10 +343,12 @@ $(function() {
           data: "level="+level+"&toSearch="+toSearch+"&banned="+banned+"&ajax=1",
           url: url,
           beforeSend: function() {
-            $("#ajax_load").html("");
+		  $("#ajax_load").css("opacity","0.5");
+            //$("#ajax_load").html("");
           },
           success: function(msg) {
 		  //alert(msg);
+		  $("#ajax_load").css("opacity","1");
             $("#ajax_load").html(msg);
             //applyPagination();
           }
@@ -364,10 +368,12 @@ function fetch(level)
           data: "level="+level+"&ajax=1",
           url: url,
           beforeSend: function() {
-            $("#ajax_load").html("");
+		  $("#ajax_load").css("opacity","0.5");
+           // $("#ajax_load").html("");
           },
           success: function(msg) {
 		  //alert(msg);
+		  $("#ajax_load").css("opacity","1");
             $("#ajax_load").html(msg);           
           }
         });
