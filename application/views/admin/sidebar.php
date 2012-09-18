@@ -30,7 +30,7 @@ $flag=1;
 			</li>
 			<?php
 			}
-			if($admin_user_level=='6' || $admin_user_level=='5') 
+			if($admin_user_level=='6' || $admin_user_level=='5' || $admin_user_level=='4') 
 			{ ?>
 			<li>
 			<a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Manage Leads</a>
@@ -111,6 +111,19 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			</li>
 			<?php
 			}
+			if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
+   {?>
+   <li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" />Q & A Section</a>
+   <ul><?php
+   if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+   {?>
+   <li><?php echo anchor("$base".'adminques/add_ques', 'Add Question'); ?></li>
+   <?php } ?>
+   <li><?php echo anchor("$base".'adminques/manage_ques', 'Manage Questions'); ?></li></ul>
+   
+   </li>
+   <?php
+   }
 			if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>
