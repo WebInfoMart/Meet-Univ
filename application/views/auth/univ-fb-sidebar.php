@@ -17,7 +17,7 @@ if($error_email != '') { $class_email = 'university_side_bar'; } else { $class_e
 if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class_mobile=''; }
 ?>
 <div class="span4 float_r">
-								<div class="college_form">
+	<div class="college_form">
 							<div>
 							<h2 class="text_align">I AM INTERESTED</h2>
 								<span>In studying at <?php echo ucwords($university_details['univ_name']);?></span>
@@ -63,7 +63,7 @@ if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class
 												</div>
 												<div class="clearfix"></div>
 											</div>-->
-											<div class="control-group">
+											<div>
 												<input type="submit" name="apply_now" id="apply_now" value="Apply Now!" class="btn btn-primary"/>
 											</div>
 										 </fieldset>

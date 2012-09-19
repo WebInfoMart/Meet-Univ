@@ -198,21 +198,36 @@ if ($user) {
 		</div>
 	</div>	
 	<div class="span8 float_l" style="margin-top:-30px">
+		<div class="contact_detail">
+			<h2>Contact Information</h2>
+			<div>
+				<div class="float_l"><h4>Office Address</h4></div>
+				<div class="float_r span6 margin_zero contact_height"><?php echo $university_details['address_line1']; ?></div>
+				<div class="clearfix"></div>
+			</div>
+			<div>
+				<div class="float_l"><h4>Mobile Number </h4></div>
+				<div class="float_l span3 margin_zero"><?php echo $university_details['phone_no']; ?></div>
+				<div class="clearfix"></div>
+			</div>
+			<div>
+				<div class="float_l"><h4>Fax </h4></div>
+				<div class="float_l span3 margin_zero"> <?php echo '&nbsp;'.$university_details['univ_fax']; ?></div>
+				<div class="clearfix"></div>
+			</div>
+						<div>
+				<div class="float_l"><h4>Email </h4></div>
+				<div class="float_l span3 margin_zero"> <?php echo '&nbsp;'.$university_details['univ_email']; ?></div>
+				<div class="clearfix"></div>
+			</div>
+			<div>
+				<div class="float_l"><h4>Website </h4></div>
+				<div class="float_l span3 margin_zero"> <?php echo '&nbsp;'.$university_details['univ_web']; ?></div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
 		<div>
 			<div class="span4 float_l margin_zero">
-				<div class="contact_detail">
-					<h2>Contact Information</h2>
-					<div>
-						<div class="float_l"><h4>Office Address</h4></div>
-						<div class="float_r span2 margin_zero contact_height"><?php echo $university_details['address_line1']; ?></div>
-						<div class="clearfix"></div>
-					</div>
-					<div>
-						<div class="float_l"><h4>Mobile Number</h4></div>
-						<div class="float_l span3 margin_zero"><?php echo $university_details['phone_no']; ?></div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
 				<div class="map_layout">
 				<?php echo $headerjs; ?>
 				<?php echo $headermap; ?>

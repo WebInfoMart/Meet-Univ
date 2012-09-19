@@ -777,10 +777,12 @@ class Adminmodel extends CI_Model
 	$config = array(
 			'allowed_types' => 'jpg|jpeg|gif|png',
 			'upload_path' => $this->univ_gallery_path,
-			'max_size' => 2000
+			'max_size' => 2000,
+			'file_name'=>'univ_logo_'.$univ_id
 		);
 		$myflag=0;
 		$this->load->library('upload', $config);
+		$this->upload->overwrite = true;
 		 if($_FILES["userfile"]["name"]!=''){
 	
 		if(!$this->upload->do_upload())
@@ -838,7 +840,7 @@ class Adminmodel extends CI_Model
 			);
 			//print_r($data);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
-			if($myflag==0)
+			if($myflag==0 && $_FILES["userfile"]["name"]!='')
 			{
 			$data=array('univ_logo_path' =>$image_data['file_name']);
 			$this->db->update('university', $data,array('univ_id'=>$univ_id));		
