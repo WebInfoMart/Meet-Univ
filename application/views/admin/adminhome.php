@@ -1,11 +1,11 @@
-<script type="text/javascript" src="<?php echo $base;?>/js/jsapi.js"></script>
+<script type="text/javascript" src="<?php echo $base;?>js/jsapi.js"></script>
 <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['day', 'visitors','pageviews'],
-		  <?php for($i = 30; $i >=0; $i--) { 
+		  <?php for($i = 30; $i >=1; $i--) { 
 			$start_date=date('Y-m-d',strtotime($i.' day ago'));
 				foreach($objResults[$start_date] as $objResult )
 					{				   

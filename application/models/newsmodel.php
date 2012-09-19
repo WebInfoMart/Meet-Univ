@@ -101,7 +101,7 @@ class Newsmodel extends CI_Model
 		$query=$this->db->get();
 		$config['base_url']=base_url()."adminnews/manage_news/";
 		$config['total_rows']=$query->num_rows();
-		$config['per_page'] = '2'; 
+		$config['per_page'] = '7'; 
 		//$config['use_page_numbers'] = TRUE;
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];

@@ -108,7 +108,7 @@ $delete=1;
 		  <a class="btn btn-primary dropdown-toggle arrow_but" data-toggle="dropdown" href="#"></a>
             <ul class="dropdown-menu">
 			<?php if($view==1) { ?>
-              <li><a href="<?php echo "$base$admin"; ?>/univ_detail/<?php echo $row->univ_id; ?>"><i class="icon-view" ></i> View</a></li>
+            <!--  <li><a href="<?php echo "$base$admin"; ?>/univ_detail/<?php //echo $row->univ_id; ?>"><i class="icon-view" ></i> View</a></li>-->
 			<?php } if($edit==1) { ?>
               <li><a href="<?php echo "$base$admin"; ?>/update_university/<?php echo $row->univ_id; ?>">
 			  <i class="icon-pencil"></i> Edit</a></li>
@@ -121,9 +121,9 @@ $delete=1;
 				<li><a href="javascript:void(0);" onclick="featured_home_confirm('<?php echo "$base$admin";?>','<?php  echo $row->featured_college; ?>','<?php echo $row->univ_id; ?>');" ><i class="icon-view"></i> <?php  if($row->featured_college=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a></li>
 			
 				<?php } ?>
+		<li><a target="_blank" href="<?php echo 'http://'.$row->subdomain_name.$domain_name; ?>"><i class="icon-view" ></i> Front View</a></li>
 				
-				
-			<?php	//} }?>
+			
 				</ul>
           </li>
         </ul>
@@ -168,9 +168,11 @@ $(function() {
           data:"ajax=1",
           url: url,
           beforeSend: function() {
-            $("#ajax_load").html("");
+            //$("#ajax_load").html("");
+			 $("#ajax_load").css("opacity","0.5");
           },
           success: function(msg) {
+		   $("#ajax_load").css("opacity","1");
 		    $("#ajax_load").html(msg);
         //    applyPagination();
           }
@@ -191,8 +193,12 @@ function search_university()
     type: "POST",
     url: search_url,
 	data:'search_box='+search_box+"&sel_id="+sel_id+"&ajax=1",	
+	beforeSend: function() {
+   		 $("#ajax_load").css("opacity","0.5");
+     },
     success: function(response)
     {
+		 $("#ajax_load").css("opacity","1");
 		$('#content_search').html(response);
     }
 	});

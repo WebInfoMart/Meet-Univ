@@ -86,7 +86,7 @@ if($search_box==''){ $search_box=0;}
 				<li><a href="javascript:void(0);" onclick="featured_home_confirm('<?php echo "$base$admin";?>','<?php  echo $row->featured_college; ?>','<?php echo $row->univ_id; ?>');" ><i class="icon-view"></i> <?php  if($row->featured_college=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a></li>
 			
 				<?php } ?>
-			<?php	//} }?>
+				<li><a target="_blank" href="<?php echo 'http://'.$row->subdomain_name.$domain_name; ?>"><i class="icon-view" ></i> Front View</a></li>
 				</ul>
           </li>
         </ul>
@@ -116,8 +116,12 @@ $(function() {
         $.ajax({
           type:"POST",
           data:"univ_name="+univ_name+"&search_box="+search_box+"&sel_id="+sel_id+"&ajax=1",
-          url: url,         
+          url: url,        
+		  beforeSend: function() {
+   		  $("#ajax_load").css("opacity","0.5");
+          },
           success: function(msg) {
+			 $("#ajax_load").css("opacity","1");
 		    $("#search_manage").html(msg);          
           }
         });

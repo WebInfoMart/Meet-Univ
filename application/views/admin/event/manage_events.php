@@ -2,6 +2,7 @@
 $('.check_all').click(function() {
 		$(this).parents('form').find('input:checkbox').attr('checked', $(this).is(':checked'));   
 	})
+	$('input.date_picker').date_input();
 jQuery(document).ready(function(){			 
 	 jQuery("#drop").change(function()
 		{  
@@ -18,14 +19,14 @@ jQuery(document).ready(function(){
 					$("#search_box").hide();
 					$("#date_selector").show();				  
 					$("#btnUnivSearch").show();
-					//search_university();
+					//search_events();
 				}	
 				if(dataString==4)
 				{
 					$("#search_box").hide();
 					$("#date_selector").hide();				  
 					$("#btnUnivSearch").hide();
-					search_university();
+					search_events();
 				}
 		});
 });
@@ -82,7 +83,7 @@ $insert=1;
 			</select>
 			<input type="text" id="search_box" style="display:none;"/>	
 			<input type="text" id="date_selector" class="date_picker" style="display:none;"/>	
-			<input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_university();" style="display:none;">
+			<input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_events();" style="display:none;">
 			 <div class="clearfix"></div>
 			 </div> 
 			<form action="<?php echo $base ?>adminevents/delete_events" method="post" id="deleteeventform" >	
@@ -115,11 +116,20 @@ $insert=1;
 						</td>
 						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
 						<td class="tabledata_width">
-						<?php echo ucwords(substr($row->event_title,0,50)); ?>
+						<?php if($row->event_title){ echo ucwords(substr($row->event_title,0,50)); } else { echo "<span style='color:#000;'>Not Available</span>"; } ?>
 						</td>
 						<td class="tabledata_width"><?php echo ucwords($row->univ_name); ?></td>
-						<td><a href="#"><?php echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>
-						<td><a href="#"><?php if($row->featured_home_event=='1'){?>Featured Event <?php } ?></a></td>
+						<td><a href="#"><?php
+						if($row->cityname!='')
+						{
+						echo ucwords($row->cityname);
+						}
+						else
+						{
+						echo '<span style="color:#000;">Not Available</span>';
+						}
+						?></a></td>
+						<td><a href="#"><?php if($row->featured_home_event=='1'){?>Featured Event <?php } else { echo "<span style='color:#000;'>Non Featured Event</span>"; } ?></a></td>
 						<td><a href="#"><?php echo $row->event_date_time; ?></a></td>
 						
 						<td>
@@ -141,9 +151,12 @@ $insert=1;
 			-->	
 			<?php }	 if($delete==1) { ?>
 			 <li><a href="#" onclick="delete_confirm('<?php echo $row->event_id; ?>');" ><i class="icon-trash"></i> Delete</a></li>
-				<?php }?>
-				
-			<?php	//} }?>
+				<?php }
+	$event_title=$this->subdomain->process_url_title(substr($row->event_title,0,50));
+    $event_link=$this->subdomain->genereate_the_subdomain_link($row->subdomain_name,'event',$event_title,$row->event_id);	
+?>	
+	<li><a target="_blank" href="<?php echo $event_link; ?>"><i class="icon-view" ></i> Front View</a></li>
+		
 			</ul>
           </li>
         </ul>
@@ -176,7 +189,7 @@ $insert=1;
 		
 		</div>
 <script>
-function search_university()
+function search_events()
 {
 	var search_box = $('#search_box').val();
 	var date_selector=$('#date_selector').val();	
@@ -187,8 +200,12 @@ function search_university()
     type: "POST",
     url: search_url,
 	data:'search_box='+search_box+"&sel_id="+sel_id+"&date_selector="+date_selector+"&ajax=1",	
+	 beforeSend: function() {
+             $("#ajax_load").css("opacity","0.5");
+     },
     success: function(response)
     {//alert(response);
+	 $("#ajax_load").css("opacity","1");
 		$('#ajax_load').html(response);
     }
 	});
@@ -339,9 +356,10 @@ $(function() {
           data: data,
           url: url,
           beforeSend: function() {
-            $("#ajax_load").html("");
+             $("#ajax_load").css("opacity","0.5");
           },
-          success: function(msg) {		 
+          success: function(msg) {
+		$("#ajax_load").css("opacity","1");		  
             $("#ajax_load").html(msg);          
           }
         });

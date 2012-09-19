@@ -268,11 +268,13 @@ function search()
 	type:"POST",
 	url:"<?php echo $base; ?>admin_counsellor/search_lead",
 	data: data,
-	cache: false,
-	async:false,
+	beforeSend: function() {
+             $("#main_content").css("opacity","0.5");
+     },
 	success:function(msg)
 	{
 	   //alert(msg);
+	  $("#main_content").css("opacity","1");
 		if(msg=='0')
 		{
 			$("#main_content").html('No Result Found');
@@ -298,9 +300,10 @@ function search()
           data: 'ajax=1',
           url: url,
           beforeSend: function() {
-		  $("#main_content").html("");
+		  $("#main_content").css("opacity","0.5");
           },
           success: function(msg) {			
+		  $("#main_content").css("opacity","1");
             $("#main_content").html(msg);
             applyPagination();
           }

@@ -26,9 +26,13 @@ jQuery(document).ready(function(){
 						$.ajax({
 							  type: "POST",
 							  data: "approved="+approved+"&ajax=1",
-							  url: url,							  
+							  url: url,			
+							beforeSend: function() {
+								$("#ajax_load").css("opacity","0.5");
+							  },		
 							  success: function(msg) {
 							  //alert(msg);
+							  $("#ajax_load").css("opacity","1");
 								$("#ajax_load").html(msg);           
 							  }
 							});
@@ -44,9 +48,13 @@ function search()
 	$.ajax({
     type: "POST",
     url: search_url,
-	data:'search_box='+search_box+"&sel_id="+sel_id+"&ajax=1",	
+	data:'search_box='+search_box+"&sel_id="+sel_id+"&ajax=1",
+		beforeSend: function() {
+		$("#ajax_load").css("opacity","0.5");
+		 },	
       success: function(msg) {
 		  //alert(msg);
+		  $("#ajax_load").css("opacity","1");
             $("#ajax_load").html(msg);           
           }
 	});
@@ -109,6 +117,7 @@ $insert=1;
 						<th ><input type="checkbox" class="check_all" ></th>
 						<th class="header" style="cursor: pointer; ">Article Title</th>
 						<th class="header" style="cursor: pointer; ">University Name</th>
+						<th class="header" style="cursor: pointer; ">Featured/UnFeatured</th>
 						<th class="header" style="cursor: pointer; ">Article Status</th>
 						
 						<!--<th class="header" style="cursor: pointer; ">Event's Place</th>-->
@@ -133,7 +142,9 @@ $insert=1;
 						<?php echo ucwords(substr($row->article_title,0,50)); ?>
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
-						<td><?php if($row->article_approve_status){ echo "Approved"; } else {  echo"Pending For Approve";} ?></td>
+						<td><?php if($row->featured_home_article){ echo "<span style='color:#000;'>Featured</span>"; } else {  echo "Nonfeatured";} ?></td>
+						
+						<td><?php if($row->article_approve_status){ echo "Approved"; } else {  echo "<span style='color:#000;'>Pending For Approve</span>";} ?></td>
 						
 						<!--<td><a href="#"><?php //echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>-->
 						<td>
@@ -155,8 +166,13 @@ $insert=1;
 			 </li>-->	
 			<?php }	 if($delete==1) { ?>
 			 <li><a href="#" onclick="delete_confirm('<?php echo $row->article_id; ?>');" ><i class="icon-trash"></i> Delete</a></li>
-				<?php }?>
+				<?php }
 				
+				$article_title=$this->subdomain->process_url_title(substr($row->article_title,0,50));
+				$article_link=$this->subdomain->genereate_the_subdomain_link($row->subdomain_name,'articles',$article_title,$row->article_id);
+				?>
+				
+			<li><a target="_balnk" href="<?php echo $article_link ; ?>" ><i class="icon-trash"></i>Front View</a></li>
 			<?php	//} }?>
 			</ul>
           </li>
@@ -349,9 +365,10 @@ $(function() {
           data: data,
           url: url,
           beforeSend: function() {
-            $("#ajax_load").html("");
+            $("#ajax_load").css("opacity","0.5");
           },
-          success: function(msg) {		 
+          success: function(msg) {		
+			$("#ajax_load").css("opacity","1");		  
             $("#ajax_load").html(msg);          
           }
         });

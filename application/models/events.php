@@ -285,7 +285,7 @@ class Events extends CI_Model
 		$this->db->from('events');
 		$this->db->where($field,'1');
 		$query = $this->db->get();
-		if($query->num_rows()<4)
+		if($query->num_rows()<3)
 		return 1;
 		else
 		return 0;

@@ -19,12 +19,13 @@ jQuery(document).ready(function(){
 							  type: "POST",
 							  data: "banned="+banned+"&ajax=1",
 							  url: url,
-							  // beforeSend: function() {
-								// $("#ajax_load").html("");
-							  // },
+							  beforeSend: function() {
+								 $("#ajax_load").css("opacity","0.5");
+							   },
 							  success: function(msg) {
 							  //alert(msg);
-								$("#ajax_load").html(msg);           
+								$("#ajax_load").html(msg);    
+								$("#ajax_load").css("opacity","1");								
 							  }
 							});
 				}								
@@ -40,7 +41,7 @@ function search()
           url: url,
           beforeSend: function() {
 		   $("#ajax_load").css("opacity","0.5");
-            $("#ajax_load").html("");
+           // $("#ajax_load").html("");
           },
           success: function(msg) {
 		  //alert(msg);

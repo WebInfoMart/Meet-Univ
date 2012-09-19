@@ -79,7 +79,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
 			<li><?php echo anchor("$base".'adminevents/add_event', 'Add Events'); ?></li>
-			<li><?php echo anchor("$base".'adminevents/add_more_event', 'Add Multiple Events'); ?></li>
+			<!--<li><?php //echo anchor("$base".'adminevents/add_more_event', 'Add Multiple Events'); ?></li>-->
 			<?php } ?>
 			<li><?php echo anchor("$base".'adminevents', 'Manage Events'); ?></li></ul></li>
 			<?php

@@ -22,9 +22,12 @@ jQuery(document).ready(function(){
 						$.ajax({
 							  type: "POST",
 							  data: "approved="+approved+"&ajax=1",
-							  url: url,							  
+							  url: url,
+							beforeSend: function() {
+								$("#ajax_load").css("opacity","0.5");
+							  },	
 							  success: function(msg) {
-							  //alert(msg);
+							 $("#ajax_load").css("opacity","1");
 								$("#ajax_load").html(msg);           
 							  }
 							});
@@ -41,15 +44,21 @@ function search()
     type: "POST",
     url: search_url,
 	data:'search_box='+search_box+"&sel_id="+sel_id+"&ajax=1",	
+	beforeSend: function() {
+	$("#ajax_load").css("opacity","0.5");
+	},
       success: function(msg) {
 		  //alert(msg);
+		  $("#ajax_load").css("opacity","1");
             $("#ajax_load").html(msg);           
           }
 	});
 }
+$('.check_all').click(function() {
+		$(this).parents('form').find('input:checkbox').attr('checked', $(this).is(':checked'));   
+	});
 </script>
 <div id="ajax_load" >
-<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
 <?php 
 $edit=0;
 $delete=0;
@@ -153,8 +162,11 @@ $insert=1;
 			 </li>-->	
 			<?php }	 if($delete==1) { ?>
 			 <li><a href="#" onclick="delete_confirm('<?php echo $row->news_id; ?>');" ><i class="icon-trash"></i> Delete</a></li>
-				<?php }?>
+				<?php }$news_title=$this->subdomain->process_url_title(substr($row->news_title,0,50));
+				$news_link=$this->subdomain->genereate_the_subdomain_link($row->subdomain_name,'news',$news_title,$row->news_id);
+				?>
 				
+			<li><a target="_balnk" href="<?php echo $news_link ; ?>" ><i class="icon-trash"></i>Front View</a></li>
 			<?php	//} }?>
 			</ul>
           </li>
@@ -347,10 +359,11 @@ $(function() {
           data: data,
           url: url,
           beforeSend: function() {
-            $("#ajax_load").html("");
+          $("#ajax_load").css("opacity","0.5");
           },
           success: function(msg) {		 
-            $("#ajax_load").html(msg);          
+            $("#ajax_load").html(msg);     
+			$("#ajax_load").css("opacity","1");			
           }
         });
         return false;

@@ -372,11 +372,11 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										</div>
 										<div class="float_r">
 										<!-- For VoiceCall PopOver -->
-										<!--<a href="#" id="ex6b" class="ex6b_ccc inline" name="event-get-detail_<?php echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+										<!--<a href="#" id="ex6b" class="ex6b_ccc inline" name="event-get-detail_<?php //echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
 											<span id="event_pop_<?php //echo $events['event_id']; ?>" class="ex6a_ccc" ></span>
-												<a href="#" id="ex6b2" class="ex6b_ccc2 inline" name="event-get-detail2_<?php echo $events['event_id']; ?>"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
+												<a href="#" id="ex6b2" class="ex6b_ccc2 inline" name="event-get-detail2_<?php //echo $events['event_id']; ?>"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
 											<span id="event_pop2_<?php //echo $events['event_id']; ?>" class="ex6a_ccc2" ></span>
-											<a href="<?php echo $event_link; ?>" class="inline"><img src="images/map.png" title="Map" alt="Map"></a>-->
+											<a href="<?php //echo $event_link; ?>" class="inline"><img src="images/map.png" title="Map" alt="Map"></a>-->
 										</div>
 										<div>
 											<div class="img_style float_l aspectcorrect" >

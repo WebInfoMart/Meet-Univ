@@ -990,10 +990,12 @@ function show_all_college_paging($current_url)
 						 }
 						 else if($filter_content[$f]=='counselling')
 						 {
+						 
+						 $events_data['filter_event_type'][]='others'; 
 						 $events_data['filter_event_type'][]='counselling'; 
 						 $event_type_list='alumuni';
 						 $event_type_list='others'; 
-						 $events_data['filter_event_type'][]='';
+						 $events_data['filter_event_type'][]='alumuni';
 						 $filter_event_types=1;
 						 continue;						  
 						 } 
