@@ -43,6 +43,11 @@ class Quesmodel extends CI_Model
 			$status=$this->input->post('approved');
 			$this->db->where('questions.q_approve',$status);
 		}
+		if($this->input->post('featured')==1)
+		{
+			$status=$this->input->post('featured');
+			$this->db->where('questions.q_featured_home_que',$status);
+		}
 		if($this->input->post('sel_id')=='1')
 		{		
 		$title=trim($this->input->post('search_box'));  		  
@@ -77,6 +82,11 @@ class Quesmodel extends CI_Model
 		{
 			$status=$this->input->post('approved');
 			$this->db->where('questions.q_approve',$status);
+		}
+		if($this->input->post('featured')==1)
+		{
+			$status=$this->input->post('featured');
+			$this->db->where('questions.q_featured_home_que',$status);
 		}
 		if($this->input->post('sel_id')=='1')
 		{		
@@ -134,11 +144,26 @@ class Quesmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('questions');
-		$this->db->join('university', 'questions.q_univ_id = university.univ_id');
+		$this->db->join('university', 'questions.q_univ_id = university.univ_id');		
 		$this->db->where('que_id',$ques_id);
 		$query=$this->db->get();
 		return $query->result_array();
 		
+	}
+	
+	function fetch_ques_ans($ques_id)
+	{
+		$this->db->select('*');
+		$this->db->from('comment_table');	
+		$this->db->where('comment_on_id',$ques_id);
+		$query=$this->db->get();
+		return $query->result_array();
+		
+	}
+	function ans_count($id)
+	{
+		$query=$this->db->query("select comment_id from comment_table where comment_on_id='".$id."'");		
+		return $query->num_rows();
 	}
 	
 	function update_ques($ques_id)
@@ -159,8 +184,25 @@ class Quesmodel extends CI_Model
 	function delete_single_ques($ques_id)
 	{
 		$this->db->delete('questions', array('que_id' => $ques_id));
+		$this->db->delete('comment_table', array('comment_on_id' => $ques_id));
 	}
-	
+	function dropans()	
+	{
+		$id=$this->input->post('id');
+		$this->db->delete('comment_table', array('comment_id' => $id));	
+		return 1;
+	}
+function edit_ans()	
+	{
+		$id=$this->input->post('id');
+		$ans=$this->input->post('ans');
+		$record=array(		
+		'commented_text'=>$ans
+		);
+		$this->db->where('comment_id',$id);
+		$this->db->update('comment_table', $record);	
+		return 1;
+	}	
 	function home_featured_unfeatured_ques($f_status,$ques_id)
 	{
 		if($f_status=='1')
@@ -214,6 +256,7 @@ class Quesmodel extends CI_Model
 			if($this->input->post("check_ques_".$ques_id[$i])=='checked')
 			{
 			$this->db->delete('questions', array('que_id' => $ques_id[$i]));
+			$this->db->delete('comment_table', array('comment_on_id' => $ques_id[$i]));
 			}
 		}
 	

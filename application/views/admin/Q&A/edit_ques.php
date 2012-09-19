@@ -1,8 +1,41 @@
-<div id="content" class="content_msg" style="display:none;">
-<div class="span8 margin_t">  
-<div class="message success"><p class="info_message"></p></div>  
-</div>  
-</div> 
+<style>
+#content_msg {
+	overflow: hidden;
+	padding: 0 20px;
+	left: 220px;
+	width: 40%;
+	position:absolute;
+	}
+#content_verify_message {
+	overflow: hidden;
+	padding: 0 20px;
+	left: 220px;
+	width: 82%;
+	}
+#content_drop_msg {
+	overflow: hidden;
+	padding: 0 20px;
+	left: 220px;
+	width: 35%;
+	position:absolute;
+	}		
+.message.info {
+	border: 1px solid #bbdbe0;
+	background: #ecf9ff url(../../images/admin/info.gif) 12px 12px no-repeat;
+	color: #0888c3;
+	}
+	
+	.message {
+	padding: 10px 15px 10px 40px;
+	margin-bottom: 15px;
+	font-weight: bold;
+	overflow: hidden;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	}
+	
+</style>
 <?php $class_title=''; 
 $class_univ_name='';
 $class_country='';
@@ -53,15 +86,87 @@ foreach($ques_info as $ques_detail) { ?>
 	<label>Detail</label>							
 	</div>							
 	<div class="">								
-	<textarea rows="12" name="detail"  cols="103"><?php echo $ques_detail['q_detail'];?></textarea>								
+	<textarea rows="5" name="detail"  cols="50"><?php echo $ques_detail['q_detail'];?></textarea>								
 	<span style="color: red;"> <?php echo form_error('detail'); ?><?php echo isset($errors['detail'])?$errors['detail']:''; ?> </span>							
 	</div>							
-	<div class="clearfix"></div>						
-</div>					
+	<div class="clearfix"></div>
+	<div class="float_l span3 margin_zero">								
+	<label>Answers</label>							
+	</div>
+<div class="clearfix"></div>
+<?php foreach($ans_info  as $ans)
+{ ?>	
+<div class="float_l span3 margin_zero">								
+	<label></label>							
+	</div>							
+	<div class="">								
+	<textarea rows="5" id="ans_<?php echo $ans['comment_id']; ?>" cols="50"><?php echo $ans['commented_text'];?></textarea>
+	<a href="javascript:void(0);" onclick="delete_this_record('<?php echo $ans['comment_id']; ?>')" id="data_del_<?php echo $ans['comment_id']; ?>" class="edit inline"><img style="height:18px;" src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>				
+	<a href="javascript:void(0);" onclick="edit_ans('<?php echo $ans['comment_id']; ?>')" id="data_<?php echo $ans['comment_id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>	
+	<div id="content_drop_msg_<?php echo $ans['comment_id']; ?>" style="display:none;">
+	<div class="message info"><p>Record dropped !!!</p></div> 
+	</div>
+	<div id="content_<?php echo $ans['comment_id']; ?>" class="content_msg" style="display:none;">
+	<div class="span8 margin_t">  
+	<div class="message success"><p class="info_message">Answer Edited Successfully</p></div>  
+	</div>  
+	</div>         
+	</div>							
+	<div class="clearfix"></div>
+<?php } ?>
+</div>				
 </li>				
-</ul>						
+</ul>
+						
 <input type="submit" name="submit" class="submit" value="Edit Question">									
 </form>	
 <?php } ?>
 </div>					
 </div>
+<script type="text/javascript">
+	//var main_url = "<?php echo $base ?>";
+	function delete_this_record(id)
+	{
+		var current_id = id;
+		var ask_confirm = confirm("Do you want to drop this record?");
+		var url='<?php echo $base;?>adminques/droprecord';
+		if(ask_confirm)
+		{
+		$.ajax({
+		type: "POST",
+		data: "id="+id,
+		url: url,
+		async: false,
+		cache: false,
+		success: function(msg)
+		{
+			if(msg == '1')
+			{
+				$("#ans_"+current_id).hide("slow");
+				$("#data_del_"+current_id).hide("slow");
+				$("#data_"+current_id).hide("slow");
+				$("#ans_"+current_id).replaceWith("");
+				$("#content_drop_msg_"+current_id).css("display","block");
+			}
+		}
+		});
+		}
+	}
+	function edit_ans(id)
+	{
+	var ans=$("#ans_"+id).val();
+	var data={id:id,ans:ans};
+	var url='<?php echo $base;?>adminques/edit_ans';
+	$.ajax({
+          type: "POST",
+          data: data,
+          url: url,         
+          success: function(msg) {
+		  	if(msg == '1')
+			{	  
+				$('#content_'+id).show();
+			}
+          }
+        });
+	}
+</script>	

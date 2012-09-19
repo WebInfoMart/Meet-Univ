@@ -1,4 +1,5 @@
 <?php 
+//print_r($ans_info);
 foreach($ques_info as $ques_detail) { ?>
 <div id="content">
 		<h2 class="margin">View ques Details</h2>
@@ -30,8 +31,7 @@ foreach($ques_info as $ques_detail) { ?>
 							<div class="clearfix"></div>
 						</div>
 					</li>
-					<?php } ?>   
-					
+					<?php } ?> 			
 					
 					<li>
 						<div>
@@ -39,11 +39,28 @@ foreach($ques_info as $ques_detail) { ?>
 								<label>Detail</label>
 							</div>
 							<div class="">
-								<textarea rows="12" disabled="disabled" name="detail"  cols="103"><?php echo $ques_detail['q_detail'];?></textarea>
+								<textarea rows="5" disabled="disabled" name="detail"  cols="50"><?php echo $ques_detail['q_detail'];?></textarea>
 							</div>
 							<div class="clearfix"></div>
 						</div>
 					</li>
+					<div class="float_l span3 margin_zero">
+								<label>Answers</label>
+							</div>
+							<div class="clearfix"></div>
+					<?php foreach($ans_info as $ans)
+					{ ?>
+					<li>
+						<div>
+							<div class="float_l span3 margin_zero">								
+							</div>
+							<div class="">
+								<textarea rows="5" disabled="disabled" name="detail"  cols="50"><?php echo $ans['commented_text'];?></textarea>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					<?php } ?>
 				</ul>
 						
 			</form>

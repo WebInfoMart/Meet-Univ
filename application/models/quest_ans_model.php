@@ -169,6 +169,20 @@ class Quest_ans_model extends CI_Model
 		return 0;
 		}
 	}
+	public function get_single_quest_comments($quest_id)
+	{
+		$this->db->select('*');
+		$this->db->from('comment_table');
+		$this->db->where('comment_on_id',$quest_id);		
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		else{
+		return 0;
+		}
+	}
 	
 	
 	

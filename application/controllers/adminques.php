@@ -112,6 +112,7 @@ class adminques extends CI_Controller
 			}
 			$data['ques_info']=$this->quesmodel->ques_detail();			
 			$data['approved']=$this->input->post('approved');
+			$data['featured']=$this->input->post('featured');
 			$data['sel_id']=$this->input->post('sel_id');  
 			$data['search_box']= $this->input->post('search_box');  
 			$this->load->view('admin/Q&A/manage_ques', $data);
@@ -394,6 +395,7 @@ class adminques extends CI_Controller
 		if($f==1)
 		{
 		$data['ques_info']=$this->quesmodel->fetch_ques_detail($ques_id);
+		$data['ans_info']=$this->quesmodel->fetch_ques_ans($ques_id);
 		//$this->load->view('admin/event/view_event', $data);
 		$this->load->view('admin/Q&A/view_ques', $data);
 		}
@@ -468,6 +470,7 @@ class adminques extends CI_Controller
 		$data['countries']=$this->users->fetch_country();
 		$data['univ_info']=$this->events->get_univ_detail();
 		$data['ques_info']=$this->quesmodel->fetch_ques_detail($ques_id);
+		$data['ans_info']=$this->quesmodel->fetch_ques_ans($ques_id);
 		//print_r($data['ques_info']);exit;
 		$this->load->view('admin/Q&A/edit_ques', $data);	
 		}
@@ -650,10 +653,47 @@ class adminques extends CI_Controller
 					redirect('admin/adminlogout');
 				}
 				$insert=$this->quesmodel->addans();	
-				if($insert==1)
-				{
-					redirect('adminques/manage_ques/eus');
-				}
+				echo $insert;
 			}	  
-}	  
+	}	
+function droprecord()
+{
+		if (!$this->tank_auth->is_admin_logged_in()) 
+			{
+				redirect('admin/adminlogin/');
+			}
+			else
+			{
+				$data = $this->path->all_path();
+				$data['user_id']	= $this->tank_auth->get_admin_user_id();
+				$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+				$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+				if(!($data['admin_priv']))
+				{
+					redirect('admin/adminlogout');
+				}
+				$insert=$this->quesmodel->dropans();	
+				echo $insert;
+			}
+}	
+function edit_ans()
+{
+		if (!$this->tank_auth->is_admin_logged_in()) 
+			{
+				redirect('admin/adminlogin/');
+			}
+			else
+			{
+				$data = $this->path->all_path();
+				$data['user_id']	= $this->tank_auth->get_admin_user_id();
+				$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+				$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+				if(!($data['admin_priv']))
+				{
+					redirect('admin/adminlogout');
+				}
+				$insert=$this->quesmodel->edit_ans();	
+				echo $insert;
+			}
+}
 }

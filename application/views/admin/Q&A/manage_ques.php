@@ -1,4 +1,46 @@
+<style>
+#content_msg {
+	overflow: hidden;
+	padding: 0 20px;
+	left: 220px;
+	width: 40%;
+	position:absolute;
+	}
+#content_verify_message {
+	overflow: hidden;
+	padding: 0 20px;
+	left: 220px;
+	width: 82%;
+	}
+#content_drop_msg {
+	overflow: hidden;
+	padding: 0 20px;
+	left: 220px;
+	width: 35%;
+	position:absolute;
+	}		
+.message.info {
+	border: 1px solid #bbdbe0;
+	background: #ecf9ff url(../../images/admin/info.gif) 12px 12px no-repeat;
+	color: #0888c3;
+	}
+	
+	.message {
+	padding: 10px 15px 10px 40px;
+	margin-bottom: 15px;
+	font-weight: bold;
+	overflow: hidden;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	}
+	
+</style>
+<div id="content_msg" class="content_msg" style="display:none;">
+<div class="message info"><p>Answer Added Successfully</p></div> 
+</div>
 <?php if($approved==''){ $approved=0;}
+if($featured==''){ $featured=0;}
 if($sel_id==''){ $sel_id=0;}
 if($search_box==''){ $search_box=0;}
  ?>
@@ -28,7 +70,23 @@ jQuery(document).ready(function(){
 								$("#ajax_load").html(msg);           
 							  }
 							});
-				}								
+				}
+				if(dataString==4)
+				{
+				  $("#search_box").hide();							
+				  $("#search").hide();
+				  var featured='1';
+						var url='<?php echo $base;?>adminques/manage_ques';
+						$.ajax({
+							  type: "POST",
+							  data: "featured="+featured+"&ajax=1",
+							  url: url,							  
+							  success: function(msg) {
+							  //alert(msg);
+								$("#ajax_load").html(msg);           
+							  }
+							});
+				}
 		});
 });
 function search()
@@ -43,6 +101,18 @@ function search()
 	data:'search_box='+search_box+"&sel_id="+sel_id+"&ajax=1",	
       success: function(msg) {
 		  //alert(msg);
+            $("#ajax_load").html(msg);           
+          }
+	});
+}
+function home()
+{	
+	var search_url = "<?php echo $base; ?>adminques/manage_ques";
+	$.ajax({
+    type: "POST",
+    url: search_url,
+	data:"ajax=1",	
+      success: function(msg) {		  
             $("#ajax_load").html(msg);           
           }
 	});
@@ -86,7 +156,8 @@ $insert=1;
   </div>
   </div>
   
- <div id="content">	
+<div id="content">	
+<input type="button" onclick="home()" class="submit tiny" value="Reset" />
 <div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
 	<span >Filter</span>
 	<select id="drop" name="drop" >
@@ -94,6 +165,7 @@ $insert=1;
 	<option value="1">Question Title</option>														
 	<option value="2">University_name</option>
 	<option value="3">Approved</option>
+	<option value="4">Featured</option>
 	</select>
 	<input id="search_box"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
 	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
@@ -108,7 +180,8 @@ $insert=1;
 						<th class="header" style="cursor: pointer; ">Questions Title</th>
 						<th class="header" style="cursor: pointer; ">University Name</th>
 						<th class="header" style="cursor: pointer; ">Featured Status</th>
-						<th class="header" style="cursor: pointer; ">ques Status</th>
+						<th class="header" style="cursor: pointer; ">Ques Status</th>
+						<th class="header" style="cursor: pointer; ">Answers Count</th>
 						
 						<!--<th class="header" style="cursor: pointer; ">Event's Place</th>-->
 						<th></th>
@@ -126,15 +199,14 @@ $insert=1;
 						<td>
 		<input type="checkbox" class="setchkval" value="" name="check_ques_<?php echo $row->que_id; ?>" id="check_ques_<?php echo $row->que_id; ?>">
 						<input type="hidden" name="que_id[]" value="<?php echo $row->que_id ?>" >
-						</td>
-						<!--<td><strong><a href="#"><?php // echo $row->id; ?></a></strong></td>-->
+						</td>						
 						<td>
 						<?php echo ucwords(substr($row->q_title,0,50)); ?>
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
 						<td><?php if($row->q_featured_home_que){ echo "Make Unfeatured"; } else {  echo"Make Featured";} ?></td>
 						<td><?php if($row->q_approve){ echo "Disapprove"; } else {  echo"Approve";} ?></td>
-						<!--<td><a href="#"><?php //echo ucwords($row->country_name).','.ucwords($row->cityname) ?></a></td>-->
+						<td id="count_<?php echo $row->que_id; ?>"><?php $count=$this->quesmodel->ans_count($row->que_id); echo $count; ?></td>						
 						<td>
 			
 		<ul class="nav">
@@ -168,9 +240,8 @@ $insert=1;
 </tr>
 <tr style="display:none"  id="tr_<?php echo $row->que_id;?>">
 <td>
+<div class="clearfix"></div>
 <textarea rows="4" cols="50" id="ans_<?php echo $row->que_id;?>" style="display:none"></textarea>
-</td>
-<td>
 <input type="button"  id="add_ans_<?php echo $row->que_id;?>" style="display:none" value="Submit" onclick="submitAns('<?php echo $row->que_id;?>')"/> 
 </td>
 </tr>
@@ -352,9 +423,10 @@ $(function() {
 		$("#pagination a").click(function() {
         var url = $(this).attr("href");	
 		var approved='<?php echo $approved; ?>';
+		var featured='<?php echo $featured; ?>';
 		var sel_id='<?php echo $sel_id; ?>';		
 		var search_box='<?php echo $search_box; ?>';
-		var data={sel_id:sel_id,search_box:search_box,approved:approved,ajax:'1'};		
+		var data={sel_id:sel_id,search_box:search_box,approved:approved,featured:featured,ajax:'1'};		
         $.ajax({
           type: "POST",
           data: data,
@@ -376,7 +448,9 @@ $(function() {
 	$("#add_ans_"+id).show();
 } 
 function submitAns(id)
-{   var url='<?php echo $base; ?>adminques/add_ans';
+{   
+	var countTd=$("#count_"+id).html();	
+	var url='<?php echo $base; ?>adminques/add_ans';
 	var answer=$("#ans_"+id).val();
 	var data={id:id,answer:answer,ajax:'1'};		
         $.ajax({
@@ -384,9 +458,17 @@ function submitAns(id)
           data: data,
           url: url,         
           success: function(msg) {	 
-                      
+                   if(msg='1')
+					{
+						$("#tr_"+id).hide('slow');
+						$("#content_msg").show('slow');
+						countTd++;
+						$("#count_"+id).html(countTd);
+						
+					}				   
           }
         });
+	
 	
 }
 </script>		

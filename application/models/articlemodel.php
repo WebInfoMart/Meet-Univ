@@ -77,7 +77,7 @@ class Articlemodel extends CI_Model
 		$title=trim($this->input->post('search_box'));  		  
 		$this->db->like('article_title',$title,'both');
 		}
-		if($this->input->post('approved')==1)
+		if($this->input->post('approved')=='1')
 		{
 			$status=$this->input->post('approved');
 			$this->db->where('article.article_approve_status',$status);
@@ -107,6 +107,11 @@ class Articlemodel extends CI_Model
 		$this->db->select('*');
 		$this->db->from('article');
 		$this->db->join('university', 'article.article_univ_id = university.univ_id');
+		if($this->input->post('approved')=='1')
+		{
+			$status=$this->input->post('approved');
+			$this->db->where('article.article_approve_status',$status);
+		}
 		if($this->input->post('sel_id')=='1')
 		{		
 		$title=trim($this->input->post('search_box'));  		  
@@ -119,7 +124,7 @@ class Articlemodel extends CI_Model
 		$res1=$query1->result_array();
 		foreach($res1 as $res)				
 					{
-					 array_push($arr,$res['univ_id']);
+						array_push($arr,$res['univ_id']);
 					}
 		$this->db->where_in('article.article_univ_id',$arr);
 		}

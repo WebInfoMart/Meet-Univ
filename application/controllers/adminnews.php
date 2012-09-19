@@ -112,6 +112,7 @@ class adminnews extends CI_Controller
 			}
 			$data['news_info']=$this->newsmodel->news_detail();			
 			$data['approved']=$this->input->post('approved');
+			$data['featured']=$this->input->post('featured');
 			$data['sel_id']=$this->input->post('sel_id');  
 			$data['search_box']= $this->input->post('search_box');  
 			$this->load->view('admin/news/manage_news', $data);
