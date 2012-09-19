@@ -57,6 +57,17 @@ class Univ_vs_user_model extends CI_Model
 	}
 	function fetch_univ_user_universities()
 	{
+		$this->db->select('*');
+		$this->db->from('university');
+		//$this->db->where_not_in('univ_id',$univs_lists); 
+		$query=$this->db->get();
+		$univ_list1=$query->result_array();
+		return $univ_list1;
+	
+	
+	
+		/*
+		code for university assigned to one user can not assign to other
 		$univs_lists=array('0');
 		$this->db->select('university_id');
 		$this->db->from('university_vs_users');
@@ -71,7 +82,7 @@ class Univ_vs_user_model extends CI_Model
 		$this->db->where_not_in('univ_id',$univs_lists); 
 		$query=$this->db->get();
 		$univ_list1=$query->result_array();
-		return $univ_list1;
+		return $univ_list1;*/
 	}
 	function manage_fetch_univ_user_universities($user_id)
 	{
