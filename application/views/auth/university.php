@@ -202,27 +202,36 @@ if ($user) {
 			<h2>Contact Information</h2>
 			<div>
 				<div class="float_l"><h4>Office Address</h4></div>
-				<div class="float_r span6 margin_zero contact_height"><?php echo $university_details['address_line1']; ?></div>
+				<div class="float_r span6 margin_zero contact_height">
+				<?php
+				if($university_details['address_line1']!='') {
+				echo $university_details['address_line1']; } else { echo "&nbsp;Not Available"; } ?></div>
 				<div class="clearfix"></div>
 			</div>
 			<div>
 				<div class="float_l"><h4>Mobile Number </h4></div>
-				<div class="float_l span3 margin_zero"><?php echo $university_details['phone_no']; ?></div>
+				<div class="float_l span3 margin_zero"><?php if($university_details['phone_no']!='' ) { echo '&nbsp;'.$university_details['phone_no']; }
+		else { echo "Not Available"; } ?></div>
 				<div class="clearfix"></div>
 			</div>
 			<div>
 				<div class="float_l"><h4>Fax </h4></div>
-				<div class="float_l span3 margin_zero"> <?php echo '&nbsp;'.$university_details['univ_fax']; ?></div>
+				<div class="float_l span3 margin_zero"> <?php 
+				if($university_details['univ_fax']!='' ) { 
+				echo '&nbsp;'.$university_details['univ_fax']; } else { echo '&nbsp;Not Available'; } ?></div>
 				<div class="clearfix"></div>
 			</div>
 						<div>
 				<div class="float_l"><h4>Email </h4></div>
-				<div class="float_l span3 margin_zero"> <?php echo '&nbsp;'.$university_details['univ_email']; ?></div>
+				<div class="float_l span3 margin_zero"> <?php
+				if($university_details['univ_email']!='') { 
+				echo '&nbsp;'.$university_details['univ_email']; } else { echo "&nbsp;Not Available"; }?></div>
 				<div class="clearfix"></div>
 			</div>
 			<div>
 				<div class="float_l"><h4>Website </h4></div>
-				<div class="float_l span3 margin_zero"> <?php echo '&nbsp;'.$university_details['univ_web']; ?></div>
+				<div class="float_l span3 margin_zero"> <?php if($university_details['univ_web']!='') { 
+				echo '&nbsp;'.$university_details['univ_web']; } else { echo "&nbsp;Not Available"; } ?></div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -291,7 +300,7 @@ if ($user) {
 									
 							</div>
 							<div>
-								<?php echo substr($article['article_detail'],0,380).'....'; ?>
+								<?php echo substr(strip_tags($article['article_detail']),0,380).'....'; ?>
 							</div>							
 						</div>
 						<div class="clearfix"></div>
