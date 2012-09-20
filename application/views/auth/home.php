@@ -230,44 +230,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 						</div>
 					</div>
-					<!--<div class="search_layout">
-						<div class="control-group">
-							<label class="control-label" for="focusedInput"><h3 class="white">City</h3></label>
-							<div class="controls">
-								<select id="select01">
-									<option>Select City</option>
-									<option>India</option>
-									<option>USA</option>
-									<option>Canada</option>
-									<option>New york</option>
-								</select>
-							</div>
-						</div>
-						<div class="control-group">
-							<div class="margin_b2">
-								<div class="float_l">
-									<img src="images/form_line_breaker.png">
-								</div>
-								<div class="float_l style_or">OR</div>
-								<div class="float_l"><img src="images/form_line_breaker2.png"></div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>-->
-					<!--<div class="control-group">
-						<label class="control-label" for="focusedInput"><h3 class="white">Search</h3></label>
-						<div class="controls">
-							<div class="float_l span4 margin_zero">
-								<input class="input-xlarge focused" id="focusedInput" type="text" value="" placeholder="Search here...">
-								<p class="help-block ex_univ"><span class="white">ex:</span> mba, university of sydney, undergraduate course</p>
-							</div>
-							<div class="float_l span1">
-								<button class="btn" href="#">Submit</button>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					-->
+					
 				</form>
 			</div>
 			<div class="clearfix"></div>
@@ -275,19 +238,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	</div>
 	<div class="clearfix"></div>
 	<div class="body_container">
-			<!--<div class="row">
-				<div class="span16 margin_zero">
-					<div style="padding:10px;background:#f1f7b4;-webkit-box-shadow: 0px 0px 6px
-					#999;-moz-box-shadow: 0px 0px 6px #888;">
-							<ul class="new_list">
-								<li><a>Lorem Ipsum has been the industry's standard dummy text.</a> </li>
-								<li><a>Lorem Ipsum has been the industry's standard dummy text.</a> </li>
-								<li><a>Lorem Ipsum has been standard dummy text.</a> </li>
-							</ul>
-					</div>
-				</div>
-			</div>
-			-->
+		
 			<div class="row">
 				<div class="span16 margin_t margin_delta">
 					<div class="float_l span7 margin_delta">
@@ -903,43 +854,38 @@ $(document).ready(function(){
 			$("#city").val(ui.item.value);
 			$("#selected_value").html(ui.item.label);
 			$("#open_box").hide();
-			$("#selected_event_city").val('');
-			event.preventDefault();
-		},
-		focus:function( event, ui ) {
-			$("#city").val(ui.item.value);
-			$("#selected_event_city").val(ui.item.label);
-			event.preventDefault();
-		},
-		open:function( event, ui ) {
-			$("#selected_event_city").val('');
+			//$("#selected_event_city").val('');
 			event.preventDefault();
 		},
 		width: 260,
 		selectFirst: false,
 		minLength: 0,
-		}).focus(function() {
-			$(this).autocomplete('search', '')
 		});
 	
 	$("html").click(function(e){
-		if((e.target.id == "select_city")){
+	//alert(e.id);
+		if((e.target.id == "select_city") || (e.target.id == "city_dropdown") || (e.target.id == "selected_event_city") ){
 			$("#open_box").show();
-			$("#selected_event_city").trigger('focus');
-			$("#selected_event_city").val("");
-		}else if((e.target.id == "city_dropdown")){
-			$("#open_box").show();
-			$("#selected_event_city").trigger('focus');
-			$("#selected_event_city").val("");
-		}else if(e.target.id == "selected_event_city"){
-			$("#open_box").show();
-			$("#selected_event_city").trigger('focus');
-			$("#selected_event_city").val("");
-		}else{
-			$("#open_box").hide();
+			$('#selected_event_city').autocomplete('search', '');
+			//$("#selected_event_city").trigger('focus');
+			//$("#selected_event_city").val("");
 		}
+		else if((e.target.id == "select_country") || (e.target.id == "country_dropdown") || (e.target.id == "selected_college_country")){
+			$("#open_box_country").show();
+			$('#selected_college_country').autocomplete('search', '')
+		}
+		else if((e.target.id == "select_course") || (e.target.id == "course_dropdown") || (e.target.id == "selected_college_course")){
+			$("#open_box_course").show();
+			$('#selected_college_course').autocomplete('search', '');
+		}
+		else{
+			$("#open_box").hide();
+			$("#open_box_country").hide();
+			$("#open_box_course").hide();
+			$('.ui-autocomplete').hide();
+			
+	}
 	});
-	
 	$("#open_box_country").hide();
 	
 	$("#selected_college_country").autocomplete({
@@ -951,39 +897,19 @@ $(document).ready(function(){
 			$("#selected_college_country").val('');	
 			event.preventDefault();
 		},
-		focus:function( event, ui ) {
-			$("#search_country").val(ui.item.value);
-			$("#selected_country").val(ui.item.label);
-			event.preventDefault();
-		},
-		open:function( event, ui ) {
-			$("#selected_college_country").val('');	
-			event.preventDefault();
-		},
 		width: 260,
 		selectFirst: false,
 		minLength: 0,
-		}).focus(function() {
-	$(this).autocomplete('search', '')
-	});
+		});
 		
-	$("html").click(function(e){
-		if((e.target.id == "select_country")){
+	/*$("html").click(function(e){
+	if((e.target.id == "select_country") || (e.target.id == "country_dropdown") || (e.target.id == "selected_college_country")){
 			$("#open_box_country").show();
-			$("#selected_college_country").trigger('focus');
-			$("#selected_college_country").val("");
-		}else if((e.target.id == "city_dropdown")){
-			$("#open_box_country").show();
-			$("#selected_college_country").trigger('focus');
-			$("#selected_college_country").val("");
-		}else if(e.target.id == "selected_college_country"){
-			$("#open_box_country").show();
-			$("#selected_college_country").trigger('focus');
-			$("#selected_college_country").val("");
+			$('#selected_college_country').autocomplete('search', '')
 		}else{
 			$("#open_box_country").hide();
 		}
-	});
+	});*/
 	
 	$("#open_box_course").hide();
 	
@@ -996,39 +922,20 @@ $(document).ready(function(){
 			$("#selected_college_course").val('');	
 			event.preventDefault();
 		},
-		focus:function( event, ui ) {
-			$("#search_program").val(ui.item.value);
-			$("#selected_course").val(ui.item.label);
-			event.preventDefault();
-		},
-		open:function( event, ui ) {
-			$("#selected_college_course").val('');
-			event.preventDefault();
-		},
 		width: 215,
 		selectFirst: false,
 		minLength: 0,
-		}).focus(function() {
-	$(this).autocomplete('search', '')
-	});
+		});
 		
-	$("html").click(function(e){
-		if((e.target.id == "select_course")){
+	/*$("html").click(function(e){
+		if((e.target.id == "select_course") || (e.target.id == "course_dropdown") || (e.target.id == "selected_college_course")){
 			$("#open_box_course").show();
-			$("#selected_college_course").trigger('focus');
-			$("#selected_college_course").val("");
-		}else if((e.target.id == "course_dropdown")){
-			$("#open_box_course").show();
-			$("#selected_college_course").trigger('focus');
-			$("#selected_college_course").val("");
-		}else if(e.target.id == "selected_college_course"){
-			$("#open_box_course").show();
-			$("#selected_college_course").trigger('focus');
-			$("#selected_college_course").val("");
-		}else{
+			$('#selected_college_course').autocomplete('search', '');
+		}
+		else{
 			$("#open_box_course").hide();
 		}
-	});
+	});*/
 	
 	$("#event_button :button").click(function(){
 		if ($("#event_button :button").is('.active')) {

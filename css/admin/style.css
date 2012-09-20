@@ -1379,10 +1379,9 @@ margin: 20px;
 #content.loginbox {
 	background: #fff;
 	width: 400px;
-	margin: 150px auto;
+	margin: 150px 500px;
 	border: 1px solid #b0bec6;
 	padding: 20px 0 0;
-	float: center;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;

@@ -114,7 +114,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 						<div class="float_l span3">
 							<div class="float_l">
 							
-							<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "univ_logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img"></div>
+							<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if( file_exists(getcwd().'/uploads/univ_gallery/'.$univ_detail_update['univ_logo_path'])  && $univ_detail_update['univ_logo_path']!=''){ echo $univ_detail_update['univ_logo_path'];  } else { echo "univ_logo.png";  } ?>" class="logo_img"></div>
 							<div class="float_l span1"><input type="file" name="userfile" class="file"></div>
 						</div>
 						<div class="clearfix"></div>

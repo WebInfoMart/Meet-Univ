@@ -1,4 +1,4 @@
-<div id="content" class="content_msg_show">
+<div id="content" class="content_msg_show hide_content_div">
 <div class="span8 margin_t">
   <div class="message success"><p><?php echo $msg; ?></p>
 </div>
@@ -12,3 +12,6 @@ left:13%;
 top:7%;
 }
 </style> 
+<script>
+$(".hide_content_div").delay(5000).hide("slow");
+</script>

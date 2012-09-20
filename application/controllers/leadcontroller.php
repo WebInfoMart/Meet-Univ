@@ -175,17 +175,20 @@ class Leadcontroller extends CI_Controller
 			$level_steps = $this->session->userdata('level_steps');
 			$apply_college_steps = $this->session->userdata('apply_college');
 			$university_ids = $this->input->post('select_id');
-			$arr = array();
+			$arr = array('0');
 			if($apply_college_steps!='')
 			{
 			array_push($arr,$apply_college_steps);
 			}
+			if(!empty($university_ids))
+			{
 			foreach($university_ids as $ids)
 			{
 				if($ids != $apply_college_steps)
 				{
 				array_push($arr,$ids);
 				}
+			}
 			}
 			$insert_val = implode($arr,",");
 			$data['submitting_step_three'] = $this->leadmodel->insert_step_three($insert_val);

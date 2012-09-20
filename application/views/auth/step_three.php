@@ -54,7 +54,7 @@
 										<div>
 											<div class="float_l page3_step3_img">
 												<?php
-												if($select_univ['univ_logo_path'] != '')
+												if( file_exists(getcwd().'/uploads/univ_gallery/'.$select_univ['univ_logo_path'])  && $select_univ['univ_logo_path'] != '')
 												{
 													echo "<img class='univ_page_logo_nw' src='".base_url()."uploads/univ_gallery/".$select_univ['univ_logo_path']."'/>"; 
 												}

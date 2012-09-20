@@ -6,7 +6,7 @@
 				Promote
 				</div>
 				<div class="pc_set"><img src="<?php echo $base; ?>images/images/pc_icon.png" class="inline pc_img_set">
-					<data class="inline text_size">Promote your events / university using our super intelligent :</data>
+					<data class="inline text_size">Promote your events / university using our Smart Analysis :</data>
 					<div class="line_set"></div>
 				</div>
 				<div class="center_area">
@@ -41,7 +41,7 @@
 			</div>
 			<div class="data13 second_holder">
 				<div class="promot_heading">
-				Super Intelligent comparison
+				Smart Analysis
 				</div>
 					<div class="data_margin">
 						<div class="data5 float_l margin_delta">
@@ -63,7 +63,7 @@
 									<label class="control-label5" for="select01">City: </label>
 									<div class="controls">
 										<select id="city_list" onchange="find_no_of_user_on_onchange(this)">
-											<option value="0">Select Educ Level</option>
+											<option value="0">Select your location</option>
 								<?php foreach($all_cities as $all_city) { ?>			
 											<option value="<?php echo $all_city['city_id']; ?>"><?php echo $all_city['cityname']; ?></option>
 								<?php } ?>			
@@ -74,8 +74,8 @@
 									<label class="control-label5" for="select01">Educational level: </label>
 									<div class="controls">
 										<select id="educ_level" onchange="find_no_of_user_on_onchange(this)">
-											<option value="0">Select your location</option>
-											<option value="2">Fondation</option>
+											<option value="0">Select Educ Level</option>
+											<option value="2">Foundation</option>
 											<option value="3">UnderGraduate</option>
 											<option value="4">PostGraduate</option>
 										</select>
@@ -147,11 +147,15 @@ $.ajax({
 		 {
 		 $('#country_text_name').html('Worldwide');
 		 } 
+		 else
+		 {
+		 $('#country_text_name').html(country_text);
+		 }
 		 var res=msg.split('!@#$%');
 		 $('#city_list').html(res[0]);
 		 $('#total_no_of_student_in_country').html(res[1]);
-		 $('#country_text_name').html(country_text);
-		 $('#city_text_name').html('Select City');
+		  $('#city_text_name').html('Select City');
+		 
 		 $('#no_of_student_in_city').html('0');
 		 
 		  $('#no_of_student_in_educ_lvl').html(res[2]);

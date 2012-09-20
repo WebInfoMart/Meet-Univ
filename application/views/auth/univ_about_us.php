@@ -1,13 +1,25 @@
 <div class="row" style="margin-top:-25px">
 	<div class="float_l span13 margin_l">
 		<div class="margin_t">
-						<?php
+		<?php if($university_details['univ_overview'] == "" && $university_details['univ_campus'] == ""
+		&& $university_details['univ_departments'] == "" && $university_details['univ_expertise'] == ""
+		&& $university_details['univ_interstudents'] == "" && $university_details['univ_slife'] == ""
+		&& $university_details['univ_faculties'] == "" && $university_details['univ_alumni'] == "") { 
+		?><div class="float_l">
+		<?php
+		echo "<h2>";
+		echo "We are gathering information about the ".$university_details['univ_name'].". Please visit back soon...";
+		echo "</h2>";
+		?></div>
+	    <?php }  else { 
 							$univ_alumni=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'alumini-detail','','');
 							$univ_faculties=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'faculties-detail','','');
 							$univ_slife=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'studentlife-detail','','');
 							$univ_interstudents=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'internationalstudent-detail','','');
 							$univ_expertise=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'expertise-detail','','');
 							$univ_departments=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'departments-detail','','');
+							$univ_services=$this->subdomain->genereate_the_subdomain_link($university_details['subdomain_name'],'univ-services','','');
+							
 	?>
 	
 	<div>
@@ -18,18 +30,10 @@
 		</div>
 		</div>
 		<?php } ?>
-		<div class="float_l">
-		<?php if($university_details['univ_overview'] == "" && $university_details['univ_campus'] == ""
-		&& $university_details['univ_departments'] == "" && $university_details['univ_expertise'] == ""
-		&& $university_details['univ_interstudents'] == "" && $university_details['univ_slife'] == ""
-		&& $university_details['univ_faculties'] == "" && $university_details['univ_alumni'] == "") { 
-		echo "<h2>";
-		echo "We are gathering information about the ".$university_details['univ_name'].". Please visit back soon...";
-		echo "</h2>";
-	} ?>
-		</div>
-		<div class="float_r span5">
+		
+		
 	<?php if($university_details['univ_insights']!='') { ?>	
+		<div class="float_l span5">
 			<div class="about_round">
 			<?php
 			
@@ -43,8 +47,9 @@
 	<div class="margin_t">
 	
 	<?php
-	if($university_details['univ_departments']!='' || $university_details['univ_expertise']!='' || $university_details['univ_interstudents']!='' || $university_details['univ_slife']!='' || $university_details['univ_faculties']!='' || $university_details['univ_alumni']!=''){
-	echo "<h3>University Campus Overview</h3><div class='course_cont'>".$university_details['univ_campus']; } 
+	if($university_details['univ_campus']!=''){
+	echo "<h3>University Campus Overview</h3><div class='course_cont'>".$university_details['univ_campus']; 
+	} 
 	
 	?>
 	</div>
@@ -52,7 +57,7 @@
 	<div class="span13 margin_delta margin_b">
 	<?php if($university_details['univ_departments'] != '') { ?>
 		<div class="float_l grid_2 margin_delta margin_t left_about">
-			<?php echo "<div class='about_fix'><h3>University Departments</h3>".$university_details['univ_departments'];
+			<?php echo "<div class='about_fix'><h3>University Departments</h3>".substr(strip_tags($university_details['univ_departments']),0,250);
 			?>
 			</div> <?php
 			if(strlen($university_details['univ_departments']) > 250) { 
@@ -67,7 +72,7 @@
 	<?php if($university_details['univ_expertise'] != '') { ?>
 		<div class="float_l grid_2 margin_delta margin_t left_about">
 			<?php
-			echo "<div class='about_fix'><h3>University Research Expertise</h3>".$university_details['univ_expertise'];
+			echo "<div class='about_fix'><h3>University Research Expertise</h3>".substr(strip_tags($university_details['univ_expertise']),0,250);
 			?>
 			</div> <?php
 			if(strlen($university_details['univ_expertise']) > 250) { 
@@ -81,7 +86,7 @@
 	<?php } ?>
 	<?php if($university_details['univ_interstudents'] != '') { ?>
 		<div class="float_l grid_2 margin_delta margin_t left_about">
-		<?php echo "<div class='about_fix'><h3>International Students</h3>".$university_details['univ_interstudents'];
+		<?php echo "<div class='about_fix'><h3>International Students</h3>".substr(strip_tags($university_details['univ_interstudents']),0,250);
 		?> </div>" <?php
 		if(strlen($university_details['univ_interstudents']) > 250) { 
 		?>
@@ -95,7 +100,7 @@
 	<?php if($university_details['univ_slife'] != '') { ?>
 		<div class="margin_t float_l grid_2 margin_delta left_about">
 		<?php 
-			echo "<div class='about_fix'><h3>University Student Life</h3>".$university_details['univ_slife'];
+			echo "<div class='about_fix'><h3>University Student Life</h3>".substr(strip_tags($university_details['univ_slife']),0,250);
 			?></div> <?php
 			if(strlen($university_details['univ_slife']) > 250) { 
 		?>
@@ -109,7 +114,7 @@
 	<?php if($university_details['univ_faculties'] != '') { ?>
 		<div class="margin_t float_l grid_2 margin_delta left_about">
 		<?php
-		echo "<div class='about_fix'><h3>University Faculties</h3>".$university_details['univ_faculties']; ?>
+		echo "<div class='about_fix'><h3>University Faculties</h3>".substr(strip_tags($university_details['univ_faculties']),0,250); ?>
 		</div> <?php
 		if(strlen($university_details['univ_faculties']) > 250) { 
 		?>
@@ -122,7 +127,7 @@
 	<?php } ?>
 	<?php if($university_details['univ_alumni'] != '') { ?>
 		<div class="float_l grid_2 margin_delta margin_t left_about">
-		<?php echo "<div class='about_fix'><h3>University Awarded Alumni</h3>".$university_details['univ_alumni'];
+		<?php echo "<div class='about_fix'><h3>University Awarded Alumni</h3>".substr(strip_tags($university_details['univ_alumni']),0,250);
 		?>
 		</div> <?php
 		if(strlen($university_details['univ_alumni']) > 250) { 
@@ -136,7 +141,7 @@
 	<?php } ?>
 		<div class="clearfix"></div>
 	</div>
-	</div>
+	<?php } ?></div>
 	</div>
 	<div class="float_r span3" style="margin-top: -5px;">
 		<img src="<?php echo $base; ?>images/banner_img.png">
