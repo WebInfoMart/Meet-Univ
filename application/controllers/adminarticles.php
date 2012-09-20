@@ -111,6 +111,7 @@ class adminarticles extends CI_Controller
 			}
 			$data['article_info']=$this->articlemodel->article_detail();
 			$data['approved']=$this->input->post('approved');
+			$data['featured']=$this->input->post('featured');
 			$data['sel_id']=$this->input->post('sel_id');  
 			$data['search_box']= $this->input->post('search_box');  
 			$this->load->view('admin/articles/manage_articles', $data);

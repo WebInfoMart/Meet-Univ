@@ -15,9 +15,9 @@
 					<span class="green_heading">EMAIL campaign:</span>
 					<form class="form-horizontal margin_t">
 						<div class="control-group2">
-							<div class="float_l">
-								<label class="label-control-data" for="select01">Country: </label>
+							<div class="float_l">								
 								<div class="controls-input-data">
+								<label class="label-control-data" for="select01">Country: </label>
 									<select  id="country_list" onchange="count_student_change_sms_email_wise(this)">
 										<option value="0">Select Country</option>
 											<?php foreach($country_list as $country_lists) { ?>
@@ -29,24 +29,26 @@
 							<div class="dotted_width float_l"></div>
 							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><span class="inline country_text_name">( Worldwide )</span>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control-group2">
-							<div class="float_l">
-								<label class="label-control-data"  for="select01">City: </label>
+							<div class="float_l">								
 								<div class="controls-input-data">
+								<label class="label-control-data"  for="select01">City: </label>
 									<select id="city_list" onchange="count_student_change_sms_email_wise(this);" >
-											<option value="0">Select CIty</option>
-								<?php foreach($all_cities as $all_city) { ?>			
+											<option value="0">Select City</option>
+												<?php foreach($all_cities as $all_city) { ?>			
 											<option value="<?php echo $all_city['city_id']; ?>"><?php echo $all_city['cityname']; ?></option>
-								<?php } ?>			
+												<?php } ?>			
 									</select>
 								</div>
 							</div>
 							<div class="dotted_width float_l"></div>
 							<h3 class="count_txt"  id="no_of_student_in_city">0</h3>
 						</div>
-						<div class="control_form">
-							<div class="float_l">
-								<label class="label-control-data" for="select01">Educational level: </label>
+						<div class="clearfix"></div>
+						<div class="control_group2">
+						<label class="label-control-data" for="select01">Educational level: </label>
+							<div class="float_l">								
 								<div class="controls-input-data checkbox_bg">
 									<input type="checkbox" id="educ_pg"  value="4" onclick="count_student_change_sms_email_wise(this)">
 									Post Graduate</br>
@@ -59,20 +61,22 @@
 							<div class="dotted_width float_l"></div>
 							<h3 class="count_txt" id="no_of_student_in_educ_lvl">0</h3>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control_form">
+						<label class="label-control-data" for="select01"></label>
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 								<div class="controls-input-data checkbox_bg">
 								<?php foreach($area_interest as $all_area_interest) { ?>			
 											<input type="checkbox" id="" value="<?php echo $all_area_interest['prog_parent_id']; ?>">
 									<?php echo $all_area_interest['program_parent_name']; ?></br/>
-								<?php } ?>	
-									
-									
+								<?php } ?>
 								</div>
 							</div>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control-group2">
+						<label class="label-control-data" for="select01"></label>
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
@@ -80,7 +84,9 @@
 							</div>
 							</div>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control-group2">
+						<label class="label-control-data" for="select01"></label>
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
@@ -88,7 +94,9 @@
 							</div>
 							</div>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control_form">
+						<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
 							<button class="btn_dark_blue">SEND NOW</button>
 							</div>

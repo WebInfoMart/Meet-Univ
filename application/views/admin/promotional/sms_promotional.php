@@ -15,9 +15,9 @@
 					<span class="green_heading">SMS campaign:</span>
 					<form class="form-horizontal margin_t">
 						<div class="control-group2">
-							<div class="float_l">
-								<label class="label-control-data" for="select01">Country: </label>
+							<div class="float_l">								
 								<div class="controls-input-data">
+								<label class="label-control-data" for="select01">Country: </label>
 									<select  id="country_list" onchange="count_student_change_sms_email_wise(this)">
 										<option value="0">Select Country</option>
 											<?php foreach($country_list as $country_lists) { ?>
@@ -29,10 +29,11 @@
 							<div class="dotted_width float_l"></div>
 							<h3 class="count_txt" id="total_no_of_student_in_country"><?php echo $total_student; ?></h3><span class="country_text_name margin_l1 inline"> ( Worldwide )</span>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control-group2">
-							<div class="float_l">
-								<label class="label-control-data"  for="select01">City: </label>
+							<div class="float_l">								
 								<div class="controls-input-data">
+								<label class="label-control-data"  for="select01">City: </label>
 									<select id="city_list" onchange="count_student_change_sms_email_wise(this);" >
 											<option value="0">Select CIty</option>
 								<?php foreach($all_cities as $all_city) { ?>			
@@ -44,9 +45,10 @@
 							<div class="dotted_width float_l"></div>
 							<h3 class="count_txt"  id="no_of_student_in_city">0</h3>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control_form">
-							<div class="float_l">
-								<label class="label-control-data" for="select01">Educational level: </label>
+						<label class="label-control-data" for="select01">Educational level: </label>
+							<div class="float_l">								
 								<div class="controls-input-data checkbox_bg">
 									<input type="checkbox" id="educ_pg"  value="4" onclick="count_student_change_sms_email_wise(this)">
 									Post Graduate</br>
@@ -59,9 +61,10 @@
 							<div class="dotted_width float_l"></div>
 							<h3 class="count_txt" id="no_of_student_in_educ_lvl">0</h3>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control_form">
-							<div class="float_l">
-								<label class="label-control-data" for="select01"></label>
+						<label class="label-control-data"  for="select01"></label>
+							<div class="float_l">	
 								<div class="controls-input-data checkbox_bg">
 								<?php foreach($area_interest as $all_area_interest) { ?>			
 											<input type="checkbox" id="" value="<?php echo $all_area_interest['prog_parent_id']; ?>">
@@ -72,16 +75,19 @@
 								</div>
 							</div>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control-group2">
-							<div class="float_l">
-								<label class="label-control-data" for="select01"></label>
+						<label class="label-control-data" for="select01"></label>
+							<div class="float_l">								
 							<div class="controls-input-data">
 								<textarea cols="31" rows="3" placeholder="Message Here..."></textarea>
 							</div>
 							</div>
 						</div>
+						<div class="clearfix"></div>
 						<div class="control_form">
-							<div class="controls-input-data">
+						<label class="label-control-data"  for="select01"></label>
+							<div class="controls-input-data">							
 							<button class="btn_dark_blue">SEND NOW</button>
 							</div>
 						</div>

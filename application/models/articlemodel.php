@@ -82,6 +82,11 @@ class Articlemodel extends CI_Model
 			$status=$this->input->post('approved');
 			$this->db->where('article.article_approve_status',$status);
 		}
+		if($this->input->post('featured')=='1')
+		{
+			$status=$this->input->post('featured');
+			$this->db->where('article.featured_home_article',$status);
+		}
 		if($this->input->post('sel_id')=='2')
 		{
 		$univ_name=trim($this->input->post('search_box'));  
@@ -111,6 +116,11 @@ class Articlemodel extends CI_Model
 		{
 			$status=$this->input->post('approved');
 			$this->db->where('article.article_approve_status',$status);
+		}
+		if($this->input->post('featured')=='1')
+		{
+			$status=$this->input->post('featured');
+			$this->db->where('article.featured_home_article',$status);
 		}
 		if($this->input->post('sel_id')=='1')
 		{		

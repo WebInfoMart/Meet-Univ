@@ -158,7 +158,7 @@ class Quest_ans_controler extends CI_Controller
 		{
 			$univ_id = 'meetquest';
 			$data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$ask_user_id);
-			
+			$data['question_comments'] = $this->quest_ans_model->get_single_quest_comments($quest_id);
 			
 			$data['img_src'] = base_url()."uploads/univ_gallery/univ_logo.png";
 

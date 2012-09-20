@@ -78,6 +78,11 @@ class Newsmodel extends CI_Model
 			$status=$this->input->post('approved');
 			$this->db->where('news.news_approve_status',$status);
 		}
+		if($this->input->post('featured')==1)
+		{
+			$status=$this->input->post('featured');
+			$this->db->where('news.featured_home_news',$status);
+		}
 		if($this->input->post('sel_id')=='1')
 		{		
 		$title=trim($this->input->post('search_box'));  		  
@@ -112,6 +117,11 @@ class Newsmodel extends CI_Model
 		{
 			$status=$this->input->post('approved');
 			$this->db->where('news.news_approve_status',$status);
+		}
+		if($this->input->post('featured')==1)
+		{
+			$status=$this->input->post('featured');
+			$this->db->where('news.featured_home_news',$status);
 		}
 		if($this->input->post('sel_id')=='1')
 		{		

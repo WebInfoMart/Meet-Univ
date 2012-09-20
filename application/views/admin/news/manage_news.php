@@ -1,4 +1,5 @@
 <?php if($approved==''){ $approved=0;}
+if($featured==''){ $featured=0;}
 if($sel_id==''){ $sel_id=0;}
 if($search_box==''){ $search_box=0;}
  ?>
@@ -31,7 +32,23 @@ jQuery(document).ready(function(){
 								$("#ajax_load").html(msg);           
 							  }
 							});
-				}								
+				}	
+					if(dataString==4)
+				{
+				  $("#search_box").hide();							
+				  $("#search").hide();
+				  var featured='1';
+						var url='<?php echo $base;?>adminnews/manage_news';
+						$.ajax({
+							  type: "POST",
+							  data: "featured="+featured+"&ajax=1",
+							  url: url,							  
+							  success: function(msg) {
+							  //alert(msg);
+								$("#ajax_load").html(msg);           
+							  }
+							});
+				}		
 		});
 });
 function search()
@@ -50,6 +67,18 @@ function search()
       success: function(msg) {
 		  //alert(msg);
 		  $("#ajax_load").css("opacity","1");
+            $("#ajax_load").html(msg);           
+          }
+	});
+}
+function home()
+{	
+	var search_url = "<?php echo $base; ?>adminnews/manage_news";
+	$.ajax({
+    type: "POST",
+    url: search_url,
+	data:"ajax=1",	
+      success: function(msg) {		  
             $("#ajax_load").html(msg);           
           }
 	});
@@ -94,7 +123,8 @@ $insert=1;
   </div>
   </div>
   
- <div id="content">	
+<div id="content">	
+<input type="button" onclick="home()" class="submit tiny" value="Reset" />
 <div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
 	<span >Filter</span>
 	<select id="drop" name="drop" >
@@ -102,6 +132,7 @@ $insert=1;
 	<option value="1">new_title</option>														
 	<option value="2">University_name</option>
 	<option value="3">Approved</option>
+	<option value="4">Featured</option>
 	</select>
 	<input id="search_box"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
 	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
@@ -351,9 +382,10 @@ $(function() {
 		$("#pagination a").click(function() {
         var url = $(this).attr("href");	
 		var approved='<?php echo $approved; ?>';
+		var featured='<?php echo $featured; ?>';
 		var sel_id='<?php echo $sel_id; ?>';		
 		var search_box='<?php echo $search_box; ?>';
-		var data={sel_id:sel_id,search_box:search_box,approved:approved,ajax:'1'};		
+		var data={sel_id:sel_id,search_box:search_box,approved:approved,featured:featured,ajax:'1'};		
         $.ajax({
           type: "POST",
           data: data,

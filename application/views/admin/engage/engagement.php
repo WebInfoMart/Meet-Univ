@@ -238,7 +238,7 @@
 									<li>
 							<?php } ?>
 										<div class="float_l data_slider">
-										<span id="city_<?php echo $city_count['event_city_id'];?>" onclick="eventDetail(<?php echo $u_id;?>,<?php echo $city_count['event_city_id'];?>);"><?php echo trim($city_count['cityname']).'('.trim($city_count['count']).')';$i++;?></span>
+										<span id="city_<?php echo $city_count['event_city_id'];?>" onclick="eventDetail(<?php echo $u_id;?>,<?php echo $city_count['event_city_id'];?>);"><?php if($city_count['cityname']==''){ echo 'Online'; } echo trim($city_count['cityname']).'('.trim($city_count['count']).')';$i++;?></span>
 										</div>	
 								<?php if($i==9){ $i=1; ?>			
 									</li>
