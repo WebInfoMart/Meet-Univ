@@ -158,7 +158,23 @@ class Quest_ans_controler extends CI_Controller
 		{
 			$univ_id = 'meetquest';
 			$data['single_quest'] = $this->quest_ans_model->get_single_quest_detail($univ_id,$quest_id,$ask_user_id);
-			$data['question_comments'] = $this->quest_ans_model->get_single_quest_comments($quest_id);
+			//$data['question_comments'] = $this->quest_ans_model->get_single_quest_comments($quest_id);
+			if($this->tank_auth->is_logged_in())
+				{
+				$data['user_is_logged_in']=1;
+				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
+				}
+			$comments=$this->frontmodel->fetch_all_comments('qna',$quest_id);
+				if($comments!=0)
+				{
+				$data['article_comments']=$comments['comments'];
+				$data['total_comment']=$comments['total_comment'];
+				}
+				else
+				{
+				$data['article_comments']=0;
+				$data['total_comment']=0;
+				}	
 			
 			$data['img_src'] = base_url()."uploads/univ_gallery/univ_logo.png";
 

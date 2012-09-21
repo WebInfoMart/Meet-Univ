@@ -865,6 +865,17 @@ class Univ extends CI_Controller
 				$data['user_is_logged_in']=1;
 				$data['user_detail']=$this->users->fetch_profile($this->ci->session->userdata('user_id'));
 				}
+				$comments=$this->frontmodel->fetch_all_comments('qna',$quest_id);
+				if($comments!=0)
+				{
+				$data['article_comments']=$comments['comments'];
+				$data['total_comment']=$comments['total_comment'];
+				}
+				else
+				{
+				$data['article_comments']=0;
+				$data['total_comment']=0;
+				}	
 	}
     //print_r($data['single_quest']);
     }
