@@ -675,7 +675,7 @@ function get_event_result_by_ajax()
 	{
 	url='<?php echo $base; ?>events';
 	}
-	
+	$('#event_results_filteration').css('opacity','0.5');
 	$('#search_results').css('opacity','0.4');
 	   $.ajax({
 	   type: "POST",
@@ -687,10 +687,7 @@ function get_event_result_by_ajax()
 		
 	   res=r.split('!@#$%^&*');
 	   document.title=res[0];
-		$('#event_results_filteration').animate({
-		'opacity':1
-		},1000,function(){
-		});
+		$('#event_results_filteration').css('opacity','1');
 		if(res[3]!='0' && res[2]!='0')
 		{
 		$('#event_results_filteration').html(res[3]);

@@ -142,7 +142,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<span id="city_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
 								</div>
 								<input type="hidden" name="event_city" id="city" value=""/>
-								<div id="open_box">
+								<div id="open_box" style="display:none;">
 									<input type="text" name="selected_event_city" id="selected_event_city" style="width:249px;" value=""/>
 								</div>
 							</div>
@@ -846,7 +846,7 @@ function voicepopup(id) {
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#open_box").hide();
+	//$("#open_box").hide();
 	
 	$("#selected_event_city").autocomplete({
 		source:<?php echo $arr; ?>,
