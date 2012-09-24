@@ -157,7 +157,8 @@ $insert=1;
   </div>
   
 <div id="content">	
-<input type="button" onclick="home()" class="submit tiny" value="Reset" />
+<h2>DETAIL OF QUESTIONS</h2>
+<input type="button" onclick="home()" class="submit tiny float_r" value="Reset" />
 <div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
 	<span >Filter</span>
 	<select id="drop" name="drop" >
@@ -170,7 +171,6 @@ $insert=1;
 	<input id="search_box"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
 	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
 	</div>
-<h2>DETAIL OF QUESTIONS</h2>
 			<form action="<?php echo $base ?>adminques/delete_ques" method="post" id="deletequesform" >	
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
 			
@@ -184,6 +184,7 @@ $insert=1;
 						<th class="header" style="cursor: pointer; ">Answers Count</th>
 						
 						<!--<th class="header" style="cursor: pointer; ">Event's Place</th>-->
+						<th></th>
 						<th></th>
 					</tr>
 				</thead>
@@ -207,8 +208,12 @@ $insert=1;
 						<td><?php if($row->q_featured_home_que){ echo "Make Unfeatured"; } else {  echo"Make Featured";} ?></td>
 						<td><?php if($row->q_approve){ echo "Disapprove"; } else {  echo"Approve";} ?></td>
 						<td id="count_<?php echo $row->que_id; ?>"><?php $count=$this->quesmodel->ans_count($row->que_id); echo $count; ?></td>						
+						
 						<td>
-			
+			<span id="tr_<?php echo $row->que_id;?>" style="display:none">
+<textarea rows="4" cols="50" id="ans_<?php echo $row->que_id;?>" style="display:none;float:left"></textarea>
+<input type="button"  id="add_ans_<?php echo $row->que_id;?>" style="display:none;margin-left: 20px;" value="Submit" onclick="submitAns('<?php echo $row->que_id;?>')"/> 
+</span>
 		<ul class="nav">
           <li data-dropdown="dropdown" >  <a class="btn-primary button_cont" href="#"><i class="icon-univ-event icon-white"></i>Ques</a>
 		  <a class="btn btn-primary dropdown-toggle arrow_but" data-toggle="dropdown" href="#"></a>
@@ -236,15 +241,10 @@ $insert=1;
 			</ul>
           </li>
         </ul>
-</td>		
+</td>	
+	
 </tr>
-<tr style="display:none"  id="tr_<?php echo $row->que_id;?>">
-<td>
-<div class="clearfix"></div>
-<textarea rows="4" cols="50" id="ans_<?php echo $row->que_id;?>" style="display:none"></textarea>
-<input type="button"  id="add_ans_<?php echo $row->que_id;?>" style="display:none" value="Submit" onclick="submitAns('<?php echo $row->que_id;?>')"/> 
-</td>
-</tr>
+
 				
 			<?php } }else { echo "<tr><td>".'No Result Found!'."<td></tr>"; } ?>		
 				</tbody>

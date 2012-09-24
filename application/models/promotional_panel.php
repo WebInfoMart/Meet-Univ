@@ -287,9 +287,10 @@ function email_send()
 		$this->db->select('email_balance');
 		$this->db->from('user_email_pack');
 		$this->db->where('user_id',$data['user_id']);
+		$this->db->where('user_id',$data['user_id']);
 		$sql=$this->db->get();
 		$balance=$sql->result_array();
-		print_r($balance);exit;
+		$bal=$balance[0]['email_balance'];
 		
 		
 		$this->db->select('v_email');
@@ -318,7 +319,9 @@ function email_send()
 			
 		$query=$this->db->get();
 		$result=$query->result_array();
-		//print_r($result);
+		$count=count($result);		
+		if($bal>$count)
+		{
 		$emails='';
 		$this->load->library('email');
 		foreach($result as $x)
@@ -339,8 +342,20 @@ function email_send()
 		$this->email->subject($this->input->post('email_subject'));
 		$this->email->message($this->input->post('emai_text'));
 		$this->email->send();
-		echo $this->email->print_debugger();		
+		return 1;
+		//$this->email->print_debugger();		
 		}
+		$update=array(
+		'email_balance'=>$bal-$count;
+		);
+		$this->db->where('user_id',$data['user_id']);
+		$this->db->update('user_email_pack',$update);
+		
+	}
+	else
+	{
+		return 0;
+	}
 	}
 	}		
 }

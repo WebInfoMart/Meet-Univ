@@ -185,6 +185,7 @@ class Admin_promotional extends CI_Controller
 	{
 		$this->promotional_panel->email_send();
 		
+		
 	}
 	
 	

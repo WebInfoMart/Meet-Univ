@@ -55,70 +55,55 @@ else { $class_univ_name='text'; }?>
 <div class="form span8">
 <?php 
 foreach($ques_info as $ques_detail) { ?>			
-<form action="<?php echo $base; ?>adminques/edit_ques/<?php echo $ques_detail['que_id']; ?>" method="post" class="caption_form" >				
-<input type="hidden" name="ques_type_ud" value="univ_ques"/>
-<ul>					
-<li>						
-<div>							
-<div class="float_l span3 margin_zero">								
-<label>Title</label>							
-</div>							
-<div class="float_l span3">		 		
-<input type="hidden" size="30"  value="<?php echo $ques_detail['que_id']; ?>" name="que_id">				
-<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo $ques_detail['q_title']; ?>" name="title">								
-<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> 
-</span>									
-</div>														
-<div class="clearfix"></div>						
-</div>					
-</li>				
-
-<li>
-<div class="float_l span3 margin_zero">							
-<label>University</label>						
-</div>	
-<div class="float_l span3">	
-<input type="text" disabled="disabled" size="30"  value="<?php echo $ques_detail['univ_name']; ?>" name="college">		
-</div>
-<div>	
-<div class="clearfix"></div>						
-	<div class="float_l span3 margin_zero">								
-	<label>Detail</label>							
-	</div>							
-	<div class="">								
-	<textarea rows="5" name="detail"  cols="50"><?php echo $ques_detail['q_detail'];?></textarea>								
-	<span style="color: red;"> <?php echo form_error('detail'); ?><?php echo isset($errors['detail'])?$errors['detail']:''; ?> </span>							
-	</div>							
-	<div class="clearfix"></div>
-	<div class="float_l span3 margin_zero">								
-	<label>Answers</label>							
+<form action="<?php echo $base; ?>adminques/edit_ques/<?php echo $ques_detail['que_id']; ?>" method="post" class="caption_form form_horizontal_data" >				
+	<input type="hidden" name="ques_type_ud" value="univ_ques"/>
+	<div class="control-group1">
+		<label class="control-label1" for="select01">Title:</label>
+		<div class="controls1">
+			<input type="hidden" size="30"  value="<?php echo $ques_detail['que_id']; ?>" name="que_id">				
+			<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo $ques_detail['q_title']; ?>" name="title">								
+			<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> 
+			</span>	
+		</div>
 	</div>
-<div class="clearfix"></div>
-<?php foreach($ans_info  as $ans)
-{ ?>	
-<div class="float_l span3 margin_zero">								
-	<label></label>							
-	</div>							
-	<div class="">								
-	<textarea rows="5" id="ans_<?php echo $ans['comment_id']; ?>" cols="50"><?php echo $ans['commented_text'];?></textarea>
-	<a href="javascript:void(0);" onclick="delete_this_record('<?php echo $ans['comment_id']; ?>')" id="data_del_<?php echo $ans['comment_id']; ?>" class="edit inline"><img style="height:18px;" src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>				
-	<a href="javascript:void(0);" onclick="edit_ans('<?php echo $ans['comment_id']; ?>')" id="data_<?php echo $ans['comment_id']; ?>" class="edit inline"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>	
-	<div id="content_drop_msg_<?php echo $ans['comment_id']; ?>" style="display:none;">
-	<div class="message info"><p>Record dropped !!!</p></div> 
+	<div class="control-group1">
+		<label class="control-label1" for="select01">University:</label>
+		<div class="controls1">
+			<input type="text" disabled="disabled" size="30"  value="<?php echo $ques_detail['univ_name']; ?>" name="college">		
+		</div>
 	</div>
-	<div id="content_<?php echo $ans['comment_id']; ?>" class="content_msg" style="display:none;">
-	<div class="span8 margin_t">  
-	<div class="message success"><p class="info_message">Answer Edited Successfully</p></div>  
-	</div>  
-	</div>         
-	</div>							
-	<div class="clearfix"></div>
-<?php } ?>
-</div>				
-</li>				
-</ul>
-						
-<input type="submit" name="submit" class="submit" value="Edit Question">									
+	<div class="control-group1">
+		<label class="control-label1" for="select01">Detail:</label>
+		<div class="controls1">
+			<textarea rows="5" name="detail"  cols="50"><?php echo $ques_detail['q_detail'];?></textarea>								
+			<span style="color: red;"> <?php echo form_error('detail'); ?><?php echo isset($errors['detail'])?$errors['detail']:''; ?> </span>		
+		</div>
+	</div>
+	<div class="control-group1">
+		<label class="control-label1" for="select01">Answers:</label>
+		<div class="controls1">
+			<?php foreach($ans_info  as $ans)
+			{ ?>
+			<textarea rows="5" id="ans_<?php echo $ans['comment_id']; ?>" cols="50" class="float_l"><?php echo $ans['commented_text'];?></textarea>
+			<a href="javascript:void(0);" onclick="delete_this_record('<?php echo $ans['comment_id']; ?>')" id="data_del_<?php echo $ans['comment_id']; ?>" class="edit inline float_l"><img style="height:18px;" src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>				
+			<a href="javascript:void(0);" onclick="edit_ans('<?php echo $ans['comment_id']; ?>')" id="data_<?php echo $ans['comment_id']; ?>" class="edit inline float_l"><img src="<?php echo $base; ?>images/admin/edit-icon.png" alt="Edit"></a>	
+			<div id="content_drop_msg_<?php echo $ans['comment_id']; ?>" style="display:none;">
+				<div class="message info"><p>Record dropped !!!</p></div> 
+				</div>
+				<div id="content_<?php echo $ans['comment_id']; ?>" class="content_msg" style="display:none;">
+					<div class="span8 margin_t">  
+						<div class="message success"><p class="info_message">Answer Edited Successfully</p></div>  
+					</div>  
+				</div> 
+			<?php } ?>	
+			<div class="clearfix"></div>
+			</div>
+		</div>
+	<div class="control-group1">
+		<div class="controls1">
+			<input type="submit" name="submit" class="submit" value="Edit Question">									
+		</div>
+	</div>				
 </form>	
 <?php } ?>
 </div>					

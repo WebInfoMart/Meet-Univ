@@ -507,8 +507,8 @@ background-position: -192px -120px !important;
 
 .open .menu, .dropdown.open .menu, .open .dropdown-toggle, .dropdown.open .dropdown-toggle {
 	color: #ffffff;
-	background: #ccc;
-	/*background: rgba(0, 0, 0, 0.3);*/
+	/*background: #ccc;
+	background: rgba(0, 0, 0, 0.3);*/
 }
 .open .menu-dropdown, .dropdown.open .menu-dropdown, .open .dropdown-menu, .dropdown.open .dropdown-menu {
 	display: block;
@@ -1169,3 +1169,27 @@ border: 1px solid #C7C7C7;
 -moz-border: 1px solid #c7c7c7;
 -webkit-border: 1px solid #c7c7c7;
 }
+
+.form_horizontal_data .control-group1::before, .form_horizontal_data .control-group1::after {
+display: table;
+line-height: 0;
+content: "";
+}
+.form_horizontal_data .control-group1 {
+margin-bottom: 20px;
+}
+.form_horizontal_data  .control-label1 {
+float: left;
+width: 160px;
+padding-top: 5px;
+text-align: right;
+}
+.form_horizontal_data .controls1 {
+margin-left: 180px;
+}
+.form-search input, .form-inline input, .form-horizontal input, .form-search textarea, .form-inline textarea, .form-horizontal textarea, .form-search select, .form-inline select, .form-horizontal select, .form-search .help-inline, .form-inline .help-inline, .form-horizontal .help-inline, .form-search .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uneditable-input, .form-search .input-prepend, .form-inline .input-prepend, .form-horizontal .input-prepend, .form-search .input-append, .form-inline .input-append, .form-horizontal .input-append {
+display: inline-block;
+margin-bottom: 0;
+vertical-align: middle;
+}
+.back_view{background:#fff;}
