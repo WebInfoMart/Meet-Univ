@@ -275,9 +275,7 @@ class Adminmodel extends CI_Model
 		
 		$config['upload_path'] = $this->gallery_path; // server directory
         $config['allowed_types'] = 'gif|jpg|png'; // by extension, will check for whether it is an image
-        $config['max_size']    = '100'; // in kb
-        $config['max_width']  = '1024';
-        $config['max_height']  = '768';
+        //$config['max_height']  = '768';
         
         $this->load->library('upload', $config);
         $this->load->library('Multi_upload');
@@ -287,11 +285,11 @@ class Adminmodel extends CI_Model
         if ( ! $files )        
         {
             $data['err_msg'] ='Error!  Please Check Your file size and type';
-            $this->load->view('admin/show_rror', $data);
+            $this->load->view('admin/show_error', $data);
         }    
         else
         {
-				$field = 'userfile';
+				$field = 'userfile1';
 				$user_id=$this->tank_auth->get_admin_user_id();
             $data1 = array('upload_data' => $files);
 			$num_files = count($_FILES[$field]['name'])-1;
