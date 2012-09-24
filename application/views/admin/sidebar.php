@@ -124,6 +124,20 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
    </li>
    <?php
    }
+   if($admin_priv_res['privilege_type_id']=='5')
+   {?>
+   <li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" />Email Packs</a>
+   <ul><?php
+   if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+   {?>
+   <li><?php echo anchor("$base".'emailpacks/add_packs', 'Add Email Pack'); ?></li>
+   <li><?php echo anchor("$base".'emailpacks/add_promocode', 'Add Promocode'); ?></li>
+   <?php } ?>
+   <li><?php echo anchor("$base".'emailpacks/manage_packs', 'Manage Email Packs'); ?></li></ul>
+   
+   </li>
+   <?php
+   }
 			if($admin_priv_res['privilege_type_id']=='1' && $admin_priv_res['privilege_level']!='0')
 			{
 			?>

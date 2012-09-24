@@ -146,10 +146,10 @@ class Admin_promotional extends CI_Controller
 	 }
 	}
 	
-	function email_campaign()
+	function email_campaign($snd='')
 	{
 	
-	$data = $this->path->all_path();
+		$data = $this->path->all_path();
 	  	if (!$this->tank_auth->is_admin_logged_in()) {
 			
 	    redirect('admin/adminlogin/');
@@ -171,6 +171,11 @@ class Admin_promotional extends CI_Controller
 		$data['area_interest']=$this->promotional_panel->find_all_area_of_intrests();
 		
 		$data['all_cities']=$this->promotional_panel->fetch_all_cities();
+		$data['msg']="";
+		if($snd=='snd')
+		{	$data['msg']="Email Sent Successfully";
+			$this->load->view('admin/userupdated',$data);
+		}
 		$this->load->view('admin/promotional/email_promotional',$data);
 		}
 		else
@@ -186,9 +191,8 @@ class Admin_promotional extends CI_Controller
 		$success=$this->promotional_panel->email_send();
 		if($success)
 		{
-			echo "Email sent successfully";
-		}
-		
+			redirect('admin_promotional/email_campaign/snd');
+		}	
 		
 	}
 	

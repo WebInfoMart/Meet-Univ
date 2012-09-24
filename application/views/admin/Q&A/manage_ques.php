@@ -457,15 +457,16 @@ function submitAns(id)
           type: "POST",
           data: data,
           url: url,         
-          success: function(msg) {	 
-                   if(msg='1')
-					{
-						$("#tr_"+id).hide('slow');
-						$("#content_msg").show('slow');
-						countTd++;
-						$("#count_"+id).html(countTd);
-						
-					}				   
+          success: function(msg) 
+		  {	 
+		   if(msg='1')
+			{
+				$("#tr_"+id).hide('slow');
+				$("#content_msg").show('slow');
+				countTd++;
+				$("#count_"+id).html(countTd);
+				
+			}				   
           }
         });
 	

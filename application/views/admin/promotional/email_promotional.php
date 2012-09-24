@@ -1,4 +1,4 @@
-	<div class="body" id="content">
+<div class="body" id="content">
 		<div>
 			
 			<div class="float_l data8 margin_delta">

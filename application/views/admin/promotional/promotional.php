@@ -25,7 +25,7 @@
 							<data class="icon_txt"><a href="<?php echo $base; ?>admin_promotional/email_campaign"> EMAIL campaign</a></data>
 						</div>
 						<div class="padding fix_height">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</div>
-						<button type="button" class="promo_btn">View Plans & Pricing</button>
+						<button type="button" onclick="window.location.href='<?php echo $base; ?>emailpacks/viewplans'" class="promo_btn">View Plans & Pricing</button>
 					</div>
 					<div class="line_back"></div>
 					<div class="float_l data3 margin_delta center_color">

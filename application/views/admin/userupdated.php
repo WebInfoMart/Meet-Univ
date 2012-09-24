@@ -1,4 +1,4 @@
-<div id="content" class="content_msg_show hide_content_div">
+<div id="content" class="content_msg_show hide_content_div" style="z-index:99999">
 <div class="span8 margin_t">
   <div class="message success"><p><?php echo $msg; ?></p>
 </div>
