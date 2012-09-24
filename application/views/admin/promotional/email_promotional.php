@@ -13,12 +13,12 @@
 				</div>
 				<div class="data7 margin_delta one_more">
 					<span class="green_heading">EMAIL campaign:</span>
-					<form class="form-horizontal margin_t">
+					<form class="form-horizontal margin_t" action="send_email" method="post">
 						<div class="control-group2">
 							<div class="float_l">								
 								<div class="controls-input-data">
 								<label class="label-control-data" for="select01">Country: </label>
-									<select  id="country_list" onchange="count_student_change_sms_email_wise(this)">
+									<select  id="country_list" name="country" onchange="count_student_change_sms_email_wise(this)">
 										<option value="0">Select Country</option>
 											<?php foreach($country_list as $country_lists) { ?>
 											<option value="<?php echo $country_lists['country_id']; ?>"><?php echo $country_lists['country_name']; ?></option>
@@ -34,7 +34,7 @@
 							<div class="float_l">								
 								<div class="controls-input-data">
 								<label class="label-control-data"  for="select01">City: </label>
-									<select id="city_list" onchange="count_student_change_sms_email_wise(this);" >
+									<select id="city_list" name="city" onchange="count_student_change_sms_email_wise(this);" >
 											<option value="0">Select City</option>
 												<?php foreach($all_cities as $all_city) { ?>			
 											<option value="<?php echo $all_city['city_id']; ?>"><?php echo $all_city['cityname']; ?></option>
@@ -50,11 +50,11 @@
 						<label class="label-control-data" for="select01">Educational level: </label>
 							<div class="float_l">								
 								<div class="controls-input-data checkbox_bg">
-									<input type="checkbox" id="educ_pg"  value="4" onclick="count_student_change_sms_email_wise(this)">
+									<input name="edu_level[]" type="checkbox" id="educ_pg"  value="4" onclick="count_student_change_sms_email_wise(this)">
 									Post Graduate</br>
-									<input type="checkbox" id="educ_ug"  value="3" onclick="count_student_change_sms_email_wise(this)">
+									<input name="edu_level[]" type="checkbox" id="educ_ug"  value="3" onclick="count_student_change_sms_email_wise(this)">
 									Under Graduate<br />
-									<input type="checkbox" id="educ_foundation"  value="2" onclick="count_student_change_sms_email_wise(this)">
+									<input name="edu_level[]" type="checkbox" id="educ_foundation"  value="2" onclick="count_student_change_sms_email_wise(this)">
 									Foundation
 								</div>
 							</div>
@@ -68,7 +68,7 @@
 								<label class="label-control-data" for="select01"></label>
 								<div class="controls-input-data checkbox_bg">
 								<?php foreach($area_interest as $all_area_interest) { ?>			
-											<input type="checkbox" id="" value="<?php echo $all_area_interest['prog_parent_id']; ?>">
+											<input type="checkbox" name="subject[]" value="<?php echo $all_area_interest['prog_parent_id']; ?>">
 									<?php echo $all_area_interest['program_parent_name']; ?></br/>
 								<?php } ?>
 								</div>
@@ -80,7 +80,7 @@
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
-								<textarea cols="31" rows="1" placeholder="Subject : "></textarea>
+								<textarea cols="31" rows="1" name="email_subject" placeholder="Subject : "></textarea>
 							</div>
 							</div>
 						</div>
@@ -90,7 +90,7 @@
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
-								<textarea cols="31" rows="3" placeholder="Type your text here.."></textarea>
+								<textarea cols="31" rows="3" name="email_text" placeholder="Type your text here.."></textarea>
 							</div>
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 						<div class="control_form">
 						<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
-							<button class="btn_dark_blue">SEND NOW</button>
+							<input type="submit" class="btn_dark_blue" name="send_email" value="SEND NOW">
 							</div>
 						</div>
 					</form>

@@ -273,5 +273,75 @@ class Promotional_panel extends CI_Model
 			return 0;
 			}
 		}
+
+function email_send()
+	{			
+		$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) 
+		{			
+			redirect('admin/adminlogin/');
+		}
+		else 
+		{
+		$data['user_id']= $this->tank_auth->get_admin_user_id();
+		$this->db->select('email_balance');
+		$this->db->from('user_email_pack');
+		$this->db->where('user_id',$data['user_id']);
+		$sql=$this->db->get();
+		$balance=$sql->result_array();
+		print_r($balance);exit;
+		
+		
+		$this->db->select('v_email');
+		$this->db->from('verified_lead_data');
+		if($this->input->post('country'))
+		{
+			$country=$this->input->post('country');
+			$this->db->where_in('v_country',$country);
+		}
+		if($this->input->post('city'))
+		{
+			$city=$this->input->post('city');
+			$this->db->where('v_city',$city);
+		}
+		
+		if($this->input->post('edu_level'))
+		{
+			$edu_level=$this->input->post('edu_level');
+			$this->db->where_in('v_current_educ_level',$edu_level);
+		}
+		if($this->input->post('subject'))
+		{
+			$subject=$this->input->post('subject');
+			$this->db->where_in('v_current_educ_level',$subject);
+		}
+			
+		$query=$this->db->get();
+		$result=$query->result_array();
+		//print_r($result);
+		$emails='';
+		$this->load->library('email');
+		foreach($result as $x)
+		{
+			// $emails[]=$res['v_email'];
+		// }
+		// $email=implode(",",$emails);	
+			// print_r($email);
+		// $this->load->library('email');
+		// $data=$this->dataentry_model->report_edit();
+		// foreach($data as $x)
+		// {                              
+	
+		$this->email->from('kulbir@webinfomart.com', 'meetuniversities');			
+		$this->email->to($x['v_email']);					
+		$this->email->cc('a,b,c');
+		
+		$this->email->subject($this->input->post('email_subject'));
+		$this->email->message($this->input->post('emai_text'));
+		$this->email->send();
+		echo $this->email->print_debugger();		
+		}
+	}
+	}		
 }
 
