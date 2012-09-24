@@ -100,7 +100,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 									</div>
 									<div class="clearfix"></div>
 								</div>
-								<span class="wrap"><?php echo substr($event_detail['event_detail'],0,250).'..'; ?></span>	
+								<span class="wrap"><?php echo substr(strip_tags($event_detail['event_detail']),0,250).'..'; ?></span>	
 								
 							</div>
 						</li>

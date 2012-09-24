@@ -238,6 +238,7 @@ var commented_on_id=$('#commented_on_id').val();
 var span_comment = $('#txt_cnt_comment_show').val();
 var span_comment_incr = parseInt(span_comment) + 1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
+var lastpostcommentid=$('#lastcommentid').val();
 if($('#commented_text').val()!='')
 {
 	$.ajax({
@@ -248,11 +249,17 @@ if($('#commented_text').val()!='')
 	   cache: false,
 	   success: function(msg)
 	   {
-		
-		$(".event_border:last").after(msg);
+		msgarr=msg.split('!@#$%^&*');
+		var lastinsid=parseInt(msgarr[0]);
+		if(lastpostcommentid=='0')
+		{
+		$('#lastcommentid').val(lastinsid);
+		}
+		$(".event_border:last").after(msgarr[1]);
 		$('#commented_text').val('');
 		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
 		$('#cnt_comment_show').html(span_comment_incr);
+		
 		}
 	   });
 }	   

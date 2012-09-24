@@ -70,7 +70,7 @@ array_push($array_dates,$var);
 											<div class="clearfix"></div>
 										</div>
 										<div>
-											<div class="img_style float_l">
+											<div class="img_style float_l aspectcorrect">
 											<?php
 											$image_exist=0;	
 									$event_img = $event_detail['univ_logo_path'];	
