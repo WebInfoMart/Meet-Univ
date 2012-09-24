@@ -56,7 +56,7 @@ class Promotional_panel extends CI_Model
 		
 		function total_student_in_country($country)
 		{
-		
+		 
 	    // $c_where=" and if(ld.v_country <>'0',if(ld.v_country <> '',if(ld.v_country IS NOT NULL,ld.v_country,up.country_id),up.country_id),up.country_id)='".$country."'";
 	    // }
 		//$sql="SELECT * from lead_data ld LEFT JOIN user_profiles up on ld.user_id=up.user_id LEFT JOIN users u on up.user_id=u.id ".$c_where;
