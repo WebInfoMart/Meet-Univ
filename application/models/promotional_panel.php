@@ -284,13 +284,15 @@ function email_send()
 		else 
 		{
 		$data['user_id']= $this->tank_auth->get_admin_user_id();
-		$this->db->select('email_balance');
+		$this->db->select('*');
 		$this->db->from('user_email_pack');
 		$this->db->where('user_id',$data['user_id']);
-		$this->db->where('user_id',$data['user_id']);
+		$this->db->where('enabled','1');
 		$sql=$this->db->get();
 		$balance=$sql->result_array();
 		$bal=$balance[0]['email_balance'];
+		$pack_id=$balance[0]['user_pack_id'];
+		$univ_id=$balance[0]['user_univ_id'];
 		
 		
 		$this->db->select('v_email');
@@ -322,34 +324,39 @@ function email_send()
 		$count=count($result);		
 		if($bal>$count)
 		{
-		$emails='';
-		$this->load->library('email');
-		foreach($result as $x)
-		{
-			// $emails[]=$res['v_email'];
-		// }
-		// $email=implode(",",$emails);	
-			// print_r($email);
-		// $this->load->library('email');
-		// $data=$this->dataentry_model->report_edit();
-		// foreach($data as $x)
-		// {                              
-	
-		$this->email->from('kulbir@webinfomart.com', 'meetuniversities');			
-		$this->email->to($x['v_email']);					
-		$this->email->cc('a,b,c');
-		
-		$this->email->subject($this->input->post('email_subject'));
-		$this->email->message($this->input->post('emai_text'));
-		$this->email->send();
-		return 1;
-		//$this->email->print_debugger();		
-		}
 		$update=array(
-		'email_balance'=>$bal-$count;
+		'email_balance'=>$bal-$count
 		);
 		$this->db->where('user_id',$data['user_id']);
 		$this->db->update('user_email_pack',$update);
+		
+		$transaction=array(
+		'trans_user_id'=>$data['user_id'],
+		'pack_id'=>$pack_id,
+		'univ_id'=>$univ_id,
+		'no_of_emails'=>$count,
+		'trans_type'=>'send'
+		);
+		$this->db->insert('email_transactions',$transaction);
+		$this->load->library('email');
+		
+		foreach($result as $x)
+		{		
+		$config['protocol'] = $this->config->item('mail_protocol');
+		  $config['smtp_host'] = $this->config->item('smtp_server');
+		  $config['smtp_user'] = $this->config->item('smtp_user_name');
+		  $config['smtp_pass'] = $this->config->item('smtp_pass');
+		  $this->email->initialize($config);             
+	
+		$this->email->from('info@meetuniversities.com', 'meetuniversities');			
+		$this->email->to('kulbir@webinfomart.com');					
+		//$this->email->cc('a,b,c');$x['v_email']		
+		$this->email->subject($this->input->post('email_subject'));
+		$this->email->message($this->input->post('email_text').$x['v_email']);
+		$this->email->send();					
+		//$this->email->print_debugger();		
+		}
+		return 1;
 		
 	}
 	else

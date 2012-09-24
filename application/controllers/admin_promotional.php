@@ -183,7 +183,11 @@ class Admin_promotional extends CI_Controller
 	
 	function send_email()
 	{
-		$this->promotional_panel->email_send();
+		$success=$this->promotional_panel->email_send();
+		if($success)
+		{
+			echo "Email sent successfully";
+		}
 		
 		
 	}
