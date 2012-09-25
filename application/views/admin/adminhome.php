@@ -84,7 +84,7 @@
 						{
 						if(filesize(getcwd().'/uploads/user_pic/thumbs/'.$ten_questions['user_thumb_pic_path']))
 						{
-						 $user_pic =  base_url()."uploads/user_pic/thumbs/".$newly_registered['user_thumb_pic_path'];
+						 $user_pic =  base_url()."uploads/user_pic/thumbs/".$ten_questions['user_thumb_pic_path'];
 						}
 						else
 						{
