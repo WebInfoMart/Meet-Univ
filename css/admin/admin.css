@@ -1231,3 +1231,7 @@ margin-left: 10px;
 -moz-box-shadow: 0 0 5px #888;
 -webkit-box-shadow: 0 0 5px#888;
 box-shadow: 0 0 5px #888;border-radius: 2px;border: 1px solid #a1d6e8;padding:0px 4px;background:#a1d6e8}
+
+.form_horizontal_data .controls1 select {
+width: 160px;
+}

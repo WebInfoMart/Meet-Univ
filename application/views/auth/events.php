@@ -260,7 +260,6 @@ $var_date = '';
 $extract_date = explode(" ",$event_detail['event_date_time']);
 $month = $extract_date[1];
 $number_month = date('m', strtotime($month));
-$number_month = date('m', strtotime($month));
 $var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
 array_push($array_dates,$var);
 $count_event_date++;
@@ -504,7 +503,7 @@ $number_month = $number_month - 1;
 }
 else{
 $show_current_date[2] = date('Y');
-$number_month = date('m');
+echo $number_month = date('m');
 }
 			// foreach($array_dates as $dates){
 			// echo $dates;
@@ -718,10 +717,7 @@ function events_result_by_paging(a,pid)
 	{
 	url='<?php echo $base; ?>events';
 	}
-	$('#div_events').animate({
-	'opacity':0.5
-	},1000,function(){
-	});
+	$('#div_events').css('opacity','0.5');
 
 	$('#pagination a').removeClass('add_paging_background_class');
 	$('.'+pid).addClass('add_paging_background_class');
@@ -737,10 +733,7 @@ function events_result_by_paging(a,pid)
 	   success: function(r)
 	   {
 	    res=r.split('!@#$%^&*');
-		$('#div_events').animate({
-		'opacity':1
-		},1,function(){
-		});
+		$('#div_events').css('opacity','1');
 		$('#div_events').html(res[1]);
 		$('#listed_currently_event').html(res[0]);
 	   }
