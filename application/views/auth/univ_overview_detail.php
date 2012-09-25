@@ -16,6 +16,8 @@
 		else if(trim($overview_type) == "univ_interstudents"){ $overview_cond = "univ_interstudents"; $overvew_text = 'International Student Details';}
 		else if(trim($overview_type) == "univ_expertise"){ $overview_cond = "univ_expertise"; $overvew_text = 'Expertise Details';}
 		else if(trim($overview_type) == "univ_departments"){ $overview_cond = "univ_departments"; $overvew_text = 'Departments Details';}
+		else if(trim($overview_type) == "univ_services"){ $overview_cond = "univ_services"; $overvew_text = 'Facilities & Services / Accommodation';}
+		
 		//echo $overvew_text;
 		?>
 		<h3><?php echo $overvew_text; ?></h3><div class='course_cont'><?php echo $view_overview_detail[$overview_cond]; ?></div>

@@ -154,6 +154,7 @@ $route['(studentlife-detail)'] = 'univ/univ_overview_detail/$1';
 $route['(internationalstudent-detail)'] = 'univ/univ_overview_detail/$1';
 $route['(expertise-detail)'] = 'univ/univ_overview_detail/$1';
 $route['(departments-detail)'] = 'univ/univ_overview_detail/$1';
+$route['(univ-services)'] = 'univ/univ_overview_detail/$1';
 
 
 $route['(find_college/(:num))'] = 'leadcontroller/find_college/$1';

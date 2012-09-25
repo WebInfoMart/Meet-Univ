@@ -1180,6 +1180,7 @@ class Univ extends CI_Controller
 		else if(trim($univ_overview) == "internationalstudent-detail"){ $overview_cond = "univ_interstudents";}
 		else if(trim($univ_overview) == "expertise-detail"){ $overview_cond = "univ_expertise";}
 		else if(trim($univ_overview) == "departments-detail"){ $overview_cond = "univ_departments";}
+		else if(trim($univ_overview) == "univ-services"){ $overview_cond = "univ_services";}
 		$data = $this->path->all_path();
 			$univ_id=$this->subdomain->find_id_of_current_univ();
 			$data['err_div']=0;

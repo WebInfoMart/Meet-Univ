@@ -17,7 +17,17 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 							<li>
 							<div class="float_l span5 margin_zero">
 								<div class="margin_zero grid_3 fix_h3">
-								<h3><a href="<?php echo $events_link; ?>"><?php echo $event_detail['event_title']; ?>
+								<h3><a href="<?php echo $events_link; ?>">
+								<?php
+								if($event_detail['event_title']!='')
+								{ 
+								echo $event_detail['event_title']; 
+								}
+								else
+								{
+								echo $event_detail['univ_name'];
+								}
+								?>
 								</a></h3>
 								<span>
 								<?php
