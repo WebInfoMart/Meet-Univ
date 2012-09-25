@@ -1,6 +1,6 @@
 <div id="content">	
 <h2>Details Of Email Packs</h2>
-<!--<input type="button" onclick="home()" class="submit tiny float_r" value="Reset" />-->	
+<input type="button" onclick="window.location.href='<?php echo $base; ?>emailpacks/user_email_packs'" class="submit tiny float_r" value="View Your Plans" />
 <table cellpadding="0" cellspacing="0" width="100%" class="sortable">			
 				<thead>
 					<tr>
@@ -30,6 +30,7 @@
 						<td><input onclick="purchase(<?php echo $row['email_pack_id'];?>)" type="button" value="Purchase"</td>
 						</tr>
 			<?php } }else { echo "<tr><td>".'No Result Found!'."<td></tr>"; } ?>		
+				
 				</tbody>
 				
 			</table>			

@@ -71,7 +71,63 @@ class emailpacks_model extends CI_Model
 		$result=$query->result_array();
 		return $result;
 	}
-	
+	function new_promo($user_id)
+	{
+		$pcode=$this->input->post('promocode');
+		$this->db->select('*');
+		$this->db->from('promocode');
+		$this->db->where('promo_name',$pcode);
+		$query=$this->db->get();
+		$result=$query->result_array();
+		$user_pack_id=$this->input->post('user_pack_id');
+		$promo_used=array();
+		$promo_used=explode(',',$this->input->post('promos_used'));
+		//print_r($promo_used);exit;
+		if($user_pack_id==$result[0]['promo_applied_on_pack'] && !in_array($result[0]['promocode_id'],$promo_used))
+		{
+			if($result[0]['discount_on']=='email')
+			{	
+				array_push($promo_used,$result[0]['promocode_id']);
+				$promo=implode(',',$promo_used);
+			if($result[0]['disc_type']=='num' && $result[0]['enabled']=='1')
+				{
+					$data=array(
+					'total_emails'=>$this->input->post('total_emails')+$result[0]['discount'],
+					'email_balance'=>$this->input->post('balance')+$result[0]['discount'],
+					'user_promo_id'=>$promo
+					);
+				}
+				else if($result[0]['disc_type']=='per' && $result[0]['enabled']=='1')
+				{$disc=($result[0]['discount']*$this->input->post('total_emails'))/100;
+				 
+					$data=array(
+					'total_emails'=>$this->input->post('total_emails')+$disc,
+					'email_balance'=>$this->input->post('balance')+$disc,
+					'user_promo_id'=>$promo
+					);
+				}				
+			}
+			// else if($result[0]['discount_on']=='price')
+			// {
+				// if($result[0]['discount_type']=='num' && $result[0]['enabled']=='1')
+				// {
+					
+				// }
+				// else if($result[0]['discount_type']=='per' && $result[0]['enabled']=='1')
+				// {
+					
+				// }	
+			// }
+			$this->db->where('user_id',$user_id);
+			$this->db->update('user_email_pack',$data);
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+		
+	}
 	
 	
 }

@@ -254,6 +254,29 @@ class emailpacks extends CI_Controller
 			}
 		}
 	}
+		function add_promo()
+	{
+		$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		} 
+		else 
+		{
+			$data['user_id']= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
+			else
+			{				
+				$promo=$this->emailpacks_model->new_promo($data['user_id']);
+				echo $promo;
+				//$this->load->view('admin/emailpacks/useremail_packs',$data);
+			}
+		}
+	}
 }
 
 /* End of file auth.php */

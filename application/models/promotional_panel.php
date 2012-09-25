@@ -292,7 +292,7 @@ function email_send()
 		$balance=$sql->result_array();
 		$bal=$balance[0]['email_balance'];
 		$pack_id=$balance[0]['user_pack_id'];
-		$univ_id=$balance[0]['user_univ_id'];
+		//$univ_id=$balance[0]['user_univ_id'];
 		
 		
 		$this->db->select('v_email');
@@ -333,7 +333,7 @@ function email_send()
 		$transaction=array(
 		'trans_user_id'=>$data['user_id'],
 		'pack_id'=>$pack_id,
-		'univ_id'=>$univ_id,
+		//'univ_id'=>$univ_id,
 		'no_of_emails'=>$count,
 		'trans_type'=>'send'
 		);
@@ -349,10 +349,10 @@ function email_send()
 		  $this->email->initialize($config);             
 	
 		$this->email->from('info@meetuniversities.com', 'meetuniversities');			
-		$this->email->to('kulbir@webinfomart.com');					
+		$this->email->to($x['v_email']);					
 		//$this->email->cc('a,b,c');$x['v_email']		
 		$this->email->subject($this->input->post('email_subject'));
-		$this->email->message($this->input->post('email_text').$x['v_email']);
+		$this->email->message($this->input->post('email_text'));
 		$this->email->send();					
 		//$this->email->print_debugger();		
 		}
