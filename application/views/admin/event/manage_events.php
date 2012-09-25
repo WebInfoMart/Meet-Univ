@@ -75,8 +75,11 @@ $insert=1;
 			<span >Filter</span>
 			<select id="drop" name="drop" >
 				<option>Select to Search</option>
-				<option value="1">Event Title</option>														
+				<option value="1">Event Title</option>
+			<?php if($admin_user_level['admin_user_level']!='3')
+					{ ?>
 				<option value="2">University Name</option>
+				<?php } ?>
 				<option value="3">Event's Country</option>
 				<option value="4">Featured Events</option>
 				<option value="5">Date Wise Events</option>

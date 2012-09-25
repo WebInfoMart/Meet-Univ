@@ -37,10 +37,12 @@ else { $class_univ_name='text'; }?>
 </div>					
 </li>				
 
-<li>				
+<li>
+<?php if($admin_user_level['admin_user_level']!='3')
+{ ?>					
 <div class="float_l span3 margin_zero">							
 <label>Select Categories</label>						
-</div>		
+</div>	
 <select class="span3" id="category" name="category" onchange="fetch_collage(this);">
 <option value="general">Choose Type</option>			
 <option value="univ">College</option>			
@@ -51,7 +53,16 @@ else { $class_univ_name='text'; }?>
 </div>	
 <select id="colleges" name="colleges" class="colege_set">
 <option value="0"> select </option>	
-</select>		
+</select>
+<?php }
+else
+{ ?>
+	<input type="hidden" id="category" value="univ" />	
+	<input type="hidden" id="colleges" value="<?php echo $univ_info['univ_id']; ?>" />
+<?php
+}
+?>
+		
 <div>							
 	<div class="float_l span3 margin_zero">								
 	<label>Detail</label>							

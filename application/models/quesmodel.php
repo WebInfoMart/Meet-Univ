@@ -37,7 +37,7 @@ class Quesmodel extends CI_Model
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
 		$this->db->select('*');
 		$this->db->from('questions');
-		$this->db->join('university', 'questions.q_univ_id = university.univ_id');		
+		$this->db->join('university', 'questions.q_univ_id = university.univ_id','left');		
 		if($this->input->post('approved')==1)
 		{
 			$status=$this->input->post('approved');
@@ -71,13 +71,13 @@ class Quesmodel extends CI_Model
 		$query=$this->db->get();
 		$config['base_url']=base_url()."adminques/manage_ques/";
 		$config['total_rows']=$query->num_rows();
-		$config['per_page'] = '2'; 
+		$config['per_page'] = '5'; 
 		//$config['use_page_numbers'] = TRUE;
 		$offset = $this->uri->segment(3); //this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
         $limit = $config['per_page'];
 		$this->db->select('*');
 		$this->db->from('questions');
-		$this->db->join('university', 'questions.q_univ_id = university.univ_id');
+		$this->db->join('university', 'questions.q_univ_id = university.univ_id','left');
 		if($this->input->post('approved')==1)
 		{
 			$status=$this->input->post('approved');

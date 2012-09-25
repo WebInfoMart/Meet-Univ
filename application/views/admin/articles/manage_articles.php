@@ -131,8 +131,11 @@ $insert=1;
 	<span >Filter</span>
 	<select id="drop" name="drop" >
 	<option>Select to Search</option>
-	<option value="1">Article_title</option>														
+	<option value="1">Article_title</option>
+<?php if($admin_user_level['admin_user_level']!='3')
+					{ ?>	
 	<option value="2">University_name</option>
+	<?php } ?>
 	<option value="3">Approved</option>
 	<option value="4">Featured</option>
 	</select>

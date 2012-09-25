@@ -67,10 +67,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 -->
 					
 			<?php
-			
-}	
-
-			
+			}				
 			if($admin_priv_res['privilege_type_id']=='3' && $admin_priv_res['privilege_level']!='0')
 			{?>
 			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/event.jpg" alt="" /> Events</a>
@@ -111,7 +108,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			</li>
 			<?php
 			}
-			if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
+			if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
    {?>
    <li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" />Q & A Section</a>
    <ul><?php

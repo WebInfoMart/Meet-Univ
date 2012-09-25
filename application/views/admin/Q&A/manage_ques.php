@@ -119,7 +119,7 @@ function home()
 }
 </script>
 <div id="ajax_load" >
-<script type="text/javascript" src="<?php echo "$base$js";?>/custom.js"></script>
+<!--<script type="text/javascript" src="<?php //echo "$base$js";?>/custom.js"></script>-->
 <?php 
 $edit=0;
 $delete=0;
@@ -163,8 +163,11 @@ $insert=1;
 	<span >Filter</span>
 	<select id="drop" name="drop" >
 	<option>Select to Search</option>
-	<option value="1">Question Title</option>														
+	<option value="1">Question Title</option>
+		<?php if($admin_user_level['admin_user_level']!='3')
+			{ ?>	
 	<option value="2">University_name</option>
+	<?php } ?>
 	<option value="3">Approved</option>
 	<option value="4">Featured</option>
 	</select>
