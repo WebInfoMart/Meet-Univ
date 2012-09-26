@@ -1,40 +1,26 @@
-<div id="content">	
-<h2>Details Of Email Packs</h2>
+<div id="content">
 <input type="button" onclick="window.location.href='<?php echo $base; ?>emailpacks/user_email_packs'" class="submit tiny float_r" value="View Your Plans" />
-<table cellpadding="0" cellspacing="0" width="100%" class="sortable">			
-				<thead>
-					<tr>
-						
-						<th class="header" style="cursor: pointer; ">Pack Title</th>
-						<th class="header" style="cursor: pointer; ">( $ ) Pack Cost</th>
-						<th class="header" style="cursor: pointer; ">Number of Emails</th>						
-						<th class="header" style="cursor: pointer; ">Purchase</th>
-						<th></th>
-					</tr>
-				</thead>
-				
-				<tbody>
-				<?php 
-				if(!empty($packs))
-				{
-				foreach($packs as $row){
-				?>
-					<tr class="even">
-					
-												
-						<td>
-						<?php echo ucwords(substr($row['email_pack_name'],0,50)); ?>
-						</td>
-						<td id="cost_<?php echo $row['email_pack_id'];?>"><?php echo ucwords($row['email_pack_cost']); ?></td>
-						<td id="emails_<?php echo $row['email_pack_id'];?>"><?php echo ucwords($row['pack_contains_email']); ?></span></td>
-						<td><input onclick="purchase(<?php echo $row['email_pack_id'];?>)" type="button" value="Purchase"</td>
-						</tr>
-			<?php } }else { echo "<tr><td>".'No Result Found!'."<td></tr>"; } ?>		
-				
-				</tbody>
-				
-			</table>			
-</div>	
+	
+	<?php 
+	if(!empty($packs))
+	{
+	foreach($packs as $row){
+	?>	
+	<div class="blue_div">
+		<div class="blue_holder">
+			<div class="plan_padding">
+			<div class="plan_heading"><?php echo ucwords(substr($row['email_pack_name'],0,50)); ?></div></br/>
+			<div class="price_txt">$
+			<div id="cost_<?php echo $row['email_pack_id'];?>" class="inline"><?php echo ucwords($row['email_pack_cost']); ?></div>
+			</div>
+			</div>
+			<div class="plan_text"><div id="emails_<?php echo $row['email_pack_id'];?>" class="inline"> <?php echo ucwords($row['pack_contains_email']); ?>  </div><span class="inline"> &nbsp; Emails </span></div>
+			<button onclick="purchase(<?php echo $row['email_pack_id'];?>)" class="plan_btn">Purchase</button>
+		</div>
+	</div>
+	<?php } }else { echo "<tr><td>".'No Result Found!'."<td></tr>"; } ?>
+
+</div>
 <script>
 function purchase(id)
 {

@@ -316,13 +316,13 @@ function email_send()
 		if($this->input->post('subject'))
 		{
 			$subject=$this->input->post('subject');
-			$this->db->where_in('v_current_educ_level',$subject);
+			$this->db->where_in('v_program',$subject);
 		}
 			
 		$query=$this->db->get();
 		$result=$query->result_array();
 		$count=count($result);		
-		if($bal>$count)
+		if($bal>$count && $count>0)
 		{
 		$update=array(
 		'email_balance'=>$bal-$count
@@ -342,7 +342,7 @@ function email_send()
 		
 		foreach($result as $x)
 		{		
-		$config['protocol'] = $this->config->item('mail_protocol');
+		  $config['protocol'] = $this->config->item('mail_protocol');
 		  $config['smtp_host'] = $this->config->item('smtp_server');
 		  $config['smtp_user'] = $this->config->item('smtp_user_name');
 		  $config['smtp_pass'] = $this->config->item('smtp_pass');

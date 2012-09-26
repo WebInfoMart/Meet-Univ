@@ -13,7 +13,7 @@
 				</div>
 				<div class="data7 margin_delta one_more">
 					<span class="green_heading">EMAIL campaign:</span>
-					<form class="form-horizontal margin_t" action="send_email" method="post">
+					<form class="form-horizontal margin_t" action="send_email" method="post" onsubmit="disable()">
 						<div class="control-group2">
 							<div class="float_l">								
 								<div class="controls-input-data">
@@ -203,5 +203,9 @@ $.ajax({
 	   }
 	}
 });
+}
+function disable()
+{
+	
 }
 </script>	

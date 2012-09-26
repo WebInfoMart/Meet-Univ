@@ -1235,3 +1235,28 @@ box-shadow: 0 0 5px #888;border-radius: 2px;border: 1px solid #a1d6e8;padding:0p
 .form_horizontal_data .controls1 select {
 width: 160px;
 }
+/*---------------------------plan descript----------------------*/
+.blue_holder{background:url(../../images/admin/blue_img.jpg) no-repeat;width: 177px;
+text-align: center;
+color: white;
+}
+.plan_padding{padding:35px 15px;}
+.price_txt{line-height: 62px;font-size: 41px;}
+.blue_div{width: 177px;
+float: left;
+margin-right: 20px;
+margin-top: 20px;
+}
+.blue_div:hover .blue_holder{background:url(../../images/admin/plan_green.jpg) no-repeat;width: 177px;
+text-align: center;
+color: white;cursor:pointer}
+.blue_div:hover .plan_btn{background:url(../../images/admin/green_btn.jpg) center no-repeat;border: 0px;
+width: 175px;color:white;
+margin-top: 15px;
+height: 30px;}
+.plan_text{background:url(../../images/admin/plan_hori.jpg) bottom no-repeat;color:#000;padding: 6px 5px;}
+.plan_heading{font-size:25px}
+.plan_btn{background:url(../../images/admin/plan_btn.jpg) center no-repeat;border: 0px;
+width: 175px;color:white;
+margin-top: 15px;
+height: 30px;}

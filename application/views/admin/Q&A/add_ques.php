@@ -20,62 +20,55 @@ else { $class_univ_name='text'; }?>
 <div id="content">		
 <h2 class="margin">Add Question</h2>	
 <div class="form span8">			
-<form action="<?php echo $base; ?>adminques/add_ques" method="post" class="caption_form" >				
-<input type="hidden" name="ques_type_ud" value="univ_ques"/>
-<ul>					
-<li>						
-<div>							
-<div class="float_l span3 margin_zero">								
-<label>Title</label>							
-</div>							
-<div class="float_l span3">								
-<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">								
-<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> 
-</span>									
-</div>														
-<div class="clearfix"></div>						
-</div>					
-</li>				
-
-<li>
-<?php if($admin_user_level['admin_user_level']!='3')
-{ ?>					
-<div class="float_l span3 margin_zero">							
-<label>Select Categories</label>						
-</div>	
-<select class="span3" id="category" name="category" onchange="fetch_collage(this);">
-<option value="general">Choose Type</option>			
-<option value="univ">College</option>			
-</select>
-<div class="clearfix"></div>
-<div class="float_l span3 margin_zero">							
-<label>Choose University</label>						
-</div>	
-<select id="colleges" name="colleges" class="colege_set">
-<option value="0"> select </option>	
-</select>
-<?php }
-else
-{ ?>
-	<input type="hidden" id="category" value="univ" />	
-	<input type="hidden" id="colleges" value="<?php echo $univ_info['univ_id']; ?>" />
-<?php
-}
-?>
-		
-<div>							
-	<div class="float_l span3 margin_zero">								
-	<label>Detail</label>							
-	</div>							
-	<div class="">								
-	<textarea rows="12" name="detail"  cols="103"><?php echo set_value('detail'); ?></textarea>								
-	<span style="color: red;"> <?php echo form_error('detail'); ?><?php echo isset($errors['detail'])?$errors['detail']:''; ?> </span>							
-	</div>							
-	<div class="clearfix"></div>						
-</div>					
-</li>				
-</ul>						
-<input type="submit" name="submit" class="submit" value="Add ques">									
+<form action="<?php echo $base; ?>adminques/add_ques" method="post" class="caption_form form_horizontal_data" >				
+	<input type="hidden" name="ques_type_ud" value="univ_ques"/>
+	<div class="control-group1">
+		<label class="control-label1" for="select01">Title:</label>
+		<div class="controls1">
+			<input type="text" size="30" class="<?php echo $class_title; ?>" value="<?php echo set_value('title'); ?>" name="title">								
+			<span style="color: red;"> <?php echo form_error('title'); ?><?php echo isset($errors['title'])?$errors['title']:''; ?> 
+			</span>			
+		</div>
+	</div>
+	<?php if($admin_user_level['admin_user_level']!='3')
+	{ ?>
+	<div class="control-group1">
+		<label class="control-label1" for="select01">Select Categories:</label>
+		<div class="controls1">
+			<select id="category" name="category" onchange="fetch_collage(this);">
+				<option value="general">Choose Type</option>			
+				<option value="univ">College</option>			
+			</select>		
+		</div>
+	</div>
+	<div class="control-group1">
+		<label class="control-label1" for="select01">Choose University:</label>
+		<div class="controls1">
+			<select id="colleges" name="colleges" class="colege_set">
+				<option value="0"> select </option>	
+			</select>	
+			<?php }
+			else
+			{ ?>
+				<input type="hidden" id="category" value="univ" />	
+				<input type="hidden" id="colleges" value="<?php echo $univ_info['univ_id']; ?>" />
+			<?php
+			}
+			?>
+		</div>
+	</div>
+	<div class="control-group1">
+		<label class="control-label1" for="select01">Detail:</label>
+		<div class="controls1">
+			<textarea rows="12" name="detail"  cols="103"><?php echo set_value('detail'); ?></textarea>								
+			<span style="color: red;"> <?php echo form_error('detail'); ?><?php echo isset($errors['detail'])?$errors['detail']:''; ?> </span>			
+		</div>
+	</div>
+	<div class="control-group1">
+		<div class="controls1">
+			<input type="submit" name="submit" class="submit" value="Add ques">		
+		</div>
+	</div>						
 </form>		
 </div>					
 </div>

@@ -613,6 +613,9 @@ class Adminmodel extends CI_Model
 	
 	function get_univ_info_search($paging,$univ_name,$sel_id)
 	{$arr=array('0');
+		$data['user_id'] = $this->tank_auth->get_admin_user_id();
+		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+		$univ=$this->univ_vs_user_model->get_assigned_univ_info($data['user_id']);
 		$this->db->select('*');
 		$this->db->from('university');
 		$this->db->join('users', 'users.id = university.user_id','left');
@@ -644,8 +647,17 @@ class Adminmodel extends CI_Model
 		if($sel_id=='4')
 		{
 		 $featured='1';
-		$this->db->where('university.featured_college',$featured);
+		 $this->db->where('university.featured_college',$featured);
 		}
+		if($sel_id=='5')
+		{
+		 $banned='1';
+		$this->db->where('university.switch_off_univ',$banned);
+		}
+		if($data['admin_user_level']=='4')
+		{
+			$this->db->where_in('univ_id',$univ);
+		}	
 		$query =$this->db->get();
 		$config['base_url']=base_url()."admin/ManageUniversitySearch/";
 		$config['total_rows']=$query->num_rows();
@@ -684,6 +696,15 @@ class Adminmodel extends CI_Model
 		{
 		 $featured='1';
 		$this->db->where('university.featured_college',$featured);
+		}
+		if($sel_id=='5')
+		{
+		 $banned='1';
+		$this->db->where('university.switch_off_univ',$banned);
+		}
+		if($data['admin_user_level']=='4')
+		{
+			$this->db->where_in('univ_id',$univ);
 		}
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();

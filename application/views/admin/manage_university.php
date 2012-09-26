@@ -14,7 +14,13 @@ jQuery(document).ready(function(){
 					$("#search_box").hide();				  
 					$("#btnUnivSearch").hide();
 					search_university();
-				}								
+				}
+				if(dataString==5)
+				{
+					$("#search_box").hide();				  
+					$("#btnUnivSearch").hide();
+					search_university();
+				}
 		});
 });
 </script>
@@ -44,17 +50,18 @@ $delete=1;
 <div id="content">	
 
 <h2>DETAIL OF UNIVERSITY</h2>
-			<div id="search_university" style="width: 425px;"> 
+			<div id="search_university" "> 
 			<span >Filter</span>
 			<select id="drop" name="drop" >
 			<option>Select to Search</option>
-			<option value="1">Univ Name</option>														
-			<option value="2">Country</option>
+			<option value="1">University Name</option>														
+			<option value="2">Country Name</option>
 			<option value="3">Admin Name</option>
-			<option value="4">Featured Univ</option>
+			<option value="4">Featured Universities</option>
+			<option value="5">Banned Universities</option>
 			</select>
-			<input type="text" id="search_box" style="width: 210px;height: 17px;margin-left: 256px;margin-top: -38px;display:none;"/>				
-			<input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_university();" style="display:none;margin-left: 480px;margin-top: -38px;">
+			<input type="text" id="search_box" style="display:none;"/>				
+			<input type="button" class="btn btn-primary" value="Search" name="btnUnivSearch" id="btnUnivSearch" onclick="search_university();" style="display:none;">
 			 <div class="clearfix"></div>
 			 </div> 
 			

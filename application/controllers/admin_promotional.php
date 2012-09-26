@@ -176,6 +176,10 @@ class Admin_promotional extends CI_Controller
 		{	$data['msg']="Email Sent Successfully";
 			$this->load->view('admin/userupdated',$data);
 		}
+		if($snd=='fld')
+		{	$data['msg']="Unable to Send Emails";
+			$this->load->view('admin/userupdated',$data);
+		}
 		$this->load->view('admin/promotional/email_promotional',$data);
 		}
 		else
@@ -192,7 +196,11 @@ class Admin_promotional extends CI_Controller
 		if($success)
 		{
 			redirect('admin_promotional/email_campaign/snd');
-		}	
+		}
+		else
+		{
+			redirect('admin_promotional/email_campaign/fld');
+		}		
 		
 	}
 	

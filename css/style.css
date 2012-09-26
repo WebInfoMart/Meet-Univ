@@ -390,7 +390,7 @@ border-color: rgba(255, 0, 0, .8) !important;
 -webkit-box-shadow: 0 0 5px#888;box-shadow: 0 0 5px #888;}
 .left_about{padding-right: 10px;border-right: 1px dotted #ddd;-moz-border-right: 1px dotted #ddd;-webkit-border-right: 1px dotted #AAA;float: left;height: 188px;}
 .about_fix{text-align: justify;padding: 0px 10px;
-font-size: 14px;
+font-size: 12px;
 line-height: 22px;height:177px;overflow:hidden;}
 .insight_data{list-style:none;}
 .about_depend{min-height: 150px;overflow: hidden;}

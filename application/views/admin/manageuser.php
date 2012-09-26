@@ -54,7 +54,10 @@ function search()
 </script>
 <div id="ajax_load">
 <div id="content">	
-<input type="button" onclick="fetch(0)" class="submit tiny" value="Reset" />
+	<h2>DETAIL OF USERS</h2>
+	<div class="float_r">
+	<input type="button" onclick="fetch(0)" class="submit tiny" value="Reset" />
+</div>
 	<div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
 	<span >Filter</span>
 	<select id="drop" name="drop" >
@@ -67,9 +70,7 @@ function search()
 	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
 	</div>
 <div class="margin_t">
-<div class="float_l">
-<h2>DETAIL OF USERS</h2>
-</div>
+
 <?php 
 $user_can_delete=0;
 if($level==''){ $level=0;}
