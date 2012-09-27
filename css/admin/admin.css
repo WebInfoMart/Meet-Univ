@@ -1203,12 +1203,15 @@ border-top-right-radius: 8px;
 -moz-border-top-right-radius: 8px;
 -webkit-border-top-left-radius: 8px;
 -webkit-border-top-right-radius: 8px;
-width:196px;
 background: #F4F4F3;
+width: 113px;
+padding: 3px;
 border: 1px solid #C9C9C9;
 -moz-border: 1px solid #C9C9C9;
 -webkit-border: 1px solid #C9C9C9;
 }
+b{text-decoration:none}
+.img_plan_type{margin: 0px 6px;}
 .plan_graph{padding: 10px 16px;margin-top: 32px;border: 2px solid silver;-moz-border: 2px solid silver;-webkit-border: 2px solid silver;background:url(../../images/admin/images/graph_bg.png) repeat;}
 .plan_box {
 background: #F9F9F9;

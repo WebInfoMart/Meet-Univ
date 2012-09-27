@@ -46,7 +46,7 @@
 	<div class="data7 float_l">
 		<div class="plan_holder">	
 			<ul class="menu_list">
-				<li><a href="#"><img src="../images/admin/mail.png"/><b class="blue">Email</b></a></li>
+				<li><a href="#"><img src="../images/admin/mail.png" class="img_plan_type"/><b class="blue">Email Packs</b></a></li>
 				<!--<li class="bg_none"><a href="#"><img src="../images/admin/images/mbl_icon.png"/><b>SMS</b></a></li>-->
 				<div class="clearfix"></div>
 			</ul>
@@ -113,7 +113,7 @@
 			?>	
 			
 		</div>
-	
+	<div class="clearfix"></div>
 	</div>
 	
 </div>
