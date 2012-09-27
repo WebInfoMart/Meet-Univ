@@ -112,7 +112,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			}
 			if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
    {?>
-  <!-- <li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/qna.gif" alt="" />Q & A Section</a>-->
+   <li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/qna.gif" alt="" />Q & A Section</a>
    <ul><?php
    if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
    {?>
