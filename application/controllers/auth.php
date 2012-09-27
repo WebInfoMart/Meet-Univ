@@ -1343,7 +1343,13 @@ class Auth extends CI_Controller
    
    function savepic()
    {
-   
+  
+
+$post = array("1", "2", "3");
+$prog = array( "1","2");
+$result = array_diff($post, $prog);
+
+print_r($result);
    // $url = 'http://inchoo.net/wp-content/uploads/2011/01/fbconnect.gif';
 	//$img = '../abcde.gif';
 	//file_put_contents($img, file_get_contents($url));

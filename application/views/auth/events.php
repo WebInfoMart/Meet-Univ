@@ -727,9 +727,7 @@ function events_result_by_paging(a,pid)
  	   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>auth/all_events_paging",
-	   async:false,
 	   data: 'offset='+a+'&current_url='+url,
-	   cache: false,
 	   success: function(r)
 	   {
 	    res=r.split('!@#$%^&*');

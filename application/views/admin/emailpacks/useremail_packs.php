@@ -138,6 +138,7 @@ $.ajax({
 		{
 			$("#content_msg2").hide();
 			$("#content_msg").show('slow');
+			$("#content_msg").hide(7000);
 			var total=parseInt(total_emails)+parseInt(msg);
 			$('#total_emails').html(total);
 			var bal=parseInt(balance)+parseInt(msg);
@@ -147,6 +148,8 @@ $.ajax({
 		{
 			$("#content_msg").hide();
 			$("#content_msg2").show('slow');
+			$("#content_msg2").hide(7000);
+			
 		}
 	   }
 });
