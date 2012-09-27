@@ -904,10 +904,10 @@ function show_all_college_paging($current_url)
 			//event of upcoming month
 			
 			//$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
-			$where.="";
+			$where.=" and events.ban_event='0'";
 			
-			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc";
-			
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt desc";
+			//changes asc to desc by sumit munjal
 			$results=$this->db->query($sql);
 			$events_data['total_res']=$results->num_rows();
 			if($results->num_rows()>$events_data['limit_res']);
@@ -918,8 +918,8 @@ function show_all_college_paging($current_url)
 			{
 				$events_data['per_page_res']=$events_data['total_res'];
 			}
-			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT 0,".$events_data['limit_res']."";
-			
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt desc LIMIT 0,".$events_data['limit_res']."";
+			//changes asc to desc by sumit munjal
 			$results=$this->db->query($sql);
 			
 			if($results->num_rows()>0)
@@ -1031,7 +1031,7 @@ function show_all_college_paging($current_url)
 			}
 			//upcoming event code
 			//$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
-			$where.="";
+			$where.=" and events.ban_event='0'";
 			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT ".$offset.",".$events_data['limit_res']."";
 			
 			$results=$this->db->query($sql);

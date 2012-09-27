@@ -132,7 +132,7 @@ $insert=1;
 						echo '<span style="color:#000;">Not Available</span>';
 						}
 						?></a></td>
-						<td><a href="#"><?php if($row->featured_home_event=='1'){?>Featured Event <?php } else { echo "<span style='color:#000;'>Non Featured Event</span>"; } ?></a></td>
+						<td><a href="#"><?php if($row->featured_home_event=='1'){ echo "Featured Event"; } else { echo "<span style='color:#000;'>Non Featured Event</span>"; } ?></a></td>
 						<td><a href="#"><?php echo $row->event_date_time; ?></a></td>
 						
 						<td>
@@ -146,14 +146,15 @@ $insert=1;
 			<?php } if($edit==1) { ?>
               <li><a href="<?php echo "$base"; ?>adminevents/edit_event/<?php echo $row->event_id; ?>">
 			  <i class="icon-pencil"></i> Edit</a></li>
+			  <li><a href="#" onclick="show_hide_event('<?php echo "$base";?>adminevents','<?php  echo $row->ban_event; ?>','<?php echo $row->event_id; ?>');"><i class="<?php if($row->ban_event=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->ban_event=='1'){?>Show Event On Site <?php } else {?>Hide Event On Site<?php } ?></a>
+			 </li>
 			  <?php } if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3') { ?>
 <li><a href="#" onclick="featured_home_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_home_event; ?>','<?php echo $row->event_id; ?>');"><i class="<?php if($row->featured_home_event=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_home_event=='1'){?> Make Home Unfeatured <?php } else {?> Make Home Featured <?php } ?></a>
 			 </li>	
-			 <!-- <li><a href="#" onclick="featured_dest_confirm('<?php echo "$base";?>adminevents','<?php  echo $row->featured_dest_event; ?>','<?php echo $row->event_id; ?>');"><i class="<?php if($row->featured_dest_event=='1'){ echo "icon-ban-circle"; } else { echo "icon-unban-circle"; }?>"></i><?php  if($row->featured_dest_event=='1'){?> Make Study-Abroad Unfeatured <?php } else {?> Make Study-Abroad Featured <?php } ?></a>
-			 </li>
-			-->	
+			 
 			<?php }	 if($delete==1) { ?>
 			 <li><a href="#" onclick="delete_confirm('<?php echo $row->event_id; ?>');" ><i class="icon-trash"></i> Delete</a></li>
+			 
 				<?php }
 	$event_title=$this->subdomain->process_url_title(substr($row->event_title,0,50));
     $event_link=$this->subdomain->genereate_the_subdomain_link($row->subdomain_name,'event',$event_title,$row->event_id);	
@@ -345,7 +346,42 @@ var f;
 	   });
 	 return f;
 }
+function show_hide_event(url,sh,event_id)
+{
 
+if(sh=='1')
+{
+shh='show';
+}
+else
+{
+shh='hide';
+}
+var r=confirm("Are U sure u want to "+shh+" the selected events");
+if(r)
+{
+var data={event_id:event_id,show_hide:sh}
+$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>adminevents/show_hide_event",
+	   async:false,
+	   data: data,
+	   cache: false,
+	   success: function(msg)
+	   {
+	  if(msg=='1')
+	   {
+	   var shh='ess';
+	   }
+	   else
+	   {
+	   var shh='ehs';
+	   }
+	    window.location.href="<?php echo $base; ?>adminevents/manage_events/"+shh;
+	   }
+	   });
+}
+}
 $(function() {
 		$("#pagination a").click(function() {
         var url = $(this).attr("href");	

@@ -217,6 +217,17 @@ $(document).ready(function() {
 					<li>
 						<div>
 						<div class="float_l span3 margin_zero">
+							<label>Hide Event On Site</label>
+						</div>
+					<div class="float_l span3">
+					<label><input type="checkbox"  name="location_event" id="hide_event" value="1"  /></label>
+					</div>
+						<div class="clearfix"></div>
+						</div>
+					</li>
+					<li>
+						<div>
+						<div class="float_l span3 margin_zero">
 							<label>Event Place</label>
 						</div>
 						<div class="float_l span3">
@@ -225,6 +236,7 @@ $(document).ready(function() {
 						</div>
 						</div>
 					</li>
+					
 				</ul>
 				<input type="button" id="add_event_step1" name="submit" class="ajaxsubmit margin_left_ajax" value="Next">
 						

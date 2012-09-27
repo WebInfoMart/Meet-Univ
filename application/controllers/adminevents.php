@@ -99,6 +99,11 @@ class Adminevents extends CI_Controller
 			$data['msg']='Event Updated Successfully';
 			$this->load->view('admin/userupdated', $data);
 			}
+			if($msg=='ehs' || $msg=='ess')
+			{
+			$data['msg']='Action Performed Successfully';
+			$this->load->view('admin/userupdated', $data);
+			}
 			$data['events_info']=$this->events->events_detail();
 			$data['featured']=$this->input->post('featured');
 			$data['sel_id']=$this->input->post('sel_id');  
@@ -830,6 +835,14 @@ class Adminevents extends CI_Controller
 		}
 		}
 	}	
+	 
+	function show_hide_event()
+	{
+	$event_id=$this->input->post('event_id');
+	$this->events->hide_show_event($event_id);
+	echo $this->input->post('show_hide');
+	
+	}
 	
 }
 

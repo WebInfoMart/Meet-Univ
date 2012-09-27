@@ -192,6 +192,15 @@ $('#submit_event').click(function()
 		var city_id=0;
 		var fixedloc=0;
 		}
+		
+		if($('#hide_event').is(':checked'))
+		{
+		var hide_event='1';
+		}
+		else
+		{
+		var hide_event='0';
+		}
 			  var form_data = {
 			   title : $('#title_event').val(),
 			   university : $('#university').val(),
@@ -212,6 +221,7 @@ $('#submit_event').click(function()
 			   cityname:$('#city_name').val(),
 			   countryname:$('#country_name').val(),
 			   statename:$('#state_name').val(),
+			   hide_event:hide_event,
 			   submit:1
 			  };
 			

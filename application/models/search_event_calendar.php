@@ -20,6 +20,7 @@ class Search_event_calendar extends CI_Model
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
+		$this->db->where('events.ban_event','0');
 		$this->db->where($event_date);
 		$query = $this->db->get();
 		if($query->num_rows()>0)

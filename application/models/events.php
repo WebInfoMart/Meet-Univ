@@ -82,6 +82,7 @@ class Events extends CI_Model
 			   'event_state_id' => $this->input->post('state'),
 			   'event_city_id' => $this->input->post('city'),
 			   'event_place' => $this->input->post('event_place'),
+			   'ban_event' => $this->input->post('hide_event'),
 			   'event_time' => $this->input->post('event_timing')
 			);
 			$this->db->insert('events', $data);
@@ -98,33 +99,11 @@ class Events extends CI_Model
 		$this->db->join('university', 'events.event_univ_id = university.univ_id');
 		$this->db->join('country', 'country.country_id = events.event_country_id','left');
 		$this->db->join('city', 'events.event_city_id = city.city_id','left');
-		if($this->input->post('sel_id')==1)
-		{	$tosearch=$this->input->post('search_box');
-			$this->db->like('event_title',$tosearch);
-		}
-		if($this->input->post('sel_id')==2)
-		{$tosearch=trim($this->input->post('search_box'));			 
-		$query1=$this->db->query("select univ_id from university as uni where uni.univ_name like '%$tosearch%'");		  
-		$res1=$query1->result_array();
-		foreach($res1 as $res)				
-					{
-					 array_push($arr,$res['univ_id']);
-					}
-		$this->db->where_in('events.event_univ_id',$arr);
-		}
-		if($this->input->post('sel_id')==3)
-		{$tosearch=trim($this->input->post('search_box'));	
-			$query1=$this->db->query("select country_id from country as cnt where cnt.country_name like '%$tosearch%'");		  
-		$res1=$query1->result_array();
-		foreach($res1 as $res)				
-					{
-					 array_push($arr,$res['country_id']);
-					}
-		$this->db->where_in('events.event_country_id',$arr);
-		}
+		
 		if($this->input->post('sel_id')==4)
-		{//$tosearch=$this->input->post('search_box');
-			$this->db->where('featured_home_event',1);
+		{
+		//$tosearch=$this->input->post('search_box');
+			$this->db->where('featured_home_event','0');
 		}
 		if($this->input->post('sel_id')==5)
 		{
@@ -135,6 +114,33 @@ class Events extends CI_Model
 		{
 		$this->db->where('university.user_id',$data['user_id']);
 		}
+		if($this->input->post('sel_id')==2)
+		{
+		$tosearch=trim($this->input->post('search_box'));			 
+		$query1=$this->db->query("select univ_id from university as uni where uni.univ_name like '%$tosearch%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['univ_id']);
+					}
+		$this->db->where_in('events.event_univ_id',$arr);
+		}
+		if($this->input->post('sel_id')==3)
+		{
+		$tosearch=trim($this->input->post('search_box'));	
+			$query1=$this->db->query("select country_id from country as cnt where cnt.country_name like '%$tosearch%'");		  
+		$res1=$query1->result_array();
+		foreach($res1 as $res)				
+					{
+					 array_push($arr,$res['country_id']);
+					}
+		$this->db->where_in('events.event_country_id',$arr);
+		}
+		if($this->input->post('sel_id')==1)
+		{	$tosearch=$this->input->post('search_box');
+			$this->db->like('event_title',$tosearch);
+		}
+		
 		$query=$this->db->get();
 		$config['base_url']=base_url()."adminevents/manage_events/";
 		$config['total_rows']=$query->num_rows();
@@ -174,10 +180,11 @@ class Events extends CI_Model
 		}
 		if($this->input->post('sel_id')==4)
 		{//$tosearch=$this->input->post('search_box');
-			$this->db->where('featured_home_event',1);
+			$this->db->where('featured_home_event','1');
 		}
 		if($this->input->post('sel_id')==5)
-		{$tosearch=trim($this->input->post('date_selector'));
+		{
+		$tosearch=trim($this->input->post('date_selector'));
 			$this->db->where('event_date_time',$tosearch);
 		}
 		if($data['admin_user_level']=='3')
@@ -325,6 +332,24 @@ class Events extends CI_Model
 		}
 	
 	}
+	
+	function hide_show_event($event_id)
+	{
+	if( $this->input->post('show_hide')=='1')
+	{
+	$hs_event='0';
+	}
+	else if($this->input->post('show_hide')=='0')
+	{
+	$hs_event='1';
+	}
+	$data = array(
+			   'ban_event' => $hs_event
+			);
+
+			$this->db->update('events', $data, array('event_id' => $event_id));
+	}
+	
 	
 }
 /* End of file users.php */
