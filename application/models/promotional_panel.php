@@ -295,7 +295,7 @@ function email_send()
 		//$univ_id=$balance[0]['user_univ_id'];
 		
 		
-		$this->db->select('v_email');
+		$this->db->select('v_program,v_email');
 		$this->db->from('verified_lead_data');
 		if($this->input->post('country'))
 		{
@@ -313,11 +313,11 @@ function email_send()
 			$edu_level=$this->input->post('edu_level');
 			$this->db->where_in('v_current_educ_level',$edu_level);
 		}
-		if($this->input->post('subject'))
-		{
-			$subject=$this->input->post('subject');
-			$this->db->where_in('v_program',$subject);
-		}
+		// if($this->input->post('subject'))
+		// {
+			// $subject=$this->input->post('subject');
+			// $this->db->where_in('v_program',$subject);
+		// }
 			
 		$query=$this->db->get();
 		$result=$query->result_array();
@@ -341,21 +341,28 @@ function email_send()
 		$this->load->library('email');
 		
 		foreach($result as $x)
-		{		
+		{
+		$prog_post=$this->input->post('subject');
+		$v_prog=explode(',',$x['v_program']);
+		$result = array_diff($prog_post, $v_prog);
+		if($result!=$prog_post)
+		{
+			//echo $x['v_email'];
 		  $config['protocol'] = $this->config->item('mail_protocol');
 		  $config['smtp_host'] = $this->config->item('smtp_server');
 		  $config['smtp_user'] = $this->config->item('smtp_user_name');
 		  $config['smtp_pass'] = $this->config->item('smtp_pass');
 		  $this->email->initialize($config);             
 	
-		$this->email->from('info@meetuniversities.com', 'meetuniversities');			
-		$this->email->to($x['v_email']);					
-		//$this->email->cc('a,b,c');$x['v_email']		
-		$this->email->subject($this->input->post('email_subject'));
-		$this->email->message($this->input->post('email_text'));
-		$this->email->send();					
-		//$this->email->print_debugger();		
-		}
+			$this->email->from('info@meetuniversities.com', 'meetuniversities');			
+			$this->email->to($x['v_email']);					
+				
+			$this->email->subject($this->input->post('email_subject'));
+			$this->email->message($this->input->post('email_text'));
+			$this->email->send();	 			
+			
+		}			
+		}exit;
 		return 1;
 		
 	}
