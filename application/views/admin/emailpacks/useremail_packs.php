@@ -134,7 +134,7 @@ $.ajax({
 	   data: data,
 	   success: function(msg)
 	   {//alert(msg);
-	    if(msg)
+	    if(msg!=0)
 		{
 			$("#content_msg2").hide();
 			$("#content_msg").show('slow');
@@ -143,7 +143,7 @@ $.ajax({
 			var bal=parseInt(balance)+parseInt(msg);
 			$('#bal').html(bal);
 		}
-		else
+		if(msg==0)
 		{
 			$("#content_msg").hide();
 			$("#content_msg2").show('slow');

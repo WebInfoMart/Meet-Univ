@@ -40,7 +40,7 @@ class Quesmodel extends CI_Model
 		$this->db->join('university', 'questions.q_univ_id = university.univ_id','left');		
 		if($this->input->post('approved')==1)
 		{
-			$status=$this->input->post('approved');
+			$status=0;
 			$this->db->where('questions.q_approve',$status);
 		}
 		if($this->input->post('featured')==1)
@@ -80,7 +80,7 @@ class Quesmodel extends CI_Model
 		$this->db->join('university', 'questions.q_univ_id = university.univ_id','left');
 		if($this->input->post('approved')==1)
 		{
-			$status=$this->input->post('approved');
+			$status=0;;
 			$this->db->where('questions.q_approve',$status);
 		}
 		if($this->input->post('featured')==1)

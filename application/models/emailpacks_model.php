@@ -123,6 +123,8 @@ class emailpacks_model extends CI_Model
 		$this->db->where('promo_name',$pcode);
 		$query=$this->db->get();
 		$result=$query->result_array();
+		if(!empty($result))
+		{
 		$user_pack_id=$this->input->post('user_pack_id');
 		$promo_used=array();
 		if($this->input->post('promos_used')!='')
@@ -194,7 +196,11 @@ class emailpacks_model extends CI_Model
 		{
 			return 0;
 		}
-		
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	function delete_email_pack($id)
 	{

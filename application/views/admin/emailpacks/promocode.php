@@ -52,7 +52,7 @@
 			</div>
 			<div class="control-group1">
 				<div class="controls1">
-						<input type="button" onclick="createPromo()" class="submit" value="Add news">	
+						<input type="button" onclick="createPromo()" class="submit" value="Create Promocode">	
 				</div>
 			</div>
 		</form>		
