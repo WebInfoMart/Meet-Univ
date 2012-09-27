@@ -46,7 +46,9 @@ else { $class_univ_name='text'; }?>
 		<div class="controls1">
 			<select id="colleges" name="colleges" class="colege_set">
 				<option value="0"> select </option>	
-			</select>	
+			</select>
+</div>
+	</div>			
 			<?php }
 			else
 			{ ?>
@@ -55,8 +57,7 @@ else { $class_univ_name='text'; }?>
 			<?php
 			}
 			?>
-		</div>
-	</div>
+		
 	<div class="control-group1">
 		<label class="control-label1" for="select01">Detail:</label>
 		<div class="controls1">

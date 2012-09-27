@@ -209,7 +209,7 @@ $insert=1;
 						</td>
 						<td><?php echo ucwords($row->univ_name); ?></td>
 						<td><?php if($row->q_featured_home_que){ echo "Make Unfeatured"; } else {  echo"Make Featured";} ?></td>
-						<td><?php if($row->q_approve){ echo "Disapprove"; } else {  echo"Approve";} ?></td>
+						<td><?php if($row->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>
 						<td id="count_<?php echo $row->que_id; ?>"><?php $count=$this->quesmodel->ans_count($row->que_id); echo $count; ?></td>						
 						
 						<td>
