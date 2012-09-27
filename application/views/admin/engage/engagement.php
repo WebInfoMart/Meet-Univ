@@ -525,8 +525,8 @@ else
 					</div>
 				</div>
 			</div>
-			</div>
 			<div class="clearfix"></div>
+			</div>
 		</div>
 		<div class="margin_t3 dlh_event_holder">			
 		

@@ -158,10 +158,7 @@ $flag=1;
 		<?php } ?>	
 		</div>
 		</div>
-		<?php } ?>		
-		
-	</div>
-<?php }  
+		<?php } 
 
 //Demo University Panel 
 
@@ -177,7 +174,6 @@ $flag=1;
   }
  if($flag) { ?>  
 	<div id="content">
-		<div class="message info"><p>Welcome to the Meet universities Admin Panel</p></div> 
 		
 		<?php if($admin_user_level=='3') { ?>
 		<h2>Statistics</h2>		
@@ -327,7 +323,12 @@ $flag=1;
 <?php }
 }
 
- ?>	
+ ?>		
+		
+	</div>
+<?php }  
+?>
+	
 <script>
 function answerthis(formid)
 {
