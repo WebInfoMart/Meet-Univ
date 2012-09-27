@@ -19,6 +19,8 @@ $flag=1;
 			<li><a href="<?php echo $base; ?>admin_promotional"><img src="<?php echo "$base$admin_img" ?>/nav/world.png" alt="" />Promotional Panel </a></li>
 			<?php if($admin_user_level=='3')
 			{ ?>
+			<li><a href="<?php echo $base; ?>emailpacks/user_email_packs"><img src="<?php echo "$base$admin_img" ?>/mail.png" alt="" />Your Email Plans</a></li>
+			
 			<li><a href="<?php echo $base; ?>admin_engagement"><img src="<?php echo "$base$admin_img" ?>/nav/world.png" alt="" />Engagement Panel </a></li>
 			<?php 
 			}
@@ -110,7 +112,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 			}
 			if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
    {?>
-   <li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/nna.gif" alt="" />Q & A Section</a>
+  <!-- <li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/qna.gif" alt="" />Q & A Section</a>-->
    <ul><?php
    if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
    {?>
