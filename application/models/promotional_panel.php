@@ -362,7 +362,7 @@ function email_send()
 			$this->email->send();	 			
 			
 		}			
-		}exit;
+		}
 		return 1;
 		
 	}
