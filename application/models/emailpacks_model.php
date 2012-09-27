@@ -38,8 +38,10 @@ class emailpacks_model extends CI_Model
 	function create_promocode()
 	{
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();
+		$time=date('y/h/m/s');
+		$promo=md5($this->input->post('promo_name').$time);		
 		$data=array(
-		'promo_name'=>md5($this->input->post('promo_name')),
+		'promo_name'=>$promo,
 		'promo_applied_on_pack'=>$this->input->post('applied_on'),
 		'discount'=>$this->input->post('disc'),
 		'discount_on'=>$this->input->post('discount'),
@@ -47,7 +49,7 @@ class emailpacks_model extends CI_Model
 		'enabled'=>'1'		
 		);
 		$this->db->insert('promocode',$data);
-		return md5($this->input->post('promo_name'));
+		return $promo;
 		
 	}
 	function fetchemail_plans()
@@ -79,9 +81,18 @@ class emailpacks_model extends CI_Model
 			);
 			$this->db->update('user_email_pack',$update);
 			$this->db->where('user_id',$user_id);
-		}else{
-		$this->db->insert('user_email_pack',$data);
+			$transaction=array(
+		'trans_user_id'=>$user_id,
+		'pack_id'=>$this->input->post('packid'),
+		//'univ_id'=>$univ_id,
+		'no_of_emails'=>$this->input->post('emails'),
+		'trans_type'=>'purchase'
+		);
+		$this->db->insert('email_transactions',$transaction);
 		}
+		else
+		{
+		$this->db->insert('user_email_pack',$data);
 		$transaction=array(
 		'trans_user_id'=>$user_id,
 		'pack_id'=>$this->input->post('packid'),
@@ -90,6 +101,7 @@ class emailpacks_model extends CI_Model
 		'trans_type'=>'purchase'
 		);
 		$this->db->insert('email_transactions',$transaction);
+		}		
 		return 1;
 	}
 	function user_packs($user_id)
@@ -113,7 +125,10 @@ class emailpacks_model extends CI_Model
 		$result=$query->result_array();
 		$user_pack_id=$this->input->post('user_pack_id');
 		$promo_used=array();
+		if($this->input->post('promos_used')!='')
+		{
 		$promo_used=explode(',',$this->input->post('promos_used'));
+		}
 		//print_r($promo_used);exit;
 		if($user_pack_id==$result[0]['promo_applied_on_pack'] && !in_array($result[0]['promocode_id'],$promo_used))
 		{
@@ -121,13 +136,24 @@ class emailpacks_model extends CI_Model
 			{	
 				array_push($promo_used,$result[0]['promocode_id']);
 				$promo=implode(',',$promo_used);
-			if($result[0]['disc_type']=='num' && $result[0]['enabled']=='1')
+				if($result[0]['disc_type']=='num' && $result[0]['enabled']=='1')
 				{
 					$data=array(
 					'total_emails'=>$this->input->post('total_emails')+$result[0]['discount'],
 					'email_balance'=>$this->input->post('balance')+$result[0]['discount'],
 					'user_promo_id'=>$promo
+					);				
+					$this->db->where('user_id',$user_id);
+					$this->db->update('user_email_pack',$data);			
+					$transaction=array(
+					'trans_user_id'=>$user_id,
+					//'univ_id'=>$univ_id,
+					'no_of_emails'=>$result[0]['discount'],
+					'pack_id'=>$result[0]['promocode_id'],
+					'trans_type'=>'purchase'
 					);
+					$this->db->insert('email_transactions',$transaction);
+					return $result[0]['discount'];
 				}
 				else if($result[0]['disc_type']=='per' && $result[0]['enabled']=='1')
 				{$disc=($result[0]['discount']*$this->input->post('total_emails'))/100;
@@ -137,14 +163,19 @@ class emailpacks_model extends CI_Model
 					'email_balance'=>$this->input->post('balance')+$disc,
 					'user_promo_id'=>$promo
 					);
+					$this->db->where('user_id',$user_id);
+					$this->db->update('user_email_pack',$data);	
+					$transaction=array(
+					'trans_user_id'=>$user_id,
+					//'univ_id'=>$univ_id,
+					'no_of_emails'=>$disc,
+					'pack_id'=>$result[0]['promocode_id'],
+					'trans_type'=>'purchase'
+					);
+					$this->db->insert('email_transactions',$transaction);
+					return $disc;
 				}
-				$transaction=array(
-				'trans_user_id'=>$user_id,
-				//'univ_id'=>$univ_id,
-				'no_of_emails'=>$this->input->post('total_emails'),
-				'trans_type'=>'purchase'
-				);
-				$this->db->insert('email_transactions',$transaction);
+				
 			}
 			// else if($result[0]['discount_on']=='price')
 			// {
@@ -157,9 +188,7 @@ class emailpacks_model extends CI_Model
 					
 				// }	
 			// }
-			$this->db->where('user_id',$user_id);
-			$this->db->update('user_email_pack',$data);
-			return 1;
+			
 		}
 		else
 		{

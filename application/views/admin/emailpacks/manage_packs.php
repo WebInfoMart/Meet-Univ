@@ -22,7 +22,7 @@ $delete=1;
 <div id="content">
 <h2>DETAIL OF EMAIL PACKS</h2>
 	<div class="float_r">
-		<input type="button" onclick="home()" class="submit tiny" value="Reset" />
+		
 	</div>
 	
 			<form action="<?php echo $base ?>adminarticles/delete_articles" method="post" id="deletearticleform" >	

@@ -191,7 +191,7 @@ class emailpacks extends CI_Controller
 			redirect('admin/adminlogout');
 			}
 			else
-			{
+			{				
 				$this->load->view('admin/header',$data);
 				$this->load->view('admin/sidebar',$data);
 				$data['email_packs']=$this->emailpacks_model->user_packs($data['user_id']);
@@ -199,7 +199,7 @@ class emailpacks extends CI_Controller
 			}
 		}
 	}
-		function add_promo()
+	function add_promo()
 	{
 		$data = $this->path->all_path();
 		if (!$this->tank_auth->is_admin_logged_in()) {
@@ -216,9 +216,16 @@ class emailpacks extends CI_Controller
 			}
 			else
 			{				
+							
 				$promo=$this->emailpacks_model->new_promo($data['user_id']);
-				echo $promo;
-				//$this->load->view('admin/emailpacks/useremail_packs',$data);
+				if($promo)
+				{
+					echo $promo;
+				}
+				else
+				{
+					echo 0;
+				}
 			}
 		}
 	}

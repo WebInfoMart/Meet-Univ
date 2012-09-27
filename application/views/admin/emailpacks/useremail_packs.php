@@ -46,14 +46,17 @@
 	<div class="data7 float_l">
 		<div class="plan_holder">	
 			<ul class="menu_list">
-				<li><!--<a href="#"><img src="../images/admin/images/mail.png"/>.--><b class="blue">Email</b></a></li>
+				<li><a href="#"><img src="../images/admin/mail.png"/><b class="blue">Email</b></a></li>
 				<!--<li class="bg_none"><a href="#"><img src="../images/admin/images/mbl_icon.png"/><b>SMS</b></a></li>-->
 				<div class="clearfix"></div>
 			</ul>
 		</div>
 		<div class="plan_box">
 			<div class="float_l data3 plan_border">
-			<?php foreach($email_packs as $packs)
+			<?php 
+			if(!empty($email_packs))
+			{
+			foreach($email_packs as $packs)
 			{ $user_pack_id=$packs['applied_for_pack']; 
 			$promos_used=$packs['user_promo_id'];			
 			?>
@@ -69,7 +72,7 @@
 					<label class="label_txt blue">
 						Total Emails:
 					</label>
-					<div class="input_right">
+					<div class="input_right" id="total_emails">
 						<?php $total_emails=$packs['total_emails']; echo $total_emails;?>
 					</div>
 				</div>						
@@ -79,7 +82,7 @@
 					<label class="label_txt blue">
 						Used:
 					</label>
-					<div class="input_right">
+					<div class="input_right" >
 						<?php echo $packs['total_emails']-$packs['email_balance'];?>
 					</div>
 				</div>
@@ -87,25 +90,32 @@
 					<label class="label_txt blue">
 						Remaining: 
 					</label>
-					<div class="input_right">
+					<div class="input_right" id="bal">
 						<?php $balance=$packs['email_balance']; echo $balance; ?>
 					</div>
 				</div>
 			</div>
-			<?php } ?>	
 			<div class="clearfix"></div>
-		</div>
-		<div>
+				<div>
 		<br/>
 		<label class="label_txt blue">
-						Add Promocode
+						Apply Promocode
 					</label>		
 				<input type="text" id="new_promo" value="" />
 				<input type="button" value="Submit" onclick="submit();" />
 				
 		</div>
+		
+			<?php } } else { ?>	
+			
+			<b><h3><span>No Email Pack Available</span></h3></b>
+			<?php }
+			?>	
+			
+		</div>
+	
 	</div>
-	<div class="clearfix"></div>
+	
 </div>
 <script>
 function submit()
@@ -123,11 +133,15 @@ $.ajax({
 	   async:false,
 	   data: data,
 	   success: function(msg)
-	   {
-	    if(msg=='1')
+	   {//alert(msg);
+	    if(msg)
 		{
 			$("#content_msg2").hide();
 			$("#content_msg").show('slow');
+			var total=parseInt(total_emails)+parseInt(msg);
+			$('#total_emails').html(total);
+			var bal=parseInt(balance)+parseInt(msg);
+			$('#bal').html(bal);
 		}
 		else
 		{
