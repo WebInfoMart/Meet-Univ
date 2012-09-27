@@ -90,7 +90,7 @@
 							<div class="float_l">
 								<label class="label-control-data" for="select01"></label>
 							<div class="controls-input-data">
-								<textarea cols="31" rows="3" name="email_text" placeholder="Type your text here.."></textarea>
+								<textarea cols="31" rows="3" id="email_body_value" name="email_text" placeholder="Type your text here.."></textarea>
 							</div>
 							</div>
 						</div>
@@ -104,8 +104,8 @@
 					</form>
 				</div>
 			</div>
-			<div class="float_l data5 margin_4 ipad_bg">
-				<textarea col="50" rows="20" class="ipad_textarea" value="">Message Here...</textarea>
+			<div class="float_l data5 margin_4 ipad_bg" id="email_preview_box">
+				<textarea col="50" rows="20" class="ipad_textarea" id="email_body_preview_value"  value="">Message Here...</textarea>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -204,6 +204,22 @@ $.ajax({
 	}
 });
 }
+
+$('#email_body_value').keyup(
+function()
+{
+var val=$(this).val();
+$('#email_body_preview_value').val(val);
+if(val=='')
+{
+$('#email_body_preview_value').val('Your Message here....');
+}
+}
+)
+$(window).scroll(function(){
+       $("#email_preview_box")
+              .animate({"marginTop": ($(window).scrollTop() + 30) + "px"}, 100 );
+});
 function disable()
 {
 	
