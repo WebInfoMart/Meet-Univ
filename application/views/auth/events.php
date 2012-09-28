@@ -220,27 +220,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						
 			<div id="event_results_filteration">
 									
-							<div id="pagination" class="table_pagination right paging-margin">
-   
-						   <?php
-						 $cc=$events['total_res'];
-						 $rl=$events['limit_res']; 
-						   if($cc>$rl)
-						   {
-						   $z=0;
-						   for($c=$cc;$c>0;$c=$c-$rl)
-						   {
-						   ?>
-						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="events_result_by_paging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
-						 <?php 
-						   }
-						   }
-						   ?>
-						   <input type="hidden" id="current_paging_value" value="0">	
-							</div>
-
+							
 							<div class="row">
 								<div class="span9 float_l margin_zero" id="div_events">
+							<div id="pagination" class="table_pagination paging-margin">
+							<?php echo $this->pagination->create_links();?>
+							</div>
 <?php
 /********************************************
 * Loop For Show Dates In Calendar. By Subh. *
@@ -269,23 +254,8 @@ if(!empty($events))
 {
 //$count_event_date = 1;										  
 foreach($events['event_res'] as $event_detail){
-//code for apply comma in date			
-/* if($count_event_date == 1)
-{								
-$current_event_month =  $event_detail['event_date_time'];
-} */
 $var_date = '';
-//echo $event_detail['event_date_time'];
-//$extract_date = explode(" ",$event_detail['event_date_time']);
-//$month = $extract_date[1];
-//$number_month = date('m', strtotime($month));
-//$number_month = date('m', strtotime($month));
-//$var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
-//array_push($array_dates,$var);
-//$count_event_date++;
-
-//end here 
-																			
+																	
 											?>
 									<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
 										<div>
@@ -701,46 +671,10 @@ function get_event_result_by_ajax()
 		}
 	  	$('#listed_currently_event').html(res[2]);
 	    $('#red_total_univ').html(res[1]);
-		
+		 pagination();
 	   }
 	   })
 }	
-
-function events_result_by_paging(a,pid)
-{
-	cpage=$('#current_paging_value').val();
-	if(a!=cpage)	
-	{
-	var url=document.URL;
-	var change_url=url.split('events/');
-	if(!(change_url.length>1 && change_url[1]!=''))
-	{
-	url='<?php echo $base; ?>events';
-	}
-	$('#div_events').css('opacity','0.5');
-
-	$('#pagination a').removeClass('add_paging_background_class');
-	$('.'+pid).addClass('add_paging_background_class');
-	//$('#ajax_loader_paging').css('z-index','9');
-	//$('#col_paging').css('opacity','0.4');
-	$('#current_paging_value').val(a);
- 	   $.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>auth/all_events_paging",
-	   data: 'offset='+a+'&current_url='+url,
-	   success: function(r)
-	   {
-	    res=r.split('!@#$%^&*');
-		$('#div_events').css('opacity','1');
-		$('#div_events').html(res[1]);
-		$('#listed_currently_event').html(res[0]);
-	   }
-	   })
-	   
-   }
-}
-
-
 
 function eventsorting(what,orderBy,id,text){
 $('.sort_list a').removeClass('active');
@@ -754,8 +688,8 @@ $('#'+id).html('<a href="javascript:void(0)" class="active" onclick="eventsortin
  $('.events_listing').tsort('',{attr:what,order:orderBy});
 
 }
-</script>
-<script>
+
+
 $(".listitem_country").hide();
 $(".listitem_country").slice(0,6).show();
 
@@ -783,4 +717,27 @@ if(total_list_item == city_record)
 	$(".more_city").hide();
 }
 });
+
+function pagination() {
+  $("#pagination a").click(function() {
+	    var url = $(this).attr("href");		
+        $.ajax({
+          type:"POST",
+          data:"current_url="+document.URL,
+          url: url,
+          beforeSend: function() {
+           $('#div_events').css('opacity','0.5');
+          },
+          success: function(msg) {
+		 res=msg.split('!@#$%^&*');
+		 $('#div_events').css('opacity','1');
+		 $('#div_events').html(res[1]);
+		 $('#listed_currently_event').html(res[0]);
+		 pagination();
+          }
+        });
+        return false;
+      });
+}
+pagination();	  
 </script>

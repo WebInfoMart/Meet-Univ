@@ -918,10 +918,22 @@ function show_all_college_paging($current_url)
 			{
 				$events_data['per_page_res']=$events_data['total_res'];
 			}
-			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt desc LIMIT 0,".$events_data['limit_res']."";
+			
+			$config['base_url']=base_url()."auth/all_events_paging/";
+			$config['total_rows']=$results->num_rows();
+		    $config['per_page'] = '10';
+			if($this->uri->segment(3)=='')
+			{
+			$offset=0;
+			}
+			else
+			{
+			$offset=$this->uri->segment(3);
+			}
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt desc LIMIT ".$offset.",".$config['per_page']."";
 			//changes asc to desc by sumit munjal
 			$results=$this->db->query($sql);
-			
+			$this->pagination->initialize($config);
 			if($results->num_rows()>0)
 			{
 			  $events_data['event_res'] = $results->result_array();

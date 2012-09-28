@@ -1,3 +1,4 @@
+
 	<script>
  if (typeof FB  != "undefined"){
         FB.XFBML.parse(document.getElementById('fbLike'));} 
@@ -5,27 +6,13 @@
 		
  gapi.plusone.go();
 </script>
-	<div id="pagination" class="table_pagination right paging-margin">
-   
-						   <?php
-						 $cc=$events['total_res'];
-						 $rl=$events['limit_res']; 
-						   if($cc>$rl)
-						   {
-						   $z=0;
-						   for($c=$cc;$c>0;$c=$c-$rl)
-						   {
-						   ?>
-						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="events_result_by_paging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
-						 <?php 
-						   }
-						   }
-						   ?>
-						   <input type="hidden" id="current_paging_value" value="0">	
-	</div>
+	
 
 							<div class="row">
 								<div class="span9 float_l margin_zero" id="div_events">
+								<div id="pagination" class="table_pagination paging-margin">
+								<?php echo $this->pagination->create_links();?>
+</div>
 									<?php
 $array_dates = array();
 
@@ -46,6 +33,8 @@ array_push($array_dates,$var);
 //end here 
 																			
 											?>
+								
+
 									<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
 										<div>
 											<div class="float_l span7 margin_zero">
@@ -195,9 +184,4 @@ array_push($array_dates,$var);
 									</div>
 									<?php } } ?>
 								</div>
-								
-								
-								
-								
-								
 							</div>

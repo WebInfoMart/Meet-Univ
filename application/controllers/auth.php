@@ -1269,7 +1269,7 @@ class Auth extends CI_Controller
 		//$data['header_title'] = 'Events | Meet Universities';
 		$data = $this->path->all_path();
 		$current_url=$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-		$change_url=explode("colleges/",$current_url);
+		$change_url=explode("events/",$current_url);
 		if(count($change_url)>1)
 		{
 		if($change_url[1]=='')
@@ -1301,9 +1301,10 @@ class Auth extends CI_Controller
 	}
 	function all_events_paging()
 	{
+		
 		$current_url=$this->input->post('current_url');
 		$data = $this->path->all_path();
-		$data['events'] = $this->searchmodel->show_events_paging($current_url);
+		$data['events'] = $this->searchmodel->all_event_filteration($current_url);
 		if($data['events']!=0)
 		{
 			$events_list=$this->load->view('ajaxviews/show_event_paging',$data);
@@ -1344,12 +1345,6 @@ class Auth extends CI_Controller
    function savepic()
    {
   
-
-$post = array("1", "2", "3");
-$prog = array( "1","2");
-$result = array_diff($post, $prog);
-
-print_r($result);
    // $url = 'http://inchoo.net/wp-content/uploads/2011/01/fbconnect.gif';
 	//$img = '../abcde.gif';
 	//file_put_contents($img, file_get_contents($url));

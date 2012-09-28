@@ -1,10 +1,14 @@
+<div id="pagination" class="table_pagination paging-margin">
+<?php echo $this->pagination->create_links();?>
+</div>
 <script>
  if (typeof FB  != "undefined"){
         FB.XFBML.parse(document.getElementById('fbLike'));} 
 		twttr.widgets.load();
 		
  gapi.plusone.go();
-</script>									
+</script>		
+														
 <?php
 $array_dates = array();
 
@@ -23,10 +27,12 @@ $var = "'".$number_month.'/'.$extract_date[0].'/'.$extract_date[2]."'";
 array_push($array_dates,$var);
 
 //end here 
-																			
-											?>
-									<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
+?>
+
+							
+									<div  class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
 										<div>
+							
 											<div class="float_l span7 margin_zero">
 											<?php
 		$univ_domain=$event_detail['subdomain_name'];
@@ -170,4 +176,4 @@ array_push($array_dates,$var);
 										<div class="clearfix"></div>
 									</div>
 									<?php } } ?>
-								
+									
