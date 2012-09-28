@@ -342,25 +342,15 @@ class Univ extends CI_Controller
 				$state_event = $data['state_name_university']['statename'];
 				$country_event = $data['country_name_university']['country_name'];
 				$event_place_name = $data['event_detail']['event_place'];
-				if($event_place = $data['event_detail']['event_place'] == 0 || $event_place = $data['event_detail']['event_place'] == '')
+				if($data['event_detail']['statename']!='' && $data['event_detail']['cityname']!='' && $data['event_detail']['country_name']!='')
 				{
-				$event_place = $city_event.','.$state_event.','.$country_event;
-				}
-				else if($data['city_name_university']['cityname'] == 0 || $data['city_name_university']['cityname'] == '') {
-				$event_place = $event_place_name.' '.$state_event.' '.$country_event;
-				}
-				else if($data['state_name_university']['statename'] == 0 || $data['state_name_university']['statename'] ==''){
-				$event_place = $event_place_name.' '.$city_event.' '.$country_event;
-				}
-				else if($data['country_name_university']['country_name'] == 0 || $data['country_name_university']['country_name'] =='')
-				{
-					$event_place = $event_place_name.' '.$city_event.' '.$state_event;
+				$event_place = $event_place_name.','.$data['event_detail']['cityname'].','.$data['event_detail']['statename'].','.$data['event_detail']['country_name'];
 				}
 				else {
-				$event_place = $event_place_name.' '.$city_event.' '.$state_event.' '.$country_event;
+				if($country_event!='')
+				$event_place = $city_event.','.$state_event.','.$country_event;
 				}
-	 		
-					  $this->load->library('GMapevent');
+	 				  $this->load->library('GMapevent');
 					  $this->gmapevent->GoogleMapAPI();
 					  $this->gmapevent->setMapType('map');
 					  //$this->gmapuniv->addMarkerByAddress($longitude,$latitude,$university_name,$university_address);
