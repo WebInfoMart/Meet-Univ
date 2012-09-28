@@ -344,7 +344,15 @@ function email_send()
 		{
 		$prog_post=$this->input->post('subject');
 		$v_prog=explode(',',$x['v_program']);
+		print_r($v_prog);
+		if(count($v_prog)>=1)
+		{
 		$result = array_diff($prog_post, $v_prog);
+		}
+		else
+		{
+			$result=$x['v_program'];
+		}
 		if($result!=$prog_post)
 		{
 			//echo $x['v_email'];

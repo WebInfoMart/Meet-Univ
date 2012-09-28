@@ -1,5 +1,5 @@
 <div id="content">
-<input type="button" onclick="window.location.href='<?php echo $base; ?>emailpacks/user_email_packs'" class="submit tiny float_r" value="View Your Plans" />
+<!--<input type="button" onclick="window.location.href='<?php echo $base; ?>emailpacks/user_email_packs'" class="submit tiny float_r" value="View Your Plans" />-->
 	
 	<?php 
 	if(!empty($packs))

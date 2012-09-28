@@ -9,7 +9,7 @@ class Newsmodel extends CI_Model
 	
 		parent::__construct();
 		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
-		$this->univ_gallery_path = realpath(APPPATH . '../uploads/news_news_images');
+		$this->univ_gallery_path = realpath(APPPATH . '../uploads/news_article_images');
 		$this->load->library('pagination');
 		$this->load->database();
 	}

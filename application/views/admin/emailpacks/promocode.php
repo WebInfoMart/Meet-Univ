@@ -63,25 +63,53 @@
 <script>
 function createPromo()
 {
-	var promo_name=$("#promo_name").val();
-	var applied_on=$('#applied_on option:selected').val();
-	var disc=$("#disc").val();
-	var discount=$('#discount option:selected').val();
-	var type=$('#type option:selected').val();
-	data={promo_name:promo_name,applied_on:applied_on,disc:disc,discount:discount,type:type,ajax:1};
-	url='<?php echo $base; ?>emailpacks/add_promocode';
-	$.ajax({
-	   type: "POST",
-	   url: url,
-	   async:false,
-	   data: data,
-	   success: function(msg)
-	   {
-	   $("#promo").val(msg);
-		$("#promo").show();
-		$("#pp").show();
-		$("#content").hide();		
-		}
-		});
+	if($("#promo_name").val()=='')
+	{
+		$("#promo_name").addClass('needsfilled');		
+	}
+	if($('#applied_on option:selected').val()=='')
+	{
+		$("#applied_on").addClass('needsfilled');		
+	}
+	if($("#disc").val()=='')
+	{
+		$("#disc").addClass('needsfilled');			
+	}
+	if($("#disc").val()!='' && isNaN($("#disc").val()))
+	{
+		$("#disc").addClass('needsfilled');
+		$("#disc").val("Numeric only");
+	}
+	if($('#discount option:selected').val()=='')
+	{
+		$("#discount").addClass('needsfilled');	
+	}
+	if($('#type option:selected').val()=='')
+	{
+		$("#type").addClass('needsfilled');	
+	}	
+	if($("#promo_name").val()!='' && $('#applied_on option:selected').val()!='' && $("#disc").val()!='' && $('#discount option:selected').val() && $('#type option:selected').val())
+	{	
+		var promo_name=$("#promo_name").val();
+		var applied_on=$('#applied_on option:selected').val();
+		var disc=$("#disc").val();
+		var discount=$('#discount option:selected').val();
+		var type=$('#type option:selected').val();
+		data={promo_name:promo_name,applied_on:applied_on,disc:disc,discount:discount,type:type,ajax:1};
+		url='<?php echo $base; ?>emailpacks/add_promocode';
+		$.ajax({
+		   type: "POST",
+		   url: url,
+		   async:false,
+		   data: data,
+		   success: function(msg)
+		   {
+		   $("#promo").val(msg);
+			$("#promo").show();
+			$("#pp").show();
+			$("#content").hide();		
+			}
+			});
+	}
 }
 </script>

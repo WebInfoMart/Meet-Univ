@@ -552,7 +552,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<div class="margin_t1">
 								<div class="input-append">
 									<form action="<?php echo $base; ?>QuestandAns" method="post">
-										<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
+										<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Question">
 										<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info btn_tab"  value="Ask">
 									</form>
 								</div>

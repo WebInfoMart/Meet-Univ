@@ -159,7 +159,7 @@ $insert=1;
 <div id="content">	
 <h2>DETAIL OF QUESTIONS</h2>
 <input type="button" onclick="home()" class="submit tiny float_r" value="Reset" />
-<div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
+<div >
 	<span >Filter</span>
 	<select id="drop" name="drop" >
 	<option>Select to Search</option>
@@ -171,8 +171,8 @@ $insert=1;
 	<option value="3">Approved</option>
 	<option value="4">Featured</option>
 	</select>
-	<input id="search_box"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
-	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
+	<input id="search_box"  style="display:none;" type="text" name="fullname" />
+	<input type="button" id="search" style="display:none;"  value="search" onclick="search()" />
 	</div>
 			<form action="<?php echo $base ?>adminques/delete_ques" method="post" id="deletequesform" >	
 			<table cellpadding="0" cellspacing="0" width="100%" class="sortable">
@@ -216,6 +216,7 @@ $insert=1;
 			<span id="tr_<?php echo $row->que_id;?>" style="display:none">
 <textarea rows="4" cols="50" id="ans_<?php echo $row->que_id;?>" style="display:none;float:left"></textarea>
 <input type="button"  id="add_ans_<?php echo $row->que_id;?>" style="display:none;margin-left: 20px;" value="Submit" onclick="submitAns('<?php echo $row->que_id;?>')"/> 
+<input type="button"  id="cancel_ans_<?php echo $row->que_id;?>" style="display:none;margin-left: 20px;" value="Cancel" onclick="cancelAns('<?php echo $row->que_id;?>')"/> 
 </span>
 		<ul class="nav">
           <li data-dropdown="dropdown" >  <a class="btn-primary button_cont" href="#"><i class="icon-univ-event icon-white"></i>Ques</a>
@@ -227,7 +228,7 @@ $insert=1;
               <li><a href="<?php echo "$base"; ?>adminques/edit_ques/<?php echo $row->que_id; ?>">
 			  <i class="icon-pencil"></i>Edit</a></li>
 			  <?php } if($edit==1) { ?>
-              <li><a onclick="addAnswer('<?php echo $row->que_id; ?>')">
+              <li style="cursor:pointer;"><a onclick="addAnswer('<?php echo $row->que_id; ?>')">
 			  <i class="icon-pencil"></i>Add Answer</a></li>
 			  <?php }  
 			  if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3') { ?>
@@ -449,6 +450,7 @@ $(function() {
 	$("#tr_"+id).show();
 	$("#ans_"+id).show();
 	$("#add_ans_"+id).show();
+	$("#cancel_ans_"+id).show();
 } 
 function submitAns(id)
 {   
@@ -475,4 +477,11 @@ function submitAns(id)
 	
 	
 }
+ function cancelAns(id)
+{
+	$("#tr_"+id).hide();
+	$("#ans_"+id).hide();
+	$("#add_ans_"+id).hide();
+	$("#cancel_ans_"+id).hide();
+} 
 </script>		

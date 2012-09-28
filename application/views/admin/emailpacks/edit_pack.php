@@ -48,24 +48,39 @@
 <script>
 function editPack(id)
 {
-	var pack_name=$("#pack_name").val();
-	var pack_cost=$("#pack_cost").val();
-	var emails=$("#emails_in_pack").val();
-	var enable=$('#enable option:selected').val();
-	var data={pack_name:pack_name,pack_cost:pack_cost,emails:emails,enable:enable,ajax:'1'};
-	url='<?php echo $base; ?>emailpacks/update_email_pack/'+id;
-	$.ajax({
-	   type: "POST",
-	   url: url,
-	   async:false,
-	   data: data,
-	   success: function(msg)
-	   {
-		if(msg)
-		{
-		window.location.href="<?php echo $base;?>emailpacks/manage_packs/edt";
-		}
-	   }
-		});
+	if($("#pack_name").val()=='')
+	{
+		$("#pack_name").addClass('needsfilled');		
+	}
+	if($("#pack_cost").val()=='')
+	{
+		$("#pack_cost").addClass('needsfilled');		
+	}
+	if($("#emails_in_pack").val()=='')
+	{
+		$("#emails_in_pack").addClass('needsfilled');		
+	}	
+	if($("#pack_name").val()!='' && $("#pack_cost").val()!='' && $("#emails_in_pack").val()!='')
+	{
+		var pack_name=$("#pack_name").val();
+		var pack_cost=$("#pack_cost").val();
+		var emails=$("#emails_in_pack").val();
+		var enable=$('#enable option:selected').val();
+		var data={pack_name:pack_name,pack_cost:pack_cost,emails:emails,enable:enable,ajax:'1'};
+		url='<?php echo $base; ?>emailpacks/update_email_pack/'+id;
+		$.ajax({
+		   type: "POST",
+		   url: url,
+		   async:false,
+		   data: data,
+		   success: function(msg)
+		   {
+			if(msg)
+			{
+			window.location.href="<?php echo $base;?>emailpacks/manage_packs/edt";
+			}
+		   }
+			});
+	}	
 }
 </script>

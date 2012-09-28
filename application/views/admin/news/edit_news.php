@@ -1,4 +1,5 @@
 <?php 
+//print_r($news_info);exit;
 foreach($news_info as $news_detail) { 
 // $univ_state_id=$news_detail['event_state_id'];
 // $univ_city_id=$news_detail['event_city_id'];
@@ -97,8 +98,8 @@ if($error_city != '') { $class_city = 'focused_error_univ'; } else { $class_city
 							</div>
 							<div class="float_l span3">
 			<?php 
-		    if(file_exists(getcwd().'/uploads/news_news_images/'.$news_detail['news_image_path']) && $news_detail['news_image_path']!='') {
-			$news_img_path=$base.'uploads/news_news_images/'.$news_detail['news_image_path'];
+		    if(file_exists(getcwd().'/uploads/news_article_images/'.$news_detail['news_image_path']) && $news_detail['news_image_path']!='') {
+			$news_img_path=$base.'uploads/news_article_images/'.$news_detail['news_image_path'];
 			}
 			else
 			{

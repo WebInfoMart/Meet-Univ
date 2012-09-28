@@ -202,9 +202,40 @@ class emailpacks_model extends CI_Model
 			return 0;
 		}
 	}
+	function manage_promo_model()
+	{
+		$this->db->select('*,promocode.enabled as en');
+		$this->db->from('promocode');
+		$this->db->join('email_pack','email_pack.email_pack_id=promocode.promocode_id','left');
+		$result=$this->db->get();
+		return $result->result_array();
+	}
+	function delete_promocode($id)
+	{
+		$this->db->where('promocode_id',$id);
+		$this->db->delete('promocode');
+		return 1;
+	}
+	function update_promocode($id,$status)
+	{
+		if($status==1)
+		{
+			$stat='0';
+		}
+		else
+		{
+			$stat='1';
+		}
+		$update=array(
+		'enabled'=>$stat
+		);
+		$this->db->where('promocode_id',$id);
+		$this->db->update('promocode',$update);
+		return 1;
+	}
 	function delete_email_pack($id)
 	{
-		$this->db->where('email_pack_id');
+		$this->db->where('email_pack_id',$id);
 		$this->db->delete('email_pack');
 		return 1;
 	}

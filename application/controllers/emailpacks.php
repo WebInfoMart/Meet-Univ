@@ -15,17 +15,6 @@ class emailpacks extends CI_Controller
 		$this->lang->load('tank_auth');
 		$this->load->model('emailpacks_model');
 	}
-
-	function index()
-	{
-		$data = $this->path->all_path();
-		if (!$this->tank_auth->is_admin_logged_in()) {
-			redirect('admin/adminlogin/');
-		} else {
-			redirect('emailpacks/managenews');
-			
-		}	
-	}
 	
 	function manage_packs($msg='')
 	{
@@ -51,6 +40,16 @@ class emailpacks extends CI_Controller
 				$data['msg']='Pack Updated Successfully';
 				$this->load->view('admin/userupdated',$data);
 			}
+			if($msg=='cr')
+			{
+				$data['msg']='Pack Created Successfully';
+				$this->load->view('admin/userupdated',$data);
+			}
+			if($msg=='dlt')
+			{
+				$data['msg']='Pack Deleted Successfully';
+				$this->load->view('admin/userupdated',$data);
+			}
 			
 			//fetch user privilege data from model
 			if($this->input->post('ajax')!='1')
@@ -60,6 +59,42 @@ class emailpacks extends CI_Controller
 			}
 			$data['email_packs']=$this->emailpacks_model->manage_packs_model();
 			$this->load->view('admin/emailpacks/manage_packs', $data);
+			
+		}	
+	}
+	function manage_promos($msg='')
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {	
+			$data = $this->path->all_path();
+			$data['user_id']= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
+			if($msg=='uds')
+			{
+			$data['msg']='Promo Updated Successfully';
+			$this->load->view('admin/userupdated',$data);
+			}
+			if($msg=='dlt')
+			{
+				$data['msg']='Promo Deleted Successfully';
+				$this->load->view('admin/userupdated',$data);
+			}
+			
+			//fetch user privilege data from model
+			if($this->input->post('ajax')!='1')
+			{
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/sidebar', $data);
+			}
+			$data['promocode']=$this->emailpacks_model->manage_promo_model();
+			$this->load->view('admin/emailpacks/manage_promos', $data);
 			
 		}	
 	}
@@ -88,10 +123,7 @@ class emailpacks extends CI_Controller
 				if($this->input->post('ajax')=='1')
 				{
 					$created=$this->emailpacks_model->create_new();
-					if($created==1)
-					{
-						redirect('emailpacks/manage_packs');
-					}
+					echo $created;
 				}
 			}				
 		}
@@ -122,6 +154,66 @@ class emailpacks extends CI_Controller
 					$created=$this->emailpacks_model->create_promocode();
 					echo $created; 
 				}
+			}
+			
+				
+		}
+	}
+	function delete_promo($id='')
+	{
+		$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		} 
+		else 
+		{
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
+			else
+			{				
+				$this->load->view('admin/header',$data);
+				$this->load->view('admin/sidebar',$data);			
+				$deleted=$this->emailpacks_model->delete_promocode($id);
+				if($deleted)
+				{
+					redirect('emailpacks/manage_promos/dlt');
+				}				
+				
+			}
+			
+				
+		}
+	}
+	function update_promo($id='',$status='')
+	{
+		$data = $this->path->all_path();
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		} 
+		else 
+		{
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+			redirect('admin/adminlogout');
+			}
+			else
+			{				
+				$this->load->view('admin/header',$data);
+				$this->load->view('admin/sidebar',$data);			
+				$updated=$this->emailpacks_model->update_promocode($id,$status);
+				if($updated)
+				{
+					redirect('emailpacks/manage_promos/uds');
+				}				
+				
 			}
 			
 				
@@ -234,7 +326,7 @@ class emailpacks extends CI_Controller
 		$delete=$this->emailpacks_model->delete_email_pack($id);
 		if($delete)
 		{
-			redirect('emailpacks/manage_packs');
+			redirect('emailpacks/manage_packs/dlt');
 		}
 	}
 	function update_email_pack($id='')

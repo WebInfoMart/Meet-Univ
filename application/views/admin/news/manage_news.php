@@ -125,7 +125,7 @@ $insert=1;
   
 <div id="content">	
 <input type="button" onclick="home()" class="submit tiny" value="Reset" />
-<div style="margin-left: 15px; font-size: 20px; margin-top: 15px;">
+<div>
 	<span >Filter</span>
 	<select id="drop" name="drop" >
 	<option>Select to Search</option>
@@ -137,8 +137,8 @@ $insert=1;
 	<option value="3">Approved</option>
 	<option value="4">Featured</option>
 	</select>
-	<input id="search_box"  style="height: 30px;margin-left: 10px;margin-top: 4px;display:none;" type="text" name="fullname" />
-	<input type="button" id="search" style="margin-top: 4px;display:none;"  value="search" onclick="search()" />
+	<input id="search_box"  style="display:none;" type="text" name="fullname" />
+	<input type="button" id="search" style="display:none;"  value="search" onclick="search()" />
 	</div>
 <h2>DETAIL OF NEWS</h2>
 			<form action="<?php echo $base ?>adminnews/delete_news" method="post" id="deletenewsform" >	
