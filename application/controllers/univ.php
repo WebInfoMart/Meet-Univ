@@ -358,7 +358,8 @@ class Univ extends CI_Controller
 				}
 				else {
 				$event_place = $event_place_name.' '.$city_event.' '.$state_event.' '.$country_event;
-				}	 		
+				}
+	 		
 					  $this->load->library('GMapevent');
 					  $this->gmapevent->GoogleMapAPI();
 					  $this->gmapevent->setMapType('map');

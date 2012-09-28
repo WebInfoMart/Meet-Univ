@@ -87,7 +87,8 @@ array_push($array_dates,$var);
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/univ_logo.png');
+								   
 								    }
 									if($event_img!='' && $image_exist==1)
 									{
@@ -95,7 +96,7 @@ array_push($array_dates,$var);
 									}
 									else
 									{
-									$image=$base.$img_path.'/default_logo.png';
+									$image=$base.'/uploads/univ_gallery/univ_logo.png';
 									} 
 									$img_arr=$this->searchmodel->set_the_image($width,$height,106,71,TRUE);
 											?>

@@ -316,7 +316,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/default_logo.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/univ_logo.png');
 								    }
 									if($event_img!='' && $image_exist==1)
 									{
@@ -324,7 +324,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 									}
 									else
 									{
-									$image=$base.$img_path.'/default_logo.png';
+									$image=$base.'/uploads/univ_gallery/univ_logo.png';
 									} 
 									$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 											?>

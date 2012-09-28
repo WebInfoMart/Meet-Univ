@@ -903,7 +903,7 @@ function show_all_college_paging($current_url)
 			}
 			//event of upcoming month
 			
-			//$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
+			$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
 			$where.=" and events.ban_event='0'";
 			
 			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt desc";
