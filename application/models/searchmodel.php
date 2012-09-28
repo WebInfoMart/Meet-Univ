@@ -906,7 +906,7 @@ function show_all_college_paging($current_url)
 			$where.=" and STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>='".date('Y-m-d')."'";
 			$where.=" and events.ban_event='0'";
 			
-			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt desc";
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc";
 			//changes asc to desc by sumit munjal
 			$results=$this->db->query($sql);
 			$events_data['total_res']=$results->num_rows();
@@ -930,7 +930,7 @@ function show_all_college_paging($current_url)
 			{
 			$offset=$this->uri->segment(3);
 			}
-			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt desc LIMIT ".$offset.",".$config['per_page']."";
+			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT ".$offset.",".$config['per_page']."";
 			//changes asc to desc by sumit munjal
 			$results=$this->db->query($sql);
 			$this->pagination->initialize($config);

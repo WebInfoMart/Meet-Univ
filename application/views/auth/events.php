@@ -473,7 +473,7 @@ $number_month = $number_month - 1;
 }
 else{
 $show_current_date[2] = date('Y');
-echo $number_month = date('m');
+$number_month = date('m');
 }
 			// foreach($array_dates as $dates){
 			// echo $dates;
@@ -672,6 +672,12 @@ function get_event_result_by_ajax()
 	  	$('#listed_currently_event').html(res[2]);
 	    $('#red_total_univ').html(res[1]);
 		 pagination();
+		 alert(res[0]);
+		 alert(res[1]);
+		 alert(res[2]);
+		 alert(res[3]);
+
+		 
 	   }
 	   })
 }	
