@@ -279,7 +279,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 				</div>
 
 				</div>
-
+<!--
 				<div class="float_l span4">
 
 					<div class="social_set float_r">
@@ -300,7 +300,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 
 					</div>
 
-				</div>
+				</div>-->
 
 				<div class="clearfix"></div>
 

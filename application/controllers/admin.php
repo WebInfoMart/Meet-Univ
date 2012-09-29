@@ -1642,6 +1642,8 @@ function manage_university($mps='')
 		}
 		else if($flag==1)
 		{
+		$data['univ_admins']=$this->adminmodel->get_univ_admin();
+		//$data['countries']=$this->users->fetch_country();
 		$data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
 		$this->load->view('admin/view_university_detail', $data);	
 		}

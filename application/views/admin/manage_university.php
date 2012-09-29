@@ -115,7 +115,7 @@ $delete=1;
 		  <a class="btn btn-primary dropdown-toggle arrow_but" data-toggle="dropdown" href="#"></a>
             <ul class="dropdown-menu">
 			<?php if($view==1) { ?>
-            <!--  <li><a href="<?php echo "$base$admin"; ?>/univ_detail/<?php //echo $row->univ_id; ?>"><i class="icon-view" ></i> View</a></li>-->
+             <li><a href="<?php echo "$base$admin"; ?>/univ_detail/<?php echo $row->univ_id; ?>"><i class="icon-view" ></i> View</a></li>
 			<?php } if($edit==1) { ?>
               <li><a href="<?php echo "$base$admin"; ?>/update_university/<?php echo $row->univ_id; ?>">
 			  <i class="icon-pencil"></i> Edit</a></li>

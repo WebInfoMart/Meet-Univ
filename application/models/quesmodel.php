@@ -35,6 +35,7 @@ class Quesmodel extends CI_Model
 	{$arr=array('0');
 		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 		$data['user_id']	= $this->tank_auth->get_admin_user_id();
+		$univ=$this->univ_vs_user_model->get_assigned_univ_info($data['user_id']);
 		$this->db->select('*');
 		$this->db->from('questions');
 		$this->db->join('university', 'questions.q_univ_id = university.univ_id','left');		
@@ -67,7 +68,11 @@ class Quesmodel extends CI_Model
 		if($data['admin_user_level']=='3')
 		{
 		$this->db->where('university.user_id',$data['user_id']);
-		}		
+		}
+		if($data['admin_user_level']=='4')
+		{
+			$this->db->where_in('q_univ_id',$univ);
+		}
 		$query=$this->db->get();
 		$config['base_url']=base_url()."adminques/manage_ques/";
 		$config['total_rows']=$query->num_rows();
@@ -107,6 +112,10 @@ class Quesmodel extends CI_Model
 		if($data['admin_user_level']=='3')
 		{
 			$this->db->where('university.user_id',$data['user_id']);
+		}
+		if($data['admin_user_level']=='4')
+		{
+			$this->db->where_in('q_univ_id',$univ);
 		}
 		$this->db->order_by("q_asked_time", "desc");
 		$this->db->limit($limit,$offset);
