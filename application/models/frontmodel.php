@@ -74,11 +74,31 @@ class Frontmodel extends CI_Model
 	}
 	function count_event_register($event_id)
 	{
+	  $num=0;
+	  $this->db->select('event_univ_id');
+	  $this->db->from('events');
+	  $this->db->where('event_id',$event_id);
+	  $res=$this->db->get();
+	  $res1=$res->row_array();
+	  $univ_id=$res1['event_univ_id'];
+	  $num=$univ_id%3;
+	  if(!$num)
+	  {
+	  $num=$univ_id%4;
+	  if(!$num)
+	  {
+	  $num=$univ_id%5;
+	  if(!$num)
+	  {
+	  $num=3;
+	  }
+	  }
+	  }
 	  $this->db->select('*');
 	  $this->db->from('event_register');
 	  $this->db->where('register_event_id',$event_id);
-	 // $c=$this->db->count_all_results()+5;
-	  $c=$this->db->count_all_results();
+	  $c=$this->db->count_all_results()+$num;
+	  //$c=$this->db->count_all_results();
 	  return $c;
 	  /*$this->db->select('no_of_register_user');
 	  $this->db->from('events');

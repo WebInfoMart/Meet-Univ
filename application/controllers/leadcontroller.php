@@ -241,6 +241,7 @@ class Leadcontroller extends CI_Controller
 	
 	function EventRegistration()
 	{
+		$this->load->library('parser');
 		$data = $this->path->all_path();
 		$this->load->view('auth/header',$data);
 		$data['get_info_logged_user'] = '';
@@ -251,6 +252,7 @@ class Leadcontroller extends CI_Controller
 			}
 			else{
 			$data['get_info_logged_user'] = '';
+			$logged_user_id='';
 			}
 		$univ_id = $this->input->post('event_register_of_univ_id');
 		$event_id = $this->input->post('event_register_id');
@@ -285,11 +287,13 @@ class Leadcontroller extends CI_Controller
 				$data['success_event_register'] = $this->leadmodel->event_registration($logged_user_id,$id_university,$id_event);
 				$latest_registered_event_id = $data['success_event_register']['event_id'];
 					$data['latest_register_event_info'] = $this->leadmodel->event_detail_for_email($latest_registered_event_id);
-					$message_email = $this->load->view('auth/event_register_content_email',$data,TRUE);
+					//$message_email = $this->load->view('auth/event_register_content_email',$data,TRUE);
+					 $message_email =  $this->parser->parse('auth/event_register_content_email', $data, TRUE);
 					 $config['protocol'] = $this->config->item('mail_protocol');
 					 $config['smtp_host'] = $this->config->item('smtp_server');
 					 $config['smtp_user'] = $this->config->item('smtp_user_name');
 					 $config['smtp_pass'] = $this->config->item('smtp_pass');
+					 $config['mailtype'] = 'html';
 					 $this->email->initialize($config);    
 					 $this->email->from('info@meetuniversities.com', 'Meet Universities');
 					 $this->email->to($user_email);
