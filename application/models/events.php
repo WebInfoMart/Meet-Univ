@@ -107,7 +107,7 @@ class Events extends CI_Model
 		}
 		if($this->input->post('sel_id')==5)
 		{
-			$tosearch=trim($this->input->post('search_box'));	
+			$tosearch=trim($this->input->post('date_selector'));	
 				$this->db->where('event_date_time',$tosearch);
 		}
 		if($data['admin_user_level']=='3')
@@ -187,6 +187,7 @@ class Events extends CI_Model
 		$tosearch=trim($this->input->post('date_selector'));
 			$this->db->where('event_date_time',$tosearch);
 		}
+		
 		if($data['admin_user_level']=='3')
 		{
 		$this->db->where('university.user_id',$data['user_id']);

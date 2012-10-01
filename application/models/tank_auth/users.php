@@ -481,7 +481,11 @@ class Users extends CI_Model
 			if($data['level']=='1')
 			{
 			$lead_data=array('user_id'=>$user_id,'fullname'=>$data['fullname'],'email'=>$data['email']);
-			$this->db->insert('lead_data',$lead_data);
+				if($this->uri->segment('2')=='british_council')
+				{
+					$lead_data['lead_tag']='british_council';					
+				}
+				$this->db->insert('lead_data',$lead_data);
 			}
 			//if ($activated) by sumit wim 
 			$this->create_profile($user_id);

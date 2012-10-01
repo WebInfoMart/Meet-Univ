@@ -13,6 +13,7 @@ if ($user) {
   }
 }
 ?>
+
 <div class="container">
 		<div class="body_bar"></div>
 		<div class="body_header"></div>

@@ -249,9 +249,24 @@ d.getElementsByTagName('head')[0].appendChild(js);
 						<div class="span5 margin_zeros">
 						<a href="<?php echo $base; ?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" alt="Meet Universities" title="Meet Universities"/></a>
 						</div>
-						<div class="span7 float_r">
-							<a target="_blank" href="<?php echo $base; ?>events"><img src="<?php echo "$base$img_path" ?>/banner.png" alt="Meet Universities" title="Meet Universities"/></a>
+						<div class="span7 float_r">					
+						<a  href="<?php echo $base; ?>register/british_council"><img src="<?php echo "$base$img_path" ?>/banner.png" alt="Meet Universities" title="Meet Universities"/></a>
 						</div>
+						<!--<div class="span7 ">
+						<form method="get" action="http://www.google.com/search"> 
+						<div style="border:1px solid black;padding:4px;width:20em;"> 
+						<table border="0" cellpadding="0"> 
+						<tr><td> 
+						<input type="text" name="q" size="25" maxlength="255" value="" /></td><td> <input type="submit" value="Google Search" /></td>
+						</tr>
+						<tr>
+						<td align="center" style="font-size:75%"> 
+						<input type="checkbox" name="sitesearch" value="meetuniversities.com" checked /> only search Meet Universities<br /> 
+						</td></tr>
+						</table> 
+						</div> 
+						</form>
+						</div>-->
 						<div class="clearfix"></div>
 					</div>
 					<div class="row">

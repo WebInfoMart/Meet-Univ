@@ -54,7 +54,6 @@ $this->session->unset_userdata('msg_send_suc');
 $this->session->unset_userdata('msg_send_suc_voice');
 ?>
 <div class="container">
-
 	<div class="body_bar"></div>
 	<div class="body_header"></div>
 	<div class="form">
@@ -149,6 +148,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							
 							<div class="controls">
 							</div>
+							
 						</div>
 						<div class="control-group">
 							<label class="control-label" for="focusedInput"><h4 class="white">in the Month of</h4></label>
@@ -163,7 +163,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								</div>
 									<div class="clearfix"></div>
 							</div>
-						</div>
+						</div>						
 					</div>
 					<div class="college" id="col"  style="display:none">
 						<div class="control-group">

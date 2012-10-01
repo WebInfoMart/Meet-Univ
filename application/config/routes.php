@@ -144,7 +144,7 @@ $route['(delete_message_outbox/(:num)/(:num))'] = 'user/delete_message_outbox/$1
 
 //$route['(:any)'] = "auth/$1";
 //define function call with this controller
-$route['(use_higer_browser|subdomain|subspot_admission_events|fairs_events|Counselling_events|login|register|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
+$route['(use_higer_browser|subdomain|subspot_admission_events|fairs_events|Counselling_events|login|register|register/(:any)|logout|news|articles|update_password|home|events|events/(:any)|update_profile|user_profile_update|forgot_password|change_user_password|university/id|home/pwd_change|about_us|contact_us|home/pus|index/cfr)'] = 'auth/$1';
 $route['default_controller'] = 'auth';
 $route['(find_college)'] = 'leadcontroller/find_college';
 

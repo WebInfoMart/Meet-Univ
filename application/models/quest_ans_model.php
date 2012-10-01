@@ -86,8 +86,8 @@ class Quest_ans_model extends CI_Model
 		$this->db->order_by("que_id","desc");
 		$query = $this->db->get(); 
 		$no_of_que=$query->num_rows();
-		$quest_data['no_of_que']=$no_of_que;
-		$config['base_url']= base_url()."Recent_Questions/question/all";
+		//$quest_data['no_of_que']=$no_of_que;
+		$config['base_url']= base_url()."Recent_Questions/question/all/";
 		$config['total_rows']=$no_of_que;
 		$config['per_page'] = '6'; 
 		$offset = $this->uri->segment('4');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
@@ -97,9 +97,9 @@ class Quest_ans_model extends CI_Model
 		$this->db->from('questions');
 		$this->db->join('university','questions.q_univ_id = university.univ_id','left');
 		$this->db->join('users','questions.q_askedby = users.id');
-		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');
-		$this->db->limit($limit,$offset);
+		$this->db->join('user_profiles','questions.q_askedby = user_profiles.user_id');		
 		$this->db->order_by("que_id","desc");
+		$this->db->limit($limit,$offset);
 		$query = $this->db->get(); 
 		$q_detail=$query->result_array();
 		$quest_data['quest_detail'] = $q_detail;

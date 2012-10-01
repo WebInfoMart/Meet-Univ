@@ -104,9 +104,9 @@ class Quesmodel extends CI_Model
 		$query1=$this->db->query("select univ_id from university as uni where uni.univ_name like '%$univ_name%'");		  
 		$res1=$query1->result_array();
 		foreach($res1 as $res)				
-					{
-					 array_push($arr,$res['univ_id']);
-					}
+		{
+		 array_push($arr,$res['univ_id']);
+		}
 		$this->db->where_in('questions.q_univ_id',$arr);
 		}
 		if($data['admin_user_level']=='3')

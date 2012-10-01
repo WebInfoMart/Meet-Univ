@@ -226,7 +226,7 @@ class Auth extends CI_Controller
 	 *
 	 * @return void
 	 */
-	function register()
+	function register($bc='')
  {
  $data = $this->path->all_path();
  $this->load->view('auth/header',$data);
