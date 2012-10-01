@@ -1276,7 +1276,10 @@ class Auth extends CI_Controller
 		$current_url=$data['base'].'events';
 		}
 		$data['city_name_having_event'] = $this->leadmodel->city_name_having_event();
-		$data['country_name_having_event'] = $this->leadmodel->country_name_having_event();
+		//$data['country_name_having_event'] = $this->leadmodel->country_name_having_event();
+		$data['country_name_having_event'] = $this->leadmodel->dest_country_name_conducting_event();
+		//$data['dest_country_name_conducting_event'] = $this->leadmodel->dest_country_name_conducting_event();
+		//print_r($data['dest_country_name_conducting_event']);
 		$data['events'] = $this->searchmodel->all_event_filteration($current_url);
 		$data['header_title']=$data['events']['title'];
 		$data['events_for_calendar'] = $this->frontmodel->fetch_events_for_calendar();

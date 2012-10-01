@@ -874,7 +874,7 @@ function show_all_college_paging($current_url)
 			if($title1!='' || $title2!='' || $title3!='')
 			$title=$title1.' Events '.$title2.' '.$title3.' | Meet Universities';
             else
-			$title='Events | Meet Universities';
+			$title='University Events | Meet Universities';
 			$events_data['title']=$title;
 			$events_data['total_res']=0;
 			$events_data['limit_res']=10;
@@ -884,7 +884,7 @@ function show_all_college_paging($current_url)
 			if($filter_country==1)
 			{
 				$country_ids=implode(",",$country_id);
-				$where.=" and events.event_country_id IN (".$country_ids.")";
+				$where.=" and university.country_id IN (".$country_ids.")";
 			}
 			if($filter_event_types==1 )
 			{

@@ -142,7 +142,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									</form>
 								</div>
 								<div class="margin_t">
-									<h4>Country</h4>
+									<h4> Destination Country</h4>
 									<form class="margin_zero">
 										<ul class="col_filter_list">
 										<?php $count_country = count($country_name_having_event); ?>
@@ -671,13 +671,7 @@ function get_event_result_by_ajax()
 		}
 	  	$('#listed_currently_event').html(res[2]);
 	    $('#red_total_univ').html(res[1]);
-		 pagination();
-		 alert(res[0]);
-		 alert(res[1]);
-		 alert(res[2]);
-		 alert(res[3]);
-
-		 
+		 pagination();		 
 	   }
 	   })
 }	

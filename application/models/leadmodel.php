@@ -548,7 +548,22 @@ class Leadmodel extends CI_Model
 			return $string;    
 		}
 		
-		
+		function dest_country_name_conducting_event()
+		{
+		$this->db->select('country.country_id,country.country_name');
+		$this->db->from('country');
+		$this->db->join('university','university.country_id=country.country_id');	
+		$this->db->distinct();
+		$query=$this->db->get();
+		if($query->num_rows()>0)
+		{
+		return $query->result_array();
+		}
+		else
+		{
+		return 0;
+		}	
+		}
 		
 
 }
