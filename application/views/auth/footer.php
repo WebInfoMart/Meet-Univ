@@ -71,6 +71,14 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 		</div>
 	</footer>
 <div class="body_footer"></div>
+<div id="main_container">
+
+<a href="javascript:void(0)" onclick="javascript:chatWith('Counsellor');">Chat With COunsellor</a>
+<!-- YOUR BODY HERE -->
+
+</div>
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/chat_css/chat.css" />
+<link rel="stylesheet" href="<?php echo "$base$css_path"?>/chat_css/screen.css" />
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-collapse.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-dropdown.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/bootstrap-modal.js"></script>
@@ -80,7 +88,8 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 <script type="text/javascript" src="<?php echo "$base$js";?>/slides.min.jquery.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
-<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mtz.monthpicker.js"></script>	
+<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mtz.monthpicker.js"></script>
+<script type="text/javascript" src="<?php echo "$base$js";?>/chat_js/chat.js"></script>		
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
