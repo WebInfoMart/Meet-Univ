@@ -250,7 +250,7 @@ d.getElementsByTagName('head')[0].appendChild(js);
 						<a href="<?php echo $base; ?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" alt="Meet Universities" title="Meet Universities"/></a>
 						</div>
 						<div class="span7 float_r">
-							<img src="<?php echo "$base$img_path" ?>/banner.png" alt="Meet Universities" title="Meet Universities"/>
+							<a target="_blank" href="<?php echo $base; ?>events"><img src="<?php echo "$base$img_path" ?>/banner.png" alt="Meet Universities" title="Meet Universities"/></a>
 						</div>
 						<div class="clearfix"></div>
 					</div>

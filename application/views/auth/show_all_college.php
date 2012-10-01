@@ -322,7 +322,7 @@ $this->session->unset_userdata('follow_to_univ');
 					</div>
 				</div>
 				<div class="span4 float_r">
-					<img src="<?php echo "$base$img_path" ?>/banner_img.png">
+					<a target="_blank" href="<?php echo $base; ?>events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
