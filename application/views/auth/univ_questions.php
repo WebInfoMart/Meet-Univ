@@ -244,9 +244,7 @@ if($('#commented_text').val()!='')
 	$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
-	   async:false,
 	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id,
-	   cache: false,
 	   success: function(msg)
 	   {
 		msgarr=msg.split('!@#$%^&*');
