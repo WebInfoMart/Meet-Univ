@@ -132,7 +132,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								<?php echo $article_comment_detail['commented_text']; ?>
 								
 							</div><br/>
-							<div class="float_r span2 margin_delta">
+							<div class="float_r span2 margin_delta" style="width:130px;">
 								<abbr class="timeago time_ago" title="<?php echo $article_comment_detail['comment_time']; ?>"></abbr>
 							</div>
 							<div class="clearfix"></div>
