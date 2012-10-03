@@ -109,7 +109,7 @@ class Admin extends CI_Controller
 	{
 		$data = $this->path->all_path();
 		if ($this->tank_auth->is_admin_logged_in()) {									// logged in
-			redirect('');
+			redirect('admin');
 
 		}  else {
 			$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
