@@ -86,7 +86,7 @@ class Quest_ans_model extends CI_Model
 		$this->db->order_by("que_id","desc");
 		$query = $this->db->get(); 
 		$no_of_que=$query->num_rows();
-		//$quest_data['no_of_que']=$no_of_que;
+		$quest_data['no_of_que']=$no_of_que;
 		$config['base_url']= base_url()."Recent_Questions/question/all/";
 		$config['total_rows']=$no_of_que;
 		$config['per_page'] = '6'; 
