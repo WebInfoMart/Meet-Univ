@@ -26,7 +26,7 @@ if ($user) {
 				<div id="quest_div_show_right" class="span13 margin_l margin_t1">
 				<h2 class="course_txt"><?php echo $count_all_question; ?> Questions Asked.</h2>
 				<div class="margin_t1">
-				<?php
+				<?php //print_r($get_all_question);
 				if(!empty($get_all_question))
 				{
 				$a=0;
@@ -102,7 +102,9 @@ if ($user) {
 							else{
 							echo 'Category-General Question,';
 							}
-				echo "&nbsp;&nbsp;".$get_all_question['ans_count'][$a]."&nbsp;Answers&nbsp;";
+							$count=$this->quest_ans_model->get_noof_comments($quest_list['que_id']);
+							
+				echo "&nbsp;&nbsp;".$count."&nbsp;Answers&nbsp;";
 				
 				// Quickly calculate the timespan
 					

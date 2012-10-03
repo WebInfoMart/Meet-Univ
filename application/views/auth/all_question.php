@@ -196,7 +196,8 @@ if ($user) {
 											?>
 											-
 											*/
-											echo $get_all_question['ans_count'][$a]."&nbsp;Answers&nbsp;";
+											$count=$this->quest_ans_model->get_noof_comments($quest_list['que_id']);
+											echo $count."&nbsp;Answers&nbsp;";
 											
 												?> 
 				

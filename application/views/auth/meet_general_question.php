@@ -72,7 +72,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 					<div class="margin_t" id="add_more_comment">
 							<div class="event_border">
 						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
-							<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Comments Yet</h3>
+							<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Answers Yet</h3>
 						</div>		
 							
 						</div>

@@ -103,7 +103,7 @@ class Quest_ans_model extends CI_Model
 		$query = $this->db->get(); 
 		$q_detail=$query->result_array();
 		$quest_data['quest_detail'] = $q_detail;
-		$quest_data['ans_count'] = 0;
+	//	$quest_data['ans_count'] = 0;
 		$this->pagination->initialize($config);
 		return $quest_data;
 		/*if($no_of_que > 0)
@@ -182,6 +182,14 @@ class Quest_ans_model extends CI_Model
 		else{
 		return 0;
 		}
+	}
+	public function get_noof_comments($quest_id)
+	{
+		$this->db->select('*');
+		$this->db->from('comment_table');
+		$this->db->where('comment_on_id',$quest_id);		
+		$query = $this->db->get();
+		return $query->num_rows();		
 	}
 	
 	
