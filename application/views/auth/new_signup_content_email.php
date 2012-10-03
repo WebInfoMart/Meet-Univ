@@ -36,17 +36,25 @@
 	  <?php 
 	  echo "<h3>Dear &nbsp;".$fullname."</h3>";
 	  ?>
-	  <span ><h3> Thank you for registering with Global University Events | MeetUniversities.com! </br>
-		   We are glad to you for chosing to be a part of our community and we hope you
-			Your Password is<h2> <?php echo $password; ?></h2>
-		   </br></h3>
-		   <h3> enjoy your stay. </h3>
-		   <p style="margin-bottom: 19px;"> All the best,Global University Events – One Place  | <a href="www.meetuniversities.com">MeetUniversities.com</a></p> 
-		   </span>
-		   <a href="<?php echo $base;?>auth/activate/<?php echo $user_id.'/'.$new_email_key; ?>" style="color: #3366cc;">Click Here for Finish your registration and activate your account...</a>
-			</br></br>
-			If you are facing trouble opening the above link please copy the url: <span style="color: #3366cc;">(<?php echo $base;?>auth/activate/<?php echo $user_id.'/'.$new_email_key; ?>)</span> and paste it on your browser to activate your account.
-	  <u></u><u></u></span></p>
+	  <span ><h3> Thank you for registering at MeetUniversities.com. Before we can activate your <br />account one  
+		   last step must be taken to complete your registration.<br />
+		   Please note - you must complete this last step to become a registered member. You will only
+		   need to visit this URL once to activate your account.<br /><br />
+		   To complete your registration, please Click this link<br /><br />		   
+		   <a href="<?php echo $base;?>auth/activate/<?php echo $user_id.'/'.$new_email_key; ?>" style="color: #3366cc;">Click Here</a>
+		   <br /><br />
+		   **** Does The Above URL Not Work? ****<br />
+		   If the above URL does not work, please use your Web browser to go to:<br />
+		  <?php echo $base;?>auth/activate/<?php echo $user_id.'/'.$new_email_key; ?><br /><br />
+		   Please be sure not to add extra spaces. You will need to type in your<br />
+		   username and activation number on the page that appears when you visit<br />
+		   the URL.<br /><br />
+		   <h2>Your Username is: <?php echo $email;?></h2>
+			<h2>Your Password is: <?php echo $password; ?></h2>
+		   <br /></h3>
+		     </span>
+		   	<br />
+			If you are still having problems signing up please contact a member of our support staff <br />at account@meetuniversities.com   <u></u><u></u></span></p>
       </td>
      </tr>
      <tr>

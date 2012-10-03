@@ -279,6 +279,7 @@ class Auth extends CI_Controller
       $uid = $data['user_id'];
       $data['logged_user_email'] = $this->users->get_email_by_userid($uid);
       $data['password'] = $this->input->post('password');
+	   $data['email'] = $this->input->post('email');
       $data['fullname'] = $this->input->post('fullname');
       $new_email_key=$this->users->get_new_email_key_by_userid($uid);
       $data['new_email_key']=$new_email_key['new_email_key'];
@@ -290,9 +291,9 @@ class Auth extends CI_Controller
 	 $config['smtp_user'] = $this->config->item('smtp_user_name');
 	 $config['smtp_pass'] = $this->config->item('smtp_pass');
 	 $this->email->initialize($config);    
-     $this->email->from('info@meetuniversities.com', 'Meet Universities');
+     $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');
      $this->email->to($uid);
-     $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
+     $this->email->subject('Action Required to activate your account | MeetUniversities.com');
      $message = $email_body ;
      $this->email->message($message);
      $this->email->send();
@@ -365,11 +366,28 @@ class Auth extends CI_Controller
 	 * @return void
 	 */
 	function activate($user_id,$new_email_key)
- {
+ {$data = $this->path->all_path();
   // Activate user
   if ($this->users->activate_user($user_id, $new_email_key)) {  // success
   // $this->tank_auth->logout();
   $this->session->set_flashdata('activated','yes');
+   $uid = $user_id;  
+      $data['logged_user_email'] = $this->users->get_email_by_userid($uid);      
+	   //print_r($data['logged_user_email']);exit;
+      $data['fullname'] = $this->users->get_username_by_userid($uid); 	  
+      $email_body = $this->load->view('auth/activation_content_email',$data,TRUE);	 
+      $this->email->set_newline("\r\n");
+  $config['protocol'] = $this->config->item('mail_protocol');
+	 $config['smtp_host'] = $this->config->item('smtp_server');
+	 $config['smtp_user'] = $this->config->item('smtp_user_name');
+	 $config['smtp_pass'] = $this->config->item('smtp_pass');	
+	 $this->email->initialize($config);    
+     $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');
+     $this->email->to($data['logged_user_email']);
+     $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
+     $message = $email_body ;
+     $this->email->message($message);
+     $this->email->send();     
    redirect('login');
    //$this->_show_message($this->lang->line('auth_message_activation_completed').' '.anchor('/auth/login/', 'Login'));
 

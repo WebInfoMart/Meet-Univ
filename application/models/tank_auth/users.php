@@ -878,6 +878,18 @@ class Users extends CI_Model
 		return 0;
 		}
 	}
+	function get_username_by_userid($uid)
+	{
+		$this->db->select('fullname');
+		$query = $this->db->get_where('users',array('id'=>$uid));
+		if($this->db->affected_rows() > 0)
+		{
+			return $query->row_array();
+		}
+		else{
+		return 0;
+		}
+	}
 	
 	function get_university_by_id($univ_id)
 	{

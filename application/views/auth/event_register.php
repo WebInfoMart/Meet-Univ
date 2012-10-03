@@ -116,12 +116,12 @@
 					</div>
 					</div>
 					<div class="float_r">
-						<img src="<?php echo $base; ?>images/banner_img.png">
+						<a href="<?php echo $base; ?>register/british_council"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="float_r span3">
-					<img src="<?php echo $base; ?>images/banner_img.png">
+					<a href="<?php echo $base; ?>register/british_council"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 				</div>
 				<div class="clearfix"></div>
 			</div>

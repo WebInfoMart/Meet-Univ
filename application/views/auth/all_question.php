@@ -231,7 +231,7 @@ if ($user) {
 				
 				
 				<div class="float_r span3 margin_t1">
-					<img src="<?php echo $base; ?>images/banner_img.png">
+					<a href="<?php echo $base; ?>register/british_council"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 				</div>
 		
 			<div id="pagination" class="table_pagination right paging-margin">
