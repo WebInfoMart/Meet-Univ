@@ -202,6 +202,29 @@ $insert=1;
 					
 						<td>
 		<input type="checkbox" class="setchkval" value="" name="check_ques_<?php echo $row->que_id; ?>" id="check_ques_<?php echo $row->que_id; ?>">
+		<?php
+		if($row->q_univ_id != '0')
+				{
+					$question_title = str_replace(' ','-',$row->q_title);
+					$univ_domain=$row->subdomain_name;
+					$quest_title=$row->q_title;
+					$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$row->que_id);
+					$url = $que_link;
+				}
+				else if($row->q_country_id != '0')
+				{
+					$url = "";
+				}
+				else
+				{
+					
+					$question_title =$this->subdomain->process_url_title($row->q_title);	
+					$url = "MeetQuest/".$row->que_id."/".$question_title."/".$row->q_askedby;
+					$url = $base.'otherQuestion'.'/'.$row->que_id.'/'.$question_title;
+				}
+				//echo $url;
+		?>
+				<input type="hidden" id="que_url_<?php echo $row->que_id ?>" value="<?php echo $url;?>" />
 						<input type="hidden" name="que_id[]" value="<?php echo $row->que_id ?>" >
 						</td>						
 						<td>
@@ -217,6 +240,7 @@ $insert=1;
 <textarea rows="4" cols="50" id="ans_<?php echo $row->que_id;?>" style="display:none;float:left"></textarea>
 <input type="button"  id="add_ans_<?php echo $row->que_id;?>" style="display:none;margin-left: 20px;" value="Submit" onclick="submitAns('<?php echo $row->que_id;?>')"/> 
 <input type="button"  id="cancel_ans_<?php echo $row->que_id;?>" style="display:none;margin-left: 20px;" value="Cancel" onclick="cancelAns('<?php echo $row->que_id;?>')"/> 
+<img id="ajax_loader" src="<?php echo $base;?>images/ajax_loader.gif" style="display:none;margin-left: 20px;"/>
 </span>
 		<ul class="nav">
           <li data-dropdown="dropdown" >  <a class="btn-primary button_cont" href="#"><i class="icon-univ-event icon-white"></i>Ques</a>
@@ -456,16 +480,21 @@ function submitAns(id)
 {   
 	var countTd=$("#count_"+id).html();	
 	var url='<?php echo $base; ?>adminques/add_ans';
+	var que_url=$('#que_url_'+id).val();	
 	var answer=$("#ans_"+id).val();
-	var data={id:id,answer:answer,ajax:'1'};		
+	var data={id:id,answer:answer,que_url:que_url,ajax:'1'};		
         $.ajax({
           type: "POST",
           data: data,
-          url: url,         
+          url: url, 
+		 beforeSend: function() {
+		$("#ajax_loader").show();
+          },
           success: function(msg) 
 		  {	 
 		   if(msg='1')
 			{
+				$("#ajax_loader").hide();
 				$("#tr_"+id).hide('slow');
 				$("#content_msg").show('slow');
 				countTd++;

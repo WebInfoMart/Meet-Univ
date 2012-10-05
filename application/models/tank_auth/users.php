@@ -880,7 +880,7 @@ class Users extends CI_Model
 	}
 	function get_username_by_userid($uid)
 	{
-		$this->db->select('fullname');
+		$this->db->select('*');
 		$query = $this->db->get_where('users',array('id'=>$uid));
 		if($this->db->affected_rows() > 0)
 		{

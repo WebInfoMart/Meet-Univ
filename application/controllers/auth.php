@@ -277,6 +277,7 @@ class Auth extends CI_Controller
       //Send Email for new registration
       //print_r($this->session->userdata);
       $uid = $data['user_id'];
+	  $userid=$data['user_id'];
       $data['logged_user_email'] = $this->users->get_email_by_userid($uid);
       $data['password'] = $this->input->post('password');
 	   $data['email'] = $this->input->post('email');
@@ -298,6 +299,7 @@ class Auth extends CI_Controller
      $this->email->message($message);
      $this->email->send();
      $this->session->set_flashdata('registeration_success','1');
+	 $this->session->set_flashdata('userid',$userid);
      $data['site_name'] = $this->config->item('website_name', 'tank_auth');
 	 redirect('login'); 
     } else {
@@ -323,11 +325,56 @@ class Auth extends CI_Controller
   $this->load->view('auth/footer',$data);
  }
 
-	/**
-	 * Send activation email again, to the same or new email address
-	 *
-	 * @return void
-	 */
+ function activation_mail_resend($userid='')
+ {
+ $data = $this->path->all_path();
+ $this->load->view('auth/header',$data);
+  $config['newline'] = $this->config->item('newline');
+  $this->email->initialize($config);
+  if ($this->tank_auth->is_logged_in()) {         // logged in
+   redirect('home');
+
+  }  
+  else 
+  { 
+      $uid = $userid;
+      $info= $this->users->get_username_by_userid($uid); 
+	  	//print_r($data);exit;
+      $new_email_key=$this->users->get_new_email_key_by_userid($uid);
+      $data['new_email_key']=$new_email_key['new_email_key'];
+	  $data['password'] = 0;
+	  $data['user_id'] =$userid ;
+	   $data['email'] = $info['email'];
+      $data['fullname'] =$info['fullname'];
+      $uid = $info['email'];
+      $email_body = $this->load->view('auth/new_signup_content_email',$data,TRUE);
+      $this->email->set_newline("\r\n");
+	 $config['protocol'] = $this->config->item('mail_protocol');
+	 $config['smtp_host'] = $this->config->item('smtp_server');
+	 $config['smtp_user'] = $this->config->item('smtp_user_name');
+	 $config['smtp_pass'] = $this->config->item('smtp_pass');
+	 $this->email->initialize($config);    
+     $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');
+     $this->email->to($uid);
+     $this->email->subject('Action Required to activate your account | MeetUniversities.com');
+     $message = $email_body ;
+     $this->email->message($message);
+     $this->email->send();
+     $this->session->set_flashdata('registeration_success','1');
+	 $this->session->set_flashdata('userid',$userid);
+     $data['site_name'] = $this->config->item('website_name', 'tank_auth');
+	 redirect('login'); 
+  
+   }
+  
+   $data['use_username'] = $use_username;   
+   $data['featured_events']=$this->frontmodel->fetch_featured_events();
+   $data['new_users']=$this->frontmodel->newly_registered_users();
+   $this->load->view('auth/register', $data);
+  
+  $this->load->view('auth/footer',$data);
+ }
+	
 	function send_again()
 	{
 		if (!$this->tank_auth->is_logged_in(FALSE)) {							// not logged in or activated
