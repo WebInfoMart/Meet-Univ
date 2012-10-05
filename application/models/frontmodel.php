@@ -535,7 +535,32 @@ class Frontmodel extends CI_Model
 	$this->db->insert('comment_table',$data);
 		return $this->db->insert_id();
 	}
-	
+	function emailids_commented_on_ques($commented_on_id,$logged_in_user_id)
+	{		
+		$this->db->select('*');
+		$this->db->from('comment_table');		
+		$this->db->join('users','users.id=comment_table.commented_by','left');
+		$this->db->where('comment_on_id',$commented_on_id);
+		$this->db->where('commented_on','qna');		
+		$this->db->where_not_in('commented_by',$logged_in_user_id);		
+		$this->db->group_by('users.email');
+		$query=$this->db->get();
+		return $query->result_array();
+	}
+	function email_asked_by($commented_on_id)
+	{
+		$this->db->select('q_askedby');
+		$this->db->from('questions');
+		$this->db->where('que_id',$commented_on_id);
+		$query=$this->db->get();
+		$id=$query->result_array();
+		
+		$this->db->select('id,email,fullname');
+		$this->db->from('users');
+		$this->db->where('id',$id[0]['q_askedby']);
+		$qry=$this->db->get();
+		return $qry->result_array();
+	}
 	function delete_comment()
 	{
 	$this->db->delete('comment_table', array('comment_id' =>$this->input->post('comment_id')));
