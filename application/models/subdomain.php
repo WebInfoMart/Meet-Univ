@@ -267,6 +267,8 @@ class Subdomain extends CI_Model
 	{
 	     $cat_title=strtolower($cat_title);
 		 $cat_title=str_replace("'",' ',$cat_title);
+		 $cat_title=str_replace("!",'',$cat_title);
+		  $cat_title=str_replace(".",'',$cat_title);
 		 $cat_title=str_replace("%",'_percent',$cat_title);
 		 $cat_title=str_replace(' ','-',$cat_title);
 		 $cat_title=str_replace('&','and',$cat_title);

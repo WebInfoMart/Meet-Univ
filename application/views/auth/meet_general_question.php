@@ -205,7 +205,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										</div>
 										<div class="control-group">
 											<div class="my_form_controls">
-												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">
+												<input type="button" onclick="post_comment();" class="btn btn-success" name="submit" value="Post Comment">&nbsp;&nbsp;
+												<img id="ajax_loader" src="<?php echo $base;?>images/ajax_loader.gif" style="display:none;"/>
 											</div>
 										</div>
 									</form>
@@ -256,7 +257,7 @@ $.ajax({
 }	
 
 function post_comment()
-{
+{var url=document.URL;
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
@@ -265,16 +266,20 @@ var span_comment_incr = parseInt(span_comment)+1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 var fb_user_id='<?php echo $user; ?>';
 var lastpostcommentid=$('#lastcommentid').val();
+var data={commented_text:commentedtext,commentd_on:commentd_on,commented_on_id:commented_on_id,user_id:user_id,fb_user_id:fb_user_id,url:url}
 if($('#commented_text').val()!='')
 {
 	$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
 	   async:false,
-	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id+'&fb_user_id='+fb_user_id,
+	   data: data,
 	   cache: false,
+	    beforeSend: function() {
+		$("#ajax_loader").show();
+          },
 	   success: function(msg)
-	   {
+	   {$("#ajax_loader").hide();
 	    msgarr=msg.split('!@#$%^&*');
 		var lastinsid=parseInt(msgarr[0]);
 		if(lastpostcommentid=='0')

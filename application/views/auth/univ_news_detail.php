@@ -286,13 +286,14 @@ var span_comment_incr = parseInt(span_comment)+1;
 var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
 var fb_user_id='<?php echo $user; ?>';
 var lastpostcommentid=$('#lastcommentid').val();
+var data={commented_text:commentedtext,commentd_on:commentd_on,commented_on_id:commented_on_id,user_id:user_id,fb_user_id:fb_user_id};
 if($('#commented_text').val()!='')
 {
 	$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
 	   async:false,
-	   data: 'commented_text='+commentedtext+'&commentd_on='+commentd_on+'&commented_on_id='+commented_on_id+'&user_id='+user_id+'&fb_user_id='+fb_user_id,
+	   data: data,
 	   cache: false,
 	   success: function(msg)
 	   {

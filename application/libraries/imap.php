@@ -7,21 +7,21 @@
 
         // Open IMAP connection
         
-        function cimap_open($host, $mailbox, $username, $password)
+        function imap_open($host, $mailbox, $username, $password)
         {
-            return imap_open('{'.$host.':143}'.$mailbox, $username, $password);
+            return imap_open($host,$mailbox, $username, $password);
         }
         
         // Find number of msg in mailbox
         
-        function cimap_num_msg($imap_connection)
+        function imap_num_msg($imap_connection)
         {
             return imap_num_msg($imap_connection);
         }
         
         // Find disk quota amount
         
-        function cimap_get_quota($imap_connection)
+        function imap_get_quota($imap_connection)
         {
             $storage = $quota['STORAGE']= imap_get_quotaroot($imap_connection, "INBOX");
             

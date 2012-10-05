@@ -16,8 +16,11 @@ class adminques extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('security');
 		$this->load->library('tank_auth');
+		$this->load->library('email');
 		$this->lang->load('tank_auth');
 		$this->load->model('quesmodel');
+		$this->load->model('frontmodel');
+		$this->load->model('users');
 	}
 
 	function index()
@@ -651,6 +654,78 @@ class adminques extends CI_Controller
 				if(!($data['admin_priv']))
 				{
 					redirect('admin/adminlogout');
+				}
+				$logged_in_user_id = $this->tank_auth->get_admin_user_id();	
+				
+				$info = $this->path->all_path();
+				$info['url']=$this->input->post('que_url');				
+				$commented_on_id=$this->input->post('id');
+				
+				$asked_by=$this->frontmodel->email_asked_by($commented_on_id);
+				$asked_by_email=$asked_by[0]['email'];
+				$asked_by_id=$asked_by[0]['id'];
+				$asked_by_name=$asked_by[0]['fullname'];				
+				
+				$mail=$this->frontmodel->emailids_commented_on_ques($commented_on_id,$logged_in_user_id);
+				$arr=array();
+				foreach($mail as $email)
+					{
+						array_push($arr,$email['email']);
+					}
+				$askedby='';
+				if(!in_array($asked_by[0]['email'],$arr))
+					{//echo 'hello';exit;
+						$askedby=$asked_by[0]['email'];
+					}	
+				$uid = $logged_in_user_id;
+				$result= $this->users->get_username_by_userid($uid); 					  	  
+				$info['fullname'] =$result['fullname'];	
+					
+				if(!empty($mail))
+				{
+				  foreach($mail as $email)
+					{  
+						if($email['email']!=$askedby)
+						{							
+							//echo $email['email'];					
+						
+						 $info['username']=$email['fullname'];
+						$email_body=$this->load->view('auth/email_templates/qna_comment_notification',$info,TRUE);
+						
+						$this->email->set_newline("\r\n");
+						 $config['protocol'] = $this->config->item('mail_protocol');
+						 $config['smtp_host'] = $this->config->item('smtp_server');
+						 $config['smtp_user'] = $this->config->item('smtp_user_name');
+						 $config['smtp_pass'] = $this->config->item('smtp_pass');
+						 $this->email->initialize($config);    
+						 $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');						
+						 $this->email->to($email['email']);				
+						 $this->email->subject($result['fullname'].' Just commented on your thread');
+						 $message = $email_body ;
+						 $this->email->message($message);
+						 $this->email->send();     
+						}						 
+					}
+				}
+				if($askedby!='' && $asked_by_id!=$logged_in_user_id)
+				{
+					//echo $askedby;
+					
+						$info['username']=$asked_by_name;
+						$email_body=$this->load->view('auth/email_templates/qna_comment_notification',$info,TRUE);
+						
+						$this->email->set_newline("\r\n");
+						 $config['protocol'] = $this->config->item('mail_protocol');
+						 $config['smtp_host'] = $this->config->item('smtp_server');
+						 $config['smtp_user'] = $this->config->item('smtp_user_name');
+						 $config['smtp_pass'] = $this->config->item('smtp_pass');
+						 $this->email->initialize($config);    
+						 $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');						
+						 $this->email->to($askedby);				
+						 $this->email->subject($result['fullname'].' Just commented on your thread');
+						 $message = $email_body ;
+						 $this->email->message($message);
+						 $this->email->send();  
 				}
 				$insert=$this->quesmodel->addans();	
 				echo $insert;

@@ -54,23 +54,25 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 </script>
 <div class="modal" id="activated_user" style="display:none;" >
   <div class="modal-header">
-    <a class="close" data-dismiss="modal"></a>
+    <a class="close" data-dismiss="modal">x</a>
     <h3>Congratulations! Your account has been successfully activated. Please login with your credentials.</h3>
   </div>
 </div>
 
 <div class="modal" id="link_send_for_fpass" style="display:none;" >
   <div class="modal-header">
-    <a class="close" data-dismiss="modal"></a>
+    <a class="close" data-dismiss="modal">x</a>
     <h3>An Email has been sent to Your E-mail Id.For Change Password Please Activate your Account</h3>
+	
   </div>
 </div>
 
 <!-- Css For Login Validation -->
 <div class="modal" id="show_success" style="display:none;" >
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal"></a>
+  <div  class="modal-header">
+   <a  class="close" data-dismiss="modal">x</a>
     <h3>You are one step away from signing up at Meet Universities. Please check your email and activate your account.</h3>
+	<a href="<?php $base;?>auth/activation_mail_resend/<?php echo $this->session->flashdata('userid');?>">Send Email again if not received!!</a>
   </div>
 </div>
 <div id="forget_model" class="model_back modal hide fade" style="display: none; ">
@@ -240,7 +242,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 									{
 									$image=$base.$img_path.'/calendar.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,100,50,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,105,71,TRUE);
 									$event_register_user = $this->frontmodel->count_event_register($home_feature_event['event_id']);
 								?>
 								<?php
@@ -255,7 +257,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 									<div class="event_meth float_l">
 										<h3 class="inline"><a href="<?php echo $event_link; ?>"><?php echo $home_feature_event['univ_name']; ?></a></h3><span class="inline"> &raquo; </span><h4 class="inline"><?php echo $cat; ?></h4>
 										<div class="margin_t1">
-											<div class="img_style float_l img_r">
+											<div class="img_style float_l img_r aspectcorrect">
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
 											<div><img src="<?php echo $base; ?>images/city.png" class="line_img inline"><span class="blue line_time inline">
@@ -332,14 +334,14 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 <script>
 <?php if($this->session->flashdata('activated')!="") { ?>
 $("#activated_user").css("display","block");
-$("#activated_user").delay(7000).fadeOut(200);
+//$("#activated_user").delay(7000).fadeOut(200);
 <?php } ?>
 </script>	
 <script>
 <?php if($this->session->flashdata('registeration_success')) { ?>
 $(document).ready(function(){
 $('#show_success').css('display','block');
-$("#show_success").delay(7000).fadeOut(200);
+//$("#show_success").delay(7000).fadeOut(200);
 });
 <?php } ?>
 	
@@ -401,6 +403,9 @@ function validateEmail(email) {
 
 $('#forgot_pass').click(function(){
 $('#forget_model').modal('toggle');
+});
+$('.modal').click(function(){
+$('.modal').hide();
 });
 <?php
  if($email_send) { ?>

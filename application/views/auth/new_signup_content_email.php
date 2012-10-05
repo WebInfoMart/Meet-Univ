@@ -1,7 +1,6 @@
 <html>
 <body>
-<div align="center">
-
+<div>
 <table border="1" cellspacing="0" cellpadding="0" width="602" style="width:451.5pt;border:solid #e88230 1.0pt">
  <tbody><tr>
   <td style="border:none;padding:0in 0in 0in 0in">
@@ -50,11 +49,14 @@
 		   username and activation number on the page that appears when you visit<br />
 		   the URL.<br /><br />
 		   <h2>Your Username is: <?php echo $email;?></h2>
+		   <?php if($password!=0)
+		   { ?>
 			<h2>Your Password is: <?php echo $password; ?></h2>
+			<?php } ?>
 		   <br /></h3>
 		     </span>
 		   	<br />
-			If you are still having problems signing up please contact a member of our support staff <br />at account@meetuniversities.com   <u></u><u></u></span></p>
+			If you are still having problems signing up please contact a member of our support staff <br />at contact@meetuniversities.com   <u></u><u></u></span></p>
       </td>
      </tr>
      <tr>
