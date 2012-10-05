@@ -39,8 +39,36 @@
 				<div class="float_l span13 margin_l">
 					<div class="float_l span10 margin_zero round_box">
 						<h2>Event Registration</h2>
+						<?php 
+						$fc=0;
+						$image_exist=0;		
+						if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_event_info['univ_logo_path']) && $univ_event_info['univ_logo_path']!='')	
+						{
+						$image_exist=1;
+						}
+						if($univ_event_info['univ_logo_path']!='' && $image_exist==1)
+						{
+						$image=$univ_event_info['univ_logo_path'];
+						}
+						else
+						{
+						$image='univ_logo.png';
+						} 
+						?>
+						
+						<div class="clearfix"></div>
 					<div class="margin_t1">
 						<form class="form-horizontal form_step_box" action="" method="post" id="frm_Event_Register">
+							<div class="control-group">
+						<div class="float_l"><img src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" title="<?php echo $univ_event_info['univ_name']; ?>" style="width: 90px;height: 85px;"/>
+						
+						</div>
+						<div class="float_l">
+							<div style="position:absolute;margin-top:30px;margin-left:10px">
+							<h2><?php echo $univ_event_info['univ_name']; ?></h2>
+							</div>
+						</div>
+						</div>
 							<div class="control-group">
 								<label class="control-label" for="focusedInput">Full Name</label>
 								<div class="controls">

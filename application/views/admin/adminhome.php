@@ -5,20 +5,19 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['day', 'visitors','pageviews'],
-		  <?php for($i = 30; $i >=1; $i--) { 
-			$start_date=date('Y-m-d',strtotime($i.' day ago'));
-				foreach($objResults[$start_date] as $objResult )
-					{				   
-					   $Visitors = $objResult->getVisitors( );
-					   $intUniquePageViews = $objResult->getUniquePageViews( ); 
-						echo "['".$start_date."',".$Visitors.",".$intUniquePageViews."]";	
-						if($i!=0)
+		  <?php 
+		 $i=30;
+		 		foreach($report as $objResult )
+					{	
+					$i--;
+ 					$start_date=date('Y-m-d',strtotime($i.' day ago'));					
+					  echo "['".$start_date."',".$objResult['ga:pageviews'].",".$objResult['ga:visitors']."]";	
+						if($i!=30)
 						{
 						echo ',';
 						}
 						
-					}
-			} ?>	         
+					} ?>					
         ]);
         var options = {
           title: 'Users details'

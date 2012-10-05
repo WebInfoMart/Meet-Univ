@@ -260,7 +260,7 @@ class Frontmodel extends CI_Model
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event'));
+		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		$query = $this->db->get();
 		$numrows=$query->num_rows();
 		$config['base_url']='http://'.$subdomain_name_for_paging.$data['domain_name']."/event-list/university_events";
@@ -274,7 +274,7 @@ class Frontmodel extends CI_Model
 		$this->db->join('country', 'country.country_id = events.event_country_id','left'); 
 		$this->db->join('state', 'state.state_id = events.event_state_id','left'); 
 		$this->db->join('city', 'city.city_id = events.event_city_id','left'); 
-		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event'));
+		$this->db->where(array('event_univ_id'=>$univ_id,'event_type'=>'univ_event','STR_TO_DATE(event_date_time, "%d %M %Y")>='=>date("Y-m-d")));
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
 		$this->pagination->initialize($config);

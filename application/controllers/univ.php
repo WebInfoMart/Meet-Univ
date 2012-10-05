@@ -1248,7 +1248,22 @@ class Univ extends CI_Controller
 		echo '<p>Total pageviews: ' . $ga->getPageviews() . ' total visits: ' . $ga->getVisits() . '</p>';
 	}
 	
-	
+	function test()
+	{
+	 $data = $this->path->all_path();
+	echo  $message=$this->load->view('auth/email_template/email_on_comment_on_que',$data,TRUE);
+	 $config['protocol'] = $this->config->item('mail_protocol');
+	 $config['smtp_host'] = $this->config->item('smtp_server');
+	 $config['smtp_user'] = $this->config->item('smtp_user_name');
+	 $config['smtp_pass'] = $this->config->item('smtp_pass');
+	 $this->email->initialize($config);    
+     $this->email->from('info@meetuniversities.com', 'Meet Universities');
+     $this->email->to('sumitmunjal@webinfomart.com');
+     $this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
+   //  $message = $email_body ;
+     $this->email->message($message);
+     
+	}
 }		
 	
 ?>

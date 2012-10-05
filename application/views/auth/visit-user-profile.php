@@ -277,7 +277,12 @@ if ($user) {
 				{
 				if($quest_list['q_univ_id'] != '0')
 				{
-					$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+					//$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
+					$question_title = str_replace(' ','-',$quest_list['q_title']);
+					$univ_domain=$quest_list['subdomain_name'];
+					$quest_title=$quest_list['q_title'];
+					$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
+					$url = $que_link;
 				}
 				else if($quest_list['q_country_id'] != '0')
 				{
@@ -285,7 +290,9 @@ if ($user) {
 				}
 				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
 				{
-					$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
+					$question_title =$this->subdomain->process_url_title($quest_list['q_title']);	
+					//$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
+					$url = $base.'otherQuestion'.'/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				$q_date = explode(" ",$quest_list['q_asked_time']);
 				//print_r($q_date[0]);
@@ -299,7 +306,7 @@ if ($user) {
 				
 
 										
-										<a href="<?php echo "$base$url"; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
+										<a href="<?php echo "$url"; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
 										<?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
 										<div>
 										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';

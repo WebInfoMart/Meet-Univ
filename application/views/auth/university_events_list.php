@@ -31,24 +31,24 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 								</a></h3>
 								<span>
 								<?php
-						if($event_detail['country_name']!='') { 
-						echo $event_detail['country_name'];
+						if($event_detail['cityname']!='') { 
+						echo $event_detail['cityname'];
 						}
-						if($event_detail['country_name']!='' && $event_detail['statename']!='')
+						if($event_detail['cityname']!='' && $event_detail['statename']!='')
 						{
-						echo ','.$event_detail['statename'];
+						echo '&nbsp;,&nbsp;'.$event_detail['statename'];
 						}
 						else if($event_detail['statename']!='')
 						{
 						echo $event_detail['statename'];
 						}
-						if(($event_detail['country_name']!='' || $event_detail['statename']!='') && $event_detail['cityname']!='')
+						if(($event_detail['cityname']!='' || $event_detail['statename']!='') && $event_detail['country_name']!='')
 						{
-						echo ','.$event_detail['cityname'];
+						echo '&nbsp;,&nbsp;'.$event_detail['country_name'];
 						}
 						else
 						{
-						echo $event_detail['cityname'];
+						echo $event_detail['country_name'];
 						}
 						?></span>
 								</div>
@@ -93,7 +93,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 								</div>
 								<div class="div_fix">
 									<div class="float_l span3 margin_zero">
-										<div><img src="<?php echo $base; ?>images/clock.png" class="line_img inline"><span class="blue line_time inline"><abbr class="timeago time_ago" title="<?php echo $event_detail['event_date_time']; ?>"></abbr>
+										<div><img src="<?php echo $base; ?>images/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $event_detail['event_date_time']; ?>
 										</span></div>
 										<div><img src="<?php echo $base; ?>images/group.png" class="line_img inline"><span class="blue line_time inline"><?php 	echo $event_register_user = $this->frontmodel->count_event_register($event_detail['event_id']); ?>
 											Register

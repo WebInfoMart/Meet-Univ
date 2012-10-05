@@ -254,7 +254,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 									{
 									$image=$base.$img_path.'/calendar.png';
 									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,100,50,TRUE);
+									$img_arr=$this->searchmodel->set_the_image($width,$height,105,71,TRUE);
 									$event_register_user = $this->frontmodel->count_event_register($home_feature_event['event_id']);
 								?>
 								<?php
@@ -269,7 +269,7 @@ if($error_iagree != '') { $class_iagree = 'focused_error'; } else { $class_iagre
 									<div class="event_meth float_l">
 										<h3 class="inline"><a href="<?php echo $event_link; ?>"><?php echo $home_feature_event['univ_name']; ?></a></h3><span class="inline"> &raquo; </span><h4 class="inline"><?php echo $cat; ?></h4>
 										<div class="margin_t1">
-											<div class="img_style float_l img_r">
+											<div class="img_style float_l img_r aspectcorrect">
 												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
 											<div><img src="<?php echo "$base$img_path" ?>/city.png" class="line_img inline"><span class="blue line_time inline">

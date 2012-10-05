@@ -17,7 +17,9 @@ class Admin extends CI_Controller
 		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
-		$this->load->library( 'gapi', array( 'email' =>'sumitmunjal@webinfomart.com', 'password' =>'sumitkumarmunjal1') );
+		$this->load->library('googleanalytics');
+   
+		
 	}
 
  function index($msg='')
@@ -53,14 +55,15 @@ class Admin extends CI_Controller
    }
    }
    if($data['admin_user_level']=='5')
-   { for($i = 1; $i <=31; $i++) 
-  {    
+   {
+   for($i = 1; $i <=31; $i++) 
+   {    
    $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
    $data['no_of_registerd_user'][$i]=$this->dashboard->count_lead_data_by_date($lead_created_time);
     
-  }    
- $data['latest_users']=$this->dashboard->latest_event_users();
- $data['ten_question']=$this->dashboard->ten_question();
+   }    
+   $data['latest_users']=$this->dashboard->latest_event_users();
+   $data['ten_question']=$this->dashboard->ten_question();
  
    }
    $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
@@ -80,13 +83,12 @@ class Admin extends CI_Controller
    }
     if($data['admin_user_level']=='5')
    {
-   for($i = 30; $i >= 1; $i--) { 
-     $start_date=date('Y-m-d',strtotime($i.' day ago'));
- $this->gapi->requestReportData( (60386809),'hostName', array( 'uniquePageViews,ga:visitors' ), array('-uniquePageViews'), null, $start_date, $start_date, 1, 1 ); 
- $data['objResults'][$start_date] = $this->gapi->getResults( ); 
- }
- //echo '<pre>'.print_r($data['objResults']).'</pre>';
- $this->load->view('admin/adminhome', $data);
+   
+  // $ga = new GoogleAnalytics();
+   $this->googleanalytics->setProfile('ga:60386809');
+   $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
+   $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
+   $this->load->view('admin/adminhome', $data);
    }
    
    if($msg=='uus')
