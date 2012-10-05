@@ -248,7 +248,7 @@ class GoogleAnalytics {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 			
 		} else {
-			$header[] = array("application/x-www-form-urlencoded");
+			$header[] = "application/x-www-form-urlencoded";
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 			
 		}
