@@ -246,9 +246,7 @@ if($('#commented_text').val()!='')
 	$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
-	   async:false,
 	   data: data,
-	   cache: false,
 	   beforeSend: function() {
 		$("#ajax_loader").show();
           },
