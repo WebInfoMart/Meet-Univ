@@ -322,7 +322,8 @@ $this->session->unset_userdata('follow_to_univ');
 					</div>
 				</div>
 				<div class="span4 float_r">
-					<a href="<?php echo $base; ?>register/british_council"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
+					<a href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
+					
 				</div>
 				<div class="clearfix"></div>
 			</div>

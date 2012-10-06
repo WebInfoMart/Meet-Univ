@@ -90,6 +90,7 @@ class Quest_ans_model extends CI_Model
 		$config['base_url']= base_url()."Recent_Questions/question/all/";
 		$config['total_rows']=$no_of_que;
 		$config['per_page'] = '6'; 
+		$config['uri_segment'] = 4;
 		$offset = $this->uri->segment('4');//this will work like site/folder/controller/function/query_string_for_cat/query_string_offset
 		$limit = $config['per_page'];
 		

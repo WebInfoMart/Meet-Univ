@@ -20,7 +20,7 @@ if ($user) {
 		<div class="body">
 			<div class="row">
 				<div class="float_r span3 margin_t1">
-					<a href="<?php echo $base; ?>register/british_council"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
+					<a href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 					
 				</div>
 				<div id="quest_div_show_right" class="span13 margin_l margin_t1">

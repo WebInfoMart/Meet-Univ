@@ -168,12 +168,14 @@ if($error_phone != '') { $class_phone = 'focused_error_stepone span2'; } else { 
 						</div>
 					</div>
 					<div class="float_r span3">
-						<img src="<?php echo "$base$img_path" ?>/banner_img.png">
+						<a href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
+					
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="float_r span3">
-					<img src="<?php echo "$base$img_path" ?>/banner_img.png">
+					<a href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
+					
 				</div>
 				<div class="clearfix"></div>
 			</div>
