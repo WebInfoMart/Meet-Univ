@@ -574,7 +574,6 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				{
 					$univ_domain=$quest_list['subdomain_name'];
 					$quest_title=$quest_list['q_title'];
-					$quest_title=$this->subdomain->process_url_title($quest_title);
 					$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
 					$url = $que_link;
 				}
@@ -708,7 +707,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							$article_count++; } } } else { echo "No Recent Articles Available"; } ?>
 						</div>
 						<div class="float_l span4">
-							<div class="fb-like-box" data-href="http://www.facebook.com/MeetUniversities" data-width="240" data-height="440" data-show-faces="true" data-stream="true" data-header="true"></div>		
+							<!--<div class="fb-like-box" data-href="http://www.facebook.com/MeetUniversities" data-width="240" data-height="440" data-show-faces="true" data-stream="true" data-header="true"></div>-->							<a href="http://sheffield-hallam-university.meetuniversities.com/university_events" target="_blank">								<img src="images/shEvent.jpg" alt="Sheffield Hallam University Event" title="Sheffield Hallam University Event" />							</a>
 						</div>
 						<div class="clearfix"></div>
 					</div>

@@ -27,7 +27,8 @@
 	<!--<link rel="stylesheet" href="<?php //echo "$base$css_path"?>/bootstrap.css">-->
 
 	
-	
+	<link rel="stylesheet" href="<?php echo "$base$css_path"?>/chat_css/chat.css" />
+	<link rel="stylesheet" href="<?php echo "$base$css_path"?>/chat_css/screen.css" />
 	
 	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.8.16/jquery-ui.min.js"></script>-->
@@ -49,6 +50,8 @@
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.autocomplete.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery.multiSelect.js"></script>
 	<script type="text/javascript" src="<?php echo "$base$js";?>/jquery-admin-validation.js"></script>
+	<script type="text/javascript" src="<?php echo "$base$js";?>/chat_js/chat.js"></script>	
+	
 	
 </head>
 
