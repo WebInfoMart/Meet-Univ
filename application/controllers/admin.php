@@ -18,7 +18,7 @@ class Admin extends CI_Controller
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
 		$this->load->library('googleanalytics');
-		$this->session->set_userdata('chat_username','Counsellor_break_1212111_12121'); // Must be already set
+		//$this->session->set_userdata('chat_username','Counsellor_break_1212111_12121'); // Must be already set
    
 		
 	}
