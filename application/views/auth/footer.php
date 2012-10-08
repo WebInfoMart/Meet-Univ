@@ -70,14 +70,14 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 			</div>
 		</div>
 	</footer>
-<?php	/*name='Guest';
+<?php	
+$name='Guest';
 $random=rand(242434,35564564564);
 $fix=$name.'_break_'.$random.'_'.time();
 if($this->session->userdata('chat_username')==FALSE)
 {
 $this->session->set_userdata('chat_username', $fix);
 }
-*/
 ?>
 <div class="body_footer"></div>
 <link rel="stylesheet" href="<?php echo "$base$css_path"?>/chat_css/chat.css" />
@@ -113,7 +113,6 @@ function checkChatCookie()
 var chat_open=getChatCookie("chatopen");
   if (chat_open=='null' || chat_open=="" || chat_open===undefined)
   {
-  //alert("hi");
    var lnow = new Date();
    lnow=lnow.getTime();
    document.cookie = "chatopen="+lnow+";domain=meetuniv.com";
@@ -123,11 +122,8 @@ var chat_open=getChatCookie("chatopen");
   {
   var lnow1 = new Date();
   var chat_open=getChatCookie("chatopen");
- // alert(chat_open);
  var st=parseInt(chat_open);
- //var st=st.getTime();
  var ft=lnow1.getTime();
-// alert(ft);
   var  difference =ft-st;
   var  secondsDifference = Math.floor(difference/1000);
   var chat_box_open=getChatCookie("chatboxopen");
@@ -136,17 +132,12 @@ var chat_open=getChatCookie("chatopen");
   {
   document.cookie = "chatboxopen=1;domain=meetuniv.com";
   document.cookie = "chatboxclosedbyuser=0;domain=meetuniv.com";
-  chatWith('Counsellor');
+  chatWith('Counselor_break_1212111_12121');
   }
   if(chat_box_close_by_user=='0')
   {
-  chatWith('Counsellor');
+  chatWith('Counselor_break_1212111_12121');
   }
- // alert(chat_open+'ds');
-   //var lnow = new Date();
-   //if(chat_open>)
-   //document.cookie = "chatopen="+lnow+",path=/;domain=meetuniv.com";
-  // alert(lnow-chat_open);
   }
 }
 /*checkChatCookie();
@@ -154,15 +145,6 @@ setInterval("checkChatCookie()", 5000);
 */
 </script>	
 <script type="text/javascript">
- // Get all the cookies pairs in an array
-   //cookiearray  = allcookies.split(';');
-
-   // Now take key value pair out of this array
-  // for(var i=0; i<cookiearray.length; i++){
-  //    name = cookiearray[i].split('=')[0];
-  //    value = cookiearray[i].split('=')[1];
-     // alert("Key is : " + name + " and Value is : " + value);
-  // }
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-32165390-1']);
   _gaq.push(['_setDomainName', 'meetuniversities.com']);

@@ -70,9 +70,12 @@ EOD;
 				function startChatSession() {
 				$items = '';
 				$se=$this->session->userdata('openChatBoxes');
+				//echo "sd";
+				print_r($se);
+				//exit;
 				if (!empty($se)) {
 				//print_r($this->session->userdata('openChatBoxes'));
-					foreach ($this->session->userdata('openChatBoxes') as $chatbox => $void) {
+					foreach ($se as $chatbox => $void) {
 						$items .= $this->chatBoxSession($chatbox);
 					}
 				}

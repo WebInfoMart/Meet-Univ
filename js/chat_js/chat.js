@@ -80,7 +80,7 @@ chats11=chatboxtitle.split('_break');
 
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chat_set" style="cursor:pointer;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/images/fav_icon.png" style="height:15px;"><div class="chatboxtitle">'+chat_username11+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" placeholder="Type Here to Chat With Counsellor" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chat_set" style="cursor:pointer;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/images/fav_icon.png" style="height:15px;"><div class="chatboxtitle">'+chat_username11+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" placeholder="Type Here to Chat With '+chat_username11+'" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
@@ -189,12 +189,11 @@ function chatHeartbeat(){
 	  cache: false,
 	  dataType: "json",
 	  success: function(data) {
-
-		$.each(data.items, function(i,item){
+	 // alert(data.items);
+	  	$.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
 
 				chatboxtitle = item.f;
-
 				if ($("#chatbox_"+chatboxtitle).length <= 0) {
 					createChatBox(chatboxtitle);
 				}
@@ -298,7 +297,6 @@ function toggleChatBoxGrowth(chatboxtitle) {
 }
 
 function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
-	 
 	if(event.keyCode == 13 && event.shiftKey == 0)  {
 		message = $(chatboxtextarea).val();
 		message = message.replace(/^\s+|\s+$/g,"");
