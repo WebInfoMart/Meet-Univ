@@ -30,7 +30,7 @@ class Admin extends CI_Controller
    redirect('admin/adminlogin/');
   } else {
   	$this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
-   $flag=0;
+  $flag=0;
    $data['username'] = $this->tank_auth->get_username();
    $data['user_id'] = $this->tank_auth->get_admin_user_id();
    $data['admin_user_level']=$this->tank_auth->get_admin_user_level();

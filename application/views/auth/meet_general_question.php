@@ -41,11 +41,11 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 							
-								echo "<img class='question_user' src='".base_url()."uploads/user_pic/thumbs/".$single_quest['user_thumb_pic_path']."'/>";
+								echo "<img style='width:40px;height:40px;' src='".base_url()."uploads/user_pic/thumbs/".$single_quest['user_thumb_pic_path']."'/>";
 							}
 							else if(file_exists(getcwd().'/uploads/user_pic/'.$single_quest['user_pic_path']) && $single_quest['user_pic_path']!='')
 							{
-								echo "<img class='question_user' src='".base_url()."uploads/user_pic/".$single_quest['user_pic_path']."'/>";
+								echo "<img  cstyle='width:40px;height:40px;' src='".base_url()."uploads/user_pic/".$single_quest['user_pic_path']."'/>";
 							}
 							else if($user && $single_quest['q_askedby'] == $logged_user_id)
 							{

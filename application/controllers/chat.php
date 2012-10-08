@@ -24,8 +24,13 @@ class Chat extends CI_Controller {
 		$this->load->library('fbConn/facebook');
 		date_default_timezone_set('Asia/Kolkata');
 		$this->load->library('session');
+		
 	}
-	
+	function index()
+	{
+	print_r($this->session->all_userdata());
+	$this->load->view('sampleb');
+	}
 	
 		function sendChat() {
 				$from = $this->session->userdata('chat_username');
@@ -70,9 +75,6 @@ EOD;
 				function startChatSession() {
 				$items = '';
 				$se=$this->session->userdata('openChatBoxes');
-				//echo "sd";
-				print_r($se);
-				//exit;
 				if (!empty($se)) {
 				//print_r($this->session->userdata('openChatBoxes'));
 					foreach ($se as $chatbox => $void) {

@@ -25,13 +25,12 @@ if($error_email != '') { $class_email = 'focused_error'; } else { $class_email='
 
 if($error_commented_text != '') { $class_commented_text = 'focused_error'; } else { $class_commented_text='input-xxlarge'; }
 ?>	
-<div class="row" style="margin-top:-20px">
-<div id="id_for_news_comment"  style="margin-top:-10px">
-		<div class="float_l span13 margin_l">
-			<div class="float_l span9 margin_delta margin_t">
-				<div class="float_l comment_img margin_delta" style="margin-right:10px;">
-				
-				<?php
+	<div class="row" style="margin-top:-20px">
+		<div id="id_for_news_comment"  style="margin-top:-10px">
+			<div class="float_l span13 margin_l">
+				<div class="float_l span9 margin_delta margin_t">
+					<div class="float_l comment_img margin_delta" style="margin-right:10px;">
+						<?php
 				$logged_user_id = $this->tank_auth->get_user_id();
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$single_quest['user_thumb_pic_path']) && $single_quest['user_thumb_pic_path']!='' )
 							{
@@ -54,29 +53,24 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							}
 							?>
 							
-							
-						
-				</div>
-				<div>
+					</div>
+					<div>
 					<span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span>
 					<h4><?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?></h4>
 					<div><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="line_time"><abbr class="timeago time_ago" title="<?php echo $single_quest['q_asked_time'] ?>"></abbr></span>
 					</div>
-				</div>
-				<div class="margin1">
-						<?php echo $single_quest['q_detail']; ?><br/>
-				<div class="margin_t1">
-					<div class="clearfix"></div>
-					<div class="margin_t" id="add_more_comment">
-							<div class="event_border">
-						<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
-							<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Answers Yet</h3>
-						</div>		
-							
+					</div>
+						<div class="margin1">
+								<?php echo $single_quest['q_detail']; ?><br/>
 						</div>
-						
-				<div class="span9 margin_delta">
-						<?php 
+					
+					<div class="margin_t" id="add_more_comment">
+						<div class="event_border">
+							<input type="hidden" id="txt_cnt_comment_show" value="<?php echo $total_comment; ?>"/>
+								<h3><span id="cnt_comment_show"><?php if($total_comment==0){ echo "No"; } else { echo $total_comment;} ?></span> Answers Yet</h3>
+							</div>	
+					</div>
+					<?php 
 							if($article_comments!=0){
 							$logged_user_id = $this->tank_auth->get_user_id(); 
 						foreach($article_comments as $article_comment_detail){ ?>
@@ -121,47 +115,44 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<?php 
 							
 							if($user_is_logged_in ){
-			if($user_detail['user_id']==$article_comment_detail['user_id'])
-			{
-			?>					
-			<!--<span class="float_r delete_comment">
-					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $article_comment_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
-			</span>-->
-			<?php	} } ?>	
-								
-								<?php echo $article_comment_detail['commented_text']; ?>
-								
-							</div><br/>
+									if($user_detail['user_id']==$article_comment_detail['user_id'])
+									{
+									?>					
+									<!--<span class="float_r delete_comment">
+											<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $article_comment_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
+									</span>-->
+									<?php	} } ?>	
+									<?php echo $article_comment_detail['commented_text']; ?>
+							</div>
 							<div class="float_r span2 margin_delta" style="width:130px;">
 								<abbr class="timeago time_ago" title="<?php echo $article_comment_detail['comment_time']; ?>"></abbr>
 							</div>
 							<div class="clearfix"></div>
-							
-						</div> <?php } } ?>
-					</div>
-					</div>
-					<?php if($total_comment>4) { ?>
+						</div>
+						<?php 
+							}//end foreach
+						} //end if?>
+						<?php if($total_comment>4) { ?>
 					<div  id="show_more">show more comment</div>
 					<input type="hidden" id="show_more_offset" value="1">
 					<?php } ?>
-					<div class="clearfix"></div>
-					<div class="margin_t margin_b">
-						<?php if($user_is_logged_in==0){ ?>		
-						<div class="events_box" style="height: 53px;">
-							<div>
-							<div class="float_r">
+						<div class="margin_t margin_b">
+							<?php if($user_is_logged_in==0){ ?>	
+								<div class="events_box" style="height: 53px;">
+									<div class="float_r">
 								Have an account? <a href="<?php echo $base; ?>login">Log In</a> OR <a href="<?php echo $base; ?>register">Sign Up</a>
-							</div>
-							<div class="clearfix"></div>
+								<div class="clearfix"></div>
 							</div>
 								<h3 class="center">Please Login for comment</h3>
-						</div>
-						<?php } else { ?>
-							<div class="events_box">
-							<div class="float_l">
-									<div class="comment_img">
-									
-									<?php
+								</div>
+								<?php } else { ?>
+									<div class="events_box">
+										<div class="float_l">
+											<div class="comment_img">
+											
+											
+											
+											<?php
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_detail['user_thumb_pic_path']) && $user_detail['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
@@ -182,7 +173,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							echo "<img src='".base_url()."images/profile_icon.png'/>";
 							}
 							?>
-								<div style='width: 46px;position: absolute;' class="center">
+							<div style='width: 46px;position: absolute;' class="center">
 								<?php
 								if($user_detail['fullname'] !='')
 								{
@@ -193,8 +184,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									echo $user_profile['name'];
 								}
 								?>
-								</div>
-									</div>
+							</div>				
+							</div>
 								</div>
 								<div class="float_l span6 margin_zero">
 									<form class="form-horizontal" method="post" action="">
@@ -211,28 +202,31 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 										</div>
 									</form>
 								</div>
-								<div class="clearfix"></div>
-							</div>
-						 <?php } ?>	
-								<div class="clearfix"></div>
-						</div>
-		<?php // } ?>
-		<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $single_quest['que_id']; ?>" >
+								<div class="clearfix"></div>				
+											
+								
+									</div><!-- end events_box -->
+							<?php } //end else part ?>
+							<input type="hidden" name="commented_on_id" id="commented_on_id" value="<?php echo $single_quest['que_id']; ?>" >
 		<input type="hidden" name="commented_on" id="commented_on" value="qna" >
-		<input type="hidden"  id="lastcommentid" value="0" >													
-					</div>			
+		<input type="hidden"  id="lastcommentid" value="0" >		
+						</div>
+				</div>
+				<div class="float_l span4 margin_t">
+				</div>
+				<div class="clearfix"></div>
 			</div>
 			<div class="float_r span3">
 				<a target="_blank" href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 			</div>
-			
-				</div>				
-				<div class="clearfix"></div>
-		</div>		
+			<div class="clearfix"></div>
+		</div>
+	</div>
 </div>
 <script>
 function post_comment()
-{var url=document.URL;
+{
+var url=document.URL;
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
 var commented_on_id=$('#commented_on_id').val();
@@ -243,7 +237,28 @@ var lastpostcommentid=$('#lastcommentid').val();
 var data={commented_text:commentedtext,commentd_on:commentd_on,commented_on_id:commented_on_id,user_id:user_id,url:url};
 if($('#commented_text').val()!='')
 {
-	$.ajax({
+ $.getJSON("<?php echo $base; ?>univ/post_comment?jsoncallback=?",data,
+ function(success)
+ {
+ if(success.msg!='login')
+ {
+  window.location.href='<?php echo $base; ?>login';
+ }
+ else
+ {
+		$("#ajax_loader").hide();
+		var lastinsid=parseInt(success.commentedid);
+		if(lastpostcommentid=='0')
+		{
+		$('#lastcommentid').val(lastinsid);
+		}
+		$(".event_border:last").after(success.comment_view);
+		$('#commented_text').val('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
+		$('#cnt_comment_show').html(span_comment_incr);
+ }
+ })
+	/*$.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>univ/post_comment",
 	   data: data,
@@ -251,7 +266,9 @@ if($('#commented_text').val()!='')
 		$("#ajax_loader").show();
           },
 	   success: function(msg)
-	   {$("#ajax_loader").hide();
+	   {
+	   alert(msg);
+	   $("#ajax_loader").hide();
 		msgarr=msg.split('!@#$%^&*');
 		var lastinsid=parseInt(msgarr[0]);
 		if(lastpostcommentid=='0')
@@ -262,9 +279,8 @@ if($('#commented_text').val()!='')
 		$('#commented_text').val('');
 		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
 		$('#cnt_comment_show').html(span_comment_incr);
-		
 		}
-	   });
+	   });*/
 }	   
 }
 

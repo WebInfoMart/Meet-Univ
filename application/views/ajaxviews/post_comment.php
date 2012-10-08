@@ -29,12 +29,6 @@ $user=$fb_user_id;
 							{
 								echo "<img src='".base_url()."uploads/user_pic/".$user_detail['user_pic_path']."'/>";
 							}
-							else if($user)
-							{
-							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-							<?php
-							}
 							else{
 							echo "<img src='".base_url()."images/profile_icon.png'/>";
 							}

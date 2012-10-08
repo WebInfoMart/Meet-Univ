@@ -740,23 +740,26 @@ class Univ extends CI_Controller
 		}
 		
 		function post_comment()
-		{//ob_start();
-			$logged_in_user_id=$this->input->post('user_id');
-			if($logged_in_user_id=='' || $logged_in_user_id==NULL || $logged_in_user_id==0)
-			{
-			redirect(base_url().'/login');
-			}
-			else
-			{
+		{
+		if($this->ci->session->userdata('user_id')=='' || $this->ci->session->userdata('user_id')==NULL || $this->ci->session->userdata('user_id')==0)
+		{
+		$array = array("msg"=>'logout');
+		echo $_REQUEST['jsoncallback']."(".json_encode($array).")";
+		exit;
+		}
+		else {
+		//ob_start();
+			$logged_in_user_id=$this->ci->session->userdata('user_id');
+			
 				$data = $this->path->all_path();
 				$info = $this->path->all_path();
-				$info['url']=$this->input->post('url');
-				$data['commented_on']=$this->input->post('commentd_on');
-				$commented_on_id=$this->input->post('commented_on_id');
-				$data['commented_text']=str_replace ( chr(10), "<br />", $this->input->post('commented_text'));
+				$info['url']=$_REQUEST['url'];
+				$data['commented_on']=$_REQUEST['commentd_on'];
+				$commented_on_id=$_REQUEST['commented_on_id'];
+				$data['commented_text']=str_replace ( chr(10), "<br />", $_REQUEST['commented_text']);
 				$data['delete_comment']=$this->frontmodel->post_comment_by_logged_in_user($logged_in_user_id,$data['commented_on'],$commented_on_id,$data['commented_text']);
 				$data['user_detail']=$this->users->fetch_profile($logged_in_user_id);
-				$data['fb_user_id']=$this->input->post('fb_user_id');
+				$data['fb_user_id']=$this->ci->session->userdata('user_id');
 				$asked_by=$this->frontmodel->email_asked_by($commented_on_id);
 				$asked_by_email=$asked_by[0]['email'];
 				$asked_by_id=$asked_by[0]['id'];
@@ -788,7 +791,7 @@ class Univ extends CI_Controller
 						 $info['username']=$email['fullname'];
 						$email_body=$this->load->view('auth/email_templates/qna_comment_notification',$info,TRUE);
 						
-						$this->email->set_newline("\r\n");
+						 $this->email->set_newline("\r\n");
 						 $config['protocol'] = $this->config->item('mail_protocol');
 						 $config['smtp_host'] = $this->config->item('smtp_server');
 						 $config['smtp_user'] = $this->config->item('smtp_user_name');
@@ -799,7 +802,7 @@ class Univ extends CI_Controller
 						 $this->email->subject(ucwords($result['fullname']).' just commented on your thread');
 						 $message = $email_body ;
 						 $this->email->message($message);
-						 $this->email->send();      
+						 $this->email->send();   
 						}						 
 					}
 				}
@@ -810,7 +813,7 @@ class Univ extends CI_Controller
 						$info['username']=$asked_by_name;
 						$email_body=$this->load->view('auth/email_templates/qna_comment_notification',$info,TRUE);
 						
-						$this->email->set_newline("\r\n");
+						 $this->email->set_newline("\r\n");
 						 $config['protocol'] = $this->config->item('mail_protocol');
 						 $config['smtp_host'] = $this->config->item('smtp_server');
 						 $config['smtp_user'] = $this->config->item('smtp_user_name');
@@ -821,11 +824,14 @@ class Univ extends CI_Controller
 						 $this->email->subject($result['fullname'].' Just commented on your thread');
 						 $message = $email_body ;
 						 $this->email->message($message);
-						 $this->email->send();  
+						 $this->email->send(); 
 				}
 				
-				$view=$this->load->view('ajaxviews/post_comment',$data);
-				echo $data['delete_comment'].'!@#$%^&*'.$view;
+				$view=$this->load->view('ajaxviews/post_comment',$data,TRUE);
+				$array=array('msg'=>'login','commentedid'=>$data['delete_comment'],'comment_view'=>$view);
+				echo $_REQUEST['jsoncallback']."(".json_encode($array).")";
+				exit;
+				//echo $data['delete_comment'].'!@#$%^&*'.$view;
 				
 			}	
 		}

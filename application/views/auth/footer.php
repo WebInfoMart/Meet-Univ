@@ -140,9 +140,8 @@ var chat_open=getChatCookie("chatopen");
   }
   }
 }
-/*checkChatCookie();
-setInterval("checkChatCookie()", 5000);
-*/
+//checkChatCookie();
+//setInterval("checkChatCookie()", 5000);
 </script>	
 <script type="text/javascript">
   var _gaq = _gaq || [];
