@@ -37,9 +37,8 @@
 	  echo "<br />Dear &nbsp;".$username."<br />";
 	  ?>
 	  <span ><b><?php echo ucwords($fullname);?></b> has posted a comment on your <a href="<?php echo $url; ?>" target="_blank">question</a>.<br /><br />
-		   Please visit the <a  target="_blank" href="<?php echo $url; ?>">link</a> to find out what <b><?php echo ucwords($fullname);?></b> has to say about your question.<br /><br />
-		   To view the answer, please Click this link<br /><br />		   
-		   If the link does not work, please copy the below url and open it in your browser to view the Answer.<br /><br />
+		   Please visit the <a  target="_blank" href="<?php echo $url; ?>">link</a> to read <b><?php echo ucwords($fullname);?>'s</b> comment and also post on the thread .<br /><br />
+		   If the above link does not work, please copy the below url and open it in your browser to view the answer.<br /><br />
 		   <?php echo $url; ?>
 		   </span></p>
       </td>

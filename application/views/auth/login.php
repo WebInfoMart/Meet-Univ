@@ -404,7 +404,7 @@ function validateEmail(email) {
 $('#forgot_pass').click(function(){
 $('#forget_model').modal('toggle');
 });
-$('.modal').click(function(){
+$('.close').click(function(){
 $('.modal').hide();
 });
 <?php

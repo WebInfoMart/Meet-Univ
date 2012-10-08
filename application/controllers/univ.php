@@ -796,7 +796,7 @@ class Univ extends CI_Controller
 						 $this->email->initialize($config);    
 						 $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');						
 						 $this->email->to($email['email']);				
-						 $this->email->subject($result['fullname'].' Just commented on your thread');
+						 $this->email->subject(ucwords($result['fullname']).' just commented on your thread');
 						 $message = $email_body ;
 						 $this->email->message($message);
 						 $this->email->send();      
