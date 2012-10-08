@@ -6,7 +6,7 @@
 					<div class="course_cont"><?php echo $detail_of_course['program_detail']!='' ? $detail_of_course['program_detail']:'We currently have no information for this program.'; ?></div>
 					<h3>Educational Level</h3>
 					<div class="course_cont"><?php echo $detail_of_course['educ_level']!='' ? $detail_of_course['educ_level']:'Education Level Not Found!!!'; ?></div>
-					<h3>Duration</h3><div class="course_cont"><?php echo $detail_of_course['program_duration1']!='' ? $detail_of_course['program_duration1']:'Program Duration Not Found!!!'; ?></div>
+					<h3>Duration</h3><div class="course_cont"><?php echo $detail_of_course['program_duration1']!='' ? $detail_of_course['program_duration1']:'Program Duration Not Available!!!'; ?></div>
 				</div>
 				<?php $this->load->view('auth/univ-fb-sidebar'); ?>
 				<div class="clearfix"></div>

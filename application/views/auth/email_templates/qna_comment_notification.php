@@ -34,7 +34,7 @@
       <p style="margin-right:0in;margin-bottom:3.75pt;margin-left:1.5pt"><span style="font-size:10.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;;color:#464646">
 	  
 	  <?php 
-	  echo "<br />Dear &nbsp;".$username."<br />";
+	  echo "<br />Dear &nbsp;".ucwords($username)."<br />";
 	  ?>
 	  <span ><b><?php echo ucwords($fullname);?></b> has posted a comment on your <a href="<?php echo $url; ?>" target="_blank">question</a>.<br /><br />
 		   Please visit the <a  target="_blank" href="<?php echo $url; ?>">link</a> to read <b><?php echo ucwords($fullname);?>'s</b> comment and also post on the thread .<br /><br />

@@ -276,7 +276,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 <script>
 
 
-function post_comment()
+/* function post_comment()
 {
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()
@@ -311,7 +311,7 @@ if($('#commented_text').val()!='')
 	   });
 }
    
-}
+} */
 
 /*$('.hover_delete_comment').hover(
                 function () {
@@ -321,6 +321,43 @@ if($('#commented_text').val()!='')
 				 $(this).find('.delete_comment').css('display','none');  	   	
                 }
             );*/
+function post_comment()
+{
+var url=document.URL;
+var commentedtext=$('#commented_text').val();
+var commentd_on=$('#commented_on').val()
+var commented_on_id=$('#commented_on_id').val();
+var span_comment = $('#txt_cnt_comment_show').val();
+var span_comment_incr = parseInt(span_comment) + 1;
+var user_id='<?php echo $this->ci->session->userdata('user_id'); ?>';
+var lastpostcommentid=$('#lastcommentid').val();
+var data={commented_text:commentedtext,commentd_on:commentd_on,commented_on_id:commented_on_id,user_id:user_id,url:url};
+if($('#commented_text').val()!='')
+{
+ $.getJSON("<?php echo $base; ?>univ/post_comment?jsoncallback=?",data,
+ function(success)
+ {
+ if(success.msg!='login')
+ {
+  window.location.href='<?php echo $base; ?>login';
+ }
+ else
+ {
+		//$("#ajax_loader").hide();
+		var lastinsid=parseInt(success.commentedid);
+		if(lastpostcommentid=='0')
+		{
+		$('#lastcommentid').val(lastinsid);
+		}
+		$(".event_border:last").after(success.comment_view);
+		$('#commented_text').val('');
+		$('#txt_cnt_comment_show').val(parseInt(span_comment)+1);
+		$('#cnt_comment_show').html(span_comment_incr);
+ }
+ })
+	
+}	   
+}			
 function delete_this_comment(comment_id)
 {
 var r=confirm("Do you want to delete the comment?");

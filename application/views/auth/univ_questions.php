@@ -225,7 +225,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 </div>
 <script>
 function post_comment()
-{
+{$("#ajax_loader").show();
 var url=document.URL;
 var commentedtext=$('#commented_text').val();
 var commentd_on=$('#commented_on').val()

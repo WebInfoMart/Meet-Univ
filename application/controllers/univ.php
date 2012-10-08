@@ -760,6 +760,8 @@ class Univ extends CI_Controller
 				$data['delete_comment']=$this->frontmodel->post_comment_by_logged_in_user($logged_in_user_id,$data['commented_on'],$commented_on_id,$data['commented_text']);
 				$data['user_detail']=$this->users->fetch_profile($logged_in_user_id);
 				$data['fb_user_id']=$this->ci->session->userdata('user_id');
+				if($_REQUEST['commentd_on']=='qna')
+				{
 				$asked_by=$this->frontmodel->email_asked_by($commented_on_id);
 				$asked_by_email=$asked_by[0]['email'];
 				$asked_by_id=$asked_by[0]['id'];
@@ -832,7 +834,14 @@ class Univ extends CI_Controller
 				echo $_REQUEST['jsoncallback']."(".json_encode($array).")";
 				exit;
 				//echo $data['delete_comment'].'!@#$%^&*'.$view;
-				
+				}
+				else
+				{
+				$view=$this->load->view('ajaxviews/post_comment',$data,TRUE);
+				$array=array('msg'=>'login','commentedid'=>$data['delete_comment'],'comment_view'=>$view);
+				echo $_REQUEST['jsoncallback']."(".json_encode($array).")";
+				exit;
+				}
 			}	
 		}
 		function delete_comment()
