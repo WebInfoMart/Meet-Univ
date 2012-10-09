@@ -94,6 +94,11 @@ $this->session->set_userdata('chat_username', $fix);
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mtz.monthpicker.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/chat_js/chat.js"></script>	
 <script>
+var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
+  if(chat_box_close_by_user=='0')
+  {
+  chatWith('Counselor_break_1212111_12121');
+  }
 function getChatCookie(c_name)
 {
 var i,x,y,ARRcookies=document.cookie.split(";");
@@ -134,14 +139,14 @@ var chat_open=getChatCookie("chatopen");
   document.cookie = "chatboxclosedbyuser=0;domain=meetuniv.com";
   chatWith('Counselor_break_1212111_12121');
   }
-  if(chat_box_close_by_user=='0')
+  /*if(chat_box_close_by_user=='0')
   {
   chatWith('Counselor_break_1212111_12121');
-  }
+  }*/
   }
 }
-//checkChatCookie();
-//setInterval("checkChatCookie()", 5000);
+checkChatCookie();
+setInterval("checkChatCookie()", 5000);
 </script>	
 <script type="text/javascript">
   var _gaq = _gaq || [];
