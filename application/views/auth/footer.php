@@ -135,7 +135,7 @@ var chat_open=getChatCookie("chatopen");
   var  secondsDifference = Math.floor(difference/1000);
   var chat_box_open=getChatCookie("chatboxopen");
   var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
-  if((secondsDifference>10 && chat_box_open=='0'))
+  if((secondsDifference>120 && chat_box_open=='0'))
   {
    var domain='<?php echo $domain_name; ?>';
   domain= domain.substr(1);
