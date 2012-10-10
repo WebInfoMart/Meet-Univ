@@ -103,7 +103,7 @@ class Events extends CI_Model
 		if($this->input->post('sel_id')==4)
 		{
 		//$tosearch=$this->input->post('search_box');
-			$this->db->where('featured_home_event','0');
+			$this->db->where('featured_home_event','1');
 		}
 		if($this->input->post('sel_id')==5)
 		{

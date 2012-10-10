@@ -2,19 +2,32 @@
 date_default_timezone_set('Asia/Kolkata'); 
 $user=null; 
 $facebook = new Facebook();
+
 $user = $facebook->getUser();
-if($this->ci->session->userdata('login_by_fb') && (! $this->ci->session->userdata('status'))){
 if ($user) {
+
   try {
     // Proceed knowing you have a logged in user who's authenticated.
     $user_profile = $facebook->api('/me');
+	
   } catch (FacebookApiException $e) {
     error_log($e);
     $user = null;
   }
 }
-if ($user) {
-  if($user_profile['gender'] != ''){ $fb_gender = $user_profile['gender']; } else{$fb_gender='';}
+if($this->ci->session->userdata('login_by_fb'))
+	{
+	$params = array('next' => $base.'/logout');
+  $logoutUrl = $facebook->getLogoutUrl($params);
+  }
+  else
+{
+  //$params = array( 'next' => $base.'/logout' );
+  $logoutUrl = $base.'logout';
+}
+if ($user && (!$this->ci->session->userdata('status'))) {
+
+ if($user_profile['gender'] != ''){ $fb_gender = $user_profile['gender']; } else{$fb_gender='';}
   if($user_profile['email'] != ''){ $fb_email = $user_profile['email']; } else{$fb_email='';}
   if($user_profile['name'] != ''){ $fb_name = $user_profile['name']; } else{$fb_name='';}
     $fb_return_num_rows = $this->users->check_facebook_email($fb_email);
@@ -73,12 +86,11 @@ if ($user) {
   $this->ci->session->set_userdata(array(
 						 'user_id'	=> $user_id,
 						 'fullname'	=> $fb_name,
-						 'status'	=> STATUS_ACTIVATED
+						 'status'	=> STATUS_ACTIVATED,
+						 'login_by_fb' =>1
 						 ));
 } 
-
-}
-	   
+   
 	  function currentPageURL() {
     $curpageURL = 'http';
     $curpageURL.= "://";
@@ -123,7 +135,7 @@ if(empty($description_content)) { $description_content="Attend Events, Study Abr
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="author" content="WebInfoMart.com">
 	<meta charset="utf-8">
-	<meta property="fb:app_id" content="415316545179174" /> 
+	<meta property="fb:app_id" content="332345880170760" /> 
 	<meta property="og:type"   content="meetuniversities:event" /> 
 	<meta property="og:url"    content="<?php echo $curURL; ?>" /> 
 	<meta property="og:title"  content="<?php echo $header_title; ?>" /> 
@@ -199,7 +211,7 @@ $('.menu a').each(function(){
 /* <![CDATA[ */
 window.fbAsyncInit = function() {
 FB.init({
-appId      : '415316545179174', // App ID
+appId      : '332345880170760', // App ID
 status     : true, // check login status
 cookie     : true, // enable cookies to allow the server to access the session
 xfbml      : true,  // parse XFBML
@@ -210,7 +222,7 @@ oauth      : true
 (function(d){
 var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
 js = d.createElement('script'); js.id = id; js.async = true;
-js.src = "//connect.facebook.net/en_US/all.js#appId=415316545179174&amp;xfbml=1";
+js.src = "//connect.facebook.net/en_US/all.js#appId=332345880170760&amp;xfbml=1";
 d.getElementsByTagName('head')[0].appendChild(js);
 }(document));
 /* ]]> */
@@ -225,7 +237,7 @@ d.getElementsByTagName('head')[0].appendChild(js);
 						if($this->ci->session->userdata('status')){ ?>
 						
 						<a href="<?php echo $base?>home"><div class="login">Hi <?php echo ucwords($this->ci->session->userdata('fullname')); ?></div></a>
-						<a href="<?php echo $base ?>logout"> <div class="login">Logout</div></a>
+						<a href="<?php echo $logoutUrl; ?>"> <div class="login">Logout</div></a>
 						<?php 
 						} 
 						else { ?>
@@ -325,4 +337,3 @@ window.location.href = "<?php echo "$base"; ?>use_higer_browser";
 });
 </script>
 <![endif]-->
-<?php $this->session->set_userdata('login_by_fb',1); ?>
