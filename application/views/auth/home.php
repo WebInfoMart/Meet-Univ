@@ -244,20 +244,23 @@ $this->session->unset_userdata('msg_send_suc_voice');
 					<div class="float_l span7 margin_delta">
 						<h3>Upcoming Events</h3>
 						<div class="fix-height ">
-							<ul class="event_new">
+							<div id="slides_events" >
+								<div class="slides_container">					
 							
 							<?php 
 						if(!empty($featured_events))
-						{
+						{$event_count=count($featured_events);
+							$count=0;						
+							
 						$rc=9;
-						foreach($featured_events as $events) {
+						foreach($featured_events as $events) 
+						{
 						$univ_domain=$events['subdomain_name'];
 		$event_title=$events['event_title'];
 		$event_id=$events['event_id'];
 		
 		$event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
-						?>
-						<?php
+						
 						//if($featured_events != '' || $featured_events != '0') {
 						$date = explode(" ",$events['event_date_time']);
 						$image_exist=0;		
@@ -281,96 +284,106 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 						$event_register_user = $this->frontmodel->count_event_register($events['event_id']);
 						
-		$univ_name=$events['univ_name'];
-		$univ_domain=$events['subdomain_name'];
-		$event_title=$events['event_title'].'()()';
-		$event_title=$this->subdomain->process_url_title($event_title);
-		$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$events['event_id']);
-						?>
-								<li onclick="gotoevent('<?php echo $event_link; ?>');" style="cursor:pointer;">
-								<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post" class="margin_zero">
-						
-									<div>
-										<div class="float_l">
-		<div class="title_style">
-		
-		<a class="" href="<?php echo $event_link ?>">
-		
-		<h4 class="inline"><?php echo $events['univ_name']; ?></h4>
-		</a><span class="inline"> &raquo; </span>
-		<h4 class="inline">
-		<?php if($events['event_category']=='spot_admission'){
-		echo "Spot Admission";
-		}
-		else if($events['event_category']=='fairs')
-		{
-			echo "Fairs";
-		}
-		else if($events['event_category']=='others')
-		{
-			echo "Counselling";
-		}
-		else if($events['event_category']=='alumuni')
-		{
-			echo "Counselling";
-		}
-		else
-		{
-		echo $events['event_category'];
-		}
-		?>
-		</h4></div>
-										</div>
-										<div class="float_r">
+						$univ_name=$events['univ_name'];
+						$univ_domain=$events['subdomain_name'];
+						$event_title=$events['event_title'].'()()';
+						$event_title=$this->subdomain->process_url_title($event_title);
+						$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$events['event_id']);
+						if(($count%3)==0)
+							{  ?>
+							<div>
+							<ul class="event_new" style="width:440px;">	
+							<?php } ?>	
+							
+					<li onclick="gotoevent('<?php echo $event_link; ?>');" style="cursor:pointer;">		
+						<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post" class="margin_zero">					
+								<div class="float_l">
+									<span class="title_style">
+									
+									<a class="" href="<?php echo $event_link ?>">
+									
+									<h4 class="inline"><?php echo $events['univ_name'];?></h4>
+									</a><span class="inline"> &raquo; </span>
+									<h4 class="inline">
+									<?php if($events['event_category']=='spot_admission'){
+									echo "Spot Admission";
+									}
+									else if($events['event_category']=='fairs')
+									{
+										echo "Fairs";
+									}
+									else if($events['event_category']=='others')
+									{
+										echo "Counselling";
+									}
+									else if($events['event_category']=='alumuni')
+									{
+										echo "Counselling";
+									}
+									else
+									{
+									echo $events['event_category'];
+									}
+									?>
+									</h4></span>
+								</div>
+								<div class="clearfix"></div>
+								<span class="float_r">
 										<!-- For VoiceCall PopOver -->
 										<!--<a href="#" id="ex6b" class="ex6b_ccc inline" name="event-get-detail_<?php //echo $events['event_id']; ?>"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>
 											<span id="event_pop_<?php //echo $events['event_id']; ?>" class="ex6a_ccc" ></span>
 												<a href="#" id="ex6b2" class="ex6b_ccc2 inline" name="event-get-detail2_<?php //echo $events['event_id']; ?>"><img src="images/sms.png" title="Send SMS" alt="Send SMS"></a>
 											<span id="event_pop2_<?php //echo $events['event_id']; ?>" class="ex6a_ccc2" ></span>
 											<a href="<?php //echo $event_link; ?>" class="inline"><img src="images/map.png" title="Map" alt="Map"></a>-->
-										</div>
-										<div>
-											<div class="img_style float_l aspectcorrect" >
-												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" alt="<?php echo $events['univ_name']; ?>" title="<?php echo $events['univ_name']; ?>" >
-											</div>
-											<div class="float_l text-width" style="font-size:14px;">
-												<h4 class="blue home_line"><?php 
-												echo $date[0]?$date[0]:'';
-												echo $date[1]?'&nbsp;'.$date[1]:'';
-												if($date[0]!='' || $date[1]!='') { echo ',&nbsp;&nbsp;'.$date[2];} else { echo ''; }
-												?></h4>
-												<h4 class="home_line"><?php echo $events['event_place']?$events['event_place']:''; 
-												if($events['event_place']!='' && $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['cityname']; } else{ echo $events['cityname']; }
-												if($events['country_name']!='' && $events['event_place']!='' || $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['country_name']; } else{ echo $events['country_name']; }
-												?> </h4>
-												<!-- Hidden field for event registration -->
-												<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
-												<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
-												<input type="submit" name="btn_event_register" id="<?php echo $events['event_id']; ?>" value="Register" class="btn btn-success" />
-												
-											</div>
-											<div class="float_r registered">
-													<h2 class="blue"><?php
-													//commented by sumit munjal now shoing here static user
-													//echo $event_register_user;
-													echo $event_register_user;
-													$rc=$rc+4; 
-													?>
-													
-													</h2>	
-													<h5 class="blue">Registered</h5>
-											</div>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-									</form>
+								</span>
+							<div>
+								<span class="img_style float_l aspectcorrect" >
+									<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" alt="<?php echo $events['univ_name']; ?>" title="<?php echo $events['univ_name']; ?>" >
+								</span>
+								<span class="float_l text-width" style="font-size:14px;">
+									<h4 class="blue home_line"><?php 
+									echo $date[0]?$date[0]:'';
+									echo $date[1]?'&nbsp;'.$date[1]:'';
+									if($date[0]!='' || $date[1]!='') { echo ',&nbsp;&nbsp;'.$date[2];} else { echo ''; }
+									?></h4>
+									<h4 class="home_line"><?php echo $events['event_place']?$events['event_place']:''; 
+									if($events['event_place']!='' && $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['cityname']; } else{ echo $events['cityname']; }
+									if($events['country_name']!='' && $events['event_place']!='' || $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['country_name']; } else{ echo $events['country_name']; }
+									?> </h4>
+									<!-- Hidden field for event registration -->
+									<input type="hidden" name="event_register_of_univ_id" value="<?php echo $events['univ_id']; ?>"/>
+									<input type="hidden" name="event_register_id" value="<?php echo $events['event_id']; ?>"/>
+									<input type="submit" name="btn_event_register" id="<?php echo $events['event_id']; ?>" value="Register" class="btn btn-success" />
+								</span>
+								<span class="float_r registered">
+									<h2 class="blue"><?php
+									//commented by sumit munjal now shoing here static user
+									//echo $event_register_user;
+									echo $event_register_user;
+									$rc=$rc+4; 
+									?>
+									
+									</h2>	
+									<h5 class="blue">Registered</h5>
+								</span>
+								<div class="clearfix"></div>
+							</div>
+						</form>	
+					</li>		
+				<?php 
+				$count++;
+				if((!($count%3)) || $count==$event_count) 
+				{ ?>	
+				</ul></div>	
 								
-								</li>
-								<?php } } else {
+				<?php }								
+								 }  } else {
 								echo "<h4>No Recent Event.</h4>";
 								}?>
-								
-							</ul>
+								</div>
+									</div>
+						
+							
 						</div>
 					</div>
 					<div class="float_l">
@@ -1209,6 +1222,16 @@ height:22px;
 </style>
 <script>
 		$(function(){
+			$('#slides_events').slides({
+				play: 5000,
+				pause: 2500,
+				effect: 'slide',
+				hoverPause: true,
+				preload: true,
+				generateNextPrev: true
+			});
+		});
+		$(function(){
 			$('#slides_content').slides({
 				play: 5000,
 				pause: 2500,
@@ -1217,8 +1240,8 @@ height:22px;
 				generateNextPrev: true
 			});
 		});
-	</script>
-<script>
+	
+	
 		$(function(){
 			$('#slides_news').slides({
 				effect: 'fade',
