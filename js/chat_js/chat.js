@@ -80,7 +80,7 @@ chats11=chatboxtitle.split('_break');
 	var chat_talk="Let's Talk!";
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead" style="cursor:pointer;margin-top:5px;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_423_thumb.jpg" title="Counselor" style="height:60px;"><span class="new_msg_arrive1"></span><div class="chatboxtitle">'+chat_talk+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"><div class="chatboxmessage"><span class="chatboxmessagefrom">Counselor:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">Hi,I am Aisha,if u need any help,I am here for u.</span></div></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead" style="cursor:pointer;margin-top:5px;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_423_thumb.jpg" title="Counselor" style="height:60px;"><span class="new_msg_arrive1"></span><div class="chatboxtitle">'+chat_talk+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"><div class="chatboxmessage"><span class="chatboxmessagefrom">Counselor:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">Hi,I am Aisha,if u need any help,I am here for You.</span></div></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
@@ -201,12 +201,12 @@ function chatHeartbeat(){
 				//if ($("#chatbox_"+chatboxtitle).length <= 0 && (chat_box_close_by_user=='0' || chat_box_close_by_user=='admin')) {
 				if ($("#chatbox_"+chatboxtitle).length <= 0 ) {
 					createChatBox(chatboxtitle);
-					document.cookie = "chatboxclosedbyuser=0;domain=meetuniversities.info";
+					document.cookie = "chatboxclosedbyuser=0;domain="+chat_domain;
 				}
 				if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
 					$("#chatbox_"+chatboxtitle).css('display','block');
 					restructureChatBoxes();
-					document.cookie = "chatboxclosedbyuser=0;domain=meetuniversities.info";
+					document.cookie = "chatboxclosedbyuser=0;domain="+chat_domain;
 				}
 				
 				if (item.s == 1) {
@@ -255,7 +255,7 @@ function chatHeartbeat(){
 
 function closeChatBox(chatboxtitle) {
 	$('#chatbox_'+chatboxtitle).css('display','none');
-	document.cookie = "chatboxclosedbyuser=1;domain=meetuniversities.info";
+	document.cookie = "chatboxclosedbyuser=1;domain="+chat_domain;
 	restructureChatBoxes();
 
 	$.post("chat/closechat", { chatbox: chatboxtitle} , function(data){	
