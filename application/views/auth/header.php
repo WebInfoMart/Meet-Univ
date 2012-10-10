@@ -135,7 +135,7 @@ if(empty($description_content)) { $description_content="Attend Events, Study Abr
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="author" content="WebInfoMart.com">
 	<meta charset="utf-8">
-	<meta property="fb:app_id" content="332345880170760" /> 
+	<meta property="fb:app_id" content="415316545179174" /> 
 	<meta property="og:type"   content="meetuniversities:event" /> 
 	<meta property="og:url"    content="<?php echo $curURL; ?>" /> 
 	<meta property="og:title"  content="<?php echo $header_title; ?>" /> 
@@ -211,7 +211,7 @@ $('.menu a').each(function(){
 /* <![CDATA[ */
 window.fbAsyncInit = function() {
 FB.init({
-appId      : '332345880170760', // App ID
+appId      : '415316545179174', // App ID
 status     : true, // check login status
 cookie     : true, // enable cookies to allow the server to access the session
 xfbml      : true,  // parse XFBML
@@ -222,7 +222,7 @@ oauth      : true
 (function(d){
 var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
 js = d.createElement('script'); js.id = id; js.async = true;
-js.src = "//connect.facebook.net/en_US/all.js#appId=332345880170760&amp;xfbml=1";
+js.src = "//connect.facebook.net/en_US/all.js#appId=415316545179174&amp;xfbml=1";
 d.getElementsByTagName('head')[0].appendChild(js);
 }(document));
 /* ]]> */

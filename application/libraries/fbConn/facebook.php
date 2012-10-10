@@ -38,8 +38,8 @@ class Facebook extends BaseFacebook
     }
 	if(count($config)==0)
 	{
-	//$config=array('appId'=>'415316545179174','secret'=>'ac58e50d8d10b458388e63eec36939ae');
-	$config=array('appId'=>'332345880170760','secret'=>'29a0f2cd00dcfbab6143d0566b0218d1');
+	$config=array('appId'=>'415316545179174','secret'=>'ac58e50d8d10b458388e63eec36939ae');
+	//$config=array('appId'=>'332345880170760','secret'=>'29a0f2cd00dcfbab6143d0566b0218d1');
 	}
     parent::__construct($config);
   }
