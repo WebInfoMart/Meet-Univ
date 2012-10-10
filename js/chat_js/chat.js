@@ -80,7 +80,7 @@ chats11=chatboxtitle.split('_break');
 	var chat_talk="Let's Talk!";
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead" style="cursor:pointer;margin-top:5px;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_423_thumb.jpg" title="Counselor" style="height:35px;width:35px;"><span class="new_msg_arrive1"></span><div class="chatboxtitle">'+chat_talk+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"><div class="chatboxmessage"><span class="chatboxmessagefrom">Counselor:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">Hi there! Welcome to MeetUniversities.com. Need help , let our experts guide you through this procedure of shortlisting and connecting with your dream university =)</span></div></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead" style="cursor:pointer;margin-top:5px;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_423_thumb.jpg" title="Counselor" style="height:35px;width:35px;margin-left:10px;"><span class="new_msg_arrive1"></span><div class="chatboxtitle">'+chat_talk+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')" style="margin-right:10px;">X</a></div><br clear="all"/></div><div class="chatboxcontent"><div class="chatboxmessage"><span class="chatboxmessagefrom">Counselor:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">Hi there! Welcome to MeetUniversities.com. Need help , let our experts guide you through this procedure of shortlisting and connecting with your dream university =)</span></div></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
@@ -94,7 +94,7 @@ chats11=chatboxtitle.split('_break');
 	}
 
 	if (chatBoxeslength == 0) {
-		$("#chatbox_"+chatboxtitle).css('right', '27px');
+		$("#chatbox_"+chatboxtitle).css('right', '7px');
 	} else {
 		width = (chatBoxeslength)*(225+7)+42;
 		$("#chatbox_"+chatboxtitle).css('right', width+'px');
