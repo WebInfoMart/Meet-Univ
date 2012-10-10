@@ -80,7 +80,7 @@ chats11=chatboxtitle.split('_break');
 	var chat_talk="Let's Talk!";
 	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
 	.addClass("chatbox")
-	.html('<div class="chatboxhead" style="cursor:pointer;margin-top:5px;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_423_thumb.jpg" title="Counselor" style="height:60px;"><span class="new_msg_arrive1"></span><div class="chatboxtitle">'+chat_talk+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"><div class="chatboxmessage"><span class="chatboxmessagefrom">Counselor:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">Hi,I am aysha,if u need any help,I am here for u.</span></div></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
+	.html('<div class="chatboxhead" style="cursor:pointer;margin-top:5px;" onclick="javascript:toggleChatBoxGrowth(\''+chatboxtitle+'\')"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_423_thumb.jpg" title="Counselor" style="height:60px;"><span class="new_msg_arrive1"></span><div class="chatboxtitle">'+chat_talk+'</div><div class="chatboxoptions"><a href="javascript:void(0)" onclick="javascript:closeChatBox(\''+chatboxtitle+'\')">X</a></div><br clear="all"/></div><div class="chatboxcontent"><div class="chatboxmessage"><span class="chatboxmessagefrom">Counselor:&nbsp;&nbsp;</span><span class="chatboxmessagecontent">Hi,I am Aisha,if u need any help,I am here for u.</span></div></div><div class="chatboxinput"><textarea class="chatboxtextarea" onkeydown="javascript:return checkChatBoxInputKey(event,this,\''+chatboxtitle+'\');"></textarea></div>')
 	.appendTo($( "body" ));
 			   
 	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
@@ -181,7 +181,7 @@ function chatHeartbeat(){
 			if (chatboxFocus[x] == false) {
 				//FIXME: add toggle all or none policy, otherwise it looks funny
 				//$('#chatbox_'+x+' .chatboxhead').toggleClass('chatboxblink');
-				$('#chatbox_'+x+' .chatboxhead').find('.new_msg_arrive1').toggleClass('new_msg_arrive');
+				$('#chatbox_'+x+' .chatboxhead').find('.new_msg_arrive1').addClass('new_msg_arrive');
 				
 			}
 		}
@@ -197,15 +197,16 @@ function chatHeartbeat(){
 			if (item)	{ // fix strange ie bug
 
 				chatboxtitle = item.f;
-
-				if ($("#chatbox_"+chatboxtitle).length <= 0) {
+				//var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
+				//if ($("#chatbox_"+chatboxtitle).length <= 0 && (chat_box_close_by_user=='0' || chat_box_close_by_user=='admin')) {
+				if ($("#chatbox_"+chatboxtitle).length <= 0 ) {
 					createChatBox(chatboxtitle);
-					document.cookie = "chatboxclosedbyuser=0;domain=meetuniv.com";
+					document.cookie = "chatboxclosedbyuser=0;domain=meetuniversities.info";
 				}
 				if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
 					$("#chatbox_"+chatboxtitle).css('display','block');
 					restructureChatBoxes();
-					document.cookie = "chatboxclosedbyuser=0;domain=meetuniv.com";
+					document.cookie = "chatboxclosedbyuser=0;domain=meetuniversities.info";
 				}
 				
 				if (item.s == 1) {
@@ -254,7 +255,7 @@ function chatHeartbeat(){
 
 function closeChatBox(chatboxtitle) {
 	$('#chatbox_'+chatboxtitle).css('display','none');
-	document.cookie = "chatboxclosedbyuser=1;domain=meetuniv.com";
+	document.cookie = "chatboxclosedbyuser=1;domain=meetuniversities.info";
 	restructureChatBoxes();
 
 	$.post("chat/closechat", { chatbox: chatboxtitle} , function(data){	
@@ -313,7 +314,7 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 		$(chatboxtextarea).css('height','44px');
 		if (message != '') {
 			$.post("chat/sendchat", {to: chatboxtitle, message: message} , function(data){
-			alert(chat_username);
+		//	alert(chat_username);
 			message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+chat_username+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
 				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
@@ -339,7 +340,6 @@ function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
 	}
 	 
 }
-
 function startChatSession(){  
 	$.ajax({
 	  url: "chat/startchatsession",
@@ -351,14 +351,13 @@ function startChatSession(){
 		chats1=chat_username.split('_break');
 		chat_username=chats1[0];
 		//alert(chat_username);
-		//alert(data.items);
 		$.each(data.items, function(i,item){
 			if (item)	{ // fix strange ie bug
-
 				chatboxtitle = item.f;
-				var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
-				
-				if ($("#chatbox_"+chatboxtitle).length <= 0 && chat_box_close_by_user=='0') {
+				// chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
+				//alert(chat_box_close_by_user);
+				//if ($("#chatbox_"+chatboxtitle).length <= 0 && (chat_box_close_by_user=='0' || chat_box_close_by_user=='admin') {
+				if ($("#chatbox_"+chatboxtitle).length <= 0 ) {
 					createChatBox(chatboxtitle,1);
 				}
 				

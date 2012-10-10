@@ -29,13 +29,13 @@ class Admin extends CI_Controller
    
    redirect('admin/adminlogin/');
   } else {
-  	$this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
    $flag=0;
    $data['username'] = $this->tank_auth->get_username();
    $data['user_id'] = $this->tank_auth->get_admin_user_id();
    $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
    if($data['admin_user_level']=='3')
    {
+   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
    $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
    if($data['univ_detail_edit']==0)
    {
@@ -57,6 +57,7 @@ class Admin extends CI_Controller
    }
    if($data['admin_user_level']=='5')
    {
+   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
    for($i = 1; $i <=31; $i++) 
    {    
    $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));

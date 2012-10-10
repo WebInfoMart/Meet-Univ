@@ -120,8 +120,10 @@ var chat_open=getChatCookie("chatopen");
   {
    var lnow = new Date();
    lnow=lnow.getTime();
-   document.cookie = "chatopen="+lnow+";domain=meetuniv.com";
-   document.cookie = "chatboxopen=0;domain=meetuniv.com";
+   var domain='<?php echo $domain_name; ?>';
+    domain= domain.substr(1);
+   document.cookie = "chatopen="+lnow+";domain="+domain;
+   document.cookie = "chatboxopen=0;domain="+domain;
   }
   else
   {
@@ -135,8 +137,10 @@ var chat_open=getChatCookie("chatopen");
   var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
   if((secondsDifference>10 && chat_box_open=='0'))
   {
-  document.cookie = "chatboxopen=1;domain=meetuniv.com";
-  document.cookie = "chatboxclosedbyuser=0;domain=meetuniv.com";
+   var domain='<?php echo $domain_name; ?>';
+  domain= domain.substr(1);
+  document.cookie = "chatboxopen=1;domain="+domain;
+  document.cookie = "chatboxclosedbyuser=0;domain="+domain;
   chatWith('Counselor_break_1212111_12121');
   }
   /*if(chat_box_close_by_user=='0')

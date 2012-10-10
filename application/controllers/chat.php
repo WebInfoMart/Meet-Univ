@@ -179,7 +179,9 @@ $s_h=$this->session->userdata('chatHistory');
 "m": "{$message}"
 },
 EOD;
-			$s3[$chatbox] = 1;
+$s3[$chatbox] = 1;
+	$this->session->set_userdata('tsChatBoxes',$s3);
+			
 		}
 		}
 	}

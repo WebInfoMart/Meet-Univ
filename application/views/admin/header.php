@@ -133,6 +133,7 @@ d.getElementsByTagName('head')[0].appendChild(js);
 <script>
  jQuery(document).ready(function() {
   jQuery("abbr.timeago").timeago();
+  
 });
 </script>	
 	
