@@ -1,4 +1,6 @@
-					
+<div id="pagination" class="table_pagination paging-margin">
+							<?php echo $this->pagination->create_links();?>	
+							</div>		
 <?php
 						$count_array = count($get_university['university']);
 						$map_address='';
@@ -9,6 +11,7 @@
 						$domain_name_url=$this->subdomain->generate_univ_link_by_subdomain($subdomain_name);				
 
 						?>
+						
 							<div class="events_holder_box margin_t" date="<?php echo date("m-d-Y", strtotime($get_university['univ_event'][$no_university][0]['event_date_time'])); ?>" country="<?php echo $get_university['university'][$no_university]['country_name']; ?>" univ_name="<?php echo $get_university['university'][$no_university]['univ_name']; ?>">
 								<div class="row">
 									<div class="span8 float_l margin_l margin_t1">			
@@ -170,4 +173,6 @@
 							</div>
 					<?php $cnt++; } ?>	
 						</div>
-						
+<div id="pagination" class="table_pagination paging-margin" style="margin-top:20px;">
+							<?php echo $this->pagination->create_links();?>	
+</div>						

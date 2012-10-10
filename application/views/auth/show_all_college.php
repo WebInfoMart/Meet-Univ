@@ -102,6 +102,7 @@ $this->session->unset_userdata('follow_to_univ');
 								</div>
 							</div>
 						</div>
+						
 						<form action="<?php echo "$base"; ?>find_college" method="post" id="frm_search_steps">
 						<input type="hidden" name="hid_send_univ_id_frm_search" id="hid_send_univ_id_frm_search" value=""/>
 						<div class="float_r" id="search_results">
@@ -109,27 +110,12 @@ $this->session->unset_userdata('follow_to_univ');
 						<div class="events_holder_box margin_t"><h3>Sorry,NO Result Found</h3></div>
 						<?php } ?>
 						
-							<div id="pagination" class="table_pagination right paging-margin">
-   
-						   <?php
-						   $cc=$get_university['total_res'];
-						   $rl=$get_university['limit_res']; 
-						   if($cc>$rl)
-						   {
-						   $z=0;
-						   for($c=$cc;$c>0;$c=$c-$rl)
-						   {
-						   ?>
-						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajaxpaging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
-						 <?php 
-						   }
-						   }
-						   ?>
-						   <input type="hidden" id="current_paging_value" value="0">	
-							</div>
+							
 						<div class="clearfix"></div>
 						<div id="col_paging">
-						
+						<div id="pagination" class="table_pagination paging-margin">
+							<?php echo $this->pagination->create_links();?>
+							</div>
 						<?php
 						$map_address='';
 						$cnt = 1;
@@ -296,24 +282,9 @@ $this->session->unset_userdata('follow_to_univ');
 					<?php $cnt++; } ?>	
 						</div>
 						<!--paging start-->
-						<div id="pagination" class="table_pagination right paging-margin" style="margin-top:20px;">
-   
-						   <?php
-						   $cc=$get_university['total_res'];
-						   $rl=$get_university['limit_res']; 
-						   if($cc>$rl)
-						   {
-						   $z=0;
-						   for($c=$cc;$c>0;$c=$c-$rl)
-						   {
-						   ?>
-						 <a style="cursor:pointer" id="paging_<?php echo $z; ?>" <?php if($z==0){ ?> class="add_paging_background_class paging_<?php echo $z; ?>" <?php }else { ?> class="paging_<?php echo $z; ?>" <?php } ?> onclick="ajaxpaging('<?php echo ($rl*$z); ?>','paging_<?php echo $z; ?>')"><?php echo ++$z; ?></a>
-						 <?php 
-						   }
-						   }
-						   ?>
-						   <input type="hidden" id="current_paging_value" value="0">	
-						</div>
+						   <div id="pagination" class="table_pagination paging-margin" style="margin-top:20px;">
+							<?php echo $this->pagination->create_links();?>	
+							</div>
 						<!--paging end -->
 						
 						
@@ -368,38 +339,7 @@ function follow_university(univ_id,follow_count)
 	   }
 	   });
 }
-function ajaxpaging(a,pid)
-{
-	$('#search_results').css('opacity','0.4');
-	cpage=$('#current_paging_value').val();
-	if(a!=cpage)	
-	{
-	var url=document.URL;
-	var change_url=url.split('colleges/');
-	if(!(change_url.length>1 && change_url[1]!=''))
-	{
-	url='<?php echo $base; ?>colleges';
-	}
-	$('#pagination a').removeClass('add_paging_background_class');
-	 $('.'+pid).addClass('add_paging_background_class');
-	//$('#ajax_loader_paging').css('z-index','9');
-	$('#current_paging_value').val(a);
- 	   $.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>auth/all_colleges_paging",
-	   data: 'offset='+a+'&current_url='+url,
-	   cache: false,
-	   success: function(r)
-	   {
-	    res=r.split('!@#$%^&*');
-		$('#col_paging').html(res[1]);
-		$('#listed_currently_univ').html(res[0]);
-		$("#search_results").css('opacity','1');
-	   }
-	   })
-	   
-   }
- }
+
 		var href=document.URL;;
 		$(function() {
 			$('.search_chkbox').click(function(e) {
@@ -454,8 +394,10 @@ function get_college_result_by_ajax()
 		}
 	  	$('#listed_currently_univ').html(res[2]);
 	    $('#red_total_univ').html(res[1]);
+		pagination();	
 	   }
 	   })
+	  
 }
 function sortBy(what,orderBy,id,text){
 $('.sort_list a').removeClass('active');
@@ -515,4 +457,29 @@ if(total_list_item_country == country_record)
 	$(".more_country").hide();
 }
 });
+
+// pagination
+pagination();
+function pagination() {
+  $("#pagination a").click(function() {
+	    var url = $(this).attr("href");		
+        $.ajax({
+          type:"POST",
+          data:"current_url="+document.URL,
+          url: url,
+          beforeSend: function() {
+           $('#search_results').css('opacity','0.4');
+          },
+          success: function(msg) {
+		  $('.table_pagination').replaceWith('');
+		 res=msg.split('!@#$%^&*');
+		$('#col_paging').html(res[1]);
+		$('#listed_currently_univ').html(res[0]);
+		$("#search_results").css('opacity','1');
+		 pagination();
+          }
+        });
+        return false;
+      });
+}
 </script>
