@@ -950,7 +950,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcf4ea', end
 .part_art{height: 150px;overflow: hidden;}
 .text-width{width:200px;margin-left:20px}
 .line_time{line-height:20px;margin-left:20px}
-.registered{text-align: center;background: #eeeeee; /* Old browsers */
+.registered{margin-right: 8px;text-align: center;background: #eeeeee; /* Old browsers */
 background: -moz-linear-gradient(left,  #eeeeee 0%, #eeeeee 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eeeeee), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(left,  #eeeeee 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
@@ -960,7 +960,7 @@ background: linear-gradient(left,  #eeeeee 0%,#eeeeee 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 */border-radius:3px;padding: 5px;height: 55px;-moz-box-shadow: inset 0 0 5px #EAEAEA;
 -webkit-box-shadow: inset 0 0 5px #EAEAEA;box-shadow: inner 0 0 5px #EAEAEA;width:65px;}
 .college_img_center{width: 90px;height:40px;margin-top: 10px;z-index: 100;}
-.fix-height{min-height:340px;overflow: hidden;max-height:390px}
+.fix-height{min-height:190px;overflow: hidden;}
 /*
 			Load CSS before JavaScript
 		*/
@@ -1023,12 +1023,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', end
 #slides_events .slides_container {
 			width:440px;
 			display:none;
-			height:500px;
+			height:312px;
 		}
 
 		slides_events .slides_container div {
 			width:440px;
-			height:500px;
+			height:312px;
 			display:block;
 		}
 		

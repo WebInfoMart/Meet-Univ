@@ -283,7 +283,7 @@ if (r==true)
 }
 else
 {
-alert("Max Limit 3 reached,To make this home featured event,First make other to unfeature");
+alert("Max Limit 3o reached,To make this home featured event,First make other to unfeature");
 }
 }
 function action_formsubmit(id,flag)

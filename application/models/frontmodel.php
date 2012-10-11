@@ -59,7 +59,7 @@ class Frontmodel extends CI_Model
 		$where='and events.featured_home_event="1"';
 		
 		$join=" JOIN  `university` ON events.event_univ_id = university.univ_id LEFT JOIN country ON country.country_id = events.event_country_id LEFT JOIN  state ON state.state_id = events.event_state_id LEFT JOIN city ON city.city_id = events.event_city_id";
-		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT 3";
+		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc";
 		$query=$this->db->query($sql);
 		//$x = $query->result_array();
 		//echo $x['event_id'];

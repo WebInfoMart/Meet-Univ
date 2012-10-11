@@ -249,7 +249,9 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							
 							<?php 
 						if(!empty($featured_events))
-						{$event_count=count($featured_events);
+						{
+						
+						$event_count=count($featured_events);
 							$count=0;						
 							
 						$rc=9;
@@ -264,14 +266,14 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						//if($featured_events != '' || $featured_events != '0') {
 						$date = explode(" ",$events['event_date_time']);
 						$image_exist=0;		
-						if(file_exists(getcwd().'/uploads/univ_gallery/'.$events['univ_logo_path']))	
+						if(file_exists(getcwd().'/uploads/univ_gallery/'.$events['univ_logo_path']) && $events['univ_logo_path']!='')	
 						{
 						$image_exist=1;
 						list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/'.$events['univ_logo_path']);
 						}
 						else
 						{
-						list($width, $height, $type, $attr) = getimagesize(getcwd().$img_path.'/calendar.png');
+						list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/univ_gallery/univ_logo.png');
 						}
 						if($events['univ_logo_path']!='' && $image_exist==1)
 						{
@@ -279,7 +281,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						}
 						else
 						{
-						$image=$base.$img_path.'/calendar.png';
+						$image=$base.'uploads/univ_gallery/univ_logo.png';
 						} 
 						$img_arr=$this->searchmodel->set_the_image($width,$height,110,75,TRUE);
 						$event_register_user = $this->frontmodel->count_event_register($events['event_id']);
@@ -1223,7 +1225,7 @@ height:22px;
 <script>
 		$(function(){
 			$('#slides_events').slides({
-				play: 5000,
+				play: 4000,
 				pause: 2500,
 				effect: 'slide',
 				hoverPause: true,
