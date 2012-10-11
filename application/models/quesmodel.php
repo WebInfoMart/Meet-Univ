@@ -153,7 +153,7 @@ class Quesmodel extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('questions');
-		$this->db->join('university', 'questions.q_univ_id = university.univ_id');		
+		$this->db->join('university', 'questions.q_univ_id = university.univ_id','left');		
 		$this->db->where('que_id',$ques_id);
 		$query=$this->db->get();
 		return $query->result_array();

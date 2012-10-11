@@ -53,7 +53,7 @@ else { $class_univ_name='text'; }?>
 <div id="content">		
 <h2 class="margin">Edit Question</h2>	
 <div class="form span8">
-<?php 
+<?php //print_r($ques_info);exit;
 foreach($ques_info as $ques_detail) { ?>			
 <form action="<?php echo $base; ?>adminques/edit_ques/<?php echo $ques_detail['que_id']; ?>" method="post" class="caption_form form_horizontal_data" >				
 	<input type="hidden" name="ques_type_ud" value="univ_ques"/>
