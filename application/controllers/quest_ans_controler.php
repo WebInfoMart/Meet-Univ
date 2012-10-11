@@ -80,6 +80,25 @@ class Quest_ans_controler extends CI_Controller
 			$this->session->set_flashdata('success',1);
 			$domain = $_SERVER['HTTP_HOST'];
 			$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
+			
+			$info = $this->path->all_path();
+			$info['url']=$pageURL;
+			$uid = $this->ci->session->userdata('user_id');
+			$result= $this->users->get_username_by_userid($uid); 					  	  
+			$info['fullname'] =$result['fullname'];
+			$email_body=$this->load->view('auth/email_templates/quest_asked_notification',$info,TRUE);			
+			$this->email->set_newline("\r\n");
+			$config['protocol'] = $this->config->item('mail_protocol');
+			 $config['smtp_host'] = $this->config->item('smtp_server');
+			 $config['smtp_user'] = $this->config->item('smtp_user_name');
+			 $config['smtp_pass'] = $this->config->item('smtp_pass');
+			 $this->email->initialize($config);    
+			 $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');						
+			 $this->email->to('kulbir@webinfomart.com');				
+			 $this->email->subject(ucwords($result['fullname']).' just asked a Question');
+			 $message = $email_body ;
+			 $this->email->message($message);
+			 $this->email->send();
 			redirect($pageURL);
 			
 		}
