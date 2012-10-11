@@ -103,10 +103,12 @@ $flag=1;
 				<ul>
 				
 					<li>
-					<?php if(file_exists(getcwd().'uploads/'.$recent_followers_of_univ_detail["user_pic_path"]) && $recent_followers_of_univ_detail['user_pic_path']!='') { ?>
+					<?php 
+					if(file_exists(getcwd().'uploads/user_pic/thumbs'.$recent_followers_of_univ_detail["user_thumb_pic_path"]) && $recent_followers_of_univ_detail['user_thumb_pic_path']!='') { 
+					?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/
 					<?php echo str_replace(' ','-',$recent_followers_of_univ_detail['fullname']); ?>" >
-					<img src="<?php echo $base.'uploads/'.$recent_followers_of_univ_detail['user_pic_path']; ?>" />
+					<img src="<?php echo $base.'uploads/'.$recent_followers_of_univ_detail['user_thumb_pic_path']; ?>" />
 					</a>
 					<?php } else { ?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/
@@ -262,10 +264,12 @@ $flag=1;
 				<ul>
 				
 					<li>
-					<?php if(file_exists(getcwd().'uploads/'.$recent_followers_of_univ_detail["user_pic_path"]) && $recent_followers_of_univ_detail['user_pic_path']!='') { ?>
+					<?php 
+					if(file_exists(getcwd().'uploads/user_pic/thumbs'.$recent_followers_of_univ_detail["user_thumb_pic_path"]) && $recent_followers_of_univ_detail['user_thumb_pic_path']!='') { 
+					?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/
 					<?php echo str_replace(' ','-',$recent_followers_of_univ_detail['fullname']); ?>" >
-					<img src="<?php echo $base.'uploads/'.$recent_followers_of_univ_detail['user_pic_path']; ?>" />
+					<img src="<?php echo $base.'uploads/'.$recent_followers_of_univ_detail['user_thumb_pic_path']; ?>" />
 					</a>
 					<?php } else { ?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/
@@ -284,37 +288,83 @@ $flag=1;
 				<h3>Question</h3>
 		<ul>
 				
-		<?php if($fetch_recent_five_question!=0) {
-		$x=0;
-		foreach($fetch_recent_five_question as $fetch_recent_five_question_detail) {
-		$x=$x+1;
-		
-		?>	
+			
 			
 					<li style="width:500px">
-						<span><abbr class="timeago time_ago" title="<?php echo $fetch_recent_five_question_detail['q_asked_time']; ?>"></abbr></span>
-						<?php if( file_exists(getcwd().'uploads/'.$fetch_recent_five_question_detail["user_pic_path"]) && $fetch_recent_five_question_detail['user_pic_path']!='') { ?>
-					<a href="#" class="avatar"><img src="<?php echo $base.'uploads/'.$fetch_recent_five_question_detail['user_pic_path']; ?>" /> </a>
-					<?php } else { ?>
-					<a href="#" class="avatar"><img src="<?php echo $base ?>uploads/user_model.png" /> </a>
+						<span>less than a minute ago</span>
+											<a href="#" class="avatar"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_423_thumb.jpg"> </a>
 					
-					<?php } ?>
-						
-						<a href="#" class="username"><?php echo $fetch_recent_five_question_detail['fullname']; ?></a>
-						<p><?php echo $fetch_recent_five_question_detail['q_title']; ?></p>
-						<p class="q_detail"><?php $fetch_recent_five_question_detail['q_detail']; ?></p>
+											
+						<a href="#" class="username">Shweta Bhatiya</a>
+						<p>how much can be provided for m.s. from u.s.a. for indian student?does it cover hostel fee also? </p>
+						<p class="q_detail"></p>
 						
 					
 					</li>
 				
 				
-		<?php 
-		} ?>		
-		</ul>
+			
+			
+					<li style="width:500px">
+						<span>7 minutes ago</span>
+											<a href="#" class="avatar"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_431_thumb.jpg"> </a>
+					
+											
+						<a href="#" class="username">Sachin Mishra</a>
+						<p> total expenses for an indian to study masters in ireland?</p>
+						<p class="q_detail"></p>
 						
-		<?php } else { ?>
-		NO Recent Question
-		<?php } ?>	
+					
+					</li>
+				
+				
+			
+			
+					<li style="width:500px">
+						<span>10 minutes ago</span>
+											<a href="#" class="avatar"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_317_thumb.jpg"> </a>
+					
+											
+						<a href="#" class="username">Sumit Munjal</a>
+						<p>List of top online universities in USA for MS(civil)</p>
+						<p class="q_detail"></p>
+						
+					
+					</li>
+				
+				
+			
+			
+					<li style="width:500px">
+						<span>15 minutes ago</span>
+											<a href="#" class="avatar"><img src="http://meetuniversities.com/uploads/user_pic/thumbs/user_429_thumb.jpg"> </a>
+					
+											
+						<a href="#" class="username">Kartik Naudu</a>
+						<p>Need Suggestion regarding MS in IT?</p>
+						<p class="q_detail"></p>
+						
+					
+					</li>
+				
+				
+			
+			
+					<li style="width:500px">
+						<span>20 minutes ago</span>
+											<a href="#" class="avatar"><img src="http://meetuniversities.com/uploads/user_pic/kk.jpg"> </a>
+					
+											
+						<a href="#" class="username">Kulbir Sangwan</a>
+						<p>I want to study computer science in canada</p>
+						<p class="q_detail"></p>
+						
+					
+					</li>
+				
+				
+				
+		</ul>	
 		</div>
 		</div>
 		<?php } ?>		
