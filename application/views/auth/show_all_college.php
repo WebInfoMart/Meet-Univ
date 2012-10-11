@@ -370,11 +370,12 @@ function get_college_result_by_ajax()
 	{
 	url='<?php echo $base; ?>colleges';
 	}
+	var data={current_url:url,offset:0};
 	$('#search_results').css('opacity','0.4');
 	   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>auth/all_colleges_search",
-	   data: 'current_url='+url,
+	   data: data,
 	   cache: false,
 	   success: function(r)
 	   {
@@ -463,9 +464,13 @@ pagination();
 function pagination() {
   $("#pagination a").click(function() {
 	    var url = $(this).attr("href");		
+		var murl=url.split('/');
+		var offset=murl[5];	
+		offset=parseInt(offset);
+		var data={current_url:document.URL,offset:offset};	
         $.ajax({
           type:"POST",
-          data:"current_url="+document.URL,
+          data:data,
           url: url,
           beforeSend: function() {
            $('#search_results').css('opacity','0.4');

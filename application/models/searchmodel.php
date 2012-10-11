@@ -669,13 +669,13 @@ function show_all_college_paging($current_url)
 						$config['base_url']=base_url()."auth/all_colleges_paging/";
 						$config['total_rows']=$results->num_rows();
 						$config['per_page'] = '25';
-						if($this->uri->segment(3)=='')
+						if($this->input->post('offset')=='' || (!$this->input->post('offset')))
 						{
 						$offset=0;
 						}
 						else
 						{
-						$offset=$this->uri->segment(3);
+						$offset=$this->input->post('offset');
 						}
 						$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt , if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' ) is null ,3, if(STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )>= '".date('Y-m-d')."' ,1,2)) as st FROM university".$join."  where university.switch_off_univ != '1' and 1 ".$where." GROUP BY university.univ_id order by st asc,dt asc LIMIT ".$offset.",".$config['per_page']."";
 						//$this->db->limit($univ_data['limit_res']);
@@ -933,13 +933,13 @@ function show_all_college_paging($current_url)
 			$config['base_url']=base_url()."auth/all_events_paging/";
 			$config['total_rows']=$results->num_rows();
 		    $config['per_page'] = '10';
-			if($this->uri->segment(3)=='')
+			if($this->input->post('offset')=='' || (!$this->input->post('offset')))
 			{
 			$offset=0;
 			}
 			else
 			{
-			$offset=$this->uri->segment(3);
+			$offset=$this->input->post('offset');
 			}
 			$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events".$join."  where 1 ".$where." order by dt asc LIMIT ".$offset.",".$config['per_page']."";
 			//changes asc to desc by sumit munjal

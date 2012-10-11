@@ -646,10 +646,11 @@ function get_event_result_by_ajax()
 	}
 	$('#event_results_filteration').css('opacity','0.5');
 	$('#search_results').css('opacity','0.4');
+	var data={current_url:url,offset:0};
 	   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>auth/all_events_search",
-	   data: 'current_url='+url,
+	   data: data,
 	   cache: false,
 	   success: function(r)
 	   {
@@ -720,11 +721,15 @@ if(total_list_item == city_record)
 
 function pagination() {
   $("#pagination a").click(function() {
-	    var url = $(this).attr("href");		
+	    var url = $(this).attr("href");
+        var murl=url.split('/');
+		var offset=murl[5];	
+		offset=parseInt(offset);
+		var data={current_url:document.URL,offset:offset};		
         $.ajax({
           type:"POST",
-          data:"current_url="+document.URL,
-          url: url,
+          data:data,
+		  url: url,
           beforeSend: function() {
            $('#div_events').css('opacity','0.5');
           },
