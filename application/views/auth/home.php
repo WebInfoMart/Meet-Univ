@@ -1382,5 +1382,5 @@ var e_id = array[1];
 function gotoevent(go)
 {
 window.location.href=go;
-}
+} 
 </script>
