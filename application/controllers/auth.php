@@ -1069,6 +1069,7 @@ class Auth extends CI_Controller
 	
  function all_colleges_paging()
  {
+
   $data = $this->path->all_path();
   $current_url=$this->input->post('current_url');
   $data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
@@ -1087,7 +1088,7 @@ class Auth extends CI_Controller
   $data['get_university'] = $this->searchmodel->show_all_college_filteration($current_url);
   if($data['get_university']!=0)
   {
-  $college_list=$this->load->view('auth/show_all_college_paging',$data);
+  $college_list=$this->load->view('auth/show_all_college_search',$data);
   $total_univ=$data['get_university']['total_res'];
   $per_page_res=$data['get_university']['per_page_res'];
   $header_title=$data['get_university']['title'];

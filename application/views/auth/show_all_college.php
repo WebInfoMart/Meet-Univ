@@ -474,12 +474,14 @@ function pagination() {
 		  $('.table_pagination').replaceWith('');
 		 res=msg.split('!@#$%^&*');
 		$('#col_paging').html(res[1]);
+		//alert(res[1])
 		$('#listed_currently_univ').html(res[0]);
 		$("#search_results").css('opacity','1');
-		 pagination();
+		pagination();
           }
         });
         return false;
       });
+	  	 
 }
 </script>
