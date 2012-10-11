@@ -104,11 +104,11 @@ $flag=1;
 				
 					<li>
 					<?php 
-					if(file_exists(getcwd().'uploads/user_pic/thumbs'.$recent_followers_of_univ_detail["user_thumb_pic_path"]) && $recent_followers_of_univ_detail['user_thumb_pic_path']!='') { 
+					if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$recent_followers_of_univ_detail["user_thumb_pic_path"]) && $recent_followers_of_univ_detail['user_thumb_pic_path']!='') { 
 					?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/
 					<?php echo str_replace(' ','-',$recent_followers_of_univ_detail['fullname']); ?>" >
-					<img src="<?php echo $base.'uploads/'.$recent_followers_of_univ_detail['user_thumb_pic_path']; ?>" />
+					<img style="height:35px;"  src="<?php echo $base.'/uploads/user_pic/thumbs/'.$recent_followers_of_univ_detail['user_thumb_pic_path']; ?>" />
 					</a>
 					<?php } else { ?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/
@@ -265,11 +265,11 @@ $flag=1;
 				
 					<li>
 					<?php 
-					if(file_exists(getcwd().'uploads/user_pic/thumbs'.$recent_followers_of_univ_detail["user_thumb_pic_path"]) && $recent_followers_of_univ_detail['user_thumb_pic_path']!='') { 
+					if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$recent_followers_of_univ_detail["user_thumb_pic_path"]) && $recent_followers_of_univ_detail['user_thumb_pic_path']!='') { 
 					?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/
 					<?php echo str_replace(' ','-',$recent_followers_of_univ_detail['fullname']); ?>" >
-					<img src="<?php echo $base.'uploads/'.$recent_followers_of_univ_detail['user_thumb_pic_path']; ?>" />
+					<img style="height:35px;"  src="<?php echo $base.'/uploads/user_pic/thumbs/'.$recent_followers_of_univ_detail['user_thumb_pic_path']; ?>" />
 					</a>
 					<?php } else { ?>
 					<a target="_blank" href="<?php echo $base; ?>user/<?php echo $recent_followers_of_univ_detail['id']; ?>/

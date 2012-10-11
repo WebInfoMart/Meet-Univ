@@ -99,7 +99,12 @@ var chat_domain='<?php echo "$domain_name";?>'.substr(1);</script>
 var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
   if(chat_box_close_by_user=='0')
   {
+  var d = new Date();
+  var htime = d.getHours();
+  if(htime<18)
+  {
   chatWith('Counselor_break_1212111_12121');
+  }
   }
 function getChatCookie(c_name)
 {
@@ -143,7 +148,12 @@ var chat_open=getChatCookie("chatopen");
   domain= domain.substr(1);
   document.cookie = "chatboxopen=1;domain="+domain;
   document.cookie = "chatboxclosedbyuser=0;domain="+domain;
+  var d = new Date();
+  var htime = d.getHours();
+  if(htime<18)
+  {
   chatWith('Counselor_break_1212111_12121');
+  }
   }
   /*if(chat_box_close_by_user=='0')
   {
@@ -151,8 +161,13 @@ var chat_open=getChatCookie("chatopen");
   }*/
   }
 }
+var d = new Date();
+var htime = d.getHours();
+if(htime<18)
+{
 checkChatCookie();
 setInterval("checkChatCookie()", 5000);
+}
 </script>	
 <script type="text/javascript">
   var _gaq = _gaq || [];
