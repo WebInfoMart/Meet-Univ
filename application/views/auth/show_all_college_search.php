@@ -3,7 +3,7 @@
 <?php echo $this->pagination->create_links();?>
 							</div>
 						<div class="clearfix"></div>
-						<div id="col_paging">
+						<div id="col_paging"> 
 						<?php
 						$count_array = count($get_university['university']);
 						$map_address='';

@@ -947,7 +947,7 @@ class Users extends CI_Model
 	function get_followers_of_univ($univ_id)
 	{
 		$query = $this->db->get_where('follow_univ',array('follow_to_univ_id'=>$univ_id,'followed_by !='=>''));
-		$rows = mysql_affected_rows();
+		$rows = $query->num_rows();
 		return $rows;
 	}
 	
@@ -1400,6 +1400,7 @@ class Users extends CI_Model
 		   $this->db->select('*');
 		   $this->db->from('follow_univ');
 		   $this->db->where('followed_by',$logged_user);
+		   $this->db->where('switch_off_univ !=','1');
 		   $this->db->join('university','follow_univ.follow_to_univ_id = university.univ_id');
 		   $this->db->order_by('ontime','desc');
 		   $this->db->limit(2);

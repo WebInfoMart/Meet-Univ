@@ -124,8 +124,15 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" style="z-index: 100;position: relative;top:6px;"><span style="position: relative;left: 10px;">Popular Events</span></h3>
 						<ul class="up_event">
 						<?php if(!empty($feature_events)){
+						$ec=0;
 								foreach($feature_events as $upcoming_event)
 								{
+								if($ec>5)
+								{
+								break;
+								}
+								
+								$ec++;
 								$event_title_list =$this->subdomain->process_url_title($upcoming_event['event_title']);	
 								$event_link=$this->subdomain->genereate_the_subdomain_link(
 								$upcoming_event['subdomain_name'],'event',$event_title_list,$upcoming_event['event_id']);

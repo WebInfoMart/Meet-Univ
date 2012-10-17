@@ -353,7 +353,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<div class="float_r social_set">
 								<div class="float_l"><g:plusone size='medium' id='shareLink' annotation='none' href='<?php //$_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone></div>
 								<div class="float_l tw">
-									<a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit">Tweet</a>
+									<a href="https://twitter.com/share" class="twitter-share-button" >Tweet</a>
 								</div>
 								<div class="float_r fb"><div class="fb-like" data-href="<?php //$_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true"></div></div>
 								<div class="clearfix"></div>

@@ -144,6 +144,10 @@ if ($user) {
 										{
 										echo $educ_level['educ_level']; 
 										}
+										else
+										{
+										 echo "Not Mentioned Yet";
+										}
 										?>
 									</ul>
 								</div>
@@ -156,7 +160,11 @@ if ($user) {
 								</div>
 								<div class="index_sidebar_content">
 									<ul class="links1">
-										<?php echo $area_interest['program_parent_name']; ?>
+										<?php
+										if($area_interest['program_parent_name']!='') {
+										echo $area_interest['program_parent_name']; }
+										else { echo "Not Mentioned Yet"; }
+										?>
 									</ul>
 								</div>
 							</div>
@@ -173,8 +181,9 @@ if ($user) {
 									{
 									foreach($my_collage_of_user_visited as $my_collage)
 									{
+									$univ_link=$this->subdomain->generate_univ_link_by_subdomain($my_collage['subdomain_name']);
 									?>
-									<li><a href="university/<?php echo $my_collage['univ_id']; ?>"><?php echo $my_collage['univ_name']; ?></a></li>
+									<li><a target="_blank" href="<?php echo  $univ_link; ?>"><?php echo $my_collage['univ_name']; ?></a></li>
 										<!--<li><a href="http://workforcetrack.in/update_profile">Ramjas College, University of Delhi</a></li>-->
 									<?php } } else { echo "No Activity Yet."; } ?>	
 									</ul>
@@ -269,56 +278,97 @@ if ($user) {
 								<h2>Latest Q&A</h2>
 								<ul class="prof_data">	
 								
-				<?php if(!empty($featured_question_visited_profile))
-				{
-				$a=0;
-				$url = "";
-				foreach($featured_question_visited_profile['quest_detail'] as $quest_list)
-				{
-				if($quest_list['q_univ_id'] != '0')
-				{
-					//$url = "UniversityQuest/$quest_list[q_univ_id]/$quest_list[que_id]/$quest_list[q_askedby]";
-					$question_title = str_replace(' ','-',$quest_list['q_title']);
-					$univ_domain=$quest_list['subdomain_name'];
-					$quest_title=$quest_list['q_title'];
-					$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
-					$url = $que_link;
-				}
-				else if($quest_list['q_country_id'] != '0')
-				{
-					$url = "";
-				}
-				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
-				{
-					$question_title =$this->subdomain->process_url_title($quest_list['q_title']);	
-					//$url = "MeetQuest/$quest_list[que_id]/$quest_list[q_askedby]";
-					$url = $base.'otherQuestion'.'/'.$quest_list['que_id'].'/'.$question_title;
-				}
-				$q_date = explode(" ",$quest_list['q_asked_time']);
-				//print_r($q_date[0]);
-				$quest_ask_date = explode("-",$q_date[0]);
-				//print_r($quest_ask_date[0]);
-				$q_month = $quest_ask_date[1];
-				$quest_month = date('M', strtotime($q_month . '01'));
-				
-				//print_r($quest_ask_date[2]);
-				?>
-				
-
+				<?php
+								if(!empty($featured_question_visited_profile))
+								{
+								$a=0;
+								$url = "";
+								foreach($featured_question_visited_profile['quest_detail'] as $quest_list)
+								{
+								if($quest_list['q_univ_id'] != '0')
+								{
+									$univ_domain=$quest_list['subdomain_name'];
+									$quest_title=$quest_list['q_title'];
+									$quest_title = str_replace(' ','-',$quest_list['q_title']);
+									$quest_title=$this->subdomain->process_url_title($quest_title);
+									$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
+									$url = $que_link;
+								}
+								else if($quest_list['q_country_id'] != '0')
+								{
+									$url = "";
+								}
+								else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
+								{
+									$quest_title = str_replace(' ','-',$quest_list['q_title']);
+									$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$quest_title;
+								}
+								$q_date = explode(" ",$quest_list['q_asked_time']);
+								$quest_ask_date = explode("-",$q_date[0]);
+								$q_month = $quest_ask_date[1]; ?>
+						
+									<li>
+										<div style="width: 34px;margin-right:20px" class="float_l">
+										<?php
+							$logged_user_id = $this->tank_auth->get_user_id();
+							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
+							{
+							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+							
+								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+							}
+							else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
+							{
+								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+							}
+							
+							else if($user && $quest_list['q_askedby'] == $logged_user_id)
+							{
+							?>
+								<img style='height:35px;width:35px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+							<?php
+							}
+							else{
+							echo "<img style='height:35px;width:35px;' src='".base_url()."images/profile_icon.png'/>";
+							}
+							?>
+										</div>
+										<a href="<?php echo $url; ?>"><div class="black height_setup"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></div>
 										
-										<a href="<?php echo "$url"; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
-										<?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
-										<div>
-										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
+										</a><div style="font-size: 11px;line-height: 12px;">
+										<?php 
+										$fullname =$this->subdomain->process_url_title($quest_list['fullname']);
+										if($logged_user_id==$quest_list['id'])		
+										{
+										$user_link=$base.'home';
+										}
+										else
+										{
+										$user_link=$base.'user/'.$quest_list['id'].'/'.$fullname;
+										}
+										if($quest_list['fullname']!='') {
+										echo 'Asked by :';
+										?>
+										<a href="<?php echo  $user_link;?>" target="_blank"><?php echo $quest_list['fullname']; ?></a>
+										<?php }
+										else
+										{
+										echo 'Asked by :Name Not Available'; 
+										}
+										 ?>
+										</div>
+										<div style="font-size: 11px;line-height: 12px;">
+										<?php
+										$q_date = explode(" ",$quest_list['q_asked_time']);
+										$quest_ask_date = explode("-",$q_date[0]);
+										$q_month = $quest_ask_date[1];
+										$quest_month = date('M', strtotime($q_month . '01'));
+										 echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
 										echo $quest_month?$quest_month.', ':'';
 										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
-										echo "Totoal Answer - ".$featured_question_visited_profile['ans_count'][$a];
 										?></div>
-									
-									
-				
-				<?php
-					} $a++; } else { echo "No Latest Questions Available"; } 
+									</li>
+							<?php } $a++; } else { echo "No Latest Questions Available"; }
 				?>
 								
 							</ul>
@@ -331,34 +381,48 @@ if ($user) {
 										<ul class="follow">
 											<li>
 												<div class="float_l">
-													<div class="follow_img">
-													<?php 
+												<?php 
 													if(!empty($follower_detail))
-													{
+													{ ?>
+													<div class="follow_img">
+													<?php
 													foreach($follower_detail as $followers) {
-													$link = base_url().'user/'.$followers['id'];
+													//$link = base_url().'user/'.$followers['id'];
+													$fullname =$this->subdomain->process_url_title($followers['fullname']);	
+													if($logged_user_id==$followers['id'])
+													{
+													$user_link=$base.'home';
+													}
+													else {
+													$user_link=$base.'user/'.$followers['id'].'/'.$fullname;
+													}
 													if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$followers['user_thumb_pic_path']) && $followers['user_thumb_pic_path']!='' )
 													{
 													//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
 													
-														echo "<a href=$link><img style='width:63px;height:55px;' src='".base_url()."uploads/user_pic/thumbs/".$followers['user_thumb_pic_path']."'/></a>";
+														$user_image=base_url()."uploads/user_pic/thumbs/".$followers['user_thumb_pic_path'];
 													}
 													else if(file_exists(getcwd().'/uploads/user_pic/'.$followers['user_pic_path']) && $followers['user_pic_path']!='')
 													{
-														echo "<a href=$link><img style='width:63px;height:55px;' src='".base_url()."uploads/user_pic/".$followers['user_pic_path']."'/></a>";
+														$user_image==base_url()."uploads/user_pic/".$followers['user_pic_path'];
 													}
-												
 													else if($user && $followers['followed_by'] == $logged_user_id)
 													{
-													?>
-														<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-													<?php
+													
+														$user_image="https://graph.facebook.com/".$user."/picture?type=small";
+													
 													}
 													else{
-													echo "<img src='".base_url()."images/profile_icon.png'/>";
+													$user_image=base_url()."images/profile_icon.png";
 													}
-													} } ?>
-													</div>
+													} 
+													?>
+										<a href="<?php echo $user_link;?>" target="_blank" title="<?php echo $followers['fullname']; ?>"><img class="latest_img" style="width:55px;height:55px;"  src="<?php echo $user_image; ?>"/></a>													</div>
+												<?php } else 
+													{
+														echo "No Follower yet";
+													}
+													?>													
 												</div>
 											</li>
 										</ul>

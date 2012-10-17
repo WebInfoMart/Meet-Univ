@@ -60,13 +60,12 @@ if ($user) {
 								}
 								else
 								{
-								$link = base_url().'user/'.$followers['id'].'/'.$followers['fullname'];
-								
+								$fullname =$this->subdomain->process_url_title($followers['fullname']);	
+								$link = base_url().'user/'.$followers['id'].'/'.$fullname;								
 								}
 								if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$followers['user_thumb_pic_path']) && $followers['user_thumb_pic_path']!='' )
 										{
 										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-										$link = base_url().'user/'.$followers['id'];
 											echo "<a href=$link><img src='".base_url()."uploads/user_pic/thumbs/".$followers['user_thumb_pic_path']."' class='latest_img' style='width:63px;height:55px;'/></a>";
 										}
 										else if(file_exists(getcwd().'/uploads/user_pic/'.$followers['user_pic_path']) && $followers['user_pic_path']!='')
@@ -76,11 +75,11 @@ if ($user) {
 										else if($user && $followers['id'] == $logged_user_id)
 										{
 										?>
-											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+											<a href="<?php echo $link; ?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" class='latest_img' style='width:63px;height:55px;'></a>
 										<?php
 										}
 										else{
-											echo "<a href=$link><img src='".base_url()."images/profile_icon.png'/></a>";
+											echo "<a href=$link><img class='latest_img' style='width:63px;height:55px;' src='".base_url()."images/profile_icon.png'/></a>";
 										}
 								?>
 									</br>

@@ -97,8 +97,9 @@ if ($user) {
 									{
 										foreach($my_collage_of_user as $my_collage)
 										{
+									$univ_link=$this->subdomain->generate_univ_link_by_subdomain($my_collage['subdomain_name']);
 									?>
-										<li><a href=""><?php echo $my_collage['univ_name']; ?></a></li>
+										<li><a href="<?php echo $univ_link; ?>" target="_blank" title="<?php echo $my_collage['univ_name']; ?>"><?php echo $my_collage['univ_name']; ?></a></li>
 									<?php }
 											}
 									else { ?><li>No Activity Yet</li><?php } ?>	

@@ -433,7 +433,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 	
 							?>
 									<div>
-										<h4><a href="<?php echo $news_link; ?>"><?php echo substr($f_news['news_title'],0,35); ?></a></h4>
+										<h4><a href="<?php echo $news_link; ?>" title="<?php echo $f_news['news_title']; ?>"><?php echo substr($f_news['news_title'],0,35);
+										if(strlen($f_news['news_title'])>35)
+										{
+										echo "..";
+										}
+										?></a></h4>
 										<span class="float_l aspectcorrect home_art">
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" alt="Counselling" title="Counselling">
 											
@@ -493,7 +498,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 		<?php $univ_link=$this->subdomain->generate_univ_link_by_subdomain($featured_clg['subdomain_name']);
 			
 									?>
-										<a href="<?php echo $univ_link; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" alt="<?php echo $featured_clg['subdomain_name']; ?>" title="<?php echo $featured_clg['subdomain_name']; ?>"></a>
+										<a href="<?php echo $univ_link; ?>">	<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $base; ?>/uploads/univ_gallery/<?php echo $image; ?>" alt="<?php echo $featured_clg['subdomain_name']; ?>" title="<?php echo $featured_clg['univ_name']; ?>"></a>
 									</div>
 				<?php 
 				$f_coll++;
@@ -644,7 +649,25 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										<div class="quest_fix">
 											<span><a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a></span>
 										</div>
-										<div class="asked_home"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?></div>
+										<div class="asked_home"><?php
+										if($quest_list['fullname']!='') {
+										echo 'Asked By:';
+										$fullname =$this->subdomain->process_url_title($quest_list['fullname']);	
+										if($logged_user_id==$quest_list['id'])		
+										{
+										$user_link=$base.'home';
+										}
+										else
+										{
+										$user_link=$base.'user/'.$quest_list['id'].'/'.$fullname;
+										}
+										?>
+										 <a href="<?php echo $user_link; ?>"  title="<?php echo $quest_list['fullname']; ?>"><?php echo $quest_list['fullname']; ?></a>
+										
+										<?php }
+										else {
+										echo "Asked By:Name Not Available"; } ?>
+										</div>
 										<div class="asked_home">
 										<?php
 										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
@@ -699,7 +722,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							
 							?>
 							<div>
-								<h4><?php echo substr($article['article_title'],0,45).'...'; ?></h4>
+								<h4 title="<?php echo $article['article_title']; ?>"><?php echo substr($article['article_title'],0,45); 
+								if(strlen($article['article_title'])>45)
+										{
+										echo "..";
+										}
+								?></h4>
 									<span class="float_l aspectcorrect home_art">
 										
 											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" alt="Article Offered By Meet Universities" title="Article Offered By Meet Universities" >
@@ -712,7 +740,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 			$article_link=$this->subdomain->genereate_the_subdomain_link($article['subdomain_name'],'articles',$article['article_title'],$article['article_id']);
 			?>
 	..<br/>
-	<div class="padding_b"><a href="<?php echo $article_link; ?>" class="float_r view_back">View More&raquo;</a>	</div>
+	<div class="padding_b"><a href="<?php echo $article_link; ?>" class="float_r view_back" title="View More">View More&raquo;</a>	</div>
 									<?php }
 									?>	
 									

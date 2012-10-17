@@ -1,6 +1,7 @@
 <div id="pagination" class="table_pagination paging-margin">
 							<?php echo $this->pagination->create_links();?>	
-							</div>		
+							</div>	
+<div id="col_paging">							
 <?php
 						$count_array = count($get_university['university']);
 						$map_address='';

@@ -403,7 +403,27 @@ $select_female='';
 										</div>
 										<a href="<?php echo $url; ?>"><div class="black height_setup"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></div>
 										
-										</a><div style="font-size: 11px;line-height: 12px;"><?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
+										</a><div style="font-size: 11px;line-height: 12px;">
+										<?php 
+										$fullname =$this->subdomain->process_url_title($quest_list['fullname']);
+										if($logged_user_id==$quest_list['id'])		
+										{
+										$user_link=$base.'home';
+										}
+										else
+										{
+										$user_link=$base.'user/'.$quest_list['id'].'/'.$fullname;
+										}
+										if($quest_list['fullname']!='') {
+										echo 'Asked by :';
+										?>
+										<a href="<?php echo  $user_link;?>" target="_blank"><?php echo $quest_list['fullname']; ?></a>
+										<?php }
+										else
+										{
+										echo 'Asked by :Name Not Available'; 
+										}
+										 ?>
 										</div>
 										<div style="font-size: 11px;line-height: 12px;">
 										<?php
@@ -427,54 +447,6 @@ $select_female='';
 										
 										</div>
 										<div class="clearfix"></div>
-											
-				<?php /*if(!empty($featured_question_profile))
-				{
-				$a=0;
-				$url = "";
-				foreach($featured_question_profile['quest_detail'] as $quest_list)
-				{
-				if($quest_list['q_univ_id'] != '0')
-				{
-					$question_title = str_replace(' ','-',$quest_list['q_title']);
-					$univ_domain=$quest_list['subdomain_name'];
-					$quest_title=$quest_list['q_title'];
-					$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
-					$url = $que_link;
-				}
-				else if($quest_list['q_country_id'] != '0')
-				{
-					$url = "";
-				}
-				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
-				{
-					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$quest_list['q_title'];
-				}
-				$q_date = explode(" ",$quest_list['q_asked_time']);
-				$quest_ask_date = explode("-",$q_date[0]);
-				$q_month = $quest_ask_date[1];
-				$quest_month = date('M', strtotime($q_month . '01'));
-				
-				//print_r($quest_ask_date[2]);
-				?>
-				
-
-										
-										<a href="<?php echo $url; ?>"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a>
-										<?php echo $quest_list['fullname']?'Asked by '.$quest_list['fullname']:'Name Not Available'; ?>
-										<div>
-										<?php echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
-										echo $quest_month?$quest_month.', ':'';
-										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
-										echo "Totoal Answer - ".$featured_question_profile['ans_count'][$a];
-										?><
-										/div>
-									
-									
-				
-				<?php
-					} $a++; } else { echo "No Latest Questions Available"; } */
-				?>
 										
 									</div>
 								</div>

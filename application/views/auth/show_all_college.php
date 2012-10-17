@@ -5,7 +5,7 @@ $this->session->unset_userdata('follow_to_univ');
 //print_r($get_university['university']); ?>
 <div class="container">
 		<div class="body_bar"></div>
-		<div class="body_header"></div>
+		<div class="body_header"></div> 
 		<div class="body">
 			<div class="row margin_t1">
 				<div class="float_l span12 margin_l">
@@ -267,7 +267,7 @@ $this->session->unset_userdata('follow_to_univ');
 											</div>
 											<div class="last_box_col float_r">
 												<img src="<?php echo "$base$img_path"; ?>/add.png" class="img_set">
-				<span class="margin_l follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
+				<span class="margin_l margin_t1 follow_univ_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" onclick="follow_university('<?php echo $get_university['university'][$no_university]['univ_id']; ?>','<?php echo $get_university['followers'][$no_university]; ?>')" style="cursor:pointer;">
 												<?php if($get_university['is_already_follow'][$no_university]=='0'){ ?>Follow<?php } else { ?>Unfollow<?php } ?>
 									   </span>
 		<input type="hidden" id="follow_count_<?php echo $get_university['university'][$no_university]['univ_id']; ?>" value="<?php echo $get_university['followers'][$no_university]; ?>">								
@@ -345,20 +345,23 @@ function follow_university(univ_id,follow_count)
 			$('.search_chkbox').click(function(e) {
 			if($(this).is(':checked'))
 			{
-			lastcharhref=href.charAt( href.length-1); 
-			addhref=$(this).closest("li").attr("href");
-			if(lastcharhref=='/')
-			{
-			addhref=addhref.substr(1);
-			}
-			href = href+addhref;
+				lastcharhref=href.charAt( href.length-1); 
+				addhref=$(this).closest("li").attr("href");
+				if(lastcharhref=='/')
+				{
+					addhref=addhref.substr(1);
+				}
+				href = href+addhref;			
 			}
 			else
 			{
-			//alert($(this).closest("li").attr("id"));
-			href=href.replace($(this).closest("li").attr("href"),'');
+				href=href.replace($(this).closest("li").attr("href"),'');
 			}
-			history.pushState('',href,href);
+			var browservalue = navigator.userAgent.toUpperCase();
+			if(browservalue .indexOf("MSIE") > -1)
+				window.location.replace(href);
+			else 
+				window.history.pushState('',href,href);		
 			get_college_result_by_ajax();
 			});
 		});

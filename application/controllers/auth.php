@@ -1413,10 +1413,28 @@ class Auth extends CI_Controller
    
    function savepic()
    {
-  
+	$email='sumitmunjal1@sdasdasdasddf.com';
    // $url = 'http://inchoo.net/wp-content/uploads/2011/01/fbconnect.gif';
 	//$img = '../abcde.gif';
 	//file_put_contents($img, file_get_contents($url));
+	
+    $email = htmlspecialchars(stripslashes(strip_tags($email))); //parse unnecessary characters to prevent exploits
+    
+    if ( eregi ( '[a-z||0-9]@[a-z||0-9].[a-z]', $email ) ) 
+	{ //checks to make sure the email address is in a valid format
+    $domain = explode( "@", $email ); //get the domain name
+        if ( @fsockopen ($domain[1],80,$errno,$errstr,3)) 
+		{
+            //if the connection can be established, the email address is probably valid
+			echo ":)";
+            return true;
+        } else 
+		{
+		echo ":(";
+            return false; //if a connection cannot be established return false
+        }
+    return false; //if email address is an invalid format return false
+}
    }
 }
 /* End of file auth.php */

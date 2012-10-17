@@ -177,7 +177,7 @@ if ($user) {
 									</span></a>
 							</div>
 								<div class="blue">
-									<span><?php echo "by&nbsp;".$quest_list['fullname']."&nbsp,";?>
+									<span><?php echo "by&nbsp;".$quest_list['fullname'].",";?>
 									</span>
 										
 											<abbr class="timeago time_ago" title="<?php echo $quest_list['q_asked_time']; ?>"></abbr>,

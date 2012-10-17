@@ -232,7 +232,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div id="gp" class="float_l">
 								<g:plusone size='medium' id='shareLink' annotation='none' href='<?php $_SERVER["REQUEST_URI"]; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
 							</div>
-							<div id="tw" class="float_l tw"><a href="https://twitter.com/share" class="twitter-share-button" data-via="munjal_sumit" data-count="none">Tweet</a>
+							<div id="tw" class="float_l tw"><a href="https://twitter.com/share" class="twitter-share-button"  data-count="none">Tweet</a>
 							</div>
 							<div id="fb" class="float_r fb"><div class="fb-like" data-href="<?php $_SERVER["REQUEST_URI"]; ?>" data-send="false" data-layout="button_count" data-width="10" data-show-faces="true" ></div>
 							</div>
