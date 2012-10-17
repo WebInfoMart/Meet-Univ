@@ -94,7 +94,7 @@ class Quest_ans_controler extends CI_Controller
 			 $config['smtp_pass'] = $this->config->item('smtp_pass');
 			 $this->email->initialize($config);    
 			 $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');						
-			 $this->email->to('kulbir@webinfomart.com');				
+			 $this->email->to('dev@meetuniversities.com');				
 			 $this->email->subject(ucwords($result['fullname']).' just asked a Question');
 			 $message = $email_body ;
 			 $this->email->message($message);

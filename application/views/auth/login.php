@@ -71,7 +71,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 <div class="modal" id="show_success" style="display:none;" >
   <div  class="modal-header">
    <a  class="close" data-dismiss="modal">x</a>
-    <h3>You are one step away from signing up at Meet Universities. Please check your email and activate your account.</h3>
+    <h3>You are one step away from connecting with your dream university. Please check your email and activate your account.</h3>
 	<a href="<?php $base;?>auth/activation_mail_resend/<?php echo $this->session->flashdata('userid');?>">Send Email again if not received!!</a>
   </div>
 </div>
