@@ -255,11 +255,11 @@ if(!empty($events))
 //$count_event_date = 1;										  
 foreach($events['event_res'] as $event_detail){
 $var_date = '';
-																	
-											?>
-									<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
-										<div>
-											<div class="float_l span7 margin_zero">
+			
+?>
+<div class="events_listing padding margin_t" date="<?php echo date("d-m-Y", strtotime($event_detail['event_date_time'])); ?>" country="<?php echo $event_detail['country_name']; ?>" univ_name="<?php echo $event_detail['univ_name']; ?>">
+<div>
+<div class="float_l span7 margin_zero">
 		<?php
 		$univ_domain=$event_detail['subdomain_name'];
 		$event_title=$event_detail['event_title'];
@@ -296,11 +296,11 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 											</div>
 											<?php 
 											//if($event_detail['event_id'] == 55) { ?>
-											<!--<div class="float_r">
-												<a onclick="voicepopup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
-													<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
-													<a href="<?php echo $event_link; ?>"><img src="<?php echo $base; ?>images/map.png" title="Map" alt="Map"></a>
-											</div>-->
+											<div class="float_r">
+											<!--	<a onclick="voicepopup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
+													<a onclick="popup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php //echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
+													<a href="<?php //echo $event_link; ?>"><img src="<?php //echo $base; ?>images/map.png" title="Map" alt="Map"></a>-->
+											</div>
 											<?php // } ?>
 											<div class="clearfix"></div>
 										</div>
@@ -342,7 +342,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 								//echo $extract_date[2];
 								//echo $var = "'".$extract_dates[0].'/'.$extract_dates[1].'/'.$extract_dates[2]."'";
 											?>
-												<h4 class="blue line_time"><?php echo $extract_dates[0].' '.$extract_dates[1].', '.$extract_dates[2];
+												<h4 class="blue line_time"><?php echo $extract_dates[0].' '.$extract_dates[1].', '.$extract_dates[2].','.$event_detail['event_time'];
 												
 												 ?></h4>
 												<h5 class="line_time">
@@ -406,12 +406,7 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain
 										<div class="clearfix"></div>
 									</div>
 									<?php } } ?>
-								</div>
-								
-								
-								
-								
-								
+								</div>							
 							</div>
 						</div>	
 						</div>
@@ -481,9 +476,9 @@ $number_month = date('m');
 <SCRIPT LANGUAGE="JavaScript"> 
     
  function popup(id) {
- /* $('#myModal').modal({
+ $('#myModal').modal({
         keyboard: false
-    }) */
+    }) 
   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>leadcontroller/sms_me_event_ajax",
@@ -498,10 +493,10 @@ $number_month = date('m');
 		  "keyboard"  : true,
 		  "show"      : true                     
 		});
-		/* $('#myModal').modal({
+	 $('#myModal').modal({
         keyboard: false
-    }) */
-	  //$('#search_program').html(msg);
+    }) 
+	  $('#search_program').html(msg);
 	   }
 	   }) 
 //alert(id);
@@ -513,9 +508,9 @@ window.open(URL, 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resiza
 } 
 
 function voicepopup(id) {
- /* $('#myModal').modal({
+  $('#myModal').modal({
         keyboard: false
-    }) */
+    }) 
   $.ajax({
 	   type: "POST",
 	   url: "<?php echo $base; ?>leadcontroller/sms_voice_me_event_ajax",
@@ -530,10 +525,10 @@ function voicepopup(id) {
 		  "keyboard"  : true,
 		  "show"      : true                     
 		});
-		/* $('#myModal-voice').modal({
+	$('#myModal-voice').modal({
         keyboard: false
-    }) */
-	  //$('#search_program').html(msg);
+    }) 
+	  $('#search_program').html(msg);
 	   }
 	   }) 
 }

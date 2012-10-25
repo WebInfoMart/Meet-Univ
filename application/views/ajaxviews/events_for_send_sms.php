@@ -112,12 +112,14 @@ foreach($event_info_sms as $event_sms)
 	</div>
 	<span style='margin-left: 29px;'><input type='hidden' name='event_id_sms' id='event_id_sms' value='$event_id'/></span>
 	
-	
+	<input type='hidden' name='event_univ' value='$event_sms[univ_name]'>
 	<input type='hidden' name='event_title' value='$event_sms[event_title]'>
+	<input type='hidden' name='event_category' value='$event_sms[event_category]'>
 	<input type='hidden' name='event_date' value='$event_sms[event_date_time]'>
 	<input type='hidden' name='event_time' value='$event_sms[event_time]'>
 	<input type='hidden' name='event_place' value='$event_sms[event_place]'>
 	<input type='hidden' name='event_city' value='$event_sms[cityname]'>
+	<input type='hidden' name='event_country' value='$event_sms[country_name]'>
 	</div>
 	<div class='float_r' style='margin-right: 84px;'>
 	<img src='$base/images/grammargirlavatar.jpg' style='width: 120px;height: 130px;'/>

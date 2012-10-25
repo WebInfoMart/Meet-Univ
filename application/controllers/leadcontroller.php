@@ -47,51 +47,55 @@ class Leadcontroller extends CI_Controller
 		$college_for_apply = $this->session->userdata('apply_college');
 		$data['selected_university_name_by_step'] = $this->leadmodel->get_university_title_by_id($college_for_apply);
 		}
+		$user_id	= $this->tank_auth->get_user_id();										// Edit by Satbir on 19/10/2012
+		$user_data = $this->users->fetch_profile($user_id);
+		
+		$data['user_data'] = $user_data;
 		if($this->input->post('process_step_one'))
 		{
-		$this->form_validation->set_rules('first_name','First Name','trim|xss_clean|required');
-		$this->form_validation->set_rules('last_name','Last Name','trim|xss_clean|required');
-		$this->form_validation->set_rules('dob_day','DOB Day','trim|xss_clean|integer|required');
-		$this->form_validation->set_rules('dob_year','DOB Year','trim|xss_clean|integer|required');
-		$this->form_validation->set_rules('step_email','Email','trim|xss_clean|required|valid_email');
-		$this->form_validation->set_rules('phone','Phone','trim|xss_clean|integer|required');
-		$this->form_validation->set_rules('iagree','I agree','trim|xss_clean|required');
-		if($this->form_validation->run())
-		{
-			
-			$this->session->set_userdata('sess_lead_email',$this->input->post('step_email'));
-			$condition = array(
-			'home_country_id' => $this->input->post('home_country'),
-			'email' => $this->input->post('step_email'),
-			'title'=> $this->input->post('title'),
-			'fullname'=> $this->input->post('first_name').' '.$this->input->post('last_name'),
-			'dob'=> $this->input->post('dob_year').'-'.$this->input->post('dob_month').'-'.$this->input->post('dob_day'),
-			'phone_type1'=> $this->input->post('phone_type'),
-			'phone_no1'=> $this->input->post('phone')
-			);
-			
-			$insert_type = '1';
-			$data['insert_step_one_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);			
-			if($data['insert_step_one_data'] != 0)
+			$this->form_validation->set_rules('first_name','First Name','trim|xss_clean|required');
+			//$this->form_validation->set_rules('last_name','Last Name','trim|xss_clean|required');				//Commented by satbir
+			$this->form_validation->set_rules('dob_day','DOB Day','trim|xss_clean|integer|required');
+			$this->form_validation->set_rules('dob_year','DOB Year','trim|xss_clean|integer|required');
+			$this->form_validation->set_rules('step_email','Email','trim|xss_clean|required|valid_email');
+			$this->form_validation->set_rules('phone','Phone','trim|xss_clean|integer|required');
+			$this->form_validation->set_rules('iagree','I agree','trim|xss_clean|required');
+			if($this->form_validation->run())
 			{
-			$this->session->set_userdata('current_insert_lead_id', $data['insert_step_one_data']);
-			$id_for_session = array(
-			'level_steps'=>'2'
-			);
-			$this->session->set_userdata($id_for_session);
-			}
-			$this->load->view('auth/step_two',$data);
-			
+				
+				$this->session->set_userdata('sess_lead_email',$this->input->post('step_email'));
+				$condition = array(
+				'home_country_id' => $this->input->post('home_country'),
+				'email' => $this->input->post('step_email'),
+				'title'=> $this->input->post('title'),
+				'fullname'=> $this->input->post('first_name'),										//commented by satbir		.' '.$this->input->post('last_name'),
+				'dob'=> $this->input->post('dob_year').'-'.$this->input->post('dob_month').'-'.$this->input->post('dob_day'),
+				'phone_type1'=> $this->input->post('phone_type'),
+				'phone_no1'=> $this->input->post('phone')
+				);
+				
+				$insert_type = '1';
+				$data['insert_step_one_data'] = $this->leadmodel->insert_data_lead_data($condition,$insert_type);			
+				if($data['insert_step_one_data'] != 0)
+				{
+				$this->session->set_userdata('current_insert_lead_id', $data['insert_step_one_data']);
+				$id_for_session = array(
+				'level_steps'=>'2'
+				);
+				$this->session->set_userdata($id_for_session);
+				}
+				$this->load->view('auth/step_two',$data);
+				
 			}
 			else{
-						$errors = $this->tank_auth->get_error_message();
-						foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
-						
-						$this->load->view('auth/step_one',$data);
+				$errors = $this->tank_auth->get_error_message();
+				foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
+				
+				$this->load->view('auth/step_one',$data);
 			}
 		}
-		 else if($this->input->post('submit_step_data'))
-		 {
+		else if($this->input->post('submit_step_data'))
+		{
 			
 			$this->form_validation->set_rules('interest_study_country','Interested Country','trim|xss_clean|required');
 		
@@ -197,6 +201,29 @@ class Leadcontroller extends CI_Controller
 				
 				
 			} */
+														/* Added by Satbir on 17/10/2012 (code start)*/
+			$uni_name = $this->leadmodel->get_university_name_by_id($insert_val); 
+			$uni_name_list_arr=array();
+			foreach($uni_name as $index => $uni_name_arr)
+			{
+				$uni_name_list_arr[] = $uni_name_arr['univ_name'];
+			}
+			$uni_name_list = implode($uni_name_list_arr,",");
+			$data['uni_name_list'] = $uni_name_list;
+			$user_email = $this->session->userdata('sess_lead_email');
+			$config['protocol'] = $this->config->item('mail_protocol');
+			$config['smtp_host'] = $this->config->item('smtp_server');
+			$config['smtp_user'] = $this->config->item('smtp_user_name');
+			$config['smtp_pass'] = $this->config->item('smtp_pass');
+			$this->email->initialize($config);    
+			$this->email->from('info@meetuniversities.com', 'MeetUniversities.com');
+			$this->email->to($user_email);
+			$this->email->subject('Applied Collages and Univercities | MeetUniversities.com');
+			$email_body = $this->load->view('auth/email_templates/search_apply_collage_notification',$data,TRUE);
+			$message = $email_body ;
+			$this->email->message($message);
+			$this->email->send();
+													/* Added by Satbir on 17/10/2012 (code end)*/
 			$set_session_data_to_blank = array(
 				'current_insert_lead_id'=>'',
 				'current_insert_lead_email'=>'',
@@ -238,6 +265,7 @@ class Leadcontroller extends CI_Controller
 		}
 		$this->load->view('auth/footer',$data);
 	}
+	
 	
 	function EventRegistration()
 	{
@@ -344,14 +372,34 @@ class Leadcontroller extends CI_Controller
 		$event_time = $this->input->post('event_time');
 		$event_place = $this->input->post('event_place');
 		$event_city = $this->input->post('event_city');
+		$event_country=$this->input->post('event_country');
+		$event_univ=$this->input->post('event_univ');
+		$event_category=$this->input->post('event_category');
+		if($event_category == "spot_admission")
+		{
+			$event_category="Spot Admission";
+		} 
+		else if($event_category == "fairs")
+		{
+			$event_category="Fairs";
+		}
+		else if($event_category == "others")
+		{
+			$event_category="Counselling";
+		}
+		else if($event_category == "alumuni")
+		{
+			$event_category="Counselling";
+		}
 		
 		$msg_type = 'text';
 		/* $this->form_validation->set_rules('fullname','Name','required');
 		$this->form_validation->set_rules('dest','Mobile No','required|integer');
 		if($this->form_validation->run())
 		{ */
-		$message = urlencode('Event-  '.$event_title.'\n'.'  Date- '.$event_date.'\n'.' Time- '.$event_time.'\n'.' Place- '.$event_place.','.$event_city);
+		$message = urlencode('Time- '.$event_time.'\n'.'Date- '.$event_date.'\n'.'Place- '.$event_place.','.$event_country.'\n'.'Event-'.$event_univ.','.$event_category);
 		$url = "http://www.unicel.in/SendSMS/sendmsg.php?uname=$username&pass=$password&send=$send&dest=$destination&msg=$message";
+		//echo $url;exit;
 		$send_suc = file_get_contents($url);
 		$data['insert_in_user_aft_txt_msg'] = $this->leadmodel->insert_user_data_after_send_sms($msg_type);
 		//$red_url = $base.'msg_send_suc';
@@ -440,6 +488,7 @@ class Leadcontroller extends CI_Controller
 		$msg_type = 'voice';
 		
 		$url_execute = "http://www.hostedivr.in/obdapi/inserteventdata.php?uid=$username&pwd=$password&mobno=$destination&name=$subject_of_voice_sms&eventdate=$invited_date";
+		//echo $url_execute;exit;
 		//$url = "http://hostedivr.in/obdapi/callscheduling.php?uid=$username&pwd=$password&mobno=$destination&fid=$fid&schtime=$date_and_time";
 		//echo $year_call;
 		$url = str_replace(" ", "%20", $url_execute);

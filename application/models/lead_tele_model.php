@@ -397,8 +397,14 @@ class Lead_tele_model extends CI_Model
 		  $new_email_key=$this->users->get_new_email_key_by_userid($user_id);
           $data_email['new_email_key']=$new_email_key['new_email_key'];
 		  $data_email['user_id']=$user_id;
-		  $email_body = $this->load->view('auth/new_signup_email',$data_email,TRUE);
+		  $email_body = $this->load->view('auth/new_signup_email',$data_email,TRUE);		  
 		  $this->load->library('email');
+		   $config['protocol'] = $this->config->item('mail_protocol');
+		 $config['smtp_host'] = $this->config->item('smtp_server');
+		 $config['smtp_user'] = $this->config->item('smtp_user_name');
+		 $config['smtp_pass'] = $this->config->item('smtp_pass');
+		 $config['mailtype'] = 'html';
+		 $this->email->initialize($config);
           $this->email->set_newline("\r\n");
 		 
 		  $this->email->from('info@meetuniversities.com', 'Meet Universities');

@@ -516,7 +516,7 @@ class adminnews extends CI_Controller
 		if($data['admin_user_level']=='3')
 		{
 		$admin_univ_id=$this->newsmodel->fetch_univ_id($data['user_id']);
-		$news_list=$this->newsmodel->fetch_events_ids($admin_univ_id['univ_id']);
+		$news_list=$this->newsmodel->fetch_news_ids($admin_univ_id['univ_id']);
 		if(!in_array($news_id,$news_list))
 		{
 			$f=0;

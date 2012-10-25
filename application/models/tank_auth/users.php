@@ -1735,7 +1735,11 @@ class Users extends CI_Model
 	return 0;
 	}
  }
-
+function uni_data_by_uni_id($uni_id)  									//Added by Satbir on 17/10/2012    
+{
+		$query = $this->db->get_where('university',array('univ_id'=>$uni_id));
+		return $query->row_array();
+}
 }
 
 /* End of file users.php */

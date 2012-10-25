@@ -258,10 +258,10 @@ $this->session->unset_userdata('msg_send_suc_voice');
 						foreach($featured_events as $events) 
 						{
 						$univ_domain=$events['subdomain_name'];
-		$event_title=$events['event_title'];
-		$event_id=$events['event_id'];
-		
-		$event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
+						$event_title=$events['event_title'];
+						$event_id=$events['event_id'];
+						
+						$event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
 						
 						//if($featured_events != '' || $featured_events != '0') {
 						$date = explode(" ",$events['event_date_time']);
@@ -346,7 +346,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<h4 class="blue home_line"><?php 
 									echo $date[0]?$date[0]:'';
 									echo $date[1]?'&nbsp;'.$date[1]:'';
-									if($date[0]!='' || $date[1]!='') { echo ',&nbsp;&nbsp;'.$date[2];} else { echo ''; }
+									if($date[0]!='' || $date[1]!='') { echo ',&nbsp;'.$date[2].' '.$events['event_time'];} else { echo ''; }
 									?></h4>
 									<h4 class="home_line"><?php echo $events['event_place']?$events['event_place']:''; 
 									if($events['event_place']!='' && $events['cityname']!=''){ echo ',&nbsp;&nbsp;'.$events['cityname']; } else{ echo $events['cityname']; }
@@ -586,6 +586,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				{
 				$a=0;
 				$q_count = 0;
+				
 				foreach($get_latest_question_home['quest_detail'] as $quest_list)
 				{
 				if($q_count < 4)
@@ -628,24 +629,29 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
 										{
 										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-										
-											echo "<img src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."' class='latest_img' alt='Qusetion about universities' title='Qusetion about universities'/>";
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img src="<?php echo base_url();?>uploads/user_pic/thumbs/<?php echo $quest_list['user_thumb_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else{ echo 'No name'; } ?>" /></a>
+										<?php
 										}
 										else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
-										{
-											echo "<img src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."' class='latest_img' alt='Qusetion about universities' title='Qusetion about universities'/>";
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $quest_list['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
 										}
 										else if($user && $quest_list['q_askedby'] == $logged_user_id)
 										{
 										?>
-											<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="Qusetion about universities">
+											<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else { echo 'No name'; } ?>" /></a>
 										<?php
 										}
-										else{
-											echo "<img src='".base_url()."images/profile_icon.png'/>";
+										else
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img src="<?php echo base_url(); ?>images/profile_icon.png" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else { echo 'No name'; } ?>"/></a>
+										<?php
 										}
 										?>
 										</div>
+										
 										<div class="quest_fix">
 											<span><a href="<?php echo $url; ?>" class="black"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></a></span>
 										</div>
@@ -662,7 +668,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										$user_link=$base.'user/'.$quest_list['id'].'/'.$fullname;
 										}
 										?>
-										 <a href="<?php echo $user_link; ?>"  title="<?php echo $quest_list['fullname']; ?>"><?php echo $quest_list['fullname']; ?></a>
+										 <a href="<?php echo $user_link; ?>"  title="<?php echo $quest_list['fullname']; ?>"><?php echo ucwords($quest_list['fullname']); ?></a>
 										
 										<?php }
 										else {

@@ -290,7 +290,8 @@ required = ["event_fullname", "event_email", "event_phone"];
 	
 	/* Validation For Step One */
 	$("#frm_step_one").submit(function(){
-	required = ["so_first_name", "so_last_name", "so_dob_day", "so_dob_year", "so_phone", "so_email", "so_iagree", "so_country"];
+	//required = ["so_first_name", "so_last_name", "so_dob_day", "so_dob_year", "so_phone", "so_email", "so_iagree", "so_country"];  //Edit by Satbir on 19/10/2011
+	required = ["so_first_name", "so_dob_day", "so_dob_year", "so_phone", "so_email", "so_iagree", "so_country"];
 	email = $("#so_email");
 	errornotice = $("#error");
 	phone = $("#so_phone");

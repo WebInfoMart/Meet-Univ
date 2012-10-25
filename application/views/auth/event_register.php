@@ -86,7 +86,7 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="focusedInput">Phone</label>
+								<label class="control-label" maxlength="10" for="focusedInput">Phone</label>
 								<div class="controls">
 								<input type="text" class="input-xlarge focused" name="event_phone" id="event_phone" value="<?php if(!empty($get_info_logged_user)){echo $get_info_logged_user['mob_no']? $get_info_logged_user['mob_no']:'Phone';} ?>"/>
 <span style="color:red;"> <?php echo form_error('event_phone'); ?> <?php echo isset($errors['event_phone'])?$errors['event_phone'] : ''; ?>  </span>

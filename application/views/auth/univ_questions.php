@@ -35,28 +35,33 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$single_quest['user_thumb_pic_path']) && $single_quest['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img class='question_user' src='".base_url()."uploads/user_pic/thumbs/".$single_quest['user_thumb_pic_path']."'/>";
+							?>
+								<a href="<?php echo $base; ?>user/<?php echo $single_quest['id'];?>/<?php echo $single_quest['fullname'];?>"><img style='height:35px;width:35px;' src="<?php echo base_url(); ?>uploads/user_pic/thumbs/<?php echo $single_quest['user_thumb_pic_path']; ?>" title="<?php if(!empty($single_quest['fullname'])){ echo $single_quest['fullname']; } else{ echo 'No name'; } ?>"/></a>
+							<?php								
 							}
 							else if(file_exists(getcwd().'/uploads/user_pic/'.$single_quest['user_pic_path']) && $single_quest['user_pic_path']!='')
-							{
-								echo "<img class='question_user' src='".base_url()."uploads/user_pic/".$single_quest['user_pic_path']."'/>";
+							{ ?>
+								<a href="<?php echo $base; ?>user/<?php echo $single_quest['id'];?>/<?php echo $single_quest['fullname'];?>"><img style='height:35px;width:35px;' src="<?php  echo base_url(); ?>uploads/user_pic/<?php echo $single_quest['user_pic_path']; ?>" title="<?php if(!empty($single_quest['fullname'])){ echo ucwords($single_quest['fullname']); } else{ echo 'No name'; } ?>" /></a>
+							<?php
 							}
+							
 							else if($user && $single_quest['q_askedby'] == $logged_user_id)
 							{
 							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
+								<a href="<?php echo $base; ?>user/<?php echo $single_quest['id'];?>/<?php echo $single_quest['fullname'];?>"><img style='height:35px;width:35px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large" title="<?php if(!empty($single_quest['fullname'])){ echo ucwords($single_quest['fullname']); } else{ echo 'No name'; } ?>" /></a>
 							<?php
 							}
-							else{
-							echo "<img style='width:40px;height:40px;' src='".base_url()."images/profile_icon.png'/>";
+							else							
+							{ ?>
+							<a href="<?php echo $base; ?>user/<?php echo $single_quest['id'];?>/<?php echo $single_quest['fullname'];?>"><img style='height:35px;width:35px;' src="<?php echo base_url();?>images/profile_icon.png" title="<?php if(!empty($single_quest['fullname'])){ echo ucwords($single_quest['fullname']); } else{ echo 'No name'; } ?>"/></a>
+							<?php
 							}
 							?>
 							
 					</div>
 					<div>
-					<span class="heading_follow"> <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span>
-					<h4><?php echo "Asked By : "; echo $single_quest['fullname'] ? $single_quest['fullname'] : 'Name Not available'; ?></h4>
+					<span > <?php echo $single_quest['q_title'] ? $single_quest['q_title'] : 'Question Has been removed !' ; ?></span>
+					<h4><?php echo "Asked By : "; echo $single_quest['fullname'] ? ucwords($single_quest['fullname']) : 'Name Not available'; ?></h4>
 					<div><img src="<?php echo "$base$img_path" ?>/clock.png" class="line_img inline"><span class="line_time"><abbr class="timeago time_ago" title="<?php echo $single_quest['q_asked_time'] ?>"></abbr></span>
 					</div>
 					</div>
@@ -147,32 +152,33 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								</div>
 								<?php } else { ?>
 									<div class="events_box">
-										<div class="float_l">
-											<div class="comment_img">
-											
-											
-											
-											<?php
-							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_detail['user_thumb_pic_path']) && $user_detail['user_thumb_pic_path']!='' )
-							{
-							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$user_detail['user_thumb_pic_path']."'/>";
-							}
-							else if(file_exists(getcwd().'/uploads/user_pic/'.$user_detail['user_pic_path']) && $user_detail['user_pic_path']!='')
-							{
-								echo "<img src='".base_url()."uploads/user_pic/".$user_detail['user_pic_path']."'/>";
-							}
-							else if($user)
-							{
-							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-							<?php
-							}
-							else{
-							echo "<img src='".base_url()."images/profile_icon.png'/>";
-							}
-							?>
+									<div class="float_l">
+									<div class="comment_img">
+								<?php
+										if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_detail['user_thumb_pic_path']) && $user_detail['user_thumb_pic_path']!='' )
+										{
+										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src="<?php echo base_url();?>uploads/user_pic/thumbs/<?php echo $user_detail['user_thumb_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else{ echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$user_detail['user_pic_path']) && $user_detail['user_pic_path']!='')
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $user_detail['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if($user && $user_detail['q_askedby'] == $logged_user_id)
+										{
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src="<?php echo base_url(); ?>images/profile_icon.png" title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>"/></a>
+										<?php
+										}
+										?>
 							<div style='width: 46px;position: absolute;' class="center">
 								<?php
 								if($user_detail['fullname'] !='')

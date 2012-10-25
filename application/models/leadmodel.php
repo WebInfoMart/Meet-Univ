@@ -212,7 +212,18 @@ class Leadmodel extends CI_Model
 		return 0;
 		}
 	}
-	
+	function get_university_name_by_id($college_id_for_apply)					// Added by Satbir on 17/10/2012
+	{ 
+		$arr=explode(',',$college_id_for_apply);
+		$this->db->select('univ_name');
+		$this->db->from('university');
+		$this->db->where_in('univ_id',$arr);
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+			return $query->result_array();
+		else 
+			return 0;
+	}
 	function event_registration($logged_user_id,$university_id,$event_id)
 	{
 		$fullname = $this->input->post('event_fullname');
@@ -241,12 +252,18 @@ class Leadmodel extends CI_Model
 			}
 			else
 			{
-				$user_insert_clause = array(
-				'fullname'=>$fullname,
-				'email'=>$email,
-				'user_type'=> "event_user"
+				$password=rand(14543423,64543423);
+				$hashed_password=$this->tank_auth->genrate_hash_passsword($password);
+				$site_user_data = array(
+				'fullname'	=> $fullname,				
+				'level'     => '1',
+				'password'	=> $hashed_password,
+				'email'		=> $email,				
+				'user_type' => 'event_user'
 				);
-				if($this->db->insert('users',$user_insert_clause))
+				$site_user_data['new_email_key'] = md5(rand().microtime());				
+	
+				if($this->db->insert('users',$site_user_data))
 				{
 					$current_user_table_insert_id = $this->db->insert_id();
 					$user_profile_clause = array(
@@ -254,11 +271,33 @@ class Leadmodel extends CI_Model
 					'mob_no'=>$phone,
 					'full_name'=>$fullname,
 					'email_as_lead'=>$email
-					);
-			
-			$this->db->insert('user_profiles',$user_profile_clause);
+					);					
+					$this->db->insert('user_profiles',$user_profile_clause);
 			
 				}
+					$data_email = $this->path->all_path();
+					$data_email['password']=$password;
+					$data_email['fullname']=$fullname;
+					$new_email_key=$this->users->get_new_email_key_by_userid($current_user_table_insert_id);
+					$data_email['new_email_key']=$new_email_key['new_email_key'];
+					$data_email['user_id']=$current_user_table_insert_id;
+					$email_body = $this->load->view('auth/new_signup_email',$data_email,TRUE);
+						//echo $email_body;exit;
+					$this->load->library('email');
+					$config['protocol'] = $this->config->item('mail_protocol');
+					$config['smtp_host'] = $this->config->item('smtp_server');
+					$config['smtp_user'] = $this->config->item('smtp_user_name');
+					$config['smtp_pass'] = $this->config->item('smtp_pass');
+					$config['mailtype'] = 'html';
+					$this->email->initialize($config);
+					//$this->email->set_newline("\r\n");
+					$this->email->from('info@meetuniversities.com', 'Meet Universities');
+					$this->email->to($email);
+					$this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
+					$message = $email_body ;
+					$this->email->message($message);
+					$this->email->send();
+					
 			}
 			$value_for_lead_table = array(
 			'user_id'=>$current_user_table_insert_id,

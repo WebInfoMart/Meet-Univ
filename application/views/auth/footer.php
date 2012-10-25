@@ -30,7 +30,7 @@ $fetch_area_interest = $this->frontmodel->fetch_area_interest_having_univ_footer
 						foreach($fetch_country as $country)
 						{
 						?>
-							<li><a href="<?php echo "$base"; ?>colleges/<?php echo $country['country_name']; ?>"><?php echo $country['country_name']; ?></a></li>
+							<li><a href="<?php echo "$base"; ?>colleges/<?php echo str_replace(' ','_',trim($country['country_name'])); ?>"><?php echo $country['country_name']; ?></a></li>
 						<?php } } ?>
 						<!--<li style="margin-left: -26px;"><a href="#"> >>>More Countries<<< </a></li>-->
 						</ul>
@@ -103,7 +103,7 @@ var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
   var htime = d.getHours();
   if(htime<18)
   {
-  chatWith('Counselor_break_1212111_12121');
+  //chatWith('Counselor_break_1212111_12121');
   }
   }
 function getChatCookie(c_name)
@@ -165,8 +165,8 @@ var d = new Date();
 var htime = d.getHours();
 if(htime<18)
 {
-checkChatCookie();
-setInterval("checkChatCookie()", 5000);
+//checkChatCookie();
+//setInterval("checkChatCookie()", 5000);
 }
 </script>	
 <script type="text/javascript">

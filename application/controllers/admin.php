@@ -18,6 +18,7 @@ class Admin extends CI_Controller
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
 		$this->load->library('googleanalytics');
+		$this->load->model('admin/admindash');
 	
 		
 	}
@@ -45,14 +46,17 @@ class Admin extends CI_Controller
    }
    else
    {
- //$data['university_id']=2;
+ 
  $data['university_id']=$data['univ_detail_edit'][0]->univ_id;
- $data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
- $data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
- $data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
- $data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
- $data['fetch_recent_five_question']=$this->dashboard->fetch_recent_five_question($data['university_id']);
- $data['recent_followers_of_univ']=$this->dashboard->recent_followers_of_univ($data['university_id']); 
+ //$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
+ //$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
+// $data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
+ //$data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
+  $data['recent_leads']=$this->admindash->recent_leads($data['university_id']);//new
+ $data['recent_questions']=$this->admindash->fetch_recent_five_question();//new
+ $data['unasnwered']=$this->admindash->unasnwered();//new
+ $data['recent_followers_of_univ']=$this->admindash->recent_followers_of_univ($data['university_id']); //new
+$data['recent_articles']=$this->admindash->recent_articles($data['university_id']);//new	
    }
    }
    if($data['admin_user_level']=='5')
@@ -74,14 +78,14 @@ class Admin extends CI_Controller
     redirect('admin/adminlogout');
    }
    //fetch user privilege data from model
-   $this->load->view('admin/header', $data);
+   $this->load->view('univadmin/header', $data);
    if($flag==0)
    {
-   $this->load->view('admin/sidebar', $data); 
+   $this->load->view('univadmin/sidebar', $data); 
    }
    if($data['admin_user_level']!='5')
    {
- $this->load->view('admin/main', $data);
+ $this->load->view('univadmin/admin_dash', $data);
    }
     if($data['admin_user_level']=='5')
    {
@@ -90,7 +94,7 @@ class Admin extends CI_Controller
    $this->googleanalytics->setProfile('ga:60386809');
    $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
    $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
-   $this->load->view('admin/adminhome', $data);
+   $this->load->view('univadmin/superadmin_home', $data);
    }
    
    if($msg=='uus')
@@ -100,15 +104,7 @@ class Admin extends CI_Controller
    }   
   }
  }
-
-	/**
-	 * Login user on the site
-	 *
-	 * @return void
-	 */
-	 
-	 
-	 
+  
 	function adminlogin()
 	{
 		$data = $this->path->all_path();
@@ -133,13 +129,6 @@ class Admin extends CI_Controller
 				$login = '';
 			}
 
-			//$data['use_recaptcha'] = $this->config->item('use_recaptcha', 'tank_auth');
-			/*if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
-				if ($data['use_recaptcha'])
-					$this->form_validation->set_rules('recaptcha_response_field', 'Confirmation Code', 'trim|xss_clean|required|callback__check_recaptcha');
-				else
-					$this->form_validation->set_rules('captcha', 'Confirmation Code', 'trim|xss_clean|required|callback__check_captcha');
-			}*/
 			$data['errors'] = array();
 
 			if ($this->form_validation->run()) {								// validation ok
@@ -168,39 +157,18 @@ class Admin extends CI_Controller
 					}
 				}
 			}
-			/*$data['show_captcha'] = FALSE;
-			if ($this->tank_auth->is_max_login_attempts_exceeded($login)) {
-				$data['show_captcha'] = TRUE;
-				if ($data['use_recaptcha']) {
-					$data['recaptcha_html'] = $this->_create_recaptcha();
-				} else {
-					$data['captcha_html'] = $this->_create_captcha();
-				}
-			}*/
-		//	$this->load->view('auth/login', $data);
+			
 		}
 		$this->load->view('admin/backend',$data);
 	}
 
-	/**
-	 * Logout user
-	 *
-	 * @return void
-	 */
 	function adminlogout()
 	{
 		$this->tank_auth->adminlogout();
 		redirect('admin');
-		//$this->_show_message($this->lang->line('auth_message_logged_out'));
+		
 	}
 
-	
-	
-	/**
-	 * Register user on the site
-	 *
-	 * @return void
-	 */
 	function adduser()
 	{
 	if (!$this->tank_auth->is_admin_logged_in()) {

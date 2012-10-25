@@ -84,37 +84,42 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 						<div class="event_border find_comment hover_delete_comment_<?php echo $article_comment_detail['comment_id']; ?>">
 							<div class="float_l comment_img">
 								<?php
-							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$article_comment_detail['user_thumb_pic_path']) && $article_comment_detail['user_thumb_pic_path']!='' )
-							{
-							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$article_comment_detail['user_thumb_pic_path']."'/>";
-							}
-							else if(file_exists(getcwd().'/uploads/user_pic/'.$article_comment_detail['user_pic_path']) && $article_comment_detail['user_pic_path']!='')
-							{
-								echo "<img src='".base_url()."uploads/user_pic/".$article_comment_detail['user_pic_path']."'/>";
-							}
-							else if($user && $article_comment_detail['commented_by'] == $logged_user_id)
-							{
-							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-							<?php
-							}
-							else{
-							echo "<img src='".base_url()."images/profile_icon.png'/>";
-							}
-							?>
+						if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$article_comment_detail['user_thumb_pic_path']) && $article_comment_detail['user_thumb_pic_path']!='' )
+										{
+										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $article_comment_detail['id'];?>/<?php echo $article_comment_detail['fullname'];?>"><img src="<?php echo base_url();?>uploads/user_pic/thumbs/<?php echo $article_comment_detail['user_thumb_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($article_comment_detail['fullname'])){ echo ucwords($article_comment_detail['fullname']); } else{ echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$article_comment_detail['user_pic_path']) && $article_comment_detail['user_pic_path']!='')
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $article_comment_detail['id'];?>/<?php echo $article_comment_detail['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $article_comment_detail['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($article_comment_detail['fullname'])){ echo ucwords($article_comment_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if($user && $article_comment_detail['q_askedby'] == $logged_user_id)
+										{
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $article_comment_detail['id'];?>/<?php echo $article_comment_detail['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($article_comment_detail['fullname'])){ echo ucwords($article_comment_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $article_comment_detail['id'];?>/<?php echo $article_comment_detail['fullname'];?>"><img src="<?php echo base_url(); ?>images/profile_icon.png" title="<?php if(!empty($article_comment_detail['fullname'])){ echo ucwords($article_comment_detail['fullname']); } else { echo 'No name'; } ?>"/></a>
+										<?php
+										}
+										?>
 							<h4 class="center">
-								<?php if($article_comment_detail['commented_by_user_name'] !=''){
-									echo $article_comment_detail['commented_by_user_name']; 
+								<?php if($article_comment_detail['commented_by_user_name'] !='')
+								{
+									echo ucwords($article_comment_detail['commented_by_user_name']); 
 									}
 									else if($article_comment_detail['fullname'] !='')
 									{
-										echo $article_comment_detail['fullname'];
+										echo ucwords($article_comment_detail['fullname']);
 									}
 									else if($user)
 									{
-										echo $user_profile['name'];
+										echo ucwords($user_profile['name']);
 									} ?>
 							</h4>
 							</div>

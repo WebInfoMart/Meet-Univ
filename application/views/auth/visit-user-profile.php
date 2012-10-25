@@ -87,7 +87,7 @@ if ($user) {
 							<?php 
 							if($detail_visited_user['fullname'] != '')
 							{
-							echo $detail_visited_user['fullname']; 
+							echo ucwords($detail_visited_user['fullname']); 
 							}
 							?>
 							</h3>
@@ -314,22 +314,26 @@ if ($user) {
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+							?>
+								<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="<?php echo base_url(); ?>uploads/user_pic/thumbs/<?php echo $quest_list['user_thumb_pic_path']; ?>" title="<?php if(!empty($quest_list['fullname'])){ echo $quest_list['fullname']; } else{ echo 'No name'; } ?>"/></a>
+							<?php								
 							}
 							else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
-							{
-								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+							{ ?>
+								<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="<?php  echo base_url(); ?>uploads/user_pic/<?php echo $quest_list['user_pic_path']; ?>" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else{ echo 'No name'; } ?>" /></a>
+							<?php
 							}
 							
 							else if($user && $quest_list['q_askedby'] == $logged_user_id)
 							{
 							?>
-								<img style='height:35px;width:35px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+								<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else{ echo 'No name'; } ?>" /></a>
 							<?php
 							}
-							else{
-							echo "<img style='height:35px;width:35px;' src='".base_url()."images/profile_icon.png'/>";
+							else							
+							{ ?>
+							<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="<?php echo base_url();?>images/profile_icon.png" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else{ echo 'No name'; } ?>"/></a>
+							<?php
 							}
 							?>
 										</div>
@@ -349,7 +353,7 @@ if ($user) {
 										if($quest_list['fullname']!='') {
 										echo 'Asked by :';
 										?>
-										<a href="<?php echo  $user_link;?>" target="_blank"><?php echo $quest_list['fullname']; ?></a>
+										<a href="<?php echo  $user_link;?>" target="_blank"><?php echo ucwords($quest_list['fullname']); ?></a>
 										<?php }
 										else
 										{

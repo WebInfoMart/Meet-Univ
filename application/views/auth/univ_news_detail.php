@@ -86,36 +86,40 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 								
 								<?php
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$news_comments_detail['user_thumb_pic_path']) && $news_comments_detail['user_thumb_pic_path']!='' )
-							{
-							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$news_comments_detail['user_thumb_pic_path']."'/>";
-							}
-							else if(file_exists(getcwd().'/uploads/user_pic/'.$news_comments_detail['user_pic_path']) && $news_comments_detail['user_pic_path']!='')
-							{
-								echo "<img src='".base_url()."uploads/user_pic/".$news_comments_detail['user_pic_path']."'/>";
-							}
-							else if($user && $news_comments_detail['commented_by'] == $logged_user_id)
-							{
-							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-							<?php
-							}
-							else{
-							echo "<img src='".base_url()."images/profile_icon.png'/>";
-							}
-							?>
+										{
+										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $news_comments_detail['id'];?>/<?php echo $news_comments_detail['fullname'];?>"><img src="<?php echo base_url();?>uploads/user_pic/thumbs/<?php echo $news_comments_detail['user_thumb_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($news_comments_detail['fullname'])){ echo ucwords($news_comments_detail['fullname']); } else{ echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$news_comments_detail['user_pic_path']) && $news_comments_detail['user_pic_path']!='')
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $news_comments_detail['id'];?>/<?php echo $news_comments_detail['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $news_comments_detail['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($news_comments_detail['fullname'])){ echo ucwords($news_comments_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if($user && $news_comments_detail['q_askedby'] == $logged_user_id)
+										{
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $news_comments_detail['id'];?>/<?php echo $news_comments_detail['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($news_comments_detail['fullname'])){ echo ucwords($news_comments_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $news_comments_detail['id'];?>/<?php echo $news_comments_detail['fullname'];?>"><img src="<?php echo base_url(); ?>images/profile_icon.png" title="<?php if(!empty($news_comments_detail['fullname'])){ echo ucwords($news_comments_detail['fullname']); } else { echo 'No name'; } ?>"/></a>
+										<?php
+										}
+										?>
 								<h4 class="center">
 								<?php if($news_comments_detail['commented_by_user_name'] !=''){
-									echo $news_comments_detail['commented_by_user_name']; 
+									echo ucwords($news_comments_detail['commented_by_user_name']); 
 									}
 									else if($news_comments_detail['fullname'] !='')
 									{
-										echo $news_comments_detail['fullname'];
+										echo ucwords($news_comments_detail['fullname']);
 									}
 									else if($user)
 									{
-										echo $user_profile['name'];
+										echo ucwords($user_profile['name']);
 									} ?>
 								</h4>
 								</div>

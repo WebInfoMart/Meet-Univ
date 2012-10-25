@@ -213,10 +213,18 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 						<div>
 							<ul class="event_new">
 								<?php 
+								$cc=0;
 								if(!empty($featured_events))
 								{
+								
 									foreach($featured_events as $home_feature_event) 
 									{ 
+									$univ_domain=$home_feature_event['subdomain_name'];
+					$event_link_register=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event','','');		
+
+									$cc++;
+								if($cc==4)
+								break;
 										if($home_feature_event['event_category'] == 'spot_admission') { $cat = 'Spot Admission'; }
 										else if($home_feature_event['event_category'] == 'fairs') { $cat = 'Fairs'; }
 										else if($home_feature_event['event_category'] == 'others') { $cat = 'Others'; }
@@ -254,6 +262,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 								$event_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'event',$event_title,$home_feature_event['event_id']);					
 								?>
 								<li>
+								<form action="<?php echo $event_link_register; ?>/EventRegistration" method="post" class="margin_zero">	
 									<div class="event_meth float_l">
 										<h3 class="inline"><a href="<?php echo $event_link; ?>"><?php echo $home_feature_event['univ_name']; ?></a></h3><span class="inline"> &raquo; </span><h4 class="inline"><?php echo $cat; ?></h4>
 										<div class="margin_t1">
@@ -278,7 +287,11 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 											$event_detail=str_replace('<div>','',$home_feature_event['event_detail']);
 											$event_detail=str_replace('</div>','',$event_detail);
 											//echo substr($event_detail,0,180); ?>
+											<input type="hidden" name="event_register_of_univ_id" value="<?php echo $home_feature_event['univ_id']; ?>"/>
+									<input type="hidden" name="event_register_id" value="<?php echo $home_feature_event['event_id']; ?>"/>
+											<input type="submit" name="btn_event_register" id="<?php echo $home_feature_event['event_id']; ?>" value="Register" class="btn btn-success" />
 										</div>
+										</form>
 									</div>
 									<div class="float_r">
 											<!--<a onClick="voicepopup('<?php //echo $home_feature_event['event_id']; ?>')" style="cursor:pointer;"><img src="images/call.png" title="Reminder Call" alt="Reminder Call"></a>

@@ -80,7 +80,7 @@ $autoload['helper'] = array();
 |
 */
 
-$autoload['config'] = array('email');
+$autoload['config'] = array('email','sendgrid');
 
 
 /*

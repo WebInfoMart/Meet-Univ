@@ -93,8 +93,9 @@ $event_link_register=$this->subdomain->genereate_the_subdomain_link($event_detai
 								</div>
 								<div class="div_fix">
 									<div class="float_l span3 margin_zero">
-										<div><img src="<?php echo $base; ?>images/clock.png" class="line_img inline"><span class="blue line_time inline"><?php echo $event_detail['event_date_time']; ?>
-										</span></div>
+										<div><img src="<?php echo $base; ?>images/clock.png" class="line_img inline">
+										<span style="width:180px;" class="blue line_time inline"><?php echo $event_detail['event_date_time'].','.$event_detail['event_time']; ?></span></div>
+										</div>
 										<div><img src="<?php echo $base; ?>images/group.png" class="line_img inline"><span class="blue line_time inline"><?php 	echo $event_register_user = $this->frontmodel->count_event_register($event_detail['event_id']); ?>
 											Register
 										</span></div>

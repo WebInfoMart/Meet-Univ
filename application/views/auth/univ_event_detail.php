@@ -212,25 +212,29 @@ $this->session->unset_userdata('msg_send_suc_voice');
 								
 								<?php
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$event_comments_detail['user_thumb_pic_path']) && $event_comments_detail['user_thumb_pic_path']!='' )
-							{
-							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$event_comments_detail['user_thumb_pic_path']."'/>";
-							}
-							else if(file_exists(getcwd().'/uploads/user_pic/'.$event_comments_detail['user_pic_path']) && $event_comments_detail['user_pic_path']!='')
-							{
-								echo "<img src='".base_url()."uploads/user_pic/".$event_comments_detail['user_pic_path']."'/>";
-							}
-							else if($user && $event_comments_detail['commented_by'] == $logged_user_id)
-							{
-							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-							<?php
-							}
-							else{
-							echo "<img src='".base_url()."images/profile_icon.png'/>";
-							}
-							?>
+										{
+										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $event_comments_detail['id'];?>/<?php echo $event_comments_detail['fullname'];?>"><img src="<?php echo base_url();?>uploads/user_pic/thumbs/<?php echo $event_comments_detail['user_thumb_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($event_comments_detail['fullname'])){ echo ucwords($event_comments_detail['fullname']); } else{ echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$event_comments_detail['user_pic_path']) && $event_comments_detail['user_pic_path']!='')
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $event_comments_detail['id'];?>/<?php echo $event_comments_detail['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $event_comments_detail['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($event_comments_detail['fullname'])){ echo ucwords($event_comments_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if($user && $event_comments_detail['q_askedby'] == $logged_user_id)
+										{
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $event_comments_detail['id'];?>/<?php echo $event_comments_detail['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($event_comments_detail['fullname'])){ echo ucwords($event_comments_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $event_comments_detail['id'];?>/<?php echo $event_comments_detail['fullname'];?>"><img src="<?php echo base_url(); ?>images/profile_icon.png" title="<?php if(!empty($event_comments_detail['fullname'])){ echo ucwords($event_comments_detail['fullname']); } else { echo 'No name'; } ?>"/></a>
+										<?php
+										}
+										?>
 								</div>
 							</div>
 							<div>
@@ -250,16 +254,17 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							</div>
 							<div class="clearfix"></div>
 							<h4><span class="course_txt">
-								<?php if($event_comments_detail['commented_by_user_name'] !=''){
-									echo $event_comments_detail['commented_by_user_name']; 
-									}
+								<?php if($event_comments_detail['commented_by_user_name'] !='')
+								{
+									echo ucwords($event_comments_detail['commented_by_user_name']); 
+								}
 									else if($event_comments_detail['fullname'] !='')
 									{
-										echo $event_comments_detail['fullname'];
+										echo ucwords($event_comments_detail['fullname']);
 									}
 									else if($user)
 									{
-										echo $user_profile['name'];
+										echo ucwords($user_profile['name']);
 									} ?>
 								</span></h4>
 						</div> <?php } } ?>
