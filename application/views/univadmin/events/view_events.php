@@ -62,15 +62,15 @@
 								<div class="control-group margin_b">
 									<label for="username" class="control-label">Event Place</label>
 									<div class="controls">
-									<div class="help-inline data1"><?php echo $event_info[0]['event_place'] ?></div>
+									<div class="help-inline data1"><?php echo $event_info[0]['event_place']; ?></div>
 									<input type="text" style="display:none;" class="input-xlarge inputElement" value="<?php echo $event_info[0]['event_place'] ?>">
 									</div>
 								</div>
 								<div class="control-group margin_b">
 									<label for="username" class="control-label">Detail</label>
 									<div class="controls">
-									<div class="help-inline data1"><?php echo $event_info[0]['event_detail'] ?></div>
-									<textarea  style="display:none;" name="text" id="input07" class="span12 inputElement" rows="4"><?php echo $event_info[0]['event_detail'] ?></textarea>
+									<div class="help-inline data1"><?php echo $event_info[0]['event_detail']; ?></div>
+									<textarea  style="display:none;" name="text" id="input07" class="span12 inputElement" rows="4"><?php echo $event_info[0]['event_detail']; ?></textarea>
 									</div>
 								</div>
 							</div>
