@@ -691,9 +691,12 @@ class Adminevents extends CI_Controller
 	function create_event_ajax()
 	{
 		
-		if (!$this->tank_auth->is_admin_logged_in()) {
+		if (!$this->tank_auth->is_admin_logged_in())
+		{
 			echo "0";
-		} else {
+		} 
+		else 
+		{
 			$data['user_id']	= $this->tank_auth->get_admin_user_id();
 			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
@@ -718,27 +721,37 @@ class Adminevents extends CI_Controller
 			{
 			if($this->input->post('submit'))
 			{
-			$this->events->create_event();
-			 
-			 
-			if(($this->input->post('share_facebook')=='on') && ($this->input->post('etiming')))
-			{
-			//$page_id = '198465570173386';
-			$page_id = '132735360191608';
+				$this->events->create_event();
 				 
-			$this->load->library('fbConn/facebook');
-			$facebook=new Facebook();
-			$facebook->setAccessToken("AAAF5umslDiYBAPWI4wabsTXGZBZB7s8SUXmncUUECOrldte1NZC2RnEIEGHH6EsZAR5sStgRZBZCL1LFQeT29ZBjZAR24K0PoxPffZCmPj6nUvQZDZD");
-			$page_access_token=$facebook->getAccessToken();
+				 
+				if(($this->input->post('share_facebook')=='on') && ($this->input->post('etiming')))
+				{
+				//$page_id = '198465570173386';
+				$page_id = '132735360191608';
+					 
+				$this->load->library('fbConn/facebook');
 				
+				$facebook=new Facebook();
+				
+				$app_id='332345880170760';
+				$app_secret='29a0f2cd00dcfbab6143d0566b0218d1';
+				
+				$accessToken='AAAF5umslDiYBAFRvEHb5K9EaTLdzKWUFf8q0Vhg5d5Dh8VtxobZBvg4UDfZC7YzsL9QrMsYIBMFd77WgpI2vsaESkZBrZCubbHGtvcZAXgcVd84TFTCgs';
+				//echo $accessToken;exit;
 				if($this->input->post('fixedloc'))
 				{
 				$street=$this->input->post('event_place');
 				$city=$this->input->post('cityname');
 				$state=$this->input->post('statename');
 				$country= $this->input->post('countryname'); 
-
-				$places =json_decode(file_get_contents("https://graph.facebook.com/search?q=".urlencode($street.", ".$city.",".$state.", ".$country)."&type=place&access_token=".$page_access_token));
+				//echo 'hello';
+				//$places =json_decode(file_get_contents("https://graph.facebook.com/oauth/search?q=".urlencode($street.", ".$city.",".$state.", ".$country)."&type=place&access_token=".$page_access_token));
+				 $places = "https://graph.facebook.com/oauth/access_token?"."client_id=".$app_id."&redirect_uri=".urlencode($street.",".$city.",".$state.",".$country)."&client_secret=".$app_secret."&code=".$code;
+				
+				// $query = urlencode($street.", ".$city.",".$state.", ".$country);
+				// $graphUrl = 'https://graph.facebook.com/search?type=user&accessToken=' . $accessToken . '&q=' . $query;
+				// $places = json_decode(file_get_contents($graphUrl));
+				//print_r($places);exit;
 				$venue=array();
 				$venue["street"]=$street;
 				$venue["city"]=$city;
@@ -763,15 +776,14 @@ class Adminevents extends CI_Controller
 				$event_info['end_time'] =$this->input->post('event_time').' '.$this->input->post('event_time_end');
 				$event_info['email'] ='info@meetuniversities.com';
 				$event_info['description'] =$this->input->post('detail');				
-				$event_info['access_token'] = $page_access_token;
+				$event_info['access_token'] = $accessToken;
 				//$event_info['city'] = $event_loc;
 				$event_info['page_id'] = $page_id;
 				$event_info['privacy'] ="OPEN";
-				$accounts = $facebook->api("/100003807361769/events","POST",$event_info);
+				//print_r($event_info);exit;
+				$accounts = $facebook->api('/132735360191608/events','POST',$event_info);
 			}
-			echo "1";
-			 
-			 
+			echo "1";		 
 			 
 			}
 			}

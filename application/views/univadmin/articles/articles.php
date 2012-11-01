@@ -33,6 +33,14 @@ if(!empty($article_info))
  <a class="close" data-dismiss="alert" href="#">×</a>
   <strong>Article deleted successfully</strong>
   </div>
+  <div id="access" class="alert alert-success" style="display:none">
+  <a class="close" data-dismiss="alert" href="#">×</a>
+  <strong>Unable to perform action please contact admin</strong>
+</div>
+<div id="deleted" class="alert alert-success" style="display:none">
+  <a class="close" data-dismiss="alert" href="#">×</a>
+  <strong>Article Deleted Successfully</strong>
+</div>
   <div class="content">
     <div class="container-fluid">      
       <div class="row-fluid">
@@ -46,19 +54,19 @@ if(!empty($article_info))
               <li>
                 <a href="#new" data-toggle="pill">New</a>
               </li>
-			  <li id="active_menu">
-                <a href="#create" data-toggle="pill">Create Articles</a>
+			  <li>
+                <a href="#create" data-toggle="pill" class="active_menu">Create Articles</a>
               </li>
             </ul>
           </div>
           <div class="content-box">
             <div class="tab-content">
               <div class="tab-pane active" id="all">
-                <table class="table table-striped dataTable" >
+                <table class="table table-striped dataTable" id="media" >
                   <thead>
                     <tr>
                       <th width="10%">
-					  <input type="checkbox" class="check_all"></th>
+					  <input type="checkbox" class='sel_rows' data-targettable="media"></th>
                       <th width="25%">Article Title</th>
                       <th width="25%">University Name</th>
                       <th width="20%">Status</th>
@@ -69,12 +77,14 @@ if(!empty($article_info))
                   <tbody>
 				  <?php foreach($article_info as $article)
 					{ ?>
-					<tr id="check_university_<?php echo $article->article_id;?>">
-                      <td><input type="checkbox" value="<?php echo $article->article_id;?>" name="check_article_<?php echo $article->article_id; ?>" class='selectable_checkbox setchkval' id="check_article_<?php echo $article->article_id; ?>"></td>
+					<tr class="check_university_<?php echo $article->article_id;?>">
+                      <td>
+					  <input type="checkbox" value="<?php echo $article->article_id;?>" name="check_article_<?php echo $article->article_id; ?>" class='selectable_checkbox setchkval' id="check_article_<?php echo $article->article_id; ?>">
+					  </td>
                       <td><?php echo ucwords(substr($article->article_title,0,50)); ?></td>
                        <td><?php echo ucwords($article->univ_name); ?></td>
                        <td class="center"> <?php if($article->article_approve_status){ echo "Approved"; } else {  echo "<span style='color:#000;'>Pending For Approve</span>";} ?></td>
-					  <td><?php if($article->featured_home_article){ echo "<span style='color:#000;'>Featured</span>"; } else {  echo "Nonfeatured";} ?></td>
+					  <td><?php if($article->featured_home_article){ echo "<span style='color:#000;'>Featured</span>"; } else {  echo "Unfeatured";} ?></td>
 					  <td class="options">
 							<div class="btn-group">
 								<?php if($view==1) { ?>
@@ -99,7 +109,7 @@ if(!empty($article_info))
 								<a href="#myModal_<?php echo $article->article_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
-								<?php }	if(($edit==1 || $delete==1 || $insert==1)  && $admin_user_level!='3' ){  ?>
+								<?php }	if(($edit==1 || $delete==1 || $insert==1)){  ?>
 								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $article->featured_home_article; ?>','<?php echo $article->article_id; ?>');"  class="btn btn-icon tip" <?php if($article->article_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?> >
 									<i class="<?php if($article->article_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
@@ -135,10 +145,10 @@ if(!empty($article_info))
 		<?php  } ?>	
               </div>
 			   <div class="tab-pane " id="new">
-                <table class="table table-striped dataTable">
+                <table class="table table-striped dataTable" id="media1">
                   <thead>
                     <tr>
-                      <th width="10%"><input type="checkbox" class="check_all"></th>
+                      <th width="10%"><input type="checkbox" class='sel_rows' data-targettable="media1"></th>
                       <th width="25%">Article Title</th>
                       <th width="25%">University Name</th>
                       <th width="20%">Status</th>
@@ -149,12 +159,12 @@ if(!empty($article_info))
                   <tbody>
 				  <?php foreach($recent_articles as $recent)
 					{ ?>
-					<tr id="check_university_<?php echo $recent->article_id;?>">
+					<tr class="check_university_<?php echo $recent->article_id;?>">
                       <td><input type="checkbox" name="sel_row[]" value="<?php echo $recent->article_id;?>" class='selectable_checkbox setchkval' /></td>
                       <td><?php echo ucwords(substr($recent->article_title,0,50)); ?></td>
                        <td><?php echo ucwords($recent->univ_name); ?></td>
                        <td class="center"> <?php if($recent->article_approve_status){ echo "Approved"; } else {  echo "<span style='color:#000;'>Pending For Approve</span>";} ?></td>
-					  <td><?php if($recent->featured_home_article){ echo "<span style='color:#000;'>Featured</span>"; } else {  echo "Nonfeatured";} ?></td>
+					  <td><?php if($recent->featured_home_article){ echo "<span style='color:#000;'>Featured</span>"; } else {  echo "Unfeatured";} ?></td>
 					 <td class="options">
 							<div class="btn-group">
 								<?php if($view==1) { ?>
@@ -166,7 +176,7 @@ if(!empty($article_info))
 									<i class="icon-pencil"></i>
 								</a>
 								<?php } if($delete==1)   {?>
-								<div class="modal hide" id="myModal_<?php echo $recent->article_id; ?>">
+								<div class="modal hide" id="myModal1_<?php echo $recent->article_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
 										<h3>Do you want to delete?</h3>
@@ -176,11 +186,11 @@ if(!empty($article_info))
 										<a href="#" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
-								<a href="#myModal_<?php echo $recent->article_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
+								<a href="#myModal1_<?php echo $recent->article_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
 								<?php }
-								if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3' ){  ?>
+								if(($edit==1 || $delete==1 || $insert==1)){  ?>
 								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $recent->featured_home_article; ?>','<?php echo $recent->article_id; ?>');"  class="btn btn-icon tip" <?php if($recent->article_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?> >
 									<i class="<?php if($article->article_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
@@ -215,7 +225,7 @@ if(!empty($article_info))
 			  <div class="tab-pane" id="create">
 				<div class="row-fluid">
 					<div class="span9">
-						<form class="form-horizontal" name="myform" action="<?php echo $base; ?>newadmin/adminarticles/add_article" method="post" enctype="multipart/form-data">
+						<form class="form-horizontal" name="myform" onsubmit="return addArticle(this);" action="<?php echo $base; ?>newadmin/adminarticles/add_article" method="post" enctype="multipart/form-data">
 							<fieldset>
 								<div class="control-group">
 								<label class="control-label" for="input01">Title</label>
@@ -252,7 +262,7 @@ if(!empty($article_info))
 								</div>
 								</div>
 								<div class="form-actions">
-								<button type="submit" onclick="addArticle()" class='btn btn-primary'>Add Article</button>
+								<button type="submit" class='btn btn-primary'>Add Article</button>
 								<a href="#" class='btn btn-danger'>Cancel</a>
 								</div>
 							</fieldset>
@@ -269,51 +279,26 @@ if(!empty($article_info))
   <!-- END Content -->
  
      <script>
-$(document).ready(function(){
-	//alert('fnslfc');
-	$('.collapsed-nav').css('display','none');
-	var url = window.location.pathname; 
-	var activePage = url.substring(url.lastIndexOf('/')+1);
-	$('.mainNav li a').each(function(){  
-		var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
-		if (activePage == currentPage) {
-			$('.mainNav li').removeClass('active');
-			$('li').find('span').removeClass('label-white');
-			$('li').find('i').removeClass('icon-white');
-			$(this).parent().addClass('active'); 
-			$(this).parent().find('span').addClass('label-white');
-			$(this).parent().find('i').addClass('icon-white');
-				$(this).parent().parent().css('display','block');
-				if($(this).parent().parent().css('display','block'))
-				{
-					$(this).parent().parent().prev().parent().addClass('active');
-					$(this).parent().parent().prev().find('span img').attr('src', 'img/toggle_minus.png');
-					$(this).parent().parent().prev().find('span').addClass('label-white');
-					$(this).parent().parent().prev().find('i').addClass('icon-white');
-				}
-			} 
-		});
-	});
-	
+
 function addArticle()
 {
+	var valid=true;
 	if($('#univ option:selected').val()=='')
 	{
 		$("#univ").addClass('needsfilled');
+		valid=false;
 	}
 	if($("#title").val()=='')
 	{
-		$("#title").addClass('needsfilled');		
+		$("#title").addClass('needsfilled');
+		valid=false;		
 	}
 	if($("#detail").val()=='')
 	{
-		$("#detail").addClass('needsfilled');		
+		$("#detail").addClass('needsfilled');	
+			valid=false;
 	}
-		
-	if($("#title").val()!='' && $("#detail").val()!='' )
-	{
-		document.forms["myform"].submit();
-	}
+	return valid;
 }
 function delete_confirm(id)
 {
@@ -325,9 +310,22 @@ function delete_confirm(id)
 	   data: '',
 	   cache: false,
 	   success: function(msg)
-	   {alert(msg);
-	    $('#check_university_'+id).hide();
+	   {
+	    
+		if(msg=='1')
+		{
+			$('.check_university_'+id).hide();
+			$('.check_university1_'+id).hide();
+			$('#deleted').show();
+			setTimeout(function(){$('#deleted').hide('slow');},3000);		
 		}
+		else
+		{
+			
+			$('#access').show();
+			setTimeout(function(){$('#access').hide('slow');},3000);	
+		}
+	}
 	
 	});
 }
@@ -454,7 +452,7 @@ function set_chkbox_val()
 	{
 		if($(this).attr('checked'))
 		{
-			$('#check_university_'+$(this).val()).addClass('toremove');
+			$('.check_university_'+$(this).val()).addClass('toremove');
 			arr.push($(this).val());
 		}		
 	});

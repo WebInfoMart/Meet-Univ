@@ -67,21 +67,21 @@ $insert=1;
               <li>
                 <a href="#new" data-toggle="pill">New</a>
               </li>
-			  <li id="active_menu">
-                <a href="#create" data-toggle="pill">Add Question</a>
+			  <li>
+                <a href="#create" data-toggle="pill" class="active_menu">Add Question</a>
               </li>
             </ul>
           </div>
           <div class="content-box">
             <div class="tab-content">
               <div class="tab-pane active" id="all">
-                <table class="table table-striped dataTable">
+                <table class="responsive table table-striped dataTable" id="media">
                   <thead>
                     <tr>
-                      <th><input type="checkbox" class="check_all"></th>
+                      <th><input type="checkbox" class='sel_rows' data-targettable="media"></th>
                       <th>Questions Title</th>
                       <th>University Name</th>
-                      <th>Status</th>
+                      <!--<th>Status</th>-->
 					  <th>Featured</th>
 					  <th>Answers Count</th>
 					   <th style="width:16%!important;">Choose Option</th>
@@ -93,21 +93,21 @@ $insert=1;
 				{
 				foreach($ques_info as $row){
 				?>
-					<tr id="check_university_<?php echo $row->que_id;?>" >
+					<tr class="check_university_<?php echo $row->que_id;?>" >
                       <td><input type="checkbox" class="selectable_checkbox setchkval" value="<?php echo $row->que_id;?>"></td>
                       <td><?php echo ucwords(substr($row->q_title,0,50)); ?></td>
                        <td><?php echo ucwords($row->univ_name); ?></td>					   
-                       <td class="center"><?php if($row->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>
-					   <td><?php if($row->q_featured_home_que){ echo "Make Unfeatured"; } else {  echo"Make Featured";} ?></td>
+                       <!--<td class="center"><?php //if($row->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>-->
+					   <td><?php if($row->q_featured_home_que){ echo "Featured"; } else {  echo"Unfeatured";} ?></td>
 					   <td id="count_<?php echo $row->que_id; ?>"><?php $count=$this->ques_model->ans_count($row->que_id); echo $count; ?></td>	
 					   <td class="options">
 							<div class="btn-group">
-							<?php if($view==1) { ?>
-								<a href="<?php echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php echo $row->que_id; ?>" class="btn btn-icon tip" data-original-title="View">
+							<!--
+								<a href="<?php //echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php //echo $row->que_id; ?>" class="btn btn-icon tip" data-original-title="View">
 									<i class="icon-ok"></i>
-								</a>
-								<?php } if($edit==1) { ?>
-								<a href="<?php echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php echo $row->que_id; ?>" class="btn btn-icon tip" data-original-title="Edit">
+								</a>-->
+								<?php   if($view==1 || $edit==1) { ?>
+								<a href="<?php echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php echo $row->que_id; ?>" class="btn btn-icon tip" data-original-title="View">
 									<i class="icon-pencil"></i>
 								</a>
 								<?php } if($delete==1){ ?>
@@ -131,7 +131,7 @@ $insert=1;
 								<a href="<?php echo $ques_link; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
-								<?php if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3') 
+								<?php if(($edit==1 || $delete==1 || $insert==1) ) 
 								{ ?>
 								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $row->q_approve; ?>','<?php echo $row->que_id; ?>');" class="btn btn-icon tip" <?php if($row->q_approve){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?>>
 									<i class="<?php if($row->q_approve){ echo 'icon-blue'; }?> icon-fire app_<?php echo $row->que_id; ?>"></i>
@@ -158,13 +158,13 @@ $insert=1;
 		<?php  } ?>
 			  </div>
               <div class="tab-pane" id="new">
-				 <table class="table table-striped dataTable">
+				 <table class="responsive  table table-striped dataTable" id="media1">
                   <thead>
                     <tr>
-                      <th><input type="checkbox" class="check_all"></th>
+                      <th><input type="checkbox" class='sel_rows' data-targettable="media1"></th>
                       <th>Questions Title</th>
                       <th>University Name</th>
-                      <th>Status</th>
+                      <!--<th>Status</th>-->
 					  <th>Featured</th>
 					  <th>Answers Count</th>
 					   <th style="width:16%!important;">Choose Option</th>
@@ -176,25 +176,27 @@ $insert=1;
 				{
 				foreach($latest_ques as $latest){
 				?>
-					<tr id="check_university_<?php echo $latest->que_id;?>" >
-                      <td><input type="checkbox" class="selectable_checkbox setchkval" value="<?php echo $latest->que_id;?>"></td>
+					<tr class="check_university_<?php echo $latest->que_id;?>" >
+                      <td>
+					  <input type="checkbox" class="selectable_checkbox setchkval" value="<?php echo $latest->que_id;?>">
+					  </td>
                       <td><?php echo ucwords(substr($latest->q_title,0,50)); ?></td>
                        <td><?php echo ucwords($latest->univ_name); ?></td>					   
-                       <td class="center"><?php if($latest->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>
-					   <td><?php if($latest->q_featured_home_que){ echo "Make Unfeatured"; } else {  echo "Make Featured";} ?></td>
+                      <!-- <td class="center"><?php //if($latest->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>-->
+					   <td><?php if($latest->q_featured_home_que){ echo "Featured"; } else {  echo "Unfeatured";} ?></td>
 					   <td id="count_<?php echo $latest->que_id; ?>"><?php $count=$this->ques_model->ans_count($latest->que_id); echo $count; ?></td>	
 					    <td class="options">
 							<div class="btn-group">
-							<?php if($view==1) { ?>
-								<a href="<?php echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php echo $latest->que_id; ?>" class="btn btn-icon tip" data-original-title="View">
+							<!--
+								<a href="<?php //echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php //echo $latest->que_id; ?>" class="btn btn-icon tip" data-original-title="View">
 									<i class="icon-ok"></i>
-								</a>
-								<?php } if($edit==1) { ?>
-								<a href="<?php echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php echo $latest->que_id; ?>" class="btn btn-icon tip" data-original-title="Edit">
+								</a>-->
+								<?php  if($view==1 || $edit==1) { ?>
+								<a href="<?php echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php echo $latest->que_id; ?>" class="btn btn-icon tip" data-original-title="View">
 									<i class="icon-pencil"></i>
 								</a>
 								<?php } if($delete==1){ ?>
-								<div class="modal hide" id="myModal_<?php echo $latest->que_id; ?>">
+								<div class="modal hide" id="myModal1_<?php echo $latest->que_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
 										<h3>Do you want to delete?</h3>
@@ -204,7 +206,7 @@ $insert=1;
 										<a href="#" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
-								<a href="#myModal_<?php echo $latest->que_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
+								<a href="#myModal1_<?php echo $latest->que_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
 								<?php }								
@@ -214,7 +216,7 @@ $insert=1;
 								<a href="<?php echo $ques_link; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
-								<?php if(($edit==1 || $delete==1 || $insert==1) && $admin_user_level!='3') 
+								<?php if(($edit==1 || $delete==1 || $insert==1)) 
 								{ ?>
 								<a href="#" onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $latest->q_approve; ?>','<?php echo $latest->que_id; ?>');" class="btn btn-icon tip" <?php if($latest->q_approve){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?>>
 									<i class="<?php if($latest->q_approve){ echo 'icon-blue'; }?> icon-fire app_<?php echo $latest->que_id; ?>"></i>
@@ -265,8 +267,8 @@ $insert=1;
 								</div>
 								<div class="control-group">
 								<label class="control-label" for="select0">Choose University:</label>
-								<div class="controls1">
-								<select id="colleges" name="colleges" class="colege_set">
+								<div class="controls">
+								<select id="colleges" name="colleges" >
 								<option value="0"> select </option>	
 								</select>
 								</div>
@@ -301,33 +303,7 @@ $insert=1;
 	</div><!-- close .container-fluid -->
   </div><!-- close .content -->
 
-   <script>
-$(document).ready(function(){
-	//alert('fnslfc');
-	$('.collapsed-nav').css('display','none');
-	var url = window.location.pathname; 
-	var activePage = url.substring(url.lastIndexOf('/')+1);
-	$('.mainNav li a').each(function(){  
-		var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
-		if (activePage == currentPage) {
-			$('.mainNav li').removeClass('active');
-			$('li').find('span').removeClass('label-white');
-			$('li').find('i').removeClass('icon-white');
-			$(this).parent().addClass('active'); 
-			$(this).parent().find('span').addClass('label-white');
-			$(this).parent().find('i').addClass('icon-white');
-				$(this).parent().parent().css('display','block');
-				if($(this).parent().parent().css('display','block'))
-				{
-					$(this).parent().parent().prev().parent().addClass('active');
-					$(this).parent().parent().prev().find('span img').attr('src', 'img/toggle_minus.png');
-					$(this).parent().parent().prev().find('span').addClass('label-white');
-					$(this).parent().parent().prev().find('i').addClass('icon-white');
-				}
-			} 
-		});
-	});
- </script>
+
  <script type="text/javascript">
 function fetch_collage(values)
 {
@@ -497,7 +473,7 @@ function chknooffeatured(field)
 	   data: '',
 	   cache: false,
 	   success: function(msg)
-	   {
+	   {//alert(msg);
 			f=msg;
 		}
 	   });
@@ -516,7 +492,7 @@ function delete_confirm(id)
 	   {//alert(msg);
 		if(msg=='1')
 		{
-			$('#check_university_'+id).hide();
+			$('.check_university_'+id).hide();
 			$('#deleted').show();
 			setTimeout(function(){$('#deleted').hide('slow');},3000);		
 		}
@@ -590,10 +566,12 @@ function set_chkbox_val()
 	{
 		if($(this).attr('checked'))
 		{
-			$('#check_university_'+$(this).val()).addClass('toremove');
+			$('.check_university_'+$(this).val()).addClass('toremove');
 			arr.push($(this).val());
 		}		
 	});
 }
 
 	</script>
+</body>
+</html>

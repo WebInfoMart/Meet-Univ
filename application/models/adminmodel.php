@@ -932,8 +932,12 @@ class Adminmodel extends CI_Model
 	}
 	
 	function get_univ_gallery_info($univ_id)
-	{
-		$query = $this->db->get_where('univ_gallery', array('gal_type' =>'univ','univ_id'=>$univ_id));
+	{	
+		$this->db->select('univ_gallery.*,university.univ_name');
+		$this->db->from('univ_gallery');		
+		$this->db->join('university','university.univ_id=univ_gallery.univ_id','left');
+		$this->db->where(array('gal_type' =>'univ','univ_gallery.univ_id'=>$univ_id));
+		$query =$this->db->get();
 		return $query->result_array();
 	}
 	function get_univ_gallery_info_count($univ_id)
@@ -944,6 +948,16 @@ class Adminmodel extends CI_Model
 	function delete_univ_gallery_pic($gid)
 	{
 	$this->db->delete('univ_gallery', array('gid' => $gid));
+	return 1;
+	}
+	function delete_images()
+	{
+		$idsstring=$this->input->post('id');
+		foreach($idsstring as $ids)
+		{
+			$this->db->delete('univ_gallery', array('gid' => $ids));
+		}
+		return 1;
 	}
 	
 	function fetch_univ_detail($user_id)

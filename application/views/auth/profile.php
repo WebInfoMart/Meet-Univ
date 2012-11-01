@@ -344,7 +344,7 @@ $select_female='';
 												</div>
 											</div>
 											<div class="margin_t1">
-								<h2>Latest Q&A</h2>
+								<h2>Latest Q& </h2>
 								<ul class="prof_data">
 								<?php
 								if(!empty($featured_question_profile))
@@ -357,7 +357,8 @@ $select_female='';
 								{
 									$univ_domain=$quest_list['subdomain_name'];
 									$quest_title=$quest_list['q_title'];
-									$quest_title = str_replace(' ','-',$quest_list['q_title']);
+									str_replace(' ','-',$quest_list['q_title']);
+									$quest_list['q_title']=$quest_title = str_replace('?','-',$quest_list['q_title']);
 									$quest_title=$this->subdomain->process_url_title($quest_title);
 									$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
 									$url = $que_link;
@@ -368,6 +369,7 @@ $select_female='';
 								}
 								else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
 								{
+									$quest_list['q_title']=str_replace('?','-',$quest_list['q_title']);
 									$quest_title = str_replace(' ','-',$quest_list['q_title']);
 									$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$quest_title;
 								}

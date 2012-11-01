@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en">
+<head>
   <link rel="stylesheet" href="<?php echo $base; ?>newadmin/css/style.css">
   <link rel="stylesheet" href="<?php echo $base; ?>newadmin/css/bootstrap.css">
   <link rel="stylesheet" href="<?php echo $base; ?>newadmin/css/bootstrap-responsive.css">
@@ -70,4 +73,8 @@
     </div>
   </div>
   <!-- END Navbar -->
-  
+  <script>
+  var baseurl='<?php echo $base;?>newadmin';
+  </script>
+  </head>
+ <body> 

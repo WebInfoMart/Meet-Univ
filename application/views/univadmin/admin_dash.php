@@ -87,7 +87,7 @@ if($flag) { ?>
                   <tbody>
                     <tr>
                       <td>
-                        Answered/Open
+                       
                       </td>
                       <td>
                         <b> Question </b>
@@ -112,13 +112,13 @@ if($flag) { ?>
                       </td>
                       <td>
                         <a href="#">
-                          <?php echo $all['full_name']; ?>
+                          <?php if(!empty($all['full_name'])){ echo $all['full_name']; }else { echo 'Not available'; } ?>
                         </a>
                       </td>
                     </tr>
 					<?php }}else { ?>
 				<tr>
-				<td>No question  till now...</td>
+				<td>No question till now...</td>
 				</tr>
 				<?php } ?>
               </tbody>  
@@ -129,7 +129,7 @@ if($flag) { ?>
           <tbody>
             <tr>
                       <td>
-                        Open
+                       
                       </td>
                       <td>
                         <b> Question </b>
@@ -155,7 +155,7 @@ if($flag) { ?>
                       </td>
                       <td>
                         <a href="#">
-                          <?php echo $ans['full_name']; ?>
+                          <?php if(!empty($ans['full_name'])){ echo $ans['full_name']; }else { echo 'Not available'; } ?>
                         </a>
                       </td>
                     </tr>

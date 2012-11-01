@@ -217,30 +217,3 @@
     </div><!-- close .container-fluid -->
   </div><!-- close .content -->
   <?php } ?>
-   <script>
-$(document).ready(function(){
-	//alert('fnslfc');
-	$('.collapsed-nav').css('display','none');
-	var url = window.location.pathname; 
-	var activePage = url.substring(url.lastIndexOf('/')+1);
-	$('.mainNav li a').each(function(){  
-		var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
-		if (activePage == currentPage) {
-			$('.mainNav li').removeClass('active');
-			$('li').find('span').removeClass('label-white');
-			$('li').find('i').removeClass('icon-white');
-			$(this).parent().addClass('active'); 
-			$(this).parent().find('span').addClass('label-white');
-			$(this).parent().find('i').addClass('icon-white');
-				$(this).parent().parent().css('display','block');
-				if($(this).parent().parent().css('display','block'))
-				{
-					$(this).parent().parent().prev().parent().addClass('active');
-					$(this).parent().parent().prev().find('span img').attr('src', 'img/toggle_minus.png');
-					$(this).parent().parent().prev().find('span').addClass('label-white');
-					$(this).parent().parent().prev().find('i').addClass('icon-white');
-				}
-			} 
-		});
-	});
- </script>

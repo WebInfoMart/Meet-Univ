@@ -20,16 +20,16 @@ class adminarticles extends CI_Controller
 		$this->load->model('admin/article_model');
 	}
 
-	function index()
-	{
-		$data = $this->path->all_path();
-		if (!$this->tank_auth->is_admin_logged_in()) {
-			redirect('admin/adminlogin/');
-		} else {
-			redirect('newadmin/adminarticles/manage_articles');
+	// function index()
+	// {
+		// $data = $this->path->all_path();
+		// if (!$this->tank_auth->is_admin_logged_in()) {
+			// redirect('admin/adminlogin/');
+		// } else {
+			// redirect('newadmin/adminarticles/manage_articles');
 			
-		}	
-	}
+		// }	
+	// }
 	//new
 	function manage_articles($msg='')
 	{
@@ -181,7 +181,7 @@ class adminarticles extends CI_Controller
 		$this->load->view('admin/sidebar',$data);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']>1 && $data['user_id']!='3')
+		if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']>1)
 		{
 		$flag=1;
 		break;
@@ -587,7 +587,7 @@ class adminarticles extends CI_Controller
 		$this->load->view('univadmin/sidebar',$data);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 && $data['admin_user_level']!='3')
+		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
 		{
 		$flag=1;
 		break;

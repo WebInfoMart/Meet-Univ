@@ -45,6 +45,7 @@ $flag=1;
 	  	<?php 
 		if($admin_user_level=='5' || $admin_user_level=='4' || $admin_user_level=='3') {
 		$admin_add_op=array('4','6','8','10');
+		
 foreach ($admin_priv as $admin_priv_res){
 if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
 {
@@ -56,29 +57,29 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
           <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span>
         </a>
         <ul class="collapsed-nav closed">
-		<?php if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
+		<?php if(($admin_priv_res['privilege_type_id']=='2' || $admin_priv_res['privilege_type_id']=='6') && $admin_priv_res['privilege_level']!='0')
 		{  if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 			{?>
           <li>
-			<a href="<?php echo $base;?>newadmin/adminarticles">Articles</a>
+			<a href="<?php echo $base;?>newadmin/adminarticles/manage_articles">Articles</a>
 		  </li>
 		  <?php } } 
-		  if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
+		  if(($admin_priv_res['privilege_type_id']=='2' || $admin_priv_res['privilege_type_id']=='6') && $admin_priv_res['privilege_level']!='0')
 			 {  
-		 if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
-		 {?>		  
-          <li><a href="<?php echo $base;?>newadmin/admin_news">News</a></li>
-		  <?php }} 
+			 if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+			 {?>		  
+			  <li><a href="<?php echo $base;?>newadmin/admin_news/manage_news">News</a></li>
+			  <?php }} 
 		  if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
 		   {   
 			if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
 		   {?>		 
-		   <li><a href="<?php echo $base;?>newadmin/admin_ques">Q & A Section</a></li>
+		   <li><a href="<?php echo $base;?>newadmin/admin_ques/manage_ques">Q & A Section</a></li>
 		   <?php } }?>
         </ul>
       </li>
 	  <li>
-        <a href="<?php echo $base;?>newadmin/admin_events">
+        <a href="<?php echo $base; ?>newadmin/admin_events">
           <i class="icon-calendar"></i>
          Events
         </a>
@@ -90,7 +91,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
           <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span>
         </a>
         <ul class="collapsed-nav closed">
-          <li><a href="uni_gallery.html">University Gallery</a></li>
+          <li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>
           <li><a href="pages.html">Pages</a></li>
           <li><a href="univ_courses.html">University Courses</a></li>
           <li><a href="update_university.html">Update University</a></li>
@@ -123,3 +124,31 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
   </div>
   <!-- End Left Navigation -->
   <?php } ?>
+     <script>
+$(document).ready(function(){	
+	$('.collapsed-nav').css('display','none');
+	var url = window.location.pathname; 	
+	var activePage = url.substring(url.lastIndexOf('/')+1);
+	//alert(activePage);
+	$('.mainNav li a').each(function(){  
+		var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
+		//alert(currentPage);
+		if (activePage == currentPage) {
+			$('.mainNav li').removeClass('active');
+			$('li').find('span').removeClass('label-white');
+			$('li').find('i').removeClass('icon-white');
+			$(this).parent().addClass('active'); 
+			$(this).parent().find('span').addClass('label-white');
+			$(this).parent().find('i').addClass('icon-white');
+				$(this).parent().parent().css('display','block');
+				if($(this).parent().parent().css('display','block'))
+				{//alert('hello');
+					$(this).parent().parent().prev().parent().addClass('active');
+					$(this).parent().parent().prev().find('span img').attr('src', baseurl+'/img/toggle_minus.png');
+					$(this).parent().parent().prev().find('span').addClass('label-white');
+					$(this).parent().parent().prev().find('i').addClass('icon-white');
+				}
+			} 
+		});
+	});
+ </script>

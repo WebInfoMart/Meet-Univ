@@ -64,25 +64,9 @@ foreach($ques_info as $ques_detail) { ?>
 									<textarea  style="display:none;" id="detail" class="span11 inputElement" rows="4">
 									<?php echo trim($ques_detail['q_detail']);?></textarea>
 									</div>
-								</div>
-								<?php 
-								if($admin_user_level=='5' || $admin_user_level=='4' && $ques_detail['univ_name']!='') 
-								{ ?>
-								<div class="control-group margin_b">
-									<label for="username" class="control-label">University Name</label>
-									<div class="controls">
-									<div class="help-inline data1"><?php echo $ques_detail['univ_name']; ?></div>
-								<select style="display:none" class="input-xlarge inputElement"  id="univ" name="univ">
-								<option value="">Please Select</option>
-								<?php foreach($univ_info as $univ_detail) { ?>
-								<option value="<?php echo $univ_detail->univ_id; ?>" <?php if($univ_detail->univ_id==$ques_detail['q_univ_id']) { ?> selected <?php } ?> ><?php echo $univ_detail->univ_name; ?></option>
-								<?php } ?>
-								</select>
-									</div>
-								</div>
-								<?php } else{ ?>
-	 			<input type="hidden" name="univ" value="<?php echo $ques_detail['q_univ_id']; ?>">
-					<?php }?>
+								</div>								
+								<input type="hidden" name="univ" id="univ" value="<?php echo $ques_detail['q_univ_id']; ?>">
+					
 								 <div class="modal hide" id="myModal">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>										
@@ -125,10 +109,9 @@ foreach($ques_info as $ques_detail) { ?>
 									<?php foreach($ans_info  as $ans)
 										{ ?>
 									<div class="controls">									
-									<div class="help-inline data1"><?php echo trim($ans['commented_text']);?></div>
+									<div style="border:1px solid;" class="help-inline data1"><?php echo trim($ans['commented_text']);?></div>
 									<div style="float:left;width:400px;">
-									<textarea  style="display:none;" name="text" id="ans_<?php echo $ans['comment_id']; ?>" class="span11 answer inputElement" rows="4">
-									<?php echo trim($ans['commented_text']);?></textarea>
+									<textarea style="display:none;" name="text" id="ans_<?php echo $ans['comment_id']; ?>" class="span11 inputElement" rows="4"><?php echo trim($ans['commented_text']);?></textarea>
 									</div>
 									<div style="float:left;">
 									<a href="javascript:void(0);" style="display:none;" onclick="delete_this_record('<?php echo $ans['comment_id']; ?>')" id="data_del_<?php echo $ans['comment_id']; ?>" class="inputElement"><img style="height:18px;" src="<?php echo $base; ?>images/admin/delete.png" alt="Delete"></a>
@@ -153,8 +136,8 @@ foreach($ques_info as $ques_detail) { ?>
 								?>
 							<div class="form-actions">
 									<a id="edit" class='btn btn-success pover' data-placement="top" data-content="Want to change" title="Edit">Edit</a>
-									<a href="#" id="update" onclick="update('<?php echo $ques_detail['que_id'];?>')" class='btn btn-success pover' data-placement="top" data-content="Update it" title="Update">Update</a>
-									<a id="add_textarea" class='btn btn-success pover' data-placement="top" data-content="Add box" title="Answer">Add Answer</a>
+									<a href="#" style="display:none;" id="update" onclick="update('<?php echo $ques_detail['que_id'];?>')" class='btn btn-success pover inputElement' data-placement="top" data-content="Update it" title="Update">Update</a>
+									<a id="add_textarea" style="display:none;" class='btn btn-success pover inputElement' data-placement="top" data-content="Add box" title="Answer">Add Answer</a>
 							</div>
 							<?php } ?>
 							</div>
@@ -209,14 +192,23 @@ $(document).ready(function(){
 			$("#edit").hide();
 		});	
 		$("#add_textarea").click(function() {
-			$('textarea').last().parent().parent().after('<div class="control-group"><div class="controls"><textarea style="display:inline-block" name="text" id="newans" class="span11 inputElement" rows="4"></textarea><a href="#myModal" data-toggle="modal" class="tip btn btn-icon margin_l" data-original-title="Delete Answer"><i class="icon-remove"></i></a></div></div>');
+			$('textarea').last().parent().parent().after('<div class="control-group"><div class="controls"><textarea style="display:inline-block" name="text" id="newans" class="span11 inputElement" rows="4"></textarea><a id="cross" title="close box" href="javascript:void(0)" onclick="closehh();" ><i class="icon-remove"></i></a></div></div>');
 		$('#update').addClass('addanswer');
+		$('#update').show();
 		});
+		
 	});
+function closehh()
+		{		
+			$('#update').removeClass('addanswer');
+			$("#newans").remove();
+			$("#cross").remove();
+			
+		}	
 function update(id)
 {
 if($('#update').hasClass('addanswer') && $("#newans").val()!='')
-{	alert('new');
+{	
 	var url='<?php echo $base; ?>newadmin/admin_ques/add_ans';
 	var que_url=$('#que_url_'+id).val();	
 	var answer=$("#newans").val();
@@ -236,17 +228,8 @@ if($('#update').hasClass('addanswer') && $("#newans").val()!='')
 	
 }
 else
-{  alert('que')
-    var valid=true;
-	if($('#univ option:selected').val()=='')
-	{
-		$("#univ").addClass('needsfilled');
-		valid=false;
-	}
-	else
-	{
-		$("#univ").removeClass('needsfilled');
-	}
+{ 
+    var valid=true;	
 	if($("#title").val()=='')
 	{
 		$("#title").addClass('needsfilled');
@@ -266,7 +249,9 @@ else
 		$("#detail").removeClass('needsfilled');
 	}	
 	if(valid==true)
-	{var univ=$('#univ option:selected').val();
+	{
+		
+	var univ=$('#univ').val();	
 	 var title=$("#title").val();
 	 var detail=$("#detail").val();
 	 var data={univ:univ,title:title,detail:detail,ajax:'1'};

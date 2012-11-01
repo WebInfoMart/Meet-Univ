@@ -1,4 +1,3 @@
-
 <?php
 $edit=0;
 $delete=0;
@@ -31,6 +30,10 @@ $insert=1;
  <a class="close" data-dismiss="alert" href="#">×</a>
   <strong>News deleted successfully</strong>
   </div>
+   <div id="access" class="alert alert-success" style="display:none">
+  <a class="close" data-dismiss="alert" href="#">×</a>
+  <strong>Unable to perform action please contact admin</strong>
+</div>
 <div class="content">
     <div class="container-fluid">     
       <div class="row-fluid">
@@ -44,8 +47,8 @@ $insert=1;
               <li>
                 <a href="#new" data-toggle="pill">New</a>
               </li>
-			  <li id="active_menu">
-                <a href="#create" data-toggle="pill">Create News</a>
+			  <li>
+                <a href="#create" data-toggle="pill" class="active_menu">Create News</a>
               </li>
             </ul>
           </div>
@@ -56,7 +59,7 @@ $insert=1;
                   <thead>
                     <tr>
                       <th width="10%"> 
-					  <input type="checkbox" name="sel_row" class='sel_row' data-targettable="allcheck"></th>
+					  <input type="checkbox" name="sel_row" class='sel_rows' data-targettable="allcheck"></th>
                       <th width="25%">News Title</th>
                       <th width="25%">University Name</th>
                       <th width="20%">Status</th>
@@ -67,7 +70,7 @@ $insert=1;
                   <tbody>
 				  <?php foreach($news_info as $news)
 				  { ?>
-					<tr id="check_university_<?php echo $news->news_id;?>">
+					<tr class="check_university_<?php echo $news->news_id;?>">
                       <td> <input type="checkbox" name="sel_row[]" value="<?php echo $news->news_id;?>" class='selectable_checkbox setchkval' /></td>
                       <td><?php echo ucwords(substr($news->news_title,0,50)); ?></td>
                        <td><?php echo ucwords($news->univ_name); ?></td>
@@ -97,7 +100,7 @@ $insert=1;
 								<a href="#myModal_<?php echo $news->news_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
-								<?php }if($edit==1 && $admin_user_level!='3'){ ?>
+								<?php }if($edit==1 ){ ?>
 								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $news->featured_home_news; ?>','<?php echo $news->news_id; ?>');"  class="btn btn-icon tip" <?php if($news->news_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?> >
 									<i class="<?php if($news->news_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
@@ -133,7 +136,7 @@ $insert=1;
 				<table class="responsive table table-striped dataTable" id="targetSample2">
                   <thead>
                     <tr>
-                      <th width="10%"> <input type="checkbox" name="sel_row" class='sel_row' data-targettable="targetSample2"></th>
+                      <th width="10%"> <input type="checkbox" name="sel_row" class='sel_rows' data-targettable="targetSample2"></th>
                       <th width="25%">News Title</th>
                       <th width="25%">University Name</th>
                       <th width="20%">Status</th>
@@ -144,7 +147,7 @@ $insert=1;
                   <tbody>
 				   <?php foreach($latest_news as $row)
 				  { ?>
-					<tr id="check_university_<?php echo $row->news_id;?>">
+					<tr class="check_university_<?php echo $row->news_id;?>">
                       <td> <input type="checkbox" name="sel_row[]" value="<?php echo $row->news_id; ?>" class='selectable_checkbox setchkval'></td>
                       <td><?php echo ucwords(substr($row->news_title,0,50)); ?></td>
                        <td><?php echo ucwords($row->univ_name); ?></td>
@@ -161,7 +164,7 @@ $insert=1;
 									<i class="icon-pencil"></i>
 								</a>
 								<?php }if($delete==1){ ?>
-								<div class="modal hide" id="myModal_<?php echo $row->news_id; ?>">
+								<div class="modal hide" id="myModal1_<?php echo $row->news_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
 										<h3>Do you want to delete?</h3>
@@ -171,10 +174,10 @@ $insert=1;
 										<a href="#" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
-								<a href="#myModal_<?php echo $row->news_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
+								<a href="#myModal1_<?php echo $row->news_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
-								<?php }if($edit==1 && $admin_user_level!='3') { ?>
+								<?php }if($edit==1) { ?>
 								<a href="#" onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $row->featured_home_news; ?>','<?php echo $row->news_id; ?>');" class="btn btn-icon tip" <?php if($row->news_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?>>
 									<i class="<?php if($row->news_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
@@ -265,32 +268,7 @@ $insert=1;
   </div><!-- close .content -->
   <!-- END Content -->
  
-   <script>
-$(document).ready(function(){
-	//alert('fnslfc');
-	$('.collapsed-nav').css('display','none');
-	var url = window.location.pathname; 
-	var activePage = url.substring(url.lastIndexOf('/')+1);
-	$('.mainNav li a').each(function(){  
-		var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
-		if (activePage == currentPage) {
-			$('.mainNav li').removeClass('active');
-			$('li').find('span').removeClass('label-white');
-			$('li').find('i').removeClass('icon-white');
-			$(this).parent().addClass('active'); 
-			$(this).parent().find('span').addClass('label-white');
-			$(this).parent().find('i').addClass('icon-white');
-				$(this).parent().parent().css('display','block');
-				if($(this).parent().parent().css('display','block'))
-				{
-					$(this).parent().parent().prev().parent().addClass('active');
-					$(this).parent().parent().prev().find('span img').attr('src', 'img/toggle_minus.png');
-					$(this).parent().parent().prev().find('span').addClass('label-white');
-					$(this).parent().parent().prev().find('i').addClass('icon-white');
-				}
-			} 
-		});
-	});
+<script>
 function delete_confirm(newsid)
 {
 	//alert(newsid);
@@ -302,7 +280,19 @@ function delete_confirm(newsid)
 	   cache: false,
 	   success: function(msg)
 	   {
-	    $('#check_university_'+newsid).hide();
+	    //$('.check_university_'+newsid).hide();
+		if(msg=='1')
+		{
+			$('.check_university_'+newsid).hide();
+			$('#deleted').show();
+			setTimeout(function(){$('#deleted').hide('slow');},3000);		
+		}
+		else
+		{
+			
+			$('#access').show();
+			setTimeout(function(){$('#access').hide('slow');},3000);	
+		}
 		}
 	
 	});
@@ -447,7 +437,7 @@ function set_chkbox_val()
 	{
 		if($(this).attr('checked'))
 		{
-			$('#check_university_'+$(this).val()).addClass('toremove');
+			$('.check_university_'+$(this).val()).addClass('toremove');
 			arr.push($(this).val());
 		}		
 	});
