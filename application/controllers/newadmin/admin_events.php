@@ -110,7 +110,8 @@ class Admin_events extends CI_Controller
 			$data['date_selector']= $this->input->post('date_selector');
 			$data['recent_event']=$this->event_model->recent_events();
 			$data['countries']=$this->users->fetch_country();
-			$data['univ_info']=$this->event_model->get_univ_detail();
+			$data['univ_info']=$this->events->get_univ_id_by_user_id($data['user_id']);
+			//$data['univ_info']=$this->event_model->get_univ_detail();
 			$this->load->view('univadmin/events/events', $data);
 			}
 		}	
@@ -687,7 +688,7 @@ class Admin_events extends CI_Controller
 		
 		if (!$this->tank_auth->is_admin_logged_in()) 
 		{
-			echo "0";
+			redirect('admin/adminlogin/');
 		}
 		else 
 		{
@@ -696,7 +697,7 @@ class Admin_events extends CI_Controller
 			$data['admin_priv'] = $this->adminmodel->get_user_privilege($data['user_id']);
 			if(!($data['admin_priv']))
 			{
-			echo "0";
+				redirect('admin/adminlogout');
 			}
 			$add_events=array('4','6','8','10');
 			$flag=0;
@@ -709,15 +710,12 @@ class Admin_events extends CI_Controller
 			}
 			if($flag==0)
 			{
-				echo "sorry";
+				$this->load->view('admin/accesserror', $data);
 			}
 			else
 			{
 				if(isset($_POST))
 				{			 
-					echo '<pre>';
-					print_r($_POST);
-					exit;
 					if(($this->input->post('share_facebook')=='on') && ($this->input->post('etiming')))
 					{
 						//$page_id = '198465570173386';
@@ -758,10 +756,13 @@ class Admin_events extends CI_Controller
 						else
 						{
 						  $event_info['location'] = $this->input->post('event_place'); 					
-						}				
+						}
+						$new_event_time = date("d M Y", strtotime($_POST['event_time']));    // Added by Satbir on 11/2/2011
 						$event_info['name']= $this->input->post('university_name');
-						$event_info['start_time'] = $this->input->post('event_time').' '.$this->input->post('event_time_start');
-						$event_info['end_time'] =$this->input->post('event_time').' '.$this->input->post('event_time_end');
+						$event_info['start_time'] = $new_event_time.' '.$this->input->post('event_time_start');
+						$event_info['end_time'] = $new_event_time.' '.$this->input->post('event_time_end');
+						// $event_info['start_time'] = $this->input->post('event_time').' '.$this->input->post('event_time_start');
+						// $event_info['end_time'] =$this->input->post('event_time').' '.$this->input->post('event_time_end');
 						$event_info['email'] ='info@meetuniversities.com';
 						$event_info['description'] =$this->input->post('detail');				
 						$event_info['access_token'] = $accessToken;
@@ -775,8 +776,7 @@ class Admin_events extends CI_Controller
 					if($inserted)
 					{
 						redirect('newadmin/admin_events/manage_events/eas');
-					}
-					echo "1";			 
+					}						 
 				}
 			}			
 		}

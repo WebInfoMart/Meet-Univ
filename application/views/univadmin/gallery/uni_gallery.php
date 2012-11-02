@@ -68,8 +68,19 @@
 										<a href="#" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
-								
-								<a href="#" class="btn btn-icon"><i class="icon-search"></i></a>									
+					
+								<div class="modal hide" id="img_<?php echo $gal_images['gid']; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<img width="526px" height="400px" src="<?php echo $news_img_path; ?>" />
+									</div>
+									
+								</div>
+								<a href="#img_<?php echo $gal_images['gid']; ?>" class="btn btn-icon"  data-toggle="modal" data-original-title="Delete">
+									<i class="icon-search"></i>
+								</a>
+						
+														
 								<a href="#myModal1_<?php echo $gal_images['gid']; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete"><i class="icon-trash"></i></a>
 								</td>
 								</tr>			
@@ -93,8 +104,10 @@
 								<div class="plupload">
 								<?php if($admin_user_level=='3')
 									{ ?>
-									<form name="myform" action="<?php echo $base; ?>admin/manage_univ_gallery" method="post" enctype="multipart/form-data">									
-									<h4 id="size" style="display:none;">File size must be less than 500kb</h4>									
+									<form name="myform" onsubmit="return addgallery(this);" action="<?php echo $base; ?>admin/manage_univ_gallery" method="post" enctype="multipart/form-data">
+									
+									<h4 id="size" style="display:none;">File size must be less than 500kb</h4>	
+											<?php if (isset($a)) echo $a;?>
 									<input type="file" id="file" name="userfile1[]"  class="multi" multiple />
 									<br /><br />
 									<input type="submit" class="submit" name="upload">
@@ -116,7 +129,7 @@
 <script>
 function delete_confirm(id)
 {
-	alert(id);
+	//alert(id);
 	var data={id:id};
 	$.ajax({	
 	 type: "POST",

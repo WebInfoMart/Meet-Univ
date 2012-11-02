@@ -1,3 +1,9 @@
+<div id="content" class="content_msg" style="display:none;z-index:99;position:absolute;left:190px;">
+	<div class="span8 margin_t">
+		<div class="message success"><p class="info_message"></p>
+		</div>
+	</div>
+</div>
 <meta charset="utf-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
@@ -152,10 +158,10 @@ if(!empty($events_info))
 			<!--end cal tab -->
 			<!--start all tab -->
               <div class="tab-pane" id="all">
-                <table class="responsive table table-striped dataTable" id="targetSample">
+                <table class="responsive table table-striped dataTable" id="media">				
                   <thead>
                     <tr>
-                      <th width="5%"> <input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="targetSample"></th>
+                     <th width="5%"> <input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="media"></th>
 					<th width="20%">Events Title</th>
                       <th width="25%">University Name</th>
                       <th width="15%">Event's Country</th>
@@ -239,10 +245,10 @@ if(!empty($events_info))
 			  <!--end cal tab -->
 			  <!--start new tab -->
               <div class="tab-pane" id="new">
-				<table class="responsive table table-striped dataTable" id="targetSample">
+				<table class="responsive table table-striped dataTable" id="media1">				
                   <thead>
                     <tr>
-                     <th width="5%"> <input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="targetSample"></th>
+                     <th width="5%"> <input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="media1"></th>
                      <th width="20%">Events Title</th>
                       <th width="25%">University Name</th>
                       <th width="15%">Event's Country</th>
@@ -332,7 +338,8 @@ if(!empty($events_info))
 										<div class="controls">
 											<input type="text" class="input-xlarge" name="title" id="title">
 										</div>
-										</div>										
+										</div>	
+										<!--
 										<div class="control-group">
 										<label class="control-label" for="input01">Choose University</label>
 										<div class="controls">
@@ -342,9 +349,13 @@ if(!empty($events_info))
 												<option value="<?php echo $univ_detail->univ_id; ?>"><?php echo $univ_detail->univ_name; ?></option>
 												<?php } ?>
 											</select>
-											<input type="hidden" name="university_name" id="university_name">										
+											<input type="hidden" name="university_name" id="university_name">
+																						
 										</div>
 										</div>
+										-->
+										<input type="hidden" name="university" id="university" value="<?php echo $univ_info['univ_id']; ?>">
+										<input type="hidden" name="university_name" id="university_name" value="<?php echo $univ_info['univ_name']; ?>">
 										<div class="control-group">
 										<label class="control-label" for="input06">Checked IF Event IS Online</label>
 										<div class="controls">
@@ -356,22 +367,27 @@ if(!empty($events_info))
 											<div class="control-group">
 												<label class="control-label" for="input01">Country</label>
 												<div class="controls">
-													<select  id="country" name="country" class="inline" onchange="fetchstates(0)" >
+													<select  id="country" name="country" class="inline" onchange="fetchstate(0)" >
 													<option value="">Please Select</option>
 													<?php foreach($countries as $key => $countries_detail) { ?>
 													<option value="<?php echo $countries_detail['country_id']; ?>"><?php echo $countries_detail['country_name']; ?></option>
 													<?php } ?>
-													</select>
-													<span class="inline margin_l" style="display:none"><button class="btn btn-icon tip" data-original-title="Add New Country"><i class="icon-plus"></i></button></span>													
+													</select>													
+													<a href="#add-country" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New Country">
+														<i class="icon-plus"></i>
+													</a>
 													<input type="hidden" name="countryname" id="countryname">
 												</div>
 											</div>									
 											<div class="control-group">
 												<label class="control-label" for="input01">State</label>
 												<div class="controls">
-													<select id="state" name="state" class="inline" onchange="fetchcities(0,0)" disabled="disabled">
+													<select id="state" name="state" class="inline" onchange="fetchcity(0,0)" disabled="disabled">
 														<option value="">Please Select</option>
 													</select>
+													<a href="#add-state" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New State">
+														<i class="icon-plus"></i>
+													</a>
 													<span class="inline margin_l" style="display:none"><button class="btn btn-icon tip" data-original-title="Add New State"><i class="icon-plus"></i></button></span>
 													<input type="hidden" name="statename" id="statename">
 												</div>
@@ -382,6 +398,9 @@ if(!empty($events_info))
 													<select id="city" name="city" class="inline" disabled="disabled">
 														<option value="">Please Select</option>	
 													</select>
+													<a href="#add-city" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New City">
+														<i class="icon-plus"></i>
+													</a>
 													<span class="inline margin_l" style="display:none"><button class="btn btn-icon tip" data-original-title="Add New City"><i class="icon-plus"></i></button></span>
 													<input type="hidden" name="cityname" id="cityname">
 												</div>
@@ -418,6 +437,7 @@ if(!empty($events_info))
 											<span class="add-on"><i class="icon-calendar"></i></span><input type="text" size="16" name="event_start_date"  id="event_start_date" class='span4 datepick'>
 											</div>
 											</div>
+											<input type="hidden" name="event_time" id="event_time">
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="date">Event End Date</label>
@@ -499,6 +519,116 @@ if(!empty($events_info))
     </div><!-- close .container-fluid -->
 </div><!-- close .content -->
   <!-- END Content -->
+
+<div class="modal hide" id="add-country">
+	<div class="modal-lightsout" id="add-country">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h2>Add Your Place</h2>
+			<form action="" method="post" id="form_country" id="add_country_form" >
+				<p>
+					<label>Country:</label><br>
+					<input type="text" size="30" class="text" name="country_model" id="country_model" value=""> 
+					<label class="form_error"  id="country_error"></label>
+				</p>
+				<p>
+					<label>State:</label><br>
+					<input type="text" size="30" class="text" name="state_model" id="state_model" value=""> 
+					<label class="form_error"  id="state_error"></label>
+				</p>
+				<p>
+					<label>City:</label><br>
+					<input type="text" size="30" class="text" name="city_model" id="city_model" value=""> 
+					<label class="form_error"  id="city_error"></label>
+				</p>	
+		</div>
+		<div class="modal-footer">
+			<input type="button" class="btn" name="addcountry" id="addcountry" value="Submit">			
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+			</form>
+	</div>
+</div>
+
+<div class="modal hide" id="add-state">
+	<div class="modal-lightsout" id="add-state">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h2>Add Your Place</h2>
+				<form action="" method="post" id="form_state" id="add_state_form">
+					<p>
+						<label>Country:</label><br>
+						<select class="text country_select margin_zero" name="country_model1" id="country_model1" >
+							<option value="">Select Country</option>
+							<?php foreach($countries as $country) { ?>
+							<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
+							<?php } ?>
+						</select>
+						<label class="form_error"  id="country_error1"></label>						
+					</p>
+						
+					<p>
+						<label>State:</label><br>
+						<input type="text" size="30" class="text" name="state_model1" id="state_model1" value=""> 
+						<label class="form_error"  id="state_error1"></label>
+					
+					</p>
+					<p>
+						<label>City:</label><br>
+						<input type="text" size="30" class="text" name="city_model1" id="city_model1" value=""> 
+						<label class="form_error"  id="city_error1"></label>
+					
+					</p>				
+				
+		</div>
+		<div class="modal-footer">
+			<input type="button" class="btn" name="addstate" id="addstate" value="Submit">			
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+			</form>
+	</div>
+</div>
+
+<div class="modal hide" id="add-city">
+	<div class="modal-lightsout" id="add-city">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h2>Add Your Place</h2>
+						<form action="" method="post" id="add_city_form" >
+							<p>
+								<label>Country:</label><br>
+							<select class="text country_select margin_zero" name="country_model2"  id="country_model2" onchange="fetchstates('-1')">
+											<option value="">Select Country</option>
+											<?php foreach($countries as $country) { ?>
+											<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
+											<?php } ?>
+							</select>
+							<label class="form_error"  id="country_error2"></label>
+							<div style="color: red;"> <?php echo form_error('country_model2'); ?><?php echo isset($errors['country_model2'])?$errors['country_model2']:''; ?> </div>
+							
+							</p>
+							<p>
+								<label>State:</label><br>
+								<select class="text country_select margin_zero" name="state_model2"  id="state_model2" disabled="disabled">
+								<option value="">Please Select</option>
+								</select>
+								<label class="form_error"  id="state_error2"></label>
+							</p>
+							<p>
+								<label>City:</label><br>
+								<input type="text" size="30" class="text" name="city_model2" id="city_model2"> 
+									<label class="form_error"  id="city_error2"></label>
+							</p>
+							<input type="hidden" name="level_user" value="3">						
+						
+		</div>
+		<div class="modal-footer">
+			<input type="button" class="btn" name="addcity" id="addcity" value="Submit">			
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+			</form>
+	</div>
+</div>
 <script>
 function addEvent()
 {
@@ -511,18 +641,18 @@ function addEvent()
 	else
 	{
 		$("#title").removeClass('needsfilled');
-		valid=true;		
+		
 	}
-	if($("#university").val()=='')
-	{
-		$("#university").addClass('needsfilled');
-		valid=false;		
-	}
-	else
-	{
-		$("#university").removeClass('needsfilled');
-		valid=true;		
-	}
+	// if($("#university").val()=='')
+	// {
+		// $("#university").addClass('needsfilled');
+		// valid=false;		
+	// }
+	// else
+	// {
+		// $("#university").removeClass('needsfilled');
+		// valid=true;		
+	// }
 	if(!$("#location_event").is(":checked"))
 	{
 		if($('#country option:selected').val()=='')
@@ -533,7 +663,7 @@ function addEvent()
 		else
 		{
 			$("#country").removeClass('needsfilled');
-			valid=true;		
+				
 		}
 		if($('#state option:selected').val()=='')
 		{
@@ -543,7 +673,7 @@ function addEvent()
 		else
 		{
 			$("#state").removeClass('needsfilled');
-			valid=true;		
+					
 		}
 		if($('#city option:selected').val()=='')
 		{
@@ -553,7 +683,7 @@ function addEvent()
 		else
 		{
 			$("#city").removeClass('needsfilled');
-			valid=true;		
+					
 		}
 	}
 	if($("#event_place").val()=='')
@@ -564,7 +694,7 @@ function addEvent()
 	else
 	{
 		$("#event_place").removeClass('needsfilled');
-		valid=true;		
+			
 	}
 	if($('#event_type option:selected').val()=='')
 	{
@@ -574,7 +704,7 @@ function addEvent()
 	else
 	{
 		$("#event_type").removeClass('needsfilled');
-		valid=true;		
+			
 	}
 	if($("#event_start_date").val()=='')
 	{
@@ -584,7 +714,7 @@ function addEvent()
 	else
 	{
 		$("#event_start_date").removeClass('needsfilled');
-		valid=true;		
+			
 	}
 	if($("#event_end_date").val()=='')
 	{
@@ -594,20 +724,22 @@ function addEvent()
 	else
 	{
 		$("#event_end_date").removeClass('needsfilled');
-		valid=true;		
+			
 	}
 	if(valid==true)
 	{
 		document.forms["myAddForm"].submit();
 	}
-	var university_name=$("#university option:selected").text();			
+	//var university_name=$("#university").val();			
 	var country_name=$("#country option:selected").text();			
 	var state_name=$("#state option:selected").text();
-	var city_name=$("#city option:selected").text();	
-	$("#university_name").val(university_name);
+	var city_name=$("#city option:selected").text();
+	var event_time = $("#event_start_date").val();
+	//$("#university_name").val(university_name);
 	$("#countryname").val(country_name);
 	$("#statename").val(state_name);
 	$("#cityname").val(city_name);	
+	$("#event_time").val(event_time);	
 	return valid;
 }  
 $(document).ready(function(){
@@ -775,7 +907,7 @@ function action_formsubmit(id,flag)
 		}
 		else
 		{
-			alert("please select al least one event");
+			alert("please select atleast one event");
 			return false;
 		}
 	}
@@ -799,7 +931,7 @@ function set_chkbox_val()
 }
 $(document).ready(function()
 {	
-	$("#location_event").click(function() {	
+	$("#location_event").click(function() {		
 		if($("#location_event").is(":checked"))
 		{
 			$("#fixedloc").val(0);
@@ -826,7 +958,14 @@ $(document).ready(function()
 	});	
 	
 });
-function fetchstates(sid)
+function fetchcountry(cid,cname)
+{
+	$("#country option:selected").text(cname);	
+	$("#country option:selected").val(cid);
+	$("#state").removeAttr("disabled");
+	$("#city").removeAttr("disabled");
+}
+function fetchstate(sid)
 {
 	var stid=sid;
 	var cid=$("#country option:selected").val();
@@ -842,8 +981,38 @@ function fetchstates(sid)
 	   }
 	   });
 }
-function fetchcities(state_id,cityid)
+function fetchstates(sid,sname)
 {
+var stid=sid;
+var cid;
+if(sid=='-1')
+{
+stid='0';
+cid=$("#country_model2 option:selected").val();
+$.ajax({
+   type: "POST",
+   url: "<?php echo $base; ?>admin/state_list_ajax/",
+   data: 'country_id='+cid+'&sel_state_id='+stid,
+   cache: false,
+   success: function(msg)
+   {
+    if(sid=='-1')
+	{
+	$('#state_model2').attr('disabled', false);
+	$('#state_model2').html(msg);
+	}
+   }
+   });
+}  
+else
+{
+	$("#state option:selected").text(sname);	
+	$("#state option:selected").val(sid);	
+	$("#state").removeAttr("disabled");
+	$("#city").removeAttr("disabled");
+}
+}
+function fetchcity(state_id,cityid){
 	if(state_id=='0')
 	{
 		state_id=$("#state option:selected").val();
@@ -860,4 +1029,288 @@ function fetchcities(state_id,cityid)
 		}
 	});  
 } 
- </script>
+function fetchcities(cityid,cityname)
+{
+	$("#city option:selected").text(cityname);	
+	$("#city option:selected").val(cityid);	
+	$("#state").removeAttr("disabled");
+	$("#city").removeAttr("disabled");
+}
+
+$('#addcountry').click(function(){
+	var country=$("#country_model").val();
+	var state=$("#state_model").val();
+	var city=$("#city_model").val();
+	var flag=0;
+	if(country=='' || country==null)
+	{
+	 $('#country_error').html("Please enter the country name"); 
+	 $('#country_model').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+		$('#country_error').html("") 
+		$('#country_model').removeClass('error');
+		flag=flag+1;
+	}
+	if(state=='' || state==null)
+	{
+		$('#state_error').html("Please enter the state name"); 
+		$('#state_model').addClass('error');
+		flag=0;
+	}
+	else
+	{
+		$('#state_error').html(""); 
+		$('#state_model').removeClass('error');
+		flag=flag+1;
+	}
+	if(city=='' || city==null)
+	{
+		$('#city_error').html("Please enter the city"); 
+		$('#city_model').addClass('error');
+		flag=0;
+	}
+	else
+	{
+		$('#city_error').html(""); 
+		$('#city_model').removeClass('error');
+		flag=flag+1;
+	}
+	if(flag==3)
+	{
+	 var  countrystatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/check_unique_field/country_name/country",
+	   async:false,
+	   data: 'field='+country,
+	   cache: false,
+	   success: function(msg)
+	   {
+	   if(msg=='1')
+		{
+		$('#country_error').html('Country Already Exist');
+		$('#country_model').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#country_model').html('');
+		$('#country_error').addClass('');
+		countrystatus=1;
+		}
+	   }
+	   });
+	 if(countrystatus)
+	 {
+	$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_country_ajax",
+	   async:false,
+	   data: 'country_model='+country+'&state_model='+state+'&city_model='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0],country);
+		fetchstates(place[1],state);
+		fetchcities(place[2],city);
+				
+		$('.modal-lightsout').fadeOut("slow");
+		//$('#add_country_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').show(500);
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+
+$('#addstate').click(function(){
+	var country=$("#country_model1 option:selected").val();
+	var countrytext=$("#country_model1 option:selected").text();
+	
+	var state=$("#state_model1").val();
+	var city=$("#city_model1").val();
+	var flag=0;
+	if(country=='' || country==null || country=='0')
+	{
+	 $('#country_error1').html("Please select the country"); 
+	 $('#country_model1').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	$('#country_error1').html("");
+	 $('#country_model1').removeClass('error');
+	  flag=flag+1;
+	}
+	if(state=='' || state==null)
+	{
+	$('#state_error1').html("Please enter the state name"); 
+	$('#state_model1').addClass('error');
+	flag=1;
+	
+	}
+	else
+	{
+	$('#state_error1').html(""); 
+	$('#state_model1').removeClass('error');
+	  flag=flag+1;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error1').html("Please enter the city"); 
+	$('#city_model1').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#city_error1').html(""); 
+	$('#city_model1').removeClass('error');
+	 flag=flag+1;
+	}
+	if(flag==3)
+	{
+	 var  statestatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/state_check",
+	   async:false,
+	   data: 'state_model1='+state+'&country_model1='+country,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    if(msg=='1')
+		{
+		$('#state_error1').html('State Already Exist in Selected Country');
+		$('#state_model1').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#state_error1').html('');
+		$('#state_model1').addClass('');
+		statestatus=1;
+		}
+	   }
+	   });
+	 if(statestatus)
+	 {
+	 $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_state_ajax",
+	   async:false,
+	   data: 'country_model1='+country+'&state_model1='+state+'&city_model1='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0],countrytext);
+		fetchstates(place[1],state);
+		fetchcities(place[2],city);
+		$('.modal-lightsout').fadeOut("slow");
+		//$('#add_state_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 
+	   
+	}
+	
+});
+
+$('#addcity').click(function(){
+	var country=$("#country_model2 option:selected").val();
+	var countrytext=$("#country_model2 option:selected").text();
+	var state=$("#state_model2 option:selected").val();
+	var statetext=$("#state_model2 option:selected").text();
+	var city=$("#city_model2").val();
+	var flag=0;
+	if(country=='' || country==null || country=='0')
+	{
+	 $('#country_error2').html("Please select the country"); 
+	 $('#country_model2').addClass('error');
+	 flag=0;
+	}
+	else
+	{
+	$('#country_error2').html("");
+	 $('#country_model2').removeClass('error');
+	  flag=flag+1;
+	}
+	if(state=='' || state==null || state=='0')
+	{
+	$('#state_error2').html("Please select the state "); 
+	$('#state_model2').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#state_error2').html(""); 
+	$('#state_model2').removeClass('error');
+	 flag=flag+1;
+	}
+	if(city=='' || city==null)
+	{
+	$('#city_error2').html("Please enter the city"); 
+	$('#city_model2').addClass('error');
+	flag=0;
+	}
+	else
+	{
+	$('#city_error2').html(""); 
+	$('#city_model2').removeClass('error');
+	flag=flag+1;
+	}
+	if(flag==3)
+	{
+	 var  citystatus=0;
+		$.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/city_check",
+	   async:false,
+	   data: 'state_model2='+state+'&country_model2='+country+'&city_model2='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    if(msg=='1')
+		{
+		$('#city_error2').html('CIty Already Exist in Selected State');
+		$('#city_model2').addClass('error');
+		}
+		else if(msg=='0')
+		{
+		$('#city_error2').html('');
+		$('#city_model2').addClass('');
+		citystatus=1;
+		}
+	   }
+	   });
+	 if(citystatus)
+	 {
+	 $.ajax({
+	   type: "POST",
+	   url: "<?php echo $base; ?>admin/add_city_ajax",
+	   async:false,
+	   data: 'country_model2='+country+'&state_model2='+state+'&city_model2='+city,
+	   cache: false,
+	   success: function(msg)
+	   {
+	    var place=msg.split('##');
+		fetchcountry(place[0],countrytext);
+		fetchstates(place[1],statetext);
+		fetchcities(place[2],city);
+		$('.modal-lightsout').fadeOut("slow");
+		//$('#add_city_form').reset();
+		$('.info_message').html('Your Place Added Successfully');
+		$('.content_msg').css('display','block');
+	   }
+	   });
+	 } 	   
+	}	
+});
+</script>

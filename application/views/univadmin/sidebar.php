@@ -90,12 +90,15 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
           General Setting
           <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span>
         </a>
+		<?php 
+		if($admin_user_level=='3') { ?>
         <ul class="collapsed-nav closed">
           <li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>
-          <li><a href="pages.html">Pages</a></li>
-          <li><a href="univ_courses.html">University Courses</a></li>
+          <li><a href="pages.html">Pages</a></li>		  
+          <li><a href="<?php echo $base; ?>newadmin/admin_courses/manage_univ_course">University Courses</a></li>
           <li><a href="update_university.html">Update University</a></li>
         </ul>
+		<?php } ?>
       </li>
 	   <li>
         <a href="#" class='toggle-subnav'>

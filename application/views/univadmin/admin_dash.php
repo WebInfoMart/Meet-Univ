@@ -216,7 +216,7 @@ if($flag) { ?>
     <div class="content-box">
       <table class="table table-striped table-nohead">
         <tbody>
-		<?php// print_r($recent_followers_of_univ); ?>
+		<?php  // print_r($recent_followers_of_univ); ?>
           <tr>
             <td>
               <a href="#">Name</a>

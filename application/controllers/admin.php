@@ -1805,7 +1805,8 @@ function manage_university($mps='')
 				
 					if($this->input->post('upload'))
 					{
-						$university_id=$univ_info['univ_id'];				
+						$university_id=$univ_info['univ_id'];
+							//print_r($this->input->post('userfile1'));exit;
 						$added=$this->adminmodel->upload_univ_gallery($university_id);	
 						if($added==1)
 						{

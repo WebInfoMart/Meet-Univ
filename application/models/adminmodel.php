@@ -885,16 +885,17 @@ class Adminmodel extends CI_Model
 	function upload_univ_gallery($univ_id)
 	{
 		$config['upload_path'] = $this->univ_gallery_path; // server directory
-        $config['allowed_types'] = 'gif|jpg|png|jpeg|'; // by extension, will check for whether it is an image
+        $config['allowed_types'] = 'gif|jpg|png|jpeg'; // by extension, will check for whether it is an image
         $this->load->library('upload', $config);
         $this->load->library('Multi_upload');
+		//print_r($_FILES);exit;
 		if (empty($_FILES))
 		{
-		return 0;
+			return 0;
 		}
 		else
 		{
-				$files = $this->multi_upload->go_upload();
+			$files = $this->multi_upload->go_upload();
         
         if ( ! $files )        
         {

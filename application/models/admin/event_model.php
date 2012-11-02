@@ -72,11 +72,10 @@ class Event_model extends CI_Model
 		$newStartDate = date("d M Y", strtotime($_POST['event_start_date']));
 		$newEndDate = date("d M Y", strtotime($_POST['event_end_date']));
 		$event_time = $_POST['event_time_start']."-".$_POST['event_time_end'];
-		if(isset($_POST['event_timing_not_fixed'])){
+		if(isset($_POST['event_timing_fixed_not_fixed'])){
 			$event_time = $this->input->post('event_mention_time');
-		}
-		$data['user_id'] = $this->tank_auth->get_admin_user_id();
-		//$event_time=$this->input->post('event_start_timing').'-'.$this->input->post('event_end_timing');
+		}	
+		$data['user_id'] = $this->tank_auth->get_admin_user_id();		
 		$data = array(
 			   'event_title' => $this->input->post('title'),
 			   'event_detail' => $this->input->post('detail'),

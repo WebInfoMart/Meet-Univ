@@ -34,8 +34,8 @@ if(!empty($event_info))
 								<div class="control-group margin_b">
 									<label for="username" class="control-label">Event Title</label>
 									<div class="controls">
-									<div class="help-inline data1"><?php echo $event_info[0]['event_title'] ?></div>
-									<input type="text" name="title" id="title" style="display:none;" class="input-xlarge inputElement" value="<?php echo $event_info[0]['event_title'] ?>">
+									<div class="help-inline data1"><?php echo $event_info[0]['event_title']; ?></div>
+									<input type="text" name="title" id="title" style="display:none;" class="input-xlarge inputElement" value="<?php echo $event_info[0]['event_title']; ?>">
 									</div>
 								</div>
 								<?php if($admin_user_level=='5' || $admin_user_level=='4') {?>
@@ -46,12 +46,12 @@ if(!empty($event_info))
 									<select style="display:none" class="input-xlarge inputElement"  id="university" name="university">
 										<option value="">Please Select</option>
 										<?php foreach($univ_info as $univ_detail) { ?>
-										<option value="<?php echo $univ_detail->univ_id; ?>" <?php if($univ_detail->univ_id==$event_info[0]['event_univ_id']) { ?> selected <?php } ?> ><?php echo $univ_detail->univ_name; ?></option>
+										<option value="<?php echo $univ_detail->univ_id; ?>" <?php if($univ_detail->univ_id == $event_info[0]['event_univ_id']) { ?> selected <?php } ?> ><?php echo $univ_detail->univ_name; ?></option>
 										<?php } ?>
 									</select>
 									</div>
 								</div>
-								<?php }else { ?>
+								<?php } else { ?>
 									<input type="hidden" name="university" value="<?php echo $event_info[0]['event_univ_id']; ?>">
 								<?php }?>
 								<div class="control-group margin_b">
@@ -73,7 +73,7 @@ if(!empty($event_info))
 									<input type="checkbox" <?php echo $checked; ?> name="location_event" id="location_event" class="inputElement" style="display:none;">
 									</div>
 								</div>								
-								<?php if($admin_user_level=='5' || $admin_user_level=='4') {?>
+								<?php // if($admin_user_level=='5' || $admin_user_level=='4') { ?>
 								<div id="divShowHide" <?php if($checked=='checked'){ ?> style="display:none" <?php } ?>>
 									<div class="control-group margin_b">
 										<label for="username" class="control-label"><b>Country</b></label>
@@ -87,46 +87,46 @@ if(!empty($event_info))
 										</select>
 										</div>
 									</div>							
-									<?php }else { ?>
-										<input type="hidden" name="country" id="country" value="<?php echo $event_info[0]['event_country_id']; ?>">
-									<?php }?>
+									<?php // }else { ?>
+										<!-- <input type="hidden" name="country" id="country" value="<?php echo $event_info[0]['event_country_id']; ?>"> -->
+									<?php // } ?>
 
-									<?php if($admin_user_level=='5' || $admin_user_level=='4') {?>
+									<?php // if($admin_user_level=='5' || $admin_user_level=='4') { ?>
 									<div class="control-group margin_b">
 										<label for="username" class="control-label"><b>State</b></label>
 										<div class="controls">
 										<div class="help-inline data1"><?php echo $event_info[0]['statename']; ?></div>
 										<select style="display:none" class="input-xlarge inputElement"  id="state" name="state" onchange="fetchcities(0,<?php echo $event_info[0]['event_city_id']; ?>)">
 											<?php if($event_info[0]['event_state_id']!='0'){ ?>
-												<option value="<?php echo $event_info[0]['event_state_id'];?>"><?php echo $event_info[0]['statename'] ?></option>
-											<? } else{ ?>
+												<option value="<?php echo $event_info[0]['event_state_id'];?>"><?php echo $event_info[0]['statename']; ?></option>
+											<? } else { ?>
 												<option value="">Please Select</option>
 											<? } ?>
 										</select>
 										</div>
 									</div>
-									<?php }else { ?>
-										<input type="hidden" name="state" id="state" value="<?php echo $event_info[0]['event_state_id']; ?>">
-									<?php }?>
+									<?php //}else { ?>
+										<!-- <input type="hidden" name="state" id="state" value="<?php echo $event_info[0]['event_state_id']; ?>"> -->
+									<?php //}?>
 									
 									
-									<?php if($admin_user_level=='5' || $admin_user_level=='4') {?>
+									<?php //if($admin_user_level=='5' || $admin_user_level=='4') { ?>
 									<div class="control-group margin_b">
 										<label for="username" class="control-label"><b>City</b></label>
 										<div class="controls">
 										<div class="help-inline data1"><?php echo $event_info[0]['cityname']; ?></div>
 										<select style="display:none" class="input-xlarge inputElement"  id="city" name="city">
 											<?php if($event_info[0]['event_city_id']!='0'){ ?>
-												<option value="<?php echo $event_info[0]['event_city_id'];?>"><?php echo $event_info[0]['cityname'] ?></option>
-											<? } else{ ?>
+												<option value="<?php echo $event_info[0]['event_city_id'];?>"><?php echo $event_info[0]['cityname']; ?></option>
+											<? } else { ?>
 												<option value="">Please Select</option>
 											<? } ?>
 										</select>
 										</div>
 									</div>
-									<?php }else { ?>
-										<input type="hidden" name="city" id="city" value="<?php echo $event_info[0]['event_city_id']; ?>">
-									<?php }?>
+									<?php // }else { ?>
+									<!-- <input type="hidden" name="city" id="city" value="<?php echo $event_info[0]['event_city_id']; ?>"> -->
+									<?php // } ?>
 								</div>
 								<div class="control-group margin_b">
 									<label for="username" class="control-label">Event Place</label>
@@ -134,14 +134,14 @@ if(!empty($event_info))
 									<div class="help-inline data1"><?php echo $event_info[0]['event_place'] ?></div>
 									<input type="text" name="event_place" id="event_place" style="display:none;" class="input-xlarge inputElement" value="<?php echo $event_info[0]['event_place'] ?>">
 									</div>
-								</div>
-								<div class="control-group margin_b">
+								</div>	
+									<div class="control-group margin_b">
 									<label for="username" class="control-label">Detail</label>
 									<div class="controls">
 									<div class="help-inline data1"><?php echo $event_info[0]['event_detail'] ?></div>
 									<textarea name="detail" style="display:none;" id="detail" class="span12 inputElement" rows="4"><?php echo $event_info[0]['event_detail'] ?></textarea>
 									</div>
-								</div>
+								</div>	
 							</div>
 							<div class="span6">
 								<div class="control-group margin_b">
@@ -157,7 +157,7 @@ if(!empty($event_info))
 									<div class="controls">
 									<div class="help-inline data1"><?php echo $newStartDate ?></div>
 									<div class="input-prepend inputElement" style="display:none">
-										<span class="add-on" style="display:none"><i class="icon-calendar"></i></span><input type="text" name="event_time" id="event_time" class="span4 datepick" value="<?php echo $newStartDate ?>" style="display:none">
+										<span class="add-on" style="display:none"><i class="icon-calendar"></i></span><input type="text" name="event_time" id="event_time" class="span4 datepick" value="<?php echo $newStartDate; ?>" style="display:none">
 									</div>
 									</div>
 								</div>
@@ -165,9 +165,9 @@ if(!empty($event_info))
 									<?php $newEndDate = date("m/d/Y", strtotime($event_info[0]['event_date_time_end']));?>
 									<label for="username" class="control-label">Event End Date</label>
 									<div class="controls">
-									<div class="help-inline data1"><?php echo $newEndDate ?></div>
+									<div class="help-inline data1"><?php echo $newEndDate; ?></div>
 									<div class="input-prepend inputElement" style="display:none">
-										<span class="add-on" style="display:none"><i class="icon-calendar"></i></span><input type="text" name="event_time_end" id="event_time_end" class="span4 datepick" value="<?php echo $newEndDate ?>" style="display:none">
+										<span class="add-on" style="display:none"><i class="icon-calendar"></i></span><input type="text" name="event_time_end" id="event_time_end" class="span4 datepick" value="<?php echo $newEndDate; ?>" style="display:none">
 									</div>
 									</div>
 								</div>
@@ -185,19 +185,19 @@ if(!empty($event_info))
 										<?php
 											$event_info_time = explode("-",$event_info[0]['event_time']);
 										?>
-										<div class="help-inline data1"><?php echo $event_info_time[0] ?></div>
+										<div class="help-inline data1"><?php echo $event_info_time[0]; ?></div>
 										<div class="input-prepend inputElement" style="display:none">
 											<span class="add-on inline margin_l" style="display:none"><i class="icon-time"></i></span>
-											<input type="text" name="event_start_time" id="event_start_time" size="16" class='span4 timepicker' value="<?php echo $event_info_time[0] ?>" style="display:none">										 
+											<input type="text" name="event_start_time" id="event_start_time" size="16" class='span4 timepicker' value="<?php echo $event_info_time[0]; ?>" style="display:none">										 
 										</div>
 										</div>
 									</div>
 									<div class="control-group margin_b">
 										<label for="username" class="control-label">Event End Time</label>
 										<div class="controls">
-										<div class="help-inline data1"><?php echo $event_info_time[1] ?></div>
+										<div class="help-inline data1"><?php echo $event_info_time[1]; ?></div>
 										<div class="input-prepend inputElement" style="display:none">
-											<span class="add-on inline margin_l" style="display:none"><i class="icon-time"></i></span><input type="text" name="event_end_time" id="event_end_time"  size="16" class='span4 timepicker' value="<?php echo $event_info_time[1] ?>" style="display:none">
+											<span class="add-on inline margin_l" style="display:none"><i class="icon-time"></i></span><input type="text" name="event_end_time" id="event_end_time"  size="16" class='span4 timepicker' value="<?php echo $event_info_time[1]; ?>" style="display:none">
 											</div>
 										</div>
 									</div>											
@@ -207,17 +207,17 @@ if(!empty($event_info))
 									<div class="controls">
 									<div class="help-inline data1"></div>
 									<div class="input-prepend inputElement" style="display:none">
-										<input type="text" name="event_mention_time" id="event_mention_time" class="input-xlarge inputElement" value="<?php echo $event_info[0]['event_time']?>" style="display:none">
+										<input type="text" name="event_mention_time" id="event_mention_time" class="input-xlarge inputElement" value="<?php echo $event_info[0]['event_time']; ?>" style="display:none">
 									</div>
 									</div>
 								</div>	
-								
+														
 							</div>
 							
 							<div class="clearfix"></div>
 							<div class="form-actions">
 									<a id="edit" class='btn btn-success pover' data-placement="top" data-content="Want to change" title="Edit">Edit</a>
-									<a id="cancel" href="<?php echo $base;?>newadmin/admin_events/view_event/<?php echo $event_info[0]['event_id']?>" style="display:none" class='btn btn-success pover' data-placement="top" data-content="Want to Cancel" title="Cancel">Cancel</a>
+									<a id="cancel" href="<?php echo $base; ?>newadmin/admin_events/view_event/<?php echo $event_info[0]['event_id']; ?>" style="display:none" class='btn btn-success pover' data-placement="top" data-content="Want to Cancel" title="Cancel">Cancel</a>
 									<input type="submit" name="submit"  class='btn btn-success pover' data-placement="top" data-content="Update it" value="Update"/>
 							</div>
 						</div>

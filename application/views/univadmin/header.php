@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="<?php echo $base; ?>newadmin/css/fullcalendar.css">
   <link rel="stylesheet" href="<?php echo $base; ?>newadmin/css/jquery.fancybox-1.3.4.css">
   <link rel="stylesheet" href="<?php echo $base; ?>newadmin/css/smoothness/jquery-ui-1.8.21.custom.css">
-  <script src="<?php echo $base;?>newadmin/js/jquery.js"></script>
+ 
+<script  src="<?php echo $base;?>js/jquery.js"></script>
 <script src="<?php echo $base;?>newadmin/js/bootstrap.js"></script>
 <script src="<?php echo $base;?>newadmin/js/jquery.flot.js"></script>
 <script src="<?php echo $base;?>newadmin/js/fullcalendar.min.js"></script>
@@ -21,6 +22,9 @@
 <script src="<?php echo $base;?>newadmin/js/custom.js"></script>
 <script src="<?php echo $base;?>newadmin/js/jquery.timeago.js"></script>
 <script src="<?php echo $base;?>newadmin/js/jquery.timepicker.js"></script>
+<!--<script src="<?php echo $base;?>newadmin/js/jquery.js"></script>-->
+	
+	<script type="text/javascript" src="<?php echo $base;?>js/jquery.MultiFile.min.js"></script>
   <!-- BEGIN Navbar -->
   <div class="navbar navbar-top">
     <div class="navbar-inner">
