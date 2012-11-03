@@ -72,9 +72,13 @@ class Event_model extends CI_Model
 		$newStartDate = date("d M Y", strtotime($_POST['event_start_date']));
 		$newEndDate = date("d M Y", strtotime($_POST['event_end_date']));
 		$event_time = $_POST['event_time_start']."-".$_POST['event_time_end'];
+		$ban_event = '0';
 		if(isset($_POST['event_timing_fixed_not_fixed'])){
 			$event_time = $this->input->post('event_mention_time');
-		}	
+		}
+		if(isset($_POST['hide_event'])){
+			$ban_event = '1';
+		}
 		$data['user_id'] = $this->tank_auth->get_admin_user_id();		
 		$data = array(
 			   'event_title' => $this->input->post('title'),
@@ -88,7 +92,7 @@ class Event_model extends CI_Model
 			   'event_state_id' => $this->input->post('state'),
 			   'event_city_id' => $this->input->post('city'),
 			   'event_place' => $this->input->post('event_place'),
-			   'ban_event' => $this->input->post('hide_event'),
+			   'ban_event' => $ban_event,
 			   'event_time' => $event_time,
 			   'event_tags' => $this->input->post('tags')
 			);

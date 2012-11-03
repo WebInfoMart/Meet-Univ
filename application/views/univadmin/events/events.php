@@ -160,13 +160,13 @@ if(!empty($events_info))
               <div class="tab-pane" id="all">
                 <table class="responsive table table-striped dataTable" id="media">				
                   <thead>
-                    <tr>
-                     <th width="5%"> <input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="media"></th>
-					<th width="20%">Events Title</th>
-                      <th width="25%">University Name</th>
-                      <th width="15%">Event's Country</th>
-					  <th width="15%">Event Date</th>
-					   <th width="20%">Choose Option</th>
+                    <tr class="for_remove_class_all">
+						<th width="5%" class="event_title_class_all" ><input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="media"></th>
+						<th width="20%" >Events Title</td>
+						<th width="25%">University Name</th>
+						<th width="15%">Event's Country</th>
+						<th width="15%">Event Date</th>
+						<th width="20%" class="event_title_class_all" >Choose Option</th>
                     </tr>
                   </thead>
                   <tbody>					
@@ -178,7 +178,7 @@ if(!empty($events_info))
 							<td><input type="checkbox" value="<?php echo $row->event_id;?>" name="check_event_<?php echo $row->event_id; ?>" class='selectable_checkbox setchkval'  id="check_event_<?php echo $row->event_id; ?>"></td>							
 							<td><?php if($row->event_title){ echo ucwords(substr($row->event_title,0,50)); } else { echo "<span style='color:#000;'>Not Available</span>"; } ?></td>
 							<td><?php echo ucwords($row->univ_name); ?></td>
-							<td><a href="#"><?php if($row->cityname!=''){ echo ucwords($row->cityname); } else { echo '<span style="color:#000;">Not Available</span>'; }?></a></td>
+							<td><?php if($row->cityname!=''){ echo ucwords($row->cityname); } else { echo '<span style="color:#000;">Not Available</span>'; }?></td>
 							<td class="center"><?php echo ucwords($row->event_date_time); ?></a></td>
 							<td class="options">
 							<div class="btn-group">
@@ -204,10 +204,12 @@ if(!empty($events_info))
 								<a href="#myModal_<?php echo $row->event_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
-								<?php }	if(($edit==1 || $delete==1 || $insert==1)  ){  ?>
+								<?php }	if(($edit==1 || $delete==1 || $insert==1) ){  ?>
+								<?php if($admin_user_level ==5){  ?>
 								<a href="#" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_events','<?php  echo $row->featured_home_event; ?>','<?php echo $row->event_id; ?>');" class="btn btn-icon tip" <?php if($row->featured_home_event){ ?> data-original-title="Unfeatured" <?php } else { ?> data-original-title="Featured" <?php } ?>>
 									<i class="<?php if($row->featured_home_event){ echo 'icon-blue'; }?> icon-star"></i>
 								</a>
+								<?php } ?>
 									
 								<a href="#" onclick="show_hide_event('<?php echo "$base";?>newadmin/admin_events','<?php  echo $row->ban_event; ?>','<?php echo $row->event_id; ?>');"  class="btn btn-icon tip" <?php if($row->ban_event){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?> >
 									<i class="<?php if($row->ban_event){ echo 'icon-blue'; }?> icon-fire"></i>
@@ -247,13 +249,13 @@ if(!empty($events_info))
               <div class="tab-pane" id="new">
 				<table class="responsive table table-striped dataTable" id="media1">				
                   <thead>
-                    <tr>
-                     <th width="5%"> <input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="media1"></th>
+                    <tr class="for_remove_class_new">
+                     <th width="5%" class="event_title_class_new"> <input type="checkbox" name="sel_rows" class='sel_rows' data-targettable="media1"></th>
                      <th width="20%">Events Title</th>
                       <th width="25%">University Name</th>
                       <th width="15%">Event's Country</th>
 					  <th width="15%">Event Date</th>
-					   <th width="20%">Choose Option</th>
+					   <th width="20%" class="event_title_class_new">Choose Option</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -264,7 +266,7 @@ if(!empty($events_info))
 					  <td><input type="checkbox" value="<?php echo $row->event_id;?>" name="check_event_<?php echo $row->event_id; ?>" class='selectable_checkbox setchkval'  id="check_event_<?php echo $row->event_id; ?>"></td>							
                       <td><?php echo ucwords(substr($row->event_title,0,50)); ?></td>
                        <td><?php echo ucwords($row->univ_name); ?></td>
-                       <td><a href="#"><?php if($row->cityname!=''){ echo ucwords($row->cityname); } else { echo '<span style="color:#000;">Not Available</span>'; }?></a></td>
+                       <td><?php if($row->cityname!=''){ echo ucwords($row->cityname); } else { echo '<span style="color:#000;">Not Available</span>'; }?></td>
                        <td class="center"><?php echo ucwords($row->event_date_time); ?></td>
 					   <td class="options center">
 							<div class="btn-group">
@@ -385,8 +387,8 @@ if(!empty($events_info))
 													<select id="state" name="state" class="inline" onchange="fetchcity(0,0)" disabled="disabled">
 														<option value="">Please Select</option>
 													</select>
-													<a href="#add-state" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New State">
-														<i class="icon-plus"></i>
+													<a href="#add-state" class="btn btn-icon tip" data-toggle="modal" data-original-title="Add New State">
+														<i class="icon-plus" id="setCountryValue"></i>
 													</a>
 													<span class="inline margin_l" style="display:none"><button class="btn btn-icon tip" data-original-title="Add New State"><i class="icon-plus"></i></button></span>
 													<input type="hidden" name="statename" id="statename">
@@ -399,7 +401,7 @@ if(!empty($events_info))
 														<option value="">Please Select</option>	
 													</select>
 													<a href="#add-city" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New City">
-														<i class="icon-plus"></i>
+														<i class="icon-plus" id="setCountryStateValue"></i>
 													</a>
 													<span class="inline margin_l" style="display:none"><button class="btn btn-icon tip" data-original-title="Add New City"><i class="icon-plus"></i></button></span>
 													<input type="hidden" name="cityname" id="cityname">
@@ -713,8 +715,7 @@ function addEvent()
 	}
 	else
 	{
-		$("#event_start_date").removeClass('needsfilled');
-			
+		$("#event_start_date").removeClass('needsfilled');			
 	}
 	if($("#event_end_date").val()=='')
 	{
@@ -723,27 +724,55 @@ function addEvent()
 	}
 	else
 	{
-		$("#event_end_date").removeClass('needsfilled');
-			
+		$("#event_end_date").removeClass('needsfilled');			
 	}
-	if(valid==true)
+	if((new Date($("#event_end_date").val()).getTime() < new Date($("#event_start_date").val()).getTime()))
 	{
-		document.forms["myAddForm"].submit();
+		alert("Invalid Date Range!\nStart Date cannot be after End Date!");
+		valid=false;
 	}
-	//var university_name=$("#university").val();			
+	
+	var start = $("#event_time_start").val();
+	var end = $("#event_time_end").val();
+	var dtStart = new Date($("#event_start_date").val() + start);
+	var dtEnd = new Date($("#event_end_date").val() + end);
+	difference_in_milliseconds = dtEnd - dtStart;
+	if (difference_in_milliseconds < 0)
+	{
+		if (difference_in_milliseconds == 0)
+		{
+			alert("End time is equal to start time!");
+		}
+		else
+		{
+			alert("End time is before start time!");
+		}
+		valid = false;
+	}
 	var country_name=$("#country option:selected").text();			
 	var state_name=$("#state option:selected").text();
 	var city_name=$("#city option:selected").text();
 	var event_time = $("#event_start_date").val();
-	//$("#university_name").val(university_name);
 	$("#countryname").val(country_name);
 	$("#statename").val(state_name);
 	$("#cityname").val(city_name);	
 	$("#event_time").val(event_time);	
+	if(valid==true)
+	{
+		document.forms["myAddForm"].submit();
+	}
 	return valid;
 }  
 $(document).ready(function(){
-	//alert('fnslfc');
+	//alert('fnslfc');	
+	$('.event_title_class_all').removeClass('sorting_asc sorting_desc');	
+	$('.event_title_class_new').removeClass('sorting_asc sorting_desc');	
+	$(".for_remove_class_all").click(function() {
+	$('.event_title_class_all').removeClass('sorting sorting_asc sorting_desc');	
+	});	
+	$(".for_remove_class_new").click(function() {
+	$('.event_title_class_new').removeClass('sorting sorting_asc sorting_desc');	
+	});	
 	$('.collapsed-nav').css('display','none');
 	var url = window.location.pathname; 
 	var activePage = url.substring(url.lastIndexOf('/')+1);
@@ -807,7 +836,7 @@ $.ajax({
 	   cache: false,
 	   success: function(msg)
 	   {
-	  if(msg=='1')
+	   if(msg=='1')
 	   {
 	   var shh='ess';
 	   }
@@ -1117,7 +1146,9 @@ $('#addcountry').click(function(){
 		fetchstates(place[1],state);
 		fetchcities(place[2],city);
 				
-		$('.modal-lightsout').fadeOut("slow");
+		$('.modal-lightsout').fadeOut("fast");
+		$('.modal-backdrop').hide("slow");	
+		$('.in').hide("slow");	
 		//$('#add_country_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').show(500);
@@ -1132,7 +1163,6 @@ $('#addcountry').click(function(){
 $('#addstate').click(function(){
 	var country=$("#country_model1 option:selected").val();
 	var countrytext=$("#country_model1 option:selected").text();
-	
 	var state=$("#state_model1").val();
 	var city=$("#city_model1").val();
 	var flag=0;
@@ -1211,7 +1241,9 @@ $('#addstate').click(function(){
 		fetchcountry(place[0],countrytext);
 		fetchstates(place[1],state);
 		fetchcities(place[2],city);
-		$('.modal-lightsout').fadeOut("slow");
+		$('.modal-lightsout').fadeOut("fast");
+		$('.modal-backdrop').hide("slow");
+		$('.in').hide("slow");		
 		//$('#add_state_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').css('display','block');
@@ -1304,7 +1336,9 @@ $('#addcity').click(function(){
 		fetchcountry(place[0],countrytext);
 		fetchstates(place[1],statetext);
 		fetchcities(place[2],city);
-		$('.modal-lightsout').fadeOut("slow");
+		$('.modal-lightsout').fadeOut("fast");
+		$('.modal-backdrop').hide("slow");	
+		$('.in').hide("slow");		
 		//$('#add_city_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').css('display','block');
@@ -1313,4 +1347,49 @@ $('#addcity').click(function(){
 	 } 	   
 	}	
 });
+$('#setCountryValue').click(function(){
+	var selCountryText = $("#country option:selected").text();
+	var selCountryVal = $("#country option:selected").val();
+	$("#country_model1 option:selected").val(selCountryVal);
+	$("#country_model1 option:selected").text(selCountryText);
+	if(selCountryText=="Please Select")
+	{
+		$("#country_model1").removeAttr("disabled");
+	}
+	else
+	{
+		$('#country_model1').attr('disabled', true);
+	}
+});
+$('#setCountryStateValue').click(function(){
+	var selCountryText = $("#country option:selected").text();
+	var selCountryVal = $("#country option:selected").val();	
+	$("#country_model2 option:selected").text(selCountryText);
+	$("#country_model2 option:selected").val(selCountryVal);
+	if(selCountryText=="Please Select")
+	{
+		$("#country_model2").removeAttr("disabled");
+	}
+	else
+	{
+		$('#country_model2').attr('disabled', true);
+	}
+
+
+	var selStateText = $("#state option:selected").text();
+	var selStateVal = $("#state option:selected").val();
+	$("#state_model2 option:selected").text(selStateText);
+	$("#state_model2 option:selected").val(selStateVal);
+	$('#state_model2').attr('disabled', true);
+	if(selStateText=="Please Select" || selStateText=="Select state")
+	{
+		$("#state_model2").removeAttr("disabled");
+	}
+	else
+	{
+		$('#state_model2').attr('disabled', true);
+	}
+	
+});
+
 </script>

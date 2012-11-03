@@ -96,7 +96,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
           <li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>
           <li><a href="pages.html">Pages</a></li>		  
           <li><a href="<?php echo $base; ?>newadmin/admin_courses/manage_univ_course">University Courses</a></li>
-          <li><a href="update_university.html">Update University</a></li>
+          <li><?php echo anchor("$base".'admin/update_university_detail', 'Update University'); ?></li>
         </ul>
 		<?php } ?>
       </li>
@@ -125,6 +125,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
     </ul> 
     <div class="clear"></div>
   </div>
+  
   <!-- End Left Navigation -->
   <?php } ?>
      <script>

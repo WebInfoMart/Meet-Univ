@@ -440,9 +440,10 @@ $univ_city_id=$univ_detail_update['city_id'];
 	</div>	
 	
 <script> 
-fetchstates('<?php echo $univ_state_id; ?>');
-fetchcities('<?php echo $univ_state_id; ?>','<?php echo $univ_city_id; ?>');
-$('#univ_client').click(function(){
+//fetchstates('<?php echo $univ_state_id; ?>');
+//fetchcities('<?php echo $univ_state_id; ?>','<?php echo $univ_city_id; ?>');
+$('#univ_client').click(function()
+{
 if($('#univ_client').is(':checked'))
 {
 $('#univ_is_client').val(1);

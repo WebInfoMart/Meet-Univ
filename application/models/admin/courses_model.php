@@ -189,9 +189,8 @@ class Courses_model extends CI_Model
 	}
 	function delete_single_course($prog_id)
 	{
-		//$this->db->delete('program', array('prog_id' => $prog_id));
-		$this->db->delete('univ_program',array('id' => $prog_id));
-		return 1;
+		$this->db->delete('program', array('prog_id' => $prog_id));
+		$this->db->delete('univ_program',array('program_id' => $prog_id));
 	}
 	
 	function delete_courses()
@@ -209,25 +208,23 @@ class Courses_model extends CI_Model
 		}
 		
 	}
-	function delete_univ_courses($univ_id)
+	//new
+	function delete_univ_courses()
 	{
-		$progcount=count($this->input->post('course_id'));	
-		$prog_id=$this->input->post('course_id');
-		for( $i =0; $i < $progcount ; $i++ )
+		$idsstring=$this->input->post('course_id');
+		foreach($idsstring as $ids)
 		{
-			if($this->input->post("check_course_".$prog_id[$i])=='checked')
-			{
-			$this->db->delete('univ_program',array('program_id' => $prog_id[$i],'univ_id'=>$univ_id));
-			
-			}
+			$this->db->delete('univ_program', array('id' => $ids));
 		}
+		return 1;
 	}
+	//new
 	function delete_single_course_univ($prog_id)
 	{
-	 $this->db->delete('univ_program',array('program_id' => $prog_id));
-	 return 1;
+	$this->db->delete('univ_program',array('id' => $prog_id));
+	return 1;
 	}
-		
+	//new	
 	function fetch_univ_courses($univ_id)
 	{
 	
@@ -237,6 +234,20 @@ class Courses_model extends CI_Model
 		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
 		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
 		$this->db->where('univ_id', $univ_id);		
+		$query = $this->db->get();		
+		return $query->result();
+	}
+	function univ_courses_latest($univ_id)
+	{
+	
+		$this->db->select('*');
+		$this->db->from('univ_program');
+		$this->db->join('program', 'program.prog_id = univ_program.program_id');
+		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
+		$this->db->where('univ_id', $univ_id);
+		$this->db->order_by('created_time','desc');
+		$this->db->limit(10);
 		$query = $this->db->get();		
 		return $query->result();
 	}

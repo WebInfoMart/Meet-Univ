@@ -375,8 +375,8 @@ $(document).ready(function(){
 			$('form').find('.inputElement').css('display', 'block');
 			$('form').find('.add-on').css('display', 'inline-block');
 			$('form').find('.datepick, .timepicker').css('display', 'inline-block');
-			$('[name=event_start_time]').val("<?php echo $event_info_time[0] ?>");
-			$('[name=event_end_time]').val("<?php echo $event_info_time[1] ?>");
+			$('[name=event_start_time]').val("<?php echo $event_info_time[0]; ?>");
+			$('[name=event_end_time]').val("<?php echo $event_info_time[1]; ?>");
 			fetchstates(<?php echo $event_info[0]['event_state_id']; ?>);
 			fetchcities(0,<?php echo $event_info[0]['event_city_id']; ?>);
 			

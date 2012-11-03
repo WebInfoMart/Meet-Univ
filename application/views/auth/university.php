@@ -39,7 +39,7 @@ if ($user) {
 			<?php } ?>
 		</div>
 		<div class="margin_t">
-			<h3 class="heading_follow">Followers</h3>
+			<h3 class="heading_follow">Followe</h3>
 				<div class="float_l span6 margin_zero">
 					<ul class="follow">
 						<li>

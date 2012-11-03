@@ -2029,69 +2029,80 @@ function manage_university($mps='')
    }
  }
  
- 
- function update_university_detail($univ_id='')
+ //new
+ function update_university_detail()
  {
-  if (!$this->tank_auth->is_admin_logged_in()) {
+  if (!$this->tank_auth->is_admin_logged_in())
+  {
    redirect('admin/adminlogin/');
   }
-  else{
-  $data = $this->path->all_path();
-  $data['user_id'] = $this->tank_auth->get_admin_user_id();
-  $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-  $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-  if(!($data['admin_priv']))
+  else
   {
-   redirect('admin/adminlogout');
-  }
-  $data['results'] = $this->adminmodel->userprivlegetype();
-  if($this->input->post('submit'))
-  {
-  $this->form_validation->set_rules('univ_name', 'University', 'trim|required');
-  $this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
-  $this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
-  $this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
-  if ($this->form_validation->run()) {
-  $flag=$this->adminmodel->update_univ_admin_university($univ_id);
-  if(!$flag) { 
-  redirect('admin/index/uus');
-  }
-  //print_r($data['x']);
-  //$this->adminmodel->edit_user_data();
-  //redirect('admin/manageusers/ups');
-  }
-  }
+	  $data = $this->path->all_path();
+	  $data['user_id'] = $this->tank_auth->get_admin_user_id();
+	  $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+	  $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+	  $univ_info=$this->events->fetch_univ_id($data['user_id']);
+			$univ_id=$univ_info['univ_id'];
+	  if(!($data['admin_priv']))
+	  {
+	   redirect('admin/adminlogout');
+	  }
+	  $data['results'] = $this->adminmodel->userprivlegetype();
+	  if($this->input->post('submit'))
+	  {
+		  $this->form_validation->set_rules('univ_name', 'University', 'trim|required');
+		  $this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
+		  $this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
+		  $this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
+		  if ($this->form_validation->run()) 
+		  {
+			  $flag=$this->adminmodel->update_univ_admin_university($univ_id);
+			  if(!$flag) 
+			  { 
+				redirect('admin/index/uus');
+			  }
+			  //print_r($data['x']);
+			  //$this->adminmodel->edit_user_data();
+			  //redirect('admin/manageusers/ups');
+		  }
+	  }
 
-  $flag=0;
-  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
-  $this->load->view('admin/header',$data);
-  if($data['univ_detail_edit']!=0)
-  {
-  $this->load->view('admin/sidebar',$data);
-  if($data['univ_detail_edit'][0]->univ_id==$univ_id)
-  {
-  $flag=1;
-  }
-  else
-  {
-  $flag=0;
-  }
-  }
-  if($data['admin_user_level']=='5')
-  {
-  $flag=1;
-  }
-  if($flag==0)
-  {
-  $this->load->view('admin/accesserror', $data);
-  }
-  else
-  {
-  $data['countries']=$this->users->fetch_country();
-  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
-  //print_r($data['univ_detail_edit']);
-  $this->load->view('admin/update_university_of_univ_admin',$data);
-  }
+	  $flag=0;
+	  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
+	  
+	  if($data['univ_detail_edit']!=0)
+	  {
+		 
+		  if($data['univ_detail_edit'][0]->univ_id==$univ_id)
+		  {
+			$flag=1;
+		  }
+		  else
+		  {
+			$flag=0;
+		  }
+	  }
+	  if($data['admin_user_level']=='5')
+	  {
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/sidebar',$data);
+		$flag=1;
+	  }
+	  if($flag==0)
+	  {
+		$this->load->view('univadmin/accesserror', $data);
+	  }
+	  else
+	  {
+		  $this->load->view('univadmin/header',$data);
+			$this->load->view('univadmin/sidebar',$data);
+			
+		  $data['countries']=$this->users->fetch_country();
+		  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
+		  //print_r($data['univ_detail_edit']);
+		  $this->load->view('univadmin/university/update_university',$data);
+	  }
     }
  }
  

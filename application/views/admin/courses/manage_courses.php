@@ -11,7 +11,7 @@
 <?php				
 foreach($course_info as $row)
 {		
-		?>					
+?>					
 <tr class="even">		
 <td>					
 <input type="checkbox" class="setchkval" value="" name="check_course_<?php echo $row->prog_id; ?>" id="check_course_<?php echo $row->prog_id; ?>">					
@@ -51,4 +51,14 @@ foreach($course_info as $row)
 <?php echo $this->pagination->create_links();?>			         
 </div> 						
 </form>		</div>		
-<script>function delete_confirm(progid){$('#check_course_'+progid).attr('checked','checked')var r=confirm("Are U sure u want to DELETE ALL RECORD of this Course?");if(r){window.location.href="<?php echo $base ?>"+'admincourses/delete_single_course/'+progid;}else{$('#check_course_'+progid).removeAttr('checked');}}function action_formsubmit(id,flag){var action=$('#course_action').val();if(action=='delete'){var atLeastOneIsChecked = $('.setchkval:checked').length > 0;if(atLeastOneIsChecked){var r=confirm("Are U sure u want to delete all the records of selected Courses");if(r){set_chkbox_val();$('#deleteform').submit();}}else{alert("please select al least one course for delete");return false;}}else{alert("please select the action");return false;}} function set_chkbox_val(){$('.setchkval').each(function(){if($(this).attr('checked')){$(this).val('checked');}else{$(this).val('');}});}</script>		
+<script>function delete_confirm(progid){$('#check_course_'+progid).attr('checked','checked')var r=confirm("Are U sure u want to DELETE ALL RECORD of this Course?");if(r){window.location.href="<?php echo $base ?>"+'admincourses/delete_single_course/'+progid;}else{$('#check_course_'+progid).removeAttr('checked');}}
+function action_formsubmit(id,flag)
+{var action=$('#course_action').val();
+if(action=='delete')
+{var atLeastOneIsChecked = $('.setchkval:checked').length > 0;
+if(atLeastOneIsChecked)
+{var r=confirm("Are U sure u want to delete all the records of selected Courses");
+if(r){set_chkbox_val();
+$('#deleteform').submit();
+}}else{alert("please select al least one course for delete");return false;}}else{alert("please select the action");return false;}}
+ function set_chkbox_val(){$('.setchkval').each(function(){if($(this).attr('checked')){$(this).val('checked');}else{$(this).val('');}});}</script>		

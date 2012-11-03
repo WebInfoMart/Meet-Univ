@@ -41,7 +41,7 @@ class Admin_events extends CI_Controller
 			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 			if(!($data['admin_priv']))
 			{
-			redirect('admin/adminlogout');
+				redirect('admin/adminlogout');
 			}
 			//fetch user privilege data from model
 			if($this->input->post('ajax')!=1)
@@ -50,16 +50,17 @@ class Admin_events extends CI_Controller
 				$this->load->view('univadmin/sidebar', $data);
 			}
 			$flag=0;
-			foreach($data['admin_priv'] as $userdata['admin_priv']){
-			if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']!=0 )
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
 			{
-			$flag=1;
-			break;
-			}
+				if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']!=0 )
+				{
+					$flag=1;
+					break;
+				}
 			}
 			if($flag==0)
 			{
-			$this->load->view('univadmin/accesserror', $data);
+				$this->load->view('univadmin/accesserror', $data);
 			}
 			else
 			{
@@ -701,12 +702,13 @@ class Admin_events extends CI_Controller
 			}
 			$add_events=array('4','6','8','10');
 			$flag=0;
-			foreach($data['admin_priv'] as $userdata['admin_priv']){
-			if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$add_events) )
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
 			{
-			$flag=1;
-			break;
-			}
+				if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$add_events) )
+				{
+					$flag=1;
+					break;
+				}
 			}
 			if($flag==0)
 			{

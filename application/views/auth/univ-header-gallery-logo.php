@@ -32,7 +32,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 						if($comcount>0)
 						{
 						$comcount++;
-						echo ",";
+						echo ", ";
 						}
 						echo $state_name_university['statename'];
 						
@@ -42,7 +42,7 @@ $this->users->increase_univ_no_of_views($university_details['univ_id'],$no_of_vi
 						if($comcount>0)
 						{
 						$comcount++;
-						echo ",";
+						echo ", ";
 						}
 					echo $country_name_university['country_name']; 
 					
