@@ -27,6 +27,12 @@ if ($user) {
 						<h3>Your Question Has been Submitted successfully.....</h3>
 					</div>
 				</div>
+				<div class="modal" id="exist" style="display:none;" >
+					<div class="modal-header">
+						<a class="close" data-dismiss="modal"></a>
+						<h3>You have already asked this question. Please check back soon to view the commments from other users .....</h3>
+					</div>
+				</div>
 	
 	<!-- End Here -->
 				
@@ -339,5 +345,17 @@ $.ajax({
 	</script>
 	<?php
 	}
+	if($this->session->flashdata('exist'))
+	{
 	?>
+	<script>
+	$(document).ready(function(){
+	//alert('exist');
+	$('#exist').css('display','block');
+	$('#exist').hide();
+	$('#exist').show("show");
+	$("#exist").delay(3000).fadeOut(200);
+	});
+	</script>
+	<?php } ?>
 	

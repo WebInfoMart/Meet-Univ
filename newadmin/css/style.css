@@ -14,6 +14,7 @@ Top-bar
 {
 border-color: red !important;
 }
+.form_error{color:red !important;}
 .pricing{margin-top: 20px;margin-left: 2px!important;}
 .pricing .well {
 background: white;

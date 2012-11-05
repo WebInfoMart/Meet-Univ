@@ -76,8 +76,13 @@ class Quest_ans_controler extends CI_Controller
 		}
 		else {
 			$quest['q_askedby']=$this->tank_auth->get_user_id();
-			$data['post_quest'] = $this->quest_ans_model->post_quest($quest);
-			$this->session->set_flashdata('success',1);
+			$asked_by=$this->tank_auth->get_user_id();
+			$check=$this->quest_ans_model->quest_exist($asked_by);
+			if($check<1)
+			{//echo 'not exist';exit;
+				$data['post_quest'] = $this->quest_ans_model->post_quest($quest);			
+				$this->session->set_flashdata('success',1);
+				
 			$domain = $_SERVER['HTTP_HOST'];
 			$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
 			
@@ -94,12 +99,24 @@ class Quest_ans_controler extends CI_Controller
 			 $config['smtp_pass'] = $this->config->item('smtp_pass');
 			 $this->email->initialize($config);    
 			 $this->email->from('info@meetuniversities.com', 'MeetUniversities.com');						
-			 $this->email->to('dev@meetuniversities.com');				
+			 $this->email->to('counselor@meetuniversities.com');				
 			 $this->email->subject(ucwords($result['fullname']).' just asked a Question');
 			 $message = $email_body ;
 			 $this->email->message($message);
 			 $this->email->send();
-			redirect($pageURL);
+			 redirect($pageURL);
+			}
+			else
+			{
+				//	echo 'exist';exit;
+				$domain = $_SERVER['HTTP_HOST'];
+				$pageURL ="http://" . $domain . $_SERVER['REQUEST_URI'];
+				
+				$info = $this->path->all_path();
+				$info['url']=$pageURL;
+				$this->session->set_flashdata('exist',1);
+				redirect($pageURL);
+			}
 			
 		}
 			
@@ -116,6 +133,7 @@ class Quest_ans_controler extends CI_Controller
 		//echo count($data['get_all_question']);
 		//$data['count_all_question'] = $this->quest_ans_model->count_all_questions();
 		//print_r($data['count_all_question']);
+		//echo $this->session->flashdata('exist').'';exit;
 		$this->load->view('auth/all_question',$data);
 		$this->load->view('auth/footer',$data);
 	}

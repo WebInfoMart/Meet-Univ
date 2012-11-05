@@ -37,7 +37,7 @@ $univ_city_id=$univ_detail_update['city_id'];
           <div class="content-box">
             <div class="tab-content">
               <div class="tab-pane active" id="general">
-					<form class="form-horizontal" enctype="multipart/form-data">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data">
 						<fieldset>
 							<div class="span6">
 								<div class="control-group">
@@ -91,7 +91,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 								</div>
 							</div>
 							<div class="span6">
-								<div class="control-group">
+								<!--<div class="control-group">
 								<label class="control-label" for="input01">Latitude</label>
 								<div class="controls">
 									<input type="text" class="input-xlarge" id="input01">
@@ -102,40 +102,43 @@ $univ_city_id=$univ_detail_update['city_id'];
 								<div class="controls">
 									<input type="text" class="input-xlarge" id="input01">
 								</div>
-								</div>
+								</div>-->
 								<div class="control-group">
 									<label class="control-label" for="input01">Country</label>
 									<div class="controls">
 										<select  class="inline" name="country" id="country" onchange="fetchstates(this)">
-										<option value="0">- Select something -</option>
+										<option value="0">- Select Country -</option>
 										<?php foreach($countries as $country) { ?>
 										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$univ_detail_update['country_id']){?> selected <?php }?> ><?php echo $country['country_name']; ?></option>
 										<?php } ?>
 										</select>
-										<span class="inline margin_l"><button id="add_country" add_country class="btn btn-icon tip" data-original-title="Add New Country"><i class="icon-plus"></i></button></span>
+										<a href="#add-country" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New Country">
+										<i class="icon-plus"></i>
+										</a>
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label" for="input04">State</label>
 									<div class="controls">
 									<select name="select"  name="state" onchange="fetchcities(0)" id="state" disabled="disabled">
-									<option value="0">- Select something -</option>
+									
 									
 									</select>
-									<span class="inline margin_l"><button id="add_state" class="btn btn-icon tip" data-original-title="Add New State"><i class="icon-plus"></i></button></span>
+									<a href="#add-state" class="btn btn-icon tip" data-toggle="modal" data-original-title="Add New State">
+									<i class="icon-plus" id="setCountryValue"></i></a>
 								</div>
 								</div>
 								<div class="control-group">
 								<label class="control-label" for="input01">City</label>
 								<div class="controls">
-									<select name="city" id="city" disabled="disabled" >
-									<option value="0">- Select something -</option>
+									<select name="city" id="city" disabled="disabled" >				
 									
 									</select>
-									<span class="inline margin_l"><button id="add_city" class="btn btn-icon tip" data-original-title="Add New City"><i class="icon-plus"></i></button></span>
+									<a href="#add-city" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New City">
+									<i class="icon-plus" id="setCountryStateValue"></i></a>
 								</div>
 								</div>
-								<div class="control-group">
+								<!--<div class="control-group">
 								<label class="control-label" for="input01">Sub Domain Name</label>
 								<div class="controls">
 									<input type="text" class="input-xlarge" id="input01">
@@ -146,11 +149,11 @@ $univ_city_id=$univ_detail_update['city_id'];
 								<div class="controls">
 									<label class="checkbox"><input type="checkbox" value="0" name="check">Is Client!</label>
 								</div>
-								</div>
+								</div>-->
 								<div class="control-group">
 								<label class="control-label" for="input01">Contact Us</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" value="<?php echo $univ_detail_update['contact_us']; ?>"  name="contact_us"  value="<?php echo set_value('contact_us'); ?>" id="input01">
+									<input type="text" class="input-xlarge" value="<?php echo $univ_detail_update['contact_us']; ?>"  name="contact_us" />
 								</div>
 								</div>
 								<div class="control-group">
@@ -160,7 +163,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 								</div>
 								</div>
 								<div class="form-actions">
-									<button type="submit" name="submit" class='btn btn-primary'>Save</button>
+									<input type="submit" name="submit" class='btn btn-primary' value="Submit" />
 									<a href="#" class='btn btn-danger'>Cancel</a>
 								</div>
 							</div>
@@ -284,6 +287,114 @@ $univ_city_id=$univ_detail_update['city_id'];
   </div><!-- close .content -->
   <!-- END Content -->
 
+<div class="modal hide" id="add-country">
+	
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h2>Add Your Place</h2>
+			<form action="" method="post" id="form_country" id="add_country_form" >
+				<p>
+					<label>Country:</label><br>
+					<input type="text" size="30" class="text" name="country_model" id="country_model" value=""> 
+					<label class="form_error"  id="country_error"></label>
+				</p>
+				<p>
+					<label>State:</label><br>
+					<input type="text" size="30" class="text" name="state_model" id="state_model" value=""> 
+					<label class="form_error"  id="state_error"></label>
+				</p>
+				<p>
+					<label>City:</label><br>
+					<input type="text" size="30" class="text" name="city_model" id="city_model" value=""> 
+					<label class="form_error"  id="city_error"></label>
+				</p>	
+		</div>
+		<div class="modal-footer">
+			<input type="button" class="btn" name="addcountry" id="addcountry" value="Submit">			
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+			</form>
+	
+</div>
+
+<div class="modal hide" id="add-state">
+	
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h2>Add Your Place</h2>
+				<form action="" method="post" id="form_state" id="add_state_form">
+					<p>
+						<label>Country:</label><br>
+						<select class="text country_select margin_zero" name="country_model1" id="country_model1" >
+							<option value="">Select Country</option>
+							<?php foreach($countries as $country) { ?>
+							<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
+							<?php } ?>
+						</select>
+						<label class="form_error"  id="country_error1"></label>						
+					</p>
+						
+					<p>
+						<label>State:</label><br>
+						<input type="text" size="30" class="text" name="state_model1" id="state_model1" value=""> 
+						<label class="form_error"  id="state_error1"></label>
+					
+					</p>
+					<p>
+						<label>City:</label><br>
+						<input type="text" size="30" class="text" name="city_model1" id="city_model1" value=""> 
+						<label class="form_error"  id="city_error1"></label>
+					
+					</p>				
+				
+		</div>
+		<div class="modal-footer">
+			<input type="button" class="btn" name="addstate" id="addstate" value="Submit">			
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+			</form>
+	
+</div>
+
+<div class="modal hide" id="add-city">
+	<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">x</button>
+			<h2>Add Your Place</h2>
+						<form action="" method="post" id="add_city_form" >
+							<p>
+								<label>Country:</label><br>
+							<select class="text country_select margin_zero" name="country_model2"  id="country_model2" onchange="fetchstates('-1')">
+							<option value="">Select Country</option>
+							<?php foreach($countries as $country) { ?>
+							<option value="<?php echo $country['country_id']; ?>" ><?php echo $country['country_name']; ?></option>
+							<?php } ?>
+							</select>
+							<label class="form_error"  id="country_error2"></label>
+							<div style="color: red;"> <?php echo form_error('country_model2'); ?><?php echo isset($errors['country_model2'])?$errors['country_model2']:''; ?> </div>
+							
+							</p>
+							<p>
+								<label>State:</label><br>
+								<select class="text country_select margin_zero" name="state_model2"  id="state_model2" disabled="disabled">
+								<option value="">Please Select</option>
+								</select>
+								<label class="form_error"  id="state_error2"></label>
+							</p>
+							<p>
+								<label>City:</label><br>
+								<input type="text" size="30" class="text" name="city_model2" id="city_model2"> 
+									<label class="form_error"  id="city_error2"></label>
+							</p>
+							<input type="hidden" name="level_user" value="3">						
+						
+		</div>
+		<div class="modal-footer">
+			<input type="button" class="btn" name="addcity" id="addcity" value="Submit">			
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+			</form>
+	
+</div>
      <script>
 $(document).ready(function(){
 	//alert('fnslfc');
@@ -310,8 +421,8 @@ $(document).ready(function(){
 			} 
 		});
 	});
-//fetchstates('<?php echo $univ_state_id; ?>');
-//fetchcities('<?php echo $univ_state_id; ?>','<?php echo $univ_city_id; ?>');
+fetchstates('<?php echo $univ_state_id; ?>');
+fetchcities('<?php echo $univ_state_id; ?>','<?php echo $univ_city_id; ?>');
 $('#univ_client').click(function()
 {
 	if($('#univ_client').is(':checked'))
@@ -440,38 +551,38 @@ $('#addcountry').click(function(){
 	if(country=='' || country==null)
 	{
 	 $('#country_error').html("Please enter the country name"); 
-	 $('#country_model').addClass('error');
+	 $('#country_model').addClass('needsfilled');
 	 flag=0;
 	}
 	else
 	{
 	$('#country_error').html("") 
-	 $('#country_model').removeClass('error');
+	 $('#country_model').removeClass('needsfilled');
 	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
 	$('#state_error').html("Please enter the state name"); 
-	$('#state_model').addClass('error');
+	$('#state_model').addClass('needsfilled');
 	flag=0;
 	
 	}
 	else
 	{
 	$('#state_error').html(""); 
-	$('#state_model').removeClass('error');
+	$('#state_model').removeClass('needsfilled');
 	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error').html("Please enter the city"); 
-	$('#city_model').addClass('error');
+	$('#city_model').addClass('needsfilled');
 	flag=0;
 	}
 	else
 	{
 	$('#city_error').html(""); 
-	$('#city_model').removeClass('error');
+	$('#city_model').removeClass('needsfilled');
 	flag=flag+1;
 	}
 	if(flag==3)
@@ -488,7 +599,7 @@ $('#addcountry').click(function(){
 	   if(msg=='1')
 		{
 		$('#country_error').html('Country Already Exist');
-		$('#country_model').addClass('error');
+		$('#country_model').addClass('needsfilled');
 		}
 		else if(msg=='0')
 		{
@@ -538,38 +649,38 @@ $('#addstate').click(function(){
 	if(country=='' || country==null || country=='0')
 	{
 	 $('#country_error1').html("Please select the country"); 
-	 $('#country_model1').addClass('error');
+	 $('#country_model1').addClass('needsfilled');
 	 flag=0;
 	}
 	else
 	{
 	$('#country_error1').html("");
-	 $('#country_model1').removeClass('error');
+	 $('#country_model1').removeClass('needsfilled');
 	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
 	$('#state_error1').html("Please enter the state name"); 
-	$('#state_model1').addClass('error');
+	$('#state_model1').addClass('needsfilled');
 	flag=1;
 	
 	}
 	else
 	{
 	$('#state_error1').html(""); 
-	$('#state_model1').removeClass('error');
+	$('#state_model1').removeClass('needsfilled');
 	  flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error1').html("Please enter the city"); 
-	$('#city_model1').addClass('error');
+	$('#city_model1').addClass('needsfilled');
 	flag=0;
 	}
 	else
 	{
 	$('#city_error1').html(""); 
-	$('#city_model1').removeClass('error');
+	$('#city_model1').removeClass('needsfilled');
 	 flag=flag+1;
 	}
 	if(flag==3)
@@ -586,7 +697,7 @@ $('#addstate').click(function(){
 	    if(msg=='1')
 		{
 		$('#state_error1').html('State Already Exist in Selected Country');
-		$('#state_model1').addClass('error');
+		$('#state_model1').addClass('needsfilled');
 		}
 		else if(msg=='0')
 		{
@@ -634,37 +745,37 @@ $('#addcity').click(function(){
 	if(country=='' || country==null || country=='0')
 	{
 	 $('#country_error2').html("Please select the country"); 
-	 $('#country_model2').addClass('error');
+	 $('#country_model2').addClass('needsfilled');
 	 flag=0;
 	}
 	else
 	{
 	$('#country_error2').html("");
-	 $('#country_model2').removeClass('error');
+	 $('#country_model2').removeClass('needsfilled');
 	  flag=flag+1;
 	}
 	if(state=='' || state==null || state=='0')
 	{
 	$('#state_error2').html("Please select the state "); 
-	$('#state_model2').addClass('error');
+	$('#state_model2').addClass('needsfilled');
 	flag=0;
 	}
 	else
 	{
 	$('#state_error2').html(""); 
-	$('#state_model2').removeClass('error');
+	$('#state_model2').removeClass('needsfilled');
 	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error2').html("Please enter the city"); 
-	$('#city_model2').addClass('error');
+	$('#city_model2').addClass('needsfilled');
 	flag=0;
 	}
 	else
 	{
 	$('#city_error2').html(""); 
-	$('#city_model2').removeClass('error');
+	$('#city_model2').removeClass('needsfilled');
 	flag=flag+1;
 	}
 	if(flag==3)
@@ -681,7 +792,7 @@ $('#addcity').click(function(){
 	    if(msg=='1')
 		{
 		$('#city_error2').html('CIty Already Exist in Selected State');
-		$('#city_model2').addClass('error');
+		$('#city_model2').addClass('needsfilled');
 		}
 		else if(msg=='0')
 		{

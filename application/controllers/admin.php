@@ -103,11 +103,7 @@ $data['recent_articles']=$this->admindash->recent_articles($data['university_id'
    $this->load->view('admin/adminhome', $data);
    }
    
-   if($msg=='uus')
-   {
-   $data['msg']='University Updated Successfully';
-   $this->load->view('admin/userupdated',$data);
-   }   
+     
   }
  }
   
@@ -2030,7 +2026,7 @@ function manage_university($mps='')
  }
  
  //new
- function update_university_detail()
+ function update_university_detail($msg="")
  {
   if (!$this->tank_auth->is_admin_logged_in())
   {
@@ -2043,12 +2039,17 @@ function manage_university($mps='')
 	  $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 	  $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 	  $univ_info=$this->events->fetch_univ_id($data['user_id']);
-			$univ_id=$univ_info['univ_id'];
+		$univ_id=$univ_info['univ_id'];
 	  if(!($data['admin_priv']))
 	  {
 	   redirect('admin/adminlogout');
 	  }
 	  $data['results'] = $this->adminmodel->userprivlegetype();
+	  if($msg=='uus')
+	   {
+	   $data['msg']='University Updated Successfully';
+	   $this->load->view('univadmin/userupdated',$data);
+	   } 
 	  if($this->input->post('submit'))
 	  {
 		  $this->form_validation->set_rules('univ_name', 'University', 'trim|required');
@@ -2060,7 +2061,7 @@ function manage_university($mps='')
 			  $flag=$this->adminmodel->update_univ_admin_university($univ_id);
 			  if(!$flag) 
 			  { 
-				redirect('admin/index/uus');
+				redirect('admin/update_university_detail/uud');
 			  }
 			  //print_r($data['x']);
 			  //$this->adminmodel->edit_user_data();

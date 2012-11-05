@@ -1013,17 +1013,18 @@ class Adminmodel extends CI_Model
       'univ_fax'=>$this->input->post('fax_address'),
       'univ_email'=>$this->input->post('univ_email'),
       'univ_web'=>$this->input->post('web_address'),
-      'univ_overview'=>$this->input->post('txtareaoverview'),
-      'univ_campus'=>$this->input->post('txtareacampus'),
-      'univ_services'=>$this->input->post('txtareaservices'),
-      'univ_faculties'=>$this->input->post('txtareafaculties'),
-      'univ_expertise'=>$this->input->post('txtareaexpertise'),
-      'univ_slife'=>$this->input->post('txtareaslife'),
-      'univ_interstudents'=>$this->input->post('txtareainterstudents'),
-      'univ_alumni'=>$this->input->post('txtareaalumni'),
-      'univ_departments'=>$this->input->post('txtareadepartments'),
-      'univ_insights'=>$this->input->post('txtareainsights')
+      // 'univ_overview'=>$this->input->post('txtareaoverview'),
+      // 'univ_campus'=>$this->input->post('txtareacampus'),
+      // 'univ_services'=>$this->input->post('txtareaservices'),
+      // 'univ_faculties'=>$this->input->post('txtareafaculties'),
+      // 'univ_expertise'=>$this->input->post('txtareaexpertise'),
+      // 'univ_slife'=>$this->input->post('txtareaslife'),
+      // 'univ_interstudents'=>$this->input->post('txtareainterstudents'),
+      // 'univ_alumni'=>$this->input->post('txtareaalumni'),
+      // 'univ_departments'=>$this->input->post('txtareadepartments'),
+      // 'univ_insights'=>$this->input->post('txtareainsights')
    );
+   //print_r($data);exit;
    $this->db->update('university', $data,array('univ_id'=>$univ_id));  
    if($myflag==1)
    {

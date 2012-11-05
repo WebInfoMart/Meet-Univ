@@ -447,6 +447,7 @@ if(!empty($events_info))
 											<div class="input-prepend">
 											<span class="add-on"><i class="icon-calendar"></i></span><input type="text" size="16" name="event_end_date"  id="event_end_date" class='span4 datepick'>
 											</div>
+											<span class="validAfterDatepicker" style="display:none;color:red;">Please enter a date after the previous value</span>
 											</div>
 										</div>
 										<div class="control-group">
@@ -465,6 +466,8 @@ if(!empty($events_info))
 													<span class="add-on"><i class="icon-time"></i></span><input type="text" size="16" id="event_time_start" name="event_time_start" class='span4 timepicker'>
 													<span class="margin_r">Till</span><span class="add-on inline margin_l"><i class="icon-time"></i></span><input type="text" size="16" id="event_time_end"  name="event_time_end" class='span4 timepicker'>
 													</div>
+													<span class="validAfterTimepickerEqual" style="display:none;color:red;">End time is equal to start time!</span>
+													<span class="validAfterTimepickerBefore" style="display:none;color:red;">End time is before start time!</span>
 												</div>
 											</div>
 										</div>
@@ -724,30 +727,31 @@ function addEvent()
 	}
 	else
 	{
-		$("#event_end_date").removeClass('needsfilled');			
+		$("#event_end_date").removeClass('needsfilled');
 	}
-	if((new Date($("#event_end_date").val()).getTime() < new Date($("#event_start_date").val()).getTime()))
-	{
-		alert("Invalid Date Range!\nStart Date cannot be after End Date!");
-		valid=false;
-	}
-	
-	var start = $("#event_time_start").val();
-	var end = $("#event_time_end").val();
-	var dtStart = new Date($("#event_start_date").val() + start);
-	var dtEnd = new Date($("#event_end_date").val() + end);
-	difference_in_milliseconds = dtEnd - dtStart;
-	if (difference_in_milliseconds < 0)
+	var start = $("#event_time_start").val();	
+	var end = $("#event_time_end").val();	
+	var dtStart = new Date($("#event_start_date").val() +" "+ start);	
+	var dtEnd = new Date($("#event_end_date").val() +" "+ end);
+	difference_in_milliseconds = dtEnd - dtStart;	
+	if (difference_in_milliseconds <= 0)
 	{
 		if (difference_in_milliseconds == 0)
 		{
-			alert("End time is equal to start time!");
+			$(".validAfterTimepickerEqual").show();
+			$(".validAfterTimepickerBefore").hide();
 		}
 		else
 		{
-			alert("End time is before start time!");
+			$(".validAfterTimepickerEqual").hide();
+			$(".validAfterTimepickerBefore").show();
 		}
 		valid = false;
+	}
+	else
+	{
+		$(".validAfterTimepickerEqual").hide();
+		$(".validAfterTimepickerBefore").hide();
 	}
 	var country_name=$("#country option:selected").text();			
 	var state_name=$("#state option:selected").text();
@@ -764,7 +768,35 @@ function addEvent()
 	return valid;
 }  
 $(document).ready(function(){
-	//alert('fnslfc');	
+	//alert('fnslfc');
+	$("#event_start_date").click(function() {
+		alert($(".active").text());
+	});
+	$("#event_start_date").change(function() {
+		if((new Date($("#event_end_date").val()).getTime() < new Date($("#event_start_date").val()).getTime()))
+		{
+			$(".validAfterDatepicker").show();
+		}
+		else
+		{
+			$(".validAfterDatepicker").hide();
+		}
+		$(".datepicker").hide();
+		
+	});	
+	$("#event_end_date").change(function() {
+		
+		if((new Date($("#event_end_date").val()).getTime() < new Date($("#event_start_date").val()).getTime()))
+		{
+			$(".validAfterDatepicker").show();
+		}
+		else
+		{
+			$(".validAfterDatepicker").hide();
+		}
+		$(".datepicker").hide();		
+	});
+	
 	$('.event_title_class_all').removeClass('sorting_asc sorting_desc');	
 	$('.event_title_class_new').removeClass('sorting_asc sorting_desc');	
 	$(".for_remove_class_all").click(function() {

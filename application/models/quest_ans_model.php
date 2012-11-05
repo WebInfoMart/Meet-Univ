@@ -36,9 +36,19 @@ class Quest_ans_model extends CI_Model
 	
 	function post_quest($quest)
 	{
+		
 		$this->db->set($quest);
 		$this->db->insert('questions');
 		return $this->db->affected_rows() ? 1 : 0;
+	}
+	function quest_exist($asked_by)
+	{
+		$this->db->select('que_id');
+		$this->db->from('questions');
+		$this->db->where('q_askedby',$asked_by);
+		$this->db->where('q_title',$this->input->post('quest_title'));
+		$qry=$this->db->get();
+		return $qry->num_rows();
 	}
 	
 	
