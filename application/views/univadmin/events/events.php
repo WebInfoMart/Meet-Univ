@@ -1073,7 +1073,8 @@ else
 	$("#city").removeAttr("disabled");
 }
 }
-function fetchcity(state_id,cityid){
+function fetchcity(state_id,cityid)
+{
 	if(state_id=='0')
 	{
 		state_id=$("#state option:selected").val();
@@ -1106,37 +1107,37 @@ $('#addcountry').click(function(){
 	if(country=='' || country==null)
 	{
 	 $('#country_error').html("Please enter the country name"); 
-	 $('#country_model').addClass('error');
+	 $('#country_model').addClass('needsfilled');
 	 flag=0;
 	}
 	else
 	{
 		$('#country_error').html("") 
-		$('#country_model').removeClass('error');
+		$('#country_model').removeClass('needsfilled');
 		flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
 		$('#state_error').html("Please enter the state name"); 
-		$('#state_model').addClass('error');
+		$('#state_model').addClass('needsfilled');
 		flag=0;
 	}
 	else
 	{
 		$('#state_error').html(""); 
-		$('#state_model').removeClass('error');
+		$('#state_model').removeClass('needsfilled');
 		flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 		$('#city_error').html("Please enter the city"); 
-		$('#city_model').addClass('error');
+		$('#city_model').addClass('needsfilled');
 		flag=0;
 	}
 	else
 	{
 		$('#city_error').html(""); 
-		$('#city_model').removeClass('error');
+		$('#city_model').removeClass('needsfilled');
 		flag=flag+1;
 	}
 	if(flag==3)
@@ -1153,7 +1154,7 @@ $('#addcountry').click(function(){
 	   if(msg=='1')
 		{
 		$('#country_error').html('Country Already Exist');
-		$('#country_model').addClass('error');
+		$('#country_model').addClass('needsfilled');
 		}
 		else if(msg=='0')
 		{
@@ -1176,11 +1177,10 @@ $('#addcountry').click(function(){
 	    var place=msg.split('##');
 		fetchcountry(place[0],country);
 		fetchstates(place[1],state);
-		fetchcities(place[2],city);
-				
-		$('.modal-lightsout').fadeOut("fast");
-		$('.modal-backdrop').hide("slow");	
-		$('.in').hide("slow");	
+		fetchcities(place[2],city);				
+		$('.modal-lightsout').fadeOut("slow");
+		$('.modal-backdrop').fadeOut("slow");	
+		$('.in').fadeOut("slow");	
 		//$('#add_country_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').show(500);
@@ -1201,38 +1201,38 @@ $('#addstate').click(function(){
 	if(country=='' || country==null || country=='0')
 	{
 	 $('#country_error1').html("Please select the country"); 
-	 $('#country_model1').addClass('error');
+	 $('#country_model1').addClass('needsfilled');
 	 flag=0;
 	}
 	else
 	{
 	$('#country_error1').html("");
-	 $('#country_model1').removeClass('error');
+	 $('#country_model1').removeClass('needsfilled');
 	  flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
 	$('#state_error1').html("Please enter the state name"); 
-	$('#state_model1').addClass('error');
+	$('#state_model1').addClass('needsfilled');
 	flag=1;
 	
 	}
 	else
 	{
 	$('#state_error1').html(""); 
-	$('#state_model1').removeClass('error');
+	$('#state_model1').removeClass('needsfilled');
 	  flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error1').html("Please enter the city"); 
-	$('#city_model1').addClass('error');
+	$('#city_model1').addClass('needsfilled');
 	flag=0;
 	}
 	else
 	{
 	$('#city_error1').html(""); 
-	$('#city_model1').removeClass('error');
+	$('#city_model1').removeClass('needsfilled');
 	 flag=flag+1;
 	}
 	if(flag==3)
@@ -1249,7 +1249,7 @@ $('#addstate').click(function(){
 	    if(msg=='1')
 		{
 		$('#state_error1').html('State Already Exist in Selected Country');
-		$('#state_model1').addClass('error');
+		$('#state_model1').addClass('needsfilled');
 		}
 		else if(msg=='0')
 		{
@@ -1274,8 +1274,8 @@ $('#addstate').click(function(){
 		fetchstates(place[1],state);
 		fetchcities(place[2],city);
 		$('.modal-lightsout').fadeOut("fast");
-		$('.modal-backdrop').hide("slow");
-		$('.in').hide("slow");		
+		$('.modal-backdrop').fadeOut("slow");
+		$('.in').fadeOut("slow");		
 		//$('#add_state_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').css('display','block');
@@ -1297,37 +1297,37 @@ $('#addcity').click(function(){
 	if(country=='' || country==null || country=='0')
 	{
 	 $('#country_error2').html("Please select the country"); 
-	 $('#country_model2').addClass('error');
+	 $('#country_model2').addClass('needsfilled');
 	 flag=0;
 	}
 	else
 	{
 	$('#country_error2').html("");
-	 $('#country_model2').removeClass('error');
+	 $('#country_model2').removeClass('needsfilled');
 	  flag=flag+1;
 	}
 	if(state=='' || state==null || state=='0')
 	{
 	$('#state_error2').html("Please select the state "); 
-	$('#state_model2').addClass('error');
+	$('#state_model2').addClass('needsfilled');
 	flag=0;
 	}
 	else
 	{
 	$('#state_error2').html(""); 
-	$('#state_model2').removeClass('error');
+	$('#state_model2').removeClass('needsfilled');
 	 flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
 	$('#city_error2').html("Please enter the city"); 
-	$('#city_model2').addClass('error');
+	$('#city_model2').addClass('needsfilled');
 	flag=0;
 	}
 	else
 	{
 	$('#city_error2').html(""); 
-	$('#city_model2').removeClass('error');
+	$('#city_model2').removeClass('needsfilled');
 	flag=flag+1;
 	}
 	if(flag==3)
@@ -1344,7 +1344,7 @@ $('#addcity').click(function(){
 	    if(msg=='1')
 		{
 		$('#city_error2').html('CIty Already Exist in Selected State');
-		$('#city_model2').addClass('error');
+		$('#city_model2').addClass('needsfilled');
 		}
 		else if(msg=='0')
 		{
@@ -1369,8 +1369,8 @@ $('#addcity').click(function(){
 		fetchstates(place[1],statetext);
 		fetchcities(place[2],city);
 		$('.modal-lightsout').fadeOut("fast");
-		$('.modal-backdrop').hide("slow");	
-		$('.in').hide("slow");		
+		$('.modal-backdrop').fadeOut("slow");	
+		$('.in').fadeOut("slow");		
 		//$('#add_city_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').css('display','block');

@@ -275,7 +275,7 @@ if ($user) {
 								</div>
 							</div>
 							<div class="margin_t1">
-								<h2>Latest Q&A</h2>
+								<h2>Latest Q&A </h2>
 								<ul class="prof_data">	
 								
 				<?php

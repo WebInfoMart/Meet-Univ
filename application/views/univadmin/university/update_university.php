@@ -120,7 +120,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 								<div class="control-group">
 									<label class="control-label" for="input04">State</label>
 									<div class="controls">
-									<select name="select"  name="state" onchange="fetchcities(0)" id="state" disabled="disabled">
+									<select name="state" onchange="fetchcities(0)" id="state" disabled="disabled">
 									
 									
 									</select>
@@ -449,6 +449,13 @@ $.ajax({
    }
    });
 }
+function fetchcountryNew(cid,cname)
+{
+	$("#country option:selected").text(cname);	
+	$("#country option:selected").val(cid);
+	$("#state").removeAttr("disabled");
+	$("#city").removeAttr("disabled");
+}
 function fetchstates(sid)
 {
 var stid=sid;
@@ -483,23 +490,61 @@ $.ajax({
    }
    });
  } 
-function fetchcities(state_id,cityid)
+function fetchstatesNew(sid,sname)
 {
-if(state_id=='0')
+var stid=sid;
+var cid;
+if(sid=='-1')
 {
-state_id=$("#state option:selected").val();
-}
- $.ajax({
+stid='0';
+cid=$("#country_model2 option:selected").val();
+$.ajax({
    type: "POST",
-   url: "<?php echo $base; ?>admin/city_list_ajax/",
-   data: 'state_id='+state_id+'&sel_city_id='+cityid,
+   url: "<?php echo $base; ?>admin/state_list_ajax/",
+   data: 'country_id='+cid+'&sel_state_id='+stid,
    cache: false,
    success: function(msg)
    {
-    $('#city').attr('disabled', false);
-	$('#city').html(msg);
+    if(sid=='-1')
+	{
+	$('#state_model2').attr('disabled', false);
+	$('#state_model2').html(msg);
+	}
    }
-   });  
+   });
+}  
+else
+{
+	$("#state option:selected").text(sname);	
+	$("#state option:selected").val(sid);	
+	$("#state").removeAttr("disabled");
+	$("#city").removeAttr("disabled");
+}
+}
+function fetchcities(state_id,cityid)
+{
+	if(state_id=='0')
+	{
+	state_id=$("#state option:selected").val();
+	}
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $base; ?>admin/city_list_ajax/",
+		data: 'state_id='+state_id+'&sel_city_id='+cityid,
+		cache: false,
+		success: function(msg)
+		{
+		$('#city').attr('disabled', false);
+		$('#city').html(msg);
+		}
+	});  
+}
+function fetchcitiesNew(cityid,cityname)
+{
+	$("#city option:selected").text(cityname);	
+	$("#city option:selected").val(cityid);	
+	$("#state").removeAttr("disabled");
+	$("#city").removeAttr("disabled");
 }
 //for fancy box
 $.fn.center = function () {
@@ -556,22 +601,21 @@ $('#addcountry').click(function(){
 	}
 	else
 	{
-	$('#country_error').html("") 
-	 $('#country_model').removeClass('needsfilled');
-	  flag=flag+1;
+		$('#country_error').html("") 
+		$('#country_model').removeClass('needsfilled');
+		flag=flag+1;
 	}
 	if(state=='' || state==null)
 	{
-	$('#state_error').html("Please enter the state name"); 
-	$('#state_model').addClass('needsfilled');
-	flag=0;
-	
+		$('#state_error').html("Please enter the state name"); 
+		$('#state_model').addClass('needsfilled');
+		flag=0;	
 	}
 	else
 	{
-	$('#state_error').html(""); 
-	$('#state_model').removeClass('needsfilled');
-	 flag=flag+1;
+		$('#state_error').html(""); 
+		$('#state_model').removeClass('needsfilled');
+		flag=flag+1;
 	}
 	if(city=='' || city==null)
 	{
@@ -620,12 +664,14 @@ $('#addcountry').click(function(){
 	   success: function(msg)
 	   {
 	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
+		fetchcountryNew(place[0],country);
+		fetchstatesNew(place[1],state);
+		fetchcitiesNew(place[2],city);
+		$('.modal-backdrop').fadeOut("slow");	
+		$('.in').fadeOut("slow");		
 		$('.modal-profile').fadeOut("slow");
         $('.modal-lightsout').fadeOut("slow");
-		$('#add_country_form').reset();
+		//$('#add_country_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').css('display','block');
 	   }
@@ -636,13 +682,9 @@ $('#addcountry').click(function(){
 	
 });
 
-
-
-
-
-
 $('#addstate').click(function(){
 	var country=$("#country_model1 option:selected").val();
+	var countrytext=$("#country_model1 option:selected").text();
 	var state=$("#state_model1").val();
 	var city=$("#city_model1").val();
 	var flag=0;
@@ -718,12 +760,14 @@ $('#addstate').click(function(){
 	   success: function(msg)
 	   {
 	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
+		fetchcountryNew(place[0],countrytext);
+		fetchstatesNew(place[1],state);
+		fetchcitiesNew(place[2],city);		
+		$('.modal-backdrop').fadeOut("slow");
+		$('.in').fadeOut("slow");		
 		$('.modal-profile').fadeOut("slow");
         $('.modal-lightsout').fadeOut("slow");
-		$('#add_state_form').reset();
+		//$('#add_state_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').css('display','block');
 	   }
@@ -739,7 +783,9 @@ $('#addstate').click(function(){
 
 $('#addcity').click(function(){
 	var country=$("#country_model2 option:selected").val();
+	var countrytext=$("#country_model2 option:selected").text();
 	var state=$("#state_model2 option:selected").val();
+	var statetext=$("#state_model2 option:selected").text();
 	var city=$("#city_model2").val();
 	var flag=0;
 	if(country=='' || country==null || country=='0')
@@ -813,12 +859,14 @@ $('#addcity').click(function(){
 	   success: function(msg)
 	   {
 	    var place=msg.split('##');
-		fetchcountry(place[0]);
-		fetchstates(place[1]);
-		fetchcities(place[1],place[2]);
+		fetchcountryNew(place[0],countrytext);
+		fetchstatesNew(place[1],statetext);
+		fetchcitiesNew(place[2],city);		
+		$('.modal-backdrop').fadeOut("slow");	
+		$('.in').fadeOut("slow");		
 		$('.modal-profile').fadeOut("slow");
         $('.modal-lightsout').fadeOut("slow");
-		$('#add_city_form').reset();
+		//$('#add_city_form').reset();
 		$('.info_message').html('Your Place Added Successfully');
 		$('.content_msg').css('display','block');
 	   }
@@ -828,7 +876,50 @@ $('#addcity').click(function(){
 	}
 	
 });
+$('#setCountryValue').click(function(){
+	var selCountryText = $("#country option:selected").text();
+	var selCountryVal = $("#country option:selected").val();
+	$("#country_model1 option:selected").val(selCountryVal);
+	$("#country_model1 option:selected").text(selCountryText);
+	if(selCountryText=="Please Select")
+	{
+		$("#country_model1").removeAttr("disabled");
+	}
+	else
+	{
+		$('#country_model1').attr('disabled', true);
+	}
+});
+$('#setCountryStateValue').click(function(){
+	var selCountryText = $("#country option:selected").text();
+	var selCountryVal = $("#country option:selected").val();	
+	$("#country_model2 option:selected").text(selCountryText);
+	$("#country_model2 option:selected").val(selCountryVal);
+	if(selCountryText=="Please Select")
+	{
+		$("#country_model2").removeAttr("disabled");
+	}
+	else
+	{
+		$('#country_model2').attr('disabled', true);
+	}
 
+
+	var selStateText = $("#state option:selected").text();
+	var selStateVal = $("#state option:selected").val();
+	$("#state_model2 option:selected").text(selStateText);
+	$("#state_model2 option:selected").val(selStateVal);
+	$('#state_model2').attr('disabled', true);
+	if(selStateText=="Please Select" || selStateText=="Select state")
+	{
+		$("#state_model2").removeAttr("disabled");
+	}
+	else
+	{
+		$('#state_model2').attr('disabled', true);
+	}
+	
+});
 function onEnter() {
     var key = window.event.keyCode;
 

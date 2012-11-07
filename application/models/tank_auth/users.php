@@ -1402,8 +1402,7 @@ class Users extends CI_Model
 		   $this->db->where('followed_by',$logged_user);
 		   $this->db->where('switch_off_univ !=','1');
 		   $this->db->join('university','follow_univ.follow_to_univ_id = university.univ_id');
-		   $this->db->order_by('ontime','desc');
-		   $this->db->limit(2);
+		   $this->db->order_by('ontime','desc');		   
 		   $query = $this->db->get();
 		   if($query->num_rows() > 0)
 		   {
