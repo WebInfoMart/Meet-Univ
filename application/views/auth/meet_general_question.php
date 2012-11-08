@@ -97,7 +97,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 											<a href="<?php echo $base; ?>user/<?php echo $article_comment_detail['id'];?>/<?php echo $article_comment_detail['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $article_comment_detail['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($article_comment_detail['fullname'])){ echo ucwords($article_comment_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
 										<?php
 										}
-										else if($user && $article_comment_detail['q_askedby'] == $logged_user_id)
+										else if($user && $article_comment_detail['commented_by'] == $logged_user_id)
 										{
 										?>
 											<a href="<?php echo $base; ?>user/<?php echo $article_comment_detail['id'];?>/<?php echo $article_comment_detail['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($article_comment_detail['fullname'])){ echo ucwords($article_comment_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
@@ -128,9 +128,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 			if($user_detail['user_id']==$article_comment_detail['user_id'])
 			{
 			?>					
-			<!--<span class="float_r delete_comment">
-					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $article_comment_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
-			</span>-->
+			<span class="float_r delete_comment">
+					<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php echo $article_comment_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
+			</span>
 			<?php	} } ?>	
 								
 								<?php echo $article_comment_detail['commented_text'];?>
@@ -164,29 +164,32 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 							<div class="events_box">
 							<div class="float_l">
 									<div class="comment_img">
-									
-									<?php
-							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_detail['user_thumb_pic_path']) && $user_detail['user_thumb_pic_path']!='' )
-							{
-							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img src='".base_url()."uploads/user_pic/thumbs/".$user_detail['user_thumb_pic_path']."'/>";
-							}
-							else if(file_exists(getcwd().'/uploads/user_pic/'.$user_detail['user_pic_path']) && $user_detail['user_pic_path']!='')
-							{
-								echo "<img src='".base_url()."uploads/user_pic/".$user_detail['user_pic_path']."'/>";
-							}
-							else if($user)
-							{
-							?>
-								<img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small">
-							<?php
-							}
-							else{
-							echo "<img src='".base_url()."images/profile_icon.png'/>";
-							}
-							?>
-								<div style='width: 46px;position: absolute;' class="center">
+								<?php
+										if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$user_detail['user_thumb_pic_path']) && $user_detail['user_thumb_pic_path']!='' )
+										{
+										//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src="<?php echo base_url();?>uploads/user_pic/thumbs/<?php echo $user_detail['user_thumb_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else{ echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if(file_exists(getcwd().'/uploads/user_pic/'.$user_detail['user_pic_path']) && $user_detail['user_pic_path']!='')
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $user_detail['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else if($user && $article_comments[0]['commented_by'] == $logged_user_id)
+										{
+										?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
+										<?php
+										}
+										else
+										{ ?>
+											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src="<?php echo base_url(); ?>images/profile_icon.png" title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>"/></a>
+										<?php
+										}
+										?>
+							<div style='width: 46px;position: absolute;' class="center">
 								<?php
 								if($user_detail['fullname'] !='')
 								{
@@ -197,8 +200,8 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									echo $user_profile['name'];
 								}
 								?>
-								</div>
-									</div>
+							</div>				
+							</div>
 								</div>
 								<div class="float_l span6 margin_zero">
 									<form class="form-horizontal" method="post" action="">

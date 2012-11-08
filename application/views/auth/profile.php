@@ -1,4 +1,3 @@
-
 <?php
 $facebook = new Facebook();
 $user = $facebook->getUser();
@@ -344,7 +343,7 @@ $select_female='';
 												</div>
 											</div>
 											<div class="margin_t1">
-								<h2>Latest Q& </h2>
+								<h2>Latest Q&A </h2>
 								<ul class="prof_data">
 								<?php
 								if(!empty($featured_question_profile))
@@ -378,31 +377,35 @@ $select_female='';
 								$q_month = $quest_ask_date[1]; ?>
 						
 									<li>
-										<div style="width: 34px;margin-right:20px" class="float_l">
-										<?php
-							$logged_user_id = $this->tank_auth->get_user_id();
+										<div id="quest_pic" class="float_l">
+					<?php
+				$logged_user_id = $this->tank_auth->get_user_id();
 							if(file_exists(getcwd().'/uploads/user_pic/thumbs/'.$quest_list['user_thumb_pic_path']) && $quest_list['user_thumb_pic_path']!='' )
 							{
 							//echo $image_thumb = $profile_pic['user_pic_path'].'_thumb';
-							
-								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/thumbs/".$quest_list['user_thumb_pic_path']."'/>";
+							?>
+								<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="<?php echo base_url(); ?>uploads/user_pic/thumbs/<?php echo $quest_list['user_thumb_pic_path']; ?>" title="<?php if(!empty($quest_list['fullname'])){ echo $quest_list['fullname']; } else{ echo 'No name'; } ?>"/></a>
+							<?php								
 							}
 							else if(file_exists(getcwd().'/uploads/user_pic/'.$quest_list['user_pic_path']) && $quest_list['user_pic_path']!='')
-							{
-								echo "<img style='height:35px;width:35px;' src='".base_url()."uploads/user_pic/".$quest_list['user_pic_path']."'/>";
+							{ ?>
+								<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="<?php  echo base_url(); ?>uploads/user_pic/<?php echo $quest_list['user_pic_path']; ?>" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else{ echo 'No name'; } ?>" /></a>
+							<?php
 							}
 							
 							else if($user && $quest_list['q_askedby'] == $logged_user_id)
 							{
 							?>
-								<img style='height:35px;width:35px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large">
+								<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=large" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else{ echo 'No name'; } ?>" /></a>
 							<?php
 							}
-							else{
-							echo "<img style='height:35px;width:35px;' src='".base_url()."images/profile_icon.png'/>";
+							else							
+							{ ?>
+							<a href="<?php echo $base; ?>user/<?php echo $quest_list['id'];?>/<?php echo $quest_list['fullname'];?>"><img style='height:35px;width:35px;' src="<?php echo base_url();?>images/profile_icon.png" title="<?php if(!empty($quest_list['fullname'])){ echo ucwords($quest_list['fullname']); } else{ echo 'No name'; } ?>"/></a>
+							<?php
 							}
 							?>
-										</div>
+				</div>
 										<a href="<?php echo $url; ?>"><div class="black height_setup"><?php echo $quest_list['q_title']?$quest_list['q_title']:''; ?></div>
 										
 										</a><div style="font-size: 11px;line-height: 12px;">
@@ -410,16 +413,17 @@ $select_female='';
 										$fullname =$this->subdomain->process_url_title($quest_list['fullname']);
 										if($logged_user_id==$quest_list['id'])		
 										{
-										$user_link=$base.'home';
+											$user_link=$base.'home';
 										}
 										else
 										{
-										$user_link=$base.'user/'.$quest_list['id'].'/'.$fullname;
+											$user_link=$base.'user/'.$quest_list['id'].'/'.$fullname;
 										}
-										if($quest_list['fullname']!='') {
-										echo 'Asked by :';
-										?>
-										<a href="<?php echo  $user_link;?>" target="_blank"><?php echo $quest_list['fullname']; ?></a>
+										if($quest_list['fullname']!='') 
+										{
+											echo 'Asked by :';
+											?>
+											<a href="<?php echo  $user_link;?>" target="_blank"><?php echo ucwords($quest_list['fullname']); ?></a>
 										<?php }
 										else
 										{
@@ -427,6 +431,8 @@ $select_female='';
 										}
 										 ?>
 										</div>
+										<div>
+										
 										<div style="font-size: 11px;line-height: 12px;">
 										<?php
 										$q_date = explode(" ",$quest_list['q_asked_time']);
@@ -436,9 +442,10 @@ $select_female='';
 										 echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
 										echo $quest_month?$quest_month.', ':'';
 										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
+										echo "Total Answers - ".$featured_question_profile['ans_count'][$a];
 										?></div>
 									</li>
-							<?php } $a++; } else { echo "No Latest Questions Available"; }
+							<?php $a++; }  } else { echo "No Latest Questions Available"; }
 				?>
 							
 								</ul>

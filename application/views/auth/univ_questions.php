@@ -1,4 +1,5 @@
 <?php
+//print_r($article_comments);
 $facebook = new Facebook();
 $user = $facebook->getUser();
 $this->load->model('users');
@@ -123,9 +124,9 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 									if($user_detail['user_id']==$article_comment_detail['user_id'])
 									{
 									?>					
-									<!--<span class="float_r delete_comment">
-											<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php //echo $article_comment_detail['comment_id']; ?>")' src="<?php //echo "$base$img_path";?>/close.jpg">
-									</span>-->
+									<span class="float_r delete_comment">
+											<img style="cursor:pointer;" class="del_icon" onclick='delete_this_comment("<?php echo $article_comment_detail['comment_id']; ?>")' src="<?php echo "$base$img_path";?>/close.jpg">
+									</span>
 									<?php	} } ?>	
 									<?php echo $article_comment_detail['commented_text']; ?>
 							</div>
@@ -167,7 +168,7 @@ if($error_commented_text != '') { $class_commented_text = 'focused_error'; } els
 											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src=" <?php echo base_url(); ?>uploads/user_pic/<?php echo $user_detail['user_pic_path']; ?>" class='latest_img' alt='Qusetion about universities' title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>" /></a>
 										<?php
 										}
-										else if($user && $user_detail['q_askedby'] == $logged_user_id)
+										else if($user && $article_comments[0]['commented_by'] == $logged_user_id)
 										{
 										?>
 											<a href="<?php echo $base; ?>user/<?php echo $user_detail['id'];?>/<?php echo $user_detail['fullname'];?>"><img src="https://graph.facebook.com/<?php echo $user; ?>/picture?type=small" alt="Qusetion about universities" title="<?php if(!empty($user_detail['fullname'])){ echo ucwords($user_detail['fullname']); } else { echo 'No name'; } ?>" /></a>

@@ -370,9 +370,10 @@ if ($user) {
 										 echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
 										echo $quest_month?$quest_month.', ':'';
 										echo $quest_ask_date[2]?$quest_ask_date[2].' ':'';
+										echo "Total Answers - ".$featured_question_visited_profile['ans_count'][$a];
 										?></div>
 									</li>
-							<?php } $a++; } else { echo "No Latest Questions Available"; }
+							<?php $a++; } } else { echo "No Latest Questions Available"; }
 				?>
 								
 							</ul>

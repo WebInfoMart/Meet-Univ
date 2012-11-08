@@ -680,6 +680,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										
 										echo $quest_month?$quest_month.', ':'';
 										 echo $quest_ask_date[0]?$quest_ask_date[0].' ':'';
+										 echo "Total Answers - ".$featured_question_profile['ans_count'][$q_count];
 										?></div>
 										<div class="clearfix"></div>
 									</li>

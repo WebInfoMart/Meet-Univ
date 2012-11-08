@@ -934,7 +934,7 @@ class Univ extends CI_Controller
 				$this->frontmodel->insert_user_comment();
 				$data['clear_comment']=1;
 				}
-				$data['question_comments']=$this->frontmodel->fetch_all_comments('qna',$quest_id);
+				$data['article_comments']=$this->frontmodel->fetch_all_comments('qna',$quest_id);
 				$data['user_is_logged_in']=0;
 				if($this->tank_auth->is_logged_in())
 				{

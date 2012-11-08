@@ -270,8 +270,8 @@ class Quest_ans_model extends CI_Model
 			foreach($q_detail as $getAns)
 			{
 				$this->db->select('*');
-				$this->db->from('answers');
-				$this->db->where('qid',$getAns['que_id']);
+				$this->db->from('comment_table');
+				$this->db->where('comment_on_id',$getAns['que_id']);
 				$query = $this->db->get();
 				$cntAns[] = $query->num_rows();
 			}
