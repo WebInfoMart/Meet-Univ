@@ -2039,7 +2039,7 @@ function manage_university($mps='')
 	  $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
 	  $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
 	  $univ_info=$this->events->fetch_univ_id($data['user_id']);
-		$univ_id=$univ_info['univ_id'];
+	  $univ_id=$univ_info['univ_id'];
 	  if(!($data['admin_priv']))
 	  {
 	   redirect('admin/adminlogout');
@@ -2067,6 +2067,41 @@ function manage_university($mps='')
 			  //$this->adminmodel->edit_user_data();
 			  //redirect('admin/manageusers/ups');
 		  }
+	  }
+	  if($this->input->post('info_save'))									//added by satbir on 11/08/2012
+	  {
+		$this->form_validation->set_rules('txtareaoverview', 'Overview University', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareacampus', 'Campus Overview', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareaservices', 'Services', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareaalumni', 'Awarded Alumni', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareadepartments', 'Departments', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareafaculties', 'Faculties', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareaslife', 'Student Life', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareainterstudents', 'For International Students', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareaexpertise', 'Research Expertise', 'trim|xss_clean');
+		$this->form_validation->set_rules('txtareainsights', 'Insights', 'trim|xss_clean');
+		if ($this->form_validation->run()) 
+		{
+			$flag = $this->adminmodel->update_univ_admin_university_info($univ_id);
+			if(!$flag) 
+			{ 
+				redirect('admin/update_university_detail/uud');
+			}
+		}
+	  }
+	  if($this->input->post('info_seo'))									//added by satbir on 11/08/2012
+	  {
+		$this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
+		$this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
+		$this->form_validation->set_rules('keyword', 'Keyword', 'trim|xss_clean');
+		if ($this->form_validation->run()) 
+		{
+			$flag = $this->adminmodel->update_univ_admin_university_seo($univ_id);
+			if(!$flag) 
+			{ 
+				redirect('admin/update_university_detail/uud');
+			}
+		}
 	  }
 
 	  $flag=0;
@@ -2097,7 +2132,7 @@ function manage_university($mps='')
 	  else
 	  {
 		  $this->load->view('univadmin/header',$data);
-			$this->load->view('univadmin/sidebar',$data);
+		  $this->load->view('univadmin/sidebar',$data);
 			
 		  $data['countries']=$this->users->fetch_country();
 		  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);

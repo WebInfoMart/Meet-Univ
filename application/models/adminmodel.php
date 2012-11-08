@@ -934,7 +934,7 @@ class Adminmodel extends CI_Model
 	
 	function get_univ_gallery_info($univ_id)
 	{	
-		$this->db->select('univ_gallery.*,university.univ_name');
+		$this->db->select('univ_gallery.*,university.univ_name,university.description,');	// added by satbir on 11/08/2012
 		$this->db->from('univ_gallery');		
 		$this->db->join('university','university.univ_id=univ_gallery.univ_id','left');
 		$this->db->where(array('gal_type' =>'univ','univ_gallery.univ_id'=>$univ_id));
@@ -1033,6 +1033,31 @@ class Adminmodel extends CI_Model
    //redirect('admin) 
    }
    
+ }
+ 
+ function update_univ_admin_university_info($univ_id){						//added by satbir on 11/08/2012
+	$data = array(
+      'univ_overview'=>$this->input->post('txtareaoverview'),
+      'univ_campus'=>$this->input->post('txtareacampus'),
+      'univ_services'=>$this->input->post('txtareaservices'),
+      'univ_faculties'=>$this->input->post('txtareafaculties'),
+      'univ_expertise'=>$this->input->post('txtareaexpertise'),
+      'univ_slife'=>$this->input->post('txtareaslife'),
+      'univ_interstudents'=>$this->input->post('txtareainterstudents'),
+      'univ_alumni'=>$this->input->post('txtareaalumni'),
+      'univ_departments'=>$this->input->post('txtareadepartments'),
+      'univ_insights'=>$this->input->post('txtareainsights')
+	);
+   $this->db->update('university', $data,array('univ_id'=>$univ_id));  
+ }
+ 
+ function update_univ_admin_university_seo($univ_id){				//added by satbir on 11/08/2012
+	$data = array(
+		'title' => $this->input->post('title'),
+		'description' => $this->input->post('description'),
+		'keyword' => $this->input->post('keyword')		
+	);
+	$this->db->update('university', $data,array('univ_id'=>$univ_id));  
  }
  
  function get_assigned_univ_info($paging='')

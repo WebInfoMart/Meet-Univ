@@ -7,26 +7,6 @@
 <meta charset="utf-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
-
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/bootstrap-responsive.css">
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/fullcalendar.css">
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/jquery.tagsinput.css">
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/jquery.cleditor.css">
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/bootstrap.datepicker.css">
-
-<script src="<?php echo $base;?>js/new_admin/js/fullcalendar.min.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.dataTables.bootstrap.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.flot.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/chosen.jquery.min.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/bootstrap.datepicker.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/bootstrap.timepicker.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.mousewheel.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/ui.spinner.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/plupload/plupload.full.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.tagsinput.min.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.cleditor.min.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.inputmask.min.js"></script>  
 <?php
 $edit=0;
 $delete=0;
@@ -769,9 +749,6 @@ function addEvent()
 }  
 $(document).ready(function(){
 	//alert('fnslfc');
-	$("#event_start_date").click(function() {
-		alert($(".active").text());
-	});
 	$("#event_start_date").change(function() {
 		if((new Date($("#event_end_date").val()).getTime() < new Date($("#event_start_date").val()).getTime()))
 		{

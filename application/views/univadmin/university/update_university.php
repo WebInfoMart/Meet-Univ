@@ -171,7 +171,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 					</form>           
 				</div>
 				<div class="tab-pane" id="info">
-					<form class="form-horizontal">
+					<form class="form-horizontal" method="post">
 						<fieldset>
 							<div class="row-fluid">
 								<div class="span6">
@@ -184,25 +184,25 @@ $univ_city_id=$univ_detail_update['city_id'];
 								<div class="control-group">
 								<label class="control-label" for="input07">Campus Overview</label>
 								<div class="controls">
-									<textarea name="cleditor" class='cleditor span12'></textarea>
+									<textarea name="txtareacampus" class='cleditor span12'><?php echo $univ_detail_update['univ_campus']; ?></textarea>
 								</div>
 								</div>
 								<div class="control-group">
 								<label class="control-label" for="input07">Facilities & Services / Accommodation</label>
 								<div class="controls">
-									<textarea name="cleditor" class='cleditor span12'></textarea>
+									<textarea name="txtareaservices" class='cleditor span12'><?php echo $univ_detail_update['univ_services']; ?></textarea>
 								</div>
 								</div>
 								<div class="control-group">
 								<label class="control-label" for="input07">Awarded Alumni</label>
 								<div class="controls">
-									<textarea name="cleditor" class='cleditor span12'></textarea>
+									<textarea name="txtareaalumni" class='cleditor span12'><?php echo $univ_detail_update['univ_alumni']; ?></textarea>
 								</div>
 								</div>
 									<div class="control-group">
 										<label class="control-label" for="input07">Departments</label>
 										<div class="controls">
-											<textarea name="cleditor" id="vad" class='cleditor span12' style="width:323px !important"></textarea>
+											<textarea name="txtareadepartments" id="vad" class='cleditor span12'><?php echo $univ_detail_update['univ_departments']; ?></textarea>
 										</div>
 									</div>
 								</div>
@@ -210,35 +210,35 @@ $univ_city_id=$univ_detail_update['city_id'];
 									<div class="control-group">
 									<label class="control-label" for="input07">Faculties</label>
 									<div class="controls">
-										<textarea name="cleditor" class='cleditor span12'></textarea>
+										<textarea name="txtareafaculties" class='cleditor span12'><?php echo $univ_detail_update['univ_faculties']; ?></textarea>
 									</div>
 									</div>
 									<div class="control-group">
 									<label class="control-label" for="input07">Student Life</label>
 									<div class="controls">
-										<textarea name="cleditor" class='cleditor span12'></textarea>
+										<textarea name="txtareaslife" class='cleditor span12'><?php echo $univ_detail_update['univ_slife']; ?></textarea>
 									</div>
 									</div>
 									<div class="control-group">
 									<label class="control-label" for="input07">For International Students</label>
 									<div class="controls">
-										<textarea name="cleditor" class='cleditor span12'></textarea>
+										<textarea name="txtareainterstudents" class='cleditor span12'><?php echo $univ_detail_update['univ_interstudents']; ?></textarea>
 									</div>
 									</div>
 									<div class="control-group">
 									<label class="control-label" for="input07">Research Expertise</label>
 									<div class="controls">
-										<textarea name="cleditor" class='cleditor span12'></textarea>
+										<textarea name="txtareaexpertise" class='cleditor span12'><?php echo $univ_detail_update['univ_expertise']; ?></textarea>
 									</div>
 									</div>
 									<div class="control-group">
 									<label class="control-label" for="input07">Insights</label>
 									<div class="controls">
-										<textarea name="cleditor" class='cleditor span12'></textarea>
+										<textarea name="txtareainsights" class='cleditor span12'><?php echo $univ_detail_update['univ_insights']; ?></textarea>
 									</div>
 									</div>
 									<div class="form-actions">
-									<button type="submit" class='btn btn-primary'>Save</button>
+									<input type="submit" name="info_save" class='btn btn-primary' value="Save" />
 									<a href="#" class='btn btn-danger'>Cancel</a>
 									</div>
 								</div>
@@ -249,28 +249,28 @@ $univ_city_id=$univ_detail_update['city_id'];
               <div class="tab-pane" id="seo">
 				<div class="row-fluid">
 					<div class="span9">
-						<form class="form-horizontal">
+						<form class="form-horizontal" method="post">
 							<fieldset>
 								<div class="control-group">
 								<label class="control-label" for="input01">Title</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01">
+									<input type="text" name="title" class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['title']); ?>">
 								</div>
 								</div>
 								<div class="control-group">
 								<label class="control-label" for="input01">Description</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01">
+									<input type="text" name="description"  class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['description']); ?>">
 								</div>
 								</div>
 								<div class="control-group">
 								<label class="control-label" for="input01">Keyword</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01">
+									<input type="text" name="keyword" class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['keyword']); ?>">
 								</div>
 								</div>
 								<div class="form-actions">
-										<button type="submit" class='btn btn-primary'>Add News</button>
+										<input type="submit" name="info_seo" class='btn btn-primary' value="Add News" />
 										<a href="#" class='btn btn-danger'>Cancel</a>
 								</div>
 							</fieldset>

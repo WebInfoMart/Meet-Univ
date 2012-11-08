@@ -31,13 +31,15 @@
 									<input type="checkbox" class='sel_rows' data-targettable="media">
 								</th>
 								<th>Image</th>							
+								<th>Description</th>					<!-- Added by satbir on 11/08/2012 -->						
 								<th>File info</th>
 								<th>Options</th>
 								</tr>
 						</thead>
 						<tbody>
 						<?php
-				foreach($gallery as $gal_images)
+
+					foreach($gallery as $gal_images)
 					{ 
 					if(file_exists(getcwd().'/uploads/univ_gallery/'.$gal_images['g_image_path']) && $gal_images['g_image_path']!='')
 					{
@@ -48,10 +50,13 @@
 								<tr class="check_university_<?php echo $gal_images['gid']; ?>">
 								<td>
 									<input type="checkbox" value="<?php echo $gal_images['gid'];?>" class='selectable_checkbox setchkval'>
-								</td>
+								</td>								
 								<td>
-									<a href="img/500.gif" class='fancy'><img style="width:100px;height:100px;" src="<?php echo $news_img_path; ?>" alt=""></a>
-								</td>	
+									<a href="img/500.gif" class='fancy'><img style="width:50px;height:50px;" src="<?php echo $news_img_path; ?>" alt=""></a>
+								</td>
+								<td>													<!-- Added by satbir on 11/08/2012 -->
+									<?php echo substr($gal_images['description'],0,60); ?>
+								</td>								
 						
 								<td class='info'>
 									<span><strong>Size:</strong> <?php echo number_format($size/1024,2).'  KB'; ?></span>

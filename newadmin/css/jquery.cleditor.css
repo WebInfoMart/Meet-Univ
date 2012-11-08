@@ -1,5 +1,5 @@
 .cleditorMain {border:1px solid #999; padding:0 1px 1px; background-color:white}
-.cleditorMain iframe {border:none; margin:0; padding:0}
+.cleditorMain iframe {border:none; margin:0; padding:0; width:324px !important;}			/* Edited by satbir on 11/08/2012*/
 .cleditorMain textarea {border:none; margin:0; padding:0; overflow-y:scroll; font:10pt Arial,Verdana; resize:none; outline:none /* webkit grip focus */}
 .cleditorToolbar {background: url('../img/toolbar.gif') repeat}
 .cleditorGroup {float:left; height:26px}
