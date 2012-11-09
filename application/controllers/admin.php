@@ -36,40 +36,41 @@ class Admin extends CI_Controller
    $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
    if($data['admin_user_level']=='3')
    {
-   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
-   $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
-   if($data['univ_detail_edit']==0)
-   {
-   $flag=1;
-   $data['msg']='No University Assigned Yet';
-   $this->load->view('admin/userupdated',$data);
-   }
-   else
-   {
- 
- $data['university_id']=$data['univ_detail_edit'][0]->univ_id;
- //$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
- //$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
-// $data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
- //$data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
-  $data['recent_leads']=$this->admindash->recent_leads($data['university_id']);//new
- $data['recent_questions']=$this->admindash->fetch_recent_five_question();//new
- $data['unasnwered']=$this->admindash->unasnwered();//new
- $data['recent_followers_of_univ']=$this->admindash->recent_followers_of_univ($data['university_id']); //new
-$data['recent_articles']=$this->admindash->recent_articles($data['university_id']);//new	
-   }
+		$this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
+		$data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
+		if($data['univ_detail_edit']==0)
+		{
+			$flag=1;
+			$data['msg']='No University Assigned Yet';
+			$this->load->view('admin/userupdated',$data);
+		}
+		else
+		{
+
+			$data['university_id']=$data['univ_detail_edit'][0]->univ_id;
+			//$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
+			//$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
+			// $data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
+			//$data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
+			$data['recent_leads']=$this->admindash->recent_leads($data['university_id']);//new
+			$data['recent_questions']=$this->admindash->fetch_recent_five_question();//new
+			$data['unasnwered']=$this->admindash->unasnwered();//new
+			$data['recent_followers_of_univ']=$this->admindash->recent_followers_of_univ($data['university_id']); //new
+			$data['recent_articles']=$this->admindash->recent_articles($data['university_id']);//new	
+		}
    }
    if($data['admin_user_level']=='5')
    {
-   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
-   for($i = 1; $i <=31; $i++) 
-   {    
-   $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
-   $data['no_of_registerd_user'][$i]=$this->dashboard->count_lead_data_by_date($lead_created_time);
-    
-   }    
-   $data['latest_users']=$this->dashboard->latest_event_users();
-   $data['ten_question']=$this->dashboard->ten_question();
+	   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
+	   for($i = 1; $i <=31; $i++) 
+	   {    
+	   $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
+	   $data['no_of_registerd_user'][$i]=$this->dashboard->count_lead_data_by_date($lead_created_time);
+		
+	   } 
+		$data['event_users']=$this->dashboard->latest_event_users();
+	   $data['latest_users']=$this->dashboard->latest_users();
+	   $data['ten_question']=$this->dashboard->ten_question();
  
    }
    $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);

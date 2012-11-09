@@ -125,7 +125,7 @@ class Dashboard extends CI_Model
 		$query=$this->db->query("SELECT * FROM `lead_data` where lead_created_time LIKE '$date%'");
 		return $query->num_rows();
 	}
-	function latest_event_users()
+	function latest_users()
 	{
 		$query=$this->db->query("select * from users where user_type!='offline' && level='1' order by createdon limit 0,15");	
 		return $query->result_array($query);
@@ -144,6 +144,21 @@ class Dashboard extends CI_Model
 		else
 		return 0;
 	}
+	
+	function latest_event_users()
+	{
+		$this->db->select('event_register.*,university.univ_name,events.event_title');
+		$this->db->from('event_register');		
+		$this->db->join('events','events.event_id=event_register.register_event_id','left');
+		$this->db->join('university','university.univ_id=event_register.register_event_univ_id','left');
+		$this->db->limit(15);
+		$res=$this->db->get();
+		if($res->num_rows()>0)
+		return $res->result_array();
+		else
+		return 0;
+	}
+	
 }
 
 /* End of file users.php */

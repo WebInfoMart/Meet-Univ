@@ -1151,7 +1151,7 @@ class Auth extends CI_Controller
   $data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
   $data['area_interest'] = $this->users->fetch_area_interest_by_id($area_interest);
   $data['follower_detail'] = $this->users->get_followers_detail_of_person($id);
-  $data['my_collage_of_user_visited'] = $this->users->my_collage_of_user($logged_user_id);
+  $data['my_collage_of_user_visited'] = $this->users->my_collage_of_user($id);
   $data['send_message_to_user_error'] = 0;
   $data['follow_own'] = 0;
   $logged_user_id == $id ? $data['follow_own'] = 1 : $data['follow_own'] = 0;
