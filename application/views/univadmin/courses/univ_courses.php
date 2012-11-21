@@ -36,7 +36,7 @@ $insert=1;
 </div>
   <!-- BEGIN Content -->
   <div class="content">
-    <div class="container-fluid">
+    <div class="container-fluid">			
       <div class="row-fluid">
         <div class="span12">
           <div class="page-header clearfix tabs">
@@ -184,6 +184,7 @@ $insert=1;
 									<input type="text" class="input-xlarge" id="input01">
 								</div>
 								</div>
+								<!--
 								<div class="control-group">
 								<label class="control-label" for="input06">Choose University</label>
 								<div class="controls">
@@ -193,7 +194,7 @@ $insert=1;
 									<option value="2">Sit dolor</option>
 									</select>
 								</div>
-								</div>
+								</div>-->
 								<div class="control-group">
 									<label class="control-label" for="input04">News Logo</label>
 									<div class="controls">
@@ -207,8 +208,8 @@ $insert=1;
 								</div>
 								</div>
 								<div class="form-actions">
-								<button type="submit" class='btn btn-primary'>Add News</button>
-								<a href="#" class='btn btn-danger'>Cancel</a>
+								<button type="submit" class='btn btn-primary'>Create</button>
+								<a href="<?php echo $base; ?>/newadmin/admin_courses/manage_univ_course" class='btn btn-danger'>Cancel</a>
 								</div>
 							</fieldset>
 						</form>

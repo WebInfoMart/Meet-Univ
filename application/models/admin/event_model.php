@@ -309,7 +309,16 @@ class Event_model extends CI_Model
 		$query=$this->db->get();		
 		return $query->result();
 	}
-	
+	function fetch_events_for_calendar(){							//added by satbir on 11/09/2012
+		$sql = "SELECT *,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events where STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."' and  ban_event!='1' order by dt asc";
+		$results=$this->db->query($sql);
+		if($results->num_rows()>0){
+			return $results->result_array();
+		}
+		else{
+			return 0;
+		}		
+	}	
 	
 }
 /* End of file users.php */

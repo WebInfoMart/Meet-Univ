@@ -240,7 +240,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 									}
 									else
 									{
-									list($width, $height, $type, $attr) = getimagesize(getcwd().$img_path.'/calendar.png');
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/'.$img_path.'/cal_img.png');
 									}
 									if($home_feature_event['univ_logo_path']!='' && $image_exist==1)
 									{
@@ -248,7 +248,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 									}
 									else
 									{
-									$image=$base.$img_path.'/calendar.png';
+									$image=$base.'/'.$img_path.'/cal_img.png';
 									} 
 									$img_arr=$this->searchmodel->set_the_image($width,$height,105,71,TRUE);
 									$event_register_user = $this->frontmodel->count_event_register($home_feature_event['event_id']);
@@ -267,7 +267,7 @@ if($error_password != '') { $class_pass = 'focused_error'; } else { $class_pass=
 										<h3 class="inline"><a href="<?php echo $event_link; ?>"><?php echo $home_feature_event['univ_name']; ?></a></h3><span class="inline"> &raquo; </span><h4 class="inline"><?php echo $cat; ?></h4>
 										<div class="margin_t1">
 											<div class="img_style float_l img_r aspectcorrect">
-												<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
+										<img src=" <?php echo $image ?>" style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" >
 											</div>
 											<div><img src="<?php echo $base; ?>images/city.png" class="line_img inline"><span class="blue line_time inline">
 											<?php 

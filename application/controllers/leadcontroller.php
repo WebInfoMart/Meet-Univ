@@ -274,14 +274,16 @@ class Leadcontroller extends CI_Controller
 		$this->load->view('auth/header',$data);
 		$data['get_info_logged_user'] = '';
 		$data['eve_reg_suc'] = '';
-		if ($this->tank_auth->is_logged_in()) {
+		if ($this->tank_auth->is_logged_in()) 
+		{
 			$logged_user_id = $this->session->userdata('user_id');
 			$data['get_info_logged_user'] = $this->users->fetch_profile($logged_user_id);
-			}
-			else{
+		}
+		else
+		{
 			$data['get_info_logged_user'] = '';
 			$logged_user_id='';
-			}
+		}
 		$univ_id = $this->input->post('event_register_of_univ_id');
 		$event_id = $this->input->post('event_register_id');
 		if($univ_id!='' && $event_id!='')
@@ -307,8 +309,7 @@ class Leadcontroller extends CI_Controller
 			
 			if($this->form_validation->run())
 			{
-				/* $university_id = $this->session->userdata('register_event_university_id');
-				$event_id = $this->session->userdata('register_event_id'); */
+				
 				$user_email = $this->input->post('event_email');
 				$id_university = $this->session->userdata('register_event_university_id');
 				$id_event = $this->session->userdata('register_event_id');

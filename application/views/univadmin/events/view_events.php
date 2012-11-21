@@ -1,24 +1,72 @@
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width">
-
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/bootstrap-responsive.css">
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/jquery.fancybox-1.3.4.css">
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/fullcalendar.css">
-<link rel="stylesheet" href="<?php echo $base;?>css/admin/new_admin/css/bootstrap.datepicker.css">
-
-<script src="<?php echo $base;?>js/new_admin/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.dataTables.bootstrap.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/jquery.fancybox-1.3.4.pack.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/bootstrap.datepicker.js"></script>
-<script src="<?php echo $base;?>js/new_admin/js/bootstrap.timepicker.js"></script>
-
 <?php
 if(!empty($event_info))
 {
 ?> 
  <div class="content">
-    <div class="container-fluid">      
+    <div class="container-fluid"> 
+	<div class="responsible_navi">
+        <div class="currentPage">
+          <i class="icon-tasks icon-white"></i> Interface Elements - Tabs
+          <div class="sorting">
+            <img src="img/sort_both.png" alt="">
+          </div>
+        </div>
+          <ul class='respNav'>
+          <li>
+            <a href="dash.html">
+              <i class="icon-home"></i>
+              Dashboard
+              <span class="label label-important">16</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class='toggle-subnav'>
+              <i class="icon-book"></i>
+               Data Management Setting
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+              <li>
+			<a href="articles.html">Articles</a>
+		  </li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="events.html">Events</a></li>
+		   <li><a href="question.html">Q & A Section</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class='toggle-subnav'>
+              <i class="icon-tasks"></i>
+             General Setting
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+               <li><a href="uni_gallery.html">University Gallery</a></li>
+          <li><a href="pages.html">Pages</a></li>
+          <li><a href="univ_courses.html">University Courses</a></li>
+          <li><a href="update_university.html">Update University</a></li>
+            </ul>
+          </li>
+		  <li>
+            <a href="#" class='toggle-subnav'>
+              <i class="icon-tasks"></i>
+             Enagage
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+              <li><a href="buttons.html">Promotional Panel</a></li>
+          <li><a href="modals.html">Email Plans</a></li>
+          <li><a href="engage.html">Engagement Panel</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="stats.html">
+              <i class="icon-signal"></i>
+              Statistics
+            </a>
+          </li>
+        </ul>
+    </div>		
       <div class="row-fluid">
         <div class="span12">
           <div class="page-header clearfix tabs">
@@ -218,7 +266,7 @@ if(!empty($event_info))
 							<div class="form-actions">
 									<a id="edit" class='btn btn-success pover' data-placement="top" data-content="Want to change" title="Edit">Edit</a>
 									<a id="cancel" href="<?php echo $base; ?>newadmin/admin_events/view_event/<?php echo $event_info[0]['event_id']; ?>" style="display:none" class='btn btn-success pover' data-placement="top" data-content="Want to Cancel" title="Cancel">Cancel</a>
-									<input type="submit" name="submit"  class='btn btn-success pover' data-placement="top" data-content="Update it" value="Update"/>
+									<input id="update" style="display:none" type="submit" name="submit"  class='btn btn-success pover' data-placement="top" data-content="Update it" value="Update"/>
 							</div>
 						</div>
 						</fieldset>
@@ -369,6 +417,7 @@ $(document).ready(function(){
 	$(document).ready(function(){
 		$("#edit").click(function() {
 			$('#cancel').show();
+			$('#update').show();
 			$('#edit').hide();
 			$('form').find('.control-group').removeClass('margin_b');
 			$('form').find('.help-inline').css('display', 'none');

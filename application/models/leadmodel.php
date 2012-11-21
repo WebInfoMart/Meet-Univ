@@ -380,6 +380,43 @@ class Leadmodel extends CI_Model
 		}
 	}
 	
+	function event_datewise()
+	{
+		$this->db->select('events.*,city.cityname,state.statename,country.country_name,university.univ_id,university.univ_name,university.univ_logo_path');
+		$this->db->from('events');
+		$this->db->join('city','city.city_id = events.event_city_id');
+		$this->db->join('state','state.state_id = events.event_state_id');
+		$this->db->join('country','country.country_id = events.event_country_id');
+		$this->db->join('university','university.univ_id = events.event_univ_id');
+		$this->db->where('event_date_time',date('24 nov 2012'));
+		
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		
+	}
+	function event_date()
+	{
+		$date=$this->input->post('date');
+		$this->db->select('events.*,city.cityname,state.statename,country.country_name,university.univ_id,university.univ_name,university.univ_logo_path');
+		$this->db->from('events');
+		$this->db->join('city','city.city_id = events.event_city_id');
+		$this->db->join('state','state.state_id = events.event_state_id');
+		$this->db->join('country','country.country_id = events.event_country_id');
+		$this->db->join('university','university.univ_id = events.event_univ_id');
+		$this->db->where('event_date_time',$date);
+		$this->db->where('event_country_id	',14);
+		
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}
+		
+	}
+	
 	function events_filter_by_city($event_city,$event_month)
 	{
 		/* $this->db->select('*');

@@ -174,8 +174,8 @@ $(document).ready(function() {
 		$(".mask_productNumber").inputmask("AAA-9999-A");
 	}
 
-	// calendar
-	var date = new Date();
+// calendar         					commented by satbir
+/*	var date = new Date();
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
@@ -236,8 +236,8 @@ $(document).ready(function() {
 			]
 		});
 	}
-
-	// subnav closed on default?
+*/
+// subnav closed on default?
 	$('.toggle-subnav').each(function(e){
 		if($(this).parent().hasClass("active")){
 			$(this).find('.label-toggle').addClass('label-white');

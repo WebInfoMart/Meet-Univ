@@ -223,9 +223,13 @@ function edit_ans()
 		'comment_on_id'=>$id,
 		'commented_on'=>'qna',
 		'commented_text' => $this->input->post('answer')
+		);		
+		$this->db->insert('comment_table',$data);							//added by satbir on 11/20/2012
+		$data1 = array(
+			'q_answered' =>'1'		
 		);
-		//print_r($data);exit;		
-		$this->db->insert('comment_table',$data);
+		$this->db->where('que_id',$id);
+		$this->db->update('questions', $data1);
 		return 1;
 		
 	}	

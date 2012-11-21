@@ -17,24 +17,23 @@ $event_delete_op=array('5','7','8','10');
 $event_insert_op=array('4','6','8','10');
 
 foreach ($admin_priv as $admin_priv_res){ 
-if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!=0)
-{
-$view=1;
-if(in_array($admin_priv_res['privilege_level'],$event_edit_op))
-{
-$edit=1;
+	if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!=0)
+	{
+		$view=1;
+		if(in_array($admin_priv_res['privilege_level'],$event_edit_op))
+		{
+			$edit=1;
+		}
+		if(in_array($admin_priv_res['privilege_level'],$event_delete_op))
+		{
+			$delete=1;
+		}
+		if(in_array($admin_priv_res['privilege_level'],$event_insert_op))
+		{
+			$insert=1;
+		}
+	}
 }
-if(in_array($admin_priv_res['privilege_level'],$event_delete_op))
-{
-$delete=1;
-}
-if(in_array($admin_priv_res['privilege_level'],$event_insert_op))
-{
-$insert=1;
-}
-}
-}
-
 if(!empty($events_info))
 {
 ?>
@@ -1400,5 +1399,35 @@ $('#setCountryStateValue').click(function(){
 	}
 	
 });
+</script>
 
+<!-- for calander -->
+<script>
+	if($('.calendar').length > 0){
+		$('.calendar').fullCalendar({
+			header: {
+				left: 'prev',
+				center: 'title',
+				right: 'next,month,agendaWeek,agendaDay'
+			},
+			editable: false,
+			events: [
+			<?php
+			if(!empty($events_for_calendar))
+			{
+				foreach($events_for_calendar as $event_detail){
+					echo "{";
+						if(!empty($event_detail['event_title']))
+							echo "title: '".$event_detail['event_title']."',";	
+						if(!empty($event_detail['event_date_time']))
+							echo "start: '".$event_detail['event_date_time']."',";	
+						if(!empty($event_detail['event_date_time']))
+							echo "end: '".$event_detail['event_date_time_end']."',";		
+					echo "},";
+				}
+			}
+			?>			
+			]			
+		});
+	}
 </script>

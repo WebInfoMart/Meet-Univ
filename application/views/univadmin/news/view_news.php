@@ -1,7 +1,70 @@
 <?php 
 foreach($news_info as $news_detail) { ?>
 <div class="content">
-    <div class="container-fluid">      
+    <div class="container-fluid"> 
+<div class="responsible_navi">
+        <div class="currentPage">
+          <i class="icon-tasks icon-white"></i> Interface Elements - Tabs
+          <div class="sorting">
+            <img src="img/sort_both.png" alt="">
+          </div>
+        </div>
+          <ul class='respNav'>
+          <li>
+            <a href="dash.html">
+              <i class="icon-home"></i>
+              Dashboard
+              <span class="label label-important">16</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class='toggle-subnav'>
+              <i class="icon-book"></i>
+               Data Management Setting
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+              <li>
+			<a href="articles.html">Articles</a>
+		  </li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="events.html">Events</a></li>
+		   <li><a href="question.html">Q & A Section</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class='toggle-subnav'>
+              <i class="icon-tasks"></i>
+             General Setting
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+               <li><a href="uni_gallery.html">University Gallery</a></li>
+          <li><a href="pages.html">Pages</a></li>
+          <li><a href="univ_courses.html">University Courses</a></li>
+          <li><a href="update_university.html">Update University</a></li>
+            </ul>
+          </li>
+		  <li>
+            <a href="#" class='toggle-subnav'>
+              <i class="icon-tasks"></i>
+             Enagage
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+              <li><a href="buttons.html">Promotional Panel</a></li>
+          <li><a href="modals.html">Email Plans</a></li>
+          <li><a href="engage.html">Engagement Panel</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="stats.html">
+              <i class="icon-signal"></i>
+              Statistics
+            </a>
+          </li>
+        </ul>
+    </div>		
       <div class="row-fluid">
         <div class="span12">
           <div class="page-header clearfix tabs">
@@ -27,9 +90,8 @@ foreach($news_info as $news_detail) { ?>
 										}
 										?>
 										<li>
-										
 												<a href="<?php echo $news_img_path; ?>" class='fancy'>
-													<img src="<?php echo $news_img_path ?>" alt="">
+													<img src="<?php echo $news_img_path ?>" alt="" width="175" height="auto">
 												</a>
 											</li>  
 										</ul>

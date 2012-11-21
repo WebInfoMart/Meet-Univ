@@ -122,6 +122,7 @@ $route['colleges']='auth/all_colleges';
 
 $route['events/(.*)'] = 'auth/events/$1';
 $route['events']='auth/events';
+$route['british_council_fair/(.*)']='auth/advt_events';
 
 $route['(QuestandAns)'] = 'quest_ans_controler/$1';
 

@@ -17,6 +17,6 @@ $sel='selected';
 </center>
 <center>
 <div style="margin-top:15px;">
-<input type="submit" name="submit" class="submit">
+<input type="submit" name="submit" value="Assign" class="submit">
 </div>
 </center>

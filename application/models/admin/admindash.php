@@ -25,6 +25,7 @@ class Admindash extends CI_Model
 		$condition=array('q_category'=>'univ');
 		$this->db->join('users','questions.q_askedby=users.id','left');
 		$this->db->join('user_profiles','user_profiles.user_id=users.id','left');
+		$this->db->join('university','questions.q_univ_id=university.univ_id','left');					//Edited by satbir on 11/19/2012
 		$this->db->where($condition);
 		$this->db->order_by("q_asked_time", "desc");
 		$this->db->limit(5);
@@ -59,6 +60,7 @@ class Admindash extends CI_Model
 						'q_answered'=>'0');
 		$this->db->join('users','questions.q_askedby=users.id','left');
 		$this->db->join('user_profiles','user_profiles.user_id=users.id','left');
+		$this->db->join('university','questions.q_univ_id=university.univ_id','left');					//Edited by satbir on 11/19/2012
 		$this->db->where($condition);
 		$this->db->order_by("q_asked_time", "desc");
 		$this->db->limit(5);

@@ -1,7 +1,9 @@
 <?php 
 foreach($article_info as $article_detail) { ?>
 <div class="content">
-    <div class="container-fluid">      
+    <div class="container-fluid"> 
+	<div class="responsible_navi"> 
+    </div>	
       <div class="row-fluid">
         <div class="span12">
           <div class="page-header clearfix tabs">
@@ -29,7 +31,7 @@ foreach($article_info as $article_detail) { ?>
 										<li>
 										
 												<a href="<?php echo $article_img_path; ?>" class='fancy'>
-													<img src="<?php echo $article_img_path ?>" alt="">
+													<img src="<?php echo $article_img_path ?>" alt="" width="200" height="auto">
 												</a>
 											</li>  
 										</ul>

@@ -29,20 +29,21 @@ $insert=1;
 if(!empty($article_info))
 {  ?>
   <!-- BEGIN Content -->
-  <div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
- <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Article deleted successfully</strong>
-  </div>
-  <div id="access" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Unable to perform action please contact admin</strong>
+<div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
+	<a class="close" data-dismiss="alert" href="#">×</a>
+	<strong>Article deleted successfully</strong>
+</div>
+<div id="access" class="alert alert-success" style="display:none">
+	<a class="close" data-dismiss="alert" href="#">×</a>
+	<strong>Unable to perform action please contact admin</strong>
 </div>
 <div id="deleted" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Article Deleted Successfully</strong>
+	<a class="close" data-dismiss="alert" href="#">×</a>
+	<strong>Article Deleted Successfully</strong>
 </div>
   <div class="content">
-    <div class="container-fluid">      
+    <div class="container-fluid"> 
+	<div class="responsible_navi"></div>	
       <div class="row-fluid">
         <div class="span12">
           <div class="page-header clearfix tabs">
@@ -65,11 +66,11 @@ if(!empty($article_info))
                 <table class="table table-striped dataTable" id="media" >
                   <thead>
                     <tr>
-                      <th width="10%">
+                      <th width="5%">
 					  <input type="checkbox" class='sel_rows' data-targettable="media"></th>
-                      <th width="25%">Article Title</th>
-                      <th width="25%">University Name</th>
-                      <th width="20%">Status</th>
+                      <th width="20%">Article Title</th>
+                      <th width="20%">University Name</th>
+                      <th width="15%">Status</th>
 					  <th width="20%">Featured/UnFeatured</th>
 					   <th width="20%">Choose Option</th>
                     </tr>

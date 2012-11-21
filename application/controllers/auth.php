@@ -1354,6 +1354,34 @@ class Auth extends CI_Controller
 		$this->load->view('auth/footer',$data);
 	}
 	
+	function advt_events()
+	{
+		$data = $this->path->all_path();
+		$this->frontmodel->get_user_detail();
+		$data['events_for_calendar'] = $this->frontmodel->fetch_events_date();
+		$data['datewise_event'] = $this->leadmodel->event_datewise();
+		$this->load->view('auth/header',$data);
+		$this->load->view('auth/add_events',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	function date_event()
+	{
+		$data = $this->path->all_path();		
+		$data['events_for_calendar'] = $this->frontmodel->fetch_events_for_calendar();
+		$data['date_event'] = $this->leadmodel->event_date();
+		$this->load->view('ajaxviews/datewiseevents',$data);
+	}
+	function advt_event_register()
+	{
+				
+		$register = $this->frontmodel->advt_event_register();
+		if($register)
+			{
+			 $this->load->view(auth/success_suggestfrnds);
+			}
+		
+	}
+	
 	function all_events_search()
 	{
 		$current_url=$this->input->post('current_url');
