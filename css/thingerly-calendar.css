@@ -1,0 +1,158 @@
+.tc-calendar,
+.tc-calendar * {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+.tc-wrapper {
+	font-family: 'Tahoma';
+	font-size: 90%;
+	line-height: 14px;
+	width: 209px;
+	height: 210px;
+	position: relative;
+	border: solid 5px #fff;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-spacing: 0.3em;
+	box-shadow: 0px 0px 5px #AAA;
+	-moz-box-shadow: 0px 0px 5px #AAA;
+-webkit-box-shadow: 0px 0px 5px #AAA;
+-webkit-border-radius: 0.8em;
+	/*background: #f0f0f0;  wim_sh */
+	background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 44%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(44%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 44%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 44%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 44%,#ededed 51%,#ffffff 100%); /* IE10+ */
+background: linear-gradient(top,  #ffffff 0%,#f3f3f3 44%,#ededed 51%,#ffffff 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+}
+
+.tc-header {
+	letter-spacing: 1px;
+font: normal 1.2em Verdana, Sans-Serif;
+cursor: default;
+background:transparent;
+color:#222;
+text-align: center;
+vertical-align: middle;
+text-transform: uppercase;
+	
+}
+
+.tc-header-l {
+	float: left;
+	width: 10%;
+  height: 16px;
+  background-image: url('../images/arrow-left.png');
+  background-repeat: no-repeat;
+  margin-left: 5px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.tc-header-r {
+	float: right;
+	width: 10%;
+  background-image: url('../images/arrow-right.png');
+  background-repeat: no-repeat;
+  height: 16px;
+  margin-right: 5px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.tc-header-t {
+	float: left;
+	width: 75%;
+  cursor: pointer;
+}
+
+.tc-body {
+	width: 100%;
+	position: absolute;
+	left: 0px;
+	top: 26px;
+}
+
+.tc-row-sm {
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+.tc-row-bg {
+	height: 55px;
+	line-height: 55px;
+	vertical-align: middle;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+
+.tc-row-sm.tc-odd,
+.tc-row-bg.tc-odd {
+	/*background: #eee;*/
+	background: #fff!important;
+}
+
+.tc-row-sm.tc-even,
+.tc-row-bg.tc-even {
+	background: #fff;
+}
+
+.tc-month-h {
+	padding-top: 3px;
+}
+
+.tc-cell {
+	float: left;
+	text-align: center;
+	width: 14.2%;
+}
+
+.tc-row-bg .tc-cell {
+	width: 25%;
+}
+
+.tc-day,
+.tc-month,
+.tc-year {
+	cursor: pointer;
+}
+
+.tc-grey {
+	color: #aaa;
+}
+
+.tc-today {
+	font-weight: bold;
+	color: #00f;
+}
+
+
+.tc-event {
+	font-weight: bold;
+	color: #f00;
+}
+
+.tc-cf:after 
+{
+	content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}

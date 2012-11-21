@@ -1,0 +1,113 @@
+.chatbox {
+	position: fixed;
+	position:expression("absolute");
+	width: 225px;
+	display:none;
+	border: 1px solid #eeeeee;
+	-moz-border: 1px solid #eeeeee;
+	-webkit-border: 1px solid #eeeeee;
+	border-top-left-radius: 7px;
+	border-top-right-radius: 7px;
+	-moz-border-top-left-radius: 7px;
+	-moz-border-top-right-radius: 7px;
+	-webkit-border-top-left-radius: 7px;
+	-webkit-border-top-right-radius: 7px;
+	/*padding: 10px;*/
+	background:#fff;
+}
+
+.chatboxhead {
+	/*background-color: #2B60DE;
+	padding:7px;
+	color: #ffffff;
+
+	border-right:1px solid #2B60DE;
+	border-left:1px solid #2B60DE;*/
+}
+
+.chatboxblink {
+	background-color: #176689;
+	border-right:1px solid #176689;
+	border-left:1px solid #176689;
+}
+
+.chatboxcontent {
+	font-family: arial,sans-serif;
+	font-size: 13px;
+	color: #333333;
+	height:200px;
+	width:209px;
+	overflow-y:auto;
+	overflow-x:auto;
+	padding:7px;
+	border: 1px solid #eeeeee;
+	-moz-border: 1px solid #eeeeee;
+	-webkit-border: 1px solid #eeeeee;
+	background-color: #ffffff;
+	line-height: 1.3em;
+}
+
+.chatboxinput {
+	padding: 10px 0px 0px 0px; 
+	background-color: #ffffff;
+	/*border-left:1px solid #cccccc;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;*/
+}
+
+.chatboxtextarea {
+	width: 215px;
+	height:44px;
+	border: 1px solid #eeeeee;
+	-moz-border: 1px solid #eeeeee;
+	-webkit-border: 1px solid #eeeeee;
+	/* padding:3px 0pt 3px 3px;
+	margin: 1px; */
+	overflow:hidden;
+}
+
+.chatboxtextareaselected {
+	border: 2px solid #2B60DE;
+	margin:0;
+}
+
+.chatboxmessage {
+	margin-left:1em;
+}
+
+.chatboxinfo {
+	margin-left:-1em;
+	color:#666666;
+
+}
+
+.chatboxmessagefrom {
+	margin-left:-1em;
+	font-weight: bold;
+}
+
+.chatboxmessagecontent {
+}
+
+.chatboxoptions {
+	float: right;
+}
+
+.chatboxoptions a {
+	text-decoration: none;
+	color: #eee;
+	font-weight:bold;
+	font-family:Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+}
+
+.chatboxtitle {
+	display: inline-block;
+	position: absolute;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 8px;
+	margin-left: 17px;
+}
+.chat_set{margin-bottom:5px}
+
+.new_msg_arrive{background:url('../../images/new_msg.png') no-repeat;width:16px;height:15px;position:absolute;bottom:37px;right:210px;}

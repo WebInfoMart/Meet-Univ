@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Meet Universities - Smart Admin</title>
+  <meta name="description" content="">
+
+  <meta name="viewport" content="width=device-width">
+
+ <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap-responsive.css">
+  <link rel="stylesheet" href="css/chosen.css">
+  <link rel="stylesheet" href="css/bootstrap.datepicker.css">
+  <link rel="stylesheet" href="css/jquery.cleditor.css">
+  <link rel="stylesheet" href="css/jquery.ui.plupload.css">
+  <link rel="stylesheet" href="css/jquery.plupload.queue.css">
+  <link rel="stylesheet" href="css/jquery.tagsinput.css">
+</head>
+<body>
+  <div class="navbar navbar-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">Meet Universities Admin</a>
+        <div class="pull-right nav-collapse">
+          <ul class="nav">
+            <li class='dropdown'>
+              <a href="#" class='dropdown-toggle' data-toggle='dropdown'>
+                <img src="img/icon-user.png" alt="" />
+                Username
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                   <a href="account.html">My Account</a>
+                  <a href="balance.html">Balance</a>
+                </li>
+              </ul>
+            </li>
+            <li class="divider-vertical"></li>
+            <li>
+              <a href="#">
+                <img src="img/icon-message.png" alt="" />
+                Messages
+              </a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li>
+              <a href="change_password.html">
+                <img src="img/icon-settings.png" alt="" />
+                Settings
+              </a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li>
+              <a href="index.html">
+                <img src="img/icon-logout.png" alt="" />
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+    <!-- END Navbar -->
+
+  <!-- BEGIN Left Navigation -->
+  <div class="navleft">
+    <div class="search">
+      <form action="#">
+        <input type="text" name="search" placeholder="Search here..." autocomplete="off" data-placement="top" class='tip' title="Enter search phrase">
+        <button class='btn btn-icon tip' title="Search now!" data-placement="right" type='submit'><i class="icon-search"></i></button>
+      </form>
+    </div>
+    <div class="user-profile clearfix">
+      <div class="user-image">
+        <img src="img/profile.png" alt="">
+      </div>
+      <div class="user-details">
+        <div class="user-username">
+          Super Admin
+        </div>
+        <div class="user-userrole">
+          Administrator
+        </div>
+        <div class="user-links">
+          <a href="#">Account</a> | 
+          <a href="edit_profile.html">Edit Profile</a>
+        </div>
+      </div>
+    </div>   
+    <ul class='mainNav'>
+      <li class='active'>
+        <a href="dash.html">
+          <i class="icon-home icon-white"></i>
+          Dashboard
+          <span class="label label-important">16</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" class='toggle-subnav'>
+          <i class="icon-book"></i>
+         Data Management Setting
+          <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+        </a>
+        <ul class="collapsed-nav closed">
+          <li>
+			<a href="articles.html">Articles</a>
+		  </li>
+          <li><a href="news.html">News</a></li>
+		   <li><a href="question.html">Q & A Section</a></li>
+        </ul>
+      </li>
+	  <li>
+        <a href="events.html">
+          <i class="icon-calendar"></i>
+         Events
+        </a>
+      </li>
+      <li>
+        <a href="#" class='toggle-subnav'>
+          <i class="icon-tasks"></i>
+          General Setting
+          <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+        </a>
+        <ul class="collapsed-nav closed">
+          <li><a href="uni_gallery.html">University Gallery</a></li>
+          <li><a href="pages.html">Pages</a></li>
+          <li><a href="univ_courses.html">University Courses</a></li>
+          <li><a href="update_university.html">Update University</a></li>
+        </ul>
+      </li>
+	   <li>
+        <a href="#" class='toggle-subnav'>
+          <i class=" icon-share"></i>
+         Enagage
+          <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+        </a>
+        <ul class="collapsed-nav closed">
+          <li><a href="promotional.html">Promotional Panel</a></li>
+          <li><a href="email_pack.html">Email Plans</a></li>
+          <li><a href="engage.html">Engagement Panel</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="stats.html">
+          <i class="icon-signal"></i>
+          Statistics
+        </a>
+      </li>
+    </ul> 
+    <div class="clear"></div>
+  </div>
+  <!-- End Left Navigation -->
+
+  <!-- BEGIN Content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="responsible_navi">
+        <div class="currentPage">
+          <i class="icon-tasks icon-white"></i> Interface Elements - Tabs
+          <div class="sorting">
+            <img src="img/sort_both.png" alt="">
+          </div>
+        </div>
+        <ul class='respNav'>
+          <li>
+            <a href="dash.html">
+              <i class="icon-home"></i>
+              Dashboard
+              <span class="label label-important">16</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class='toggle-subnav'>
+              <i class="icon-book"></i>
+              Sample Pages
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+              <li><a href="calendar.html">Calendar</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="user.html">User Profile</a></li>
+              <li><a href="404.html">404 Error</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="stats.html">
+              <i class="icon-signal"></i>
+              Statistics
+            </a>
+          </li>
+          <li>
+            <a href="4.html" class='toggle-subnav'>
+              <i class="icon-tasks"></i>
+              Interface Elements
+              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
+            </a>
+            <ul class="collapsed-nav closed">
+              <li><a href="buttons.html">Buttons & Icons</a></li>
+              <li><a href="modals.html">Modals, Alerts & Notifications</a></li>
+              <li><a href="tabs.html">Tabs & Accordion</a></li>
+              <li><a href="tooltips.html">Tooltips & Popovers</a></li>
+              <li><a href="sliders.html">Sliders & Progressbars</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="forms.html">
+              <i class="icon-list"></i>
+              Forms
+            </a>
+          </li>
+          <li>
+            <a href="tables.html">
+              <i class="icon-th-large"></i>
+              Tables
+              <span class="badge badge-warning">4</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="page-header clearfix tabs">
+            <h2>Create Events</h2>
+			</div>
+          <div class="content-box">
+            <div class="row-fluid">
+					<div class="span12">
+						<form class="form-horizontal">
+							<fieldset>
+								<div class="row-fluid">
+									<div class="span6">
+										<div class="control-group">
+										<label class="control-label" for="input01">Event Title</label>
+										<div class="controls">
+											<input type="text" class="input-xlarge" id="input01">
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input06">Checked IF Event IS Online</label>
+										<div class="controls">
+											<label class="checkbox"><input type="checkbox" value="0" name="check"> Check this checkbox!</label>
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input01">Country</label>
+										<div class="controls">
+											<select name="select" id="input06" class="inline">
+											<option value="0">- Select something -</option>
+											<option value="1">Lorem ipsum</option>
+											<option value="2">Sit dolor</option>
+											</select>
+											<span class="inline margin_l"><button class="btn btn-icon tip" data-original-title="Add New Country"><i class="icon-plus"></i></button></span>
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input01">State</label>
+										<div class="controls">
+											<select name="select" id="input06" class="inline">
+											<option value="0">- Select something -</option>
+											<option value="1">Lorem ipsum</option>
+											<option value="2">Sit dolor</option>
+											</select>
+											<span class="inline margin_l"><button class="btn btn-icon tip" data-original-title="Add New Country"><i class="icon-plus"></i></button></span>
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input01">City</label>
+										<div class="controls">
+											<select name="select" id="input06" class="inline">
+											<option value="0">- Select something -</option>
+											<option value="1">Lorem ipsum</option>
+											<option value="2">Sit dolor</option>
+											</select>
+											<span class="inline margin_l"><button class="btn btn-icon tip" data-original-title="Add New Country"><i class="icon-plus"></i></button></span>
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input06">Hide Event On Site</label>
+										<div class="controls">
+											<label class="checkbox"><input type="checkbox" value="0" name="check"> Check this checkbox!</label>
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input01">Event Place</label>
+										<div class="controls">
+											<input type="text" class="input-xlarge" id="input01">
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input06">Event Type</label>
+										<div class="controls">
+											<select name="select" id="input06">
+											<option value="0">- Select something -</option>
+											<option value="1">Lorem ipsum</option>
+											<option value="2">Sit dolor</option>
+											</select>
+										</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="date">Event Date</label>
+											<div class="controls">
+											<div class="input-prepend">
+											<span class="add-on"><i class="icon-calendar"></i></span><input type="text" size="16" id="date" class='span4 datepick'>
+											</div>
+											</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input06">Checked IF Event Timing Is</label>
+										<div class="controls">
+											<label class="checkbox"><input type="checkbox" value="0" name="check"> (Appintment based,Not Fixed etc.)</label>
+										</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="time">Event time</label>
+											<div class="controls">
+												<div class="input-prepend">
+													<span>From</span>
+												<span class="add-on"><i class="icon-time"></i></span><input type="text" size="16" id="time" class='span4 timepicker'>
+												<span class="margin_r">Till</span><span class="add-on inline margin_l"><i class="icon-time"></i></span><input type="text" size="16" id="time" class='span4 timepicker'>
+												</div>
+										</div>
+										</div>
+										<div class="control-group">
+											<label class="control-label" for="tags">Council</label>
+											<div class="controls">
+											<input type="text" class='tagsinput span12' id="tags" value="council">
+											</div>
+										</div>
+									</div>
+									<div class="span6">
+										<div class="control-group">
+										<label class="control-label" for="input06">Share on Facebook</label>
+										 <div class="controls">
+											<label class='radio'><input type="radio" name="radio" value="0"> 3 days</label>
+											<label class='radio'><input type="radio" name="radio" value="1"> 7 days</label>
+											<label class='radio'><input type="radio" name="radio" value="2"> 15 days</label>
+										</div>
+										</div>
+										<div class="control-group">
+										<label class="control-label" for="input06">Detail</label>
+										<div class="controls">
+											<textarea name="cleditor" class='cleditor span12'></textarea>
+										</div>
+										</div>
+										<div class="form-actions">
+										<button type="submit" class='btn btn-primary'>Add Events</button>
+										<a href="#" class='btn btn-danger'>Cancel</a>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+          </div>
+      </div>
+    </div><!-- close .container-fluid -->
+  </div><!-- close .content -->
+  <!-- END Content -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.flot.js"></script>
+<script src="js/chosen.jquery.min.js"></script>
+<script src="js/bootstrap.datepicker.js"></script>
+<script src="js/bootstrap.timepicker.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<script src="js/ui.spinner.js"></script>
+<script src="js/plupload/plupload.full.js"></script>
+<script src="js/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script src="js/jquery.tagsinput.min.js"></script>
+<script src="js/jquery.cleditor.min.js"></script>
+<script src="js/jquery.inputmask.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/bootstrap.datepicker.js"></script>
+   <script>
+$(document).ready(function(){
+	//alert('fnslfc');
+	$('.collapsed-nav').css('display','none');
+	var url = window.location.pathname; 
+	var activePage = url.substring(url.lastIndexOf('/')+1);
+	$('.mainNav li a').each(function(){  
+		var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
+		if (activePage == currentPage) {
+			$('.mainNav li').removeClass('active');
+			$('li').find('span').removeClass('label-white');
+			$('li').find('i').removeClass('icon-white');
+			$(this).parent().addClass('active'); 
+			$(this).parent().find('span').addClass('label-white');
+			$(this).parent().find('i').addClass('icon-white');
+				$(this).parent().parent().css('display','block');
+				if($(this).parent().parent().css('display','block'))
+				{
+					$(this).parent().parent().prev().parent().addClass('active');
+					$(this).parent().parent().prev().find('span img').attr('src', 'img/toggle_minus.png');
+					$(this).parent().parent().prev().find('span').addClass('label-white');
+					$(this).parent().parent().prev().find('i').addClass('icon-white');
+				}
+			} 
+		});
+	});
+ </script>
+</body>
+</html>

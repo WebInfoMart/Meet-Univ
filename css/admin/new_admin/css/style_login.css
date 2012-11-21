@@ -1,0 +1,82 @@
+.content{
+	background:#fff;
+	padding: 20px;
+}
+
+#wrap{
+	width: 285px;
+	margin: 55px auto;
+}
+
+.login_wrap{
+	background: #fff;
+	padding:20px 30px;
+}
+
+.head{
+	padding:11px 8px 9px 10px;
+	border-right:1px solid #4d99e5;
+	border-left:1px solid #4d99e5; 
+	font-weight:bold;
+	text-shadow: 0px 1px 1px #000;
+	filter: dropshadow(color=#000000, offx=1, offy=1);
+	color:#fff;
+	background: url('../img/nav_active.png') repeat-x;
+	-webkit-border-radius: 5px 5px 0 0;
+        -moz-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
+    border-bottom:1px solid #333;
+}
+
+.head i {
+	margin-right:5px;
+	margin-top:1px;
+}
+
+.bottom{
+	border-top:1px solid #666;
+	background: url('../img/nav_big.png') repeat;
+	border-right:1px solid #fff;
+	border-left:1px solid #fff; 
+	padding:5px 4px;
+	-webkit-border-radius: 0 0 5px 5px;
+        -moz-border-radius: 0 0 5px 5px;
+            border-radius: 0 0 5px 5px;
+}
+
+.bottom .btn{
+	margin:4px;
+}
+
+.bottom .lost-pw{
+	margin:10px 0 8px 10px;
+}
+
+.email, .pw{
+	width:184px;
+}
+
+.container h1{
+	text-align:center;
+	color:#ddd;
+	padding-top:150px;
+}
+
+p{
+	font-size:16px;
+	text-align: center;
+	padding-top:200px;
+	color:#ddd;
+}
+
+.big{
+	text-align: center;
+	font-size:360px;
+	color:#ddd;
+	padding-top:180px;
+}
+
+body{
+	background:#111 !important;
+}
+
