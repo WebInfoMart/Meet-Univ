@@ -388,8 +388,9 @@ class Leadmodel extends CI_Model
 		$this->db->join('state','state.state_id = events.event_state_id');
 		$this->db->join('country','country.country_id = events.event_country_id');
 		$this->db->join('university','university.univ_id = events.event_univ_id');
-		$this->db->where('event_date_time',date('24 nov 2012'));
-		
+		$this->db->where('event_date_time','24 nov 2012');
+		$this->db->where('events.event_country_id',14);
+		$this->db->order_by('id', 'RANDOM');
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{
@@ -400,6 +401,7 @@ class Leadmodel extends CI_Model
 	function event_date()
 	{
 		$date=$this->input->post('date');
+		$city=$this->input->post('city');
 		$this->db->select('events.*,city.cityname,state.statename,country.country_name,university.univ_id,university.univ_name,university.univ_logo_path');
 		$this->db->from('events');
 		$this->db->join('city','city.city_id = events.event_city_id');
@@ -407,7 +409,10 @@ class Leadmodel extends CI_Model
 		$this->db->join('country','country.country_id = events.event_country_id');
 		$this->db->join('university','university.univ_id = events.event_univ_id');
 		$this->db->where('event_date_time',$date);
-		$this->db->where('event_country_id	',14);
+		$this->db->where('event_country_id',14);
+		$this->db->where('event_city_id',$city);
+		
+		
 		
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
@@ -639,6 +644,26 @@ class Leadmodel extends CI_Model
 		{
 		return 0;
 		}	
+		}
+		function campaign_visits()
+		{
+			$campaign_type=$this->uri->segment(2);
+			$campaign_id=$this->uri->segment(3);
+			$referral='self';
+			if ($this->agent->is_referral())
+			{
+				$referral=$this->agent->referrer();
+			}
+			$user_ip=$this->input->ip_address();
+			$info=array(
+			'user_ip'=>$user_ip,
+			'reff_url'=>$referral,
+			'campaign_id'=>$campaign_id,
+			'campaign_type'=>$campaign_type
+			);
+			$this->db->insert('campaign',$info);
+			return $this->db->insert_id();			
+			
 		}
 		
 

@@ -127,7 +127,7 @@ class Dashboard extends CI_Model
 	}
 	function latest_users()
 	{
-		$query=$this->db->query("select * from users where user_type!='offline' && level='1' order by createdon limit 0,15");	
+		$query=$this->db->query("select * from users where user_type!='offline' && level='1' order by createdon desc limit 0,15");	
 		return $query->result_array($query);
 	}
 	function ten_question()
@@ -151,7 +151,7 @@ class Dashboard extends CI_Model
 		$this->db->from('event_register');		
 		$this->db->join('events','events.event_id=event_register.register_event_id','left');
 		$this->db->join('university','university.univ_id=event_register.register_event_univ_id','left');
-		$this->db->limit(15);
+		$this->db->order_by('event_registered_time','desc');				$this->db->limit(15);
 		$res=$this->db->get();
 		if($res->num_rows()>0)
 		return $res->result_array();

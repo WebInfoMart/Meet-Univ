@@ -21,6 +21,7 @@ class Auth extends CI_Controller
 		$this->load->library('email');
 		$this->ci =& get_instance();
 		$this->load->library('fbConn/facebook');
+		date_default_timezone_set('GMT');
 	}
 
 	function index()
@@ -1357,7 +1358,27 @@ class Auth extends CI_Controller
 	function advt_events()
 	{
 		$data = $this->path->all_path();
-		$this->frontmodel->get_user_detail();
+		if($this->uri->segment(3)!=0)
+		{
+			$data['user_info']=$this->leadmodel->campaign_visits();
+		}
+		$data['events_for_calendar'] = $this->frontmodel->fetch_events_date();
+		$data['datewise_event'] = $this->leadmodel->event_datewise();
+		$this->load->view('auth/header',$data);
+		$this->load->view('auth/add_events',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	function test()
+	{ 
+		$data = $this->path->all_path();
+		if($this->uri->segment(3)!=0)
+		{
+			$data['user_info']=$this->leadmodel->campaign_visits();
+		}
+		if($this->uri->segment(2)=='nc')
+		{
+			echo $this->uri->segment(2);exit;
+		}
 		$data['events_for_calendar'] = $this->frontmodel->fetch_events_date();
 		$data['datewise_event'] = $this->leadmodel->event_datewise();
 		$this->load->view('auth/header',$data);
@@ -1375,11 +1396,123 @@ class Auth extends CI_Controller
 	{
 				
 		$register = $this->frontmodel->advt_event_register();
+		$fullname=$this->input->post('event_fullname');
+		$reff_by=$this->input->post('event_email');
+		$phone = $this->input->post('event_phone');
+		$uri=$this->input->post('uri_seg');
+		if($uri=='nc')
+		{		
+			$this->db->select('*');
+			$this->db->from('users');
+			$this->db->where('email',$reff_by);
+			$get_result = $this->db->get();
+			$event_detail_users = $get_result->row_array();
+			if($get_result->num_rows() <1)			
+			{
+				$password=rand(14543423,64543423);
+				$hashed_password=$this->tank_auth->genrate_hash_passsword($password);
+				$site_user_data = array(
+				'fullname'	=> $fullname,				
+				'level'     => '1',
+				'password'	=> $hashed_password,
+				'email'		=> $reff_by,				
+				'user_type' => 'site_user'
+				);
+				$site_user_data['new_email_key'] = md5(rand().microtime());				
+	
+				if($this->db->insert('users',$site_user_data))
+				{
+					$current_user_table_insert_id = $this->db->insert_id();
+					$user_profile_clause = array(
+					'user_id'=>$current_user_table_insert_id,
+					'mob_no'=>$phone,
+					'full_name'=>$fullname,
+					'email_as_lead'=>$reff_by
+					);					
+					$this->db->insert('user_profiles',$user_profile_clause);
+			
+				}
+					$data_email = $this->path->all_path();
+					$data_email['password']=$password;
+					$data_email['fullname']=$fullname;
+					$new_email_key=$this->users->get_new_email_key_by_userid($current_user_table_insert_id);
+					$data_email['new_email_key']=$new_email_key['new_email_key'];
+					$data_email['user_id']=$current_user_table_insert_id;
+					$email_body = $this->load->view('auth/new_signup_email',$data_email,TRUE);
+						//echo $email_body;exit;
+					$this->load->library('email');
+					$config['protocol'] = $this->config->item('mail_protocol');
+					$config['smtp_host'] = $this->config->item('smtp_server');
+					$config['smtp_user'] = $this->config->item('smtp_user_name');
+					$config['smtp_pass'] = $this->config->item('smtp_pass');
+					$config['mailtype'] = 'html';
+					$this->email->initialize($config);
+					//$this->email->set_newline("\r\n");
+					$this->email->from('info@meetuniversities.com', 'Meet Universities');
+					$this->email->to($reff_by);
+					$this->email->subject('Welcome to Global University Events Listing | MeetUniversities.com');
+					$message = $email_body ;
+					$this->email->message($message);
+					$this->email->send();
+					
+			}
+			
+		}
+		
 		if($register)
 			{
-			 $this->load->view(auth/success_suggestfrnds);
+				//$fullname=str_replace(' ','_',$fullname);
+				redirect('thankyou/'.$fullname.'/'.$reff_by);
 			}
 		
+		
+	}
+	function thankupage($name='',$email)
+	{
+		
+		$data = $this->path->all_path();
+		$data['fullname']=$name;
+		$data['email']=$email;
+		$this->load->view('auth/header',$data);
+		$this->load->view('auth/success_suggestfrnds',$data);
+		$this->load->view('auth/footer',$data);
+	}
+	function send_invites()
+	{	
+		
+	$config['protocol'] = $this->config->item('mail_protocol');
+	 $config['smtp_host'] = $this->config->item('smtp_server');
+	 $config['smtp_user'] = $this->config->item('smtp_user_name');
+	 $config['smtp_pass'] = $this->config->item('smtp_pass');
+	 $this->email->initialize($config);
+	if(!empty($_POST['checkbox'])) 
+	{
+		$chk_arr=$_POST['checkbox'];
+		foreach($chk_arr as $check) {
+			$reff_by=$_POST['email'];
+			$fullname=str_replace('%20',' ',$_POST['fullname']);			
+			$to = $check;
+			$subject = $fullname." sent you a message.";
+			$message = "<html><body><img style='float:left;' src='http://meetuniversities.com/images/logo.png' /><div style='float:right;'>Universities | Events | Scholarship</div><div style='clear:both'></div><br/> Hi,<br/>How are you?<br/><br/> I thought you'd like www.meetuniversities.com; it has the largest listing of university events & plenty of free information with regard to study options abroad .<br/><br/> MeetUniversities has an awesome interface to explore, get in touch and connect with universities directly.<br/><br/> Hurry up! Grab a free ebook for studying abroad by simply joining them. <br/><br/> Come join. I have also joined. <br/><br/> Thanks</body></html>";
+			$from = "info@meetuniversities.com";	
+			$this->email->from('info@meetuniversities.com',$fullname);
+			$this->email->to($to);
+			$this->email->subject($subject);
+			$this->email->message($message);
+			$this->email->send();
+			$this->frontmodel->referral_email($reff_by,$to);			
+			
+		}
+		redirect('success');
+			
+	}
+	}
+	function success()
+	{
+		$data = $this->path->all_path();		
+		$this->load->view('auth/header',$data);
+		$this->load->view('auth/success',$data);
+		$this->load->view('auth/footer',$data);
 	}
 	
 	function all_events_search()

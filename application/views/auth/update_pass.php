@@ -62,7 +62,7 @@
 							</div>
 						</div>
 							<div class="span3">
-									<img src="images/banner_img.png">
+									<a target="_blank" href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 							</div>
 					</div>
 					<div class="clearfix"></div>

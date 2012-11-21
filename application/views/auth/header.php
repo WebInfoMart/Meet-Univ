@@ -137,7 +137,7 @@ if(empty($description_content)) { $description_content="Attend Events, Study Abr
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="author" content="WebInfoMart.com">
 	<meta charset="utf-8">
-	<meta property="fb:app_id" content="332345880170760" /> 
+	<meta property="fb:app_id" content="415316545179174" /> 
 	<meta property="og:type"   content="meetuniversities:event" /> 
 	<meta property="og:url"    content="<?php echo $curURL; ?>" /> 
 	<meta property="og:title"  content="<?php echo $header_title; ?>" /> 
@@ -207,13 +207,13 @@ $('.menu a').each(function(){
 });
 </script>
 </head>
-<body>
+<body onload="onLoad()">
 <div id="fb-root"></div>
 <script>
 /* <![CDATA[ */
 window.fbAsyncInit = function() {
 FB.init({
-appId      : '332345880170760', // App ID
+appId      : '415316545179174', // App ID
 status     : true, // check login status
 cookie     : true, // enable cookies to allow the server to access the session
 xfbml      : true,  // parse XFBML
@@ -224,7 +224,7 @@ oauth      : true
 (function(d){
 var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
 js = d.createElement('script'); js.id = id; js.async = true;
-js.src = "//connect.facebook.net/en_US/all.js#appId=332345880170760&amp;xfbml=1";
+js.src = "//connect.facebook.net/en_US/all.js#appId=415316545179174&amp;xfbml=1";
 d.getElementsByTagName('head')[0].appendChild(js);
 }(document));
 /* ]]> */
@@ -261,10 +261,10 @@ d.getElementsByTagName('head')[0].appendChild(js);
 				<div class="margin">
 					<div class="row"><!--LOGO-->
 						<div class="span5 margin_zeros">
-						<a href="<?php echo $base; ?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" alt="Meet Universities" title="Meet Universities"/></a>
+						<a href="<?php echo $base;?>">	<img src="<?php echo "$base$img_path" ?>/logo.png" alt="Meet Universities" title="Meet Universities"/></a>
 						</div>
 						<div class="span7 float_r">					
-						<a  href="<?php echo $base; ?>register/british_council"><img src="<?php echo "$base$img_path" ?>/banner.png" alt="Meet Universities" title="Meet Universities"/></a>
+						<a  href="<?php echo $base;?>british_council_fair/hm/1"><img src="<?php echo "$base$img_path" ?>/banner.png" alt="British Council Fair" title="British Council Fair"/></a>
 						</div>
 						<!--<div class="span7 ">
 						<form method="get" action="http://www.google.com/search"> 

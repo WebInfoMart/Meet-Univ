@@ -74,7 +74,7 @@ array_push($array_dates,$var);
 												echo '<h5>'.$event_detail['event_title'].'</h5>';
 												?>
 											</div>
-											<div class="float_r">
+											<div class="float_r">																						<a onclick="popup('<?php echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>		
 												<!--<a onclick="popup('<?php// echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php// echo $base; ?>images/call.png" title="Reminder Call" alt="Reminder Call"></a>
 													<a onclick="voicepopup('<?php //echo $event_detail['event_id']; ?>');" style="cursor:pointer;"><img src="<?php// echo$base; ?>images/sms.png" title="Send SMS" alt="Send SMS"></a>
 												<a href="<?php //echo $event_link; ?>"><img src="<?php //echo $base; ?>images/map.png" title="Map" alt="Map"></a>-->

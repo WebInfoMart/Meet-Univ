@@ -1,3 +1,3 @@
-<?php
-echo $event_comments_count;
+<?php
+echo $event_comments_count;
 ?>

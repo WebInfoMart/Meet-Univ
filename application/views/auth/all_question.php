@@ -110,13 +110,13 @@ if ($user) {
 						<?php 
 						if($get_all_question!=0)
 						{ 
-						echo $get_all_question['no_of_que'];
+						//echo $get_all_question['no_of_que'];												
 						}
 						else
 						{ 
-						echo "0"; 
+						//echo "0"; 												
 						} ?> 
-						Questions asked on MeetUniversities</h3>
+						100 Questions asked on MeetUniversities</h3>
 					</div>
 						<ul class="course_list">
 							<?php
@@ -142,8 +142,8 @@ if ($user) {
 				else
 				{
 					//$univ_title = str_replace(' ','_',$quest_list['title']);
-					//$question_title = str_replace(' ','-',$quest_list['q_title']);
-					$question_title =$this->subdomain->process_url_title($quest_list['q_title']);	
+					$question=str_replace(' ','-',$quest_list['q_title']);					$question=str_replace('[','',$question);					$question=str_replace(']','',$question);					$question=str_replace('(','',$question);					$question=str_replace(')','',$question);					$question=str_replace('{','',$question);					$question=str_replace('}','',$question);
+					$question_title =$this->subdomain->process_url_title($question);	
 					$url = "MeetQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
 					$url = $base.'otherQuestion'.'/'.$quest_list['que_id'].'/'.$question_title;
 				}

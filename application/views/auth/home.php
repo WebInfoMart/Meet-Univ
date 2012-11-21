@@ -604,14 +604,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				}
 				else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
 				{
-					$question_title=$quest_list['q_title'];
-					$question_title=str_replace(' ','-',$question_title);
-					$question_title=str_replace('[','',$question_title);
-					$question_title=str_replace(']','',$question_title);
-					$question_title=str_replace('(','-',$question_title);
-					$question_title=str_replace(')','-',$question_title);
-					$question_title=str_replace('{','-',$question_title);
-					$question_title=str_replace('}','-',$question_title);
+					$question_title=str_replace(' ','-',$quest_list['q_title']);										$question_title=str_replace('[','',$question_title);										$question_title=str_replace(']','',$question_title);										$question_title=str_replace('(','-',$question_title);										$question_title=str_replace(')','-',$question_title);										$question_title=str_replace('{','-',$question_title);										$question_title=str_replace('}','-',$question_title);										$question_title = str_replace(' ','-',$question_title);
 					$question_title=$this->subdomain->process_url_title($question_title);
 					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$question_title;
 				}

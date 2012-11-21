@@ -289,7 +289,7 @@ if ($user) {
 								{
 									$univ_domain=$quest_list['subdomain_name'];
 									$quest_title=$quest_list['q_title'];
-									$quest_title = str_replace(' ','-',$quest_list['q_title']);
+									$quest_title = str_replace(' ','-',$quest_list['q_title']);									$quest_title = str_replace('[','',$quest_title);									$quest_title = str_replace(']','',$quest_title);									$quest_title = str_replace('{','',$quest_title);									$quest_title = str_replace('}','',$quest_title);									$quest_title = str_replace('(','',$quest_title);									$quest_title = str_replace(')','',$quest_title);									$quest_title = str_replace('?','',$quest_title);
 									$quest_title=$this->subdomain->process_url_title($quest_title);
 									$que_link=$this->subdomain->genereate_the_subdomain_link($univ_domain,'question',$quest_title,$quest_list['que_id']);
 									$url = $que_link;
@@ -300,7 +300,7 @@ if ($user) {
 								}
 								else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
 								{
-									$quest_title = str_replace(' ','-',$quest_list['q_title']);
+									$quest_title = str_replace(' ','',$quest_list['q_title']);									$quest_title = str_replace('[','',$quest_title);									$quest_title = str_replace(']','',$quest_title);									$quest_title = str_replace('(','',$quest_title);									$quest_title = str_replace(')','',$quest_title);									$quest_title = str_replace('{','',$quest_title);									$quest_title = str_replace('}','',$quest_title);									$quest_title = str_replace('?','',$quest_title);
 									$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$quest_title;
 								}
 								$q_date = explode(" ",$quest_list['q_asked_time']);

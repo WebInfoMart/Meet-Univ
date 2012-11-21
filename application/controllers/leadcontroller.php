@@ -274,16 +274,14 @@ class Leadcontroller extends CI_Controller
 		$this->load->view('auth/header',$data);
 		$data['get_info_logged_user'] = '';
 		$data['eve_reg_suc'] = '';
-		if ($this->tank_auth->is_logged_in()) 
-		{
+		if ($this->tank_auth->is_logged_in()) {
 			$logged_user_id = $this->session->userdata('user_id');
 			$data['get_info_logged_user'] = $this->users->fetch_profile($logged_user_id);
-		}
-		else
-		{
+			}
+			else{
 			$data['get_info_logged_user'] = '';
 			$logged_user_id='';
-		}
+			}
 		$univ_id = $this->input->post('event_register_of_univ_id');
 		$event_id = $this->input->post('event_register_id');
 		if($univ_id!='' && $event_id!='')
@@ -309,7 +307,8 @@ class Leadcontroller extends CI_Controller
 			
 			if($this->form_validation->run())
 			{
-				
+				/* $university_id = $this->session->userdata('register_event_university_id');
+				$event_id = $this->session->userdata('register_event_id'); */
 				$user_email = $this->input->post('event_email');
 				$id_university = $this->session->userdata('register_event_university_id');
 				$id_event = $this->session->userdata('register_event_id');
@@ -535,7 +534,7 @@ class Leadcontroller extends CI_Controller
 		}
 		redirect($current_url);
 		//echo $send_suc;
-	}
+	}		/*Added by Anusha*/	function send_mail_gmail_contacts($subject='', $to){				$this->load->library('parser');		$config['protocol'] = $this->config->item('mail_protocol');		$config['smtp_host'] = $this->config->item('smtp_server');		$config['smtp_user'] = $this->config->item('smtp_user_name');		$config['smtp_pass'] = $this->config->item('smtp_pass');		$config['mailtype'] = 'html';		$this->email->initialize($config);    		$this->email->from('info@meetuniversities.com', 'Meet Universities');		$this->email->to($check);		$this->email->subject($subject.' sent you a message.');		$message = "<html><body><img style='float:left;' src='http://meetuniversities.com/images/logo.png' /><div style='float:right;'>Universities | Events | Scholarship</div><div style='clear:both'></div><br/> Hi,<br/>How are you?<br/><br/> I thought you'd like www.meetuniversities.com; it has the largest listing of university events & plenty of free information with regard to study options abroad .<br/><br/> MeetUniversities has an awesome interface to explore, get in touch and connect with universities directly.<br/><br/> Hurry up! Grab a free ebook for studying abroad by simply joining them. <br/><br/> Come join. I have also joined. <br/><br/> Thanks</body></html>" ;		$this->email->message($message);		$this->email->send(); 		redirect('thankyou.php');		return true;	}
 }
 
 

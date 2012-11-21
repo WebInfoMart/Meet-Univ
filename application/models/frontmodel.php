@@ -7,7 +7,8 @@ class Frontmodel extends CI_Model
 	{
 		$this->load->library('pagination');
 		$this->load->database();
-		date_default_timezone_set('Asia/Kolkata');
+		//date_default_timezone_set('Asia/Kolkata');
+		$this->load->library('user_agent');
 	}
 	function fetch_events_for_calendar()
 	{
@@ -30,7 +31,7 @@ class Frontmodel extends CI_Model
 	function fetch_events_date()
 	{
 		
-		$sql = "SELECT *,city.cityname,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events left join city on city.city_id=events.event_city_id where STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."' and  ban_event!='1' group by dt order by dt asc";
+		$sql = "SELECT *,city.cityname,STR_TO_DATE( `events`.`event_date_time`,  '%d %M %Y' )  as dt FROM events left join city on city.city_id=events.event_city_id where STR_TO_DATE(event_date_time, '%d %M %Y')>='".date('Y-m-d')."' and  ban_event!='1' and event_country_id=14 and event_city_id=67 group by dt,city.cityname order by dt asc";
 		
 		$results=$this->db->query($sql);
 		if($results->num_rows()>0)
@@ -43,11 +44,7 @@ class Frontmodel extends CI_Model
 		}
 		
 	}
-	function get_user_detail()
-	{
-		$this->uri->segment(2);
-		
-	}
+	
 	function advt_event_register()
 	{
 	$ids=$this->input->post('checked');
@@ -75,14 +72,30 @@ class Frontmodel extends CI_Model
 			//print_r($insert);exit;
 			
 			$this->db->insert('event_register',$insert);
-			return 1;
-			
-			
 			
 		}
+		
+		$current_user_id=$this->input->post('current_user_id');
+		$data = array(
+               'success' =>'1'
+            );
+		$this->db->where('cmp_user_id',$current_user_id);
+		
+		$this->db->update('campaign', $data); 
+		
+		if($this->db->affected_rows()>0)
+		{
+			return 1;
+		}
 	
-	
-	
+	}
+	function referral_email($from,$to)
+	{
+		$insert=array(
+		'ref_by'=>$from,
+		'ref_email'=>$to		
+		);
+		$this->db->insert('bc_referral',$insert);
 	}
 	
 	function fetch_featured_events()

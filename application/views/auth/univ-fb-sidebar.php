@@ -16,7 +16,7 @@ if($error_email != '') { $class_email = 'university_side_bar'; } else { $class_e
 
 if($error_mobile != '') { $class_mobile = 'university_side_bar'; } else { $class_mobile=''; }
 ?>
-<div class="span4 float_r">
+<div class="span4 float_r margin_t">
 	<div class="college_form">
 							<div>
 							<h2 class="text_align">I AM INTERESTED</h2>

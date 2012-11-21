@@ -184,7 +184,7 @@ $('#myModal2').modal('toggle');});
 							</div>
 						</div>
 						<div class="span3 float_l">
-							<img src="http://workforcetrack.in/images/banner_img.png">
+							<a target="_blank" href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
 						</div>
 						<div class="clearfix"></div>
 					</div>

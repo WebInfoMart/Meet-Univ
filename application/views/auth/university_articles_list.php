@@ -1,124 +1,124 @@
-<div class="row" style="margin-top: -10px;">
-	<div class="span16 margin_l">
-				<div class="float_l span13 margin_zero">
-					<div class="span9 margin_zero">
-					<div>
-				
-					<ul class="event_new">
-				<?php foreach($articles_list_detail as $articles_detail){ 
-				$article_title =$this->subdomain->process_url_title($articles_detail['article_title']);	
-				$articles_link=$this->subdomain->genereate_the_subdomain_link($articles_detail['subdomain_name'],'articles',$article_title,$articles_detail['article_id']);
-				?>
-						<li>
-							<div class="float_l span5 margin_zero">
-								<div class="margin_zero grid_3 fix_h3">
-									<h3><a href="<?php echo $articles_link; ?>"><?php echo $articles_detail['article_title']; ?></a></h3>
-								</div>
-							</div>
-								<div class="float_r span4 margin_zero">
-									<!--<div class="social_set float_r">
-										<div id="gp" class="float_l">
-											<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
-										</div>
-										<div id="tw" class="float_l tw">
-											<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>
-										</div>
-										<div id="fb" class="float_r fb"><div  class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
-										<div class="clearfix"></div>
-									</div>-->
-								</div>
-								<div class="clearfix"></div>
-									<div class="margin_t1 img_height">
-										<div class="float_l img_style img_r aspectcorrect" >
-											<?php
-									$image_exist=0;	
-									$article_img = $articles_detail['article_image_path'];	
-									$univ_image =$articles_detail['univ_logo_path'];
-									if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
-									{
-									$image_exist=1;
-								    list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
-									}
-									else if( file_exists(getcwd().'/images/default_logo.png'))
-									{
-									$image_exist =2;
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'/images/default_logo.png');
-									}
-									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_image) && $univ_image!='')
-									{
-									$image_exist=3;
-									list($width, $height, $type, $attr) = getimagesize(getcwd().'uploads/univ_gallery'.$univ_image);
-								    }
-									if($article_img !='' && $image_exist==1)
-									{
-									$image=$base.'uploads/news_article_images/'.$article_img;
-									}
-									else if($image_exist==2)
-									{
-									$image=$base.'images/default_logo.png';
-									}
-									else if($image_exist==3)
-									{
-									$image=$base.$img_path.'uploads/univ_gallery'.$univ_image;
-									} 
-									$img_arr=$this->searchmodel->set_the_image($width,$height,105,71,TRUE);
-							?>
-
-											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" >
-										</div>
-										<div><img src="<?php echo "$base$img_path"; ?>/clock.png" class="line_img inline"><span class="blue line_time inline"><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
-										</span></div>
-									<span class="wrap"><?php echo substr($articles_detail['article_detail'],0,420).'..';
-									if((strlen($articles_detail['article_detail'])>420))
-								{?>
-								<a href="<?php echo $articles_link; ?>" style="font-size:13px;font-weight:bold">view more</a>
-								<?php
-								}
-								?>
-									</span>	
-								
-							</div>
-						</li>
-					<?php } ?>
-					</ul>
-					<div id="pagination" class="table_pagination right paging-margin">
-            <?php echo $this->pagination->create_links();?>
-            </div>
-				</div>
-				</div>
-				<div class="float_l span4">			
-					<div class="back_up">
-						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" class="pop_img"><span class="pop_data">Popular Articles</span></h3>
-						<ul class="up_event">
-							<?php if(!empty($popular_articles)){
-								foreach($popular_articles as $popular_article_detail)
-								{
-								
-								$article_title_list =$this->subdomain->process_url_title($popular_article_detail['article_title']);	
-								$article_link=$this->subdomain->genereate_the_subdomain_link(
-								$popular_article_detail['subdomain_name'],'articles',$article_title_list,$popular_article_detail['article_id']);
-								?>
-									<li><a href="<?php echo $article_link; ?>"><?php echo $popular_article_detail['article_title'];?></a></li>
-								<?php } } ?>
-						</ul>
-					</div>
-				</div>
-			</div>
-				<div class="float_r span3">
-					<a href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
-				</div>
-			</div>
-				<div class="clearfix"></div>
-			</div>
-	</div>
-</div>
-	
-					
-					
-					
-					
-					
-					
-					
-					
+<div class="row" style="margin-top: -10px;">
+	<div class="span16 margin_l">
+				<div class="float_l span13 margin_zero">
+					<div class="span9 margin_zero">
+					<div>
+				
+					<ul class="event_new">
+				<?php foreach($articles_list_detail as $articles_detail){ 
+				$article_title =$this->subdomain->process_url_title($articles_detail['article_title']);	
+				$articles_link=$this->subdomain->genereate_the_subdomain_link($articles_detail['subdomain_name'],'articles',$article_title,$articles_detail['article_id']);
+				?>
+						<li>
+							<div class="float_l span5 margin_zero">
+								<div class="margin_zero grid_3 fix_h3">
+									<h3><a href="<?php echo $articles_link; ?>"><?php echo $articles_detail['article_title']; ?></a></h3>
+								</div>
+							</div>
+								<div class="float_r span4 margin_zero">
+									<!--<div class="social_set float_r">
+										<div id="gp" class="float_l">
+											<g:plusone size='medium' id='shareLink' annotation='none' href='<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>' callback='countGoogleShares' data-count="true"></g:plusone>
+										</div>
+										<div id="tw" class="float_l tw">
+											<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-via="munjal_sumit" data-lang="en">Tweet</a>
+										</div>
+										<div id="fb" class="float_r fb"><div  class="fb-like" data-href="<?php echo $base;?>univ-<?php echo $articles_detail['univ_id']; ?>-article-<?php echo $articles_detail['article_id']; ?>" data-send="false" data-layout="button_count" data-width="20" data-show-faces="true" data-font="arial"></div></div>
+										<div class="clearfix"></div>
+									</div>-->
+								</div>
+								<div class="clearfix"></div>
+									<div class="margin_t1 img_height">
+										<div class="float_l img_style img_r aspectcorrect" >
+											<?php
+									$image_exist=0;	
+									$article_img = $articles_detail['article_image_path'];	
+									$univ_image =$articles_detail['univ_logo_path'];
+									if(file_exists(getcwd().'/uploads/news_article_images/'.$article_img) && $article_img!='')	
+									{
+									$image_exist=1;
+								    list($width, $height, $type, $attr) = getimagesize(getcwd().'/uploads/news_article_images/'.$article_img);
+									}
+									else if( file_exists(getcwd().'/images/default_logo.png'))
+									{
+									$image_exist =2;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'/images/default_logo.png');
+									}
+									else if(file_exists(getcwd().'/uploads/univ_gallery/'.$univ_image) && $univ_image!='')
+									{
+									$image_exist=3;
+									list($width, $height, $type, $attr) = getimagesize(getcwd().'uploads/univ_gallery'.$univ_image);
+								    }
+									if($article_img !='' && $image_exist==1)
+									{
+									$image=$base.'uploads/news_article_images/'.$article_img;
+									}
+									else if($image_exist==2)
+									{
+									$image=$base.'images/default_logo.png';
+									}
+									else if($image_exist==3)
+									{
+									$image=$base.$img_path.'uploads/univ_gallery'.$univ_image;
+									} 
+									$img_arr=$this->searchmodel->set_the_image($width,$height,105,71,TRUE);
+							?>
+
+											<img style="left:<?php echo $img_arr['targetleft']; ?>px;top:<?php echo $img_arr['targettop']; ?>px;width:<?php echo $img_arr['width']; ?>px;height:<?php echo $img_arr['height']; ?>px;" src="<?php echo $image; ?>" >
+										</div>
+										<div><img src="<?php echo "$base$img_path"; ?>/clock.png" class="line_img inline"><span class="blue line_time inline"><abbr class="timeago time_ago" title="<?php echo $articles_detail['publish_time']; ?>"></abbr>
+										</span></div>
+									<span class="wrap"><?php echo substr($articles_detail['article_detail'],0,420).'..';
+									if((strlen($articles_detail['article_detail'])>420))
+								{?>
+								<a href="<?php echo $articles_link; ?>" style="font-size:13px;font-weight:bold">view more</a>
+								<?php
+								}
+								?>
+									</span>	
+								
+							</div>
+						</li>
+					<?php } ?>
+					</ul>
+					<div id="pagination" class="table_pagination right paging-margin">
+            <?php echo $this->pagination->create_links();?>
+            </div>
+				</div>
+				</div>
+				<div class="float_l span4">			
+					<div class="back_up">
+						<h3><img src="<?php echo base_url(); ?>images/home_cal.gif" class="pop_img"><span class="pop_data">Popular Articles</span></h3>
+						<ul class="up_event">
+							<?php if(!empty($popular_articles)){
+								foreach($popular_articles as $popular_article_detail)
+								{
+								
+								$article_title_list =$this->subdomain->process_url_title($popular_article_detail['article_title']);	
+								$article_link=$this->subdomain->genereate_the_subdomain_link(
+								$popular_article_detail['subdomain_name'],'articles',$article_title_list,$popular_article_detail['article_id']);
+								?>
+									<li><a href="<?php echo $article_link; ?>"><?php echo $popular_article_detail['article_title'];?></a></li>
+								<?php } } ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+				<div class="float_r span3">
+					<a href="http://university-of-greenwich.meetuniversities.com/university_events"><img src="<?php echo "$base$img_path" ?>/banner_img.png"></a>
+				</div>
+			</div>
+				<div class="clearfix"></div>
+			</div>
+	</div>
+</div>
+	
+					
+					
+					
+					
+					
+					
+					
+					
 					
