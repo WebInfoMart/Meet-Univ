@@ -80,7 +80,19 @@
 			<div class="body">
 		<div class="row">
 			<div class="float_l span13 margin_l margin_t1">
+			
 				<div style="text-align:center"><br /><img src="http://meetuniversities.com/images/thank.png" /></div><br />
+				<div class="modal" id="show_success" style="display:none;" >
+
+			  <div  class="modal-header">
+			   <a  class="close" data-dismiss="modal">x</a>
+
+				<h3>You are one step away from connecting with your dream university. Please check your email and activate your account.</h3>
+
+				<a href="<?php $base;?>auth/activation_mail_resend/<?php echo $this->session->flashdata('userid');?>">Send Email again if not received!!</a>
+
+			  </div>
+			</div>
 				<!-- Offer Conversion: Meet Universities -->
 <img src="http://kalpit.go2cloud.org/aff_l?offer_id=116&adv_sub=<?php echo $this->uri->segment(4); ?>" width="1px" height="1px" />
 <!-- // End Offer Conversion -->
@@ -156,7 +168,25 @@
         });
       }
 </script>
+<script>
 
+<?php if($this->session->flashdata('success')) { ?>
+
+$(document).ready(function(){
+
+$('#show_success').css('display','block');
+
+//$("#show_success").delay(7000).fadeOut(200);
+
+});
+
+<?php } ?>
+
+	
+
+
+
+</script>
 </div>
 
 

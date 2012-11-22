@@ -70,14 +70,14 @@ class Frontmodel extends CI_Model
 			$insert['register_event_univ_id']=$result[0]['event_univ_id'];
 			$insert['register_event_id']=$id;			
 			$this->db->insert('event_register',$insert);
-			//for lead table
+			//for lead table			
 			$value_for_lead_table = array(			
 			'fullname'=>$event_fullname,
 			'email'=>$event_email,
 			'phone_no1'=>$event_phone,
 			'applied_univ_id'=>$result[0]['event_univ_id'],
 			'applied_event_id'=>$id,
-			'lead_source'=>'nc',
+			'lead_source'=>$this->input->post('uri_seg'),
 			'lead_created_time'=>date('Y-n-d H:i:s')
 			);
 			$this->db->insert('lead_data',$value_for_lead_table);

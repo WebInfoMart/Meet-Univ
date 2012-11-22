@@ -1383,7 +1383,7 @@ class Auth extends CI_Controller
 		$reff_by=$this->input->post('event_email');
 		$phone = $this->input->post('event_phone');
 		$uri=$this->input->post('uri_seg');
-		if($uri=='nc')
+		if($uri=='nc' || $uri=='as')
 		{		
 			$this->db->select('*');
 			$this->db->from('users');
@@ -1404,7 +1404,7 @@ class Auth extends CI_Controller
 				$site_user_data['new_email_key'] = md5(rand().microtime());				
 	
 				if($this->db->insert('users',$site_user_data))
-				{
+				{	$this->session->set_flashdata('success',1);	
 					$current_user_table_insert_id = $this->db->insert_id();
 					$user_profile_clause = array(
 					'user_id'=>$current_user_table_insert_id,
@@ -1441,6 +1441,7 @@ class Auth extends CI_Controller
 			}
 			
 		}
+		
 		
 		if($register)
 			{

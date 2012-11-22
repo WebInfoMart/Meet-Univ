@@ -36,7 +36,7 @@
 		<div class="registerd_event_admin" style="width:50%;float:left">
 			<h3>Latest Users</h3>
 		
-				<?php //print_r($latest_users); 
+				<?php //print_r($latest_users);exit;; 
 				if($latest_users!=0){ ?>
 				<table cellpadding="0" cellspacing="0" width="50%" class="sortable">
 			
