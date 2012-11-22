@@ -28,6 +28,7 @@ class Engagement extends CI_Controller
 		}
 		$this->load->view('univadmin/header',$data);
 		$this->load->view('univadmin/sidebar',$data);
+		
 		if($data['admin_user_level']==3 || $data['admin_user_level']==5)
 		{
 		 $univ=$this->engagement_panel->fetch_univ_detail($data['user_id']);
