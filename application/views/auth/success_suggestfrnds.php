@@ -1,3 +1,4 @@
+<?php //echo $this->uri->segment(4);exit; ?>
 <style>
 #contacts .contact_list{float:right;width:300px;}
 </style>
@@ -80,6 +81,15 @@
 		<div class="row">
 			<div class="float_l span13 margin_l margin_t1">
 				<div style="text-align:center"><br /><img src="http://meetuniversities.com/images/thank.png" /></div><br />
+				<!-- Offer Conversion: Meet Universities -->
+<img src="http://kalpit.go2cloud.org/aff_l?offer_id=116&adv_sub=<?php echo $this->uri->segment(4); ?>" width="1px" height="1px" />
+<!-- // End Offer Conversion -->
+				<div style='margin: 0px 20px 30px 75px;'>
+				
+					<a href="https://www.facebook.com/MeetUniversities/app_190322544333196" target="_blank">
+						<img src="http://meetuniversities.com/images/likeusnow.png">
+					</a>
+				</div>
 				<div style="text-align:center;font-size:18px;line-height:30px">Who doesn't need publicity, don't you think we are doing a decent job ?<br />
 				Keeping all this information free for You "THE STUDENT".</div>
 				<br />
@@ -123,11 +133,7 @@
 				</div>
 				
 				<div style="content: '.';display: none;clear: both;margin: 25px 45px 10px 65px;" id="contacts"></div>
-				<div style='margin: 0px 20px 30px 75px;'>
-					<a href="https://www.facebook.com/MeetUniversities/app_190322544333196" target="_blank">
-						<img src="http://meetuniversities.com/images/likeusnow.png">
-					</a>
-				</div>
+				
 				<div><img src="http://meetuniversities.com/images/thanx-page-for-code.png" style="text-align:center" /></div>
 				
 			</div>

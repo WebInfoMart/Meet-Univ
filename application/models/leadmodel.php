@@ -659,7 +659,8 @@ class Leadmodel extends CI_Model
 			'user_ip'=>$user_ip,
 			'reff_url'=>$referral,
 			'campaign_id'=>$campaign_id,
-			'campaign_type'=>$campaign_type
+			'campaign_type'=>$campaign_type,
+			'visited_time'=>date('Y-n-d H:i:s')
 			);
 			$this->db->insert('campaign',$info);
 			return $this->db->insert_id();			

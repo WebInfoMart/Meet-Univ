@@ -21,7 +21,7 @@ class Auth extends CI_Controller
 		$this->load->library('email');
 		$this->ci =& get_instance();
 		$this->load->library('fbConn/facebook');
-		date_default_timezone_set('GMT');
+		
 	}
 
 	function index()
@@ -1368,23 +1368,6 @@ class Auth extends CI_Controller
 		$this->load->view('auth/add_events',$data);
 		$this->load->view('auth/footer',$data);
 	}
-	function test()
-	{ 
-		$data = $this->path->all_path();
-		if($this->uri->segment(3)!=0)
-		{
-			$data['user_info']=$this->leadmodel->campaign_visits();
-		}
-		if($this->uri->segment(2)=='nc')
-		{
-			echo $this->uri->segment(2);exit;
-		}
-		$data['events_for_calendar'] = $this->frontmodel->fetch_events_date();
-		$data['datewise_event'] = $this->leadmodel->event_datewise();
-		$this->load->view('auth/header',$data);
-		$this->load->view('auth/add_events',$data);
-		$this->load->view('auth/footer',$data);
-	}
 	function date_event()
 	{
 		$data = $this->path->all_path();		
@@ -1462,12 +1445,12 @@ class Auth extends CI_Controller
 		if($register)
 			{
 				//$fullname=str_replace(' ','_',$fullname);
-				redirect('thankyou/'.$fullname.'/'.$reff_by);
+				redirect('thankyou/'.$fullname.'/'.$reff_by.'/'.$phone);
 			}
 		
 		
 	}
-	function thankupage($name='',$email)
+	function thankupage($name='',$email,$phone)
 	{
 		
 		$data = $this->path->all_path();
