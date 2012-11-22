@@ -27,52 +27,54 @@ class Admin extends CI_Controller
  function index($msg='')
  { 
   $data = $this->path->all_path();
-  if (!$this->tank_auth->is_admin_logged_in()) {
-   
-   redirect('admin/adminlogin/');
-  } else {
+  if (!$this->tank_auth->is_admin_logged_in()) 
+  {   
+	redirect('admin/adminlogin/');
+  } 
+  else 
+  {
    $flag=0;
    $data['username'] = $this->tank_auth->get_username();
-   $data['user_id'] = $this->tank_auth->get_admin_user_id();
+   $data['user_id'] = $this->tank_auth->get_admin_user_id();  
    $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
    if($data['admin_user_level']=='3')
    {
-   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
-   $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
-   if($data['univ_detail_edit']==0)
-   {
-   $flag=1;
-   $data['msg']='No University Assigned Yet';
-   $this->load->view('admin/userupdated',$data);
+		$this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
+		$data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
+		if($data['univ_detail_edit']==0)
+		{
+			$flag=1;
+			$data['msg']='No University Assigned Yet';
+			$this->load->view('admin/userupdated',$data);
+		}
+		else
+		{
+			$data['university_id']=$data['univ_detail_edit'][0]->univ_id;
+			//$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
+			//$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
+			// $data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
+			//$data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
+			$data['recent_leads']=$this->admindash->recent_leads($data['university_id']);//new
+			$data['recent_questions']=$this->admindash->fetch_recent_five_question();//new
+			$data['unasnwered']=$this->admindash->unasnwered();//new
+			$data['recent_followers_of_univ']=$this->admindash->recent_followers_of_univ($data['university_id']); //new
+			$data['recent_articles']=$this->admindash->recent_articles($data['university_id']);//new	
+		}
    }
-   else
+   if($data['admin_user_level']=='5' || $data['admin_user_level']=='4' || $data['admin_user_level']=='6')
    {
+	   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
+	   for($i = 1; $i <=31; $i++) 
+	   {    
+	   $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
+	   $data['no_of_registerd_user'][$i]=$this->dashboard->count_lead_data_by_date($lead_created_time);
+		
+	   }    
+	   $data['latest_users']=$this->dashboard->latest_event_users();
+	   $data['ten_question']=$this->dashboard->ten_question();
  
- $data['university_id']=$data['univ_detail_edit'][0]->univ_id;
- //$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
- //$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
-// $data['no_of_upcoming_event_requests']=$this->dashboard->find_no_of_register_of_just_upcoming_event($data['university_id']);
- //$data['upcoming_event_registerd_user']=$this->dashboard->upcoming_event_registerd_user_detail($data['university_id']);
-  $data['recent_leads']=$this->admindash->recent_leads($data['university_id']);//new
- $data['recent_questions']=$this->admindash->fetch_recent_five_question();//new
- $data['unasnwered']=$this->admindash->unasnwered();//new
- $data['recent_followers_of_univ']=$this->admindash->recent_followers_of_univ($data['university_id']); //new
-$data['recent_articles']=$this->admindash->recent_articles($data['university_id']);//new	
    }
-   }
-   if($data['admin_user_level']=='5')
-   {
-   $this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
-   for($i = 1; $i <=31; $i++) 
-   {    
-   $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
-   $data['no_of_registerd_user'][$i]=$this->dashboard->count_lead_data_by_date($lead_created_time);
-    
-   }    
-   $data['latest_users']=$this->dashboard->latest_event_users();
-   $data['ten_question']=$this->dashboard->ten_question();
  
-   }
    $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
    if((!($data['admin_priv'])) && ($data['admin_user_level']!=6 && $data['admin_user_level']!=2))
    {
@@ -80,32 +82,37 @@ $data['recent_articles']=$this->admindash->recent_articles($data['university_id'
    }
    //fetch user privilege data from model   
   
-   if($data['admin_user_level']!='5')
+   if($data['admin_user_level']=='3')
    {
-	if($flag==0)
-	   {
-	   $this->load->view('univadmin/header', $data);
-	   $this->load->view('univadmin/sidebar', $data); 
-	   }
-	$data['events_for_calendar'] = $this->event_model->fetch_events_for_calendar();		//added by satbir on 11/17/2012
-	$this->load->view('univadmin/admin_dash', $data);
+		if($flag==0)
+		   {
+		    $this->load->view('univadmin/header', $data);		  
+			$this->load->view('univadmin/sidebar', $data); 		   
+		   }
+		$data['events_for_calendar'] = $this->event_model->fetch_events_for_calendar();		//added by satbir on 11/17/2012
+		if($data['user_id']==300)
+		{
+			redirect('newadmin/engagement');
+		}
+		else
+		{
+			$this->load->view('univadmin/admin_dash', $data);
+		}
    }
-    if($data['admin_user_level']=='5')
+    if($data['admin_user_level']=='5' || $data['admin_user_level']=='4' || $data['admin_user_level']=='6')
    {
    
-  // $ga = new GoogleAnalytics();
-   $this->googleanalytics->setProfile('ga:60386809');
-   $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
-   $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
-    if($flag==0)
-	   {
-	   $this->load->view('admin/header', $data);
-	   $this->load->view('admin/sidebar', $data); 
-	   }  
-   $this->load->view('admin/adminhome', $data);
+	  // $ga = new GoogleAnalytics();
+	   $this->googleanalytics->setProfile('ga:60386809');
+	   $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
+	   $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
+		if($flag==0)
+		   {
+		   $this->load->view('admin/header', $data);
+		   $this->load->view('admin/sidebar', $data); 
+		   }  
+	   $this->load->view('admin/adminhome', $data);
    }
-   
-     
   }
  }
   
