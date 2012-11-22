@@ -567,7 +567,6 @@ class adminarticles extends CI_Controller
 			}
 	  }
 	}
-	
 	//new
 	function approve_disapprove_article($approve_status='',$article_id)
 	{

@@ -264,7 +264,7 @@ if(!empty($article_info))
 								</div>
 								<div class="form-actions">
 								<button type="submit" class='btn btn-primary'>Add Article</button>
-								<a href="#" class='btn btn-danger'>Cancel</a>
+								<a href="<?php echo $base; ?>newadmin/adminarticles/manage_articles" class='btn btn-danger'>Cancel</a>
 								</div>
 							</fieldset>
 						</form>

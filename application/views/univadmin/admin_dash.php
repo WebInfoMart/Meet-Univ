@@ -1,94 +1,31 @@
 <?php 
 $flag=1;
-  if($admin_user_level=='3')
-  {
-  if($univ_detail_edit==0)
-  {
-  $flag=0;
-  }
-  }
+if($admin_user_level=='3')
+{
+	if($univ_detail_edit==0)
+	{
+		$flag=0;
+	}
+}
 if($flag) { ?> 
   <div class="content">
     <div class="container-fluid"> 
-      <div class="responsible_navi">
-        <div class="currentPage">
-          <i class="icon-home icon-white"></i> Dashboard
-          <div class="sorting">
-            <img src="img/sort_both.png" alt="">
-          </div>
-        </div>
-        <ul class='respNav'>
-          <li>
-            <a href="dash.html">
-              <i class="icon-home"></i>
-              Dashboard
-              <span class="label label-important">16</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class='toggle-subnav'>
-              <i class="icon-book"></i>
-               Data Management Setting
-              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
-            </a>
-            <ul class="collapsed-nav closed">
-              <li>
-			<a href="articles.html">Articles</a>
-		  </li>
-          <li><a href="news.html">News</a></li>
-          <li><a href="events.html">Events</a></li>
-		   <li><a href="question.html">Q & A Section</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#" class='toggle-subnav'>
-              <i class="icon-tasks"></i>
-             General Setting
-              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
-            </a>
-            <ul class="collapsed-nav closed">
-               <li><a href="uni_gallery.html">University Gallery</a></li>
-          <li><a href="pages.html">Pages</a></li>
-          <li><a href="univ_courses.html">University Courses</a></li>
-          <li><a href="update_university.html">Update University</a></li>
-            </ul>
-          </li>
-		  <li>
-            <a href="#" class='toggle-subnav'>
-              <i class="icon-tasks"></i>
-             Enagage
-              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
-            </a>
-            <ul class="collapsed-nav closed">
-              <li><a href="buttons.html">Promotional Panel</a></li>
-          <li><a href="email_pack.html">Email Plans</a></li>
-          <li><a href="engage.html">Engagement Panel</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="stats.html">
-              <i class="icon-signal"></i>
-              Statistics
-            </a>
-          </li>
-        </ul>
-      </div>	
-<div class="row-fluid">
-  <div class="span12">
-   <div class="page-header clearfix tabs">
-    <h2>Insight <small>Site Statistics</small></h2>
-  </div>
-  <div class="content-box">
-    <div class="tab-content">
-    
-	   <div class="tab-pane active" id="big">
-        <div class="flot"></div>
-      </div>
-	 
-    </div>
-  </div>
-</div>
-</div>
+      <div class="responsible_navi"></div>	
+		<div class="row-fluid">
+		  <div class="span12">
+		   <div class="page-header clearfix tabs">
+			<h2>Insight <small>Site Statistics</small></h2>
+		  </div>
+		  <div class="content-box">
+			<div class="tab-content">
+			
+			   <div class="tab-pane active" id="big">
+				<div class="flot"></div>
+			  </div>			 
+			</div>
+		  </div>
+		</div>
+		</div>
       <div class="row-fluid">
         <div class="span6 no-margin">
           <div class="page-header">
@@ -382,33 +319,6 @@ if($flag) { ?>
 <!-- END Content -->
 <?php } ?>
 <script>
-$(document).ready(function(){
-	//alert('fnslfc');
-	$('.collapsed-nav').css('display','none');
-	var url = window.location.pathname; 
-	var activePage = url.substring(url.lastIndexOf('/')+1);
-	$('.mainNav li a').each(function(){  
-		var currentPage = this.href.substring(this.href.lastIndexOf('/')+1);
-		if (activePage == currentPage) {
-			$('.mainNav li').removeClass('active');
-			$('li').find('span').removeClass('label-white');
-			$('li').find('i').removeClass('icon-white');
-			$(this).parent().addClass('active'); 
-			$(this).parent().find('span').addClass('label-white');
-			$(this).parent().find('i').addClass('icon-white');
-				$(this).parent().parent().css('display','block');
-				if($(this).parent().parent().css('display','block'))
-				{
-					$(this).parent().parent().prev().parent().addClass('active');
-					$(this).parent().parent().prev().find('span img').attr('src', 'img/toggle_minus.png');
-					$(this).parent().parent().prev().find('span').addClass('label-white');
-					$(this).parent().parent().prev().find('i').addClass('icon-white');
-				}
-			} 
-		});
-	});
- </script>
- <script>
 function add_answer(id)
 {
 	var url='<?php echo $base; ?>newadmin/admin_ques/add_ans';

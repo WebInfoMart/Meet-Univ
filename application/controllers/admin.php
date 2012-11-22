@@ -19,6 +19,7 @@ class Admin extends CI_Controller
 		$this->lang->load('tank_auth');
 		$this->load->library('googleanalytics');
 		$this->load->model('admin/admindash');
+		$this->load->model('admin/admindash_nc');			//added by satbir on 11/22/2012
 		$this->load->model('admin/event_model');			//added by satbir on 11/17/2012
 	
 		
@@ -90,8 +91,22 @@ class Admin extends CI_Controller
 			$this->load->view('univadmin/sidebar', $data); 		   
 		   }
 		$data['events_for_calendar'] = $this->event_model->fetch_events_for_calendar();		//added by satbir on 11/17/2012
-		if($data['user_id']==300)
+		if($data['user_id']==529)
 		{
+			$data['recent_leads']="";
+			$data['recent_leads']=$this->admindash_nc->recent_leads_nc();			
+			$this->load->view('univadmin/admin_dash_nc', $data);
+			//redirect('newadmin/engagement');
+		}
+		else if($data['user_id']==528)
+		{
+			$data['recent_leads']="";
+			$data['recent_leads']=$this->admindash_nc->recent_leads_as();			
+			$this->load->view('univadmin/admin_dash_nc', $data);
+			//redirect('newadmin/engagement');
+		}
+		else if($data['user_id']==530)
+		{		
 			redirect('newadmin/engagement');
 		}
 		else

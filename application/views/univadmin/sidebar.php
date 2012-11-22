@@ -43,7 +43,7 @@ $flag=1;
         </a>
       </li>	  
 	  	<?php 
-		 if($user_id!=300)
+		 if($user_id!=528 ||  $user_id!=529)
 		   {
 		if($admin_user_level=='5' || $admin_user_level=='4' || $admin_user_level=='3') {
 		$admin_add_op=array('4','6','8','10');

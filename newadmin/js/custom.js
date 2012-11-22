@@ -340,7 +340,7 @@ $(document).ready(function() {
 	if($('.pover').length > 0){
 		$(".pover").popover();
 	}
-/*
+
 	// Statistics
 	if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length > 0 || $('.flot-multi').length > 0 || $('.flot-live').length > 0){
 		$(function(e){
@@ -544,5 +544,5 @@ $(document).ready(function() {
 			}
 		});
 	});
-	}*/
+	}
 });
