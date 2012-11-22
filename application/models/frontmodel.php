@@ -54,7 +54,8 @@ class Frontmodel extends CI_Model
 	$insert=array(
 	'fullname'=>$event_fullname,
 	'email'=>$event_email,
-	'phone'=>$event_phone	
+	'phone'=>$event_phone,
+	'event_registered_time'=>date('Y-n-d H:i:s')
 	);
 	//print_r($ids);
 	//echo $event_fullname.$event_email.$event_phone;
@@ -67,11 +68,20 @@ class Frontmodel extends CI_Model
 			$query=$this->db->get();
 			$result=$query->result_array();
 			$insert['register_event_univ_id']=$result[0]['event_univ_id'];
-			$insert['register_event_id']=$id;
-			
-			//print_r($insert);exit;
-			
+			$insert['register_event_id']=$id;			
 			$this->db->insert('event_register',$insert);
+			//for lead table
+			$value_for_lead_table = array(			
+			'fullname'=>$event_fullname,
+			'email'=>$event_email,
+			'phone_no1'=>$event_phone,
+			'applied_univ_id'=>$result[0]['event_univ_id'],
+			'applied_event_id'=>$id,
+			'lead_source'=>'nc',
+			'lead_created_time'=>date('Y-n-d H:i:s')
+			);
+			$this->db->insert('lead_data',$value_for_lead_table);
+					
 			
 		}
 		
@@ -93,7 +103,8 @@ class Frontmodel extends CI_Model
 	{
 		$insert=array(
 		'ref_by'=>$from,
-		'ref_email'=>$to		
+		'ref_email'=>$to,
+		'ref_time'=>date('Y-n-d H:i:s')
 		);
 		$this->db->insert('bc_referral',$insert);
 	}

@@ -185,7 +185,7 @@
 						<td><?php if($user['phone']==""){ echo 'Not Available'; }  echo $user['phone']; ?></td>
 						<td><?php if($user['event_title']==""){ echo 'Not Available'; }  echo $user['event_title']; ?></td>
 						<td><?php if($user['univ_name']==""){ echo 'Not Available'; }  echo $user['univ_name']; ?></td>
-						<td><?php $date=strtotime($user['event_registered_time']); echo date('d/M/Y h:m',$date); ?></td>
+						<td><?php $dt=strtotime($user['event_registered_time']); echo date('d/M/Y G:i ',$dt); ?></td>
 					</tr>	
 				<?php } } ?>		
 				
