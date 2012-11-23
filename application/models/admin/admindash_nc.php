@@ -19,24 +19,26 @@ class Admindash_nc extends CI_Model
 
 	function recent_leads_nc()
 	{	
-		$this->db->select("*");
-		$this->db->from('lead_data');
-		$condition=array('lead_source'=>'nc');
+		$this->db->select('lead_data.fullname,lead_data.email,lead_data.phone_no1,lead_data.phone_verified,lead_data.lead_created_time,users.activated');
+		$this->db->from('lead_data');		
+		$condition=array('lead_data.lead_source'=>'nc');
 		$this->db->join('users','lead_data.email=users.email','left');
+		$this->db->group_by('lead_data.email');
 		$this->db->where($condition);
-		$this->db->order_by("lead_created_time", "desc");		
+		$this->db->order_by("lead_data.lead_created_time", "desc");		
 		$res=$this->db->get();		
 		return $res->result_array();		
 		 
 	}
 	function recent_leads_as()
 	{	
-		$this->db->select("*");
-		$this->db->from('lead_data');
-		$condition=array('lead_source'=>'as');	
+		$this->db->select('lead_data.fullname,lead_data.email,lead_data.phone_no1,lead_data.phone_verified,lead_data.lead_created_time,users.activated');
+		$this->db->from('lead_data');		
+		$condition=array('lead_data.lead_source'=>'as');
 		$this->db->join('users','lead_data.email=users.email','left');
+		$this->db->group_by('lead_data.email');
 		$this->db->where($condition);
-		$this->db->order_by("lead_created_time", "desc");		
+		$this->db->order_by("lead_data.lead_created_time", "desc");		
 		$res=$this->db->get();		
 		return $res->result_array();		
 		 

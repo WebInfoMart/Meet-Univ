@@ -847,6 +847,47 @@ class Admin_events extends CI_Controller
 	echo $this->input->post('show_hide');
 	
 	}
+	function recent_event()
+	{
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else {	
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+				redirect('admin/adminlogout');
+			}
+			//fetch user privilege data from model
+			if($this->input->post('ajax')!=1)
+			{
+				$this->load->view('univadmin/header', $data);
+				$this->load->view('univadmin/sidebar', $data);
+			}
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
+			{
+				if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']!=0 )
+				{
+					$flag=1;
+					break;
+				}
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
+			}
+			else
+			{
+				$data['rec_eve_reg']=$this->event_model->recent_event_registered();
+				$data['visit']=$this->event_model->count_students_visit();
+				$this->load->view('univadmin/events/recent_events', $data);
+			}
+		}	
+	}
 	
 }
 

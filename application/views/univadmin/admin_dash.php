@@ -9,12 +9,12 @@ if($admin_user_level=='3')
 }
 if($flag) { ?> 
   <div class="content">
-    <div class="container-fluid"> 
+    <div class="container-fluid">	
       <div class="responsible_navi"></div>	
 		<div class="row-fluid">
 		  <div class="span12">
 		   <div class="page-header clearfix tabs">
-			<h2>Insight <small>Site Statistics</small></h2>
+			<h2>Insight <small>Site Statistics</small></h2><a href="<?php echo $base; ?>newadmin/admin_events/recent_event"><h2 style="float:right;">Recent Events</h2></a>
 		  </div>
 		  <div class="content-box">
 			<div class="tab-content">

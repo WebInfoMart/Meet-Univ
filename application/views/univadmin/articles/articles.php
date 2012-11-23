@@ -25,7 +25,7 @@ $insert=1;
 }
 }
 }
- ?>
+?>
   <!-- BEGIN Content -->
 <div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
 	<a class="close" data-dismiss="alert" href="#">×</a>
@@ -91,7 +91,7 @@ $insert=1;
 									<i class="icon-ok"></i>
 								</a>
 								<?php } if($edit==1){ ?>
-								<a href="<?php echo "$base"; ?>newadmin/adminarticles/edit_article/<?php echo $article->article_id; ?>" class="btn btn-icon tip" data-original-title="Edit">
+								<a href="<?php echo $base; ?>newadmin/adminarticles/edit_article/<?php echo $article->article_id; ?>" class="btn btn-icon tip" data-original-title="Edit">
 									<i class="icon-pencil"></i>
 								</a>
 								<?php } if($delete==1)   {?>
@@ -108,9 +108,24 @@ $insert=1;
 								<a href="#myModal_<?php echo $article->article_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
-								<?php }	if(($edit==1 || $delete==1 || $insert==1)){  ?>
-								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $article->featured_home_article; ?>','<?php echo $article->article_id; ?>');"  class="btn btn-icon tip" <?php if($article->article_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?> >
-									<i class="<?php if($article->article_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
+								<?php }	if(($edit==1 || $delete==1 || $insert==1)){  ?>								
+								<div class="modal hide" id="myAppDisModal_<?php echo $article->article_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($article->article_approve_status == 1){ ?>
+											<h3>Do you want to dispprove ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to approve ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="#" onclick="approve_home_confirm('<?php echo $base;?>newadmin/adminarticles','<?php  echo $article->article_approve_status; ?>','<?php echo $article->article_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="#" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>
+								<a href="#myAppDisModal_<?php echo $article->article_id; ?>" class="btn btn-icon tip" <?php if($article->article_approve_status){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon_<?php echo $article->article_id; ?>" class="<?php if($article->article_approve_status == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
 								<?php 
 								$article_title=$this->subdomain->process_url_title(substr($article->article_title,0,50));
@@ -126,7 +141,7 @@ $insert=1;
 							</div>
 						</td>
                      </tr>
-					 <?php }  ?>
+					 <?php } ?>
                    
                     
                    
@@ -147,10 +162,11 @@ $insert=1;
                 <table class="table table-striped dataTable" id="media1">
                   <thead>
                     <tr>
-                      <th width="10%"><input type="checkbox" class='sel_rows' data-targettable="media1"></th>
-                      <th width="25%">Article Title</th>
-                      <th width="25%">University Name</th>
-                      <th width="20%">Status</th>
+                      <th width="5%">
+					  <input type="checkbox" class='sel_rows' data-targettable="media1"></th>
+                      <th width="20%">Article Title</th>
+                      <th width="20%">University Name</th>
+                      <th width="15%">Status</th>
 					  <th width="20%">Featured/UnFeatured</th>
 					   <th width="20%">Choose Option</th>
                     </tr>
@@ -171,7 +187,7 @@ $insert=1;
 									<i class="icon-ok"></i>
 								</a>
 								<?php } if($edit==1){ ?>
-								<a href="<?php echo "$base"; ?>newadmin/adminarticles/edit_article/<?php echo $recent->article_id; ?>" class="btn btn-icon tip" data-original-title="Edit">
+								<a href="<?php echo $base; ?>newadmin/adminarticles/edit_article/<?php echo $recent->article_id; ?>" class="btn btn-icon tip" data-original-title="Edit">
 									<i class="icon-pencil"></i>
 								</a>
 								<?php } if($delete==1)   {?>
@@ -190,8 +206,24 @@ $insert=1;
 								</a>
 								<?php }
 								if(($edit==1 || $delete==1 || $insert==1)){  ?>
-								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $recent->featured_home_article; ?>','<?php echo $recent->article_id; ?>');"  class="btn btn-icon tip" <?php if($recent->article_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?> >
-									<i class="<?php if($article->article_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
+								
+								<div class="modal hide" id="myAppDisModal1_<?php echo $recent->article_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($recent->article_approve_status == 1){ ?>
+											<h3>Do you want to dispprove ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to approve ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="#" onclick="approve_home_confirm('<?php echo $base;?>newadmin/adminarticles','<?php  echo $recent->article_approve_status; ?>','<?php echo $recent->article_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="#" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>
+								<a href="#myAppDisModal1_<?php echo $recent->article_id; ?>" class="btn btn-icon tip" <?php if($recent->article_approve_status){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon_<?php echo $recent->article_id; ?>" class="<?php if($recent->article_approve_status == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
 								<?php 
 								$article_title=$this->subdomain->process_url_title(substr($recent->article_title,0,50));
@@ -331,19 +363,7 @@ function delete_confirm(id)
 
 function approve_home_confirm(a,b,c)
 {
-	if(b=='0')
-	{
-	status='approve';
-	}
-	if(b=='1')
-	{
-	status='disapprove';
-	}
-	var r=confirm("Are you sure you want to " +status+ " to this article?");
-	if (r==true)
-	{
-	  window.location.href=a+'/approve_disapprove_article/'+b+'/'+c;
-	}
+	 window.location.href=a+'/approve_disapprove_article/'+b+'/'+c;
 }
 function featured_home_confirm(a,b,c)
 {

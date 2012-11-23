@@ -318,7 +318,26 @@ class Event_model extends CI_Model
 		else{
 			return 0;
 		}		
-	}	
+	}
+	function count_students_visit()									//added by satbir on 11/23/2012
+	{
+		$this->db->select('campaign_type, COUNT(campaign_type) as total');	
+		$this->db->from('campaign');
+		$this->db->group_by('campaign_type'); 
+		$query=$this->db->get();		
+		return $query->result_array();
+	}
+	function recent_event_registered()
+	{
+		$this->db->select('event_register.fullname,event_register.email,event_register.phone,users.activated,lead_data.phone_verified');
+		$this->db->from('event_register');
+		$this->db->join('lead_data','event_register.email=lead_data.email','left');
+		$this->db->join('users','event_register.email=users.email','left');		
+		$this->db->group_by('event_register.email');
+		$this->db->order_by('event_registered_time','desc');
+		$query=$this->db->get();		
+		return $query->result_array();		
+	}
 	
 }
 /* End of file users.php */
