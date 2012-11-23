@@ -32,7 +32,7 @@ $flag=1;
 			</li>
 			<?php
 			}
-			if($admin_user_level=='6' || $admin_user_level=='5' || $admin_user_level=='4') 
+			if($admin_user_level=='6' || $admin_user_level=='4') 
 			{ ?>
 			<li>
 			<a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/leads.jpg" alt="" /> Manage Leads</a>

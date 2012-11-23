@@ -34,8 +34,6 @@ foreach ($admin_priv as $admin_priv_res){
 		}
 	}
 }
-if(!empty($events_info))
-{
 ?>
 <!-- BEGIN Content -->
   <div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
@@ -206,10 +204,6 @@ if(!empty($events_info))
                      </tr> 
 					<?php 
 						} 
-					}
-					else { 
-						echo "<tr><td>".'No Result Found'."</td></tr>";
-					} 
 					?>					 
                   </tbody>
                 </table>

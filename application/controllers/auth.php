@@ -1404,7 +1404,7 @@ class Auth extends CI_Controller
 				$site_user_data['new_email_key'] = md5(rand().microtime());				
 	
 				if($this->db->insert('users',$site_user_data))
-				{	$this->session->set_flashdata('success',1);	
+				{		
 					$current_user_table_insert_id = $this->db->insert_id();
 					$user_profile_clause = array(
 					'user_id'=>$current_user_table_insert_id,
@@ -1413,6 +1413,7 @@ class Auth extends CI_Controller
 					'email_as_lead'=>$reff_by
 					);					
 					$this->db->insert('user_profiles',$user_profile_clause);
+					$this->session->set_flashdata('success',1);
 			
 				}
 					$data_email = $this->path->all_path();
@@ -1422,7 +1423,7 @@ class Auth extends CI_Controller
 					$data_email['new_email_key']=$new_email_key['new_email_key'];
 					$data_email['user_id']=$current_user_table_insert_id;
 					$email_body = $this->load->view('auth/new_signup_email',$data_email,TRUE);
-						//echo $email_body;exit;
+					echo $email_body;exit;
 					$this->load->library('email');
 					$config['protocol'] = $this->config->item('mail_protocol');
 					$config['smtp_host'] = $this->config->item('smtp_server');

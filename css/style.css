@@ -390,7 +390,7 @@ border-color: rgba(255, 0, 0, .8) !important;
 -webkit-box-shadow: 0 0 5px#888;box-shadow: 0 0 5px #888;}
 .left_about{padding-right: 10px;border-right: 1px dotted #ddd;-moz-border-right: 1px dotted #ddd;-webkit-border-right: 1px dotted #AAA;float: left;height: 188px;}
 .about_fix{text-align: justify;padding: 0px 10px;
-font-size: 12px;
+font-size: 12px; 
 line-height: 22px;height:177px;overflow:hidden;}
 .insight_data{list-style:none;}
 .about_depend{min-height: 150px;overflow: hidden;}
@@ -418,3 +418,25 @@ margin-bottom:9px;
 	color:red !important;
 	border-color:red !important;
 }
+/*british council page*/
+.event_bc_cal {
+border: 1px solid;
+cursor: pointer;
+width: 100px;
+height: 90px;
+background-color: #C8DCE4;
+padding: 5px;
+margin: 5px;
+}
+.event_bc_cal h3{line-height: 28px;
+font-size: 24px;
+text-align: right;
+color: #5E7533;}
+
+.event_bc_cal span{font-size: 18px;
+color: #B33200;
+line-height: 35px;}
+.img_bc_univ{border: solid 1px #eaeaea
+margin:2px;
+margin-right:5px}
+.list_bc_univ{-webkit-box-shadow:  1px 1px 5px 2px #cccccc;box-shadow:  1px 1px 5px 2px #cccccc;border:solid 1px #ccc;width:300px;margin:10px;padding:8px;}

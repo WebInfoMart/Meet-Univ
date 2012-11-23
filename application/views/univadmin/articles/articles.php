@@ -25,9 +25,7 @@ $insert=1;
 }
 }
 }
-
-if(!empty($article_info))
-{  ?>
+ ?>
   <!-- BEGIN Content -->
 <div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
 	<a class="close" data-dismiss="alert" href="#">×</a>
@@ -128,7 +126,7 @@ if(!empty($article_info))
 							</div>
 						</td>
                      </tr>
-					 <?php }}  ?>
+					 <?php }  ?>
                    
                     
                    
