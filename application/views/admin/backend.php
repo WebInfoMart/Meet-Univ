@@ -14,7 +14,7 @@
 <?php
 $class_login='';
 $class_pass='';
-$error_login = form_error('login');
+$error_login = strip_tags(form_error('login'));
 $error_password = form_error('password');
 
 if($error_login != '') { $class_login = 'error'; } else { $class_login='email'; }

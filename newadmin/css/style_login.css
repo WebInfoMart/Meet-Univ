@@ -55,6 +55,11 @@
 .email, .pw{
 	width:184px;
 }
+.error
+{
+border-color: red !important;
+width:184px;
+}
 
 .container h1{
 	text-align:center;
@@ -63,10 +68,10 @@
 }
 
 p{
-	font-size:16px;
+	font-size:14px;
 	text-align: center;
-	padding-top:200px;
-	color:#ddd;
+	padding-top:7px;
+	color:#FA1515;
 }
 
 .big{

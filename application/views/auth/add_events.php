@@ -7,61 +7,102 @@ $host=$_SERVER['HTTP_HOST'];
 		<div class="body_header"></div>
 		<div class="body">
 		<div class="row margin_t1">
-		<a href="<?php echo $base;?>british_council_fair/hm/2"><img src="<?php echo $base;?>images/banner.jpg" style="float:right;" /></a>
+		
 			<div class="float_l span10 margin_l">				
-				<div class="span13 margin_zero float_l">
-					<h3>British Council Events</h3>
-					<div class="margin_t1">			
-						<img id="ajax_loader" src="<?php echo $base;?>images/ajax_loader.gif" style="display:none;width:30px;height:30px;"/>			
-					<?php foreach($events_for_calendar as $events) {
-					?>
-						
-							<div id="date_<?php echo $events['event_id']; ?>" onclick="eventDetail('<?php echo $events['event_date_time'];?>','<?php echo $events['event_city_id']; ?>')" class="float_l event_bc_cal" >
-								<h3><?php echo $events['event_date_time']; ?></h3>
-								<?php if($events['event_date_time_end']!='') { echo " - ".$events['event_date_time_end'];} ?>
-								<span><?php echo $events['cityname']; ?></span>
-							</div>
-					
-					<?php } ?>					
-					</div>
-				</div>
+				
 					<div class="span9 margin_zero float_l">
-					<br />
-					<h3>Register to get : </h3>
-					<h3 style="color:#F36E21;">University Information <span style="color:black;">| </span>Free expert advice <span style="color:black;">|</span> MeetUps</h3>
-					<br />
 					<form class="form-horizontal form_step_box" onsubmit="return validate(this);" action="<?php echo $base; ?>auth/advt_event_register" method="post" id="frm_Event_Register">
-					<div class="clearfix"></div>
-					<div class="margin_t1">
+						<!--
+						<a href="<?php echo $base;?>british_council_fair/hm/2"><img src="<?php echo $base;?>images/banner.jpg" style="float:right;" /></a>
+						<div class="span13 margin_zero float_l">
+						<h3>British Council Events</h3>
+						<div class="margin_t1">			
+							<img id="ajax_loader" src="<?php echo $base;?>images/ajax_loader.gif" style="display:none;width:30px;height:30px;"/>			
+						<?php foreach($events_for_calendar as $events) {
+						?>
+							
+								<div id="date_<?php echo $events['event_id']; ?>" onclick="eventDetail('<?php echo $events['event_date_time'];?>','<?php echo $events['event_city_id']; ?>')" class="float_l event_bc_cal" >
+									<h3><?php echo $events['event_date_time']; ?></h3>
+									<?php if($events['event_date_time_end']!='') { echo " - ".$events['event_date_time_end'];} ?>
+									<span><?php echo $events['cityname']; ?></span>
+								</div>
+						
+						<?php } ?>					
+						</div>
+						</div>
+						<br />
+						<h3>Register to get : </h3>
+						<h3 style="color:#F36E21;">University Information <span style="color:black;">| </span>Free expert advice <span style="color:black;">|</span> MeetUps</h3>
+						<br /> -->
+					<div style="width:1000px;">
+						<div style="width:300px;float:left;margin:11px;">
+								<a href="<?php echo $base;?>british_council_fair/hm/2">
+								<img src="<?php echo $base;?>images/banner.jpg"  /></a>
+						</div>	
+						<div style="width:300px;float:left;margin:5px;">
+							<div class="span13 margin_zero float_l">
+							<h3>British Council Events</h3>
+							<div class="margin_t1">			
+								<img id="ajax_loader" src="<?php echo $base;?>images/ajax_loader.gif" style="display:none;width:30px;height:30px;"/>			
+							<?php foreach($events_for_calendar as $events) {
+							?>
+								
+									<div id="date_<?php echo $events['event_id']; ?>" onclick="eventDetail('<?php echo $events['event_date_time'];?>','<?php echo $events['event_city_id']; ?>')" class="float_l event_bc_cal" >
+										<h3><?php echo $events['event_date_time']; ?></h3>
+										<?php if($events['event_date_time_end']!='') { echo " - ".$events['event_date_time_end'];} ?>
+										<span><?php echo $events['cityname']; ?></span>
+									</div>
+							
+							<?php } ?>					
+							</div>
+							</div>
+						
+						</div>	
+					<div style="width: 300px;float: right;margin: 5px;border: 1px solid;border-color: #CCC;padding: 10px;background: #F1F1F1;">
+						<h3>Register to get : </h3>
+						<h3 style="color:#F36E21;">University Information <span style="color:black;">| </span>Free expert advice <span style="color:black;">|</span> MeetUps</h3>
+						</br>
+						<div class="margin_t1">
 						
 							
-							<div style="float:left;margin-right:5px;">
+							<div>
 								<label class="control-label" for="focusedInput">Full Name</label>
-								<div>
-								<input type="text" class="input-xlarge focused span2" name="event_fullname" id="event_fullname" value=""/>	
-								<input	type="hidden" name="current_user_id" value="<?php echo $user_info; ?>" />				
+								<div style="margin-top:10px;">
+									<input style="width:150px;" type="text" class="input-xlarge focused span2" name="event_fullname" id="event_fullname" value=""/>	
+									<input	type="hidden" name="current_user_id" value="<?php echo $user_info; ?>" />				
 								</div>
 							</div>
-							<div style="float:left;margin-right:5px;">
+							<div>
 								<label class="control-label" for="focusedInput">Email</label>
-								<div>
-								<input type="text" name="event_email" id="event_email" class="input-xlarge focused span2" value=""/>
-								<input type="hidden" name="uri_seg" value="<?php echo $this->uri->segment(2); ?>"/>
+								<div style="margin-top:10px;">
+									<input style="width:150px;" type="text" name="event_email" id="event_email" class="input-xlarge focused span2" value=""/>
+									<input type="hidden" name="uri_seg" value="<?php echo $this->uri->segment(2); ?>"/>
 								</div>
 							</div>
-							<div style="float:left;margin-right:5px;">
+							<div>
 								<label class="control-label" for="focusedInput">Phone</label>
-								<div >
-								<input type="text" maxlength="10" class="input-xlarge focused span2" name="event_phone" id="event_phone" value=""/>
+								<div style="margin-top:10px;">
+								<input style="width:150px;" type="text" maxlength="10" class="input-xlarge focused span2" name="event_phone" id="event_phone" value=""/>
 								</div>
 							</div>
-						
+							<div>
+								<label class="control-label" for="focusedInput"></label>
+								<div style="margin-top:10px;">
+									<input type='checkbox' onclick='select_all()' id='select_it'>&nbsp;&nbsp;<b>Check for all events</b>
+								</div>
+							</div>
+							
 							<div>
 							<input style="margin-top:28px;" type="submit" name="submit_event_register" value="Register me" class="btn btn-success"/>
 							<div id="notselect" style="display:none;"><h4 style="color:red;">Please select atleast one event!!</h4></div>
 								
 							</div>
 					</div>
+					</div>					
+					</div>
+					
+					<div class="clearfix"></div>
+					
 					<div id="content" class="margin_t1">			
 					<?php 	
 					if(!empty($datewise_event))
@@ -257,5 +298,16 @@ function eventDetail(date,city)
 			
 				}
 			});
+}
+function select_all()
+{
+			if($('#select_it').is(':checked'))
+			{
+				$('input:checkbox').attr('checked','checked');
+			}
+			else 
+			{
+				$('input:checkbox').removeAttr('checked');
+			}
 }
 </script>
