@@ -26,17 +26,15 @@ class Admin extends CI_Controller
 	}
 
  function index($msg='')
- { 
+ {
   $data = $this->path->all_path();
-  if (!$this->tank_auth->is_admin_logged_in()) 
-  {   
-	redirect('admin/adminlogin/');
-  } 
-  else 
-  {
+  if (!$this->tank_auth->is_admin_logged_in()) {
+   
+   redirect('admin/adminlogin/');
+  } else {
    $flag=0;
    $data['username'] = $this->tank_auth->get_username();
-   $data['user_id'] = $this->tank_auth->get_admin_user_id();  
+   $data['user_id'] = $this->tank_auth->get_admin_user_id();
    $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
    if($data['admin_user_level']=='3')
    {
@@ -50,6 +48,7 @@ class Admin extends CI_Controller
 		}
 		else
 		{
+
 			$data['university_id']=$data['univ_detail_edit'][0]->univ_id;
 			//$data['univ_follwers']=$this->users->get_followers_of_univ($data['university_id']);
 			//$data['no_of_requests']=$this->dashboard->count_lead_data_by_univ($data['university_id']);
@@ -70,12 +69,12 @@ class Admin extends CI_Controller
 	   $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
 	   $data['no_of_registerd_user'][$i]=$this->dashboard->count_lead_data_by_date($lead_created_time);
 		
-	   }    
-	   $data['latest_users']=$this->dashboard->latest_event_users();
+	   } 
+		$data['event_users']=$this->dashboard->latest_event_users();
+	   $data['latest_users']=$this->dashboard->latest_users();
 	   $data['ten_question']=$this->dashboard->ten_question();
  
    }
- 
    $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
    if((!($data['admin_priv'])) && ($data['admin_user_level']!=6 && $data['admin_user_level']!=2))
    {
@@ -85,20 +84,20 @@ class Admin extends CI_Controller
   
    if($data['admin_user_level']=='3')
    {
-		if($flag==0)
-		   {
-		    $this->load->view('univadmin/header', $data);		  
-			$this->load->view('univadmin/sidebar', $data); 		   
-		   }
-		$data['events_for_calendar'] = $this->event_model->fetch_events_for_calendar();		//added by satbir on 11/17/2012
-		if($data['user_id']==529)
+	if($flag==0)
+	   {
+	   $this->load->view('univadmin/header', $data);
+	   $this->load->view('univadmin/sidebar', $data); 
+	   }
+	//$this->load->view('univadmin/admin_dash', $data);
+		if($data['user_id']==534)
 		{
 			$data['recent_leads']="";
 			$data['recent_leads']=$this->admindash_nc->recent_leads_nc();			
 			$this->load->view('univadmin/admin_dash_nc', $data);
 			//redirect('newadmin/engagement');
 		}
-		else if($data['user_id']==528)
+		else if($data['user_id']==533)
 		{
 			$data['recent_leads']="";
 			$data['recent_leads']=$this->admindash_nc->recent_leads_as();			
@@ -117,17 +116,19 @@ class Admin extends CI_Controller
     if($data['admin_user_level']=='5' || $data['admin_user_level']=='4' || $data['admin_user_level']=='6')
    {
    
-	  // $ga = new GoogleAnalytics();
-	   $this->googleanalytics->setProfile('ga:60386809');
-	   $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
-	   $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
-		if($flag==0)
-		   {
-		   $this->load->view('admin/header', $data);
-		   $this->load->view('admin/sidebar', $data); 
-		   }  
-	   $this->load->view('admin/adminhome', $data);
+  // $ga = new GoogleAnalytics();
+   $this->googleanalytics->setProfile('ga:60386809');
+   $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
+   $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
+    if($flag==0)
+	   {
+	   $this->load->view('admin/header', $data);
+	   $this->load->view('admin/sidebar', $data); 
+	   }  
+   $this->load->view('admin/adminhome', $data);
    }
+   
+     
   }
  }
   
