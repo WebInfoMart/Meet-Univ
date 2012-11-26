@@ -44,7 +44,10 @@ $host=$_SERVER['HTTP_HOST'];
 							<h3>British Council Events</h3>
 							<div class="margin_t1">			
 								<img id="ajax_loader" src="<?php echo $base;?>images/ajax_loader.gif" style="display:none;width:30px;height:30px;"/>			
-							<?php foreach($events_for_calendar as $events) {
+							<?php 
+							if(!empty($events_for_calendar))
+							{
+							foreach($events_for_calendar as $events) {
 							?>
 								
 									<div id="date_<?php echo $events['event_id']; ?>" onclick="eventDetail('<?php echo $events['event_date_time'];?>','<?php echo $events['event_city_id']; ?>')" class="float_l event_bc_cal" >
@@ -53,7 +56,9 @@ $host=$_SERVER['HTTP_HOST'];
 										<span><?php echo $events['cityname']; ?></span>
 									</div>
 							
-							<?php } ?>					
+							<?php } }else{ 
+							echo "No Events Available";
+							} ?>					
 							</div>
 							</div>
 						
