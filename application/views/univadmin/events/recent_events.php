@@ -1,3 +1,7 @@
+<div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
+	<a class="close" data-dismiss="alert" href="#">×</a>
+	<strong>Registration deleted successfully</strong>
+</div>
 <div class="content">
     <div class="container-fluid">
      <div class="row-fluid">
@@ -97,8 +101,7 @@
 					  <tr>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Phone</th>						
-						<th>No. of Universities</th>                
+						<th>Phone</th>					               
 						<th>Status</th>                
 					  </tr>
 					</thead>
@@ -111,23 +114,9 @@
 						<tr id="tr_<?php echo $events['id']; ?>">
 							<td><?php echo $events['fullname']; ?> </td>
 							<td><?php echo $events['email']; ?></td>
-							<td><?php echo $events['phone']; ?></td>					
-							<td><?php  echo ''; ?></td> 
+							<td><?php echo $events['phone']; ?></td>							
 							<td>
-								<div class="btn-group">									
-									<div class="modal hide" id="myModal_<?php echo $events['id']; ?>">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">x</button>
-											<h3>Do you want to delete?</h3>
-										</div>
-										<?php $eve_ID = $events['id']; ?>
-										<?php $eve_Email = $events['email']; ?>
-										<div class="modal-footer">
-											<a href="#" onclick="del_reg_con('<?php echo $eve_ID; ?>','<?php echo $eve_Email; ?>')" class="btn" data-dismiss="modal">Yes</a>
-											<a href="#" class="btn" data-dismiss="modal">Close</a>
-										</div>
-									</div>									
-									<a href="#myModal_<?php echo $events['id']; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete"><i class="icon-trash"></i></a>
+									<div class="btn-group">	
 									<?php if($events['phone_verified']==1){ ?>
 										<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Phone verified"><i class="icon-ok-sign icon-blue"></i></a>
 									<?php } else {?>
@@ -137,7 +126,20 @@
 										<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Email verified"><i class="icon-envelope icon-blue"></i></a>
 									<?php } else {?>									
 										<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Email not verified"><i class="icon-envelope"></i></a>
-									<?php } ?>								
+									<?php } ?>																	
+									<div class="modal hide" id="myModal_<?php echo $events['id']; ?>">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">x</button>
+											<h3>Do you want to delete <?php echo $events['fullname']; ?>'s data?</h3>
+										</div>
+										<?php $eve_ID = $events['id']; ?>
+										<?php $eve_Email = $events['email']; ?>
+										<div class="modal-footer">
+											<a href="#" onclick="del_reg_con('<?php echo $eve_ID; ?>','<?php echo $eve_Email; ?>')" class="btn" data-dismiss="modal">Yes</a>
+											<a href="#" class="btn" data-dismiss="modal">Close</a>
+										</div>
+									</div>									
+									<a href="#myModal_<?php echo $events['id']; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete"><i class="icon-trash"></i></a>
 								</div>
 							</td>
 					   </tr> 
@@ -165,6 +167,8 @@ function del_reg_con(id,email)
 		success: function(msg)
 		{
 			$('#tr_'+id).hide('slow');
+			$('#deleted').show();
+			setTimeout(function(){$('#deleted').hide('slow');},6000);			
 		}
 	});	
 }
