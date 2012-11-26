@@ -97,8 +97,8 @@
 					  <tr>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Phone</th>						
-						<th>No. of Universities</th>                
+						<th>Phone</th>					
+						           
 						<th>Status</th>                
 					  </tr>
 					</thead>
@@ -108,15 +108,25 @@
 					{ foreach($rec_eve_reg as $events)
 						{ 
 					?>
-						<tr>
+						<tr id="tr_<?php echo $events['id']; ?>">
 							<td><?php echo $events['fullname']; ?> </td>
 							<td><?php echo $events['email']; ?></td>
-							<td><?php echo $events['phone']; ?></td>					
-							<td><?php  echo ''; ?></td> 
+							<td><?php echo $events['phone']; ?></td>
 							<td>
-								<div class="btn-group">
-									<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="View"><i class="icon-ok"></i></a>
-									<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Delete"><i class="icon-trash"></i></a>
+								<div class="btn-group">									
+									<div class="modal hide" id="myModal_<?php echo $events['id']; ?>">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">x</button>
+											<h3>Do you want to delete?</h3>
+										</div>
+										<?php $eve_ID = $events['id']; ?>
+										<?php $eve_Email = $events['email']; ?>
+										<div class="modal-footer">
+											<a href="#" onclick="del_reg_con('<?php echo $eve_ID; ?>','<?php echo $eve_Email; ?>')" class="btn" data-dismiss="modal">Yes</a>
+											<a href="#" class="btn" data-dismiss="modal">Close</a>
+										</div>
+									</div>									
+									<a href="#myModal_<?php echo $events['id']; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete"><i class="icon-trash"></i></a>
 									<?php if($events['phone_verified']==1){ ?>
 										<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Phone verified"><i class="icon-ok-sign icon-blue"></i></a>
 									<?php } else {?>
@@ -143,6 +153,20 @@
     </div><!-- close .container-fluid -->  
 </div><!-- close .content -->      
 <script>
+
+function del_reg_con(id,email)
+{
+	var data = {reg_id:id,reg_email:email}
+	$.ajax({
+		type: "POST",
+		url: "<?php echo $base; ?>newadmin/admin_events/delete_recent_events",
+		data: data,
+		success: function(msg)
+		{
+			$('#tr_'+id).hide('slow');
+		}
+	});	
+}
 // Statistics
 $(document).ready(function() {
 if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length > 0 || $('.flot-multi').length > 0 || $('.flot-live').length > 0){

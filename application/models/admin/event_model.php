@@ -329,14 +329,28 @@ class Event_model extends CI_Model
 	}
 	function recent_event_registered()
 	{
-		$this->db->select('event_register.fullname,event_register.email,event_register.phone,users.activated,lead_data.phone_verified');
+		$this->db->select('event_register.id,event_register.fullname,event_register.email,event_register.phone,users.activated,lead_data.phone_verified');
 		$this->db->from('event_register');
 		$this->db->join('lead_data','event_register.email=lead_data.email','left');
 		$this->db->join('users','event_register.email=users.email','left');		
 		$this->db->group_by('event_register.email');
 		$this->db->order_by('event_registered_time','desc');
-		$query=$this->db->get();		
+		$query=$this->db->get();
 		return $query->result_array();		
+	}
+	function delete_recent_events()
+	{
+		$email = $this->input->post('reg_email');		
+		$query1 =$this->db->delete('event_register', array('email' => $email));
+		$query2 = $this->db->delete('lead_data', array('email' => $email));
+		if($this->db->affected_rows($query1)>0 || $this->db->affected_rows($query2)>0)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 }
