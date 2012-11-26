@@ -97,8 +97,8 @@
 					  <tr>
 						<th>Name</th>
 						<th>Email</th>
-						<th>Phone</th>					
-						           
+						<th>Phone</th>						
+						<th>No. of Universities</th>                
 						<th>Status</th>                
 					  </tr>
 					</thead>
@@ -111,7 +111,8 @@
 						<tr id="tr_<?php echo $events['id']; ?>">
 							<td><?php echo $events['fullname']; ?> </td>
 							<td><?php echo $events['email']; ?></td>
-							<td><?php echo $events['phone']; ?></td>
+							<td><?php echo $events['phone']; ?></td>					
+							<td><?php  echo ''; ?></td> 
 							<td>
 								<div class="btn-group">									
 									<div class="modal hide" id="myModal_<?php echo $events['id']; ?>">
