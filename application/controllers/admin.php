@@ -84,11 +84,12 @@ class Admin extends CI_Controller
   
    if($data['admin_user_level']=='3')
    {
-		if($flag==0)
-		{
-			$this->load->view('univadmin/header', $data);
-			$this->load->view('univadmin/sidebar', $data); 
-		}	
+	if($flag==0)
+	   {
+	   $this->load->view('univadmin/header', $data);
+	   $this->load->view('univadmin/sidebar', $data); 
+	   }
+	//$this->load->view('univadmin/admin_dash', $data);
 		if($data['user_id']==534)
 		{
 			$data['recent_leads']="";
@@ -103,13 +104,12 @@ class Admin extends CI_Controller
 			$this->load->view('univadmin/admin_dash_nc', $data);
 			//redirect('newadmin/engagement');
 		}
-		else if($data['user_id']==530)
+		else if($data['user_id']==544)
 		{		
 			redirect('newadmin/engagement');
 		}
 		else
 		{
-			$data['events_for_calendar'] = $this->event_model->fetch_events_for_calendar();		//added by satbir on 11/17/2012
 			$this->load->view('univadmin/admin_dash', $data);
 		}
    }

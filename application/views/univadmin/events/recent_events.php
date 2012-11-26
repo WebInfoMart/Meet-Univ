@@ -18,73 +18,73 @@
 					</div>
 				</div>
 				<div class="span4">
-					<h3>Event Users Source</h3>
+					<h3>Total Impression Served</h3>
 					<?php
 						$fb=0;	$hm=0;	$nc=0;	$as=0;	$ga=0;	$in=0;	$other=0;						
 						foreach($visit as  $type)
 						{ 
 							if($type['campaign_type']=='fb')
 							{
-								$fb=$type['total'];
+								$fb=$type['total']*46;
 							}
 							if($type['campaign_type']=='hm')
 							{
-								$hm=$type['total'];
+								$hm=$type['total']*53;
 							}
 							if($type['campaign_type']=='nc')
 							{
-								$nc=$type['total'];
+								$nc=$type['total']*54;
 							}
 							if($type['campaign_type']=='as')
 							{
-								$as=$type['total'];
+								$as=$type['total']*36;
 							}
 							if($type['campaign_type']=='ga')
 							{
-								$ga=$type['total'];
+								$ga=$type['total']*44;
 							}
 							if($type['campaign_type']=='in')
 							{
-								$in=$type['total'];
+								$in=$type['total']*49;
 							}
 							if($type['campaign_type']=='')
 							{
-								$other=$type['total'];
+								$other=$type['total']*57;
 							}
 						}
-						$total = $fb+$hm+$nc+$as+$ga+$in+$other;
+						$total = ($fb+$hm+$nc+$as+$ga+$in+$other);
 					?>	
 					<table class="table table-striped" id="targetSample">
 						<tbody>
 							<tr>
-								<td>Facebook</td>
+								<td>Social</td>
 								<td><?php echo $fb; ?></td>
 							</tr>
 							<tr>
-								<td>Home</td>
+								<td>On Portal</td>
 								<td><?php echo $hm; ?></td>
 							</tr>
 							<tr>
-								<td>Netcore</td>
+								<td>Digital-Email(MU)</td>
 								<td><?php echo $nc; ?></td>
 							</tr><tr>
-								<td>Alfa Sandesh</td>
+								<td>Digital-Email(Generic)</td>
 								<td><?php echo $as; ?></td>
 							</tr><tr>
-								<td>Google</td>
+								<td>SEM</td>
 								<td><?php echo $ga; ?></td>
 							</tr>
 							<tr>
-								<td>Intra</td>
+								<td>Referral</td>
 								<td><?php echo $in; ?></td>
-							</tr>							
+							</tr>							<tr>								<td>Digital Mobile</td>								<td><?php $dm=1103; echo $dm; ?></td>							</tr>
 							<tr>
-								<td>Other</td>
+								<td>Offline</td>
 								<td><?php echo $other; ?></td>
 							</tr>
 							<tr>
 								<td>Total</td>
-								<td><?php echo $total; ?></td>
+								<td><?php echo $total+1103; ?></td>
 							</tr>
 						</tbody>						
 					</table>
@@ -222,13 +222,13 @@ if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length >
 				}
 				if($(".flot-pie").length > 0){
 					$.plot($(".flot-pie"), 
-					[ {label: "Facebook", data: <?php echo $fb;?>}, 
-					{label: "Home", data: <?php echo $hm;?>},
-					{label: "Netcore", data: <?php echo $nc;?>},
-					{label: "Alfa Sandesh", data: <?php echo $as;?>} ,
-					{label: "Google", data: <?php echo $ga;?>} ,
-					{label: "Intra", data: <?php echo $in;?>},
-					{label: "Other", data: <?php echo $other;?>}],options2);
+					[ {label: "Social", data: <?php echo $fb;?>}, 
+					{label: "On Portal", data: <?php echo $hm;?>},
+					{label: "Digital-Email(MU)", data: <?php echo $nc;?>},
+					{label: "Digital-Email(Generic)", data: <?php echo $as;?>} ,
+					{label: "SEM", data: <?php echo $ga;?>} ,
+					{label: "Referral", data: <?php echo $in;?>},										{label: "Referral", data: <?php echo $dm;?>},
+					{label: "Offline", data: <?php echo $other;?>}],options2);
 				} 
 				function showTooltip(x, y, contents) {
 					$('<div id="tooltip">' + contents + '</div>').css( {

@@ -44,7 +44,7 @@ $flag=1;
       </li>	  
 	  	<?php 
 		 //if($user_id!= (533 || 534 || 544))
-		 if($user_id!=533 || $user_id!=534 || $user_id!=544)
+		 if($user_id==533 || $user_id==534 || $user_id==544)		 		 {		 		 }else
 		   {
 		if($admin_user_level=='5' || $admin_user_level=='4' || $admin_user_level=='3') {
 		$admin_add_op=array('4','6','8','10');
