@@ -14,7 +14,7 @@ if($flag) { ?>
 		<div class="row-fluid">
 		  <div class="span12">
 		   <div class="page-header clearfix tabs">
-			<h2>Insight <small>Site Statistics</small></h2><?php if($admin_user_level=='3') { ?><a href="<?php echo $base; ?>newadmin/admin_events/recent_event"><h2 style="float:right;">Recent Events</h2></a><?php } ?>
+			<h2>Insight <small>Site Statistics</small></h2><?php if($admin_user_level=='3' && !($user_id =='533' || $user_id =='534' || $user_id =='544')) { ?><a href="<?php echo $base; ?>newadmin/admin_events/recent_event"><h2 style="float:right;">Recent Events</h2></a><?php } ?>
 		  </div>
 		  <div class="content-box">
 			<div class="tab-content">

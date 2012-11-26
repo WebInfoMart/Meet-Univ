@@ -336,7 +336,8 @@ class Event_model extends CI_Model
 		$this->db->group_by('event_register.email');
 		$this->db->order_by('event_registered_time','desc');
 		$query=$this->db->get();
-		return $query->result_array();		
+		return $query->result_array();
+
 	}
 	function delete_recent_events()
 	{

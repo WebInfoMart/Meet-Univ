@@ -166,9 +166,11 @@ function del_reg_con(id,email)
 		data: data,
 		success: function(msg)
 		{
-			$('#tr_'+id).hide('slow');
 			$('#deleted').show();
-			setTimeout(function(){$('#deleted').hide('slow');},6000);			
+			var new_position = $('#deleted').offset();
+			window.scrollTo(new_position.left,new_position.top);
+			$('#tr_'+id).hide('slow');			
+			setTimeout(function(){$('#deleted').hide('slow');},3000);			
 		}
 	});	
 }
