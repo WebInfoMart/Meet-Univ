@@ -329,9 +329,10 @@ class Event_model extends CI_Model
 	}
 	function recent_event_registered()
 	{
-		$this->db->select('event_register.id,event_register.fullname,event_register.email,event_register.phone,users.activated,lead_data.phone_verified');
+		$this->db->select('event_register.id,event_register.fullname,event_register.email,event_register.phone,users.activated,lead_data.phone_verified,verified_lead_data.v_verified_phone');
 		$this->db->from('event_register');
 		$this->db->join('lead_data','event_register.email=lead_data.email','left');
+		$this->db->join('verified_lead_data','event_register.email=verified_lead_data.v_email','left');
 		$this->db->join('users','event_register.email=users.email','left');		
 		$this->db->group_by('event_register.email');
 		$this->db->order_by('event_registered_time','desc');

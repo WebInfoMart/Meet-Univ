@@ -47,7 +47,8 @@ class Frontmodel extends CI_Model
 	
 	function advt_event_register()
 	{
-	$ids=$this->input->post('checked');
+	//$ids=$this->input->post('checked');
+	$id='165';
 	$event_fullname=$this->input->post('event_fullname');
 	$event_email=$this->input->post('event_email');
 	$event_phone=$this->input->post('event_phone');
@@ -60,8 +61,8 @@ class Frontmodel extends CI_Model
 	//print_r($ids);
 	//echo $event_fullname.$event_email.$event_phone;
 	
-	foreach($ids as $id)
-		{
+	//foreach($ids as $id)
+		//{
 			$this->db->select('event_univ_id');
 			$this->db->from('events');
 			$this->db->where('event_id',$id);
@@ -83,7 +84,7 @@ class Frontmodel extends CI_Model
 			$this->db->insert('lead_data',$value_for_lead_table);
 					
 			
-		}
+		//}
 		
 		$current_user_id=$this->input->post('current_user_id');
 		$data = array(

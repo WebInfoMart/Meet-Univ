@@ -40,7 +40,7 @@ if($flag) { ?>
 						 echo date('d/m/y-h:m',$d); ?></td> 
 						<td>
 							<div class="btn-group">
-								<?php if($leads['phone_verified']==1){ ?>
+								<?php if($leads['phone_verified']==1 || $leads['v_verified_phone']==1){ ?>
 									<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Phone verified"><i class="icon-ok-sign icon-blue"></i></a>
 								<?php } else {?>
 									<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Phone not verified"><i class="icon-ok-sign"></i></a>									
