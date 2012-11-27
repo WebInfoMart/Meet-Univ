@@ -338,9 +338,19 @@ class Event_model extends CI_Model
 		$this->db->order_by('event_registered_time','desc');
 		$this->db->limit(30);
 		$query=$this->db->get();
-		return $query->result_array();
+		return $query->result_array();	
 
 	}
+	function recent_event_registered_new()
+	{
+		$var = $this->db->query("SELECT vld.v_id, vld.v_fullname, vld.`v_email`,vld.`v_phone`,lead_data.phone_verified,lead_data.email_verified,vld.v_verified_phone,vld.v_verified_email FROM verified_lead_data AS vld		
+LEFT JOIN lead_data ON lead_data.email = vld.v_email
+WHERE vld.v_id IN ( 0, 80, 144, 154, 159, 172, 181, 190, 191, 196, 197, 200, 201, 204, 205, 206, 208, 209, 212, 215, 226, 233, 235, 236, 240, 245, 246, 248, 252, 256, 263, 268, 270, 276, 279 )ORDER BY vld.v_email LIMIT 0 , 30");
+		return $var->result_array();
+		
+
+	}
+	
 	function delete_recent_events()
 	{
 		$email = $this->input->post('reg_email');		

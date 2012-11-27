@@ -882,7 +882,8 @@ class Admin_events extends CI_Controller
 			}
 			else
 			{
-				$data['rec_eve_reg']=$this->event_model->recent_event_registered();
+				//$data['rec_eve_reg']=$this->event_model->recent_event_registered();
+				$data['rec_eve_reg_new']=$this->event_model->recent_event_registered_new();
 				$data['visit']=$this->event_model->count_students_visit();
 				$this->load->view('univadmin/events/recent_events', $data);
 			}

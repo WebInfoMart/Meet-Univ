@@ -107,14 +107,14 @@
 					</thead>
 					<tbody>
 					<?php 
-					if(!empty($rec_eve_reg))
-					{ foreach($rec_eve_reg as $events)
+					if(!empty($rec_eve_reg_new))
+					{ foreach($rec_eve_reg_new as $events)
 						{ 
 					?>
-						<tr id="tr_<?php echo $events['id']; ?>">
-							<td><?php echo $events['fullname']; ?> </td>
-							<td><?php echo $events['email']; ?></td>
-							<td><?php echo $events['phone']; ?></td>							
+						<tr id="tr_<?php echo $events['v_id']; ?>">
+							<td><?php echo $events['v_fullname']; ?> </td>
+							<td><?php echo $events['v_email']; ?></td>
+							<td><?php echo $events['v_phone']; ?></td>							
 							<td>
 									<div class="btn-group">	
 									<?php if($events['phone_verified']==1 || $events['v_verified_phone']==1){ ?>
@@ -122,24 +122,24 @@
 									<?php } else {?>
 										<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Phone not verified"><i class="icon-ok-sign"></i></a>									
 									<?php } ?>	
-									<?php if($events['activated']==1){ ?>
+									<?php if($events['email_verified']==1 || $events['v_verified_email']==1){ ?>
 										<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Email verified"><i class="icon-envelope icon-blue"></i></a>
 									<?php } else {?>									
 										<a href="javascript:void(0)" class="btn btn-icon tip" data-original-title="Email not verified"><i class="icon-envelope"></i></a>
 									<?php } ?>																	
-									<div class="modal hide" id="myModal_<?php echo $events['id']; ?>">
+									<div class="modal hide" id="myModal_<?php echo $events['v_id']; ?>">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">x</button>
-											<h3>Do you want to delete <?php echo $events['fullname']; ?>'s data?</h3>
+											<h3>Do you want to delete <?php echo $events['v_fullname']; ?>'s data?</h3>
 										</div>
-										<?php $eve_ID = $events['id']; ?>
-										<?php $eve_Email = $events['email']; ?>
+										<?php $eve_ID = $events['v_id']; ?>
+										<?php $eve_Email = $events['v_email']; ?>
 										<div class="modal-footer">
 											<a href="#" onclick="del_reg_con('<?php echo $eve_ID; ?>','<?php echo $eve_Email; ?>')" class="btn" data-dismiss="modal">Yes</a>
 											<a href="#" class="btn" data-dismiss="modal">Close</a>
 										</div>
 									</div>									
-									<a href="#myModal_<?php echo $events['id']; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete" style="display:none;"><i class="icon-trash"></i></a>
+									<a href="#myModal_<?php echo $events['v_id']; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete" style="display:none;"><i class="icon-trash"></i></a>
 								</div>
 							</td>
 					   </tr> 
