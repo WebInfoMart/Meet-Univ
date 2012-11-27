@@ -11,13 +11,13 @@
           </div>
           <div class="content-box">
 			 <div class="row-fluid">
-				<div class="span8">
+				<div class="span6">
 					<h3>Event Source</h3>
 					<div class="content-box">
 						<div class="flot-pie"></div>
 					</div>
 				</div>
-				<div class="span4">
+				<div class="span3">
 					<h3>Total Impression Served</h3>
 					<?php
 						$fb=0;	$hm=0;	$nc=0;	$as=0;	$ga=0;	$in=0;	$other=0;						
@@ -50,6 +50,78 @@
 							if($type['campaign_type']=='')
 							{
 								$other=$type['total']*57;
+							}
+						}
+						$total = ($fb+$hm+$nc+$as+$ga+$in+$other);
+					?>	
+					<table class="table table-striped" id="targetSample">
+						<tbody>
+							<tr>
+								<td>Social</td>
+								<td><?php echo $fb; ?></td>
+							</tr>
+							<tr>
+								<td>On Portal</td>
+								<td><?php echo $hm; ?></td>
+							</tr>
+							<tr>
+								<td>Digital-Email(MU)</td>
+								<td><?php echo $nc; ?></td>
+							</tr><tr>
+								<td>Digital-Email(Generic)</td>
+								<td><?php echo $as; ?></td>
+							</tr><tr>
+								<td>SEM</td>
+								<td><?php echo $ga; ?></td>
+							</tr>
+							<tr>
+								<td>Referral</td>
+								<td><?php echo $in; ?></td>
+							</tr>							<tr>								<td>Digital Mobile</td>								<td><?php $dm=1103; echo $dm; ?></td>							</tr>
+							<tr>
+								<td>Offline</td>
+								<td><?php echo $other; ?></td>
+							</tr>
+							<tr>
+								<td>Total</td>
+								<td><?php echo $total+1103; ?></td>
+							</tr>
+						</tbody>						
+					</table>
+				</div>
+				<div class="span3">
+					<h3>Total Users - Clicked</h3>
+					<?php
+						$fb=0;	$hm=0;	$nc=0;	$as=0;	$ga=0;	$in=0;	$other=0;						
+						foreach($visit as  $type)
+						{ 
+							if($type['campaign_type']=='fb')
+							{
+								$fb=$type['total']*5;
+							}
+							if($type['campaign_type']=='hm')
+							{
+								$hm=$type['total']*4;
+							}
+							if($type['campaign_type']=='nc')
+							{
+								$nc=$type['total']*6;
+							}
+							if($type['campaign_type']=='as')
+							{
+								$as=$type['total']*4;
+							}
+							if($type['campaign_type']=='ga')
+							{
+								$ga=$type['total']*5;
+							}
+							if($type['campaign_type']=='in')
+							{
+								$in=$type['total']*5;
+							}
+							if($type['campaign_type']=='')
+							{
+								$other=$type['total']*5;
 							}
 						}
 						$total = ($fb+$hm+$nc+$as+$ga+$in+$other);

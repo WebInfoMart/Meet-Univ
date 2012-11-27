@@ -202,7 +202,7 @@ function search_lead_model()
 		$where=$where."&& v_email!=''";
 	}
 	
-	$query=$this->db->query("select v_id from verified_lead_data1 where ".$where."");
+	$query=$this->db->query("select v_id from verified_lead_data where ".$where."");
 	$data=$query->result_array();	
 	$ids=array();
 	$ids[]=0;
