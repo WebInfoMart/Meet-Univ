@@ -336,6 +336,7 @@ class Event_model extends CI_Model
 		$this->db->join('users','event_register.email=users.email','left');		
 		$this->db->group_by('event_register.email');
 		$this->db->order_by('event_registered_time','desc');
+		$this->db->limit(30);
 		$query=$this->db->get();
 		return $query->result_array();
 

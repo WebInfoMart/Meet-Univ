@@ -96,7 +96,7 @@
 		<div class="row-fluid">
 			<div class="table">
 				<div class="content-box">			 
-					<table class="responsive table table-striped dataTable" id="allcheck">
+					<table class="responsive table table-striped" id="allcheck">
 					<thead>			
 					  <tr>
 						<th>Name</th>
@@ -139,7 +139,7 @@
 											<a href="#" class="btn" data-dismiss="modal">Close</a>
 										</div>
 									</div>									
-									<a href="#myModal_<?php echo $events['id']; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete"><i class="icon-trash"></i></a>
+									<a href="#myModal_<?php echo $events['id']; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete" style="display:none;"><i class="icon-trash"></i></a>
 								</div>
 							</td>
 					   </tr> 
@@ -150,6 +150,17 @@
 						<?php } ?>
 					</tbody>
 					</table> 
+					<div id="media_info" class="dataTables_info">Showing 01 to 30 of 8000 entries</div>
+					<div class="modal hide" id="myModal_2">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">x</button>
+							<h3>You need to purchase a higher package.</h3>
+						</div>						
+						<div class="modal-footer">							
+							<a href="#" class="btn" data-dismiss="modal">Close</a>
+						</div>
+					</div>
+					<div class="dataTables_paginate paging_bootstrap pagination"><ul><li class="prev disabled"><a href="javascript:void(0);"><- Previous</a></li><li class="active"><a href="javascript:void(0);">1</a></li><li><a href="#myModal_2" data-toggle="modal" >2</a></li><li class="next"><a href="#myModal_2" data-toggle="modal">Next -></a></li></ul></div>
 				</div>		
 			</div>		 
 		</div> 		
