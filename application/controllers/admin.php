@@ -89,24 +89,24 @@ class Admin extends CI_Controller
 	   $this->load->view('univadmin/header', $data);
 	   $this->load->view('univadmin/sidebar', $data); 
 	   }
-	//$this->load->view('univadmin/admin_dash', $data);
+	
 		if($data['user_id']==534)
 		{
 			$data['recent_leads']="";
 			$data['recent_leads']=$this->admindash_nc->recent_leads_nc();			
 			$this->load->view('univadmin/admin_dash_nc', $data);
-			//redirect('newadmin/engagement');
+			
 		}
 		else if($data['user_id']==533)
 		{
 			$data['recent_leads']="";
 			$data['recent_leads']=$this->admindash_nc->recent_leads_as();			
 			$this->load->view('univadmin/admin_dash_nc', $data);
-			//redirect('newadmin/engagement');
+			
 		}
 		else if($data['user_id']==544)
 		{		
-			redirect('newadmin/engagement');
+			redirect('newadmin/admin_events/recent_event');
 		}
 		else
 		{
