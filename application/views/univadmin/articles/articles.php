@@ -101,8 +101,8 @@ $insert=1;
 										<h3>Do you want to delete?</h3>
 									</div>
 									<div class="modal-footer">
-										<a href="#" onclick="delete_confirm('<?php echo $article->article_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
-										<a href="#" class="btn" data-dismiss="modal">Close</a>
+										<a href="javascript:void(0)" onclick="delete_confirm('<?php echo $article->article_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
 								<a href="#myModal_<?php echo $article->article_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
@@ -120,8 +120,8 @@ $insert=1;
 										
 									</div>
 									<div class="modal-footer">
-										<a href="#" onclick="approve_home_confirm('<?php echo $base;?>newadmin/adminarticles','<?php  echo $article->article_approve_status; ?>','<?php echo $article->article_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
-										<a href="#" class="btn" data-dismiss="modal">Close</a>
+										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/adminarticles','<?php  echo $article->article_approve_status; ?>','<?php echo $article->article_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
 								<a href="#myAppDisModal_<?php echo $article->article_id; ?>" class="btn btn-icon tip" <?php if($article->article_approve_status){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >

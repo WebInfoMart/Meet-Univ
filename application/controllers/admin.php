@@ -110,6 +110,7 @@ class Admin extends CI_Controller
 		}
 		else
 		{
+			$data['events_for_calendar'] = $this->event_model->fetch_events_for_calendar();		//added by satbir on 11/17/2012
 			$this->load->view('univadmin/admin_dash', $data);
 		}
    }
