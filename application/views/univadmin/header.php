@@ -63,8 +63,8 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="account.html">My Account</a>
-                  <a href="balance.html">Balance</a>
+                  <a href="#">My Account</a>
+                  <a href="#">Balance</a>
                 </li>
               </ul>
             </li>
@@ -77,7 +77,7 @@
             </li>
             <li class="divider-vertical"></li>
             <li>
-              <a href="change_password.html">
+              <a href="#">
                 <img src="<?php echo $base;?>newadmin/img/icon-settings.png" alt="" />
                 Settings
               </a>

@@ -30,7 +30,7 @@ $flag=1;
         </div>
         <div class="user-links">
           <a href="#">Account</a> | 
-          <a href="edit_profile.html">Edit Profile</a>
+          <a href="#">Edit Profile</a>
         </div>
       </div>
     </div>   
@@ -97,7 +97,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		if($admin_user_level=='3') { ?>
         <ul class="collapsed-nav closed">
           <li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>
-          <li><a href="pages.html">Pages</a></li>		  
+          <li><a href="#">Pages</a></li>		  
           <li><a href="<?php echo $base; ?>newadmin/admin_courses/manage_univ_course">University Courses</a></li>
           <li><?php echo anchor("$base".'admin/update_university_detail', 'Update University'); ?></li>
         </ul>
@@ -119,7 +119,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
         </ul>
       </li>
       <li>
-        <a href="stats.html">
+        <a href="#">
           <i class="icon-signal"></i>
           Statistics
         </a>
