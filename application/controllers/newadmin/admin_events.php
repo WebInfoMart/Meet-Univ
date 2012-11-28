@@ -111,7 +111,7 @@ class Admin_events extends CI_Controller
 			$data['date_selector']= $this->input->post('date_selector');
 			$data['recent_event']=$this->event_model->recent_events();
 			$data['countries']=$this->users->fetch_country();
-			$data['univ_info']=$this->events->get_univ_id_by_user_id($data['user_id']);
+			$data['univ_info']=$this->event_model->get_univ_id_by_user_id($data['user_id']);
 			//$data['univ_info']=$this->event_model->get_univ_detail();
 			$data['events_for_calendar'] = $this->event_model->fetch_events_for_calendar();
 			$this->load->view('univadmin/events/events', $data);

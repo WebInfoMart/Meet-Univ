@@ -514,7 +514,11 @@ class Admin_ques extends CI_Controller
 				$fu_status=$this->ques_model->home_featured_unfeatured_ques($f_status,$ques_id);
 				if($fu_status)
 				{
-					echo $fu_status;
+					redirect('newadmin/admin_ques/manage_ques/fh');
+				}
+				else
+				{
+					redirect('newadmin/admin_ques/manage_ques/ufh');
 				}
 			
 			}
@@ -600,9 +604,12 @@ class Admin_ques extends CI_Controller
 			$fu_status=$this->ques_model->approve_home_confirm($approve_status,$ques_id);
 			if($fu_status)
 			{
-				echo $fu_status;
+				redirect('newadmin/admin_ques/manage_ques/aas');
 			}
-			
+			else
+			{
+				redirect('newadmin/admin_ques/manage_ques/adas');
+			}		
 		
 		}
 			

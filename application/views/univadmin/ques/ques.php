@@ -1,3 +1,8 @@
+<div class="modal hide" id="alert">
+	<div class="modal-header">		
+		<div align="center"><h3>You have reached maximum limit for show ques</h3></div>
+	</div>
+</div>
 <?php
 $edit=0;
 $delete=0;
@@ -38,22 +43,7 @@ $insert=1;
   <a class="close" data-dismiss="alert" href="#">×</a>
   <strong>Question Deleted Successfully</strong>
 </div>
-<div id="approved" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Question approved Successfully</strong>
-</div>
-<div id="disapproved" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Question disapproved Successfully</strong>
-</div>
-<div id="featured" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Question is now home featured</strong>
-</div>
-<div id="unfeatured" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Question removed from home featured</strong>
-</div>
+
 <div class="content">
   <div class="container-fluid"> 
 	<div class="responsible_navi">
@@ -181,7 +171,7 @@ $insert=1;
 									</div>
 									<div class="modal-footer">
 										<a href="" onclick="delete_confirm('<?php echo $row->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
-										<a href="#" class="btn" data-dismiss="modal">Close</a>
+										<a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
 								<a href="#myModal_<?php echo $row->que_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
@@ -196,12 +186,42 @@ $insert=1;
 								</a>
 								<?php if(($edit==1 || $delete==1 || $insert==1) ) 
 								{ ?>
-								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $row->q_approve; ?>','<?php echo $row->que_id; ?>');" class="btn btn-icon tip" <?php if($row->q_approve){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?>>
-									<i class="<?php if($row->q_approve){ echo 'icon-blue'; }?> icon-fire app_<?php echo $row->que_id; ?>"></i>
-								</a>
-								<a href="#" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $row->q_featured_home_que; ?>','<?php echo $row->que_id; ?>');" class="btn btn-icon tip" <?php if($row->q_featured_home_que){ ?> data-original-title="Unfeatured" <?php } else { ?> data-original-title="Featured" <?php } ?>>
-									<i class="<?php if($row->q_featured_home_que){ echo 'icon-blue'; }?> icon-star feat_<?php echo $row->que_id; ?>"></i>
-								</a>
+								<div class="modal hide" id="myAppDisModal_<?php echo $row->que_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($row->q_approve == 1){ ?>
+											<h3>Do you want to dispprove ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to approve ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_ques','<?php  echo $row->q_approve; ?>','<?php echo $row->que_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>
+								<a href="#myAppDisModal_<?php echo $row->que_id; ?>" class="btn btn-icon tip" <?php if($row->q_approve){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon_<?php echo $row->que_id; ?>" class="<?php if($row->q_approve == 1){ echo 'icon-blue'; }?> icon-fire"></i>
+								</a>								
+								<div class="modal hide" id="myFeaUnfModal_<?php echo $row->que_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($row->q_featured_home_que == 1){ ?>
+											<h3>Do you want to make home unfeatured ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to make home featured ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $row->q_featured_home_que; ?>','<?php echo $row->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a href="#myFeaUnfModal_<?php echo $row->que_id; ?>"  class="btn btn-icon tip" <?php if($row->q_featured_home_que){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i class="<?php if($row->q_featured_home_que){ echo 'icon-blue'; }?> icon-star"></i>
+								</a>								
 								<?php } ?>
 							</div>
 						</td>
@@ -281,11 +301,41 @@ $insert=1;
 								</a>
 								<?php if(($edit==1 || $delete==1 || $insert==1)) 
 								{ ?>
-								<a href="#" onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $latest->q_approve; ?>','<?php echo $latest->que_id; ?>');" class="btn btn-icon tip" <?php if($latest->q_approve){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?>>
-									<i class="<?php if($latest->q_approve){ echo 'icon-blue'; }?> icon-fire app_<?php echo $latest->que_id; ?>"></i>
+								<div class="modal hide" id="myAppDisModal1_<?php echo $latest->que_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($latest->q_approve == 1){ ?>
+											<h3>Do you want to dispprove ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to approve ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_ques','<?php  echo $latest->q_approve; ?>','<?php echo $latest->que_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>
+								<a href="#myAppDisModal1_<?php echo $latest->que_id; ?>" class="btn btn-icon tip" <?php if($latest->q_approve){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon_<?php echo $latest->que_id; ?>" class="<?php if($latest->q_approve == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
-								<a href="#" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $latest->q_featured_home_que; ?>','<?php echo $latest->que_id; ?>');" class="btn btn-icon tip" <?php if($latest->q_featured_home_que){ ?> data-original-title="Unfeatured" <?php } else { ?> data-original-title="Featured" <?php } ?>>
-									<i class="<?php if($latest->q_featured_home_que){ echo 'icon-blue'; }?> icon-star feat_<?php echo $latest->que_id; ?>"></i>
+								<div class="modal hide" id="myFeaUnfModal1_<?php echo $latest->que_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($latest->q_featured_home_que == 1){ ?>
+											<h3>Do you want to make home unfeatured ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to make home featured ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $latest->q_featured_home_que; ?>','<?php echo $latest->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a href="#myFeaUnfModal1_<?php echo $latest->que_id; ?>"  class="btn btn-icon tip" <?php if($latest->q_featured_home_que){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i class="<?php if($latest->q_featured_home_que){ echo 'icon-blue'; }?> icon-star"></i>
 								</a>
 								<?php } ?>
 							</div>
@@ -437,110 +487,37 @@ function addQues()
 }
 function approve_home_confirm(a,b,c)
 {
-	if(b==0)
-	{
-		status='approve';
-	}
-	if(b==1)
-	{
-		status='disapprove';
-	}
-	var r=confirm("Are you sure you want to " +status+ " to this question?");
-	if (r==true)
-	{
-	  var url=a+'/approve_disapprove_ques/'+b+'/'+c+'/';
-	  $.ajax({
-	   type: "POST",
-	   url: url,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-		{
-			if(msg=='1')
-			{
-				$('#approved').show();
-				setTimeout(function(){$('#approved').hide('slow');},3000);
-				$(".app_"+c).addClass('icon-blue');
-			}
-			else
-			{
-				$('#disapproved').show();
-				setTimeout(function(){$('#disapproved').hide('slow');},3000);
-				$(".app_"+c).removeClass('icon-blue');
-			}
-		}
-		
-	   });
-	}
+	 window.location.href=a+'/approve_disapprove_ques/'+b+'/'+c;
 }
 function featured_home_confirm(a,b,c)
 {
-	var nof='1';
-	if(b=='0')
+	if(b==1)
 	{
-		nof=chknooffeatured('q_featured_home_que');
-	}
-	if(nof=='1')
-	{
-		var status;
-		if(b==0)
-		{
-		status='make home featured';
-		}
-		if(b==1)
-		{
-		status='make home unfeatured';
-		}
-		var r=confirm("Are you sure you want to " +status+ " to this question?");
-		if (r==true)
-		{
-		  url=a+'/featured_unfeatured_ques/'+b+'/'+c+'/';
-		  $.ajax({
-	   type: "POST",
-	   url: url,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-		{
-			if(msg=='1')
-			{
-				$('#featured').show();
-				setTimeout(function(){$('#featured').hide('slow');},3000);
-				$(".feat_"+c).addClass('icon-blue');
-			}
-			else
-			{
-				$('#unfeatured').show();
-				setTimeout(function(){$('#unfeatured').hide('slow');},3000);
-				$(".feat_"+c).removeClass('icon-blue');
-			}
-		}
-		
-	   });
-		}
+		window.location.href=a+'/featured_unfeatured_ques/'+b+'/'+c;
 	}
 	else
 	{
-		alert("You have reached maximum limit for show ques");
+		$.ajax({
+		   type: "POST",
+		   url: "<?php echo $base; ?>newadmin/admin_ques/count_featured_ques/q_featured_home_que",
+		   async:false,
+		   data: '',
+		   cache: false,
+		   success: function(msg)
+			{
+				if(msg==1)
+				{
+					window.location.href=a+'/featured_unfeatured_ques/'+b+'/'+c;
+				}
+				else
+				{
+					$('#alert').show();
+					setTimeout(function(){$('#alert').hide('slow');},2000);					
+				}
+			}
+		});
 	}
-}
-function chknooffeatured(field)
-{
-	var f;
-	$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>newadmin/admin_ques/count_featured_ques/"+field,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-	   {//alert(msg);
-			f=msg;
-		}
-	   });
-	 return f;
+	
 }
 function delete_confirm(id)
 {

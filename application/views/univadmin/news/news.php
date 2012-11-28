@@ -1,3 +1,8 @@
+<div class="modal hide" id="alert">
+	<div class="modal-header">		
+		<div align="center"><h3>You have reached maximum limit</h3></div>
+	</div>
+</div>
 <?php
 $edit=0;
 $delete=0;
@@ -163,10 +168,25 @@ $insert=1;
 								<a href="#myModal_<?php echo $news->news_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
-								<?php }if($edit==1 ){ ?>
-								<a href="#"  onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $news->featured_home_news; ?>','<?php echo $news->news_id; ?>');"  class="btn btn-icon tip" <?php if($news->news_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?> >
-									<i class="<?php if($news->news_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
-								</a>
+								<?php }if($edit==1 ){ ?>								
+								<div class="modal hide" id="myAppDisModal_<?php echo $news->news_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($news->news_approve_status == 1){ ?>
+											<h3>Do you want to dispprove ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to approve ?</h3>
+										<?php } ?>										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_news','<?php  echo $news->featured_home_news; ?>','<?php echo $news->news_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>
+								<a href="#myAppDisModal_<?php echo $news->news_id; ?>" class="btn btn-icon tip" <?php if($news->news_approve_status){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon_<?php echo $news->news_id; ?>" class="<?php if($news->news_approve_status == 1){ echo 'icon-blue'; }?> icon-fire"></i>
+								</a>								
+								
 								<?php 
 								$news_title=$this->subdomain->process_url_title(substr($news->news_title,0,50));
 								$news_link=$this->subdomain->genereate_the_subdomain_link($news->subdomain_name,'news',$news_title,$news->news_id);
@@ -174,9 +194,24 @@ $insert=1;
 								<a href="<?php echo $news_link; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
-								<a href="#" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $news->featured_home_news; ?>','<?php echo $news->news_id; ?>');" class="btn btn-icon tip" <?php if($news->featured_home_news){ ?> data-original-title="Unfeatured" <?php } else { ?> data-original-title="Featured" <?php } ?>>
+								<div class="modal hide" id="myFeaUnfModal_<?php echo $news->news_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($news->featured_home_news == 1){ ?>
+											<h3>Do you want to make home unfeatured ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to make home featured ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $news->featured_home_news; ?>','<?php echo $news->news_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a href="#myFeaUnfModal_<?php echo $news->news_id; ?>"  class="btn btn-icon tip" <?php if($news->featured_home_news){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
 									<i class="<?php if($news->featured_home_news){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>
+								</a>								
 								<?php } ?>
 							</div>
 						</td>
@@ -199,7 +234,7 @@ $insert=1;
 				<table class="responsive table table-striped dataTable" id="targetSample2">
                   <thead>
                     <tr>
-                      <th width="10%"> <input type="checkbox" name="sel_row" class='sel_rows' data-targettable="targetSample2"></th>
+                      <th width="10%"><input type="checkbox" name="sel_row" class='sel_rows' data-targettable="targetSample2"></th>
                       <th width="25%">News Title</th>
                       <th width="25%">University Name</th>
                       <th width="20%">Status</th>
@@ -251,9 +286,25 @@ $insert=1;
 								<a href="<?php echo $news_link; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
-								<a href="#" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $row->featured_home_news; ?>','<?php echo $row->news_id; ?>');" class="btn btn-icon tip" <?php if($row->featured_home_news){ ?> data-original-title="Unfeatured" <?php } else { ?> data-original-title="Featured" <?php } ?>>
+								
+								<div class="modal hide" id="myFeaUnfModal1_<?php echo $row->news_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($row->featured_home_news == 1){ ?>
+											<h3>Do you want to make home unfeatured ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to make home featured ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $row->featured_home_news; ?>','<?php echo $row->news_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a href="#myFeaUnfModal1_<?php echo $row->news_id; ?>"  class="btn btn-icon tip" <?php if($row->featured_home_news){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
 									<i class="<?php if($row->featured_home_news){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>
+								</a>								
 								<?php } ?>
 							</div>
 						</td>
@@ -382,64 +433,37 @@ function addNews()
 }
 function approve_home_confirm(a,b,c)
 {
-	if(b==0)
-	{
-	status='approve';
-	}
-	if(b==1)
-	{
-	status='disapprove';
-	}
-	var r=confirm("Are you sure you want to " +status+ " to this news?");
-	if (r==true)
-	{
-	  window.location.href=a+'/approve_disapprove_news/'+b+'/'+c;
-	}
+	window.location.href=a+'/approve_disapprove_news/'+b+'/'+c;
 }
 function featured_home_confirm(a,b,c)
 {
-	var nof='1';
-	if(b=='0')
+	if(b==1)
 	{
-		nof=chknooffeatured('featured_home_news');
-	}
-	if(nof=='1')
-	{
-		var status;
-		if(b==0)
-		{
-		status='make home featured';
-		}
-		if(b==1)
-		{
-		status='make home unfeatured';
-		}
-		var r=confirm("Are you sure you want to " +status+ " to this news?");
-		if (r==true)
-		{
-		  window.location.href=a+'/featured_unfeatured_news/'+b+'/'+c;
-		}
+		window.location.href=a+'/featured_unfeatured_news/'+b+'/'+c;
 	}
 	else
 	{
-		alert("You have reached maximum limit for show news");
+		$.ajax({
+		   type: "POST",
+		   url: "<?php echo $base; ?>newadmin/admin_news/count_featured_news/featured_home_news",
+		   async:false,
+		   data: '',
+		   cache: false,
+		   success: function(msg)
+			{
+				if(msg==1)
+				{
+					window.location.href=a+'/featured_unfeatured_news/'+b+'/'+c;
+				}
+				else
+				{
+					$('#alert').show();
+					setTimeout(function(){$('#alert').hide('slow');},2000);					
+				}
+			}
+		});
 	}
-}	
-function chknooffeatured(field)
-{
-var f;
-	$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>newadmin/admin_news/count_featured_news/"+field,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-		{
-			f=msg;
-		}
-	   });
-	 return f;
+	
 }
 var arr=new Array;
 function action_formsubmit(id,flag)

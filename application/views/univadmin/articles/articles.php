@@ -1,3 +1,8 @@
+<div class="modal hide" id="alert">
+	<div class="modal-header">		
+		<div align="center"><h3>You have reached maximum limit</h3></div>
+	</div>
+</div>
 <?php
 $edit=0;
 $delete=0;
@@ -64,8 +69,7 @@ $insert=1;
                 <table class="table table-striped dataTable" id="media" >
                   <thead>
                     <tr>
-                      <th width="5%">
-					  <input type="checkbox" class='sel_rows' data-targettable="media"></th>
+                      <th width="5%"><input type="checkbox" class='sel_rows' data-targettable="media"></th>
                       <th width="20%">Article Title</th>
                       <th width="20%">University Name</th>
                       <th width="15%">Status</th>
@@ -128,23 +132,35 @@ $insert=1;
 									<i id="icon_<?php echo $article->article_id; ?>" class="<?php if($article->article_approve_status == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
 								<?php 
-								$article_title=$this->subdomain->process_url_title(substr($article->article_title,0,50));
+									$article_title=$this->subdomain->process_url_title(substr($article->article_title,0,50));
 									$article_link=$this->subdomain->genereate_the_subdomain_link($article->subdomain_name,'articles',$article_title,$article->article_id);				
-									?>
+								?>
 								<a href="<?php echo $article_link ; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
-									<a href="#" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $article->featured_home_article; ?>','<?php echo $article->article_id; ?>');" class="btn btn-icon tip" <?php if($article->featured_home_article){ ?> data-original-title="Unfeatured" <?php } else { ?> data-original-title="Featured" <?php } ?>>
+								<div class="modal hide" id="myFeaUnfModal_<?php echo $article->article_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($article->featured_home_article == 1){ ?>
+											<h3>Do you want to make home unfeatured ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to make home featured ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $article->featured_home_article; ?>','<?php echo $article->article_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a href="#myFeaUnfModal_<?php echo $article->article_id; ?>"  class="btn btn-icon tip" <?php if($article->featured_home_article){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
 									<i class="<?php if($article->featured_home_article){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>
+								</a>							
 								<?php } ?>
 							</div>
 						</td>
                      </tr>
-					 <?php } ?>
-                   
-                    
-                   
+					 <?php } ?>         
                   </tbody>
                 </table>
 				<?php if($delete==1) { ?> 	
@@ -162,13 +178,12 @@ $insert=1;
                 <table class="table table-striped dataTable" id="media1">
                   <thead>
                     <tr>
-                      <th width="5%">
-					  <input type="checkbox" class='sel_rows' data-targettable="media1"></th>
+                      <th width="5%"><input type="checkbox" class='sel_rows' data-targettable="media1"></th>
                       <th width="20%">Article Title</th>
                       <th width="20%">University Name</th>
                       <th width="15%">Status</th>
 					  <th width="20%">Featured/UnFeatured</th>
-					   <th width="20%">Choose Option</th>
+					  <th width="20%">Choose Option</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -226,15 +241,30 @@ $insert=1;
 									<i id="icon_<?php echo $recent->article_id; ?>" class="<?php if($recent->article_approve_status == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
 								<?php 
-								$article_title=$this->subdomain->process_url_title(substr($recent->article_title,0,50));
+									$article_title=$this->subdomain->process_url_title(substr($recent->article_title,0,50));
 									$article_link=$this->subdomain->genereate_the_subdomain_link($recent->subdomain_name,'articles',$article_title,$recent->article_id);				
 									?>
 								<a href="<?php echo $article_link ; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
-									<a href="#" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $recent->featured_home_article; ?>','<?php echo $recent->article_id; ?>');" class="btn btn-icon tip" <?php if($recent->featured_home_article){ ?> data-original-title="Unfeatured" <?php } else { ?> data-original-title="Featured" <?php } ?>>
+								<div class="modal hide" id="myFeaUnfRecModal_<?php echo $recent->article_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<?php if($recent->featured_home_article == 1){ ?>
+											<h3>Do you want to make home unfeatured ?</h3>
+										<?php } else { ?>
+											<h3>Do you want to make home featured ?</h3>
+										<?php } ?>
+										
+									</div>
+									<div class="modal-footer">
+										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/adminarticles','<?php  echo $recent->featured_home_article; ?>','<?php echo $recent->article_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a href="#myFeaUnfRecModal_<?php echo $recent->article_id; ?>"  class="btn btn-icon tip" <?php if($recent->featured_home_article){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
 									<i class="<?php if($recent->featured_home_article){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>
+								</a>							
 								<?php } ?>
 							</div>
 						</td>
@@ -301,6 +331,7 @@ $insert=1;
 					</div>
 				</div>
               </div>
+			  
             </div>
           </div>
         </div>
@@ -367,49 +398,33 @@ function approve_home_confirm(a,b,c)
 }
 function featured_home_confirm(a,b,c)
 {
-	var nof='1';
-	if(b=='0')
+	if(b==1)
 	{
-		nof=chknooffeatured('featured_home_article');
-	}
-	if(nof=='1')
-	{
-		var status;
-		if(b==0)
-		{
-		status='make home featured';
-		}
-		if(b==1)
-		{
-		status='make home unfeatured';
-		}
-		var r=confirm("Are you sure you want to " +status+ " to this article?");
-		if (r==true)
-		{
-		  window.location.href=a+'/featured_unfeatured_article/'+b+'/'+c;
-		}
+		window.location.href=a+'/featured_unfeatured_article/'+b+'/'+c;
 	}
 	else
 	{
-		alert("You have reached maximum limit for show article");
+		$.ajax({
+		   type: "POST",
+		   url: "<?php echo $base; ?>newadmin/adminarticles/count_featured_articles/featured_home_article",
+		   async:false,
+		   data: '',
+		   cache: false,
+		   success: function(msg)
+			{
+				if(msg==1)
+				{
+					window.location.href=a+'/featured_unfeatured_article/'+b+'/'+c;
+				}
+				else
+				{
+					$('#alert').show();
+					setTimeout(function(){$('#alert').hide('slow');},2000);					
+				}
+			}
+		});
 	}
-}	
-function chknooffeatured(field)
-{
-var f;
-	$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>newadmin/adminarticles/count_featured_articles/"+field,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-		{
-		
-			f=msg;
-		}
-	   });
-	 return f;
+	
 }
 var arr=new Array;
 
