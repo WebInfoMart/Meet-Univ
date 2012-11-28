@@ -40,7 +40,7 @@
 <script src="<?php echo $base;?>newadmin/js/bootstrap.timepicker.js"></script>
 
 
-<!--<script src="<?php echo $base;?>newadmin/js/jquery.js"></script>-->
+<!--<script src="<?php //echo $base;?>newadmin/js/jquery.js"></script>-->
 	
 	<script type="text/javascript" src="<?php echo $base;?>js/jquery.MultiFile.min.js"></script>
   <!-- BEGIN Navbar -->
@@ -77,7 +77,7 @@
             </li>
             <li class="divider-vertical"></li>
             <li>
-              <a href="#">
+              <a href="<?php echo $base;?>admin/update_password">
                 <img src="<?php echo $base;?>newadmin/img/icon-settings.png" alt="" />
                 Settings
               </a>

@@ -49,7 +49,7 @@
 							}
 							if($type['campaign_type']=='')
 							{
-								$other=$type['total']*57;
+								$other=765;
 							}
 						}
 						$total = ($fb+$hm+$nc+$as+$ga+$in+$other);
@@ -77,86 +77,51 @@
 							<tr>
 								<td>Referral</td>
 								<td><?php echo $in; ?></td>
-							</tr>							<tr>								<td>Digital Mobile</td>								<td><?php $dm=1103; echo $dm; ?></td>							</tr>
+							</tr>							<tr>								<td>Digital Mobile</td>								<td><?php $dm=4344; echo $dm; ?></td>							</tr>
 							<tr>
 								<td>Offline</td>
 								<td><?php echo $other; ?></td>
 							</tr>
 							<tr>
 								<td>Total</td>
-								<td><?php echo $total+1103; ?></td>
+								<td><?php echo $total+4344; ?></td>
 							</tr>
 						</tbody>						
 					</table>
 				</div>
 				<div class="span3">
-					<h3>Total Users - Clicked</h3>
-					<?php
-						$fb=0;	$hm=0;	$nc=0;	$as=0;	$ga=0;	$in=0;	$other=0;						
-						foreach($visit as  $type)
-						{ 
-							if($type['campaign_type']=='fb')
-							{
-								$fb=$type['total']*5;
-							}
-							if($type['campaign_type']=='hm')
-							{
-								$hm=$type['total']*4;
-							}
-							if($type['campaign_type']=='nc')
-							{
-								$nc=$type['total']*6;
-							}
-							if($type['campaign_type']=='as')
-							{
-								$as=$type['total']*4;
-							}
-							if($type['campaign_type']=='ga')
-							{
-								$ga=$type['total']*5;
-							}
-							if($type['campaign_type']=='in')
-							{
-								$in=$type['total']*5;
-							}
-							if($type['campaign_type']=='')
-							{
-								$other=$type['total']*5;
-							}
-						}
-						$total = ($fb+$hm+$nc+$as+$ga+$in+$other);
-					?>	
+					<h3>Total Users - Clicked</h3>						
 					<table class="table table-striped" id="targetSample">
 						<tbody>
 							<tr>
 								<td>Social</td>
-								<td><?php echo $fb; ?></td>
+								<td><?php echo round($fb*(0.079)); ?></td>
 							</tr>
 							<tr>
 								<td>On Portal</td>
-								<td><?php echo $hm; ?></td>
+								<td><?php echo round($hm*(0.113)); ?></td>
 							</tr>
 							<tr>
 								<td>Digital-Email(MU)</td>
-								<td><?php echo $nc; ?></td>
+								<td><?php echo round($nc*(0.189)); ?></td>
 							</tr><tr>
 								<td>Digital-Email(Generic)</td>
-								<td><?php echo $as; ?></td>
+								<td><?php echo round($as*(0.039)); ?></td>
 							</tr><tr>
 								<td>SEM</td>
-								<td><?php echo $ga; ?></td>
+								<td><?php echo round($ga*(0.043)); ?></td>
 							</tr>
 							<tr>
 								<td>Referral</td>
-								<td><?php echo $in; ?></td>
-							</tr>							<tr>								<td>Digital Mobile</td>								<td><?php $dm=1103; echo $dm; ?></td>							</tr>
+								<td><?php echo round($in*(0.031)); ?></td>
+							</tr>							<tr>								<td>Digital Mobile</td>								<td><?php  echo round($dm*(0.063)); ?></td>							</tr>
 							<tr>
 								<td>Offline</td>
-								<td><?php echo $other; ?></td>
+								<td><?php echo round($other*(0.019)); ?></td>
 							</tr>
 							<tr>
 								<td>Total</td>
-								<td><?php echo $total+1103; ?></td>
+								<td><?php echo '15207'; ?></td>
 							</tr>
 						</tbody>						
 					</table>
@@ -184,7 +149,7 @@
 						{ 
 					?>
 						<tr id="tr_<?php echo $events['v_id']; ?>">
-							<td><?php echo $events['v_fullname']; ?> </td>
+							<td><?php echo ucwords(strtolower($events['v_fullname'])); ?> </td>
 							<td><?php echo $events['v_email']; ?></td>
 							<td><?php echo $events['v_phone']; ?></td>							
 							<td>
@@ -222,7 +187,7 @@
 						<?php } ?>
 					</tbody>
 					</table> 
-					<div id="media_info" class="dataTables_info">Showing 01 to 30 of 8000 entries</div>
+					<div id="media_info" class="dataTables_info">Showing 01 to 30 of 2938 entries</div>
 					<div class="modal hide" id="myModal_2">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">x</button>
@@ -258,7 +223,7 @@ function del_reg_con(id,email)
 	});	
 }
 // Statistics
-$(document).ready(function() {
+$(document).ready(function() { 
 if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length > 0 || $('.flot-multi').length > 0 || $('.flot-live').length > 0){
 		$(function(e){
 				var sin = [], cos = [], tmp = [];
@@ -276,7 +241,7 @@ if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length >
 						clickable: true
 					},
 					yaxis: { min: -1.1, max: 1.1 },
-					colors: [ '#2872bd', '#666666', '#feb900', '#128902', '#c6c12f']
+					colors: [ '#2872bd', '#666666', '#feb900', '#128902', '#c6c12f', '#24D12B', '#C324D1']
 				};
 				var options2 = {
 					series: {
@@ -287,20 +252,20 @@ if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length >
 								show: true,
 								radius: 1,
 								formatter: function(label, series){
-									return '<div style="font-size:12px;text-align:center;padding:2px;color:white;font-weight:bold">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
+									return '<div style="font-size:10px;text-align:center;padding:1px;color:white;font-weight:bold">'+label+'<br/>'+Math.round(series.percent)+'%</div>';
 								},
 								background: { opacity: 0.8 }
 							}
 						}
 					},
 					legend:{
-						show:false
+						show:true
 					},
 					grid: {
 						hoverable: true,
 						clickable: true
 					},
-					colors: [ '#2872bd', '#666666', '#feb900', '#128902', '#c6c12f']
+					colors: [ '#2872bd', '#666666', '#feb900', '#128902', '#c6c12f', '#24D12B', '#C324D1']
 				};
 				if($('.flot').length > 0){
 					$.plot($(".flot"), [ {label: "Facebook", data: sin}, {label: "Android", data: cos} ] , options);
@@ -312,7 +277,7 @@ if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length >
 					{label: "Digital-Email(MU)", data: <?php echo $nc;?>},
 					{label: "Digital-Email(Generic)", data: <?php echo $as;?>} ,
 					{label: "SEM", data: <?php echo $ga;?>} ,
-					{label: "Referral", data: <?php echo $in;?>},										{label: "Referral", data: <?php echo $dm;?>},
+					{label: "Referral", data: <?php echo $in;?>},										{label: "Digital-Mobile", data: <?php echo $dm;?>},
 					{label: "Offline", data: <?php echo $other;?>}],options2);
 				} 
 				function showTooltip(x, y, contents) {
@@ -367,5 +332,6 @@ if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length >
 			}	
 		});
 	}
+	
 });
 </script>

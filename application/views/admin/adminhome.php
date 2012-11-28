@@ -95,7 +95,7 @@
 					} 
 					?>
 						</td>
-						<td><?php $date=strtotime($latest_user['createdon']); echo date('d/M/Y h:m',$date); ?></td>
+						<td><?php $date=strtotime($latest_user['createdon']); echo date('d/M/Y G:i',$date); ?></td>
 					</tr>	
 				<?php } } ?>		
 				

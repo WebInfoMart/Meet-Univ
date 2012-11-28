@@ -14,7 +14,7 @@
 <?php
 $class_login='';
 $class_pass='';
-$error_login = strip_tags(form_error('login'));
+$error_login = form_error('login');
 $error_password = form_error('password');
 
 if($error_login != '') { $class_login = 'error'; } else { $class_login='email'; }
@@ -32,14 +32,14 @@ if($error_password != '') { $class_pass = 'error'; } else { $class_pass='pw'; }
 				<label for="email">Email</label>
 				<div class="input-prepend">
 					<span class="add-on"><i class='icon-envelope'></i></span>
-					<input type="text" value="<?php echo set_value('login'); ?>" name='login' id="email" class='<?php echo $class_pass;?>' placeholder="Your Email..." />
-					<?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?>
+					<input type="text" value="<?php echo set_value('login'); ?>" name='login' id="email" class='<?php echo $class_login;?>' placeholder="Your Email..." />
+					<span style="color:red;"><?php echo form_error('login'); ?><?php echo isset($errors['login'])?$errors['login']:''; ?></span>
 				</div>
 				<label for="password">Password</label>
 				<div class="input-prepend">
 					<span class="add-on"><i class='icon-lock'></i></span>
 					<input type="password" value="<?php echo set_value('password'); ?>" name="password" id="password" placeholder="Password" class='<?php echo $class_pass;?>' />
-					<?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?>
+					<span style="color:red;"><?php echo form_error('password'); ?><?php echo isset($errors['password'])?$errors['password']:''; ?></span>
 				</div>
 				<!--<label class="checkbox"><input type="checkbox" name="remember" value="1"> Remember me</label>-->
 		</div>

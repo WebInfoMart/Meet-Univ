@@ -342,7 +342,7 @@ $(document).ready(function() {
 	}
 
 	// Statistics
-	if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length > 0 || $('.flot-multi').length > 0 || $('.flot-live').length > 0){
+	/* if($(".flot").length > 0 || $('.flot-pie').length > 0 || $('.flot-bar').length > 0 || $('.flot-multi').length > 0 || $('.flot-live').length > 0){
 		$(function(e){
 				var sin = [], cos = [], tmp = [];
 				for (var i = 0; i < 21; i += 0.5) {
@@ -389,10 +389,10 @@ $(document).ready(function() {
 				};
 
 				if($('.flot').length > 0){
-					$.plot($(".flot"), [ {label: "Active guests", data: sin}, {label: "Active members", data: cos} ] , options);
+					$.plot($(".flot"), [ {label: "Active gues", data: sin}, {label: "Active members", data: cos} ] , options);
 				}
 				if($(".flot-pie").length > 0){
-					$.plot($(".flot-pie"), [ {label: "Active guests", data: 5}, {label: "Active members", data: 10},{label: "Label #3", data: 3},{label: "Label #4", data: 7} ] , options2);
+					$.plot($(".flot-pie"), [ {label: "Active gue", data: 5}, {label: "Active members", data: 10},{label: "Label #3", data: 3},{label: "Label #4", data: 7} ] , options2);
 				}
 				var d1 = [];
 				for (var i = 0; i <= 10; i += 1)
@@ -544,5 +544,5 @@ $(document).ready(function() {
 			}
 		});
 	});
-	}
+	} */
 });

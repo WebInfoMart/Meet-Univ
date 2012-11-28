@@ -1,3 +1,120 @@
+<script>
+$(document).ready(function() {
+if($('.dataTable').length > 0){
+		$('.dataTable').each(function(e){
+			if($(this).hasClass("dataTable-noheader")){
+				$(this).dataTable({
+					"sPaginationType": "bootstrap",
+					'bFilter': false,
+					'bLengthChange': false
+				});
+			} else {
+				$(this).dataTable({
+					"sPaginationType": "bootstrap"
+				});
+			}
+		});
+	}
+if($(".flot").length > 0 ){
+		$(function(e){
+				var sin = [], cos = [], tmp = [];
+				for (var i = 0; i < 21; i += 0.5) {
+					sin.push([i, Math.sin(i)]);
+					cos.push([i, Math.cos(i)]);
+				}
+
+				var options = {
+					series: {
+						lines: { show: true },
+						points: { show: true }
+					},
+					grid: {
+						hoverable: true,
+						clickable: true
+					},
+					yaxis: { min: -1.1, max: 1.1 },
+					colors: [ '#2872bd', '#666666', '#feb900', '#128902', '#c6c12f']
+				};
+
+
+				if($('.flot').length > 0){
+					$.plot($(".flot"), [ {label: "Active guests", data: sin}, {label: "Active members", data: cos} ] , options);
+				}
+				
+				var d1 = [];
+				for (var i = 0; i <= 10; i += 1)
+					d1.push([i, parseInt(Math.random() * 30)]);
+
+				var d2 = [];
+				for (var i = 0; i <= 10; i += 1)
+					d2.push([i, parseInt(Math.random() * 30)]);
+
+				var d3 = [];
+				for (var i = 0; i <= 10; i += 1)
+					d3.push([i, parseInt(Math.random() * 30)]);
+
+				var ds = new Array();
+
+				ds.push({
+					data:d1,
+					bars: {
+						show: true, 
+						barWidth: 0.2, 
+						order: 1,
+						lineWidth : 2
+					}
+				});
+				ds.push({
+					data:d2,
+					bars: {
+						show: true, 
+						barWidth: 0.2, 
+						order: 2
+					}
+				});
+				ds.push({
+					data:d3,
+					bars: {
+						show: true, 
+						barWidth: 0.2, 
+						order: 3
+					}
+				});
+
+			
+
+			function showTooltip(x, y, contents) {
+				$('<div id="tooltip">' + contents + '</div>').css( {
+					top: y + 5,
+					left: x + 10,
+				}).appendTo("body").show();
+			}
+
+
+		var previousPoint = null;
+		$(".flot-bar,.flot-pie,.flot,.flot-multi").bind("plothover", function (event, pos, item) {
+			if (item) {
+				if(event.currentTarget.className == 'flot-bar'){
+					var y = Math.round(item.datapoint[1]);
+				} else if(event.currentTarget.className == 'flot-pie') {
+					var y = Math.round(item.datapoint[0])+"%";
+				} else if(event.currentTarget.className == 'flot'){
+					var y = (Math.round(item.datapoint[1] * 1000)/1000);
+				} else {
+					var y = (Math.round(item.datapoint[1]*1000)/1000)+"€";
+				}
+				$("#tooltip").remove();
+				showTooltip(pos.pageX, pos.pageY,"Value = "+y);
+			}
+			else {
+				$("#tooltip").remove();
+				previousPoint = null;            
+			}
+		});
+	});
+	}
+});	
+</script>
 <?php 
 $flag=1;
 if($admin_user_level=='3')

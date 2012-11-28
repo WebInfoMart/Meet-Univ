@@ -117,7 +117,7 @@ class Admin extends CI_Controller
     if($data['admin_user_level']=='5' || $data['admin_user_level']=='4' || $data['admin_user_level']=='6')
    {
    
-  // $ga = new GoogleAnalytics();
+  $ga = new GoogleAnalytics();
    $this->googleanalytics->setProfile('ga:60386809');
    $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
    $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
@@ -1993,8 +1993,16 @@ function manage_university($mps='')
 		{
 			redirect('admin/adminlogout');
 		}
-		$this->load->view('admin/header',$data);
-		$this->load->view('admin/sidebar',$data);
+		if($data['admin_user_level']==3)
+		{
+			$this->load->view('univadmin/header',$data);
+			$this->load->view('univadmin/sidebar',$data);
+		}
+		else
+		{
+			$this->load->view('admin/header',$data);
+			$this->load->view('admin/sidebar',$data);
+		}
 		$this->form_validation->set_rules('current_password', 'Current Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
 		$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
@@ -2005,7 +2013,14 @@ function manage_university($mps='')
 						$this->form_validation->set_value('current_password'),
 						$this->form_validation->set_value('new_password'))) {	// success
 						$data['msg']='Your Password has been changed Successfully';
-						$this->load->view('admin/userupdated',$data);
+						if($data['admin_user_level']==3)
+						{
+							$this->load->view('univadmin/userupdated',$data);
+						}
+						else
+						{						
+							$this->load->view('admin/userupdated',$data);
+						}
 						$flag=1;
 					//$this->_show_message($this->lang->line('auth_message_password_changed'));
 					
@@ -2016,8 +2031,15 @@ function manage_university($mps='')
 				
 			}
 		if($flag==0)
-		{	
-		$this->load->view('admin/update_password', $data);
+		{
+			if($data['admin_user_level']==3)
+				{
+					$this->load->view('univadmin/change_password',$data);
+				}
+				else
+				{
+					$this->load->view('admin/update_password', $data);							
+				}	
 		}
 	 }
 	}
