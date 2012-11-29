@@ -220,11 +220,11 @@ class Article_model extends CI_Model
 	{
 		if($approve_status=='1')
 		{
-		$approve_status='0';
+			$approve_status='0';
 		}
 		else if($approve_status=='0')
 		{
-		$approve_status='1'; 
+			$approve_status='1'; 
 		}
 		$data=array('article_approve_status'=>$approve_status);
 		$this->db->update('article', $data, array('article_id' => $article_id));

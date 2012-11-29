@@ -476,8 +476,8 @@ class adminarticles extends CI_Controller
 		{
 			redirect('admin/adminlogout');
 		}
-		$this->load->view('univadmin/header',$data);
-		$this->load->view('univadmin/sidebar',$data);
+		//$this->load->view('univadmin/header',$data);
+		//$this->load->view('univadmin/sidebar',$data);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 && $data['admin_user_level']!='3')
@@ -505,14 +505,7 @@ class adminarticles extends CI_Controller
 			if($f==1)
 			{
 				$fu_status=$this->article_model->home_featured_unfeatured_article($f_status,$article_id);
-				if($fu_status)
-				{
-					redirect('newadmin/adminarticles/manage_articles/fh');
-				}
-				else
-				{
-					redirect('newadmin/adminarticles/manage_articles/ufh');
-				}
+				echo $fu_status;				
 			}
 			else
 			{
@@ -582,8 +575,8 @@ class adminarticles extends CI_Controller
 		{
 			redirect('admin/adminlogout');
 		}
-		$this->load->view('univadmin/header',$data);
-		$this->load->view('univadmin/sidebar',$data);
+		//$this->load->view('univadmin/header',$data);
+		//$this->load->view('univadmin/sidebar',$data);
 		$flag=0;
 		foreach($data['admin_priv'] as $userdata['admin_priv']){
 		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
@@ -599,14 +592,7 @@ class adminarticles extends CI_Controller
 		else
 		{
 			$fu_status=$this->article_model->approve_home_confirm($approve_status,$article_id);
-			if($fu_status)
-			{
-				redirect('newadmin/adminarticles/manage_articles/aas');
-			}
-			else
-			{
-				redirect('newadmin/adminarticles/manage_articles/adas');
-			}
+			echo $fu_status;		
 		}
 			
 		}
