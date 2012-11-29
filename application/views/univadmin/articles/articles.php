@@ -386,12 +386,12 @@ function delete_confirm(id)
 				$('.check_university_'+id).hide();
 				$('.check_university1_'+id).hide();
 				$('#delete').show();
-				setTimeout(function(){$('#delete').hide('slow');},2000);		
+				setTimeout(function(){$('#delete').fadeOut('slow');},2000);		
 			}
 			else
 			{
 				$('#denied').show();
-				setTimeout(function(){$('#denied').hide('slow');},2000);	
+				setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
 			}
 		}
 	});
@@ -552,7 +552,7 @@ function featured_home_confirm(id_sta)
 				else
 				{
 					$('#alert').show();
-					setTimeout(function(){$('#alert').hide('slow');},2000);					
+					setTimeout(function(){$('#alert').fadeOut('slow');},2000);					
 				}
 			}
 		});
