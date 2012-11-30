@@ -218,18 +218,17 @@ class News_model extends CI_Model
 	//new
 	function approve_home_confirm($approve_status,$news_id)
 	{
-		/* if($approve_status=='1')
+		if($approve_status=='1')
 		{
-		$approve_status='0';
+			$approve_status='0';
 		}
 		else if($approve_status=='0')
 		{
-		$approve_status='1'; 
-		} */
+			$approve_status='1'; 
+		} 
 		$data=array('news_approve_status'=>$approve_status);
 		$this->db->update('news', $data, array('news_id' => $news_id));
-		return $approve_status;
-       
+		return $approve_status;    
 	}	
 	//new
 	function count_feature_news($field)

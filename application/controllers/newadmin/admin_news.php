@@ -469,64 +469,60 @@ class Admin_news extends CI_Controller
 		
 	 }
 	 //new
-	 function featured_unfeatured_news($f_status='',$news_id)
+	function featured_unfeatured_news($f_status='',$news_id)
 	{
-		if (!$this->tank_auth->is_admin_logged_in()) {
+		if (!$this->tank_auth->is_admin_logged_in())
+		{
 			redirect('admin/adminlogin/');
-		}
-		else{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
-		$this->load->view('univadmin/header',$data);
-		$this->load->view('univadmin/sidebar',$data);
-		$flag=0;
-		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
-		{
-		$flag=1;
-		break;
-		}
-		}
-		if($flag==0)
-		{
-		$this->load->view('univadmin/accesserror', $data);
 		}
 		else
 		{
-		$f=1;
-		if($data['admin_user_level']=='3')
-		{
-			$admin_univ_id=$this->news_model->fetch_univ_id($data['user_id']);
-			$news_list=$this->news_model->fetch_news_ids($admin_univ_id['univ_id']);
-			if(!in_array($news_id,$news_list))
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
 			{
-				$f=0;
+				redirect('admin/adminlogout');
 			}
-		}
-		if($f==1)
-		{
-			$fu_status=$this->news_model->home_featured_unfeatured_news($f_status,$news_id);
-			if($fu_status)
+			//$this->load->view('univadmin/header',$data);
+			//$this->load->view('univadmin/sidebar',$data);
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
 			{
-			redirect('newadmin/admin_news/manage_news/fh');
+				if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
+				{
+					$flag=1;
+					break;
+				}
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
 			}
 			else
 			{
-			redirect('newadmin/admin_news/manage_news/ufh');
+				$f=1;
+				if($data['admin_user_level']=='3')
+				{
+					$admin_univ_id=$this->news_model->fetch_univ_id($data['user_id']);
+					$news_list=$this->news_model->fetch_news_ids($admin_univ_id['univ_id']);
+					if(!in_array($news_id,$news_list))
+					{
+						$f=0;
+					}
+				}
+				if($f==1)
+				{
+					$fu_status=$this->news_model->home_featured_unfeatured_news($f_status,$news_id);
+					echo $fu_status;		
+				}
+				else
+				{
+					$this->load->view('univadmin/accesserror', $data);
+				}	
 			}
 		}
-		else
-		{
-			$this->load->view('univadmin/accesserror', $data);
-		}	
-		}
-	  }
 	}
 	
 	function count_featured_news($field)
@@ -583,45 +579,38 @@ class Admin_news extends CI_Controller
 		}
 		else
 		{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
-		$this->load->view('univadmin/header',$data);
-		$this->load->view('univadmin/sidebar',$data);
-		$flag=0;
-		foreach($data['admin_priv'] as $userdata['admin_priv'])
-		{
-			if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
 			{
-				$flag=1;
-				break;
+				redirect('admin/adminlogout');
 			}
-		}
-		if($flag==1)
-		{
-		$this->load->view('univadmin/accesserror', $data);
-		}
-		else
-		{
-		$fu_status=$this->news_model->approve_home_confirm($approve_status,$news_id);
-		if($fu_status)
-		{
-		redirect('newadmin/admin_news/manage_news/aas');
-		}
-		else
-		{
-		redirect('newadmin/admin_news/manage_news/adas');
-		}
-		}
+			//$this->load->view('univadmin/header',$data);
+			//$this->load->view('univadmin/sidebar',$data);
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
+			{
+				if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
+				{
+					$flag=1;
+					break;
+				}
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
+			}
+			else
+			{
+				$fu_status=$this->news_model->approve_home_confirm($approve_status,$news_id);
+				echo $fu_status;		
+			}
 			
 		}
-	  }
 	}
+}
 
 /* End of file auth.php */
 /* Location: ./application/controllers/auth.php */

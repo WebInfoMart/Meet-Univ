@@ -1,6 +1,36 @@
 <div class="modal hide" id="alert">
 	<div class="modal-header">		
-		<div align="center"><h3>You have reached maximum limit</h3></div>
+		<div align="center" style="color:red;"><h3>You have reached maximum limit</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="deleted">
+	<div class="modal-header">		
+		<div align="center"><h3>News deleted successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="approved">
+	<div class="modal-header">		
+		<div align="center"><h3>News approved successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="disapproved">
+	<div class="modal-header">		
+		<div align="center"><h3>News disapproved successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="featured">
+	<div class="modal-header">		
+		<div align="center"><h3>News featured successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="unfeatured">
+	<div class="modal-header">		
+		<div align="center"><h3>News unfeatured successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="denied">
+	<div class="modal-header">		
+		<div align="center" style="color:red;"><h3>Unable to perform action please contact admin</h3></div>
 	</div>
 </div>
 <?php
@@ -31,14 +61,6 @@ $insert=1;
 }
 } 
 ?>
-<div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
-	<a class="close" data-dismiss="alert" href="#">×</a>
-	<strong>News deleted successfully</strong>
-</div>
-<div id="access" class="alert alert-success" style="display:none">
-	<a class="close" data-dismiss="alert" href="#">×</a>
-	<strong>Unable to perform action please contact admin</strong>
-</div>
 <div class="content">
     <div class="container-fluid"> 
     <div class="responsible_navi">
@@ -132,7 +154,7 @@ $insert=1;
                       <th width="20%">University Name</th>
                       <th width="15%">Status</th>
 					  <th width="20%">Featured/NotFeatured</th>
-					   <th width="20%">Choose Option</th>
+					  <th width="20%">Choose Option</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -142,8 +164,8 @@ $insert=1;
                       <td> <input type="checkbox" name="sel_row[]" value="<?php echo $news->news_id;?>" class='selectable_checkbox setchkval' /></td>
                       <td><?php echo ucwords(substr($news->news_title,0,50)); ?></td>
                        <td><?php echo ucwords($news->univ_name); ?></td>
-					   <td><?php if($news->news_approve_status){ echo "Approved"; } else {  echo "Disapproved";} ?></td>
-                       <td class="center"> <?php if($news->featured_home_news){ echo "Featured"; } else {  echo "Unfeatured";} ?></td>
+					   <td id="ahc_td_<?php echo $news->news_id; ?>"><?php if($news->news_approve_status){ echo "Approved"; } else {  echo "Disapproved";} ?></td>
+                       <td id="mhf_td_<?php echo $news->news_id; ?>" class="center"> <?php if($news->featured_home_news){ echo "Featured"; } else {  echo "Unfeatured";} ?></td>
 					   <td class="options">
 							<div class="btn-group">
 							<?php if($view==1) { ?>
@@ -161,8 +183,8 @@ $insert=1;
 										<h3>Do you want to delete?</h3>
 									</div>
 									<div class="modal-footer">
-										<a href="#" onclick="delete_confirm('<?php echo $news->news_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
-										<a href="#" class="btn" data-dismiss="modal">Close</a>
+										<a href="javascript:void(0);" onclick="delete_confirm('<?php echo $news->news_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
 								<a href="#myModal_<?php echo $news->news_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
@@ -172,21 +194,16 @@ $insert=1;
 								<div class="modal hide" id="myAppDisModal_<?php echo $news->news_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($news->news_approve_status == 1){ ?>
-											<h3>Do you want to dispprove ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to approve ?</h3>
-										<?php } ?>										
+										<h3>Do you want to change status ?</h3>	
 									</div>
 									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_news','<?php  echo $news->featured_home_news; ?>','<?php echo $news->news_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a id="ahc_<?php echo $news->news_id; ?>_<?php echo $news->news_approve_status; ?>" href="javascript:void(0)" onclick="approve_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
-								<a href="#myAppDisModal_<?php echo $news->news_id; ?>" class="btn btn-icon tip" <?php if($news->news_approve_status){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+								<a id="a_<?php echo $news->news_id; ?>" href="#myAppDisModal_<?php echo $news->news_id; ?>" class="btn btn-icon tip" <?php if($news->news_approve_status == 1){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
 									<i id="icon_<?php echo $news->news_id; ?>" class="<?php if($news->news_approve_status == 1){ echo 'icon-blue'; }?> icon-fire"></i>
-								</a>								
-								
+								</a>
 								<?php 
 								$news_title=$this->subdomain->process_url_title(substr($news->news_title,0,50));
 								$news_link=$this->subdomain->genereate_the_subdomain_link($news->subdomain_name,'news',$news_title,$news->news_id);
@@ -197,21 +214,16 @@ $insert=1;
 								<div class="modal hide" id="myFeaUnfModal_<?php echo $news->news_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($news->featured_home_news == 1){ ?>
-											<h3>Do you want to make home unfeatured ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to make home featured ?</h3>
-										<?php } ?>
-										
+										<h3>Do you want to change status ?</h3>										
 									</div>
 									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $news->featured_home_news; ?>','<?php echo $news->news_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a id="mhf_<?php echo $news->news_id; ?>_<?php  echo $news->featured_home_news; ?>" href="javascript:void(0)" onclick="featured_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
-								</div>											
-								<a href="#myFeaUnfModal_<?php echo $news->news_id; ?>"  class="btn btn-icon tip" <?php if($news->featured_home_news){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
-									<i class="<?php if($news->featured_home_news){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>								
+								</div>
+								<a id="mhf_a_<?php echo $news->news_id; ?>" href="#myFeaUnfModal_<?php echo $news->news_id; ?>"  class="btn btn-icon tip" <?php if($news->featured_home_news){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i id="mhf_icon_<?php echo $news->news_id; ?>" class="<?php if($news->featured_home_news){ echo 'icon-blue'; }?> icon-star"></i>
+								</a>
 								<?php } ?>
 							</div>
 						</td>
@@ -249,8 +261,8 @@ $insert=1;
                       <td> <input type="checkbox" name="sel_row[]" value="<?php echo $row->news_id; ?>" class='selectable_checkbox setchkval'></td>
                       <td><?php echo ucwords(substr($row->news_title,0,50)); ?></td>
                        <td><?php echo ucwords($row->univ_name); ?></td>
-					   <td><?php if($row->news_approve_status){ echo "Disapprove"; } else {  echo "Approve";} ?></td>
-                       <td class="center"> <?php if($row->featured_home_news){ echo "Make Unfeatured"; } else {  echo "Make Featured";} ?></td>
+					   <td id="ahc1_td_<?php echo $row->news_id; ?>"><?php if($row->news_approve_status){ echo "Approve"; } else {  echo "Disapproved";} ?></td>
+                       <td id="mhf1_td_<?php echo $row->news_id; ?>" class="center"> <?php if($row->featured_home_news){ echo "Make Unfeatured"; } else {  echo "Make Featured";} ?></td>
 					   <td class="options">
 							<div class="btn-group">
 							<?php if($view==1){ ?>
@@ -276,9 +288,19 @@ $insert=1;
 									<i class="icon-trash"></i>
 								</a>
 								<?php }if($edit==1) { ?>
-								<a href="#" onclick="approve_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $row->featured_home_news; ?>','<?php echo $row->news_id; ?>');" class="btn btn-icon tip" <?php if($row->news_approve_status){ ?> data-original-title="Disapprove" <?php } else { ?> data-original-title="Approve" <?php } ?>>
-									<i class="<?php if($row->news_approve_status){ echo 'icon-blue'; }?> icon-fire"></i>
-								</a>
+								<div class="modal hide" id="myAppDisModal1_<?php echo $row->news_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h3>Do you want to change status ?</h3>	
+									</div>
+									<div class="modal-footer">
+										<a id="ahc1_<?php echo $row->news_id; ?>_<?php echo $row->news_approve_status; ?>" href="javascript:void(0)" onclick="approve_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>
+								<a id="a1_<?php echo $row->news_id; ?>" href="#myAppDisModal1_<?php echo $row->news_id; ?>" class="btn btn-icon tip" <?php if($row->news_approve_status == 1){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon1_<?php echo $row->news_id; ?>" class="<?php if($row->news_approve_status == 1){ echo 'icon-blue'; }?> icon-fire"></i>
+								</a>								
 								<?php 
 								$news_title=$this->subdomain->process_url_title(substr($row->news_title,0,50));
 								$news_link=$this->subdomain->genereate_the_subdomain_link($row->subdomain_name,'news',$news_title,$row->news_id);
@@ -286,25 +308,19 @@ $insert=1;
 								<a href="<?php echo $news_link; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
-								
 								<div class="modal hide" id="myFeaUnfModal1_<?php echo $row->news_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($row->featured_home_news == 1){ ?>
-											<h3>Do you want to make home unfeatured ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to make home featured ?</h3>
-										<?php } ?>
-										
+										<h3>Do you want to change status ?</h3>										
 									</div>
 									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_news','<?php  echo $row->featured_home_news; ?>','<?php echo $row->news_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a id="mhf1_<?php echo $row->news_id; ?>_<?php  echo $row->featured_home_news; ?>" href="javascript:void(0)" onclick="featured_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
-								</div>											
-								<a href="#myFeaUnfModal1_<?php echo $row->news_id; ?>"  class="btn btn-icon tip" <?php if($row->featured_home_news){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
-									<i class="<?php if($row->featured_home_news){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>								
+								</div>
+								<a id="mhf_a1_<?php echo $row->news_id; ?>" href="#myFeaUnfModal1_<?php echo $row->news_id; ?>"  class="btn btn-icon tip" <?php if($row->featured_home_news){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i id="mhf_icon1_<?php echo $row->news_id; ?>" class="<?php if($row->featured_home_news){ echo 'icon-blue'; }?> icon-star"></i>
+								</a>
 								<?php } ?>
 							</div>
 						</td>
@@ -383,34 +399,6 @@ $insert=1;
   <!-- END Content -->
  
 <script>
-function delete_confirm(newsid)
-{
-	//alert(newsid);
-	$.ajax({	
-	 type: "POST",
-	   url: "<?php echo $base; ?>newadmin/admin_news/delete_single_news/"+newsid,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-	   {
-	    //$('.check_university_'+newsid).hide();
-		if(msg=='1')
-		{
-			$('.check_university_'+newsid).hide();
-			$('#deleted').show();
-			setTimeout(function(){$('#deleted').hide('slow');},3000);		
-		}
-		else
-		{
-			
-			$('#access').show();
-			setTimeout(function(){$('#access').hide('slow');},3000);	
-		}
-		}
-	
-	});
-}	
 function addNews()
 {
 	if($('#univ option:selected').val()=='')
@@ -431,9 +419,79 @@ function addNews()
 		document.forms["myform"].submit();
 	}
 }
-function approve_home_confirm(a,b,c)
+function delete_confirm(newsid)
 {
-	window.location.href=a+'/approve_disapprove_news/'+b+'/'+c;
+	$.ajax({	
+		type: "POST",
+		url: "<?php echo $base; ?>newadmin/admin_news/delete_single_news/"+newsid,
+		async:false,
+		data: '',
+		cache: false,
+		success: function(msg)
+		{
+			if(msg=='1')
+			{
+				$('.check_university_'+newsid).hide();
+				$('#deleted').show();
+				setTimeout(function(){$('#deleted').fadeOut('slow');},3000);		
+			}
+			else
+			{
+				
+				$('#denied').show();
+				setTimeout(function(){$('#denied').fadeOut('slow');},3000);	
+			}
+		}
+	
+	});
+}
+function approve_home_confirm(id_sta)
+{
+	var arr = id_sta.id.split('_');
+	var c = arr[1];		//id
+	var b = arr[2];		//status
+	var data={'id':c,'status':b};
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $base; ?>newadmin/admin_news/approve_disapprove_news/'+b+'/'+c,
+		async:false,
+		data: data,
+		cache: false,
+		success: function(msg)
+		{
+			if(msg == '1')
+			{
+				$('#icon_'+c).addClass('icon-blue');
+				$('#icon1_'+c).addClass('icon-blue');
+				$('#a_'+c).attr('data-original-title','Approved');
+				$('#a1_'+c).attr('data-original-title','Approved');
+				$('#ahc_'+c+'_'+b).attr('id','ahc_'+c+'_'+msg);
+				$('#ahc1_'+c+'_'+b).attr('id','ahc1_'+c+'_'+msg);
+				$('#ahc_td_'+c).text("Approved");
+				$('#ahc1_td_'+c).text("Approved");
+				$('#approved').show();
+				setTimeout(function(){$('#approved').fadeOut('slow');},2000);
+			}
+			else if(msg == '0')
+			{
+				$('#icon_'+c).removeClass('icon-blue');
+				$('#icon1_'+c).removeClass('icon-blue');
+				$('#a_'+c).attr('data-original-title','Disapproved');
+				$('#a1_'+c).attr('data-original-title','Disapproved');
+				$('#ahc_'+c+'_'+b).attr('id','ahc_'+c+'_'+msg);
+				$('#ahc1_'+c+'_'+b).attr('id','ahc1_'+c+'_'+msg);
+				$('#ahc_td_'+c).text("Disapproved");
+				$('#ahc1_td_'+c).text("Disapproved");
+				$('#disapproved').show();
+				setTimeout(function(){$('#disapproved').fadeOut('slow');},2000);
+			}
+			else
+			{
+				$('#denied').show();
+				setTimeout(function(){$('#denied').fadeOut('slow');},2000);
+			}
+		}
+	});
 }
 function featured_home_confirm(a,b,c)
 {
@@ -458,12 +516,125 @@ function featured_home_confirm(a,b,c)
 				else
 				{
 					$('#alert').show();
-					setTimeout(function(){$('#alert').hide('slow');},2000);					
+					setTimeout(function(){$('#alert').fadeOut('slow');},2000);					
 				}
 			}
 		});
 	}
 	
+}
+function featured_home_confirm_new(id_sta)
+{
+	var arr = id_sta.id.split('_');	
+	var c = arr[1];		//id
+	var b = arr[2];		//status
+	if(b==1)
+	{
+		$.ajax({
+			type: "POST",
+			url: '<?php echo $base; ?>newadmin/admin_news/featured_unfeatured_news/'+b+'/'+c,
+			async:false,
+			data: '',
+			cache: false,
+			success: function(msg)
+			{
+				if(msg==1)
+				{
+					$('#mhf_icon_'+c).addClass('icon-blue');
+					$('#mhf_icon1_'+c).addClass('icon-blue');
+					$('#mhf_a_'+c).attr('data-original-title','Featured');
+					$('#mhf_a1_'+c).attr('data-original-title','Featured');
+					$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+					$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+					$('#mhf_td_'+c).text("Featured");
+					$('#mhf1_td_'+c).text("Featured");
+					$('#featured').show();				
+					setTimeout(function(){$('#featured').fadeOut('slow');},2000);
+				}
+				else if(msg==0)
+				{
+					$('#mhf_icon_'+c).removeClass('icon-blue');
+					$('#mhf_icon1_'+c).removeClass('icon-blue');
+					$('#mhf_a_'+c).attr('data-original-title','Featured');
+					$('#a1_'+c).attr('data-original-title','Featured');
+					$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+					$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+					$('#mhf_td_'+c).text("Unfeatured");
+					$('#mhf1_td_'+c).text("Unfeatured");
+					$('#unfeatured').show();				
+					setTimeout(function(){$('#unfeatured').fadeOut('slow');},2000);
+				}
+				else
+				{
+					$('#denied').show();
+					setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
+				}
+			}
+		});
+	}
+	else
+	{
+		$.ajax({
+			type: "POST",
+			url: "<?php echo $base; ?>newadmin/admin_news/count_featured_news/featured_home_news",
+			async:false,
+			data: '',
+			cache: false,
+			success: function(msg)
+			{
+				if(msg==1)
+				{
+					$.ajax({
+						type: "POST",
+						url: '<?php echo $base; ?>newadmin/admin_news/featured_unfeatured_news/'+b+'/'+c,
+						async:false,
+						data: '',
+						cache: false,
+						success: function(msg)
+						{
+							if(msg==1)
+							{
+								$('#mhf_icon_'+c).addClass('icon-blue');
+								$('#mhf_icon1_'+c).addClass('icon-blue');
+								$('#mhf_a_'+c).attr('data-original-title','Featured');
+								$('#mhf_a1_'+c).attr('data-original-title','Featured');
+								$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+								$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+								$('#mhf_td_'+c).text("Featured");
+								$('#mhf1_td_'+c).text("Featured");
+								$('#featured').show();				
+								setTimeout(function(){$('#featured').fadeOut('slow');},2000);
+							}
+							else if(msg==0)
+							{
+								$('#mhf_icon_'+c).removeClass('icon-blue');
+								$('#mhf_icon1_'+c).removeClass('icon-blue');
+								$('#mhf_a_'+c).attr('data-original-title','Featured');
+								$('#a1_'+c).attr('data-original-title','Featured');
+								$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+								$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+								$('#mhf_td_'+c).text("Unfeatured");
+								$('#mhf1_td_'+c).text("Unfeatured");
+								$('#unfeatured').show();				
+								setTimeout(function(){$('#unfeatured').fadeOut('slow');},2000);
+							}
+							else
+							{
+								$('#denied').show();
+								setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
+							}
+						}
+						
+					});
+				}				
+				else
+				{
+					$('#alert').show();
+					setTimeout(function(){$('#alert').fadeOut('slow');},2000);					
+				}
+			}
+		});
+	}
 }
 var arr=new Array;
 function action_formsubmit(id,flag)

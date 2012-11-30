@@ -576,45 +576,38 @@ class Admin_ques extends CI_Controller
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		}
-		else{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
-		
-		$flag=0;
-		foreach($data['admin_priv'] as $userdata['admin_priv'])
-		{
-			if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
-			{
-				$flag=1;
-				break;
-			}
-		}
-		if($flag==0)
-		{
-			$this->load->view('univadmin/accesserror', $data);
-		}
 		else
 		{
-			$fu_status=$this->ques_model->approve_home_confirm($approve_status,$ques_id);
-			if($fu_status)
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
 			{
-				redirect('newadmin/admin_ques/manage_ques/aas');
+				redirect('admin/adminlogout');
+			}
+			
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
+			{
+				if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
+				{
+					$flag=1;
+					break;
+				}
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
 			}
 			else
 			{
-				redirect('newadmin/admin_ques/manage_ques/adas');
-			}		
-		
+				$fu_status=$this->ques_model->approve_home_confirm($approve_status,$ques_id);
+				echo $fu_status;		
+			}
+				
 		}
-			
-		}
-	  }
+	}
 	  //new
 	function add_ans()
 	{		if (!$this->tank_auth->is_admin_logged_in()) 

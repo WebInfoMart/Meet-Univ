@@ -3,6 +3,31 @@
 		<div align="center"><h3>You have reached maximum limit for show ques</h3></div>
 	</div>
 </div>
+<div class="modal hide" id="deleted">
+	<div class="modal-header">		
+		<div align="center"><h3>Question deleted successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="approved">
+	<div class="modal-header">		
+		<div align="center"><h3>Question approved successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="disapproved">
+	<div class="modal-header">		
+		<div align="center"><h3>Question disapproved successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="addques">
+	<div class="modal-header">		
+		<div align="center"><h3>Question Added Successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="denied">
+	<div class="modal-header">		
+		<div align="center" style="color:red;"><h3>Unable to perform action please contact admin</h3></div>
+	</div>
+</div>
 <?php
 $edit=0;
 $delete=0;
@@ -31,19 +56,6 @@ $insert=1;
 }
 } 
 ?>
-<div id="addques" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Question Added Successfully</strong>
-</div>
-<div id="access" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Unable to perform action please contact admin</strong>
-</div>
-<div id="deleted" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Question Deleted Successfully</strong>
-</div>
-
 <div class="content">
   <div class="container-fluid"> 
 	<div class="responsible_navi">
@@ -147,13 +159,13 @@ $insert=1;
 				foreach($ques_info as $row){
 				?>
 					<tr class="check_university_<?php echo $row->que_id;?>" >
-                      <td><input type="checkbox" class="selectable_checkbox setchkval" value="<?php echo $row->que_id;?>"></td>
-                      <td><?php echo ucwords(substr($row->q_title,0,50)); ?></td>
-                       <td><?php echo ucwords($row->univ_name); ?></td>					   
-                       <!--<td class="center"><?php //if($row->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>-->
-					   <td><?php if($row->q_featured_home_que){ echo "Featured"; } else {  echo"Unfeatured";} ?></td>
-					   <td id="count_<?php echo $row->que_id; ?>"><?php $count=$this->ques_model->ans_count($row->que_id); echo $count; ?></td>	
-					   <td class="options">
+						<td><input type="checkbox" class="selectable_checkbox setchkval" value="<?php echo $row->que_id;?>"></td>
+						<td><?php echo ucwords(substr($row->q_title,0,50)); ?></td>
+						<td><?php echo ucwords($row->univ_name); ?></td>					   
+						<!--<td class="center"><?php //if($row->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>-->
+						<td><?php if($row->q_featured_home_que){ echo "Featured"; } else {  echo"Unfeatured";} ?></td>
+						<td id="count_<?php echo $row->que_id; ?>"><?php $count=$this->ques_model->ans_count($row->que_id); echo $count; ?></td>	
+						<td class="options">
 							<div class="btn-group">
 							<!--
 								<a href="<?php //echo "$base"; ?>newadmin/admin_ques/edit_ques/<?php //echo $row->que_id; ?>" class="btn btn-icon tip" data-original-title="View">
@@ -170,7 +182,7 @@ $insert=1;
 										<h3>Do you want to delete?</h3>
 									</div>
 									<div class="modal-footer">
-										<a href="" onclick="delete_confirm('<?php echo $row->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0);" onclick="delete_confirm('<?php echo $row->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
@@ -189,19 +201,14 @@ $insert=1;
 								<div class="modal hide" id="myAppDisModal_<?php echo $row->que_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($row->q_approve == 1){ ?>
-											<h3>Do you want to dispprove ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to approve ?</h3>
-										<?php } ?>
-										
+										<h3>Do you want to change status ?</h3>	
 									</div>
 									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_ques','<?php  echo $row->q_approve; ?>','<?php echo $row->que_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a id="ahc_<?php echo $row->que_id; ?>_<?php echo $row->q_approve; ?>" href="javascript:void(0)" onclick="approve_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
-								<a href="#myAppDisModal_<?php echo $row->que_id; ?>" class="btn btn-icon tip" <?php if($row->q_approve){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+								<a id="a_<?php echo $row->que_id; ?>" href="#myAppDisModal_<?php echo $row->que_id; ?>" class="btn btn-icon tip" <?php if($row->q_approve == 1){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
 									<i id="icon_<?php echo $row->que_id; ?>" class="<?php if($row->q_approve == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>								
 								<div class="modal hide" id="myFeaUnfModal_<?php echo $row->que_id; ?>">
@@ -285,8 +292,8 @@ $insert=1;
 										<h3>Do you want to delete?</h3>
 									</div>
 									<div class="modal-footer">
-										<a href="" onclick="delete_confirm('<?php echo $latest->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
-										<a href="#" class="btn" data-dismiss="modal">Close</a>
+										<a href="javascript:void(0);" onclick="delete_confirm('<?php echo $latest->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
 								<a href="#myModal1_<?php echo $latest->que_id; ?>" class="btn btn-icon tip" data-toggle="modal" data-original-title="Delete">
@@ -304,20 +311,15 @@ $insert=1;
 								<div class="modal hide" id="myAppDisModal1_<?php echo $latest->que_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($latest->q_approve == 1){ ?>
-											<h3>Do you want to dispprove ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to approve ?</h3>
-										<?php } ?>
-										
+										<h3>Do you want to change status ?</h3>	
 									</div>
 									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_ques','<?php  echo $latest->q_approve; ?>','<?php echo $latest->que_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a id="ahc1_<?php echo $latest->que_id; ?>_<?php echo $latest->q_approve; ?>" href="javascript:void(0)" onclick="approve_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
-								<a href="#myAppDisModal1_<?php echo $latest->que_id; ?>" class="btn btn-icon tip" <?php if($latest->q_approve){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
-									<i id="icon_<?php echo $latest->que_id; ?>" class="<?php if($latest->q_approve == 1){ echo 'icon-blue'; }?> icon-fire"></i>
+								<a id="a1_<?php echo $latest->que_id; ?>" href="#myAppDisModal1_<?php echo $latest->que_id; ?>" class="btn btn-icon tip" <?php if($latest->q_approve == 1){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon1_<?php echo $latest->que_id; ?>" class="<?php if($latest->q_approve == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
 								<div class="modal hide" id="myFeaUnfModal1_<?php echo $latest->que_id; ?>">
 									<div class="modal-header">
@@ -448,7 +450,6 @@ $.ajax({
    });
  }
 }
-
 function addQues()
 {
 	if($("#title").val()=='')
@@ -479,15 +480,84 @@ function addQues()
 		if(msg=='1')
 		{
 			$('#addques').show();
-			setTimeout(function(){$('#addques').hide('slow');},3000);
+			setTimeout(function(){$('#addques').fadeOut('slow');},3000);
 		}
 	}
 	});
 	}
 }
+function delete_confirm(id)
+{
+	$.ajax({	
+		type: "POST",
+		url: "<?php echo $base; ?>newadmin/admin_ques/delete_single_ques/"+id,
+		async:false,
+		data: '',
+		cache: false,
+		success: function(msg)
+		{
+			if(msg=='1')
+			{
+				$('.check_university_'+id).hide();
+				$('#deleted').show();
+				setTimeout(function(){$('#deleted').fadeOut('slow');},3000);		
+			}
+			else
+			{				
+				$('#denied').show();
+				setTimeout(function(){$('#denied').fadeOut('slow');},3000);	
+			}
+		}
+	
+	});
+}
 function approve_home_confirm(a,b,c)
 {
 	 window.location.href=a+'/approve_disapprove_ques/'+b+'/'+c;
+}
+function approve_home_confirm_new(id_sta)
+{
+	var arr = id_sta.id.split('_');
+	var c = arr[1];		//id
+	var b = arr[2];		//status
+	var data={'id':c,'status':b};
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $base; ?>newadmin/admin_ques/approve_disapprove_ques/'+b+'/'+c,
+		async:false,
+		data: data,
+		cache: false,
+		success: function(msg)
+		{
+			if(msg == '1')
+			{
+				$('#icon_'+c).addClass('icon-blue');
+				$('#icon1_'+c).addClass('icon-blue');
+				$('#a_'+c).attr('data-original-title','Approved');
+				$('#a1_'+c).attr('data-original-title','Approved');
+				$('#ahc_'+c+'_'+b).attr('id','ahc_'+c+'_'+msg);
+				$('#ahc1_'+c+'_'+b).attr('id','ahc1_'+c+'_'+msg);				
+				$('#approved').show();
+				setTimeout(function(){$('#approved').fadeOut('slow');},2000);
+			}
+			else if(msg == '0')
+			{
+				$('#icon_'+c).removeClass('icon-blue');
+				$('#icon1_'+c).removeClass('icon-blue');
+				$('#a_'+c).attr('data-original-title','Disapproved');
+				$('#a1_'+c).attr('data-original-title','Disapproved');
+				$('#ahc_'+c+'_'+b).attr('id','ahc_'+c+'_'+msg);
+				$('#ahc1_'+c+'_'+b).attr('id','ahc1_'+c+'_'+msg);	
+				$('#disapproved').show();
+				setTimeout(function(){$('#disapproved').fadeOut('slow');},2000);
+			}
+			else
+			{
+				$('#denied').show();
+				setTimeout(function(){$('#denied').fadeOut('slow');},2000);
+			}
+		}
+	});
 }
 function featured_home_confirm(a,b,c)
 {
@@ -519,33 +589,7 @@ function featured_home_confirm(a,b,c)
 	}
 	
 }
-function delete_confirm(id)
-{
-	//alert(newsid);
-	$.ajax({	
-	 type: "POST",
-	   url: "<?php echo $base; ?>newadmin/admin_ques/delete_single_ques/"+id,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-	   {//alert(msg);
-		if(msg=='1')
-		{
-			$('.check_university_'+id).hide();
-			$('#deleted').show();
-			setTimeout(function(){$('#deleted').hide('slow');},3000);		
-		}
-		else
-		{
-			
-			$('#access').show();
-			setTimeout(function(){$('#access').hide('slow');},3000);	
-		}
-		}
-	
-	});
-}
+
 var arr=new Array;
 function action_formsubmit(id,flag)
 {

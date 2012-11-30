@@ -70,11 +70,7 @@ $insert=1;
 	<a class="close" data-dismiss="alert" href="#">×</a>
 	<strong>Unable to perform action please contact admin</strong>
 </div>
-<div id="deleted" class="alert alert-success" style="display:none">
-	<a class="close" data-dismiss="alert" href="#">×</a>
-	<strong>Article Deleted Successfully</strong>
-</div>
-  <div class="content">
+<div class="content">
     <div class="container-fluid"> 
 	<div class="responsible_navi"></div>	
       <div class="row-fluid">
