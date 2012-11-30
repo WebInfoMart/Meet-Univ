@@ -345,7 +345,7 @@ class Event_model extends CI_Model
 	{
 		$var = $this->db->query("SELECT vld.v_id, vld.v_fullname, vld.`v_email`,vld.`v_phone`,lead_data.phone_verified,lead_data.email_verified,vld.v_verified_phone,vld.v_verified_email FROM verified_lead_data AS vld	
 		LEFT JOIN lead_data ON lead_data.email = vld.v_email
-		WHERE vld.v_id IN ( select v_id from verified_lead_data where v_next_action='hot' )ORDER BY vld.v_email LIMIT 0 , 30");
+		WHERE vld.v_id IN ( select v_id from verified_lead_data where v_next_action='hot' ) ORDER BY vld.created_on desc LIMIT 0 , 30");
 		return $var->result_array();
 	}
 	function delete_recent_events()

@@ -207,21 +207,24 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<input type="hidden" name="search_program" id="search_program" value=""/>
 									<div id="open_box_course">
 										<input type="text" style="width:220px;" name="selected_college_course" id="selected_college_course" value=""/>
-									</div>
-								</div>
-								<!--<div class="float_l span4 margin_zero">
-									<select id="search_program" name="search_program">
-										<option value="">Select</option>
-										<?php
-										foreach($area_interest as $srch_course)
-										{
-										?>
-											<option value="<?php echo $srch_course['prog_parent_id']; ?>"><?php echo ucwords($srch_course['program_parent_name']); ?></option>
-										<?php
-										}
-										?>
-									</select>
-								</div>-->
+									</div>										
+								</div>	
+									<!--   -->
+									<br />
+									<br />
+									<br />
+									<div class="dropdown_box_course" style="display:none;" >
+										<div id="select_subcourse" style="display:none;" >
+											<span id="selected_subcourse">Select Subcourse</span>
+											<span id="subcourse_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
+										</div>
+										<input type="hidden" name="search_subprogram" id="search_subprogram" value=""/>
+									
+										<div id="open_box_subcourse" style="display:none;">
+										<input type="text" style="width:220px;" name="selected_college_subcourse" id="selected_college_subcourse" value=""/>
+										</div>
+									</div>	
+									<!-- -->
 								<div class="float_l span1">
 									<input type="button" onclick="serach_results()" name="serach_col_btn" class="btn" value="Search"/>
 									<input type="hidden" name="btn_search" id="btn_col_search">
@@ -830,12 +833,12 @@ $area_interest_list='[';
 $ai=1;
 foreach($area_interest as $srch_course)
 {
-$area_interest_list.='{label: "'.$srch_course['program_parent_name'].'"}';
-if($ai!=count($area_interest))
-{
-$area_interest_list.=',';
-}
-$ai++;
+	$area_interest_list.='{label: "'.$srch_course['program_parent_name'].'"}';
+	if($ai!=count($area_interest))
+	{
+		$area_interest_list.=',';
+	}
+	$ai++;
 }
  $area_interest_list.=']'; 
 ?>	
@@ -895,6 +898,7 @@ function voicepopup(id) {
 </script>
 
 <script type="text/javascript">
+var eduLevel;
 $(document).ready(function(){
 	//$("#open_box").hide();
 	
@@ -913,7 +917,7 @@ $(document).ready(function(){
 		});
 	
 	$("html").click(function(e){
-	//alert(e.id);
+	//alert(e.target.id);
 		if((e.target.id == "select_city") || (e.target.id == "city_dropdown") || (e.target.id == "selected_event_city") ){
 			$("#open_box").show();
 			$('#selected_event_city').autocomplete('search', '');
@@ -928,10 +932,15 @@ $(document).ready(function(){
 			$("#open_box_course").show();
 			$('#selected_college_course').autocomplete('search', '');
 		}
+		else if((e.target.id == "select_subcourse")  || (e.target.id == "selected_subcourse") || (e.target.id == "course_dropdown") || (e.target.id == "selected_college_subcourse")){
+			$("#open_box_subcourse").show();
+			$("#selected_college_subcourse").show();			
+			$('#selected_college_subcourse').autocomplete('search', '');
+		}
 		else{
 			$("#open_box").hide();
 			$("#open_box_country").hide();
-			$("#open_box_course").hide();
+			$("#open_box_course").hide();			
 			$('.ui-autocomplete').hide();
 			
 	}
@@ -961,7 +970,7 @@ $(document).ready(function(){
 		}
 	});*/
 	
-	$("#open_box_course").hide();
+	$("#open_box_course").hide();	
 	
 	$("#selected_college_course").autocomplete({
 		source: <?php echo $area_interest_list; ?>,
@@ -971,11 +980,53 @@ $(document).ready(function(){
 			$("#open_box_country").hide();
 			$("#selected_college_course").val('');	
 			event.preventDefault();
+			//alert(eduLevel);
+			searchSubcourse(ui.item.label,eduLevel);//kk
 		},
 		width: 215,
 		selectFirst: false,
 		minLength: 0,
 		});
+	
+						
+	
+
+	function searchSubcourse(name,level)
+	{
+		//alert(name);
+		data={program:name,level:level};
+		 $.ajax({
+		   type: "POST",
+		   url: "<?php echo $base; ?>search/fetch_parent_progrmas_id",
+		   async:false,
+		   data: data,
+		   cache: false,
+		   success: function(msg)
+		   {
+		   //alert(msg);
+				var test = new Array();
+				test=msg.split(',');
+				$("#selected_college_subcourse").autocomplete({
+				source: test,
+					select: function( event, ui ) {
+					$("#search_subprogram").val(ui.item.value);
+					$("#selected_subcourse").html(ui.item.label);						
+					$("#selected_college_subcourse").val('');	
+					$("#selected_college_subcourse").hide();
+					event.preventDefault();
+				},
+				width: 215,
+				selectFirst: false,
+				minLength: 0,
+				});
+				$('#selected_college_subcourse').autocomplete('search', '');	
+				$("#select_subcourse").show();
+				$(".dropdown_box_course").show();		
+							
+		   }
+		   })
+	}	
+	
 		
 	/*$("html").click(function(e){
 		if((e.target.id == "select_course") || (e.target.id == "course_dropdown") || (e.target.id == "selected_college_course")){
@@ -1013,6 +1064,24 @@ $(document).ready(function(){
 		//$(":button").addClass("active");
 			var id =$(this).attr('id');
 			$('#'+id).addClass("active");
+			if(id=='pg')
+			{
+				eduLevel=4;
+			}
+			if(id=='ug')
+			{
+				eduLevel=3;
+			}
+			if(id=='found')
+			{
+				eduLevel=2;
+			}
+			if(id=='allcollege')
+			{
+				eduLevel='';
+			}
+			
+			//alert(eduLevel);
 		}
 		
 	});
@@ -1062,7 +1131,7 @@ $('.openddli').click(function()
 	
 $(document).ready(function() {
 			$("#col").hide();
-	$('#colleges').click(function() {
+	$('#colleges').click(function() {		
 		$("#events_col").hide();
 		$("#col").show();
 		$('#sub-title').replaceWith('<p class="help-block white help_line" id="sub-title">colleges by programs, country and course level</p>');
@@ -1112,28 +1181,34 @@ $('#type_search').val('fairs');
 
 function serach_results()
 {
-var url='<?php echo $base; ?>colleges/';
-var country;
-var educ_level;
-var area_interest;
-var country=$('#selected_country').html();
-country=country.replace(' ','_');
-var prog= $('#selected_course').html();
-prog=prog.replace(/ /g,'_');
-var educ_level=$('#educ_level').val();
-if(country!='Select_Country')
-{
-url=url+country+'/';
-}
-if(prog!='Select' && prog!='Select_Program')
-{
-url=url+prog+'/';
-}
-if(educ_level!='All')
-{
-url=url+educ_level;
-}
-window.location=url;
+	var url='<?php echo $base; ?>colleges/';
+	var country;
+	var educ_level;
+	var area_interest;
+	var country=$('#selected_country').html();
+	country=country.replace(' ','_');
+	var prog= $('#selected_course').html();
+	prog=prog.replace(/ /g,'_');
+	var subprog= $('#selected_subcourse').html();
+	subprog=subprog.replace(/ /g,'_').replace('(','-').replace(')','~');
+	var educ_level=$('#educ_level').val();
+	if(country!='Select_Country')
+	{
+		url=url+country+'/';
+	}
+	if(educ_level!='All')
+	{
+		url=url+educ_level+'/';
+	}
+	if(prog!='Select')
+	{
+		url=url+prog+'/';
+		if(subprog!='Select Subcourse')
+		{//alert(url);
+			url=url+subprog;
+		}
+	}	
+	window.location=url;
 }
 function serch_events()
 {
@@ -1163,7 +1238,7 @@ function fetch_programs(educ_level)
 	   cache: false,
 	   success: function(msg)
 	   {
-	  $('#search_program').html(msg);
+			$('#search_program').html(msg);
 	   }
 	   })
 }
@@ -1293,7 +1368,7 @@ height:22px;
 
 <script>
 noofregister();
-var delay = 5000; //5 minutes counted in milliseconds.
+var delay = 500000000000; //5 minutes counted in milliseconds.
 var cval=0;
 setInterval(function(){
  noofregister()   
@@ -1352,14 +1427,11 @@ var e_id = array[1];
 	   cache: false,
 	   success: function(msg)
 	   {
-	   $(".wrap").css("margin-left","193px");
-	      $(this).removeClass("left-arrow"); 
-          $(this).addClass("left-arrow-overwrite"); 
-	   $("#event_pop_"+e_id).popover(
-		'content',
-		msg
-	).popover('show');
-	$("#event_pop_"+e_id).append('<input type="hidden" name="page_status_voice" value="home"/>');
+			$(".wrap").css("margin-left","193px");
+			$(this).removeClass("left-arrow"); 
+			$(this).addClass("left-arrow-overwrite"); 
+			$("#event_pop_"+e_id).popover('content',msg).popover('show');
+			$("#event_pop_"+e_id).append('<input type="hidden" name="page_status_voice" value="home"/>');
 	   }
 	   }) 
 });
@@ -1402,15 +1474,9 @@ var e_id = array[1];
 	   cache: false,
 	   success: function(msg)
 	   {
-	   $(".wrap").css("margin-left","193px");
-	      //$(this).removeClass("left-arrow"); 
-          //$(this).addClass("left-arrow-overwrite"); 
-		  
-	   $("#event_pop2_"+e_id).popover(
-		'content',
-		msg
-	).popover('show');
-	$("#event_pop2_"+e_id).append('<input type="hidden" name="page_status" value="home"/>');
+			$(".wrap").css("margin-left","193px");		  
+			$("#event_pop2_"+e_id).popover('content',msg	).popover('show');
+			$("#event_pop2_"+e_id).append('<input type="hidden" name="page_status" value="home"/>');
 	   }
 	   }) 
 });
