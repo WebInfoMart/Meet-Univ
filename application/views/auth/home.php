@@ -216,12 +216,12 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<div class="dropdown_box_course" style="display:none;" >
 										<div id="select_subcourse" style="display:none;" >
 											<span id="selected_subcourse">Select Subcourse</span>
-											<span id="subcourse_dropdown" class="caret" style="float: right;margin-top: 7px;"></span>
+											<span id="subcourse_dropdown" class="caret" style="float:right;margin-top:7px;"></span>
 										</div>
-										<input type="hidden" name="search_subprogram" id="search_subprogram" value=""/>
+										<!--<input type="hidden" name="search_subprogram" id="search_subprogram" value="" />-->
 									
 										<div id="open_box_subcourse" style="display:none;">
-										<input type="text" style="width:220px;" name="selected_college_subcourse" id="selected_college_subcourse" value=""/>
+										<input type="text" style="width:220px;" name="selected_college_subcourse" id="selected_college_subcourse" value="" />
 										</div>
 									</div>	
 									<!-- -->
