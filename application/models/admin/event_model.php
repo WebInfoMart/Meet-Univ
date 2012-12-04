@@ -160,6 +160,7 @@ class Event_model extends CI_Model
 	function delete_single_event($event_id)
 	{
 		$this->db->delete('events', array('event_id' => $event_id));
+		return 1;
 	}
 	
 	function fetch_event_detail($event_id)
@@ -267,22 +268,20 @@ class Event_model extends CI_Model
 		}
 	
 	}
-	
-	function hide_show_event($event_id)
-	{
-	if( $this->input->post('show_hide')=='1')
-	{
-	$hs_event='0';
-	}
-	else if($this->input->post('show_hide')=='0')
-	{
-	$hs_event='1';
-	}
-	$data = array(
-			   'ban_event' => $hs_event
-			);
 
-			$this->db->update('events', $data, array('event_id' => $event_id));
+	function hide_show_event($approve_status,$event_id)				//edit by satbir on 12/04/2012
+	{
+		if($approve_status=='1')
+		{
+			$approve_status='0';
+		}
+		else if($approve_status=='0')
+		{
+			$approve_status='1'; 
+		}
+		$data=array('ban_event'=>$approve_status);
+		$this->db->update('events', $data, array('event_id' => $event_id));
+		return $approve_status;       
 	}
 	
 	function recent_events()									//added by satbir on 26/10/2012

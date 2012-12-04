@@ -204,8 +204,7 @@
   </div><!-- close .content -->
   <!-- END Content -->
    <script>
-$(document).ready(function(){
-	//alert('fnslfc');
+$(document).ready(function(){	
 	$('.collapsed-nav').css('display','none');
 	var url = window.location.pathname; 
 	var activePage = url.substring(url.lastIndexOf('/')+1);

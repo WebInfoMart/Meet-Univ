@@ -28,6 +28,16 @@
 		<div align="center"><h3>Article unfeatured successfully</h3></div>
 	</div>
 </div>
+<div class="modal hide" id="sel_atl_one">
+	<div class="modal-header">		
+		<div align="center"><h3>please select atleast one article</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_act">
+	<div class="modal-header">		
+		<div align="center"><h3>please select the action</h3></div>
+	</div>
+</div>
 <div class="modal hide" id="denied">
 	<div class="modal-header">		
 		<div align="center" style="color:red;"><h3>Unable to perform action please contact admin</h3></div>
@@ -380,7 +390,7 @@ function delete_confirm(id)
 			if(msg == 1)
 			{
 				$('.check_university_'+id).hide();
-				$('.check_university1_'+id).hide();
+				//$('.check_university1_'+id).hide();
 				$('#delete').show();
 				setTimeout(function(){$('#delete').fadeOut('slow');},2000);		
 			}
@@ -597,13 +607,15 @@ function action_formsubmit(id,flag)
 		}
 		else
 		{
-			alert("please select al least one article");
+			$('#sel_atl_one').show();				
+			setTimeout(function(){$('#sel_atl_one').fadeOut('slow');},2000);
 			return false;
 		}
 	}
 	else
 	{
-		alert("please select the action");
+		$('#sel_act').show();				
+		setTimeout(function(){$('#sel_act').fadeOut('slow');},2000);
 		return false;
 	}
 }

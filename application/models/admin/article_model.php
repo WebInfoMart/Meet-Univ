@@ -228,8 +228,7 @@ class Article_model extends CI_Model
 		}
 		$data=array('article_approve_status'=>$approve_status);
 		$this->db->update('article', $data, array('article_id' => $article_id));
-		return $approve_status;
-       
+		return $approve_status;       
 	}	
 	//new
 	function count_feature_article($field)

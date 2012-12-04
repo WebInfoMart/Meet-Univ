@@ -1,6 +1,46 @@
 <div class="modal hide" id="alert">
 	<div class="modal-header">		
-		<div align="center"><h3>You have reached maximum limit for show event</h3></div>
+		<div align="center" style="color:red;"><h3>You have reached maximum limit for show event</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="delete">
+	<div class="modal-header">		
+		<div align="center"><h3>Event deleted successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="approved">
+	<div class="modal-header">		
+		<div align="center"><h3>Event approved successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="disapproved">
+	<div class="modal-header">		
+		<div align="center"><h3>Event disapproved successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="featured">
+	<div class="modal-header">		
+		<div align="center"><h3>Event featured successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="unfeatured">
+	<div class="modal-header">		
+		<div align="center"><h3>Event unfeatured successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_atl_one">
+	<div class="modal-header">		
+		<div align="center"><h3>please select atleast one event</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_act">
+	<div class="modal-header">		
+		<div align="center"><h3>please select the action</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="denied">
+	<div class="modal-header">		
+		<div align="center" style="color:red;"><h3>Unable to perform action please contact admin</h3></div>
 	</div>
 </div>
 <div id="content" class="content_msg" style="display:none;z-index:99;position:absolute;left:190px;">
@@ -41,10 +81,6 @@ foreach ($admin_priv as $admin_priv_res){
 }
 ?>
 <!-- BEGIN Content -->
-  <div id="deleted" style="display:none;" class="alert alert-success" style="z-index:99999">
- <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Event deleted successfully</strong>
-  </div>
   <div class="content">
     <div class="container-fluid">
       <div class="responsible_navi">
@@ -156,7 +192,7 @@ foreach ($admin_priv as $admin_priv_res){
 						foreach($events_info as $row)
 						{
 					?>	
-						<tr id="check_university_<?php echo $row->event_id;?>">
+						<tr id="check_university_<?php echo $row->event_id;?>" class="check_university_<?php echo $row->event_id;?>">
 							<td><input type="checkbox" value="<?php echo $row->event_id;?>" name="check_event_<?php echo $row->event_id; ?>" class='selectable_checkbox setchkval'  id="check_event_<?php echo $row->event_id; ?>"></td>							
 							<td><?php if($row->event_title){ echo ucwords(substr($row->event_title,0,50)); } else { echo "<span style='color:#000;'>Not Available</span>"; } ?></td>
 							<td><?php echo ucwords($row->univ_name); ?></td>
@@ -179,50 +215,25 @@ foreach ($admin_priv as $admin_priv_res){
 										<h3>Do you want to delete?</h3>
 									</div>
 									<div class="modal-footer">
-										<a href="#" onclick="delete_confirm('<?php echo $row->event_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0);" onclick="delete_confirm('<?php echo $row->event_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>						
 								<a href="#myModal_<?php echo $row->event_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
-								<?php }	if(($edit==1 || $delete==1 || $insert==1) ){  ?>
-								<?php if($admin_user_level ==5){  ?>
-								<div class="modal hide" id="myFeaUnfModal_<?php echo $row->event_id; ?>">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($row->featured_home_event == 1){ ?>
-											<h3>Do you want to make home unfeatured ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to make home featured ?</h3>
-										<?php } ?>
-										
-									</div>
-									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_events','<?php  echo $row->featured_home_event; ?>','<?php echo $row->event_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
-										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
-									</div>
-								</div>											
-								<a href="#myFeaUnfModal_<?php echo $row->event_id; ?>"  class="btn btn-icon tip" <?php if($row->featured_home_event ==1 ){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
-									<i class="<?php if($row->featured_home_event ==1){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>
-								<?php } ?>									
+								<?php }	if(($edit==1 || $delete==1 || $insert==1) ){  ?>																	
 								<div class="modal hide" id="myAppDisModal_<?php echo $row->event_id; ?>">
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($row->ban_event == 1){ ?>
-											<h3>Do you want to dispprove ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to approve ?</h3>
-										<?php } ?>
-										
+										<button type="button" class="close" data-dismiss="modal">x</button>										
+											<h3>Do you want to change status ?</h3>	
 									</div>
-									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_events','<?php  echo $row->ban_event; ?>','<?php echo $row->event_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+									<div class="modal-footer">										
+										<a id="ahc_<?php echo $row->event_id; ?>_<?php echo $row->ban_event; ?>" href="javascript:void(0)" onclick="approve_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
-								</div>
-								<a href="#myAppDisModal_<?php echo $row->event_id; ?>" class="btn btn-icon tip" <?php if($row->ban_event){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+								</div>							
+								<a id="a_<?php echo $row->event_id; ?>" href="#myAppDisModal_<?php echo $row->event_id; ?>" class="btn btn-icon tip" <?php if($row->ban_event == 1){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
 									<i id="icon_<?php echo $row->event_id; ?>" class="<?php if($row->ban_event == 1){ echo 'icon-blue'; }?> icon-fire"></i>
 								</a>
 								<?php 
@@ -232,6 +243,21 @@ foreach ($admin_priv as $admin_priv_res){
 								<a href="<?php echo $event_link ; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
+								<?php if($admin_user_level ==5){  ?>
+								<div class="modal hide" id="myFeaUnfModal_<?php echo $row->event_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h3>Do you want to change status ?</h3>											
+									</div>
+									<div class="modal-footer">
+										<a id="mhf_<?php echo $row->event_id; ?>_<?php  echo $row->featured_home_event; ?>" href="javascript:void(0)" onclick="featured_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a id="mhf_a_<?php echo $row->event_id; ?>" href="#myFeaUnfModal_<?php echo $row->event_id; ?>"  class="btn btn-icon tip" <?php if($row->featured_home_event){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i id="mhf_icon_<?php echo $row->event_id; ?>" class="<?php if($row->featured_home_event){ echo 'icon-blue'; }?> icon-star"></i>
+								</a>
+								<?php } ?>
 								<?php } ?>
 							</div>
 						</td>				
@@ -269,7 +295,7 @@ foreach ($admin_priv as $admin_priv_res){
 					<?php
 					foreach($recent_event as $row){
 					?>
-					<tr id="check_university_<?php echo $row->event_id;?>">
+					<tr id="check_university_<?php echo $row->event_id;?>" class="check_university_<?php echo $row->event_id;?>">
 					  <td><input type="checkbox" value="<?php echo $row->event_id;?>" name="check_event_<?php echo $row->event_id; ?>" class='selectable_checkbox setchkval'  id="check_event_<?php echo $row->event_id; ?>"></td>							
                       <td><?php echo ucwords(substr($row->event_title,0,50)); ?></td>
                        <td><?php echo ucwords($row->univ_name); ?></td>
@@ -292,50 +318,27 @@ foreach ($admin_priv as $admin_priv_res){
 										<h3>Do you want to delete?</h3>
 									</div>
 									<div class="modal-footer">
-										<a href="#" onclick="delete_confirm('<?php echo $row->event_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
-										<a href="#" class="btn" data-dismiss="modal">Close</a>
+										<a href="javascript:void(0);" onclick="delete_confirm('<?php echo $row->event_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0);" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>						
 								<a href="#myRecentModal_<?php echo $row->event_id; ?>" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Delete">
 									<i class="icon-trash"></i>
 								</a>
 								<?php }	if(($edit==1 || $delete==1 || $insert==1)  ){  ?>
-								<div class="modal hide" id="myFeaUnfModal1_<?php echo $row->event_id; ?>">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($row->featured_home_event == 1){ ?>
-											<h3>Do you want to make home unfeatured ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to make home featured ?</h3>
-										<?php } ?>										
-									</div>
-									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_events','<?php  echo $row->featured_home_event; ?>','<?php echo $row->event_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
-										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
-									</div>
-								</div>											
-								<a href="#myFeaUnfModal1_<?php echo $row->event_id; ?>"  class="btn btn-icon tip" <?php if($row->featured_home_event){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
-									<i class="<?php if($row->featured_home_event){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>
-								
 								<div class="modal hide" id="myAppDisModal1_<?php echo $row->event_id; ?>">
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($row->ban_event == 1){ ?>
-											<h3>Do you want to dispprove ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to approve ?</h3>
-										<?php } ?>
-										
+										<button type="button" class="close" data-dismiss="modal">x</button>										
+											<h3>Do you want to change status ?</h3>	
 									</div>
-									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="approve_home_confirm('<?php echo $base;?>newadmin/admin_events','<?php  echo $row->ban_event; ?>','<?php echo $row->event_id; ?>')" class="btn" data-dismiss="modal">Yes</a>
+									<div class="modal-footer">										
+										<a id="ahc1_<?php echo $row->event_id; ?>_<?php echo $row->ban_event; ?>" href="javascript:void(0)" onclick="approve_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
-								</div>
-								<a href="#myAppDisModal1_<?php echo $row->event_id; ?>" class="btn btn-icon tip" <?php if($row->ban_event){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
-									<i id="icon_<?php echo $row->event_id; ?>" class="<?php if($row->ban_event == 1){ echo 'icon-blue'; }?> icon-fire"></i>
-								</a>								
+								</div>							
+								<a id="a1_<?php echo $row->event_id; ?>" href="#myAppDisModal1_<?php echo $row->event_id; ?>" class="btn btn-icon tip" <?php if($row->ban_event == 1){ ?> data-original-title="Approved" <?php } else { ?> data-original-title="Disapproved" <?php } ?> data-toggle="modal" >
+									<i id="icon1_<?php echo $row->event_id; ?>" class="<?php if($row->ban_event == 1){ echo 'icon-blue'; }?> icon-fire"></i>
+								</a>
 								<?php 
 								$event_title=$this->subdomain->process_url_title(substr($row->event_title,0,50));
 								$event_link=$this->subdomain->genereate_the_subdomain_link($row->subdomain_name,'event',$event_title,$row->event_id);									
@@ -343,6 +346,19 @@ foreach ($admin_priv as $admin_priv_res){
 								<a href="<?php echo $event_link ; ?>" class="btn btn-icon tip" data-original-title="Preview">
 									<i class="icon-film"></i>
 								</a>
+								<div class="modal hide" id="myFeaUnfModal1_<?php echo $row->event_id; ?>">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h3>Do you want to change status ?</h3>											
+									</div>
+									<div class="modal-footer">
+										<a id="mhf1_<?php echo $row->event_id; ?>_<?php  echo $row->featured_home_event; ?>" href="javascript:void(0)" onclick="featured_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
+										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
+									</div>
+								</div>											
+								<a id="mhf_a1_<?php echo $row->event_id; ?>" href="#myFeaUnfModal1_<?php echo $row->event_id; ?>"  class="btn btn-icon tip" <?php if($row->featured_home_event){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i id="mhf_icon1_<?php echo $row->event_id; ?>" class="<?php if($row->featured_home_event){ echo 'icon-blue'; }?> icon-star"></i>
+								</a>								
 								<?php } ?>
 							</div>
 						</td>
@@ -803,8 +819,7 @@ function addEvent()
 	}
 	return valid;
 }  
-$(document).ready(function(){
-	//alert('fnslfc');
+$(document).ready(function(){	
 	$("#event_start_date").change(function() {
 		if((new Date($("#event_end_date").val()).getTime() < new Date($("#event_start_date").val()).getTime()))
 		{
@@ -863,85 +878,180 @@ $(document).ready(function(){
 	});
 	
 function delete_confirm(id)
-{
-	//alert(id);
+{	
 	$.ajax({	
-	 type: "POST",
-	   url: "<?php echo $base; ?>newadmin/admin_events/delete_single_event/"+id,
-	   async:false,
-	   data: '',
-	   cache: false,
-	   success: function(msg)
-	   {
-	   //alert(msg);
-	    $('#check_university_'+id).hide();
+		type: "POST",
+		url: "<?php echo $base; ?>newadmin/admin_events/delete_single_event/"+id,
+		async:false,
+		data: '',
+		cache: false,
+		success: function(msg)
+		{	   
+			if(msg == 1)
+			{
+				$('.check_university_'+id).hide();
+				//$('.check_university1_'+id).hide();
+				$('#delete').show();
+				setTimeout(function(){$('#delete').fadeOut('slow');},2000);		
+			}
+			else
+			{
+				$('#denied').show();
+				setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
+			}
 		}
 	
 	});
 }
-function approve_home_confirm(url,sh,event_id)
+function approve_home_confirm(id_sta)
 {
-if(sh=='1')
-{
-shh='hide';
+	var arr = id_sta.id.split('_');	
+	var c = arr[1];		//id
+	var b = arr[2];		//status
+	var data={'id':c,'status':b};	
+	$.ajax({
+		type: "POST",
+		url: '<?php echo $base; ?>newadmin/admin_events/show_hide_event/'+b+'/'+c,
+		async:false,
+		data: data,
+		cache: false,
+		success: function(msg)
+		{
+			if(msg == '1')
+			{				
+				$('#icon_'+c).addClass('icon-blue');
+				$('#icon1_'+c).addClass('icon-blue');
+				$('#a_'+c).attr('data-original-title','Approved');
+				$('#a1_'+c).attr('data-original-title','Approved');
+				$('#ahc_'+c+'_'+b).attr('id','ahc_'+c+'_'+msg);
+				$('#ahc1_'+c+'_'+b).attr('id','ahc1_'+c+'_'+msg);								
+				$('#approved').show();				
+				setTimeout(function(){$('#approved').fadeOut('slow');},2000);				
+			}
+			else if(msg == '0')
+			{				
+				$('#icon_'+c).removeClass('icon-blue');
+				$('#icon1_'+c).removeClass('icon-blue');
+				$('#a_'+c).attr('data-original-title','Disapproved');			
+				$('#a1_'+c).attr('data-original-title','Disapproved');			
+				$('#ahc_'+c+'_'+b).attr('id','ahc_'+c+'_'+msg);				
+				$('#ahc1_'+c+'_'+b).attr('id','ahc1_'+c+'_'+msg);				
+				$('#disapproved').show();
+				setTimeout(function(){$('#disapproved').fadeOut('slow');},2000);				
+			}
+			else
+			{
+				$('#denied').show();
+				setTimeout(function(){$('#denied').fadeOut('slow');},2000);				
+			}
+		}
+	});	
 }
-else
+function featured_home_confirm(id_sta)
 {
-shh='show';
-}
-var r=confirm("Are U sure u want to "+shh+" the selected events");
-if(r)
-{
-var data={event_id:event_id,show_hide:sh}
-$.ajax({
-	   type: "POST",
-	   url: "<?php echo $base; ?>newadmin/admin_events/show_hide_event",
-	   async:false,
-	   data: data,
-	   cache: false,
-	   success: function(msg)
-	   {
-	   if(msg=='1')
-	   {
-	   var shh='ess';
-	   }
-	   else
-	   {
-	   var shh='ehs';
-	   }
-	    window.location.href="<?php echo $base; ?>newadmin/admin_events/manage_events/"+shh;
-	   }
-	   });
-}
-}
-function featured_home_confirm(a,b,c)
-{
+	var arr = id_sta.id.split('_');	
+	var c = arr[1];		//id
+	var b = arr[2];		//status
 	if(b==1)
 	{
-		window.location.href=a+'/featured_unfeatured_event/'+b+'/'+c;
+		$.ajax({
+			type: "POST",
+			url: '<?php echo $base; ?>newadmin/admin_events/featured_unfeatured_event/'+b+'/'+c,
+			async:false,
+			data: '',
+			cache: false,
+			success: function(msg)
+			{
+				if(msg==1)
+				{
+					$('#mhf_icon_'+c).addClass('icon-blue');
+					$('#mhf_icon1_'+c).addClass('icon-blue');
+					$('#mhf_a_'+c).attr('data-original-title','Featured');
+					$('#mhf_a1_'+c).attr('data-original-title','Featured');
+					$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+					$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);			
+					$('#featured').show();				
+					setTimeout(function(){$('#featured').fadeOut('slow');},2000);
+				}
+				else if(msg==0)
+				{
+					$('#mhf_icon_'+c).removeClass('icon-blue');
+					$('#mhf_icon1_'+c).removeClass('icon-blue');
+					$('#mhf_a_'+c).attr('data-original-title','Featured');
+					$('#a1_'+c).attr('data-original-title','Featured');
+					$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+					$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);				
+					$('#unfeatured').show();				
+					setTimeout(function(){$('#unfeatured').fadeOut('slow');},2000);
+				}
+				else
+				{
+					$('#denied').show();
+					setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
+				}
+			}
+			
+		});
 	}
 	else
 	{
 		$.ajax({
-		   type: "POST",
-		   url: "<?php echo $base; ?>newadmin/admin_events/count_featured_events/featured_home_event",
-		   async:false,
-		   data: '',
-		   cache: false,
-		   success: function(msg)
+			type: "POST",
+			url: "<?php echo $base; ?>newadmin/admin_events/count_featured_events/featured_home_event",
+			async:false,
+			data: '',
+			cache: false,
+			success: function(msg)
 			{
 				if(msg==1)
 				{
-					window.location.href=a+'/featured_unfeatured_event/'+b+'/'+c;
-				}
+					$.ajax({
+						type: "POST",
+						url: '<?php echo $base; ?>newadmin/admin_events/featured_unfeatured_event/'+b+'/'+c,
+						async:false,
+						data: '',
+						cache: false,
+						success: function(msg)
+						{
+							if(msg==1)
+							{
+								$('#mhf_icon_'+c).addClass('icon-blue');
+								$('#mhf_icon1_'+c).addClass('icon-blue');
+								$('#mhf_a_'+c).attr('data-original-title','Featured');
+								$('#mhf_a1_'+c).attr('data-original-title','Featured');
+								$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+								$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);							
+								$('#featured').show();				
+								setTimeout(function(){$('#featured').fadeOut('slow');},2000);
+							}
+							else if(msg==0)
+							{
+								$('#mhf_icon_'+c).removeClass('icon-blue');
+								$('#mhf_icon1_'+c).removeClass('icon-blue');
+								$('#mhf_a_'+c).attr('data-original-title','Featured');
+								$('#a1_'+c).attr('data-original-title','Featured');
+								$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+								$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);							
+								$('#unfeatured').show();				
+								setTimeout(function(){$('#unfeatured').fadeOut('slow');},2000);
+							}
+							else
+							{
+								$('#denied').show();
+								setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
+							}
+						}
+						
+					});
+				}				
 				else
 				{
 					$('#alert').show();
-					setTimeout(function(){$('#alert').hide('slow');},2000);					
+					setTimeout(function(){$('#alert').fadeOut('slow');},2000);					
 				}
 			}
 		});
-	}	
+	}
 }
 var arr=new Array;
 function action_formsubmit(id,flag)
@@ -984,13 +1094,15 @@ function action_formsubmit(id,flag)
 		}
 		else
 		{
-			alert("please select atleast one event");
+			$('#sel_atl_one').show();				
+			setTimeout(function(){$('#sel_atl_one').fadeOut('slow');},2000);
 			return false;
 		}
 	}
 	else
 	{
-		alert("please select the action");
+		$('#sel_act').show();				
+		setTimeout(function(){$('#sel_act').fadeOut('slow');},2000);		
 		return false;
 	}
 }

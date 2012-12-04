@@ -244,64 +244,58 @@ class Admin_events extends CI_Controller
 			}	
 		}
 	}
-	function featured_unfeatured_event($f_status='',$event_id)
+	function featured_unfeatured_event($f_status='',$event_id)				//edit by satbir on 12/04/2012
 	{
-		if (!$this->tank_auth->is_admin_logged_in()) {
+		if (!$this->tank_auth->is_admin_logged_in()) 
+		{
 			redirect('admin/adminlogin/');
 		}
-		else{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
-		$this->load->view('univadmin/header',$data);
-		$this->load->view('univadmin/sidebar',$data);
-		$flag=0;
-		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']>1 && $data['user_id']!='3')
-		{
-		$flag=1;
-		break;
-		}
-		}
-		if($flag==0)
-		{
-		$this->load->view('univadmin/accesserror', $data);
-		}
 		else
 		{
-		$f=1;
-		if($data['admin_user_level']=='3')
-		{
-		$admin_univ_id=$this->event_model->fetch_univ_id($data['user_id']);
-		$event_list=$this->event_model->fetch_events_ids($admin_univ_id['univ_id']);
-		if(!in_array($event_id,$event_list))
-		{
-			$f=0;
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+				redirect('admin/adminlogout');
+			}
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
+			{
+				if($userdata['admin_priv']['privilege_type_id']==3 && $userdata['admin_priv']['privilege_level']>1 && $data['user_id']!='3')
+				{
+					$flag=1;
+					break;
+				}
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
+			}
+			else
+			{
+				$f=1;
+				if($data['admin_user_level']=='3')
+				{
+					$admin_univ_id=$this->event_model->fetch_univ_id($data['user_id']);
+					$event_list=$this->event_model->fetch_events_ids($admin_univ_id['univ_id']);
+					if(!in_array($event_id,$event_list))
+					{
+						$f=0;
+					}
+				}
+				if($f==1)
+				{
+					$fu_status=$this->event_model->home_featured_unfeatured_event($f_status,$event_id);
+					echo $fu_status;	
+				}
+				else
+				{
+					$this->load->view('univadmin/accesserror', $data);
+				}	
+			}
 		}
-		}
-		if($f==1)
-		{
-		$fu_status=$this->event_model->home_featured_unfeatured_event($f_status,$event_id);
-		if($fu_status)
-		{
-		redirect('newadmin/admin_events/manage_events/fh');		
-		}
-		else
-		{
-		redirect('newadmin/admin_events/manage_events/ufh');
-		}
-		}
-		else
-		{
-		$this->load->view('univadmin/accesserror', $data);
-		}	
-		}
-	  }
 	}
 	function featured_unfeatured_dest_event($f_status='',$event_id)
 	{
@@ -368,53 +362,55 @@ class Admin_events extends CI_Controller
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		}
-		else{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
-		$this->load->view('univadmin/header',$data);
-		$this->load->view('univadmin/sidebar',$data);
-		$flag=0;
-		$delete_events=array('5','7','8','10');
-		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$delete_events))
-		{
-		$flag=1;
-		break;
-		}
-		}
-		if($flag==0)
-		{
-		$this->load->view('univadmin/accesserror', $data);
-		}
 		else
 		{
-		$f=1;
-		if($data['admin_user_level']=='3')
-		{
-		$admin_univ_id=$this->event_model->fetch_univ_id($data['user_id']);
-		$event_list=$this->event_model->fetch_events_ids($admin_univ_id['univ_id']);
-		if(!in_array($event_id,$event_list))
-		{
-			$f=0;
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+				redirect('admin/adminlogout');
+			}
+			//$this->load->view('univadmin/header',$data);
+			//$this->load->view('univadmin/sidebar',$data);
+			$flag=0;
+			$delete_events=array('5','7','8','10');
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
+			{
+				if($userdata['admin_priv']['privilege_type_id']==3 && in_array($userdata['admin_priv']['privilege_level'],$delete_events))
+				{
+					$flag=1;
+					break;
+				}
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
+			}
+			else
+			{
+				$f=1;
+				if($data['admin_user_level']=='3')
+				{
+					$admin_univ_id=$this->event_model->fetch_univ_id($data['user_id']);
+					$event_list=$this->event_model->fetch_events_ids($admin_univ_id['univ_id']);
+					if(!in_array($event_id,$event_list))
+					{
+						$f=0;
+					}
+				}
+				if($f==1)
+				{
+					$deleted = $this->event_model->delete_single_event($event_id);
+					echo $deleted;
+				}
+				else
+				{
+					$this->load->view('univadmin/accesserror', $data);
+				}
+			}
 		}
-		}
-		if($f==1)
-		{
-		$this->event_model->delete_single_event($event_id);
-		//redirect('adminevents/manage_events/eds');
-		}
-		else
-		{
-		$this->load->view('univadmin/accesserror', $data);
-		}
-		}
-	  }
 	}
 	function view_event($event_id)
 	{
@@ -840,12 +836,41 @@ class Admin_events extends CI_Controller
 		}
 		}
 	}	
-	function show_hide_event()
+
+	function show_hide_event($approve_status='',$event_id)     //edit by satbir on 12/04/2012
 	{
-	$event_id=$this->input->post('event_id');
-	$this->event_model->hide_show_event($event_id);
-	echo $this->input->post('show_hide');
-	
+		if (!$this->tank_auth->is_admin_logged_in()) {
+			redirect('admin/adminlogin/');
+		}
+		else
+		{
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+				redirect('admin/adminlogout');
+			}
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
+			{
+				if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
+				{
+					$flag=1;
+					break;
+				}
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
+			}
+			else
+			{
+				$fu_status=$this->event_model->hide_show_event($approve_status,$event_id);
+				echo $fu_status;		
+			}			
+		}
 	}
 	function recent_event()											//added by satbir on 11/26/2012
 	{

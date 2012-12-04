@@ -475,56 +475,49 @@ class Admin_ques extends CI_Controller
 		if (!$this->tank_auth->is_admin_logged_in()) {
 			redirect('admin/adminlogin/');
 		}
-		else{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
-		
-		$flag=0;
-		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
-		{
-		$flag=1;
-		break;
-		}
-		}
-		if($flag==0)
-		{
-			$this->load->view('univadmin/accesserror', $data);
-		}
 		else
 		{
-			$f=1;
-			if($data['admin_user_level']=='3')
+			$data = $this->path->all_path();
+			$data['user_id']	= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
 			{
-			$admin_univ_id=$this->ques_model->fetch_univ_id($data['user_id']);
-			$ques_list=$this->ques_model->fetch_events_ids($admin_univ_id['univ_id']);
-			if(!in_array($ques_id,$ques_list))
+				redirect('admin/adminlogout');
+			}		
+			$flag=0;
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
 			{
-				$f=0;
-			}
-			}
-			if($f==1)
-			{
-				$fu_status=$this->ques_model->home_featured_unfeatured_ques($f_status,$ques_id);
-				if($fu_status)
+				if($userdata['admin_priv']['privilege_type_id']==2 && $userdata['admin_priv']['privilege_level']>1 )
 				{
-					redirect('newadmin/admin_ques/manage_ques/fh');
+					$flag=1;
+					break;
 				}
-				else
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
+			}
+			else
+			{
+				$f=1;
+				if($data['admin_user_level']=='3')
 				{
-					redirect('newadmin/admin_ques/manage_ques/ufh');
+					$admin_univ_id=$this->ques_model->fetch_univ_id($data['user_id']);
+					$ques_list=$this->ques_model->fetch_events_ids($admin_univ_id['univ_id']);
+					if(!in_array($ques_id,$ques_list))
+					{
+						$f=0;
+					}
+				}
+				if($f==1)
+				{
+					$fu_status=$this->ques_model->home_featured_unfeatured_ques($f_status,$ques_id);
+					echo $fu_status;			
 				}
 			
 			}
-		
 		}
-	  }
 	}
 	//new
 	function count_featured_ques($field)

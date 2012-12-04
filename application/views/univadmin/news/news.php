@@ -28,6 +28,16 @@
 		<div align="center"><h3>News unfeatured successfully</h3></div>
 	</div>
 </div>
+<div class="modal hide" id="sel_atl_one">
+	<div class="modal-header">		
+		<div align="center"><h3>please select atleast one news</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_act">
+	<div class="modal-header">		
+		<div align="center"><h3>please select the action</h3></div>
+	</div>
+</div>
 <div class="modal hide" id="denied">
 	<div class="modal-header">		
 		<div align="center" style="color:red;"><h3>Unable to perform action please contact admin</h3></div>
@@ -217,7 +227,7 @@ $insert=1;
 										<h3>Do you want to change status ?</h3>										
 									</div>
 									<div class="modal-footer">
-										<a id="mhf_<?php echo $news->news_id; ?>_<?php  echo $news->featured_home_news; ?>" href="javascript:void(0)" onclick="featured_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
+										<a id="mhf_<?php echo $news->news_id; ?>_<?php  echo $news->featured_home_news; ?>" href="javascript:void(0)" onclick="featured_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
@@ -314,7 +324,7 @@ $insert=1;
 										<h3>Do you want to change status ?</h3>										
 									</div>
 									<div class="modal-footer">
-										<a id="mhf1_<?php echo $row->news_id; ?>_<?php  echo $row->featured_home_news; ?>" href="javascript:void(0)" onclick="featured_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
+										<a id="mhf1_<?php echo $row->news_id; ?>_<?php  echo $row->featured_home_news; ?>" href="javascript:void(0)" onclick="featured_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
@@ -493,37 +503,7 @@ function approve_home_confirm(id_sta)
 		}
 	});
 }
-function featured_home_confirm(a,b,c)
-{
-	if(b==1)
-	{
-		window.location.href=a+'/featured_unfeatured_news/'+b+'/'+c;
-	}
-	else
-	{
-		$.ajax({
-		   type: "POST",
-		   url: "<?php echo $base; ?>newadmin/admin_news/count_featured_news/featured_home_news",
-		   async:false,
-		   data: '',
-		   cache: false,
-		   success: function(msg)
-			{
-				if(msg==1)
-				{
-					window.location.href=a+'/featured_unfeatured_news/'+b+'/'+c;
-				}
-				else
-				{
-					$('#alert').show();
-					setTimeout(function(){$('#alert').fadeOut('slow');},2000);					
-				}
-			}
-		});
-	}
-	
-}
-function featured_home_confirm_new(id_sta)
+function featured_home_confirm(id_sta)
 {
 	var arr = id_sta.id.split('_');	
 	var c = arr[1];		//id
@@ -678,13 +658,15 @@ function action_formsubmit(id,flag)
 		}
 		else
 		{
-			alert("please select al least one news");
+			$('#sel_atl_one').show();				
+			setTimeout(function(){$('#sel_atl_one').fadeOut('slow');},2000);
 			return false;
 		}
 	}
 	else
 	{
-		alert("please select the action");
+		$('#sel_act').show();				
+		setTimeout(function(){$('#sel_act').fadeOut('slow');},2000);
 		return false;
 	}
 }

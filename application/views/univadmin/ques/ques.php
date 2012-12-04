@@ -1,6 +1,6 @@
 <div class="modal hide" id="alert">
 	<div class="modal-header">		
-		<div align="center"><h3>You have reached maximum limit for show ques</h3></div>
+		<div align="center" style="color:red;"><h3>You have reached maximum limit for show ques</h3></div>
 	</div>
 </div>
 <div class="modal hide" id="deleted">
@@ -18,9 +18,29 @@
 		<div align="center"><h3>Question disapproved successfully</h3></div>
 	</div>
 </div>
+<div class="modal hide" id="featured">
+	<div class="modal-header">		
+		<div align="center"><h3>Question featured successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="unfeatured">
+	<div class="modal-header">		
+		<div align="center"><h3>Question unfeatured successfully</h3></div>
+	</div>
+</div>
 <div class="modal hide" id="addques">
 	<div class="modal-header">		
 		<div align="center"><h3>Question Added Successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_atl_one">
+	<div class="modal-header">		
+		<div align="center"><h3>please select atleast one question</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_act">
+	<div class="modal-header">		
+		<div align="center"><h3>please select the action</h3></div>
 	</div>
 </div>
 <div class="modal hide" id="denied">
@@ -163,7 +183,7 @@ $insert=1;
 						<td><?php echo ucwords(substr($row->q_title,0,50)); ?></td>
 						<td><?php echo ucwords($row->univ_name); ?></td>					   
 						<!--<td class="center"><?php //if($row->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>-->
-						<td><?php if($row->q_featured_home_que){ echo "Featured"; } else {  echo"Unfeatured";} ?></td>
+						<td id="mhf_td_<?php echo $row->que_id; ?>"><?php if($row->q_featured_home_que){ echo "Featured"; } else {  echo"Unfeatured";} ?></td>
 						<td id="count_<?php echo $row->que_id; ?>"><?php $count=$this->ques_model->ans_count($row->que_id); echo $count; ?></td>	
 						<td class="options">
 							<div class="btn-group">
@@ -204,7 +224,7 @@ $insert=1;
 										<h3>Do you want to change status ?</h3>	
 									</div>
 									<div class="modal-footer">
-										<a id="ahc_<?php echo $row->que_id; ?>_<?php echo $row->q_approve; ?>" href="javascript:void(0)" onclick="approve_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
+										<a id="ahc_<?php echo $row->que_id; ?>_<?php echo $row->q_approve; ?>" href="javascript:void(0)" onclick="approve_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
@@ -214,21 +234,16 @@ $insert=1;
 								<div class="modal hide" id="myFeaUnfModal_<?php echo $row->que_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($row->q_featured_home_que == 1){ ?>
-											<h3>Do you want to make home unfeatured ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to make home featured ?</h3>
-										<?php } ?>
-										
+										<h3>Do you want to change status ?</h3>											
 									</div>
 									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $row->q_featured_home_que; ?>','<?php echo $row->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a id="mhf_<?php echo $row->que_id; ?>_<?php  echo $row->q_featured_home_que; ?>" href="javascript:void(0)" onclick="featured_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>											
-								<a href="#myFeaUnfModal_<?php echo $row->que_id; ?>"  class="btn btn-icon tip" <?php if($row->q_featured_home_que){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
-									<i class="<?php if($row->q_featured_home_que){ echo 'icon-blue'; }?> icon-star"></i>
-								</a>								
+								<a id="mhf_a_<?php echo $row->que_id; ?>" href="#myFeaUnfModal_<?php echo $row->que_id; ?>"  class="btn btn-icon tip" <?php if($row->q_featured_home_que){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i id="mhf_icon_<?php echo $row->que_id; ?>" class="<?php if($row->q_featured_home_que){ echo 'icon-blue'; }?> icon-star"></i>
+								</a>
 								<?php } ?>
 							</div>
 						</td>
@@ -273,7 +288,7 @@ $insert=1;
                       <td><?php echo ucwords(substr($latest->q_title,0,50)); ?></td>
                        <td><?php echo ucwords($latest->univ_name); ?></td>					   
                       <!-- <td class="center"><?php //if($latest->q_approve){ echo "Disapprove"; } else { echo "Approve";} ?></td>-->
-					   <td><?php if($latest->q_featured_home_que){ echo "Featured"; } else {  echo "Unfeatured";} ?></td>
+					   <td id="mhf1_td_<?php echo $latest->que_id; ?>"><?php if($latest->q_featured_home_que){ echo "Featured"; } else {  echo "Unfeatured";} ?></td>
 					   <td id="count_<?php echo $latest->que_id; ?>"><?php $count=$this->ques_model->ans_count($latest->que_id); echo $count; ?></td>	
 					    <td class="options">
 							<div class="btn-group">
@@ -314,7 +329,7 @@ $insert=1;
 										<h3>Do you want to change status ?</h3>	
 									</div>
 									<div class="modal-footer">
-										<a id="ahc1_<?php echo $latest->que_id; ?>_<?php echo $latest->q_approve; ?>" href="javascript:void(0)" onclick="approve_home_confirm_new(this);" class="btn" data-dismiss="modal">Yes</a>
+										<a id="ahc1_<?php echo $latest->que_id; ?>_<?php echo $latest->q_approve; ?>" href="javascript:void(0)" onclick="approve_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>
@@ -324,20 +339,15 @@ $insert=1;
 								<div class="modal hide" id="myFeaUnfModal1_<?php echo $latest->que_id; ?>">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<?php if($latest->q_featured_home_que == 1){ ?>
-											<h3>Do you want to make home unfeatured ?</h3>
-										<?php } else { ?>
-											<h3>Do you want to make home featured ?</h3>
-										<?php } ?>
-										
+										<h3>Do you want to change status ?</h3>											
 									</div>
 									<div class="modal-footer">
-										<a href="javascript:void(0)" onclick="featured_home_confirm('<?php echo "$base";?>newadmin/admin_ques','<?php  echo $latest->q_featured_home_que; ?>','<?php echo $latest->que_id; ?>');" class="btn" data-dismiss="modal">Yes</a>
+										<a id="mhf1_<?php echo $latest->que_id; ?>_<?php  echo $latest->q_featured_home_que; ?>" href="javascript:void(0)" onclick="featured_home_confirm(this);" class="btn" data-dismiss="modal">Yes</a>
 										<a href="javascript:void(0)" class="btn" data-dismiss="modal">Close</a>
 									</div>
 								</div>											
-								<a href="#myFeaUnfModal1_<?php echo $latest->que_id; ?>"  class="btn btn-icon tip" <?php if($latest->q_featured_home_que){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
-									<i class="<?php if($latest->q_featured_home_que){ echo 'icon-blue'; }?> icon-star"></i>
+								<a id="mhf_a1_<?php echo $latest->que_id; ?>" href="#myFeaUnfModal1_<?php echo $latest->que_id; ?>"  class="btn btn-icon tip" <?php if($latest->q_featured_home_que){ ?> data-original-title="Featured" <?php } else { ?> data-original-title="Unfeatured" <?php } ?> data-toggle="modal">
+									<i id="mhf_icon1_<?php echo $latest->que_id; ?>" class="<?php if($latest->q_featured_home_que){ echo 'icon-blue'; }?> icon-star"></i>
 								</a>
 								<?php } ?>
 							</div>
@@ -511,11 +521,7 @@ function delete_confirm(id)
 	
 	});
 }
-function approve_home_confirm(a,b,c)
-{
-	 window.location.href=a+'/approve_disapprove_ques/'+b+'/'+c;
-}
-function approve_home_confirm_new(id_sta)
+function approve_home_confirm(id_sta)
 {
 	var arr = id_sta.id.split('_');
 	var c = arr[1];		//id
@@ -559,35 +565,119 @@ function approve_home_confirm_new(id_sta)
 		}
 	});
 }
-function featured_home_confirm(a,b,c)
+function featured_home_confirm(id_sta)
 {
+	var arr = id_sta.id.split('_');	
+	var c = arr[1];		//id
+	var b = arr[2];		//status
 	if(b==1)
 	{
-		window.location.href=a+'/featured_unfeatured_ques/'+b+'/'+c;
+		$.ajax({
+			type: "POST",
+			url: '<?php echo $base; ?>newadmin/admin_ques/featured_unfeatured_ques/'+b+'/'+c,
+			async:false,
+			data: '',
+			cache: false,
+			success: function(msg)
+			{
+				if(msg==1)
+				{
+					$('#mhf_icon_'+c).addClass('icon-blue');
+					$('#mhf_icon1_'+c).addClass('icon-blue');
+					$('#mhf_a_'+c).attr('data-original-title','Featured');
+					$('#mhf_a1_'+c).attr('data-original-title','Featured');
+					$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+					$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+					$('#mhf_td_'+c).text("Featured");
+					$('#mhf1_td_'+c).text("Featured");
+					$('#featured').show();				
+					setTimeout(function(){$('#featured').fadeOut('slow');},2000);
+				}
+				else if(msg==0)
+				{
+					$('#mhf_icon_'+c).removeClass('icon-blue');
+					$('#mhf_icon1_'+c).removeClass('icon-blue');
+					$('#mhf_a_'+c).attr('data-original-title','Featured');
+					$('#a1_'+c).attr('data-original-title','Featured');
+					$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+					$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+					$('#mhf_td_'+c).text("Unfeatured");
+					$('#mhf1_td_'+c).text("Unfeatured");
+					$('#unfeatured').show();				
+					setTimeout(function(){$('#unfeatured').fadeOut('slow');},2000);
+				}
+				else
+				{
+					$('#denied').show();
+					setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
+				}
+			}
+			
+		});
 	}
 	else
 	{
 		$.ajax({
-		   type: "POST",
-		   url: "<?php echo $base; ?>newadmin/admin_ques/count_featured_ques/q_featured_home_que",
-		   async:false,
-		   data: '',
-		   cache: false,
-		   success: function(msg)
+			type: "POST",
+			url: "<?php echo $base; ?>newadmin/admin_ques/count_featured_ques/q_featured_home_que",
+			async:false,
+			data: '',
+			cache: false,
+			success: function(msg)
 			{
 				if(msg==1)
 				{
-					window.location.href=a+'/featured_unfeatured_ques/'+b+'/'+c;
-				}
+					$.ajax({
+						type: "POST",
+						url: '<?php echo $base; ?>newadmin/admin_ques/featured_unfeatured_ques/'+b+'/'+c,
+						async:false,
+						data: '',
+						cache: false,
+						success: function(msg)
+						{
+							if(msg==1)
+							{
+								$('#mhf_icon_'+c).addClass('icon-blue');
+								$('#mhf_icon1_'+c).addClass('icon-blue');
+								$('#mhf_a_'+c).attr('data-original-title','Featured');
+								$('#mhf_a1_'+c).attr('data-original-title','Featured');
+								$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+								$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+								$('#mhf_td_'+c).text("Featured");
+								$('#mhf1_td_'+c).text("Featured");
+								$('#featured').show();				
+								setTimeout(function(){$('#featured').fadeOut('slow');},2000);
+							}
+							else if(msg==0)
+							{
+								$('#mhf_icon_'+c).removeClass('icon-blue');
+								$('#mhf_icon1_'+c).removeClass('icon-blue');
+								$('#mhf_a_'+c).attr('data-original-title','Featured');
+								$('#a1_'+c).attr('data-original-title','Featured');
+								$('#mhf_'+c+'_'+b).attr('id','mhf_'+c+'_'+msg);
+								$('#mhf1_'+c+'_'+b).attr('id','mhf1_'+c+'_'+msg);
+								$('#mhf_td_'+c).text("Unfeatured");
+								$('#mhf1_td_'+c).text("Unfeatured");
+								$('#unfeatured').show();				
+								setTimeout(function(){$('#unfeatured').fadeOut('slow');},2000);
+							}
+							else
+							{
+								$('#denied').show();
+								setTimeout(function(){$('#denied').fadeOut('slow');},2000);	
+							}
+						}
+						
+					});
+				}				
 				else
 				{
 					$('#alert').show();
-					setTimeout(function(){$('#alert').hide('slow');},2000);					
+					setTimeout(function(){$('#alert').fadeOut('slow');},2000);					
 				}
 			}
 		});
 	}
-	
 }
 
 var arr=new Array;
@@ -633,13 +723,15 @@ function action_formsubmit(id,flag)
 		}
 		else
 		{
-			alert("please select at least one question");
+			$('#sel_atl_one').show();				
+			setTimeout(function(){$('#sel_atl_one').fadeOut('slow');},2000);
 			return false;
 		}
 	}
 	else
 	{
-		alert("please select the action");
+		$('#sel_act').show();				
+		setTimeout(function(){$('#sel_act').fadeOut('slow');},2000);	
 		return false;
 	}
 }
