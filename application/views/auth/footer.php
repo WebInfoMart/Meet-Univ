@@ -92,8 +92,9 @@ $this->session->set_userdata('chat_username', $fix);
 <script type="text/javascript" src="<?php echo "$base$js";?>/thingerly-calendar.js"></script>
 <script type="text/javascript" src="<?php echo "$base$js";?>/jquery.mtz.monthpicker.js"></script>
 <script type="text/javascript">
-var chat_domain='<?php echo "$domain_name";?>'.substr(1);</script>	
-<script type="text/javascript" src="<?php echo "$base$js";?>/chat_js/chat.js"></script>	
+var chat_domain='<?php echo "$domain_name";?>'.substr(1);</script>
+<!--	
+<script type="text/javascript" src="<?php echo "$base$js";?>/chat_js/chat.js"></script>	-->
 <script>
 var chat_box_close_by_user=getChatCookie("chatboxclosedbyuser");
   if(chat_box_close_by_user=='0')

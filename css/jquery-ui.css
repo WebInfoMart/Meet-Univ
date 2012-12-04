@@ -44,7 +44,8 @@
 .ui-accordion .ui-accordion-content-active { display: block; }
 
 .ui-autocomplete { position: absolute; cursor: default; }
-ul.ui-autocomplete { width:325px; }	
+
+ul.ui-autocomplete { width:325px!important;z-index:9!important; }	
 
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */

@@ -29,19 +29,19 @@ class Auth extends CI_Controller
 		$subdomain_arr = explode('.', $_SERVER['HTTP_HOST']);
 		if(count($subdomain_arr)>2)
 		{
-		if($subdomain_arr[0]!='www')
-		{
-		$univ_domain=$this->subdomain->find_subdomain_name_and_id();
-		$this->subdomain->university_by_domain($univ_domain['university']['univ_id'],$univ_domain['domain']);
+			if($subdomain_arr[0]!='www')
+			{
+				$univ_domain=$this->subdomain->find_subdomain_name_and_id();
+				$this->subdomain->university_by_domain($univ_domain['university']['univ_id'],$univ_domain['domain']);
+			}
+			else
+			{
+				$this->subdomain->homefunction();
+			}
 		}
 		else
 		{
-		$this->subdomain->homefunction();
-		}
-		}
-		else
-		{
-		$this->subdomain->homefunction();
+			$this->subdomain->homefunction();
 		}
 			
 	}
