@@ -1,14 +1,27 @@
 <?php
+$admin_profile = $this->adminmodel->get_admin_profile($user_id);
+foreach($admin_profile as $profile_detail)
+{
+	if(file_exists(getcwd().'/uploads/user_pic/'.$profile_detail['user_pic_path']) && $profile_detail['user_pic_path']!='') 
+	{
+		$profile_img_path=$base.'uploads/user_pic/'.$profile_detail['user_pic_path'];
+	}
+	else
+	{
+		$profile_img_path=$base.'images/profile_icon.png';
+	}
+	$admin_name = $profile_detail['fullname'];
+}
 $flag=1;
-  if($admin_user_level=='3')
-  {
-  $univ_detail_edit=$this->adminmodel->fetch_univ_detail($user_id);
-  if($univ_detail_edit==0)
-  {
-  $flag=0;
-  }
-  }
- if($flag==1) { ?> 
+if($admin_user_level=='3')
+{
+	$univ_detail_edit=$this->adminmodel->fetch_univ_detail($user_id);
+	if($univ_detail_edit==0)
+	{
+		$flag=0;
+	}
+}
+if($flag==1) { ?> 
   <!-- BEGIN Left Navigation -->
   <div class="navleft">
     <div class="search">
@@ -19,18 +32,18 @@ $flag=1;
     </div>
     <div class="user-profile clearfix">
       <div class="user-image">
-        <img src="<?php echo $base;?>newadmin/img/profile.png" alt="">
+        <img src="<?php echo $profile_img_path ?>" alt=""  width="50" height="auto">
       </div>
       <div class="user-details">
         <div class="user-username">
-          <?php echo ucwords($this->session->userdata('admin_fullname')); ?>
+          <?php echo ucwords($admin_name); ?>
         </div>
         <div class="user-userrole">
           Administrator
         </div>
         <div class="user-links">
-          <a href="#">Account</a> | 
-          <a href="#">Edit Profile</a>
+          <a href="javascript:void(0);">Account</a> | 
+          <a href="<?php echo $base;?>admin/edit_profile">Edit Profile</a>
         </div>
       </div>
     </div>   

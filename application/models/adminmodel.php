@@ -11,6 +11,7 @@ class Adminmodel extends CI_Model
 		parent::__construct();
 		$this->gallery_path = realpath(APPPATH . '../uploads/home_gallery');
 		$this->univ_gallery_path = realpath(APPPATH . '../uploads/univ_gallery');
+		$this->profile_image_path = realpath(APPPATH . '../uploads/user_pic');
 		//$this->gallery_path_url = 'http://127.0.0.1/Meet-Univ/uploads/';
 		$this->load->library('pagination');
 		$this->load->database();
@@ -1101,8 +1102,57 @@ class Adminmodel extends CI_Model
 		$data=array('featured_college'=>$f_status);
 		$this->db->update('university', $data, array('univ_id' => $univ_id));
 		return $f_status;
-  }  
-	
+  }
+	function get_admin_profile($user_id)						//added by satbir on 12/07/2012
+	{
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('id',$user_id);
+		$this->db->join('user_profiles', 'user_profiles.user_id = users.id','left');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+	function update_profile($profile_id)						//added by satbir on 12/07/2012
+	{
+		$data['user_id'] = $this->tank_auth->get_admin_user_id();
+		$config = array(
+			'allowed_types' => 'jpg|jpeg|gif|png',
+			'upload_path' => $this->profile_image_path			
+		);
+		$this->load->library('upload', $config);
+		$this->upload->overwrite = true;
+		$myflag=1;
+		if($_FILES["userfile"]["name"]!='')
+		{
+			if(!$this->upload->do_upload())
+			{
+			  $myflag=0;
+			  $data['err_msg']=$this->upload->display_errors();
+			  $this->load->view('admin/show_error',$data);
+			}
+		}
+		if($myflag==1)
+		{
+			$image_data = $this->upload->data();
+			$config = array(
+				'source_image' => $image_data['full_path'],
+				'new_image' => $this->profile_image_path . '/thumbs',
+				'maintain_ration' => true,
+				'width' => 150,
+				'height' => 100
+			);
+			$this->load->library('image_lib', $config);
+			$this->image_lib->resize();
+			$data = array('fullname' => $this->input->post('fullname'));
+			$this->db->update('users', $data, array('id' => $profile_id));			
+			if($myflag==1 && $image_data['file_name']!='')
+			{
+				$data=array('user_pic_path' =>$image_data['file_name'],'full_name' => $this->input->post('fullname'));
+				$this->db->update('user_profiles', $data, array('user_id'=>$profile_id));		
+			}		
+		}	
+	return $myflag;
+	}
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

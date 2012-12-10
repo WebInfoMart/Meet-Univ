@@ -83,76 +83,14 @@ foreach ($admin_priv as $admin_priv_res){
 <!-- BEGIN Content -->
   <div class="content">
     <div class="container-fluid">
-      <div class="responsible_navi">
-        <div class="currentPage">
-          <i class="icon-tasks icon-white"></i> Interface Elements - Tabs
-          <div class="sorting">
-            <img src="img/sort_both.png" alt="">
-          </div>
-        </div>
-        <ul class='respNav'>
-          <li>
-            <a href="dash.html">
-              <i class="icon-home"></i>
-              Dashboard
-              <span class="label label-important">16</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" class='toggle-subnav'>
-              <i class="icon-book"></i>
-              Sample Pages
-              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
-            </a>
-            <ul class="collapsed-nav closed">
-              <li><a href="calendar.html">Calendar</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li><a href="user.html">User Profile</a></li>
-              <li><a href="404.html">404 Error</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="stats.html">
-              <i class="icon-signal"></i>
-              Statistics
-            </a>
-          </li>
-          <li>
-            <a href="4.html" class='toggle-subnav'>
-              <i class="icon-tasks"></i>
-              Interface Elements
-              <span class="label label-toggle"><img src="img/toggle_minus.png" alt=""></span>
-            </a>
-            <ul class="collapsed-nav closed">
-              <li><a href="buttons.html">Buttons & Icons</a></li>
-              <li><a href="modals.html">Modals, Alerts & Notifications</a></li>
-              <li><a href="tabs.html">Tabs & Accordion</a></li>
-              <li><a href="tooltips.html">Tooltips & Popovers</a></li>
-              <li><a href="sliders.html">Sliders & Progressbars</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="forms.html">
-              <i class="icon-list"></i>
-              Forms
-            </a>
-          </li>
-          <li>
-            <a href="tables.html">
-              <i class="icon-th-large"></i>
-              Tables
-              <span class="badge badge-warning">4</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <div class="responsible_navi"></div>
       <div class="row-fluid">
         <div class="span12">
           <div class="page-header clearfix tabs">
             <h2>Events</h2>
             <ul class="nav nav-pills">
 			<li class='active'>
-                <a href="#cal" data-toggle="pill">View Calendar </a>
+                <a href="#cal" data-toggle="pill">View Calendar</a>
             </li>
               <li>
                 <a href="#all" data-toggle="pill">All</a>

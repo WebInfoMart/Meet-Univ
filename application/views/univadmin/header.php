@@ -1,3 +1,18 @@
+<?php
+$admin_profile = $this->adminmodel->get_admin_profile($user_id);
+foreach($admin_profile as $profile_detail)
+{
+	if(file_exists(getcwd().'/uploads/user_pic/'.$profile_detail['user_pic_path']) && $profile_detail['user_pic_path']!='') 
+	{
+		$profile_img_path=$base.'uploads/user_pic/'.$profile_detail['user_pic_path'];
+	}
+	else
+	{
+		$profile_img_path=$base.'images/profile_icon.png';
+	}
+	$admin_name = $profile_detail['fullname'];
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -57,20 +72,20 @@
           <ul class="nav">
             <li class='dropdown'>
               <a href="#" class='dropdown-toggle' data-toggle='dropdown'>
-                <img src="<?php echo $base;?>newadmin/img/icon-user.png" alt="" />
-                Username
+                <img src="<?php echo $profile_img_path;?>" alt="" width="13" height="auto"/>
+                <?php echo ucwords($admin_name); ?>
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="#">My Account</a>
-                  <a href="#">Balance</a>
+                  <a href="javascript:void(0);">My Account</a>
+                  <a href="javascript:void(0);">Balance</a>
                 </li>
               </ul>
             </li>
             <li class="divider-vertical"></li>
             <li>
-              <a href="#">
+              <a href="javascript:void(0);">
                 <img src="<?php echo $base;?>newadmin/img/icon-message.png" alt="" />
                 Messages
               </a>

@@ -13,6 +13,7 @@ if($error_new_pwd != '') { $class_confirm_pwd = 'needsfilled'; } else { $class_c
 ?>
 <div class="content">
     <div class="container-fluid">
+	<div class="responsible_navi"></div>
      <div class="row-fluid">
 		<div class="span12">
 			<div class="page-header">
@@ -44,7 +45,7 @@ if($error_new_pwd != '') { $class_confirm_pwd = 'needsfilled'; } else { $class_c
 						</div>
 						<div class="form-actions">
 							<button type="submit" name="submit" class="btn btn-primary">Update</button>
-							<a href="#" class="btn btn-danger">Cancel</a>
+							<a href="javascript:void(0);" class="btn btn-danger">Cancel</a>
 						</div>
 					</div>
 				</fieldset>
