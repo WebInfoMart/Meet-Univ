@@ -67,7 +67,7 @@ foreach($admin_profile as $profile_detail)
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">Meet Universities Admin</a>
+        <a class="brand" href="<?php echo $base;?>admin">Meet Universities Admin</a>
         <div class="pull-right nav-collapse">
           <ul class="nav">
             <li class='dropdown'>
