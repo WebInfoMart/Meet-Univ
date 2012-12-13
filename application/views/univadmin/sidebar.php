@@ -99,25 +99,25 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
           <i class="icon-calendar"></i>
          Events
         </a>
-      </li>
-      <li>
-        <a href="javascript:void(0);" class='toggle-subnav'>
-          <i class="icon-tasks"></i>
-          General Setting
-          <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span>
-        </a>
+      </li>     
 		<?php 
-		if($admin_user_level=='3') { ?>
-        <ul class="collapsed-nav closed">
-          <li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>
-          <li><a href="javascript:void(0);">Pages</a></li>		  
-          <li><a href="<?php echo $base; ?>newadmin/admin_courses/manage_univ_course">University Courses</a></li>
-          <li><?php echo anchor("$base".'admin/update_university_detail', 'Update University'); ?></li>
-        </ul>
-		<?php } ?>
-      </li>
+		if($admin_user_level=='3') { ?>		
+		<li>
+			<a href="#" class='toggle-subnav'>
+			  <i class="icon-tasks"></i>
+			  General Setting
+			  <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span>
+			</a>		
+			<ul class="collapsed-nav closed">
+			  <li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>
+			  <li><a href="#">Pages</a></li>		  
+			  <li><a href="<?php echo $base; ?>newadmin/admin_courses/manage_univ_course">University Courses</a></li>
+			  <li><?php echo anchor("$base".'admin/update_university_detail', 'Update University'); ?></li>
+			</ul>
+		 </li>
+		<?php } ?>     
 	   <li>
-        <a href="javascript:void(0);" class='toggle-subnav'>
+        <a href="#" class='toggle-subnav'>
           <i class=" icon-share"></i>
          Engage
           <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span>
@@ -132,7 +132,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
         </ul>
       </li>
       <li>
-        <a href="javascript:void(0);">
+        <a href="#">
           <i class="icon-signal"></i>
           Statistics
         </a>

@@ -54,22 +54,9 @@ $flag=1;
 		if($admin_user_level=='5' || $admin_user_level=='4' || $admin_user_level=='3') {
 		$admin_add_op=array('4','6','8','10');
 		
-foreach ($admin_priv as $admin_priv_res){
-if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
-{
-?>
-
-
-<!--<li><a href="#" class="collapse"> <img src="<?php //echo "$base$admin_img" ?>/nav/qna.gif" alt="" /> Q & A</a>
-		<ul><?php
-		//if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
-		//{?>
-		<li><?php //echo anchor("$base".'admin/addevents', 'Add Que'); ?></li> <?php //} ?>
-			<li><?php //echo anchor("$base".'admin/manageevents', 'Manage Q & A'); ?></li></ul></li>
--->
-					
-			<?php
-			}				
+foreach ($admin_priv as $admin_priv_res)
+	{
+				
 			if($admin_priv_res['privilege_type_id']=='3' && $admin_priv_res['privilege_level']!='0')
 			{?>
 			<li><a href="#" class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/event.jpg" alt="" /> Events</a>
@@ -202,7 +189,7 @@ if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level
 		<?php } 
 		
 		
-		} ?>
+	} ?>
 			<?php if($admin_user_level=='5'){ ?>
 		<li><a href="#"  class="collapse"><img src="<?php echo "$base$admin_img" ?>/nav/book.jpg" alt="" /> Program/Courses</a>
 		<ul>

@@ -115,16 +115,10 @@ if($(".flot").length > 0 ){
 	}
 });	
 </script>
-<?php 
-$flag=1;
-if($admin_user_level=='3')
-{
-	if($univ_detail_edit==0)
-	{
-		$flag=0;
-	}
-}
-if($flag) { ?> 
+<?php
+if($admin_user_level=='3') 
+{ 
+?> 
   <div class="content">
     <div class="container-fluid">	
       <div class="responsible_navi"></div>	
@@ -226,8 +220,7 @@ if($flag) { ?>
 							$url = "";
 						}
 						else
-						{
-							
+						{							
 							$question_title =$this->subdomain->process_url_title($all['q_title']);	
 							$url = "MeetQuest/".$all['que_id']."/".$question_title."/".$all['q_askedby'];
 							$url = $base.'otherQuestion'.'/'.$all['que_id'].'/'.$question_title;
@@ -434,7 +427,7 @@ if($flag) { ?>
 </div><!-- close .container-fluid -->
 </div><!-- close .content -->
 <!-- END Content -->
-<?php } ?>
+
 <script>
 function add_answer(id)
 {
@@ -461,8 +454,6 @@ function add_answer(id)
 }
 
  </script>
- 
-
 <!-- for calander     added by satbir on 11/17/2012   -->
 <script>
 	if($('.calendar').length > 0){
@@ -493,3 +484,240 @@ function add_answer(id)
 		});
 	}
 </script>
+<?php 
+} 
+else
+{ 
+?>
+<script>
+$(document).ready(function() {
+	$('#maxWid').width('90%');
+});
+</script>
+<script type="text/javascript" src="<?php echo $base;?>js/jsapi.js"></script>
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['day', 'visitors','pageviews'],
+		  <?php 
+		 $i=30;
+		 		foreach($report as $objResult )
+					{	
+					$i--;
+ 					$start_date=date('Y-m-d',strtotime($i.' day ago'));					
+					  echo "['".$start_date."',".$objResult['ga:pageviews'].",".$objResult['ga:visitors']."]";	
+						if($i!=30)
+						{
+						echo ',';
+						}
+						
+					} ?>					
+        ]);
+        var options = {
+          title: 'Users details'
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+</script>
+<div class="content">
+	<div class="container-fluid">	
+		<div class="responsible_navi"></div>	
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="page-header clearfix tabs">
+					<h2>Insight <small>Site Statistics</small></h2>
+				</div>
+				<div class="content-box">
+					<div class="tab-content">
+						<div class="tab-pane active" id="big">
+							<div class="stats_charts" id="chart_div" style="width: 1100px; height: 300px;"></div>							
+						</div>			 
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div class="row-fluid" id="maxWid">
+			<div class="span6 no-margin">
+				<div class="page-header">
+					<h3>Latest Users</h3>
+				</div>
+				<div class="content-box">
+					<table class="table table-striped table-nohead">
+						<tr>
+							<th>Sr No</th>
+							<th>Username</th>
+							<th>Email Id</th>
+							<th>User Type</th>						
+							<th>Created On</th>                 
+						</tr>					
+						<?php 
+						$i=1;
+						foreach($latest_users as $latest_user) 
+						{ 
+						?>	
+						<tr> 	
+							<td><?php echo $i; $i++;?></td>
+							<td><?php if($latest_user['fullname']==""){ echo 'Not Available'; } echo $latest_user['fullname']; ?></td>
+							<td><?php if($latest_user['email']==""){ echo 'Not Available'; } echo $latest_user['email']; ?></td>
+							<td>
+								<?php 
+								if($latest_user['user_type']=="")
+								{ 
+									echo 'Not Available';
+								} 
+								else 
+								{ 
+									if($latest_user['user_type']=='site_user')
+									{
+										echo 'Site User';
+									}
+									else if($latest_user['user_type']=='fb_login')
+									{
+										echo 'Facebook User';
+									}
+									else if($latest_user['user_type']=='fb_canvas')
+									{
+										echo 'Facebook application';
+									}
+									else if($latest_user['user_type']=='android_user')
+									{
+										echo 'Android User';
+									}
+									else if($latest_user['user_type']=='event_user')
+									{
+										echo 'Event User';
+									}
+									else if($latest_user['user_type']=='offline')
+									{
+										echo 'Offline';
+									}
+									else
+									{
+										echo 'Other';
+									}
+								} 
+								?>
+							</td>
+							<td><?php $date=strtotime($latest_user['createdon']); echo date('d/M/Y G:i',$date); ?></td>
+						</tr>	
+						<?php 
+						}
+						?>					
+					</table>
+				</div>        
+			</div>			
+			<div class="span6 no-margin">
+				<div class="page-header">
+					<h3>Question</h3>
+				</div>
+				<div class="content-box">
+					<table class="table table-striped table-nohead">
+						<tr>
+							<th>Image</th>
+							<th>Username</th>
+							<th>Email Id</th>
+							<th>Title</th>						
+							<th>Question</th>                 
+						</tr>
+						<?php 
+						if($ten_question!=0) 
+						{
+							$x=0;						
+							foreach($ten_question as $ten_questions) 
+							{
+						?>
+								<tr>
+								<?php
+								$x=$x+1;		
+								if(file_exists(getcwd().'/uploads/user_pic/'.$ten_questions['user_pic_path']) && $ten_questions['user_pic_path']!='')
+								{
+									if(filesize(getcwd().'/uploads/user_pic/'.$ten_questions['user_pic_path']))
+									{
+										$user_pic =  base_url()."uploads/user_pic/".$ten_questions['user_pic_path'];
+									}
+									else
+									{
+										$user_pic = base_url()."images/profile_icon.png";
+									}						
+								}
+								else
+								{
+									$user_pic = base_url()."images/profile_icon.png";
+								}
+							?>
+								<td><a href="javascript:void(0);" class="avatar"><img src="<?php echo $user_pic; ?>" width="30px" /></a></td>								
+								<td><a href="javascript:void(0);" class="username"><?php echo $ten_questions['fullname']; ?></a></td>
+								<td><p><?php echo $ten_questions['email']; ?></p></td>
+								<td><p><?php echo $ten_questions['q_title']; ?></p></td>
+								<td><p class="q_detail"><?php echo $ten_questions['q_detail']; ?></p></td>					
+							</tr>
+							<?php 
+							} 
+							?>
+						<?php 
+						} 
+						else
+						{
+							echo "<tr>NO Recent Question</tr>";
+						}
+						?>			
+					</table>
+				</div>        
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="table">
+				<div class="page-header">
+					<h3>Latest Events Registrations</h3>
+				</div>
+				<div class="content-box">
+					<?php
+					if($latest_users!=0)
+					{
+					?>
+					<table id="allcheck" class="responsive table table-striped">
+						<thead>
+							<tr>
+								<th>Sr No</th>
+								<th>Username</th>
+								<th>Email Id</th>
+								<th>Phone No</th>						
+								<th>Event Name</th>						
+								<th>University Name</th>						
+								<th>Created On</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $i=1;
+							foreach($event_users as $user) 
+							{ 
+							?>	
+							<tr> 	
+								<td><?php echo $i; $i++;  ?></td>
+								<td><?php if($user['fullname']==""){ echo 'Not Available'; }  echo $user['fullname']; ?></td>
+								<td><?php if($user['email']==""){ echo 'Not Available'; }  echo $user['email']; ?></td>
+								<td><?php if($user['phone']==""){ echo 'Not Available'; }  echo $user['phone']; ?></td>
+								<td><?php if($user['event_title']==""){ echo 'Not Available'; }  echo $user['event_title']; ?></td>
+								<td><?php if($user['univ_name']==""){ echo 'Not Available'; }  echo $user['univ_name']; ?></td>
+								<td><?php $dt=strtotime($user['event_registered_time']); echo date('d/M/Y G:i ',$dt); ?></td>
+							</tr>	
+							<?php 
+							}
+							?>
+						</tbody>
+					</table>
+					<?php
+					}
+					?>
+				</div>
+			</div>
+		</div>
+	</div><!-- close .container-fluid -->
+</div><!-- close .content -->
+<!-- END Content -->
+<?php 
+} 
+?>
