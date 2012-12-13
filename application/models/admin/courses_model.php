@@ -349,6 +349,29 @@ class Courses_model extends CI_Model
 			$i=$i+1;
 			}*/
 	}
+	function fetch_all_univ_courses()
+	{	
+		$this->db->select('*');
+		$this->db->from('univ_program');
+		$this->db->join('program', 'program.prog_id = univ_program.program_id');
+		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
+		$query = $this->db->get();		
+		return $query->result();
+	}
+	function fetch_univ_courses_latest()
+	{
+	
+		$this->db->select('*');
+		$this->db->from('univ_program');
+		$this->db->join('program', 'program.prog_id = univ_program.program_id');
+		$this->db->join('program_educ_level', 'program_educ_level.prog_edu_lvl_id = program.educ_level_id');
+		$this->db->join('program_parent', 'program_parent.prog_parent_id = program.prog_parent_id');
+		$this->db->order_by('created_time','desc');
+		$this->db->limit(10);
+		$query = $this->db->get();		
+		return $query->result();
+	}
 }
 
 /* End of file users.php */

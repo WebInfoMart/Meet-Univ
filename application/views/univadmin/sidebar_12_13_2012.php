@@ -1,5 +1,4 @@
 <?php
-$dms = false;
 $admin_profile = $this->adminmodel->get_admin_profile($user_id);
 foreach($admin_profile as $profile_detail)
 {
@@ -59,96 +58,87 @@ if($flag==1)
 		{
 			if($admin_user_level=='5' || $admin_user_level=='4' || $admin_user_level=='3') 
 			{
-				$admin_add_op=array('4','6','8','10');									
-				?>						
-					<li>
-						<a href="javascript:void(0);" class='toggle-subnav'><i class="icon-book"></i>Data Management Setting <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span></a>
-						<ul class="collapsed-nav closed">
-							<?php 
-							foreach ($admin_priv as $admin_priv_res)
-							{
-								if($admin_priv_res['privilege_type_id']=='2' && $admin_priv_res['privilege_level']!='0')
+				$admin_add_op=array('4','6','8','10');		
+				foreach ($admin_priv as $admin_priv_res)
+				{
+					if($admin_priv_res['privilege_type_id']=='3' && $admin_priv_res['privilege_level']!='0')
+					{
+						?>
+						<li>
+							<a href="javascript:void(0);" class='toggle-subnav'><i class="icon-book"></i>Data Management Setting <span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span></a>
+							<ul class="collapsed-nav closed">
+								<?php 
+								if(($admin_priv_res['privilege_type_id']=='2' || $admin_priv_res['privilege_type_id']=='6') && $admin_priv_res['privilege_level']!='0')
 								{  
+									if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+									{
 								?>
-									<li><a href="<?php echo $base;?>newadmin/adminarticles/manage_articles">Articles</a></li>
+									<li>
+										<a href="<?php echo $base;?>newadmin/adminarticles/manage_articles">Articles</a>
+									</li>
+								<?php 
+									} 
+								} 
+								if(($admin_priv_res['privilege_type_id']=='2' || $admin_priv_res['privilege_type_id']=='6') && $admin_priv_res['privilege_level']!='0')
+								{  
+									if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+									{
+								?>		  
 									<li><a href="<?php echo $base;?>newadmin/admin_news/manage_news">News</a></li>
-								<?php								 
-								} 								 
+								<?php 
+									}
+								} 
 								if($admin_priv_res['privilege_type_id']=='6' && $admin_priv_res['privilege_level']!='0')
-								{
+								{   
+									if(in_array($admin_priv_res['privilege_level'],$admin_add_op))
+									{
 								?>		 
 									<li><a href="<?php echo $base;?>newadmin/admin_ques/manage_ques">Q & A Section</a></li>
-								<?php				
+								<?php 
+									} 
 								}
-							}
-							?>
-						</ul>
-					</li>
-					<?php
-					foreach ($admin_priv as $admin_priv_res)
-					{				
-						if($admin_priv_res['privilege_type_id']=='3' && $admin_priv_res['privilege_level']!='0')
-						{
-					?>
-							<li>
-								<a href="<?php echo $base; ?>newadmin/admin_events"><i class="icon-calendar"></i>Events</a>
-							</li> 
-					<?php
-						}
-					}
-					?>
-					<li>
-						<a href="javascript:void(0);" class='toggle-subnav'><i class="icon-tasks"></i>General Setting<span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span></a>		
-						<ul class="collapsed-nav closed">
-							<?php
-							foreach ($admin_priv as $admin_priv_res)
-							{
-								if($admin_priv_res['privilege_type_id']=='11' && $admin_priv_res['privilege_level']!='0') 
-								{
-							?>
-									<li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>									  
-							<?php
-								}
-							}							
-							if($admin_user_level=='5' || $admin_user_level=='3')
-							{
-							?>
+								?>
+							</ul>
+						</li>
+						<li>
+							<a href="<?php echo $base; ?>newadmin/admin_events"><i class="icon-calendar"></i>Events</a>
+						</li>     
+						<?php 
+						if($admin_user_level=='3') 
+						{ 
+						?>	
+						<li>
+							<a href="javascript:void(0);" class='toggle-subnav'><i class="icon-tasks"></i>General Setting<span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span></a>		
+							<ul class="collapsed-nav closed">
+								<li><a href="<?php echo $base; ?>admin/manage_univ_gallery">University Gallery</a></li>									  
 								<li><a href="<?php echo $base; ?>newadmin/admin_courses/manage_univ_course">University Courses</a></li>
-							<?php
-							}
-							if($admin_user_level=='3')
-							{
-							?>
 								<li><?php echo anchor("$base".'admin/update_university_detail', 'Update University'); ?></li>
-							<?php
-							}
-							?>
-						</ul>
-					</li>
-					<li>
-						<a href="javascript:void(0);" class='toggle-subnav'><i class=" icon-share"></i>Engage<span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span></a>
-						<ul class="collapsed-nav closed">
-							<?php
-							if($admin_user_level=='5' || $admin_user_level=='3')
-							{
-							?>
+							</ul>
+						</li>
+						<?php 
+						} 
+						?>     
+						<li>
+							<a href="javascript:void(0);" class='toggle-subnav'><i class=" icon-share"></i>Engage<span class="label label-toggle"><img src="<?php echo $base;?>newadmin/img/toggle_minus.png" alt=""></span></a>
+							<ul class="collapsed-nav closed">
 								<li><a href="<?php echo $base; ?>newadmin/admin_promotional">Promotional Panel</a></li>
-							<?php
-							}
-							if($admin_user_level=='3')
-							{
-							?>
 								<li><a href="<?php echo $base; ?>newadmin/emailpacks">Email Plans</a></li>
-								<li><a href="<?php echo $base; ?>newadmin/engagement">Engagement Panel</a></li>								
-							<?php
-							}
-							?>
-						</ul>
-					</li>
-					<li>
-						<a href="javascript:void(0);"><i class="icon-signal"></i>Statistics</a>
-					</li>
-				<?php
+								<?php 
+								if($admin_user_level=='3')
+								{ 
+								?>
+								<li><a href="<?php echo $base; ?>newadmin/engagement">Engagement Panel</a></li>
+								<?php 
+								} 
+								?>
+							</ul>
+						</li>
+						<li>
+							<a href="javascript:void(0);"><i class="icon-signal"></i>Statistics</a>
+						</li>
+					  <?php 
+					}
+				}
 			} 
 		} 
 		?>

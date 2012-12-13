@@ -17,7 +17,7 @@ class Admin extends CI_Controller
 		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
-		$this->load->library('googleanalytics');
+		//$this->load->library('googleanalytics');
 		$this->load->model('admin/admindash');
 		$this->load->model('admin/admindash_nc');			//added by satbir on 11/22/2012
 		$this->load->model('admin/event_model');			//added by satbir on 11/17/2012		
@@ -86,10 +86,10 @@ class Admin extends CI_Controller
 			if($data['admin_user_level']=='5' || $data['admin_user_level']=='4' || $data['admin_user_level']=='6')
 			{
 				//$this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
-				$ga = new GoogleAnalytics();
-				$this->googleanalytics->setProfile('ga:60386809');
-				$this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
-				$data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
+				// $ga = new GoogleAnalytics();
+				// $this->googleanalytics->setProfile('ga:60386809');
+				// $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
+				// $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
 				// for($i = 1; $i <=31; $i++) 
 				// {    
 					// $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
@@ -1737,7 +1737,7 @@ function manage_university($mps='')
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) 
 		{
-				redirect('admin/adminlogin/');
+			redirect('admin/adminlogin/');
 		}
 		else
 		{
@@ -1748,17 +1748,9 @@ function manage_university($mps='')
 			if(!($data['admin_priv']))
 			{
 				redirect('admin/adminlogout');
-			}
-			 if($data['admin_user_level']=='5')
-			 {
-			 $this->load->view('admin/header',$data);
-				$this->load->view('admin/sidebar',$data);
-			 }
-			 else
-			{
-				$this->load->view('univadmin/header',$data);
-				$this->load->view('univadmin/sidebar',$data);
-			}
+			}			
+			$this->load->view('univadmin/header',$data);
+			$this->load->view('univadmin/sidebar',$data);		
 			$flag=0;
 			$delete=0;
 			foreach($data['admin_priv'] as $userdata['admin_priv'])
@@ -1797,26 +1789,32 @@ function manage_university($mps='')
 				
 					if($this->input->post('upload'))
 					{
-						$university_id=$univ_info['univ_id'];
-							//print_r($this->input->post('userfile1'));exit;
+						$university_id=$univ_info['univ_id'];						
 						$added=$this->adminmodel->upload_univ_gallery($university_id);	
 						if($added==1)
 						{
-						 redirect('admin/manage_univ_gallery/ius');
-						}
-						
-			
-					}
-					
-//					
+							redirect('admin/manage_univ_gallery/ius');
+						}			
+					}				
 				}
 				else
 				{
 					$data['univ_info']=$this->events->get_univ_detail();
+					$data['gallery']=$this->adminmodel->get_all_univ_gallery_info();
+					if($this->input->post('upload'))
+					{
+						$university_id= $this->input->post('university');						
+						$added=$this->adminmodel->upload_univ_gallery($university_id);	
+						if($added==1)
+						{
+							redirect('admin/manage_univ_gallery/ius');
+						}			
+					}
 				}
 				if($data['admin_user_level']=='5')
 				{
-					$this->load->view('admin/manage_univ_gallery', $data);
+					//$this->load->view('admin/manage_univ_gallery', $data);
+					$this->load->view('univadmin/gallery/uni_gallery', $data);					
 				}
 				else
 				{
@@ -1918,37 +1916,39 @@ function manage_university($mps='')
 	}
 	function fetch_univ_gallery_ajax()
 	{
-	if (!$this->tank_auth->is_admin_logged_in()) {
+		if (!$this->tank_auth->is_admin_logged_in()) 
+		{
 			redirect('admin/adminlogin/');
 		}
-	else {
-	$data = $this->path->all_path();
-	$data['user_id']	= $this->tank_auth->get_admin_user_id();
-	$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-	$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-	if(!($data['admin_priv']))
-	{
-		redirect('admin/adminlogout');
-	}
-	$delete=0;
-	$delete_gallery_pic=array('5','7','8','10');
-		foreach($data['admin_priv'] as $userdata['admin_priv']){
-		if($userdata['admin_priv']['privilege_type_id']==11 && $userdata['admin_priv']['privilege_level']!=0 && $data['admin_user_level']!='3')
+		else 
 		{
-		if(in_array($userdata['admin_priv']['privilege_level'],$delete_gallery_pic))
-		{
-		$delete=1;
+			$data = $this->path->all_path();
+			$data['user_id']= $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			if(!($data['admin_priv']))
+			{
+				redirect('admin/adminlogout');
+			}
+			$delete=0;
+			$delete_gallery_pic=array('5','7','8','10');
+			foreach($data['admin_priv'] as $userdata['admin_priv'])
+			{
+				if($userdata['admin_priv']['privilege_type_id']==11 && $userdata['admin_priv']['privilege_level']!=0 && $data['admin_user_level']!='3')
+				{
+					if(in_array($userdata['admin_priv']['privilege_level'],$delete_gallery_pic))
+					{
+						$delete=1;
+					}
+				}
+			}
+			$univ_id=$this->input->post('univ_id');
+			$data['delete']=$delete;	
+			$data['count']=$this->adminmodel->get_univ_gallery_info_count($univ_id);
+			$data['gallery']=$this->adminmodel->get_univ_gallery_info($univ_id);
+			$this->load->view('ajaxviews/manage_univ_gallery_admin', $data);		
 		}
-		}
-	}
-	$univ_id=$this->input->post('univ_id');
-	$data['delete']=$delete;	
-	$data['count']=$this->adminmodel->get_univ_gallery_info_count($univ_id);
-	$data['gallery']=$this->adminmodel->get_univ_gallery_info($univ_id);
-	$this->load->view('ajaxviews/manage_univ_gallery_admin', $data);
-	
-	}
-  }	
+	}	
 	function update_password()
 	{
 		if (!$this->tank_auth->is_admin_logged_in()) {

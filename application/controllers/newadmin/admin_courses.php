@@ -373,57 +373,62 @@ class Admin_courses extends CI_Controller
 		//new
 		function manage_univ_course($msg='')
 		{
-			if (!$this->tank_auth->is_admin_logged_in()) {
-			redirect('admin/adminlogin/');
-		}
-		else{
-		$data = $this->path->all_path();
-		$data['user_id']	= $this->tank_auth->get_admin_user_id();
-		$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-		$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-		if(!($data['admin_priv']))
-		{
-			redirect('admin/adminlogout');
-		}
-		$data['openhtml']=0;
+			if (!$this->tank_auth->is_admin_logged_in()) 
+			{
+				redirect('admin/adminlogin/');
+			}
+			else
+			{
+				$data = $this->path->all_path();
+				$data['user_id']	= $this->tank_auth->get_admin_user_id();
+				$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+				$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+				if(!($data['admin_priv']))
+				{
+					redirect('admin/adminlogout');
+				}
+				$data['openhtml']=0;		
+				if($data['admin_user_level']=='5' || $data['admin_user_level']=='3')
+				{
+					if($msg=='cds')
+					{
+						$data['msg']='Course Deleted Sucessfully';
+						$this->load->view('admin/userupdated',$data);
+					}
+					if($msg=='cas')
+					{
+						$data['msg']='Program Added Sucessfully';
+						$this->load->view('admin/userupdated',$data);
+					}
+					if($data['admin_user_level']=='3')
+					{
+						$this->load->view('univadmin/header',$data);
+						$this->load->view('univadmin/sidebar',$data);
+						$univ=$this->events->fetch_univ_id($data['user_id']);
+						$univ_id=$univ['univ_id'];
+						$data['course_info']=$this->courses_model->fetch_univ_courses($univ_id);
+						$data['course_latest']=$this->courses_model->univ_courses_latest($univ_id);
+						$this->load->view('univadmin/courses/univ_courses', $data);
+					}
+					else if($data['admin_user_level']=='5')
+					{
+						$this->load->view('univadmin/header',$data);
+						$this->load->view('univadmin/sidebar',$data);
+						$data['univ_info']=$this->events->get_univ_detail();
+						$data['course_info']=$this->courses_model->fetch_all_univ_courses();
+						$data['course_latest']=$this->courses_model->fetch_univ_courses_latest();
+						//$this->load->view('admin/courses/manage_univ_courses', $data);
+						$this->load->view('univadmin/courses/univ_courses', $data);
+					}
+					
+					
+				}
+				else
+				{
+					$this->load->view('admin/accesserror', $data);
+				}
 		
-		if($data['admin_user_level']=='5' || $data['admin_user_level']=='3')
-		{
-			if($msg=='cds')
-			{
-				$data['msg']='Course Deleted Sucessfully';
-				$this->load->view('admin/userupdated',$data);
 			}
-			if($msg=='cas')
-			{
-				$data['msg']='Program Added Sucessfully';
-				$this->load->view('admin/userupdated',$data);
-			}
-			if($data['admin_user_level']=='3')
-			{
-				$this->load->view('univadmin/header',$data);
-				$this->load->view('univadmin/sidebar',$data);
-				$univ=$this->events->fetch_univ_id($data['user_id']);
-				$univ_id=$univ['univ_id'];
-				$data['course_info']=$this->courses_model->fetch_univ_courses($univ_id);
-				$data['course_latest']=$this->courses_model->univ_courses_latest($univ_id);
-				$this->load->view('univadmin/courses/univ_courses', $data);
-			}
-			else if($data['admin_user_level']=='5')
-			{
-				$this->load->view('admin/header',$data);
-				$this->load->view('admin/sidebar',$data);
-				$data['univ_info']=$this->events->get_univ_detail();
-				$this->load->view('admin/courses/manage_univ_courses', $data);
-			}
-			
-			
-		}
-		else{
-		$this->load->view('admin/accesserror', $data);
-		}
-		
-		}
 		}
 		//new
 	function delete_univ_courses()

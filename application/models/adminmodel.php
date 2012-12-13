@@ -1153,6 +1153,16 @@ class Adminmodel extends CI_Model
 		}	
 	return $myflag;
 	}
+	function get_all_univ_gallery_info()    			// added by satbir on 12/13/2012
+	{
+		$this->db->select('*');	
+		$this->db->from('univ_gallery');		
+		$this->db->join('university','university.univ_id=univ_gallery.univ_id','left');
+		$this->db->where(array('gal_type' =>'univ'));
+		$this->db->order_by("univ_gallery.postedon", "desc");
+		$query =$this->db->get();
+		return $query->result_array();
+	}
 }
 /* End of file users.php */
 /* Location: ./application/models/auth/users.php */

@@ -1,3 +1,23 @@
+<div class="modal hide" id="delete">
+	<div class="modal-header">		
+		<div align="center"><h3>Course deleted successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_atl_one">
+	<div class="modal-header">		
+		<div align="center"><h3>Please select atleast one course</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="sel_act">
+	<div class="modal-header">		
+		<div align="center"><h3>Please select the course</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="denied">
+	<div class="modal-header">		
+		<div align="center" style="color:red;"><h3>Unable to perform action please contact admin</h3></div>
+	</div>
+</div>
 <?php
 $edit=0;
 $delete=0;
@@ -26,16 +46,7 @@ $insert=1;
 }
 }
 ?>
-<div id="access" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Unable to perform action please contact admin</strong>
-</div>
-<div id="deleted" class="alert alert-success" style="display:none">
-  <a class="close" data-dismiss="alert" href="#">×</a>
-  <strong>Courses Deleted Successfully</strong>
-</div>
-  <!-- BEGIN Content -->
-  <div class="content">
+<div class="content">
     <div class="container-fluid">			
       <div class="row-fluid">
         <div class="span12">
@@ -59,9 +70,7 @@ $insert=1;
                 <table class="table table-striped dataTable" id="media" >
                   <thead>
                     <tr>
-                      <th>
-					  <input type="checkbox" class='sel_rows' data-targettable="media">
-					  </th>
+                      <th><input type="checkbox" class='sel_rows' data-targettable="media"></th>
                       <th>Program Title</th>
                       <th>Education Level</th>
                       <th>Course Name</th>
@@ -70,7 +79,7 @@ $insert=1;
                     </tr>
                   </thead>
                   <tbody>
-				  <?php	//print_r($course_info);			  
+				  <?php			  
 				  foreach($course_info as $row)
 				  {  ?>
 					<tr class="check_university_<?php echo $row->id; ?>">
@@ -118,9 +127,7 @@ $insert=1;
 				 <table class="table table-striped dataTable" id="media1" >
                   <thead>
                     <tr>
-                      <th>
-					  <input type="checkbox" class='sel_rows' data-targettable="media1">
-					  </th>
+                      <th><input type="checkbox" class='sel_rows' data-targettable="media1"> </th>
                       <th>Program Title</th>
                       <th>Education Level</th>
                       <th>Course Name</th>
@@ -129,7 +136,7 @@ $insert=1;
                     </tr>
                   </thead>
                  <tbody>
-				  <?php	//print_r($course_info);			  
+				  <?php				  
 				  foreach($course_latest as $row)
 				  {  ?>
 					<tr class="check_university_<?php echo $row->id; ?>">
@@ -163,14 +170,13 @@ $insert=1;
                   </tbody>
                 </table>
 				<?php if($delete==1) { ?> 	
-			<div class="tableactions" style="margin-top:70px;">
-				<select name="univ_action" id="del_action">
-					<option value="">Actions</option>
-					<option value="delete">Delete</option>
-				</select>
-				
-				<input type="button" onclick="action_formsubmit(0,0)" class="submit tiny" value="Apply to selected" />
-			</div>		<!-- .tableactions ends -->
+				<div class="tableactions" style="margin-top:70px;">
+					<select name="univ_action" id="del_action">
+						<option value="">Actions</option>
+						<option value="delete">Delete</option>
+					</select>					
+					<input type="button" onclick="action_formsubmit(0,0)" class="submit tiny" value="Apply to selected" />
+				</div>
 		<?php  } ?>
               </div>
 			  <div class="tab-pane" id="create">
@@ -184,17 +190,6 @@ $insert=1;
 									<input type="text" class="input-xlarge" id="input01">
 								</div>
 								</div>
-								<!--
-								<div class="control-group">
-								<label class="control-label" for="input06">Choose University</label>
-								<div class="controls">
-									<select name="select" id="input06">
-									<option value="0">- Select something -</option>
-									<option value="1">Lorem ipsum</option>
-									<option value="2">Sit dolor</option>
-									</select>
-								</div>
-								</div>-->
 								<div class="control-group">
 									<label class="control-label" for="input04">News Logo</label>
 									<div class="controls">
@@ -220,11 +215,9 @@ $insert=1;
           </div>
         </div>
       </div>
-    </div><!-- close .container-fluid -->
-  </div><!-- close .content -->
-  <!-- END Content -->
- 
-   <script>
+    </div>
+</div>
+<script>
 $(document).ready(function(){
 	//alert('fnslfc');
 	$('.collapsed-nav').css('display','none');
@@ -252,7 +245,6 @@ $(document).ready(function(){
 	});
 function delete_confirm(id)
 {
-	alert(id);
 	$.ajax({	
 	 type: "POST",
 	   url: "<?php echo $base; ?>newadmin/admin_courses/delete_single_course_univ/"+id,
@@ -261,19 +253,18 @@ function delete_confirm(id)
 	   cache: false,
 	   success: function(msg)
 	   {
-	    //alert(msg)
-		if(msg=='1')
+	    if(msg=='1')
 		{
 			$('.check_university_'+id).hide();
 			$('.check_university1_'+id).hide();
-			$('#deleted').show();
-			setTimeout(function(){$('#deleted').hide('slow');},3000);		
+			$('#delete').show();
+			setTimeout(function(){$('#delete').fadeOut('slow');},3000);		
 		}
 		else
 		{
 			
-			$('#access').show();
-			setTimeout(function(){$('#access').hide('slow');},3000);	
+			$('#denied').show();
+			setTimeout(function(){$('#denied').fadeOut('slow');},3000);	
 		}
 	}
 	
@@ -301,7 +292,6 @@ function action_formsubmit(id,flag)
 			var r=confirm("Are you sure you want to delete selected questions");
 			set_chkbox_val();			
 			var data={'course_id':arr};
-alert(arr);
 			if(r)
 			{
 				$.ajax({
@@ -315,13 +305,13 @@ alert(arr);
 						if(msg==1)
 						{
 							$('.toremove').hide();
-							$("#deleted").show();
-							$("#deleted").delay(5000).hide("slow");
+							$("#delete").show();
+							$("#delete").delay(5000).fadeOut("slow");
 						}
 						else
 						{
-							$('#access').show();
-							setTimeout(function(){$('#access').hide('slow');},3000);	
+							$('#denied').show();
+							setTimeout(function(){$('#denied').fadeOut('slow');},3000);	
 						}
 					}
 
@@ -330,13 +320,15 @@ alert(arr);
 		}
 		else
 		{
-			alert("please select at least one question");
+			$('#sel_atl_one').show();				
+			setTimeout(function(){$('#sel_atl_one').fadeOut('slow');},2000);
 			return false;
 		}
 	}
 	else
 	{
-		alert("please select the action");
+		$('#sel_act').show();				
+		setTimeout(function(){$('#sel_act').fadeOut('slow');},2000);
 		return false;
 	}
 }
@@ -351,8 +343,5 @@ function set_chkbox_val()
 			arr.push($(this).val());
 		}		
 	});
-}
-	
+}	
  </script>
-</body>
-</html>
