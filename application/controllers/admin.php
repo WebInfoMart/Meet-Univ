@@ -17,7 +17,7 @@ class Admin extends CI_Controller
 		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
-		//$this->load->library('googleanalytics');
+		$this->load->library('googleanalytics');
 		$this->load->model('admin/admindash');
 		$this->load->model('admin/admindash_nc');			//added by satbir on 11/22/2012
 		$this->load->model('admin/event_model');			//added by satbir on 11/17/2012		
@@ -86,10 +86,10 @@ class Admin extends CI_Controller
 			if($data['admin_user_level']=='5' || $data['admin_user_level']=='4' || $data['admin_user_level']=='6')
 			{
 				//$this->session->set_userdata('chat_username','Counselor_break_1212111_12121'); // Must be already set
-				// $ga = new GoogleAnalytics();
-				// $this->googleanalytics->setProfile('ga:60386809');
-				// $this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
-				// $data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
+				$ga = new GoogleAnalytics();
+				$this->googleanalytics->setProfile('ga:60386809');
+				$this->googleanalytics->setDateRange(date('Y-m-d',strtotime('30 day ago')),date('Y-m-d',strtotime('1 day ago')));
+				$data['report'] = $this->googleanalytics->getReport(array('dimensions'=>urlencode('ga:date'),'metrics'=>urlencode('ga:pageviews,ga:visitors')));
 				// for($i = 1; $i <=31; $i++) 
 				// {    
 					// $lead_created_time=date("Y-m-d", strtotime('-'. $i .' days'));
