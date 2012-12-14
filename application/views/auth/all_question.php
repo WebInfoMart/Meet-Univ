@@ -55,7 +55,7 @@ if ($user) {
 							<div class="clearfix"></div>
 							<div class="slides_container">
 								<div>
-									<form action="QuestandAns" method="post" class="margin_t">
+									<form action="questandans" method="post" class="margin_t">
 									<div class="control-group">
 											<input class="input-xxlarge focused" id="quest_title" name="quest_title" type="text" value="<?php echo $quest_var; ?>">
 											<span style="color:red;"> <?php echo form_error('quest_title'); ?><?php echo isset($errors['quest_title'])?$errors['quest_title']:''; ?> </span>
@@ -92,7 +92,7 @@ if ($user) {
 											<div class="margin_t1">
 												<ul class="browse_list">
 													<li>
-														<a href="Browse_Question/All">Browse All Questions</a>
+														<a href="browse-question/all">Browse All Questions</a>
 													</li>
 													
 												</ul>
@@ -145,7 +145,7 @@ if ($user) {
 					$question=str_replace(' ','-',$quest_list['q_title']);					$question=str_replace('[','',$question);					$question=str_replace(']','',$question);					$question=str_replace('(','',$question);					$question=str_replace(')','',$question);					$question=str_replace('{','',$question);					$question=str_replace('}','',$question);
 					$question_title =$this->subdomain->process_url_title($question);	
 					$url = "MeetQuest/$quest_list[que_id]/$question_title/$quest_list[q_askedby]";
-					$url = $base.'otherQuestion'.'/'.$quest_list['que_id'].'/'.$question_title;
+					$url = $base.'otherquestion'.'/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				?>
 				<li>

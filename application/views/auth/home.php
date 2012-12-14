@@ -574,7 +574,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 							<!--<h3>what are the type of questions they ask in iit?</h3>-->
 							<div class="margin_t1">
 								<div class="input-append">
-									<form action="<?php echo $base; ?>QuestandAns" method="post">
+									<form action="<?php echo $base; ?>questandans" method="post">
 										<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Question">
 										<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info btn_tab"  value="Ask">
 									</form>
@@ -609,7 +609,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 				{
 					$question_title=str_replace(' ','-',$quest_list['q_title']);										$question_title=str_replace('[','',$question_title);										$question_title=str_replace(']','',$question_title);										$question_title=str_replace('(','-',$question_title);										$question_title=str_replace(')','-',$question_title);										$question_title=str_replace('{','-',$question_title);										$question_title=str_replace('}','-',$question_title);										$question_title = str_replace(' ','-',$question_title);
 					$question_title=$this->subdomain->process_url_title($question_title);
-					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$question_title;
+					$url = $base.'otherquestion/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				else
 				{

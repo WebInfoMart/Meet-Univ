@@ -16,7 +16,7 @@ $fetch_country = $this->frontmodel->fetch_country_having_univ_footer();$fetch_ar
 						foreach($fetch_area_interest as $interest)
 						{
 						?>
-							<li><a href="<?php echo $base; ?>/colleges/<?php echo str_replace(' ','_',$interest['program_parent_name']); ?>"><?php echo $interest['program_parent_name'];  ?></a></li>
+							<li><a href="<?php echo $base; ?>colleges/<?php echo str_replace(' ','-',strtolower($interest['program_parent_name'])); ?>"><?php echo $interest['program_parent_name'];  ?></a></li>
 						<?php } } ?>
 						</ul>
 					</div>
@@ -29,7 +29,7 @@ $fetch_country = $this->frontmodel->fetch_country_having_univ_footer();$fetch_ar
 						foreach($fetch_country as $country)
 						{
 						?>
-							<li><a href="<?php echo "$base"; ?>colleges/<?php echo str_replace(' ','_',trim($country['country_name'])); ?>"><?php echo $country['country_name']; ?></a></li>
+							<li><a href="<?php echo "$base"; ?>colleges/<?php echo str_replace(' ','-',trim(strtolower($country['country_name']))); ?>"><?php echo $country['country_name']; ?></a></li>
 						<?php } } ?>
 						<!--<li style="margin-left: -26px;"><a href="#"> >>>More Countries<<< </a></li>-->
 						</ul>
@@ -40,7 +40,7 @@ $fetch_country = $this->frontmodel->fetch_country_having_univ_footer();$fetch_ar
 							<li><a href="<?php echo $base; ?>about_us">About us</a></li>
 							<li><a href="<?php echo $base; ?>contact_us">Contact us</a></li>
 							<li><a href="<?php echo $base; ?>colleges">Colleges</a></li>
-							<li><a href="<?php echo $base; ?>QuestandAns">Questions & Answers</a></li>
+							<li><a href="<?php echo $base; ?>questandans">Questions & Answers</a></li>
 							<li><a href="">Service Agreement</a></li>
 						</ul>
 						<!--<h4 class="white">Follow us</h4>

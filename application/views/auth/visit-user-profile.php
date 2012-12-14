@@ -268,7 +268,7 @@ if ($user) {
 							
 							<div class="margin_t1">
 								<div class="input-append">
-									<form action="<?php echo $base; ?>QuestandAns" method="post">
+									<form action="<?php echo $base; ?>questandans" method="post">
 										<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
 										<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info btn_tab"  value="Ask">
 									</form>
@@ -301,7 +301,7 @@ if ($user) {
 								else if($quest_list['q_category'] == 'general' && $quest_list['q_country_id'] == '0' && $quest_list['q_univ_id'] == '0')
 								{
 									$quest_title = str_replace(' ','',$quest_list['q_title']);									$quest_title = str_replace('[','',$quest_title);									$quest_title = str_replace(']','',$quest_title);									$quest_title = str_replace('(','',$quest_title);									$quest_title = str_replace(')','',$quest_title);									$quest_title = str_replace('{','',$quest_title);									$quest_title = str_replace('}','',$quest_title);									$quest_title = str_replace('?','',$quest_title);
-									$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$quest_title;
+									$url = $base.'otherquestion/'.$quest_list['que_id'].'/'.$quest_title;
 								}
 								$q_date = explode(" ",$quest_list['q_asked_time']);
 								$quest_ask_date = explode("-",$q_date[0]);

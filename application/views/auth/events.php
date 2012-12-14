@@ -113,7 +113,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 									<form class="margin_zero">
 										<ul class="col_filter_list">
 											
-											<li href="/spot_admission"><label class="checkbox">
+											<li href="/spot-admission"><label class="checkbox">
 												<input type="checkbox" class="search_chkbox"  id="" <?php
 												if(in_array('spot_admission',$events['filter_event_type']))
 												{
@@ -150,7 +150,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 											<?php
 											if(!empty($country_name_having_event) && ($country_name_having_event!=1)) {
 											foreach($country_name_having_event as $country_name_having_event){
-											$country_name=str_replace(' ','_',$country_name_having_event['country_name']);
+											$country_name=str_replace(' ','-',strtolower($country_name_having_event['country_name']));
 											?>
 											<li class="listitem_country"  href="/<?php echo $country_name; ?>"><label class="checkbox">
 									<input type="checkbox" id="" class="search_chkbox" value=""
@@ -186,7 +186,7 @@ $this->session->unset_userdata('msg_send_suc_voice');
 										{
 										foreach($city_name_having_event as $city_name_have_event)
 										{
-										$city_name_have_event_list=str_replace(' ','_',$city_name_have_event['cityname']);
+										$city_name_have_event_list=str_replace(' ','-',strtolower($city_name_have_event['cityname']));
 										?>
 											<li class="listitem_city" href="/<?php echo $city_name_have_event_list; ?>"><label class="checkbox">
 		<input type="checkbox" class="search_chkbox" <?php if(in_array($city_name_have_event['city_id'],$events['filter_city']))
@@ -622,7 +622,7 @@ var x = new Array(<?php echo $array_dates; ?>);
 			{
 				//alert($(this).closest("li").attr("id"));
 				href=href.replace($(this).closest("li").attr("href"),'');
-			}
+			}			
 			history.pushState('',href,href);
 			get_event_result_by_ajax();
 			});;

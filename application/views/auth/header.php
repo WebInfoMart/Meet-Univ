@@ -6,6 +6,24 @@ $facebook = new Facebook();
 
 $user = $facebook->getUser();
 //echo $facebook->getAccessToken();exit;
+$app_id='415316545179174';
+$app_secret='ac58e50d8d10b458388e63eec36939ae';
+
+$accessToken='AAAF5umslDiYBAKi48Os7IC7vhx8QWem0YbMzwJfZC0iZAYvjVsKWZCi9EKuEqdbeYmoxKDkrM4zjsogIVSboeEtDZCUFofFClaackGyjyVb6aR5IZBDrV';
+	
+$url ="https://graph.facebook.com/oauth/access_token?client_id=".$app_id."&client_secret=".$app_secret."&
+grant_type=fb_exchange_token";
+
+$ch = curl_init();				
+	curl_setopt($ch, CURLOPT_USERAGENT, $url);
+	curl_setopt($ch, CURLOPT_URL,trim($url));
+	curl_setopt($ch, CURLOPT_FAILONERROR, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+	$html = curl_exec($ch);	
+				 print_r($html);exit;
 if ($user) {
 
   try {
@@ -289,7 +307,7 @@ d.getElementsByTagName('head')[0].appendChild(js);
 								<ul class="menu">
 									<li><a href="<?php echo $base; ?>">Home</a></li>
 									<li><a href="<?php echo "$base"; ?>colleges">Colleges</a></li>
-									<li><a href="<?php echo "$base"; ?>QuestandAns">Questions & Answers</a></li>
+									<li><a href="<?php echo "$base"; ?>questandans">Questions & Answers</a></li>
 									<li><a href="<?php echo $base; ?>events">Events</a></li>
 									<li><a href="<?php echo $base; ?>articles">Articles</a></li>
 									<li class="padding_beta" style="border:none;"><a href="<?php echo $base; ?>news">News</a></li>

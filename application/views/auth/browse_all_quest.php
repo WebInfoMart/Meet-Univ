@@ -46,7 +46,7 @@ if ($user) {
 				else
 				{										$question_title=$quest_list['q_title'];										$question_title=str_replace(' ','-',$question_title);										$question_title=str_replace('[','',$question_title);										$question_title=str_replace(']','',$question_title);										$question_title=str_replace('(','',$question_title);										$question_title=str_replace(')','',$question_title);										$question_title=str_replace('{','',$question_title);										$question_title=str_replace('}','',$question_title);										
 					$question_title =$this->subdomain->process_url_title($question_title);
-					$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$question_title;
+					$url = $base.'otherquestion/'.$quest_list['que_id'].'/'.$question_title;
 				}
 				?>
 				<div id="effect-style">

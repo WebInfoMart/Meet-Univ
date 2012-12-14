@@ -336,7 +336,7 @@ $select_female='';
 											</div>
 											<div class="margin_t1">
 												<div class="input-append">
-													<form action="<?php echo $base; ?>QuestandAns" method="post">
+													<form action="<?php echo $base; ?>questandans" method="post">
 														<input class="span4 margin_zero" id="appendedInput" name="quest_on_univ" size="16" type="text" placeholder="Enter Your Qusetion">
 														<input type="submit" id="ask_quest" name="ask_quest" class="add-on btn-info" style="padding: 3px 18px 6px 18px;color:#fff;font-size:16px;height:28px;" value="Ask">
 													</form>
@@ -370,7 +370,7 @@ $select_female='';
 								{
 									$quest_list['q_title']=str_replace('?','-',$quest_list['q_title']);
 									$quest_title = str_replace(' ','-',$quest_list['q_title']);									$quest_title=str_replace('[','',$quest_title);					$quest_title=str_replace(']','',$quest_title);					$quest_title=str_replace('(','',$quest_title);					$quest_title=str_replace(')','',$quest_title);					$quest_title=str_replace('{','',$quest_title);					$quest_title=str_replace('}','',$quest_title);
-									$url = $base.'otherQuestion/'.$quest_list['que_id'].'/'.$quest_title;
+									$url = $base.'otherquestion/'.$quest_list['que_id'].'/'.$quest_title;
 								}
 								$q_date = explode(" ",$quest_list['q_asked_time']);
 								$quest_ask_date = explode("-",$q_date[0]);
