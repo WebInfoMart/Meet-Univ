@@ -366,7 +366,7 @@ $insert=1;
 								<label class="control-label" for="input06">Choose University</label>
 								<div class="controls">
 									<select id="univ" name="univ" id="input06">
-									<option value="">- Please Select  -</option>
+									<option value="0">- Please Select  -</option>
 									<?php foreach($univ_info as $univ_detail) 
 									{ ?>										
 									<option value="<?php echo $univ_detail->univ_id; ?>" ><?php echo $univ_detail->univ_name; ?></option>
@@ -392,7 +392,7 @@ $insert=1;
 								</div>
 								<div class="form-actions">
 								<button type="button" onclick="addNews()" class='btn btn-primary'>Add News</button>
-								<a href="#" class='btn btn-danger'>Cancel</a>
+								<input type="button"  onclick="cancel()" class='btn btn-success pover' data-placement="top" data-content="Want to cancel" title="Cancel" value="Cancel" />
 								</div>
 							</fieldset>
 						</form>
@@ -409,19 +409,39 @@ $insert=1;
   <!-- END Content -->
  
 <script>
+function cancel()							//added by satbir 12/14/2012
+{
+	$("#title").val('');
+	$("#title").removeClass('needsfilled');
+	$("#univ").removeClass('needsfilled');
+	$("#detail").val('');
+	$("#detail").removeClass('needsfilled');	
+}
 function addNews()
 {
-	if($('#univ option:selected').val()=='')
+	if($('#univ option:selected').val()=='0')
 	{
 		$("#univ").addClass('needsfilled');
+	}
+	else
+	{
+		$("#univ").removeClass('needsfilled');
 	}
 	if($("#title").val()=='')
 	{
 		$("#title").addClass('needsfilled');		
 	}
+	else
+	{
+		$("#title").removeClass('needsfilled');
+	}
 	if($("#detail").val()=='')
 	{
 		$("#detail").addClass('needsfilled');		
+	}
+	else
+	{
+		$("#detail").removeClass('needsfilled');
 	}
 		
 	if($("#title").val()!='' && $("#detail").val()!='' )

@@ -4,14 +4,13 @@ $class_univ_owner='';
 $class_sub_domain='';
 $error_univ_name = form_error('univ_name');
 $error_univ_owner = form_error('univ_owner');
-
 if($error_univ_name != '') { $class_univ_name = 'needsfilled'; } else { $class_univ_name=''; }
-
 if($error_univ_owner != '') { $class_univ_owner = 'needsfilled'; } else { $class_univ_owner='text'; }
 ?>
  <!-- BEGIN Content -->
   <div class="content">
     <div class="container-fluid">
+	<div class="responsible_navi"></div>
        <div class="row-fluid">
 		<div class="span12">
 			<div class="page-header">
@@ -270,8 +269,7 @@ $univ_city_id=$univ_detail_update['city_id'];
 								</div>
 								</div>
 								<div class="form-actions">
-										<input type="submit" name="info_seo" class='btn btn-primary' value="Add News" />
-										<a href="#" class='btn btn-danger'>Cancel</a>
+									<input type="submit" name="info_seo" class='btn btn-primary' value="Update" />									
 								</div>
 							</fieldset>
 						</form>

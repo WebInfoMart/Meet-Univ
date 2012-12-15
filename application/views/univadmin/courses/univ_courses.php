@@ -47,7 +47,8 @@ $insert=1;
 }
 ?>
 <div class="content">
-    <div class="container-fluid">			
+    <div class="container-fluid">
+	<div class="responsible_navi"></div>
       <div class="row-fluid">
         <div class="span12">
           <div class="page-header clearfix tabs">
@@ -182,12 +183,12 @@ $insert=1;
 			  <div class="tab-pane" id="create">
 				<div class="row-fluid">
 					<div class="span9">
-						<form class="form-horizontal">
+						<form class="form-horizontal" onsubmit="return createCourse(this);">
 							<fieldset>
 								<div class="control-group">
 								<label class="control-label" for="input01">Title</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01">
+									<input type="text" class="input-xlarge" id="title" name="title">
 								</div>
 								</div>
 								<div class="control-group">
@@ -199,12 +200,12 @@ $insert=1;
 								<div class="control-group">
 								<label class="control-label" for="input07">Detail</label>
 								<div class="controls">
-									<textarea name="text" id="input07" class='span12' rows='8'></textarea>
+									<textarea name="text" id="detail" name="detail" class='span12' rows='8'></textarea>
 								</div>
 								</div>
 								<div class="form-actions">
-								<button type="submit" class='btn btn-primary'>Create</button>
-								<a href="<?php echo $base; ?>/newadmin/admin_courses/manage_univ_course" class='btn btn-danger'>Cancel</a>
+								<button type="submit" class='btn btn-primary'>Create</button>								
+								<input type="button"  onclick="cancel()" class='btn btn-success pover' data-placement="top" data-content="Want to cancel" title="Cancel" value="Cancel" />
 								</div>
 							</fieldset>
 						</form>
@@ -218,6 +219,36 @@ $insert=1;
     </div>
 </div>
 <script>
+function cancel()							//added by satbir 12/14/2012
+{
+	$("#title").val('');
+	$("#title").removeClass('needsfilled');
+	$("#detail").val('');
+	$("#detail").removeClass('needsfilled');	
+}
+function createCourse()
+{
+	var valid=true;	
+	if($("#title").val()=='')
+	{
+		$("#title").addClass('needsfilled');
+		valid=false;		
+	}
+	else
+	{
+		$("#title").removeClass('needsfilled');
+	}
+	if($("#detail").val()=='')
+	{
+		$("#detail").addClass('needsfilled');	
+		valid=false;
+	}
+	else
+	{
+		$("#detail").removeClass('needsfilled');
+	}
+	return valid;
+}
 $(document).ready(function(){
 	//alert('fnslfc');
 	$('.collapsed-nav').css('display','none');

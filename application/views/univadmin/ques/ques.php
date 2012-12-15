@@ -414,7 +414,7 @@ $insert=1;
 								</div>
 								<div class="form-actions">
 								<input type="button"  onclick="addQues()" class='btn btn-primary' value="Add Question" />
-								<a href="#" class='btn btn-danger'>Cancel</a>
+								<input type="button"  onclick="cancel(this)" class='btn btn-success pover' data-placement="top" data-content="Want to cancel" title="Cancel" value="Cancel" />
 								</div>
 							</fieldset>
 						</form>
@@ -466,11 +466,18 @@ function addQues()
 	{
 		$("#title").addClass('needsfilled');		
 	}
+	else
+	{
+		$("#title").removeClass('needsfilled');
+	}
 	if($("#detail").val()=='')
 	{
 		$("#detail").addClass('needsfilled');		
 	}
-		
+	else
+	{
+		$("#detail").removeClass('needsfilled');
+	}		
 	if($("#title").val()!='' && $("#detail").val()!='' )
 	{
 	
@@ -478,7 +485,7 @@ function addQues()
 	var colleges=$('#colleges').val();
 	var category=$('#category').val();
 	var type=$('#ques_type_ud').val();
-	var detail=$('#detail').val();
+	var detail=$('#detail').val();	
 	var data={type:type,title:title,colleges:colleges,detail:detail,category:category};
 	$.ajax({
 	type:"POST",
@@ -489,12 +496,22 @@ function addQues()
 	{
 		if(msg=='1')
 		{
+			$("#title").val('');
+			$("#detail").val('');
 			$('#addques').show();
 			setTimeout(function(){$('#addques').fadeOut('slow');},3000);
 		}
 	}
 	});
 	}
+}
+function cancel()				//added by satbir 12/14/2012
+{
+	$("#title").val('');
+	$("#title").removeClass('needsfilled');
+	$("#detail").val('');
+	$("#detail").removeClass('needsfilled');
+	
 }
 function delete_confirm(id)
 {
@@ -747,7 +764,4 @@ function set_chkbox_val()
 		}		
 	});
 }
-
-	</script>
-</body>
-</html>
+</script>

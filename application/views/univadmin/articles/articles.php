@@ -341,7 +341,7 @@ $insert=1;
 								</div>
 								<div class="form-actions">
 								<button type="submit" class='btn btn-primary'>Add Article</button>
-								<a href="<?php echo $base; ?>newadmin/adminarticles/manage_articles" class='btn btn-danger'>Cancel</a>
+								<input type="button"  onclick="cancel()" class='btn btn-success pover' data-placement="top" data-content="Want to cancel" title="Cancel" value="Cancel" />
 								</div>
 							</fieldset>
 						</form>
@@ -357,23 +357,43 @@ $insert=1;
   </div><!-- close .content -->
 <!-- END Content -->
 <script>
+function cancel()							//added by satbir 12/14/2012
+{
+	$("#title").val('');
+	$("#title").removeClass('needsfilled');
+	$("#univ").removeClass('needsfilled');
+	$("#detail").val('');
+	$("#detail").removeClass('needsfilled');	
+}
 function addArticle()
 {
 	var valid=true;
-	if($('#univ option:selected').val()=='')
+	if($('#univ option:selected').val()=='0')
 	{
 		$("#univ").addClass('needsfilled');
 		valid=false;
+	}
+	else
+	{
+		$("#univ").removeClass('needsfilled');
 	}
 	if($("#title").val()=='')
 	{
 		$("#title").addClass('needsfilled');
 		valid=false;		
 	}
+	else
+	{
+		$("#title").removeClass('needsfilled');
+	}
 	if($("#detail").val()=='')
 	{
 		$("#detail").addClass('needsfilled');	
-			valid=false;
+		valid=false;
+	}
+	else
+	{
+		$("#detail").removeClass('needsfilled');
 	}
 	return valid;
 }

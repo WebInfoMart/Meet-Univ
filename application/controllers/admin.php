@@ -2063,11 +2063,8 @@ function manage_university($mps='')
 	   redirect('admin/adminlogout');
 	  }
 	  $data['results'] = $this->adminmodel->userprivlegetype();
-	  if($msg=='uus')
-	   {
-	   $data['msg']='University Updated Successfully';
-	   $this->load->view('univadmin/userupdated',$data);
-	   } 
+	  
+	    
 	  if($this->input->post('submit'))
 	  {
 		  $this->form_validation->set_rules('univ_name', 'University', 'trim|required');
@@ -2079,7 +2076,7 @@ function manage_university($mps='')
 			  $flag=$this->adminmodel->update_univ_admin_university($univ_id);
 			  if(!$flag) 
 			  { 
-				redirect('admin/update_university_detail/uud');
+				redirect('admin/update_university_detail/uus');
 			  }
 			  //print_r($data['x']);
 			  //$this->adminmodel->edit_user_data();
@@ -2103,7 +2100,7 @@ function manage_university($mps='')
 			$flag = $this->adminmodel->update_univ_admin_university_info($univ_id);
 			if(!$flag) 
 			{ 
-				redirect('admin/update_university_detail/uud');
+				redirect('admin/update_university_detail/uus');
 			}
 		}
 	  }
@@ -2117,45 +2114,45 @@ function manage_university($mps='')
 			$flag = $this->adminmodel->update_univ_admin_university_seo($univ_id);
 			if(!$flag) 
 			{ 
-				redirect('admin/update_university_detail/uud');
+				redirect('admin/update_university_detail/uus');
 			}
 		}
 	  }
-
 	  $flag=0;
-	  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);
-	  
-	  if($data['univ_detail_edit']!=0)
-	  {
-		 
-		  if($data['univ_detail_edit'][0]->univ_id==$univ_id)
-		  {
+	  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);	  
+		if($data['univ_detail_edit']!=0)
+		{		 
+			if($data['univ_detail_edit'][0]->univ_id==$univ_id)
+			{
+				$flag=1;
+			}
+			else
+			{
+				$flag=0;
+			}
+		}
+		if($data['admin_user_level']=='5')
+		{
+			$this->load->view('admin/header',$data);
+			$this->load->view('admin/sidebar',$data);
 			$flag=1;
-		  }
-		  else
-		  {
-			$flag=0;
-		  }
-	  }
-	  if($data['admin_user_level']=='5')
-	  {
-		$this->load->view('admin/header',$data);
-		$this->load->view('admin/sidebar',$data);
-		$flag=1;
-	  }
-	  if($flag==0)
-	  {
-		$this->load->view('univadmin/accesserror', $data);
-	  }
-	  else
-	  {
-		  $this->load->view('univadmin/header',$data);
-		  $this->load->view('univadmin/sidebar',$data);
-			
-		  $data['countries']=$this->users->fetch_country();
-		  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
-		  //print_r($data['univ_detail_edit']);
-		  $this->load->view('univadmin/university/update_university',$data);
+		}
+		if($flag==0)
+		{
+			$this->load->view('univadmin/accesserror', $data);
+		}
+		else
+		{			  
+			$this->load->view('univadmin/header',$data);
+			$this->load->view('univadmin/sidebar',$data);
+			if($msg=='uus')
+			{
+				$data['msg']='University Updated Successfully';
+				$this->load->view('univadmin/userupdated',$data);
+			}
+			$data['countries']=$this->users->fetch_country();
+			$data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
+			$this->load->view('univadmin/university/update_university',$data);
 	  }
     }
  }
