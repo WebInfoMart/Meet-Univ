@@ -2044,118 +2044,122 @@ function manage_university($mps='')
  }
  
  //new
- function update_university_detail($msg="")
- {
-  if (!$this->tank_auth->is_admin_logged_in())
-  {
-   redirect('admin/adminlogin/');
-  }
-  else
-  {
-	  $data = $this->path->all_path();
-	  $data['user_id'] = $this->tank_auth->get_admin_user_id();
-	  $data['admin_user_level']=$this->tank_auth->get_admin_user_level();
-	  $data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
-	  $univ_info=$this->events->fetch_univ_id($data['user_id']);
-	  $univ_id=$univ_info['univ_id'];
-	  if(!($data['admin_priv']))
-	  {
-	   redirect('admin/adminlogout');
-	  }
-	  $data['results'] = $this->adminmodel->userprivlegetype();
-	  
-	    
-	  if($this->input->post('submit'))
-	  {
-		  $this->form_validation->set_rules('univ_name', 'University', 'trim|required');
-		  $this->form_validation->set_rules('address1', 'Addrss Line1', 'trim|xss_clean');
-		  $this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
-		  $this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
-		  if ($this->form_validation->run()) 
-		  {
-			  $flag=$this->adminmodel->update_univ_admin_university($univ_id);
-			  if(!$flag) 
-			  { 
-				redirect('admin/update_university_detail/uus');
-			  }
-			  //print_r($data['x']);
-			  //$this->adminmodel->edit_user_data();
-			  //redirect('admin/manageusers/ups');
-		  }
-	  }
-	  if($this->input->post('info_save'))									//added by satbir on 11/08/2012
-	  {
-		$this->form_validation->set_rules('txtareaoverview', 'Overview University', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareacampus', 'Campus Overview', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareaservices', 'Services', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareaalumni', 'Awarded Alumni', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareadepartments', 'Departments', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareafaculties', 'Faculties', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareaslife', 'Student Life', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareainterstudents', 'For International Students', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareaexpertise', 'Research Expertise', 'trim|xss_clean');
-		$this->form_validation->set_rules('txtareainsights', 'Insights', 'trim|xss_clean');
-		if ($this->form_validation->run()) 
+	function update_university_detail($msg="")
+	{
+		if (!$this->tank_auth->is_admin_logged_in())
 		{
-			$flag = $this->adminmodel->update_univ_admin_university_info($univ_id);
-			if(!$flag) 
-			{ 
-				redirect('admin/update_university_detail/uus');
-			}
-		}
-	  }
-	  if($this->input->post('info_seo'))									//added by satbir on 11/08/2012
-	  {
-		$this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
-		$this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
-		$this->form_validation->set_rules('keyword', 'Keyword', 'trim|xss_clean');
-		if ($this->form_validation->run()) 
-		{
-			$flag = $this->adminmodel->update_univ_admin_university_seo($univ_id);
-			if(!$flag) 
-			{ 
-				redirect('admin/update_university_detail/uus');
-			}
-		}
-	  }
-	  $flag=0;
-	  $data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);	  
-		if($data['univ_detail_edit']!=0)
-		{		 
-			if($data['univ_detail_edit'][0]->univ_id==$univ_id)
-			{
-				$flag=1;
-			}
-			else
-			{
-				$flag=0;
-			}
-		}
-		if($data['admin_user_level']=='5')
-		{
-			$this->load->view('admin/header',$data);
-			$this->load->view('admin/sidebar',$data);
-			$flag=1;
-		}
-		if($flag==0)
-		{
-			$this->load->view('univadmin/accesserror', $data);
+			redirect('admin/adminlogin/');
 		}
 		else
-		{			  
-			$this->load->view('univadmin/header',$data);
-			$this->load->view('univadmin/sidebar',$data);
-			if($msg=='uus')
+		{
+			$data = $this->path->all_path();
+			$data['user_id'] = $this->tank_auth->get_admin_user_id();
+			$data['admin_user_level']=$this->tank_auth->get_admin_user_level();
+			$data['admin_priv']=$this->adminmodel->get_user_privilege($data['user_id']);
+			$univ_info=$this->events->fetch_univ_id($data['user_id']);
+			$univ_id=$univ_info['univ_id'];
+			if(!($data['admin_priv']))
 			{
-				$data['msg']='University Updated Successfully';
-				$this->load->view('univadmin/userupdated',$data);
+				redirect('admin/adminlogout');
 			}
-			$data['countries']=$this->users->fetch_country();
-			$data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
-			$this->load->view('univadmin/university/update_university',$data);
-	  }
-    }
- }
+			$data['results'] = $this->adminmodel->userprivlegetype();	    
+			if($this->input->post('submit'))
+			{
+				// $this->form_validation->set_rules('univ_name', 'University', 'trim|required');
+				// $this->form_validation->set_rules('address', 'Addrss Line1', 'trim|xss_clean');
+				// $this->form_validation->set_rules('phone_no', 'phone no', 'trim|xss_clean');
+				// $this->form_validation->set_rules('contact_us', 'Contact Us', 'trim|xss_clean');
+				// if ($this->form_validation->run()) 
+				// {
+					$flg=$this->adminmodel->update_univ_admin_university($univ_id);
+					echo $flg;
+					exit;
+					// if(!$flag) 
+					// { 
+						// redirect('admin/update_university_detail/uus');
+					// }
+					//print_r($data['x']);
+					//$this->adminmodel->edit_user_data();
+					//redirect('admin/manageusers/ups');
+				// }
+			}
+			if($this->input->post('info_save'))									//added by satbir on 11/08/2012
+			{				
+				// $this->form_validation->set_rules('txtareaoverview', 'Overview University', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareacampus', 'Campus Overview', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareaservices', 'Services', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareaalumni', 'Awarded Alumni', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareadepartments', 'Departments', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareafaculties', 'Faculties', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareaslife', 'Student Life', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareainterstudents', 'For International Students', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareaexpertise', 'Research Expertise', 'trim|xss_clean');
+				// $this->form_validation->set_rules('txtareainsights', 'Insights', 'trim|xss_clean');
+				//if ($this->form_validation->run()) 
+				//{
+					$flg = $this->adminmodel->update_univ_admin_university_info($univ_id);
+					echo $flg;
+					exit;
+					// if(!$flag) 
+					// { 
+						// redirect('admin/update_university_detail/uus');
+					// }
+				//}
+			}
+			if($this->input->post('info_seo'))									//added by satbir on 11/08/2012
+			{
+				// $this->form_validation->set_rules('title', 'Title', 'trim|xss_clean');
+				// $this->form_validation->set_rules('description', 'Description', 'trim|xss_clean');
+				// $this->form_validation->set_rules('keyword', 'Keyword', 'trim|xss_clean');
+				//if ($this->form_validation->run()) 
+				//{
+				$res = $this->adminmodel->update_univ_admin_university_seo($univ_id);
+				echo $res;
+				exit;
+				// if(!$flag) 
+				// { 
+					// redirect('admin/update_university_detail/uus');
+				// }
+				// }
+			}
+			$flag=0;
+			$data['univ_detail_edit']=$this->adminmodel->fetch_univ_detail($data['user_id']);	  
+			if($data['univ_detail_edit']!=0)
+			{		 
+				if($data['univ_detail_edit'][0]->univ_id==$univ_id)
+				{
+					$flag=1;
+				}
+				else
+				{
+					$flag=0;
+				}
+			}
+			if($data['admin_user_level']=='5')
+			{
+				$this->load->view('admin/header',$data);
+				$this->load->view('admin/sidebar',$data);
+				$flag=1;
+			}
+			if($flag==0)
+			{
+				$this->load->view('univadmin/accesserror', $data);
+			}
+			else
+			{			  
+				$this->load->view('univadmin/header',$data);
+				$this->load->view('univadmin/sidebar',$data);
+				if($msg=='uus')
+				{
+					$data['msg']='University Updated Successfully';
+					$this->load->view('univadmin/userupdated',$data);
+				}
+				$data['countries']=$this->users->fetch_country();
+				$data['univ_detail_edit']=$this->adminmodel->fetch_univ_data_edit($univ_id);
+				$this->load->view('univadmin/university/update_university',$data);
+			}
+		}	
+	}
  
  function featured_unfeatured_university($f_status,$univ_id)
  {
@@ -2279,6 +2283,10 @@ function manage_university($mps='')
 				}	
 			}
 		}		
+	}
+	function update_university_detail_by_ajax()    		// added by satbir 12_15_2012
+	{
+		
 	}
  
 }

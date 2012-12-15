@@ -7,284 +7,25 @@ $error_univ_owner = form_error('univ_owner');
 if($error_univ_name != '') { $class_univ_name = 'needsfilled'; } else { $class_univ_name=''; }
 if($error_univ_owner != '') { $class_univ_owner = 'needsfilled'; } else { $class_univ_owner='text'; }
 ?>
- <!-- BEGIN Content -->
-  <div class="content">
-    <div class="container-fluid">
-	<div class="responsible_navi"></div>
-       <div class="row-fluid">
-		<div class="span12">
-			<div class="page-header">
-				<h2>Update University</h2>
-				<ul class="nav nav-pills">
-					<li class='active'>
-						<a href="#general" data-toggle="pill">General</a>
-					</li>
-					<li>
-						<a href="#info" data-toggle="pill" id="univ">University Info.</a>
-					</li>
-					<li>
-						<a href="#seo" data-toggle="pill">SEO</a>
-					</li>
-				</ul>
-			</div>
-<?php 
-foreach($univ_detail_edit as $univ_detail_update)
-{
-$univ_state_id=$univ_detail_update['state_id'];
-$univ_city_id=$univ_detail_update['city_id'];
-?>			
-          <div class="content-box">
-            <div class="tab-content">
-              <div class="tab-pane active" id="general">
-					<form class="form-horizontal" method="post" enctype="multipart/form-data">
-						<fieldset>
-							<div class="span6">
-								<div class="control-group">
-								<label class="control-label" for="input01">University Name</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge <?php echo $class_univ_name; ?>" name="univ_name" size="30" value="<?php echo $univ_detail_update['univ_name']; ?>" >
-									<span style="color: red;"> <?php echo form_error('univ_name'); ?><?php echo isset($errors['univ_name'])?$errors['univ_name']:''; ?> </span>
-								</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="input04">University Logo</label>
-									<div class="controls">
-									<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "univ_logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img">
-										<input type="file" name="userfile" class="input-xlarge" id="input04">
-									</div>
-								</div>
-								<!--
-								<div class="control-group">
-								<label class="control-label" for="input06">University Owner</label>
-								<div class="controls">
-									<select name="select" id="input06">
-									<option value="0">- Select something -</option>
-									<option value="1">Lorem ipsum</option>
-									<option value="2">Sit dolor</option>
-									</select>
-								</div>
-								</div>-->
-								<div class="control-group">
-								<label class="control-label" for="input01">Phone Number</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" maxlength="10"  id="input01" value="<?php echo $univ_detail_update['phone_no']; ?>"  name="phone_no">
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input01">University Email</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="univ_email" value="<?php echo $univ_detail_update['univ_email']; ?>">
-								</div>
-								<span style="color: red;"> <?php echo form_error('univ_email'); ?><?php echo isset($errors['univ_email'])?$errors['univ_email']:''; ?> </span>
-								</div><div class="control-group">
-								<label class="control-label" for="input01">Web Address</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="web_address"  value="<?php echo $univ_detail_update['univ_web']; ?>">
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input07">Address</label>
-								<div class="controls">
-									<textarea name="text" name="address1" class='span12' rows='4'><?php echo $univ_detail_update['address_line1']; ?></textarea>
-								</div>
-								</div>
-							</div>
-							<div class="span6">
-								<!--<div class="control-group">
-								<label class="control-label" for="input01">Latitude</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01">
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input01">Longitude</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01">
-								</div>
-								</div>-->
-								<div class="control-group">
-									<label class="control-label" for="input01">Country</label>
-									<div class="controls">
-										<select  class="inline" name="country" id="country" onchange="fetchstates(this)">
-										<option value="0">- Select Country -</option>
-										<?php foreach($countries as $country) { ?>
-										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$univ_detail_update['country_id']){?> selected <?php }?> ><?php echo $country['country_name']; ?></option>
-										<?php } ?>
-										</select>
-										<a href="#add-country" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New Country">
-										<i class="icon-plus"></i>
-										</a>
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="input04">State</label>
-									<div class="controls">
-									<select name="state" onchange="fetchcities(0)" id="state" disabled="disabled">
-									
-									
-									</select>
-									<a href="#add-state" class="btn btn-icon tip" data-toggle="modal" data-original-title="Add New State">
-									<i class="icon-plus" id="setCountryValue"></i></a>
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input01">City</label>
-								<div class="controls">
-									<select name="city" id="city" disabled="disabled" >				
-									
-									</select>
-									<a href="#add-city" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New City">
-									<i class="icon-plus" id="setCountryStateValue"></i></a>
-								</div>
-								</div>
-								<!--<div class="control-group">
-								<label class="control-label" for="input01">Sub Domain Name</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01">
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input01">University Is Client</label>
-								<div class="controls">
-									<label class="checkbox"><input type="checkbox" value="0" name="check">Is Client!</label>
-								</div>
-								</div>-->
-								<div class="control-group">
-								<label class="control-label" for="input01">Contact Us</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" value="<?php echo $univ_detail_update['contact_us']; ?>"  name="contact_us" />
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input01">Fax Address</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="fax_address"  value="<?php echo $univ_detail_update['univ_fax']; ?>">
-								</div>
-								</div>
-								<div class="form-actions">
-									<input type="submit" name="submit" class='btn btn-primary' value="Submit" />
-									<a href="#" class='btn btn-danger'>Cancel</a>
-								</div>
-							</div>
-						</fieldset>
-					</form>           
-				</div>
-				<div class="tab-pane" id="info">
-					<form class="form-horizontal" method="post">
-						<fieldset>
-							<div class="row-fluid">
-								<div class="span6">
-									<div class="control-group">
-								<label class="control-label" for="input07">Overview University</label>
-								<div class="controls">
-									<textarea name="txtareaoverview" class='cleditor span12'><?php echo $univ_detail_update['univ_overview']; ?></textarea>
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input07">Campus Overview</label>
-								<div class="controls">
-									<textarea name="txtareacampus" class='cleditor span12'><?php echo $univ_detail_update['univ_campus']; ?></textarea>
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input07">Facilities & Services / Accommodation</label>
-								<div class="controls">
-									<textarea name="txtareaservices" class='cleditor span12'><?php echo $univ_detail_update['univ_services']; ?></textarea>
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input07">Awarded Alumni</label>
-								<div class="controls">
-									<textarea name="txtareaalumni" class='cleditor span12'><?php echo $univ_detail_update['univ_alumni']; ?></textarea>
-								</div>
-								</div>
-									<div class="control-group">
-										<label class="control-label" for="input07">Departments</label>
-										<div class="controls">
-											<textarea name="txtareadepartments" id="vad" class='cleditor span12'><?php echo $univ_detail_update['univ_departments']; ?></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="span6">
-									<div class="control-group">
-									<label class="control-label" for="input07">Faculties</label>
-									<div class="controls">
-										<textarea name="txtareafaculties" class='cleditor span12'><?php echo $univ_detail_update['univ_faculties']; ?></textarea>
-									</div>
-									</div>
-									<div class="control-group">
-									<label class="control-label" for="input07">Student Life</label>
-									<div class="controls">
-										<textarea name="txtareaslife" class='cleditor span12'><?php echo $univ_detail_update['univ_slife']; ?></textarea>
-									</div>
-									</div>
-									<div class="control-group">
-									<label class="control-label" for="input07">For International Students</label>
-									<div class="controls">
-										<textarea name="txtareainterstudents" class='cleditor span12'><?php echo $univ_detail_update['univ_interstudents']; ?></textarea>
-									</div>
-									</div>
-									<div class="control-group">
-									<label class="control-label" for="input07">Research Expertise</label>
-									<div class="controls">
-										<textarea name="txtareaexpertise" class='cleditor span12'><?php echo $univ_detail_update['univ_expertise']; ?></textarea>
-									</div>
-									</div>
-									<div class="control-group">
-									<label class="control-label" for="input07">Insights</label>
-									<div class="controls">
-										<textarea name="txtareainsights" class='cleditor span12'><?php echo $univ_detail_update['univ_insights']; ?></textarea>
-									</div>
-									</div>
-									<div class="form-actions">
-									<input type="submit" name="info_save" class='btn btn-primary' value="Save" />
-									<a href="#" class='btn btn-danger'>Cancel</a>
-									</div>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-              </div>
-              <div class="tab-pane" id="seo">
-				<div class="row-fluid">
-					<div class="span9">
-						<form class="form-horizontal" method="post">
-							<fieldset>
-								<div class="control-group">
-								<label class="control-label" for="input01">Title</label>
-								<div class="controls">
-									<input type="text" name="title" class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['title']); ?>">
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input01">Description</label>
-								<div class="controls">
-									<input type="text" name="description"  class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['description']); ?>">
-								</div>
-								</div>
-								<div class="control-group">
-								<label class="control-label" for="input01">Keyword</label>
-								<div class="controls">
-									<input type="text" name="keyword" class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['keyword']); ?>">
-								</div>
-								</div>
-								<div class="form-actions">
-									<input type="submit" name="info_seo" class='btn btn-primary' value="Update" />									
-								</div>
-							</fieldset>
-						</form>
-					</div>
-				</div>
-              </div>
-            </div>
-          </div>
-			<?php } ?>		  
-		</div>
-      </div>
-    </div><!-- close .container-fluid -->
-  </div><!-- close .content -->
-  <!-- END Content -->
 
+<!-- alert model start -->
+<div class="modal hide" id="updated">				<!-- Added by satbir on 12/14/2012 -->			
+	<div class="modal-header">		
+		<div align="center"><h3>University Updated Successfully</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="no_changes">				<!-- Added by satbir on 12/14/2012 -->			
+	<div class="modal-header">		
+		<div align="center" style="color:red;"><h3>No changes found</h3></div>
+	</div>
+</div>
+<div class="modal hide" id="denied">
+	<div class="modal-header">		
+		<div align="center" style="color:red;"><h3>Unable to perform action please contact admin</h3></div>
+	</div>
+</div>
+<!-- alert model end -->
+<!-- Add country city state model start -->
 <div class="modal hide" id="add-country">
 	
 		<div class="modal-header">
@@ -393,7 +134,395 @@ $univ_city_id=$univ_detail_update['city_id'];
 			</form>
 	
 </div>
-     <script>
+ <!-- Add country city state model end -->
+ <!-- BEGIN Content -->
+  <div class="content">
+    <div class="container-fluid">
+	<div class="responsible_navi"></div>
+       <div class="row-fluid">
+		<div class="span12">
+			<div class="page-header">
+				<h2>Update University</h2>
+				<ul class="nav nav-pills">
+					<li class='active'>
+						<a href="#general" data-toggle="pill">General</a>
+					</li>
+					<li>
+						<a href="#info" data-toggle="pill" id="univ">University Info.</a>
+					</li>
+					<li>
+						<a href="#seo" data-toggle="pill">SEO</a>
+					</li>
+				</ul>
+			</div>
+<?php 
+foreach($univ_detail_edit as $univ_detail_update)
+{
+$univ_state_id=$univ_detail_update['state_id'];
+$univ_city_id=$univ_detail_update['city_id'];
+?>			
+          <div class="content-box">
+            <div class="tab-content">
+              <div class="tab-pane active" id="general">
+					<form class="form-horizontal" enctype="multipart/form-data" id="update_univ_form">
+						<fieldset>
+							<div class="span6">
+								<div class="control-group">
+								<label class="control-label" for="input01">University Name</label>
+								<div class="controls">
+									<input type="text" name="univ_name" id="univ_name" class="input-xlarge <?php echo $class_univ_name; ?>"  size="30" value="<?php echo $univ_detail_update['univ_name']; ?>" >
+									<span style="color: red;"> <?php echo form_error('univ_name'); ?><?php echo isset($errors['univ_name'])?$errors['univ_name']:''; ?> </span>
+								</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="input04">University Logo</label>
+									<div class="controls">
+									<img src="<?php echo "$base";  ?>uploads/univ_gallery/<?php if($univ_detail_update['univ_logo_path']==''){ echo "univ_logo.png"; } else { echo $univ_detail_update['univ_logo_path']; } ?>" class="logo_img">
+										<input type="file" name="userfile" id="userfile" class="input-xlarge" id="input04">
+									</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">Phone Number</label>
+								<div class="controls">
+									<input type="text" name="phone_no" id="phone_no" class="input-xlarge" maxlength="10"  id="input01" value="<?php echo $univ_detail_update['phone_no']; ?>" >
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">University Email</label>
+								<div class="controls">
+									<input type="text" name="univ_email" id="univ_email" class="input-xlarge" value="<?php echo $univ_detail_update['univ_email']; ?>">
+								</div>
+								<span style="color: red;"> <?php echo form_error('univ_email'); ?><?php echo isset($errors['univ_email'])?$errors['univ_email']:''; ?> </span>
+								</div><div class="control-group">
+								<label class="control-label" for="input01">Web Address</label>
+								<div class="controls">
+									<input type="text" name="web_address" id="web_address" class="input-xlarge" value="<?php echo $univ_detail_update['univ_web']; ?>">
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input07">Address</label>
+								<div class="controls">
+									<textarea name="address" id="address" class='span12' rows='4'><?php echo $univ_detail_update['address_line1']; ?></textarea>
+								</div>
+								</div>
+							</div>
+							<div class="span6">
+								<div class="control-group">
+									<label class="control-label" for="input01">Country</label>
+									<div class="controls">
+										<select  class="inline" name="country" id="country" onchange="fetchstates(this)">
+										<option value="0">- Select Country -</option>
+										<?php foreach($countries as $country) { ?>
+										<option value="<?php echo $country['country_id']; ?>" <?php if($country['country_id']==$univ_detail_update['country_id']){?> selected <?php }?> ><?php echo $country['country_name']; ?></option>
+										<?php } ?>
+										</select>
+										<a href="#add-country" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New Country">
+										<i class="icon-plus"></i>
+										</a>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="input04">State</label>
+									<div class="controls">
+									<select name="state" onchange="fetchcities(0)" id="state" disabled="disabled">
+									
+									
+									</select>
+									<a href="#add-state" class="btn btn-icon tip" data-toggle="modal" data-original-title="Add New State">
+									<i class="icon-plus" id="setCountryValue"></i></a>
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">City</label>
+								<div class="controls">
+									<select name="city" id="city" disabled="disabled" >				
+									
+									</select>
+									<a href="#add-city" class="btn btn-icon tip"  data-toggle="modal" data-original-title="Add New City">
+									<i class="icon-plus" id="setCountryStateValue"></i></a>
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">Contact Us</label>
+								<div class="controls">
+									<input type="text" name="contact_us" id="contact_us" class="input-xlarge" value="<?php echo $univ_detail_update['contact_us']; ?>" />
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">Fax Address</label>
+								<div class="controls">
+									<input type="text" name="fax_address" id="fax_address"  class="input-xlarge" value="<?php echo $univ_detail_update['univ_fax']; ?>">
+								</div>
+								</div>
+								<div class="form-actions">
+									<input type="button" name="submit" id="submit" onclick="update_univ_gen()" class='btn btn-primary' value="Submit" />									
+								</div>
+							</div>
+						</fieldset>
+					</form>           
+				</div>
+				<div class="tab-pane" id="info">
+					<form class="form-horizontal" id="info_form">
+						<fieldset>
+							<div class="row-fluid">
+								<div class="span6">
+									<div class="control-group">
+								<label class="control-label" for="input07">Overview University</label>
+								<div class="controls">
+									<textarea name="txtareaoverview" id="txtareaoverview" class='cleditor span12'><?php echo $univ_detail_update['univ_overview']; ?></textarea>
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input07">Campus Overview</label>
+								<div class="controls">
+									<textarea name="txtareacampus" id="txtareacampus" class='cleditor span12'><?php echo $univ_detail_update['univ_campus']; ?></textarea>
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input07">Facilities & Services / Accommodation</label>
+								<div class="controls">
+									<textarea name="txtareaservices" id="txtareaservices" class='cleditor span12'><?php echo $univ_detail_update['univ_services']; ?></textarea>
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input07">Awarded Alumni</label>
+								<div class="controls">
+									<textarea name="txtareaalumni" id="txtareaalumni" class='cleditor span12'><?php echo $univ_detail_update['univ_alumni']; ?></textarea>
+								</div>
+								</div>
+									<div class="control-group">
+										<label class="control-label" for="input07">Departments</label>
+										<div class="controls">
+											<textarea name="txtareadepartments" id="txtareadepartments" id="vad" class='cleditor span12'><?php echo $univ_detail_update['univ_departments']; ?></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="span6">
+									<div class="control-group">
+									<label class="control-label" for="input07">Faculties</label>
+									<div class="controls">
+										<textarea name="txtareafaculties" id="txtareafaculties" class='cleditor span12'><?php echo $univ_detail_update['univ_faculties']; ?></textarea>
+									</div>
+									</div>
+									<div class="control-group">
+									<label class="control-label" for="input07">Student Life</label>
+									<div class="controls">
+										<textarea name="txtareaslife" id="txtareaslife" class='cleditor span12'><?php echo $univ_detail_update['univ_slife']; ?></textarea>
+									</div>
+									</div>
+									<div class="control-group">
+									<label class="control-label" for="input07">For International Students</label>
+									<div class="controls">
+										<textarea name="txtareainterstudents" id="txtareainterstudents" class='cleditor span12'><?php echo $univ_detail_update['univ_interstudents']; ?></textarea>
+									</div>
+									</div>
+									<div class="control-group">
+									<label class="control-label" for="input07">Research Expertise</label>
+									<div class="controls">
+										<textarea name="txtareaexpertise" id="txtareaexpertise" class='cleditor span12'><?php echo $univ_detail_update['univ_expertise']; ?></textarea>
+									</div>
+									</div>
+									<div class="control-group">
+									<label class="control-label" for="input07">Insights</label>
+									<div class="controls">
+										<textarea name="txtareainsights" id="txtareainsights" class='cleditor span12'><?php echo $univ_detail_update['univ_insights']; ?></textarea>
+									</div>
+									</div>
+									<div class="form-actions">
+										<input type="button" name="info_save" class='btn btn-primary' value="Save" onclick="update_univ_INFO()"/>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+              </div>
+              <div class="tab-pane" id="seo">
+				<div class="row-fluid">
+					<div class="span9">
+						<form class="form-horizontal">
+							<fieldset>
+								<div class="control-group">
+								<label class="control-label" for="input01">Title</label>
+								<div class="controls">
+									<input type="text" name="title" id="title" class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['title']); ?>">
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">Description</label>
+								<div class="controls">
+									<input type="text" name="description" id="description" class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['description']); ?>">
+								</div>
+								</div>
+								<div class="control-group">
+								<label class="control-label" for="input01">Keyword</label>
+								<div class="controls">
+									<input type="text" name="keyword" id="keyword" class="input-xlarge" id="input01" value="<?php echo strip_tags($univ_detail_update['keyword']); ?>">
+								</div>
+								</div>
+								<div class="form-actions">
+									<input type="button" name="info_seo" class='btn btn-primary' value="Update" onclick="update_univ_SEO()"/>									
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+              </div>
+            </div>
+          </div>
+			<?php } ?>		  
+		</div>
+      </div>
+    </div><!-- close .container-fluid -->
+  </div><!-- close .content -->
+  <!-- END Content -->
+<script>
+function update_univ_gen()
+{
+	var valid = true;
+	if($("#univ_name").val()=='')
+	{
+		$("#univ_name").addClass('needsfilled');
+		valid = false;		
+	}
+	else
+	{
+		$("#univ_name").removeClass('needsfilled');
+	}
+	if(valid == true)
+	{		
+		var univ_name  = $("#univ_name").val();
+		var phone_no  = $("#phone_no").val();
+		var univ_email  = $("#univ_email").val();
+		var web_address  = $("#web_address").val();
+		var address  = $("#address").val();
+		var country  = $("#country option:selected").val();
+		var state  = $("#state option:selected").val();
+		var city  = $("#city option:selected").val();
+		var contact_us = $("#contact_us").val();
+		var fax_address = $("#fax_address").val();
+		var data = {
+					submit:'submit',
+					univ_name:univ_name,
+					phone_no:phone_no,
+					univ_email:univ_email,
+					web_address:web_address,
+					address:address,
+					country:country,
+					state:state,
+					city:city,
+					contact_us:contact_us,
+					fax_address:fax_address
+					};
+		$.ajax({
+			type: 'POST',
+			data: data,
+			url: '<?php echo $base; ?>admin/update_university_detail',
+			async: false,
+			success: function(msg)
+			{
+				if(msg == '1')
+				{
+					$('#updated').show();
+					setTimeout(function(){$('#updated').fadeOut('slow');},2000);
+				}
+				else if(msg == '0')
+				{
+					$('#no_changes').show();
+					setTimeout(function(){$('#no_changes').fadeOut('slow');},2000);
+				}
+				else
+				{
+					$('#denied').show();
+					setTimeout(function(){$('#denied').fadeOut('slow');},2000);
+				}
+			}
+		});
+	}
+	
+}
+function update_univ_INFO()
+{
+	var txtareaoverview = $("#txtareaoverview").val();
+	var txtareacampus = $("#txtareacampus").val();
+	var txtareaservices = $("#txtareaservices").val();
+	var txtareaalumni = $("#txtareaalumni").val();
+	var txtareadepartments = $("#txtareadepartments").val();
+	var txtareafaculties = $("#txtareafaculties").val();
+	var txtareaslife = $("#txtareaslife").val();
+	var txtareainterstudents = $("#txtareainterstudents").val();
+	var txtareaexpertise = $("#txtareaexpertise").val();
+	var txtareainsights = $("#txtareainsights").val();	
+	var data = {info_save:'info_save',txtareaoverview:txtareaoverview,txtareacampus:txtareacampus,txtareaservices:txtareaservices,txtareaalumni:txtareaalumni,txtareadepartments:txtareadepartments,txtareafaculties:txtareafaculties,txtareaslife:txtareaslife,txtareainterstudents:txtareainterstudents,txtareaexpertise:txtareaexpertise,txtareainsights:txtareainsights};
+	$.ajax({
+		type: 'POST',
+		url: '<?php echo $base; ?>admin/update_university_detail',
+		data: data,
+		async: false,
+		success: function(msg)
+		{
+			if(msg == '1')
+			{
+				$('#updated').show();
+				setTimeout(function(){$('#updated').fadeOut('slow');},2000);
+			}
+			else if(msg == '0')
+			{
+				$('#no_changes').show();
+				setTimeout(function(){$('#no_changes').fadeOut('slow');},2000);
+			}
+			else
+			{
+				$('#denied').show();
+				setTimeout(function(){$('#denied').fadeOut('slow');},2000);
+			}
+		}		
+	});
+}
+function update_univ_SEO()
+{
+	var valid = true;
+	if($("#title").val()=='')
+	{
+		$("#title").addClass('needsfilled');
+		valid = false;		
+	}
+	else
+	{
+		$("#title").removeClass('needsfilled');
+	}
+	if(valid == true)
+	{
+		var ttl = $("#title").val();
+		var des = $("#description").val();
+		var key = $("#keyword").val();
+		data = {info_seo:'info_seo',title:ttl,description:des,keyword:key};
+		$.ajax({
+			type: 'POST',
+			url: '<?php echo $base; ?>admin/update_university_detail',
+			data: data,
+			cache: false,
+			async: false,
+			success: function(msg)
+			{
+				if(msg == '1')
+				{
+					$('#updated').show();
+					setTimeout(function(){$('#updated').fadeOut('slow');},2000);
+				}
+				else if(msg == '0')
+				{
+					$('#no_changes').show();
+					setTimeout(function(){$('#no_changes').fadeOut('slow');},2000);
+				}
+				else
+				{
+					$('#denied').show();
+					setTimeout(function(){$('#denied').fadeOut('slow');},2000);
+				}
+			}
+		});
+	}
+}
 $(document).ready(function(){
 	//alert('fnslfc');
 	$('.collapsed-nav').css('display','none');

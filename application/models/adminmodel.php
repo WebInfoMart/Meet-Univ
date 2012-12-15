@@ -733,7 +733,7 @@ class Adminmodel extends CI_Model
                'switch_off_univ' => $ban_unban
             );
 		$this->db->where('univ_id', $univ_id);	
-		$this->db->update('university', $data);
+		$this->db->update('university', $data);		
 	}
 	
 	function delete_single_university($univ_id)
@@ -975,66 +975,51 @@ class Adminmodel extends CI_Model
 	 }
 	 
 	 
- function update_univ_admin_university($univ_id)
- {
- $config = array(
-   'allowed_types' => 'jpg|jpeg|gif|png',
-   'upload_path' => $this->univ_gallery_path,
-   'max_size' => 2000
-  );
-  $myflag=0;
-  $this->load->library('upload', $config);
-  if($this->upload->do_upload())
-  {
-  $myflag=1;
-  }
-  $image_data = $this->upload->data();
-  
-  $config = array(
-   'source_image' => $image_data['full_path'],
-   'new_image' => $this->univ_gallery_path . '/thumbs',
-   'maintain_ration' => true,
-   'width' => 150,
-   'height' => 100
-  );
-  
-  $this->load->library('image_lib', $config);
-  $this->image_lib->resize();
- 
-  $cretedby_admin=$this->tank_auth->get_admin_user_id();
-      $data = array(
-      'univ_name' => $this->input->post('univ_name'),
-      'address_line1' => $this->input->post('address1'),
-       'city_id' =>$this->input->post('city'),
-      'state_id' => $this->input->post('state'),
-      'country_id'=>$this->input->post('country'),
-      'phone_no' => $this->input->post('phone_no'),
-      'contact_us' => $this->input->post('contact_us'),
-      'createdby' =>$cretedby_admin,
-      'univ_fax'=>$this->input->post('fax_address'),
-      'univ_email'=>$this->input->post('univ_email'),
-      'univ_web'=>$this->input->post('web_address'),
-      // 'univ_overview'=>$this->input->post('txtareaoverview'),
-      // 'univ_campus'=>$this->input->post('txtareacampus'),
-      // 'univ_services'=>$this->input->post('txtareaservices'),
-      // 'univ_faculties'=>$this->input->post('txtareafaculties'),
-      // 'univ_expertise'=>$this->input->post('txtareaexpertise'),
-      // 'univ_slife'=>$this->input->post('txtareaslife'),
-      // 'univ_interstudents'=>$this->input->post('txtareainterstudents'),
-      // 'univ_alumni'=>$this->input->post('txtareaalumni'),
-      // 'univ_departments'=>$this->input->post('txtareadepartments'),
-      // 'univ_insights'=>$this->input->post('txtareainsights')
-   );
-   //print_r($data);exit;
-   $this->db->update('university', $data,array('univ_id'=>$univ_id));  
-   if($myflag==1)
-   {
-   $data=array('univ_logo_path' =>$image_data['file_name']);
-   $this->db->update('university', $data,array('univ_id'=>$univ_id)); 
-   //redirect('admin) 
-   }
-   
- }
+	function update_univ_admin_university($univ_id)
+	{
+		$config = array(
+		'allowed_types' => 'jpg|jpeg|gif|png',
+		'upload_path' => $this->univ_gallery_path,
+		'max_size' => 2000
+		);
+		$myflag=0;
+		$this->load->library('upload', $config);
+		if($this->upload->do_upload())
+		{
+			$myflag=1;
+		}
+		$image_data = $this->upload->data();  
+		$config = array(
+		'source_image' => $image_data['full_path'],
+		'new_image' => $this->univ_gallery_path . '/thumbs',
+		'maintain_ration' => true,
+		'width' => 150,
+		'height' => 100
+		);  
+		$this->load->library('image_lib', $config);
+		$this->image_lib->resize(); 
+		$cretedby_admin=$this->tank_auth->get_admin_user_id();
+		$data = array(
+			'univ_name' => $this->input->post('univ_name'),
+			'address_line1' => $this->input->post('address'),
+			'city_id' =>$this->input->post('city'),
+			'state_id' => $this->input->post('state'),
+			'country_id'=>$this->input->post('country'),
+			'phone_no' => $this->input->post('phone_no'),
+			'contact_us' => $this->input->post('contact_us'),
+			'createdby' =>$cretedby_admin,
+			'univ_fax'=>$this->input->post('fax_address'),
+			'univ_email'=>$this->input->post('univ_email'),
+			'univ_web'=>$this->input->post('web_address')    
+		);
+		$this->db->update('university', $data,array('univ_id'=>$univ_id));  
+		if($myflag==1)
+		{
+			$data=array('univ_logo_path' =>$image_data['file_name']);
+			$this->db->update('university1', $data,array('univ_id'=>$univ_id));   
+		} 
+		return $this->db->affected_rows();
+	}
  
  function update_univ_admin_university_info($univ_id){						//added by satbir on 11/08/2012
 	$data = array(
@@ -1049,7 +1034,8 @@ class Adminmodel extends CI_Model
       'univ_departments'=>$this->input->post('txtareadepartments'),
       'univ_insights'=>$this->input->post('txtareainsights')
 	);
-   $this->db->update('university', $data,array('univ_id'=>$univ_id));  
+	$this->db->update('university', $data,array('univ_id'=>$univ_id)); 
+	return $this->db->affected_rows();
  }
  
  function update_univ_admin_university_seo($univ_id){				//added by satbir on 11/08/2012
@@ -1058,7 +1044,8 @@ class Adminmodel extends CI_Model
 		'description' => $this->input->post('description'),
 		'keyword' => $this->input->post('keyword')		
 	);
-	$this->db->update('university', $data,array('univ_id'=>$univ_id));  
+	$this->db->update('university', $data,array('univ_id'=>$univ_id));
+	return $this->db->affected_rows();
  }
  
  function get_assigned_univ_info($paging='')
